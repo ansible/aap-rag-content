@@ -1,0 +1,62 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="installation-and-deployment-models">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Installation and deployment models</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Ansible Automation Platform offers many installation and deployment options based on your infrastructure and organizational needs. Each installation type reference includes supported infrastructure types and links to tested topologies.</p> 
+     <section class="section"> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">The Ansible Automation Platform RPM installer was deprecated in 2.5 and removed in Ansible Automation Platform 2.7. For more information on upgrade and migration paths, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/assembly_upgrade_support_matrix" title="Use these reference tables to find the supported upgrade paths for your Ansible Automation Platform deployment. Review Red Hat Enterprise Linux version compatibility and step-by-step processes for RPM, container, and OpenShift Container Platform deployment types.">Supported upgrade and migration scenarios</a>.</p> 
+       </div>
+      </div> 
+      <table class="table">
+       <caption>
+        <span class="table--title-label">Table 1. </span><span class="title">Ansible Automation Platform installation and deployment models</span>
+       </caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:25%">
+        <col style="width:25%">
+        <col style="width:25%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="installation-and-deployment-models__entry__1">Mode</th> 
+         <th class="entry" id="installation-and-deployment-models__entry__2">Infrastructure</th> 
+         <th class="entry" id="installation-and-deployment-models__entry__3">Description</th> 
+         <th class="entry" id="installation-and-deployment-models__entry__4">Tested topologies</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="installation-and-deployment-models__entry__1"> <p class="p">Containers</p> </td> 
+         <td class="entry" headers="installation-and-deployment-models__entry__2"> <p class="p">Virtual machines and bare metal</p> </td> 
+         <td class="entry" headers="installation-and-deployment-models__entry__3"> <p class="p">The containerized installer deploys Ansible Automation Platform on Red Hat Enterprise Linux by using Podman which runs the platform in containers on host machines. Customers manage the product and infrastructure lifecycle.</p> </td> 
+         <td class="entry" headers="installation-and-deployment-models__entry__4"> 
+          <ul class="ul"> 
+           <li class="li"> <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-ref_cont_a_env_a" title="The container-based growth topology provides a smaller footprint deployment without redundancy for organizations getting started with Ansible Automation Platform.">Container growth topology</a> </li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-ref_cont_b_env_a" title="The container-based enterprise topology provides redundancy and higher compute for large volumes of automation.">Container enterprise topology</a> </li> 
+          </ul> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="installation-and-deployment-models__entry__1"> <p class="p">Operator</p> </td> 
+         <td class="entry" headers="installation-and-deployment-models__entry__2"> <p class="p">Red Hat OpenShift</p> </td> 
+         <td class="entry" headers="installation-and-deployment-models__entry__3"> <p class="p">The Operator uses Red Hat OpenShift Operators to deploy Ansible Automation Platform within Red Hat OpenShift. Customers manage the product and infrastructure lifecycle.</p> </td> 
+         <td class="entry" headers="installation-and-deployment-models__entry__4"> 
+          <ul class="ul"> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-ref_ocp_a_env_a" title="The Operator-based growth topology provides a smaller footprint deployment without redundancy for organizations getting started with Ansible Automation Platform on Red Hat OpenShift Container Platform.">Operator growth topology</a> </li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-ref_ocp_b_env_a" title="The Operator-based enterprise topology provides redundancy and higher compute for large volumes of automation on Red Hat OpenShift Container Platform.">Operator enterprise topology</a> </li> 
+          </ul> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,7 @@
+# Automate software patching
+## Patching examples
+
+You can modify and thoroughly test the following playbooks that serve as patching examples, to fit the target environment before production use.
+
+These examples use the `ansible.builtin.dnf` module for managing packages on RHEL and other operating systems that use the `dnf` package manager. Modules for patching other Linux operating systems, Microsoft Windows, and many network devices are also available.
+

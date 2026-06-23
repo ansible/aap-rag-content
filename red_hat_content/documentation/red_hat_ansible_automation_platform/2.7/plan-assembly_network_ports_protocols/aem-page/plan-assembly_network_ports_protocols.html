@@ -1,0 +1,664 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="network-ports-protocols"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Network ports and protocols</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">Red Hat Ansible Automation Platform uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server in order for it to work.</p> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-network-ports-protocols-diagram"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Network ports and protocols diagram</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">The following architectural diagrams are example of a fully deployed Ansible Automation Platform with all possible components.</p> 
+       <section class="section"> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">In some of the following use cases, hop nodes are used instead of a direct link from an execution node. Hop nodes are an option for connecting control and execution nodes. Hop nodes use minimal CPU and memory, so vertically scaling hop nodes does not impact system capacity.</p> 
+         </div> 
+        </div> 
+        <p class="p"> <strong class="ph b">Container-based installations</strong> </p> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">The following diagram shows connections between Ansible Automation Platform components. All external client traffic is routed through platform gateway. Direct external access to automation hub, Event-Driven Ansible, automation controller, and metrics service is not available. Metrics service is a required component in Ansible Automation Platform 2.7.</p> 
+         </div> 
+        </div> 
+        <img class="image" id="ref-network-ports-protocols-diagram__image_2" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/cont-network-ports-and-protocols-2-7.png" alt="Interaction of Ansible Automation Platform components on the network with information about the ports and protocols that are used in a container-based installation."> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="network-ports-protocols_table"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Network ports and protocols table</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">The following table indicates the destination port and the direction of network traffic:</p> 
+       <section class="section"> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <ul class="ul"> 
+           <li class="li">The following default destination ports and installer inventory listed are configurable. If you choose to configure them to suit your environment, you might experience a change in behavior.</li> 
+           <li class="li">Port 443 is the industry standard for HTTPS. Port 80 is not mandatory, but is included for environments that might want to have an unsecure connection.</li> 
+          </ul> 
+          <ul class="ul"> 
+           <li class="li">Use Port 80 if you set any of <code class="ph codeph">controller_nginx_disable_https</code>, <code class="ph codeph">hub_nginx_disable_https</code> or <code class="ph codeph">eda_nginx_disable_https</code> to <code class="ph codeph">true</code>. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_installation#ref-security-variables-install-inventory" title="Customize the installation inventory file to define your Ansible Automation Platform architecture and change the initial configuration of its components.">Security-relevant variables in the installation inventory</a></li> 
+          </ul> 
+          <p class="p"> <strong class="ph b">For RPM-based installations (deprecated — removed in Ansible Automation Platform 2.7)</strong> </p> 
+          <ul class="ul"> 
+           <li class="li">Use Port 80 if you set any of <code class="ph codeph">nginx_disable_https</code>, <code class="ph codeph">automationhub_disable_https</code> or <code class="ph codeph">automationedacontroller_disable_https</code> to <code class="ph codeph">true</code>. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_installation#ref-security-variables-install-inventory" title="Customize the installation inventory file to define your Ansible Automation Platform architecture and change the initial configuration of its components.">Security-relevant variables in the installation inventory</a></li> 
+          </ul> 
+         </div> 
+        </div> 
+        <p class="p">The following table shows container-based installation ports and inventory variables in <strong class="ph b">bold</strong> text.</p> 
+        <p class="p"> <strong class="ph b">Network ports and protocols</strong> </p> 
+        <table class="table"> 
+         <caption></caption> 
+         <colgroup> 
+          <col style="width:9%"> 
+          <col style="width:9%"> 
+          <col style="width:13%"> 
+          <col style="width:13%"> 
+          <col style="width:15%"> 
+          <col style="width:18%"> 
+          <col style="width:23%"> 
+         </colgroup> 
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="network-ports-protocols_table__entry__1">Destination</th> 
+           <th class="entry" id="network-ports-protocols_table__entry__2">Port</th> 
+           <th class="entry" id="network-ports-protocols_table__entry__3">Source</th> 
+           <th class="entry" id="network-ports-protocols_table__entry__4">Protocol</th> 
+           <th class="entry" id="network-ports-protocols_table__entry__5">Service</th> 
+           <th class="entry" id="network-ports-protocols_table__entry__6">Required for</th> 
+           <th class="entry" id="network-ports-protocols_table__entry__7">Installer Inventory Variable</th> 
+          </tr> 
+         </thead> 
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Platform gateway</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">80/443</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Client/External</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">HTTP/HTTPS</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">All external user and API traffic. Platform gateway is the sole entry point for Ansible Automation Platform.</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"> <p class="p"> <strong class="ph b">gateway_main_url</strong> </p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Automation hub</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">22</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Installer node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">SSH</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Management (Install, Configure, Upgrade)</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"> <p class="p">ansible_port</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Automation hub</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">80/443</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Installer node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">HTTP/HTTPS</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Enables installer node to push the execution environment image to automation hub when using the bundle installer.</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"> <p class="p">ansible_port</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Automation hub</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">80/443</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Automation controller</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">HTTP/HTTPS</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Pull collections</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Automation hub</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">80/443</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Event-Driven Ansible node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">HTTP/HTTPS</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Pull container decision environments</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Platform gateway</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">80/443</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Execution node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">HTTP/HTTPS</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Allows execution nodes to pull the execution environment image from automation hub through platform gateway</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Automation hub</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">8444</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Platform gateway</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">HTTPS</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Link between platform gateway and Ansible Automation Platform components</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Automation hub</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">6379</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Event-Driven Ansible</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">Redis</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Event processing</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Automation controller</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">22</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Installer node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">SSH</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Management (Install, Configure, Upgrade)</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"> <p class="p">ansible_port</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Automation controller</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">80/443</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Event-Driven Ansible</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">HTTP/HTTPS</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Launch automation controller jobs</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Automation controller</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">80/8443</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Platform gateway</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">HTTP/HTTPS</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Link between platform gateway and Ansible Automation Platform components</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Automation controller</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">27199</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Execution node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">Receptor</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Used for Mesh peering and communication. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_planning_mesh#defining-node-types" title="The examples in this section demonstrate how to set the node type for the hosts in your inventory file.">Defining automation mesh node types</a>.</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"> <p class="p"> <strong class="ph b">receptor_port</strong> </p> <p class="p"> <strong class="ph b">receptor_peers</strong> </p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Event-Driven Ansible</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">22</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Installer node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">SSH</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Management (Install, Configure, Upgrade)</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"> <p class="p">ansible_port</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Event-Driven Ansible</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">80/8445</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Platform gateway</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">HTTP/HTTPS</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Link between platform gateway and Ansible Automation Platform components</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Event-Driven Ansible</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">8443</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Platform gateway</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">HTTPS</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Receiving event stream traffic</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Execution node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">22</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Installer node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">SSH</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Management (Install, Configure, Upgrade)</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"> <p class="p">ansible_port</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Execution node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">8443</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Gateway load balancer/Ingress node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">HTTPS</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"></td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"> <p class="p"> <strong class="ph b">gateway_main_url</strong> </p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Execution node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">27199</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Automation controller</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">Receptor</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Used for Mesh peering and communication. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_planning_mesh#defining-node-types" title="The examples in this section demonstrate how to set the node type for the hosts in your inventory file.">Defining automation mesh node types</a>.</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"> <p class="p"> <strong class="ph b">receptor_port</strong> </p> <p class="p"> <strong class="ph b">receptor_peers</strong> </p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Execution node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">27199</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">OpenShift Container Platform</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">Receptor</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"></td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Hop node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">22</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Installer node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">SSH</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Management (Install, Configure, Upgrade)</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"> <p class="p">ansible_port</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Hop node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">27199</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Automation controller</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">Receptor</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">ENABLE connections from hop nodes to Receptor port if relayed through hop nodes. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_planning_mesh#defining-node-types" title="The examples in this section demonstrate how to set the node type for the hosts in your inventory file.">Defining automation mesh node types</a>.</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"> <p class="p"> <strong class="ph b">receptor_port</strong> </p> <p class="p"> <strong class="ph b">receptor_peers</strong> </p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Hop node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">27199</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Execution node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">Receptor</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Used for Mesh peering and communication. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_planning_mesh#defining-node-types" title="The examples in this section demonstrate how to set the node type for the hosts in your inventory file.">Defining automation mesh node types</a>.</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"> <p class="p"> <strong class="ph b">receptor_port</strong> </p> <p class="p"> <strong class="ph b">receptor_peers</strong> </p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Hybrid node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">22</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Installer node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">SSH</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Management (Install, Configure, Upgrade)</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"> <p class="p"> <code class="ph codeph">ansible_port</code> </p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Hybrid node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">27199</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Automation controller</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">Receptor</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">ENABLE connections from automation controller to Receptor port if relayed through non-hop connected nodes. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_planning_mesh#defining-node-types" title="The examples in this section demonstrate how to set the node type for the hosts in your inventory file.">Defining automation mesh node types</a>.</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"> <p class="p"> <strong class="ph b">receptor_port</strong> </p> <p class="p"> <strong class="ph b">receptor_peers</strong> </p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">PostgreSQL database</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">22</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Installer node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">SSH</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Management (Install, Configure, Upgrade)</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"> <p class="p"> <code class="ph codeph">pg_port</code> </p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">PostgreSQL database</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">5432</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Automation controller</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">PostgreSQL</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Required only if the internal database is used with another component. Otherwise, this port should not be open.</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"> <p class="p"> <strong class="ph b">controller_pg_port</strong> </p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">PostgreSQL database</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">5432</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Event-Driven Ansible</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">PostgreSQL</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Required only if the internal database is used with another component. Otherwise, this port should not be open.</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"> <p class="p"> <strong class="ph b">eda_pg_port</strong> </p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">PostgreSQL</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">5432</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Automation hub</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">PostgreSQL</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Required only if the internal database is used with another component. Otherwise, this port should not be open</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"> <p class="p"> <strong class="ph b">hub_pg_port</strong> </p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">PostgreSQL database</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">5432</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Metrics service</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">PostgreSQL</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Required only if the internal database is used with another component. Otherwise, this port should not be open.</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"> <p class="p">automationmetrics_pg_port</p> <p class="p">metrics_pg_port</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">PostgreSQL database (read-only)</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">5432</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Metrics service</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">PostgreSQL</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Read-only connection to automation controller database. Required for metrics service to correlate automation activity with resource metrics. Uses <code class="ph codeph">ms_awx_readonly</code> user.</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"> <p class="p">automationcontroller_pg_host</p> <p class="p">controller_pg_host</p> <p class="p">automationcontroller_pg_username (ms_awx_readonly)</p> <p class="p">controller_pg_username</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">OpenShift Container Platform (RPM only<span class="ph"> — deprecated</span>)</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">6443</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Automation controller</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">HTTP/HTTPS</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Only required when using container groups to run jobs.</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"> <p class="p">Hostname of OpenShift API server</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Redis node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">6379</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Automation controller</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">Redis</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Job launching</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Redis node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">6379</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Event-Driven Ansible</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">Redis</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Job launching</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Redis node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">6379</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Automation hub</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">Redis</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Job launching</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Redis node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">6379</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Platform gateway</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">Redis</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Data storage and retrieval</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Redis node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">16379</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Redis node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">Redis</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Redis cluster bus port for a resilient Redis configuration</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Mesh ingress</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">443</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Execution node</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">Receptor</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">HTTPS</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">If using mesh ingress, ensure that outbound HTTPS (port 443) is allowed from the execution nodes to the OpenShift route URL.</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Platform gateway</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">80/8444</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Automation hub</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">HTTPS</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">Link between platform gateway and Ansible Automation Platform components</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="network-ports-protocols_table__entry__1"> <p class="p">Platform gateway</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__2"> <p class="p">8443</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__3"> <p class="p">Platform gateway</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__4"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__5"> <p class="p">HTTPS</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__6"> <p class="p">nginx</p> </td> 
+           <td class="entry" headers="network-ports-protocols_table__entry__7"></td> 
+          </tr> 
+         </tbody> 
+        </table> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <ul class="ul"> 
+           <li class="li">Hybrid nodes act as a combination of control and execution nodes, and therefore Hybrid nodes share the connections of both.</li> 
+           <li class="li">If <code class="ph codeph">receptor_listener_port</code> is defined, the machine also requires an available open port on which to establish inbound TCP connections, for example, 27199.</li> 
+          </ul> 
+         </div> 
+        </div> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title4" id="ref-network-ports-protocols-firewalls"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Network ports and protocols firewalls</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">The following tables provide information about configuring firewalls for Red Hat Ansible Automation Platform components.</p> 
+       <section class="section"> 
+        <p class="p"> <strong class="ph b">Red Hat Insights for Red Hat Ansible Automation Platform</strong> </p> 
+        <table class="table"> 
+         <caption></caption> 
+         <colgroup> 
+          <col style="width:50%"> 
+          <col style="width:50%"> 
+         </colgroup> 
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-network-ports-protocols-firewalls__entry__1">URL</th> 
+           <th class="entry" id="ref-network-ports-protocols-firewalls__entry__2">Required for</th> 
+          </tr> 
+         </thead> 
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__1"> <p class="p"> <a class="xref" href="https://api.access.redhat.com" target="_blank" rel="external noopener">https://api.access.redhat.com:443</a> </p> </td> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__2"> <p class="p">General account services, subscriptions</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__1"> <p class="p"> <a class="xref" href="https://cert-api.access.redhat.com" target="_blank" rel="external noopener">https://cert-api.access.redhat.com:443</a> </p> </td> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__2"> <p class="p">Insights data upload</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__1"> <p class="p"> <a class="xref" href="https://cert.console.redhat.com" target="_blank" rel="external noopener">https://cert.console.redhat.com:443</a> </p> </td> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__2"> <p class="p">Inventory upload and Cloud Connector connection</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__1"> <p class="p"> <a class="xref" href="https://console.redhat.com" target="_blank" rel="external noopener">https://console.redhat.com:443</a> </p> </td> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__2"> <p class="p">Access to Insights dashboard</p> </td> 
+          </tr> 
+         </tbody> 
+        </table> 
+        <p class="p"> <strong class="ph b">Automation Hub</strong> </p> 
+        <table class="table"> 
+         <caption></caption> 
+         <colgroup> 
+          <col style="width:50%"> 
+          <col style="width:50%"> 
+         </colgroup> 
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-network-ports-protocols-firewalls__entry__11">URL</th> 
+           <th class="entry" id="ref-network-ports-protocols-firewalls__entry__12">Required for</th> 
+          </tr> 
+         </thead> 
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__11"> <p class="p"> <a class="xref" href="https://console.redhat.com" target="_blank" rel="external noopener">https://console.redhat.com:443</a> </p> </td> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__12"> <p class="p">General account services, subscriptions</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__11"> <p class="p"> <a class="xref" href="https://catalog.redhat.com" target="_blank" rel="external noopener">https://catalog.redhat.com:443</a> </p> </td> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__12"> <p class="p">Indexing execution environments</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__11"> <p class="p"> <a class="xref" href="https://sso.redhat.com" target="_blank" rel="external noopener">https://sso.redhat.com:443</a> </p> </td> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__12"> <p class="p">TCP</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__11"> <p class="p">https://automation-hub-prd.s3.amazonaws.com, https://automation-hub-prd.s3.us-east-2.amazonaws.com</p> </td> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__12"> <p class="p">Firewall access</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__11"> <p class="p"> <a class="xref" href="https://galaxy.ansible.com" target="_blank" rel="external noopener">https://galaxy.ansible.com:443</a> </p> </td> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__12"> <p class="p">Ansible Community curated Ansible content</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__11"> <p class="p">https://ansible-galaxy-ng.s3.dualstack.us-east-1.amazonaws.com</p> </td> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__12"> <p class="p">Dual Stack IPv6 endpoint for Community curated Ansible content repository</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__11"> <p class="p"> <a class="xref" href="https://registry.redhat.io" target="_blank" rel="external noopener">https://registry.redhat.io:443</a> </p> </td> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__12"> <p class="p">Access to container images provided by Red Hat and partners</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__11"> <p class="p"> <a class="xref" href="https://cert.console.redhat.com" target="_blank" rel="external noopener">https://cert.console.redhat.com:443</a> </p> </td> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__12"> <p class="p">Red Hat and partner curated Ansible Collections</p> </td> 
+          </tr> 
+         </tbody> 
+        </table> 
+        <p class="p"> <strong class="ph b">Execution Environments (EE)</strong> </p> 
+        <table class="table"> 
+         <caption></caption> 
+         <colgroup> 
+          <col style="width:50%"> 
+          <col style="width:50%"> 
+         </colgroup> 
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-network-ports-protocols-firewalls__entry__29">URL</th> 
+           <th class="entry" id="ref-network-ports-protocols-firewalls__entry__30">Required for</th> 
+          </tr> 
+         </thead> 
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__29"> <p class="p"> <a class="xref" href="https://registry.redhat.io" target="_blank" rel="external noopener">https://registry.redhat.io:443</a> </p> </td> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__30"> <p class="p">Access to container images provided by Red Hat and partners</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__29"> <p class="p"> <code class="ph codeph">cdn.quay.io:443</code> </p> </td> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__30"> <p class="p">Access to container images provided by Red Hat and partners</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__29"> <p class="p"> <code class="ph codeph">cdn01.quay.io:443</code> </p> </td> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__30"> <p class="p">Access to container images provided by Red Hat and partners</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__29"> <p class="p"> <code class="ph codeph">cdn02.quay.io:443</code> </p> </td> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__30"> <p class="p">Access to container images provided by Red Hat and partners</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__29"> <p class="p"> <code class="ph codeph">cdn03.quay.io:443</code> </p> </td> 
+           <td class="entry" headers="ref-network-ports-protocols-firewalls__entry__30"> <p class="p">Access to container images provided by Red Hat and partners</p> </td> 
+          </tr> 
+         </tbody> 
+        </table> 
+        <div class="note important note_important"> <span class="note__title">Important:</span> 
+         <div class="note__body"> 
+          <p class="p">As of <strong class="ph b">April 1st, 2025</strong>, <code class="ph codeph">quay.io</code> is adding three additional endpoints. As a result, customers must adjust allow/block lists within their firewall systems lists to include the following endpoints:</p> 
+          <ul class="ul"> 
+           <li class="li"> <code class="ph codeph">cdn04.quay.io</code> </li> 
+           <li class="li"> <code class="ph codeph">cdn05.quay.io</code> </li> 
+           <li class="li"> <code class="ph codeph">cdn06.quay.io</code> </li> 
+          </ul> 
+          <p class="p">To avoid problems pulling container images, customers must allow outbound TCP connections (ports 80 and 443) to the following hostnames:</p> 
+          <ul class="ul"> 
+           <li class="li"> <code class="ph codeph">cdn.quay.io</code> </li> 
+           <li class="li"> <code class="ph codeph">cdn01.quay.io</code> </li> 
+           <li class="li"> <code class="ph codeph">cdn02.quay.io</code> </li> 
+           <li class="li"> <code class="ph codeph">cdn03.quay.io</code> </li> 
+           <li class="li"> <code class="ph codeph">cdn04.quay.io</code> </li> 
+           <li class="li"> <code class="ph codeph">cdn05.quay.io</code> </li> 
+           <li class="li"> <code class="ph codeph">cdn06.quay.io</code> </li> 
+          </ul> 
+          <p class="p">This change should be made to any firewall configuration that specifically enables outbound connections to <code class="ph codeph">registry.redhat.io</code> or <code class="ph codeph">registry.access.redhat.com</code>.</p> 
+          <p class="p">Use the hostnames instead of IP addresses when configuring firewall rules.</p> 
+          <p class="p">After making this change, you can continue to pull images from <code class="ph codeph">registry.redhat.io</code> or <code class="ph codeph">registry.access.redhat.com</code>. You do not require a <code class="ph codeph">quay.io</code> login, or need to interact with the <code class="ph codeph">quay.io</code> registry directly in any way to continue pulling Red Hat container images.</p> 
+          <p class="p">For more information, see <a class="xref" href="https://access.redhat.com/articles/7084334" target="_blank" rel="external noopener">Firewall changes for container image pulls 2024/2025</a>.</p> 
+         </div> 
+        </div> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title5" id="mesh-nodes"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Automation mesh node requirements</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">Automation mesh is an overlay network that distributes automation work across large and distributed collections of workers through peer-to-peer node connections. Included are the tested system configurations and network port requirements for mesh nodes.</p> 
+       <section class="section"></section> 
+       <section class="section" id="mesh-nodes___tested_system_configurations"> 
+        <h3 class="title sectiontitle">Tested system configurations</h3> 
+        <p class="p">Each automation mesh VM has been tested with these requirements: 16 GB RAM, 4 CPUs, 60 GB local disk, and 3000 IOPS.</p> 
+       </section> 
+       <section class="section" id="mesh-nodes___network_ports"> 
+        <h3 class="title sectiontitle">Network ports</h3> 
+        <p class="p">Automation mesh uses several ports to communicate with its services. These ports must be open and available for Red Hat Ansible Automation Platform to work. Ensure that these ports are available and are not blocked by a firewall.</p> 
+        <table class="table"> 
+         <caption> <span class="table--title-label">Table 1. </span><span class="title">Network ports and protocols</span> 
+         </caption> 
+         <colgroup> 
+          <col style="width:20%"> 
+          <col style="width:20%"> 
+          <col style="width:20%"> 
+          <col style="width:20%"> 
+          <col style="width:20%"> 
+         </colgroup> 
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="mesh-nodes___network_ports__entry__1">Port number</th> 
+           <th class="entry" id="mesh-nodes___network_ports__entry__2">Protocol</th> 
+           <th class="entry" id="mesh-nodes___network_ports__entry__3">Service</th> 
+           <th class="entry" id="mesh-nodes___network_ports__entry__4">Source</th> 
+           <th class="entry" id="mesh-nodes___network_ports__entry__5">Destination</th> 
+          </tr> 
+         </thead> 
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="mesh-nodes___network_ports__entry__1"> <p class="p">80/443</p> </td> 
+           <td class="entry" headers="mesh-nodes___network_ports__entry__2"> <p class="p">HTTP/HTTPS</p> </td> 
+           <td class="entry" headers="mesh-nodes___network_ports__entry__3"> <p class="p">Receptor</p> </td> 
+           <td class="entry" headers="mesh-nodes___network_ports__entry__4"> <p class="p">Execution node</p> </td> 
+           <td class="entry" headers="mesh-nodes___network_ports__entry__5"> <p class="p">OpenShift Container Platform mesh ingress</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="mesh-nodes___network_ports__entry__1"> <p class="p">80/443</p> </td> 
+           <td class="entry" headers="mesh-nodes___network_ports__entry__2"> <p class="p">HTTP/HTTPS</p> </td> 
+           <td class="entry" headers="mesh-nodes___network_ports__entry__3"> <p class="p">Receptor</p> </td> 
+           <td class="entry" headers="mesh-nodes___network_ports__entry__4"> <p class="p">Hop node</p> </td> 
+           <td class="entry" headers="mesh-nodes___network_ports__entry__5"> <p class="p">OpenShift Container Platform mesh ingress</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="mesh-nodes___network_ports__entry__1"> <p class="p">27199</p> </td> 
+           <td class="entry" headers="mesh-nodes___network_ports__entry__2"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="mesh-nodes___network_ports__entry__3"> <p class="p">Receptor</p> </td> 
+           <td class="entry" headers="mesh-nodes___network_ports__entry__4"> <p class="p">OpenShift Container Platform cluster</p> </td> 
+           <td class="entry" headers="mesh-nodes___network_ports__entry__5"> <p class="p">Execution node</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="mesh-nodes___network_ports__entry__1"> <p class="p">27199</p> </td> 
+           <td class="entry" headers="mesh-nodes___network_ports__entry__2"> <p class="p">TCP</p> </td> 
+           <td class="entry" headers="mesh-nodes___network_ports__entry__3"> <p class="p">Receptor</p> </td> 
+           <td class="entry" headers="mesh-nodes___network_ports__entry__4"> <p class="p">OpenShift Container Platform cluster</p> </td> 
+           <td class="entry" headers="mesh-nodes___network_ports__entry__5"> <p class="p">Hop node</p> </td> 
+          </tr> 
+         </tbody> 
+        </table> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist"> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_planning_mesh#assembly-planning-mesh" title="Learn how to plan an automation mesh deployment in your Ansible Automation Platform environment.">Scale automation across your infrastructure with automation mesh</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

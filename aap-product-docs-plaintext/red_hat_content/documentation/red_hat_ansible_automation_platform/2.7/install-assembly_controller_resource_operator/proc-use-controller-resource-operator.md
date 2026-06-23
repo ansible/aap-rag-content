@@ -1,0 +1,17 @@
+# Ansible Automation Platform Resource Operator
+## Use Resource Operator
+
+The Resource Operator itself does not do anything until the user creates an object. As soon as the user creates an **AutomationControllerProject** or **AnsibleJob** resource, the Resource Operator starts processing that object.
+
+### Before you begin
+
+- Install the Kubernetes-based cluster of your choice.
+- Deploy automation controller using the `automation-controller-operator`.
+
+### About this task
+
+### Procedure
+
+1.  After installing the `automation-controller-resource-operator` in your cluster, you must create a Kubernetes (k8s) secret with the connection information for your Ansible Automation Platform instance.
+2.  Then you can use Resource Operator to create a k8s resource to manage your Ansible Automation Platform instance.
+

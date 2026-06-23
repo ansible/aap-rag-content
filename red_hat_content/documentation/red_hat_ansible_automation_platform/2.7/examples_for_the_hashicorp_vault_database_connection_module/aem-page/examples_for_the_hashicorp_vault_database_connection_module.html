@@ -1,0 +1,116 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-da544c14-b4d3-4c97-ba03-7a509188ca8f">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Examples for the hashicorp.vault.database_connection module</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">The following examples show basic configurations for the <code class="ph codeph">hashicorp.vault.database_connection</code> module.</p> 
+     <p class="p"> <strong class="ph b">Example 1: Create a database connection with a PostgreSql plugin</strong> </p> 
+     <p class="p">Before (<code class="ph codeph">community.hashi_vault</code>):</p> 
+     <pre class="pre codeblock"><code>- name: Example 1 - Create a database connection (PostgreSQL plugin, default database mount)
+  community.hashi_vault.vault_database_connection_configure:
+    url: https://vault.example.com:8200
+    namespace: "{{ vault_namespace | default(omit) }}"
+    auth_method: userpass
+    username: "{{ vault_auth_username }}"
+    password: "{{ vault_auth_password }}"
+    connection_name: postgres-main
+    plugin_name: postgresql-database-plugin
+    connection_url:
+postgresql://{{'{{username}}'}}:{{'{{password}}'}}@postgres.example.com:5432/appdb?sslmode=disable
+    connection_username: "{{ db_static_user }}"
+    connection_password: "{{ db_static_password }}"
+    allowed_roles:
+      - app-readonly
+      - app-readwrite
+  register: db_connection_result
+ </code></pre> 
+     <p class="p">After (<code class="ph codeph">hashicorp.vault</code>):</p> 
+     <pre class="pre codeblock"><code>- name: Create database connection with PostgreSQL plugin
+  hashicorp.vault.database_connection:
+    name: postgres-sample-connection
+    plugin_name: "postgresql-database-plugin"
+    allowed_roles:
+      - "readonly"
+    connection_url: "host=localhost port=5432 user='{{ username }}' password='{{ password }}'"
+    plugin_options:
+      max_open_connections: 5
+      max_connection_lifetime: "5s"
+    username: "admin_user"
+    password: "secure_password"
+ </code></pre> 
+     <p class="p"> <strong class="ph b">Example 2: Update a database connection with MySQL</strong> </p> 
+     <p class="p">Before (<code class="ph codeph">community.hashi_vault</code>):</p> 
+     <pre class="pre codeblock"><code>- name: Example 2 - Update an existing database connection (MySQL plugin)
+  community.hashi_vault.vault_database_connection_configure:
+    url: https://vault.example.com:8200
+    namespace: "{{ vault_namespace | default(omit) }}"
+    auth_method: token
+    token: "{{ vault_token }}"
+    connection_name: mysql-main
+    plugin_name: mysql-database-plugin
+    connection_url: "{{'{{username}}'}}:{{'{{password}}'}}@tcp(mysql.example.com:3306)/"
+    connection_username: "{{ db_static_user }}"
+    connection_password: "{{ db_static_password }}"
+    allowed_roles:
+      - readonly
+      - readwrite
+  register: mysql_connection_result
+ </code></pre> 
+     <p class="p">After (<code class="ph codeph">hashicorp.vault</code>):</p> 
+     <pre class="pre codeblock"><code>- name: Update a database connection with MySQL
+  hashicorp.vault.database_connection:
+    name: mysql-sample-connection
+    state: present
+    connection_url: "mysql://vaultuser:secretpassword@localhost:3306/mydb"
+    verify_connection: true
+    plugin_name: "mysql-database-plugin"
+    database_mount_path: "database-conn-config-integration-tests"
+    allowed_roles:
+      - "readonly"
+      - "readwrite"
+    username: "vaultuser"
+    password: "secretpassword"
+ </code></pre> 
+     <p class="p"> <strong class="ph b">Example 3: Reset a database connection</strong> </p> 
+     <p class="p">Before (<code class="ph codeph">community.hashi_vault</code>):</p> 
+     <pre class="pre codeblock"><code> <strong class="ph b">- name:</strong> Reset a Database Connection with the default mount point
+  <strong class="ph b">community.hashi_vault.vault_database_connection_reset:</strong>
+    <strong class="ph b">url:</strong> https://vault:8201
+    <strong class="ph b">auth_method:</strong> userpass
+    <strong class="ph b">username:</strong> '{{ <strong class="ph b">user</strong> }}'
+    <strong class="ph b">password:</strong> '{{ <strong class="ph b">passwd</strong> }}'
+    <strong class="ph b">connection_name:</strong> mysql-sample-connection
+  <strong class="ph b">register:</strong> result</code></pre> 
+     <p class="p">After (<code class="ph codeph">hashicorp.vault</code>):</p> 
+     <pre class="pre codeblock"><code>- name: Reset a database connection
+  hashicorp.vault.database_connection:
+    name: mysql-sample-connection
+    state: reset
+ </code></pre> 
+     <p class="p"> <strong class="ph b">Example 4: Delete a database connection</strong> </p> 
+     <p class="p">Before (<code class="ph codeph">community.hashi_vault</code>):</p> 
+     <pre class="pre codeblock"><code> <strong class="ph b">- name:</strong> Delete a Database Connection with the default mount point
+  <strong class="ph b">community.hashi_vault.vault_database_connection_delete:</strong>
+    <strong class="ph b">url:</strong> https://vault:8201
+    <strong class="ph b">auth_method:</strong> userpass
+    <strong class="ph b">username:</strong> '{{ user }}'
+    <strong class="ph b">password:</strong> '{{ passwd }}'
+    <strong class="ph b">connection_name:</strong> SomeName
+  <strong class="ph b">register:</strong> result
+
+ <strong class="ph b">- name:</strong> Display the result of the operation
+  <strong class="ph b">ansible.builtin.debug:</strong>
+    <strong class="ph b">msg:</strong> "{{ <strong class="ph b">result</strong> }}"</code></pre> 
+     <p class="p">After (<code class="ph codeph">hashicorp.vault</code>):</p> 
+     <pre class="pre codeblock"><code>- name: Delete a database connection
+  hashicorp.vault.database_connection:
+    name: mysql-sample-connection
+    state: absent
+ </code></pre> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

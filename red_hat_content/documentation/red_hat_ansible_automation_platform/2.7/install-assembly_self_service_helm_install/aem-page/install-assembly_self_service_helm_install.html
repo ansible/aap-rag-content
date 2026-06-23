@@ -1,0 +1,124 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="self-service-helm-install"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Install the Ansible automation portal Helm chart</h1> 
+     <p class="shortdesc">You can use the configured secrets and plugin registry to install the Ansible automation portal. Deploy the application onto your OpenShift cluster using the provided Helm chart.</p> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="install-helm-from-catalog"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Configure the Helm chart from the OpenShift catalog</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Deploy the Helm chart from the OpenShift catalog by configuring the base URL and organization name in the YAML view. This launches the Ansible automation portal installation.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have created a project for Ansible automation portal in OpenShift Container Platform.</li> 
+         <li class="li">You have created secrets in OpenShift Container Platform for Red Hat Ansible Automation Platform authentication.</li> 
+         <li class="li">If you configure SCM integration (for example, importing from private repositories or using templates that access SCM), you have created secrets in OpenShift for SCM authentication.</li> 
+         <li class="li">You have completed one of the plug-in delivery methods: 
+          <ul class="ul"> 
+           <li class="li">For OCI delivery: You have created the <code class="ph codeph">&lt;release-name&gt;-dynamic-plugins-registry-auth</code> secret.</li> 
+           <li class="li">For HTTP plug-in registry (deprecated): You have deployed the plug-in registry and plan to set <code class="ph codeph">pluginMode</code> to <code class="ph codeph">tarball</code>.</li> 
+          </ul> </li> 
+        </ul> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the OpenShift Container Platform web console, select the <span class="ph uicontrol">Developer</span> view.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select your project and click the <span class="ph uicontrol">Helm</span> option in the OpenShift sidebar.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol">Create</span> and select <span class="ph uicontrol">Helm Release</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Search for <code class="ph codeph">Portal</code> in the Helm Charts filter, and select the <span class="ph uicontrol">Automation Portal</span> chart.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol">Create</span> and select the <span class="ph uicontrol">YAML view</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Update the <code class="ph codeph">clusterRouterBase</code> value with the base URL of your OpenShift instance.</span> 
+          <div class="itemgroup stepxmp"> 
+           <div class="note important note_important"> <span class="note__title">Important:</span> 
+            <div class="note__body"> 
+             <p class="p">You must replace the default <code class="ph codeph">apps.example.com</code> placeholder value. If the default value remains, Helm chart validation fails.</p> 
+            </div> 
+           </div> 
+           <pre class="pre codeblock"><code>redhat-developer-hub:
+  global:
+    clusterRouterBase: apps.example.com</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Configure the plug-in delivery mode and version by setting the <code class="ph codeph">pluginMode</code> and <code class="ph codeph">imageTagInfo</code> keys:</span> 
+          <ul class="ul choices"> 
+           <li class="li choice">For OCI delivery, set <code class="ph codeph">pluginMode</code> to <code class="ph codeph">oci</code>.</li> 
+          </ul> 
+          <div class="itemgroup info"> 
+           <p class="p">Set <code class="ph codeph">imageTagInfo</code> to the plug-in version from the Helm chart or the lifecycle page. To determine the correct version tag, see "Determine version tags before you install".</p> 
+          </div> 
+          <div class="itemgroup stepxmp"> 
+           <pre class="pre codeblock"><code>redhat-developer-hub:
+  global:
+    pluginMode: oci
+    imageTagInfo: "&lt;plugin-version&gt;"</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Set the Red Hat Ansible Automation Platform organization to synchronize. The default value is <code class="ph codeph">Default</code>. Update the <code class="ph codeph">orgs</code> key to match your organization name:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>redhat-developer-hub:
+  upstream:
+    backstage:
+      appConfig:
+        catalog:
+          providers:
+            rhaap:
+              '{{- include "catalog.providers.env" . }}':
+                orgs: "&lt;your-aap-organization-name&gt;"</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd"><strong class="ph b">Optional:</strong> Update the <code class="ph codeph">CUSTOMER_SUPPORT_URL</code> to point to your support portal:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>redhat-developer-hub:
+  upstream:
+    backstage:
+      extraEnvVars:
+        - name: CUSTOMER_SUPPORT_URL
+          value: https://access.redhat.com/support</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol">Create</span>.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relinfo"> <strong>Related information</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/installing_self-service_automation_portal/index#self-service-create-ocp-registry_self-service-preinstall-config" target="_blank" rel="external noopener">Choose a plug-in delivery method</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="verify-installation"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Verify the installation</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Verify the Helm chart installation from the OpenShift Container Platform web console.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">In a browser, log in to your OpenShift instance.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <span class="ph uicontrol">Developer</span> view, navigate to the <span class="ph uicontrol">Topology</span> view for the namespace where you deployed the Helm chart.</span> 
+          <div class="itemgroup stepresult"> 
+           <p class="p">The deployment appears with the label <code class="ph codeph">D</code> on the icon. The name of the deployment is <code class="ph codeph">&lt;installation-name&gt;-backstage</code>, for example <code class="ph codeph">&lt;my-self-service-automation-portal-backstage&gt;</code>.</p> 
+           <p class="p">While it is deploying, the icon is light blue. The color changes to dark blue when deployment is complete.</p> 
+           <figure class="fig fignone" id="verify-installation__fig_1"> 
+            <figcaption> <span class="fig--title-label">Figure 1. </span>OpenShift deployment topology view 
+            </figcaption> 
+            <img class="image" id="verify-installation__image_1" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/self-service-verify-helm-install.png" alt="Deployment on OpenShift console"> 
+           </figure> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

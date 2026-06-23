@@ -1,0 +1,748 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-view-key-metrics"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Install automation dashboard to calculate savings (RHEL only)</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">By effectively using automation dashboard, you can gain valuable insights into your Ansible Automation Platform usage and drive continuous improvement in your automation practices.</p> 
+      <section class="section">
+       <h2 class="title sectiontitle">About the automation dashboard</h2> 
+       <p class="p">The automation dashboard utility is a web-based container application that provides key metrics related to job execution, efficiency, and the value derived from automation.</p> 
+       <p class="p">Automation dashboard uses automation metrics to supply automation usage data from Ansible Automation Platform. This data helps you compare the cost of performing tasks manually to the cost of performing tasks through automation, allowing you to show what savings are achievable through automation.</p> 
+       <p class="p"><strong class="ph b">Key benefits</strong></p> 
+       <p class="p">Automation dashboard helps you:</p> 
+       <ul class="ul"> 
+        <li class="li">Get a clear overview of the automation occurring in your environment.</li> 
+        <li class="li">Track metrics such as time saved and errors reduced, to quantify the benefits of automation.</li> 
+        <li class="li">Analyze job execution times and failure rates to pinpoint areas for automation improvement.</li> 
+        <li class="li">Use the generated data to make informed decisions about automation strategy, resource allocation, and prioritization of automation projects.</li> 
+       </ul> 
+       <p class="p"><strong class="ph b">Automation Dashboard and Red Hat Ansible Automation Platform 2.7</strong></p> 
+       <p class="p">In Red Hat Ansible Automation Platform 2.7, two dashboard solutions are available:</p> 
+       <ul class="ul"> 
+        <li class="li"><strong class="ph b">Native Automation Dashboard (Technology Preview):</strong> Integrated into Red Hat Ansible Automation Platform 2.7 as part of the Metrics Service. Suitable for single Red Hat Ansible Automation Platform instance monitoring with integrated Red Hat Ansible Automation Platform UI experience.</li> 
+        <li class="li"><strong class="ph b">Standalone automation dashboard:</strong> This guide describes the standalone utility, which continues to be supported in Red Hat Ansible Automation Platform 2.7 and later releases. Use the standalone utility when you need: 
+         <ul class="ul"> 
+          <li class="li">Multi-instance monitoring (aggregating data across multiple Red Hat Ansible Automation Platform deployments)</li> 
+          <li class="li">Independent dashboard infrastructure separate from Red Hat Ansible Automation Platform installation</li> 
+          <li class="li">Dashboard for Red Hat Ansible Automation Platform versions prior to 2.7</li> 
+         </ul> </li> 
+       </ul> 
+      </section> 
+      <section class="section">
+       <h2 class="title sectiontitle">Choose between standalone and native dashboard (Red Hat Ansible Automation Platform 2.7+)</h2> 
+       <p class="p">If you are running Red Hat Ansible Automation Platform 2.7, two dashboard options are available. Use this guidance to determine which dashboard solution meets your needs.</p> 
+       <p class="p"><strong class="ph b">Use standalone automation dashboard when:</strong></p> 
+       <ul class="ul"> 
+        <li class="li"><strong class="ph b">Multi-cluster monitoring is required:</strong> You need to aggregate data across multiple Red Hat Ansible Automation Platform deployments (for example, production, staging, and development environments)</li> 
+        <li class="li"><strong class="ph b">Using Red Hat Ansible Automation Platform version is 2.4, 2.5, or 2.6:</strong> Native dashboard is only available in Red Hat Ansible Automation Platform 2.7</li> 
+        <li class="li"><strong class="ph b">Independent infrastructure preferred:</strong> You want dashboard infrastructure separate from Red Hat Ansible Automation Platform installation (for example, different security zones, independent scaling, disaster recovery isolation)</li> 
+       </ul> 
+       <p class="p"><strong class="ph b">Use native Automation Dashboard (Red Hat Ansible Automation Platform 2.7) when:</strong></p> 
+       <ul class="ul"> 
+        <li class="li"><strong class="ph b">Single Red Hat Ansible Automation Platform instance monitoring:</strong> You only need to monitor one Red Hat Ansible Automation Platform deployment</li> 
+        <li class="li"><strong class="ph b">Integrated experience preferred:</strong> You want dashboard integrated into Red Hat Ansible Automation Platform unified UI with Gateway authentication</li> 
+        <li class="li"><strong class="ph b">No additional infrastructure:</strong> You do not want to deploy separate VMs or containers for dashboard</li> 
+        <li class="li"><strong class="ph b">Using a new Red Hat Ansible Automation Platform 2.7 deployment:</strong> You are installing Red Hat Ansible Automation Platform 2.7 for the first time</li> 
+       </ul> 
+      </section> 
+      <section class="section">
+       <h2 class="title sectiontitle">Coexistence</h2> 
+       <p class="p">Both dashboard solutions can run simultaneously. For example, you might use:</p> 
+       <ul class="ul"> 
+        <li class="li"><strong class="ph b">Standalone dashboard:</strong> For aggregated view across multiple Red Hat Ansible Automation Platform environments</li> 
+        <li class="li"><strong class="ph b">Native dashboard:</strong> For detailed single-instance view of your Red Hat Ansible Automation Platform 2.7 production cluster</li> 
+       </ul> 
+      </section> 
+      <section class="section">
+       <h2 class="title sectiontitle">Architecture comparison</h2> 
+       <p class="p"><strong class="ph b">Standalone dashboard infrastructure:</strong></p> 
+       <ul class="ul"> 
+        <li class="li">Separate RHEL host or VM</li> 
+        <li class="li">Dedicated PostgreSQL database</li> 
+        <li class="li">Independent Redis instance</li> 
+        <li class="li">Podman containerized deployment</li> 
+        <li class="li">Manual OAuth2 token configuration</li> 
+        <li class="li">Pulls data by using Red Hat Ansible Automation Platform API</li> 
+       </ul> 
+       <p class="p"><strong class="ph b">Native dashboard infrastructure (Technology Preview):</strong></p> 
+       <ul class="ul"> 
+        <li class="li">Integrated with Metrics Service (no separate VM)</li> 
+        <li class="li">Uses Metrics Service PostgreSQL database</li> 
+        <li class="li">Automatic Gateway authentication</li> 
+        <li class="li">Enabled by using installer flag</li> 
+        <li class="li">Data collected by Metrics Service backend</li> 
+       </ul> 
+      </section> 
+      <section class="section">
+       <h2 class="title sectiontitle">Migration considerations</h2> 
+       <div class="note important note_important">
+        <span class="note__title">Important:</span> 
+        <div class="note__body"> 
+         <p class="p">There is no automatic migration path from standalone dashboard to native dashboard in Red Hat Ansible Automation Platform 2.7. If you plan to transition from standalone to native dashboard in the future:</p> 
+         <ul class="ul"> 
+          <li class="li">Continue using standalone dashboard until multi-instance support is added to native dashboard (planned for future GA release)</li> 
+          <li class="li">Contact Red Hat Support for guidance on migration planning</li> 
+         </ul> 
+        </div>
+       </div> 
+      </section> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist relconcepts">
+       <strong>Related concepts</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-con_understand_automation_dashboard_architecture" title="This module explains the automation dashboard architecture in Red Hat Ansible Automation Platform 2.7, including its integration with metrics service, deployment options, and Technology Preview limitations.">Understand automation dashboard architecture</a></li>
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_understand_metrics_service_architecture" title="Learn the architectural components and deployment topology of metrics service to make informed infrastructure decisions and ensure successful integration with Ansible Automation Platform.">Understand metrics service architecture</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-installing-automation-dashboard"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Install automation dashboard</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Install automation dashboard to collect and analyze key metrics related to job execution, efficiency, and automation savings across your Ansible Automation Platform deployments.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">One of the following tested configurations: 
+          <ul class="ul"> 
+           <li class="li">RHEL 9 or RHEL 10 on x86 or ARM-based physical or virtual hosts.</li> 
+           <li class="li">With an external database: PostgreSQL v15 database. 
+            <div class="note important note_important">
+             <span class="note__title">Important:</span> 
+             <div class="note__body">
+              Do not install automation dashboard on the same host(s) as Ansible Automation Platform.
+             </div>
+            </div> </li> 
+          </ul> </li> 
+         <li class="li">Automation dashboard installation has been tested with the following configuration: 
+          <ul class="ul"> 
+           <li class="li">80 GB hard drive (depending on data growth)</li> 
+           <li class="li">4 vCPUs x 16 GB RAM</li> 
+           <li class="li">Disk IOPS - 3000</li> 
+           <li class="li">Handle up to 10,000 jobs/month and 47M summaries/month</li> 
+           <li class="li">Connects to three Ansible Automation Platform deployments of the same version</li> 
+          </ul> </li> 
+         <li class="li">Access to <em class="ph i">baseos</em> and <em class="ph i">Ansible Automation Platformstream</em> repository packages for the RHEL 9 or RHEL 10 host.</li> 
+         <li class="li">A non-root login account to the RHEL 9 or RHEL 10 host for installation. 
+          <ul class="ul"> 
+           <li class="li">The login account requires <code class="ph codeph">sudo</code> access to root.</li> 
+           <li class="li">By default, we use the <code class="ph codeph">$HOMEDIR</code> of the user account.</li> 
+          </ul> </li> 
+         <li class="li">URL details for access to your Ansible Automation Platform instances.</li> 
+         <li class="li">One of the following supported Red Hat Ansible Automation Platform versions: 
+          <ul class="ul" id="proc-installing-automation-dashboard__ul_1"> 
+           <li class="li">Red Hat Ansible Automation Platform 2.4</li> 
+           <li class="li">Red Hat Ansible Automation Platform 2.5</li> 
+           <li class="li">Red Hat Ansible Automation Platform 2.6</li> 
+           <li class="li">Red Hat Ansible Automation Platform 2.7</li> 
+          </ul> </li> 
+         <li class="li">An Ansible Automation Platform OAuth2 token, which is used for communication between the Ansible Automation Platform instances and automation dashboard.</li> 
+         <li class="li">Access to download the installation bundle providing installation components for the automation dashboard.</li> 
+         <li class="li">Open firewall access to allow for bidirectional communication between Ansible Automation Platform instances and the automation dashboard. 
+          <ul class="ul"> 
+           <li class="li">This includes HTTPS/443 (or your Ansible Automation Platform configured port) from the dashboard to the Ansible Automation Platform instance(s).</li> 
+           <li class="li">Port 8447 is the default ingress port for the automation dashboard. This port can be configured during installation.</li> 
+           <li class="li">RHEL firewall ports that might block 5432 to PostgreSQL.</li> 
+          </ul> </li> 
+         <li class="li">A supported version of <code class="ph codeph">ansible-core</code> installed on supported RHEL versions.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Download the latest installer tar file from access.redhat.com. Navigate to Downloads &gt; Red Hat Ansible Automation Platform Product Software.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Copy the installation source file to your RHEL 9 or RHEL 10 host.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Extract the installation source. This will require ~500Mb. of disk space. Throughout this example we will use the ec2-user home directory: <code class="ph codeph">/home/&lt;username&gt;</code>. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock language-bash"><code>tar -xzvf ansible-automation-dashboard-containerized-setup-bundle-0.1-x86_64.tar.gz
+cd ansible-automation-dashboard-containerized-setup/</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Install the required <code class="ph codeph">ansible-core</code> package. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock language-bash"><code>cd ansible-automation-dashboard-containerized-setup
+sudo dnf install ansible-core</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Create an application <code class="ph codeph">client_id/client_secret</code> in your Ansible Automation Platform instance: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Create an OAuth2 application using the following steps : </span> 
+            <div class="itemgroup info"> 
+             <ol class="ol" type="i"> 
+              <li class="li"><strong class="ph b">For Ansible 2.4</strong>: 
+               <ul class="ul"> 
+                <li class="li">Navigate to <a class="xref" href="https://AAP_CONTROLLER_FQDN/#/applications" target="_blank" rel="external noopener">https://AAP_CONTROLLER_FQDN/#/applications</a></li> 
+               </ul> </li> 
+              <li class="li"><strong class="ph b">For Ansible 2.5, 2.6, and 2.7</strong>: 
+               <ul class="ul"> 
+                <li class="li">Navigate to <a class="xref" href="https://AAP_GATEWAY_FQDN/access/applications" target="_blank" rel="external noopener">https://AAP_GATEWAY_FQDN/access/applications</a></li> 
+               </ul> 
+               <div class="note note note_note">
+                <span class="note__title">Note:</span> 
+                <div class="note__body">
+                 In Red Hat Ansible Automation Platform 2.5 and later, OAuth2 applications are managed through Red Hat Ansible Automation Platform Gateway, not directly in the automation controller.
+                </div>
+               </div> </li> 
+              <li class="li">Add the following information: 
+               <ul class="ul"> 
+                <li class="li"><strong class="ph b">Name</strong>: automation-dashboard-sso</li> 
+                <li class="li"><strong class="ph b">Authorization grant type</strong>: authorization-code</li> 
+                <li class="li"><strong class="ph b">Organization</strong>: Default</li> 
+                <li class="li"><strong class="ph b">Redirect URIs</strong>: <a class="xref" href="https://AUTOMATION_DASHBOARD_FQDN/auth-callback" target="_blank" rel="external noopener">https://AUTOMATION_DASHBOARD_FQDN/auth-callback</a></li> 
+                <li class="li"><strong class="ph b">Client type</strong>: Confidential 
+                 <div class="note note note_note">
+                  <span class="note__title">Note:</span> 
+                  <div class="note__body">
+                   The values for <strong class="ph b">Name</strong>, <strong class="ph b">Organization</strong>, and HTTPS port number for Ansible Automation Platform are configurable. The examples provided in this document assume use of port 443.
+                  </div>
+                 </div> </li> 
+               </ul> </li> 
+             </ol> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Save the <code class="ph codeph">client_id</code> and <code class="ph codeph">client_secret information</code> inputs into the inventory file.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Create an Ansible Automation Platform access token: </span> 
+            <div class="itemgroup info"> 
+             <ol class="ol" type="i"> 
+              <li class="li">Navigate to <code class="ph codeph">https://AAP_GATEWAY_FQDN/#/users/&lt;id&gt;/tokens</code>, and create a token using the following information: 
+               <ul class="ul"> 
+                <li class="li">OAuth application: automation-dashboard-sso</li> 
+                <li class="li">Scope: read</li> 
+               </ul> </li> 
+              <li class="li">Store the access token and refresh token values. <code class="ph codeph">clusters.yaml</code> uses these tokens.</li> 
+             </ol> 
+            </div> </li> 
+          </ol> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Copy the example inventory and change it before running the installation program. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock language-bash"><code>cp -i inventory.example inventory
+vi inventory</code></pre> 
+           <div class="note important note_important">
+            <span class="note__title">Important:</span> 
+            <div class="note__body"> 
+             <ul class="ul"> 
+              <li class="li">This is an example tested inventory containing default values for Ansible Automation Platform 2.4, 2.5, 2.6, and 2.7.</li> 
+              <li class="li">You must change the following values to use this inventory configuration in your environment: 
+               <ul class="ul"> 
+                <li class="li">Change the RHEL 9 or RHEL 10 host occurrences from <code class="ph codeph">host.example.com</code> to your FQDN host</li> 
+                <li class="li">Change the phrase <code class="ph codeph">TODO</code> to match your passwords within all <code class="ph codeph">_admin_password</code> or <code class="ph codeph">_pg_password</code> values.</li> 
+                <li class="li">Change the <code class="ph codeph">dashboard_pg_host</code> value to the IP address or DNS name of the database server.</li> 
+               </ul> </li> 
+              <li class="li">For more information, see the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-inventory_file_variables_for_automation_dashboard#GUID-91739484-5e4b-43a7-a0f2-72ef805f6535" title="The inventory variables required by the automation dashboard installation program are described in the following table:">Inventory variables</a> section of this document.</li> 
+             </ul> 
+            </div>
+           </div> 
+           <pre class="pre codeblock language-bash"><code># This is our automation dashboard front-end application
+[automationdashboard]
+host.example.com ansible_connection=local
+
+# These are required vars for the installation and should not be removed
+[automationdashboard:vars]
+# Configure AAP OAuth2 authentication.
+# aap_auth_provider_name - name as shown on login page.
+aap_auth_provider_name=Ansible Automation Platform
+# aap_auth_provider_protocol - http or https
+aap_auth_provider_protocol=https
+# AAP version - 2.4, 2.5, 2.6 or 2.7
+aap_auth_provider_aap_version=2.7
+# aap_auth_provider_host - AAP IP or DNS name, with optional port
+aap_auth_provider_host=my-aap.example.com
+# aap_auth_provider_check_ssl - enforce TLS check or not.
+aap_auth_provider_check_ssl=true
+# aap_auth_provider_client_id and aap_auth_provider_client_secret -
+# they are obtained from AAP when OAuth2 application is created in AAP.
+aap_auth_provider_client_id=TODO
+aap_auth_provider_client_secret=TODO
+
+
+# Specify amount of old data to synchronize after installation.
+# The initial_sync_days=N requests N days of old data, counting from "today".
+# The initial_sync_since requests data from the specified date until "today".
+# If both are specified, the initial_sync_since will be used.
+initial_sync_days=1
+# initial_sync_since=2025-08-08
+
+# Hide warnings when insecure https request are made.
+# Use this if your AAP uses self-signed TLS certificate.
+# show_urllib3_insecure_request_warning=False
+
+# Force clean install-like
+# dashboard_update_secret=true
+
+# HTTP/HTTPS settings
+# nginx_disable_https=true
+# Change nginx_http_port or nginx_https_port if you want to access dashboard on a different TCP port.
+# nginx_http_port=8083
+# nginx_https_port=8447
+# TLS certificate configuration
+# The dashboard_tls_cert needs:
+#   - contain server certificate, intermediate CA certificates and root CA certificate.
+#   - the server certificate must be the first one in the file.
+# dashboard_tls_cert=/path/to/tls/dashboard.crt
+# dashboard_tls_key=/path/to/tls/dashboard.key
+
+# Enable Django DEBUG.
+# django_debug=True
+
+[database]
+host.example.com ansible_connection=local
+[redis]
+host.example.com ansible_connection=local
+
+[all:vars]
+redis_mode=standalone
+
+[all:vars]
+postgresql_admin_username=postgres
+postgresql_admin_password=TODO
+
+# registry_username=
+# registry_password=
+# AAP Dashboard - mandatory
+# --------------------------
+dashboard_pg_containerized=True
+dashboard_admin_password=TODO
+# The value of dashboard_pg_host needs to resolve to an IP address of the database.
+# It cannot be localhost or 127.0.0.1.
+# It can be IP address of the server.
+
+dashboard_pg_host=host.example.com
+dashboard_pg_username=aapdashboard
+dashboard_pg_password=TODO
+dashboard_pg_database=aapdashboard
+
+bundle_install=true
+#
+# Relevant if bundle_install=false
+# Set container_image_update to True to fetch most recent container images from registry.
+# container_image_update=True
+#
+# Relevant if bundle_install=true
+# &lt;full path to the bundle directory&gt;
+bundle_dir='{{ lookup("ansible.builtin.env", "PWD") }}/bundle'
+# AAP Dashboard - optional
+# --------------------------
+# Set to True to expose Django admin page.
+# nginx_dashboard_admin_exposed=False</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Install the required Ansible collections. You must complete this step to prevent module resolution errors during the installation.</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>ansible-galaxy collection install -r requirements.yml</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Run the installation program. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock language-bash"><code>ansible-playbook -i inventory ansible.containerized_installer.dashboard_install --ask-become-pass</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">For reference, see the following example output:</p> 
+        <pre class="pre codeblock language-text"><code>PLAY RECAP *********************************************************************************************************************************************
+ec2-54-147-26-173.compute-1.amazonaws.com : ok=126  changed=51   unreachable=0    failed=0    skipped=42   rescued=0    ignored=0
+localhost                  : ok=12   changed=0    unreachable=0    failed=0    skipped=9    rescued=0    ignored=0</code></pre> 
+        <p class="p">Alternative configurations are possible (for example, the database for automation dashboard can be set on a different host). This requires additional changes to variables in the inventory file. Consult the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-inventory_file_variables_for_automation_dashboard#GUID-91739484-5e4b-43a7-a0f2-72ef805f6535" title="The inventory variables required by the automation dashboard installation program are described in the following table:">Inventory variables</a> section of this document for available variables.</p> 
+       </section> 
+      </div> 
+      <article class="topic task nested2" aria-labelledby="ariaid-title3" id="proc-integrating-automation-dashboard"> 
+       <h3 class="title topictitle3" id="ariaid-title3">Configure automation dashboard</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">Integrate your Ansible Automation Platform instances into the automation dashboard configuration to collect and visualise data and gain insights into your automation.</p> 
+        <section class="section prereq">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Before you begin</h4>
+         </div> 
+         <ul class="ul"> 
+          <li class="li">You have installed automation dashboard.</li> 
+          <li class="li">You have verified that automation dashboard is running on HTTPS port 8447 on your Red Hat Enterprise Linux host. 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <ul class="ul"> 
+              <li class="li">This verification requires your Ansible Automation Platform login details.</li> 
+              <li class="li">Port 8447 is enabled by default, but this is configurable.</li> 
+             </ul> 
+            </div>
+           </div> </li> 
+         </ul> 
+        </section> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step stepexpand"> <span class="ph cmd">Configure a personal access token. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_token_based_authentication#gw-token-based-authentication" title="Token-based authentication permits authentication of third-party tools and services with the platform through integrated OAuth 2 token support. Ansible Automation Platform utilizes both OAuth Tokens and Personal Access Tokens (PATs).">Configuring access to external applications with token-based authentication</a>.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Create or update the <code class="ph codeph">clusters.yaml</code> file. You must include the <code class="ph codeph">access_token</code>, <code class="ph codeph">refresh_token</code>, <code class="ph codeph">client_id</code>, and <code class="ph codeph">client_secret</code> to enable persistent authentication and automatic token rotation. </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock language-yaml"><code>clusters:
+  - protocol: https
+    address: &lt;aap_controller_url&gt;
+    port: 443
+    access_token: &lt;access_token_string&gt;
+    refresh_token: &lt;refresh_token_string&gt;
+    client_id: &lt;client_id_string&gt;
+    client_secret: &lt;client_secret_string&gt;
+    verify_ssl: false
+    name: &lt;unique_cluster_name&gt;</code></pre> 
+            <div class="note note note_note">
+             <span class="note__title">Note:</span> 
+             <div class="note__body"> 
+              <p dir="ltr" class="p">For Red Hat Ansible Automation Platform 2.7 Users: If you only need to monitor a single Red Hat Ansible Automation Platform 2.7 instance, consider using the native Automation Dashboard integrated into Red Hat Ansible Automation Platform 2.7 instead of standalone dashboard. Native dashboard provides an integrated UI experience with Red Hat Ansible Automation Platform Gateway authentication. However, if you need to aggregate data across multiple Red Hat Ansible Automation Platform instances (regardless of version), continue using this standalone dashboard utility. </p> 
+             </div>
+            </div> 
+            <p class="p"><strong class="ph b">Configuring TLS verification</strong> </p> 
+            <p class="p">When configuring the <code class="ph codeph">verify_ssl</code> parameter, choose the setting that matches your Ansible Automation Platform certificate type:</p> 
+            <ul class="ul"> 
+             <li class="li"><strong class="ph b">Commercial certificates:</strong> Set <code class="ph codeph">verify_ssl: true</code>.</li> 
+             <li class="li"><strong class="ph b">Self-signed certificates:</strong> Set <code class="ph codeph">verify_ssl: false</code>. 
+              <div class="note note note_note">
+               <span class="note__title">Note:</span> 
+               <div class="note__body"> 
+                <p class="p">The automation dashboard cannot verify self-signed certificates against a custom Certificate Authority (CA).</p> 
+               </div>
+              </div> </li> 
+            </ul> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">You can add one or more Ansible Automation Platform instances (of the same Ansible Automation Platform version) into the automation dashboard configuration for pulling and combining data by using the following: </span> 
+           <div class="itemgroup info"> 
+            <div class="note note note_note">
+             <span class="note__title">Note:</span> 
+             <div class="note__body"> 
+              <p class="p">If you only have one Ansible Automation Platform instance, then remove the second entry.</p> 
+             </div>
+            </div> 
+            <pre class="pre codeblock language-bash"><code>---
+clusters:
+  - protocol: https            &lt;--- Normally https
+    address: my-aap.example.com  &lt;--- Can use IP or FQDN without http(s)://
+    port: 443                &lt;--- Normally 443
+    access_token: sampleToken    &lt;--- Your preconfigured Ansible Automation Platform read access token
+  Platform read access token
+    refresh_token: myRefreshToken
+    client_id: myClientID
+    client_secret: myClientSecret
+    verify_ssl: false        &lt;--- Can be used when using self signed certs
+    sync_schedules:
+      - name: Every 5 minutes sync
+        rrule: DTSTART;TZID=Europe/Ljubljana:20250630T070000 FREQ=MINUTELY;INTERVAL=5
+        enabled: true
+ # If there is one Ansible Automation Platform instance, then remove the second entry below.
+  # Alternately. If there is more than one AAP instance to connect, copy additional entries.
+  - protocol: https
+    address: aap2.example.com
+    port: 443
+    access_token: WRn2swiqg5spEwUndDkrJoCeg4Qwuw
+    verify_ssl: true
+    sync_schedules:
+      - name: Every 5 minutes sync
+        rrule: DTSTART;TZID=Europe/Ljubljana:20250630T070000 FREQ=MINUTELY;INTERVAL=5
+       enabled: true</code></pre> 
+            <div class="note note note_note">
+             <span class="note__title">Note:</span> 
+             <div class="note__body"> 
+              <p class="p">The <code class="ph codeph">access_token</code>, <code class="ph codeph">refresh_token</code>, and <code class="ph codeph">client_secret</code> are stored in the automation dashboard database. These values are encrypted for security.</p> 
+             </div>
+            </div> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Load and activate your automation dashboard configuration. You must copy the configuration file to the container’s <code class="ph codeph">/tmp/</code> directory. The system automatically removes the file from the container after successful processing. </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock language-bash"><code>podman cp clusters.yaml automation-dashboard-web:/tmp
+podman exec -it automation-dashboard-web /venv/bin/python manage.py setclusters /tmp/clusters.yaml</code></pre> 
+            <div class="note note note_note">
+             <span class="note__title">Note:</span> 
+             <div class="note__body">
+              If the system cannot remove the file from the /tmp/ directory, it displays an error message and continues running.
+             </div>
+            </div> 
+            <div class="note note note_note">
+             <span class="note__title">Note:</span> 
+             <div class="note__body"> 
+              <p class="p"><strong class="ph b">Token Rotation:</strong> The automation dashboard rotates tokens internally for security but does not update your local <code class="ph codeph">clusters.yaml</code> file. If you must re-run the <code class="ph codeph">setclusters</code> command later, your defined tokens might be expired.</p> 
+              <p class="p">To retrieve the current valid tokens, run the following command and save the output to a new file:</p> 
+              <pre class="pre codeblock language-bash"><code>podman exec -it automation-dashboard-web /venv/bin/python manage.py getclusters --decrypt &gt; clusters_current.yaml</code></pre> 
+             </div>
+            </div> 
+           </div> </li>
+         </ol>
+        </section> 
+       </div> 
+       <nav role="navigation" class="related-links">
+        <div class="linklist relconcepts">
+         <strong>Related concepts</strong>
+         <br>
+         <ul class="linklist">
+          <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-con_understand_automation_dashboard_architecture" title="This module explains the automation dashboard architecture in Red Hat Ansible Automation Platform 2.7, including its integration with metrics service, deployment options, and Technology Preview limitations.">Understand automation dashboard architecture</a></li>
+         </ul>
+        </div>
+        <div class="linklist reltasks">
+         <strong>Related tasks</strong>
+         <br>
+         <ul class="linklist">
+          <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-task_enable_automation_dashboard_containerized_installation" title="Enable automation dashboard data collection during the initial installation to start collecting ROI and cost analysis data without post-installation configuration.">Enable automation dashboard during containerized installation</a></li>
+         </ul>
+        </div>
+       </nav> 
+      </article>
+      <article class="topic task nested2" aria-labelledby="ariaid-title4" id="synchronizing-data-to-automation-dashboard"> 
+       <h3 class="title topictitle3" id="ariaid-title4">Synchronize data to automation dashboard</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">Synchronize data from your connected Ansible Automation Platform clusters to the automation dashboard to view the latest automation metrics.</p> 
+        <section class="section prereq">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Before you begin</h4>
+         </div> 
+         <ul class="ul"> 
+          <li class="li">You have installed automation dashboard.</li> 
+          <li class="li">You have configured the <code class="ph codeph">clusters.yaml</code> file with your platform details.</li> 
+         </ul> 
+        </section> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step stepexpand"> <span class="ph cmd">Identify the running automation dashboard container: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock language-terminal"><code>$ podman ps | grep automation-dashboard-web</code></pre> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Run the synchronization command using one of the following methods: </span> 
+           <div class="itemgroup info"> 
+            <div class="div"> 
+             <ul class="ul"> 
+              <li class="li"><strong class="ph b">Interactive mode:</strong> Run <code class="ph codeph">syncdata</code> without arguments. You must confirm the synchronization request when prompted. <pre class="pre codeblock language-terminal"><code>$ podman exec -it automation-dashboard-web /venv/bin/python manage.py syncdata</code></pre> </li> 
+              <li class="li"><strong class="ph b">Noninteractive mode:</strong> Use the <code class="ph codeph">--since</code> and <code class="ph codeph">--until</code> flags to define the date range. This method bypasses the user prompt and is required for automated scripts or <code class="ph codeph">cron</code> jobs. <pre class="pre codeblock language-terminal"><code>$ podman exec -it automation-dashboard-web /venv/bin/python manage.py syncdata --since=2024-01-01 --until=2024-06-30</code></pre> </li> 
+             </ul> 
+            </div> 
+           </div> </li>
+         </ol>
+        </section> 
+        <section class="section result">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Results</h4>
+         </div> 
+         <ol class="ol"> 
+          <li class="li">Verify that the terminal displays the success message: <code class="ph codeph">Successfully created Sync task for Cluster &lt;cluster_url&gt;</code>.</li> 
+          <li class="li">Refresh automation dashboard in your browser to view the updated metrics.</li> 
+         </ol> 
+        </section> 
+       </div> 
+      </article>
+      <article class="topic task nested2" aria-labelledby="ariaid-title5" id="verifying-cluster-access-tokens_verifying-tokens"> 
+       <h3 class="title topictitle3" id="ariaid-title5">Verify cluster access tokens</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">After you configure and load your cluster data, verify the stored access tokens for debugging purposes.</p> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step stepexpand"> <span class="ph cmd">Use the <code class="ph codeph">getclusters</code> management command with the <code class="ph codeph">--decrypt</code> option to display the stored <code class="ph codeph">access_token</code> and <code class="ph codeph">refresh_token</code> in plain text.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Run the following command inside the <code class="ph codeph">automation-dashboard-web</code> container: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock language-bash"><code>podman exec -it automation-dashboard-web /venv/bin/python ./manage.py getclusters --decrypt</code></pre> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Review the output to confirm that the stored tokens are correct and up-to-date. </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock language-bash"><code>clusters:
+  - protocol: https
+    address: my-aap.example.com
+    port: 443
+    access_token: sampleToken
+    refresh_token: myRefreshToken
+    client_id: myClientID
+    client_secret: myClientSecret
+    verify_ssl: false
+    sync_schedules:
+      - name: Every 5 minutes sync
+        rrule: DTSTART;TZID=Europe/Ljubljana:20250630T070000 FREQ=MINUTELY;INTERVAL=5
+        enabled: true</code></pre> 
+            <div class="note note note_note">
+             <span class="note__title">Note:</span> 
+             <div class="note__body"> 
+              <p class="p">Displaying the encrypted <code class="ph codeph">access_token</code> and <code class="ph codeph">refresh_token</code> in plain text for debugging requires the <code class="ph codeph">--decrypt</code> flag. Do not use this command on unsecured systems.</p> 
+             </div>
+            </div> 
+            <p class="p">You can write output produced by <code class="ph codeph">./manage.py getclusters --decrypt</code> to a file <code class="ph codeph">clusters.yaml</code> and use it as input for <code class="ph codeph">./manage.py setclusters clusters.yaml</code>.</p> 
+           </div> </li>
+         </ol>
+        </section> 
+        <section class="section result">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Results</h4>
+         </div> 
+         <p class="p">If you come across error messages during installation, consult the following table:</p> 
+         <table class="table">
+          <caption></caption>
+          <colgroup>
+           <col style="width:20%">
+           <col style="width:40%">
+           <col style="width:40%">
+          </colgroup>
+          <thead class="thead"> 
+           <tr class="row"> 
+            <th class="entry" id="verifying-cluster-access-tokens_verifying-tokens__entry__1">Issue</th> 
+            <th class="entry" id="verifying-cluster-access-tokens_verifying-tokens__entry__2">Possible Cause</th> 
+            <th class="entry" id="verifying-cluster-access-tokens_verifying-tokens__entry__3">Solution</th> 
+           </tr> 
+          </thead>
+          <tbody class="tbody"> 
+           <tr class="row"> 
+            <td class="entry" headers="verifying-cluster-access-tokens_verifying-tokens__entry__1"> <p class="p">401 error</p> </td> 
+            <td class="entry" headers="verifying-cluster-access-tokens_verifying-tokens__entry__2"> <p class="p">This is an unauthorized access message indicating authentication errors such as wrong credentials or tokens.</p> </td> 
+            <td class="entry" headers="verifying-cluster-access-tokens_verifying-tokens__entry__3"> <p class="p">Verify that your access token is correct in <code class="ph codeph">clusters.yaml</code></p> </td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="verifying-cluster-access-tokens_verifying-tokens__entry__1"> <p class="p">401 error</p> </td> 
+            <td class="entry" headers="verifying-cluster-access-tokens_verifying-tokens__entry__2"> <p class="p">A temporary 401 error is expected behavior when the token expires, followed immediately by trying to refresh.</p> </td> 
+            <td class="entry" headers="verifying-cluster-access-tokens_verifying-tokens__entry__3"> <p class="p">If the automatic token refresh fails (for example, due to invalid <code class="ph codeph">client_secret</code> or <code class="ph codeph">refresh_token</code>), use the <code class="ph codeph">getclusters</code><code class="ph codeph">--decrypt</code> command to manually verify that the credentials stored in the database match those in your source <code class="ph codeph">clusters.yaml</code> file. If they do not match, re-run the <code class="ph codeph">setclusters</code> command with the correct configuration. You can only use the refresh token once. If you need to execute <code class="ph codeph">setclusters</code> because of invalid access token, create new access and refresh tokens, and use them in your source <code class="ph codeph">clusters.yaml</code>.</p> </td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="verifying-cluster-access-tokens_verifying-tokens__entry__1"> <p class="p">404 error</p> </td> 
+            <td class="entry" headers="verifying-cluster-access-tokens_verifying-tokens__entry__2"> <p class="p">This is a “not found” message indicating that something is not configured correctly or pointing to the correct endpoint.</p> </td> 
+            <td class="entry" headers="verifying-cluster-access-tokens_verifying-tokens__entry__3"> <p class="p">Verify that your Ansible Automation Platform instance URLs used in <code class="ph codeph">clusters.yaml</code> are correct.</p> </td> 
+           </tr> 
+          </tbody>
+         </table> 
+         <p class="p">A successful installation should be running the following three container services:</p> 
+         <pre class="pre codeblock language-bash"><code>podman ps --all --format "{{.Names}}"
+
+postgresql
+automation-dashboard-task
+automation-dashboard-web</code></pre> 
+         <p class="p">You can check your container logs by running the following:</p> 
+         <pre class="pre codeblock language-bash"><code>journalctl CONTAINER_NAME=container (where container equals one of postgresql automation-dashboard-task or automation-dashboard-web)
+
+For example:
+journalctl CONTAINER_NAME=automation-dashboard-task
+May 22 13:02:07 automation-dashboard automation-dashboard-task[1607]: [wait-for-migrations-dashboard.sh] Waiting for database migrations...
+May 22 13:02:07 automation-dashboard automation-dashboard-task[1607]: [wait-for-migrations-dashboard.sh] Attempt 1
+May 22 13:02:10 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:10,636 periodic 2 140568371550016 Starting sync task.
+May 22 13:02:10 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:10,636 periodic 2 140568371550016 Retrieving clusters inform&gt;
+May 22 13:02:10 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:10,747 periodic 2 140568371550016 Retrieved 1 clusters.
+May 22 13:02:10 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:10,761 periodic 2 140568371550016 Retrieving data from clust&gt;
+May 22 13:02:10 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:10,761 connector 2 140568371550016 Checking Ansible Automation Platform version at h&gt;
+May 22 13:02:10 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:10,761 connector 2 140568371550016 Checking if is Ansible Automation Platform 2.5 at&gt;
+May 22 13:02:10 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:10,761 connector 2 140568371550016 Pinging api https://ec2-3&gt;
+May 22 13:02:10 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:10,761 connector 2 140568371550016 Executing GET request to &gt;
+May 22 13:02:13 automation-dashboard automation-dashboard-task[1607]: ERROR 2025-05-22 13:02:13,820 connector 2 140568371550016 GET request failed with &gt;
+May 22 13:02:13 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:13,821 connector 2 140568371550016 Checking if is Ansible Automation Platform 2.4 at&gt;
+May 22 13:02:13 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:13,821 connector 2 140568371550016 Pinging api https://ec2-3&gt;
+May 22 13:02:13 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:13,821 connector 2 140568371550016 Executing GET request to &gt;
+May 22 13:02:16 automation-dashboard automation-dashboard-task[1607]: ERROR 2025-05-22 13:02:16,892 connector 2 140568371550016 GET request failed with ...</code></pre> 
+         <p class="p">The following log snippet shows a successful token refresh:</p> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">This log snippet omits timestamps and hostname for brevity.</p> 
+          </div>
+         </div> 
+         <p class="p"> <strong class="ph b">Example</strong> </p> 
+         <pre class="pre codeblock language-bash"><code>journalctl CONTAINER_NAME=automation-dashboard-task
+INFO Checking if is AAP 2.5 ... 2.6 at https://app.example.com:443
+INFO Pinging api https://app.example.com:443/api/gateway/v1/ping/
+INFO Detected AAP version AAP 2.6 at https://app.example.com:443
+INFO Executing GET request to https://app.example.com:443/api/controller/v2/organizations/?page_size=100&amp;page=1
+ERROR GET request failed with status 401
+INFO Token refresh POST request succeeded with status 201
+ERROR GET after reauth response.status_code=200
+INFO Executing GET request to https://app.example.com:443/api/controller/v2/job_templates/?page_size=200&amp;page=1
+Executing GET request to https://app.example.com:443/api/controller/v2/jobs/?page_size=100&amp;page=1&amp;order_by=finished&amp;finished__gt=2025-10-23T13:01:09.768681Z</code></pre> 
+         <p class="p">Check how the services are running by using <code class="ph codeph">systemd</code>:</p> 
+         <pre class="pre codeblock language-bash"><code>systemctl status --user
+
+● automation-dashboard
+    State: running
+    Units: 76 loaded (incl. loaded aliases)
+     Jobs: 0 queued
+   Failed: 0 units
+    Since: Thu 2025-05-22 13:02:07 UTC; 22min ago
+  systemd: 252-51.el9
+   CGroup: /user.slice/user-1000.slice/user@1000.service
+           ├─app.slice
+           │ ├─automation-dashboard-task.service
+           │ │ └─1607 /usr/bin/conmon --api-version 1 -c 84e46532e8ca31b0cadb037479289d030103aa01b7a1591e62b83b17f031e47d -u 84e46532e8ca31b0cadb037479&gt;
+           │ ├─automation-dashboard-web.service
+           │ │ └─1608 /usr/bin/conmon --api-version 1 -c d060f3e3fb2b4c4c5c588149253beed83c78ccc9c9a8c1bf4c96157142a210dc -u d060f3e3fb2b4c4c5c58814925&gt;
+           │ ├─dbus-broker.service
+           │ │ ├─1621 /usr/bin/dbus-broker-launch --scope user
+           │ │ └─1624 dbus-broker --log 4 --controller 9 --machine-id 612db98503014199bfd8c788c8d3da58 --max-bytes 100000000000000 --max-fds 2500000000&gt;
+           │ └─postgresql.service
+           │   └─1614 /usr/bin/conmon --api-version 1 -c eec61745cb6fc3a89a4f7475d7ef63b5899699157d943c2f16a3243311927bef -u eec61745cb6fc3a89a4f7475d7&gt;
+           ├─init.scope
+           │ ├─1093 /usr/lib/systemd/systemd --user
+           │ └─1128 "(sd-pam)"
+           └─user.slice
+             ├─libpod-84e46532e8ca31b0cadb037479289d030103aa01b7a1591e62b83b17f031e47d.scope
+             │ └─container
+             │   ├─1619 /usr/bin/dumb-init -- /usr/bin/launch_dashboard_task.sh
+             │   └─1681 /venv/bin/python periodic.py
+             ├─libpod-d060f3e3fb2b4c4c5c588149253beed83c78ccc9c9a8c1bf4c96157142a210dc.scope
+             │ └─container
+             │   ├─1617 /usr/bin/dumb-init -- /usr/bin/launch_dashboard_web.sh
+             │   ├─1646 /usr/bin/python3.9 /usr/local/bin/supervisord -c /etc/supervisord_dashboard_web.conf
+             │   ├─1877 /bin/bash /usr/local/bin/stop-supervisor
+             │   ├─1878 "nginx: master process nginx -g daemon off;"
+             │   ├─1879 /venv/bin/uwsgi /etc/tower/uwsgi.ini
+             │   ├─1880 "nginx: worker process"
+             │   ├─1881 "nginx: worker process"
+             │   ├─1882 "nginx: worker process"
+             │   ├─1883 "nginx: worker process"
+             │   ├─1884 /venv/bin/uwsgi /etc/tower/uwsgi.ini
+             │   ├─1885 /venv/bin/uwsgi /etc/tower/uwsgi.ini
+             │   ├─1886 /venv/bin/uwsgi /etc/tower/uwsgi.ini
+             │   ├─1887 /venv/bin/uwsgi /etc/tower/uwsgi.ini
+             │   └─1888 /venv/bin/uwsgi /etc/tower/uwsgi.ini
+             ├─libpod-eec61745cb6fc3a89a4f7475d7ef63b5899699157d943c2f16a3243311927bef.scope
+             │ └─container
+             │   ├─1623 postgres
+             │   ├─1869 "postgres: logger "
+             │   ├─1871 "postgres: checkpointer "
+             │   ├─1872 "postgres: background writer "
+             │   ├─1873 "postgres: walwriter "
+             │   ├─1874 "postgres: autovacuum launcher "
+             │   ├─1875 "postgres: stats collector "
+             │   ├─1876 "postgres: logical replication launcher "
+             │   └─1889 "postgres: aapdashboard aapdashboard 172.31.28.99(39338) idle"
+             └─podman-pause-b6c4e853.scope
+               └─1359 catatonit -P</code></pre> 
+        </section> 
+       </div> 
+      </article>
+      <article class="topic task nested2" aria-labelledby="ariaid-title6" id="proc-uninstalling-automation-dashboard"> 
+       <h3 class="title topictitle3" id="ariaid-title6">Uninstall automation dashboard</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">Uninstall automation dashboard and its dependencies by using a single command, ensuring a clean removal from your host.</p> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <div class="ul steps-unordered">
+          <div class="li step p"> <span class="ph cmd">Run the following command to uninstall automation dashboard and its dependencies, including the PostgreSQL database container: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock language-bash"><code>ansible-playbook -i inventory
+ansible.containerized_installer.dashboard_uninstall</code></pre> 
+            <div class="note note note_note">
+             <span class="note__title">Note:</span> 
+             <div class="note__body">
+              Uninstalling automation dashboard permanently deletes all collected metrics data, saved reports, and the PostgreSQL database.
+             </div>
+            </div> 
+           </div> 
+          </div>
+         </div>
+        </section> 
+       </div> 
+      </article>
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

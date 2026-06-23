@@ -1,0 +1,41 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-b34b7cae-6833-4de0-9d28-2a219ee9e0fd">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Define where automation runs with host and node groupings</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Managing hosts and controlling where automation jobs run ensures efficient resource utilization and proper workload distribution across your infrastructure. Define which systems to manage and organize execution capacity to align with your operational requirements. </p> 
+     <section class="section" id="GUID-b34b7cae-6833-4de0-9d28-2a219ee9e0fd__section_1"> 
+      <p class="p">Defining where automation runs helps you to: </p> 
+      <div class="p"> 
+       <ul class="ul" id="GUID-b34b7cae-6833-4de0-9d28-2a219ee9e0fd__ul_1"> 
+        <li class="li"><strong class="ph b">Target the right systems</strong>: Organize hosts into inventories to define which systems to manage and ensure automation runs against the correct infrastructure components. </li> 
+        <li class="li"><strong class="ph b">Control where jobs run</strong>: Group instances into instance groups and assign them to resources to control where jobs run and manage capacity. </li> 
+        <li class="li"><strong class="ph b">Optimize resource allocation</strong>: Balance automation workloads across available capacity by configuring how instance groups distribute jobs. </li> 
+       </ul> 
+      </div> 
+     </section> 
+     <section class="section" id="GUID-b34b7cae-6833-4de0-9d28-2a219ee9e0fd__section_2">
+      <h2 class="title sectiontitle">How Ansible Automation Platform supports host and node groupings </h2> 
+      <p class="p">Ansible Automation Platform uses two grouping mechanisms: </p> 
+      <div class="p"> 
+       <ul class="ul" id="GUID-b34b7cae-6833-4de0-9d28-2a219ee9e0fd__ul_2"> 
+        <li class="li"><strong class="ph b">Hosts and inventories</strong> define which systems you want to manage. A host is a system managed by Ansible Automation Platform. It can be a physical server, a virtual machine, a cloud-based server, or another device. Group hosts in inventories and use patterns to select which hosts or groups to target when running automation. </li> 
+        <li class="li"><strong class="ph b">Instance groups</strong> organize instances together to control where automation jobs run. Assign instance groups to organizations, inventories, or job templates. When you launch a job, the platform checks for instance groups associated with the job template, then the inventory, then the organization in that order. The platform then runs the job on the instance group with available capacity. </li> 
+       </ul> 
+      </div> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_hosts#assembly-controller-hosts">Add new hosts as automation targets</a></strong><br>A host is a system managed by Ansible Automation Platform, which might include a physical, virtual, cloud-based server, or other device.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_ug_controller_instance_groups#controller-instance-groups">Determine where automation runs with instance groups</a></strong><br>An Instance Group enables you to group instances in a clustered environment. Policies dictate how instance groups behave and how jobs are executed. The following view displays the capacity levels based on policy algorithms:</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_controller_configure_instance_groups#controller-configure-instance-groups">Configure instance groups from the API</a></strong><br>You can configure instance groups in automation controller using the REST API.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_controller_container_groups#controller-container-groups">Control where automation runs with container groups</a></strong><br>Ansible Automation Platform supports container groups, which enable you to run jobs in automation controller regardless of whether automation controller is installed as a standalone, in a virtual environment, or in a container.</li>
+     </ul>
+    </nav>
+   </article>
+  </main>
+ </body>
+</html>

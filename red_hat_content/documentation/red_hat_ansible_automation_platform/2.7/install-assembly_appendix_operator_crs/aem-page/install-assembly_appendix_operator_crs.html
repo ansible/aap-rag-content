@@ -1,0 +1,1229 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="appendix-operator-crs_appendix-operator-crs"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Red Hat Ansible Automation Platform custom resources</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">This appendix provides a reference for the Ansible Automation Platform custom resources for various deployment scenarios.</p> 
+      <div class="note tip note_tip">
+       <span class="note__title">Tip:</span> 
+       <div class="note__body"> 
+        <p class="p">You can link in existing components by specifying the component name under the <code class="ph codeph">name</code> variable. You can also use <code class="ph codeph">name</code> to create a custom name for a new component.</p> 
+       </div>
+      </div> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="operator-crs"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Custom resources</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Refer to the following custom resources you can use for various Ansible Automation Platform deployment scenarios.</p> 
+       <section class="section"></section> 
+       <section class="section" id="operator-crs___aap_existing_controller_and_hub_new_eda_yml">
+        <h3 class="title sectiontitle">aap-existing-controller-and-hub-new-eda.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  controller:
+    name: existing-controller
+    disabled: false
+
+  eda:
+    disabled: false
+
+  hub:
+    name: existing-hub
+    disabled: false</code></pre> 
+       </section> 
+       <section class="section" id="operator-crs___aap_all_defaults_yml">
+        <h3 class="title sectiontitle">aap-all-defaults.yml</h3> 
+        <pre class="pre codeblock"><code>apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  # Platform
+  ## uncomment to test bundle certs
+  # bundle_cacert_secret: gateway-custom-certs
+
+  # Components
+
+  hub:
+    disabled: false
+    ## uncomment if using file storage for Content pod
+    storage_type: file
+    file_storage_storage_class: nfs-local-rwx
+    file_storage_size: 10Gi
+
+    ## uncomment if using S3 storage for Content pod
+    # storage_type: S3
+    # object_storage_s3_secret: example-galaxy-object-storage
+
+    ## uncomment if using Azure storage for Content pod
+    # storage_type: azure
+    # object_storage_azure_secret: azure-secret-name
+
+  # lightspeed:
+  #   disabled: true
+
+# End state:
+# * Automation controller deployed and named: myaap-controller
+# * * Event-Driven Ansible deployed and named: myaap-eda
+# * * Automation hub deployed and named: myaap-hub</code></pre> 
+       </section> 
+       <section class="section" id="operator-crs___aap_existing_controller_only_yml">
+        <h3 class="title sectiontitle">aap-existing-controller-only.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  controller:
+    name: existing-controller
+
+  eda:
+    disabled: true
+
+  hub:
+    disabled: true
+    ## uncomment if using file storage for Content pod
+    # storage_type: file
+    # file_storage_storage_class: nfs-local-rwx
+    # file_storage_size: 10Gi
+
+    ## uncomment if using S3 storage for Content pod
+    # storage_type: S3
+    # object_storage_s3_secret: example-galaxy-object-storage
+
+    ## uncomment if using Azure storage for Content pod
+    # storage_type: azure
+    # object_storage_azure_secret: azure-secret-name
+
+
+# End state:
+# * Automation controller: existing-controller registered with Ansible Automation Platform UI
+# * * Event-Driven Ansible deployed and named: myaap-eda
+# * * Automation hub deployed and named: myaap-hub</code></pre> 
+       </section> 
+       <section class="section" id="operator-crs___aap_existing_hub_and_controller_yml">
+        <h3 class="title sectiontitle">aap-existing-hub-and-controller.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  controller:
+    name: existing-controller
+    disabled: false
+
+  eda:
+    disabled: true
+
+  hub:
+    name: existing-hub
+    disabled: false
+
+# End state:
+# * Automation controller: existing-controller registered with Ansible Automation Platform UI
+# * * Event-Driven Ansible deployed and named: myaap-eda
+# * * Automation hub: existing-hub registered with Ansible Automation Platform UI</code></pre> 
+       </section> 
+       <section class="section" id="operator-crs___aap_existing_hub_controller_eda_yml">
+        <h3 class="title sectiontitle">aap-existing-hub-controller-eda.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  controller:
+    name: existing-controller # &lt;-- this is the name of the existing AutomationController CR
+    disabled: false
+
+  eda:
+    name: existing-eda
+    disabled: false
+
+  hub:
+    name: existing-hub
+    disabled: false
+
+# End state:
+# * Controller: existing-controller registered with Ansible Automation Platform UI
+# * * Event-Driven Ansible: existing-eda registered with Ansible Automation Platform UI
+# * * Automation hub: existing-hub registered with Ansible Automation Platform UI
+#
+# Note: The automation controller, Event-Driven Ansible, and automation hub names must match the names of the existing.
+# Automation controller, Event-Driven Ansible, and automation hub CRs in the same namespace as the Ansible Automation Platform CR. If the names do not match, the Ansible Automation Platform CR will not be able to register the existing automation controller, Event-Driven Ansible, and automation hub with the Ansible Automation Platform UI,and will instead deploy new automation controller, Event-Driven Ansible, and automation hub instances.</code></pre> 
+       </section> 
+       <section class="section" id="operator-crs___aap_existing_hub_controller_eda_yml_2">
+        <h3 class="title sectiontitle">aap-existing-hub-controller-eda.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  controller:
+    name: existing-controller # &lt;-- this is the name of the existing AutomationController CR
+    disabled: false
+
+  eda:
+    name: existing-eda
+    disabled: false
+
+  hub:
+    name: existing-hub
+    disabled: false
+
+# End state:
+# * Automation controller: existing-controller registered with Ansible Automation Platform UI
+# * * Event-Driven Ansible: existing-eda registered with Ansible Automation Platform UI
+# * * Automation hub: existing-hub registered with Ansible Automation Platform UI
+#
+# Note: The automation controller, Event-Driven Ansible, and automation hub names must match the names of the existing.
+# Automation controller, Event-Driven Ansible, and automation hub CRs in the same namespace as the Ansible Automation Platform CR. If the names do not match, the Ansible Automation Platform CR will not be able to register the existing automation controller, Event-Driven Ansible, and automation hub with the Ansible Automation Platform UI,and will instead deploy new automation controller, Event-Driven Ansible, and automation hub instances.</code></pre> 
+       </section> 
+       <section class="section" id="operator-crs___aap_fresh_controller_eda_yml">
+        <h3 class="title sectiontitle">aap-fresh-controller-eda.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  controller:
+    disabled: false
+
+  eda:
+    disabled: false
+
+  hub:
+    disabled: true
+    ## uncomment if using file storage for Content pod
+    storage_type: file
+    file_storage_storage_class: nfs-local-rwx
+    file_storage_size: 10Gi
+
+    ## uncomment if using S3 storage for Content pod
+    # storage_type: S3
+    # object_storage_s3_secret: example-galaxy-object-storage
+
+    ## uncomment if using Azure storage for Content pod
+    # storage_type: azure
+    # object_storage_azure_secret: azure-secret-name
+
+# End state:
+# * Automation controller deployed and named: myaap-controller
+# * * Event-Driven Ansible deployed and named: myaap-eda
+# * * Automation hub disabled
+# * Red Hat Ansible Lightspeed disabled</code></pre> 
+       </section> 
+       <section class="section" id="operator-crs___aap_fresh_external_db_yml">
+        <h3 class="title sectiontitle">aap-fresh-external-db.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  controller:
+    disabled: false
+
+  eda:
+    disabled: false
+
+  hub:
+    disabled: false
+    ## uncomment if using file storage for Content pod
+    storage_type: file
+    file_storage_storage_class: nfs-local-rwx
+    file_storage_size: 10Gi
+
+    ## uncomment if using S3 storage for Content pod
+    # storage_type: S3
+    # object_storage_s3_secret: example-galaxy-object-storage
+
+    ## uncomment if using Azure storage for Content pod
+    # storage_type: azure
+    # object_storage_azure_secret: azure-secret-name
+
+
+# End state:
+# * Automation controller deployed and named: myaap-controller
+# * * Event-Driven Ansible deployed and named: myaap-eda
+# * * Automation hub deployed and named: myaap-hub</code></pre> 
+       </section> 
+       <section class="section" id="operator-crs___aap_configuring_external_db_all_default_components_yml">
+        <h3 class="title sectiontitle">aap-configuring-external-db-all-default-components.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  database:
+     database_secret: external-postgres-configuration-gateway
+  controller:
+     postgres_configuration_secret: external-postgres-configuration-controller
+  hub:
+     postgres_configuration_secret: external-postgres-configuration-hub
+  eda:
+     database:
+       database_secret: external-postgres-configuration-eda</code></pre> 
+       </section> 
+       <section class="section" id="operator-crs___aap_configuring_existing_external_db_all_default_components_yml">
+        <h3 class="title sectiontitle">aap-configuring-existing-external-db-all-default-components.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  database:
+     database_secret: external-postgres-configuration-gateway</code></pre> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">The system uses the external database for platform gateway, and automation controller, automation hub, and Event-Driven Ansible continues to use the existing databases that were used in 2.4.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section class="section" id="operator-crs___aap_configuring_external_db_with_lightspeed_enabled_yml">
+        <h3 class="title sectiontitle">aap-configuring-external-db-with-lightspeed-enabled.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  database:
+     database_secret: external-postgres-configuration-gateway
+  controller:
+     postgres_configuration_secret: external-postgres-configuration-controller
+  hub:
+     postgres_configuration_secret: external-postgres-configuration-hub
+  eda:
+     database:
+       database_secret: external-postgres-configuration-eda
+  lightspeed:
+    disabled: false
+    database:
+      database_secret: &lt;secret-name&gt;-postgres-configuration
+    auth_config_secret_name: 'auth-configuration-secret'
+    model_config_secret_name: 'model-configuration-secret'</code></pre> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">You can follow the <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index" target="_blank" rel="external noopener">Red Hat Ansible Lightspeed with IBM watsonx Code Assistant User Guide</a> for help with creating the model and auth secrets.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section class="section" id="operator-crs___aap_fresh_install_with_settings_yml">
+        <h3 class="title sectiontitle">aap-fresh-install-with-settings.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+  image_pull_policy: Always
+
+  # Platform
+  ## uncomment to test bundle certs
+  # bundle_cacert_secret: gateway-custom-certs
+
+  # Components
+  controller:
+    disabled: false
+    image_pull_policy: Always
+
+    extra_settings:
+      - setting: MAX_PAGE_SIZE
+        value: '501'
+
+  eda:
+    disabled: false
+    image_pull_policy: Always
+
+    extra_settings:
+      - setting: EDA_MAX_PAGE_SIZE
+        value: '501'
+
+  hub:
+    disabled: false
+    image_pull_policy: Always
+
+    ## uncomment if using file storage for Content pod
+    storage_type: file
+    file_storage_storage_class: rook-cephfs
+    file_storage_size: 10Gi
+
+    ## uncomment if using S3 storage for Content pod
+    # storage_type: S3
+    # object_storage_s3_secret: example-galaxy-object-storage
+
+    ## uncomment if using Azure storage for Content pod
+    # storage_type: azure
+    # object_storage_azure_secret: azure-secret-name
+
+    pulp_settings:
+      MAX_PAGE_SIZE: 501
+      cache_enabled: false
+
+  # lightspeed:
+  #   disabled: true
+
+# End state:
+# * Automation controller deployed and named: myaap-controller
+# * * Event-Driven Ansible deployed and named: myaap-eda
+# * * Automation hub deployed and named: myaap-hub</code></pre> 
+       </section> 
+       <section class="section" id="operator-crs___aap_fresh_install_yml">
+        <h3 class="title sectiontitle">aap-fresh-install.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  # Redis Mode
+  # redis_mode: cluster
+
+  # Platform
+  ## uncomment to test bundle certs
+  # bundle_cacert_secret: gateway-custom-certs
+  # extra_settings:
+  #   - setting: MAX_PAGE_SIZE
+  #     value: '501'
+
+  # Components
+  controller:
+    disabled: false
+
+  eda:
+    disabled: false
+
+  hub:
+    disabled: false
+    ## uncomment if using file storage for Content pod
+    storage_type: file
+    file_storage_storage_class: nfs-local-rwx
+    file_storage_size: 10Gi
+
+    ## uncomment if using S3 storage for Content pod
+    # storage_type: S3
+    # object_storage_s3_secret: example-galaxy-object-storage
+
+    ## uncomment if using Azure storage for Content pod
+    # storage_type: azure
+    # object_storage_azure_secret: azure-secret-name
+
+  # lightspeed:
+  #   disabled: true
+
+# End state:
+# * Automation controller deployed and named: myaap-controller
+# * * Event-Driven Ansible deployed and named: myaap-eda
+# * * Automation hub deployed and named: myaap-hub</code></pre> 
+       </section> 
+       <section class="section" id="operator-crs___aap_fresh_only_controller_yml">
+        <h3 class="title sectiontitle">aap-fresh-only-controller.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  controller:
+    disabled: false
+
+  eda:
+    disabled: true
+
+  hub:
+    disabled: true
+    ## uncomment if using file storage for Content pod
+    # storage_type: file
+    # file_storage_storage_class: nfs-local-rwx
+    # file_storage_size: 10Gi
+
+    ## uncomment if using S3 storage for Content pod
+    # storage_type: S3
+    # object_storage_s3_secret: example-galaxy-object-storage
+
+    ## uncomment if using Azure storage for Content pod
+    # storage_type: azure
+    # object_storage_azure_secret: azure-secret-name
+
+
+# End state:
+# * Automation controller: existing-controller registered with Ansible Automation Platform UI
+# * * Event-Driven Ansible deployed and named: myaap-eda
+# * * Automation hub deployed and named: myaap-hub</code></pre> 
+       </section> 
+       <section class="section" id="operator-crs___aap_fresh_only_hub_yml">
+        <h3 class="title sectiontitle">aap-fresh-only-hub.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  controller:
+    disabled: true
+
+  eda:
+    disabled: true
+
+  hub:
+    disabled: false
+    ## uncomment if using file storage for Content pod
+    storage_type: file
+    file_storage_storage_class: nfs-local-rwx
+    file_storage_size: 10Gi
+
+    # # AaaS Hub Settings
+    # pulp_settings:
+    #   cache_enabled: false
+
+    ## uncomment if using S3 storage for Content pod
+    # storage_type: S3
+    # object_storage_s3_secret: example-galaxy-object-storage
+
+    ## uncomment if using Azure storage for Content pod
+    # storage_type: azure
+    # object_storage_azure_secret: azure-secret-name
+
+  lightspeed:
+    disabled: false
+
+# End state:
+# * Automation controller disabled
+# * * Event-Driven Ansible disabled
+# * * Automation hub deployed and named: myaap-hub
+# * Red Hat Ansible Lightspeed disabled</code></pre> 
+       </section> 
+       <section class="section" id="operator-crs___aap_lightspeed_enabled_yml">
+        <h3 class="title sectiontitle">aap-lightspeed-enabled.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  controller:
+    disabled: false
+
+  eda:
+    disabled: false
+
+  hub:
+    disabled: false
+    ## uncomment if using file storage for Content pod
+    storage_type: file
+    file_storage_storage_class: nfs-local-rwx
+    file_storage_size: 10Gi
+
+    ## uncomment if using S3 storage for Content pod
+    # storage_type: S3
+    # object_storage_s3_secret: example-galaxy-object-storage
+
+    ## uncomment if using Azure storage for Content pod
+    # storage_type: azure
+    # object_storage_azure_secret: azure-secret-name
+
+  lightspeed:
+    disabled: false
+
+# End state:
+# * Automation controller deployed and named: myaap-controller
+# * * Event-Driven Ansible deployed and named: myaap-eda
+# * * Automation hub deployed and named: myaap-hub
+# * Red Hat Ansible Lightspeed deployed and named: myaap-lightspeed</code></pre> 
+       </section> 
+       <section class="section" id="operator-crs___gateway_only_yml">
+        <h3 class="title sectiontitle">gateway-only.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  controller:
+    disabled: true
+
+  eda:
+    disabled: true
+
+  hub:
+    disabled: true
+
+  lightspeed:
+    disabled: true
+
+# End state:
+# * Platform gateway deployed and named: myaap-gateway
+#   * UI is reachable at: https://myaap-gateway-gateway.apps.ocp4.example.com
+# * Automation controller is not deployed
+# * * Event-Driven Ansible is not deployed
+# * * Automation hub is not deployed
+# * Red Hat Ansible Lightspeed is not deployed</code></pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="unique_2099983463"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Custom resources</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Refer to the following custom resources you can use for various Ansible Automation Platform deployment scenarios.</p> 
+       <section class="section"></section> 
+       <section class="section" id="unique_2099983463___aap_existing_controller_and_hub_new_eda_yml">
+        <h3 class="title sectiontitle">aap-existing-controller-and-hub-new-eda.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  controller:
+    name: existing-controller
+    disabled: false
+
+  eda:
+    disabled: false
+
+  hub:
+    name: existing-hub
+    disabled: false</code></pre> 
+       </section> 
+       <section class="section" id="unique_2099983463___aap_all_defaults_yml">
+        <h3 class="title sectiontitle">aap-all-defaults.yml</h3> 
+        <pre class="pre codeblock"><code>apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  # Platform
+  ## uncomment to test bundle certs
+  # bundle_cacert_secret: gateway-custom-certs
+
+  # Components
+
+  hub:
+    disabled: false
+    ## uncomment if using file storage for Content pod
+    storage_type: file
+    file_storage_storage_class: nfs-local-rwx
+    file_storage_size: 10Gi
+
+    ## uncomment if using S3 storage for Content pod
+    # storage_type: S3
+    # object_storage_s3_secret: example-galaxy-object-storage
+
+    ## uncomment if using Azure storage for Content pod
+    # storage_type: azure
+    # object_storage_azure_secret: azure-secret-name
+
+  # lightspeed:
+  #   disabled: true
+
+# End state:
+# * Automation controller deployed and named: myaap-controller
+# * * Event-Driven Ansible deployed and named: myaap-eda
+# * * Automation hub deployed and named: myaap-hub</code></pre> 
+       </section> 
+       <section class="section" id="unique_2099983463___aap_existing_controller_only_yml">
+        <h3 class="title sectiontitle">aap-existing-controller-only.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  controller:
+    name: existing-controller
+
+  eda:
+    disabled: true
+
+  hub:
+    disabled: true
+    ## uncomment if using file storage for Content pod
+    # storage_type: file
+    # file_storage_storage_class: nfs-local-rwx
+    # file_storage_size: 10Gi
+
+    ## uncomment if using S3 storage for Content pod
+    # storage_type: S3
+    # object_storage_s3_secret: example-galaxy-object-storage
+
+    ## uncomment if using Azure storage for Content pod
+    # storage_type: azure
+    # object_storage_azure_secret: azure-secret-name
+
+
+# End state:
+# * Automation controller: existing-controller registered with Ansible Automation Platform UI
+# * * Event-Driven Ansible deployed and named: myaap-eda
+# * * Automation hub deployed and named: myaap-hub</code></pre> 
+       </section> 
+       <section class="section" id="unique_2099983463___aap_existing_hub_and_controller_yml">
+        <h3 class="title sectiontitle">aap-existing-hub-and-controller.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  controller:
+    name: existing-controller
+    disabled: false
+
+  eda:
+    disabled: true
+
+  hub:
+    name: existing-hub
+    disabled: false
+
+# End state:
+# * Automation controller: existing-controller registered with Ansible Automation Platform UI
+# * * Event-Driven Ansible deployed and named: myaap-eda
+# * * Automation hub: existing-hub registered with Ansible Automation Platform UI</code></pre> 
+       </section> 
+       <section class="section" id="unique_2099983463___aap_existing_hub_controller_eda_yml">
+        <h3 class="title sectiontitle">aap-existing-hub-controller-eda.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  controller:
+    name: existing-controller # &lt;-- this is the name of the existing AutomationController CR
+    disabled: false
+
+  eda:
+    name: existing-eda
+    disabled: false
+
+  hub:
+    name: existing-hub
+    disabled: false
+
+# End state:
+# * Controller: existing-controller registered with Ansible Automation Platform UI
+# * * Event-Driven Ansible: existing-eda registered with Ansible Automation Platform UI
+# * * Automation hub: existing-hub registered with Ansible Automation Platform UI
+#
+# Note: The automation controller, Event-Driven Ansible, and automation hub names must match the names of the existing.
+# Automation controller, Event-Driven Ansible, and automation hub CRs in the same namespace as the Ansible Automation Platform CR. If the names do not match, the Ansible Automation Platform CR will not be able to register the existing automation controller, Event-Driven Ansible, and automation hub with the Ansible Automation Platform UI,and will instead deploy new automation controller, Event-Driven Ansible, and automation hub instances.</code></pre> 
+       </section> 
+       <section class="section" id="unique_2099983463___aap_existing_hub_controller_eda_yml_2">
+        <h3 class="title sectiontitle">aap-existing-hub-controller-eda.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  controller:
+    name: existing-controller # &lt;-- this is the name of the existing AutomationController CR
+    disabled: false
+
+  eda:
+    name: existing-eda
+    disabled: false
+
+  hub:
+    name: existing-hub
+    disabled: false
+
+# End state:
+# * Automation controller: existing-controller registered with Ansible Automation Platform UI
+# * * Event-Driven Ansible: existing-eda registered with Ansible Automation Platform UI
+# * * Automation hub: existing-hub registered with Ansible Automation Platform UI
+#
+# Note: The automation controller, Event-Driven Ansible, and automation hub names must match the names of the existing.
+# Automation controller, Event-Driven Ansible, and automation hub CRs in the same namespace as the Ansible Automation Platform CR. If the names do not match, the Ansible Automation Platform CR will not be able to register the existing automation controller, Event-Driven Ansible, and automation hub with the Ansible Automation Platform UI,and will instead deploy new automation controller, Event-Driven Ansible, and automation hub instances.</code></pre> 
+       </section> 
+       <section class="section" id="unique_2099983463___aap_fresh_controller_eda_yml">
+        <h3 class="title sectiontitle">aap-fresh-controller-eda.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  controller:
+    disabled: false
+
+  eda:
+    disabled: false
+
+  hub:
+    disabled: true
+    ## uncomment if using file storage for Content pod
+    storage_type: file
+    file_storage_storage_class: nfs-local-rwx
+    file_storage_size: 10Gi
+
+    ## uncomment if using S3 storage for Content pod
+    # storage_type: S3
+    # object_storage_s3_secret: example-galaxy-object-storage
+
+    ## uncomment if using Azure storage for Content pod
+    # storage_type: azure
+    # object_storage_azure_secret: azure-secret-name
+
+# End state:
+# * Automation controller deployed and named: myaap-controller
+# * * Event-Driven Ansible deployed and named: myaap-eda
+# * * Automation hub disabled
+# * Red Hat Ansible Lightspeed disabled</code></pre> 
+       </section> 
+       <section class="section" id="unique_2099983463___aap_fresh_external_db_yml">
+        <h3 class="title sectiontitle">aap-fresh-external-db.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  controller:
+    disabled: false
+
+  eda:
+    disabled: false
+
+  hub:
+    disabled: false
+    ## uncomment if using file storage for Content pod
+    storage_type: file
+    file_storage_storage_class: nfs-local-rwx
+    file_storage_size: 10Gi
+
+    ## uncomment if using S3 storage for Content pod
+    # storage_type: S3
+    # object_storage_s3_secret: example-galaxy-object-storage
+
+    ## uncomment if using Azure storage for Content pod
+    # storage_type: azure
+    # object_storage_azure_secret: azure-secret-name
+
+
+# End state:
+# * Automation controller deployed and named: myaap-controller
+# * * Event-Driven Ansible deployed and named: myaap-eda
+# * * Automation hub deployed and named: myaap-hub</code></pre> 
+       </section> 
+       <section class="section" id="unique_2099983463___aap_configuring_external_db_all_default_components_yml">
+        <h3 class="title sectiontitle">aap-configuring-external-db-all-default-components.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  database:
+     database_secret: external-postgres-configuration-gateway
+  controller:
+     postgres_configuration_secret: external-postgres-configuration-controller
+  hub:
+     postgres_configuration_secret: external-postgres-configuration-hub
+  eda:
+     database:
+       database_secret: external-postgres-configuration-eda</code></pre> 
+       </section> 
+       <section class="section" id="unique_2099983463___aap_configuring_existing_external_db_all_default_components_yml">
+        <h3 class="title sectiontitle">aap-configuring-existing-external-db-all-default-components.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  database:
+     database_secret: external-postgres-configuration-gateway</code></pre> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">The system uses the external database for platform gateway, and automation controller, automation hub, and Event-Driven Ansible continues to use the existing databases that were used in 2.4.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section class="section" id="unique_2099983463___aap_configuring_external_db_with_lightspeed_enabled_yml">
+        <h3 class="title sectiontitle">aap-configuring-external-db-with-lightspeed-enabled.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  database:
+     database_secret: external-postgres-configuration-gateway
+  controller:
+     postgres_configuration_secret: external-postgres-configuration-controller
+  hub:
+     postgres_configuration_secret: external-postgres-configuration-hub
+  eda:
+     database:
+       database_secret: external-postgres-configuration-eda
+  lightspeed:
+    disabled: false
+    database:
+      database_secret: &lt;secret-name&gt;-postgres-configuration
+    auth_config_secret_name: 'auth-configuration-secret'
+    model_config_secret_name: 'model-configuration-secret'</code></pre> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">You can follow the <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index" target="_blank" rel="external noopener">Red Hat Ansible Lightspeed with IBM watsonx Code Assistant User Guide</a> for help with creating the model and auth secrets.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section class="section" id="unique_2099983463___aap_fresh_install_with_settings_yml">
+        <h3 class="title sectiontitle">aap-fresh-install-with-settings.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+  image_pull_policy: Always
+
+  # Platform
+  ## uncomment to test bundle certs
+  # bundle_cacert_secret: gateway-custom-certs
+
+  # Components
+  controller:
+    disabled: false
+    image_pull_policy: Always
+
+    extra_settings:
+      - setting: MAX_PAGE_SIZE
+        value: '501'
+
+  eda:
+    disabled: false
+    image_pull_policy: Always
+
+    extra_settings:
+      - setting: EDA_MAX_PAGE_SIZE
+        value: '501'
+
+  hub:
+    disabled: false
+    image_pull_policy: Always
+
+    ## uncomment if using file storage for Content pod
+    storage_type: file
+    file_storage_storage_class: rook-cephfs
+    file_storage_size: 10Gi
+
+    ## uncomment if using S3 storage for Content pod
+    # storage_type: S3
+    # object_storage_s3_secret: example-galaxy-object-storage
+
+    ## uncomment if using Azure storage for Content pod
+    # storage_type: azure
+    # object_storage_azure_secret: azure-secret-name
+
+    pulp_settings:
+      MAX_PAGE_SIZE: 501
+      cache_enabled: false
+
+  # lightspeed:
+  #   disabled: true
+
+# End state:
+# * Automation controller deployed and named: myaap-controller
+# * * Event-Driven Ansible deployed and named: myaap-eda
+# * * Automation hub deployed and named: myaap-hub</code></pre> 
+       </section> 
+       <section class="section" id="unique_2099983463___aap_fresh_install_yml">
+        <h3 class="title sectiontitle">aap-fresh-install.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  # Redis Mode
+  # redis_mode: cluster
+
+  # Platform
+  ## uncomment to test bundle certs
+  # bundle_cacert_secret: gateway-custom-certs
+  # extra_settings:
+  #   - setting: MAX_PAGE_SIZE
+  #     value: '501'
+
+  # Components
+  controller:
+    disabled: false
+
+  eda:
+    disabled: false
+
+  hub:
+    disabled: false
+    ## uncomment if using file storage for Content pod
+    storage_type: file
+    file_storage_storage_class: nfs-local-rwx
+    file_storage_size: 10Gi
+
+    ## uncomment if using S3 storage for Content pod
+    # storage_type: S3
+    # object_storage_s3_secret: example-galaxy-object-storage
+
+    ## uncomment if using Azure storage for Content pod
+    # storage_type: azure
+    # object_storage_azure_secret: azure-secret-name
+
+  # lightspeed:
+  #   disabled: true
+
+# End state:
+# * Automation controller deployed and named: myaap-controller
+# * * Event-Driven Ansible deployed and named: myaap-eda
+# * * Automation hub deployed and named: myaap-hub</code></pre> 
+       </section> 
+       <section class="section" id="unique_2099983463___aap_fresh_only_controller_yml">
+        <h3 class="title sectiontitle">aap-fresh-only-controller.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  controller:
+    disabled: false
+
+  eda:
+    disabled: true
+
+  hub:
+    disabled: true
+    ## uncomment if using file storage for Content pod
+    # storage_type: file
+    # file_storage_storage_class: nfs-local-rwx
+    # file_storage_size: 10Gi
+
+    ## uncomment if using S3 storage for Content pod
+    # storage_type: S3
+    # object_storage_s3_secret: example-galaxy-object-storage
+
+    ## uncomment if using Azure storage for Content pod
+    # storage_type: azure
+    # object_storage_azure_secret: azure-secret-name
+
+
+# End state:
+# * Automation controller: existing-controller registered with Ansible Automation Platform UI
+# * * Event-Driven Ansible deployed and named: myaap-eda
+# * * Automation hub deployed and named: myaap-hub</code></pre> 
+       </section> 
+       <section class="section" id="unique_2099983463___aap_fresh_only_hub_yml">
+        <h3 class="title sectiontitle">aap-fresh-only-hub.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  controller:
+    disabled: true
+
+  eda:
+    disabled: true
+
+  hub:
+    disabled: false
+    ## uncomment if using file storage for Content pod
+    storage_type: file
+    file_storage_storage_class: nfs-local-rwx
+    file_storage_size: 10Gi
+
+    # # AaaS Hub Settings
+    # pulp_settings:
+    #   cache_enabled: false
+
+    ## uncomment if using S3 storage for Content pod
+    # storage_type: S3
+    # object_storage_s3_secret: example-galaxy-object-storage
+
+    ## uncomment if using Azure storage for Content pod
+    # storage_type: azure
+    # object_storage_azure_secret: azure-secret-name
+
+  lightspeed:
+    disabled: false
+
+# End state:
+# * Automation controller disabled
+# * * Event-Driven Ansible disabled
+# * * Automation hub deployed and named: myaap-hub
+# * Red Hat Ansible Lightspeed disabled</code></pre> 
+       </section> 
+       <section class="section" id="unique_2099983463___aap_lightspeed_enabled_yml">
+        <h3 class="title sectiontitle">aap-lightspeed-enabled.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  controller:
+    disabled: false
+
+  eda:
+    disabled: false
+
+  hub:
+    disabled: false
+    ## uncomment if using file storage for Content pod
+    storage_type: file
+    file_storage_storage_class: nfs-local-rwx
+    file_storage_size: 10Gi
+
+    ## uncomment if using S3 storage for Content pod
+    # storage_type: S3
+    # object_storage_s3_secret: example-galaxy-object-storage
+
+    ## uncomment if using Azure storage for Content pod
+    # storage_type: azure
+    # object_storage_azure_secret: azure-secret-name
+
+  lightspeed:
+    disabled: false
+
+# End state:
+# * Automation controller deployed and named: myaap-controller
+# * * Event-Driven Ansible deployed and named: myaap-eda
+# * * Automation hub deployed and named: myaap-hub
+# * Red Hat Ansible Lightspeed deployed and named: myaap-lightspeed</code></pre> 
+       </section> 
+       <section class="section" id="unique_2099983463___gateway_only_yml">
+        <h3 class="title sectiontitle">gateway-only.yml</h3> 
+        <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  controller:
+    disabled: true
+
+  eda:
+    disabled: true
+
+  hub:
+    disabled: true
+
+  lightspeed:
+    disabled: true
+
+# End state:
+# * Platform gateway deployed and named: myaap-gateway
+#   * UI is reachable at: https://myaap-gateway-gateway.apps.ocp4.example.com
+# * Automation controller is not deployed
+# * * Event-Driven Ansible is not deployed
+# * * Automation hub is not deployed
+# * Red Hat Ansible Lightspeed is not deployed</code></pre> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

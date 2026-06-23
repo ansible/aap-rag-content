@@ -1,0 +1,83 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="token-management-hub"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Configure automation hub tokens</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">You must authenticate your hub instance before you can upload or download collections.</p> 
+      <p class="p">As of Ansible Automation Platform's 2.7 release, you can no longer access the API through automation hub. To authenticate automation hub, follow the platform gateway authentication process.</p> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">Automation hub does not support basic authentication or authenticating through service accounts.</p> 
+       </div>
+      </div> 
+      <p class="p">To sync collections from console.redhat.com to your automation hub instance, or if you are using Keycloak to authenticate your private automation hub, follow the procedure to create the offline token in automation hub.</p> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist relconcepts">
+       <strong>Related concepts</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-mandatory_platform_gateway_authentication_in_ansible_automation_platform_2_7#con-mandatory-gateway-auth" title="In Red Hat Ansible Automation Platform 2.7, platform gateway is the only supported method for external authentication to platform components. Direct API access to automation controller, automation hub, and Event-Driven Ansible has been removed.">Mandatory platform gateway authentication in Ansible Automation Platform 2.7</a></li>
+       </ul>
+      </div>
+      <div class="linklist reltasks">
+       <strong>Related tasks</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="#proc-create-api-token" title="In automation hub, you can create an offline token using Token management. The offline token is a secret token used to protect your content, so be sure to store it in a secure location.">Create the offline token in automation hub</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-create-api-token"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Create the offline token in automation hub</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">In automation hub, you can create an offline token using <strong class="ph b">Token management</strong>. The offline token is a secret token used to protect your content, so be sure to store it in a secure location.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Your offline token expires after 30 days of inactivity.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">Navigate to <a class="xref" href="https://console.redhat.com/ansible/automation-hub/token/" target="_blank" rel="external noopener">Ansible Automation Platform on the Red Hat Hybrid Cloud Console</a>.</span> </li>
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Hub</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Connect to Hub</span></span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Under <strong class="ph b">Offline token</strong>, click <span class="ph uicontrol button">Load Token</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click the <span class="ph uicontrol button">Copy to clipboard</span> icon to copy the offline token.</span> </li>
+         <li class="li step"> <span class="ph cmd">Paste the token into a file and store in a secure location.</span> </li>
+        </ol>
+       </section> 
+       <section class="section postreq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div> 
+        <p class="p">The offline token is now available for configuring automation hub as your default collections server or for uploading collections by using the <code class="ph codeph">ansible-galaxy</code> command line tool.</p> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist reltasks">
+        <strong>Related tasks</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_token_management_hub#con-offline-token-active" title="Offline tokens expire after 30 days of inactivity. You can keep your offline token from expiring by refreshing it periodically.">Keeping your offline token active</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

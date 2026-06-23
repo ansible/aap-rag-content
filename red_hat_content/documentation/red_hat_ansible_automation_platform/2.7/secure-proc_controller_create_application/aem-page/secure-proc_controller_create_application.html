@@ -1,0 +1,257 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="proc-controller-create-application"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Create a new application</h1> 
+     <div class="body taskbody">
+      <p class="shortdesc">When integrating an external web application with Ansible Automation Platform, the web application might need to create OAuth2 tokens on behalf of users of the web application.</p> 
+      <section class="section context">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">About this task</h2>
+       </div> 
+       <p class="p">Creating an application with the Authorization Code grant type is the preferred way to do this for the following reasons:</p> 
+       <ul class="ul"> 
+        <li class="li">External applications can obtain a token for users, using their credentials.</li> 
+        <li class="li">Compartmentalized tokens issued for a particular application, enables those tokens to be easily managed. For example, revoking all tokens associated with that application.</li> 
+       </ul> 
+      </section> 
+      <section>
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Procedure</h2>
+       </div>
+       <ol class="ol steps">
+        <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">OAuth Applications</span></span>.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create OAuth application</span>. The <strong class="ph b">Create Application</strong> page opens.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Enter the following details: </span> 
+         <div class="itemgroup info"> 
+          <dl class="dl"> 
+           <dt class="dt dlterm">
+            Name
+           </dt> 
+           <dd class="dd">
+            (required) Enter a name for the application you want to create.
+           </dd> 
+           <dt class="dt dlterm">
+            URL
+           </dt> 
+           <dd class="dd">
+            (optional) Enter the URL of the external application. This link is added to the navigation panel for easy access. This setting is currently offered as a Technology Preview only.
+           </dd> 
+           <dt class="dt dlterm">
+            Description
+           </dt> 
+           <dd class="dd">
+            (optional) Include a short description for your application.
+           </dd> 
+           <dt class="dt dlterm">
+            Organization
+           </dt> 
+           <dd class="dd">
+            (required) Select an organization with which this application is associated.
+           </dd> 
+           <dt class="dt dlterm">
+            Authorization grant type
+           </dt> 
+           <dd class="dd">
+            (required) Select one of the grant types to use for the user to get tokens for this application. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_token_based_authentication#ref-gw-application-functions" title="Several OAuth 2 utilities are available for authorization, token refresh, and revoke. You can specify the following grant types when creating an application:">Application functions</a> for more information about grant types.
+           </dd> 
+           <dt class="dt dlterm">
+            Client Type
+           </dt> 
+           <dd class="dd">
+            (required) Select the level of security of the client device.
+           </dd> 
+           <dt class="dt dlterm">
+            Redirect URIS
+           </dt> 
+           <dd class="dd">
+            Provide a list of allowed URIs, separated by spaces. You need this if you specified the grant type to be <strong class="ph b">Authorization code</strong>.
+           </dd> 
+          </dl> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create OAuth application</span>, or click <span class="ph uicontrol button">Cancel</span> to abandon your changes. </span> 
+         <div class="itemgroup info"> 
+          <p class="p">The <strong class="ph b">Client ID</strong> and <strong class="ph b">Client Secret</strong> display in a window. This will be the only time the client secret will be shown.</p> 
+          <div class="note note note_note">
+           <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">The <strong class="ph b">Client Secret</strong> is only created when the <strong class="ph b">Client type</strong> is set to <strong class="ph b">Confidential</strong>.</p> 
+           </div>
+          </div> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Click the copy icon and save the client ID and client secret to integrate an external application with Ansible Automation Platform.</span> </li>
+       </ol>
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-controller-apps-create-tokens"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Associate tokens with applications</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can view a list of users that have tokens to access an application by selecting the <strong class="ph b">Tokens</strong> tab in the <strong class="ph b">OAuth Applications</strong> details page.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">You can only create OAuth 2 Tokens for your own user, which means you can only configure or view tokens from your own user profile.</p> 
+         </div>
+        </div> 
+        <p class="p">When authentication tokens have been configured, you can select the application to which the token is associated and the level of access that the token has.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Users</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the username for your user profile to configure OAuth 2 tokens.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">Tokens</strong> tab. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">When no tokens are present, the <strong class="ph b">Tokens</strong> screen prompts you to add them.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create token</span> to open the <strong class="ph b">Create Token</strong> window.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Enter the following details: </span> 
+          <div class="itemgroup info"> 
+           <dl class="dl"> 
+            <dt class="dt dlterm">
+             Application
+            </dt> 
+            <dd class="dd"> 
+             <p class="p">Enter the name of the application with which you want to associate your token. Alternatively, you can search for it by clicking <span class="ph uicontrol button">Browse</span>. This opens a separate window that enables you to choose from the available options. Select <strong class="ph b">Name</strong> from the filter list to filter by name if the list is extensive.</p> 
+             <div class="note note note_note">
+              <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">To create a Personal Access Token (PAT) that is not linked to any application, leave the Application field blank.</p> 
+              </div>
+             </div> 
+            </dd> 
+            <dt class="dt dlterm">
+             Description
+            </dt> 
+            <dd class="dd">
+             (optional) Provide a short description for your token.
+            </dd> 
+            <dt class="dt dlterm">
+             Scope
+            </dt> 
+            <dd class="dd"> 
+             <p class="p">(required) Specify the level of access you want this token to have. The scope of an OAuth 2 token can be set as one of the following:</p> 
+             <ul class="ul"> 
+              <li class="li"><strong class="ph b">Write</strong>: Allows requests sent with this token to add, edit and delete resources in the system.</li> 
+              <li class="li"><strong class="ph b">Read</strong>: Limits actions to read only. Note that the write scope includes read scope.</li> 
+             </ul> 
+            </dd> 
+           </dl> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create token</span>, or click <span class="ph uicontrol button">Cancel</span> to abandon your changes. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The Token information is displayed with <strong class="ph b">Token</strong> and <strong class="ph b">Refresh Token</strong> information, and the expiration date of the token. This will be the only time the token and refresh token will be shown. You can view the token association and token information from the list view.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click the copy icon and save the token and refresh token for future use.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">You can verify that the application now shows the user with the appropriate token by using the <strong class="ph b">Tokens</strong> tab on the Applications details page.</p> 
+        <ol class="ol"> 
+         <li class="li">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">OAuth Applications</span></span>.</li> 
+         <li class="li">Select the application you want to verify from the <strong class="ph b">Applications</strong> list view.</li> 
+         <li class="li">Select the <strong class="ph b">Tokens</strong> tab. <p class="p">Your token should be displayed in the list of tokens associated with the application you chose.</p></li> 
+        </ol> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relref">
+        <strong>Related reference</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_token_session_management#ref-controller-token-session-management" title="Ansible Automation Platform supports the following commands for OAuth2 token management:">Token and session management</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="ref-controller-app-token-functions"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Application token functions</h2> 
+      <p class="shortdesc">The <code class="ph codeph">refresh</code> and <code class="ph codeph">revoke</code> functions associated with tokens, for tokens at the <code class="ph codeph">/o/</code> endpoints can currently only be carried out with application tokens.</p> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title4" id="ref-controller-refresh-existing-token"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Refresh an existing access token</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The following example shows an existing access token with a refresh token provided:</p> 
+       <section class="section"> 
+        <pre class="pre">{
+    "id": 35,
+    "type": "access_token",
+    ...
+    "user": 1,
+    "token": "omMFLk7UKpB36WN2Qma9H3gbwEBSOc",
+    "refresh_token": "AL0NK9TTpv0qp54dGbC4VUZtsZ9r8z",
+    "application": 6,
+    "expires": "2017-12-06T03:46:17.087022Z",
+    "scope": "read write"
+}</pre> 
+        <p class="p">The <code class="ph codeph">/o/token/</code> endpoint is used for refreshing the access token:</p> 
+        <pre class="pre">curl -X POST \
+    -d "grant_type=refresh_token&amp;refresh_token=AL0NK9TTpv0qp54dGbC4VUZtsZ9r8z" \
+    -u "gwSPoasWSdNkMDtBN3Hu2WYQpPWCO9SwUEsKK22l:fI6ZpfocHYBGfm1tP92r0yIgCyfRdDQt0Tos9L8a4fNsJjQQMwp9569eIaUBsaVDgt2eiwOGe0bg5m5vCSstClZmtdy359RVx2rQK5YlIWyPlrolpt2LEpVeKXWaiybo" \
+    http://&lt;gateway&gt;/o/token/ -i</pre> 
+        <p class="p">Where <code class="ph codeph">refresh_token</code> is provided by <code class="ph codeph">refresh_token</code> field of the preceding access token.</p> 
+        <p class="p">The authentication information is of format <code class="ph codeph">&lt;client_id&gt;:&lt;client_secret&gt;</code>, where <code class="ph codeph">client_id</code> and <code class="ph codeph">client_secret</code> are the corresponding fields of the underlying related application of the access token.</p> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">The special OAuth 2 endpoints only support using the <code class="ph codeph">x-www-form-urlencoded</code><strong class="ph b">Content-type</strong>, so as a result, none of the <code class="ph codeph">/o/*</code> endpoints accept <code class="ph codeph">application/json</code>.</p> 
+         </div>
+        </div> 
+        <p class="p">On success, a response displays in JSON format containing the new (refreshed) access token with the same scope information as the previous one:</p> 
+        <pre class="pre">HTTP/1.1 200 OK
+Server: nginx/1.12.2
+Date: Tue, 05 Dec 2017 17:54:06 GMT
+Content-Type: application/json
+Content-Length: 169
+Connection: keep-alive
+Content-Language: en
+Vary: Accept-Language, Cookie
+Pragma: no-cache
+Cache-Control: no-store
+Strict-Transport-Security: max-age=15768000
+
+{"access_token": "NDInWxGJI4iZgqpsreujjbvzCfJqgR", "token_type": "Bearer", "expires_in": 315360000000, "refresh_token": "DqOrmz8bx3srlHkZNKmDpqA86bnQkT", "scope": "read write"}</pre> 
+        <p class="p">The refresh operation replaces the existing token by deleting the original and then immediately creating a new token with the same scope and related application as the original one.</p> 
+        <p class="p">Verify that the new token is present and the old one is deleted in the <code class="ph codeph">api/gateway/v1/tokens/</code> endpoint.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title5" id="ref-controller-revoke-access-token"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Revoke an access token</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">You can revoke an access token by deleting the token in the platform UI, or by using the <code class="ph codeph">/o/revoke-token/</code> endpoint.</p> 
+       <section class="section"> 
+        <p class="p">Revoking an access token by this method is the same as deleting the token resource object, but it enables you to delete a token by providing its token value, and the associated <code class="ph codeph">client_id</code> (and <code class="ph codeph">client_secret</code> if the application is <code class="ph codeph">confidential</code>). For example:</p> 
+        <pre class="pre">curl -X POST -d "token=rQONsve372fQwuc2pn76k3IHDCYpi7" \
+-u "gwSPoasWSdNkMDtBN3Hu2WYQpPWCO9SwUEsKK22l:fI6ZpfocHYBGfm1tP92r0yIgCyfRdDQt0Tos9L8a4fNsJjQQMwp9569eIaUBsaVDgt2eiwOGe0bg5m5vCSstClZmtdy359RVx2rQK5YlIWyPlrolpt2LEpVeKXWaiybo" \
+http://&lt;gateway&gt;/o/revoke_token/ -i</pre> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <ul class="ul"> 
+           <li class="li">The special OAuth 2 endpoints only support using the <code class="ph codeph">x-www-form-urlencoded</code><strong class="ph b">Content-type</strong>, so as a result, none of the <code class="ph codeph">/o/*</code> endpoints accept <code class="ph codeph">application/json</code>.</li> 
+           <li class="li">The <strong class="ph b">Allow External Users to Create Oauth2 Tokens</strong> (<code class="ph codeph">ALLOW_OAUTH2_FOR_EXTERNAL_USERS</code> in the API) setting is disabled by default. External users refer to users authenticated externally with a service such as LDAP, or any of the other SSO services. This setting ensures external users cannot create their own tokens. If you enable then disable it, any tokens created by external users in the meantime will still exist, and are not automatically revoked. This setting can be configured from the <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Platform gateway</span></span> menu.</li> 
+          </ul> 
+         </div>
+        </div> 
+        <p class="p">You can also revoke OAuth2 tokens by using the <code class="ph codeph">manage</code> utility, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_token_session_management#ref-controller-revoke-oauth2-token" title="Use this command to revoke OAuth2 tokens, both application tokens and personal access tokens (PAT). It revokes all application tokens (but not their associated refresh tokens), and revokes all personal access tokens. However, you can also specify a user for whom to revoke all tokens.">Revoke oauth2 tokens</a>.</p> 
+        <p class="p">On success, a response of <code class="ph codeph">200 OK</code> is displayed. Verify the deletion by checking whether the token is present in the <code class="ph codeph">api/gateway/v1/tokens/</code> endpoint.</p> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

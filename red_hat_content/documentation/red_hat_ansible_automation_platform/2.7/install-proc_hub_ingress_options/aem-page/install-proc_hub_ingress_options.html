@@ -1,0 +1,104 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="proc-hub-ingress-options">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure ingress options for automation hub</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">The Ansible Automation Platform Operator installation form allows you to further configure your automation hub operator ingress under <strong class="ph b">Advanced configuration</strong>.</p> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div>
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Log in to Red Hat OpenShift Container Platform.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Installed Operators</span></span>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Select your Ansible Automation Platform Operator deployment.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b"><strong class="ph b">Ansible Automation Platform</strong></strong> tab.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Click the ⋮ icon next to your Ansible Automation Platform instance and select <strong class="ph b">Edit AnsibleAutomationPlatform</strong> .</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">YAML view</strong> and locate the <code class="ph codeph">spec.hub:</code> section.<span class="ph uicontrol button"></span>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Configure the route options under the <code class="ph codeph">hub:</code> section:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>spec:
+  hub:
+    ingress_type: Ingress
+    ingress_annotations: |
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/proxy-connect-timeout: "600"
+    ingress_tls_secret: hub-ingress-tls-secret</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Save</strong>.</span> 
+        <div class="itemgroup info"> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">These settings apply to the automation hub component managed by this Ansible Automation Platform instance. The operator automatically updates the ingress configuration for the hub.</p> 
+           <p class="p">For more examples of Ansible Automation Platform custom resources, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_operator_crs#appendix-operator-crs_appendix-operator-crs" title="This appendix provides a reference for the Ansible Automation Platform custom resources for various deployment scenarios.">Red Hat Ansible Automation Platform custom resources</a> </p> 
+          </div>
+         </div> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd"></span><br> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <p class="p">After you have configured your automation hub ingress settings, OpenShift Container Platform updates the pods. This may take a few minutes.</p> 
+      <p class="p">You can view the progress by navigating to <span class="ph menucascade"><span class="ph uicontrol">Workloads</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Pods</span></span> and locating the newly created instance.</p> 
+      <p class="p">Verify that the following operator pods provided by the Ansible Automation Platform Operator installation from automation hub are running:</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:33.3333%">
+        <col style="width:33.3333%">
+        <col style="width:33.3334%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="proc-hub-ingress-options__entry__1">Operator manager controllers</th> 
+         <th class="entry" id="proc-hub-ingress-options__entry__2">Automation controller</th> 
+         <th class="entry" id="proc-hub-ingress-options__entry__3">Automation hub</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="proc-hub-ingress-options__entry__1"> <p class="p">The operator manager controllers for each of the 3 operators, include the following:</p> 
+          <ul class="ul"> 
+           <li class="li">automation-controller-operator-controller-manager</li> 
+           <li class="li">automation-hub-operator-controller-manager</li> 
+           <li class="li">resource-operator-controller-manager</li> 
+          </ul> </td> 
+         <td class="entry" headers="proc-hub-ingress-options__entry__2"> <p class="p">After deploying automation controller, you will see the addition of these pods:</p> 
+          <ul class="ul"> 
+           <li class="li">controller</li> 
+           <li class="li">controller-postgres</li> 
+          </ul> </td> 
+         <td class="entry" headers="proc-hub-ingress-options__entry__3"> <p class="p">After deploying automation hub, you will see the addition of these pods:</p> 
+          <ul class="ul"> 
+           <li class="li">hub-api</li> 
+           <li class="li">hub-content</li> 
+           <li class="li">hub-postgres</li> 
+           <li class="li">hub-redis</li> 
+           <li class="li">hub-worker</li> 
+          </ul> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">A missing pod can indicate the need for a pull secret. Pull secrets are required for protected or private image registries. See <a class="xref" href="https://docs.openshift.com/container-platform/4.11/openshift_images/managing_images/using-image-pull-secrets.html" target="_blank" rel="external noopener">Using image pull secrets</a> for more information. You can diagnose this issue further by running <code class="ph codeph">oc describe pod &lt;pod-name&gt;</code> to see if there is an ImagePullBackOff error on that pod.</p> 
+       </div>
+      </div> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

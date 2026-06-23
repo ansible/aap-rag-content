@@ -1,0 +1,72 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="modifying-the-run-schedule"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Configure the <code class="ph codeph">metrics-utility</code> to run at specific times</h1> 
+     <div class="body taskbody">
+      <p class="shortdesc">You can configure <code class="ph codeph">metrics-utility</code> to run at specified times and intervals. Run frequency is expressed in cronjobs. For more information on the cron utility, see <a class="xref" href="https://www.redhat.com/sysadmin/linux-cron-command" target="_blank" rel="external noopener">How to schedule jobs using the Linux <code class="ph codeph">Cron</code> utility</a>.</p> 
+      <section class="section context">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">About this task</h2>
+       </div> 
+       <p class="p">To modify the run schedule on Red Hat Enterprise Linux and on OpenShift Container Platform, use one of the following procedures:</p> 
+      </section> 
+      <section>
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Procedure</h2>
+       </div>
+       <ol class="ol steps">
+        <li class="li step stepexpand"> <span class="ph cmd">From the command line, run: </span> 
+         <div class="itemgroup info"> 
+          <p class="p"> <code class="ph codeph">crontab -e</code> </p> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">After the code editor has opened, update the <code class="ph codeph">gather</code> and <code class="ph codeph">build</code> parameters using cron syntax as shown below: </span> 
+         <div class="itemgroup info"> 
+          <p class="p"> <code class="ph codeph">*/2 * * * * metrics-utility gather_automation_controller_billing_data --ship --until=10m</code> </p> 
+          <p class="p"> <code class="ph codeph">*/5 * * * * metrics-utility build_report</code> </p> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Save and close the file.</span> </li>
+       </ol>
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="modify-the-run-schedule-on-OCP"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Modify the run schedule on OpenShift Container Platform from the Ansible Automation Platform operator</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">To adjust the execution schedule of the <code class="ph codeph">metrics-utility</code> within your Ansible Automation Platform deployment running on OpenShift Container Platform, use the following procedure.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Workloads</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Deployments</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">On the next screen, select <strong class="ph b">automation-controller-operator-controller-manager</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Beneath the heading <strong class="ph b">Deployment Details</strong>, click the down arrow button to change the number of pods to zero. This pauses the deployment so you can update the running schedule.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <strong class="ph b">Installed Operators</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">From the list of installed operators, select Ansible Automation Platform.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">On the next screen, select the automation controller tab.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">From the list displayed, select your automation controller instance.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">On the next screen, select the <code class="ph codeph">YAML</code> tab.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In the <code class="ph codeph">YAML</code> file, find the following parameters and enter a variable representing how often <code class="ph codeph">metrics-utility</code> should gather data and how often it should produce a report: </span> 
+          <div class="itemgroup info"> 
+           <p class="p"> <code class="ph codeph">metrics_utility_cronjob_gather_schedule:</code> </p> 
+           <p class="p"> <code class="ph codeph">metrics_utility_cronjob_report_schedule:</code> </p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Save</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation menu, select <span class="ph menucascade"><span class="ph uicontrol">Deployments</span></span> and then select <strong class="ph b">automation-controller-operator-controller-manager</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Increase the number of pods to 1.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">To verify that you have changed the <code class="ph codeph">metrics-utility</code> running schedule successfully, you can take one or both of the following steps: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">Return to the <code class="ph codeph">YAML</code> file and ensure that the previously described parameters reflect the correct variables.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">From the navigation menu, select <span class="ph menucascade"><span class="ph uicontrol">Workloads</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Cronjobs</span></span> and ensure that your cronjobs show the updated schedule.</span> </li> 
+          </ol> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

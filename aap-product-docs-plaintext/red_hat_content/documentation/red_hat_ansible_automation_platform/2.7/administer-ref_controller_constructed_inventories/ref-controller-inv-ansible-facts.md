@@ -1,0 +1,7 @@
+# Create dynamic groups with constructed inventories
+## Ansible facts
+
+You can create an inventory that uses Ansible facts to populate host variables.
+
+To create an inventory with Ansible facts, you must run a playbook against the inventory that has the setting `gather_facts: true`. The facts differ system-to-system. The following examples are not intended to address all known scenarios.
+

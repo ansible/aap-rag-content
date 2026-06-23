@@ -1,0 +1,23 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="assembly-pod-spec-modifications_performance-considerations">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Performance tuning for operator environments</h1> 
+    <p class="shortdesc">A pod in Kubernetes is the smallest deployable compute unit, consisting of one or more containers sharing networking and storage on a single host. Red Hat Ansible Automation Platform uses a default pod specification, which can be customized with a user-defined YAML or JSON document.</p> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_pod_specification_mods">Introduction</a></strong><br>The Kubernetes concept of a pod is one or more containers deployed together on one host, and the smallest compute unit that can be defined, deployed, or managed.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-proc_customizing_pod_specs#proc-customizing-pod-specs">Customize pod specifications to improve performance</a></strong><br>You can use the following procedure to customize the pod.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-ref_resource_management_pods_containers#ref-resource-management-pods-containers">Manage resources for pods and containers</a></strong><br>When you specify a pod, you can specify how much of each resource a container needs. The most common resources to specify are CPU and memory (RAM).</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_control_plane_adjustments#assembly-control-plane-adjustments_performance-considerations">Adjust the control plane to tune performance</a></strong><br>The control plane refers to the automation controller pods which contain the web and task containers that, among other things, provide the user interface and handle the scheduling and launching of jobs.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_specify_dedicated_nodes#assembly-specify-dedicted-nodes_performance-considerations">Specify dedicated nodes for pods and job execution</a></strong><br>A Kubernetes cluster runs on multiple nodes. Use the <code class="ph codeph">topologySpreadConstraints</code> setting to control how pods are distributed across your nodes during scheduling. This ensures high availability and balanced workloads across your infrastructure.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_controller_capacity_determination#controller-capacity-determination">How job capacity is determined and impacts job runs</a></strong><br>The automation controller capacity system determines how many jobs can run on an instance given the amount of resources available to the instance and the size of the jobs that are running (referred to as Impact). The algorithm used to determine this is based on the following two things:</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_controller_capacity_job_impacts#controller-capacity-job-impacts">Job type impact on capacity</a></strong><br>When configuring automation controller capacity, it is important to understand how different job types impact the system capacity.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-receptor_kubernetes_retry_count_variable">Fine-tune Receptor worker backoff strategies for API reliability</a></strong><br>Configure the Receptor worker within the Ansible Automation Platform Operator through the<code class="ph codeph">RECEPTOR_KUBE_RETRY_COUNT</code> environment variable. This variable controls how the worker handles Kubernetes API connection failures.</li>
+     </ul>
+    </nav>
+   </article>
+  </main>
+ </body>
+</html>

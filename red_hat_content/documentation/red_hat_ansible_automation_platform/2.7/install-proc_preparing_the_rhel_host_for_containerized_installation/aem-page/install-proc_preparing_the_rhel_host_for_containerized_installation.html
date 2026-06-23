@@ -1,0 +1,75 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="preparing-the-rhel-host-for-containerized-installation">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Prepare the Red Hat Enterprise Linux host</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Containerized Ansible Automation Platform runs the component services as Podman based containers on top of a Red Hat Enterprise Linux host. Prepare the Red Hat Enterprise Linux host to ensure a successful installation.</p> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Log in to the Red Hat Enterprise Linux host as your non-root user.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Ensure that the hostname of your host uses a fully qualified domain name (FQDN). </span> 
+        <ol type="a" class="ol substeps"> 
+         <li class="li substep substepexpand"> <span class="ph cmd">To check the hostname of your host, run the following command: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>hostname -f</code></pre> 
+           <p class="p">Example output:</p> 
+           <pre class="pre codeblock"><code>aap.example.org</code></pre> 
+          </div> </li> 
+         <li class="li substep substepexpand"> <span class="ph cmd">If the hostname is not a FQDN, you can set it with the following command: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ sudo hostnamectl set-hostname &lt;your_hostname&gt;</code></pre> 
+          </div> </li> 
+        </ol> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Register your Red Hat Enterprise Linux host with <code class="ph codeph">subscription-manager</code>: </span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>$ sudo subscription-manager register</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Verify that only the BaseOS and AppStream repositories are enabled on the host: </span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>$ sudo dnf repolist</code></pre> 
+         <p class="p">Example output for RHEL 9:</p> 
+         <pre class="pre codeblock"><code>Updating Subscription Management repositories.
+repo id                                                    repo name
+rhel-9-for-x86_64-appstream-rpms                           Red Hat Enterprise Linux 9 for x86_64 - AppStream (RPMs)
+rhel-9-for-x86_64-baseos-rpms                              Red Hat Enterprise Linux 9 for x86_64 - BaseOS (RPMs)</code></pre> 
+         <p class="p">Example output for RHEL 10:</p> 
+         <pre class="pre codeblock"><code>Updating Subscription Management repositories.
+repo id                                                    repo name
+rhel-10-for-x86_64-appstream-rpms                          Red Hat Enterprise Linux 10 for x86_64 - AppStream (RPMs)
+rhel-10-for-x86_64-baseos-rpms                             Red Hat Enterprise Linux 10 for x86_64 - BaseOS (RPMs)</code></pre> 
+         <ul class="ul"> 
+          <li class="li">For disconnected installations, follow the steps in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_containerized_disconnected_installation#obtaining-and-configuring-rpm-dependencies" title="The Ansible Automation Platform containerized setup bundle installation program does not include RPM source dependencies from the BaseOS and AppStream repositories. It relies on the host system’s package manager to resolve these dependencies.">Obtain and configure RPM source dependencies</a> to access these repositories.</li> 
+         </ul> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Ensure the host can resolve host names and IP addresses using DNS. This is essential to ensure services can talk to one another.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Install <code class="ph codeph">ansible-core</code>: </span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>$ sudo dnf install -y ansible-core</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Optional: Install additional utilities that are useful for troubleshooting purposes, for example <code class="ph codeph">wget</code>, <code class="ph codeph">git-core</code>, <code class="ph codeph">rsync</code>, and <code class="ph codeph">vim</code>: </span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>$ sudo dnf install -y wget git-core rsync vim</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Optional: To have the installation program automatically pick up and apply your Ansible Automation Platform subscription manifest license, follow the steps in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_activate_1#assembly-aap-obtain-manifest-files" title="You can obtain a subscription manifest in the Subscription Allocations section of Red Hat Subscription Management.">Obtain a manifest file</a>.</span> </li>
+      </ol>
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relinfo">
+      <strong>Related information</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/managing_networking_infrastructure_services/assembly_setting-up-an-unbound-dns-server_networking-infrastructure-services" target="_blank" rel="external noopener">Setting up an unbound DNS server</a></li>
+       <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/managing_networking_infrastructure_services/assembly_setting-up-and-configuring-a-bind-dns-server_networking-infrastructure-services" target="_blank" rel="external noopener">Setting up and configuring a BIND DNS server</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

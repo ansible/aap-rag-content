@@ -1,0 +1,24 @@
+# Understanding Ansible Automation Platform synchronization
+## Ansible Automation Platform synchronization configuration examples
+### Minimal configuration
+
+Synchronizes the Organization, Users, Teams, and Job Templates using the default 60-minute frequency and 15-minute timeout.
+
+```yaml
+catalog:
+providers:
+rhaap:
+'{{- include "catalog.providers.env" . }}':
+orgs: Default
+sync:
+orgsUsersTeams:
+schedule:
+frequency: { minutes: 60 }
+timeout: { minutes: 15 }
+jobTemplates:
+enabled: true
+schedule:
+frequency: { minutes: 60 }
+timeout: { minutes: 15 }
+```
+

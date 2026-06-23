@@ -1,0 +1,11 @@
+# Understand and configure notifications
+## Notification hierarchy
+### Notification workflow
+
+Automation controller can send notifications when jobs succeed or fail.
+
+When a job succeeds or fails, the error or success handler pulls a list of relevant notifications. It then creates a notification object for each one, containing relevant details about the job and sends it to the destination. These include email addresses, slack channels, and SMS numbers.
+
+These notification objects are available as related resources on job types (jobs, inventory updates, project updates), and also at `/api/v2/notifications`. You can also see what notifications have been sent from a notification template by examining its related resources.
+
+If a notification fails, it does not impact the job associated with it or cause it to fail. The status of the notification can be viewed at its detail endpoint `/api/v2/notifications/<n>`.

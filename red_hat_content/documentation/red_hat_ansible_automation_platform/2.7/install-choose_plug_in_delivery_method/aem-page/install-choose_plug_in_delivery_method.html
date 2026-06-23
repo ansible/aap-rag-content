@@ -1,0 +1,39 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="choose-plug-in-delivery-method">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Plug-in delivery method</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Ansible plug-ins for Red Hat Developer Hub support two delivery methods. Select the method that fits your environment.</p> 
+     <p class="p">Ansible automation portal supports two plug-in delivery methods:</p> 
+     <ul class="ul"> 
+      <li class="li"><strong class="ph b">OCI container delivery (recommended)</strong>: Ansible automation portal automatically pulls an Open Container Initiative (OCI) container from <code class="ph codeph">registry.redhat.io</code> that contains the plug-ins. Use this method for new installations.</li> 
+      <li class="li"><strong class="ph b">HTTP plug-in registry (deprecated)</strong>: Manually create an HTTP plug-in registry that hosts plug-in tarball files. This method is deprecated and will be removed in a future release of Ansible Automation Platform. Existing installations that use this method should migrate to OCI container delivery.</li> 
+     </ul> 
+     <div class="note note note_note">
+      <span class="note__title">Note:</span> 
+      <div class="note__body"> 
+       <p class="p">If you are installing Ansible automation portal in a disconnected or air-gapped OpenShift Container Platform environment, complete the pre-installation configuration in this chapter and then follow the procedures in the disconnected installation chapter. The disconnected installation chapter includes additional steps for mirroring container images, configuring registry authentication, and installing the Helm chart in isolated environments.</p> 
+      </div>
+     </div> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_oci_container_delivery">OCI container delivery</a></strong><br>Use OCI container delivery to pull plug-in artifacts from <code class="ph codeph">registry.redhat.io/ansible-automation-platform/automation-portal</code>. The plug-in version must match the <code class="ph codeph">imageTagInfo</code> value in your Helm chart configuration. This is the recommended method for new installations.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_self_service_choose_plugin_delivery">Plug-in delivery method</a></strong><br>Ansible automation portal supports two plug-in delivery methods. Use OCI container delivery for new installations, or plan to migrate from the deprecated HTTP plug-in registry.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/ref_self_service_determine_version_tags">Determine version tags before you install</a></strong><br>Record the version values that you need before you install the Helm chart or mirror images for Ansible automation portal.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_migrate_tarball_to_oci_1#migrate-tarball-to-oci">Migrate from HTTP plug-in registry to OCI container delivery</a></strong><br>Migrate from the deprecated HTTP plug-in registry to OCI container image delivery by switching Helm values and updating your Kubernetes secret configuration.</li>
+     </ul>
+     <div class="linklist relconcepts">
+      <strong>Related concepts</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_disconnected_install#self-service-disconnected-install" title="You can install Ansible automation portal in a disconnected OpenShift Container Platform environment. For new installations, use OCI container delivery and mirror required container images and plug-in artifacts to your internal registry.">Install Ansible automation portal in air-gapped OpenShift Container Platform environments</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

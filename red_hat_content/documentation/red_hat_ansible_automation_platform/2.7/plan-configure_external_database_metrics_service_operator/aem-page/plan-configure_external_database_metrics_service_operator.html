@@ -1,0 +1,148 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="configure-external-database-metrics-service-operator">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure external database for metrics service</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Configure metrics service to use external PostgreSQL databases for the metrics service database and read-only access to the automation controller database.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <p class="p">Before you configure metrics service with an external database, ensure:</p> 
+      <ul class="ul"> 
+       <li class="li">External PostgreSQL database is running (version 15, 16, or 17)</li> 
+       <li class="li">Two databases exist: 
+        <ul class="ul"> 
+         <li class="li"><code class="ph codeph">metrics_service</code> database with a user that has CREATEDB role</li> 
+         <li class="li"><code class="ph codeph">automationcontroller</code> database (same database used by automation controller)</li> 
+        </ul> </li> 
+       <li class="li">Read-only user <code class="ph codeph">ms_awx_readonly</code> exists in PostgreSQL with SELECT privileges on all tables in the <code class="ph codeph">automationcontroller</code> database's public schema</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Create the read-only user:</strong></p> 
+      <pre class="pre codeblock"><code>-- Connect to the automationcontroller database
+\c automationcontroller
+
+-- Create read-only user
+CREATE USER ms_awx_readonly WITH PASSWORD '&lt;readonly-password&gt;';
+
+-- Grant privileges
+GRANT CONNECT ON DATABASE automationcontroller TO ms_awx_readonly;
+GRANT USAGE ON SCHEMA public TO ms_awx_readonly;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO ms_awx_readonly;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO ms_awx_readonly;
+
+ALTER DEFAULT PRIVILEGES FOR ROLE automationcontroller IN SCHEMA public GRANT
+SELECT ON TABLES TO ms_awx_readonly;
+ALTER DEFAULT PRIVILEGES FOR ROLE automationcontroller IN SCHEMA public GRANT SELECT ON SEQUENCES TO ms_awx_readonly;</code></pre> 
+     </section> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">Metrics service requires two database connections: a <code class="ph codeph">metrics_service</code> database for storing metrics data and read-only access to the <code class="ph codeph">automationcontroller</code> database for correlating metrics with automation activity.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Create a secret for the <code class="ph codeph">metrics_service</code> database connection:</span> 
+        <div class="itemgroup stepxmp"> 
+         <pre class="pre codeblock"><code>apiVersion: v1
+kind: Secret
+metadata:
+  name: aap-metrics-postgres-configuration
+  namespace: aap
+stringData:
+  host: &lt;external-postgres-host&gt;
+  port: "5432"
+  database: metrics_service
+  username: &lt;metrics-db-username&gt;
+  password: &lt;metrics-db-password&gt;
+  type: unmanaged
+type: Opaque</code></pre> 
+        </div> 
+        <div class="itemgroup stepresult"> 
+         <div class="note important note_important">
+          <span class="note__title">Important:</span> 
+          <div class="note__body">
+           <code class="ph codeph">type: unmanaged</code> tells the operator this is an external database. Without this field, the operator attempts to initialize the database as a managed instance and fails.
+          </div>
+         </div> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Create a secret for read-only access to the <code class="ph codeph">automationcontroller</code> database:</span> 
+        <div class="itemgroup stepxmp"> 
+         <pre class="pre codeblock"><code>apiVersion: v1
+kind: Secret
+metadata:
+  name: aap-metrics-read-token
+  namespace: aap
+stringData:
+  host: &lt;external-postgres-host&gt;
+  port: "5432"
+  database: automationcontroller
+  username: ms_awx_readonly
+  password: &lt;readonly-user-password&gt;
+type: Opaque</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Apply both secrets to your OpenShift cluster:</span> 
+        <div class="itemgroup stepxmp"> 
+         <pre class="pre codeblock"><code>$ oc apply -f aap-metrics-postgres-configuration.yaml -n aap
+$ oc apply -f aap-metrics-read-token.yaml -n aap</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Verify the secrets were created:</span> 
+        <div class="itemgroup stepxmp"> 
+         <pre class="pre codeblock"><code>$ oc get secret -n aap | grep metrics</code></pre> 
+        </div> 
+        <div class="itemgroup stepresult"> 
+         <p class="p">Expected output shows both secrets:</p> 
+         <pre class="pre codeblock"><code>aap-metrics-postgres-configuration
+aap-metrics-read-token</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Reference the secrets in your AnsibleAutomationPlatform custom resource:</span> 
+        <div class="itemgroup stepxmp"> 
+         <pre class="pre codeblock"><code>apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: aap
+  namespace: aap
+spec:
+  metrics:
+    database:
+      database_secret: aap-metrics-postgres-configuration
+      externally_managed: true
+    ms_awx_readonly_user_secret: aap-metrics-read-token
+    ms_awx_readonly_user:
+      externally_managed: true</code></pre> 
+        </div> 
+        <div class="itemgroup info"> 
+         <p class="p">Where:</p> 
+         <ul class="ul"> 
+          <li class="li"><code class="ph codeph">database.database_secret</code>: References the <code class="ph codeph">metrics_service</code> database secret</li> 
+          <li class="li"><code class="ph codeph">database.externally_managed: true</code>: Skips operator-managed PostgreSQL pod creation</li> 
+          <li class="li"><code class="ph codeph">ms_awx_readonly_user_secret</code>: References the read-only user secret</li> 
+          <li class="li"><code class="ph codeph">ms_awx_readonly_user.externally_managed: true</code>: Uses customer-provided read-only user instead of operator creating it</li> 
+         </ul> 
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <p class="p">After applying the AnsibleAutomationPlatform custom resource, verify metrics service provisioning:</p> 
+      <ol class="ol"> 
+       <li class="li">Check the MetricsService custom resource status: <pre class="pre codeblock"><code>$ oc get metricsservice -n aap</code></pre> </li> 
+       <li class="li">Verify all 3 metrics service pods are running: <pre class="pre codeblock"><code>$ oc get pods -n aap | grep metrics</code></pre> <p class="p">Expected output:</p> <pre class="pre codeblock"><code>aap-metrics-web-xxxxx        1/1  Running
+aap-metrics-tasks-xxxxx      1/1  Running
+aap-metrics-scheduler-xxxxx  1/1  Running</code></pre> </li> 
+       <li class="li">Check database connectivity in the logs: <pre class="pre codeblock"><code>$ oc logs &lt;instance&gt;-metrics-web-xxxxx -n aap | grep "Database connection"</code></pre> <p class="p">This should show a successful connection to both databases.</p> </li> 
+      </ol> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

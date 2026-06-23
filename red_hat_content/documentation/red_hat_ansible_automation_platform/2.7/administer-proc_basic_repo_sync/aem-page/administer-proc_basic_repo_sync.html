@@ -1,0 +1,105 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="proc-basic-repo-sync"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Synchronize repositories in automation hub</h1> 
+     <div class="body taskbody">
+      <p class="shortdesc">Synchronize repositories in automation hub to update your custom repository with the latest collections from a configured remote.</p> 
+      <section>
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Procedure</h2>
+       </div>
+       <ol class="ol steps">
+        <li class="li step stepexpand"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Repositories</span></span>.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Locate your repository in the list and click <span class="ph uicontrol button">More Actions</span> icon <strong class="ph b">⋮</strong>, then select <strong class="ph b">Sync repository</strong>. </span> 
+         <div class="itemgroup info"> 
+          <p class="p">All collections in the configured remote are downloaded to your custom repository. To check the status of the collection sync, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Task Management</span></span> from the navigation panel.</p> 
+          <div class="note note note_note">
+           <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">To limit repository synchronization to specific collections within a remote, you can identify specific collections to be pulled by using a <code class="ph codeph">requirements.yml</code> file.</p> 
+           </div>
+          </div> 
+         </div> </li>
+       </ol>
+      </section> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist reltasks">
+       <strong>Related tasks</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_create_requirements_file" title="Use a requirements file to add collections to your automation hub.">Create a requirements file</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-export-collection"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Export automation content from automation hub</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">When collections are finalized, you can import them to a location where they can be distributed to others across your organization.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li>
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Collections</span></span>. The <strong class="ph b">Collections</strong> page displays all collections across all repositories. You can search for a specific collection.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click into the collection that you want to export. The collection details page opens.</span> </li>
+         <li class="li step"> <span class="ph cmd">From the <strong class="ph b">Install</strong> tab, select <strong class="ph b">Download tarball</strong>. The .tar file is downloaded to your default browser downloads folder. You can now import it to the location of your choosing.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-import-collection"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Import automation content to automation hub</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">As an automation content creator, you can import a collection to your custom repository.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">To use a collection in your custom repository, first import the collection into your namespace so the automation hub administrator can approve it.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Namespaces</span></span>. The <strong class="ph b">Namespaces</strong> page displays all of the namespaces available.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the namespace to which you want to add your collection.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">Collections</strong> tab.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Upload Collection</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Enter or browse to select a collection file.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the repository pipeline to add the collection. The choices are <strong class="ph b">Staging repos</strong> and <strong class="ph b">Repositories without pipeline</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Upload collection</span>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The <strong class="ph b">Imports</strong> screen displays a summary of tests and notifies you if the collection upload is successful or has failed. To find your imports, on your namespace click the <span class="ph uicontrol button">More Actions</span> icon <strong class="ph b">⋮</strong> and select <strong class="ph b">Imports</strong>.</p> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">If the collection is not approved, it is not displayed in the published repository.</p> 
+            </div>
+           </div> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relconcepts">
+        <strong>Related concepts</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_approval_pipeline#con-approval-pipeline" title="In automation hub you can approve collections into any repository marked with the pipeline=approved label.">Approval pipeline for custom repositories in automation hub</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,604 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="AnsibleAutomationPlatform">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">AnsibleAutomationPlatform [aap.ansible.com/v1alpha1]</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">The <code class="ph codeph">AnsibleAutomationPlatform</code> custom resource is the top-level resource for deploying and managing Ansible Automation Platform on OpenShift Container Platform. It configures all components, including automation controller, automation hub, Event-Driven Ansible, and the platform gateway.</p> 
+     <section class="section" id="AnsibleAutomationPlatform__description">
+      <h2 class="title sectiontitle">Description</h2> 
+      <table class="table" id="AnsibleAutomationPlatform__description-table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:33.33333333333333%">
+        <col style="width:66.66666666666666%">
+       </colgroup>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry"><strong class="ph b">API Group</strong></td> 
+         <td class="entry"><code class="ph codeph">aap.ansible.com</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry"><strong class="ph b">API Version</strong></td> 
+         <td class="entry"><code class="ph codeph">v1alpha1</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry"><strong class="ph b">Kind</strong></td> 
+         <td class="entry"><code class="ph codeph">AnsibleAutomationPlatform</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry"><strong class="ph b">Scope</strong></td> 
+         <td class="entry">Namespaced</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="AnsibleAutomationPlatform__spec">
+      <h2 class="title sectiontitle">Specification</h2> 
+      <p class="p">The top-level <code class="ph codeph">spec</code> fields for the <code class="ph codeph">AnsibleAutomationPlatform</code> custom resource.</p> 
+      <table class="table" id="AnsibleAutomationPlatform__spec-table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:28.57142857142857%">
+        <col style="width:14.285714285714285%">
+        <col style="width:42.857142857142854%">
+        <col style="width:14.285714285714285%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-table__entry__1">Field</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-table__entry__2">Type</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-table__entry__3">Description</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-table__entry__4">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__1"><code class="ph codeph">no_log</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__2">Boolean</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__3">Development setting to enable additional logging output.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__4"><code class="ph codeph">false</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__1"><code class="ph codeph">image_pull_policy</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__2">String</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__3">Image pull policy for all platform pods. Options:<code class="ph codeph">Always</code>,<code class="ph codeph">Never</code>,<code class="ph codeph">IfNotPresent</code>.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__4"><code class="ph codeph">IfNotPresent</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__1"><code class="ph codeph">bundle_cacert_secret</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__2">String</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__3">Name of a Kubernetes secret containing custom CA certificates to trust.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__4">-</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__1"><code class="ph codeph">redis_mode</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__2">String</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__3">Redis deployment mode. Set to<code class="ph codeph">cluster</code> to enable Redis cluster mode.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__4">-</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__1"><code class="ph codeph">api</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__2">Object</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__3">Configuration for the platform gateway API pods. See<a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-api">spec.api</a>.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__4">-</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__1"><code class="ph codeph">redis</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__2">Object</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__3">Configuration for the platform Redis pods. See<a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-redis">spec.redis</a>.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__4">-</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__1"><code class="ph codeph">database</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__2">Object</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__3">Configuration for the platform database. See<a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-database">spec.database</a>.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__4">-</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__1"><code class="ph codeph">controller</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__2">Object</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__3">Configuration for the automation controller component. See<a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-controller">spec.controller</a>.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__4">-</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__1"><code class="ph codeph">eda</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__2">Object</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__3">Configuration for the Event-Driven Ansible component. See<a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-eda">spec.eda</a>.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__4">-</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__1"><code class="ph codeph">hub</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__2">Object</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__3">Configuration for the automation hub component. See<a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-hub">spec.hub</a>.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__4">-</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__1"><code class="ph codeph">lightspeed</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__2">Object</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__3">Configuration for the Ansible Lightspeed component. See<a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-lightspeed">spec.lightspeed</a>.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-table__entry__4">-</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="AnsibleAutomationPlatform__spec-api">
+      <h2 class="title sectiontitle">spec.api</h2> 
+      <p class="p">Configuration for the platform gateway API pods.</p> 
+      <table class="table" id="AnsibleAutomationPlatform__spec-api-table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:28.57142857142857%">
+        <col style="width:14.285714285714285%">
+        <col style="width:42.857142857142854%">
+        <col style="width:14.285714285714285%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-api-table__entry__1">Field</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-api-table__entry__2">Type</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-api-table__entry__3">Description</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-api-table__entry__4">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-api-table__entry__1"><code class="ph codeph">replicas</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-api-table__entry__2">Integer</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-api-table__entry__3">Number of gateway API pod replicas.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-api-table__entry__4"><code class="ph codeph">1</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-api-table__entry__1"><code class="ph codeph">resource_requirements</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-api-table__entry__2">Object</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-api-table__entry__3">Kubernetes resource requests and limits for the gateway API pods. See<a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__resource-requirements">Resource requirements object</a>.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-api-table__entry__4">See defaults table</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="AnsibleAutomationPlatform__spec-redis">
+      <h2 class="title sectiontitle">spec.redis</h2> 
+      <p class="p">Configuration for the platform Redis pods.</p> 
+      <table class="table" id="AnsibleAutomationPlatform__spec-redis-table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:28.57142857142857%">
+        <col style="width:14.285714285714285%">
+        <col style="width:42.857142857142854%">
+        <col style="width:14.285714285714285%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-redis-table__entry__1">Field</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-redis-table__entry__2">Type</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-redis-table__entry__3">Description</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-redis-table__entry__4">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-redis-table__entry__1"><code class="ph codeph">replicas</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-redis-table__entry__2">Integer</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-redis-table__entry__3">Number of Redis pod replicas.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-redis-table__entry__4"><code class="ph codeph">1</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-redis-table__entry__1"><code class="ph codeph">resource_requirements</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-redis-table__entry__2">Object</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-redis-table__entry__3">Kubernetes resource requests and limits for the Redis pods. See<a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__resource-requirements">Resource requirements object</a>.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-redis-table__entry__4">See defaults table</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="AnsibleAutomationPlatform__spec-database">
+      <h2 class="title sectiontitle">spec.database</h2> 
+      <p class="p">Configuration for the platform database.</p> 
+      <table class="table" id="AnsibleAutomationPlatform__spec-database-table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:28.57142857142857%">
+        <col style="width:14.285714285714285%">
+        <col style="width:42.857142857142854%">
+        <col style="width:14.285714285714285%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-database-table__entry__1">Field</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-database-table__entry__2">Type</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-database-table__entry__3">Description</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-database-table__entry__4">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-database-table__entry__1"><code class="ph codeph">database_secret</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-database-table__entry__2">String</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-database-table__entry__3">Name of a Kubernetes secret containing external database connection details. Required when using an external database instead of the operator-deployed database.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-database-table__entry__4">-</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-database-table__entry__1"><code class="ph codeph">resource_requirements</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-database-table__entry__2">Object</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-database-table__entry__3">Kubernetes resource requests and limits for the operator-deployed database pod. Ignored when using an external database. See<a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__resource-requirements">Resource requirements object</a>.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-database-table__entry__4">See defaults table</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="AnsibleAutomationPlatform__spec-controller">
+      <h2 class="title sectiontitle">spec.controller</h2> 
+      <p class="p">Configuration for the automation controller component. In addition to the fields listed here, this section accepts all fields from <code class="ph codeph">AutomationController.spec</code>. For the full list of available fields, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-automation_controller_custom_resources#AutomationControllerAndMeshIngress__controller-spec">AutomationController spec</a>.</p> 
+      <table class="table" id="AnsibleAutomationPlatform__spec-controller-table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:28.57142857142857%">
+        <col style="width:14.285714285714285%">
+        <col style="width:42.857142857142854%">
+        <col style="width:14.285714285714285%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-controller-table__entry__1">Field</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-controller-table__entry__2">Type</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-controller-table__entry__3">Description</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-controller-table__entry__4">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-controller-table__entry__1"><code class="ph codeph">disabled</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-controller-table__entry__2">Boolean</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-controller-table__entry__3">Set to<code class="ph codeph">true</code> to disable the automation controller component.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-controller-table__entry__4"><code class="ph codeph">false</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-controller-table__entry__1"><code class="ph codeph">name</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-controller-table__entry__2">String</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-controller-table__entry__3">Name of an existing<code class="ph codeph">AutomationController</code> custom resource to register with the platform gateway.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-controller-table__entry__4">-</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="AnsibleAutomationPlatform__spec-eda">
+      <h2 class="title sectiontitle">spec.eda</h2> 
+      <p class="p">Configuration for the Event-Driven Ansible component. In addition to the fields listed here, this section accepts all fields from <code class="ph codeph">EDA.spec</code>. For the full list of available fields, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-event_driven_ansible_custom_resources#EDA__spec">EDA spec</a>.</p> 
+      <table class="table" id="AnsibleAutomationPlatform__spec-eda-table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:28.57142857142857%">
+        <col style="width:14.285714285714285%">
+        <col style="width:42.857142857142854%">
+        <col style="width:14.285714285714285%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-eda-table__entry__1">Field</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-eda-table__entry__2">Type</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-eda-table__entry__3">Description</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-eda-table__entry__4">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-eda-table__entry__1"><code class="ph codeph">disabled</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-eda-table__entry__2">Boolean</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-eda-table__entry__3">Set to<code class="ph codeph">true</code> to disable the Event-Driven Ansible component.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-eda-table__entry__4"><code class="ph codeph">false</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-eda-table__entry__1"><code class="ph codeph">name</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-eda-table__entry__2">String</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-eda-table__entry__3">Name of an existing<code class="ph codeph">EDA</code> custom resource to register with the platform gateway.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-eda-table__entry__4">-</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="AnsibleAutomationPlatform__spec-hub">
+      <h2 class="title sectiontitle">spec.hub</h2> 
+      <p class="p">Configuration for the automation hub component. In addition to the fields listed here, this section accepts all fields from <code class="ph codeph">AutomationHub.spec</code>. For the full list of available fields, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-automation_hub_custom_resources#AutomationHub__spec">AutomationHub spec</a>.</p> 
+      <table class="table" id="AnsibleAutomationPlatform__spec-hub-table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:28.57142857142857%">
+        <col style="width:14.285714285714285%">
+        <col style="width:42.857142857142854%">
+        <col style="width:14.285714285714285%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-hub-table__entry__1">Field</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-hub-table__entry__2">Type</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-hub-table__entry__3">Description</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-hub-table__entry__4">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-hub-table__entry__1"><code class="ph codeph">disabled</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-hub-table__entry__2">Boolean</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-hub-table__entry__3">Set to<code class="ph codeph">true</code> to disable the automation hub component.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-hub-table__entry__4"><code class="ph codeph">false</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-hub-table__entry__1"><code class="ph codeph">name</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-hub-table__entry__2">String</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-hub-table__entry__3">Name of an existing<code class="ph codeph">AutomationHub</code> custom resource to register with the platform gateway.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-hub-table__entry__4">-</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="AnsibleAutomationPlatform__spec-lightspeed">
+      <h2 class="title sectiontitle">spec.lightspeed</h2> 
+      <p class="p">Configuration for the Ansible Lightspeed component. In addition to the fields listed here, this section accepts all fields from <code class="ph codeph">AnsibleLightspeed.spec</code>. For the full list of available fields, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansible_lightspeed_custom_resources#AnsibleLightspeed__spec">AnsibleLightspeed spec</a>.</p> 
+      <table class="table" id="AnsibleAutomationPlatform__spec-lightspeed-table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:28.57142857142857%">
+        <col style="width:14.285714285714285%">
+        <col style="width:42.857142857142854%">
+        <col style="width:14.285714285714285%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-lightspeed-table__entry__1">Field</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-lightspeed-table__entry__2">Type</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-lightspeed-table__entry__3">Description</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__spec-lightspeed-table__entry__4">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-lightspeed-table__entry__1"><code class="ph codeph">disabled</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-lightspeed-table__entry__2">Boolean</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-lightspeed-table__entry__3">Set to<code class="ph codeph">true</code> to disable the Ansible Lightspeed component.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__spec-lightspeed-table__entry__4"><code class="ph codeph">true</code></td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="AnsibleAutomationPlatform__resource-requirements">
+      <h2 class="title sectiontitle">Resource requirements object</h2> 
+      <p class="p">All <code class="ph codeph">resource_requirements</code> fields follow the standard Kubernetes resource specification pattern with <code class="ph codeph">requests</code> and <code class="ph codeph">limits</code>.</p> 
+      <table class="table" id="AnsibleAutomationPlatform__resource-requirements-table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:28.57142857142857%">
+        <col style="width:14.285714285714285%">
+        <col style="width:42.857142857142854%">
+        <col style="width:14.285714285714285%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="AnsibleAutomationPlatform__resource-requirements-table__entry__1">Field</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__resource-requirements-table__entry__2">Type</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__resource-requirements-table__entry__3">Description</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__resource-requirements-table__entry__4">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__resource-requirements-table__entry__1"><code class="ph codeph">requests.cpu</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__resource-requirements-table__entry__2">String</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__resource-requirements-table__entry__3">Minimum CPU allocation for the pod, for example<code class="ph codeph">100m</code>.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__resource-requirements-table__entry__4">Varies by component</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__resource-requirements-table__entry__1"><code class="ph codeph">requests.memory</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__resource-requirements-table__entry__2">String</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__resource-requirements-table__entry__3">Minimum memory allocation for the pod, for example<code class="ph codeph">256Mi</code>.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__resource-requirements-table__entry__4">Varies by component</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__resource-requirements-table__entry__1"><code class="ph codeph">limits.cpu</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__resource-requirements-table__entry__2">String</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__resource-requirements-table__entry__3">Maximum CPU the pod can consume, for example<code class="ph codeph">500m</code>.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__resource-requirements-table__entry__4">Varies by component</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__resource-requirements-table__entry__1"><code class="ph codeph">limits.memory</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__resource-requirements-table__entry__2">String</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__resource-requirements-table__entry__3">Maximum memory the pod can consume, for example<code class="ph codeph">1000Mi</code>.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__resource-requirements-table__entry__4">Varies by component</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="AnsibleAutomationPlatform__default-resource-requirements">
+      <h2 class="title sectiontitle">Default resource requirements</h2> 
+      <p class="p">The following table lists the default resource requests and limits for each component.</p> 
+      <table class="table" id="AnsibleAutomationPlatform__default-resources-table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:42.857142857142854%">
+        <col style="width:14.285714285714285%">
+        <col style="width:14.285714285714285%">
+        <col style="width:14.285714285714285%">
+        <col style="width:14.285714285714285%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="AnsibleAutomationPlatform__default-resources-table__entry__1">Component</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__default-resources-table__entry__2">CPU request</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__default-resources-table__entry__3">Memory request</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__default-resources-table__entry__4">CPU limit</th> 
+         <th class="entry" id="AnsibleAutomationPlatform__default-resources-table__entry__5">Memory limit</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__1"><code class="ph codeph">api</code> (gateway)</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__2">100m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__3">256Mi</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__4">500m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__5">1000Mi</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__1"><code class="ph codeph">redis</code> (platform)</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__2">100m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__3">256Mi</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__4">500m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__5">500Mi</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__1"><code class="ph codeph">database</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__2">100m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__3">256Mi</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__4">500m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__5">800Mi</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__1"><code class="ph codeph">controller.task</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__2">100m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__3">150Mi</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__4">1000m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__5">1200Mi</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__1"><code class="ph codeph">controller.web</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__2">100m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__3">200Mi</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__4">200m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__5">1600Mi</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__1"><code class="ph codeph">controller.ee</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__2">100m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__3">64Mi</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__4">1000m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__5">500Mi</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__1"><code class="ph codeph">controller.redis</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__2">50m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__3">64Mi</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__4">100m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__5">200Mi</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__1"><code class="ph codeph">controller.rsyslog</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__2">100m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__3">128Mi</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__4">500m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__5">250Mi</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__1"><code class="ph codeph">controller.init</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__2">100m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__3">128Mi</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__4">500m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__5">200Mi</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__1"><code class="ph codeph">eda.api</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__2">50m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__3">350Mi</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__4">500m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__5">400Mi</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__1"><code class="ph codeph">eda.ui</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__2">25m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__3">64Mi</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__4">500m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__5">150Mi</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__1"><code class="ph codeph">eda.scheduler</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__2">50m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__3">200Mi</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__4">500m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__5">250Mi</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__1"><code class="ph codeph">eda.worker</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__2">25m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__3">200Mi</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__4">250m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__5">250Mi</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__1"><code class="ph codeph">eda.default_worker</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__2">25m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__3">200Mi</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__4">500m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__5">400Mi</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__1"><code class="ph codeph">eda.activation_worker</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__2">25m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__3">150Mi</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__4">500m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__5">400Mi</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__1"><code class="ph codeph">eda.event_stream</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__2">25m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__3">150Mi</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__4">100m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__5">300Mi</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__1"><code class="ph codeph">hub.api</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__2">150m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__3">256Mi</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__4">800m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__5">500Mi</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__1"><code class="ph codeph">hub.content</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__2">150m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__3">256Mi</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__4">800m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__5">1200Mi</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__1"><code class="ph codeph">hub.worker</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__2">150m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__3">256Mi</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__4">800m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__5">400Mi</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__1"><code class="ph codeph">hub.web</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__2">100m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__3">256Mi</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__4">500m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__5">300Mi</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__1"><code class="ph codeph">hub.redis</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__2">100m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__3">250Mi</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__4">300m</td> 
+         <td class="entry" headers="AnsibleAutomationPlatform__default-resources-table__entry__5">400Mi</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="AnsibleAutomationPlatform__example">
+      <h2 class="title sectiontitle">Example custom resource</h2> 
+      <p class="p">The following example shows a basic <code class="ph codeph">AnsibleAutomationPlatform</code> custom resource with an external database, S3 storage for automation hub, and Event-Driven Ansible SSL verification disabled:</p> 
+      <pre class="pre codeblock"><code>apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: aap
+spec:
+  database:
+    database_secret: postgres-config-gateway
+  eda:
+    automation_server_ssl_verify: 'no'
+  hub:
+    storage_type: 's3'
+    object_storage_s3_secret: 'example-galaxy-object-storage'</code></pre> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

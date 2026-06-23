@@ -1,0 +1,311 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="rhdh-install"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Install the Ansible plug-ins</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Install the Ansible plug-ins for Red Hat Developer Hub on OpenShift Container Platform using OCI container delivery. Red Hat Developer Hub pulls the plug-ins directly from <code class="ph codeph">registry.redhat.io</code> as OCI artifacts during startup.</p>
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="rhdh-create-registry-auth-secret"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Create the registry authentication secret</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Red Hat Developer Hub pulls the Ansible plug-ins directly from <code class="ph codeph">registry.redhat.io</code> as OCI artifacts during startup. This requires a registry authentication secret in the same OpenShift Container Platform project as your Red Hat Developer Hub deployment.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to the container image registry:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock language-terminal"><code>$ podman login --authfile auth.json registry.redhat.io</code></pre> 
+           <p class="p">To authenticate to multiple registries, run <code class="ph codeph">podman login</code> for each registry. The <code class="ph codeph">auth.json</code> file accumulates credentials for all registries you log in to.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Create a secret from the <code class="ph codeph">auth.json</code> file in the same OpenShift Container Platform project as your Red Hat Developer Hub deployment.</span> 
+          <div class="itemgroup info"> 
+           <p class="p">For an Operator-based deployment:</p> 
+           <pre class="pre codeblock language-terminal"><code>$ oc create secret generic dynamic-plugins-registry-auth \
+  --from-file=auth.json=auth.json \
+  -n &lt;your_rhdh_namespace&gt;</code></pre> 
+           <p class="p">For a Helm-based deployment:</p> 
+           <pre class="pre codeblock language-terminal"><code>$ oc create secret generic &lt;release_name&gt;-dynamic-plugins-registry-auth \
+  --from-file=auth.json=auth.json \
+  -n &lt;your_rhdh_namespace&gt;</code></pre> 
+           <p class="p">Replace <code class="ph codeph"><em class="ph i">&lt;release_name&gt;</em></code> with your Helm release name.</p> 
+           <div class="note important note_important">
+            <span class="note__title">Important:</span> 
+            <div class="note__body"> 
+             <p class="p">The secret name is fixed. The Red Hat Developer Hub Operator and Helm chart expect these exact names. You cannot use a custom name.</p> 
+            </div>
+           </div> 
+           <table class="table">
+            <caption>
+             <span class="table--title-label">Table 1. </span><span class="title">Secret names by deployment method</span>
+            </caption>
+            <colgroup>
+             <col>
+             <col>
+            </colgroup>
+            <thead class="thead"> 
+             <tr class="row"> 
+              <th class="entry" id="rhdh-create-registry-auth-secret__entry__1">Deployment method</th> 
+              <th class="entry" id="rhdh-create-registry-auth-secret__entry__2">Secret name</th> 
+             </tr> 
+            </thead>
+            <tbody class="tbody"> 
+             <tr class="row"> 
+              <td class="entry" headers="rhdh-create-registry-auth-secret__entry__1">Operator</td> 
+              <td class="entry" headers="rhdh-create-registry-auth-secret__entry__2"><code class="ph codeph">dynamic-plugins-registry-auth</code></td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="rhdh-create-registry-auth-secret__entry__1">Helm chart</td> 
+              <td class="entry" headers="rhdh-create-registry-auth-secret__entry__2"><code class="ph codeph"><em class="ph i">&lt;release_name&gt;</em>-dynamic-plugins-registry-auth</code></td> 
+             </tr> 
+            </tbody>
+           </table> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">For disconnected or restricted network environments, mirror the <code class="ph codeph">automation-portal</code> OCI image to an internal registry and use OCI references pointing to that registry instead.</p> 
+            </div>
+           </div> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Verify that the secret exists in the project.</p> 
+        <p class="p">For an Operator-based deployment:</p> 
+        <pre class="pre codeblock language-terminal"><code>$ oc get secret dynamic-plugins-registry-auth -n &lt;your_rhdh_namespace&gt;</code></pre> 
+        <p class="p">For a Helm-based deployment:</p> 
+        <pre class="pre codeblock language-terminal"><code>$ oc get secret &lt;release_name&gt;-dynamic-plugins-registry-auth -n &lt;your_rhdh_namespace&gt;</code></pre> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.9/html-single/installing_and_viewing_plugins_in_red_hat_developer_hub/index#assembly-install-dynamic-plugins-rhdh_title-plugins-rhdh-about" target="_blank" rel="external noopener">Mirroring dynamic plugin OCI artifacts for deployments in restricted environments</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="rhdh-configure-dynamic-plugins"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Configure the dynamic plug-ins</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">After creating the registry authentication secret, add the Ansible plug-ins to your dynamic plug-ins configuration.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Edit your dynamic plug-ins configuration and add the Ansible plug-ins using OCI references.</span> 
+          <div class="itemgroup info"> 
+           <p class="p"><strong class="ph b">Operator installation</strong></p> 
+           <p class="p">In the <code class="ph codeph">data.dynamic-plugins.yaml.plugins</code> block, add the Ansible plug-ins:</p> 
+           <pre class="pre codeblock language-yaml"><code>kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: dynamic-plugins-rhdh
+data:
+  dynamic-plugins.yaml: |
+    includes:
+      - dynamic-plugins.default.yaml
+    plugins:
+      - disabled: false
+        package: &gt;-
+          oci://registry.redhat.io/ansible-automation-platform/automation-portal:&lt;tag&gt;!ansible-plugin-backstage-rhaap
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              ansible.plugin-backstage-rhaap:
+                appIcons:
+                  - importName: AnsibleLogo
+                    name: AnsibleLogo
+                dynamicRoutes:
+                  - importName: AnsiblePage
+                    menuItem:
+                      icon: AnsibleLogo
+                      text: Ansible
+                    path: /ansible
+      - disabled: false
+        package: &gt;-
+          oci://registry.redhat.io/ansible-automation-platform/automation-portal:&lt;tag&gt;!ansible-plugin-backstage-self-service
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              ansible.plugin-backstage-self-service:
+                scaffolderFieldExtensions:
+                  - importName: AAPTokenFieldExtension
+                  - importName: AAPResourcePickerExtension
+      - disabled: false
+        package: &gt;-
+          oci://registry.redhat.io/ansible-automation-platform/automation-portal:&lt;tag&gt;!ansible-backstage-plugin-catalog-backend-module-rhaap
+        pluginConfig: {}
+      - disabled: false
+        package: &gt;-
+          oci://registry.redhat.io/ansible-automation-platform/automation-portal:&lt;tag&gt;!ansible-plugin-scaffolder-backend-module-backstage-rhaap
+        pluginConfig:
+          dynamicPlugins:
+            backend:
+              ansible.plugin-scaffolder-backend-module-backstage-rhaap:</code></pre> 
+           <p class="p"><strong class="ph b">Helm chart installation</strong></p> 
+           <p class="p">Update the Helm chart configuration under the <code class="ph codeph">plugins</code> section:</p> 
+           <pre class="pre codeblock language-yaml"><code>global:
+  # ...
+  dynamic:
+    # ...
+    plugins:
+      - disabled: false
+        package: &gt;-
+          oci://registry.redhat.io/ansible-automation-platform/automation-portal:&lt;tag&gt;!ansible-plugin-backstage-rhaap
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              ansible.plugin-backstage-rhaap:
+                appIcons:
+                  - importName: AnsibleLogo
+                    name: AnsibleLogo
+                dynamicRoutes:
+                  - importName: AnsiblePage
+                    menuItem:
+                      icon: AnsibleLogo
+                      text: Ansible
+                    path: /ansible
+      - disabled: false
+        package: &gt;-
+          oci://registry.redhat.io/ansible-automation-platform/automation-portal:&lt;tag&gt;!ansible-plugin-backstage-self-service
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              ansible.plugin-backstage-self-service:
+                scaffolderFieldExtensions:
+                  - importName: AAPTokenFieldExtension
+                  - importName: AAPResourcePickerExtension
+      - disabled: false
+        package: &gt;-
+          oci://registry.redhat.io/ansible-automation-platform/automation-portal:&lt;tag&gt;!ansible-backstage-plugin-catalog-backend-module-rhaap
+        pluginConfig: {}
+      - disabled: false
+        package: &gt;-
+          oci://registry.redhat.io/ansible-automation-platform/automation-portal:&lt;tag&gt;!ansible-plugin-scaffolder-backend-module-backstage-rhaap
+        pluginConfig:
+          dynamicPlugins:
+            backend:
+              ansible.plugin-scaffolder-backend-module-backstage-rhaap:</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Replace <code class="ph codeph"><em class="ph i">&lt;tag&gt;</em></code> with the Ansible plug-ins image tag for your release (for example, <code class="ph codeph">2.2</code>).</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Apply the changes. For Operator deployments, click <strong class="ph b">Save</strong>. For Helm deployments, click <strong class="ph b">Upgrade</strong>.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="rhdh-add-devtools-sidecar"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Add the Ansible Developer Tools sidecar container</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">After the plug-ins load, add the Ansible Developer Tools container as a sidecar container to the Red Hat Developer Hub pod.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">The <code class="ph codeph">ansible-dev-tools-rhel9</code> container image is hosted on <code class="ph codeph">registry.redhat.io</code> and requires Red Hat Ansible Automation Platform subscription entitlements. If your OpenShift Container Platform cluster's global pull secret does not include AAP-entitled credentials, you must create an <code class="ph codeph">imagePullSecrets</code> entry in the deployment patch. You can reuse the same <code class="ph codeph">auth.json</code> credentials created for the dynamic plug-ins registry secret:</p> 
+          <pre class="pre codeblock language-terminal"><code>$ oc create secret docker-registry rhdh-registry-pull-secret \
+    --from-file=.dockerconfigjson=auth.json \
+    -n &lt;your_rhdh_namespace&gt;</code></pre> 
+          <p class="p">Then add the <code class="ph codeph">imagePullSecrets</code> field to the deployment patch as shown in the examples below.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Add the Ansible Developer Tools sidecar container to your deployment configuration.</span> 
+          <div class="itemgroup info"> 
+           <p class="p"><strong class="ph b">Operator installation</strong></p> 
+           <p class="p">Modify the Backstage custom resource to add a <code class="ph codeph">containers</code> block in the <code class="ph codeph">spec.deployment.patch.spec.template.spec</code> block:</p> 
+           <pre class="pre codeblock language-yaml"><code>apiVersion: rhdh.redhat.com/v1alpha5
+kind: Backstage
+metadata:
+  name: developer-hub
+spec:
+  deployment:
+    patch:
+      spec:
+        template:
+          spec:
+            imagePullSecrets:
+              - name: rhdh-registry-pull-secret
+            containers:
+              - command:
+                  - adt
+                  - server
+                image: registry.redhat.io/ansible-automation-platform-2.7/ansible-dev-tools-rhel9:latest
+                imagePullPolicy: Always
+                ports:
+                  - containerPort: 8000
+                    protocol: TCP</code></pre> 
+           <p class="p"><strong class="ph b">Helm chart installation</strong></p> 
+           <p class="p">Update the <code class="ph codeph">extraContainers</code> section in the Helm chart YAML:</p> 
+           <pre class="pre codeblock language-yaml"><code>upstream:
+  backstage:
+    # ...
+    extraContainers:
+      - command:
+          - adt
+          - server
+        image: &gt;-
+          registry.redhat.io/ansible-automation-platform-2.7/ansible-dev-tools-rhel9:latest
+        imagePullPolicy: IfNotPresent
+        name: ansible-devtools-server
+        ports:
+          - containerPort: 8000
+    # ...</code></pre> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">The image pull policy is <code class="ph codeph">imagePullPolicy: IfNotPresent</code>. The image is pulled only if it does not already exist on the node. Update it to <code class="ph codeph">imagePullPolicy: Always</code> if you always want to use the latest image.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Apply the changes. For Operator deployments, click <strong class="ph b">Save</strong>. For Helm deployments, click <strong class="ph b">Upgrade</strong>.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="rhdh-verify-plugin-installation"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Verify the plug-in installation</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">After configuring the dynamic plug-ins and sidecar container, verify that the Ansible plug-ins installed successfully.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">In the <code class="ph codeph">install-dynamic-plugin</code> container logs, search for the Ansible plug-ins.</span> 
+          <div class="itemgroup info"> 
+           <p class="p">A successful installation shows:</p> 
+           <pre class="pre codeblock language-terminal"><code>==&gt; Successfully installed dynamic plugin oci://registry.redhat.io/ansible-automation-platform/automation-portal:&lt;tag&gt;!ansible-plugin-backstage-rhaap
+==&gt; Successfully installed dynamic plugin oci://registry.redhat.io/ansible-automation-platform/automation-portal:&lt;tag&gt;!ansible-plugin-backstage-self-service
+==&gt; Successfully installed dynamic plugin oci://registry.redhat.io/ansible-automation-platform/automation-portal:&lt;tag&gt;!ansible-backstage-plugin-catalog-backend-module-rhaap
+==&gt; Successfully installed dynamic plugin oci://registry.redhat.io/ansible-automation-platform/automation-portal:&lt;tag&gt;!ansible-plugin-scaffolder-backend-module-backstage-rhaap</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Verify that the Ansible plug-in is present in the navigation pane.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select <strong class="ph b">Administration</strong> to view the installed plug-ins in the <strong class="ph b">Plugins</strong> tab.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

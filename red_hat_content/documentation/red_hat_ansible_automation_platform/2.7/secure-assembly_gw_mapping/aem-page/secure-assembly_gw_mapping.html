@@ -1,0 +1,526 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="gw-mapping"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Map external authenticators to Ansible Automation Platform</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (such as username and email address) or what groups they belong to, you can configure authenticator maps.</p> 
+      <p class="p">Use authenticator maps to add conditions that must be met before a user is given or denied access to a resource type. Authenticator maps are associated with an authenticator and are given an order. The maps are processed in order when the user logs in. These are similar to firewall rules or mail filters.</p> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="gw-understanding-authenticator-mapping"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Understand authenticator mapping</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">Review how authenticator maps evaluate trigger conditions sequentially to govern user authorization. Understanding this process helps ensure that Ansible Automation Platform assigns the correct resource permissions when users log in.</p> 
+       <dl class="dl"> 
+        <dt class="dt dlterm">
+          Authentication 
+        </dt> 
+        <dd class="dd">
+          Validates a user’s identity, typically through a username and password or a trust system. 
+        </dd> 
+        <dt class="dt dlterm">
+          Authorization 
+        </dt> 
+        <dd class="dd">
+          Determines what an authenticated user can do once they are authenticated. 
+        </dd> 
+       </dl> 
+       <p class="p">In Ansible Automation Platform, authenticators manage authentication, validating users and returning details such as their username, given name, email, and group memberships (for example, LDAP groups). Authorization comes from the authenticator’s associated maps.</p> 
+       <p class="p">During the authentication process, after a user has authenticated, the authorization system starts with a default set of permissions in memory. Then sequentially, the authenticator maps are processed and adjust permissions based on their trigger conditions. When all the authenticator’s maps are processed, the in-memory representation of the user’s permissions are reconciled with their existing permissions.</p> 
+       <p class="p">For example, here is a simplified in-memory representation of the default permissions as follows:</p> 
+       <pre class="pre codeblock"><code>Access allowed = True
+Superuser permission = Undefined
+Admin of teams = None</code></pre> 
+       <p class="p">And, you might have maps that need to be processed are processed in the following order:</p> 
+       <ol class="ol"> 
+        <li class="li"><strong class="ph b">Allow</strong> rule set to never</li> 
+        <li class="li"><strong class="ph b">Allow</strong> rule based on group</li> 
+        <li class="li"><strong class="ph b">Superuser</strong> rule based on user attributes</li> 
+        <li class="li"><strong class="ph b">Team</strong> admin rule based on user group</li> 
+       </ol> 
+       <p class="p">The first <strong class="ph b">Allow</strong> map, set to never, denies access to the system and the in-memory representation looks like:</p> 
+       <pre class="pre codeblock"><code>Access allowed = <strong class="ph b">False</strong>
+Superuser permission = Undefined
+Admin of teams = None</code></pre> 
+       <p class="p">However, if the user matches the second <strong class="ph b">Allow</strong> map (the group-based allow), the permissions change to the following:</p> 
+       <pre class="pre codeblock"><code>Access allowed = <strong class="ph b">True</strong>
+Superuser permission = Undefined
+Admin of teams = None</code></pre> 
+       <p class="p">Where the user is subsequently granted access to Ansible Automation Platform because they have the required groups.</p> 
+       <p class="p">Next, the <strong class="ph b">Superuser</strong> map checks user attributes. If no match is found, it does not revoke existing permissions by default. Therefore, the permissions remain the same as the results from the previous map:</p> 
+       <pre class="pre codeblock"><code>Access allowed = True
+Superuser permission = <strong class="ph b">Skipped</strong>
+Admin of teams = None</code></pre> 
+       <p class="p">To revoke superuser access, you can select the <strong class="ph b">Revoke</strong> option on the <strong class="ph b">Superuser</strong> map. That way, when the user does not meet the attribute criteria, the permissions update to False such as the following:</p> 
+       <pre class="pre codeblock"><code>Access allowed = True
+Superuser permission = <strong class="ph b">False</strong>
+Admin of teams = None</code></pre> 
+       <p class="p">The final <strong class="ph b">Team</strong> map checks the user’s groups coming from the authenticator for admin access on the team “My Team”. If the user has the required group, the permissions update to the following:</p> 
+       <pre class="pre codeblock"><code>Access allowed = True
+Superuser permission = False
+Admin of teams = “<strong class="ph b">My Team</strong>”</code></pre> 
+       <p class="p">If the user lacks the required group, permissions remain unchanged unless the <strong class="ph b">Revoke</strong> option has been selected on the map, in which case permissions update to the following:</p> 
+       <pre class="pre codeblock"><code>Access allowed = True
+Superuser permission = False
+Admin of teams = <strong class="ph b">Revoke admin of “My Team”</strong></code></pre> 
+       <p class="p">After processing all maps in the order defined, the final permissions reconcile, updating the user’s access based on the map rules.</p> 
+       <p class="p">In summary, authenticators validate users and delegate system authorization to the authenticator maps. Authenticator maps are executed in order creating an in-memory representation of the users' permissions which get reconciled with the actual permissions after all maps are executed.</p> 
+       <p class="p">By default, authenticator maps return either <strong class="ph b">ALLOW</strong> or <strong class="ph b">SKIPPED</strong>.</p> 
+       <dl class="dl"> 
+        <dt class="dt dlterm">
+          ALLOW 
+        </dt> 
+        <dd class="dd">
+          Means that a match is detected and the platform should grant the user access to the corresponding role or permission (such as, superuser, or team member). 
+        </dd> 
+        <dt class="dt dlterm">
+          SKIPPED 
+        </dt> 
+        <dd class="dd">
+          Means that the user did not match the trigger in the map and, the platform skips processing this map and continues to check the remaining maps. This is useful if you want to grant users additional permissions in the system without having to change the authenticator maps. 
+        </dd> 
+       </dl> 
+       <p class="p">However, when the <strong class="ph b">Revoke</strong> option is selected, <strong class="ph b">SKIPPED</strong> becomes <strong class="ph b">DENY</strong> and users who do not meet the required trigger criteria are denied access to the corresponding role or permission. This ensures that only users with matching trigger conditions are granted access.</p> 
+      </div> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="gw-authenticator-map-types"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Authenticator map types</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">Ansible Automation Platform supports the following rule types:</p> 
+       <dl class="dl"> 
+        <dt class="dt dlterm">
+          Allow 
+        </dt> 
+        <dd class="dd">
+          Determine if the user is allowed to log in to the system. 
+        </dd> 
+        <dt class="dt dlterm">
+          Organization 
+        </dt> 
+        <dd class="dd">
+          Determine if a user should be put into an organization. 
+        </dd> 
+        <dt class="dt dlterm">
+          Team 
+        </dt> 
+        <dd class="dd">
+          Determine if the user should be a member of a team. 
+        </dd> 
+        <dt class="dt dlterm">
+          Role 
+        </dt> 
+        <dd class="dd">
+          Determine if the user is a member of a role (for example, <em class="ph i">System Auditor</em>). 
+        </dd> 
+        <dt class="dt dlterm">
+          Is Superuser 
+        </dt> 
+        <dd class="dd">
+          Determine if the user is a superuser in the system. 
+        </dd> 
+       </dl> 
+       <p class="p">These authentication map types can be used with any type of authenticator.</p> 
+      </div> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title4" id="gw-authenticator-map-triggers"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Authenticator map triggers</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">Each map has a trigger that defines when the map should be evaluated as true. Trigger types include the following:</p> 
+       <dl class="dl"> 
+        <dt class="dt dlterm">
+          Always 
+        </dt> 
+        <dd class="dd">
+          The trigger should always be fired. 
+        </dd> 
+        <dt class="dt dlterm">
+          Never 
+        </dt> 
+        <dd class="dd">
+          The trigger should never be fired. 
+        </dd> 
+        <dt class="dt dlterm">
+          Group 
+        </dt> 
+        <dd class="dd"> 
+         <p class="p">The map is true or false based on a user having, not having, or having multiple groups in the source system. </p> 
+         <p class="p">When defining a group trigger, the authentication mapping expands to include the following selections:</p> 
+         <ul class="ul"> 
+          <li class="li"><strong class="ph b">Operation:</strong> This field includes conditional settings that trigger the handling of the rule based on the specified <strong class="ph b">Groups</strong> criteria. The choices include <strong class="ph b">and</strong> and <strong class="ph b">or</strong>. For example, if you select <strong class="ph b">and</strong> the user logging in must be a member of all of the groups specified in the <strong class="ph b">Groups</strong> field for this trigger to be true. Alternatively, if you select <strong class="ph b">or</strong> the user logging in must be a member of any of the specified <strong class="ph b">Groups</strong> in order for the trigger to fire. 
+           <div class="note note note_note"> <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">If you are only keying off one group it does not matter if you select <strong class="ph b">"and"</strong> or <strong class="ph b">"or"</strong>.</p> 
+            </div> 
+           </div> </li> 
+          <li class="li"><strong class="ph b">Groups:</strong> This is a list of one or more groups coming from the authentication system that the user must be a member of. The first time you create a <strong class="ph b">Groups</strong> entry, you must manually enter the values. Once entered, that selection will be available from the <strong class="ph b">Groups</strong> list. <p class="p">See the <strong class="ph b">Operation</strong> field to determine the behavior of the trigger if more than one group is specified in the trigger.</p> 
+           <div class="note note note_note"> <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">You must enter group identifiers in lowercase. For example, <code class="ph codeph">cn=johnsmith,dc=example,dc=com</code> instead of <code class="ph codeph">CN=JohnSmith,DC=Example,DC=COM</code>.</p> 
+            </div> 
+           </div> </li> 
+         </ul> 
+        </dd> 
+        <dt class="dt dlterm">
+          Attribute 
+        </dt> 
+        <dd class="dd"> 
+         <p class="p">The map is true or false based on a users attributes coming from the source system. </p> 
+         <p class="p">When defining an attribute trigger, the authentication mapping expands to include the following selections:</p> 
+         <ul class="ul"> 
+          <li class="li"><strong class="ph b">Operation:</strong> This field includes conditional settings that trigger the handling of the rule based on the specified <strong class="ph b">Attribute</strong> criteria. In version 2.6 this field indicates what will happen if the source system returns a list of attributes instead of a single value. For example, if the source system returns multiple emails for a user and <strong class="ph b">Operation</strong> was set to <strong class="ph b">and</strong>, all of the given emails must match the <strong class="ph b">Comparison</strong> for the trigger to be <em class="ph i">True</em>. If <strong class="ph b">Operation</strong> was set to <strong class="ph b">or</strong>, any of the returned emails will set the trigger to <em class="ph i">True</em> if they match the <strong class="ph b">Comparison</strong> in the trigger. 
+           <div class="note note note_note"> <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">If you want to experiment with multiple attribute maps you can do that through the API but the UI form will remove multi-attribute maps if the authenticator is saved through the UI. When adding multiple attributes to a map, the <strong class="ph b">Operation</strong> will also apply to the attributes.</p> 
+            </div> 
+           </div> </li> 
+          <li class="li"><strong class="ph b">Attribute:</strong> The name of the attribute coming from the source system this trigger will be evaluated against. For example, if you wanted the trigger to fire based on the user’s surname and the last name field in the source system was called <code class="ph codeph">users_last_name</code> you would enter the value "users_last_name" in this field.</li> 
+          <li class="li"><strong class="ph b">Comparison:</strong> Tells the trigger how to evaluate the value of the users. <strong class="ph b">Attribute</strong> in the source system compared to the <strong class="ph b">Value</strong> specified on the trigger. Available options are: <strong class="ph b">contains</strong>, <strong class="ph b">matches</strong>, <strong class="ph b">ends with</strong>, <strong class="ph b">in</strong>, or <strong class="ph b">equals</strong>. Below is a breakdown of each <strong class="ph b">Comparison</strong> type: 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">contains</strong>: The specified character sequence in <strong class="ph b">Value</strong> is contained within the attributes value returned from the source. For example, given an attribute value of "John" from the source the contains <strong class="ph b">Comparison</strong> would set the trigger to <em class="ph i">True</em> if the trigger <strong class="ph b">Value</strong> was set to "Jo" and <em class="ph i">False</em> if the trigger <strong class="ph b">Value</strong> was "Joy".</li> 
+            <li class="li"><strong class="ph b">matches</strong>: The <strong class="ph b">Value</strong> on the trigger is treated as a python regular expression and does a regular expression match (with case ignore on) between the specified <strong class="ph b">Value</strong> and the value returned from the source system. For example, if the trigger’s <strong class="ph b">Value</strong> was "Jo" the trigger would return <em class="ph i">True</em> if the value from the source was "John" or "Joanne" or any other value which matched the regular expression "Jo". The trigger would return <em class="ph i">False</em> if the sources value for the attribute was "Dan" because "Dan" does not match the regular expression "Jo".</li> 
+            <li class="li"><strong class="ph b">ends with</strong>: The trigger will see if the value provided by the source ends with the specified <strong class="ph b">Value</strong> of the trigger. For example, if the source provided a value of "John" the trigger would be <em class="ph i">True</em> if its <strong class="ph b">Value</strong> was set to "n" or "on". The trigger would be <em class="ph i">False</em> if its <strong class="ph b">Value</strong> was set to "z" because the value "John" coming from the source does not end with the value "z" specified by the trigger.</li> 
+            <li class="li"><strong class="ph b">equal</strong>: The trigger will see if the value provided by the source is equal to (in its entirety) the specified <strong class="ph b">Value</strong> of the trigger. For example, if the source returned the value "John", the trigger would be <em class="ph i">True</em> if its <strong class="ph b">Value</strong> was set to "John". Any value other than "John" returned from the source would set this trigger to <em class="ph i">False</em>.</li> 
+            <li class="li"><strong class="ph b">in</strong>: The <strong class="ph b">in</strong> condition checks if the value matches one of several values. When <strong class="ph b">in</strong> is specified as the <strong class="ph b">Comparison</strong>, the <strong class="ph b">Value</strong> field can be a comma-separated list. For example, if a trigger had a <strong class="ph b">Value</strong> of "John,Donna" the trigger would be <em class="ph i">True</em> if the attribute coming from the source had either the value "John" or "Donna". Otherwise, the trigger would be <em class="ph i">False</em>.</li> 
+            <li class="li"><strong class="ph b">Value</strong>: The value that a users attribute will be matched against based on the <strong class="ph b">Comparison</strong> field. See examples in the <strong class="ph b">Comparison</strong> definition. 
+             <div class="note note note_note"> <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">If the <strong class="ph b">Comparison</strong> type is <strong class="ph b">in</strong>, this field can be a comma-separated list (without spaces).</p> 
+              </div> 
+             </div> </li> 
+           </ul> </li> 
+         </ul> 
+        </dd> 
+       </dl> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist"> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-authenticator-map-examples" title="Use the following examples to explore the different conditions, such as groups and attribute values you can implement to control user access to the platform.">Authenticator map examples</a></li> 
+         <li class="linklist"><a class="link" href="https://docs.python.org/3/library/re.html#re.match" target="_blank" rel="external noopener">Regular expression match (re.match)</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title5" id="gw-authenticator-map-examples"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Authenticator map examples</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">Use the following examples to explore the different conditions, such as groups and attribute values you can implement to control user access to the platform.</p> 
+       <p class="p"> <strong class="ph b">Add users to an organization based on an attribute</strong> </p> 
+       <p class="p">In this example, you will add a user to the <strong class="ph b">Networking</strong> organization if they have an <code class="ph codeph">Organization</code> attribute with the value of <code class="ph codeph">Networking</code>:</p> 
+       <br> 
+       <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/am-org-mapping-full-annotation.png" alt="Add users to an organization mapping example fully annotated with callout numbers that correlate with the following list that describes the function of each field"> 
+       <br> 
+       <ol class="ol"> 
+        <li class="li">The <strong class="ph b">Organization</strong> title of the page indicates that you are configuring settings permissions on an organization.</li> 
+        <li class="li"><code class="ph codeph">Network Organization</code> is entered in this field and is the unique, descriptive name for this map configuration.</li> 
+        <li class="li"><strong class="ph b">Attributes</strong> is selected from the <strong class="ph b">Trigger</strong> list to configure authentication based on an attribute from the source system, which in this example is <code class="ph codeph">Organization</code>.</li> 
+        <li class="li">The operation is defined as <code class="ph codeph">or</code> meaning that at least one condition must be true for authentication to succeed.</li> 
+        <li class="li">The <strong class="ph b">Attribute</strong> coming from the source system is Organization.</li> 
+        <li class="li">The <strong class="ph b">Comparison</strong> value is set to <code class="ph codeph">matches</code> which means that when a user has the attribute <strong class="ph b">Value</strong> of <code class="ph codeph">Networking</code>, they are added to the <strong class="ph b">Networking</strong> organization.</li> 
+        <li class="li">The attribute <strong class="ph b">Value</strong> coming from the source system is <code class="ph codeph">Networking</code>.</li> 
+        <li class="li">The name of the <strong class="ph b">Organization</strong> to which you are adding members is <code class="ph codeph">Networking</code>.</li> 
+        <li class="li">Users are added to the <strong class="ph b">Networking</strong> organization with the <code class="ph codeph">Organization Member</code> role.</li> 
+       </ol> 
+       <p class="p"> <strong class="ph b">Add users to a team based on the users group</strong> </p> 
+       <p class="p">In this example, you will add user to the <code class="ph codeph">Apple</code> team if they have either of the following groups:</p> 
+       <pre class="pre codeblock"><code>cn=administrators,ou=aap,ou=example,o=com</code></pre> 
+       <p class="p">or</p> 
+       <pre class="pre codeblock"><code>cn=operators,ou=aap,ou=example,co=com</code></pre> 
+       <br> 
+       <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/am-apple-team-map-example.png" alt="Add user to a team mapping example"> 
+       <br> 
+       <p class="p"> <strong class="ph b">Do not escalate privileges</strong> </p> 
+       <p class="p">In this example, you never escalate users to a superuser. But note, this rule does not revoke a user’s superuser permission because the revoke option is not set.</p> 
+       <br> 
+       <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/am-do-not-escalate-privileges.png" alt="Do not escalate privileges mapping example"> 
+       <br> 
+       <p class="p"> <strong class="ph b">Escalate privileges based on a user having a group</strong> </p> 
+       <p class="p">In this example, you escalate user privileges to superuser if they belong to the following group:</p> 
+       <pre class="pre codeblock"><code>cn=administrators,ou=aap</code></pre> 
+       <br> 
+       <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/am-escalate-privileges.png" alt="Escalate privileges mapping example"> 
+       <br> 
+       <p class="p"> <strong class="ph b">Using mapping order to create exceptions</strong> </p> 
+       <p class="p">Since maps are executed in order, it is possible to create exceptions. Expanding on the previous example for <em class="ph i">Do not escalate privileges</em>, you can add another rule with a higher order, such as, <em class="ph i">Escalate privileges</em>.</p> 
+       <p class="p">The first rule (<em class="ph i">Do not escalate privileges</em>) prevents any user from being escalated to a superuser, but the second rule (<em class="ph i">Escalate privileges</em>) alters that decision to grant superuser privileges to a user if they are in the <code class="ph codeph">Administrators</code> group.</p> 
+       <br> 
+       <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/am-mapping-order.png" alt="Mapping order example"> 
+       <br> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="gw-allow-mapping"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Control user access to the system with allow mapping</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">With allow mapping, you can control which users have access to the system by defining the conditions that must be met.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">After configuring the authentication details for your authentication method, select the <strong class="ph b">Mapping</strong> tab.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select <strong class="ph b">Allow</strong> from the <strong class="ph b">Add authentication mapping</strong> list.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Enter a unique rule <strong class="ph b">Name</strong> to identify the rule.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select a <strong class="ph b">Trigger</strong> from the list. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-authenticator-map-triggers" title="Each map has a trigger that defines when the map should be evaluated as true. Trigger types include the following:">Authenticator map triggers</a> for more information about map triggers.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select <strong class="ph b">Revoke</strong> to deny user access to the system when the trigger conditions are not matched.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Next</span>.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section postreq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">What to do next</h3> 
+        </div> 
+        <ol class="ol"> 
+         <li class="li">You can manage the authentication mappings order by clicking <span class="ph uicontrol button">Manage mappings</span>.</li> 
+         <li class="li">Drag and drop the mapping up or down in the list. 
+          <div class="note note note_note"> <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">The mapping precedence is determined by the order in which the mappings are listed.</p> 
+           </div> 
+          </div> </li> 
+         <li class="li">Click <span class="ph uicontrol button">Apply</span>.</li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title7" id="proc-controller-organization-mapping"> 
+      <h2 class="title topictitle2" id="ariaid-title7">Map users to organizations</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can control which users are placed into which Ansible Automation Platform organizations based on attributes such as their username and email address or based on groups provided from an authenticator.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">When organization mapping is positively evaluated, a specified organization is created, if it does not exist if the authenticator tied to the map is allowed to create objects.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">After configuring the authentication details for your authentication method, select the <strong class="ph b">Mapping</strong> tab.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select <strong class="ph b">Organization</strong> from the <strong class="ph b">Add authentication mapping</strong> list.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Enter a unique rule <strong class="ph b">Name</strong> to identify the rule.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select a <strong class="ph b">Trigger</strong> from the list. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-authenticator-map-triggers" title="Each map has a trigger that defines when the map should be evaluated as true. Trigger types include the following:">Authenticator map triggers</a> for more information about map triggers.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select <strong class="ph b">Revoke</strong> to remove the user’s access to the selected organization role when the trigger conditions are not matched.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select the <strong class="ph b">Organization</strong> to which matching users are added or blocked.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select a <strong class="ph b">Role</strong> to be applied or removed for matching users (for example, <strong class="ph b">Organization Admin</strong> or <strong class="ph b">Organization Member</strong>).</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Next</span>.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section postreq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">What to do next</h3> 
+        </div> 
+        <ol class="ol"> 
+         <li class="li">You can manage the authentication mappings order by clicking <span class="ph uicontrol button">Manage mappings</span>.</li> 
+         <li class="li">Drag and drop the mapping up or down in the list. 
+          <div class="note note note_note"> <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">The mapping precedence is determined by the order in which the mappings are listed.</p> 
+           </div> 
+          </div></li> 
+         <li class="li">Click <span class="ph uicontrol button">Apply</span>.</li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title8" id="proc-controller-team-mapping"> 
+      <h2 class="title topictitle2" id="ariaid-title8">Map users to teams</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Team mapping is the mapping of team members (users) from authenticators.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">You can define the options for each team’s membership. For each team, you can specify which users are automatically added as members of the team and also which users can administer the team.</p> 
+        <p class="p">You can specify Team mappings separately for each account authentication.</p> 
+        <p class="p">When Team mapping is positively evaluated, a specified team and its organization are created, if they do not exist if the related authenticator is allowed to create objects.</p> 
+        <div class="note important note_important"> <span class="note__title">Important:</span> 
+         <div class="note__body"> 
+          <p class="p">When configuring team mappings with an Attribute trigger, use the <code class="ph codeph">or</code> operation. The <code class="ph codeph">and</code> operation requires every single value in a list to match the comparison criteria for the trigger to be successful. This is rarely the intended behavior, as you typically want a match on at least one value in the list.</p> 
+         </div> 
+        </div> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">After configuring the authentication details for your authentication method, select the <strong class="ph b">Mapping</strong> tab.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select <strong class="ph b">Team</strong> from the <strong class="ph b">Add authentication mapping</strong> list.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Enter a unique rule <strong class="ph b">Name</strong> to identify the rule.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select a <strong class="ph b">Trigger</strong> from the list. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-authenticator-map-triggers" title="Each map has a trigger that defines when the map should be evaluated as true. Trigger types include the following:">Authenticator map triggers</a> for more information about map triggers.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select <strong class="ph b">Revoke</strong> to remove the user’s access to the selected organization role and deny user access to the system when the trigger conditions are not matched.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select the <strong class="ph b">Team</strong> and <strong class="ph b">Organization</strong> to which matching users are added or blocked.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select a <strong class="ph b">Role</strong> to be applied or removed for matching users (for example, <strong class="ph b">Team Admin</strong> or <strong class="ph b">Team Member</strong>).</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Next</span>.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section postreq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">What to do next</h3> 
+        </div> 
+        <ol class="ol"> 
+         <li class="li">You can manage the authentication mappings order by clicking <span class="ph uicontrol button">Manage mappings</span>.</li> 
+         <li class="li">Drag and drop the mapping up or down in the list. 
+          <div class="note note note_note"> <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">The mapping precedence is determined by the order in which the mappings are listed.</p> 
+           </div> 
+          </div></li> 
+         <li class="li">Click <span class="ph uicontrol button">Apply</span>.</li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title9" id="gw-role-mapping"> 
+      <h2 class="title topictitle2" id="ariaid-title9">Map users to roles</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Role mapping is the mapping of a user either to a global role, such as Platform Auditor, or team or organization role.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">When a Team or Organization is specified together with the appropriate Role, the behavior is the same with Organization mapping or Team mapping.</p> 
+        <p class="p">You can specify role mapping separately for each account authentication.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">After configuring the authentication details for your authentication method, select the <strong class="ph b">Mapping</strong> tab.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select <strong class="ph b">Role</strong> from the <strong class="ph b">Add authentication mapping</strong> list.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Enter a unique rule <strong class="ph b">Name</strong> to identify the rule.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select a <strong class="ph b">Trigger</strong> from the list. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-authenticator-map-triggers" title="Each map has a trigger that defines when the map should be evaluated as true. Trigger types include the following:">Authenticator map triggers</a> for more information about map triggers.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select <strong class="ph b">Revoke</strong> to remove the role for the user when none of the trigger conditions are matched.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select a <strong class="ph b">Role</strong> to be applied or removed for matching users.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Next</span>.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section postreq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">What to do next</h3> 
+        </div> 
+        <ol class="ol"> 
+         <li class="li">You can manage the authentication mappings order by clicking <span class="ph uicontrol button">Manage mappings</span>.</li> 
+         <li class="li">Drag and drop the mapping up or down in the list. 
+          <div class="note note note_note"> <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">The mapping precedence is determined by the order in which the mappings are listed.</p> 
+           </div> 
+          </div></li> 
+         <li class="li">Click <span class="ph uicontrol button">Apply</span>.</li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title10" id="gw-superuser-mapping"> 
+      <h2 class="title topictitle2" id="ariaid-title10">Map users to the superuser role</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Superuser mapping is the mapping of a user to the superuser role, such as System Administrator.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">After configuring the authentication details for your authentication method, select the <strong class="ph b">Mapping</strong> tab.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select <strong class="ph b">Superuser</strong> from the <strong class="ph b">Add authentication mapping</strong> list.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Enter a unique rule <strong class="ph b">Name</strong> to identify the rule.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select a <strong class="ph b">Trigger</strong> from the list. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-authenticator-map-triggers" title="Each map has a trigger that defines when the map should be evaluated as true. Trigger types include the following:">Authenticator map triggers</a> for more information about map triggers.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select <strong class="ph b">Revoke</strong> to remove the superuser role from the user when none of the trigger conditions are matched.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Next</span>.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section postreq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">What to do next</h3> 
+        </div> 
+        <ol class="ol"> 
+         <li class="li">You can manage the authentication mappings order by clicking <span class="ph uicontrol button">Manage mappings</span>.</li> 
+         <li class="li">Drag and drop the mapping up or down in the list. 
+          <div class="note note note_note"> <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">The mapping precedence is determined by the order in which the mappings are listed.</p> 
+           </div> 
+          </div> </li> 
+         <li class="li">Click <span class="ph uicontrol button">Apply</span>.</li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title11" id="gw-review-mapping-results"> 
+      <h2 class="title topictitle2" id="ariaid-title11">Review authenticator map results</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">Platform administrators can review authenticator map evaluation results through the user API endpoint.</p> 
+       <p class="p">The results show how the maps are processed during the user’s login:</p> 
+       <pre class="pre codeblock"><code>api/gateway/v1/users/X</code></pre> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title12" id="gw-using-jinja-syntax-auth-maps"> 
+      <h2 class="title topictitle2" id="ariaid-title12">Use Jinja-like syntax in authenticator maps</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Platform gateway supports a Jinja-like templating syntax in authenticator maps to dynamically assign users to organizations, teams, and roles based on attribute values from an external provider.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">The syntax that can be used in a map is <code class="ph codeph">{% for_attr_value(&lt;attribute_name&gt;) %}</code>. This causes platform gateway to iterate over attribute values from an external provider, creating a separate mapping for each value.</p> 
+        <p class="p"><strong class="ph b">Example 1: Single attribute</strong></p> 
+        <p class="p">An <strong class="ph b">Organization</strong> authenticator map is created with the following configuration:</p> 
+        <ul class="ul"> 
+         <li class="li"><strong class="ph b">Organization</strong> field: Enter <code class="ph codeph">Org {% for_attr_value(users_orgs) %}</code>.</li> 
+         <li class="li"><strong class="ph b">Attribute</strong> value: Enter <code class="ph codeph">users_orgs</code>.</li> 
+         <li class="li"><strong class="ph b">External data received</strong>: <code class="ph codeph">["Database", "Networking"]</code> (The attribute values returned by the Identity Provider)</li> 
+        </ul> 
+        <p class="p">This results in the authenticator map being evaluated twice, once for <code class="ph codeph">Org Database</code> and once for <code class="ph codeph">Org Networking</code>.</p> 
+        <p class="p"><strong class="ph b">Example 2: Multiple attributes</strong></p> 
+        <p class="p">You can also use this syntax more than once in a single attribute map. For example, having a syntax like <code class="ph codeph">Organization {% for_attr_value(org) %} - Department {% for_attr_value(dept) %}</code> with attributes <code class="ph codeph">org</code> having the values <code class="ph codeph">a</code> and <code class="ph codeph">b</code> and <code class="ph codeph">dept</code> having the values <code class="ph codeph">Y</code> and <code class="ph codeph">Z</code> results in the map being run 4 times with the values:</p> 
+        <ul class="ul"> 
+         <li class="li">Organization a - Department Y</li> 
+         <li class="li">Organization a - Department Z</li> 
+         <li class="li">Organization b - Department Y</li> 
+         <li class="li">Organization b - Department Z</li> 
+        </ul> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Authentication Methods</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select your authenticator from the list.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">Mapping</strong> tab and click <span class="ph uicontrol button">Create mapping</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In <strong class="ph b">Authentication mapping</strong>, choose the appropriate mapping type: <strong class="ph b">Organization</strong>, <strong class="ph b">Team</strong>, or <strong class="ph b">Role</strong>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Trigger</strong> field, select <strong class="ph b">Attributes</strong>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the corresponding field, such as the <strong class="ph b">Organization</strong> field for an Organization map, enter the Jinja-like syntax to dynamically generate the name.</span> 
+          <div class="itemgroup info"> 
+           <p class="p">For example, to create an organization name based on an attribute called <code class="ph codeph">users_orgs</code>, enter <code class="ph codeph">Org {% for_attr_value(users_orgs) %}</code>.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Attribute</strong> field, specify the name of the attribute from your external provider that has values you want to loop through, such as <code class="ph codeph">users_orgs</code>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Complete any other required fields for the mapping. </span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create mapping</span>.</span> 
+          <div class="itemgroup info"> 
+           <p class="p">Platform gateway uses this template to create and manage user assignments based on the values of the specified attribute.</p> 
+          </div> </li> 
+        </ol> 
+       </section> 
+       <section class="section result"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Results</h3> 
+        </div> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">The system raises a validation error if the templating syntax is mistyped and the new authenticator map is not created. During an authentication, if the external provider does not provide the specified attribute or the user does not have values associated with the attribute specified by the Jinja syntax, the map is triggered and a message indicating why is put into the platform gateway logs.</p> 
+         </div> 
+        </div> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

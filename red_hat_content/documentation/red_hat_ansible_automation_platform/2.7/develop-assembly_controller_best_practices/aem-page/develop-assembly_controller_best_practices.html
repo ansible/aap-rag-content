@@ -1,0 +1,97 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-controller-best-practices"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Best practices for automation execution</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Adopt these best practices to help ensure scalable, maintainable, and highly efficient automation. This guidance focuses on using source control, dynamic inventories, and robust file structures within automation controller.</p>
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-controller-source-control"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Use source control</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Automation controller supports playbooks stored directly on the server. Therefore, you must store your playbooks, roles, and any associated details in source control.</p> 
+       <section class="section"> 
+        <p class="p">This way you have an audit trail describing when and why you changed the rules that are automating your infrastructure. Additionally, it permits sharing of playbooks with other parts of your infrastructure or team.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="ref-controller-file-directory-structure"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Ansible file and directory structure</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Follow recommended directory structures for Ansible projects to organize playbooks, inventories, and variables. A consistent layout improves maintainability and scaling.</p> 
+       <section class="section"> 
+        <p class="p">To ensure reliable and consistent automation, follow these best practices for managing your content:</p> 
+        <ul class="ul"> 
+         <li class="li">Package reusable content, such as roles, modules, and plugins into Ansible Collections.</li> 
+         <li class="li">Reference all necessary Collections for a project in the project’s <code class="ph codeph">requirements.yml</code> file. These dependencies are automatically installed into the execution environment (EE) at runtime, but only if they are not already present in the EE image.</li> 
+         <li class="li">Do not import content from other projects or common file-system locations, such as <code class="ph codeph">/opt</code>, at runtime. All content must be explicitly defined within the EE.</li> 
+         <li class="li">Working directory: The playbook directory is used as the current working directory at runtime. However, always use the <code class="ph codeph">playbook_dir</code> variable instead of relying on the current working directory path.</li> 
+        </ul> 
+        <div class="note warning note_warning">
+         <span class="note__title">Warning:</span> 
+         <div class="note__body"> 
+          <p class="p">Automation controller does not support interactive features.</p> 
+          <ul class="ul"> 
+           <li class="li">Avoid using the <code class="ph codeph">vars_prompt</code> feature, as automation controller does not permit interactive questions. For user input, use <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-assembly_gs_auto_op#controller-surveys-in-job-templates" title="Surveys provide a way to prompt users for input when launching a job from a job template. This input can then be used as variables in the playbook run.">Surveys in job templates</a>.</li> 
+           <li class="li">Do not use the <code class="ph codeph">pause</code> feature without a timeout. Automation controller does not permit canceling a pause interactively. If <code class="ph codeph">pause</code> is necessary, you must set a timeout.</li> 
+          </ul> 
+         </div>
+        </div> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title4" id="ref-controller-use-dynamic-inv-sources"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Use dynamic inventory sources</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Define an inventory synchronization process by using dynamic sources, such as a cloud provider or CMDB, to help ensure your infrastructure inventory in automation controller stays consistently up-to-date.</p> 
+       <section class="section"> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Edits and additions to Inventory host variables persist beyond an inventory synchronization as long as <code class="ph codeph">--overwrite_vars</code> is <strong class="ph b">not</strong> set.</p> 
+         </div>
+        </div> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title5" id="ref-controller-inv-variable-management"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Variable management for inventory</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Variables associated with hosts and groups in an inventory can be managed in several ways in automation controller.</p> 
+       <section class="section"> 
+        <p class="p">Keep variable data with the hosts and groups definitions (see the inventory editor), rather than using <code class="ph codeph">group_vars/</code> and <code class="ph codeph">host_vars/</code>. If you use dynamic inventory sources, automation controller can synchronize such variables with the database while the <strong class="ph b">Overwrite Variables</strong> option is not set.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title6" id="ref-controller-autoscaling"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Autoscale</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Use the "callback" feature to permit newly booting instances to request configuration for auto-scaling scenarios or provisioning integration.</p> 
+       <section class="section"></section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title7" id="ref-controller-large-host-counts"> 
+      <h2 class="title topictitle2" id="ariaid-title7">Larger host counts</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Set "forks" on a job template to larger values to increase parallelism of execution runs.</p> 
+       <section class="section"></section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title8" id="ref-controller-continuous-integration"> 
+      <h2 class="title topictitle2" id="ariaid-title8">Continuous integration / Continuous deployment</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Continuous Integration (CI) and Continuous Deployment (CD) are development practices that require developers to integrate code into a shared repository several times a day.</p> 
+       <section class="section"> 
+        <p class="p">Each integration can then be verified by an automated build and automated tests. CI/CD is a method to deliver applications to customers by introducing automation into the stages of app development.</p> 
+        <p class="p">The main concepts attributed to CI/CD are continuous integration, continuous delivery, and continuous deployment. Automation controller can be integrated with CI/CD systems to enable automated provisioning, configuration management, application deployment, and other IT tasks as part of the CI/CD pipeline.</p> 
+        <p class="p">For a Continuous Integration system, such as Jenkins, to create a job, it must make a <code class="ph codeph">curl</code> request to a job template. The credentials to the job template must not require prompting for any particular passwords.</p> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

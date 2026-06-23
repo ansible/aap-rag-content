@@ -1,0 +1,92 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="ansible-variables">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Ansible variables</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">The following variables control how Ansible Automation Platform interacts with remote hosts.</p> 
+     <section class="section"> 
+      <table class="table">
+       <caption>
+        <span class="table--title-label">Table 1. </span><span class="title">Ansible variables</span>
+       </caption>
+       <colgroup>
+        <col style="width:50%">
+        <col style="width:50%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ansible-variables__entry__1">Variable</th> 
+         <th class="entry" id="ansible-variables__entry__2">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-variables__entry__1"> <p class="p"> <code class="ph codeph">ansible_connection</code> </p> </td> 
+         <td class="entry" headers="ansible-variables__entry__2"> <p class="p">The connection plugin used for the task on the target host. This can be the name of any Ansible connection plugin.</p> <p class="p">SSH protocol types are <code class="ph codeph">smart</code>, <code class="ph codeph">ssh</code>, or <code class="ph codeph">paramiko</code>. You can also use <code class="ph codeph">local</code> to run tasks on the control node itself.</p> <p class="p">Default = <code class="ph codeph">smart</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-variables__entry__1"> <p class="p"> <code class="ph codeph">ansible_host</code> </p> </td> 
+         <td class="entry" headers="ansible-variables__entry__2"> <p class="p">The IP address or name of the target host to use instead of <code class="ph codeph">inventory_hostname</code>.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-variables__entry__1"> <p class="p"> <code class="ph codeph">ansible_password</code> </p> </td> 
+         <td class="entry" headers="ansible-variables__entry__2"> <p class="p">The password to authenticate to the host.</p> <p class="p">Do not store this variable in plain text. Always use a vault.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-variables__entry__1"> <p class="p"> <code class="ph codeph">ansible_port</code> </p> </td> 
+         <td class="entry" headers="ansible-variables__entry__2"> <p class="p">The connection port number.</p> <p class="p">The default for SSH is <code class="ph codeph">22</code>.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-variables__entry__1"> <p class="p"> <code class="ph codeph">ansible_scp_extra_args</code> </p> </td> 
+         <td class="entry" headers="ansible-variables__entry__2"> <p class="p">This setting is always appended to the default <code class="ph codeph">scp</code> command line.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-variables__entry__1"> <p class="p"> <code class="ph codeph">ansible_sftp_extra_args</code> </p> </td> 
+         <td class="entry" headers="ansible-variables__entry__2"> <p class="p">This setting is always appended to the default <code class="ph codeph">sftp</code> command line.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-variables__entry__1"> <p class="p"> <code class="ph codeph">ansible_shell_executable</code> </p> </td> 
+         <td class="entry" headers="ansible-variables__entry__2"> <p class="p">This sets the shell that the Ansible controller uses on the target machine and overrides the executable in <code class="ph codeph">ansible.cfg</code> which defaults to <code class="ph codeph">/bin/sh</code>.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-variables__entry__1"> <p class="p"> <code class="ph codeph">ansible_shell_type</code> </p> </td> 
+         <td class="entry" headers="ansible-variables__entry__2"> <p class="p">The shell type of the target system.</p> <p class="p">Do not use this setting unless you have set the <code class="ph codeph">ansible_shell_executable</code> to a non-Bourne (sh) compatible shell. By default commands are formatted using sh-style syntax. Setting this to <code class="ph codeph">csh</code> or <code class="ph codeph">fish</code> causes commands executed on target systems to follow the syntax of those shells instead.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-variables__entry__1"> <p class="p"> <code class="ph codeph">ansible_ssh_common_args</code> </p> </td> 
+         <td class="entry" headers="ansible-variables__entry__2"> <p class="p">This setting is always appended to the default command line for <code class="ph codeph">sftp</code>, <code class="ph codeph">scp</code>, and <code class="ph codeph">ssh</code>. Useful to configure a <code class="ph codeph">ProxyCommand</code> for a certain host or group.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-variables__entry__1"> <p class="p"> <code class="ph codeph">ansible_ssh_executable</code> </p> </td> 
+         <td class="entry" headers="ansible-variables__entry__2"> <p class="p">This setting overrides the default behavior to use the system <code class="ph codeph">ssh</code>. This can override the <code class="ph codeph">ssh_executable</code> setting in <code class="ph codeph">ansible.cfg</code>.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-variables__entry__1"> <p class="p"> <code class="ph codeph">ansible_ssh_extra_args</code> </p> </td> 
+         <td class="entry" headers="ansible-variables__entry__2"> <p class="p">This setting is always appended to the default <code class="ph codeph">ssh</code> command line.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-variables__entry__1"> <p class="p"> <code class="ph codeph">ansible_ssh_pipelining</code> </p> </td> 
+         <td class="entry" headers="ansible-variables__entry__2"> <p class="p">Determines if SSH <code class="ph codeph">pipelining</code> is used.</p> <p class="p">This can override the <code class="ph codeph">pipelining</code> setting in <code class="ph codeph">ansible.cfg</code>. If using SSH key-based authentication, the key must be managed by an SSH agent.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-variables__entry__1"> <p class="p"> <code class="ph codeph">ansible_ssh_private_key_file</code> </p> </td> 
+         <td class="entry" headers="ansible-variables__entry__2"> <p class="p">Private key file used by SSH.</p> <p class="p">Useful if using multiple keys and you do not want to use an SSH agent.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-variables__entry__1"> <p class="p"> <code class="ph codeph">ansible_user</code> </p> </td> 
+         <td class="entry" headers="ansible-variables__entry__2"> <p class="p">The user name to use when connecting to the host.</p> <p class="p">Do not change this variable unless <code class="ph codeph">/bin/sh</code> is not installed on the target machine or cannot be run from sudo.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-variables__entry__1"> <p class="p"> <code class="ph codeph">inventory_hostname</code> </p> </td> 
+         <td class="entry" headers="ansible-variables__entry__2"> <p class="p">This variable takes the hostname of the machine from the inventory script or the Ansible configuration file. You cannot set the value of this variable. Because the value is taken from the configuration file, the actual runtime hostname value can vary from what is returned by this variable.</p> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

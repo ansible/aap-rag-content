@@ -1,0 +1,30 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="update-ocp"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Patch update for Operator-based Ansible Automation Platform</h1> 
+     <p class="shortdesc">You can use an upgrade patch to update your operator-based Ansible Automation Platform.</p> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="update-aap-on-ocp"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Patch updating Ansible Automation Platform on OpenShift Container Platform</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">When you perform a patch update for an installation of Ansible Automation Platform on OpenShift Container Platform, most updates happen within a channel:</p> 
+       <ol class="ol"> 
+        <li class="li">A new update becomes available in the marketplace (through the redhat-operator CatalogSource).</li> 
+        <li class="li">A new InstallPlan is automatically created for your Ansible Automation Platform subscription. If the subscription is set to Manual, the InstallPlan must be manually approved in the OpenShift UI. If the subscription is set to Automatic, it upgrades as soon as the new version is available. 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">Set a manual install strategy on your Ansible Automation Platform Operator subscription. With a manual strategy, you are prompted to approve an upgrade when it becomes available in your selected update channel. Stable channels are available for each X.Y release (for example, stable-<var class="keyword varname">X.Y</var>).</p> 
+          </div>
+         </div> </li> 
+        <li class="li">A new Subscription, CSV, and Operator containers will be created alongside the old Subscription, CSV, and containers. Then the old resources will be cleaned up if the new install was successful.</li> 
+       </ol> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

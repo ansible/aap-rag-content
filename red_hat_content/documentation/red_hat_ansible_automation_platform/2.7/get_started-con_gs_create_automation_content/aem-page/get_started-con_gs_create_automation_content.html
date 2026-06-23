@@ -1,0 +1,61 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="con-gs-create-automation-content">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Create automation content with playbooks</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Ansible playbooks are blueprints that tell Ansible Automation Platform what tasks to perform with which devices. Use a playbook to define automation tasks for the platform to run.</p> 
+     <section class="section" id="con-gs-create-automation-content___create_a_playbook">
+      <h2 class="title sectiontitle">Create a playbook</h2> 
+      <p class="p">A playbook contains one or more plays. A basic play contains the following parameters:</p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Name</strong>: a brief description of the overall function of the playbook, which assists in keeping it readable and organized for all users.</li> 
+       <li class="li"><strong class="ph b">Hosts</strong>: identifies the target or targets for Ansible to run against.</li> 
+       <li class="li"><strong class="ph b">Become statements</strong>: this optional statement can be set to <code class="ph codeph">true</code> or <code class="ph codeph">yes</code> to enable privilege escalation using a become plugin (such as <code class="ph codeph">sudo</code>, <code class="ph codeph">su</code>, <code class="ph codeph">pfexec</code>, <code class="ph codeph">doas</code>, <code class="ph codeph">pbrun</code>, <code class="ph codeph">dzdo</code>, <code class="ph codeph">ksu</code>).</li> 
+       <li class="li"><strong class="ph b">Tasks</strong>: this is the list of actions that get executed against each host in the play.</li> 
+      </ul> 
+      <p class="p">Here is an example of a play in a playbook. You can see the name of the play, the host, and the list of tasks included in the play.</p> 
+      <pre class="pre codeblock"><code>- name: Set Up a Project and Job Template
+  hosts: host.name.ip
+  become: true
+
+  tasks:
+    - name: Create a Project
+      ansible.controller.project:
+        name: Job Template Test Project
+        state: present
+        scm_type: git
+        scm_url: https://github.com/ansible/ansible-tower-samples.git
+
+    - name: Create a Job Template
+      ansible.controller.job_template:
+        name: my-job-1
+        project: Job Template Test Project
+        inventory: Demo Inventory
+        playbook: hello_world.yml
+        job_type: run
+        state: present</code></pre> 
+      <p class="p">For more detailed guidance on authoring playbooks, consult the following documentation:</p> 
+      <ul class="ul"> 
+       <li class="li"> Developing automation content </li> 
+       <li class="li">Creating playbooks and viewing playbook explanations in the Red Hat Ansible Lightspeed with IBM watsonx Code Assistant User Guide to learn how to generate a playbook with AI.</li> 
+       <li class="li"> Getting started with playbooks </li> 
+      </ul> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relconcepts">
+      <strong>Related concepts</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_devtools_intro" title="Ansible development tools (ansible-dev-tools) is a suite of tools provided with Ansible Automation Platform to help automation creators to create, test, and deploy playbook projects, execution environments, and collections.">Create, test, and deploy automation content with ansible-dev-tools</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_creating_viewing_playbooks#creating-viewing-playbooks" title="Using the Ansible VS Code extension, you can create Ansible playbooks using a natural language interface in English.">Create playbooks and view playbook explanations</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_intro_to_playbooks" title="An Ansible Playbook is a blueprint for automation tasks, which are actions executed with limited manual effort across an inventory of solutions. Playbooks tell Ansible what to do on which devices.">Get started automating with playbooks</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Receptor variables</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Reference information for the inventory file variables used to configure Receptor.</p> 
+     <section class="section"> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:40%">
+        <col style="width:15%">
+        <col style="width:20%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__1">Variable name</th> 
+         <th class="entry" id="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__2">Description</th> 
+         <th class="entry" id="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__3">Required or optional</th> 
+         <th class="entry" id="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__4">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__1"> <p class="p"><code class="ph codeph">receptor_disable_signing</code></p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__2"> <p class="p">Controls whether signing of communications between receptor nodes is enabled or disabled. Set this variable to <code class="ph codeph">true</code> to disable communication signing.</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__1"> <p class="p"><code class="ph codeph">receptor_disable_tls</code></p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__2"> <p class="p">Controls whether TLS is enabled or disabled for Receptor. Set this variable to <code class="ph codeph">true</code> to disable TLS.</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__1"> <p class="p"><code class="ph codeph">receptor_firewall_zone</code></p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__2"> <p class="p">The firewall zone where receptor related firewall rules are applied. This controls which networks can access Receptor based on the zone's trust level.</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__4"> <p class="p"><code class="ph codeph">public</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__1"> <p class="p"><code class="ph codeph">receptor_log_level</code></p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__2"> <p class="p">Controls the verbosity of logging for Receptor. Valid options include: <code class="ph codeph">error</code>, <code class="ph codeph">warning</code>, <code class="ph codeph">info</code>, or <code class="ph codeph">debug</code>.</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__4"> <p class="p"><code class="ph codeph">info</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__1"> <p class="p"><code class="ph codeph">receptor_mintls13</code></p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__2"> <p class="p">Controls whether or not Receptor only accepts connections that use TLS 1.3 or higher. Set to <code class="ph codeph">true</code> to only accept connections that use TLS 1.3 or higher.</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__1"> <p class="p"><code class="ph codeph">receptor_peers</code></p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__2"> <p class="p">Used to indicate which nodes a specific host connects to. Wherever this variable is defined, an outbound connection to the specific host is established. The value must be a comma-separated list of hostnames. Do not use inventory group names. This is resolved into a set of hosts that is used to construct the <code class="ph codeph">receptor.conf</code> file.</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__4"> <p class="p"><code class="ph codeph">[]</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__1"> <p class="p"><code class="ph codeph">receptor_port</code></p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__2"> <p class="p">Port number that Receptor listens on for incoming connections from other receptor nodes.</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__4"> <p class="p"><code class="ph codeph">27199</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__1"> <p class="p"><code class="ph codeph">receptor_protocol</code></p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__2"> <p class="p">Protocol that Receptor will support when handling traffic.</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__4"> <p class="p"><code class="ph codeph">tcp</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__1"> <p class="p"><code class="ph codeph">receptor_signing_private_key</code></p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__2"> <p class="p">Path to the private key used by Receptor to sign communications with other receptor nodes in the network.</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__1"> <p class="p"><code class="ph codeph">receptor_signing_public_key</code></p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__2"> <p class="p">Path to the public key used by Receptor to sign communications with other receptor nodes in the network.</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__1"> <p class="p"><code class="ph codeph">receptor_signing_remote</code></p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__2"> <p class="p">Denote whether the receptor signing files are local to the installation program (<code class="ph codeph">false</code>) or on the remote component server (<code class="ph codeph">true</code>).</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__1"> <p class="p"><code class="ph codeph">receptor_tls_cert</code></p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__2"> <p class="p">Path to the TLS certificate file for Receptor.</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__1"> <p class="p"><code class="ph codeph">receptor_tls_key</code></p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__2"> <p class="p">Path to the TLS key file for Receptor.</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__1"> <p class="p"><code class="ph codeph">receptor_tls_remote</code></p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__2"> <p class="p">Denote whether the receptor provided certificate files are local to the installation program (<code class="ph codeph">false</code>) or on the remote component server (<code class="ph codeph">true</code>).</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__1"> <p class="p"><code class="ph codeph">receptor_type</code></p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__2"> <p class="p">For the <code class="ph codeph">[automationcontroller]</code> group the two options are:</p> 
+          <ul class="ul"> 
+           <li class="li"><code class="ph codeph">receptor_type=control</code> - The node only runs project and inventory updates, but not regular jobs.</li> 
+           <li class="li"><code class="ph codeph">receptor_type=hybrid</code> - The node runs everything.</li> 
+          </ul> <p class="p">For the <code class="ph codeph">[execution_nodes]</code> group the two options are:</p> 
+          <ul class="ul"> 
+           <li class="li"><code class="ph codeph">receptor_type=hop</code> - The node forwards jobs to an execution node.</li> 
+           <li class="li"><code class="ph codeph">receptor_type=execution</code> - The node can run jobs.</li> 
+          </ul> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__4"> <p class="p">For the <code class="ph codeph">[automationcontroller]</code> group: <code class="ph codeph">hybrid</code>. For the <code class="ph codeph">[execution_nodes]</code> group: <code class="ph codeph">execution</code>.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__1"> <p class="p"><code class="ph codeph">receptor_use_archive_compression</code></p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__2"> <p class="p">Controls whether archive compression is enabled or disabled for Receptor. You can control this functionality globally by using <code class="ph codeph">use_archive_compression</code>.</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0__entry__4"> <p class="p"><code class="ph codeph">true</code></p> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

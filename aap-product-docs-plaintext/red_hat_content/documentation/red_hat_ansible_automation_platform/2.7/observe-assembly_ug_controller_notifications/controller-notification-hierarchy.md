@@ -1,0 +1,12 @@
+# Understand and configure notifications
+## Notification hierarchy
+
+Automation controller uses a hierarchical notification system where notification templates can be defined at various levels, and lower-level objects can inherit templates from their parent objects.
+
+Notification templates inherit templates defined on parent objects, such as the following:
+
+- Job templates use notification templates defined for them. Additionally, they can inherit notification templates from the project used by the job template, and from the organization that it is listed under.
+- Project updates use notification templates defined on the project and inherit notification templates from the organization associated with it.
+- Inventory updates use notification templates defined on the organization that it is listed under.
+- Ad hoc commands use notification templates defined on the organization that the inventory is associated with.
+

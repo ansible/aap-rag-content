@@ -1,0 +1,84 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="controller-approval-nodes"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Configure nodes in workflow visualizer</h1> 
+     <div class="body refbody"> 
+      <p class="shortdesc">Use an Approval node to manually pause a workflow between playbooks. This allows you to review and approve the next step within a set timeframe or advance the process immediately.</p> 
+      <section class="section"> 
+       <p class="p">The default for the timeout is none, but you can specify the length of time before the request expires and is automatically denied. After you select and supply the information for the approval node, it displays on the graphical view with a pause icon beside it.</p> 
+       <br> 
+       <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-wf-approval-node.png" alt="Approval node"> 
+       <br> 
+       <p class="p">The approver is anyone who meets the following criteria:</p> 
+       <ul class="ul"> 
+        <li class="li">A user that can execute the workflow job template containing the approval nodes.</li> 
+        <li class="li">A user who has organization administrator or above privileges (for the organization associated with that workflow job template).</li> 
+        <li class="li">A user who has the <strong class="ph b">Approve</strong> permission explicitly assigned to them within that specific workflow job template.</li> 
+       </ul> 
+       <p class="p">If pending approval nodes are not approved within the specified time limit (if an expiration was assigned) or they are denied, then they are marked as "timed out" or "failed", and move on to the next "on fail node" or "always node". If approved, the "on success" path is taken. If you try to <code class="ph codeph">POST</code> in the API to a node that has already been approved, denied or timed out, an error message notifies you that this action is redundant, and no further steps are taken.</p> 
+       <p class="p">The following table shows the various levels of permissions allowed on approval workflows:</p> 
+       <br> 
+       <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-wf-node-approval-rbac.png" alt="Node approval rbac"> 
+       <br> 
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="controller-building-nodes-scenarios"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Build nodes scenarios</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Learn how to manage nodes in the following scenarios.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click the (<img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/options_menu.png" width="15" alt="Plus icon">) icon on the parent node and <strong class="ph b">Add step and link</strong> to add a sibling node: <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-wf-create-sibling-node.png" alt="Create sibling node"><br></span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Add step</span> or <span class="ph uicontrol button">Start</span> (<img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/options_menu.png" width="15" alt="Plus icon">) and <strong class="ph b">Add step</strong>, to add a root node to depict a split scenario.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">At any node where you want to create a split scenario, hover over the node from which the split scenario begins and click the plus (<img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/options_menu.png" width="15" alt="Plus icon">) icon on the parent node and <strong class="ph b">Add step and link</strong>. This adds multiple nodes from the same parent node, creating sibling nodes.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Refer to the key by clicking <span class="ph uicontrol button">Legend</span> to identify the meaning of the symbols and colors associated with the graphical depiction. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note"> <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">If you remove a node that has a follow-on node attached to it in a workflow with a set of sibling nodes that has varying edge types, the attached node automatically joins the set of sibling nodes and retains its edge type:</p> 
+            </div> 
+           </div> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="controller-edit-nodes"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Edit a node</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Learn how to edit a node’s details or link edge type (Run on success/fail/always) and remove links within a workflow, and how to adjust the workflow diagram’s view.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ul class="ul steps-unordered"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Edit a node by using one of these methods: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">If you want to edit a node, click the icon of the node. The pane displays the current selections, click <span class="ph uicontrol button">Edit</span> to change these. Make your changes and click <span class="ph uicontrol button">Finish</span> to apply them to the graphical view.</li> 
+            <li class="li">To edit the edge type for an existing link, (<strong class="ph b">Run on success</strong>, <strong class="ph b">Run on fail</strong>, <strong class="ph b">Run always</strong>), click (<img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/options_menu.png" width="15" alt="Plus icon">) on the existing status.</li> 
+            <li class="li">To remove a link, click (<img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/options_menu.png" width="15" alt="Plus icon">) for the link and click <span class="ph uicontrol button">Remove link</span>. This option only appears in the pane if the target or child node has more than one parent. All nodes must be linked to at least one other node at all times so you must create a new link before removing an old one.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Edit the view of the workflow diagram by using one of these methods: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Click the examine icon (<img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/examine.png" width="15" alt="Examine icon 15">) to zoom in, the reduce icon (<img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/reduce.png" width="15" alt="Reduce icon 15">) to zoom out, the expand icon (<img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/expand.png" width="15" alt="Expand icon 15">) to fit to screen or the reset icon (<img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/reset.png" width="15" alt="Reset icon 15">) to reposition the view.</li> 
+            <li class="li">Drag the workflow diagram to reposition it on the screen or use the scroll on your mouse to zoom.</li> 
+           </ul> 
+          </div> </li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

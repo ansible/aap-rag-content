@@ -1,0 +1,129 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="running-playbook-extension"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Run your playbook automation to test behavior</h1> 
+     <div class="body taskbody"> 
+      <p class="shortdesc">Run your playbook using two methods provided by the Ansible VS Code extension.</p> 
+      <section> 
+       <div class="tasklabel"> 
+        <h2 class="sectiontitle tasklabel">Procedure</h2> 
+       </div> 
+       <div class="ul steps-unordered"> 
+        <div class="li step p"> <span class="ph cmd">The Ansible VS Code extension provides two options to run your playbook: </span> 
+         <div class="itemgroup info"> 
+          <ul class="ul"> 
+           <li class="li"><code class="ph codeph">ansible-playbook</code> runs the playbook on your local machine using Ansible Core.</li> 
+           <li class="li"><code class="ph codeph">ansible-navigator</code> runs the playbook in an execution environment in the same manner that Ansible Automation Platform runs an automation job. You specify the base image for the execution environment in the Ansible extension settings.</li> 
+          </ul> 
+         </div> 
+        </div> 
+       </div> 
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="extension-run-ansible-playbook"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Run your playbook with <code class="ph codeph">ansible-playbook</code></h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can run your Ansible playbook locally by using the <code class="ph codeph">ansible-playbook</code> command directly within the VS Code extension.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <div class="ul steps-unordered"> 
+         <div class="li step p"> <span class="ph cmd">To run a playbook, right-click the playbook name in the <strong class="ph b">Explorer</strong> pane, then select <span class="ph menucascade"><span class="ph uicontrol">Run Ansible Playbook via</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Run playbook via <span class="keyword cmdname">ansible-playbook</span></span></span>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p"> <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ansible-playbook-run.png" alt="Run playbook via ansible-playbook"> </p> 
+           <p class="p">The output is displayed in the <strong class="ph b">Terminal</strong> tab of the VS Code terminal. The <code class="ph codeph">ok=2</code> and <code class="ph codeph">failed=0</code> messages indicate that the playbook ran successfully.</p> 
+           <p class="p"> <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ansible-playbook-success.png" alt="Success message for ansible-playbook execution"> </p> 
+          </div> 
+         </div> 
+        </div> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="extension-run-ansible-navigator"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Run your playbook with <code class="ph codeph">ansible-navigator</code></h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can run an Ansible playbook through <code class="ph codeph">ansible-navigator</code> by right-clicking the playbook name in the Explorer pane. This procedure explains how to view the playbook’s output and navigate the results for each play and task within the terminal.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You enabled the use of an execution environment in the Ansible extension settings.</li> 
+         <li class="li">You entered the path or URL for the execution environment image in the Ansible extension settings.</li> 
+        </ul> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">To run a playbook, right-click the playbook name in the Explorer pane, then select <span class="ph menucascade"><span class="ph uicontrol">Run Ansible Playbook via</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Run playbook via ansible-navigator run</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">View the output in the <strong class="ph b">Terminal</strong> tab of the VS Code terminal. The <strong class="ph b">Successful</strong> status indicates that the playbook ran successfully. </span> 
+          <div class="itemgroup info"> 
+           <p class="p"> <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/devtools-extension-navigator-output.png" alt="Output for ansible-navigator execution"> </p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Enter the number next to a play to step into the play results. The example playbook only contains one play. Enter <code class="ph codeph">0</code> to view the status of the tasks executed in the play. </span> 
+          <div class="itemgroup info"> 
+           <p class="p"> <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/devtools-extension-navigator-tasks.png" alt="Tasks in ansible-navigator output"> </p> 
+           <p class="p">Type the number next to a task to review the task results.</p> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist reltasks"> <strong>Related tasks</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_execute_playbook_navigator#proc-execute-playbook-tui" title="You can run Ansible playbooks with the automation content navigator text-based user interface to follow the execution of the tasks and delve into the results of each task.">Executing a playbook from automation content navigator</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title4" id="publishing-playbook-collection-aap"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Publish and run your playbook automation</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">The following procedures describe how to deploy your new playbooks in your instance of Ansible Automation Platform so that you can use them to run automation jobs.</p> 
+      </div> 
+      <article class="topic task nested2" aria-labelledby="ariaid-title5" id="devtools-save-scm"> 
+       <h3 class="title topictitle3" id="ariaid-title5">Save your project in SCM</h3> 
+       <div class="body taskbody"> 
+        <p class="shortdesc">Save your playbook project as a repository in your source control management system, for example GitHub.</p> 
+        <section> 
+         <div class="tasklabel"> 
+          <h4 class="sectiontitle tasklabel">Procedure</h4> 
+         </div> 
+         <ol class="ol steps"> 
+          <li class="li step"> <span class="ph cmd">Initialize your project directory as a git repository.</span> </li> 
+          <li class="li step"> <span class="ph cmd">Push your project up to a source control system such as GitHub.</span> </li> 
+         </ol> 
+        </section> 
+       </div> 
+      </article> 
+      <article class="topic task nested2" aria-labelledby="ariaid-title6" id="create-aap-job"> 
+       <h3 class="title topictitle3" id="ariaid-title6">Run your playbook in Ansible Automation Platform</h3> 
+       <div class="body taskbody"> 
+        <p class="shortdesc">To run your playbook in Ansible Automation Platform, you must create a project in automation controller for the repository where you stored your playbook project. You can then create a job template for each playbook from the project.</p> 
+        <section> 
+         <div class="tasklabel"> 
+          <h4 class="sectiontitle tasklabel">Procedure</h4> 
+         </div> 
+         <ol class="ol steps"> 
+          <li class="li step"> <span class="ph cmd">In a browser, log in to automation controller.</span> </li> 
+          <li class="li step"> <span class="ph cmd">Configure a Source Control credential type for your source control system if necessary. See the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_create_credential" title="Learn how to create new credentials in Automation controller.">Creating new credentials</a> section of <em class="ph i">Using automation execution</em> for more details.</span> </li> 
+          <li class="li step"> <span class="ph cmd">In automation controller, create a project for the GitHub repository where you stored your playbook project. Refer to the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_controller_projects" title="A project is a logical collection of Ansible playbooks, represented in automation controller.">Projects</a> chapter of <em class="ph i">Using automation execution</em>.</span> </li> 
+          <li class="li step"> <span class="ph cmd">Create a job template that uses a playbook from the project that you created. Refer to the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_job_templates" title="You can create both Job templates and Workflow job templates from Automation Execution > Templates .">Job Templates</a> chapter of <em class="ph i">Using automation execution</em>.</span> </li> 
+          <li class="li step"> <span class="ph cmd">Run your playbook from automation controller by launching the job template. Refer to the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_controller_launch_job_template#controller-launch-job-template" title="You can configure a job template to store all the parameters that you would normally pass to the Ansible Playbook on the command line. In addition to the playbooks, the template passes the inventory, credentials, extra variables, and all options and settings that you can specify on the command line.">Launching a job template</a> section of <em class="ph i">Using automation execution</em>.</span> </li> 
+         </ol> 
+        </section> 
+       </div> 
+      </article> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

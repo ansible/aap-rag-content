@@ -1,0 +1,125 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="oci-container-delivery">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">OCI container delivery</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Use OCI container delivery to pull plug-in artifacts from <code class="ph codeph">registry.redhat.io/ansible-automation-platform/automation-portal</code>. The plug-in version must match the <code class="ph codeph">imageTagInfo</code> value in your Helm chart configuration. This is the recommended method for new installations.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">You have a Red Hat account with access to <code class="ph codeph">registry.redhat.io</code>.</li> 
+       <li class="li">You have credentials for <code class="ph codeph">registry.redhat.io</code>.</li> 
+       <li class="li">You have access to the OpenShift project where you will install the Helm chart.</li> 
+       <li class="li">You have installed the OpenShift CLI (<code class="ph codeph">oc</code>) and logged in to your cluster.</li> 
+       <li class="li">You have a registry service account token from the Red Hat Customer Portal. For more information, see <a class="xref" href="https://access.redhat.com/RegistryAuthentication" target="_blank" rel="external noopener">Registry Service Accounts</a>.</li> 
+      </ul> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Create an <span class="ph filepath">auth.json</span> file on your local machine.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Add registry credentials for <code class="ph codeph">registry.redhat.io</code> to the <span class="ph filepath">auth.json</span> file:</span> 
+        <div class="itemgroup stepxmp"> 
+         <pre class="pre codeblock"><code>{
+  "auths": {
+    "registry.redhat.io": {
+      "auth": "&lt;base64-encoded-username-password&gt;"
+    }
+  }
+}</code></pre> 
+        </div> 
+        <div class="itemgroup info"> 
+         <p class="p">If you pull plug-in artifacts from a private or mirror registry, add an entry for that registry in the same <span class="ph filepath">auth.json</span> file:</p> 
+         <pre class="pre codeblock"><code>{
+  "auths": {
+    "registry.redhat.io": {
+      "auth": "&lt;base64-encoded-username-password&gt;"
+    },
+    "&lt;private_registry_url&gt;": {
+      "auth": "&lt;base64-encoded-registry-credentials&gt;"
+    }
+  }
+}</code></pre> 
+         <p class="p">For full mirror registry configuration including <code class="ph codeph">imageRegistry</code>, <code class="ph codeph">ociPluginImage</code>, and image mirroring procedures, see the disconnected installation chapter.</p> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Generate the base64-encoded authentication value for each registry:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>printf '%s' '&lt;username&gt;:&lt;password&gt;' | base64 -w0</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Replace the <code class="ph codeph">&lt;base64-encoded-username-password&gt;</code> and <code class="ph codeph">&lt;base64-encoded-registry-credentials&gt;</code> placeholders in the <span class="ph filepath">auth.json</span> file with the output from the previous step.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Create the authentication secret in the target OpenShift project. The secret name must match your Helm release name.</span> 
+        <div class="itemgroup stepxmp"> 
+         <p class="p">If you install from the OpenShift catalog and you use the default release name <code class="ph codeph">redhat-rhaap-portal</code>:</p> 
+         <pre class="pre codeblock"><code>oc create secret generic redhat-rhaap-portal-dynamic-plugins-registry-auth \
+  --from-file=auth.json=./auth.json</code></pre> 
+         <p class="p">If you use a custom release name:</p> 
+         <pre class="pre codeblock"><code>oc create secret generic &lt;release-name&gt;-dynamic-plugins-registry-auth \
+  --from-file=auth.json=./auth.json</code></pre> 
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">Verify that the secret exists in the project: <pre class="pre codeblock"><code>oc get secret &lt;release-name&gt;-dynamic-plugins-registry-auth</code></pre> 
+        <div class="note important note_important">
+         <span class="note__title">Important:</span> 
+         <div class="note__body"> 
+          <p class="p">Create this secret in the same OpenShift project as the Helm release, and create it before you install or upgrade the Helm release.</p> 
+          <p class="p">The dynamic plug-in init container uses <code class="ph codeph">skopeo</code> to pull OCI artifacts directly. It does not use Kubernetes <code class="ph codeph">imagePullSecrets</code>, cluster-level <code class="ph codeph">ImageDigestMirrorSet</code> or <code class="ph codeph">ImageTagMirrorSet</code>, or OpenShift Container Platform global pull secrets. You must provide registry credentials in the <code class="ph codeph">auth.json</code> secret even if your cluster is configured with image mirrors.</p> 
+         </div>
+        </div> </li> 
+      </ul> 
+      <p class="p"><strong class="ph b">OpenShift web console steps</strong></p> 
+      <p class="p">You can create the <code class="ph codeph">dynamic-plugins-registry-auth</code> secret in the OpenShift web console.</p> 
+      <ol class="ol"> 
+       <li class="li">In the OpenShift web console, select the OpenShift project where you will install the Helm release.</li> 
+       <li class="li">In the <span class="ph uicontrol">Administrator</span> view, click <span class="ph menucascade"><span class="ph uicontrol">Workloads</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Secrets</span></span>.</li> 
+       <li class="li">Click <span class="ph menucascade"><span class="ph uicontrol">Create</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Key/value secret</span></span>.</li> 
+       <li class="li">Set the secret name to <code class="ph codeph">&lt;release-name&gt;-dynamic-plugins-registry-auth</code>.</li> 
+       <li class="li">Add a key named <code class="ph codeph">auth.json</code> and paste the contents of your <span class="ph filepath">auth.json</span> file as the value.</li> 
+       <li class="li">Click <span class="ph uicontrol">Create</span>.</li> 
+      </ol> 
+      <p class="p"><strong class="ph b">Helm chart configuration</strong></p> 
+      <p class="p">When you configure the Helm chart, set <code class="ph codeph">redhat-developer-hub.global.pluginMode</code> to <code class="ph codeph">oci</code> for OCI container delivery (recommended). Verify that <code class="ph codeph">pluginMode</code> is set to the correct value. If you omit this setting, the chart defaults to <code class="ph codeph">tarball</code>.</p> 
+      <p class="p">Set <code class="ph codeph">imageTagInfo</code> to the plug-in version that matches your deployment. To determine the correct version tag, see "Determine version tags before you install".</p> 
+      <pre class="pre codeblock"><code>redhat-developer-hub:
+  global:
+    pluginMode: oci
+    imageTagInfo: "&lt;plugin-version&gt;"</code></pre> 
+      <p class="p">If you need to change <code class="ph codeph">pluginMode</code> after installing the Helm release, upgrade the Helm release.</p> 
+      <p class="p"><strong class="ph b">OpenShift web console:</strong></p> 
+      <ol class="ol"> 
+       <li class="li">In the <span class="ph uicontrol">Developer</span> view, click <span class="ph uicontrol">Helm</span>.</li> 
+       <li class="li">Select the Helm release.</li> 
+       <li class="li">Click <span class="ph menucascade"><span class="ph uicontrol">Actions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Upgrade</span></span>.</li> 
+       <li class="li">In the <span class="ph uicontrol">YAML view</span>, set <code class="ph codeph">redhat-developer-hub.global.pluginMode</code> to <code class="ph codeph">oci</code> (OCI container delivery).</li> 
+       <li class="li">Click <span class="ph uicontrol">Upgrade</span>.</li> 
+      </ol> 
+      <p class="p"><strong class="ph b">Command line:</strong></p> 
+      <ul class="ul"> 
+       <li class="li">Run the <code class="ph codeph">helm upgrade</code> command with your updated values file: <pre class="pre codeblock"><code>helm upgrade &lt;release-name&gt; &lt;chart&gt; -n &lt;project&gt; -f &lt;values.yaml&gt;</code></pre> </li> 
+      </ul> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relinfo">
+      <strong>Related information</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="https://access.redhat.com/RegistryAuthentication" target="_blank" rel="external noopener">Registry Service Accounts</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

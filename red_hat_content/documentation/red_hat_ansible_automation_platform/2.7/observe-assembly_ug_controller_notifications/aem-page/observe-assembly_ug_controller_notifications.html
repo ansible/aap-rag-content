@@ -1,0 +1,69 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="controller-notifications"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Understand and configure notifications</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">A Notification Type such as Email, Slack or a Webhook, is an instance of a Notification Template, and has a name, description and configuration defined in the Notification template.</p> 
+      <p class="p">The following include examples of details needed to add a notification template:</p> 
+      <ul class="ul"> 
+       <li class="li">A username, password, server, and recipients are needed for an Email notification template</li> 
+       <li class="li">The token and a list of channels are needed for a Slack notification template</li> 
+       <li class="li">The URL and Headers are needed for a Webhook notification template</li> 
+      </ul> 
+      <p class="p">When a job fails, a notification is sent using the configuration that you define in the notification template.</p> 
+      <p class="p">The following shows the typical flow for the notification system:</p> 
+      <ul class="ul"> 
+       <li class="li">You create a notification template to the <code class="ph codeph">REST API</code> at the <code class="ph codeph">/api/v2/notification_templates endpoint</code>, either through the API or through the UI.</li> 
+       <li class="li">You assign the notification template to any of the various objects that support it (all variants of job templates, organizations and projects) and at the appropriate trigger level for which you want the notification (started, success, or error). For example, you might want to assign a particular notification template to trigger when Job Template 1 fails. In this case, you associate the notification template with the job template at <code class="ph codeph">/api/v2/job_templates/n/notification_templates_error</code> API endpoint.</li> 
+       <li class="li">You can set notifications on job start and job end. Users and teams are also able to define their own notifications that can be attached to arbitrary jobs.</li> 
+      </ul> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist relconcepts">
+       <strong>Related concepts</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_controller_create_workflow_template#controller-work-with-notifications" title="From the navigation panel, select Automation Execution > Administration > Notifiers . You can review any notification integrations you have set up and their statuses, if they have run.">Work with notifications</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="controller-notification-hierarchy"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Notification hierarchy</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Automation controller uses a hierarchical notification system where notification templates can be defined at various levels, and lower-level objects can inherit templates from their parent objects.</p> 
+       <p class="p">Notification templates inherit templates defined on parent objects, such as the following:</p> 
+       <ul class="ul"> 
+        <li class="li">Job templates use notification templates defined for them. Additionally, they can inherit notification templates from the project used by the job template, and from the organization that it is listed under.</li> 
+        <li class="li">Project updates use notification templates defined on the project and inherit notification templates from the organization associated with it.</li> 
+        <li class="li">Inventory updates use notification templates defined on the organization that it is listed under.</li> 
+        <li class="li">Ad hoc commands use notification templates defined on the organization that the inventory is associated with.</li> 
+       </ul> 
+      </div> 
+      <article class="topic concept nested2" aria-labelledby="ariaid-title3" id="controller-notification-workflow"> 
+       <h3 class="title topictitle3" id="ariaid-title3">Notification workflow</h3> 
+       <div class="body conbody">
+        <p class="shortdesc">Automation controller can send notifications when jobs succeed or fail.</p> 
+        <p class="p">When a job succeeds or fails, the error or success handler pulls a list of relevant notifications. It then creates a notification object for each one, containing relevant details about the job and sends it to the destination. These include email addresses, slack channels, and SMS numbers.</p> 
+        <p class="p"></p> 
+        <p class="p">These notification objects are available as related resources on job types (jobs, inventory updates, project updates), and also at <code class="ph codeph">/api/v2/notifications</code>. You can also see what notifications have been sent from a notification template by examining its related resources.</p> 
+        <p class="p">If a notification fails, it does not impact the job associated with it or cause it to fail. The status of the notification can be viewed at its detail endpoint <code class="ph codeph">/api/v2/notifications/&lt;n&gt;</code>.</p> 
+       </div> 
+       <nav role="navigation" class="related-links">
+        <div class="linklist relconcepts">
+         <strong>Related concepts</strong>
+         <br>
+         <ul class="linklist">
+          <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_ug_controller_notifications#controller-notifications" title="A Notification Type such as Email, Slack or a Webhook, is an instance of a Notification Template, and has a name, description and configuration defined in the Notification template.">Understand and configure notifications</a></li>
+         </ul>
+        </div>
+       </nav> 
+      </article>
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="ref-controller-data-collection-details"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Details about data collected for Automation Analytics</h1> 
+     <div class="body refbody">
+      <p class="shortdesc">Learn about the specific data that automation controller collects and sends to Red Hat when you enable Automation Analytics.</p> 
+      <section class="section"> 
+       <p class="p">Automation Analytics collects the following classes of data from automation controller:</p> 
+       <ul class="ul"> 
+        <li class="li">Basic configuration, such as which features are enabled, and what operating system is being used</li> 
+        <li class="li">Topology and status of the automation controller environment and hosts, including capacity and health</li> 
+        <li class="li">Counts of automation resources: 
+         <ul class="ul"> 
+          <li class="li">organizations, teams, and users</li> 
+          <li class="li">inventories and hosts</li> 
+          <li class="li">credentials (indexed by type)</li> 
+          <li class="li">projects (indexed by type)</li> 
+          <li class="li">templates</li> 
+          <li class="li">schedules</li> 
+          <li class="li">active sessions</li> 
+          <li class="li">running and pending jobs</li> 
+         </ul> </li> 
+        <li class="li">Job execution details (start time, finish time, launch type, and success)</li> 
+        <li class="li">Automation task details (success, host id, playbook/role, task name, and module used)</li> 
+       </ul> 
+       <p class="p">You can use <code class="ph codeph">awx-manage gather_analytics</code> (without <code class="ph codeph">--ship</code>) to inspect the data that automation controller sends, so that you can satisfy your data collection concerns. This creates a .tar file that contains the analytics data that is sent to Red Hat.</p> 
+       <p class="p">This file contains several JSON and CSV files. Each file contains a different set of analytics data.</p> 
+      </section> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="assembly-using-data-dictionary"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Automation Analytics Data Dictionary</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Automation Analytics Data is sent to the Red Hat Hybrid Cloud Console (HCC) to provide detailed analytics on your automation.</p> 
+       <p class="p">The data dictionary outlines the information collected by Automation Analytics from the Red Hat Ansible Automation Platform automation controller, also known as Automation Execution.</p> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://access.redhat.com/articles/7124201" target="_blank" rel="external noopener">Ansible Automation Platform - Data Dictionary</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

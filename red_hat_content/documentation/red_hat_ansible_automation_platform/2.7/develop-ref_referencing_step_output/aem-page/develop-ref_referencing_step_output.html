@@ -1,0 +1,60 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="referencing-step-output">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Reference step output in output</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">After the <code class="ph codeph">rhaap:launch-job-template</code> action runs, the step output includes job execution data. Reference this data using the <code class="ph codeph">${{ steps['&lt;step-id&gt;'].output.data.&lt;field&gt; }}</code> syntax.</p> 
+     <section class="section"> 
+      <p class="p">The <code class="ph codeph">rhaap:launch-job-template</code> action returns the following output fields:</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:50%">
+        <col style="width:15%">
+        <col style="width:35%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="referencing-step-output__entry__1">Reference</th> 
+         <th class="entry" id="referencing-step-output__entry__2">Type</th> 
+         <th class="entry" id="referencing-step-output__entry__3">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="referencing-step-output__entry__1"><code class="ph codeph">${{ steps['launch-job'].output.data.id }}</code></td> 
+         <td class="entry" headers="referencing-step-output__entry__2">number</td> 
+         <td class="entry" headers="referencing-step-output__entry__3">Ansible Automation Platform Job ID.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="referencing-step-output__entry__1"><code class="ph codeph">${{ steps['launch-job'].output.data.status }}</code></td> 
+         <td class="entry" headers="referencing-step-output__entry__2">string</td> 
+         <td class="entry" headers="referencing-step-output__entry__3">Ansible Automation Platform Job status (for example, <code class="ph codeph">pending</code>, <code class="ph codeph">running</code>, <code class="ph codeph">successful</code>).</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="referencing-step-output__entry__1"><code class="ph codeph">${{ steps['launch-job'].output.data.url }}</code></td> 
+         <td class="entry" headers="referencing-step-output__entry__2">string</td> 
+         <td class="entry" headers="referencing-step-output__entry__3">Direct URL to the job in Ansible Automation Platform.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Displaying job execution data in the output</h2> 
+      <pre class="pre codeblock"><code>output:
+  text:
+    - title: Job launched
+      content: |
+        **Job ID:** ${{ steps['launch-job'].output.data.id }}
+        **Status:** ${{ steps['launch-job'].output.data.status }}
+  links:
+    - title: View job in Ansible Automation Platform
+      url: ${{ steps['launch-job'].output.data.url }}</code></pre> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

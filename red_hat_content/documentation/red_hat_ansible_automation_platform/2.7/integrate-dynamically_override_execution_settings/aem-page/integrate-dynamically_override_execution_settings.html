@@ -1,0 +1,43 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-4bcb8df7-3c48-4a58-b288-2a2c8cd337ea">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Dynamically override execution settings</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">As an administrator using Terraform provider, you can configure optional Prompt on Launch parameters in Ansible job and workflow templates to dynamically override default execution settings at runtime.placeholder.</p> 
+     <p class="p">This means that you can use one Ansible template with different Terraform <code class="ph codeph">*.tf</code> files to deploy many environments. Terraform provides the values when the Ansible job or workflow runs.The Ansible playbooks and templates stored in Ansible Automation Platform remain reusable and independent of the specific Terraform configuration that provisioned them.</p> 
+     <div class="p">
+      You must take the following steps to use Prompt on Launch: 
+      <ul class="ul" id="GUID-4bcb8df7-3c48-4a58-b288-2a2c8cd337ea__ul_1"> 
+       <li class="li"><strong class="ph b">Ansible UI:</strong> Select the <strong class="ph b">Prompt on Launch</strong> checkbox for any of the supported fields in the Ansible job or workflow template.</li> 
+       <li class="li"><strong class="ph b">Terraform:</strong> Set the values for the corresponding fields in the <code class="ph codeph">*.tf</code> file that will launch jobs from that template. If the corresponding value is not set in the <code class="ph codeph">*.tf</code> file, then the run fails and Ansible Automation Platform sends an error message.</li> 
+      </ul> The supported Prompt on Launch settings include: 
+      <ul class="ul" id="GUID-4bcb8df7-3c48-4a58-b288-2a2c8cd337ea__ul_2"> 
+       <li class="li"><strong class="ph b">Inventory:</strong> Allows Terraform to specify the inventory that will be used by the Ansible job template.</li> 
+       <li class="li"><strong class="ph b">Extra variables:</strong> To use extra variables to pass data or trigger actionable workflows, provide either a JSON or YAML string.</li> 
+       <li class="li"><strong class="ph b">Job tag:</strong> Tags to include in the workflow job run.</li> 
+       <li class="li"><strong class="ph b">Labels:</strong> Labels can be used to describe a job template, such as dev or test. You can use labels to group and filter job templates and completed jobs in the display.</li> 
+       <li class="li"><strong class="ph b">Limit:</strong> The Prompt on Launch option restricts a job template to run against only a specific host or group of hosts within an inventory. 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body">
+          When running as part of a workflow, the workflow job template limit is used instead.
+         </div>
+        </div> </li> 
+       <li class="li"><strong class="ph b">Skip tag:</strong> Tags to ignore in the workflow job run.</li> 
+      </ul> 
+     </div> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist">
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_job_templates" title="You can create both Job templates and Workflow job templates from Automation Execution > Templates .">Automation job templates</a></li>
+       <li class="linklist"><a class="link" href="https://registry.terraform.io/providers/ansible/aap/latest/docs/resources/job#ensuring-jobs-launch-on-hosts-created-and-inventories-updated-in-the-same-configuration" target="_blank" rel="external noopener">aap_job schema</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

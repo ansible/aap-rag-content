@@ -1,0 +1,42 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body id="devtools-ms-dev-containers-ext"> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Install and configure the Dev Containers extension</h1> 
+    <div class="body taskbody"> 
+     <p class="shortdesc">If you are installing the containerized version of Ansible development tools, you must install the <a class="xref" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers" target="_blank" rel="external noopener">Microsoft Dev Containers</a> extension in VS Code.</p> 
+     <section class="section context"> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">About this task</h2> 
+      </div> 
+     </section> 
+     <section> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">Procedure</h2> 
+      </div> 
+      <ol class="ol steps"> 
+       <li class="li step stepexpand"> <span class="ph cmd">Open VS Code.</span> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Click the <strong class="ph b">Extensions</strong> (<img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/vscode-extensions-icon.png" width="15" alt="Extensions">) icon in the Activity Bar, or click <span class="ph menucascade"><span class="ph uicontrol">View</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Extensions</span></span>, to display the <strong class="ph b">Extensions</strong> view.</span> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">In the search field in the <strong class="ph b">Extensions</strong> view, type <code class="ph codeph">Dev Containers</code>.</span> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Select the Dev Containers extension from Microsoft and click <span class="ph uicontrol button">Install</span>. </span> 
+        <div class="itemgroup info"> 
+         <p class="p">If you are using Podman or Podman Desktop as your containerization platform, you must modify the default settings in the <code class="ph codeph">Dev Containers</code> extension.</p> 
+        </div> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Replace docker with podman in the <code class="ph codeph">Dev Containers</code> extension settings: </span> 
+        <ol type="a" class="ol substeps"> 
+         <li class="li substep substepexpand"> <span class="ph cmd">In VS Code, open the settings editor.</span> </li> 
+         <li class="li substep substepexpand"> <span class="ph cmd">Search for <code class="ph codeph">@ext:ms-vscode-remote.remote-containers</code>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">Alternatively, click the <strong class="ph b">Extensions</strong> icon in the activity bar and click the gear icon for the <code class="ph codeph">Dev Containers</code> extension.</p> 
+          </div> </li> 
+        </ol> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Set <code class="ph codeph">Dev &gt; Containers:Docker Path</code> to <code class="ph codeph">podman</code>.</span> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Set <code class="ph codeph">Dev &gt; Containers:Docker Compose Path</code> to <code class="ph codeph">podman-compose</code>.</span> </li> 
+      </ol> 
+     </section> 
+    </div> 
+   </article> 
+  </main>  
+ </body>
+</html>

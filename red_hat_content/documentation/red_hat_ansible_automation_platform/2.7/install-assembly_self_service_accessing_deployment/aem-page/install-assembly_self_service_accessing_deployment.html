@@ -1,0 +1,87 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="self-service-accessing-deployment"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Update the deployment URL</h1> 
+     <p class="shortdesc">Complete the necessary post-installation configuration, including updating the OAuth application and setting up initial Role-Based Access Control (RBAC). You can then access and sign in to the portal.</p> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="self-service-add-deployment-url-oauth-app"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Add the deployment URL to the OAuth Application</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">When you set up your OAuth application in Ansible Automation Platform before deploying Ansible automation portal, you added placeholder text for the <code class="ph codeph">Redirect URIs</code> value.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">You must update this value using the URL from the deployed application so that you can run automation on Ansible automation portal from Ansible automation portal.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">Determine the <code class="ph codeph">Redirect URI</code> from your OpenShift deployment: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Open the URL for the deployment from the OpenShift console to display the sign-in page for Ansible automation portal. <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/self-service-topology-get-url.png" alt="Open URL from OpenShift web console"><br></span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Copy the URL for the sign-in page for Ansible automation portal.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">To determine the <code class="ph codeph">Redirect URI</code> value, append <code class="ph codeph">/api/auth/rhaap/handler/frame</code> to the end of the deployment URL. </span> 
+            <div class="itemgroup info"> 
+             <p class="p">For example, if the URL for the deployment is <code class="ph codeph">https://my-automation-portal-project.mycluster.com</code>, then the <code class="ph codeph">Redirect URI</code> value is <code class="ph codeph">https://my-automation-portal-project.mycluster.com/api/auth/rhaap/handler/frame</code>.</p> 
+            </div> </li> 
+          </ol> </li> 
+         <li class="li step"> <span class="ph cmd">Update the <code class="ph codeph">Redirect URIs</code> field in the OAuth application in Ansible Automation Platform: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">In a browser, open your instance of Ansible Automation Platform.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">OAuth Applications</span></span>.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">In the list view, click the OAuth application you created.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Replace the placeholder text in the <code class="ph codeph">Redirect URIs</code> field with the value you determined from your OpenShift deployment.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Click <code class="ph codeph">Save</code> to apply the changes.</span> </li> 
+          </ol> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="self-service-sign-in"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Sign in to Ansible automation portal</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Log in to the deployed Ansible automation portal using your existing Ansible Automation Platform credentials. The portal uses these credentials for authentication.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have configured an OAuth application in Ansible Automation Platform for Ansible automation portal.</li> 
+         <li class="li">You have configured a user account in Ansible Automation Platform.</li> 
+        </ul> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">In a browser, navigate to the URL for Ansible automation portal to open the sign-in page. <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/self-service-sign-in-page.png" alt="Self-service sign-in page"><br></span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Sign In</span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">The sign-in page for Ansible Automation Platform appears: <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/rhaap-sign-in-page.png" alt="Ansible Automation Platform sign-in page"><br></span> </li> 
+         <li class="li step"> <span class="ph cmd">Enter your Ansible Automation Platform credentials and click <strong class="ph b">Log in</strong>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">The Ansible automation portal web console opens.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section tasktroubleshooting"> 
+        <p class="p">If you are using custom or self-signed SSL certificates and when attempting to log in to Ansible automation portal, it displays the error:</p> 
+        <p class="p"><code class="ph codeph">Login failed; caused by Error: Failed to send POST request: fetch failed</code></p> 
+        <p class="p">This error indicates that Ansible automation portal cannot verify the SSL certificate from your Ansible Automation Platform instance.</p> 
+        <p class="p">To resolve this issue, configure Ansible automation portal to trust your custom CA certificate. </p> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">While you can disable SSL validation by setting <code class="ph codeph">checkSSL: false</code> in the Helm chart configuration, this approach is not recommended for production environments as it reduces security. Instead, configure Ansible automation portal to trust your custom CA certificate.</p> 
+         </div> 
+        </div> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

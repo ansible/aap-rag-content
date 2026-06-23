@@ -1,0 +1,5 @@
+{
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/optimize-proc_customizing_pod_specs#proc-enable-pods-ref-images",
+  "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-proc_customizing_pod_specs",
+  "title": "Enable pods to reference images from other secured registries"
+}

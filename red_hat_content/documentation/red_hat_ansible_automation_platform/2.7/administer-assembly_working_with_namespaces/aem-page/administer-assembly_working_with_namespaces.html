@@ -1,0 +1,466 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-working-with-namespaces"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Manage collection access and permissions with namespaces</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Namespaces are unique locations in automation hub to which you can upload and publish content collections.</p> 
+      <p class="p">Namespace access is governed by teams with permission to manage the content and related information that appears there. You can use namespaces in automation hub to organize collections developed within your organization for internal distribution and use.</p> 
+      <p class="p">If you are working with namespaces, you must have a team that has permissions to create, edit and upload collections to namespaces. Collections uploaded to a namespace require administrative approval before you can publish them and make them available for use.</p> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-create-content-developers"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Create a content development team</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Create a new team in Ansible Automation Platform to support content curation and development in your organization.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have administrative permissions in Ansible Automation Platform and can create teams.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">Your team can contribute internally-developed collections for publication in private automation hub.</p> 
+        <p class="p">To help content developers create a namespace and upload their internally developed collections to private automation hub, first create a team and assign the required permissions.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li>
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Teams</span></span> and click <span class="ph uicontrol button">Create team</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Enter <strong class="ph b">Content Engineering</strong> as a <strong class="ph b">Name</strong> for the team.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select an <strong class="ph b">Organization</strong> for the team.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Create team</span>. The team Details page opens.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select the <strong class="ph b">Roles</strong> tab and then select the <strong class="ph b">Automation Content</strong> tab.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Add roles</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select <strong class="ph b">Namespace</strong> from the <strong class="ph b">Resource type</strong> list and click <span class="ph uicontrol button">Next</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select the namespaces that will receive the new roles and click <span class="ph uicontrol button">Next</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select the roles to apply to the selected namespaces and click <span class="ph uicontrol button">Next</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Review your selections and click <span class="ph uicontrol button">Finish</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Close</span> to complete the process.</span> </li>
+        </ol>
+       </section> 
+       <section class="section postreq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div> 
+        <p class="p">The new team is created with the permissions that you assigned. You can now add users to the team in the <strong class="ph b">Users</strong> tab.</p> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist reltasks">
+        <strong>Related tasks</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_teams#proc-gw-team-list-view" title="The Teams page displays the existing teams for your installation. From here, you can search for a specific team, filter the list of teams by team name or organization, or change the sort order for the list.">Teams</a></li>
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_teams#proc-gw-team-add-user" title="To assign a user to a team, the user must already have been created. For more information, see Creating a user. Assigning a user to a team adds them as a member only. Use the Roles tab to assign a role that gives users on the team resource access.">Assign users to a team</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-create-namespace"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Create a namespace</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Create a namespace to organize collections that your content developers upload to automation hub.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have <strong class="ph b">Add Namespaces</strong> and <strong class="ph b">Upload to Namespaces</strong> permissions.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">When creating a namespace, you can assign a team in automation hub as owners of that namespace.</p> 
+        <div class="note tip note_tip">
+         <span class="note__title">Tip:</span> 
+         <div class="note__body"> 
+          <p class="p">By default, namespaces used on Ansible Galaxy are also used on automation hub by the Ansible partner team. For questions, contact <a class="xref" href="mailto:ansiblepartners@redhat.com" target="_blank" rel="external noopener">ansiblepartners@redhat.com</a>.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li>
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Namespaces</span></span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Create namespace</span> and enter a <strong class="ph b">Name</strong> for your namespace.</span> </li>
+         <li class="li step"> <span class="ph cmd">Optional: enter a description, company, logo URL, resources, or useful links in the appropriate fields.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Create namespace</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select the <strong class="ph b">Team Access</strong> tab and click <span class="ph uicontrol button">Add roles</span> to assign roles to your namespace.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select the team to which you want to grant a role, then click <span class="ph uicontrol button">Next</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select the roles you want to apply to the selected team, and then click <span class="ph uicontrol button">Next</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Review your selections and click <span class="ph uicontrol button">Finish</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Close</span> to complete the process.</span> </li>
+        </ol>
+       </section> 
+       <section class="section postreq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div> 
+        <p class="p">Your content developers can now upload collections to your new namespace. In addition, teams with permissions to upload to the namespace can start adding their collections for approval. Collections in the namespace appear in the <strong class="ph b">Published</strong> repository after approval.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-edit-namespace"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Edit namespace resources</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Edit the information associated with the namespace and provide resources for your users to accompany collections included in the namespace.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have <strong class="ph b">Change Namespaces</strong> permissions.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">Customize your namespace by adding a logo and a description, and link users to your GitHub repository, issue tracker, or other online assets. You can also enter markdown text in the <strong class="ph b">Resources</strong> field to include more information. This is helpful to users who use your content in their automation tasks.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li>
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Namespaces</span></span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select the namespace you want to edit.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click the <span class="ph uicontrol button">Edit namespace</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Enter the relevant information in the fields.</span> </li>
+         <li class="li step"> <span class="ph cmd">Optional: enter markdown information in the <strong class="ph b">Resources</strong> field.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Save namespace</span>.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="proc-uploading-collections"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Upload collections to a namespace</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Upload internally-developed collections in <code class="ph codeph">tar.gz</code> file format to your private automation hub namespace for review and approval by an automation hub administrator.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have a namespace to which you can upload the collection.</li> 
+        </ul> 
+        <div class="note important note_important">
+         <span class="note__title">Important:</span> 
+         <div class="note__body"> 
+          <p class="p">Attempting to upload very large collections will result in an error.</p> 
+          <p class="p">Limit collection size to 200 mb when uploading to console.redhat.com or private automation hub.</p> 
+          <p class="p">In scenarios that require a complete environment with multiple collections and dependencies, use an execution environment. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_container_registry#obtain-images" title="Before you can push execution environments to your private automation hub, you must first pull them from an existing registry and tag them for use.">Pull execution environments for use in automation hub</a>for more information.</p> 
+         </div>
+        </div> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body">
+          In Ansible Automation Platform 2.7, collection uploads route through platform gateway. If uploads fail with an HTTP 413 error, you may need to increase the gateway <code class="ph codeph">GRPC_SERVER_MAX_RECEIVE_MESSAGE_LENGTH</code> setting. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gateway_route_timeouts#con-gateway-route-timeouts" title="In Ansible Automation Platform 2.7, all API access to platform components goes through platform gateway. Gateway-level timeout settings control how long platform gateway waits for backend services to respond before closing a connection.">Configure platform gateway route timeouts</a>for more information.
+         </div>
+        </div> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">When approved, the collection moves to the <strong class="ph b">Published</strong> content repository where automation hub users can view and download it.</p> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Format your collection file name as follows: &lt;my_namespace-my_collection-1.0.0.tar.gz&gt;</p> 
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Namespaces</span></span> and select a namespace.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">Collections</strong> tab.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Upload collection</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Browse</span> next to the <strong class="ph b">Collection file</strong> field.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the collection to upload.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select one of the following options: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"> <strong class="ph b">Staging repos</strong> </li> 
+            <li class="li"> <strong class="ph b">Repositories without pipeline</strong> </li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Upload collection</span>.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">To verify whether the collection uploaded successfully or if it failed, navigate to <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Namespaces</span></span> and click the <span class="ph uicontrol button">More Actions</span> icon <strong class="ph b">⋮</strong>, then select <strong class="ph b">Imports</strong>. There you will find a summary of tests indicating whether the import was successful.</p> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist reltasks">
+        <strong>Related tasks</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_container_registry#obtain-images" title="Before you can push execution environments to your private automation hub, you must first pull them from an existing registry and tag them for use.">Pull execution environments for use in automation hub</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="proc-review-collection-imports"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Review your namespace import logs</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Review the status of collections uploaded to your namespaces to evaluate success or failure of the process.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have access to a namespace to which you can upload collections.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">Imported collection information includes:</p> 
+        <dl class="dl"> 
+         <dt class="dt dlterm">
+          Status
+         </dt> 
+         <dd class="dd">
+          completed or failed
+         </dd> 
+         <dt class="dt dlterm">
+          Approval status
+         </dt> 
+         <dd class="dd">
+          waiting for approval or approved
+         </dd> 
+         <dt class="dt dlterm">
+          Version
+         </dt> 
+         <dd class="dd">
+          the version of the uploaded collection
+         </dd> 
+         <dt class="dt dlterm">
+          Import log
+         </dt> 
+         <dd class="dd">
+          activities executed during the collection import
+         </dd> 
+        </dl> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">Log in to your Ansible Automation Platform.</span> </li>
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Namespaces</span></span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select a namespace.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click the <span class="ph uicontrol button">More Actions</span> icon <strong class="ph b">⋮</strong> and select <strong class="ph b">Imports</strong>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Use the search field or locate an imported collection from the list.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click the imported collection.</span> </li>
+         <li class="li step"> <span class="ph cmd">Review collection import details to determine the status of the collection in your namespace.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title7" id="delete-collection"> 
+      <h2 class="title topictitle2" id="ariaid-title7">Delete a collection</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can further manage your collections by deleting content, if the content has no dependencies.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">The content being deleted does not have dependencies with other content.</li> 
+         <li class="li">You have <strong class="ph b">Delete Collections</strong> permissions.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">The <strong class="ph b">Dependencies</strong> tab on a collection displays a list of other collections that use the current collection.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to your Ansible Automation Platform.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Collections</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Before deleting the collection, check to see if it has collections that are dependent on it: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Click the <strong class="ph b">Dependencies</strong> tab for that collection. If it is blank, you will be able to delete the collection. If the <strong class="ph b">Dependencies</strong> tab is not blank, you must delete these dependencies before you can delete the collection.</li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click the collection to delete.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click the <span class="ph uicontrol button">More Actions</span> icon <strong class="ph b">⋮</strong>, and then select an option: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd"><strong class="ph b">Delete version from system</strong> removes the specific version of the collection from the entire instance, including all repositories and namespaces.</span> </li> 
+           <li class="li substep"> <span class="ph cmd"><strong class="ph b">Delete version from repository</strong> removes the specific version of the collection from the repository where it was uploaded. This does not affect the collection in other repositories or namespaces.</span> </li> 
+           <li class="li substep"> <span class="ph cmd"><strong class="ph b">Delete entire collection from repository</strong> removes all versions of the entire collection from the repository where it was uploaded, but does not affect other repositories or namespaces.</span> </li> 
+           <li class="li substep"> <span class="ph cmd"><strong class="ph b">Delete entire collection from system</strong> removes all versions of the entire collection from the instance, including all repositories and namespaces.</span> </li> 
+          </ol> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">When the confirmation window opens, verify that the collection or version number is correct, and then select <strong class="ph b">Delete</strong>.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title8" id="proc-delete-namespace"> 
+      <h2 class="title topictitle2" id="ariaid-title8">Delete a namespace</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can delete unwanted namespaces to manage storage on your automation hub server.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">The namespace you are deleting does not have a collection with dependencies.</li> 
+         <li class="li">You have <strong class="ph b">Delete namespace</strong> permissions.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">First, ensure that the namespace you want to delete does not contain a collection with dependencies.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Namespaces</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click the namespace to be deleted.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click the <span class="ph uicontrol button">More Actions</span> icon <strong class="ph b">⋮</strong>, then click <span class="ph uicontrol button">Delete namespace</span>. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">If the <span class="ph uicontrol button">Delete namespace</span> button is disabled, the namespace contains a collection with dependencies. Review the collections in this namespace, and delete any dependencies.</p> 
+            </div>
+           </div> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">The namespace that you deleted, as well as its associated collections, is now deleted and removed from the namespace list view.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title9" id="proc-create-remote"> 
+      <h2 class="title topictitle2" id="ariaid-title9">Create a remote configuration in automation hub</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Remote configurations allow you to sync content to your custom repositories from an external collection source.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">In automation hub, you can create a remote configuration to an external collection source. Then, you can sync the content from those collections to your custom repositories.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Remotes</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create Remote</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Enter a <strong class="ph b">Name</strong> for the remote configuration.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Enter the <strong class="ph b">URL</strong> for the remote server, including the path for the specific repository. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">To find the remote server URL and repository path, navigate to <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Repositories</span></span>, select the <span class="ph uicontrol button">More Actions</span> icon <strong class="ph b">⋮</strong>, and select <span class="ph uicontrol button">Copy CLI configuration</span>.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">To sync signed collections only, check the box labeled <strong class="ph b">Signed collections only</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">To sync dependencies, check the box labeled <strong class="ph b">Sync all dependencies</strong>. To turn off dependency syncing, leave this box unchecked.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Configure the credentials to the remote server by entering a <strong class="ph b">Token</strong> or <strong class="ph b">Username</strong> and <strong class="ph b">Password</strong> required to access the external collection. </span> 
+          <div class="itemgroup info"> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">To access collections from console.redhat.com, enter the <strong class="ph b">SSO URL</strong> to sign in to the identity provider (IdP).</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select or create a <strong class="ph b">Requirements file</strong> to identify the collections and version ranges to synchronize with your custom repository. For example, to download only the kubernetes and AWS collection versions 5.0.0 or later the requirements file would look like this: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>Collections:
+       - name: community.kubernetes
+      - name: community.aws
+         version:”&gt;=5.0.0”</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: To configure your remote further, use the options available under <strong class="ph b">Show advanced options</strong>: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">If there is a corporate proxy in place for your organization, enter a <strong class="ph b">Proxy URL</strong>, <strong class="ph b">Proxy Username</strong> and <strong class="ph b">Proxy Password</strong>.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Enable or disable transport layer security using the <strong class="ph b">TLS validation</strong> checkbox.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">If digital certificates are required for authentication, enter a <strong class="ph b">Client key</strong> and <strong class="ph b">Client certificate</strong>.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">If you are using a self-signed SSL certificate for your server, enter the PEM encoded client certificate used for authentication in the <strong class="ph b">CA certificate</strong> field.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">To accelerate the speed at which collections in this remote can be downloaded, specify the number of collections that can be downloaded in tandem in the <strong class="ph b">Download concurrency</strong> field.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">To limit the number of queries per second on this remote, specify a <strong class="ph b">Rate Limit</strong>. </span> 
+            <div class="itemgroup info"> 
+             <div class="note note note_note">
+              <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">Some servers can have a specific rate limit set, and if exceeded, synchronization fails.</p> 
+              </div>
+             </div> 
+            </div> </li> 
+          </ol> </li>
+        </ol>
+       </section> 
+      </div> 
+      <article class="topic task nested2" aria-labelledby="ariaid-title10" id="proc-provide-remote-access"> 
+       <h3 class="title topictitle3" id="ariaid-title10">Assign access to a remote configuration</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">After you create a remote configuration, you must provide access to it before anyone can use it.</p> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li>
+          <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Remotes</span></span>.</span> </li>
+          <li class="li step"> <span class="ph cmd">Click into your repository in the list, and then select the <strong class="ph b">Team Access</strong> tab.</span> </li>
+          <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Add roles</span>.</span> </li>
+          <li class="li step"> <span class="ph cmd">Select the team to which you want to grant a role, then click <span class="ph uicontrol button">Next</span>.</span> </li>
+          <li class="li step"> <span class="ph cmd">Select the roles you want to apply to the selected team, and then click <span class="ph uicontrol button">Next</span>.</span> </li>
+          <li class="li step"> <span class="ph cmd">Review your selections and click <span class="ph uicontrol button">Finish</span>.</span> </li>
+          <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Close</span> to complete the process.</span> </li>
+         </ol>
+        </section> 
+       </div> 
+      </article>
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

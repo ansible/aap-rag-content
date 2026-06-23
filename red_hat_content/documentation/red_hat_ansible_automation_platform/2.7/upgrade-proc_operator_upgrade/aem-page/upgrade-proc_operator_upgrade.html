@@ -1,0 +1,75 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="upgrading-operator"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Upgrade the Ansible Automation Platform Operator</h1> 
+     <div class="body taskbody">
+      <p class="shortdesc">To upgrade to the latest version of Ansible Automation Platform Operator on OpenShift Container Platform, you can use the following procedure:</p> 
+      <section class="section prereq">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Before you begin</h2>
+       </div> 
+       <div class="note important note_important">
+        <span class="note__title">Important:</span> 
+        <div class="note__body"> 
+         <p dir="ltr" class="p">Upgrading from version 2.4 or 2.5 is not supported. Upgrade to Red Hat Ansible Automation Platform 2.6 before upgrading to version 2.7.</p> 
+         <p dir="ltr" class="p">See Upgrading Red Hat Ansible Automation Platform Operator in the version 2.6 documentation.</p> 
+        </div>
+       </div> 
+       <ul class="ul"> 
+        <li class="li">Read the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/platform_intro" title="Ansible Automation Platform unifies comprehensive automation capabilities, a robust ecosystem, and flexible deployment options into one strategic solution. It enables customers to automate and orchestrate workflows across domains for efficient, resilient, and consistent IT operations at scale.">Release notes</a> for your target version.</li> 
+       </ul> 
+       <ol class="ol"> 
+        <li class="li">For existing deployments only: You must deploy your automation controller and automation hub instances to the same, single namespace before upgrading. For more information see, <a class="xref" href="https://access.redhat.com/solutions/7092056" target="_blank" rel="external noopener">Migrating from one namespace to another</a>.</li> 
+        <li class="li">Review the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_aap_backup_recovery" title="To safeguard against unexpected data loss and application errors, it is critical that you perform periodic backups of your Red Hat Ansible Automation Platform deployment. In addition to data loss prevention, backups allow you to fall back to a different deployment state.">Backup and restore in an OpenShift environment</a> section and backup your services: 
+         <ul class="ul"> 
+          <li class="li">AutomationControllerBackup</li> 
+          <li class="li">AutomationHubBackup</li> 
+          <li class="li">EDABackup</li> 
+         </ul> </li> 
+       </ol> 
+       <div class="note important note_important">
+        <span class="note__title">Important:</span> 
+        <div class="note__body"> 
+         <p class="p">Upgrading from Event-Driven Ansible 2.4 is not supported. If you are using Event-Driven Ansible 2.4 in production, contact Red Hat before you upgrade.</p> 
+        </div>
+       </div> 
+      </section> 
+      <section>
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Procedure</h2>
+       </div>
+       <ol class="ol steps">
+        <li class="li step stepexpand"> <span class="ph cmd">Log in to OpenShift Container Platform.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Installed Operators</span></span>.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Select the Ansible Automation Platform Operator installed on your project namespace.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">Subscriptions</strong> tab.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">To upgrade to 2.7 change the channel to <code class="ph codeph">stable-2.7</code>.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">This creates an InstallPlan for the user. Click <span class="ph uicontrol button">Preview InstallPlan</span>.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Approve</span>.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Create a Custom Resource (CR) using the Ansible Automation Platform UI.</span> 
+         <div class="itemgroup info"> 
+          <div class="note note note_note">
+           <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">The automation controller and automation hub UIs remain until all SSO configuration is supported in the platform gateway UI.</p> 
+           </div>
+          </div> 
+         </div> </li>
+       </ol>
+      </section> 
+      <section class="section result">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Results</h2>
+       </div> 
+       <p class="p">You can confirm you have upgraded successfully by navigating to <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Installed Operators</span></span>, here under Ansible Automation Platform you can verify the version number matches your target version.</p> 
+       <p class="p">Additionally, go to your Ansible Automation Platform Operator deployment and click <span class="ph uicontrol button">All instances</span> to verify if all instances upgraded correctly. All pods should display either a <strong class="ph b">Running</strong> or <strong class="ph b">Completed status</strong>, with no pods displaying an error status.</p> 
+      </section> 
+     </div> 
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="devtools-develop-collections"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Package and distribute automation content with collections</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Collections are a distribution format for Ansible content that can include playbooks, roles, modules, and plugins. Red Hat provides Ansible Content Collections on Ansible automation hub that contain both Red Hat Ansible Certified Content and Ansible validated content.</p> 
+      <p class="p">If you have installed private automation hub, you can create collections for your organization and push them to private automation hub so that you can use them in job templates in Ansible Automation Platform. You can use collections to package and distribute plug-ins. These plug-ins are written in Python.</p> 
+      <p class="p">You can also create collections to package and distribute Ansible roles, which are expressed in YAML. You can also include playbooks and custom plug-ins that are required for these roles in the collection. Typically, collections of roles are distributed for use within your organization.</p> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="devtools-create-roles-collection"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Understand collections for distributing roles</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">An Ansible role is a self-contained unit of Ansible automation content that groups related tasks and associated variables, files, handlers, and other assets in a defined directory structure.</p> 
+       <p class="p">You can run Ansible roles in one or more plays, and reuse them across playbooks. Invoking roles instead of tasks simplifies playbooks. You can migrate existing standalone roles into collections, and push them to private automation hub to share them with other users in your organization. Distributing roles in this way is a typical way to use collections.</p> 
+       <p class="p">With Ansible collections, you can store and distribute multiple roles in a single unit of reusable automation. Inside a collection, you can share custom plug-ins across all roles in the collection instead of duplicating them in each role.</p> 
+       <p class="p">You must move roles into collections if you want to use them in Ansible Automation Platform.</p> 
+       <p class="p">You can add existing standalone roles to a collection, or add new roles to it. Push the collection to source control and configure credentials for the repository in Ansible Automation Platform.</p> 
+      </div> 
+      <article class="topic concept nested2" aria-labelledby="ariaid-title3" id="plan-roles-collection"> 
+       <h3 class="title topictitle3" id="ariaid-title3">Plan your collection</h3> 
+       <div class="body conbody">
+        <p class="shortdesc">Organize smaller bundles of curated automation into separate collections for specific functions, rather than creating one big general collection for all of your roles.</p> 
+        <p class="p">For example, you could store roles that manage the networking for an internal system called <code class="ph codeph">myapp</code> in a <code class="ph codeph">company_namespace.myapp_network</code> collection, and store roles that manage and deploy networking in AWS in a collection called <code class="ph codeph">company_namespace.aws_net</code>.</p> 
+       </div> 
+      </article>
+      <article class="topic concept nested2" aria-labelledby="ariaid-title4" id="devtools-roles-collection-prerequisites"> 
+       <h3 class="title topictitle3" id="ariaid-title4">Prerequisites</h3> 
+       <div class="body conbody">
+        <p class="shortdesc">You must install and configure the essential software and accounts listed in this section before you proceed.</p> 
+        <ul class="ul"> 
+         <li class="li">VS Code and the Ansible extension</li> 
+         <li class="li">Microsoft Dev Containers extension in VS Code</li> 
+         <li class="li">Ansible development tools</li> 
+         <li class="li">A containerization platform, for example Podman, Podman Desktop, Docker, or Docker Desktop</li> 
+         <li class="li">A Red Hat account and log in access to the Red Hat container registry at registry.redhat.io. For information about logging in to registry.redhat.io, see Authenticating with the Red Hat container registry.</li> 
+        </ul> 
+       </div> 
+       <nav role="navigation" class="related-links">
+        <div class="linklist reltasks">
+         <strong>Related tasks</strong>
+         <br>
+         <ul class="linklist">
+          <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_devtools_requirements#devtools-setup-registry-redhat-io" title="All container images available through the Red Hat container catalog are hosted on an image registry, registry.redhat.io. The registry requires authentication for access to images.">Authenticating with the Red Hat container registry</a></li>
+         </ul>
+        </div>
+       </nav> 
+      </article>
+      <article class="topic task nested2" aria-labelledby="ariaid-title5" id="devtools-scaffold-roles-collection"> 
+       <h3 class="title topictitle3" id="ariaid-title5">Generate the collection structure for roles</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">Scaffold a collection using the Ansible extension in VS Code. This process creates the necessary directory structure for packaging and distributing your roles and plug-ins.</p> 
+        <section class="section context">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">About this task</h4>
+         </div>
+        </section> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step stepexpand"> <span class="ph cmd">Open VS Code.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Navigate to the directory where you want to create your roles collection.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Click the Ansible icon in the VS Code activity bar to open the Ansible extension.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Select <strong class="ph b">Get started</strong> in the <strong class="ph b">Ansible content creator</strong> section. </span> 
+           <div class="itemgroup info"> 
+            <p class="p">The <strong class="ph b">Ansible content creator</strong> tab opens.</p> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Create</strong> section, click <strong class="ph b">Ansible collection project</strong>. </span> 
+           <div class="itemgroup info"> 
+            <p class="p">The <strong class="ph b">Create new Ansible project</strong> tab opens.</p> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">In the form in the <strong class="ph b">Create Ansible project</strong> tab, enter the following: </span> 
+           <div class="itemgroup info"> 
+            <ul class="ul"> 
+             <li class="li"><strong class="ph b">Namespace</strong>: Enter a name for your namespace, for example <code class="ph codeph">company_namespace</code>.</li> 
+             <li class="li"><strong class="ph b">Collection</strong>: Enter a name for your collection, for example, <code class="ph codeph">myapp_network</code>.</li> 
+             <li class="li"><strong class="ph b">Init path</strong>: Enter the path to the directory where you want to scaffold your new collection. <p class="p">If you enter an existing directory name, the scaffolding process overwrites the contents of that directory. The scaffold process only allows you to use an existing directory if you enable the Force option.</p>
+              <ul class="ul">
+               <li class="li">If you are using the containerized version of Ansible development tools, the destination directory path is relative to the container, not a path in your local system. To discover the current directory name in the container, run the pwd command in a terminal in VS Code. If the current directory in the container is <code class="ph codeph">workspaces</code>, enter <code class="ph codeph">workspaces/&lt;current_project&gt;/collections</code>.</li>
+               <li class="li">If you are using a locally installed version of Ansible Dev tools, enter the full path to the directory, for example <code class="ph codeph">/user/&lt;username&gt;/path/to/&lt;collection_directory&gt;</code>.</li>
+              </ul></li> 
+            </ul> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create</span>.</span> </li>
+         </ol>
+        </section> 
+        <section class="section result">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Results</h4>
+         </div> 
+         <p class="p">The following message appears in the <strong class="ph b">Logs</strong> pane of the <strong class="ph b">Create Ansible collection</strong> tab.</p> 
+         <pre class="pre codeblock"><code>--------------------- ansible-creator logs ---------------------
+
+    Note: collection company_namespace.myapp_network created at /path/to/collections/directory</code></pre> 
+         <p class="p">The following directories and files are created in your <code class="ph codeph">collections/</code> directory:</p> 
+         <pre class="pre codeblock"><code>├── .devcontainer
+├── .github
+├── .gitignore
+├── .isort.cfg
+├── .pre-commit-config.yaml
+├── .prettierignore
+├── .vscode
+├── CHANGELOG.rst
+├── CODE_OF_CONDUCT.md
+├── CONTRIBUTING
+├── LICENSE
+├── MAINTAINERS
+├── README.md
+├── changelogs
+├── devfile.yaml
+├── docs
+├── extensions
+├── galaxy.yml
+├── meta
+├── plugins
+├── pyproject.toml
+├── requirements.txt
+├── roles
+├── test-requirements.txt
+├── tests
+└── tox-ansible.ini</code></pre> 
+        </section> 
+       </div> 
+      </article>
+      <article class="topic task nested2" aria-labelledby="ariaid-title6" id="devtools-migrate-existing-roles-collection"> 
+       <h3 class="title topictitle3" id="ariaid-title6">Migrate existing roles to your collection</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">Migrate existing standalone roles into the <code class="ph codeph">roles/</code> directory of your new collection. You must rename roles to remove hyphens and update playbooks to use the fully qualified collection name.</p> 
+        <section class="section context">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">About this task</h4>
+         </div> 
+         <pre class="pre codeblock"><code>my_role
+├── README.md
+├── defaults
+│   └── main.yml
+├── files
+├── handlers
+│   └── main.yml
+├── meta
+│   └── main.yml
+├── tasks
+│   └── main.yml
+├── templates
+├── tests
+│   ├── inventory
+│   └── test.yml
+└── vars
+    └── main.yml</code></pre> 
+         <p class="p">An Ansible role has a defined directory structure with seven main standard directories. Each role must must include at least one of these directories. You can omit any directories the role does not use. Each directory contains a <code class="ph codeph">main.yml</code> file.</p> 
+        </section> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step stepexpand"> <span class="ph cmd">If necessary, rename the directory that contains your role to reflect its content, for example, <code class="ph codeph">acl_config</code> or <code class="ph codeph">tacacs</code>. </span> 
+           <div class="itemgroup info"> 
+            <p class="p">Roles in collections cannot have hyphens in their names. Use the underscore character (<code class="ph codeph">_</code>) instead.</p> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Copy the roles directories from your standalone role into the <code class="ph codeph">roles/</code> directory in your collection. </span> 
+           <div class="itemgroup info"> 
+            <p class="p">For example, in a collection called <code class="ph codeph">myapp_network</code>, add your roles to the <code class="ph codeph">myapp_network/roles/</code> directory.</p> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Copy any plug-ins from your standalone roles into the <code class="ph codeph">plugins directory/</code> for your new collection. The collection directory structure resembles the following. </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>company_namespace
+└── myapp_network
+    ├── ...
+    ├── galaxy.yml
+    ├── docs
+    ├── extensions
+    ├── meta
+    ├── plugins
+    ├── roles
+    │   ├── acl_config
+    │   │   ├── README.md
+    │   │   ├── defaults
+    │   │   ├── files
+    │   │   ├── handlers
+    │   │   ├── meta
+    │   │   ├── tasks
+    │   │   ├── templates
+    │   │   ├── tests
+    │   │   └── vars
+    │   └── tacacs
+    │       ├── README.md
+    │       ├── default
+    │       ├── files
+    │       ├── handlers
+    │       ├── meta
+    │       ├── tasks
+    │       ├── templates
+    │       ├── tests
+    │       └── vars
+    │   ├── run
+    ├── ...
+    ├── tests
+    └── vars</code></pre> 
+            <p class="p">The <code class="ph codeph">run</code> role is a default role directory that is created when you scaffold the collection.</p> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Update your playbooks to use the fully qualified collection name (FQDN) for your new roles in your collection. </span> 
+           <div class="itemgroup info"> 
+            <div class="note note note_note">
+             <span class="note__title">Note:</span> 
+             <div class="note__body"> 
+              <p class="p">Not every standalone role will seamlessly integrate into your collection without modification of the code. For example, if a third-party standalone role from Galaxy that contains a plug-in uses the <code class="ph codeph">module_utils/</code> directory, then the plug-in itself has import statements.</p> 
+             </div>
+            </div> 
+           </div> </li>
+         </ol>
+        </section> 
+       </div> 
+      </article>
+      <article class="topic task nested2" aria-labelledby="ariaid-title7" id="devtools-create-new-role-in-collection"> 
+       <h3 class="title topictitle3" id="ariaid-title7">Create a new role in your collection</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">Create a new Ansible role within your collection by copying the default role directory.</p> 
+        <section class="section context">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">About this task</h4>
+         </div>
+        </section> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step"> <span class="ph cmd">To create a new role, copy the default <code class="ph codeph">run</code> role directory that was scaffolded when you created the collection.</span> </li>
+          <li class="li step"> <span class="ph cmd">Define the tasks that you want your role to perform in the <code class="ph codeph">tasks/main.yml</code> file. If you are creating a role to reuse tasks in an existing playbook, copy the content in the tasks block of your playbook YAML file. Remove the whitespace to the left of the tasks. Use <code class="ph codeph">ansible-lint</code> in VS Code to check your YAML code.</span> </li>
+          <li class="li step"> <span class="ph cmd">If your role depends on another role, add the dependency in the <code class="ph codeph">meta/main.yml</code> file.</span> </li>
+         </ol>
+        </section> 
+       </div> 
+      </article>
+      <article class="topic task nested2" aria-labelledby="ariaid-title8" id="devtools-docs-roles-collection"> 
+       <h3 class="title topictitle3" id="ariaid-title8">Add documentation for your roles collection</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">It is important to provide documentation for your roles and roles collection, so that other users understand what your roles do and how to use them.</p> 
+        <section class="section context">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">About this task</h4>
+         </div>
+        </section> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step stepexpand"> <span class="ph cmd">To add documentation for a role, navigate to the role directory.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Open the <code class="ph codeph">README.md</code> file in an editor. This file was added in the role directory when you scaffolded your collection directory.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Provide the following information in the <code class="ph codeph">README.md</code> files for every role in your collection: </span> 
+           <div class="itemgroup info"> 
+            <ul class="ul"> 
+             <li class="li">Role description: A brief summary of what the role does</li> 
+             <li class="li">Requirements: List the collections, libraries, and required installations</li> 
+             <li class="li">Dependencies</li> 
+             <li class="li">Role variables: Provide the following information about the variables your role uses. 
+              <ul class="ul">
+               <li class="li">Description</li>
+               <li class="li">Defaults</li>
+               <li class="li">Example values</li>
+               <li class="li">Required variables</li>
+              </ul></li> 
+             <li class="li">Example playbook: Show an example of a playbook that uses your role. Use comments in the playbook to help users understand where to set variables. <p class="p">The <code class="ph codeph">README.md</code> file in <a class="xref" href="https://github.com/redhat-cop/controller_configuration/tree/devel/roles/ad_hoc_command_cancel" target="_blank" rel="external noopener"><code class="ph codeph">controller_configuration.ad_hoc_command_cancel</code></a> is an example of a role with standard documentation.</p></li> 
+            </ul> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">To add documentation for your roles collection, navigate to the collection directory.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">In the <code class="ph codeph">README.md</code> file for your collection, provide the following information: </span> 
+           <div class="itemgroup info"> 
+            <ul class="ul"> 
+             <li class="li">Collection description: Describe what the collection does.</li> 
+             <li class="li">Requirements: List required collections.</li> 
+             <li class="li">List the roles as a component of the collection.</li> 
+             <li class="li">Using the collection: Describe how to run the components of the collection.</li> 
+             <li class="li">Add a troubleshooting section.</li> 
+             <li class="li">Versioning: Describe the release cycle of your collection.</li> 
+            </ul> 
+           </div> </li>
+         </ol>
+        </section> 
+       </div> 
+      </article>
+      <article class="topic task nested2" aria-labelledby="ariaid-title9" id="devtools-publish-roles-collection-pah"> 
+       <h3 class="title topictitle3" id="ariaid-title9">Publish your collection in private automation hub</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">Publish your collection by packaging it into a tarball and uploading it to a namespace in private automation hub. This makes the collection available for internal use in Ansible Automation Platform projects.</p> 
+        <section class="section prereq">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Before you begin</h4>
+         </div> 
+         <ul class="ul"> 
+          <li class="li">Package your collection into a tarball.</li> 
+          <li class="li">Format your collection file name as follows <code class="ph codeph">&lt;my_namespace-my_collection-x.y.z.tar.gz&gt;</code>.For example, <code class="ph codeph">company_namespace-myapp_network-2.0.0.tar.gz</code></li> 
+         </ul> 
+        </section> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step"> <span class="ph cmd">Create a namespace for your collection in private automation hub. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_working_with_namespaces#proc-create-namespace" title="Create a namespace to organize collections that your content developers upload to automation hub.">Creating a namespace</a> .</span> </li>
+          <li class="li step"> <span class="ph cmd">Optional: Add information to your namespace. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_working_with_namespaces#proc-edit-namespace" title="Edit the information associated with the namespace and provide resources for your users to accompany collections included in the namespace.">Adding additional information and resources to a namespace</a> in <em class="ph i">Managing automation content</em> .</span> </li>
+          <li class="li step"> <span class="ph cmd">Upload your roles collections tarballs to your namespace. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_working_with_namespaces#proc-uploading-collections" title="Upload internally-developed collections in tar.gz file format to your private automation hub namespace for review and approval by an automation hub administrator.">Uploading collections to your namespaces</a> in <em class="ph i">Managing automation content</em> .</span> </li>
+          <li class="li step"> <span class="ph cmd">Approve your collection for internal publication. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_managing_private_collections#proc-approve-collection" title="You can approve collections uploaded to individual namespaces for internal publication and use.">Uploading collections to your namespaces</a> in <em class="ph i">Managing automation content</em>.</span> </li>
+         </ol>
+        </section> 
+       </div> 
+       <article class="topic task nested3" aria-labelledby="ariaid-title10" id="devtools-use-roles-collections-aap"> 
+        <h4 class="title topictitle4" id="ariaid-title10">Use your collection in projects in Red Hat Ansible Automation Platform</h4> 
+        <div class="body taskbody">
+         <p class="shortdesc">To use your collection in automation controller projects, add the collection to a custom execution environment. Then tag the new image and push it to private automation hub.</p> 
+         <section class="section context">
+          <div class="tasklabel">
+           <h5 class="sectiontitle tasklabel">About this task</h5>
+          </div> 
+          <p class="p">The following procedure describes the workflow to add a collection to an execution environment. Refer to <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/creating_and_using_execution_environments/assembly-publishing-exec-env#proc-customize-ee-image" target="_blank" rel="external noopener">Customizing an existing automation executions environment image</a> for the commands to execute these steps.</p> 
+         </section> 
+         <section>
+          <div class="tasklabel">
+           <h5 class="sectiontitle tasklabel">Procedure</h5>
+          </div>
+          <ol class="ol steps">
+           <li class="li step"> <span class="ph cmd">You can pull an execution environment base image from automation hub, or you can add your collection to your own custom execution environment.</span> </li>
+           <li class="li step"> <span class="ph cmd">Add the collections that you want to include in the execution environment.</span> </li>
+           <li class="li step"> <span class="ph cmd">Build the new execution environment.</span> </li>
+           <li class="li step"> <span class="ph cmd">Verify that the collections are in the execution environment.</span> </li>
+           <li class="li step"> <span class="ph cmd">Tag the image and push it to private automation hub.</span> </li>
+           <li class="li step"> <span class="ph cmd">Pull your new image into your automation controller instance.</span> </li>
+           <li class="li step"> <span class="ph cmd">The playbooks that use the roles in your collection must use the fully qualified domain name (FQDN) for the roles.</span> </li>
+          </ol>
+         </section> 
+        </div> 
+       </article>
+      </article>
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

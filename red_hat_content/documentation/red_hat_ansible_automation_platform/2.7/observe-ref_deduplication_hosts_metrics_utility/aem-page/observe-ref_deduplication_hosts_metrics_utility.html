@@ -1,0 +1,44 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="ref-deduplication-hosts-metrics-utility"> 
+     <h1 class="title topictitle1" id="ariaid-title1">How to deduplicate host data in reports</h1> 
+     <div class="body refbody">
+      <p class="shortdesc">Deduplication changes how <code class="ph codeph">metrics-utility</code> merges individual host records into countable managed nodes when building reports. Deduplication identifies identical hosts to ensure an accurate count of unique hosts.</p> 
+      <section class="section"> 
+       <p class="p"><code class="ph codeph">metrics-utility</code> tracks individual hosts based on their hostnames. It tracks any entries that use the same hostname as the host. Additional deduplication strategies are also available using the following environment variable: <code class="ph codeph">METRICS_UTILITY_DEDUPLICATOR=</code>.</p> 
+      </section> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-deduplication-renewal-guidance"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Deduplication in the <code class="ph codeph">RENEWAL_GUIDANCE</code> report</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The <code class="ph codeph">RENEWAL_GUIDANCE</code> report uses deduplication to merge several entries for the same managed node into a single entry. This is important to provide accurate counts of managed nodes for subscription renewal.</p> 
+       <section class="section"> 
+        <p class="p">The default value for <code class="ph codeph">METRICS_UTILITY_DEDUPLICATOR=renewal</code>. This is the original method, which analyzes <code class="ph codeph">host_name</code>, <code class="ph codeph">ansible_host</code>, <code class="ph codeph">ansible_product_serial</code>, and <code class="ph codeph">ansible_machine_id</code> separately, and merges entries any duplicated items.</p> 
+        <p class="p"><code class="ph codeph">METRICS_UTILITY_DEDUPLICATOR=renewal</code> applies deduplication in multiple iterations. It is limited by the <code class="ph codeph">REPORT_RENEWAL_GUIDANCE_DEDUP_ITERATIONS</code> environment variable, which defaults to <code class="ph codeph">3</code>.</p> 
+        <p class="p">You can also run <code class="ph codeph">METRICS_UTILITY_DEDUPLICATOR</code> with the following environment variables:</p> 
+        <ul class="ul"> 
+         <li class="li"><code class="ph codeph">METRICS_UTILITY_DEDUPLICATOR=renewal-hostname</code>. This is similar to <code class="ph codeph">ccsp</code>, again preferring <code class="ph codeph">ansible_host</code> over <code class="ph codeph">host_name</code> when present. No other fields are considered.</li> 
+         <li class="li"><code class="ph codeph">METRICS_UTILITY_DEDUPLICATOR=renewal-experimental</code>. This is similar to <code class="ph codeph">ccsp-experimental</code>, which first applies the hostname-based deduplication, then deduplicates again, merging when both of the serials match.</li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="ref-deduplication-ccsp-ccspv2"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Deduplication in the CCSP or CCSPv2 reports</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">When generating the CCSP or CCSPv2 reports, you can set deduplication options to avoid counting the same managed node multiple times.</p> 
+       <section class="section"> 
+        <p class="p">The default value for <code class="ph codeph">METRICS_UTILITY_DEDUPLICATOR=ccsp</code>. This limits deduplication to hostnames only.</p> 
+        <p class="p">The <code class="ph codeph">ansible_host</code> variable, from <code class="ph codeph">main_host.variables</code>, is preferred over <code class="ph codeph">host_name</code>, from <code class="ph codeph">main_jobhostsummary</code>, when present.</p> 
+        <p class="p">You can also set <code class="ph codeph">METRICS_UTILITY_DEDUPLICATOR=ccsp-experimental</code>. This setting merges entries when both their <code class="ph codeph">ansible_product_serial</code> and <code class="ph codeph">ansible_machine_id</code> facts are present and duplicated.</p> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

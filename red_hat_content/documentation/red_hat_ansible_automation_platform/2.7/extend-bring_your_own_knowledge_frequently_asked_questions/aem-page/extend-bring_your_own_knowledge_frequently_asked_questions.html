@@ -1,0 +1,23 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-843dd86f-b02c-4074-9b1e-decc0d6a4d0f">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Bring your own knowledge frequently asked questions</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Below, find some frequently-asked questions about the BYOK to the automation assistant feature.</p> 
+     <p class="p"><strong class="ph b">Does BYOK replace the default Ansible documentation in the intelligent assistant?</strong> No. BYOK adds a second knowledge source alongside the default Ansible documentation. Both sources remain active. The Ansible documentation RAG cannot be disabled.</p> 
+     <p class="p"><strong class="ph b">Do end users need to do anything differently once BYOK is deployed?</strong> No. Users interact with the intelligent assistant the same way they always have. The intelligent assistant automatically incorporates BYOK content into its responses when relevant.</p> 
+     <p class="p"><strong class="ph b">How does the intelligent assistant decide whether to use BYOK content or Ansible docs?</strong> The intelligent assistant queries both sources for every question. BYOK content receives a higher priority score (controlled by the <code class="ph codeph">score_multiplier</code> parameter). When BYOK content is relevant, it takes precedence. When it isn't, Ansible documentation fills the gap. For questions that span both, the intelligent assistant blends the sources into a single coherent answer.</p> 
+     <p class="p"><strong class="ph b">What happens if the BYOK image becomes unavailable?</strong> The intelligent assistant falls back gracefully to the Ansible documentation RAG and continues serving users without interruption. The issue is logged for administrator visibility.</p> 
+     <p class="p"><strong class="ph b">What file formats can I include in a BYOK image?</strong> Only Markdown (.md) and plain text (.txt) files are supported. Content in other formats (PDF, AsciiDoc, HTML) must be converted before creating the BYOK image.</p> 
+     <p class="p"><strong class="ph b">Can I have multiple BYOK images active at the same time?</strong> No. Only one BYOK image can be active at a time. To combine multiple documentation sets, merge them into a single image during the build process.</p> 
+     <p class="p"><strong class="ph b">How do I update the BYOK content when our documentation changes?</strong>See the section titled <strong class="ph b">Keep your custom documentation current</strong> for instructions on updating the BYOK image.</p> 
+     <p class="p"><strong class="ph b">Does BYOK work on both OpenShift and containerized deployments?</strong> Yes. BYOK provides full feature parity across both operator-based (OpenShift) and containerized AAP deployments.</p> 
+     <p class="p"><strong class="ph b">Does BYOK affect response times?</strong> BYOK's dual-source retrieval is designed to maintain response times comparable to single-source operation. Response times remain comparable.</p> 
+     <p class="p"><strong class="ph b">Does my data leave my infrastructure?</strong> No. The BYOK image is built on your infrastructure using open source tooling, stored in your container registry, and deployed within your Ansible Automation Platform environment. For on-premise deployments, your documentation never leaves your control.</p> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

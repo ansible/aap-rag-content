@@ -1,0 +1,39 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-d4a25359-969e-413c-ba14-ee77f0de3125">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Install Ansible Development Tools with the AI assistant</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">If you do not have Ansible Development Tools installed, you can instruct the assistant to install them.</p> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Open GitHub Copilot Chat.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Enter the prompt: </span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>
+            
+          </code></pre> The assistant then triggers the <code class="ph codeph">adt_check_env</code> tool.
+        </div> 
+        <div class="itemgroup stepresult">
+         The system: 
+         <ul class="ul" id="GUID-d4a25359-969e-413c-ba14-ee77f0de3125__ul_1"> 
+          <li class="li">Checks if ADT is already installed. If so, it will report: "ADT (<code class="ph codeph">ansible-dev-tools</code>) is already installed".</li> 
+          <li class="li">If ADT is not installed, it will attempt installation via <code class="ph codeph">pip</code> or <code class="ph codeph">pipx</code>.</li> 
+         </ul> If ADT is not already installed, the AI assistant chooses a package manager (<code class="ph codeph">pip</code> or <code class="ph codeph">pipx</code>) and installs ADT automatically.
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section postreq" id="GUID-d4a25359-969e-413c-ba14-ee77f0de3125__postreq_1">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">What to do next</h2>
+      </div>When installation is complete, the assistant will return a message in the Copilot chat window confirming that ADT has been installed successfully. You can also prompt the assistant to <code class="ph codeph">check my Ansible environment again</code>. If the installation was successful, the assistant will verify that ADT is in your environment.
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="proc-prepare-gateway-accounts-upgrade">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Prepare platform gateway accounts for the 2.7 upgrade</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">In Red Hat Ansible Automation Platform 2.6, users without a platform gateway account can authenticate using an automation controller password. In Ansible Automation Platform 2.7, this fallback authentication mechanism is removed.</p> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">You must configure platform gateway accounts for all users before upgrading. Users cannot authenticate after the upgrade if they rely on the automation controller password fallback.</p> 
+       </div>
+      </div> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Identify users who authenticate through the automation controller password fallback.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Create platform gateway accounts for these users or instruct users to set platform gateway passwords.</span> 
+        <div class="itemgroup info"> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">If you miss this step before upgrading, automation controller accounts are automatically created in platform gateway during the upgrade, but passwords are not set. Users with automatically-created accounts must reset their passwords before they can log in.</p> 
+          </div>
+         </div> 
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <p class="p">Confirm that all active users can log in to their platform gateway accounts.</p> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

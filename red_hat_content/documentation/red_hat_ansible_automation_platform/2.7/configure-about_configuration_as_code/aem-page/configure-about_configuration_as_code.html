@@ -1,0 +1,140 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="about-configuration-as-code">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configuration as Code with the ansible.platform collection</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Configuration as Code (CaC) is an approach where you define and manage the configuration of Ansible Automation Platform using version-controlled files, such as YAML, instead of manually configuring resources through the web UI.</p> 
+     <p class="p">The <code class="ph codeph">ansible.platform</code> collection provides Ansible modules for managing Ansible Automation Platform resources programmatically. You can use this collection to automate the creation and management of organizations, users, teams, role-based access control (RBAC), authentication providers, gateway services, and platform-wide settings.</p> 
+     <section class="section" id="about-configuration-as-code__benefits">
+      <h2 class="title sectiontitle">Benefits of Configuration as Code</h2> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Repeatability</strong>: Apply the same configuration across development, staging, and production environments.</li> 
+       <li class="li"><strong class="ph b">Change tracking</strong>: Store configuration in Git to maintain a history of changes with diffs and rollback capability.</li> 
+       <li class="li"><strong class="ph b">Disaster recovery</strong>: Rebuild your Ansible Automation Platform configuration quickly after outages or migrations.</li> 
+       <li class="li"><strong class="ph b">Reduced errors</strong>: Route changes through CI/CD pipelines and pull requests for peer review and automated testing.</li> 
+       <li class="li"><strong class="ph b">Scalability</strong>: Configure multiple organizations, teams, and users in bulk without manual intervention.</li> 
+      </ul> 
+     </section> 
+     <section class="section" id="about-configuration-as-code__four-state-model">
+      <h2 class="title sectiontitle">The four-state model</h2> 
+      <p class="p">Most modules in the <code class="ph codeph">ansible.platform</code> collection support a four-state model for managing resources:</p> 
+      <dl class="dl"> 
+       <dt class="dt dlterm">
+        present
+       </dt> 
+       <dd class="dd">
+        Create the resource if it does not exist, or update it if it does. Only the parameters you specify are set; other fields retain their current values.
+       </dd> 
+       <dt class="dt dlterm">
+        absent
+       </dt> 
+       <dd class="dd">
+        Delete the resource if it exists.
+       </dd> 
+       <dt class="dt dlterm">
+        exists
+       </dt> 
+       <dd class="dd">
+        Check whether the resource exists without creating or modifying it. Use this state to verify that prerequisites are in place before running further tasks.
+       </dd> 
+       <dt class="dt dlterm">
+        enforced
+       </dt> 
+       <dd class="dd">
+        Create or update the resource, and reset any parameters you did not specify to their API default values. Use this state when you want to ensure the complete desired state of a resource, not just the fields you explicitly define.
+       </dd> 
+      </dl> 
+      <p class="p">The following example uses the <code class="ph codeph">enforced</code> state to ensure that an organization has only the specified description. Any other fields that were previously set on this organization are reset to their default values:</p> 
+      <pre class="pre codeblock language-yaml"><code>- name: Enforce organization configuration
+  ansible.platform.organization:
+    name: "Production"
+    description: "Production automation resources"
+    state: enforced</code></pre> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">Not all modules support every state. The <code class="ph codeph">settings</code> module has no <code class="ph codeph">state</code> parameter and always applies changes. The <code class="ph codeph">token</code> module supports only <code class="ph codeph">present</code> and <code class="ph codeph">absent</code> and is not idempotent. The <code class="ph codeph">feature_flag</code> module defaults to <code class="ph codeph">exists</code> instead of <code class="ph codeph">present</code>, so you must explicitly set <code class="ph codeph">state: present</code> to modify a flag. For a complete list of supported states per module, see the module reference.</p> 
+       </div>
+      </div> 
+     </section> 
+     <section class="section" id="about-configuration-as-code__resource-names">
+      <h2 class="title sectiontitle">Resource names instead of IDs</h2> 
+      <p class="p">When you reference resources such as organizations, teams, or users in your playbooks, use human-readable names instead of numeric IDs. Names are portable across environments, which means you can apply the same playbook to development, staging, and production without modification. Using names also simplifies disaster recovery because you can rebuild your configuration without looking up IDs from a previous environment.</p> 
+     </section> 
+     <section class="section" id="about-configuration-as-code__check-mode">
+      <h2 class="title sectiontitle">Check mode and idempotency</h2> 
+      <p class="p">All resource modules in the <code class="ph codeph">ansible.platform</code> collection support Ansible check mode (<code class="ph codeph">--check</code>). In check mode, modules report what changes they would make without applying them. Use check mode to verify your playbooks before applying changes to a production environment.</p> 
+      <p class="p">Most modules are idempotent: running the same playbook multiple times produces the same result. The <code class="ph codeph">token</code> module is an exception — each run creates a new token.</p> 
+     </section> 
+     <section class="section" id="about-configuration-as-code__module-defaults">
+      <h2 class="title sectiontitle">Module defaults for connection parameters</h2> 
+      <p class="p">The <code class="ph codeph">ansible.platform</code> collection defines an action group called <code class="ph codeph">gateway</code> that includes all modules. Use <code class="ph codeph">module_defaults</code> to set connection parameters once instead of repeating them in every task:</p> 
+      <pre class="pre codeblock language-yaml"><code>- name: Configure Ansible Automation Platform resources
+  hosts: localhost
+  gather_facts: false
+  module_defaults:
+    group/ansible.platform.gateway:
+      aap_hostname: "{{ aap_hostname }}"
+      aap_username: "{{ aap_username }}"
+      aap_password: "{{ aap_password }}"
+      aap_validate_certs: "{{ aap_validate_certs }}"
+  tasks:
+    - name: Ensure organization exists
+      ansible.platform.organization:
+        name: "My Organization"
+        state: present
+
+    - name: Ensure team exists
+      ansible.platform.team:
+        name: "My Team"
+        organization: "My Organization"
+        state: present</code></pre> 
+      <p class="p">You can also use environment variables instead of specifying connection parameters in your playbook. The recommended naming convention is to use <code class="ph codeph">AAP_</code> prefixed variable names, but <code class="ph codeph">GATEWAY_</code> prefixed names are also accepted for backward compatibility:</p> 
+      <ul class="ul"> 
+       <li class="li"><code class="ph codeph">AAP_HOSTNAME</code> or <code class="ph codeph">GATEWAY_HOSTNAME</code></li> 
+       <li class="li"><code class="ph codeph">AAP_USERNAME</code> or <code class="ph codeph">GATEWAY_USERNAME</code></li> 
+       <li class="li"><code class="ph codeph">AAP_PASSWORD</code> or <code class="ph codeph">GATEWAY_PASSWORD</code></li> 
+       <li class="li"><code class="ph codeph">AAP_TOKEN</code> or <code class="ph codeph">GATEWAY_API_TOKEN</code> (the naming is asymmetric by design)</li> 
+       <li class="li"><code class="ph codeph">AAP_VALIDATE_CERTS</code> or <code class="ph codeph">GATEWAY_VERIFY_SSL</code></li> 
+       <li class="li"><code class="ph codeph">AAP_REQUEST_TIMEOUT</code> or <code class="ph codeph">GATEWAY_REQUEST_TIMEOUT</code></li> 
+      </ul> 
+     </section> 
+     <section class="section" id="about-configuration-as-code__authentication">
+      <h2 class="title sectiontitle">Authentication methods</h2> 
+      <p class="p">You can authenticate to Ansible Automation Platform by using one of the following module parameters:</p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Username and password</strong>: Set the <code class="ph codeph">aap_username</code> and <code class="ph codeph">aap_password</code> module parameters.</li> 
+       <li class="li"><strong class="ph b">OAuth2 token</strong>: Set the <code class="ph codeph">aap_token</code> module parameter with a token string or a token object returned by the <code class="ph codeph">ansible.platform.token</code> module.</li> 
+      </ul> 
+      <p class="p">All authentication module parameters accept both <code class="ph codeph">aap_</code> and <code class="ph codeph">gateway_</code> prefixed names for backward compatibility.</p> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist reltasks">
+      <strong>Related tasks</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-set_up_automation_environment_for_casc" title="Configuration as Code is a way of working where you define and manage the configuration of Ansible Automation Platform using version-controlled configuration files, such as YAML, instead of clicking through the web UI.">Set up your automation environment for Configuration as Code</a></li>
+      </ul>
+     </div>
+     <div class="linklist relref">
+      <strong>Related reference</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-ansible_platform_collection_modules" title="The ansible.platform collection provides modules for managing Ansible Automation Platform resources. The following tables list the available modules grouped by category.">Modules in the ansible.platform collection</a></li>
+      </ul>
+     </div>
+     <div class="linklist relinfo">
+      <strong>Related information</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="https://console.redhat.com/ansible/automation-hub/repo/published/ansible/platform/content/?showing=module" target="_blank" rel="external noopener">ansible.platform collection on Automation hub</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

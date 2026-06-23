@@ -1,0 +1,618 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="deploying-ansible-mcp-server"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Deploy the MCP server on Ansible Automation Platform</h1> 
+     <p class="shortdesc">As an organization administrator, you can deploy the Model Context Protocol (MCP) server for Red Hat Ansible Automation Platform on an operator-based installation or container-based installation of Ansible Automation Platform. </p> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="con-about-ansible-mcp-server"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Overview</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Model Context Protocol (MCP) is an open standard enabling AI models to use external AI tools and services through a unified interface. Using the MCP server for Red Hat Ansible Automation Platform, you can connect your Ansible instance to an external AI tool such as Claude, Cursor, or ChatGPT.</p> 
+       <p class="p">The AI tools can access key information about your Ansible Automation Platform environment and perform tasks. Ansible users can query information, execute workflows, and perform automation tasks using natural language prompts directly within their preferred AI tool. </p> 
+       <section class="section" id="con-about-ansible-mcp-server___benefits">
+        <h3 class="title sectiontitle">Benefits</h3> 
+        <p class="p">The following are the benefits of the MCP server:</p> 
+        <p class="p"><strong class="ph b">For external AI tools</strong>:</p> 
+        <ul class="ul"> 
+         <li class="li">Provides a standardized interface for securely querying infrastructure data and executing automation workflows within the Ansible Automation Platform.</li> 
+         <li class="li">Enables agentic workflows to interact with the Ansible Automation Platform.</li> 
+        </ul> 
+        <p class="p"><strong class="ph b">For Ansible users</strong>:</p> 
+        <ul class="ul"> 
+         <li class="li">Provides the ability to use the chatbot interface of their preferred external AI tool to get information about their Ansible Automation Platform environment, and run automation jobs directly through that tool.</li> 
+        </ul> 
+        <p class="p"><strong class="ph b">For developers</strong>:</p> 
+        <ul class="ul"> 
+         <li class="li">Reduces the time and complexity of developing or integrating the Ansible Automation Platform with AI applications or agents.</li> 
+         <li class="li">Simplifies AI integration, enabling existing automation through Ansible Automation Platform to be exposed to AI tools without writing custom API code or middleware.</li> 
+        </ul> 
+       </section> 
+       <section class="section" id="con-about-ansible-mcp-server___workflow">
+        <h3 class="title sectiontitle">Workflow</h3> 
+        <p class="p">The standalone MCP server functions as a secure link between your external AI clients and the Ansible Automation Platform. The AI agent accesses underlying infrastructure only when the MCP server has appropriate permissions.</p> 
+        <p class="p">The following describes the workflow:</p> 
+        <ol class="ol"> 
+         <li class="li">AI client (The requester): The user initiates a request through their external AI agent (for example, Cursor or Claude) using natural-language prompts.</li> 
+         <li class="li">The AI model (The translator): The AI agent receives the request, interprets the intent, and maps it to the appropriate exposed Ansible toolset. It then sends a structured toolset call with the necessary parameters.</li> 
+         <li class="li">MCP server (The gatekeeper): Upon receiving the call, the MCP server validates the request. It uses the user’s API token to authenticate with the automation controller.</li> 
+         <li class="li">Ansible controller (The executor): The automation controller accepts the validated command from the MCP server and triggers the appropriate automation job.</li> 
+         <li class="li">Response loop: The automation result is returned to the MCP server, standardized into a format the AI agent can process, and displayed to the user via the AI client.</li> 
+        </ol> 
+        <div class="note important note_important">
+         <span class="note__title">Important:</span> 
+         <div class="note__body"> 
+          <p class="p">Both the MCP server and the Ansible Automation Platform UI access the Ansible Automation Platform API. However, because the AI tool processes the API output before displaying it in its chat interface, you might observe different results when comparing the output from the AI tool with the Ansible Automation Platform UI.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section class="section" id="con-about-ansible-mcp-server___ansible_mcp_server_toolsets">
+        <h3 class="title sectiontitle"> MCP server toolsets</h3> 
+        <p class="p">The MCP server provides a pre-configured suite of toolsets that effectively act as a bridge between your preferred AI agent and the Ansible Automation Platform. Once configured, these toolsets enable your AI agent to perform specific, authorized actions without requiring you to leave the chat interface.</p> 
+        <p class="p">The MCP server turns your AI agent from a passive assistant into an active operator that can interact with your Ansible Automation Platform infrastructure and execute workflows or automate tasks based on the permissions you define.</p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:14.285700000000002%">
+          <col style="width:28.571400000000004%">
+          <col style="width:57.1429%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="con-about-ansible-mcp-server___ansible_mcp_server_toolsets__entry__1">Toolset</th> 
+           <th class="entry" id="con-about-ansible-mcp-server___ansible_mcp_server_toolsets__entry__2">Description</th> 
+           <th class="entry" id="con-about-ansible-mcp-server___ansible_mcp_server_toolsets__entry__3">Usage examples</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="con-about-ansible-mcp-server___ansible_mcp_server_toolsets__entry__1"> <p class="p">Job management</p> </td> 
+           <td class="entry" headers="con-about-ansible-mcp-server___ansible_mcp_server_toolsets__entry__2"> <p class="p">Tools to list available job templates, launch automation jobs, and monitor their real-time status.</p> </td> 
+           <td class="entry" headers="con-about-ansible-mcp-server___ansible_mcp_server_toolsets__entry__3"> <p class="p">Operators can:</p> 
+            <ul class="ul"> 
+             <li class="li">Launch job templates and workflows to execute automation tasks for their projects and services.</li> 
+             <li class="li">View job output and logs to troubleshoot failed automation tasks and understand what went wrong.</li> 
+             <li class="li">Relaunch failed jobs to recover from temporary failures and complete necessary automation tasks.</li> 
+            </ul> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="con-about-ansible-mcp-server___ansible_mcp_server_toolsets__entry__1"> <p class="p">Inventory management</p> </td> 
+           <td class="entry" headers="con-about-ansible-mcp-server___ansible_mcp_server_toolsets__entry__2"> <p class="p">Tools to query your inventory for host details, check group membership, and verify system facts.</p> </td> 
+           <td class="entry" headers="con-about-ansible-mcp-server___ansible_mcp_server_toolsets__entry__3"> <p class="p">Operators can:</p> 
+            <ul class="ul"> 
+             <li class="li">View and browse inventories across environments to understand which systems they are managing with automation.</li> 
+             <li class="li">Manage group assignments to target automation to specific sets of systems.</li> 
+             <li class="li">View hosts that are configured for automation.</li> 
+            </ul> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="con-about-ansible-mcp-server___ansible_mcp_server_toolsets__entry__1"> <p class="p">System monitoring</p> </td> 
+           <td class="entry" headers="con-about-ansible-mcp-server___ansible_mcp_server_toolsets__entry__2"> <p class="p">Tools to retrieve job logs, troubleshoot failed tasks, and check the health of your automation environment.</p> </td> 
+           <td class="entry" headers="con-about-ansible-mcp-server___ansible_mcp_server_toolsets__entry__3"> <p class="p">Administrators can:</p> 
+            <ul class="ul"> 
+             <li class="li">Perform platform status and health checks across all services to identify issues and ensure the automation platform is running correctly.</li> 
+             <li class="li">Monitor service health through the platform gateway to ensure all platform components are functioning correctly.</li> 
+             <li class="li">Audit user activity and generate reports to ensure compliance and identify potential security issues.</li> 
+            </ul> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="con-about-ansible-mcp-server___ansible_mcp_server_toolsets__entry__1"> <p class="p">User management</p> </td> 
+           <td class="entry" headers="con-about-ansible-mcp-server___ansible_mcp_server_toolsets__entry__2"> <p class="p">Tools to allow the AI agent to administer access and organizational structure within the Ansible Automation Platform.</p> </td> 
+           <td class="entry" headers="con-about-ansible-mcp-server___ansible_mcp_server_toolsets__entry__3"> <p class="p">Administrators can:</p> 
+            <ul class="ul"> 
+             <li class="li">Use natural-language prompts to provision users and enforce hierarchy, rather than manually navigating the UI.</li> 
+             <li class="li">Create, modify, and delete users and teams to manage access to the Ansible Automation Platform and support organizational changes.</li> 
+             <li class="li">Configure role-based access control to ensure users have the appropriate permissions for their responsibilities while maintaining security.</li> 
+             <li class="li">View team memberships and structure to see who else in their organization is working on automation.</li> 
+            </ul> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="con-about-ansible-mcp-server___ansible_mcp_server_toolsets__entry__1"> <p class="p">Security/compliance</p> </td> 
+           <td class="entry" headers="con-about-ansible-mcp-server___ansible_mcp_server_toolsets__entry__2"> <p class="p">Tools that enable the AI agent to act as a security operator, managing sensitive credentials and verifying platform integrity without exposing raw secrets.</p> </td> 
+           <td class="entry" headers="con-about-ansible-mcp-server___ansible_mcp_server_toolsets__entry__3"> <p class="p">Operators can:</p> 
+            <ul class="ul"> 
+             <li class="li">View available credentials to understand what authentication options are available for their automation jobs.</li> 
+            </ul> <p class="p">Administrators can:</p> 
+            <ul class="ul"> 
+             <li class="li">Manage credentials and security policies to ensure secure access to external systems while maintaining proper governance.</li> 
+             <li class="li">Manage custom credential types for seamless integration with third-party applications.</li> 
+            </ul> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="con-about-ansible-mcp-server___ansible_mcp_server_toolsets__entry__1"> <p class="p">Platform configuration</p> </td> 
+           <td class="entry" headers="con-about-ansible-mcp-server___ansible_mcp_server_toolsets__entry__2"> <p class="p">Tools that enable organization administrators and developers to inspect and tune the Ansible Automation Platform infrastructure itself.</p> </td> 
+           <td class="entry" headers="con-about-ansible-mcp-server___ansible_mcp_server_toolsets__entry__3"> <p class="p">Administrators can:</p> 
+            <ul class="ul"> 
+             <li class="li">Manage system settings across all components to configure the platform in line with the organizational requirements and policies.</li> 
+             <li class="li">Manage and track licenses to ensure compliance with licensing terms and optimize license utilization.</li> 
+            </ul> <p class="p">Developers can:</p> 
+            <ul class="ul"> 
+             <li class="li">Tune execution environments to optimize the runtime performance of their automation content.</li> 
+            </ul> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section" id="con-about-ansible-mcp-server___server_level_and_user_level_permissions">
+        <h3 class="title sectiontitle">Server-level and user-level permissions</h3> 
+        <p class="p">The MCP server employs a dual-layer security model to ensure safe integration between AI tools and your Ansible Automation Platform infrastructure. This approach combines a global administrative safeguard with the granular Role-Based Access Control (RBAC) of the Ansible Automation Platform.</p> 
+        <p class="p">You can grant the following access types to the MCP server:</p> 
+        <ul class="ul"> 
+         <li class="li"><strong class="ph b">Server-level permissions</strong>: Organization administrators assign a global-level permission while deploying the MCP server. Administrators can choose one of the following access levels: 
+          <ul class="ul"> 
+           <li class="li">Read-only access: The default setting that enforces a strict "look but do not touch" policy. The AI agent can retrieve system data, such as logs and inventory, but the agent cannot launch jobs or modify configurations. This global safeguard overrides all individual user permissions to prevent unintended automation.</li> 
+           <li class="li">Read-write access: This setting authorizes the AI agent to make changes in your Ansible Automation Platform, such as executing job templates, managing resources, and applying infrastructure changes. However, these actions are subject to the specific RBAC permissions of the user-provided API token.</li> 
+          </ul> </li> 
+         <li class="li"><strong class="ph b">User-level permissions</strong>: The AI agent’s specific capabilities are inherited from the user account that generated the authentication API token. 
+          <ul class="ul"> 
+           <li class="li">Inherited permissions: The AI tool inherits the user’s permissions and performs only the actions the user is authorized to perform. For example, if the user’s token only has permissions to view the "network" inventory, the AI tool cannot access or modify the "database" inventory even if the user requests it.</li> 
+           <li class="li">Rejection of unauthorized actions: If the AI tool attempts an action (like launching a job) that the user’s token is not authorized to perform, the Ansible Automation Platform API rejects the request.</li> 
+          </ul> </li> 
+        </ul> 
+        <div class="note warning note_warning">
+         <span class="note__title">Warning:</span> 
+         <div class="note__body"> 
+          <p class="p">Enabling read-write access for the MCP server grants the AI agent autonomy to directly make changes in your Ansible Automation Platform environment, for example, executing automation jobs. The AI agent can directly make changes in your Ansible Automation Platform environment only if the user has write permissions. Large Language Models (LLMs) can occasionally misinterpret prompts or hallucinate commands. Therefore, enabling read-write access may introduce a risk of unintended changes to your environment.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section class="section" id="con-about-ansible-mcp-server___telemetry_data_collection_for_ansible_mcp_server">
+        <h3 class="title sectiontitle">Telemetry data collection for the MCP server</h3> 
+        <p class="p">Red Hat collects anonymized telemetry data from the MCP server. The telemetry data includes metrics related to MCP server performance, adoption trends, and usage patterns.</p> 
+        <p class="p">Telemetry data will be automatically collected for MCP server deployments using Ansible Automation Platform patch release on 21 January 2026 and later versions. Red Hat will use this data to monitor the operational health of your MCP servers and to ensure the long-term scalability of the MCP ecosystem.</p> 
+        <div class="note important note_important">
+         <span class="note__title">Important:</span> 
+         <div class="note__body"> 
+          <p class="p">Telemetry data collection cannot be disabled, but strict user privacy is maintained. Red Hat does not collect users' personal information, such as usernames or passwords. If any personal information is inadvertently received, the data is deleted. For more information, see the Red Hat Privacy Statement under Related Links below.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section class="section" id="con-about-ansible-mcp-server___prerequisites">
+        <h3 class="title sectiontitle">Prerequisites</h3> 
+        <ul class="ul"> 
+         <li class="li">Platform version: An instance of Ansible Automation Platform 2.6 or later.</li> 
+         <li class="li">Deployment environment: 
+          <ul class="ul"> 
+           <li class="li">OpenShift: Access to an OpenShift cluster with permissions to install operators.</li> 
+           <li class="li">Containerized: A supported container runtime.</li> 
+          </ul> </li> 
+         <li class="li">Access credentials: A valid user or service account within Ansible Automation Platform with permissions to execute the desired automation jobs. You will need to generate an API token for this account.</li> 
+        </ul> 
+       </section> 
+       <section class="section" id="con-about-ansible-mcp-server___overview_of_deploying_the_ansible_mcp_server">
+        <h3 class="title sectiontitle">Overview of deploying the MCP server</h3> 
+        <p class="p">Perform the following tasks to deploy and configure an MCP server and integrate it with your preferred AI tool:</p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:11.1111%">
+          <col style="width:33.3333%">
+          <col style="width:55.55559999999999%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="con-about-ansible-mcp-server___overview_of_deploying_the_ansible_mcp_server__entry__1">Step number</th> 
+           <th class="entry" id="con-about-ansible-mcp-server___overview_of_deploying_the_ansible_mcp_server__entry__2">Task</th> 
+           <th class="entry" id="con-about-ansible-mcp-server___overview_of_deploying_the_ansible_mcp_server__entry__3">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="con-about-ansible-mcp-server___overview_of_deploying_the_ansible_mcp_server__entry__1"> <p class="p">1</p> </td> 
+           <td class="entry" headers="con-about-ansible-mcp-server___overview_of_deploying_the_ansible_mcp_server__entry__2"> <p class="p">Deploy and configure an MCP server on container-based installation</p> </td> 
+           <td class="entry" headers="con-about-ansible-mcp-server___overview_of_deploying_the_ansible_mcp_server__entry__3"> <p class="p">An organization administrator deploys and configures the MCP server on a container-based installation of Ansible Automation Platform 2.6 or later.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="con-about-ansible-mcp-server___overview_of_deploying_the_ansible_mcp_server__entry__1"> <p class="p">2</p> </td> 
+           <td class="entry" headers="con-about-ansible-mcp-server___overview_of_deploying_the_ansible_mcp_server__entry__2"> <p class="p">Create an API token for the MCP server</p> </td> 
+           <td class="entry" headers="con-about-ansible-mcp-server___overview_of_deploying_the_ansible_mcp_server__entry__3"> <p class="p">An Ansible user creates an API token for their Ansible Automation Platform instance and uses it to connect to their preferred AI tool. The AI tools will inherit the user’s permissions for authentication using the API token.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="con-about-ansible-mcp-server___overview_of_deploying_the_ansible_mcp_server__entry__1"> <p class="p">3</p> </td> 
+           <td class="entry" headers="con-about-ansible-mcp-server___overview_of_deploying_the_ansible_mcp_server__entry__2"> <p class="p">Connect an external AI agent to the MCP server </p> </td> 
+           <td class="entry" headers="con-about-ansible-mcp-server___overview_of_deploying_the_ansible_mcp_server__entry__3"> <p class="p">The Ansible user then configures an external AI tool with the MCP server’s API token, enabling the AI tool to connect to the MCP server and execute workflows and automate tasks.</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist">
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_deploying_ansible_mcp_server#proc-configure-mcp-server-containerized-install" title="As an organization administrator, you can deploy and configure the MCP server on a container-based installation of Ansible Automation Platform. Use the following procedure to deploy and configure the MCP server.">Deploy and configure the MCP server on a container-based installation</a></li>
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_deploying_ansible_mcp_server#proc-create-api-token-ansible-mcp-server" title="Create an API token for your Ansible Automation Platform instance, so you can use it to connect with your preferred AI agent. The AI tool will inherit the user’s permissions for API token-based authentication.">Create an API token for the MCP server</a></li>
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_deploying_ansible_mcp_server#proc-connect-ai-agent-ansible-mcp-server" title="Use the API token of the Ansible MCP server to connect it with your preferred AI agent, such as Claude, Cursor, or ChatGPT.">Connect an AI agent to the MCP server</a></li>
+         <li class="linklist"><a class="link" href="https://www.redhat.com/en/about/privacy-policy" target="_blank" rel="external noopener">Red Hat Privacy Statement</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-configure-mcp-server-containerized-install"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Deploy the MCP server for Red Hat Ansible Automation Platform on a container-based installation</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">As an organization administrator, you can deploy and configure the MCP server on a container-based installation of Ansible Automation Platform. Use the following procedure to deploy and configure the MCP server.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have a valid subscription for Ansible Automation Platform 2.6 or later.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <div class="ol steps">
+         <div class="li step p"> <span class="ph cmd">Configure MCP server variables in the inventory file: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Create an <code class="ph codeph">[ansiblemcp]</code> group and add a host for the MCP server.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Add the following installation variables to your inventory file under the <code class="ph codeph">[all:vars]</code> group: </span> 
+            <div class="itemgroup info"> 
+             <ul class="ul"> 
+              <li class="li"><code class="ph codeph">mcp_allow_write_operations</code>: Use to grant read-only or read-write permissions to the external AI tool.</li> 
+              <li class="li"><code class="ph codeph">mcp_ignore_certificate_errors</code>: Use to bypass SSL/TLS certificate validation.</li> 
+             </ul> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">To make your system trust a self-signed custom certificate, add the following required variables to your inventory file: </span> 
+            <div class="itemgroup info"> 
+             <ul class="ul"> 
+              <li class="li"><code class="ph codeph">mcp_tls_cert</code>: Path to TLS certificate</li> 
+              <li class="li"><code class="ph codeph">mcp_tls_key</code>: Path to TLS key <p class="p">For information about using your own TLS certificates and keys, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_advanced_configuration_containerized" title="Configure external databases, custom TLS certificates, execution nodes, HAProxy load balancers, and hub storage for complex containerized Ansible Automation Platform deployments.">Configuring custom TLS certificates</a>. For information about required and optional variables, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-mcp_server_variables" title="Inventory file variables for the MCP server for Red Hat Ansible Automation Platform.">MCP server variables</a>.</p> <pre class="pre codeblock"><code># This is the list of inventory file variables required to deploy an Ansible MCP server on a container-based installation.
+
+# This section is for the MCP server host
+# -------------------------------------------------
+[ansiblemcp]
+aap.example.com
+
+# This section is for Ansible MCP server permissions
+# --------------------------------------------------
+[all:vars]
+mcp_allow_write_operations=false &lt;To enable read-write access, set the "mcp_allow_write_operations" variable to "true"&gt;
+mcp_ignore_certificate_errors=false
+mcp_tls_cert= &lt;path to tls certificate&gt;
+mcp_tls_key= &lt;path to tls key&gt;
+
+# Additional MCP server settings 
+mcp_extra_settings='[{"setting": "DEFAULT_PAGE_SIZE", "value": "25"}]' &lt;Overrides the default page size for list-type API responses&gt;</code></pre> </li> 
+             </ul> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Optional: add additional MCP server settings such as <code class="ph codeph">DEFAULT_PAGE_SIZE</code> as in the example above.</span> </li> 
+          </ol> 
+         </div>
+        </div>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Check the pods after installation is complete. You should see an <code class="ph codeph">ansiblemcp</code> pod running with the following command:</p> 
+        <pre class="pre codeblock language-none"><code>$ podman ps</code></pre> 
+       </section> 
+       <section class="section postreq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div> 
+        <ol class="ol"> 
+         <li class="li">Obtain the location of the MCP server: 
+          <ul class="ul"> 
+           <li class="li">The service is exposed on port 8448 of the host, and HTTPS is enabled.</li> 
+           <li class="li">The example above deploys the MCP server on <code class="ph codeph">aap.example.com</code>, so the service base URL will be <code class="ph codeph">https://aap.example.com:8448</code>.</li> 
+          </ul> </li> 
+         <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_deploying_ansible_mcp_server#proc-create-api-token-ansible-mcp-server" title="Create an API token for your Ansible Automation Platform instance, so you can use it to connect with your preferred AI agent. The AI tool will inherit the user’s permissions for API token-based authentication.">Create an API token for the MCP server</a>.</li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-configure-mcp-server-operator-install"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Deploy the MCP server for Red Hat Ansible Automation Platform on an operator-based installation</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">As an organization administrator, you can deploy and configure the MCP server on an operator-based installation of Ansible Automation Platform. Use the following procedure to deploy and configure the MCP server.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have a valid Ansible Automation Platform subscription.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Red Hat OpenShift Container Platform as an administrator.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Navigate to the namespace where you want to install the MCP server.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Installed Operators</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">From the list of installed operators, select <strong class="ph b">Ansible Automation Platform</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In the Ansible Automation Platform tile, click <strong class="ph b">Create instance</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">From the <strong class="ph b">Configure via</strong> field, select the <strong class="ph b">Form</strong> view, then provide the instance name. For example, <code class="ph codeph">aap-mcp</code>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">YAML</strong> view, and under the <code class="ph codeph">spec:</code> section, add the <code class="ph codeph">mcp</code> component:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>spec:
+  mcp:
+    disabled: false
+    allow_write_operations: false</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Use the <code class="ph codeph">allow_write_operations</code> variable to configure the operational access level of the MCP server:</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Create</strong>. the MCP server is created.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: If you changed the permissions of the MCP server after it was created and deployed, you must delete the <strong class="ph b">AnsibleMCPServer</strong> custom resource and recreate it. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">Perform the following steps:</p> 
+          </div> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">Go to the Ansible Automation Platform portal.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Under <strong class="ph b">Resources</strong>, search for the <strong class="ph b">AnsibleMCPServer</strong> custom resource.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Select the active <strong class="ph b">AnsibleMCPServer</strong> instance. An active AnsibleMCPServer instance is identified by the <code class="ph codeph">-mcp</code> suffix appended to the Ansible Automation Platform custom resource name.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Select the <strong class="ph b">Settings menu</strong> on the right side of the instance, and then click <strong class="ph b">Delete AnsibleMCPServer</strong>.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">After the reconciliation process completes, the existing MCP server instance is deleted, and a new MCP server instance is created.</span> </li> 
+          </ol> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <ol class="ol"> 
+         <li class="li">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Workloads</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Deployments</span></span>.</li> 
+         <li class="li">Check that the deployment you created is listed there. For example: <code class="ph codeph">aap-mcp</code>.</li> 
+         <li class="li">Check one of the pod’s logs and verify there are no errors.</li> 
+        </ol> 
+       </section> 
+       <section class="section postreq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div> 
+        <ol class="ol"> 
+         <li class="li">Obtain the following information: 
+          <ul class="ul"> 
+           <li class="li"><strong class="ph b">Ansible Automation Platform login screen URL</strong>: 
+            <ol class="ol" type="a"> 
+             <li class="li">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Networking</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Routes</span></span>.</li> 
+             <li class="li">For the Ansible Automation Platform deployment, click the <strong class="ph b">Copy icon</strong> in the <strong class="ph b">Location</strong> field. This is the URL of the Ansible Automation Platform login screen.</li> 
+            </ol> </li> 
+           <li class="li"><strong class="ph b">Ansible Automation Platform administrator password</strong>: 
+            <ol class="ol" type="a"> 
+             <li class="li">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Workloads</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Secrets</span></span> and click <code class="ph codeph">aap-admin-password</code>.</li> 
+             <li class="li">Click <strong class="ph b">Reveal values</strong> and then use the <strong class="ph b">Copy</strong> icon to save the Ansible Automation Platform administrator password for future use.</li> 
+            </ol> </li> 
+           <li class="li"><strong class="ph b">MCP server URL</strong>: 
+            <ol class="ol" type="a"> 
+             <li class="li">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Networking</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Routes</span></span>.</li> 
+             <li class="li">For the deployment you recently created (<code class="ph codeph">aap-mcp</code>), click the <strong class="ph b">Copy</strong> icon from the <strong class="ph b">Location</strong> field. This is the URL required to configure your AI agent to connect to the MCP server.</li> 
+            </ol> </li> 
+          </ul> </li> 
+         <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_deploying_ansible_mcp_server#proc-create-api-token-ansible-mcp-server" title="Create an API token for your Ansible Automation Platform instance, so you can use it to connect with your preferred AI agent. The AI tool will inherit the user’s permissions for API token-based authentication.">Create an API token for the MCP server</a>.</li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="proc-create-api-token-ansible-mcp-server"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Create an API token for the MCP server</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Create an API token for your Ansible Automation Platform instance, so you can use it to connect with your preferred AI agent. The AI tool will inherit the user’s permissions for API token-based authentication.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">Your organization administrator has deployed the MCP server for Red Hat Ansible Automation Platform.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Users</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the username for your user profile to configure OAuth 2 tokens.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">Tokens</strong> tab. When no tokens are present, the <strong class="ph b">Tokens</strong> screen prompts you to add them.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Create token</strong>, and provide the following details: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Application</strong>: Enter the name of the application with which you want to associate your token. Alternatively, you can search for it by clicking <strong class="ph b">Browse</strong>. This opens a separate window that enables you to choose from the available options. Select <strong class="ph b">Name</strong> from the filter list to filter by name if the list is extensive. 
+             <div class="note note note_note">
+              <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">To create a Personal Access Token (PAT) that is not linked to any application, leave the <strong class="ph b">Application</strong> field blank.</p> 
+              </div>
+             </div> </li> 
+            <li class="li"><strong class="ph b">Description</strong>: (Optional) Provide a short description for your token.</li> 
+            <li class="li"><strong class="ph b">Scope</strong>: (Required) Specify the level of access you want this token to have. The scope of an OAuth 2 token can be set as one of the following: 
+             <ul class="ul"> 
+              <li class="li"><strong class="ph b">Write</strong>: Allows requests sent with this token to add, edit, and delete resources in the system.</li> 
+              <li class="li"><strong class="ph b">Read</strong>: Limits actions to read only. The write scope includes the read scope.</li> 
+             </ul> </li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Create token</strong>. The token information is displayed.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">On the token information page that appears, click the <strong class="ph b">Copy icon</strong> and save the token for future use. </span> 
+          <div class="itemgroup info"> 
+           <div class="note important note_important">
+            <span class="note__title">Important:</span> 
+            <div class="note__body"> 
+             <p class="p">This will be the only time the token is displayed. Therefore, ensure that you save the token for future use.</p> 
+            </div>
+           </div> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">You can verify that the application now shows the user with the appropriate token by selecting the <strong class="ph b">Tokens</strong> tab on the <strong class="ph b">Application Details</strong> page:</p> 
+        <ol class="ol"> 
+         <li class="li">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">OAuth Applications</span></span>.</li> 
+         <li class="li">Select the application you want to verify from the <strong class="ph b">Applications</strong> list view.</li> 
+         <li class="li">Select the <strong class="ph b">Tokens</strong> tab. <p class="p">Your token should be displayed in the list of tokens associated with the application you chose.</p> </li> 
+        </ol> 
+       </section> 
+       <section class="section postreq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li"> <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_deploying_ansible_mcp_server#proc-connect-ai-agent-ansible-mcp-server" title="Use the API token of the Ansible MCP server to connect it with your preferred AI agent, such as Claude, Cursor, or ChatGPT.">Connect an external AI agent to the MCP server</a> </li> 
+        </ul> 
+       </section> 
+      </div> 
+      <article class="topic task nested2" aria-labelledby="ariaid-title6" id="proc-connect-ai-agent-ansible-mcp-server"> 
+       <h3 class="title topictitle3" id="ariaid-title6">Connect an AI agent to the MCP server</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">Use the API token of the Ansible MCP server to connect it with your preferred AI agent, such as Claude, Cursor, or ChatGPT.</p> 
+        <section class="section prereq">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Before you begin</h4>
+         </div> 
+         <ul class="ul"> 
+          <li class="li">The MCP server for Red Hat Ansible Automation Platform is deployed on your Ansible Automation Platform environment.</li> 
+          <li class="li">An API token is created for your MCP server.</li> 
+         </ul> 
+        </section> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step stepexpand"> <span class="ph cmd">Go to the AI tool that you want to connect to the Ansible Automation Platform.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Follow your AI client’s instructions to configure the MCP server settings. </span> 
+           <div class="itemgroup info"> 
+            <p class="p">Typically, you must specify the MCP server configurations in the <code class="ph codeph">mcp.json</code> file.</p> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">When configuring the <code class="ph codeph">mcp.json</code> file, add the Ansible MCP server URL in the following format: </span> 
+           <div class="itemgroup info"> 
+            <p class="p"> <code class="ph codeph"><em class="ph i">&lt;Ansible MCP server URL&gt;</em>/<em class="ph i">&lt;toolset&gt;</em>/mcp</code> </p> 
+            <p class="p">Key:</p> 
+            <ul class="ul"> 
+             <li class="li"><strong class="ph b">Ansible MCP server URL</strong> = The URL of the Ansible MCP server. For example, <code class="ph codeph">https://api.example.com/</code>. <p class="p">To obtain the Ansible MCP server URL, contact your organization administrator.</p> </li> 
+             <li class="li"><strong class="ph b">Toolset</strong> = The toolset that you want to connect to. For example, <code class="ph codeph">job_management</code>, <code class="ph codeph">inventory_management</code>, <code class="ph codeph">system_monitoring</code>, <code class="ph codeph">user_management</code>, <code class="ph codeph">security_compliance</code>, and <code class="ph codeph">platform_configuration</code>.</li> 
+             <li class="li"><strong class="ph b">Token</strong> = The API token of the Ansible MCP server. <p class="p">Use the following format to add details about your Ansible MCP server in the the <code class="ph codeph">mcp.json</code> file:</p> <pre class="pre codeblock"><code>{
+  "mcpServers": {
+    "aap-mcp-job-mgmt": {
+      "type": "http",
+      "url": "https://api.example.com/job_management/mcp",
+      "headers": {
+        "Authorization": "Bearer ${env:MY_SERVICE_TOKEN}"
+      }
+    },
+    "aap-mcp-inventory-mgmt": {
+      "type": "http",
+      "url": "https://api.example.com/inventory_management/mcp",
+      "headers": {
+        "Authorization": "Bearer ${env:MY_SERVICE_TOKEN}"
+      }
+    },
+    "aap-mcp-system-monitor": {
+      "type": "http",
+      "url": "https://api.example.com/system_monitoring/mcp",
+      "headers": {
+        "Authorization": "Bearer ${env:MY_SERVICE_TOKEN}"
+      }
+    },
+    "aap-mcp-user-mgmt": {
+      "type": "http",
+      "url": "https://api.example.com/user_management/mcp",
+      "headers": {
+        "Authorization": "Bearer ${env:MY_SERVICE_TOKEN}"
+      }
+    },
+    "aap-mcp-security": {
+      "type": "http",
+      "url": "https://api.example.com/security_compliance/mcp",
+      "headers": {
+        "Authorization": "Bearer ${env:MY_SERVICE_TOKEN}"
+      }
+    },
+    "aap-mcp-platform-config": {
+      "type": "http",
+      "url": "https://api.example.com/platform_configuration/mcp",
+      "headers": {
+        "Authorization": "Bearer ${env:MY_SERVICE_TOKEN}"
+      }
+    }
+  }
+}</code></pre> 
+              <div class="note important note_important">
+               <span class="note__title">Important:</span> 
+               <div class="note__body"> 
+                <p class="p">Use a concise MCP server name, ideally limited to 20 characters. This is because AI agents combine the MCP server name with the tool name to create a unique identifier, and most AI agents enforce a 64-character limit on this combined identifier.</p> 
+               </div>
+              </div> </li> 
+            </ul> 
+           </div> </li>
+         </ol>
+        </section> 
+        <section class="section result">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Results</h4>
+         </div> 
+         <ul class="ul"> 
+          <li class="li">Verify that the AI tool successfully connects to the Ansible Automation Platform MCP server using the API token. <p class="p">In your AI agent’s chat window, enter a prompt like <code class="ph codeph">What MCP tools are available for my Ansible Automation Platform?</code>. The AI agent should return a response with a list of tools that are enabled for the Ansible Automation Platform MCP server.</p> </li> 
+         </ul> 
+        </section> 
+        <section class="section postreq">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">What to do next</h4>
+         </div> 
+         <ul class="ul"> 
+          <li class="li">Open a new chat in your AI agent, and enter your prompt. <p class="p">For example: <code class="ph codeph">Give me a list of my Ansible Automation Platform jobs.</code> A list of all your Ansible Automation Platform jobs is displayed in the AI agent’s chat window.</p> </li> 
+         </ul> 
+        </section> 
+       </div> 
+       <nav role="navigation" class="related-links">
+        <div class="linklist relinfo">
+         <strong>Related information</strong>
+         <br>
+         <ul class="linklist">
+          <li class="linklist"><a class="link" href="https://code.claude.com/docs/en/mcp" target="_blank" rel="external noopener">Connect Claude Code to tools via MCP</a></li>
+          <li class="linklist"><a class="link" href="https://cursor.com/docs/context/mcp" target="_blank" rel="external noopener">Configure Model Context Protocol (MCP) in Cursor</a></li>
+          <li class="linklist"><a class="link" href="https://code.visualstudio.com/docs/copilot/customization/mcp-servers" target="_blank" rel="external noopener">Use MCP servers in VS Code</a></li>
+          <li class="linklist"><a class="link" href="https://docs.cline.bot/mcp/configuring-mcp-servers" target="_blank" rel="external noopener">Configuring MCP Servers - Cline</a></li>
+         </ul>
+        </div>
+       </nav> 
+      </article>
+      <article class="topic reference nested2" aria-labelledby="ariaid-title7" id="troubleshoot-ansible-mcp-server-errors"> 
+       <h3 class="title topictitle3" id="ariaid-title7">Troubleshoot MCP server errors</h3> 
+       <div class="body refbody">
+        <p class="shortdesc">This section contains information to help you diagnose and resolve issues with deploying the MCP server for Red Hat Ansible Automation Platform and connecting it to an external AI agent.</p> 
+        <section class="section" id="troubleshoot-ansible-mcp-server-errors___api_output_format_rejected_with_406_status_code">
+         <h4 class="title sectiontitle">API output format rejected with 406 Status Code</h4> 
+         <p class="p"><strong class="ph b">Issue</strong>: Ansible Automation Platform rejects an API request (for example, retrieving job stdout) with an HTTP <code class="ph codeph">406</code> status code if the MCP server’s requested output is not in <code class="ph codeph">JSON</code> format.</p> 
+         <p class="p"><strong class="ph b">Workaround</strong>: To obtain the output in a specific format, instruct your AI tool to use <code class="ph codeph">JSON</code> format first. You can then transform the <code class="ph codeph">JSON</code> output into your desired format.</p> 
+        </section> 
+        <section class="section" id="troubleshoot-ansible-mcp-server-errors___user_requests_rejected_with_400_status_code">
+         <h4 class="title sectiontitle">User requests rejected with 400 status code</h4> 
+         <p class="p"><strong class="ph b">Issue</strong>: The MCP server may reject user requests from the external AI tool with <code class="ph codeph">400 Bad Request</code> status code. This error is encountered when the Ansible Automation Platform uses a self-signed certificate.</p> 
+         <p class="p"><strong class="ph b">Workaround</strong>: Configure the MCP server to ignore certificate errors using the following steps:</p> 
+         <ul class="ul"> 
+          <li class="li">For container-based installation: Set the value of variable <code class="ph codeph">mcp_ignore_certificate_errors</code> to <code class="ph codeph">true</code>.</li> 
+          <li class="li">For operator-based installation: <p class="p">Add the <code class="ph codeph">IGNORE_CERTIFICATE_ERRORS</code> setting to the <code class="ph codeph">mcp:</code> section of <strong class="ph b">AnsibleAutomationPlatform</strong> custom resource in the following format:</p> <pre class="pre codeblock language-none"><code>  spec:
+    mcp:
+      extra_settings:
+        - setting: IGNORE_CERTIFICATE_ERRORS
+          value: true</code></pre> </li> 
+         </ul> 
+        </section> 
+        <section class="section" id="troubleshoot-ansible-mcp-server-errors___ansible_mcp_server_permissions_are_changed_post_deployment">
+         <h4 class="title sectiontitle">MCP server permissions are changed post deployment</h4> 
+         <p class="p"><strong class="ph b">Issue</strong>: If you changed the permissions of the MCP server after it was created and deployed, you must delete the <strong class="ph b">AnsibleMCPServer</strong> custom resource and recreate it.</p> 
+         <p class="p"><strong class="ph b">Workaround</strong>: Perform the following steps:</p> 
+         <ol class="ol"> 
+          <li class="li">Navigate to the Ansible Automation Platform portal.</li> 
+          <li class="li">Under <strong class="ph b">Resources</strong>, search for the <strong class="ph b">AnsibleMCPServer</strong> custom resource.</li> 
+          <li class="li">Select the active <strong class="ph b">AnsibleMCPServer</strong> instance. An active AnsibleMCPServer instance is identified by the <code class="ph codeph">-mcp</code> suffix appended to the Ansible Automation Platform custom resource name.</li> 
+          <li class="li">Select the <strong class="ph b">Settings menu</strong> (3-dot menu icon) on the right side of the instance, then click <strong class="ph b">Delete AnsibleMCPServer</strong>.</li> 
+          <li class="li">After the reconciliation process is completed, the existing MCP server instance is deleted and a new MCP server instance is created.</li> 
+         </ol> 
+        </section> 
+       </div> 
+      </article>
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

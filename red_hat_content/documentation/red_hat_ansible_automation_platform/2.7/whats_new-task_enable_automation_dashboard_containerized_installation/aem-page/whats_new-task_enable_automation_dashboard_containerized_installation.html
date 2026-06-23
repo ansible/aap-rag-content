@@ -1,0 +1,274 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="enable-automation-dashboard-containerized-installation">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Enable automation dashboard during containerized installation</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Enable automation dashboard data collection during the initial installation to start collecting ROI and cost analysis data without post-installation configuration.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">Red Hat Ansible Automation Platform 2.7 containerized installer downloaded and extracted</li> 
+       <li class="li">Infrastructure meets metrics service deployment requirements</li> 
+       <li class="li">Understanding of Technology Preview features and limitations</li> 
+       <li class="li">Metrics service enabled (required dependency)</li> 
+      </ul> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p"><strong class="ph b">Technology Preview:</strong> Automation dashboard is a Technology Preview feature in Red Hat Ansible Automation Platform 2.7 and is disabled by default. You must explicitly enable it by creating a feature flags file and passing it to the installer.</p> 
+       </div>
+      </div> 
+     </section> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">This procedure enables automation dashboard during the initial containerized installation of Red Hat Ansible Automation Platform 2.7. By configuring dashboard collection in a feature flags file, you eliminate post-installation configuration steps and enable dashboard data collection to start within 6 hours of installation completion. This approach ensures no gap in data collection, allowing you to establish a baseline for ROI analysis from the first day of platform operation and begin capturing all automation activity immediately.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Configure inventory file for metrics service.</span> 
+        <div class="itemgroup info"> 
+         <p class="p">Edit your Ansible Automation Platform containerized installer inventory file and ensure metrics service is configured. Dashboard requires metrics service as its backend.</p> 
+         <pre class="pre codeblock"><code>[automationcontroller]
+aap.example.com
+
+[automationmetrics]
+aap.example.com
+
+[database]
+aap.example.com
+
+[all:vars]
+postgresql_admin_username=postgres
+postgresql_admin_password=''</code></pre> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">The <code class="ph codeph">[automationmetrics]</code> group defines which node runs metrics service. Adding a host to this group automatically enables metrics service - there is no separate <code class="ph codeph">automationmetrics_enabled</code> variable. The host in <code class="ph codeph">[automationmetrics]</code> does not need to be colocated with <code class="ph codeph">[automationcontroller]</code>.</p> 
+          </div>
+         </div> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Create feature flags file to enable dashboard collection.</span> 
+        <div class="itemgroup info"> 
+         <p class="p">Create a <span class="ph filepath">feature_flags.yml</span> file in your installer directory with the dashboard collection feature flag:</p> 
+         <pre class="pre codeblock"><code>cd /path/to/aap-containerized-installer                                                 
+  echo "feature_flags:                                                                                   
+    FEATURE_DASHBOARD_COLLECTION_ENABLED: True" &gt; feature_flags.yml</code></pre> 
+         <p class="p">This creates a YAML file containing:</p> 
+         <pre class="pre codeblock"><code>feature_flags:                                                                          
+    FEATURE_DASHBOARD_COLLECTION_ENABLED: True</code></pre> 
+         <div class="note important note_important">
+          <span class="note__title">Important:</span> 
+          <div class="note__body"> 
+           <p class="p">Do not add <code class="ph codeph">feature_flags</code> directly to the INI-formatted inventory file. YAML syntax cannot be mixed with INI syntax in the inventory file. Feature flags must be passed to the installer as a separate file using the <code class="ph codeph">-e</code> flag in Step 3.</p> 
+          </div>
+         </div> 
+         <table class="table">
+          <caption></caption>
+          <colgroup>
+           <col style="width:27.27272727272727%">
+           <col style="width:18.181818181818183%">
+           <col style="width:54.54545454545454%">
+          </colgroup>
+          <thead class="thead"> 
+           <tr class="row"> 
+            <th class="entry" id="enable-automation-dashboard-containerized-installation__entry__1">Variable</th> 
+            <th class="entry" id="enable-automation-dashboard-containerized-installation__entry__2">Default</th> 
+            <th class="entry" id="enable-automation-dashboard-containerized-installation__entry__3">Purpose</th> 
+           </tr> 
+          </thead>
+          <tbody class="tbody"> 
+           <tr class="row"> 
+            <td class="entry" headers="enable-automation-dashboard-containerized-installation__entry__1"><code class="ph codeph">FEATURE_DASHBOARD_COLLECTION_ENABLED</code></td> 
+            <td class="entry" headers="enable-automation-dashboard-containerized-installation__entry__2"><code class="ph codeph">False</code></td> 
+            <td class="entry" headers="enable-automation-dashboard-containerized-installation__entry__3">Enables automation dashboard data collection in metrics service (Technology Preview). When enabled, metrics service collects dashboard-specific metrics (cost data, ROI calculations, pricing information) in addition to standard metrics.</td> 
+           </tr> 
+          </tbody>
+         </table> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">Metrics service is enabled by adding a host to the <code class="ph codeph">[automationmetrics]</code> group (Step 1). There is no separate <code class="ph codeph">automationmetrics_enabled</code> variable.</p> 
+          </div>
+         </div> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Run the containerized installation program with feature flags</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>cd /path/to/aap-containerized-installer
+ansible-playbook -i inventory ansible.containerized_installer.install -e @feature_flags.yml</code></pre> 
+         <p class="p">The <code class="ph codeph">-e @feature_flags.yml</code> flag passes the feature flags file to the installer as extra variables.</p> 
+         <p class="p">The installation program performs the following sequence for dashboard enablement:</p> 
+         <ol class="ol" type="a"> 
+          <li class="li"><strong class="ph b">Metrics service installation:</strong> Installs and configures metrics service backend 
+           <ul class="ul"> 
+            <li class="li">Creates <code class="ph codeph">metrics_service</code> database</li> 
+            <li class="li">Creates <code class="ph codeph">metrics_service</code> user (ALL privileges)</li> 
+            <li class="li">Creates <code class="ph codeph">ms_awx_readonly</code> user (SELECT-only on Controller DB)</li> 
+            <li class="li">Deploys <code class="ph codeph">automation-metrics-web</code>, <code class="ph codeph">automation-metrics-tasks</code>, and <code class="ph codeph">automation-metrics-scheduler</code> containers</li> 
+           </ul> </li> 
+          <li class="li"><strong class="ph b">Dashboard feature flag configuration:</strong> Sets <code class="ph codeph">feature_flags: {'FEATURE_DASHBOARD_COLLECTION_ENABLED': True}</code> in metrics service container configuration file</li> 
+          <li class="li"><strong class="ph b">Database migration:</strong> Runs <code class="ph codeph">automation-metrics-init</code> container to create dashboard tables from <span class="ph filepath">apps/dashboard_reports/migrations/</span></li> 
+          <li class="li"><strong class="ph b">Data collection scheduling:</strong> Configures dashboard collection tasks</li> 
+         </ol> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">The installer log does not indicate when dashboard collection is enabled. Use the following post-installation verification steps to confirm that automation dashboard is active.</p> 
+          </div>
+         </div> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Verify dashboard is enabled</span> 
+        <div class="itemgroup info"> 
+         <p class="p">After installation completes, verify dashboard collection is active:</p> 
+        </div> 
+        <ol type="a" class="ol substeps"> 
+         <li class="li substep substepexpand"> <span class="ph cmd">Check metrics service container configuration</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>podman exec automation-metrics-web cat /etc/ansible-automation-platform/metrics_service/settings.yaml | grep FEATURE_DASHBOARD_COLLECTION_ENABLED</code></pre> 
+           <p class="p">Expected output:</p> 
+           <pre class="pre codeblock"><code>FEATURE_DASHBOARD_COLLECTION_ENABLED: True</code></pre> 
+          </div> </li> 
+         <li class="li substep substepexpand"> <span class="ph cmd">Verify dashboard tables exist</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>podman exec postgresql \
+  psql -h localhost -U metrics_service -d metrics_service \
+  -c "SELECT table_name FROM information_schema.tables WHERE table_name LIKE 'dashboard%';"</code></pre> 
+           <p class="p">Expected output: Six dashboard tables:</p> 
+           <ul class="ul"> 
+            <li class="li"><code class="ph codeph">dashboard_job_data</code> - Main record for every job in the AWX database</li> 
+            <li class="li"><code class="ph codeph">dashboard_job_data_host_summary</code> - Host summary records by job</li> 
+            <li class="li"><code class="ph codeph">dashboard_job_data_label</code> - Labels associated with jobs</li> 
+            <li class="li"><code class="ph codeph">dashboard_template_metadata</code> - Job template metadata</li> 
+            <li class="li"><code class="ph codeph">dashboard_subscription_cost</code> - Singleton for cost parameters</li> 
+            <li class="li"><code class="ph codeph">dashboard_filter_set</code> - Saved user filtersets</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li substep substepexpand"> <span class="ph cmd">Check metrics service logs for collection activity</span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">Dashboard collection logs appear only after the first collection cycle runs. On a new installation with no historical data, the initial backfill task runs 30 seconds after metrics service starts. Regular 6-hourly collection logs may not appear for up to 6 hours after installation.</p> 
+            </div>
+           </div> 
+           <pre class="pre codeblock"><code>podman logs automation-metrics-web --tail 50 | grep -i dashboard
+podman logs automation-metrics-tasks --tail 50 | grep -i dashboard
+podman logs automation-metrics-scheduler --tail 50 | grep -i dashboard</code></pre> 
+           <p class="p">Example successful collection output (<code class="ph codeph">automation-metrics-tasks</code>):</p> 
+           <pre class="pre codeblock"><code>{"timestamp": "2026-04-23T12:03:00.066Z", "level": "INFO", "logger": "apps.tasks.utils", "message": "Task 'daily_dashboard_collection (Execution 2026-04-23 12:03:00)' completed: Task execution finished with status: completed"}
+
+{"timestamp": "2026-04-23T12:04:00.028Z", "level": "INFO", "logger": "apps.tasks.utils", "message": "Task 'collect_dashboard_reports_data' start: Starting collect_dashboard_reports_data task"}
+
+{"timestamp": "2026-04-23T12:04:00.034Z", "level": "INFO", "logger": "apps.tasks.utils", "message": "Task 'collect_dashboard_reports_data' processing: Collecting dashboard data for: 2026-04-23T02:51:58.295245+00:00 to 2026-04-23T12:04:00.033289+00:00"}
+
+{"timestamp": "2026-04-23T12:04:00.048Z", "level": "INFO", "logger": "apps.dashboard_reports.models", "message": "Updated JobData Job 250 - Template: example-template - Status: successful"}
+
+{"timestamp": "2026-04-23T12:04:00.055Z", "level": "INFO", "logger": "apps.dashboard_reports.models", "message": "Updated 16 JobHostSummary records for JobData Job 250 - Template: example-template - Status: successful"}</code></pre> 
+           <p class="p">Example scheduling output (<code class="ph codeph">automation-metrics-scheduler</code>):</p> 
+           <pre class="pre codeblock"><code>{"timestamp": "2026-04-23T12:05:00.024Z", "level": "INFO", "logger": "apps.tasks.tasks_system", "message": "Submitted task daily_dashboard_collection (Execution 2026-04-23 12:05:00) (ID: 2314) to dispatcher queue dashboard"}
+
+{"timestamp": "2026-04-23T12:05:00.024Z", "level": "INFO", "logger": "apps.tasks.cron_scheduler", "message": "Recurring task daily_dashboard_collection (ID: 571) remains as template for future executions"}
+
+{"timestamp": "2026-04-23T12:06:00.014Z", "level": "INFO", "logger": "apps.tasks.cron_scheduler", "message": "Created execution record for recurring task: daily_dashboard_collection → daily_dashboard_collection (Execution 2026-04-23 12:06:00) (ID: 2315)"}</code></pre> 
+          </div> </li> 
+        </ol> 
+        <div class="itemgroup stepxmp"> 
+         <p class="p"><strong class="ph b">Common warning and error messages</strong></p> 
+         <p class="p">If dashboard collection encounters issues, you may see these log messages:</p> 
+         <p class="p"><strong class="ph b">Errors:</strong></p> 
+         <ul class="ul"> 
+          <li class="li"><code class="ph codeph">Error collecting jobs: &lt;reason&gt;</code></li> 
+          <li class="li"><code class="ph codeph">Error creating/updating JobData for job &lt;id&gt;: &lt;reason&gt;</code></li> 
+          <li class="li"><code class="ph codeph">Error during cleanup of old JobData records: &lt;reason&gt;</code></li> 
+          <li class="li"><code class="ph codeph">cleanup_dashboard_reports_old_data: retention_period_days=&lt;value&gt; is not a valid integer; aborting cleanup</code></li> 
+         </ul> 
+         <p class="p"><strong class="ph b">Warnings:</strong></p> 
+         <ul class="ul"> 
+          <li class="li"><code class="ph codeph">Warning: Failed to close AWX DB connection in _collect_data()</code></li> 
+          <li class="li"><code class="ph codeph">retention_period_days=&lt;n&gt; is negative ... clamping to 0</code></li> 
+          <li class="li"><code class="ph codeph">Race condition creating TemplateMetadata for '&lt;name&gt;'; fetching existing record.</code></li> 
+         </ul> 
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <p class="p">Dashboard is successfully enabled when:</p> 
+      <ul class="ul"> 
+       <li class="li"><code class="ph codeph">podman exec automation-metrics-web cat /etc/ansible-automation-platform/metrics_service/settings.yaml | grep FEATURE_ENABLED</code> shows <code class="ph codeph">FEATURE_ENABLED: {'DASHBOARD_COLLECTION': True}</code></li> 
+       <li class="li">Six dashboard tables exist in <code class="ph codeph">metrics_service</code> database</li> 
+       <li class="li">Metrics service logs show dashboard collection tasks scheduled</li> 
+       <li class="li">Dashboard UI accessible in Ansible Automation Platform unified UI (after first collection cycle completes)</li> 
+      </ul> 
+     </section> 
+     <section class="section postreq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">What to do next</h2>
+      </div> 
+      <p class="p"><strong class="ph b">What happens next</strong></p> 
+      <p class="p">After installation, the dashboard enablement sequence is:</p> 
+      <ol class="ol"> 
+       <li class="li"><strong class="ph b">30 seconds after metrics service starts:</strong> Initial backfill task (<code class="ph codeph">initial_dashboard_collection</code>) begins</li> 
+       <li class="li"><strong class="ph b">Backfill in progress:</strong> Metrics service collects up to 90 days of historical data from Controller database (if available)</li> 
+       <li class="li"><strong class="ph b">Backfill completes:</strong> Dashboard UI displays collected data</li> 
+       <li class="li"><strong class="ph b">Regular collection starts:</strong> 6-hourly collection schedule (<code class="ph codeph">daily_dashboard_collection</code>) begins running</li> 
+      </ol> 
+      <p class="p"><strong class="ph b">Time to first data:</strong></p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">New installations with no historical jobs:</strong> Dashboard data appears within minutes after backfill completes</li> 
+       <li class="li"><strong class="ph b">Installations with substantial Controller history:</strong> The backfill process involves retrieving and storing historical records. The duration of this task is contingent upon the volume of data currently residing in the automation controller database.</li> 
+      </ul> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">Dashboard RBAC permissions are configured automatically by the installer based on Red Hat Ansible Automation Platform roles. Only Administrators have full access. Other roles do not have access to the automation dashboard.</p> 
+       </div>
+      </div> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist">
+      <strong>Prerequisites</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-con_understand_automation_dashboard_architecture" title="This module explains the automation dashboard architecture in Red Hat Ansible Automation Platform 2.7, including its integration with metrics service, deployment options, and Technology Preview limitations.">Understand automation dashboard architecture</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_install_metrics_service_with_containerized_installer" title="Enable and configure metrics service during containerized installation to automatically collect anonymized usage data and transmit it to Red Hat.">Install metrics service with containerized installer</a></li>
+      </ul>
+     </div>
+     <div class="linklist">
+      <strong>Alternative approaches</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-task_enable_automation_dashboard_post_installation#enable-automation-dashboard-post-installation" title="Activate dashboard data collection with automatic historical data backfill to generate comprehensive usage and ROI reports without reinstalling the platform or losing historical automation activity data.">Enable automation dashboard post-installation</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-task_enable_automation_dashboard_during_operator_installation" title="Enable automation dashboard using declarative Custom Resource configuration to leverage operator-managed dashboard deployment with automatic feature flag propagation to metrics service.">Enable automation dashboard during operator installation</a></li>
+      </ul>
+     </div>
+     <div class="linklist">
+      <strong>Next steps</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-view_automation_job_metrics_with_automation_dashboard#con-filter-automation-data" title="Automation dashboard provides filtering options to analyze your Ansible Automation Platform automation runs. You can select one or more filtering options to customize your report, select a time period and a currency, and save your report to your automation dashboard.">Filter and save automation data for reporting</a></li>
+      </ul>
+     </div>
+     <div class="linklist">
+      <strong>Troubleshooting</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-ref_troubleshoot_automation_dashboard_configuration_and_deployment" title="Diagnose automation dashboard issues including Gateway integration failures, RBAC access problems, UI feature limitations, and data collection errors.">Troubleshoot automation dashboard configuration and deployment</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

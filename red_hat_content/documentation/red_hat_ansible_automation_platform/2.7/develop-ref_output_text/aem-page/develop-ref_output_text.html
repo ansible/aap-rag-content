@@ -1,0 +1,34 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="output-text">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Output text</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Use <code class="ph codeph">output.text</code> to display information to the user after the template runs. Each text block has a <code class="ph codeph">title</code> and <code class="ph codeph">content</code> field. The <code class="ph codeph">content</code> field supports markdown formatting.</p> 
+     <section class="section"> 
+      <pre class="pre codeblock"><code>output:
+  text:
+    - title: Request submitted
+      content: |
+        Your request has been submitted.</code></pre> 
+      <p class="p">You can include multiple text blocks:</p> 
+      <pre class="pre codeblock"><code>output:
+  text:
+    - title: Request submitted
+      content: |
+        Your deployment of **${{ parameters.app_name }}** has been submitted.
+
+        **Job ID:** ${{ steps['launch-job'].output.data.id }}
+        **Status:** ${{ steps['launch-job'].output.data.status }}
+
+    - title: Configuration summary
+      content: |
+        - Inventory: ${{ parameters.inventory }}
+        - Application: ${{ parameters.app_name }}</code></pre> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

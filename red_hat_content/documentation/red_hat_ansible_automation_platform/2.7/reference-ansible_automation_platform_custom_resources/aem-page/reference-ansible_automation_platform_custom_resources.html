@@ -1,0 +1,26 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="con-platform-crds">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Ansible Automation Platform custom resources</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">The Ansible Automation Platform operator provides custom resources for deploying, backing up, and restoring a complete Ansible Automation Platform instance on OpenShift Container Platform.</p> 
+     <p class="p">The <code class="ph codeph">AnsibleAutomationPlatform</code> custom resource is the top-level resource for deploying the platform. It manages all components, including automation controller, automation hub, Event-Driven Ansible, Ansible Lightspeed, and the platform gateway. Use this custom resource when you want the operator to manage the full platform deployment as a single unit.</p> 
+     <p class="p">The <code class="ph codeph">AnsibleAutomationPlatformBackup</code> and <code class="ph codeph">AnsibleAutomationPlatformRestore</code> custom resources manage data protection for the platform. A backup captures the state of all platform components and their databases. A restore recreates the platform from a previously created backup. You can configure backup settings globally or override them for individual components such as automation controller, automation hub, and Event-Driven Ansible.</p> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_">AnsibleAutomationPlatform [aap.ansible.com/v1alpha1]</a></strong><br>The <code class="ph codeph">AnsibleAutomationPlatform</code> custom resource is the top-level resource for deploying and managing Ansible Automation Platform on OpenShift Container Platform. It configures all components, including automation controller, automation hub, Event-Driven Ansible, and the platform gateway.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatformbackup_and_ansibleautomationplatformrestore__aap_ansible_com_v1alpha1_">AnsibleAutomationPlatformBackup and AnsibleAutomationPlatformRestore [aap.ansible.com/v1alpha1]</a></strong><br>The <code class="ph codeph">AnsibleAutomationPlatformBackup</code> and <code class="ph codeph">AnsibleAutomationPlatformRestore</code> custom resources manage backup and restore operations for your Ansible Automation Platform deployment on OpenShift Container Platform. You can configure global settings or override them per component.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-automation_controller_custom_resources#con-controller-crds">Automation controller custom resources</a></strong><br>The automation controller operator provides custom resources for deploying, configuring, and protecting a standalone automation controller instance on OpenShift Container Platform.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-automation_hub_custom_resources#con-hub-crds">Automation hub custom resources</a></strong><br>The automation hub operator provides custom resources for deploying, configuring, and protecting a standalone automation hub instance on OpenShift Container Platform.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansible_lightspeed_custom_resources#con-lightspeed-crds">Ansible Lightspeed custom resources</a></strong><br>The Ansible Lightspeed operator provides a custom resource for deploying and configuring the Ansible Lightspeed AI assistant service on OpenShift Container Platform.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-event_driven_ansible_custom_resources#con-eda-crds">Event-Driven Ansible custom resources</a></strong><br>The Event-Driven Ansible operator provides custom resources for deploying, configuring, and protecting a standalone Event-Driven Ansible instance on OpenShift Container Platform.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-resource_operator_custom_resources#con-resource-operator-crds">Resource Operator custom resources</a></strong><br>The Resource Operator provides custom resources that enable you to manage automation controller resources directly from your Kubernetes cluster using a declarative, GitOps-compatible workflow.</li>
+     </ul>
+    </nav>
+   </article>
+  </main>
+ </body>
+</html>

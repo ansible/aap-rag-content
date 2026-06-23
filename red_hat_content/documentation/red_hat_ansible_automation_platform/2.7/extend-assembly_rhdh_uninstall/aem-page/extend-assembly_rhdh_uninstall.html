@@ -1,0 +1,91 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="rhdh-uninstall"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Uninstall the Ansible plug-ins</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Uninstall the Ansible plug-ins from Red Hat Developer Hub for Helm chart and Operator deployments.</p>
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="rhdh-uninstall-ocp-helm"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Uninstall a Helm chart installation</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">To uninstall the Ansible plug-ins from a Helm chart installation, remove the plug-in configuration from the Helm chart YAML, remove the <code class="ph codeph">extraContainers</code> section, and delete the Ansible block from the custom ConfigMap.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">In Red Hat Developer Hub, remove any software templates that use the <code class="ph codeph">ansible:content:create</code> action.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In the OpenShift Developer UI, navigate to <strong class="ph b">Helm</strong> &gt; <strong class="ph b">developer-hub</strong> &gt; <strong class="ph b">Actions</strong> &gt; <strong class="ph b">Upgrade</strong> &gt; <strong class="ph b">Yaml view</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Remove the Ansible plug-ins configuration under the <code class="ph codeph">plugins</code> section (all <code class="ph codeph">oci://registry.redhat.io/ansible-automation-platform/automation-portal</code> entries).</span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">If you used the deprecated HTTP plug-in registry method, remove the <code class="ph codeph">http://plugin-registry:8080/...</code> entries instead.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Remove the <code class="ph codeph">extraContainers</code> section.</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>upstream:
+  backstage:
+    ...
+    extraContainers:
+      - command:
+          - adt
+          - server
+        image: &gt;-
+          registry.redhat.io/ansible-automation-platform-2.7/ansible-dev-tools-rhel9:latest
+        imagePullPolicy: IfNotPresent
+        name: ansible-devtools-server
+        ports:
+          - containerPort: 8000</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Upgrade</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Edit your custom Red Hat Developer Hub config map, for example <code class="ph codeph">app-config-rhdh</code>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Remove the <code class="ph codeph">ansible</code> section.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Restart the Red Hat Developer Hub deployment.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">If you used OCI delivery, delete the registry auth secret:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock language-terminal"><code>$ oc delete secret &lt;deployment-name&gt;-dynamic-plugins-registry-auth</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">If you used the HTTP plug-in registry method, remove the plug-in registry application:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock language-terminal"><code>$ oc delete all -l app=plugin-registry</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="rhdh-uninstall-operator"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Uninstall from an Operator installation</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">To uninstall the Ansible plug-ins from an Operator installation, edit the ConfigMaps that reference Ansible. The deployment auto-reloads when the ConfigMaps are updated.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Remove the Ansible plug-in entries from the <code class="ph codeph">plugins:</code> block in your dynamic plug-ins ConfigMap.</span> 
+          <div class="itemgroup info">
+           <p class="p">Alternatively, set <code class="ph codeph">disabled: true</code> for each Ansible plug-in entry.</p>
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Edit your custom Red Hat Developer Hub ConfigMap (for example, <code class="ph codeph">app-config-rhdh</code>):</span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">Remove the Ansible software templates entry from the <code class="ph codeph">catalog.locations</code> block.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Remove the entire <code class="ph codeph">ansible</code> block (including <code class="ph codeph">creatorService</code>, <code class="ph codeph">rhaap</code>, <code class="ph codeph">devSpaces</code>, and <code class="ph codeph">automationHub</code> entries).</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Click <strong class="ph b">Save</strong>.</span> </li> 
+          </ol> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Modify the Backstage custom resource and remove the <code class="ph codeph">containers</code> block for the Ansible Developer Tools sidecar from the <code class="ph codeph">spec.deployment.patch.spec.template.spec</code> block. Click <strong class="ph b">Save</strong>.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

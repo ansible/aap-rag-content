@@ -1,0 +1,114 @@
+# Troubleshoot your containerized deployment
+## Diagnose the problem
+
+For general container-based troubleshooting, you can inspect the container logs for any running service to help troubleshoot underlying issues.
+
+**Identifying the running containers**
+
+To get a list of the running container names run the following command:
+
+```
+$ podman ps --all --format "{{.Names}}"
+```
+
+*Table 2. Container details*
+
+| Component group           | Container name                                   | Purpose                                                                                                                                                                  |
+| ------------------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| <br>Automation controller | <br> `automation-controller-rsyslog`             | <br>Handles centralized logging for automation controller.                                                                                                               |
+| <br>Automation controller | <br> `automation-controller-task`                | <br>Manages and runs tasks related to automation controller, such as running playbooks and interacting with inventories.                                                 |
+| <br>Automation controller | <br> `automation-controller-web`                 | <br>A web server that provides a REST API for automation controller. This is accessed and routed through platform gateway for user interaction.                          |
+| <br>Event-Driven Ansible  | <br> `automation-eda-api`                        | <br>Exposes the API for Event-Driven Ansible, allowing external systems to trigger and manage event-driven automations.                                                  |
+| <br>Event-Driven Ansible  | <br> `automation-eda-daphne`                     | <br>A web server for Event-Driven Ansible, handling WebSocket connections and serving static files.                                                                      |
+| <br>Event-Driven Ansible  | <br> `automation-eda-web`                        | <br>A web server that provides a REST API for Event-Driven Ansible. This is accessed and routed through platform gateway for user interaction.                           |
+| <br>Event-Driven Ansible  | <br> `automation-eda-worker-<number>`            | <br>These containers run the automation rules and playbooks based on incoming events.                                                                                    |
+| <br>Event-Driven Ansible  | <br> `automation-eda-activation-worker-<number>` | <br>These containers manage the activation of automation rules, ensuring they run when specific conditions are met.                                                      |
+| <br>Event-Driven Ansible  | <br> `automation-eda-scheduler`                  | <br>Responsible for scheduling and managing recurring tasks and rule activations.                                                                                        |
+| <br>Platform gateway      | <br> `automation-gateway-proxy`                  | <br>Acts as a reverse proxy, routing incoming requests to the appropriate Ansible Automation Platform services.                                                          |
+| <br>Platform gateway      | <br> `automation-gateway`                        | <br>Responsible for authentication, authorization, and overall request handling for the platform, all of which is exposed through a REST API and served by a web server. |
+| <br>Automation hub        | <br> `automation-hub-api`                        | <br>Provides the API for automation hub, enabling interaction with collection content, user management, and other automation hub functionality.                          |
+| <br>Automation hub        | <br> `automation-hub-content`                    | <br>Manages and serves Ansible Content Collections, roles, and modules stored in automation hub.                                                                         |
+| <br>Automation hub        | <br> `automation-hub-web`                        | <br>A web server that provides a REST API for automation hub. This is accessed and routed through platform gateway for user interaction.                                 |
+| <br>Automation hub        | <br> `automation-hub-worker-<number>`            | <br>These containers handle background tasks for automation hub, such as content synchronization, indexing, and validation.                                              |
+| <br>Performance Co-Pilot  | <br> `pcp`                                       | <br>If Performance Co-Pilot Monitoring is enabled, this container is used for system performance monitoring and data collection.                                         |
+| <br>PostgreSQL            | <br> `postgresql`                                | <br>Hosts the PostgreSQL database for Ansible Automation Platform.                                                                                                       |
+| <br>Receptor              | <br> `receptor`                                  | <br>Facilitates secure and reliable communication within Ansible Automation Platform.                                                                                    |
+| <br>Redis                 | <br> `redis-<suffix>`                            | <br>Responsible for caching, real-time analytics and fast data retrieval.                                                                                                |
+
+
+**Inspecting the logs**
+
+Containerized Ansible Automation Platform uses `journald` for Podman logging. To inspect any running container logs, run the `journalctl` command:
+
+```
+$ journalctl CONTAINER_NAME=<container_name>
+```
+Example command with output:
+
+```
+$ journalctl CONTAINER_NAME=automation-gateway-proxy
+
+Oct 08 01:40:12 aap.example.org automation-gateway-proxy[1919]: [2024-10-08 00:40:12.885][2][info][upstream] [external/envoy/source/common/upstream/cds_ap>
+Oct 08 01:40:12 aap.example.org automation-gateway-proxy[1919]: [2024-10-08 00:40:12.885][2][info][upstream] [external/envoy/source/common/upstream/cds_ap>
+Oct 08 01:40:19 aap.example.org automation-gateway-proxy[1919]: [2024-10-08T00:40:16.753Z] "GET /up HTTP/1.1" 200 - 0 1138 10 0 "192.0.2.1" "python->
+```
+To view the logs of a running container in real-time, run the `podman logs -f` command:
+
+```
+$ podman logs -f <container_name>
+```
+**Controlling container operations**
+
+You can control operations for a container by running the `systemctl` command:
+
+```
+$ systemctl --user status <container_name>
+```
+Example command with output:
+
+```
+$ systemctl --user status automation-gateway-proxy
+● automation-gateway-proxy.service - Podman automation-gateway-proxy.service
+Loaded: loaded (/home/user/.config/systemd/user/automation-gateway-proxy.service; enabled; preset: disabled)
+Active: active (running) since Mon 2024-10-07 12:39:23 BST; 23h ago
+Docs: man:podman-generate-systemd(1)
+Process: 780 ExecStart=/usr/bin/podman start automation-gateway-proxy (code=exited, status=0/SUCCESS)
+Main PID: 1919 (conmon)
+Tasks: 1 (limit: 48430)
+Memory: 852.0K
+CPU: 2.996s
+CGroup: /user.slice/user-1000.slice/user@1000.service/app.slice/automation-gateway-proxy.service
+└─1919 /usr/bin/conmon --api-version 1 -c 2dc3c7b2cecd73010bad1e0aaa806015065f92556ed3591c9d2084d7ee209c7a -u 2dc3c7b2cecd73010bad1e0aaa80>
+Oct 08 11:44:10 aap.example.org automation-gateway-proxy[1919]: [2024-10-08T10:44:02.926Z] "GET /api/galaxy/_ui/v1/settings/ HTTP/1.1" 200 - 0 654 58 47 ">
+Oct 08 11:44:10 aap.example.org automation-gateway-proxy[1919]: [2024-10-08T10:44:03.387Z] "GET /api/controller/v2/config/ HTTP/1.1" 200 - 0 4018 58 44 "1>
+Oct 08 11:44:10 aap.example.org automation-gateway-proxy[1919]: [2024-10-08T10:44:03.370Z] "GET /api/galaxy/v3/plugin/ansible/search/collection-versions/?>
+Oct 08 11:44:10 aap.example.org automation-gateway-proxy[1919]: [2024-10-08T10:44:03.405Z] "GET /api/controller/v2/organizations/?role_level=notification_>
+Oct 08 11:44:10 aap.example.org automation-gateway-proxy[1919]: [2024-10-08T10:44:04.366Z] "GET /api/galaxy/_ui/v1/me/ HTTP/1.1" 200 - 0 1368 79 40 "192.1>
+Oct 08 11:44:10 aap.example.org automation-gateway-proxy[1919]: [2024-10-08T10:44:04.360Z] "GET /api/controller/v2/workflow_approvals/?page_size=200&statu>
+Oct 08 11:44:10 aap.example.org automation-gateway-proxy[1919]: [2024-10-08T10:44:04.379Z] "GET /api/controller/v2/job_templates/7/ HTTP/1.1" 200 - 0 1356>
+Oct 08 11:44:10 aap.example.org automation-gateway-proxy[1919]: [2024-10-08T10:44:04.378Z] "GET /api/galaxy/_ui/v1/feature-flags/ HTTP/1.1" 200 - 0 207 81>
+Oct 08 11:44:13 aap.example.org automation-gateway-proxy[1919]: [2024-10-08 10:44:13.856][2][info][upstream] [external/envoy/source/common/upstream/cds_ap>
+Oct 08 11:44:13 aap.example.org automation-gateway-proxy[1919]: [2024-10-08 10:44:13.856][2][info][upstream] [external/envoy/source/common/upstream/cds_ap
+```
+**Getting container information about the execution plane**
+
+To get container information about automation controller, Event-Driven Ansible, and `execution_nodes` nodes, prefix any Podman commands with either:
+
+```
+CONTAINER_HOST=unix://run/user/<user_id>/podman/podman.sock
+```
+or
+
+```
+CONTAINERS_STORAGE_CONF=<user_home_directory>/aap/containers/storage.conf
+```
+Example with output:
+
+```
+$ CONTAINER_HOST=unix://run/user/1000/podman/podman.sock podman images
+
+REPOSITORY                                                            TAG         IMAGE ID      CREATED     SIZE
+registry.redhat.io/ansible-automation-platform-25/ee-supported-rhel8  latest      59d1bc680a7c  6 days ago  2.24 GB
+registry.redhat.io/ansible-automation-platform-25/ee-minimal-rhel8    latest      a64b9fc48094  6 days ago  338 MB
+```
+

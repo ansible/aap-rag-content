@@ -1,0 +1,191 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="ref-platform-system-requirements">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Red Hat Ansible Automation Platform system requirements</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Your system must meet the following minimum system requirements to install and run Red Hat Ansible Automation Platform. </p> 
+     <section class="section"> 
+      <p class="p">A resilient deployment requires 10 virtual machines with a minimum of 16 gigabytes (GB) of RAM and 4 virtual CPUs (vCPU). See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-assembly_overview_tested_deployment_models" title="Red Hat tests Ansible Automation Platform with a defined set of topologies to give you opinionated deployment options. Deploy all components of Ansible Automation Platform so that all features and capabilities are available for use without the need to take further action.">Choose a deployment method and topology</a> for more information on topology options. </p> 
+      <table class="table">
+       <caption>
+        <span class="table--title-label">Table 1. </span><span class="title">Base system</span>
+       </caption>
+       <colgroup>
+        <col style="width:20%">
+        <col style="width:40%">
+        <col style="width:40%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-platform-system-requirements__entry__1">Type</th> 
+         <th class="entry" id="ref-platform-system-requirements__entry__2">Description</th> 
+         <th class="entry" id="ref-platform-system-requirements__entry__3">Notes</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__1"> <p class="p">Subscription</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__2"> <p class="p">Valid Red Hat Ansible Automation Platform subscription</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__3"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__1"> <p class="p">Operating system</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__2"> 
+          <ul class="ul"> 
+           <li class="li">Red Hat Enterprise Linux 9.6 or later minor versions of Red Hat Enterprise Linux 9</li> 
+          </ul> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__3"> <p class="p">Red Hat Ansible Automation Platform are also supported on OpenShift, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator" title="As a system administrator, you can use Ansible Automation Platform Operator to deploy new Ansible Automation Platform instances in your OpenShift environment.">Installing on OpenShift Container Platform</a> for more information.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__1"> <p class="p">CPU architecture</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__2"> <p class="p">x86_64, AArch64, s390x (IBM Z), ppc64le (IBM Power)</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__3"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__1"> <p class="p">Ansible-core</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__2"> <p class="p">Ansible-core version 2.16 or later</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__3"> <p class="p">Ansible Automation Platform uses the system-wide ansible-core package to install the platform, but uses ansible-core 2.16 for both its control plane and built-in execution environments.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__1"> <p class="p">Browser</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__2"> <p class="p">A currently supported version of Mozilla Firefox or Google Chrome.</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__3"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__1"> <p class="p">Database</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__2"> 
+          <ul class="ul"> 
+           <li class="li">For Ansible Automation Platform managed databases: PostgreSQL 15.</li> 
+           <li class="li">For customer provided (external) databases: PostgreSQL 15, 16, or 17.</li> 
+          </ul> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__3"> 
+          <ul class="ul"> 
+           <li class="li">External (customer supported) databases require International Components for Unicode (ICU) support.</li> 
+           <li class="li">External databases using PostgreSQL 16 or 17 must rely on external backup and restore processes. Backup and restore functionality is dependent on utilities provided with PostgreSQL 15.</li> 
+          </ul> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__1"> <p class="p">IP version</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__2"> <p class="p">IPv4, IPv6 (single-stack and dual-stack)</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__3"></td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <table class="table">
+       <caption>
+        <span class="table--title-label">Table 2. </span><span class="title">Virtual machine requirements</span>
+       </caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:10%">
+        <col style="width:10%">
+        <col style="width:10%">
+        <col style="width:45%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-platform-system-requirements__entry__25">Component</th> 
+         <th class="entry" id="ref-platform-system-requirements__entry__26">RAM</th> 
+         <th class="entry" id="ref-platform-system-requirements__entry__27">vCPU</th> 
+         <th class="entry" id="ref-platform-system-requirements__entry__28">Disk IOPS</th> 
+         <th class="entry" id="ref-platform-system-requirements__entry__29">Storage</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__25"> <p class="p">Platform gateway</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__26"> <p class="p">16GB</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__27"> <p class="p">4</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__28"> <p class="p">3000</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__29"> <p class="p">60GB minimum</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__25"> <p class="p">Control nodes</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__26"> <p class="p">16GB</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__27"> <p class="p">4</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__28"> <p class="p">3000</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__29"> <p class="p">80GB minimum with at least 20GB available under <code class="ph codeph">/var/lib/awx</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__25"> <p class="p">Execution nodes</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__26"> <p class="p">16GB</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__27"> <p class="p">4</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__28"> <p class="p">3000</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__29"> <p class="p">60GB minimum</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__25"> <p class="p">Hop nodes</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__26"> <p class="p">16GB</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__27"> <p class="p">4</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__28"> <p class="p">3000</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__29"> <p class="p">60GB minimum</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__25"> <p class="p">Automation hub</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__26"> <p class="p">16GB</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__27"> <p class="p">4</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__28"> <p class="p">3000</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__29"> <p class="p">60GB minimum with at least 40GB allocated to <code class="ph codeph">/var/lib/pulp</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__25"> <p class="p">Database</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__26"> <p class="p">16GB</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__27"> <p class="p">4</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__28"> <p class="p">3000</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__29"> <p class="p">100GB minimum allocated to <code class="ph codeph">/var/lib/pgsql</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__25"> <p class="p">Event-Driven Ansible controller</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__26"> <p class="p">16GB</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__27"> <p class="p">4</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__28"> <p class="p">3000</p> </td> 
+         <td class="entry" headers="ref-platform-system-requirements__entry__29"> <p class="p">60GB minimum</p> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">These are minimum requirements and can be increased for larger workloads in increments of 2x (for example 16GB becomes 32GB and 4 vCPU becomes 8vCPU). See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_horizontal_scaling_for_performance" title="Horizontal scaling involves increasing the number of replicas (pods or virtual machines) for a given service. Similar to vertical scaling, this approach is useful for high resource utilization or workload scaling.">Horizontally scale tested deployment models to improve performance</a> for more information.</p> 
+       </div>
+      </div> 
+     </section> 
+     <section class="section" id="ref-platform-system-requirements___repository_requirements">
+      <h2 class="title sectiontitle">Repository requirements</h2> 
+      <p class="p">Enable the following repositories only when installing Red Hat Ansible Automation Platform:</p> 
+      <ul class="ul"> 
+       <li class="li">RHEL BaseOS</li> 
+       <li class="li">RHEL AppStream</li> 
+      </ul> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">If you enable repositories besides those mentioned above, the Red Hat Ansible Automation Platform installation could fail unexpectedly.</p> 
+       </div>
+      </div> 
+      <p class="p">The following are necessary for you to work with project updates and collections:</p> 
+      <ul class="ul"> 
+       <li class="li">Ensure that the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-assembly_network_ports_protocols#network-ports-protocols_table" title="The following table indicates the destination port and the direction of network traffic:">Network ports and protocols table</a> are available for successful connection and download of collections from automation hub or Ansible Galaxy server.</li> 
+      </ul> 
+     </section> 
+     <section class="section" id="ref-platform-system-requirements___additional_notes_for_red_hat_ansible_automation_platform_requirements">
+      <h2 class="title sectiontitle">Additional notes for Red Hat Ansible Automation Platform requirements</h2> 
+      <ul class="ul"> 
+       <li class="li">The Ansible Automation Platform database backups are staged on each node at <code class="ph codeph">/var/backups/automation-platform</code> through the variable <code class="ph codeph">backup_dir</code>. You might need to mount a new volume to <code class="ph codeph">/var/backups</code> or change the staging location with the variable <code class="ph codeph">backup_dir</code> to prevent issues with disk space before running the <code class="ph codeph">./setup.sh -b</code> script.</li> 
+       <li class="li">If performing a bundled Ansible Automation Platform installation, the installation setup.sh script attempts to install ansible-core (and its dependencies) from the bundle for you.</li> 
+       <li class="li">If you have installed Ansible-core manually, the Ansible Automation Platform installation setup.sh script detects that Ansible has been installed and does not attempt to reinstall it.</li> 
+      </ul> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">You must use Ansible-core, which is installed by using DNF. Ansible-core version 2.16 is required for versions 2.6 and later.</p> 
+       </div>
+      </div> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

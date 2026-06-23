@@ -1,0 +1,167 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="rhdh-configure"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Configure the Ansible plug-ins</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">After installing the Ansible plug-ins, configure them to connect to your Ansible Automation Platform instance and enable software templates.</p> 
+      <p class="p">Add the following configuration to your Red Hat Developer Hub custom ConfigMap (for example, <code class="ph codeph">app-config-rhdh</code>).</p> 
+      <ul class="ul"> 
+       <li class="li">For Operator deployments, edit the ConfigMap directly.</li> 
+       <li class="li">For Helm deployments, edit the ConfigMap referenced in <code class="ph codeph">upstream.backstage.extraAppConfig</code>.</li> 
+      </ul> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="rhdh-configure-devtools-server"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Configure the Ansible Dev Tools Server</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">The <code class="ph codeph">creatorService</code> URL is required for the Ansible plug-ins to provision new projects using the provided software templates.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <div class="ol steps">
+         <div class="li step p"> <span class="ph cmd">Add the following code to your Red Hat Developer Hub <code class="ph codeph">app-config-rhdh.yaml</code> file.</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: app-config-rhdh
+...
+data:
+  app-config-rhdh.yaml: |-
+    ansible:
+      creatorService:
+        baseUrl: 127.0.0.1
+        port: '8000'
+...</code></pre> 
+          </div> 
+         </div>
+        </div>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="rhdh-configure-aap-details"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Configure Ansible Automation Platform details</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Connect Red Hat Developer Hub to your automation controller by configuring the Ansible Automation Platform details. This configuration uses a Personal Access Token (PAT) to authenticate the plug-ins, which allows them to interact with your automation environment.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">The Ansible plug-ins continue to function regardless of the Ansible Automation Platform subscription status.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">Create a Personal Access Token (PAT) with "read and write” scope in automation controller, following the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_token_based_authentication#gw-token-based-authentication" title="Token-based authentication permits authentication of third-party tools and services with the platform through integrated OAuth 2 token support. Ansible Automation Platform utilizes both OAuth Tokens and Personal Access Tokens (PATs).">Applications</a> section of <em class="ph i">Access management and authentication</em>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Edit your custom Red Hat Developer Hub config map, for example <code class="ph codeph">app-config-rhdh</code>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Add your Ansible Automation Platform details to <code class="ph codeph">app-config-rhdh.yaml</code>. </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Set the <code class="ph codeph">baseURL</code> key with your automation controller URL.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Set the <code class="ph codeph">token</code> key with the generated token value that you created in Step 1.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Set the <code class="ph codeph">checkSSL</code> key to <code class="ph codeph">true</code> or <code class="ph codeph">false</code>. </span> 
+            <div class="itemgroup info"> 
+             <p class="p">If <code class="ph codeph">checkSSL</code> is set to <code class="ph codeph">true</code>, the Ansible plug-ins verify whether the SSL certificate is valid.</p> 
+             <pre class="pre codeblock"><code>data:
+  app-config-rhdh.yaml: |
+    ...
+    ansible:
+    ...
+      rhaap:
+        baseUrl: '&lt;https://MyControllerUrl&gt;'
+        token: '&lt;AAP Personal Access Token&gt;'
+        checkSSL: true</code></pre> 
+             <div class="note note note_note">
+              <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">You are responsible for protecting your Red Hat Developer Hub installation from external and unauthorized access. Manage the backend authentication key like any other secret. Meet strong password requirements, do not expose it in any configuration files, and only inject it into configuration files as an environment variable.</p> 
+              </div>
+             </div> 
+            </div> </li> 
+          </ol> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="rhdh-add-plugin-software-templates"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Add Ansible plug-ins software templates</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Add Ansible Automation Platform software templates to your Red Hat Developer Hub instance so users can create new Ansible playbooks and collection projects based on Ansible best practices.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Edit your custom Red Hat Developer Hub config map, for example <code class="ph codeph">app-config-rhdh</code>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Add the following code to your Red Hat Developer Hub <code class="ph codeph">app-config-rhdh.yaml</code> file. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>data:
+  app-config-rhdh.yaml: |
+    catalog:
+      ...
+      locations:
+        ...
+        - type: url
+          target: https://github.com/ansible/ansible-rhdh-templates/blob/main/all.yaml
+          rules:
+            - allow: [Template]</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.9/html-single/administration_guide_for_red_hat_developer_hub/assembly-admin-templates#assembly-admin-templates" target="_blank" rel="external noopener">Managing templates</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="rhdh-configure-rbac"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Configure Role Based Access Control</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Red Hat Developer Hub offers Role-based Access Control (RBAC) functionality. RBAC can then be applied to the Ansible plug-ins content.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <div class="ul steps-unordered">
+         <div class="li step p"> <span class="ph cmd">Assign the following roles: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Members of the <code class="ph codeph">admin:superUsers</code> group can select templates in the <strong class="ph b">Create</strong> tab of the Ansible plug-ins to create playbook and collection projects.</li> 
+            <li class="li">Members of the <code class="ph codeph">admin:users</code> group can view templates in the <strong class="ph b">Create</strong> tab of the Ansible plug-ins. <p class="p">The following example adds RBAC to Red Hat Developer Hub.</p> <pre class="pre codeblock"><code>data:
+  app-config-rhdh.yaml: |
+    plugins:
+    ...
+    permission:
+      enabled: true
+      rbac:
+        admin:
+          users:
+            - name: user:default/&lt;user-scm-ida&gt;
+          superUsers:
+            - name: user:default/&lt;user-admin-idb&gt;</code></pre> <p class="p">For more information about permission policies and managing RBAC, refer to the <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.9/html-single/authorization_in_red_hat_developer_hub/index" target="_blank" rel="external noopener"><em class="ph i">Authorization in Red Hat Developer Hub</em></a> guide.</p> </li> 
+           </ul> 
+          </div> 
+         </div>
+        </div>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

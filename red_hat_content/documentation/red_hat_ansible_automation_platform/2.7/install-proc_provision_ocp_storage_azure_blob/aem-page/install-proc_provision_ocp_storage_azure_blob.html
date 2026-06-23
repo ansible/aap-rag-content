@@ -1,0 +1,73 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="provision-ocp-storage-azure-blob">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure object storage on Azure Blob</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Red Hat supports Azure Blob Storage for automation hub. You can configure it when deploying the <code class="ph codeph">AnsibleAutomationPlatform</code> custom resource (CR), or you can configure it for an existing instance.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">Create an Azure Storage blob container to store the objects.</li> 
+       <li class="li">Note the name of the blob container.</li> 
+      </ul> 
+     </section> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div>
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Create a Kubernetes secret containing the credentials and connection details for your Azure account, and the name of your Azure Storage blob container. The following example creates a secret called <code class="ph codeph">test-azure</code>: </span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-yaml"><code>$ oc -n $HUB_NAMESPACE apply -f- &lt;&lt;EOF
+apiVersion: v1
+kind: Secret
+metadata:
+  name: 'test-azure'
+stringData:
+  azure-account-name: $AZURE_ACCOUNT_NAME
+  azure-account-key: $AZURE_ACCOUNT_KEY
+  azure-container: $AZURE_CONTAINER
+  azure-container-path: $AZURE_CONTAINER_PATH
+  azure-connection-string: $AZURE_CONNECTION_STRING
+EOF</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Add the secret to the Ansible Automation Platform custom resource (CR) under the <code class="ph codeph">hub</code> section in the <code class="ph codeph">spec</code>:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-yaml"><code>apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  hub:
+    storage_type: azure
+    object_storage_azure_secret: test-azure</code></pre> 
+        </div> 
+        <div class="itemgroup info"> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">If you have an existing automation hub instance, specify its name using <code class="ph codeph">hub.name: existing-hub-name</code> to apply these settings to the existing instance.</p> 
+           <p class="p">For more examples of Ansible Automation Platform custom resources, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_operator_crs#appendix-operator-crs_appendix-operator-crs" title="This appendix provides a reference for the Ansible Automation Platform custom resources for various deployment scenarios.">Red Hat Ansible Automation Platform custom resources</a> </p> 
+          </div>
+         </div> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">If you are applying this secret to an existing instance, restart the API pods for the change to take effect. <code class="ph codeph">&lt;hub-name&gt;</code> is the name of your hub instance. </span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-bash"><code>$ oc -n $HUB_NAMESPACE delete pod -l app.kubernetes.io/name=&lt;hub-name&gt;-api</code></pre> 
+        </div> </li>
+      </ol>
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

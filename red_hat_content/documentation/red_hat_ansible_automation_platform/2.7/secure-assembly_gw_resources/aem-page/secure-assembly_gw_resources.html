@@ -1,0 +1,74 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-gw-resources"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Manage user access to resources</h1> 
+     <p class="shortdesc">Manage user access to Ansible Automation Platform resources via directly assigned or team-inherited roles. Resources vary by function, such as job templates and projects for automation execution, or decision environments and rulebook activations for automation decisions.</p> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-gw-team-access"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Provide team access to a resource</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can grant users access based on their team membership. When you add a user as a member of a team, they inherit access to the roles and resources defined for that team.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Direct team access cannot be granted to <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Remote Registries</span></span> resources.</p> 
+         </div> 
+        </div> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">From the navigation panel, click the name of the resource that you want to give a team access to. For example, <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Templates</span></span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">On the details page, select the <strong class="ph b">Team Access</strong> tab.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Assign Teams</span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click the checkbox beside the team to assign that team access to your chosen resource and click <span class="ph uicontrol button">Next</span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select the roles you want applied to the team for the chosen resource and click <span class="ph uicontrol button">Next</span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Review the settings and click <span class="ph uicontrol button">Finish</span>. The Assign Teams dialog displays indicating whether the role assignments were successfully applied.</span> </li> 
+         <li class="li step"> <span class="ph cmd">You can remove resource access for a team by selecting the <strong class="ph b">Remove team</strong> icon next to the team. This launches a confirmation dialog, asking you to confirm the removal.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-gw-user-access-resources"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Provide direct user access to a resource</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can directly grant users access to resources, and edit their access after it has been granted.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Direct user access cannot be granted to <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Remote Registries</span></span> resources.</p> 
+         </div> 
+        </div> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select a resource that you want to give a team access to. For example, <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Templates</span></span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select the <strong class="ph b">User access</strong> tab.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Assign users</span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click the checkbox beside the user to assign that user to your chosen resource and click <span class="ph uicontrol button">Next</span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select the roles you want applied to the user for the chosen resource and click <span class="ph uicontrol button">Next</span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Review the settings and click <span class="ph uicontrol button">Finish</span>. The Assign Roles dialog displays indicating whether the role assignments were successfully applied.</span> </li> 
+         <li class="li step"> <span class="ph cmd">You can edit a user’s access to a resource from the <strong class="ph b">User Access</strong> tab by clicking the pencil icon <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png" width="15" alt="Edit page"> next to the user’s name and adding or removing directly-assigned roles.</span> </li> 
+         <li class="li step"> <span class="ph cmd">You can remove resource access for a user by selecting the <strong class="ph b">Remove role</strong> icon next to the user. This launches a confirmation dialog asking you to confirm the removal.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

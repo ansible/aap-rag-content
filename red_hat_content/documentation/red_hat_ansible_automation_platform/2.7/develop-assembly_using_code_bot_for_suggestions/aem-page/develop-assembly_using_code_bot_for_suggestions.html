@@ -1,0 +1,224 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="using-code-bot-for-suggestions"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Install and configure the Ansible code bot</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">Ansible code bot scans GitHub repositories (collections, roles, playbooks) and proactively creates pull requests with best practice or quality improvement recommendations. </p> 
+      <div class="note important note_important"> <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">The Ansible code bot was deprecated on October 1, 2025 and will be retired anytime after December 31, 2025. Red Hat is no longer actively maintaining or supporting the component.</p> 
+       </div> 
+      </div> 
+      <p class="p">Ansible code bot scans your code repositories to recommend code quality improvements. It promotes Ansible best practices while avoiding common errors that can lead to bugs or make code harder to maintain. The bot automatically submits pull requests to the repository, which proactively alerts the repository owner to a recommended change to their content. You can configure Ansible code bot to scan your existing Git repositories (both public and private). Your organization must have an active subscription to Red Hat Ansible Automation Platform to use the Ansible code bot. However, IBM watsonx Code Assistant is not required to use the Ansible code bot. </p> 
+      <p class="p">After the Ansible code bot is installed, it automatically scans the selected repositories that are in Jinja format. Once the scanning is complete, the code bot generates an initial PR for each repository; the initial PR also contains the scan schedule configured to run weekly. You must review the initial PR for the suggested changes and merge the PR. Once the initial PR is merged, the scan schedule is triggered, and the subsequent repository scans are performed weekly. If required, you can change the scan schedule to a daily or monthly cadence.</p> 
+      <p class="p">You can access the Ansible code bot dashboard that displays all your repositories that have the bot installed along with their scan status. From the dashboard, you can start a manual scan, view the scan history, and view the repository. From GitHub, you can configure a schedule to scan your repository at regular intervals, and add or remove a repository from being scanned.</p> 
+      <div class="note important note_important"> <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">Ansible code bot is supported on the following GitHub versions:</p> 
+        <ul class="ul"> 
+         <li class="li">GitHub.com</li> 
+         <li class="li">GitHub Enterprise Cloud <p class="p">Ansible code bot is not supported on GitHub Enterprise Server. </p> </li> 
+        </ul> 
+       </div> 
+      </div> 
+      <p class="p">The following examples are code recommendations that the Ansible code bot can suggest:</p> 
+      <ul class="ul"> 
+       <li class="li">Available alternatives for deprecated legacy syntax or implementation patterns</li> 
+       <li class="li">Module version changes and updates, such as: 
+        <ul class="ul"> 
+         <li class="li">Adding any new required parameters</li> 
+         <li class="li">Flagging deprecated parameters</li> 
+         <li class="li">Removing unused parameters</li> 
+        </ul> </li> 
+       <li class="li">Applying YAML best practices</li> 
+       <li class="li">Adding comment blocks</li> 
+       <li class="li">Fixing casing issues in name fields</li> 
+      </ul> 
+     </div> 
+     <nav role="navigation" class="related-links"> 
+      <div class="linklist relinfo"> <strong>Related information</strong> 
+       <br> 
+       <ul class="linklist"> 
+        <li class="linklist"><a class="link" href="https://docs.github.com/en/enterprise-cloud@latest/get-started/learning-about-github/githubs-plans" target="_blank" rel="external noopener">GitHub’s plans</a></li> 
+       </ul> 
+      </div> 
+     </nav> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="install-code-bot"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Install the Ansible code bot</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Install the Ansible code bot to get code recommendations for your repositories, and then log in to the Ansible code bot dashboard to monitor and manage your repository scans.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to GitHub by using the account associated with your organization.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Go to the <a class="xref" href="https://github.com/apps/ansible-code-bot" target="_blank" rel="external noopener">Ansible code bot</a> GitHub app.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the Ansible repositories that you want the app to access: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">All repositories</strong>: Provides access to read the metadata of all repositories.</li> 
+            <li class="li"><strong class="ph b">Only select repositories</strong>: Provides access to read the metadata of only the repositories that you select.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: If you selected <strong class="ph b">Only select repositories</strong> in the previous step, select the repositories that you want the Ansible code bot to access from the <strong class="ph b">Select repositories</strong> list.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Install &amp; Authorize</strong>. A message is displayed that specifies the following permissions are granted automatically to the bot during installation: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Read access to metadata</li> 
+            <li class="li">Read and write access to code and pull requests</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">When prompted, log in to your Red Hat Single Sign-On account as an organization administrator.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to the Ansible code bot dashboard: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">On the <strong class="ph b">Authorize Ansible code bot</strong> page, verify your account and repository permissions.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Click <strong class="ph b">Authorize Ansible</strong>. </span> 
+            <div class="itemgroup info"> 
+             <p class="p">From the <strong class="ph b">Authorize Ansible code bot</strong> page, the following actions occur:</p> 
+             <ul class="ul"> 
+              <li class="li">Ansible code bot verifies that you are a part of an organization that has an active subscription to Red Hat Ansible Automation Platform.</li> 
+              <li class="li">GitHub requests read permissions to access the repositories associated with your account. <p class="p">On successful authorization, you are logged in to Ansible code bot dashboard. The dashboard displays all your repositories that have the Ansible code bot installed along with their scan status.</p> </li> 
+             </ul> 
+            </div> </li> 
+          </ol> </li> 
+        </ol> 
+       </section> 
+       <section class="section result"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Results</h3> 
+        </div> 
+        <p class="p">After the Ansible code bot is installed, it automatically scans the selected repositories that are in Jinja format. When the scanning is complete, the code bot generates an initial PR for each repository; the initial PR also contains the scan schedule configured to run weekly.</p> 
+        <p class="p">Perform the following tasks:</p> 
+        <ol class="ol"> 
+         <li class="li">Review the initial PR for the suggested changes, and merge the PR. <p class="p">After you merge the initial PR, the configured scan schedule is triggered, and the subsequent repository scans are performed weekly.</p> 
+          <div class="note note note_note"> <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">If you do not merge the initial PR, the weekly scan schedule is not triggered and the Ansible code bot dashboard displays the repositories without any associated scan history.</p> 
+           </div> 
+          </div> <p class="p">The following illustration is an example of an initial PR being created:</p> <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/code-bot-initial-pr.png" alt="Ansible code bot settings"><br></li> 
+         <li class="li">Optional: If required, you can manually scan your repositories or change the scan schedule to a daily or monthly cadence.</li> 
+         <li class="li">Modify the scanned repositories. </li> 
+        </ol> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_troubleshoot_lightspeed_configuration_errors#troubleshoot-ansible-code-bot-errors" title="This section provides information about errors when using the Ansible code bot and their workarounds.">Troubleshooting Ansible code bot errors</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="uninstall-code-bot"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Uninstall the Ansible code bot</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">If you no longer want to use the Ansible code bot, you can uninstall it from GitHub. After the code bot is uninstalled, you can still access the Ansible code bot dashboard but you cannot see the repositories on the dashboard or scan your repositories.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to GitHub by using the account associated with your organization.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In GitHub, click your profile photo &gt; <strong class="ph b">Settings</strong>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Under Integrations, click <strong class="ph b">Applications</strong> &gt; <strong class="ph b">Installed GitHub Apps</strong>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Configure</strong> beside the Ansible code bot app.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Under the <strong class="ph b">Danger zone</strong> area, click <strong class="ph b">Uninstall</strong>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The Ansible code bot app is uninstalled from your GitHub account.</p> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title4" id="manage-repo-scans"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Manage repository scans</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">The Ansible code bot dashboard displays a list of your repositories where the code bot is installed, and indicates if the scan schedule is not set, or is set to manual or scheduled scan.</p> 
+       <p class="p">You can scan your Git repository by starting a manual scan, or configure a schedule to scan your repository at regular intervals. After the scan is completed, you can view the scan history. The scan history shows the start time, status, and type of scan. It also includes a link to the pull request if it was created, and the log message if the scan failed. You can also add new repositories for scanning or remove existing repositories from being scanned.</p> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="manually-scan-repo-github"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Manually scan the repository from GitHub</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can manually scan your Git repositories from GitHub if you did not set up a scanning schedule for your Ansible code bot or if you do not want to wait for the next scheduled scan.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">If you manually scan your repository, and no pull request was created, it is likely so because a duplicate pull request already exists.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">In GitHub, go to the main page of the repository that you want to scan.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">To modify the repository settings, click the <strong class="ph b">Settings</strong> icon beside the <strong class="ph b">About</strong> area.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Topics</strong> field, enter the keyword topic <strong class="ph b">ansible-code-bot-scan</strong> to the repository. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The following illustration shows the keyword topic for starting a manual scan:</p> 
+           <br> 
+           <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/lightspeed-ansible-code-bot-manual-trigger-setting.png" alt="Ansible code bot settings"> 
+           <br> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Save changes</strong>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">Based on the repository webhook event, Ansible code bot starts a manual scan of your repository. If the avoid duplicate pull requests condition is not met, then the manual scan results in a new pull request with all the necessary Ansible code bot recommendations.</p> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_troubleshoot_lightspeed_configuration_errors#troubleshoot-ansible-code-bot-errors" title="This section provides information about errors when using the Ansible code bot and their workarounds.">Troubleshooting Ansible code bot errors</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="manually-scan-repo"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Manually scan the repository from the Ansible code bot dashboard</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can manually scan your Git repositories if you did not set up a scanning schedule for your Ansible code bot or if you do not want to wait for the next scheduled scan.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">If you manually scan your repository, and no pull request was created, it is likely so because a duplicate pull request already exists.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to the <a class="xref" href="https://bot.ai.ansible.redhat.com/console" target="_blank" rel="external noopener">Ansible code bot dashboard</a>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The <strong class="ph b">Repositories</strong> list displays a list of repositories that you selected for scanning.</p> 
+           <div class="note note note_note"> <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">If you do not see your repository in the <strong class="ph b">Repositories</strong> list, you can add it for scanning. </p> 
+            </div> 
+           </div> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">To start a manual scan of your repository, click the <strong class="ph b">Ellipsis</strong> icon (<img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ansible-code-bot-dashboard-kebab-icon.png" alt="Ellipsis icon">) beside the repository that you want to scan and select <strong class="ph b">Scan now</strong>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Refresh</strong> to view the status of the scan job.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">To view more details about your repository scans, click the <strong class="ph b">Ellipsis</strong> icon (<img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ansible-code-bot-dashboard-kebab-icon.png" alt="Ellipsis icon">) beside the repository and select <strong class="ph b">View scan history</strong>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The repository’s scan history is displayed along with the scan start time, scan status, type of scan (scheduled or manual), link to the pull request if it was created, and the log message if the scan failed.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">To view your repository on GitHub, click the <strong class="ph b">Ellipsis</strong> icon (<img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ansible-code-bot-dashboard-kebab-icon.png" alt="Ellipsis icon">) beside the repository and select <strong class="ph b">View repository</strong>.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

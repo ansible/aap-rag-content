@@ -1,0 +1,290 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="configuring-inventory-file"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Configure the inventory file</h1> 
+     <div class="body refbody">
+      <p class="shortdesc">You can control the installation of Ansible Automation Platform with inventory files. Inventory files define the host details, certificate details, and component-specific settings needed to customize the installation.</p> 
+      <section class="section"> 
+       <p class="p">Example inventory files are available in this document that you can copy and change to get started.</p> 
+       <div class="note important note_important">
+        <span class="note__title">Important:</span> 
+        <div class="note__body"> 
+         <p class="p">The inventory file requirements differ based on your installation type:</p> 
+         <ul class="ul"> 
+          <li class="li"><strong class="ph b">Online installation</strong>: Requires the <code class="ph codeph">registry_username</code> and <code class="ph codeph">registry_password</code> variables to authenticate and pull container images from Red Hat registries during installation.</li> 
+          <li class="li"><strong class="ph b">Disconnected (bundled) installation</strong>: Does not require <code class="ph codeph">registry_username</code> or <code class="ph codeph">registry_password</code> because all container images are pre-packaged in the bundle. Instead, requires the <code class="ph codeph">bundle_install=true</code> and <code class="ph codeph">bundle_dir</code> variables.</li> 
+         </ul> 
+         <p class="p">The following inventory file examples are for online installations. For disconnected installation inventory requirements, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_containerized_disconnected_installation#perform-disconnected-installation" title="A disconnected installation installs containerized Ansible Automation Platform without requiring network access to external registries.">Perform a disconnected installation</a>.</p> 
+        </div>
+       </div> 
+       <div class="note important note_important">
+        <span class="note__title">Important:</span> 
+        <div class="note__body"> 
+         <p dir="ltr" class="p">The <code class="ph codeph">[automationmetrics]</code> inventory group is required in Ansible Automation Platform 2.7 when <code class="ph codeph">[automationcontroller]</code> is present. The installer will fail preflight checks if this group is missing.</p> 
+         <p dir="ltr" class="p">Metrics service must be deployed on a dedicated host in containerized deployments.</p> 
+        </div>
+       </div> 
+       <p class="p">Additionally, growth topology and enterprise topology inventory files are available in the following locations:</p> 
+       <ul class="ul"> 
+        <li class="li">In the downloaded installation program package: 
+         <ul class="ul"> 
+          <li class="li">The default inventory file, named <code class="ph codeph">inventory</code>, is for the enterprise topology pattern.</li> 
+          <li class="li">To deploy the growth topology (all-in-one) pattern, use the <code class="ph codeph">inventory-growth</code> file instead.</li> 
+         </ul> </li> 
+        <li class="li">In <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-ref_cont_a_env_a" title="The container-based growth topology provides a smaller footprint deployment without redundancy for organizations getting started with Ansible Automation Platform.">Container growth topology</a> and <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-ref_cont_b_env_a" title="The container-based enterprise topology provides redundancy and higher compute for large volumes of automation.">Container enterprise topology</a> in <em class="ph i">Tested deployment models</em>.</li> 
+       </ul> 
+       <p class="p">To use the example inventory files, replace the <code class="ph codeph">&lt; &gt;</code> placeholders with your specific variables, and update the host names.</p> 
+       <p class="p">Refer to the <code class="ph codeph">README.md</code> file in the installation directory or <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_inventory_file_vars" title="The following tables contain information about the variables used in Ansible Automation Platform’s installation inventory files.">Inventory file variables</a> for more information about optional and required variables.</p> 
+       <div class="note important note_important">
+        <span class="note__title">Important:</span> 
+        <div class="note__body"> 
+         <p dir="ltr" class="p">Metrics service is a required component in Ansible Automation Platform 2.7. When you include the <code class="ph codeph">[automationcontroller]</code> inventory group, you must also include the <code class="ph codeph">[automationmetrics]</code> inventory group. The installer will fail if <code class="ph codeph">[automationcontroller]</code> is present without <code class="ph codeph">[automationmetrics]</code>.</p> In containerized deployments, metrics service must be deployed on a dedicated host. Do not co-locate metrics service with other Ansible Automation Platform components.
+        </div>
+       </div> 
+      </section> 
+      <section class="section" id="configuring-inventory-file___inventory_file_for_online_installation_for_containerized_growth_topology_all_in_one">
+       <h2 class="title sectiontitle">Inventory file for online installation for containerized growth topology (all-in-one)</h2> 
+       <p class="p">Use the example inventory file to perform an online installation for the containerized growth topology (all-in-one):</p> 
+       <pre class="pre codeblock language-yaml"><code># This is the Ansible Automation Platform installer inventory file intended for the container growth deployment topology.
+# This inventory file expects to be run from the host where Ansible Automation Platform will be installed.
+# Consult the Ansible Automation Platform product documentation about this topology's tested hardware configuration.
+#
+# Consult the docs if you are unsure what to add
+# For all optional variables consult the included README.md
+# or the Ansible Automation Platform documentation
+
+# This section is for your platform gateway hosts
+# -----------------------------------------------------
+[automationgateway]
+aap.example.org
+
+# This section is for your automation controller hosts
+# -----------------------------------------------------
+[automationcontroller]
+aap.example.org
+
+# This section is for your automation hub hosts
+# -----------------------------------------------------
+[automationhub]
+aap.example.org
+
+# This section is for your Event-Driven Ansible controller hosts
+# -----------------------------------------------------
+[automationeda]
+aap.example.org
+
+# This section is for your metrics service hosts 
+# ----------------------------------------------------- 
+[automationmetrics]
+aap.example.org
+
+# This section is for the Ansible Automation Platform database
+# -----------------------------------------------------
+[database]
+aap.example.org
+
+[all:vars]
+
+# Ansible
+ansible_connection=local
+
+# Common variables
+# -----------------------------------------------------
+postgresql_admin_username=postgres
+postgresql_admin_password=&lt;set your own&gt;
+
+registry_username=&lt;your RHN username&gt;
+registry_password=&lt;your RHN password&gt;
+
+redis_mode=standalone
+
+# Platform gateway
+# -----------------------------------------------------
+gateway_admin_password=&lt;set your own&gt;
+gateway_pg_host=aap.example.org
+gateway_pg_password=&lt;set your own&gt;
+
+# Automation controller
+# -----------------------------------------------------
+controller_admin_password=&lt;set your own&gt;
+controller_pg_host=aap.example.org
+controller_pg_password=&lt;set your own&gt;
+controller_percent_memory_capacity=0.5
+
+# Automation hub
+# -----------------------------------------------------
+hub_admin_password=&lt;set your own&gt;
+hub_pg_host=aap.example.org
+hub_pg_password=&lt;set your own&gt;
+hub_seed_collections=false
+
+# Event-Driven Ansible controller
+# -----------------------------------------------------
+eda_admin_password=&lt;set your own&gt;
+eda_pg_host=aap.example.org
+eda_pg_password=&lt;set your own&gt;
+
+# AAP Automation metrics service
+# -----------------------------------------------------
+automationmetrics_pg_host=aap.example.org
+automationmetrics_pg_password=&lt;set your own&gt;
+automationmetrics_controller_read_pg_host=aap.example.org
+automationmetrics_controller_read_pg_password=&lt;set your own&gt;</code></pre> 
+       <ul class="ul"> 
+        <li class="li"><code class="ph codeph">ansible_connection=local</code> - Used for all-in-one installations where the installation program is run on the same node that hosts Ansible Automation Platform. 
+         <ul class="ul"> 
+          <li class="li">If the installation program is run from a separate node, do not include <code class="ph codeph">ansible_connection=local</code>. In this case, use an SSH connection instead.</li> 
+         </ul> </li> 
+        <li class="li"><code class="ph codeph">[database]</code> - This group in the inventory file defines the Ansible Automation Platform managed database.</li> 
+       </ul> 
+      </section> 
+      <section class="section" id="configuring-inventory-file___inventory_file_for_online_installation_for_containerized_enterprise_topology">
+       <h2 class="title sectiontitle">Inventory file for online installation for containerized enterprise topology</h2> 
+       <p class="p">Use the example inventory file to perform an online installation for the containerized enterprise topology:</p> 
+       <pre class="pre codeblock language-yaml"><code># This is the Ansible Automation Platform enterprise installer inventory file
+# Consult the docs if you are unsure what to add
+# For all optional variables consult the included README.md
+# or the Red Hat documentation
+
+# This section is for your platform gateway hosts
+# -----------------------------------------------------
+[automationgateway]
+gateway1.example.org
+gateway2.example.org
+
+# This section is for your automation controller hosts
+# -----------------------------------------------------
+[automationcontroller]
+controller1.example.org
+controller2.example.org
+
+# This section is for your Ansible Automation Platform execution hosts
+# -----------------------------------------------------
+[execution_nodes]
+hop1.example.org receptor_type='hop'
+exec1.example.org
+exec2.example.org
+
+# This section is for your automation hub hosts
+# -----------------------------------------------------
+[automationhub]
+hub1.example.org
+hub2.example.org
+
+# This section is for your Event-Driven Ansible controller hosts
+# -----------------------------------------------------
+[automationeda]
+eda1.example.org
+eda2.example.org
+
+# This section is for your metrics service hosts
+# ----------------------------------------------------- 
+[automationmetrics] metrics.example.org
+
+[redis]
+gateway1.example.org
+gateway2.example.org
+hub1.example.org
+hub2.example.org
+eda1.example.org
+eda2.example.org
+
+[all:vars]
+
+# Common variables
+# -----------------------------------------------------
+postgresql_admin_username=&lt;set your own&gt;
+postgresql_admin_password=&lt;set your own&gt;
+registry_username=&lt;your RHN username&gt;
+registry_password=&lt;your RHN password&gt;
+
+# Platform gateway
+# -----------------------------------------------------
+gateway_admin_password=&lt;set your own&gt;
+gateway_pg_host=externaldb.example.org
+gateway_pg_database=&lt;set your own&gt;
+gateway_pg_username=&lt;set your own&gt;
+gateway_pg_password=&lt;set your own&gt;
+
+# Automation controller
+# -----------------------------------------------------
+controller_admin_password=&lt;set your own&gt;
+controller_pg_host=externaldb.example.org
+controller_pg_database=&lt;set your own&gt;
+controller_pg_username=&lt;set your own&gt;
+controller_pg_password=&lt;set your own&gt;
+
+# Automation hub
+# -----------------------------------------------------
+hub_admin_password=&lt;set your own&gt;
+hub_pg_host=externaldb.example.org
+hub_pg_database=&lt;set your own&gt;
+hub_pg_username=&lt;set your own&gt;
+hub_pg_password=&lt;set your own&gt;
+
+# Event-Driven Ansible controller
+# -----------------------------------------------------
+eda_admin_password=&lt;set your own&gt;
+eda_pg_host=externaldb.example.org
+eda_pg_database=&lt;set your own&gt;
+eda_pg_username=&lt;set your own&gt;
+eda_pg_password=&lt;set your own&gt;
+
+# AAP Automation metrics service
+# -----------------------------------------------------
+automationmetrics_pg_host=externaldb.example.org
+automationmetrics_pg_database=&lt;set your own&gt;
+automationmetrics_pg_username=&lt;set your own&gt;
+automationmetrics_pg_password=&lt;set your own&gt;
+automationmetrics_controller_read_pg_host=externaldb.example.org
+automationmetrics_controller_read_pg_password=&lt;set your own&gt;</code></pre> 
+       <div class="note note note_note">
+        <span class="note__title">Note:</span> 
+        <div class="note__body"> 
+         <p dir="ltr" class="p">Metrics service requires access to two databases:</p> 
+         <ul class="ul" id="configuring-inventory-file__ul_1"> 
+          <li class="li"><strong class="ph b"><code class="ph codeph">metrics_service</code> database</strong> (read/write): Stores collected metrics data</li> 
+          <li class="li"><strong class="ph b"><code class="ph codeph">automationcontroller</code> database</strong> (read-only): Correlates metrics with automation activity</li> 
+         </ul> The <code class="ph codeph">ms_awx_readonly</code> user must be created in the external database with SELECT privileges on the <code class="ph codeph">automationcontroller</code> database.
+        </div>
+       </div> 
+      </section> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist relref">
+       <strong>Related reference</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-ref_cont_a_env_a" title="The container-based growth topology provides a smaller footprint deployment without redundancy for organizations getting started with Ansible Automation Platform.">Container growth topology</a></li>
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-ref_cont_b_env_a" title="The container-based enterprise topology provides redundancy and higher compute for large volumes of automation.">Container enterprise topology</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-tips-build-inventory"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Tips for building inventories</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">When building inventories for Ansible automation, consider the following best practices to ensure efficient and effective management of your hosts.</p> 
+       <section class="section"> 
+        <ul class="ul"> 
+         <li class="li">Ensure that group names are meaningful and unique.</li> 
+         <li class="li">Group names are also case sensitive.</li> 
+         <li class="li">Do not use spaces, hyphens, or preceding numbers (use <code class="ph codeph">floor_19</code>, not <code class="ph codeph">19th_floor</code>) in group names.</li> 
+         <li class="li">Group hosts in your inventory logically according to their What, Where, and When: 
+          <ul class="ul"> 
+           <li class="li">What: Group hosts according to the topology, for example: db, web, leaf, spine, metrics.</li> 
+           <li class="li">Where: Group hosts by geographic location, for example: data center, region, floor, building.</li> 
+           <li class="li">When: Group hosts by stage, for example: development, test, staging, production.</li> 
+          </ul> </li> 
+         <li class="li">Metrics service must be included when automation controller is present. In containerized deployments, use a dedicated host for metrics service (separate from controller, hub, gateway, and EDA).</li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="con-installation"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Installation settings to secure your platform</h1> 
+     <p class="shortdesc">Installation decisions directly impact the security posture of Ansible Automation Platform. The process involves setting several variables critical to infrastructure hardening. Before installing, review the installation guidance to ensure your configuration meets security standards.</p> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="con-install-secure-host"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Install from a dedicated installation host</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">The Ansible Automation Platform installation program can be run from one of the infrastructure servers, such as an automation controller, or from an external system that has SSH access to the Ansible Automation Platform infrastructure servers.</p> 
+       <p class="p">The Ansible Automation Platform installation program is also used not just for installation, but for subsequent day-two operations, such as backup and restore, and upgrades. Perform installation and day-two operations from a dedicated external server, hereafter referred to as the installation host. Doing so eliminates the need to log in to one of the infrastructure servers to run these functions. The installation host must only be used for management of Ansible Automation Platform and must not run any other services or software.</p> 
+       <p class="p">The installation host must be a Red Hat Enterprise Linux server that has been installed and configured in accordance with Security hardening for Red Hat Enterprise Linux and any security profile requirements relevant to your organization (CIS, STIG, and so on). Obtain the Ansible Automation Platform installer and create the installation program inventory file. This inventory file is used for upgrades, adding infrastructure components, and day-two operations by the installation program, so preserve the file after installation for future operational use.</p> 
+       <p class="p">Access to the installation host must be restricted only to those personnel who are responsible for managing the Ansible Automation Platform infrastructure. Over time, it will contain sensitive information, such as the installation inventory (which contains the initial login credentials for Ansible Automation Platform), copies of user-provided PKI keys and certificates, backup files, and so on. The installation host must also be used for logging in to the Ansible Automation Platform infrastructure servers through SSH when necessary for infrastructure management and maintenance.</p> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist">
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index" target="_blank" rel="external noopener">Security hardening</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="ref-security-variables-install-inventory"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Security-relevant variables in the installation inventory</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Customize the installation inventory file to define your Ansible Automation Platform architecture and change the initial configuration of its components.</p> 
+       <section class="section"> 
+        <p class="p">The following table lists several security-relevant variables and their recommended values for an RPM-based deployment.</p> 
+        <table class="table">
+         <caption>
+          <span class="table--title-label">Table 1. </span><span class="title">Security-relevant inventory variables</span>
+         </caption>
+         <colgroup>
+          <col style="width:33.3333%">
+          <col style="width:33.3333%">
+          <col style="width:33.3334%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-security-variables-install-inventory__entry__1"> <strong class="ph b">RPM deployment variable</strong> </th> 
+           <th class="entry" id="ref-security-variables-install-inventory__entry__2"> <strong class="ph b">Recommended Value</strong> </th> 
+           <th class="entry" id="ref-security-variables-install-inventory__entry__3"> <strong class="ph b">Details</strong> </th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-security-variables-install-inventory__entry__1"> <p class="p"> <code class="ph codeph">postgres_use_ssl</code> </p> </td> 
+           <td class="entry" headers="ref-security-variables-install-inventory__entry__2"> <p class="p">true</p> </td> 
+           <td class="entry" headers="ref-security-variables-install-inventory__entry__3"> <p class="p">The installation program configures the installation program-managed Postgres database to accept SSL/TLS-based connections when this variable is set.</p> <p class="p">The default for this variable is false which means SSL/TLS is not used for PostgreSQL connections.</p> <p class="p">When set to true, the platform connects to PostgreSQL by using SSL/TLS.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-security-variables-install-inventory__entry__1"> <p class="p"> <code class="ph codeph">pg_sslmode</code> <code class="ph codeph">automation_gateway_pg_sslmode</code> <code class="ph codeph">automationhub_pg_sslmode</code> <code class="ph codeph">automationcontroller_pg_sslmode</code> </p> </td> 
+           <td class="entry" headers="ref-security-variables-install-inventory__entry__2"> <p class="p">verify-full</p> </td> 
+           <td class="entry" headers="ref-security-variables-install-inventory__entry__3"> <p class="p">These variables control mutual TLS (mTLS) authentication to the database. By default, when each service connects to the database, it tries an encrypted connection, but it is not enforced.</p> <p class="p">Setting this variable to <code class="ph codeph">verify-full</code> enforces an mTLS negotiation between the service and the database. The <code class="ph codeph">postgres_use_ssl</code> variable must also be set to <code class="ph codeph">true</code> for this pg_sslmode to be effective.</p> <p class="p"><strong class="ph b">NOTE</strong>: If a third-party database is used instead of the installation program-managed database, the third-party database must be set up independently to accept mTLS connections.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-security-variables-install-inventory__entry__1"> <p class="p"> <code class="ph codeph">nginx_disable_hsts</code> <code class="ph codeph">automation_gateway_disable_hsts</code> <code class="ph codeph">automationhub_disable_hsts</code> <code class="ph codeph">automationcontroller_disable_hsts</code> </p> </td> 
+           <td class="entry" headers="ref-security-variables-install-inventory__entry__2"> <p class="p">false</p> </td> 
+           <td class="entry" headers="ref-security-variables-install-inventory__entry__3"> <p class="p">If set to <code class="ph codeph">true</code>, these variables disable HTTPS <em class="ph i">strict transport Security</em> (HSTS) connections to each of the component web services.</p> <p class="p">The default is <code class="ph codeph">false</code>. If these variables are absent from the installation program inventory it is effectively equivalent to defining the variables as <code class="ph codeph">false</code>.</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p">The following table lists several security-relevant variables and their recommended values for a container-based deployment.</p> 
+        <table class="table">
+         <caption>
+          <span class="table--title-label">Table 2. </span><span class="title">Security-relevant containerized inventory variables</span>
+         </caption>
+         <colgroup>
+          <col style="width:33.3333%">
+          <col style="width:33.3333%">
+          <col style="width:33.3334%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-security-variables-install-inventory__entry__13"> <strong class="ph b">Container deployment variable</strong> </th> 
+           <th class="entry" id="ref-security-variables-install-inventory__entry__14"> <strong class="ph b">Recommended Value</strong> </th> 
+           <th class="entry" id="ref-security-variables-install-inventory__entry__15"> <strong class="ph b">Details</strong> </th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-security-variables-install-inventory__entry__13"> <p class="p"> <code class="ph codeph">postgresql_disable_tls</code> </p> </td> 
+           <td class="entry" headers="ref-security-variables-install-inventory__entry__14"> <p class="p">false</p> </td> 
+           <td class="entry" headers="ref-security-variables-install-inventory__entry__15"> <p class="p">If set to <code class="ph codeph">true</code>, this variable disables TLS connections to the installation program-managed PostgreSQL database.</p> <p class="p">The default is <code class="ph codeph">false</code></p> <p class="p">If this variable is absent from the installation program inventory, it is effectively equivalent to defining the variable as <code class="ph codeph">false</code>.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-security-variables-install-inventory__entry__13"> <p class="p"> <code class="ph codeph">controller_pg_sslmode</code> <code class="ph codeph">gateway_pg_sslmode</code> <code class="ph codeph">hub_pg_sslmode</code> <code class="ph codeph">eda_pg_sslmode</code> </p> </td> 
+           <td class="entry" headers="ref-security-variables-install-inventory__entry__14"> <p class="p">verify-full</p> </td> 
+           <td class="entry" headers="ref-security-variables-install-inventory__entry__15"> <p class="p">These variables control mutual TLS (mTLS) authentication to the database.</p> <p class="p">By default, when each service connects to the database, it tries an encrypted connection, but it is not enforced. Setting this variable to <code class="ph codeph">verify-full</code> enforces an mTLS negotiation between the service and the database.</p> 
+            <div class="note note note_note">
+             <span class="note__title">Note:</span> 
+             <div class="note__body"> 
+              <p class="p">If a third-party database is used instead of the installation program-managed database, the third-party database must be set up independently to accept mTLS connections.</p> 
+             </div>
+            </div> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-security-variables-install-inventory__entry__13"> <p class="p"> <code class="ph codeph">controller_nginx_disable_https</code> <code class="ph codeph">gateway_nginx_disable_https</code> <code class="ph codeph">hub_nginx_disable_https</code> <code class="ph codeph">da_nginx_disable_https</code> </p> </td> 
+           <td class="entry" headers="ref-security-variables-install-inventory__entry__14"> <p class="p"> <code class="ph codeph">false</code> </p> </td> 
+           <td class="entry" headers="ref-security-variables-install-inventory__entry__15"> <p class="p">If set to <code class="ph codeph">true</code>, these variables disable HTTPS connections to each of the component web services.</p> <p class="p">The default is <code class="ph codeph">false</code>.</p> <p class="p">If these variables are absent from the installation program inventory, it is effectively equivalent to defining the variables as <code class="ph codeph">false</code>.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-security-variables-install-inventory__entry__13"> <p class="p"> <code class="ph codeph">controller_nginx_disable_hsts</code> <code class="ph codeph">gateway_nginx_disable_hsts</code> <code class="ph codeph">hub_nginx_disable_hsts</code> <code class="ph codeph">eda_nginx_disable_hsts</code> </p> </td> 
+           <td class="entry" headers="ref-security-variables-install-inventory__entry__14"> <p class="p"> <code class="ph codeph">false</code> </p> </td> 
+           <td class="entry" headers="ref-security-variables-install-inventory__entry__15"> <p class="p">If set to 'true', these variables disable HTTPS Strict Transport Security (HSTS) connections to each of the component web services.</p> <p class="p">The default is <code class="ph codeph">false</code>.</p> <p class="p">If these variables are absent from the installation program inventory it is effectively equivalent to defining the variables as <code class="ph codeph">false</code>.</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p">In an enterprise architecture where a load balancer is used in front of multiple platform gateways, SSL/TLS client connections can be terminated at the load balancer or passed through to the individual AAP servers. If SSL/TLS is being terminated at the load balancer, this section recommends that the traffic gets re-encrypted from the load balancer to the individual Ansible Automation Platform servers. This ensures that end-to-end encryption is in use. In this scenario, the <code class="ph codeph">*_disable_https</code> variables listed are set to the default value of <code class="ph codeph">false</code>.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-install-user-pki"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Install with user-provided PKI certificates</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Replace the default self-signed certificates with custom PKI certificates for your Ansible Automation Platform components. Using your existing PKI infrastructure helps ensure trusted and secure communication across the platform.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Copy the certificate files and their relevant key files to the installation program directory, along with the CA certificate used to verify the certificates.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Use the following inventory variables to configure the infrastructure components with the new certificates. </span> 
+          <div class="itemgroup info"> 
+           <table class="table">
+            <caption>
+             <span class="table--title-label">Table 3. </span><span class="title">PKI certificate inventory variables</span>
+            </caption>
+            <colgroup>
+             <col style="width:33.3333%">
+             <col style="width:33.3333%">
+             <col style="width:33.3334%">
+            </colgroup>
+            <tbody class="tbody"> 
+             <tr class="row"> 
+              <td class="entry"> <p class="p"> <strong class="ph b">RPM Variable</strong> </p> </td> 
+              <td class="entry"> <p class="p"> <strong class="ph b">Containerized Variable</strong> </p> </td> 
+              <td class="entry"> <p class="p"> <strong class="ph b">Details</strong> </p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry"> <p class="p"> <code class="ph codeph">custom_ca_cert</code> </p> </td> 
+              <td class="entry"> <p class="p"> <code class="ph codeph">custom_ca_cert</code> </p> </td> 
+              <td class="entry"> <p class="p">The path to the custom CA certificate file.</p> <p class="p">If set, this will install a custom CA certificate to the system truststore.</p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry"> <p class="p"> <code class="ph codeph">web_server_ssl_cert</code> </p> </td> 
+              <td class="entry"> <p class="p"> <code class="ph codeph">controller_tls_cert</code> </p> </td> 
+              <td class="entry"> <p class="p">The file name of the automation controller PKI certificate located in the installation program directory.</p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry"> <p class="p"> <code class="ph codeph">web_server_ssl_key</code> </p> </td> 
+              <td class="entry"> <p class="p"> <code class="ph codeph">controller_tls_key</code> </p> </td> 
+              <td class="entry"> <p class="p">The file name of the automation controller PKI key located in the installation program directory.</p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry"> <p class="p"> <code class="ph codeph">automationhub_ssl_cert</code> </p> </td> 
+              <td class="entry"> <p class="p"> <code class="ph codeph">hub_tls_cert</code> </p> </td> 
+              <td class="entry"> <p class="p">The file name of the private automation hub PKI certificate located in the installation program directory.</p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry"> <p class="p"> <code class="ph codeph">automationhub_ssl_key</code> </p> </td> 
+              <td class="entry"> <p class="p"> <code class="ph codeph">hub_tls_key</code> </p> </td> 
+              <td class="entry"> <p class="p">The file name of the private automation hub PKI key located in the installation program directory.</p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry"> <p class="p"> <code class="ph codeph">postgres_ssl_cert</code> </p> </td> 
+              <td class="entry"> <p class="p"> <code class="ph codeph">postgresql_tls_cert</code> </p> </td> 
+              <td class="entry"> <p class="p">The file name of the database server PKI certificate located in the installation program directory. This variable is only needed for the installation program managed database server, not if a third-party database is used.</p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry"> <p class="p"> <code class="ph codeph">postgres_ssl_key</code> </p> </td> 
+              <td class="entry"> <p class="p"> <code class="ph codeph">postgresql_tls_key</code> </p> </td> 
+              <td class="entry"> <p class="p">The file name of the database server PKI key located in the installation program directory. This variable is only needed for the installation program-managed database server, not if a third-party database is used.</p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry"> <p class="p"> <code class="ph codeph">automationedacontroller_ssl_cert</code> </p> </td> 
+              <td class="entry"> <p class="p"> <code class="ph codeph">eda_tls_cert</code> </p> </td> 
+              <td class="entry"> <p class="p">The file name of the Event-Driven Ansible controller PKI certificate located in the installation program directory.</p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry"> <p class="p"> <code class="ph codeph">automationedacontroller_ssl_key</code> </p> </td> 
+              <td class="entry"> <p class="p"> <code class="ph codeph">eda_tls_key</code> </p> </td> 
+              <td class="entry"> <p class="p">The file name of the Event-Driven Ansible controller PKI key located in the installation program directory.</p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry"> <p class="p">-</p> </td> 
+              <td class="entry"> <p class="p"> <code class="ph codeph">gateway_tls_cert</code> </p> </td> 
+              <td class="entry"> <p class="p">The filename of the platform gateway PKI certificate located in the installation program directory.</p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry"> <p class="p">-</p> </td> 
+              <td class="entry"> <p class="p"> <code class="ph codeph">gateway_tls_key</code> </p> </td> 
+              <td class="entry"> <p class="p">The file name of the platform gateway PKI key located in the installation program directory.</p> </td> 
+             </tr> 
+            </tbody>
+           </table> 
+           <p class="p">When multiple platform gateways are deployed with a load balancer, <code class="ph codeph">gateway_tls_cert</code> and <code class="ph codeph">gateway_tls_key</code> are shared by each platform gateway. To prevent hostname mismatches, the certificate’s <em class="ph i">Common Name</em> (CN) must match the DNS FQDN used by the load balancer. If your organizational policies require unique certificates for each service, each certificate requires a <em class="ph i">Subject Alt Name</em> (SAN) that matches the DNS FQDN used for the load-balanced service. To install unique certificates and keys on each platform gateway, the certificate and key variables in the installation inventory file must be defined as host variables instead of in the <code class="ph codeph">[all:vars]</code> section. For example:</p> 
+           <pre class="pre codeblock"><code>[automationgateway]
+gateway0.example.com gateway_tls_cert=/path/to/cert0 gateway_tls_key=/path/to/key0
+gateway1.example.com gateway_tls_cert=/path/to/cert1 gateway_tls_key=/path/to/key1
+
+[automationcontroller]
+controller0.example.com web_server_ssl_cert=/path/to/cert0 web_server_ssl_key=/path/to/key0
+controller1.example.com web_server_ssl_cert=/path/to/cert1 web_server_ssl_key=/path/to/key1
+controller2.example.com web_server_ssl_cert=/path/to/cert2 web_server_ssl_key=/path/to/key2
+
+[automationhub]
+hub0.example.com automationhub_ssl_cert=/path/to/cert0 automationhub_ssl_key=/path/to/key0
+hub1.example.com automationhub_ssl_cert=/path/to/cert1 automationhub_ssl_key=/path/to/key1
+hub2.example.com automationhub_ssl_cert=/path/to/cert2 automationhub_ssl_key=/path/to/key2</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="proc-sensitive-variables-install-inventory"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Secure sensitive variables with ansible vault</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">By securing sensitive values in the installation inventory file with Ansible Vault, both RPM-based and containerized Ansible Automation Platform installations benefit from improved security, password hygiene, and maintainability.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Navigate to the install directory by using the following command: </span> 
+          <div class="itemgroup info"> 
+           <p class="p"> <code class="ph codeph">cd /path/to/ansible-automation-platform-setup-bundle-2.5-&lt;version&gt;</code> </p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Create a vault file by using the following command: </span> 
+          <div class="itemgroup info"> 
+           <p class="p"> <code class="ph codeph">ansible-vault create vault.yml</code> </p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">When prompted, enter a vault password This password is required to access or modify the vault and is required for day-two operations such as backups and reconfigurations. </span> 
+          <div class="itemgroup info"> 
+           <div class="note important note_important">
+            <span class="note__title">Important:</span> 
+            <div class="note__body"> 
+             <p class="p">Passwords with special characters must be in double quotes.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Store the vault password securely, in accordance with your organizations security policy, for example, using a password manager or vault service.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Add your sensitive variables to the vault and ensure they are not also defined in the inventory file. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">To edit your vault file use:</p> 
+           <p class="p"> <code class="ph codeph">ansible-vault edit &lt;file&gt;</code> </p> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="proc-install-rpm-deployment"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Use an external vault file with an RPM-based Ansible Automation Platform deployment</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">When installing Ansible Automation Platform using RPM packages, you can use an external Ansible vault file to securely provide sensitive variables, such as passwords, during the installation process.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">For RPM-based installations, you can provide the Ansible vault at runtime when executing the setup script.</p> 
+        <p class="p">Add the following sensitive variables to the vault file:</p> 
+        <pre class="pre codeblock"><code>admin_password: &lt;secure_password&gt;
+pg_password: &lt;secure_password&gt;
+automationgateway_admin_password: &lt;secure_password&gt;
+automationgateway_pg_password: &lt;secure_password&gt;
+automationhub_admin_password: &lt;secure_password&gt;
+automationhub_pg_password: &lt;secure_password&gt;
+automationedacontroller_admin_password: &lt;secure_password&gt;
+automationedacontroller_pg_password: &lt;secure_password&gt;
+
+*In the case of a connected installation:
+
+registry_password: &lt;secure_cdn_password&gt;</code></pre> 
+        <p class="p">To use the vault during installation, use the following procedure:</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Ensure the vault file, for example, <code class="ph codeph">vault.yml</code>, contains all required sensitive variables.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Run the installation using the following command: </span> 
+          <div class="itemgroup info"> 
+           <p class="p"> <code class="ph codeph">./setup.sh -e @vault.yml -ask-vault-pass</code> </p> 
+           <p class="p">Using this procedure ensures that the installation program reads encrypted variables from the vault and prompts for the vault password.</p> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title7" id="proc-install-containerized-deployment"> 
+      <h2 class="title topictitle2" id="ariaid-title7">Use an external vault file with a containerized installation</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">For containerized installations of Ansible Automation Platform, use the provided automation execution playbook with the external vault file.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">Add the following sensitive variables to the vault file:</p> 
+        <pre class="pre codeblock"><code>postgresql_admin_password:  &lt;secure_password&gt;
+gateway_admin_password:  &lt;secure_password&gt;
+gateway_pg_password:  &lt;secure_password&gt;
+controller_admin_password:  &lt;secure_password&gt;
+controller_pg_password:  &lt;secure_password&gt;
+hub_admin_password:  &lt;secure_password&gt;c
+hub_pg_password:  &lt;secure_password&gt;
+eda_admin_password:  &lt;secure_password&gt;
+eda_pg_password: &lt;secure_password&gt;
+
+*In the case of a connected installation:
+
+registry_password: &lt;secure_cdn_password&gt;</code></pre> 
+        <p class="p">To use the new Ansible vault with the installation program, use the following procedure:</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Ensure your vault file, for example, <code class="ph codeph">vault.yml</code>, contains all required sensitive variables.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Run the container installer using the following command: </span> 
+          <div class="itemgroup info"> 
+           <p class="p"><code class="ph codeph">ansible-playbook ansible.containerized_installer.install -e @vault.yml -ask-become-pass</code>.</p> 
+           <p class="p">Ensure that the vault file is located in the working directory, or provide the full path. Do not duplicate the encrypted variables in the <code class="ph codeph">plaintext</code> inventory file.</p> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

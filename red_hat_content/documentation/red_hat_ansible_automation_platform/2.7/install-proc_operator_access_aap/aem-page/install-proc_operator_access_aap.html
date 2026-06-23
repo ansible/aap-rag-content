@@ -1,0 +1,55 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="operator-access-aap">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Access Ansible Automation Platform through the UI</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Use the <strong class="ph b">Ansible Automation Platform</strong> instance as your default. This instance links the automation controller, automation hub, and Event-Driven Ansible deployments to a single interface.</p> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div>
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step"> <span class="ph cmd">Log in to Red Hat OpenShift Container Platform.</span> </li>
+       <li class="li step"> <span class="ph cmd">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Networking</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Routes</span></span></span> </li>
+       <li class="li step"> <span class="ph cmd">Click the link under <strong class="ph b">Location</strong> for <strong class="ph b">Ansible Automation Platform</strong>.</span> </li>
+       <li class="li step"> <span class="ph cmd">This redirects you to the Ansible Automation Platform login page. Enter "admin" as your username in the <strong class="ph b">Username</strong> field.</span> </li>
+       <li class="li step"> <span class="ph cmd">For the password you must: </span> 
+        <ol type="a" class="ol substeps"> 
+         <li class="li substep"> <span class="ph cmd">Go to <span class="ph menucascade"><span class="ph uicontrol">Workloads</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Secrets</span></span>.</span> </li> 
+         <li class="li substep"> <span class="ph cmd">Click <span class="ph uicontrol button">&lt;your instance name&gt;-admin-password</span> and copy the password.</span> </li> 
+         <li class="li substep"> <span class="ph cmd">Paste the password into the <strong class="ph b">Password</strong> field.</span> </li> 
+        </ol> </li>
+       <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Login</span>.</span> </li>
+       <li class="li step"> <span class="ph cmd">Apply your subscription: </span> 
+        <ol type="a" class="ol substeps"> 
+         <li class="li substep"> <span class="ph cmd">Click <span class="ph uicontrol button">Subscription manifest</span> or <span class="ph uicontrol button">Username/password</span>.</span> </li> 
+         <li class="li substep"> <span class="ph cmd">Upload your manifest or enter your username and password.</span> </li> 
+         <li class="li substep"> <span class="ph cmd">Select your subscription from the <strong class="ph b">Subscription</strong> list.</span> </li> 
+         <li class="li substep"> <span class="ph cmd">Click <span class="ph uicontrol button">Next</span>. This redirects you to the <strong class="ph b">Analytics</strong> page.</span> </li> 
+        </ol> </li>
+       <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Next</span>.</span> </li>
+       <li class="li step"> <span class="ph cmd">Select the <strong class="ph b">I agree to the terms of the license agreement</strong> checkbox.</span> </li>
+       <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Next</span>.</span> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <p class="p">You now have access to the platform gateway user interface.</p> 
+     </section> 
+     <section class="section tasktroubleshooting"> 
+      <p class="p">If you cannot access the Ansible Automation Platform see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-configure_your_ansible_automation_platform_deployment#operator-aap-troubleshooting" title="Manage your Ansible Automation Platform deployment and troubleshoot common issues with these frequently asked questions. Learn about resource management, logging, and error recovery for your components.">Frequently asked questions on platform gateway</a> for help with troubleshooting and debugging.</p> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

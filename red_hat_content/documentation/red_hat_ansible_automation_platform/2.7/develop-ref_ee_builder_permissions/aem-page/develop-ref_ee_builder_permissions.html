@@ -1,0 +1,106 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="ref-ee-builder-permissions">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Execution environment builder permissions</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Execution environment builder uses navigation-level permissions that control which sidebar items and pages are visible to users in Ansible automation portal.</p> 
+     <section class="section">
+      <h2 class="title sectiontitle">Overview</h2> 
+      <p class="p">Execution environment builder uses the same permission model as the rest of Ansible automation portal. Users with the AAP Administrator role have all permissions inherently. Non-admin users require an RBAC role with the correct permissions before they can access execution environment builder features.</p> 
+      <p class="p">If you have already configured base RBAC roles per <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_configure#rhdh-configure-rbac" title="Red Hat Developer Hub offers Role-based Access Control (RBAC) functionality. RBAC can then be applied to the Ansible plug-ins content.">Configure role-based access control for Ansible automation portal</a>, add the execution environment builder permissions to your existing role. If you have not yet set up RBAC, complete that guide first.</p> 
+      <p class="p">These permissions determine whether a user can see the execution environment builder features at all. They do not replace the base automation portal permissions configured during initial RBAC setup.</p> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Execution environment builder permissions</h2> 
+      <p class="p">The following permissions control visibility of execution environment builder features. An administrator must enable these navigation permissions in the automation portal RBAC configuration before non-admin users can see execution environment builder sidebar items.</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:40%">
+        <col style="width:40%">
+        <col style="width:20%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-ee-builder-permissions__entry__1">Permission</th> 
+         <th class="entry" id="ref-ee-builder-permissions__entry__2">Controls</th> 
+         <th class="entry" id="ref-ee-builder-permissions__entry__3">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-ee-builder-permissions__entry__1"><code class="ph codeph">ansible.execution-environments.view</code></td> 
+         <td class="entry" headers="ref-ee-builder-permissions__entry__2"><strong class="ph b">Execution Environments</strong> menu — creation wizard and EE catalog</td> 
+         <td class="entry" headers="ref-ee-builder-permissions__entry__3">Disabled</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-ee-builder-permissions__entry__1"><code class="ph codeph">ansible.collections.view</code></td> 
+         <td class="entry" headers="ref-ee-builder-permissions__entry__2"><strong class="ph b">Collections</strong> menu — collection catalog for EE definitions</td> 
+         <td class="entry" headers="ref-ee-builder-permissions__entry__3">Disabled</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-ee-builder-permissions__entry__1"><code class="ph codeph">ansible.git-repositories.view</code></td> 
+         <td class="entry" headers="ref-ee-builder-permissions__entry__2"><strong class="ph b">Git Repositories</strong> menu — saving and syncing EE definitions</td> 
+         <td class="entry" headers="ref-ee-builder-permissions__entry__3">Disabled</td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <p class="p">Each permission can be assigned individually for granular control.</p> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Base automation portal permissions</h2> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body">
+        <p class="p">The following permissions control base automation portal sidebar items and are not specific to execution environment builder. They are configured in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_configure#rhdh-configure-rbac" title="Red Hat Developer Hub offers Role-based Access Control (RBAC) functionality. RBAC can then be applied to the Ansible plug-ins content.">Configure role-based access control for Ansible automation portal</a>.</p>
+       </div>
+      </div> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:40%">
+        <col style="width:40%">
+        <col style="width:20%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-ee-builder-permissions__entry__13">Permission</th> 
+         <th class="entry" id="ref-ee-builder-permissions__entry__14">Controls</th> 
+         <th class="entry" id="ref-ee-builder-permissions__entry__15">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-ee-builder-permissions__entry__13"><code class="ph codeph">ansible.templates.view</code></td> 
+         <td class="entry" headers="ref-ee-builder-permissions__entry__14"><strong class="ph b">Templates</strong> menu — template management</td> 
+         <td class="entry" headers="ref-ee-builder-permissions__entry__15">Disabled</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-ee-builder-permissions__entry__13"><code class="ph codeph">ansible.history.view</code></td> 
+         <td class="entry" headers="ref-ee-builder-permissions__entry__14"><strong class="ph b">History</strong> menu — build history</td> 
+         <td class="entry" headers="ref-ee-builder-permissions__entry__15">Disabled</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Administrator-only actions</h2> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body">
+        <p class="p">Importing and deleting EE definitions and templates are restricted actions. Only users with the AAP Administrator role or users who have been explicitly granted the Backstage catalog delete permission can perform these actions.</p>
+       </div>
+      </div> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_grant_ee_builder_access">Grant execution environment builder access to a role</a></strong><br>Enable navigation permissions in the Ansible automation portal RBAC configuration so that non-admin users can access execution environment builder features.</li>
+     </ul>
+    </nav>
+   </article>
+  </main>
+ </body>
+</html>

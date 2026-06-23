@@ -1,0 +1,220 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="controller-api-browsing"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Browse the REST API</h1> 
+     <div class="body taskbody">
+      <p class="shortdesc">Access and use the platform gateway REST API through a web browser. You can find the recommended current version (v2), view documentation for endpoints, and use GET, PUT, and POST methods with JSON formatting.</p> 
+      <section>
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Procedure</h2>
+       </div>
+       <ol class="ol steps">
+        <li class="li step stepexpand"> <span class="ph cmd">Go to the REST API in a web browser at:</span> 
+         <div class="itemgroup info"> 
+          <p class="p"><code class="ph codeph">https://&lt;gateway server name&gt;/api/controller/v2</code></p> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Click the <strong class="ph b">v2</strong> link next to <strong class="ph b">current versions</strong> or <strong class="ph b">available versions</strong>.</span> 
+         <div class="itemgroup info"> 
+          <p class="p">The API supports version 2.</p> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Perform a <code class="ph codeph">GET</code> with the <code class="ph codeph">/api/</code> endpoint to get the <code class="ph codeph">current_version</code>, which is the recommended version.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Click the question mark icon on the navigation menu for documentation on the access methods for that particular API endpoint and what data is returned when using those methods.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Use the <code class="ph codeph">PUT</code> and <code class="ph codeph">POST</code> verbs on the specific API pages by formatting JSON in the various text fields.</span> 
+         <div class="itemgroup info"> 
+          <div class="note note note_note">
+           <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">You can also view changed settings from factory defaults at the <code class="ph codeph">/api/gateway/v1/settings/</code> endpoint. It reflects changes you made in the API browser, not changed settings that come from static settings files.</p> 
+           </div>
+          </div> 
+         </div> </li>
+       </ol>
+      </section> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="controller-api-conventions"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Find resources with the search query string parameter</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">The API is versioned for compatibility reasons. You can see what API versions are available by querying <code class="ph codeph">/api/</code>.</p> 
+       <p class="p">You might have to specify the content or type on <code class="ph codeph">POST</code> or <code class="ph codeph">PUT</code> requests:</p> 
+       <ul class="ul"> 
+        <li class="li"><code class="ph codeph">PUT</code>: Update a specific resource (by an identifier) or a collection of resources. You can also use <code class="ph codeph">PUT</code> to create a specific resource if you know the resource identifier before-hand.</li> 
+        <li class="li"><code class="ph codeph">POST</code>: Create a new resource. Also acts as a catch-all verb for operations that do not fit into the other categories.</li> 
+       </ul> 
+       <p class="p">All URIs not ending with "/" receive a 301 redirect.</p> 
+       <div class="note note note_note">
+        <span class="note__title">Note:</span> 
+        <div class="note__body"> 
+         <p class="p">The formatting of <code class="ph codeph">extra_vars</code> attached to Job Template records is preserved. YAML is returned as YAML with formatting and comments preserved, and JSON is returned as JSON.</p> 
+        </div>
+       </div> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="controller-api-sorting"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Sort the API</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Learn about managing ordering and sorting in the API.</p> 
+       <p class="p">To give you examples that are easy to follow, we use the following URL throughout this section: </p> 
+       <pre class="pre codeblock"><code>https://&lt;gateway server name&gt;/api/controller/v2/groups/</code></pre> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title4" id="controller-api-filter"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Filter resources through the API</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">The system recognizes a collection as a "queryset". You can filter this by using various operators.</p>
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title5" id="controller-api-advanced-queries"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Advanced queries in the API</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">You can use additional query string parameters used to filter the list of results returned to those matching a given value. You can only use fields and relations that exist in the database for filtering.</p> 
+       <section class="section"> 
+        <p class="p">Ensure that any special characters in the specified value are URL-encoded. For example:</p> 
+        <pre class="pre">?field=value%20xyz</pre> 
+        <p class="p">Fields can also span relations, only for fields and relationships defined in the database:</p> 
+        <pre class="pre">?other__field=value</pre> 
+        <p class="p">To exclude results matching certain criteria, prefix the field parameter with <code class="ph codeph">not__</code>:</p> 
+        <pre class="pre">?not__field=value</pre> 
+        <p class="p">By default, all query string filters are AND’ed together, so only the results matching all filters are returned. To combine results matching any one of multiple criteria, prefix each query string parameter with <code class="ph codeph">or__</code>:</p> 
+        <pre class="pre">?or__field=value&amp;or__field=othervalue
+?or__not__field=value&amp;or__field=othervalue</pre> 
+        <p class="p">The default AND filtering applies all filters simultaneously to each related object being filtered across database relationships. The chain filter instead applies filters separately for each related object. To use this, prefix the query string parameter with <code class="ph codeph">chain__</code>:</p> 
+        <pre class="pre">?chain__related__field=value&amp;chain__related__field2=othervalue
+?chain__not__related__field=value&amp;chain__related__field2=othervalue</pre> 
+        <p class="p">If you write the first query as <code class="ph codeph">?related<em class="ph i">field=value&amp;related</em>field2=othervalue</code>, it returns only the primary objects where the same related object satisfied both conditions. As written by using the chain filter, it would return the intersection of primary objects matching each condition.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title6" id="controller-api-field-lookups"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Field lookups</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Field lookups allow you to filter API results based on specific criteria. You can use field lookups for more advanced queries, by appending the lookup to the field name:</p> 
+       <section class="section"> 
+        <pre class="pre codeblock"><code>?field__lookup=value</code></pre> 
+        <p class="p">The following field lookups are supported:</p> 
+        <ul class="ul"> 
+         <li class="li">exact: Exact match (default lookup if not specified, see the following note for more information).</li> 
+         <li class="li">iexact: Case-insensitive version of exact.</li> 
+         <li class="li">contains: Field contains value.</li> 
+         <li class="li">icontains: Case-insensitive version of contains.</li> 
+         <li class="li">startswith: Field starts with value.</li> 
+         <li class="li">istartswith: Case-insensitive version of startswith.</li> 
+         <li class="li">endswith: Field ends with value.</li> 
+         <li class="li">iendswith: Case-insensitive version of endswith.</li> 
+         <li class="li">regex: Field matches the given regular expression.</li> 
+         <li class="li">iregex: Case-insensitive version of regular expression.</li> 
+         <li class="li">gt: Greater than comparison.</li> 
+         <li class="li">gte: Greater than or equal to comparison.</li> 
+         <li class="li">lt: Less than comparison.</li> 
+         <li class="li">lte: Less than or equal to comparison.</li> 
+         <li class="li">isnull: Check whether the given field or related object is null; expects a boolean value.</li> 
+         <li class="li">in: Check whether the given field’s value is present in the list provided; expects a list of items.</li> 
+         <li class="li">You can specify boolean values as <code class="ph codeph">True</code> or <code class="ph codeph">1</code> for true, <code class="ph codeph">False</code> or <code class="ph codeph">0</code> for false (both case-insensitive).</li> 
+        </ul> 
+        <p class="p">For example, <code class="ph codeph">?created__gte=2023-01-01</code> provides a list of items created after 1/1/2023.</p> 
+        <p class="p">You can specify null values as <code class="ph codeph">None</code> or <code class="ph codeph">Null</code> (both case-insensitive), though we recommend using the <code class="ph codeph">isnull</code> lookup to explicitly check for null values.</p> 
+        <p class="p">You can specify lists (for the <code class="ph codeph">in</code> lookup) as a comma-separated list of values. Filtering based on the requesting user’s level of access by query string parameter:</p> 
+        <ul class="ul"> 
+         <li class="li"><code class="ph codeph">role_level</code>: Level of role to filter on, such as <code class="ph codeph">admin_role</code></li> 
+        </ul> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Earlier releases of Ansible Automation Platform returned queries with <strong class="ph b">_exact</strong> results by default. As a workaround, set the <code class="ph codeph">limit</code> to <code class="ph codeph">?limit_exact</code> for the default filter. For example, <code class="ph codeph">/api/controller/v2/jobs/?limit_exact=example.domain.com</code> results in:</p> 
+          <pre class="pre codeblock"><code>{
+    "count": 1,
+    "next": null,
+    "previous": null,
+    "results": [
+...</code></pre> 
+         </div>
+        </div> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title7" id="controller-api-pagination"> 
+      <h2 class="title topictitle2" id="ariaid-title7">View collection responses that are not shown by default</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">The API paginates responses for collections. This means that while a collection might contain tens or hundreds of thousands of objects, in each web request, only a limited number of results are returned for API performance reasons.</p>
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title8" id="controller-api-access-resources"> 
+      <h2 class="title topictitle2" id="ariaid-title8">Access resource objects through API identifiers</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">The platform gateway API uses a primary key to access individual resource objects. You can access resources by using resource-specific, human-readable identifiers through the named URL feature. </p> 
+       <p class="p">The following example shows the named URL path where you can access a resource object without an auxiliary query string:</p> 
+       <pre class="pre codeblock"><code>/api/controller/v2/hosts/host_name++inv_name++org_name/</code></pre> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title9" id="controller-api-config-settings"> 
+      <h2 class="title topictitle2" id="ariaid-title9">API configuration values</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">There are two named-URL-related configuration settings available under <code class="ph codeph">/api/controller/v2/settings/named-url/: NAMED_URL_FORMATS</code> and <code class="ph codeph">NAMED_URL_GRAPH_NODES</code>.</p> 
+       <section class="section"> 
+        <p class="p"><code class="ph codeph">NAMED_URL_FORMATS</code> is a read only key-value pair list of all available named URL identifier formats. The following shows an example <code class="ph codeph">NAMED_URL_FORMATS</code>:</p> 
+        <pre class="pre codeblock"><code>"NAMED_URL_FORMATS": {
+"organizations": "&lt;name&gt;",
+"teams": "&lt;name&gt;++&lt;organization.name&gt;",
+"credential_types": "&lt;name&gt;+&lt;kind&gt;",
+"credentials": "&lt;name&gt;++&lt;credential_type.name&gt;+&lt;credential_type.kind&gt;++&lt;organization.name&gt;",
+"notification_templates": "&lt;name&gt;++&lt;organization.name&gt;",
+"job_templates": "&lt;name&gt;++&lt;organization.name&gt;",
+"projects": "&lt;name&gt;++&lt;organization.name&gt;",
+"inventories": "&lt;name&gt;++&lt;organization.name&gt;",
+"hosts": "&lt;name&gt;++&lt;inventory.name&gt;++&lt;organization.name&gt;",
+"groups": "&lt;name&gt;++&lt;inventory.name&gt;++&lt;organization.name&gt;",
+"inventory_sources": "&lt;name&gt;++&lt;inventory.name&gt;++&lt;organization.name&gt;",
+"inventory_scripts": "&lt;name&gt;++&lt;organization.name&gt;",
+"instance_groups": "&lt;name&gt;",
+"labels": "&lt;name&gt;++&lt;organization.name&gt;",
+"workflow_job_templates": "&lt;name&gt;++&lt;organization.name&gt;",
+"workflow_job_template_nodes": "&lt;identifier&gt;++&lt;workflow_job_template.name&gt;++&lt;organization.name&gt;",
+"applications": "&lt;name&gt;++&lt;organization.name&gt;",
+"users": "&lt;username&gt;",
+"instances": "&lt;hostname&gt;"
+}</code></pre> 
+        <p class="p">For each item in <code class="ph codeph">NAMED_URL_FORMATS</code>, the key is the API name of the resource to have named URL. The value is a string indicating how to form a human-readable unique identifier for that resource. <code class="ph codeph">NAMED_URL_FORMATS</code> only lists the resources that can have named URL, any resource not listed there has no named URL. If a resource can have named URL, its objects must have a <code class="ph codeph">named_url</code> field that represents the object-specific named URL. That field is only visible under detail view, not list view. You can access specified resource objects by using accurately generated named URL. This the object and its related URLs. For example, if <code class="ph codeph">/api/controller/v2/res_name/obj_slug/</code> is valid, <code class="ph codeph">/api/controller/v2/res_name/obj_slug/related_res_name/</code> is also valid.</p> 
+        <p class="p"><code class="ph codeph">NAMED_URL_FORMATS</code> are instructive enough to compose human-readable unique identifiers and named URLs themselves. For ease-of-use, every object of a resource that can have named URL has a related field <code class="ph codeph">named_url</code> that displays that object’s named URL. You can copy and paste that field for your own custom use. For more information, see the help text of the API browser if a resource object has named URL.</p> 
+        <p class="p">You can manually decide the named URL label, for example with ID 5. To compose a named URL for this specific resource object by using <code class="ph codeph">NAMED_URL_FORMATS</code>, first look up the labels field of <code class="ph codeph">NAMED_URL_FORMATS</code> to get the identifier format <code class="ph codeph">&lt;name&gt;++&lt;organization.name&gt;</code>:</p> 
+        <ul class="ul"> 
+         <li class="li">The first part of the URL format is <code class="ph codeph">&lt;name&gt;</code>, which indicates that you can find the label resource detail in <code class="ph codeph">/api/controller/v2/labels/5/</code>, and look for <code class="ph codeph">name</code> field in returned JSON. If you have the <code class="ph codeph">name</code> field with value <code class="ph codeph">Foo</code>, then the first part of the unique identifier is <code class="ph codeph">Foo</code>.</li> 
+         <li class="li">The second part of the format is double plus sign ++. That is the delimiter that separates different parts of a unique identifier. Append them to the unique identifier to get <code class="ph codeph">Foo++</code>.</li> 
+         <li class="li">The third part of the format is <code class="ph codeph">&lt;organization.name&gt;</code>, which indicates that the field is not in the current label object under investigation, but in an organization that the label object points to. As the format indicates, look up the organization in the related field of the current returned JSON. That field might not exist. If it exists, follow the URL given in that field, for example, <code class="ph codeph">/api/gateway/v1/organizations/3/</code>, to get the details of the specific organization, extract its name field, for example, "Default", and append it to the current unique identifier. Since <code class="ph codeph">&lt;organizations.name&gt;</code> is the last part of the format, it generates the following named URL: <code class="ph codeph">/api/controller/v2/labels/Foo++Default/</code>. <p class="p">In the case where an organization does not exist in the related field of the label object detail, append an empty string instead. This does not alter the current identifier. Therefore, <code class="ph codeph">Foo++</code> becomes the final unique identifier and the resulting generated named URL becomes <code class="ph codeph">/api/controller/v2/labels/Foo++/</code>.</p></li> 
+        </ul> 
+        <p class="p">An important aspect of generating a unique identifier for named URL has to do with reserved characters. As the identifier is part of a URL, the following reserved characters by URL standard are encoded by percentage symbols: <code class="ph codeph">;/?:@=&amp;[]</code>. For example, if an organization is named <code class="ph codeph">;/?:@=&amp;[]</code>, its unique identifier should be <code class="ph codeph">%3B%2F%3F%3A%40%3D%26%5B%5D</code>. Another special reserved character is <code class="ph codeph">`, which is not reserved by URL standard but used by named URL to link different parts of an identifier. It is encoded by `[]</code>. For example, if an organization is named <code class="ph codeph">[]`, its unique identifier is `%5B[]%5D</code>, where original <code class="ph codeph">[</code> and <code class="ph codeph">]</code> are percent encoded and <code class="ph codeph">` is converted to `[]</code>.</p> 
+        <p class="p">Although you cannot manually change <code class="ph codeph">NAMED_URL_FORMATS</code>, modifications do occur automatically and expand over time, reflecting underlying resource modification and expansion. Consult the <code class="ph codeph">NAMED_URL_FORMATS</code> on the same cluster where you want to use the named URL feature.</p> 
+        <p class="p"><code class="ph codeph">NAMED_URL_GRAPH_NODES</code> is another read-only list of key-value pairs that exposes the internal graph data structure used to manage named URLs. This is not intended to be human-readable but must be used for programmatically generating named URLs. An example script for generating named URL given the primary key of arbitrary resource objects that can have a named URL, using info provided by <code class="ph codeph">NAMED_URL_GRAPH_NODES</code>, can be found in <a class="xref" href="https://github.com/ansible/awx/blob/devel/tools/scripts/pk_to_named_url.py" target="_blank" rel="external noopener">GitHub</a>.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title10" id="controller-api-identifier-format-protocol"> 
+      <h2 class="title topictitle2" id="ariaid-title10">Understand how to identify resources by name</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">The API uses a consistent protocol to generate human-readable unique identifiers for resources that can be addressed by name in the API and the web interface.</p> 
+       <p class="p">Resources are identifiable by their unique keys, which are tuples of resource fields. Every resource is guaranteed to have its primary key number alone as a unique key, but there might be many other unique keys. A resource can generate an identifier format and, therefore, have a named URL if it has at least one unique key that satisfies the following rules:</p> 
+       <ol class="ol"> 
+        <li class="li">The key must contain only fields that are either the <code class="ph codeph">name</code> field, or text fields with a finite number of possible choices (such as credential type resource’s <code class="ph codeph">kind</code> field).</li> 
+        <li class="li">The only permitted exceptional field that breaks the preceding rule is a many-to-one related field relating to a resource other than itself, which is also allowed to have a slug.</li> 
+       </ol> 
+       <p class="p">If there are resources <code class="ph codeph">Foo</code> and <code class="ph codeph">Bar</code>, both <code class="ph codeph">Foo</code> and <code class="ph codeph">Bar</code> contain a name field and a choice field that can only have values "yes" or "no". Additionally, resource <code class="ph codeph">Foo</code> has a many-to-one field (a foreign key) relating to <code class="ph codeph">Bar</code>, for example <code class="ph codeph">fk</code>. <code class="ph codeph">Foo</code> has a unique key tuple (<code class="ph codeph">name</code>, <code class="ph codeph">choice</code>, <code class="ph codeph">fk</code>) and <code class="ph codeph">Bar</code> has a unique key tuple (<code class="ph codeph">name</code>, <code class="ph codeph">choice</code>). <code class="ph codeph">Bar</code> can have named URL because it satisfies the preceding first rule. <code class="ph codeph">Foo</code> can also have named URL, even though it breaks the first rule, the extra field breaking rule number one is the <code class="ph codeph">fk</code> field, which is many-to-one-related to <code class="ph codeph">Bar</code> and <code class="ph codeph">Bar</code> can have named URL.</p> 
+       <p class="p">For resources satisfying rule number one, their human-readable unique identifiers are combinations of foreign key fields, delimited by <code class="ph codeph">`. In specific, resource `Bar` in the preceding example has slug format `&lt;name&gt;&lt;choice&gt;</code>.</p> 
+       <p class="p">Note that the field order matters in slug format and the <code class="ph codeph">name</code> field always comes first if present, followed by the remaining fields arranged in lexicographic order of field name. For example, if <code class="ph codeph">Bar</code> also has an <code class="ph codeph">a_choice</code> field satisfying rule one and the unique key becomes (<code class="ph codeph">name</code>, <code class="ph codeph">choice</code>, <code class="ph codeph">a_choice</code>), its slug format becomes <code class="ph codeph">&lt;name&gt;&lt;a_choice&gt;&lt;choice&gt;</code>.</p> 
+       <p class="p">For resources satisfying rule number two, if traced back through the extra foreign key fields, the result is a tree of resources that identify objects of that resource. To generate the identifier format, each resource in the traceback tree generates its own part of the standalone format, using all fields but the foreign keys. Finally, all parts are combined by <code class="ph codeph">++</code> in the following order:</p> 
+       <ul class="ul"> 
+        <li class="li">Put standalone format as the first identifier part.</li> 
+        <li class="li">Recursively generate unique identifiers for each resource. The underlying resource is pointing to using a foreign key (a child of a traceback tree node).</li> 
+        <li class="li">Treat generated unique identifiers as the rest of the identifier components. Sort them in lexicographic order of corresponding foreign keys.</li> 
+        <li class="li">Combine all components together using <code class="ph codeph">++</code> to generate the final identifier format.</li> 
+       </ul> 
+       <p class="p">When generating an identifier format for resource <code class="ph codeph">Foo</code>, the API generates the standalone formats, <code class="ph codeph">&lt;name&gt;&lt;choice&gt;` for `Foo` and `&lt;fk.name&gt;&lt;fk.choice&gt;</code> for <code class="ph codeph">Bar</code>, then combines them together to be <code class="ph codeph">&lt;name&gt;&lt;choice&gt;+&lt;fk.name&gt;+&lt;fk.choice&gt;</code>.</p> 
+       <p class="p">When generating identifiers according to the given identifier format, there are cases where a foreign key might point to nowhere. In this case, the API substitutes the part of the format corresponding to the resource the foreign key should point to with an empty string. For example, if a <code class="ph codeph">Foo</code> object has the <code class="ph codeph">name ="alice"</code>, <code class="ph codeph">choice ="yes",</code> but <code class="ph codeph">fk field = None</code>, its resulting identifier is <code class="ph codeph">alice+yes++</code>.</p> 
+       <p class="p"></p> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

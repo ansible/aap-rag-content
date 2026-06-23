@@ -1,0 +1,80 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="maintaining-containerized-aap"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Maintain containerized Ansible Automation Platform</h1> 
+     <p class="shortdesc">Update, backup, restore, uninstall, or reinstall containerized Ansible Automation Platform deployments to support your automation infrastructure.</p> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="uninstalling-containerized-aap"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Uninstall containerized Ansible Automation Platform</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Uninstall your container-based installation of Ansible Automation Platform.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have logged in to the Red Hat Enterprise Linux host as your dedicated non-root user.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">If you intend to reinstall Ansible Automation Platform and want to use the preserved databases, you must collect the existing secret keys: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">First, list the available secrets: </span> 
+            <div class="itemgroup info"> 
+             <pre class="pre codeblock"><code>$ podman secret list</code></pre> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Next, collect the secret keys by running the following command: </span> 
+            <div class="itemgroup info"> 
+             <pre class="pre codeblock"><code>$ podman secret inspect --showsecret &lt;secret_key_variable&gt; | jq -r .[].SecretData</code></pre> 
+             <p class="p">For example:</p> 
+             <pre class="pre codeblock"><code>$ podman secret inspect --showsecret controller_secret_key | jq -r .[].SecretData</code></pre> 
+            </div> </li> 
+          </ol> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Run the <code class="ph codeph">uninstall</code> playbook: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ ansible-playbook -i inventory ansible.containerized_installer.uninstall</code></pre> 
+           <ul class="ul"> 
+            <li class="li">This stops all systemd units and containers and then deletes all resources used by the containerized installer such as: 
+             <ul class="ul"> 
+              <li class="li">configuration and data directories and files</li> 
+              <li class="li">systemd unit files</li> 
+              <li class="li">Podman containers and images</li> 
+              <li class="li">RPM packages</li> 
+             </ul> </li> 
+            <li class="li">To keep container images, set the <code class="ph codeph">container_keep_images</code> parameter to <code class="ph codeph">true</code>. <pre class="pre codeblock"><code>$ ansible-playbook -i inventory ansible.containerized_installer.uninstall -e container_keep_images=true</code></pre> </li> 
+            <li class="li">To keep PostgreSQL databases, set the <code class="ph codeph">postgresql_keep_databases</code> parameter to <code class="ph codeph">true</code>. <pre class="pre codeblock"><code>$ ansible-playbook -i inventory ansible.containerized_installer.uninstall -e postgresql_keep_databases=true</code></pre> </li> 
+           </ul> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="reinstalling-containerized-aap"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Reinstall containerized Ansible Automation Platform</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Reinstall a containerized deployment after uninstalling and preserving the database.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <div class="ul steps-unordered">
+         <div class="li step p"> <span class="ph cmd">Follow the steps in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_installing_containerized_aap" title="Run the install playbook to install containerized Ansible Automation Platform after preparing the Red Hat Enterprise Linux host, downloading the installation program, and configuring the inventory file.">Install containerized Ansible Automation Platform</a> and include the existing secret key value in the playbook command: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ ansible-playbook -i inventory ansible.containerized_installer.install -e controller_secret_key=&lt;secret_key_value&gt;</code></pre> 
+          </div> 
+         </div>
+        </div>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="con-create-crs-resource-operator"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Create a custom resource for Resource Operator</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Use the Resource Operator to manage Ansible Automation Platform resources directly from your Kubernetes cluster. This section provides the procedures for creating custom resources like <strong class="ph b">AnsibleJob</strong>, <strong class="ph b">JobTemplate</strong>, <strong class="ph b">AnsibleProject</strong>, and more.</p> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-create-an-ansiblejob"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Create an AnsibleJob custom resource</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">An AnsibleJob custom resource launches a job in the Ansible Automation Platform instance specified in the Kubernetes secret (automation controller host URL, token). You can launch an automation job on automation controller by creating an AnsibleJob resource.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div>
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Specify the connection secret and job template you want to launch. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>apiVersion: tower.ansible.com/v1alpha1
+kind: AnsibleJob
+metadata:
+  generateName: demo-job-1 # generate a unique suffix per 'kubectl create'
+spec:
+  connection_secret: aap-access
+  job_template_name: Demo Job Template</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Configure features such as, inventory, extra variables, and time to live for the job. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>spec:
+  connection_secret: aap-access
+  job_template_name: Demo Job Template
+  inventory: Demo Inventory                    # Inventory prompt on launch needs to be enabled
+  runner_image: quay.io/ansible/controller-resource-runner
+  runner_version: latest
+  job_ttl: 100
+  extra_vars:                                  # Extra variables prompt on launch needs to be enabled
+     test_var: test
+  job_tags: "provision,install,configuration"  # Specify tags to run
+  skip_tags: "configuration,restart"           # Skip tasks with a given tag</code></pre> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">You must enable prompt on launch for inventories and extra variables if you are configuring those. To enable <strong class="ph b">Prompt on launch</strong>, within the automation controller UI: From the <span class="ph menucascade"><span class="ph uicontrol">Resources</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Templates</span></span> page, select your template and select the <strong class="ph b">Prompt on launch</strong> checkbox next to <strong class="ph b">Inventory</strong> and <strong class="ph b">Variables</strong> sections.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Launch a workflow job template with an AnsibleJob object by specifying the <code class="ph codeph">workflow_template_name</code> instead of <code class="ph codeph">job_template_name</code>: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>apiVersion: tower.ansible.com/v1alpha1
+kind: AnsibleJob
+metadata:
+  generateName: demo-job-1 # generate a unique suffix per 'kubectl create'
+spec:
+  connection_secret: aap-access
+  workflow_template_name: Demo Workflow Template</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-create-a-jobtemplate"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Create a JobTemplate custom resource</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">A job template is a definition and set of parameters for running an Ansible job. For more information see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_job_templates" title="You can create both Job templates and Workflow job templates from Automation Execution > Templates .">Standardize and streamline automation with automation job templates</a>.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div>
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <div class="ul steps-unordered">
+         <div class="li step p"> <span class="ph cmd">Create a job template on automation controller by creating a JobTemplate custom resource: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>apiVersion: tower.ansible.com/v1alpha1
+kind: JobTemplate
+metadata:
+  name: jobtemplate-4
+spec:
+  connection_secret: aap-access
+  job_template_name: ExampleJobTemplate4
+  job_template_project: Demo Project
+  job_template_playbook: hello_world.yml
+  job_template_inventory: Demo Inventory</code></pre> 
+          </div> 
+         </div>
+        </div>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-operator-create-controller-project"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Create an automation controller project custom resource</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">A Project is a logical collection of Ansible playbooks, represented in automation controller. For more information see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_controller_projects" title="A project is a logical collection of Ansible playbooks, represented in automation controller.">Logically group playbooks with projects</a>.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div>
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <div class="ul steps-unordered">
+         <div class="li step p"> <span class="ph cmd">Create a project on automation controller by creating an automation controller project custom resource: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>apiVersion: tower.ansible.com/v1alpha1
+kind: AnsibleProject
+metadata:
+  name: git
+spec:
+  repo: https://github.com/ansible/ansible-tower-samples
+  branch: main
+  name: ProjectDemo-git
+  scm_type: git
+  organization: Default
+  description: demoProject
+  connection_secret: aap-access
+  runner_pull_policy: IfNotPresent</code></pre> 
+          </div> 
+         </div>
+        </div>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="proc-operator-create-controller-schedule"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Create an automation controller schedule custom resource</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Define an <code class="ph codeph">AnsibleSchedule</code> custom resource to create a schedule on the automation controller, ensuring you specify the necessary <code class="ph codeph">apiVersion</code>, <code class="ph codeph">kind</code>, and a unique <code class="ph codeph">metadata.name</code>.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div>
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <div class="ul steps-unordered">
+         <div class="li step p"> <span class="ph cmd">Create a schedule on automation controller by creating an automation controller schedule custom resource: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>apiVersion: tower.ansible.com/v1alpha1
+kind: AnsibleSchedule
+metadata:
+  name: schedule
+spec:
+  connection_secret: aap-access
+  runner_pull_policy: IfNotPresent
+  name: "Demo Schedule"
+  rrule: "DTSTART:20210101T000000Z RRULE:FREQ=DAILY;INTERVAL=1;COUNT=1"
+  unified_job_template: "Demo Job Template"</code></pre> 
+          </div> 
+         </div>
+        </div>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="proc-operator-create-controller-workflow"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Create an automation controller workflow custom resource</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Workflows enable you to configure a sequence of disparate job templates (or workflow templates) that may or may not share inventory, playbooks, or permissions. For more information see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_workflows#controller-workflows" title="Workflows enable you to configure a sequence of disparate job templates (or workflow templates) that might or might not share inventory, playbooks, or permissions.">Workflows in automation controller</a> .</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div>
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <div class="ul steps-unordered">
+         <div class="li step p"> <span class="ph cmd">Create a workflow on automation controller by creating a workflow custom resource: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>apiVersion: tower.ansible.com/v1alpha1
+kind: AnsibleWorkflow
+metadata:
+  name: workflow
+spec:
+  inventory: Demo Inventory
+  workflow_template_name: Demo Job Template
+  connection_secret: aap-access
+  runner_pull_policy: IfNotPresent</code></pre> 
+          </div> 
+         </div>
+        </div>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title7" id="proc-operator-create-controller-workflow-template"> 
+      <h2 class="title topictitle2" id="ariaid-title7">Create an automation controller workflow template custom resource</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">A workflow job template links together a sequence of disparate resources to track the full set of jobs that were part of the release process as a single unit.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">For more information see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_workflow_job_templates" title="A workflow job template links together a sequence of disparate resources that tracks the full set of jobs that were part of the release process as a single unit.">Workflow job templates</a> .</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <div class="ul steps-unordered">
+         <div class="li step p"> <span class="ph cmd">Create a workflow template on automation controller by creating a workflow template custom resource: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>apiVersion: tower.ansible.com/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: workflowtemplate-sample
+spec:
+  connection_secret: aap-access
+  name: ExampleTowerWorkflow
+  description: Example Workflow Template
+  organization: Default
+  inventory: Demo Inventory
+  workflow_nodes:
+  - identifier: node101
+    unified_job_template:
+      name: Demo Job Template
+      inventory:
+        organization:
+          name: Default
+      type: job_template
+  - identifier: node102
+    unified_job_template:
+      name: Demo Job Template
+      inventory:
+        organization:
+          name: Default
+      type: job_template</code></pre> 
+          </div> 
+         </div>
+        </div>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title8" id="proc-operator-create-controller-inventory"> 
+      <h2 class="title topictitle2" id="ariaid-title8">Create an automation controller inventory custom resource</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">By using an inventory file, Ansible Automation Platform can manage a large number of hosts with a single command.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">Inventories also help you use Ansible Automation Platform more efficiently by reducing the number of command line options you have to specify. For more information see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_inventories" title="Ansible Automation Platform works against a list of managed nodes or hosts in your infrastructure that are logically organized, using an inventory file. The installer inventory can specify your installation scenario and describe host deployments to Ansible.">Inventories</a> .</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <div class="ul steps-unordered">
+         <div class="li step p"> <span class="ph cmd">Create an inventory on automation controller by creating an inventory custom resource: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>metadata:
+  name: inventory-new
+spec:
+  connection_secret: aap-access
+  description: my new inventory
+  name: newinventory
+  organization: Default
+  state: present
+  instance_groups:
+    - default
+  variables:
+    string: "string_value"
+    bool: true
+    number: 1
+    list:
+      - item1: true
+      - item2: "1"
+    object:
+      string: "string_value"
+      number: 2</code></pre> 
+          </div> 
+         </div>
+        </div>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title9" id="proc-operator-create-controller-credential"> 
+      <h2 class="title topictitle2" id="ariaid-title9">Create an automation controller credential custom resource</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Credentials authenticate the automation controller user when launching jobs against machines, synchronizing with inventory sources, and importing project content from a version control system.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">SSH and AWS are the most commonly used credentials. For a full list of supported credentials see<a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_types" title="Ansible Automation Platform supports a number of credential types.">Credential types</a> .</p> 
+        <p class="p">For help with defining values you can refer to the <a class="xref" href="https://access.redhat.com/login?redirectTo=https%3A%2F%2Faccess.redhat.com%2Fsolutions%2F7050627" target="_blank" rel="external noopener">OpenAPI (Swagger) file for Red Hat Ansible Automation Platform API</a> KCS article.</p> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">You can use <code class="ph codeph">https://&lt;aap-instance&gt;/api/controller/v2/credential_types/</code> to view the list of credential types on your instance. To get the full list use the following <code class="ph codeph">curl</code> command:</p> 
+          <pre class="pre codeblock"><code>export AAP_TOKEN="your-oauth2-token"
+export AAP_URL="https://your-aap-controller.example.com"
+
+curl -s -H "Authorization: Bearer $AAP_TOKEN" "$AAP_URL/api/controller/v2/credential_types/" | jq -r '.results[].name'</code></pre> 
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <div class="ul steps-unordered">
+         <div class="li step p"> <span class="ph cmd">Create an AWS or SSH credential on automation controller by creating a credential custom resource: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">SSH credential: <pre class="pre codeblock"><code>apiVersion: tower.ansible.com/v1alpha1
+kind: AnsibleCredential
+metadata:
+  name: ssh-cred
+spec:
+  name: ssh-cred
+  organization: Default
+  connection_secret: aap-access
+  description: "SSH credential"
+  type: "Machine"
+  ssh_username: "cat"
+  ssh_secret: my-ssh-secret
+  runner_pull_policy: IfNotPresent</code></pre> </li> 
+            <li class="li">AWS credential: <pre class="pre codeblock"><code>apiVersion: tower.ansible.com/v1alpha1
+kind: AnsibleCredential
+metadata:
+  name: aws-cred
+spec:
+  name: aws-access
+  organization: Default
+  connection_secret: aap-access
+  description: "This is a test credential"
+  type: "Amazon Web Services"
+  username_secret: aws-secret
+  password_secret: aws-secret
+  runner_pull_policy: IfNotPresent</code></pre> </li> 
+           </ul> 
+          </div> 
+         </div>
+        </div>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

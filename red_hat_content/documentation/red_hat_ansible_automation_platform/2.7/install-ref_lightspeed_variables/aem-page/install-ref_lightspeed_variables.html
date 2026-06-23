@@ -1,0 +1,507 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="lightspeed-variables">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Red Hat Ansible Lightspeed variables</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Configure Red Hat Ansible Lightspeed by setting inventory file variables during installation. Use this reference to determine which variables to set for your deployment requirements.</p> 
+     <section class="section" id="lightspeed-variables___red_hat_ansible_lightspeed_variables">
+      <h2 class="title sectiontitle">Red Hat Ansible Lightspeed variables</h2> 
+      <p class="p">Inventory file variables for Red Hat Ansible Lightspeed.</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:25%">
+        <col style="width:30%">
+        <col style="width:10%">
+        <col style="width:10%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1">RPM variable name</th> 
+         <th class="entry" id="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2">Container variable name</th> 
+         <th class="entry" id="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3">Description</th> 
+         <th class="entry" id="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4">Required or optional</th> 
+         <th class="entry" id="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_admin_password</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Red Hat Ansible Lightspeed administrator password. Use of special characters for this variable is limited. The password can include any printable ASCII character except <code class="ph codeph">/</code>, <code class="ph codeph">"</code>, or <code class="ph codeph">@</code>.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Required</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_admin_user</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Username used to identify and create the Red Hat Ansible Lightspeed admin user.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"> <p class="p"> <code class="ph codeph">admin</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_chat_rate_throttle</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Chat rate throttle.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"> <p class="p"> <code class="ph codeph">10/minute</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_nginx_client_max_body_size</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Maximum allowed size for data sent to Red Hat Ansible Lightspeed through NGINX.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"> <p class="p"> <code class="ph codeph">5m</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_nginx_disable_hsts</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Controls whether HTTP Strict Transport Security (HSTS) is enabled or disabled for Red Hat Ansible Lightspeed. Set this variable to <code class="ph codeph">true</code> to disable HSTS.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"> <p class="p"> <code class="ph codeph">false</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_nginx_disable_https</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Controls whether HTTPS is enabled or disabled for Red Hat Ansible Lightspeed. Set this variable to <code class="ph codeph">true</code> to disable HTTPS.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"> <p class="p"> <code class="ph codeph">false</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_nginx_hsts_max_age</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Maximum duration (in seconds) that HTTP Strict Transport Security (HSTS) is enforced for Red Hat Ansible Lightspeed.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"> <p class="p"> <code class="ph codeph">63072000</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_nginx_http_port</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Port number that Red Hat Ansible Lightspeed listens on for HTTP requests.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"> <p class="p"> <code class="ph codeph">8084</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_nginx_https_port</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Port number that Red Hat Ansible Lightspeed listens on for HTTPS requests.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"> <p class="p"> <code class="ph codeph">8447</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_nginx_https_protocols</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Protocols that Red Hat Ansible Lightspeed will support when handling HTTPS traffic.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"> <p class="p"> <code class="ph codeph">[TLSv1.2, TLSv1.3]</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_nginx_user_headers</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Custom Nginx headers. List of additional NGINX headers to add to Red Hat Ansible Lightspeed’s NGINX configuration.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"> <p class="p">[]</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_nginx_read_timeout</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Sets the HTTP timeout for end-user requests. The minimum value is <code class="ph codeph">10</code> seconds.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"> <p class="p"> <code class="ph codeph">3600</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_pg_cert_auth</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Controls whether client certificate authentication is enabled or disabled on the Red Hat Ansible Lightspeed PostgreSQL database. Set this variable to <code class="ph codeph">true</code> to enable client certificate authentication.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"> <p class="p"> <code class="ph codeph">false</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_pg_database</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Name of the PostgreSQL database used by Red Hat Ansible Lightspeed.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"> <p class="p"> <code class="ph codeph">lightspeed</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_pg_host</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Hostname of the PostgreSQL database used by Red Hat Ansible Lightspeed.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Required</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_pg_password</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Password for the Red Hat Ansible Lightspeed PostgreSQL database user. Use of special characters for this variable is limited. The <code class="ph codeph">!</code>, <code class="ph codeph">#</code>, <code class="ph codeph">0</code> and <code class="ph codeph">@</code> characters are supported. Use of other special characters can cause the setup to fail.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_pg_port</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Port number for the PostgreSQL database used by Red Hat Ansible Lightspeed.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"> <p class="p"> <code class="ph codeph">5432</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_pg_sslmode</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Controls the SSL mode to use when platform gateway connects to the PostgreSQL database. Valid options include <code class="ph codeph">verify-full</code>, <code class="ph codeph">verify-ca</code>, <code class="ph codeph">require</code>, <code class="ph codeph">prefer</code>, <code class="ph codeph">allow</code>, <code class="ph codeph">disable</code>.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"> <p class="p"> <code class="ph codeph">prefer</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_pg_tls_cert</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Path to the PostgreSQL SSL/TLS certificate file for Red Hat Ansible Lightspeed.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_pg_tls_key</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Path to the PostgreSQL SSL/TLS key file for Red Hat Ansible Lightspeed.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_pg_username</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Username for the Red Hat Ansible Lightspeed PostgreSQL database user.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"> <p class="p"> <code class="ph codeph">lightspeed</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_secret_key</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Secret key value used by Red Hat Ansible Lightspeed to sign and encrypt data.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_tls_cert</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Path to the SSL/TLS certificate file for Red Hat Ansible Lightspeed.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_tls_key</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Path to the SSL/TLS key file for Red Hat Ansible Lightspeed.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_tls_remote</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Denote whether the Red Hat Ansible Lightspeed provided certificate files are local to the installation program (<code class="ph codeph">false</code>) or on the remote component server (<code class="ph codeph">true</code>).</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"> <p class="p"> <code class="ph codeph">false</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_use_archive_compression</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Controls whether archive compression is enabled or disabled for Red Hat Ansible Lightspeed. You can control this functionality globally by using <code class="ph codeph">use_archive_compression</code>.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"> <p class="p"> <code class="ph codeph">true</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_use_db_compression</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__3"> <p class="p">Controls whether database compression is enabled or disabled for Red Hat Ansible Lightspeed. You can control this functionality globally by using <code class="ph codeph">use_db_compression</code>.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___red_hat_ansible_lightspeed_variables__entry__5"> <p class="p"> <code class="ph codeph">false</code> </p> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="lightspeed-variables___ansible_lightspeed_coding_assistant_variables">
+      <h2 class="title sectiontitle">Coding assistant variables</h2> 
+      <p class="p">Inventory file variables for the coding assistant.</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:25%">
+        <col style="width:30%">
+        <col style="width:10%">
+        <col style="width:10%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__1">RPM variable name</th> 
+         <th class="entry" id="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__2">Container variable name</th> 
+         <th class="entry" id="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__3">Description</th> 
+         <th class="entry" id="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__4">Required or optional</th> 
+         <th class="entry" id="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__5">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_wca_model_type</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__3"> <p class="p">IBM watsonx Code Assistant model deployment mode, cloud (<code class="ph codeph">wca</code>) or on-premise (<code class="ph codeph">wca-onprem</code>).</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__5"> <p class="p"> <code class="ph codeph">wca</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_wca_model_url</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__3"> <p class="p">URL of the IBM watsonx Code Assistant model. For cloud deployment, the URL could be <code class="ph codeph">https://api.dataplatform.test.cloud.ibm.com</code>.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__5"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_wca_model_api_key</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__3"> <p class="p">API key of the IBM watsonx Code Assistant model that was generated during the model installation.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__4"> <p class="p">Required</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__5"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_wca_model_id</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__3"> <p class="p">ID of the IBM watsonx Code Assistant model.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__5"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_wca_model_verify_ssl</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__3"> <p class="p">Denotes whether or not to verify IBM watsonx Code Assistant’s web certificates when making calls from Red Hat Ansible Lightspeed to itself during installation. Set to <code class="ph codeph">false</code> to disable web certificate verification.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__5"> <p class="p"> <code class="ph codeph">true</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_wca_model_enable_anonymization</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__3"> <p class="p">Controls whether the anonymization of Personally Identifiable Information (PII) is enabled. PII information includes passwords, IP addresses, email addresses, and other sensitive data.</p> <p class="p">When PII anonymization is enabled, users' personal information is modified to some generic values to protect their data and reduce the risk of data leaks.</p> <p class="p">You can turn off the anonymization by specifying the value as <code class="ph codeph">false</code> if you want to retain all original information as entered by users and improve the quality of the answers.</p> <p class="p">If you set the value to <code class="ph codeph">false</code> and the Ansible administrator is using Red Hat Ansible Lightspeed in hybrid mode (where the model is in IBM watsonx Code Assistant in IBM Cloud) then their users' PII is sent to IBM Cloud.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__5"> <p class="p"> <code class="ph codeph">true</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_wca_model_username</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__3"> <p class="p">For on-premise deployment only. The username you use to connect to an IBM Cloud Pak for Data deployment.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__5"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_wca_health_check</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__3"> <p class="p">Enables or disables IBM watsonx Code Assistant health check.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__5"> <p class="p"> <code class="ph codeph">true</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_wca_idp_url</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__3"> <p class="p">For cloud deployment only. The IBM watsonx Code Assistant Identity Provider (IdP) URL.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__5"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_wca_idp_login</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__3"> <p class="p">For cloud deployment only. The IBM watsonx Code Assistant Identity Provider (IdP) username.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__5"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_wca_idp_password</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__3"> <p class="p">For cloud deployment only. The IBM watsonx Code Assistant Identity Provider (IdP) password.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_coding_assistant_variables__entry__5"></td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables">
+      <h2 class="title sectiontitle">Automation intelligent assistant variables</h2> 
+      <p class="p">Inventory file variables for the intelligent assistant.</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:25%">
+        <col style="width:30%">
+        <col style="width:10%">
+        <col style="width:10%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__1">RPM variable name</th> 
+         <th class="entry" id="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__2">Container variable name</th> 
+         <th class="entry" id="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__3">Description</th> 
+         <th class="entry" id="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__4">Required or optional</th> 
+         <th class="entry" id="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__5">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_chatbot_model_url</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__3"> <p class="p">The inference API base URL on your LLM setup. For example, <code class="ph codeph">https://your_inference_api/v1</code>.If you are using Microsoft Azure OpenAI, then set the base URL to <code class="ph codeph">https://your_inference_api/openai/v1</code>. </p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__5"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_chatbot_model_verify_ssl</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__3"> <p class="p">Controls whether SSL/TLS certificate verification is enabled or disabled when making HTTPS requests.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__5"> <p class="p"> <code class="ph codeph">true</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_chatbot_default_provider</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__3"> <p class="p">The provider type of your LLM setup by using one of the following values:</p> 
+          <ul class="ul"> 
+           <li class="li">Red Hat Enterprise Linux AI: <code class="ph codeph">rhelai</code></li> 
+           <li class="li">Red Hat OpenShift AI: <code class="ph codeph">rhoai</code></li> 
+           <li class="li">OpenAI: <code class="ph codeph">openai</code></li> 
+           <li class="li">Microsoft Azure OpenAI: <code class="ph codeph">azure</code></li> 
+          </ul> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__5"> <p class="p"> <code class="ph codeph">rhoai</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_chatbot_model_extra_settings</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__3"> <p class="p">Use this parameter to pass a JSON dictionary of extra parameters to pass directly to the model provider, for settings not covered by other standard fields.</p> <p class="p">If you want to use Microsoft Azure OpenAI as the LLM provider, specify the value as <code class="ph codeph">'{"api_type": ""}'</code>.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__5"> <p class="p"> <code class="ph codeph">{}</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__1">N/A</td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__2"><code class="ph codeph">lightspeed_chatbot_agent_extra_settings</code></td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__3">Use this parameter to customize agent behavior, such as controlling the temperature of the LLM. For example, <p class="p"><code class="ph codeph">'{"chatbot_temperature_override": 1}'</code>.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__4">Optional</td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__5"><code class="ph codeph">{}</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_chatbot_chatbot_max_tokens</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__3"> <p class="p">Maximum number of tokens to generate a chat response.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__5"> <p class="p"> <code class="ph codeph">4096</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_chatbot_http_port</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__3"> <p class="p">Port number that Ansible Lightspeed intelligent assistant listens on for HTTP requests.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__5"> <p class="p"> <code class="ph codeph">8085</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_chatbot_model_id</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__3"> <p class="p">The ID of the LLM model that is configured on your LLM setup.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__5"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_chatbot_model_api_key</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__3"> <p class="p">The API token or the API key of your LLM setup. This token is sent along with the authorization header when an inference API is called.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables__entry__5"></td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables">
+      <h2 class="title sectiontitle">Automation intelligent assistant integration with MCP server variables</h2> 
+      <p class="p">Inventory file variables for automation intelligent assistant integration with the Model Context Protocol (MCP) server for Red Hat Ansible Automation Platform.</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:25%">
+        <col style="width:30%">
+        <col style="width:10%">
+        <col style="width:10%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables__entry__1">RPM variable name</th> 
+         <th class="entry" id="lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables__entry__2">Container variable name</th> 
+         <th class="entry" id="lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables__entry__3">Description</th> 
+         <th class="entry" id="lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables__entry__4">Required or optional</th> 
+         <th class="entry" id="lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables__entry__5">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_mcp_controller_enabled</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables__entry__3"> <p class="p">Controls whether the Ansible Lightspeed MCP controller is enabled or disabled.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables__entry__5"> <p class="p"> <code class="ph codeph">false</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_mcp_controller_port</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables__entry__3"> <p class="p">Ansible Lightspeed MCP controller port.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables__entry__5"> <p class="p"> <code class="ph codeph">8004</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_mcp_lightspeed_enabled</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables__entry__3"> <p class="p">Ansible Lightspeed MCP lightspeed enabled.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables__entry__5"> <p class="p"> <code class="ph codeph">false</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables__entry__1"> <p class="p">N/A</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables__entry__2"> <p class="p"> <code class="ph codeph">lightspeed_mcp_lightspeed_port</code> </p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables__entry__3"> <p class="p">Ansible Lightspeed MCP lightspeed port.</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables__entry__4"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables__entry__5"> <p class="p"> <code class="ph codeph">8005</code> </p> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="lightspeed-variables__section_1">
+      <h2 class="title sectiontitle">Bring your own Knowledge for automation intelligent assistant variables</h2> 
+      <p class="p">Inventory file variables for the automation intelligent assistant with BYOK.</p> 
+      <table class="table" id="lightspeed-variables__table_1">
+       <caption></caption>
+       <colgroup>
+        <col style="width:33.33333333333333%">
+        <col style="width:33.33333333333333%">
+        <col style="width:33.33333333333333%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="lightspeed-variables__table_1__entry__1">Parameter</th> 
+         <th class="entry" id="lightspeed-variables__table_1__entry__2">Description</th> 
+         <th class="entry" id="lightspeed-variables__table_1__entry__3">Default value</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables__table_1__entry__1"><code class="ph codeph">lightspeed_chatbot_byok_image</code></td> 
+         <td class="entry" headers="lightspeed-variables__table_1__entry__2">The full registry path to your RAG image. For example,<code class="ph codeph">lightspeed_chatbot_byok_image: quay.io/my-custom-image/my-rag</code></td> 
+         <td class="entry" headers="lightspeed-variables__table_1__entry__3">n/a</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="lightspeed-variables__table_1__entry__1"><code class="ph codeph">lightspeed_chatbot_byok_score_multiplier</code></td> 
+         <td class="entry" headers="lightspeed-variables__table_1__entry__2">The score multiplier for BYOK content priority. It adjusts how heavily the AI weighs your custom data versus base knowledge.</td> 
+         <td class="entry" headers="lightspeed-variables__table_1__entry__3"><code class="ph codeph">1.2</code></td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

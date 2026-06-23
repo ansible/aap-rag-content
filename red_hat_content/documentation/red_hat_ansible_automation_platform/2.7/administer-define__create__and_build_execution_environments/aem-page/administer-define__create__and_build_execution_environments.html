@@ -1,0 +1,44 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-9ff94bd4-fddf-4320-833a-295d20920a1c">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Define, create, and build execution environments</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Run automation consistently across nodes with execution environments, which are container images that contain everything you need to run your automation.</p> 
+     <div class="p">
+      An execution environment is a containerized runtime that provides the following benefits: 
+      <ul class="ul" id="GUID-9ff94bd4-fddf-4320-833a-295d20920a1c__ul_2"> 
+       <li class="li">A consistent environment in which to run automation jobs</li> 
+       <li class="li">Portability and scalability, as you can run automation jobs on any node, including controller and execution nodes</li> 
+       <li class="li">Security and governance, as you can control what's inside the runtime environment; and you can have approved, signed, and verified container images</li> 
+       <li class="li">Improved efficiency, as developers need not spend time troubleshooting environment dependencies</li> 
+      </ul> 
+     </div> 
+     <div class="p">
+      Execution environments contain: 
+      <ul class="ul" id="GUID-9ff94bd4-fddf-4320-833a-295d20920a1c__ul_1"> 
+       <li class="li">Ansible core</li> 
+       <li class="li">Required collections</li> 
+       <li class="li">Python and other system dependencies</li> 
+       <li class="li">Other libraries that your automation may require</li> 
+      </ul> 
+     </div> 
+     <p class="p">Ansible Builder is a command line tool that automates the process of building automation execution environments by using metadata defined in various Ansible Collections or created by the user. You build an execution environment before you can create it using automation controller. After building it, you push it to a repository (such as quay) and then, when creating an execution environment in the UI with automation controller, you must point to that repository to use it in Ansible Automation Platform to use it, for example, in a job template.</p> 
+     <p class="p">With Ansible Builder, you can easily create a customizable automation execution environments definition file that specifies the content you want included in your automation execution environments such as Ansible Core, Python, Collections, third-party Python requirements, and system level packages. This enables you to fulfill all of the necessary requirements and dependencies to get jobs running. </p> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-create_and_integrate_custom_mcp_servers_in_execution_environments#GUID-031639ad-3f6a-48bc-893d-63f3c14c2e3b">Create and integrate custom MCP Servers in execution environments</a></strong><br>Integrate custom <em class="ph i">Model Context Protocol</em> (MCP) servers into execution environments using the <code class="ph codeph">ansible.mcp_builder</code> framework to automate installation, configuration, and lifecycle management.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_building_definition_file#con-building-definition-file">Build a definition file</a></strong><br>You can use Ansible Builder to create an execution environment. Building a new execution environment involves a definition that specifies which content you want to include in your execution environment, such as collections, Python requirements, and system-level packages.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_building_an_execution_environment_in_a_disconnected_environment">Disconnected environment customizations</a></strong><br>Creating execution environments for Ansible Automation Platform is a common task which works differently in disconnected environments. When building a custom execution environment, the ansible-builder tool defaults to downloading content from the following locations on the internet:</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_ee_setup_reference#assembly-controller-ee-setup-reference">Execution environment setup reference</a></strong><br>Review this reference information to better understand the definition of an execution environment. </li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-manage_execution_environments_in_private_automation_hub#GUID-c616972e-1012-4d50-a64b-dc38f0d5105b">Set up your container repository</a></strong><br>When you set up your container repository, you can add a description, include a README, add teams that can access the repository, and tag automation execution environments.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_obtain_images#obtain-images">Pull execution environments for use in automation hub</a></strong><br>Before you can push execution environments to your private automation hub, you must first pull them from an existing registry and tag them for use.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_working_with_signed_containers#working-with-signed-containers">Secure your automation with container signing</a></strong><br>Add an extra layer of security to your content by enabling container signing in private automation hub.</li>
+     </ul>
+    </nav>
+   </article>
+  </main>
+ </body>
+</html>

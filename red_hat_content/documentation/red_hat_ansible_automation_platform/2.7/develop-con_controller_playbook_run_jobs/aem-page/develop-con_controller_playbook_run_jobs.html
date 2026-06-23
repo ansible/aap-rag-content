@@ -1,0 +1,159 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="controller-playbook-run-jobs"> 
+     <h1 class="title topictitle1" id="ariaid-title1">View output for your playbook job runs</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">You can run playbook jobs to run Ansible playbooks on one or more managed nodes directly from the automation controller interface without creating a job template.</p> 
+      <p class="p">Use playbook run jobs to perform tasks that are more complex than those that can be accomplished with remote command execution. Any task that you can describe as an Ansible Playbook can be run on a host or group of hosts in your inventory. You can manage your systems quickly and easily. Because of an RBAC engine and detailed audit logging, you know which user has completed a specific task.</p> 
+      <p class="p">When a playbook is run, the results display in the <strong class="ph b">Output</strong> tab. If used, the Ansible CLI displays the same information. This can be useful for debugging.</p> 
+      <p class="p">The events summary displays the following events that are run as part of this playbook:</p> 
+      <ul class="ul"> 
+       <li class="li">The number of times this playbook has run is shown in the <strong class="ph b">Plays</strong> field</li> 
+       <li class="li">The number of tasks associated with this playbook is shown in the <strong class="ph b">Tasks</strong> field</li> 
+       <li class="li">The number of hosts associated with this playbook is shown in the <strong class="ph b">Hosts</strong> field</li> 
+       <li class="li">The amount of time it took to complete the playbook run is shown in the <strong class="ph b">Elapsed</strong> field</li> 
+      </ul> 
+      <br> 
+      <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-jobs-events-summary.png" alt="Job events summary"> 
+      <br> 
+      <p class="p">You can <span class="ph uicontrol button">Relaunch job</span>, <span class="ph uicontrol button">Cancel job</span>, download <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/download.png" width="15" alt="Download"> the job output, or delete <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/delete-button.png" width="15" alt="Delete"> the job.</p> 
+      <p class="p">Hover over a section of the host status bar in the <strong class="ph b">Output</strong> view and the number of hosts associated with that status displays.</p> 
+      <p class="p">The output for a playbook job is also available after launching a job from the <strong class="ph b">Jobs</strong> tab of its <strong class="ph b">Jobs Templates</strong> page. View its host details by clicking the line item tasks in the output.</p> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="controller-playbook-run-search"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Search</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">Use <strong class="ph b">Search</strong> to look up specific events, hostnames, and their statuses. To filter only certain hosts with a particular status, specify one of the following valid statuses:</p> 
+       <section class="section"> 
+        <dl class="dl"> 
+         <dt class="dt dlterm">
+           ok 
+         </dt> 
+         <dd class="dd">
+           Indicates that a task completed successfully but no change was executed on the host. 
+         </dd> 
+         <dt class="dt dlterm">
+           changed 
+         </dt> 
+         <dd class="dd">
+           The playbook task executed. Since Ansible tasks should be written to be idempotent, tasks can exit successfully without executing anything on the host. In these cases, the task returns <strong class="ph b">ok</strong>, but not <strong class="ph b">changed</strong>. 
+         </dd> 
+         <dt class="dt dlterm">
+           failed 
+         </dt> 
+         <dd class="dd">
+           The task failed. Further playbook execution stopped for this host. 
+         </dd> 
+         <dt class="dt dlterm">
+           unreachable 
+         </dt> 
+         <dd class="dd">
+           The host is unreachable from the network or has another unrecoverable error associated with it. 
+         </dd> 
+         <dt class="dt dlterm">
+           skipped 
+         </dt> 
+         <dd class="dd">
+           The playbook task skipped because no change was necessary for the host to reach the target state. 
+         </dd> 
+         <dt class="dt dlterm">
+           rescued 
+         </dt> 
+         <dd class="dd">
+           This shows the tasks that failed and then executes a rescue section. 
+         </dd> 
+         <dt class="dt dlterm">
+           ignored 
+         </dt> 
+         <dd class="dd">
+           This shows the tasks that failed and have <code class="ph codeph">ignore_errors: yes configured</code>. 
+         </dd> 
+        </dl> 
+        <p class="p">The following example shows a search with only unreachable hosts:</p> 
+        <br> 
+        <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-std-out-unreachable.png" alt="Stdout pane unreachable"> 
+        <br> 
+        <p class="p">For more information about using the search, see the <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/assembly-controller-search" target="_blank" rel="external noopener">Search</a> section.</p> 
+        <p class="p">The standard output view displays the events that occur on a particular job.</p> 
+        <p class="p">Click a line of an event from the <strong class="ph b">Stdout</strong> pane and a <strong class="ph b">Host Events</strong> window displays in a separate window. This window shows the host that was affected by that particular event.</p> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Upgrading to the latest versions of Ansible Automation Platform involves progressively migrating all historical playbook output and events. This migration process is gradual, and happens automatically in the background after installation is complete. Installations with very large amounts of historical job output (tens or hundreds of GB of output) can have missing job output until migration is complete. The most recent data shows up at the top of the output, followed by older events.</p> 
+         </div> 
+        </div> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="controller-playbook-run-details"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Playbook run details</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">Learn how to view the details of a playbook run in Automation controller.</p> 
+       <section class="section"> 
+        <p class="p">Access the <strong class="ph b">Details</strong> tab to view details about the job execution:</p> 
+        <br> 
+        <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-job-details-for-example-job.png" alt="Job details for example run"> 
+        <br> 
+        <p class="p">You can view the following details for an executed job:</p> 
+        <ul class="ul"> 
+         <li class="li"><strong class="ph b">Status</strong>: It can be any of the following: 
+          <ul class="ul"> 
+           <li class="li"><strong class="ph b">Pending</strong>: The playbook run has been created, but not queued or started yet. Any job, not just playbook runs, stay in pending until it is ready to be run by the system. Reasons for playbook runs not being ready include dependencies that are currently running (all dependencies must be completed before the next step can run), or there is not enough capacity to run in the locations it is configured to.</li> 
+           <li class="li"><strong class="ph b">Waiting</strong>: The playbook run is in the queue waiting to be executed.</li> 
+           <li class="li"><strong class="ph b">Running</strong>: The playbook run is currently in progress.</li> 
+           <li class="li"><strong class="ph b">Successful</strong>: The last playbook run succeeded.</li> 
+           <li class="li"><strong class="ph b">Failed</strong>: The last playbook run failed.</li> 
+          </ul></li> 
+         <li class="li"><strong class="ph b">Job template</strong>: The name of the job template from which this job launched.</li> 
+         <li class="li"><strong class="ph b">Inventory</strong>: The inventory selected to run this job against.</li> 
+         <li class="li"><strong class="ph b">Project</strong>: The name of the project associated with the launched job.</li> 
+         <li class="li"><strong class="ph b">Project Status</strong>: The status of the project associated with the launched job.</li> 
+         <li class="li"><strong class="ph b">Playbook</strong>: The playbook used to launch this job.</li> 
+         <li class="li"><strong class="ph b">Execution environment</strong>: The name of the execution environment used in this job.</li> 
+         <li class="li"><strong class="ph b">Credentials</strong>: The credentials used in this job.</li> 
+         <li class="li"><strong class="ph b">Extra variables</strong>: Any extra variables passed when creating the job template are displayed here.</li> 
+        </ul> 
+        <p class="p">Select one of these items to view the corresponding job templates, projects, and other objects.</p> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title4" id="con-controller-playbook-access-info-sharing"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Playbook access and information sharing</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">Automation controller’s use of automation execution environments and Linux containers prevents playbooks from reading files outside of their project directory.</p> 
+       <p class="p">By default, the only data exposed to the ansible-playbook process inside the container is the current project being used.</p> 
+       <p class="p">You can customize this in the Job Settings and expose additional directories from the host into the container.</p> 
+      </div> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title5" id="ref-controller-isolation-functionality"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Isolation functionality and variables</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">Automation controller uses container technology to isolate jobs from each other. By default, only the current project is exposed to the container running a job template.</p> 
+       <section class="section"> 
+        <p class="p">If you need to expose additional directories, you must customize your playbook runs. To configure job isolation, you can set variables.</p> 
+        <p class="p">By default, automation controller uses the system’s <code class="ph codeph">tmp</code> directory (<code class="ph codeph">/tmp</code> by default) as its staging area. You can change this in the <strong class="ph b">Job Execution Path</strong> field of the <strong class="ph b">Jobs settings</strong> page, or in the REST API at <code class="ph codeph">/api/v2/settings/jobs</code>:</p> 
+        <pre class="pre codeblock"><code>AWX_ISOLATION_BASE_PATH = "/opt/tmp"</code></pre> 
+        <p class="p">If there are any additional directories that should specifically be exposed from the host to the container that playbooks run in, you can specify those in the <strong class="ph b">Paths to expose to isolated jobs</strong> field of the <strong class="ph b">Jobs Settings</strong> page, or in the REST API at <code class="ph codeph">/api/v2/settings/jobs</code>:</p> 
+        <pre class="pre codeblock"><code>AWX_ISOLATION_SHOW_PATHS = ['/list/of/', '/paths']</code></pre> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <ul class="ul"> 
+           <li class="li">If a path to a specific file is entered, then the entire directory containing that file will be mounted inside the execution environment.</li> 
+           <li class="li">If your playbooks need to use keys or settings defined in <code class="ph codeph">AWX_ISOLATION_SHOW_PATHS</code>, then add this file to <code class="ph codeph">/var/lib/awx/.ssh</code>.</li> 
+          </ul> 
+         </div> 
+        </div> 
+        <p class="p">The fields described here can be found on the <strong class="ph b">Jobs settings</strong> page:</p> 
+        <br> 
+        <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/job-settings-full.png" alt="Jobs settings options"> 
+        <br> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

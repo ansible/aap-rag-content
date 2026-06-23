@@ -1,0 +1,70 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="devtools-install">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Install Ansible development tools from an RPM package</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Ansible development tools are available as an RPM package for Red Hat Enterprise Linux. Install the tools on your local RHEL system using a package manager.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">You have installed a supported version of Red Hat Enterprise Linux.</li> 
+       <li class="li">You have registered your system with Red Hat Subscription Manager.</li> 
+       <li class="li">You have installed a containerization platform, for example Podman or Docker.</li> 
+      </ul> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Run the following command to check whether Simple Content Access (SCA) is enabled: </span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-shell"><code>$ sudo subscription-manager status</code></pre> 
+         <p class="p">If Simple Content Access is enabled, the output contains the following message:</p> 
+         <pre class="pre codeblock"><code>Content Access Mode is set to Simple Content Access.</code></pre> 
+        </div> 
+        <ol type="a" class="ol substeps"> 
+         <li class="li substep substepexpand"> <span class="ph cmd">If Simple Content Access is not enabled, attach the Red Hat Ansible Automation Platform SKU: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock language-shell"><code>$ sudo subscription-manager attach --pool=&lt;sku-pool-id&gt;</code></pre> 
+          </div> </li> 
+        </ol> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Install Ansible development tools with the following command: </span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-shell"><code>$ sudo dnf install
+  --enablerepo=ansible-automation-platform-<var class="keyword varname">aap-version</var>-for-rhel-<var class="keyword varname">rhel-version</var>-x86_64-rpms ansible-dev-tools</code></pre> 
+         <p class="p">Replace <var class="keyword varname">aap-version</var> with your Ansible Automation Platform version and <var class="keyword varname">rhel-version</var> with your Red Hat Enterprise Linux major version.</p> 
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <ol class="ol"> 
+       <li class="li">Verify that the Ansible development tools have been installed: <pre class="pre codeblock language-shell"><code>$ rpm -aq | grep ansible-dev-tools</code></pre> <p class="p">If the installation was successful, the output shows the <code class="ph codeph">ansible-dev-tools</code> package and its version number, for example:</p> <pre class="pre codeblock"><code>ansible-dev-tools-25.8.3-1.el9ap.noarch</code></pre> </li> 
+       <li class="li">On successful installation, you can view the help documentation for the <code class="ph codeph">ansible-creator</code> utility: <pre class="pre codeblock"><code>$ ansible-creator --help
+
+  usage: ansible-creator [-h] [--version] command ...
+
+  The fastest way to generate all your ansible content.
+
+  Positional arguments:
+   command
+    add           Add resources to an existing Ansible project.
+    init          Initialize a new Ansible project.
+
+  Options:
+   --version      Print ansible-creator version and exit.
+   -h     --help  Show this help message and exit</code></pre> </li> 
+      </ol> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

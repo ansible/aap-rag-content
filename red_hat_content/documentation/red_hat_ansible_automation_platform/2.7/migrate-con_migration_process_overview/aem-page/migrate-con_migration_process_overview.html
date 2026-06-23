@@ -1,0 +1,35 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="migration-process-overview">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Migration process overview</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Understand the complete migration workflow including preparation, export, artifact creation, import, reconciliation, and validation steps for moving between Ansible Automation Platform installation types.</p> 
+     <div class="note important note_important">
+      <span class="note__title">Important:</span> 
+      <div class="note__body"> 
+       <p class="p">You can only migrate to a different installation type of the same Ansible Automation Platform version. For example, you can migrate from containerized 2.7 to OpenShift Container Platform 2.7, but not from containerized 2.6 to OpenShift Container Platform 2.7.</p> 
+      </div>
+     </div> 
+     <div class="note warning note_warning">
+      <span class="note__title">Warning:</span> 
+      <div class="note__body">
+       If you are running an RPM-based deployment, complete your migration to a containerized or OpenShift Container Platform deployment before upgrading to Ansible Automation Platform 2.7. RPM-based deployments are not supported as an upgrade path to 2.7.
+      </div>
+     </div> 
+     <p class="p">The migration between Ansible Automation Platform installation types follows this general workflow:</p> 
+     <ol class="ol"> 
+      <li class="li">Prepare and assess the source environment</li> 
+      <li class="li">Export the source environment</li> 
+      <li class="li">Create and verify the migration artifact</li> 
+      <li class="li">Prepare and assess the target environment</li> 
+      <li class="li">Import the migration content to the target environment</li> 
+      <li class="li">Reconcile the target environment post-import</li> 
+      <li class="li">Validate the target environment</li> 
+     </ol> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

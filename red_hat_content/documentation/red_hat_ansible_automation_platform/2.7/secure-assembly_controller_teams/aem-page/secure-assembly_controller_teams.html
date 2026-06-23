@@ -1,0 +1,220 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-controller-teams"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Bulk-assign roles to users with teams</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">As an administrator, you can use teams to bulk-assign roles to users that need to share the same access.</p> 
+      <p class="p">A team is a subdivision of an organization that groups users and roles together for specific resources. Teams offer a means to implement role-based access control schemes and delegate responsibilities across organizations by allowing you to grant access to users in bulk. For example, you can grant resource access to a team, and therefore to all the users in the team, rather than granting access to each individual user on the team.</p> 
+      <p class="p">You can create as many teams as needed for your organization. Teams can only be assigned to one organization while an organization can be made up of multiple teams. Each team can be assigned roles, the same way roles are assigned for users. Teams can also scalably assign ownership for credentials, preventing multiple interface click-throughs to assign the same credentials to the same user.</p> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-gw-team-list-view"> 
+      <h2 class="title topictitle2" id="ariaid-title2">View the Teams list</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">The <strong class="ph b">Teams</strong> page displays the existing teams for your installation. From here, you can search for a specific team, filter the list of teams by team name or organization, or change the sort order for the list.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Teams</span></span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">In the <strong class="ph b">Search</strong> bar, enter an appropriate keyword for the team you want to search for and click the arrow icon.</span> </li>
+         <li class="li step"> <span class="ph cmd">From the menu bar, you can sort the list of teams by using the arrows for <strong class="ph b">Name</strong> and <strong class="ph b">Organization</strong> to toggle your sorting preference.</span> </li>
+         <li class="li step"> <span class="ph cmd">You can view team details by clicking a team <strong class="ph b">Name</strong> on the <strong class="ph b">Teams</strong> page.</span> </li>
+         <li class="li step"> <span class="ph cmd">You can view organization details by clicking the link in the <strong class="ph b">Organization</strong> column.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-controller-creating-a-team"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Create a team</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Manage teams by creating them, assigning an organization, and adding <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_teams#proc-gw-team-add-user" title="To assign a user to a team, the user must already have been created. For more information, see Creating a user. Assigning a user to a team adds them as a member only. Use the Roles tab to assign a role that gives users on the team resource access.">users</a> or <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_teams#proc-gw-add-admin-team" title="Assign existing users as administrators to a team so they can manage its membership and settings. This allows designated administrators to create new users and grant permissions within the team.">administrators</a>. Team members automatically inherit all assigned roles and permissions. Users must exist in the system before they can be added to a team.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Teams</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create team</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Enter a <strong class="ph b">Name</strong> and optionally give a <strong class="ph b">Description</strong> for the team.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select an <strong class="ph b">Organization</strong> to be associated with this team. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">Each team can only be assigned to one organization.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create team</span>. The <strong class="ph b">Details</strong> page opens, where you can review and edit your team information and access.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-gw-team-add-user"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Assign users to a team</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">To assign a user to a team, the user must already have been created. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_users#proc-controller-creating-a-user" title="You can create three types of users in Ansible Automation Platform:">Creating a user</a>. Assigning a user to a team adds them as a member only. Use the <strong class="ph b">Roles</strong> tab to assign a role that gives users on the team resource access.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">New user memberships to a team must be added at the platform level.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Teams</span></span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select the team to which you want to add users.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select the <strong class="ph b">Users</strong> tab.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select one or more users from the list by clicking the checkbox next to the name to add them as members of this team.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Add users</span>.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="proc-gw-team-remove-user"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Remove users from a team</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can remove a user from a team from the Team list view.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Teams</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the team from which you want to remove users.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">Users</strong> tab.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click the <strong class="ph b">Remove user</strong> icon next to the user you want to remove as a member of the team.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">You can delete multiple users by selecting the checkbox next to each user you want to remove, and selecting <strong class="ph b">Remove selected users</strong> from the <strong class="ph b">More actions ⋮</strong> list. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">If the user is a Team administrator, you can remove their membership to the team from the <strong class="ph b">Administrators</strong> tab.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">A confirmation dialog asking you to confirm the removal will appear. Confirm the removal. Note that removing a user from a team removes all of that team’s role assignments from the user.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="proc-gw-add-admin-team"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Assign administrators to a team</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Assign existing users as administrators to a team so they can manage its membership and settings. This allows designated administrators to create new users and grant permissions within the team.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Teams</span></span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select the team to which you want to add an administrator.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select the <strong class="ph b">Administrators</strong> tab and click <span class="ph uicontrol button">Add administrator(s)</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select one or more users from the list by clicking the checkbox next to the name to add them as administrators of this team.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Add administrators</span>.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title7" id="proc-controller-user-permissions"> 
+      <h2 class="title topictitle2" id="ariaid-title7">Assign roles to a team</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can grant a team granular access to specific resources such as inventories, projects, and job templates by assigning the team roles associated with those particular resources. You can also set permissions at the level of the organization from the Organizations view.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Teams cannot be assigned to an organization through role assignment, nor can teams be assigned organization roles from the Teams view. Refer to the steps provided in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_controller_access_organizations#proc-gw-add-team-organization" title="You can give a team access to an organization, and to the resources within that organization, by assigning roles to the team in the organization’s Teams tab. All users who are part of a team assigned to the organization will inherit the team’s organization role assignments.">Adding a team to an organization</a> for detailed instructions on assigning a team to an organization.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Teams</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the team <strong class="ph b">Name</strong> to which you want to add roles.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">Roles</strong> tab and click <span class="ph uicontrol button">Add roles</span>. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">Ensure that you are selecting the desired role within the correct component context, because resources like projects and credentials can be associated with both Automation Execution (automation controller) and Automation Decisions (Event-Driven Ansible).</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select a <strong class="ph b">Resource type</strong> and click <span class="ph uicontrol button">Next</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the resources that you want to give the team role-based access to and click <span class="ph uicontrol button">Next</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the roles to apply to the resources and click <span class="ph uicontrol button">Next</span>. </span> 
+          <div class="itemgroup info"> 
+           <div class="note tip note_tip">
+            <span class="note__title">Tip:</span> 
+            <div class="note__body"> 
+             <p class="p">If you are selecting more than one role in this step, consider <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_roles#proc-gw-create-roles" title="Ansible Automation Platform services provide a set of predefined roles with permissions enough for standard automation tasks. It is also possible to configure custom roles that define access permissions to a resource.">creating a custom role</a> that includes all the permissions for this resource type to give the team the correct access.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Review the settings and click <span class="ph uicontrol button">Finish</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">The <strong class="ph b">Add roles</strong> dialog displays indicating whether the role assignments were successfully applied. Click <span class="ph uicontrol button">Close</span> to close the dialog.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title8" id="proc-gw-remove-roles-team"> 
+      <h2 class="title topictitle2" id="ariaid-title8">Remove roles from a team</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Remove roles from a team to revoke access to specific Ansible Automation Platform resources. Updating these permissions helps ensure that team members only keep the necessary access for their tasks within the correct component context.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Teams</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the team <strong class="ph b">Name</strong> from which you want to remove roles.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">Roles</strong> tab.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">To remove a single role, click the minus icon next to the resource and confirm removal on the dialog that is displayed. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">Ensure that you are selecting the desired role within the correct component context, because resources like projects and credentials can be associated with both Automation Execution (automation controller) and Automation Decisions (Event-Driven Ansible).</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">To remove roles in bulk, select the checkbox next to each resource you want to remove and click <strong class="ph b">Delete selected roles</strong> from the <span class="ph uicontrol button">More Actions</span><strong class="ph b">⋮</strong> list on the menu bar, then confirm removal and click <strong class="ph b">Delete role</strong>.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title9" id="proc-gw-delete-team"> 
+      <h2 class="title topictitle2" id="ariaid-title9">Delete a team</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Before you can delete a team, you must have team permissions. When you delete a team, the roles that users inherited from that team are revoked.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Teams</span></span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">To remove a single team, click the minus icon <strong class="ph b">-</strong> next to the team and confirm removal on the dialog that is displayed.</span> </li>
+         <li class="li step"> <span class="ph cmd">To remove teams in bulk, select the checkbox next to each team that you want to remove, then click the <span class="ph uicontrol button">More Actions</span><strong class="ph b">⋮</strong> icon and select <strong class="ph b">Delete team</strong>.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

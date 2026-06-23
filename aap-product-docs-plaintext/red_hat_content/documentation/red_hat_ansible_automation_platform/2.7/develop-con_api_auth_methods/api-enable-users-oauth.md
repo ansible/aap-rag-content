@@ -1,0 +1,11 @@
+# Authenticate through the API
+## Enable external users to create OAuth 2 tokens
+
+By default, external users such as those created by single sign-on are not able to generate OAuth tokens for security purposes.
+
+### Procedure
+
+1.  From the navigation panel, select Settings> (and then)Platform gateway.
+2.  Select Edit platform gateway settings.
+3.  Enable the option to **Allow external users to create OAuth2 tokens**.
+

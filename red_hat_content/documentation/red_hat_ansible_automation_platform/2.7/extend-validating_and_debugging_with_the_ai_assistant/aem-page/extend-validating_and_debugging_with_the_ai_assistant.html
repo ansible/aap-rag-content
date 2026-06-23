@@ -1,0 +1,123 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-08b00071-eafe-4419-8642-9a3f22b6a652">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Validate and debug with the AI assistant</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Use the AI assistant to validate playbooks in real time, identify issues before execution, and automatically apply fixes.</p> 
+     <section class="section prereq" id="GUID-08b00071-eafe-4419-8642-9a3f22b6a652__prereq_1">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul" id="GUID-08b00071-eafe-4419-8642-9a3f22b6a652__ul_1"> 
+       <li class="li">VS Code is open and Ansible VS Code extension is active.</li> 
+       <li class="li">The MCP server for Red Hat Ansible Automation Platform is enabled.</li> 
+       <li class="li">You have an Ansible playbook open in the editor (for example, <code class="ph codeph">playbooks/webserver.yml</code>).</li> 
+      </ul> 
+     </section> 
+     <section class="section context" id="GUID-08b00071-eafe-4419-8642-9a3f22b6a652__context_1">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">First, ask the AI assistant to analyze the current playbook without modifying it. This identifies specific rule violations and potential errors.</p> 
+      <p class="p">If errors are found, <code class="ph codeph">ansible_lint</code> has autofix functionality, enabling it to suggest changes, and, with your permission, implement those changes in your code.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Open the playbook file in the VS Code editor.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">In the Copilot chat window, enter a natural language prompt such as:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>Validate my webserver playbook to check for any issues.</code></pre> 
+         <p class="p">The assistant triggers the <code class="ph codeph">ansible_lint</code>tool in check-only mode. </p> 
+         <p class="p">The assistant displays a list of the issues it found, including Rule IDs, line numbers, and descriptions of the errors (for example, missing FQCN, or YAML formatting issues).</p> 
+         <p class="p">The assistant will ask if you would like <code class="ph codeph">ansible-lint</code> to apply automatic fixes. You must grant the AI assistant permission to make any changes to your code.</p> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Enter "yes" or "no" depending on whether you want the assistant to apply the suggested changes.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Select the option to <span class="ph uicontrol">allow</span> or to <span class="ph uicontrol">skip</span> to grant the assistant permission to make changes.</span> 
+        <div class="itemgroup info"> 
+         <p class="p">If you select <span class="ph uicontrol">allow</span>, the assistant updates your code.</p> 
+         <p class="p">If you select <span class="ph uicontrol">skip</span>, the assistant outputs a list of issues and the suggested fix for each.</p> 
+        </div> </li>
+      </ol>
+     </section> 
+    </div> 
+    <article class="topic task nested1" aria-labelledby="ariaid-title2" id="task_1"> 
+     <h2 class="title topictitle2" id="ariaid-title2">Auto-fix errors</h2> 
+     <div class="body taskbody">
+      <p class="shortdesc">You can prompt the AI assistant to auto-fix errors that <code class="ph codeph">ansible_lint</code>finds.</p> 
+      <section id="task_1__steps_1">
+       <div class="tasklabel">
+        <h3 class="sectiontitle tasklabel">Procedure</h3>
+       </div>
+       <ol class="ol steps" id="task_1__steps_1">
+        <li class="li step stepexpand"> <span class="ph cmd">In the GitHub Copilot chat window, enter the following prompt:</span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>Run ansible_lint on my webserver playbook and apply automatic fixes.</code></pre> The assistant triggers the <code class="ph codeph">ansible_lint</code>tool wiht the <code class="ph codeph">fix:true</code> parameter.
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">The tool then processes the file and applies corrections for issues such as:</span> 
+         <ol type="a" class="ol substeps" id="task_1__substeps_1"> 
+          <li class="li substep"> <span class="ph cmd">FQCN (Fully Qualified Collection Name): Converting short module names to fully qualified ones.</span> </li> 
+          <li class="li substep"> <span class="ph cmd">Formatting: Correcting YAML indentation and Jinja2 expression spacing.</span> </li> 
+          <li class="li substep"> <span class="ph cmd">Ordering: Fixing key ordering within tasks.</span> </li> 
+         </ol> </li>
+       </ol>
+      </section> 
+      <section class="section postreq" id="task_1__postreq_1">
+       <div class="tasklabel">
+        <h3 class="sectiontitle tasklabel">What to do next</h3>
+       </div>When the AI agent completes the auto fixes, confirm the updates by taking the following steps. 
+       <ol class="ol" id="task_1__ol_1"> 
+        <li class="li">Either verify in the chat window that the AI has displayed the <strong class="ph b">fixed content</strong>, or confirm that the file has been updated.</li> 
+        <li class="li">Review your open file in the editor. Changes (such as updated module names) should be reflected immediately in the code.</li> 
+       </ol> 
+      </section> 
+     </div> 
+    </article> 
+    <article class="topic task nested1" aria-labelledby="ariaid-title3" id="task_2"> 
+     <h2 class="title topictitle2" id="ariaid-title3">Implement fixes</h2> 
+     <div class="body taskbody"> 
+      <section id="task_2__steps_2">
+       <div class="tasklabel">
+        <h3 class="sectiontitle tasklabel">Procedure</h3>
+       </div>
+       <ol class="ol steps" id="task_2__steps_2">
+        <li class="li step stepexpand"> <span class="ph cmd">Review the assistant's response. It should highlight sections of the code that have errors or that could be improved. The analysis might include:</span> 
+         <ol type="a" class="ol substeps" id="task_2__substeps_2"> 
+          <li class="li substep"> <span class="ph cmd">Identification of Anti-patterns: Flagging inefficient or insecure practices.</span> </li> 
+          <li class="li substep"> <span class="ph cmd">Failure Analysis: Explaining logical errors that could cause runtime failures.</span> </li> 
+          <li class="li substep"> <span class="ph cmd">Best Practice Gaps: Noting where the code deviates from the "prescriptive rule sets" derived from Ansible content best practices.</span> </li> 
+         </ol> 
+         <div class="itemgroup stepxmp">
+          After reviewing the errors, ask the assistant to generate the specific code required to fix them. 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Prompt the assistant to provide a solution. For example: </span> 
+         <ol type="a" class="ol substeps" id="task_2__substeps_3"> 
+          <li class="li substep"> <span class="ph cmd"><code class="ph codeph">How do I fix this error?</code></span> </li> 
+          <li class="li substep"> <span class="ph cmd"><code class="ph codeph">Refactor this task to follow best practices</code></span> </li> 
+         </ol> 
+         <div class="itemgroup stepxmp">
+          The assistant generates a corrected code block, ensuring it conforms to best practice recommendations (such as correct indentation, valid parameters, and proper module usage).
+         </div> </li>
+       </ol>
+      </section> 
+      <section class="section postreq" id="task_2__postreq_2">
+       <div class="tasklabel">
+        <h3 class="sectiontitle tasklabel">What to do next</h3>
+       </div> 
+       <p dir="ltr" class="p">After applying the suggested changes, verify that there are no further issues.</p> 
+       <ol class="ol" id="task_2__ol_2"> 
+        <li class="li">Apply the changes to your playbook.</li> 
+        <li class="li">(Optional) Ask the assistant to confirm the new structure. For example, you can ask <code class="ph codeph">Does this look correct now?</code></li> 
+        <li class="li">The assistant might trigger <code class="ph codeph">ansible_lint </code>again or perform a final static check to ensure the debugging session resolved the issues.</li> 
+       </ol> 
+      </section> 
+     </div> 
+    </article> 
+   </article>
+  </main>
+ </body>
+</html>

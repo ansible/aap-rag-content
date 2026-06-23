@@ -1,0 +1,35 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="configuring-haproxy-load-balancer">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure a HAProxy load balancer</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Configure a HAProxy load balancer in front of platform gateway with a custom CA cert.</p> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <div class="ol steps">
+       <div class="li step p"> <span class="ph cmd">Set the following inventory file variables under the <code class="ph codeph">[all:vars]</code> group: </span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>custom_ca_cert=&lt;path_to_cert_crt&gt;
+gateway_main_url=&lt;https://load_balancer_url&gt;</code></pre> 
+         <div class="note important note_important">
+          <span class="note__title">Important:</span> 
+          <div class="note__body"> 
+           <ul class="ul"> 
+            <li class="li">Ensure your load balancer is configured to use HTTP/1.1 when communicating with platform gateway. HTTP/2 is not supported.</li> 
+            <li class="li">HAProxy SSL passthrough mode is not supported with platform gateway.</li> 
+           </ul> 
+          </div>
+         </div> 
+        </div> 
+       </div>
+      </div>
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

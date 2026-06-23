@@ -1,0 +1,8 @@
+# Troubleshoot Red Hat Ansible Lightspeed configuration errors
+## Troubleshoot Ansible Visual Studio Code extension errors
+### Cannot request code recommendations by using the Ansible VS Code extension
+
+The following error message is displayed: `Your trial to the generative AI model has expired. Refer to your IBM Cloud Account to re-enable access to the IBM watsonx Code Assistant.`
+
+To resolve this error, refer to your IBM Cloud account and select an upgrade option.
+

@@ -1,0 +1,112 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="ref-controller-settings-control-execution-nodes"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Capacity settings for each node type</h1> 
+     <div class="body refbody">
+      <p class="shortdesc">Configure capacity settings for control and execution nodes to manage resource allocation effectively.</p> 
+      <section class="section"> 
+       <p class="p">The following settings impact capacity calculations on the cluster. Set them to the same value on all control nodes by using the following file-based settings.</p> 
+       <ul class="ul"> 
+        <li class="li"><code class="ph codeph">AWX_CONTROL_NODE_TASK_IMPACT</code>: Sets the impact of controlling jobs. You can use it when your control plane exceeds required CPU or memory usage to control the number of jobs that your control plane can run at the same time.</li> 
+        <li class="li"><code class="ph codeph">SYSTEM_TASK_FORKS_CPU</code> and <code class="ph codeph">SYSTEM_TASK_FORKS_MEM</code>: Influence how many resources are estimated to be consumed by each fork of Ansible. By default, 1 fork of Ansible is estimated to use 0.25 of a CPU and 100 Mb of memory.</li> 
+       </ul> 
+      </section> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-controller-capacity-instance-container"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Capacity settings for instance group and container group</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">When using container groups or instance groups to run automation jobs, you can configure capacity settings to limit the number of concurrent jobs and forks that can be used.</p> 
+       <section class="section"> 
+        <p class="p">Use the <code class="ph codeph">max_concurrent_jobs</code> and <code class="ph codeph">max_forks</code> settings available on instance groups to limit how many jobs and forks can be consumed across an instance group or container group.</p> 
+        <ul class="ul"> 
+         <li class="li">To calculate the <code class="ph codeph">max_concurrent_jobs</code> you need on a container group consider the <code class="ph codeph">pod_spec</code> setting for that container group. In the <code class="ph codeph">pod_spec</code>, you can see the resource requests and limits for the automation job pod. Use the following equation to calculate the maximum concurrent jobs that you need: <pre class="pre codeblock"><code>((number of worker nodes in kubernetes cluster) * (CPU available on each worker)) / (CPU request on pod_spec) = maximum number of concurrent jobs</code></pre>
+          <ul class="ul">
+           <li class="li">For example, if your <code class="ph codeph">pod_spec</code> indicates that a pod will request 250 mcpu Kubernetes cluster has 1 worker node with 2 CPU, the maximum number of jobs that you need to start with is 8.</li>
+          </ul></li> 
+         <li class="li">You can also consider the memory consumption of the forks in the jobs. Calculate the appropriate setting of <code class="ph codeph">max_forks</code> with the following equation: <pre class="pre codeblock"><code>((number of worker nodes in kubernetes cluster) * (memory available on each worker)) / (memory request on pod_spec) = maximum number of forks</code></pre>
+          <ul class="ul">
+           <li class="li">For example, given a single worker node with 8 GB of Memory, we determine that the <code class="ph codeph">max forks</code> we want to run is 81. This way, either 39 jobs with 1 fork can run (task impact is always forks + 1), or 2 jobs with forks set to 39 can run.</li>
+          </ul></li> 
+         <li class="li">You might have other business requirements that motivate using <code class="ph codeph">max_forks</code> or <code class="ph codeph">max_concurrent_jobs</code> to limit the number of jobs launched in a container group.</li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="ref-controller-settings-scheduling-jobs"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Adjust settings for scheduling jobs</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The controller uses a task manager to schedule jobs onto instances.</p> 
+       <section class="section"> 
+        <p class="p">The task manager periodically collects tasks that need to be scheduled and determines what instances have capacity and are eligible for running them. The task manager has the following workflow:</p> 
+        <ol class="ol"> 
+         <li class="li">Find and assign the control and execution instances.</li> 
+         <li class="li">Update the job’s status to waiting.</li> 
+         <li class="li">Message the control node through <code class="ph codeph">pg_notify</code> for the dispatcher to pick up the task and start running it.</li> 
+        </ol> 
+        <p class="p">If the scheduling task is not completed within <code class="ph codeph">TASK_MANAGER_TIMEOUT</code> seconds (default 300 seconds), the task is terminated early. Timeout issues generally arise when there are thousands of pending jobs.</p> 
+        <p class="p">One way the task manager limits how much work it can do in a single run is the <code class="ph codeph">START_TASK_LIMIT</code> setting. This limits how many jobs it can start in a single run. The default is 100 jobs. If more jobs are pending, a new scheduler task is scheduled to run immediately after. Users who are willing to have potentially longer latency between when a job is launched and when it starts, to have greater overall throughput, can consider increasing the <code class="ph codeph">START_TASK_LIMIT</code>. To see how long individual runs of the task manager take, use the Prometheus metric <code class="ph codeph">task_manager__schedule_seconds</code>, available in <code class="ph codeph">/api/v2/metrics</code>.</p> 
+        <p class="p">Jobs elected to begin running by the task manager do not do so until the task manager process exits and commits its changes. The <code class="ph codeph">TASK_MANAGER_TIMEOUT</code> setting determines how long a single run of the task manager will run for before committing its changes. When the task manager reaches its timeout, it attempts to commit any progress it made. The task is not actually forced to exit until after a grace period (determined by <code class="ph codeph">TASK_MANAGER_TIMEOUT_GRACE_PERIOD</code>) has passed.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title4" id="ref-controller-internal-cluster-routing"> 
+      <h2 class="title topictitle2" id="ariaid-title4">VM installation settings for internal cluster routing</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Automation controller cluster hosts communicate across the network within the cluster. In the inventory file for the traditional VM installer, you can indicate several routes to the cluster nodes that are used in different ways:</p> 
+       <section class="section"> 
+        <p class="p"><strong class="ph b">Example</strong>:</p> 
+        <pre class="pre">[automationcontroller]
+controller1 ansible_user=ec2-user ansible_host=10.10.12.11 node_type=hybrid routable_hostname=somehost.somecompany.org</pre> 
+        <ul class="ul"> 
+         <li class="li"><code class="ph codeph">controller1</code> is the inventory hostname for the automation controller host. The inventory hostname is what is shown as the instance hostname in the application. This can be useful when preparing for disaster recovery scenarios where you want to use the backup/restore method to restore the cluster to a new set of hosts that have different IP addresses. In this case you can have entries in <code class="ph codeph">/etc/hosts</code> that map these inventory hostnames to IP addresses, and you can use internal IP addresses to mitigate any DNS issues when it comes to resolving public DNS names.</li> 
+         <li class="li"><code class="ph codeph">ansible_host=10.10.12.11</code> indicates how the installation program reaches the host, which in this case is an internal IP address. This is not used outside of the installation program.</li> 
+         <li class="li"><code class="ph codeph">routable_hostname=somehost.somecompany.org</code> indicates the hostname that is resolvable for the peers that connect to this node on the receptor mesh. Since it can cross many networks, we are using a hostname that maps to an IP address resolvable for the receptor peers.</li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title5" id="ref-controller-web-service-tuning"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Tune the web server</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The Control and Hybrid nodes each serve the UI and API of automation controller. WSGI traffic is served by the uwsgi web server on a local socket. ASGI traffic is served by Daphne. NGINX listens on port 443 and proxies traffic as needed.</p> 
+       <section class="section"> 
+        <p class="p">To scale automation controller’s web service, follow these best practices:</p> 
+        <ul class="ul"> 
+         <li class="li">Deploy multiple control nodes and use a load balancer to spread web requests over multiple servers.</li> 
+         <li class="li">Set max connections per automation controller to 100.</li> 
+        </ul> 
+        <p class="p">To optimize automation controller’s web service on the client side, follow these guidelines:</p> 
+        <ul class="ul"> 
+         <li class="li">Direct user to use dynamic inventory sources instead of individually creating inventory hosts by using the API.</li> 
+         <li class="li">Use webhook notifications instead of polling for job status.</li> 
+         <li class="li">Use the bulk APIs for host creation and job launching to batch requests.</li> 
+         <li class="li">Use OAuth2 token authentication. In Ansible Automation Platform 2.7, OAuth2 tokens are the only supported authentication method for API access. You must create tokens through platform gateway.</li> 
+        </ul> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relconcepts">
+        <strong>Related concepts</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_token_based_authentication#gw-token-based-authentication" title="Token-based authentication permits authentication of third-party tools and services with the platform through integrated OAuth 2 token support. Ansible Automation Platform utilizes both OAuth Tokens and Personal Access Tokens (PATs).">Configuring access to external applications with token-based authentication</a></li>
+        </ul>
+       </div>
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://www.ansible.com/blog/scaling-automation-controller-for-api-driven-workloads" target="_blank" rel="external noopener">Scaling Automation Controller for API Driven Workloads</a></li>
+         <li class="linklist"><a class="link" href="https://www.ansible.com/blog/bulk-api-in-automation-controller" target="_blank" rel="external noopener">Bulk API in Automation Controller</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

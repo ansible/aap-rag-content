@@ -1,0 +1,292 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body id="set-up-automation-environment-for-casc"> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Set up your automation environment for Configuration as Code</h1> 
+    <div class="body taskbody"> 
+     <p class="shortdesc">Configuration as Code is a way of working where you define and manage the configuration of Ansible Automation Platform using version-controlled configuration files, such as YAML, instead of clicking through the web UI.</p> 
+     <section class="section prereq"> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">Before you begin</h2> 
+      </div> 
+      <ul class="ul"> 
+       <li class="li">You have a Git account.</li> 
+       <li class="li">Your platform gateway instance is accessible.</li> 
+       <li class="li">You have a valid platform gateway token or user credentials for platform gateway authentication. Legacy automation controller PATs are not supported.</li> 
+       <li class="li">You built and registered your own execution environment. Alternatively, you have available the supported execution environment to run playbooks that use the <code class="ph codeph">ansible.platform</code> collection. For more information, see <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/html/creating_and_using_execution_environments/index" target="_blank" rel="external noopener">Creating and using execution environments</a>.</li> 
+      </ul> 
+     </section> 
+     <section class="section context"> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">About this task</h2> 
+      </div> 
+      <div class="note important note_important"> <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">Direct API access to individual service components (automation controller, automation hub, and Event-Driven Ansible) is not supported. All CasC playbooks must authenticate through platform gateway. If you previously used automation controller Personal Access Tokens (PATs), replace them with platform gateway tokens. Ensure that the <code class="ph codeph">aap_hostname</code> variable in your playbooks points to your platform gateway URL.</p> 
+        <p class="p">For more information about creating tokens, see <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/html/access_management_and_authentication/gw-token-based-authentication#proc-controller-apps-create-tokens" target="_blank" rel="external noopener">Adding tokens</a> in <em class="ph i">Access management and authentication</em>.</p> 
+       </div> 
+      </div> 
+      <p class="p">As an Ansible content developer, you can use the Configuration as Code approach to apply settings on your automation controller to get the following benefits:</p> 
+      <ul class="ul"> 
+       <li class="li">Predictable job behavior</li> 
+       <li class="li">Easier and faster scaling to new clusters</li> 
+       <li class="li">Change history with diffs and rollback capability thanks to version control support</li> 
+       <li class="li">Faster recovery after outages or migrations</li> 
+       <li class="li">Reduced risk of errors because changes flow through CI/CD pipelines and pull requests, where peer reviews and automated testing are applied</li> 
+      </ul> 
+     </section> 
+     <section> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">Procedure</h2> 
+      </div> 
+      <ol class="ol steps"> 
+       <li class="li step stepexpand"> <span class="ph cmd">Create a new Git repository.</span> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">On your local machine, encrypt your password for platform gateway:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>$ ansible-vault encrypt_string '<var class="keyword varname">gateway_password</var>' --name 'aap_password'
+New Vault password: <var class="keyword varname">vault_password</var>
+Confirm New Vault password: <var class="keyword varname">vault_password</var>
+Encryption successful
+aap_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          63633763653530343566363864333130656433613634333465363733326261336465333362623635
+          3061333439626238616332313663633431663962353735320a633732346232396165373931653039
+          64326462306162396366373565316631343033656230363038623237313036613166313331623533
+          3363636462646534330a616437646665393738386235306361653333313338656563346633396434
+          35346164656437326231326433323934643133353436323562373762616531326463</code></pre> 
+         <p class="p">You encrypted the value of the <code class="ph codeph">aap_password</code> variable, which you will use in the next step.</p> 
+        </div> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Create the <span class="ph filepath">/my_ansible_project/vars/all.yml</span> file with variables for connecting to your Ansible Automation Platform and variables for creating Role-Based Access Control (RBAC) objects:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-yaml"><code>---
+# Ansible Automation Platform related variables
+aap_hostname: "&lt;GATEWAY&gt;"
+aap_username: "&lt;GATEWAY_USER&gt;"
+aap_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          63633763653530343566363864333130656433613634333465363733326261336465333362623635
+          3061333439626238616332313663633431663962353735320a633732346232396165373931653039
+          64326462306162396366373565316631343033656230363038623237313036613166313331623533
+          3363636462646534330a616437646665393738386235306361653333313338656563346633396434
+          35346164656437326231326433323934643133353436323562373762616531326463
+aap_validate_certs: false
+
+# Details for creating organization, team, and user
+org_name: "Demo-Organization"
+team_name: "Demo-Team"
+user_username: "Demo-User"
+user_email: "demo.user@example.com"
+user_password: "3ncrypt3d_P@$$word"
+
+# Role names as they exist in your Ansible Automation Platform
+role_for_team_in_org: "Organization Inventory Admin" # "Executor"
+role_for_user_in_org: "Organization Auditor"
+
+# Custom role definition details
+custom_role_name: "NetOps ReadOnly"
+custom_role_description: "Read-only access to network objects"</code></pre> 
+         <div class="note note note_note"> <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">The <code class="ph codeph">aap_hostname</code> variable must point to your platform gateway URL, not to individual service endpoints such as automation controller or automation hub. The <code class="ph codeph">aap_username</code> and <code class="ph codeph">aap_password</code> variables are your platform gateway credentials.</p> 
+           <p class="p">Alternatively, you can authenticate by using a platform gateway OAuth 2 token instead of a username and password. Replace the <code class="ph codeph">aap_username</code> and <code class="ph codeph">aap_password</code> variables with <code class="ph codeph">aap_token</code>:</p> 
+           <pre class="pre codeblock language-yaml"><code>aap_hostname: "&lt;GATEWAY&gt;"
+aap_token: "&lt;GATEWAY_OAUTH2_TOKEN&gt;"
+aap_validate_certs: false</code></pre> 
+           <p class="p">For more information about creating tokens, see <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/html/access_management_and_authentication/gw-token-based-authentication#proc-controller-apps-create-tokens" target="_blank" rel="external noopener">Adding tokens</a> in <em class="ph i">Access management and authentication</em>.</p> 
+          </div> 
+         </div> 
+        </div> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Compose the <span class="ph filepath">/my_ansible_project/RBAC_settings.yml</span> playbook, which creates RBAC objects and assigns roles to those objects:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-yaml"><code>---
+- name: Create RBAC objects and assign roles to them
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - ./vars/all.yml
+  tasks:
+    - name: Ensure new organization exists
+      ansible.platform.organization:
+        name: "{{ org_name }}"
+        state: present
+        aap_hostname: "{{ aap_hostname }}"
+        aap_username: "{{ aap_username }}"
+        aap_password: "{{ aap_password }}"
+        aap_validate_certs: "{{ aap_validate_certs }}"
+
+    - name: Ensure new team exists in organization
+      ansible.platform.team:
+        name: "{{ team_name }}"
+        organization: "{{ org_name }}"
+        state: present
+        aap_hostname: "{{ aap_hostname }}"
+        aap_username: "{{ aap_username }}"
+        aap_password: "{{ aap_password }}"
+        aap_validate_certs: "{{ aap_validate_certs }}"
+
+    - name: Ensure new user exists
+      ansible.platform.user:
+        username: "{{ user_username }}"
+        email: "{{ user_email }}"
+        password: "{{ user_password }}"
+        state: present
+        aap_hostname: "{{ aap_hostname }}"
+        aap_username: "{{ aap_username }}"
+        aap_password: "{{ aap_password }}"
+        aap_validate_certs: "{{ aap_validate_certs }}"
+
+    - name: Ensure new custom role exists
+      ansible.platform.role_definition:
+        name: "{{ custom_role_name }}"
+        description: "{{ custom_role_description }}"
+        content_type: awx.inventory
+        permissions:
+          - awx.view_inventory
+          - awx.change_inventory
+        state: present
+        aap_hostname: "{{ aap_hostname }}"
+        aap_username: "{{ aap_username }}"
+        aap_password: "{{ aap_password }}"
+        aap_validate_certs: "{{ aap_validate_certs }}"
+
+    - name: Assign already existing role to team in organization
+      ansible.platform.role_team_assignment:
+        team: "{{ team_name }}"
+        assignment_objects:
+          - name: "{{ org_name }}"
+            type: "organizations"
+        role_definition: "{{ role_for_team_in_org }}"
+        state: present
+        aap_hostname: "{{ aap_hostname }}"
+        aap_username: "{{ aap_username }}"
+        aap_password: "{{ aap_password }}"
+        aap_validate_certs: "{{ aap_validate_certs }}"
+
+    - name: Assign already existing role to user in organization
+      ansible.platform.role_user_assignment:
+        user: "{{ user_username }}"
+        object_ids:
+          - "{{ org_name }}"
+        role_definition: "{{ role_for_user_in_org }}"
+        state: present
+        aap_hostname: "{{ aap_hostname }}"
+        aap_username: "{{ aap_username }}"
+        aap_password: "{{ aap_password }}"
+        aap_validate_certs: "{{ aap_validate_certs }}"</code></pre> 
+         <p class="p">If you are using token-based authentication, replace the <code class="ph codeph">aap_username</code> and <code class="ph codeph">aap_password</code> parameters with <code class="ph codeph">aap_token</code> in each task.</p> 
+         <p class="p">Many values in this playbook are provided in the form of variables, such as object names, their details, Ansible Automation Platform credentials. You can easily reuse the variables throughout files in your Ansible project, which will also simplify the creation and maintenance of the project and reduce the number of errors.</p> 
+         <p class="p">Refer to the <span class="ph filepath">all.yml</span> file to see the expanded values of those variables. For details about the module parameters, default values, and further examples how to use the modules, see the resources on Automation hub for the <a class="xref" href="https://console.redhat.com/ansible/automation-hub/repo/published/ansible/platform/content/?showing=module" target="_blank" rel="external noopener">ansible.platform</a> collection.</p> 
+        </div> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Push the variables and the playbook to your Git repository so that automation controller can later read in the correct data.</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>git add .
+git commit -m "Provide variables and RBAC_settings.yml playbook resources for Ansible Automation Platform project"
+git push origin <var class="keyword varname">relevant_branch_name</var></code></pre> 
+        </div> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Using the platform gateway UI, create a new project with the following values:</span> 
+        <div class="itemgroup info"> 
+         <ul class="ul"> 
+          <li class="li">Name: Platform collection testing</li> 
+          <li class="li">Description: Automation resources to test the CaC capability of RBAC modules from the <code class="ph codeph">ansible.platform</code> collection</li> 
+          <li class="li">Execution Environment: <code class="ph codeph">ee-supported</code></li> 
+          <li class="li">Organization: Default</li> 
+          <li class="li">Source Control Type: Git</li> 
+          <li class="li">Source Control URL: <code class="ph codeph">https://my_git_url/my_git_repository/my_ansible_project</code></li> 
+         </ul> 
+         <br> 
+         <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/cac-create-project.png" alt="Create project dialog with Configuration as Code settings"> 
+         <br> 
+        </div> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Create a credential for your Ansible Vault password of your encrypted <code class="ph codeph">aap_password</code> variable:</span> 
+        <div class="itemgroup info"> 
+         <ul class="ul"> 
+          <li class="li">Name: aap_password_vault</li> 
+          <li class="li">Description: Holds vault password for decrypting the value of the <code class="ph codeph">aap_password</code> variable</li> 
+          <li class="li">Credential type: Vault</li> 
+          <li class="li">Vault Password: <var class="keyword varname">vault_password</var></li> 
+         </ul> 
+         <br> 
+         <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/cac-create-vault-credential.png" alt="Create credential dialog with Vault password settings"> 
+         <br> 
+        </div> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Create a job template with the following values:</span> 
+        <div class="itemgroup info"> 
+         <ul class="ul"> 
+          <li class="li">Name: RBAC_settings</li> 
+          <li class="li">Description: Create organization, team, user, and custom role RBAC objects. Assign a pre-existing role to the created team and assign a pre-existing role to the created user.</li> 
+          <li class="li">Job type: Run</li> 
+          <li class="li">Inventory: Demo Inventory</li> 
+          <li class="li">Project: Platform collection testing</li> 
+          <li class="li">Playbook: <code class="ph codeph">RBAC_settings.yml</code></li> 
+          <li class="li">Execution Environment: <code class="ph codeph">ee-supported</code></li> 
+          <li class="li">Credentials: aap_password_vault | Vault</li> 
+         </ul> 
+         <br> 
+         <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/cac-create-job-template.png" alt="Create job template dialog with RBAC settings configuration"> 
+         <br> 
+        </div> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Launch the <code class="ph codeph">RBAC_settings</code> job template.</span> 
+        <div class="itemgroup stepresult"> 
+         <p class="p">After the template job successfully finishes, the output should be similar to the following:</p> 
+         <pre class="pre codeblock"><code>Vault password:
+
+PLAY [Create RBAC objects and assign roles to them] ****************************
+
+TASK [Ensure new organization exists] ******************************************
+changed: [localhost]
+
+TASK [Ensure new team exists in organization] **********************************
+changed: [localhost]
+
+TASK [Ensure new user exists] **************************************************
+changed: [localhost]
+
+TASK [Ensure new custom role exists] *******************************************
+changed: [localhost]
+
+TASK [Assign already existing role to team in organization] ********************
+changed: [localhost]
+
+TASK [Assign already existing role to user in organization] ********************
+changed: [localhost]
+
+PLAY RECAP *********************************************************************
+localhost: ok=6 changed=6 unreachable=0 failed=0 skipped=0 rescued=0 ignored=0</code></pre> 
+         <p class="p">The output message shows that you ran the job template against 1 target (your localhost). At the same time, you created:</p> 
+         <ul class="ul"> 
+          <li class="li">An organization.</li> 
+          <li class="li">A team that exists within the created organization. The team was assigned some pre-existing role.</li> 
+          <li class="li">A user that exists within the created organization. The user was assigned some pre-existing role.</li> 
+          <li class="li">A custom role.</li> 
+         </ul> 
+        </div> </li> 
+      </ol> 
+     </section> 
+     <section class="section result"> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">Results</h2> 
+      </div> 
+      <p class="p">Verify that the resources were created correctly:</p> 
+      <ul class="ul"> 
+       <li class="li"> <p class="p">In the navigation panel, check that you see your created organization:</p> <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/cac-organization-exists.png" alt="Organization list showing the created Demo-Organization"><br> </li> 
+       <li class="li"> <p class="p">Check that you see your created team, which belongs to the organization and is assigned the correct pre-existing role:</p> <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/cac-team-exists.png" alt="Team list showing the created Demo-Team with assigned role"><br> </li> 
+       <li class="li"> <p class="p">Check that you see your created user, which belongs to the organization and is assigned the correct pre-existing role:</p> <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/cac-user-exists.png" alt="User list showing the created Demo-User with assigned role"><br> </li> 
+       <li class="li"> <p class="p">Check that you see your created custom role, which was assigned the permissions as specified in your <span class="ph filepath">RBAC_settings.yml</span> playbook:</p> <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/cac-custom-role-exists.png" alt="Custom role showing NetOps ReadOnly with assigned permissions"><br> </li> 
+      </ul> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links"> 
+     <div class="linklist relinfo"> <strong>Related information</strong> 
+      <br> 
+      <ul class="linklist"> 
+       <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/html/access_management_and_authentication/gw-token-based-authentication#proc-controller-apps-create-tokens" target="_blank" rel="external noopener">Adding tokens in Access management and authentication</a></li> 
+       <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/html/access_management_and_authentication/gw-token-based-authentication#ref-controller-create-oauth2-token" target="_blank" rel="external noopener">create_oauth2_token in Access management and authentication</a></li> 
+       <li class="linklist"><a class="link" href="https://console.redhat.com/ansible/automation-hub/repo/published/ansible/platform/content/?showing=module" target="_blank" rel="external noopener">ansible.platform collection on Automation hub</a></li> 
+      </ul> 
+     </div> 
+    </nav> 
+   </article> 
+  </main>  
+ </body>
+</html>

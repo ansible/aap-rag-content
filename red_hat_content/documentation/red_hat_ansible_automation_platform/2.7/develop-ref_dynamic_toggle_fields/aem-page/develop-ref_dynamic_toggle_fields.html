@@ -1,0 +1,43 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="dynamic-toggle-fields">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Show or hide fields based on a toggle</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Use a <code class="ph codeph">boolean</code> toggle field to show or hide a group of additional fields.</p> 
+     <section class="section"> 
+      <p class="p">In this example, selecting "Show advanced options" reveals one additional field. When the toggle is off, the field is hidden and not submitted.</p> 
+      <pre class="pre codeblock"><code>parameters:
+  - title: Time server settings
+    required:
+      - ntpServers
+    properties:
+      ntpServers:
+        title: NTP servers
+        type: string
+        default: 0.rhel.pool.ntp.org, 1.rhel.pool.ntp.org
+      showAdvanced:
+        title: Show advanced options?
+        type: boolean
+        default: false
+    dependencies:
+      showAdvanced:
+        allOf:
+          - if:
+              properties:
+                showAdvanced:
+                  const: true
+            then:
+              properties:
+                maxSyncDelay:
+                  type: number
+                  title: Max sync delay (ms)
+                  default: 500</code></pre> 
+      <p class="p">When <code class="ph codeph">showAdvanced</code> is <code class="ph codeph">true</code>, the form displays <code class="ph codeph">maxSyncDelay</code>. When <code class="ph codeph">showAdvanced</code> is <code class="ph codeph">false</code>, the field is hidden.</p> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

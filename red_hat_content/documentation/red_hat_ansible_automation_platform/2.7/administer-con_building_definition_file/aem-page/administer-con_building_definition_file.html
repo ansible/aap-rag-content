@@ -1,0 +1,176 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="con-building-definition-file"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Build a definition file</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">You can use Ansible Builder to create an execution environment. Building a new execution environment involves a definition that specifies which content you want to include in your execution environment, such as collections, Python requirements, and system-level packages.</p> 
+      <p class="p">After you install Ansible Builder, you can create a definition file that Ansible Builder uses to create your automation execution environment image. Ansible Builder makes an automation execution environment image by reading and validating your definition file, then creating a <code class="ph codeph">Containerfile</code>, and finally passing the <code class="ph codeph">Containerfile</code> to Podman, which then packages and creates your automation execution environment image. The definition file that you create must be in <code class="ph codeph">YAML</code> format, with a <code class="ph codeph">.yaml</code> or <code class="ph codeph">.yml extension</code>, and contain different sections. The default definition filename, if not provided, is <code class="ph codeph">execution-environment.yml</code>. For more information on the parts of a definition file, see <em class="ph i">Breakdown of definition file content</em>.</p> 
+      <p class="p">The following is an example of a version 3 definition file. Each definition file must specify the major version number of the Ansible Builder feature set it uses. If not specified, Ansible Builder defaults to version 1, making most new features and definition keywords unavailable.</p> 
+      <pre class="pre codeblock"><code>version: 3
+
+build_arg_defaults:
+  ANSIBLE_GALAXY_CLI_COLLECTION_OPTS: '--pre'
+
+dependencies:
+  galaxy: requirements.yml
+  python:
+    - six
+    - psutil
+  system: bindep.txt
+
+images:
+  base_image:
+    name: registry.redhat.io/ansible-automation-platform-26/ee-minimal-rhel9:latest
+
+# Custom package manager path for the RHEL based images
+options:
+  package_manager_path: /usr/bin/microdnf
+
+additional_build_steps:
+  prepend_base:
+    - RUN echo This is a prepend base command!
+
+  prepend_galaxy:
+    # Environment variables used for Galaxy client configurations
+    - ENV ANSIBLE_GALAXY_SERVER_LIST=automation_hub
+    - ENV ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_URL=https://console.redhat.com/api/automation-hub/content/published/
+    - ENV ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_AUTH_URL=https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
+    # define a custom build arg env passthru - we still also have to pass
+    # `--build-arg ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN` to get it to pick it up from the env
+    - ARG ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN
+
+  prepend_final: |
+    RUN whoami
+    RUN cat /etc/os-release
+  append_final:
+    - RUN echo This is a post-install command!
+    - RUN ls -la /etc</code></pre> 
+      <ul class="ul"> 
+       <li class="li"><code class="ph codeph">build_arg_defaults</code>: Lists default values for build arguments.</li> 
+       <li class="li"><code class="ph codeph">dependencies</code>: Specifies the location of various requirements files.</li> 
+       <li class="li"><code class="ph codeph">images</code>: Specifies the base image to be used. Red Hat support is only provided for the redhat.registry.io base image.</li> 
+       <li class="li"><code class="ph codeph">options</code>: Specifies options that can affect builder runtime functionality.</li> 
+       <li class="li"><code class="ph codeph">additional_build_steps</code>: Commands for additional custom build steps.</li> 
+      </ul> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist relconcepts">
+       <strong>Related concepts</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_definition_file_breakdown" title="You must provide a definition file to build automation execution environments with Ansible Builder, because it specifies the content that is included in the automation execution environment container image.">Definition file reference</a></li>
+       </ul>
+      </div>
+      <div class="linklist relinfo">
+       <strong>Related information</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="https://ansible.readthedocs.io/projects/builder/en/latest/porting_guides/porting_guide/" target="_blank" rel="external noopener">Ansible Builder Porting Guide</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="con-definition-dependencies"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Definition dependencies</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">You can include dependencies that must be installed into the final image in the dependencies section of your definition file.</p> 
+       <p class="p">To avoid issues with your automation execution environment image, make sure that the entries for Galaxy, Python, and system point to a valid requirements file, or are valid content for their file types.</p> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="con-galaxy-dependencies"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Galaxy</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">The <code class="ph codeph">galaxy</code> entry points to a valid requirements file or includes inline content for the <code class="ph codeph">ansible-galaxy collection install -r …​</code> command.</p> 
+       <p class="p">The entry <code class="ph codeph">requirements.yml</code> can be a relative path from the directory of the automation execution environment definition’s folder, or an absolute path.</p> 
+       <p class="p">The content might look like the following:</p> 
+       <pre class="pre codeblock"><code>collections:
+  - community.aws
+  - kubernetes.core</code></pre> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title4" id="con-python-dependencies"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Python</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">The <code class="ph codeph">python</code> entry in the definition file points to a valid requirements file or to an inline list of Python requirements in PEP508 format for the <code class="ph codeph">pip install -r …​</code> command.</p> 
+       <p class="p">The entry <code class="ph codeph">requirements.txt</code> is a file that installs extra Python requirements on top of what the Collections already list as their Python dependencies. It might be listed as a relative path from the directory of the automation execution environment definition’s folder, or an absolute path. The contents of a <code class="ph codeph">requirements.txt</code> file should be formatted as the following example, similar to the standard output from a <code class="ph codeph">pip freeze</code> command.</p> 
+       <p class="p">The content might look like the following:</p> 
+       <pre class="pre codeblock"><code>boto&gt;=2.49.0
+botocore&gt;=1.12.249
+pytz
+python-dateutil&gt;=2.7.0
+awxkit
+packaging
+requests&gt;=2.4.2
+xmltodict
+azure-cli-core==2.11.1
+openshift&gt;=0.6.2
+requests-oauthlib
+openstacksdk&gt;=0.13
+ovirt-engine-sdk-python&gt;=4.4.10</code></pre> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://docs.ansible.com/projects/builder/en/latest/porting_guides/porting_guide_v3.1/#pep-508-standard" target="_blank" rel="external noopener">PEP508 format standard</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title5" id="con-system-dependencies"> 
+      <h2 class="title topictitle2" id="ariaid-title5">System</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">The <code class="ph codeph">system</code> entry in the definition points to a bindep requirements file or to an inline list of bindep entries, which install system-level dependencies that are outside of what the collections already include as their dependencies.</p> 
+       <p class="p">The <code class="ph codeph">system</code> entry can be listed as a relative path from the directory of the automation execution environment definition’s folder, or as an absolute path. At a minimum, the collections must specify necessary requirements for <code class="ph codeph">[platform:rpm]</code>.</p> 
+       <p class="p">To demonstrate this, the following is an example <code class="ph codeph">bindep.txt</code> file that adds the <code class="ph codeph">libxml2</code> and <code class="ph codeph">subversion</code> packages to a container.</p> 
+       <p class="p">The content might look like the following:</p> 
+       <pre class="pre codeblock"><code>libxml2-devel [platform:rpm]
+subversion [platform:rpm]</code></pre> 
+       <p class="p">Entries from multiple collections are combined into a single file. This is processed by <code class="ph codeph">bindep</code> and then passed to <code class="ph codeph">dnf</code>. Only requirements with no profiles or no runtime requirements will be installed to the image.</p> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://docs.opendev.org/opendev/bindep/latest/readme.html" target="_blank" rel="external noopener">bindep documentation</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title6" id="ref-definition-file-image"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Images</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The <code class="ph codeph">images</code> section of the definition file identifies the base image. Verification of signed container images is supported with the <code class="ph codeph">podman</code> container runtime.</p> 
+       <section class="section"> 
+        <p class="p">The following table shows a list of values that you can use in <code class="ph codeph">images</code>:</p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:15%">
+          <col style="width:85%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-definition-file-image__entry__1">Value</th> 
+           <th class="entry" id="ref-definition-file-image__entry__2">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-definition-file-image__entry__1"> <p class="p"> <code class="ph codeph">base_image</code> </p> </td> 
+           <td class="entry" headers="ref-definition-file-image__entry__2"> <p class="p">Specifies the parent image for the automation execution environment which enables a new image to be built that is based on an existing image. This is typically a supported execution environment base image such as <em class="ph i">ee-minimal</em> or <em class="ph i">ee-supported</em>, but it can also be an execution environment image that you have created and want to customize further.</p> <p class="p">A <code class="ph codeph">name</code> key is required for the container image to use. Specify the <code class="ph codeph">signature _original_name</code> key if the image is mirrored within your repository, but is signed with the image’s original signature key. Image names must contain a tag, such as <code class="ph codeph">:latest</code>.</p> <p class="p">The default image is <code class="ph codeph">registry.redhat.io/ansible-automation-platform-24/ee-minimal-rhel8:latest</code>.</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

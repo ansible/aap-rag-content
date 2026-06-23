@@ -1,0 +1,256 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="controller-job-template-variables"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Set extra variables in job templates</h1> 
+     <div class="body refbody"> 
+      <p class="shortdesc">Along with any extra variables set in the job template and survey, automation controller automatically adds the following variables to the job environment.</p> 
+      <section class="section"> 
+       <div class="note note note_note"> <span class="note__title">Note:</span> 
+        <div class="note__body"> 
+         <ul class="ul"> 
+          <li class="li"><code class="ph codeph">awx_*</code> variables are defined by the system and cannot be overridden.</li> 
+          <li class="li">Variables about the job context, such as <code class="ph codeph">awx_job_template_name</code> are not affected if they are set in <code class="ph codeph">extra_vars</code>.</li> 
+         </ul> 
+        </div> 
+       </div> 
+       <ul class="ul"> 
+        <li class="li"><code class="ph codeph">awx_job_id</code>: The job ID for this job run.</li> 
+        <li class="li"><code class="ph codeph">awx_job_launch_type</code>: The description to indicate how the job was started: 
+         <ul class="ul"> 
+          <li class="li"><strong class="ph b">manual</strong>: The job was started manually by a user.</li> 
+          <li class="li"><strong class="ph b">relaunch</strong>: The job was started via relaunch.</li> 
+          <li class="li"><strong class="ph b">callback</strong>: The job was started via host callback.</li> 
+          <li class="li"><strong class="ph b">scheduled</strong>: The job was started from a schedule.</li> 
+          <li class="li"><strong class="ph b">dependency</strong>: The job was started as a dependency of another job.</li> 
+          <li class="li"><strong class="ph b">workflow</strong>: The job was started from a workflow job.</li> 
+          <li class="li"><strong class="ph b">sync</strong>: The job was started from a project sync.</li> 
+          <li class="li"><strong class="ph b">scm</strong>: The job was created as an Inventory SCM sync.</li> 
+         </ul></li> 
+        <li class="li"><code class="ph codeph">awx_job_template_id</code>: The job template ID that this job run uses.</li> 
+        <li class="li"><code class="ph codeph">awx_job_template_name</code>: The job template name that this job uses.</li> 
+        <li class="li"><code class="ph codeph">awx_execution_node</code>: The Execution Node name that launched this job.</li> 
+        <li class="li"><code class="ph codeph">awx_project_revision</code>: The revision identifier for the source tree that this particular job uses (it is also the same as the job’s field scm_revision).</li> 
+        <li class="li"><code class="ph codeph">awx_project_scm_branch</code>: The configured default project SCM branch for the project the job template uses.</li> 
+        <li class="li"><code class="ph codeph">awx_job_scm_branch</code>: If the SCM Branch is overwritten by the job, the value is shown here.</li> 
+        <li class="li"><code class="ph codeph">awx_user_email</code>: The user email of the controller user that started this job. This is not available for callback or scheduled jobs.</li> 
+        <li class="li"><code class="ph codeph">awx_user_first_name</code>: The user’s first name of the automation controller user that started this job. This is not available for callback or scheduled jobs.</li> 
+        <li class="li"><code class="ph codeph">awx_user_id</code>: The user ID of the automation controller user that started this job. This is not available for callback or scheduled jobs.</li> 
+        <li class="li"><code class="ph codeph">awx_user_last_name</code>: The last name of the automation controller user that started this job. This is not available for callback or scheduled jobs.</li> 
+        <li class="li"><code class="ph codeph">awx_user_name</code>: The user name of the automation controller user that started this job. This is not available for callback or scheduled jobs.</li> 
+        <li class="li"><code class="ph codeph">awx_schedule_id</code>: If applicable, the ID of the schedule that launched this job.</li> 
+        <li class="li"><code class="ph codeph">awx_schedule_name</code>: If applicable, the name of the schedule that launched this job.</li> 
+        <li class="li"><code class="ph codeph">awx_workflow_job_id</code>: If applicable, the ID of the workflow job that launched this job.</li> 
+        <li class="li"><code class="ph codeph">awx_workflow_job_name</code>: If applicable, the name of the workflow job that launched this job. Note this is also the same as the workflow job template.</li> 
+        <li class="li"><code class="ph codeph">awx_inventory_id</code>: If applicable, the ID of the inventory this job uses.</li> 
+        <li class="li"><code class="ph codeph">awx_inventory_name</code>: If applicable, the name of the inventory this job uses.</li> 
+       </ul> 
+       <p class="p">For compatibility, all variables are also given an "awx" prefix, for example, <code class="ph codeph">awx_job_id</code>.</p> 
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="controller-create-survey"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Create a survey</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can create a survey for a job template to prompt users for input when they launch a job based on that template. Surveys can include many questions of various types, such as text input, multiple choice, and passwords.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">The responses provided by users are stored in Ansible variables that can be used within the playbook associated with the job template.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Templates</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the job template you want to create a survey for.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the <strong class="ph b">Survey</strong> tab, click <span class="ph uicontrol button">Create survey question</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">A survey can consist of any number of questions. For each question, enter the following information: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Question</strong>: The question to ask the user.</li> 
+            <li class="li">Optional: <strong class="ph b">Description</strong>: A description of what is being asked of the user.</li> 
+            <li class="li"><strong class="ph b">Answer variable name</strong>: The Ansible variable name to store the user’s response in. This is the variable to be used by the playbook. Variable names cannot contain spaces.</li> 
+            <li class="li"><strong class="ph b">Answer type</strong>: Choose from the following question types: 
+             <ul class="ul"> 
+              <li class="li"><strong class="ph b">Text</strong>: A single line of text. You can set the minimum and maximum length (in characters) for this answer.</li> 
+              <li class="li"><strong class="ph b">Textarea</strong>: A multi-line text field. You can set the minimum and maximum length (in characters) for this answer.</li> 
+              <li class="li"><strong class="ph b">Password</strong>: Responses are treated as sensitive information, similar to the way an actual password is treated. You can set the minimum and maximum length (in characters) for this answer.</li> 
+              <li class="li"><strong class="ph b">Multiple Choice (single select)</strong>: A list of options, of which only one can be selected at a time. Enter the options, one per line, in the <strong class="ph b">Multiple Choice Options</strong> field.</li> 
+              <li class="li"><strong class="ph b">Multiple Choice (multiple select)</strong>: A list of options, any number of which can be selected at a time. Enter the options, one per line, in the <strong class="ph b">Multiple Choice Options</strong> field.</li> 
+              <li class="li"><strong class="ph b">Integer</strong>: An integer number. You can set the minimum and maximum length (in characters) for this answer.</li> 
+              <li class="li"><strong class="ph b">Float</strong>: A decimal number. You can set the minimum and maximum length (in characters) for this answer.</li> 
+             </ul></li> 
+            <li class="li"><strong class="ph b">Required</strong>: Whether or not an answer to this question is required from the user.</li> 
+            <li class="li"><strong class="ph b">Minimum length</strong> and <strong class="ph b">Maximum length</strong>: Specify if a certain length in the answer is required.</li> 
+            <li class="li"><strong class="ph b">Default answer</strong>: The default answer to the question. This value is pre-filled in the interface and is used if the answer is not provided by the user.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Once you have entered the question information, click <span class="ph uicontrol button">Create question</span> to add the question. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The survey question displays in the <strong class="ph b">Survey</strong> list. For any question, you can click <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png" width="15" alt="Pencil"> to edit it.</p> 
+           <p class="p">Check the box next to each question and click <span class="ph uicontrol button">Delete</span> to delete the question, or use the toggle option in the menu bar to enable or disable the survey prompts.</p> 
+           <p class="p">If you have more than one survey question, click <span class="ph uicontrol button">Edit Order</span> to rearrange the order of the questions by clicking and dragging on the grid icon.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">To add more questions, click <span class="ph uicontrol button">Add</span>.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="controller-optional-survey-questions"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Optional survey questions</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">The <strong class="ph b">Required</strong> setting on a survey question determines whether the answer is optional or not for the user interacting with it.</p> 
+       <section class="section"> 
+        <p class="p">Optional survey variables can also be passed to the playbook in <code class="ph codeph">extra_vars</code>.</p> 
+        <ul class="ul"> 
+         <li class="li">If a non-text variable (input type) is marked as optional, and is not filled in, no survey <code class="ph codeph">extra_var</code> is passed to the playbook.</li> 
+         <li class="li">If a text input or text area input is marked as optional, is not filled in, and has a minimum <code class="ph codeph">length &gt; 0</code>, no survey <code class="ph codeph">extra_var</code> is passed to the playbook.</li> 
+         <li class="li">If a text input or text area input is marked as optional, is not filled in, and has a minimum <code class="ph codeph">length === 0</code>, that survey <code class="ph codeph">extra_var</code> is passed to the playbook, with the value set to an empty string ("").</li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title4" id="controller-extra-variables"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Extra variables</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">You can pass extra variables to a automation controller job template in several ways, including through surveys and the API.</p> 
+       <section class="section"> 
+        <p class="p">When you pass survey variables, they are passed as extra variables (<code class="ph codeph">extra_vars</code>) within automation controller. However, passing extra variables to a job template (as you would do with a survey) can override other variables being passed from the inventory and project.</p> 
+        <p class="p">By default, <code class="ph codeph">extra_vars</code> are marked as <code class="ph codeph">!unsafe</code> unless you specify them on the Job Template’s Extra Variables section. These are trusted, because they can only be added by users with enough privileges to add or edit a Job Template. For example, nested variables do not expand when entered as a prompt, as the Jinja brackets are treated as a string.</p> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p"><code class="ph codeph">extra_vars</code> passed to the job launch API are only honored if one of the following is true:</p> 
+          <ul class="ul"> 
+           <li class="li">They correspond to variables in an enabled survey.</li> 
+           <li class="li"><code class="ph codeph">ask_variables_on_launch</code> is set to <strong class="ph b">True</strong>.</li> 
+          </ul> 
+         </div> 
+        </div> 
+        <p class="p"><strong class="ph b">Example</strong> You have a defined variable for an inventory for <code class="ph codeph">debug = true</code>. It is possible that this variable, <code class="ph codeph">debug = true</code>, can be overridden in a job template survey.</p> 
+        <p class="p">To ensure the variables that you pass are not overridden, ensure they are included by redefining them in the survey. You can define extra variables at the inventory, group, and host levels.</p> 
+        <p class="p">If you are specifying the <code class="ph codeph">ALLOW_JINJA_IN_EXTRA_VARS</code> parameter, which controls whether Jinja templating is allowed in extra variables for job templates in automation controller, you can configure the parameter in the UI Jobs Settings.</p> 
+        <ul class="ul" id="controller-extra-variables__ul_5"> 
+         <li class="li"></li> 
+         <li class="li"> Only on Template Definitions (default); Never (recommended); Always (strongly discouraged)</li> 
+        </ul> Setting The job template extra variables dictionary is merged with the survey variables. 
+        <p class="p">The following are some simplified examples of <code class="ph codeph">extra_vars</code> in YAML and JSON formats:</p> 
+        <ul class="ul"> 
+         <li class="li">The configuration in YAML format:</li> 
+        </ul> 
+        <pre class="pre codeblock"><code>launch_to_orbit: true
+satellites:
+  - sputnik
+  - explorer
+  - satcom</code></pre> 
+        <ul class="ul"> 
+         <li class="li">The configuration in JSON format:</li> 
+        </ul> 
+        <pre class="pre codeblock"><code>{
+  "launch_to_orbit": true,
+  "satellites": ["sputnik", "explorer", "satcom"]
+}</code></pre> 
+        <p class="p">The following table notes the behavior (hierarchy) of variable precedence in automation controller as it compares to variable precedence in Ansible.</p> 
+        <p class="p"> <strong class="ph b">Automation controller Variable Precedence Hierarchy (last listed wins)</strong> </p> 
+        <table class="table"> 
+         <caption></caption> 
+         <colgroup> 
+          <col style="width:50%"> 
+          <col style="width:50%"> 
+         </colgroup> 
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="controller-extra-variables__entry__1">Ansible</th> 
+           <th class="entry" id="controller-extra-variables__entry__2">automation controller</th> 
+          </tr> 
+         </thead> 
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="controller-extra-variables__entry__1"> <p class="p">role defaults</p> </td> 
+           <td class="entry" headers="controller-extra-variables__entry__2"> <p class="p">role defaults</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="controller-extra-variables__entry__1"> <p class="p">dynamic inventory variables</p> </td> 
+           <td class="entry" headers="controller-extra-variables__entry__2"> <p class="p">dynamic inventory variables</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="controller-extra-variables__entry__1"> <p class="p">inventory variables</p> </td> 
+           <td class="entry" headers="controller-extra-variables__entry__2"> <p class="p">automation controller inventory variables</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="controller-extra-variables__entry__1"> <p class="p">inventory <code class="ph codeph">group_vars</code></p> </td> 
+           <td class="entry" headers="controller-extra-variables__entry__2"> <p class="p">automation controller group variables</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="controller-extra-variables__entry__1"> <p class="p">inventory <code class="ph codeph">host_vars</code></p> </td> 
+           <td class="entry" headers="controller-extra-variables__entry__2"> <p class="p">automation controller host variables</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="controller-extra-variables__entry__1"> <p class="p">playbook <code class="ph codeph">group_vars</code></p> </td> 
+           <td class="entry" headers="controller-extra-variables__entry__2"> <p class="p">playbook <code class="ph codeph">group_vars</code></p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="controller-extra-variables__entry__1"> <p class="p">playbook <code class="ph codeph">host_vars</code></p> </td> 
+           <td class="entry" headers="controller-extra-variables__entry__2"> <p class="p">playbook <code class="ph codeph">host_vars</code></p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="controller-extra-variables__entry__1"> <p class="p">host facts</p> </td> 
+           <td class="entry" headers="controller-extra-variables__entry__2"> <p class="p">host facts</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="controller-extra-variables__entry__1"> <p class="p">registered variables</p> </td> 
+           <td class="entry" headers="controller-extra-variables__entry__2"> <p class="p">registered variables</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="controller-extra-variables__entry__1"> <p class="p">set facts</p> </td> 
+           <td class="entry" headers="controller-extra-variables__entry__2"> <p class="p">set facts</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="controller-extra-variables__entry__1"> <p class="p">play variables</p> </td> 
+           <td class="entry" headers="controller-extra-variables__entry__2"> <p class="p">play variables</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="controller-extra-variables__entry__1"> <p class="p">play <code class="ph codeph">vars_prompt</code></p> </td> 
+           <td class="entry" headers="controller-extra-variables__entry__2"> <p class="p">(not supported)</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="controller-extra-variables__entry__1"> <p class="p">play <code class="ph codeph">vars_files</code></p> </td> 
+           <td class="entry" headers="controller-extra-variables__entry__2"> <p class="p">play <code class="ph codeph">vars_files</code></p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="controller-extra-variables__entry__1"> <p class="p">role and include variables</p> </td> 
+           <td class="entry" headers="controller-extra-variables__entry__2"> <p class="p">role and include variables</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="controller-extra-variables__entry__1"> <p class="p">block variables</p> </td> 
+           <td class="entry" headers="controller-extra-variables__entry__2"> <p class="p">block variables</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="controller-extra-variables__entry__1"> <p class="p">task variables</p> </td> 
+           <td class="entry" headers="controller-extra-variables__entry__2"> <p class="p">task variables</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="controller-extra-variables__entry__1"> <p class="p">extra variables</p> </td> 
+           <td class="entry" headers="controller-extra-variables__entry__2"> <p class="p">Job Template extra variables</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="controller-extra-variables__entry__1"></td> 
+           <td class="entry" headers="controller-extra-variables__entry__2"> <p class="p">Job Template Survey (defaults)</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="controller-extra-variables__entry__1"></td> 
+           <td class="entry" headers="controller-extra-variables__entry__2"> <p class="p">Job Launch extra variables</p> </td> 
+          </tr> 
+         </tbody> 
+        </table> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

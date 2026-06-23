@@ -1,0 +1,104 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="ref-controller-smart-inventories"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Define a collection of hosts with Smart Inventories</h1> 
+     <div class="body refbody">
+      <p class="shortdesc">Smart Inventories are collections of hosts defined by a stored search that can be viewed such as a standard inventory and can be easily used with job runs. Organization administrators have admin permission for inventories in their organization and can create Smart Inventories.</p> 
+      <section class="section"> 
+       <p class="p">You can identify a Smart Inventory by the <code class="ph codeph">KIND=smart</code> variable.</p> 
+       <p class="p">You can define a Smart Inventory by using the same method being used with Search. <code class="ph codeph">InventorySource</code> is directly associated with an Inventory.</p> 
+       <div class="note note note_note">
+        <span class="note__title">Note:</span> 
+        <div class="note__body"> 
+         <p class="p">Smart inventories are deprecated and will be removed in a future release. Consider moving to constructed inventories for enhancements and replacement.</p> 
+        </div>
+       </div> 
+       <p class="p">The <code class="ph codeph">Inventory</code> model has the following new fields that are blank by default but are set accordingly for Smart Inventories:</p> 
+       <ul class="ul"> 
+        <li class="li">Set <code class="ph codeph">kind</code> to <code class="ph codeph">smart</code> for Smart Inventories.</li> 
+        <li class="li">Set <code class="ph codeph">host_filter</code> AND <code class="ph codeph">kind</code> to <code class="ph codeph">smart</code> for Smart Inventories.</li> 
+       </ul> 
+       <p class="p">The <code class="ph codeph">host</code> model has a related endpoint, <code class="ph codeph">smart_inventories</code> that identifies a set of all the Smart Inventories a host is associated with. The membership table updates every time a job runs against a smart inventory.</p> 
+       <div class="note note note_note">
+        <span class="note__title">Note:</span> 
+        <div class="note__body"> 
+         <p class="p">To update the memberships more often, you can change the <code class="ph codeph">AWX_REBUILD_SMART_MEMBERSHIP</code> file-based setting to <code class="ph codeph">True</code>. (The default is False). This updates memberships if the following events occur:</p> 
+         <ul class="ul"> 
+          <li class="li">A new host is added</li> 
+          <li class="li">An existing host is modified (updated or deleted)</li> 
+          <li class="li">A new Smart Inventory is added</li> 
+          <li class="li">An existing Smart Inventory is modified (updated or deleted)</li> 
+         </ul> 
+        </div>
+       </div> 
+       <p class="p">You can view inventories without being editable:</p> 
+       <ul class="ul"> 
+        <li class="li">Names of Host and Group created as a result of an inventory source synchronization.</li> 
+        <li class="li">You cannot move or edit Group records.</li> 
+       </ul> 
+       <p class="p">You cannot create hosts from a Smart Inventory host endpoint (<code class="ph codeph">/inventories/N/hosts/</code>) as with a normal inventory. The administrator of a Smart Inventory has permission to edit fields such as the name, description, variables, and the ability to delete. The administrator does not have the permission to change the <code class="ph codeph">host_filter</code>, because that affects which hosts (that have a primary membership inside another inventory) are included in the smart inventory.</p> 
+       <p class="p"><code class="ph codeph">host_filter</code> only applies to hosts inside of inventories inside the Smart Inventory’s organization.</p> 
+       <p class="p">To modify <code class="ph codeph">host_filter</code>, you must be the organization administrator of the inventory’s organization. Organization administrators have implicit "admin" access to all inventories inside the organization, therefore, this does not convey any permissions they did not already possess.</p> 
+       <p class="p">Administrators of the Smart Inventory can grant other users (who are not also admins of your organization) permissions such as "use" and "adhoc" to the smart inventory. These permit the actions indicated by the role, as with other standard inventories. However, this does not grant any special permissions to hosts (which live in a different inventory). It does not permit direct read permission to hosts, or permit them to see additional hosts under <code class="ph codeph">/#/hosts/</code>, although they can still view the hosts under the smart inventory host list.</p> 
+       <p class="p">In some situations, you can change the following:</p> 
+       <ul class="ul"> 
+        <li class="li">A new Host created manually on Inventory with Inventory sources.</li> 
+        <li class="li">Groups created as a result of inventory source synchronizations.</li> 
+        <li class="li">Variables on Host and Group are not changeable, even as the local System Administrator.</li> 
+       </ul> 
+       <p class="p">Hosts associated with the Smart Inventory are manifested at view time. If the results of a Smart Inventory contains more than one host with identical hostnames, only one of the matching hosts is included as part of the Smart Inventory, ordered by Host ID.</p> 
+      </section> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-controller-smart-host-filter"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Smart Host Filters</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">You can use a search filter to populate hosts for an inventory. This feature uses the fact searching feature.</p> 
+       <section class="section"> 
+        <p class="p">Automation controller stores facts generated by an Ansible Playbook during a Job Template in the database whenever <code class="ph codeph">use_fact_cache=True</code> is set per-Job Template. New facts are merged with existing facts and are per-host. These stored facts can be used to filter hosts with the <code class="ph codeph">/api/v2/hosts</code> endpoint, using the <code class="ph codeph">GET</code> query parameter <code class="ph codeph">host_filter</code>.</p> 
+        <p class="p">For example:</p> 
+        <pre class="pre">/api/v2/hosts?host_filter=ansible_facts__ansible_processor_vcpus=8</pre> 
+        <p class="p">The <code class="ph codeph">host_filter</code> parameter permits:</p> 
+        <ul class="ul"> 
+         <li class="li">grouping with ()</li> 
+         <li class="li">use of the boolean and operator: 
+          <ul class="ul">
+           <li class="li"><code class="ph codeph">__</code> to reference related fields in relational fields</li>
+           <li class="li"><code class="ph codeph">__</code> is used on ansible_facts to separate keys in a JSON key path</li>
+           <li class="li">`[] is used to denote a json array in the path specification</li>
+           <li class="li"><code class="ph codeph">""</code> can be used in the value when spaces are wanted in the value</li>
+          </ul></li> 
+         <li class="li">"classic" Django queries may be embedded in the <code class="ph codeph">host_filter</code></li> 
+        </ul> 
+        <p class="p"><strong class="ph b">Examples</strong>:</p> 
+        <pre class="pre">/api/v2/hosts/?host_filter=name=localhost
+/api/v2/hosts/?host_filter=ansible_facts__ansible_date_time__weekday_number="3"
+/api/v2/hosts/?host_filter=ansible_facts__ansible_processor[]="GenuineIntel"
+/api/v2/hosts/?host_filter=ansible_facts__ansible_lo__ipv6[]__scope="host"
+/api/v2/hosts/?host_filter=ansible_facts__ansible_processor_vcpus=8
+/api/v2/hosts/?host_filter=ansible_facts__ansible_env__PYTHONUNBUFFERED="true"
+/api/v2/hosts/?host_filter=(name=localhost or name=database) and (groups__name=east or groups__name="west coast") and ansible_facts__an</pre> 
+        <p class="p">You can search <code class="ph codeph">host_filter</code> by <strong class="ph b">host name</strong>, <strong class="ph b">group name</strong>, and <strong class="ph b">Ansible facts</strong>.</p> 
+        <p class="p">Group search has the following format:</p> 
+        <pre class="pre">groups.name:groupA</pre> 
+        <p class="p">Fact search has the following format:</p> 
+        <pre class="pre">ansible_facts.ansible_fips:false</pre> 
+        <p class="p">You can also perform Smart Search searches, which consist of a host name and host description.</p> 
+        <pre class="pre">host_filter=name=my_host</pre> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">If a search term in <code class="ph codeph">host_filter</code> is of string type, to make the value a number (for example, <code class="ph codeph">2.66</code>) or a JSON keyword (for example, <code class="ph codeph">null</code>, <code class="ph codeph">true</code> or <code class="ph codeph">false</code>) valid, add double quotations around the value to prevent the controller from parsing it as a non-string:</p> 
+          <pre class="pre">host_filter=ansible_facts__packages__dnsmasq[]__version="2.66"</pre> 
+         </div>
+        </div> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="self-service-install-vmware">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Install Ansible automation portal on VMware vSphere</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Deploy the Ansible automation portal appliance on VMware vSphere using the vSphere web client.</p> 
+     <section class="section" id="self-service-install-vmware__prerequisites">
+      <h2 class="title sectiontitle">Prerequisites</h2> 
+      <ul class="ul"> 
+       <li class="li">VMware vSphere/vCenter with permissions to create VMs and upload files to a datastore.</li> 
+       <li class="li">The Ansible automation portal disk image in VMDK format, available from the Red Hat Ansible Automation Platform downloads page.</li> 
+       <li class="li">Your cloud-init user-data file prepared with Ansible Automation Platform credentials and SSH keys.</li> 
+       <li class="li">An SSH key pair for appliance access.</li> 
+       <li class="li"><code class="ph codeph">genisoimage</code> installed on your local machine (for creating the cloud-init ISO).</li> 
+      </ul> 
+     </section> 
+     <section class="section" id="self-service-install-vmware__install-using-vsphere-web-client">
+      <h2 class="title sectiontitle">Install using the vSphere web client</h2> 
+      <ol class="ol"> 
+       <li class="li">Upload the VMDK disk image to a datastore: 
+        <ol class="ol" type="a"> 
+         <li class="li">Open the vCenter web client.</li> 
+         <li class="li">Navigate to <strong class="ph b">Storage</strong> &gt; <strong class="ph b">Datastores</strong> and select your datastore.</li> 
+         <li class="li">Click <strong class="ph b">Upload Files</strong> and upload the Ansible automation portal VMDK file.</li> 
+        </ol> </li> 
+       <li class="li">Save your cloud-init user-data file as <code class="ph codeph">cloud-init-user-data.yaml</code>. Use the cloud-init template from the first boot configuration topic.</li> 
+       <li class="li">Create a cloud-init ISO from your user-data file. <p class="p">VMware delivers cloud-init configuration to the VM as a small ISO disk image labeled <code class="ph codeph">cidata</code>. Cloud-init expects two files on the ISO: <code class="ph codeph">user-data</code> (your configuration) and <code class="ph codeph">meta-data</code> (instance identity):</p> <pre class="pre codeblock language-terminal"><code>$ cp cloud-init-user-data.yaml user-data
+$ echo "instance-id: automation-portal" &gt; meta-data
+$ genisoimage -output cloud-init.iso -volid cidata -joliet -rock user-data meta-data</code></pre> </li> 
+       <li class="li">Upload the cloud-init ISO to the same datastore.</li> 
+       <li class="li">Create a virtual machine: 
+        <ol class="ol" type="a"> 
+         <li class="li">Right-click the cluster or host and select <strong class="ph b">New Virtual Machine</strong> &gt; <strong class="ph b">Create a new virtual machine</strong>.</li> 
+         <li class="li">Set the following example values. Replace the name, CPU, and memory to match your environment: 
+          <table class="table">
+           <caption></caption>
+           <colgroup>
+            <col>
+            <col>
+           </colgroup>
+           <thead class="thead"> 
+            <tr class="row"> 
+             <th class="entry" id="self-service-install-vmware__install-using-vsphere-web-client__entry__1">Field</th> 
+             <th class="entry" id="self-service-install-vmware__install-using-vsphere-web-client__entry__2">Example value</th> 
+            </tr> 
+           </thead>
+           <tbody class="tbody"> 
+            <tr class="row"> 
+             <td class="entry" headers="self-service-install-vmware__install-using-vsphere-web-client__entry__1"><strong class="ph b">Name</strong></td> 
+             <td class="entry" headers="self-service-install-vmware__install-using-vsphere-web-client__entry__2"><code class="ph codeph">automation-portal</code></td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="self-service-install-vmware__install-using-vsphere-web-client__entry__1"><strong class="ph b">Guest OS</strong></td> 
+             <td class="entry" headers="self-service-install-vmware__install-using-vsphere-web-client__entry__2">Red Hat Enterprise Linux 9 (64-bit)</td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="self-service-install-vmware__install-using-vsphere-web-client__entry__1"><strong class="ph b">CPU</strong></td> 
+             <td class="entry" headers="self-service-install-vmware__install-using-vsphere-web-client__entry__2">6 cores</td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="self-service-install-vmware__install-using-vsphere-web-client__entry__1"><strong class="ph b">Memory</strong></td> 
+             <td class="entry" headers="self-service-install-vmware__install-using-vsphere-web-client__entry__2">24 GB</td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="self-service-install-vmware__install-using-vsphere-web-client__entry__1"><strong class="ph b">Hard disk</strong></td> 
+             <td class="entry" headers="self-service-install-vmware__install-using-vsphere-web-client__entry__2">Remove the default disk</td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="self-service-install-vmware__install-using-vsphere-web-client__entry__1"><strong class="ph b">Network</strong></td> 
+             <td class="entry" headers="self-service-install-vmware__install-using-vsphere-web-client__entry__2">Select your VM network</td> 
+            </tr> 
+           </tbody>
+          </table> </li> 
+         <li class="li">Click <strong class="ph b">Next</strong> and then <strong class="ph b">Finish</strong>.</li> 
+        </ol> </li> 
+       <li class="li">Attach the VMDK disk and cloud-init ISO to the VM: 
+        <ol class="ol" type="a"> 
+         <li class="li">Copy the uploaded VMDK and cloud-init ISO to the VM folder on the datastore.</li> 
+         <li class="li">Edit the VM settings.</li> 
+         <li class="li">Click <strong class="ph b">Add New Device</strong> &gt; <strong class="ph b">Existing Hard Disk</strong> and browse to the copied VMDK.</li> 
+         <li class="li">Click <strong class="ph b">Add New Device</strong> &gt; <strong class="ph b">CD/DVD Drive</strong>. Select <strong class="ph b">Datastore ISO File</strong> and browse to the copied cloud-init ISO.</li> 
+         <li class="li">Select <strong class="ph b">Connect At Power On</strong> for the CD/DVD drive.</li> 
+         <li class="li">Save the VM settings.</li> 
+        </ol> </li> 
+       <li class="li">Power on the VM. First-boot configuration takes 2-3 minutes.</li> 
+      </ol> 
+      <p class="p"><strong class="ph b">Verification</strong></p> 
+      <ul class="ul"> 
+       <li class="li">Open the VM console in vSphere or SSH into the VM and confirm that all services are running: <pre class="pre codeblock language-terminal"><code>$ sudo systemctl status portal postgres devtools</code></pre> </li> 
+       <li class="li">Access the portal URL from your browser.</li> 
+      </ul> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relconcepts">
+      <strong>Related concepts</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_initial_config_wizard" title="Provide initial configuration for the Ansible automation portal appliance so that portal services can start and connect to Ansible Automation Platform.">Configure the appliance at first boot</a></li>
+      </ul>
+     </div>
+     <div class="linklist reltasks">
+      <strong>Related tasks</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_connect_verify" title="After deploying the Ansible automation portal appliance, update the OAuth redirect URI, verify service health, and sign in to the portal.">Connect and verify Ansible automation portal</a></li>
+      </ul>
+     </div>
+     <div class="linklist relinfo">
+      <strong>Related information</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="https://access.redhat.com/downloads/content/480" target="_blank" rel="external noopener">Red Hat Ansible Automation Platform downloads page</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

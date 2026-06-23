@@ -1,0 +1,57 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-cd5a6d18-2c2a-446b-9d80-a2f8811c1dde">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure Ansible DevTools and the development environment</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">After installing ADT, use the MCP server for Red Hat Ansible Automation Platform to configure your workspace by setting up a virtual environment, installing specific Python versions, and adding necessary Ansible collections.</p> 
+     <section class="section prereq" id="GUID-cd5a6d18-2c2a-446b-9d80-a2f8811c1dde__prereq_1">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul" id="GUID-cd5a6d18-2c2a-446b-9d80-a2f8811c1dde__ul_1"> 
+       <li class="li">VS Code is open.</li> 
+       <li class="li">GitHub Copilot Chat is active.</li> 
+      </ul> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">In the Copilot chat window, enter a natural language prompt instructing the AI assistant to set up a particular configuration. For example:</span> 
+        <div class="itemgroup stepxmp"> 
+         <pre class="pre codeblock"><code>Set up a complete Ansible development environment with Python 3.11, and install the collections amazon.aws and ansible.posix</code></pre> 
+         <div class="p">
+          The assistant will trigger the <code class="ph codeph">ade_setup_environment</code>tool. The system will automatically perform the following configuration steps: 
+          <ul class="ul" id="GUID-cd5a6d18-2c2a-446b-9d80-a2f8811c1dde__ul_2"> 
+           <li class="li">Create a Virtual Environment: The assistant creates a virtual environment (for example, <code class="ph codeph">venv/</code>) in your workspace.</li> 
+           <li class="li">Install Core Tools: The assistant installs <code class="ph codeph">ansible-core </code>and <code class="ph codeph">ansible-lint</code> in the new virtual environment.</li> 
+           <li class="li">Install Collections: The assistant installs the requested collections (for example, <code class="ph codeph">amazon.aws</code>, <code class="ph codeph">ansible.posix</code>) and their dependencies.</li> 
+           <li class="li">Check for Conflicts: The assistant checks for conflicting packages and verifies the <code class="ph codeph">ansible-lint</code> status.</li> 
+          </ul> 
+         </div> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Review the output in the Copilot interface. When it has completed setup, the assistant provides a summary confirming the environment is set up. It also provides instructions on how to activate the environment:</span> 
+        <ol type="a" class="ol substeps" id="GUID-cd5a6d18-2c2a-446b-9d80-a2f8811c1dde__substeps_1"> 
+         <li class="li substep"> <span class="ph cmd">To activate, run: <code class="ph codeph">source &lt;path&gt;/venv/bin/activate</code></span> </li> 
+         <li class="li substep"> <span class="ph cmd">To deactivate, run: <code class="ph codeph">deactivate</code></span> </li> 
+        </ol> </li>
+      </ol>
+     </section> 
+     <section class="section postreq" id="GUID-cd5a6d18-2c2a-446b-9d80-a2f8811c1dde__postreq_1">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">What to do next</h2>
+      </div> 
+      <div class="p">
+       Verify the configuration was successful by asking the assistant to re-check the environment status. For example: 
+       <pre class="pre codeblock"><code>Check my environment again to confirm everything is set up correctly.</code></pre> 
+      </div> 
+      <p class="p">The <code class="ph codeph">ade_environment_info</code> tool will run and confirm the Python version, virtual environment path, and installed collections in its output.</p> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

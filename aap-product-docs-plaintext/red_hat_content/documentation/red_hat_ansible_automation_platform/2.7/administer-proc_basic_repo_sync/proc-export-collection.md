@@ -1,0 +1,12 @@
+# Synchronize repositories in automation hub
+## Export automation content from automation hub
+
+When collections are finalized, you can import them to a location where they can be distributed to others across your organization.
+
+### Procedure
+
+1.  Log in to Ansible Automation Platform.
+2.  From the navigation panel, select Automation Content> (and then)Collections. The **Collections** page displays all collections across all repositories. You can search for a specific collection.
+3.  Click into the collection that you want to export. The collection details page opens.
+4.  From the **Install** tab, select **Download tarball**. The .tar file is downloaded to your default browser downloads folder. You can now import it to the location of your choosing.
+

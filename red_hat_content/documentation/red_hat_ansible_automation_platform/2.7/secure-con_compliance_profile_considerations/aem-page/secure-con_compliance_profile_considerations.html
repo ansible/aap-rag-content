@@ -1,0 +1,131 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="con-compliance-profile-considerations"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Ensure compliance with host-level security controls</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">You can use Ansible Automation Platform to manage systems where security controls have been applied to managed RHEL nodes to meet the requirements of a compliance profile such as CIS, PCI/DSS, the DISA STIG, or similar.</p> 
+      <p class="p">In environments where these controls are required, discuss waiving the controls with your security auditor.</p> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-fapolicyd"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Fapolicyd</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Set the <code class="ph codeph">fapolicyd</code> daemon to permissive mode before installing Ansible Automation Platform. This prevents the pre-flight checks from stopping your installation and avoids subsequent operational failures caused by enforcing policies.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Edit the file <code class="ph codeph">/etc/fapolicyd/fapolicyd.conf</code> and set "permissive = 1".</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Restart the service with the command </span> 
+          <div class="itemgroup info"> 
+           <p class="p"> <code class="ph codeph">sudo systemctl restart fapolicyd.service</code> </p> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">If this security control is also applied to the installation host, the default <code class="ph codeph">fapolicyd</code> configuration causes the Ansible Automation Platform installation program to fail. In this case, the recommendation is to set <code class="ph codeph">fapolicyd</code> to permissive mode on the installation host.</p> 
+            </div>
+           </div> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-file-systems-mounted-noexec.adoc"> 
+      <h2 class="title topictitle2" id="ariaid-title3">File systems mounted with "noexec"</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Remove the <code class="ph codeph">noexec</code> mount option from the<code class="ph codeph"> /tmp</code>, <code class="ph codeph">/var</code>, and <code class="ph codeph">/var/tmp</code> file systems so the Ansible Automation Platform RPM installer can execute binaries. This prevents preflight check failures and helps ensure a successful installation.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">To install Ansible Automation Platform, you must re-mount these file systems with the <code class="ph codeph">noexec</code> option removed. When installation is complete, proceed with the following steps:</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Reapply the <code class="ph codeph">noexec</code> option to the <code class="ph codeph">/tmp</code> and <code class="ph codeph">/var/tmp</code> file systems.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Change the automation controller job execution path from <code class="ph codeph">/tmp</code> to an alternate directory that does not have the <code class="ph codeph">noexec</code> option enabled.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">To make this change, log in to the automation controller UI as an administrator, navigate to Settings and select <strong class="ph b">Jobs settings</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Change the "Job execution path" setting to the alternate directory. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">During normal operations, the file system which contains the <code class="ph codeph">/var/lib/awx</code> subdirectory (typically <code class="ph codeph">/var</code>) must not be mounted with the <code class="ph codeph">noexec</code> option, or the automation controller cannot run automation jobs in execution environments.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In environments where STIG controls are routinely audited, discuss waiving the STIG controls related to file system <code class="ph codeph">noexec</code> with your security auditor.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-namespaces"> 
+      <h2 class="title topictitle2" id="ariaid-title4">User namespaces</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">To support Ansible Automation Platform execution environments, you must allow Linux containers. If a compliance profile (like DISA STIG) has set <code class="ph codeph">user.max_user_namespaces</code> to "0," you must disable this control.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">To check the <code class="ph codeph">user.max_user_namespaces</code> kernel setting, complete the following steps on each Ansible Automation Platform component in the installation inventory.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">Log in to your automation controller at the command line.</span> </li>
+         <li class="li step"> <span class="ph cmd">Run the command <code class="ph codeph">sudo sysctl user.max_user_namespaces</code>.</span> </li>
+         <li class="li step"> <span class="ph cmd">If the output indicates that the value is zero, look at the contents of the file <code class="ph codeph">/etc/sysctl.conf</code> and all files under <code class="ph codeph">/etc/sysctl.d/</code>, edit the file containing the <code class="ph codeph">user.max_user_namespaces</code> setting, and set the value to "65535".</span> </li>
+         <li class="li step"> <span class="ph cmd">To apply this new value, run the command <code class="ph codeph">sudo sysctl -p &lt;file&gt;</code>, where <code class="ph codeph">&lt;file&gt;</code> is the file just modified.</span> </li>
+         <li class="li step"> <span class="ph cmd">Re-run the command <code class="ph codeph">sudo sysctl user.max_user_namespaces</code> and verify that the value is now set to "65535".</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title5" id="ref-interactive-session-timeout"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Interactive session timeout</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Temporarily increase the interactive session timeout during lengthy operations like installations, backups, and restores. This prevents compliance policies from automatically logging you out and helps ensure these critical processes complete successfully.</p> 
+       <section class="section"> 
+        <p class="p">There are multiple ways in which this control can be enforced, including shell timeout variables, setting the idle session timeout for <code class="ph codeph">systemd-logind</code>, or setting SSH connection timeouts, and different compliance profiles can use one or more of these methods. The one that most often interrupts the installation and day two operations is the idle session timeout for <code class="ph codeph">systemd-logind</code>, which was introduced in the DISA STIG version V2R1 (Red Hat Enterprise Linux 8) and V2R2 (Red Hat Enterprise Linux 9). To increase the idle session timeout for <code class="ph codeph">systemd-logind</code>, as the root user:</p> 
+        <ul class="ul"> 
+         <li class="li">Edit the file <code class="ph codeph">/etc/systemd/logind.conf</code>.</li> 
+         <li class="li">If the <code class="ph codeph">StopIdleSessionSec</code> setting is set to zero, no change is needed.</li> 
+         <li class="li">If the <code class="ph codeph">StopIdleSessionSec</code> setting is non-zero, this indicates that the session will be terminated after that number of seconds. <p class="p">Change <code class="ph codeph">StopIdleSessionSec=7200</code> to increase the timeout, then run <code class="ph codeph">systemctl restart systemd-logind</code> to apply the change.</p> </li> 
+         <li class="li">Log out of the interactive session entirely and log back in to ensure the new setting applies to the current login session.</li> 
+        </ul> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">This change only needs to be made on the installation host, or if an installation host is not used, the host where the Ansible Automation Platform installation program is run.</p> 
+         </div>
+        </div> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title6" id="ref-sudo-nopasswd"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Sudo and NOPASSWD</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">A compliance profile might require that all users with sudo privileges must provide a password (the <code class="ph codeph">NOPASSWD</code> directive must not be used in a sudoers file). The installation program runs many tasks as a privileged user, and by default expects to be able to elevate privileges without a password.</p> 
+       <section class="section"> 
+        <p class="p">To provide a password to the installation program for elevating privileges, append the following options when launching the RPM installer script:</p> 
+        <p class="p"><code class="ph codeph">./setup.sh &lt;setup options&gt; --ask-become-pass</code>.</p> 
+        <p class="p">For the container-based installation program:</p> 
+        <p class="p"> <code class="ph codeph">ansible-playbook ansible.containerized_installer.install --ask-become-pass</code> </p> 
+        <p class="p">When the installation program is run, you are prompted for the user’s password to elevate privileges.</p> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Using the <code class="ph codeph">--ask-become-pass</code> option also applies when running the installation program for day-two operations such as backup and restore.</p> 
+         </div>
+        </div> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

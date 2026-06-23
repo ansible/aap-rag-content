@@ -1,0 +1,334 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="eda-projects"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Organize rulebooks for event-driven automation</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Projects are a logical collection of rulebooks. They must be a git repository and located in the path defined for Event-Driven Ansible content in Ansible collections: <code class="ph codeph">/extensions/eda/rulebooks</code> at the root of the project.</p> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">Event-Driven Ansible controller uses PostgreSQL for data storage and background task workers via the <code class="ph codeph">dispatcherd </code>service. When the workers are unavailable, you will not be able to create or sync projects, or enable rulebook activations.</p> 
+       </div>
+      </div> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="GUID-0372bdfb-6b7f-4de7-9a43-bd4431aab994"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Set up a new project</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Set up a project to connect Event-Driven Ansible controller to a Git repository, enabling it to pull, sync, and manage the rulebooks used by your automation.</p> 
+       <section class="section prereq" id="GUID-0372bdfb-6b7f-4de7-9a43-bd4431aab994__prereq_1">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul" id="GUID-0372bdfb-6b7f-4de7-9a43-bd4431aab994__ul_1"> 
+         <li class="li">You are logged in to the Ansible Automation Platform Dashboard as a Content Consumer.</li> 
+         <li class="li">You have set up a credential, if necessary. For more information, see the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_eda_set_up_credential#eda-set-up-credential" title="Create a credential to securely store sensitive data (like tokens and passwords) required for rulebook activations to connect to source plugins or private registries.">Setting up credentials</a> section.</li> 
+         <li class="li">You have an existing repository containing rulebooks.</li> 
+        </ul> 
+       </section> 
+       <section id="GUID-0372bdfb-6b7f-4de7-9a43-bd4431aab994__steps_1">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps" id="GUID-0372bdfb-6b7f-4de7-9a43-bd4431aab994__steps_1">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to the Ansible Automation Platform Dashboard.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Navigate to <strong class="ph b"><span class="ph menucascade"><span class="ph uicontrol">Automation Decisions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Projects</span></span></strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create project</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Insert the following: </span> 
+          <div class="itemgroup info"> 
+           <dl class="dl"> 
+            <dt class="dt dlterm">
+             Name
+            </dt> 
+            <dd class="dd">
+             Enter project name.
+            </dd> 
+            <dt class="dt dlterm">
+             Description
+            </dt> 
+            <dd class="dd">
+             This field is optional.
+            </dd> 
+            <dt class="dt dlterm">
+             Organization
+            </dt> 
+            <dd class="dd">
+             Enter your organization’s name or select <span class="ph uicontrol">Default</span> from the list.
+            </dd> 
+            <dt class="dt dlterm">
+             Source control type
+            </dt> 
+            <dd class="dd">
+             Git is the only source control type available for use. This field is optional.
+            </dd> 
+            <dt class="dt dlterm">
+             Source control URL
+            </dt> 
+            <dd class="dd"> 
+             <p class="p">Enter Git, SSH, or HTTP[S] protocol address of a repository, such as GitHub or GitLab. This required field is editable. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_projects#eda-editing-a-project" title="Edit project details (like the source repository URL or credential) to manage where Event-Driven Ansible fetches its rulebooks from and how it authenticates.">Editing a project</a> to view details of how editing this field impacts rulebook activations.</p> 
+             <div class="note note note_note">
+              <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">This field accepts SSH private key or private key phrase. To enable the use of these private keys, your project URL must begin with <code class="ph codeph">git@</code>.</p> 
+              </div>
+             </div> 
+            </dd> 
+            <dt class="dt dlterm">
+             Proxy
+            </dt> 
+            <dd class="dd">
+             This is used to access HTTP or HTTPS servers. This field is optional and editable. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_projects#eda-editing-a-project" title="Edit project details (like the source repository URL or credential) to manage where Event-Driven Ansible fetches its rulebooks from and how it authenticates.">Editing a project</a> to view details of how editing this field impacts rulebook activations.
+            </dd> 
+            <dt class="dt dlterm">
+             Source control branch/tag/commit
+            </dt> 
+            <dd class="dd">
+             This is the branch to checkout. In addition to branches, you can input tags, commit hashes, and arbitrary refs. Some commit hashes and refs may not be available unless you also provide a custom refspec. This field is optional and editable. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_projects#eda-editing-a-project" title="Edit project details (like the source repository URL or credential) to manage where Event-Driven Ansible fetches its rulebooks from and how it authenticates.">Editing a project</a> to view details of how editing this field impacts rulebook activations.
+            </dd> 
+            <dt class="dt dlterm">
+             Source control refspec
+            </dt> 
+            <dd class="dd">
+             A refspec to fetch (passed to the Ansible git module). This parameter allows access to references via the branch field not otherwise available. This field is optional and editable. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_projects#eda-editing-a-project" title="Edit project details (like the source repository URL or credential) to manage where Event-Driven Ansible fetches its rulebooks from and how it authenticates.">Editing a project</a> to view details of how editing this field impacts rulebook activations.
+            </dd> 
+            <dt class="dt dlterm">
+             Source control credential
+            </dt> 
+            <dd class="dd">
+             This is an optional credential used to authenticate with the provided Source control URL.
+            </dd> 
+            <dt class="dt dlterm">
+             Content signature validation credential
+            </dt> 
+            <dd class="dd">
+             Enable content signing to verify that the content has remained secure when a project is synced. If the content has been tampered with, the job will not run. This field is optional.
+            </dd> 
+            <dt class="dt dlterm">
+             Options
+            </dt> 
+            <dd class="dd"> 
+             <ul class="ul" id="GUID-0372bdfb-6b7f-4de7-9a43-bd4431aab994__ul_2"> 
+              <li class="li"><strong class="ph b"><span class="ph uicontrol">Update revision on launch</span></strong> - This checkbox is optional. Enabling it updates the project prior to starting or restarting a rulebook activation. For more information on how this option impacts your rulebook activations, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_projects#GUID-a3765204-d569-4016-9af9-adcbcb4f13eb" title="The Update revision on launch option automatically syncs projects with source control. This ensures rulebook activations run the most current content, eliminating manual updates and the risk of outdated execution.">Update revision on launch for projects</a>. When you select this option, the <span class="ph uicontrol">Option Details</span> section is displayed with the following field: 
+               <ul class="ul" id="GUID-0372bdfb-6b7f-4de7-9a43-bd4431aab994__ul_3"> 
+                <li class="li"><strong class="ph b"><span class="ph uicontrol">Cache Timeout</span></strong> - This is the time in seconds to consider a project as current. During job runs and callbacks, the task system will evaluate the timestamp of the latest project update. If it is older than your Cache Timeout, it is not considered current, and a new project update is performed. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_projects#GUID-cdc75060-9922-4d8e-9eb0-55bd38440abb" title="The cache timeout setting controls how long Event-Driven Ansible controller reuses a previous project synchronization result before performing a new sync operation.">Cache Timeout in Event-Driven Ansible project</a>.</li> 
+               </ul> </li> 
+              <li class="li"><strong class="ph b"><span class="ph uicontrol">Verify SSL</span> </strong>- The Verify SSL option is enabled by default. Enabling this option verifies the SSL with HTTPS when the project is imported. 
+               <div class="note note note_note">
+                <span class="note__title">Note:</span> 
+                <div class="note__body">
+                 You can disable this option if you have a local repository that uses self-signed certificates.
+                </div>
+               </div> </li> 
+             </ul> 
+            </dd> 
+           </dl> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select <span class="ph uicontrol button">Create project</span>.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result" id="GUID-0372bdfb-6b7f-4de7-9a43-bd4431aab994__result_1">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Your project is now created and can be managed in the <strong class="ph b">Projects</strong> page.</p> 
+        <p class="p">After saving the new project, the project’s details page is displayed. From there or the <strong class="ph b">Projects</strong> list view, you can edit or delete it.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="eda-projects-list-view"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Projects list view</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">The Projects list view provides a quick dashboard to verify rulebook sync status, track content via the Git hash, and manage repository access.</p> 
+       <div class="note note note_note">
+        <span class="note__title">Note:</span> 
+        <div class="note__body"> 
+         <p class="p">If a rulebook changes in source control, you can re-sync a project by selecting the sync icon next to the project from the <strong class="ph b">Projects</strong> list view. The <strong class="ph b">Git hash</strong> updates represent the latest commit on that repository. An activation must be restarted or recreated if you want to use the updated project.</p> 
+        </div>
+       </div> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="eda-editing-a-project"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Edit a project</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Edit project details (like the source repository URL or credential) to manage where Event-Driven Ansible fetches its rulebooks from and how it authenticates.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">From the <strong class="ph b">Projects</strong> list view, select the <span class="ph uicontrol button">More Actions</span> icon <strong class="ph b">⋮</strong> next to the desired project. The Edit page is displayed.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Edit the desired fields. </span> 
+          <div class="itemgroup info"> 
+           <div class="note important note_important">
+            <span class="note__title">Important:</span> 
+            <div class="note__body"> 
+             <p class="p">When you update a project’s <strong class="ph b">Source control URL</strong>, <strong class="ph b">Source control branch/tag/commit</strong>, or <strong class="ph b">Source control refspec</strong>, Event-Driven Ansible automatically triggers a project resync. This process updates the rulebooks available within Event-Driven Ansible controller and can significantly impact existing rulebook activations:</p> 
+             <ul class="ul"> 
+              <li class="li"><strong class="ph b">Rulebook Content Updates</strong>: Running activations continue to use old content when a rulebook’s content changes. To apply the newer content, you must restart the affected rulebook activation. If the rulebook content you update is attached to an activation that uses event streams, you must re-attach the event stream to that activation after the updates are applied and then, restart the activation.</li> 
+              <li class="li"><strong class="ph b">New Rulebooks</strong>: Any new rulebook added to the repository becomes available in the database after the sync.</li> 
+              <li class="li"><strong class="ph b">Deleted Rulebooks</strong>: A removed rulebook is deleted from the database upon sync. Its associated activations, however, continue to run and can be restarted. Review and update any activations detached from their source rulebook.</li> 
+             </ul> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select <span class="ph uicontrol button">Save project</span>.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="eda-delete-project"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Delete a project</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Use the platform gateway interface to delete a project that is no longer required from Event-Driven Ansible controller.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ol class="ol"> 
+         <li class="li">A project is not currently linked to any rulebook activation.</li> 
+        </ol> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">You cannot delete a project if it is still being used by a rulebook activation.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">To delete a project, complete one of the following: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">From the <strong class="ph b">Projects</strong> list view, select the checkbox next to the desired project, and click the <span class="ph uicontrol button">More Actions</span> icon <strong class="ph b">⋮</strong> from the page menu.</li> 
+            <li class="li">From the <strong class="ph b">Projects</strong> list view, click the <span class="ph uicontrol button">More Actions</span> icon <strong class="ph b">⋮</strong> next to the desired project.</li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select <span class="ph uicontrol button">Delete project</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Permanently delete projects</strong> window, select <span class="ph uicontrol button">Yes, I confirm that I want to delete this project</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select <span class="ph uicontrol button">Delete project</span>.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title6" id="GUID-a3765204-d569-4016-9af9-adcbcb4f13eb"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Update revision on launch for projects</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">The <strong class="ph b"><span class="ph uicontrol">Update revision on launch</span></strong> option automatically syncs projects with source control. This ensures rulebook activations run the most current content, eliminating manual updates and the risk of outdated execution.</p> 
+       <div class="p">
+        Selecting automatic synchronization can ensure the following benefits: 
+        <ul class="ul" id="GUID-a3765204-d569-4016-9af9-adcbcb4f13eb__ul_1"> 
+         <li class="li">Rulebook activations that use the latest code from source control</li> 
+         <li class="li">Reduction in manual intervention and potential for human error</li> 
+         <li class="li">Consistent behavior with automation controller project management</li> 
+         <li class="li">Prevention of production delays caused by manual sync requirements</li> 
+        </ul> 
+       </div> 
+       <div class="p">
+        When you enable project synchronization, Event-Driven Ansible controller completes the following tasks: 
+        <ol class="ol" id="GUID-a3765204-d569-4016-9af9-adcbcb4f13eb__ol_1"> 
+         <li class="li">Checks the remote source control repository for updates</li> 
+         <li class="li">Synchronizes the project to the current revision</li> 
+         <li class="li">Updates cached rulebooks, roles, and collections</li> 
+         <li class="li">Launches or restarts the rulebook activation with updated content</li> 
+        </ol> 
+        <div class="note important note_important">
+         <span class="note__title">Important:</span> 
+         <div class="note__body"> 
+          <p dir="ltr" class="p">Event-Driven Ansible controller uses PostgreSQL for data storage and background task workers via the <code class="ph codeph">dispatcherd</code> service. When the workers are unavailable, you will not be able to create or sync projects, or enable rulebook activations.</p> 
+         </div>
+        </div> 
+       </div> 
+      </div> 
+      <article class="topic concept nested2" aria-labelledby="ariaid-title7" id="GUID-cdc75060-9922-4d8e-9eb0-55bd38440abb"> 
+       <h3 class="title topictitle3" id="ariaid-title7">Cache Timeout in Event-Driven Ansible projects</h3> 
+       <div class="body conbody">
+        <p class="shortdesc">The cache timeout setting controls how long Event-Driven Ansible controller reuses a previous project synchronization result before performing a new sync operation.</p> 
+        <div class="p">
+         Use cache timeout when: 
+         <ul class="ul" id="GUID-cdc75060-9922-4d8e-9eb0-55bd38440abb__ul_1"> 
+          <li class="li">Multiple rulebook activations use the same project</li> 
+          <li class="li">Activations launch or restart in rapid succession</li> 
+          <li class="li">You want to avoid redundant synchronization operations</li> 
+          <li class="li">Source control repository has rate limiting or performance constraints</li> 
+         </ul> 
+        </div> 
+        <div class="p">
+         When you configure cache timeout, the following occurs: 
+         <ol class="ol" id="GUID-cdc75060-9922-4d8e-9eb0-55bd38440abb__ol_1"> 
+          <li class="li">Synchronization request fetches content from source control</li> 
+          <li class="li">Result is cached for the specified timeout duration</li> 
+          <li class="li">Subsequent synchronization requests within the timeout period use cached content</li> 
+          <li class="li">After timeout expires, next synchronization request fetches fresh content</li> 
+         </ol> 
+        </div> 
+       </div> 
+      </article>
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title8" id="GUID-e264e1cd-4e68-4c61-a3ca-de8331031f93"> 
+      <h2 class="title topictitle2" id="ariaid-title8">Project and rulebook activation settings interdependencies</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Project and activation settings are interdependent. The <span class="ph uicontrol">Update revision on launch</span> and <span class="ph uicontrol">Auto-restart on project update</span> configurations combine to determine auto-restart behaviors and trigger specific user confirmation prompts.</p> 
+       <section class="section" id="GUID-e264e1cd-4e68-4c61-a3ca-de8331031f93__section_1"> 
+        <table class="table" id="GUID-e264e1cd-4e68-4c61-a3ca-de8331031f93__table_1">
+         <caption>
+          <span class="table--title-label">Table 1. </span><span class="title">Project and rulebook activation settings interdependencies</span>
+         </caption>
+         <colgroup>
+          <col style="width:25%">
+          <col style="width:25%">
+          <col style="width:25%">
+          <col style="width:25%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="GUID-e264e1cd-4e68-4c61-a3ca-de8331031f93__table_1__entry__1"><strong class="ph b">Triggered by</strong></th> 
+           <th class="entry" id="GUID-e264e1cd-4e68-4c61-a3ca-de8331031f93__table_1__entry__2"><strong class="ph b">Project State</strong></th> 
+           <th class="entry" id="GUID-e264e1cd-4e68-4c61-a3ca-de8331031f93__table_1__entry__3"><strong class="ph b">Activation State</strong></th> 
+           <th class="entry" id="GUID-e264e1cd-4e68-4c61-a3ca-de8331031f93__table_1__entry__4"><strong class="ph b">Resulting Behavior</strong></th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="GUID-e264e1cd-4e68-4c61-a3ca-de8331031f93__table_1__entry__1">Rulebook activation started or restarted</td> 
+           <td class="entry" headers="GUID-e264e1cd-4e68-4c61-a3ca-de8331031f93__table_1__entry__2"><span class="ph uicontrol">Enabled</span> (Update revision on launch <strong class="ph b">ON</strong>)</td> 
+           <td class="entry" headers="GUID-e264e1cd-4e68-4c61-a3ca-de8331031f93__table_1__entry__3"><span class="ph uicontrol">Enabled</span> or <span class="ph uicontrol">Disabled</span></td> 
+           <td class="entry" headers="GUID-e264e1cd-4e68-4c61-a3ca-de8331031f93__table_1__entry__4">A message informs you that the project is configured to update on restart, which might impact other activations sharing this project. You must confirm to proceed.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="GUID-e264e1cd-4e68-4c61-a3ca-de8331031f93__table_1__entry__1">Rulebook activation started or restarted</td> 
+           <td class="entry" headers="GUID-e264e1cd-4e68-4c61-a3ca-de8331031f93__table_1__entry__2"><span class="ph uicontrol">Disabled</span> (Update revision on launch <span class="ph uicontrol">OFF</span>)</td> 
+           <td class="entry" headers="GUID-e264e1cd-4e68-4c61-a3ca-de8331031f93__table_1__entry__3"><span class="ph uicontrol">Enabled</span>or <span class="ph uicontrol">Disabled</span></td> 
+           <td class="entry" headers="GUID-e264e1cd-4e68-4c61-a3ca-de8331031f93__table_1__entry__4">A standard message is displayed for the user to confirm they want to restart the rulebook activation.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="GUID-e264e1cd-4e68-4c61-a3ca-de8331031f93__table_1__entry__1">Project synced</td> 
+           <td class="entry" headers="GUID-e264e1cd-4e68-4c61-a3ca-de8331031f93__table_1__entry__2"><span class="ph uicontrol">Enabled </span>or <span class="ph uicontrol">Disabled</span></td> 
+           <td class="entry" headers="GUID-e264e1cd-4e68-4c61-a3ca-de8331031f93__table_1__entry__3"><span class="ph uicontrol">Enabled</span> (Auto-restart on project update <span class="ph uicontrol">ON</span>)</td> 
+           <td class="entry" headers="GUID-e264e1cd-4e68-4c61-a3ca-de8331031f93__table_1__entry__4">A message informs you that the associated rulebook activation is configured to restart when this project syncs. You must confirm the sync.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="GUID-e264e1cd-4e68-4c61-a3ca-de8331031f93__table_1__entry__1">Project synced</td> 
+           <td class="entry" headers="GUID-e264e1cd-4e68-4c61-a3ca-de8331031f93__table_1__entry__2"><span class="ph uicontrol">Enabled </span>or <span class="ph uicontrol">Disabled</span></td> 
+           <td class="entry" headers="GUID-e264e1cd-4e68-4c61-a3ca-de8331031f93__table_1__entry__3"><span class="ph uicontrol">Disabled</span> (Auto-restart on project update <span class="ph uicontrol">OFF</span>)</td> 
+           <td class="entry" headers="GUID-e264e1cd-4e68-4c61-a3ca-de8331031f93__table_1__entry__4">A standard message is displayed for the user to confirm they want to sync the project.</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

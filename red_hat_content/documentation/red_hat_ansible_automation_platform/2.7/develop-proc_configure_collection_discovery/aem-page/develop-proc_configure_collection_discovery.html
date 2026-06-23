@@ -1,0 +1,155 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="proc-configure-collection-discovery">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure collection discovery sources</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Configure Git content discovery and private automation hub collection discovery so that Ansible collections are available in execution environment builder and the collection catalog.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">You have completed GitHub or GitLab integration setup and credentials are configured.</li> 
+       <li class="li">You know which GitHub organizations or GitLab groups contain your Ansible collections.</li> 
+       <li class="li">If using private automation hub, you know the base URL and which repositories to sync.</li> 
+      </ul> 
+     </section> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">Two discovery providers are available:</p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Git content discovery</strong> (<code class="ph codeph">ansibleGitContents</code>) — crawls configured GitHub or GitLab organizations for <code class="ph codeph">galaxy.yml</code> files and registers discovered collections as catalog entities.</li> 
+       <li class="li"><strong class="ph b">Private automation hub</strong> (<code class="ph codeph">pahCollections</code>) — syncs collections from your private automation hub instance, including version and dependency metadata.</li> 
+      </ul> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Open your configuration file for editing.</span> 
+        <div class="itemgroup info"> 
+         <p class="p"><strong class="ph b">OpenShift — CLI:</strong></p> 
+         <pre class="pre codeblock"><code>$ helm get values &lt;release_name&gt; -n &lt;namespace&gt; -o yaml &gt; current-values.yaml
+$ vi current-values.yaml</code></pre> 
+         <p class="p"><strong class="ph b">OpenShift — web console:</strong></p> 
+         <p class="p">Navigate to <strong class="ph b">Helm &gt; Installed Helm Charts</strong>. Select your automation portal release and click <strong class="ph b">Upgrade</strong> to open the values editor.</p> 
+         <p class="p"><strong class="ph b">RHEL appliance:</strong></p> 
+         <pre class="pre codeblock"><code>$ sudo vi /etc/portal/configs/app-config/app-config.production.yaml</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Locate the content discovery section under <code class="ph codeph">catalog.providers.rhaap</code>.</span> 
+        <div class="itemgroup info"> 
+         <p class="p">Both <code class="ph codeph">ansibleGitContents</code> and <code class="ph codeph">pahCollections</code> are included in the chart but disabled by default (<code class="ph codeph">enabled: false</code>).</p> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">To enable Git content discovery, set <code class="ph codeph">ansibleGitContents.enabled</code> to <code class="ph codeph">true</code> and update the provider settings to match your environment.</span> 
+        <div class="itemgroup info"> 
+         <p class="p">You can add multiple provider entries — one for each organization or group you want to scan:</p> 
+         <pre class="pre codeblock"><code>catalog:
+  providers:
+    rhaap:
+      production:
+        sync:
+          ansibleGitContents:
+            enabled: true
+            schedule:
+              frequency: {minutes: 120}
+              timeout: {minutes: 30}
+            providers:
+              github:
+                - name: "github-public"
+                  host: github.com
+                  checkSSL: true
+                  orgs:
+                    - name: &lt;your_github_org&gt;
+                      branches: [main, master, dev]
+                      tags: ['v*']
+                      galaxyFilePaths: []
+                      schedule:
+                        frequency: {minutes: 120}
+                        timeout: {minutes: 30}
+              gitlab:
+                - name: "gitlab-public"
+                  host: gitlab.com
+                  checkSSL: true
+                  orgs:
+                    - name: &lt;your_gitlab_group&gt;
+                      schedule:
+                        frequency: {minutes: 120}
+                        timeout: {minutes: 30}</code></pre> 
+         <div class="note important note_important">
+          <span class="note__title">Important:</span> 
+          <div class="note__body">
+           <p class="p">The <code class="ph codeph">name</code> field (for example, <code class="ph codeph">github-public</code>) is a canonical identifier used internally by automation portal. It does not need to match your organization name. The <code class="ph codeph">host</code> field is the actual fully qualified domain name (FQDN) of your Git provider (for example, <code class="ph codeph">github.com</code> or <code class="ph codeph">github.internal.example.com</code>).</p>
+          </div>
+         </div> 
+         <p class="p">Update the following values for your environment:</p> 
+         <ul class="ul"> 
+          <li class="li">Replace <code class="ph codeph">&lt;your_github_org&gt;</code> with your GitHub organization name.</li> 
+          <li class="li">Replace <code class="ph codeph">&lt;your_gitlab_group&gt;</code> with your GitLab group name. Nested groups are supported.</li> 
+          <li class="li">Set <code class="ph codeph">checkSSL: false</code> for hosts with self-signed certificates.</li> 
+          <li class="li">Adjust <code class="ph codeph">branches</code>, <code class="ph codeph">tags</code>, and <code class="ph codeph">schedule</code> values for your environment.</li> 
+         </ul> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body">
+           <p class="p">Content discovery consumes repository provider API quota. Large organizations with frequent sync schedules may hit rate limits (HTTP 429), causing incomplete results. Increase <code class="ph codeph">schedule.frequency</code> or reduce the number of scanned organizations to stay within your repository provider's limits.</p>
+          </div>
+         </div> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body">
+           <p class="p">The <code class="ph codeph">crawlDepth</code> parameter controls how many directory levels deep the provider searches for <code class="ph codeph">galaxy.yml</code> files within each repository. The default is <code class="ph codeph">1</code>, which discovers only collections with <code class="ph codeph">galaxy.yml</code> at the repository root. Collections discovered at deeper levels appear in the catalog but cannot be installed by <code class="ph codeph">ansible-galaxy</code> or used in EE builds. To adjust crawl depth, add it to the org configuration:</p> 
+           <pre class="pre codeblock"><code>orgs:
+  - name: &lt;your_github_org&gt;
+    crawlDepth: 1</code></pre> 
+          </div>
+         </div> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">To enable private automation hub collection discovery, set <code class="ph codeph">pahCollections.enabled</code> to <code class="ph codeph">true</code> and update the repository names.</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>          pahCollections:
+            enabled: true
+            repositories:
+              - name: rh-certified
+                schedule:
+                  frequency: {days: 1}
+                  timeout: {minutes: 60}
+              - name: validated
+                schedule:
+                  frequency: {days: 1}
+                  timeout: {minutes: 60}
+              - name: published
+                schedule:
+                  frequency: {days: 1}
+                  timeout: {minutes: 60}</code></pre> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body">
+           <p class="p">Synchronization time depends on the number of collections and metadata in your configured repositories. Large repositories can take significantly longer. To reduce sync time, configure your private automation hub to sync only the collections your teams need.</p>
+          </div>
+         </div> 
+         <p class="p">When <code class="ph codeph">pahCollections</code> is configured and your private automation hub base URL is set (via <code class="ph codeph">ansible.rhaap.baseUrl</code>), automation portal automatically generates <code class="ph codeph">galaxy_servers</code> entries in the <code class="ph codeph">ansible.cfg</code> file that ansible-creator produces when a user creates an EE definition.</p> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Apply the configuration changes. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_apply_configuration_changes" title="Apply configuration changes after modifying your Helm chart values or RHEL appliance configuration file for execution environment builder.">Apply configuration changes</a>.</span> </li>
+      </ol>
+     </section> 
+     <section class="section postreq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">What to do next</h2>
+      </div> 
+      <div class="note tip note_tip">
+       <span class="note__title">Tip:</span> 
+       <div class="note__body">
+        <p class="p">For a complete working example of all discovery settings in context, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_ee_builder_helm_values" title="A complete Helm chart values configuration for execution environment builder with GitHub App authentication, content discovery, and private automation hub enabled.">Complete Helm chart values reference</a>.</p>
+       </div>
+      </div> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

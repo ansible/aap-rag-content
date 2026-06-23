@@ -1,0 +1,183 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="controller-setting-up-insights"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Integrate with Red Hat Lightspeed (formerly Insights)</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">Automation controller supports integration with Red Hat Lightspeed.</p> 
+      <p class="p">When a host is registered with Red Hat Lightspeed, it is scanned continually for vulnerabilities and known configuration conflicts. Each problem identified can have an associated fix in the form of an Ansible Playbook.</p> 
+      <p class="p">Red Hat Lightspeed users create a maintenance plan to group the fixes and can create a playbook to mitigate the problems. Automation controller tracks the maintenance plan playbooks through a Red Hat Lightspeed project.</p> 
+      <p class="p">Authentication to Red Hat Lightspeed through Basic Authorization is backed by a special credential, which must first be established in automation controller.</p> 
+      <p class="p">To run a Red Hat Lightspeed maintenance plan, you need a Red Hat Lightspeed project and inventory.</p> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="controller-create-insights-credential"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Create Red Hat Lightspeed credentials</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">To create a Red Hat Lightspeed credential, use the following procedure.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">To use token-based authentication, you must <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_hybrid_cloud_console/1-latest/html/creating_and_managing_service_accounts/proc-ciam-svc-acct-overview-creating-service-acct#proc-ciam-svc-acct-create-creating-service-acct" target="_blank" rel="external noopener">create a Red Hat service account</a> to generate a <strong class="ph b">Client ID</strong> and <strong class="ph b">Client secret</strong>.</li> 
+         <li class="li">Assign this service account to the appropriate <strong class="ph b">User Access</strong> group with necessary permissions.</li> 
+        </ul> 
+        <p class="p">To enable integration between Ansible Automation Platform and Red Hat Lightspeed, assign the service account the following permissions:</p> 
+        <ul class="ul"> 
+         <li class="li"><strong class="ph b">inventory:hosts:read</strong> (included in the Inventory Hosts viewer role)</li> 
+         <li class="li"><strong class="ph b">patch:read</strong> (included in the Patch viewer role)</li> 
+         <li class="li"><strong class="ph b">remediations:remediation:read</strong> and <strong class="ph b">playbook-dispatcher:run:read</strong> (included in the Remediations user role)</li> 
+        </ul> 
+        <p class="p">You might consider associating your service account with an existing user access group that already has the required permissions, or creating a new user access group.</p> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">In adherence to security guidelines, service accounts are not automatically included in the default access group. To grant access, you must manually add them to the appropriate user access groups.</p> 
+          <p class="p">If you are not an organization administrator, you can create a service account and then ask your administrator to add your account to the appropriate user access groups.</p> 
+         </div> 
+        </div> 
+        <p class="p">After you have created a service account and assigned it the appropriate permissions, you can create a new credential for use with Red Hat Lightspeed.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Credentials</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create credential</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Enter the appropriate details in the following fields: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Name</strong>: Enter the name of the credential.</li> 
+            <li class="li">Optional: <strong class="ph b">Description</strong>: Enter a description for the credential.</li> 
+            <li class="li">Optional: <strong class="ph b">Organization</strong>: Enter the name of the organization with which the credential is associated, or click the search <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/search.png" width="15" alt="Search"> icon and select it from the <strong class="ph b">Select organization</strong> window.</li> 
+            <li class="li"><strong class="ph b">Credential type</strong>: Enter <strong class="ph b">Red Hat Lightspeed</strong> or select it from the list. 
+             <div class="note note note_note"> <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">Use the <strong class="ph b">Username</strong> and <strong class="ph b">Password</strong> fields for Basic authentication. You can leave these blank if using <strong class="ph b">Client ID</strong> and <strong class="ph b">Client secret</strong>.</p> 
+              </div> 
+             </div> </li> 
+            <li class="li"><strong class="ph b">Client ID</strong>: Enter the client ID you received when you created your service account.</li> 
+            <li class="li"><strong class="ph b">Client secret</strong>: Enter the client secret you received when you created your service account.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create credential</span>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">You can now use this credential in an <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-inv-source-rhlightspeed" title="You can create an inventory source that uses Red Hat Lightspeed as the source of hosts.">Source an inventory from Red Hat Lightspeed</a> and <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_ug_controller_setting_up_insights#controller-create-insights-project" title="Create an automation controller project linked to Red Hat Lightspeed and retrieve remediation playbooks. This streamlines your efforts to address vulnerabilities and keep system configurations.">Red Hat Lightspeed project</a>.</p> 
+          </div> </li> 
+        </ol> 
+       </section> 
+       <section class="section tasktroubleshooting"> 
+        <ul class="ul"> 
+         <li class="li">If you receive a project sync failure, see the steps in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_ug_controller_setting_up_insights#controller-remediate-insights-inventory" title="Remediation of a Red Hat Lightspeed inventory enables automation controller to run Red Hat Lightspeed playbooks with a single click.">Remediating a Red Hat Lightspeed inventory</a> and check your analytics logs.</li> 
+        </ul> 
+        <div class="note important note_important"> <span class="note__title">Important:</span> 
+         <div class="note__body"> 
+          <p class="p">You must recreate existing credentials and reassociate them with existing projects and inventory sources to support token-based authentication.</p> 
+         </div> 
+        </div> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relinfo"> <strong>Related information</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_hybrid_cloud_console/1-latest/html/creating_and_managing_service_accounts/proc-ciam-svc-acct-overview-creating-service-acct" target="_blank" rel="external noopener">Creating and Managing Service Accounts</a></li> 
+         <li class="linklist"><a class="link" href="https://www.youtube.com/watch?v=UvNcmJsbg1w" target="_blank" rel="external noopener">How to use Service Accounts on the Hybrid Cloud Console</a></li> 
+         <li class="linklist"><a class="link" href="https://access.redhat.com/articles/7108804" target="_blank" rel="external noopener">Support for token-based authentication via Service Account for Red Hat Lightspeed in Ansible Automation Platform</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="controller-create-insights-project"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Create a Red Hat Lightspeed project</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Create an automation controller project linked to Red Hat Lightspeed and retrieve remediation playbooks. This streamlines your efforts to address vulnerabilities and keep system configurations.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Projects</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create project</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Enter the appropriate details in the following fields. Note that the following fields require specific Red Hat Lightspeed related entries: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Name</strong>: Enter the name for your Red Hat Lightspeed project.</li> 
+            <li class="li">Optional: <strong class="ph b">Description</strong>: Enter a description for the project.</li> 
+            <li class="li"><strong class="ph b">Organization</strong>: Enter the name of the organization with which the credential is associated, or click the search <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/search.png" width="15" alt="Search"> icon and select it from the <strong class="ph b">Select organization</strong> window.</li> 
+            <li class="li">Optional: <strong class="ph b">Execution environment</strong>: The execution environment that is used for jobs that use this project.</li> 
+            <li class="li"><strong class="ph b">Source control type</strong>: Select <strong class="ph b">Red Hat Lightspeed</strong>.</li> 
+            <li class="li">Optional: <strong class="ph b">Content signature validation credential</strong>: Enable content signing to verify that the content has remained secure when a project is synced.</li> 
+            <li class="li"><strong class="ph b">Red Hat Lightspeed credential</strong>: This is pre-populated with the Red Hat Lightspeed credential you created before. If not, enter the credential, or click the search <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/search.png" width="15" alt="Search"> icon and select it from the <strong class="ph b">Select Red Hat Lightspeed Credential</strong> window.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the update options for this project from the <strong class="ph b">Options</strong> field and provide any additional values, if applicable. For more information about each option click the tooltip <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/question-circle.png" width="15" alt="tooltip"> icon next to each one. <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-insights-create-project-insights-form.png" alt="Red Hat Lightspeed create project"><br></span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create project</span>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">All SCM and project synchronizations occur automatically the first time you save a new project.</p> 
+          </div> </li> 
+        </ol> 
+       </section> 
+       <section class="section postreq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">What to do next</h3> 
+        </div> 
+        <p class="p">If you want them to be updated to what is current in Red Hat Lightspeed, manually update the SCM-based project by clicking the <strong class="ph b">Update</strong><img class="image" height="20" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-update-button.png" width="20" alt="Update"> icon under the project’s available actions.</p> 
+        <p class="p">This process syncs your Red Hat Lightspeed project with your Red Hat Lightspeed account solution. Note that the status dot beside the name of the project updates once the sync has run.</p> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title4" id="controller-create-insights-inventory"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Create a Red Hat Lightspeed inventory</h2> 
+      <p class="shortdesc">The Red Hat Lightspeed playbook contains a <code class="ph codeph">hosts:</code> line where the value is the hostname supplied to Red Hat Lightspeed, which can be different from the hostname supplied to automation controller.</p> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="controller-remediate-insights-inventory"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Remediate a Red Hat Lightspeed inventory</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Remediation of a Red Hat Lightspeed inventory enables automation controller to run Red Hat Lightspeed playbooks with a single click.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">You can do this by creating a job template to run the Red Hat Lightspeed remediation.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation menu, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Templates</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">On the <strong class="ph b">Templates</strong> list view, click <span class="ph uicontrol button">Create template</span> and select from the list.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Enter the appropriate details in the following fields. Note that the following fields require specific Red Hat Lightspeed related entries: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Name</strong>: Enter the name of your Maintenance Plan.</li> 
+            <li class="li">Optional: <strong class="ph b">Description</strong>: Enter a description for the job template.</li> 
+            <li class="li"><strong class="ph b">Job Type</strong>: If not already populated, select <strong class="ph b">Run</strong> from the job type list.</li> 
+            <li class="li"><strong class="ph b">Inventory</strong>: Select the Red Hat Lightspeed inventory that you previously created.</li> 
+            <li class="li"><strong class="ph b">Project</strong>: Select the Red Hat Lightspeed project that you previously created.</li> 
+            <li class="li">Optional: <strong class="ph b">Execution Environment</strong>: The container image to be used for execution.</li> 
+            <li class="li"><strong class="ph b">Playbook</strong>: Select a playbook associated with the Maintenance Plan that you want to run from the playbook list.</li> 
+            <li class="li">Optional: <strong class="ph b">Credentials</strong>: Enter the credential to use for this project or click the search (<img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/magnify.png" width="15" alt="Search">) icon and select it from the pop-up window. The credential does not have to be a Red Hat Lightspeed credential.</li> 
+            <li class="li"><strong class="ph b">Verbosity</strong>: Keep the default setting, or select the required verbosity from the list. <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-insights-create-job-template.png" alt="Red Hat Lightspeed job template"><br></li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create job template</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click the launch <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/rightrocket.png" width="15" alt="Launch"> icon to launch the job template.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section result"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Results</h3> 
+        </div> 
+        <p class="p">When complete, the job results in the <strong class="ph b">Job Details</strong> page.</p> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

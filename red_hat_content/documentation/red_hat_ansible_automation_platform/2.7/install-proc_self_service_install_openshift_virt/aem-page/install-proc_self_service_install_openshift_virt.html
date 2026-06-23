@@ -1,0 +1,184 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="self-service-install-openshift-virt">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Install Ansible automation portal on Red Hat OpenShift Virtualization</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Deploy the Ansible automation portal appliance on Red Hat OpenShift Virtualization to run the portal as a virtual machine alongside container workloads within your Red Hat OpenShift Container Platform cluster.</p> 
+     <p class="p">This approach enables you to use your existing OpenShift infrastructure to host the portal.</p> 
+     <p class="p">For more information about Red Hat OpenShift Virtualization, see the About OpenShift Virtualization documentation.</p> 
+     <p class="p">You can install the appliance using the CLI or the OpenShift web console. Both methods require the following prerequisites.</p> 
+     <section class="section" id="self-service-install-openshift-virt__prerequisites">
+      <h2 class="title sectiontitle">Prerequisites</h2> 
+      <ul class="ul"> 
+       <li class="li">Red Hat OpenShift Container Platform cluster (4.x) with Red Hat OpenShift Virtualization operator installed and configured.</li> 
+       <li class="li">Cluster administrator or equivalent permissions to create VirtualMachine resources.</li> 
+       <li class="li">A storage class configured that supports ReadWriteOnce (RWO) access mode for virtual machine disks.</li> 
+       <li class="li">The Ansible automation portal disk image in QCOW2 format.</li> 
+       <li class="li">The <code class="ph codeph">virtctl</code> CLI tool installed. You can download it from the OpenShift web console under <strong class="ph b">Virtualization</strong> &gt; <strong class="ph b">Overview</strong> &gt; <strong class="ph b">Download virtctl</strong>.</li> 
+       <li class="li">Access to the OpenShift web console or <code class="ph codeph">oc</code> CLI tool.</li> 
+       <li class="li">Your cloud-init user-data file prepared with Ansible Automation Platform credentials and SSH keys.</li> 
+       <li class="li">Sufficient cluster resources: minimum 16 GiB allocatable memory for the virtual machine.</li> 
+      </ul> 
+     </section> 
+     <section class="section" id="self-service-install-openshift-virt__install-using-cli">
+      <h2 class="title sectiontitle">Install using the CLI</h2> 
+      <ol class="ol"> 
+       <li class="li">Create a project for the deployment: <pre class="pre codeblock language-terminal"><code>$ oc new-project &lt;project-name&gt;</code></pre> </li> 
+       <li class="li">Upload the QCOW2 disk image using <code class="ph codeph">virtctl</code>: <pre class="pre codeblock language-terminal"><code>$ virtctl image-upload dv &lt;disk-datavolume-name&gt; \
+  --size=50Gi \
+  --image-path=/path/to/disk.qcow2 \
+  --uploadproxy-url=https://cdi-uploadproxy-openshift-cnv.apps.&lt;cluster-domain&gt; \
+  --wait-secs=600 \
+  -n &lt;project-name&gt;</code></pre> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col>
+          <col>
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="self-service-install-openshift-virt__install-using-cli__entry__1">Option</th> 
+           <th class="entry" id="self-service-install-openshift-virt__install-using-cli__entry__2">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="self-service-install-openshift-virt__install-using-cli__entry__1"><code class="ph codeph">--size</code></td> 
+           <td class="entry" headers="self-service-install-openshift-virt__install-using-cli__entry__2">Set to at least 50 Gi. The QCOW2 expands during conversion to raw format and requires additional space.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="self-service-install-openshift-virt__install-using-cli__entry__1"><code class="ph codeph">--insecure</code></td> 
+           <td class="entry" headers="self-service-install-openshift-virt__install-using-cli__entry__2">Add this flag if the Containerized Data Importer (CDI) upload proxy uses a self-signed certificate. Omit it when the proxy has a trusted certificate.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="self-service-install-openshift-virt__install-using-cli__entry__1"><code class="ph codeph">--force-bind</code></td> 
+           <td class="entry" headers="self-service-install-openshift-virt__install-using-cli__entry__2">Add this flag if the storage class uses <code class="ph codeph">WaitForFirstConsumer</code> volume binding mode.</td> 
+          </tr> 
+         </tbody>
+        </table> <p class="p">Wait for both upload and processing to complete. The "Processing completed successfully" message confirms that CDI converted the image. For more information about CDI, see the Managing data volumes section of the Red Hat OpenShift Virtualization documentation.</p> </li> 
+       <li class="li">Create a Secret from the cloud-init file: <pre class="pre codeblock language-terminal"><code>$ oc create secret generic &lt;cloudinit-secret-name&gt; \
+  --from-file=userdata=cloud-init-user-data.yaml \
+  -n &lt;project-name&gt;</code></pre> </li> 
+       <li class="li">Create a VirtualMachine manifest and save it as a YAML file (for example, <code class="ph codeph">portal-vm.yaml</code>). <p class="p">The following example shows a minimal configuration. Replace the resource names and namespace to match your environment:</p> <pre class="pre codeblock language-yaml"><code>apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: &lt;vm-name&gt;
+  namespace: &lt;project-name&gt;
+spec:
+  runStrategy: Always
+  template:
+    spec:
+      domain:
+        devices:
+          disks:
+            - disk:
+                bus: virtio
+              name: rootdisk
+            - disk:
+                bus: virtio
+              name: cloudinitdisk
+          interfaces:
+            - masquerade: {}
+              name: default
+        resources:
+          requests:
+            memory: 16Gi
+      networks:
+        - name: default
+          pod: {}
+      volumes:
+        - name: rootdisk
+          dataVolume:
+            name: &lt;disk-datavolume-name&gt;
+        - name: cloudinitdisk
+          cloudInitNoCloud:
+            secretRef:
+              name: &lt;cloudinit-secret-name&gt;</code></pre> <p class="p">The <code class="ph codeph">dataVolume</code> name must match the DataVolume created by <code class="ph codeph">virtctl image-upload</code> in step 2. The <code class="ph codeph">secretRef</code> name must match the Secret created in step 3.</p> </li> 
+       <li class="li">Apply the manifest: <pre class="pre codeblock language-terminal"><code>$ oc apply -f &lt;vm-manifest&gt;.yaml</code></pre> </li> 
+       <li class="li">Wait for the VM to reach <code class="ph codeph">Running</code> status: <pre class="pre codeblock language-terminal"><code>$ oc get vmi -n &lt;project-name&gt; -w</code></pre> <p class="p">The VM is ready when PHASE shows <code class="ph codeph">Running</code> and READY shows <code class="ph codeph">True</code>.</p> </li> 
+       <li class="li">Create a Service and Route to expose Ansible automation portal: <pre class="pre codeblock language-terminal"><code>$ virtctl expose vm &lt;vm-name&gt; --port=443 --name=&lt;service-name&gt; -n &lt;project-name&gt;
+$ oc create route passthrough &lt;route-name&gt; --service=&lt;service-name&gt; --port=443 -n &lt;project-name&gt;
+$ ROUTE_HOST=$(oc get route &lt;route-name&gt; -o jsonpath='{.spec.host}' -n &lt;project-name&gt;)
+$ echo "Automation portal URL: https://$ROUTE_HOST"</code></pre> </li> 
+       <li class="li">Update the Ansible automation portal user-accessible URL to match the route. <p class="p">SSH into the VM:</p> <pre class="pre codeblock language-terminal"><code>$ virtctl ssh &lt;username&gt;@vmi/&lt;vm-name&gt; -n &lt;project-name&gt;</code></pre> <p class="p">Edit the configuration file:</p> <pre class="pre codeblock language-terminal"><code>$ sudo vi /etc/portal/configs/app-config/app-config.production.yaml</code></pre> <p class="p">Set the following three values, replacing <code class="ph codeph">&lt;route-host&gt;</code> with the route hostname from step 7:</p> <pre class="pre codeblock language-yaml"><code>app:
+  baseUrl: "https://&lt;route-host&gt;"
+backend:
+  baseUrl: "https://&lt;route-host&gt;"
+  cors:
+    origin: "https://&lt;route-host&gt;"</code></pre> <p class="p">Save the file and restart the Ansible automation portal service. Restarting the <code class="ph codeph">portal</code> service also restarts <code class="ph codeph">postgres</code> and <code class="ph codeph">devtools</code> due to service dependencies:</p> <pre class="pre codeblock language-terminal"><code>$ sudo systemctl restart portal</code></pre> </li> 
+      </ol> 
+      <p class="p"><strong class="ph b">Verification</strong></p> 
+      <ul class="ul"> 
+       <li class="li">Verify that the virtual machine is running: <pre class="pre codeblock language-terminal"><code>$ oc get vmi -n &lt;project-name&gt;</code></pre> <p class="p">The output shows the virtual machine in <code class="ph codeph">Running</code> phase with <code class="ph codeph">READY</code> status set to <code class="ph codeph">True</code>.</p> </li> 
+       <li class="li">SSH into the appliance and verify that all services are running: <pre class="pre codeblock language-terminal"><code>$ sudo ansible-portal status</code></pre> </li> 
+       <li class="li">Access the portal URL from your browser.</li> 
+      </ul> 
+     </section> 
+     <section class="section" id="self-service-install-openshift-virt__install-using-web-console">
+      <h2 class="title sectiontitle">Install using the OpenShift web console</h2> 
+      <p class="p">You can also deploy the appliance from the OpenShift web console without using the CLI.</p> 
+      <p class="p"><strong class="ph b">Prerequisites</strong></p> 
+      <ul class="ul"> 
+       <li class="li">Red Hat OpenShift Container Platform with the Red Hat OpenShift Virtualization operator installed and configured.</li> 
+       <li class="li">Cluster administrator or equivalent permissions.</li> 
+       <li class="li">The Ansible automation portal QCOW2 disk image available on your local machine.</li> 
+       <li class="li">Your cloud-init user-data file prepared with Ansible Automation Platform credentials and SSH keys.</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Procedure</strong></p> 
+      <ol class="ol"> 
+       <li class="li">Go to <strong class="ph b">Storage</strong> &gt; <strong class="ph b">PersistentVolumeClaims</strong>.</li> 
+       <li class="li">Create a PVC using <strong class="ph b">Data upload form</strong>. Upload the QCOW2 image. Set the size to at least 50 Gi.</li> 
+       <li class="li">Go to <strong class="ph b">Workloads</strong> &gt; <strong class="ph b">Secrets</strong>. Create a key/value secret with a key named <code class="ph codeph">userdata</code>. Paste the cloud-init user-data contents as the value.</li> 
+       <li class="li">Go to <strong class="ph b">Virtualization</strong> &gt; <strong class="ph b">VirtualMachines</strong>. Click <strong class="ph b">Create VirtualMachine</strong> &gt; <strong class="ph b">From YAML</strong>. Apply the manifest from the CLI procedure.</li> 
+       <li class="li">Wait for the VM status to change to <strong class="ph b">Running</strong>.</li> 
+       <li class="li">Go to <strong class="ph b">Networking</strong> &gt; <strong class="ph b">Services</strong>. Create a service targeting port 443 on the VM.</li> 
+       <li class="li">Go to <strong class="ph b">Networking</strong> &gt; <strong class="ph b">Routes</strong>. Create a passthrough TLS route for the service. Note the route hostname.</li> 
+       <li class="li">SSH into the VM. Set <code class="ph codeph">app.baseUrl</code>, <code class="ph codeph">backend.baseUrl</code>, and <code class="ph codeph">backend.cors.origin</code> to <code class="ph codeph">https://&lt;route-hostname&gt;</code>.</li> 
+       <li class="li">Restart the portal service: <pre class="pre codeblock language-terminal"><code>$ sudo systemctl restart portal</code></pre> </li> 
+      </ol> 
+      <p class="p"><strong class="ph b">Verification</strong></p> 
+      <ul class="ul"> 
+       <li class="li">SSH into the VM and confirm that all services are running: <pre class="pre codeblock language-terminal"><code>$ sudo ansible-portal status</code></pre> </li> 
+       <li class="li">Access the portal URL from your browser.</li> 
+      </ul> 
+      <p class="p">If you encounter upload, boot, or scheduling failures, see Troubleshooting RHEL appliances.</p> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relconcepts">
+      <strong>Related concepts</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_initial_config_wizard" title="Provide initial configuration for the Ansible automation portal appliance so that portal services can start and connect to Ansible Automation Platform.">Configure the appliance at first boot</a></li>
+      </ul>
+     </div>
+     <div class="linklist reltasks">
+      <strong>Related tasks</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_connect_verify" title="After deploying the Ansible automation portal appliance, update the OAuth redirect URI, verify service health, and sign in to the portal.">Connect and verify Ansible automation portal</a></li>
+      </ul>
+     </div>
+     <div class="linklist relref">
+      <strong>Related reference</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_self_service_rhel_troubleshooting" title="Common issues and solutions for deploying and managing Ansible automation portal RHEL appliances.">Troubleshooting RHEL appliances</a></li>
+      </ul>
+     </div>
+     <div class="linklist relinfo">
+      <strong>Related information</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html-single/virtualization/index#about-virt" target="_blank" rel="external noopener">About OpenShift Virtualization</a></li>
+       <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/virtualization/storage#virt-using-cdi-to-import-data-volumes" target="_blank" rel="external noopener">Managing data volumes</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

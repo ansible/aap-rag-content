@@ -1,0 +1,37 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="assembly-controller-logging-aggregation">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Send log files to third-party aggregation services</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Logging enables sending detailed logs to third-party aggregation services. These feeds provide insights into Ansible Automation Platform controller use and technical trends. Data can be used to analyze infrastructure events, monitor for anomalies, and correlate events across multiple services.</p> 
+     <p class="p">The types of data that are most useful to automation controller are job fact data, job events or job runs, activity stream data, and log messages. The data is sent in JSON format over a HTTP connection by using minimal service-specific adjustments engineered in a custom handler or through an imported library.</p> 
+     <p class="p">The version of <code class="ph codeph">rsyslog</code> that is installed by automation controller does not include the following <code class="ph codeph">rsyslog</code> modules:</p> 
+     <ul class="ul"> 
+      <li class="li">rsyslog-udpspoof.x86_64</li> 
+      <li class="li">rsyslog-libdbi.x86_64</li> 
+     </ul> 
+     <p class="p">After installing automation controller, you must only use the automation controller provided <code class="ph codeph">rsyslog</code> package for any logging outside of automation controller that might have previously been done with the RHEL provided <code class="ph codeph">rsyslog</code> package.</p> 
+     <p class="p">If you already use <code class="ph codeph">rsyslog</code> for logging system logs on the automation controller instances, you can continue to use <code class="ph codeph">rsyslog</code> to handle logs from outside of automation controller by running a separate <code class="ph codeph">rsyslog</code> process (using the same version of rsyslog that automation controller uses), and pointing it to a separate <code class="ph codeph">/etc/rsyslog.conf</code> file.</p> 
+     <p class="p">Use the <code class="ph codeph">/api/v2/settings/logging/</code> endpoint to configure how the automation controller <code class="ph codeph">rsyslog</code> process handles messages that have not yet been sent if your external logger goes offline:</p> 
+     <ul class="ul"> 
+      <li class="li"><code class="ph codeph">LOG_AGGREGATOR_ACTION_MAX_DISK_USAGE_GB</code>: Maximum disk persistence for rsyslogd action queuing in GB. <p class="p">Specifies the amount of data to store (in gigabytes) during an outage of the external log aggregator (defaults to 1).</p> <p class="p">Equivalent to the <code class="ph codeph">rsyslogd queue.maxDiskSpace</code> setting.</p> </li> 
+      <li class="li"><code class="ph codeph">LOG_AGGREGATOR_ACTION_QUEUE_SIZE</code>: Maximum number of messages that can be stored in the log action queue. <p class="p">Defines how large the rsyslog action queue can grow in number of messages stored. This can have an impact on memory use. When the queue reaches 75% of this number, the queue starts writing to disk (<code class="ph codeph">queue.highWatermark</code> in <code class="ph codeph">rsyslog</code>). When it reaches 90%, <code class="ph codeph">NOTICE</code>, <code class="ph codeph">INFO</code>, and <code class="ph codeph">DEBUG</code> messages start to be discarded (<code class="ph codeph">queue.discardMark</code> with 'queue.discardSeverity=5`).</p> <p class="p">Equivalent to the <code class="ph codeph">rsyslogd queue.size</code> setting on the action.</p> </li> 
+     </ul> 
+     <p class="p">It stores files in the directory specified by <code class="ph codeph">LOG_AGGREGATOR_MAX_DISK_USAGE_PATH</code>.</p> 
+     <ul class="ul"> 
+      <li class="li"><code class="ph codeph">LOG_AGGREGATOR_MAX_DISK_USAGE_PATH</code>: Specifies the location to store logs that should be retried after an outage of the external log aggregator (defaults to <code class="ph codeph">/var/lib/awx</code>). Equivalent to the <code class="ph codeph">rsyslogd queue.spoolDirectory</code> setting.</li> 
+     </ul> 
+     <p class="p">For example, if <code class="ph codeph">Splunk</code> goes offline, <code class="ph codeph">rsyslogd</code> stores a queue on the disk until <code class="ph codeph">Splunk</code> comes back online. By default, it stores up to 1GB of events (while Splunk is offline) but you can increase that to more than 1GB if necessary, or change the path where you save the queue.</p> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-ref_controller_loggers#ref-controller-loggers">Configure logging components</a></strong><br>Automation controller provides several loggers that can be configured to deliver structured log data for analysis and monitoring.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-ref_controller_log_aggregators#ref-controller-log-aggregators">Configure third-party services</a></strong><br>The logging aggregator service works with the following monitoring and data analysis systems:</li>
+     </ul>
+    </nav>
+   </article>
+  </main>
+ </body>
+</html>

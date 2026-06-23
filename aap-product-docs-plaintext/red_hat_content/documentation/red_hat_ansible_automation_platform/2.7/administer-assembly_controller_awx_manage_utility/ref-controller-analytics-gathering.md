@@ -1,0 +1,14 @@
+# Use awx-manage to access automation controller information
+## Analytics gathering
+
+Use this command to gather analytics on-demand outside of the predefined window (the default is 4 hours):
+
+`$ awx-manage gather_analytics --ship`
+
+For customers with disconnected environments who want to collect usage information about unique hosts automated across a time period, use this command:
+
+`awx-manage host_metric --since YYYY-MM-DD --json`
+
+The `--since` parameter is optional.
+
+The `--json` flag specifies the output format and is optional.

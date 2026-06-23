@@ -1,0 +1,44 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-232ed82b-3a15-4363-8bb3-6f7f6c0f9104">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Update or replace the BYOK image</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">When your organization's documentation changes, you can update or replace the deployed BYOK image with the latest image, or remove it entirely.</p> 
+     <section class="section prereq" id="GUID-232ed82b-3a15-4363-8bb3-6f7f6c0f9104__prereq_1">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div>You have deployed a BYOK RAG image on a container-based or operator-based AAP 2.7 installation.
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step"> <span class="ph cmd">Rebuild the BYOK RAG image using the latest version of your documentation by following the steps in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-build_a_searchable_knowledge_base_image_from_your_documentation" title="The rag-content tool converts your documentation into a vector database that the intelligent assistant uses to retrieve relevant content when responding to queries. Use this procedure to download the tool version best suited to your system's hardware.">Build a searchable knowledge base image from your documentation</a>.</span> </li>
+       <li class="li step"> <span class="ph cmd">Publish the new version to your registry.</span> </li>
+       <li class="li step"> <span class="ph cmd">Update the BYOK image reference in your Ansible configuration.</span> </li>
+       <li class="li step"> <span class="ph cmd">Restart the intelligent assistant service (rerun the installer) to pick up the new image. The BYOK configuration persists and does not require reconfiguration after restarting.</span> </li>
+      </ol>
+     </section> 
+    </div> 
+    <article class="topic task nested1" aria-labelledby="ariaid-title2" id="task_1"> 
+     <h2 class="title topictitle2" id="ariaid-title2">Remove the BYOK image</h2> 
+     <div class="body taskbody">
+      <p class="shortdesc">An administrator can remove the deployed BYOK RAG image. With this removal, the intelligent assistant reverts to using the default Ansible Automation Platform 2.7 documentation.</p> 
+      <section id="task_1__steps_1">
+       <div class="tasklabel">
+        <h3 class="sectiontitle tasklabel">Procedure</h3>
+       </div>
+       <ol class="ol steps" id="task_1__steps_1">
+        <li class="li step"> <span class="ph cmd">Remove the BYOK image configuration from your installation variables.</span> </li>
+        <li class="li step"> <span class="ph cmd">Re-run the installer, which restarts the service with the new configuration. The intelligent assistant resumes operating with only the default Ansible Automation Platform 2.7 documentation RAG pipeline.</span> </li>
+       </ol>
+      </section> 
+     </div> 
+    </article> 
+   </article>
+  </main>
+ </body>
+</html>

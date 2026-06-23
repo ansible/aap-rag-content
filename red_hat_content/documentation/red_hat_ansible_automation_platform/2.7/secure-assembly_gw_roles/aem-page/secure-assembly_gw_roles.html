@@ -1,0 +1,103 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-gw-roles"> 
+     <h1 class="title topictitle1" id="ariaid-title1">View, create, and assign roles to grant user access to resources</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">Assign roles to teams or users to grant them targeted access to Red Hat Ansible Automation Platform resources. Defining these permissions allows you to safely govern who can view, modify, or execute tasks on resources like projects and inventories.</p> 
+      <p class="p">Roles define permissions for a specific resource, centralizing all access to that resource through the role itself. This design makes roles reusable units that enable administrators to share defined behaviors among many resources or with different users.</p> 
+      <p class="p">As an administrator, you have the option of using default predefined roles, or you can create roles based on your organization’s needs.</p> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-gw-roles"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Display roles</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can display the roles assigned to each component resource from the <span class="ph menucascade"><span class="ph uicontrol">Access Management</span></span> menu.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">Roles are labeled with their associated Ansible Automation Platform component and function. These components align with Ansible Automation Platform services and the side navigation structure in the user interface. Component labels can be understood as follows:</p> 
+        <ul class="ul"> 
+         <li class="li"><strong class="ph b">Automation Execution</strong> refers to automation controller</li> 
+         <li class="li"><strong class="ph b">Automation Decisions</strong> refers to Event-Driven Ansible</li> 
+         <li class="li"><strong class="ph b">Automation Content</strong> refers to automation hub</li> 
+        </ul> 
+        <p class="p">Roles created at the level of the organization can be associated with multiple components because they group together permissions from automation controller (Automation Execution) and Event-Driven Ansible (Automation Decisions). Only organization roles can span multiple components.</p> 
+        <p class="p">A similar role entity for Automation Content is a "system" role, which gives access to all of the specified resource types in Automation Content.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Roles</span></span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">From the table header, you can sort the list of roles by using the arrows for <strong class="ph b">Name</strong>, <strong class="ph b">Description</strong>, <strong class="ph b">Component</strong>, <strong class="ph b">Resource Type</strong>, and <strong class="ph b">Role Creation</strong>, or by making sort selections in the <strong class="ph b">Sort</strong> list.</span> </li> 
+         <li class="li step"> <span class="ph cmd">You can filter the list of roles by selecting <strong class="ph b">Name</strong>, <strong class="ph b">Editable</strong>, or <strong class="ph b">Component</strong> from the filter list and clicking the arrow.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-gw-create-roles"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Create a role</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Ansible Automation Platform services provide a set of predefined roles with permissions enough for standard automation tasks. It is also possible to configure custom roles that define access permissions to a resource.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">If the default predefined roles for a resource type do not give the necessary permissions, you can create custom roles for an organization. Creating a custom role reduces complexity by consolidating all required permissions into a single assignment per resource or resource type, eliminating the need to assign multiple roles to a user or team.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Roles</span></span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Create role</span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Provide a <strong class="ph b">Name</strong> and a short <strong class="ph b">Description</strong> for the role. The name and description should be unique and specific to the role’s intended use and permissions to give context when assigning the role.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select a <strong class="ph b">Resource Type</strong>. Ensure that you are selecting the required resource in the correct component context, because resources such as projects and credentials can be associated with both Automation Execution and Automation Decisions.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select the <strong class="ph b">Permissions</strong> you want assigned to this role from the drop-down menu.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Create role</span> to create your new role.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-gw-edit-roles"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Edit a role</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Default roles are predefined in the platform and cannot be changed; however, you can modify custom roles from the <strong class="ph b">Roles</strong> list view. The <strong class="ph b">Role Creation</strong> column in the <strong class="ph b">Roles</strong> list view indicates whether a role is a default role that cannot be changed, or a custom role that can be modified.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Roles</span></span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click the <strong class="ph b">Edit role</strong> icon <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png" width="15" alt="Edit"> next to the role you want and modify the role settings as needed.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Save role</span> to save your changes.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="proc-gw-delete-roles"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Delete a role</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You cannot delete default roles; however, you can delete custom roles from the <strong class="ph b">Roles</strong> list view.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Roles</span></span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click the <span class="ph uicontrol button">More Actions</span> icon <strong class="ph b">⋮</strong> next to the role you want and select <strong class="ph b">Delete role</strong>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">To delete roles in bulk, select the roles you want to delete from the <strong class="ph b">Roles</strong> list view, click the <span class="ph uicontrol button">More Actions</span> icon <strong class="ph b">⋮</strong>, and select <strong class="ph b">Delete roles</strong>.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

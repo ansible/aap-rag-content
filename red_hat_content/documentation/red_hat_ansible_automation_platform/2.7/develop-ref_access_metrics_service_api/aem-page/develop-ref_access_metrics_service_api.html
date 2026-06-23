@@ -1,0 +1,393 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="ref-access-metrics-service-api">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Access metrics service API</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Access metrics service REST API endpoints for programmatic health checks, task status queries, and feature flag inspection to automate monitoring.</p> 
+     <section class="section">
+      <h2 class="title sectiontitle">API architecture</h2> 
+      <p class="p">Metrics service exposes a REST API at <code class="ph codeph">/api/v1/</code> with endpoints for task management, health monitoring, feature flag inspection, and settings configuration. The API is accessible through Ansible Automation Platform Gateway routing and requires authentication.</p> 
+      <p class="p"><strong class="ph b">Base URL:</strong></p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Containerized installer</strong>: <code class="ph codeph">https://&lt;gateway-route&gt;/api/metrics/v1/</code> (via Gateway route)</li> 
+       <li class="li"><strong class="ph b">OpenShift operator</strong>: <code class="ph codeph">https://&lt;gateway-route&gt;/api/v1/</code> (via Gateway route)</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Authentication:</strong></p> 
+      <p class="p">API requests require authentication using Ansible Automation Platform Gateway credentials. Include a valid authentication token in the request headers:</p> 
+      <pre class="pre codeblock"><code>curl -H "Authorization: Bearer &lt;token&gt;" https://&lt;gateway-route&gt;/api/metrics/v1/health/</code></pre> 
+      <p class="p">For local development or troubleshooting on the metrics service host, you can access the API directly (bypassing Gateway authentication):</p> 
+      <pre class="pre codeblock"><code># Containerized: Direct access via container
+podman exec automation-metrics-web curl http://localhost:8006/api/v1/health/
+
+# OpenShift: Direct access via pod
+oc exec deployment/metrics-service-web -n &lt;namespace&gt; -- curl http://localhost:8080/api/v1/health/</code></pre> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">API endpoints</h2> 
+      <p class="p"><strong class="ph b">/api/v1/health/</strong></p> 
+      <p class="p"><strong class="ph b">Purpose:</strong> Health status monitoring for integration with monitoring systems (Prometheus, Nagios, etc.)</p> 
+      <p class="p"><strong class="ph b">Method:</strong> <code class="ph codeph">GET</code></p> 
+      <p class="p"><strong class="ph b">Authentication:</strong> Not required for direct container/pod access; required for Gateway access</p> 
+      <p class="p"><strong class="ph b">Response schema:</strong></p> 
+      <pre class="pre codeblock"><code>{
+  "status": "good",
+  "version": "1.0.0",
+  "database": {
+    "status": "connected",
+    "migrations": "up-to-date"
+  },
+  "scheduler": {
+    "status": "running",
+    "last_heartbeat": "2026-05-20T14:35:00Z"
+  }
+}</code></pre> 
+      <p class="p"><strong class="ph b">Status values:</strong></p> 
+      <table class="table frame-all">
+       <caption></caption>
+       <colgroup>
+        <col style="width:20%">
+        <col style="width:40%">
+        <col style="width:40%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry colsep-1 rowsep-1" id="ref-access-metrics-service-api__entry__1">Status</th> 
+         <th class="entry colsep-1 rowsep-1" id="ref-access-metrics-service-api__entry__2">Meaning</th> 
+         <th class="entry rowsep-1" id="ref-access-metrics-service-api__entry__3">Action</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-access-metrics-service-api__entry__1"><code class="ph codeph">good</code></td> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-access-metrics-service-api__entry__2">All components healthy</td> 
+         <td class="entry rowsep-1" headers="ref-access-metrics-service-api__entry__3">No action required</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-access-metrics-service-api__entry__1"><code class="ph codeph">degraded</code></td> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-access-metrics-service-api__entry__2">Some components unhealthy but service functional</td> 
+         <td class="entry rowsep-1" headers="ref-access-metrics-service-api__entry__3">Investigate degraded components</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1" headers="ref-access-metrics-service-api__entry__1"><code class="ph codeph">unhealthy</code></td> 
+         <td class="entry colsep-1" headers="ref-access-metrics-service-api__entry__2">Critical components failing, service non-functional</td> 
+         <td class="entry" headers="ref-access-metrics-service-api__entry__3">Immediate troubleshooting required</td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <p class="p"><strong class="ph b">Example usage:</strong></p> 
+      <pre class="pre codeblock"><code># Containerized
+curl http://localhost:8087/health/
+
+# OpenShift
+curl https://&lt;gateway-route&gt;/api/metrics/v1/health/ -H "Authorization: Bearer &lt;token&gt;"
+
+# Monitoring integration (Prometheus)
+http_probe:
+  targets:
+    - https://&lt;gateway-route&gt;/api/metrics/v1/health/
+  bearer_token: &lt;token&gt;</code></pre> 
+      <p class="p"><strong class="ph b">Response codes:</strong></p> 
+      <ul class="ul"> 
+       <li class="li"><code class="ph codeph">200 OK</code>: Service is healthy (<code class="ph codeph">status: "good"</code>)</li> 
+       <li class="li"><code class="ph codeph">503 Service Unavailable</code>: Service is degraded or unhealthy</li> 
+       <li class="li"><code class="ph codeph">401 Unauthorized</code>: Invalid or missing authentication token (Gateway access only)</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">/api/v1/tasks/</strong></p> 
+      <p class="p"><strong class="ph b">Purpose:</strong> Task execution status for troubleshooting collection pipeline</p> 
+      <p class="p"><strong class="ph b">Method:</strong> <code class="ph codeph">GET</code></p> 
+      <p class="p"><strong class="ph b">Authentication:</strong> Required</p> 
+      <p class="p"><strong class="ph b">Query parameters:</strong></p> 
+      <table class="table frame-all">
+       <caption></caption>
+       <colgroup>
+        <col style="width:16.666666666666664%">
+        <col style="width:16.666666666666664%">
+        <col style="width:33.33333333333333%">
+        <col style="width:33.33333333333333%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry colsep-1 rowsep-1" id="ref-access-metrics-service-api__entry__13">Parameter</th> 
+         <th class="entry colsep-1 rowsep-1" id="ref-access-metrics-service-api__entry__14">Type</th> 
+         <th class="entry colsep-1 rowsep-1" id="ref-access-metrics-service-api__entry__15">Description</th> 
+         <th class="entry rowsep-1" id="ref-access-metrics-service-api__entry__16">Example</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-access-metrics-service-api__entry__13"><code class="ph codeph">name</code></td> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-access-metrics-service-api__entry__14">string</td> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-access-metrics-service-api__entry__15">Filter by task name</td> 
+         <td class="entry rowsep-1" headers="ref-access-metrics-service-api__entry__16"><code class="ph codeph">?name=collect_hourly_metrics</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-access-metrics-service-api__entry__13"><code class="ph codeph">status</code></td> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-access-metrics-service-api__entry__14">string</td> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-access-metrics-service-api__entry__15">Filter by task status (<code class="ph codeph">success</code>,<code class="ph codeph">failure</code>,<code class="ph codeph">running</code>,<code class="ph codeph">pending</code>)</td> 
+         <td class="entry rowsep-1" headers="ref-access-metrics-service-api__entry__16"><code class="ph codeph">?status=failure</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-access-metrics-service-api__entry__13"><code class="ph codeph">limit</code></td> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-access-metrics-service-api__entry__14">integer</td> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-access-metrics-service-api__entry__15">Maximum results to return (default: 50, max: 500)</td> 
+         <td class="entry rowsep-1" headers="ref-access-metrics-service-api__entry__16"><code class="ph codeph">?limit=100</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1" headers="ref-access-metrics-service-api__entry__13"><code class="ph codeph">offset</code></td> 
+         <td class="entry colsep-1" headers="ref-access-metrics-service-api__entry__14">integer</td> 
+         <td class="entry colsep-1" headers="ref-access-metrics-service-api__entry__15">Pagination offset</td> 
+         <td class="entry" headers="ref-access-metrics-service-api__entry__16"><code class="ph codeph">?offset=50</code></td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <p class="p"><strong class="ph b">Response schema:</strong></p> 
+      <pre class="pre codeblock"><code>{
+  "count": 150,
+  "next": "/api/metrics/v1/tasks/?limit=50&amp;offset=50",
+  "previous": null,
+  "results": [
+    {
+      "id": 1234,
+      "name": "collect_hourly_metrics",
+      "status": "success",
+      "started": "2026-05-20T14:05:00Z",
+      "finished": "2026-05-20T14:06:32Z",
+      "duration_seconds": 92,
+      "error_message": null
+    },
+    {
+      "id": 1233,
+      "name": "daily_metrics_rollup",
+      "status": "failure",
+      "started": "2026-05-20T02:00:00Z",
+      "finished": "2026-05-20T02:00:15Z",
+      "duration_seconds": 15,
+      "error_message": "Database connection timeout"
+    }
+  ]
+}</code></pre> 
+      <p class="p"><strong class="ph b">Example usage:</strong></p> 
+      <pre class="pre codeblock"><code># Get all tasks from last 24 hours
+curl https://&lt;gateway-route&gt;/api/metrics/v1/tasks/?limit=100 \
+  -H "Authorization: Bearer &lt;token&gt;"
+
+# Get failed tasks only
+curl https://&lt;gateway-route&gt;/api/metrics/v1/tasks/?status=failure \
+  -H "Authorization: Bearer &lt;token&gt;"
+
+# Get specific task by name
+curl https://&lt;gateway-route&gt;/api/metrics/v1/tasks/?name=daily_anonymize_and_prepare \
+  -H "Authorization: Bearer &lt;token&gt;"</code></pre> 
+      <p class="p"><strong class="ph b">Use cases:</strong></p> 
+      <ul class="ul"> 
+       <li class="li">Monitor task success rates over time</li> 
+       <li class="li">Identify which collectors are failing</li> 
+       <li class="li">Troubleshoot collection pipeline performance</li> 
+       <li class="li">Alert on task failures (integrate with monitoring systems)</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">/api/metrics/v1/feature_flag_state/</strong></p> 
+      <p class="p"><strong class="ph b">Purpose:</strong> Troubleshooting endpoint for Red Hat Support to inspect internal feature enablement settings</p> 
+      <p class="p"><strong class="ph b">Method:</strong> <code class="ph codeph">GET</code></p> 
+      <p class="p"><strong class="ph b">Authentication:</strong> Required</p> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">This endpoint exposes internal feature enablement settings used for troubleshooting and support cases. Customers should not modify these settings directly. If you need to opt out of data collection, contact Red Hat Support for guidance.</p> 
+       </div>
+      </div> 
+      <p class="p"><strong class="ph b">Use cases:</strong></p> 
+      <ul class="ul"> 
+       <li class="li">Red Hat Support troubleshooting: Verify internal settings during support cases</li> 
+       <li class="li">Support-guided opt-out verification: Confirm settings after Red Hat Support applies opt-out configuration</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Example usage (support-guided only):</strong></p> 
+      <pre class="pre codeblock"><code># Get current feature flag state
+curl https://&lt;gateway-route&gt;/api/metrics/v1/feature_flag_state/ \
+  -H "Authorization: Bearer &lt;token&gt;"</code></pre> 
+      <p class="p"><strong class="ph b">Response includes internal settings:</strong></p> 
+      <ul class="ul"> 
+       <li class="li"><code class="ph codeph">METRICS_COLLECTION</code>: Controls local data collection</li> 
+       <li class="li"><code class="ph codeph">ANONYMIZED_DATA_COLLECTION</code>: Controls transmission to Red Hat</li> 
+       <li class="li"><code class="ph codeph">DASHBOARD_COLLECTION</code>: Controls dashboard-specific data</li> 
+      </ul> 
+      <p class="p">For information about these settings, contact Red Hat Support.</p> 
+      <p class="p"><strong class="ph b">/api/v1/settings/</strong></p> 
+      <p class="p"><strong class="ph b">Purpose:</strong> Troubleshooting endpoint for Red Hat Support to retrieve and update internal dynamic settings</p> 
+      <p class="p"><strong class="ph b">Methods:</strong> <code class="ph codeph">GET</code>, <code class="ph codeph">PATCH</code></p> 
+      <p class="p"><strong class="ph b">Authentication:</strong> Required (write operations require admin privileges)</p> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">This endpoint exposes internal feature enablement settings used for troubleshooting and support cases. Customers should not modify these settings directly without Red Hat Support guidance. If you need to opt out of data collection or change metrics service configuration, contact Red Hat Support.</p> 
+       </div>
+      </div> 
+      <p class="p"><strong class="ph b">Use cases:</strong></p> 
+      <ul class="ul"> 
+       <li class="li">Red Hat Support troubleshooting: Retrieve current internal settings during support cases</li> 
+       <li class="li">Support-guided configuration: Red Hat Support may use this endpoint to apply configuration changes</li> 
+       <li class="li">Audit trail: Track configuration changes made by Red Hat Support</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Example usage (support-guided only):</strong></p> 
+      <pre class="pre codeblock"><code># Get all settings (read-only query for troubleshooting)
+curl https://&lt;gateway-route&gt;/api/v1/settings/ \
+  -H "Authorization: Bearer &lt;token&gt;"</code></pre> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">Do not use <code class="ph codeph">PATCH</code> operations to modify settings without Red Hat Support guidance. Incorrect configuration can impact service operation and supportability.</p> 
+       </div>
+      </div> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Gateway routing and authentication</h2> 
+      <p class="p"><strong class="ph b">Routing</strong></p> 
+      <p class="p">Ansible Automation Platform Gateway routes API requests to metrics service based on URL path prefix:</p> 
+      <p class="p"><strong class="ph b">Gateway routing rules:</strong></p> 
+      <pre class="pre codeblock"><code>https://&lt;gateway-route&gt;/api/v1/health/        → metrics-service-web:8006/api/v1/health/
+https://&lt;gateway-route&gt;/api/v1/tasks/         → metrics-service-web:8006/api/v1/tasks/
+https://&lt;gateway-route&gt;/api/v1/feature_flag_state/ → metrics-service-web:8006/api/v1/feature_flag_state/
+https://&lt;gateway-route&gt;/api/v1/settings/      → metrics-service-web:8006/api/v1/settings/</code></pre> 
+      <p class="p"><strong class="ph b">Troubleshooting routing issues:</strong></p> 
+      <p class="p">If API requests return <code class="ph codeph">404 Not Found</code> when accessing through Gateway:</p> 
+      <ol class="ol"> 
+       <li class="li">Verify Gateway is running and healthy</li> 
+       <li class="li">Check Gateway logs for routing errors</li> 
+       <li class="li">Verify metrics service pods are running</li> 
+       <li class="li">Test direct access to metrics service (bypass Gateway) to isolate routing vs service issues</li> 
+      </ol> 
+      <p class="p"><strong class="ph b">Authentication</strong></p> 
+      <p class="p"><strong class="ph b">Token-based authentication:</strong></p> 
+      <p class="p">Metrics service API uses Ansible Automation Platform Gateway authentication. Obtain a token from Gateway:</p> 
+      <pre class="pre codeblock"><code># Request token from Gateway
+curl -X POST https://&lt;gateway-route&gt;/api/gateway/v1/tokens/ \
+  -H "Content-Type: application/json" \
+  -d '{
+    "username": "admin",
+    "password": "&lt;password&gt;"
+  }'</code></pre> 
+      <p class="p">Response:</p> 
+      <pre class="pre codeblock"><code>{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "expires": "2026-05-20T18:00:00Z"
+}</code></pre> 
+      <p class="p">Use the token in subsequent API requests:</p> 
+      <pre class="pre codeblock"><code>curl https://&lt;gateway-route&gt;/api/v1/health/ \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."</code></pre> 
+      <p class="p"><strong class="ph b">Service accounts:</strong></p> 
+      <p class="p">For automation and monitoring integrations, create a dedicated service account with minimal privileges:</p> 
+      <pre class="pre codeblock"><code># Create service account via Gateway API
+curl -X POST https://&lt;gateway-route&gt;/api/gateway/v1/service_accounts/ \
+  -H "Authorization: Bearer &lt;admin-token&gt;" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "metrics-monitoring",
+    "description": "Service account for metrics service health monitoring",
+    "scopes": ["metrics:read"]
+  }'</code></pre> 
+      <p class="p"><strong class="ph b">Troubleshooting authentication:</strong></p> 
+      <table class="table frame-all">
+       <caption></caption>
+       <colgroup>
+        <col style="width:20%">
+        <col style="width:40%">
+        <col style="width:40%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry colsep-1 rowsep-1" id="ref-access-metrics-service-api__entry__33">Error</th> 
+         <th class="entry colsep-1 rowsep-1" id="ref-access-metrics-service-api__entry__34">Cause</th> 
+         <th class="entry rowsep-1" id="ref-access-metrics-service-api__entry__35">Solution</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-access-metrics-service-api__entry__33"><code class="ph codeph">401 Unauthorized</code></td> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-access-metrics-service-api__entry__34">Missing or invalid token</td> 
+         <td class="entry rowsep-1" headers="ref-access-metrics-service-api__entry__35">Verify token is included in<code class="ph codeph">Authorization</code> header and has not expired</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-access-metrics-service-api__entry__33"><code class="ph codeph">403 Forbidden</code></td> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-access-metrics-service-api__entry__34">Insufficient permissions</td> 
+         <td class="entry rowsep-1" headers="ref-access-metrics-service-api__entry__35">Verify service account has required scopes (<code class="ph codeph">metrics:read</code> or<code class="ph codeph">metrics:write</code>)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1" headers="ref-access-metrics-service-api__entry__33"><code class="ph codeph">Token expired</code></td> 
+         <td class="entry colsep-1" headers="ref-access-metrics-service-api__entry__34">Token TTL exceeded</td> 
+         <td class="entry" headers="ref-access-metrics-service-api__entry__35">Request a new token from Gateway</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Integration examples</h2> 
+      <p class="p"><strong class="ph b">Prometheus monitoring</strong></p> 
+      <p class="p"><strong class="ph b">prometheus.yml configuration:</strong></p> 
+      <pre class="pre codeblock"><code>scrape_configs:
+  - job_name: 'metrics-service-health'
+    metrics_path: '/api/v1/health/'
+    scheme: https
+    bearer_token: '&lt;token&gt;'
+    static_configs:
+      - targets:
+          - '&lt;gateway-route&gt;'</code></pre> 
+      <p class="p"><strong class="ph b">Nagios monitoring</strong></p> 
+      <pre class="pre codeblock"><code>#!/bin/bash
+# check_metrics_service_health.sh
+
+GATEWAY="https://&lt;gateway-route&gt;"
+TOKEN="&lt;service-account-token&gt;"
+
+response=$(curl -s -o /dev/null -w "%{http_code}" \
+  -H "Authorization: Bearer $TOKEN" \
+  "$GATEWAY/api/v1/health/")
+
+if [ "$response" -eq 200 ]; then
+  echo "OK: metrics service is healthy"
+  exit 0
+elif [ "$response" -eq 503 ]; then
+  echo "WARNING: metrics service is degraded"
+  exit 1
+else
+  echo "CRITICAL: metrics service is unreachable"
+  exit 2
+fi</code></pre> 
+      <p class="p"><strong class="ph b">Ansible playbook integration</strong></p> 
+      <pre class="pre codeblock"><code>---
+- name: Disable anonymized data collection
+  hosts: localhost
+  tasks:
+    - name: Update ANONYMIZED_DATA_COLLECTION setting
+      uri:
+        url: "https://{{ gateway_route }}/api/v1/settings/ANONYMIZED_DATA_COLLECTION/"
+        method: PATCH
+        headers:
+          Authorization: "Bearer {{ gateway_token }}"
+          Content-Type: "application/json"
+        body_format: json
+        body:
+          value: "false"
+        status_code: 200
+      register: result
+
+    - name: Verify setting was updated
+      debug:
+        msg: "ANONYMIZED_DATA_COLLECTION disabled successfully"
+      when: result.status == 200</code></pre> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relref">
+      <strong>Related reference</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-ref_troubleshoot_metrics_service" title="Diagnostic procedures and solutions for common metrics service issues to resolve problems and restore data collection.">Troubleshoot metrics service</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_metrics_service_configuration_variables" title="Review configuration variables to customize metrics service deployment, database connections, security settings, and operational parameters.">Metrics service configuration variables</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

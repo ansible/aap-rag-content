@@ -1,0 +1,178 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-workspaces-develop"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Develop automation content in your workspace</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">The Ansible development tools are installed as part of the Ansible extension in the Ansible development workspace. You can use Ansible development tools to scaffold directories for automation content in your repository.</p> 
+      <p class="p">Using the Ansible extension ensures that best practices for directory structure are met. </p> 
+      <p class="p">Red Hat recommends that you create only one collection per repository, so that each collection has a clear, specific purpose. This approach promotes reusability, as each collection is a self-contained unit of content. A one-to-one relationship between a collection and its repository also improves manageability by simplifying dependency management, maintenance, and release cycles.</p> 
+     </div> 
+     <nav role="navigation" class="related-links"> 
+      <div class="linklist relinfo"> <strong>Related information</strong> 
+       <br> 
+       <ul class="linklist"> 
+        <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/latest/html/developing_automation_content" target="_blank" rel="external noopener">Developing automation content</a></li> 
+       </ul> 
+      </div> 
+     </nav> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="devspaces-create-content"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Create collections and playbooks in your Ansible development workspace</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Use the Ansible extension in VS Code to use Ansible development tools to scaffold directories and files for your automation content. You can use Red Hat Ansible Lightspeed with IBM watsonx Code Assistant to help you write playbooks, and <code class="ph codeph">ansible-lint</code> to debug them.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the OpenShift Dev Spaces dashboard. select the Ansible development workspace where you want to develop automation content.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Activity</strong> bar of VS Code, select the Ansible icon to open Ansible development tools.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select <strong class="ph b">Connect</strong> in the Ansible Lightspeed section to log in to Ansible Lightspeed.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select an option in the <strong class="ph b">initialize</strong> section of <strong class="ph b">Ansible Development tools</strong> to scaffold files and directories for a collection project or a playbook project. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">For more information on creating projects, see:</p> 
+           <ul class="ul"> 
+            <li class="li"><cite class="cite">Scaffold a playbook project</cite> in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_creating_playbook_project#creating-playbook-project" title="Use the Ansible Automation Platform VS Code extension to scaffold a new Ansible playbook project. This process creates the necessary directory structure and configuration files, preparing your environment for playbook development.">Auto-generate the structure and files for your automation project</a></li> 
+            <li class="li"><cite class="cite">Scaffold a collection for your roles</cite> in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-devtools_develop_collections#devtools-develop-collections" title="Collections are a distribution format for Ansible content that can include playbooks, roles, modules, and plugins. Red Hat provides Ansible Content Collections on Ansible automation hub that contain both Red Hat Ansible Certified Content and Ansible validated content.">Package and distribute automation content with collections</a></li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select options in the <strong class="ph b">Add</strong> section of Ansible development tools to add files for playbooks or roles to your project. Alternatively, you can use the options in the <strong class="ph b">Ansible Lightspeed</strong> section to generate playbooks or roles.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Save your work: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">Click the main menu icon in the <strong class="ph b">Activity</strong> bar and select <span class="ph menucascade"><span class="ph uicontrol">Terminal</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">New Terminal</span></span>.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Use <code class="ph codeph">git add</code> and <code class="ph codeph">git commit</code> commands to stage the changed files and commit your changes to the local repository in the workspace.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Use the <code class="ph codeph">git push</code> command to push your updates to your remote Git repository.</span> </li> 
+          </ol> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="devspaces-edit-content"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Edit and debug automation content in your Ansible development workspace</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc"> You can continue to work in an existing workspace. Workspaces that are inactive might be paused due to an administrator-set timeout to free up resources. However, they will automatically relaunch when you select them from the OpenShift Dev Spaces dashboard. </p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div>The administrator in OpenShift Dev Spaces configures the duration of this inactivity timeout. Additionally, Ansible lint will identify errors within your playbooks. 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">To display your previously created workspaces, select <strong class="ph b">Workspaces</strong> in your OpenShift Dev Spaces dashboard.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select <strong class="ph b">Open</strong> next to the workspace that you want to use.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">Explorer</strong> icon in the <strong class="ph b">Activity</strong> bar to open the file explorer, and open the file you want to edit.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">While you are editing, the Ansible extension provides suggestions. Select a suggestion from the dropdown list to include it in your playbook.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">To view documentation for a keyword or a module, hover your mouse over it.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Open the terminal in VS Code: click the main menu icon in the <strong class="ph b">Activity</strong> bar and select <span class="ph menucascade"><span class="ph uicontrol">Terminal</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">New Terminal</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">Problems</strong> tab in the terminal to view issues that <code class="ph codeph">ansible-lint</code> has identified. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">In the following example, one error is selected in the <strong class="ph b">Problems</strong> tab, and the corresponding line in the playbook is highlighted.</p> 
+           <br> 
+           <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/playbook.png" alt="Playbook and ansible-lint messages"> 
+           <br> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">When you have resolved the problems in your playbook, a message is displayed in the <strong class="ph b">Problems</strong> tab of the terminal.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="devspaces-execute-playbooks"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Execute playbooks in your Ansible development workspace</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Execute your playbooks using the integrated Ansible extension or <code class="ph codeph">ansible-navigator</code> within the VS Code environment of your workspace.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">With the introduction of full container-in-container support, you can seamlessly use execution environments within Ansible development workspaces. Tools such as <code class="ph codeph">ansible-navigator</code> and <code class="ph codeph">ansible-builder</code> are fully supported for executing playbooks and building custom execution environments directly from your browser-based workspace.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">To execute a playbook using the Ansible extension, right-click on a playbook name in the file explorer and select <span class="ph menucascade"><span class="ph uicontrol">Run ansible playbook via</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Run ansible playbook via ansible playbook</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Alternatively, to execute a playbook using <code class="ph codeph">ansible-navigator</code> with an execution environment, open a terminal in VS Code and run:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>ansible-navigator run <var class="keyword varname">your_playbook.yml</var></code></pre> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="devspaces-configure-navigator"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Configure ansible-navigator for execution environments</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Customize <code class="ph codeph">ansible-navigator</code> settings in your Ansible development workspace to configure execution environment options, logging, and output format.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">The <code class="ph codeph">ansible-navigator</code> tool uses a YAML configuration file to define settings for execution environments, container engines, and output behavior. An example <code class="ph codeph">ansible-navigator.yaml</code> file is available in the <a class="xref" href="https://github.com/redhat-cop/ansible-devspaces" target="_blank" rel="external noopener">Ansible Development Workspace Sample</a> repository.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">In your Ansible development workspace, create a file named <code class="ph codeph">ansible-navigator.yaml</code> in the root of your project directory.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Add the following minimal configuration and modify it to suit your requirements:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>ansible-navigator:
+  execution-environment:
+    container-engine: podman
+  logging:
+    level: critical
+  playbook-artifact:
+    enable: false</code></pre> 
+           <p class="p">The Ansible dev spaces image includes a default execution environment. You only need to add additional settings such as <code class="ph codeph">environment-variables</code>, <code class="ph codeph">volume-mounts</code>, or <code class="ph codeph">container-options</code> if your project requires them.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"><strong>Optional: </strong> <span class="ph cmd">To override the default execution environment image, add the <code class="ph codeph">image</code> setting under the <code class="ph codeph">execution-environment</code> section:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>  execution-environment:
+    image: registry.redhat.io/ansible-automation-platform-27/ee-supported-rhel9:latest</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Save the file. The <code class="ph codeph">ansible-navigator</code> tool automatically loads the configuration from the current working directory or from the default locations.</span> 
+          <div class="itemgroup info"> 
+           <p class="p">For more information about <code class="ph codeph">ansible-navigator</code> settings, see <a class="xref" href="https://docs.ansible.com/projects/navigator/settings" target="_blank" rel="external noopener">ansible-navigator settings</a> in the ansible-navigator documentation.</p> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="devspaces-share-work"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Share your work</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Share your automation content and collaborate with colleagues by working together from a single shared Git repository and submitting pull requests.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">To contribute to a colleague's project, request the URL for the Git repository that corresponds to your colleague's Ansible development workspace.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Launch a workspace using the repository URL that your colleague shared.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Work within a new git branch and contribute to your colleague's repository by creating a merge or pull request.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

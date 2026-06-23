@@ -1,0 +1,23 @@
+# Install the Red Hat Ansible Automation Platform operator
+## Update the YAML file of the Ansible Automation Platform operator
+
+After you create the model configuration secret, you must update the YAML file of the Ansible Automation Platform operator to use the secret.
+
+### Procedure
+
+1.  Go to the Red Hat OpenShift Container Platform.
+2.  Select Operators> (and then)Installed Operators.
+3.  From the list of installed operators, select the **Ansible Automation Platform** operator.
+4.  Locate and select the **Ansible Automation Platform** custom resource, and then click the required app.
+5.  Select the **YAML** tab.
+6.  Scroll the text to find the `Lightspeed` category, and add the following details under the `spec:` section:
+
+
+```
+spec:
+lightspeed:
+disabled: false
+model_config_secret_name: <Name of the model configuration secret that you recently created.>
+```
+
+7.  Click **Save**. The Ansible Lightspeed service takes a few minutes to set up.

@@ -1,0 +1,70 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-23e52737-a74a-4618-b838-4923e605a22c">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure an external database for event streams in Operator on OpenShift Container Platform</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">The Ansible Automation Platform Operator automatically creates a dedicated PostgreSQL user (<code class="ph codeph">eda_event_stream</code>) for Event-Driven Ansible event stream operations. This user has minimal privileges (<code class="ph codeph">CONNECT</code> only) to reduce the security impact if credentials are exposed in decision environments.</p> 
+     <section class="section prereq" id="GUID-23e52737-a74a-4618-b838-4923e605a22c__prereq_1">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul" id="GUID-23e52737-a74a-4618-b838-4923e605a22c__ul_1"> 
+       <li class="li">The external database must run an Ansible Automation Platform-supported version of PostgreSQL: version 15, 16, or 17.</li> 
+      </ul> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Create an <code class="ph codeph">event_stream_postgres_configuration_secret</code> YAML file:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>
+----
+apiVersion: v1 
+kind: Secret 
+metadata: 
+ name: eda-event-stream-postgres-configuration 
+ namespace: &lt;target_namespace&gt; 
+stringData: 
+    host: "&lt;external_ip_or_url_resolvable_by_the_cluster&gt;" 
+    port: "&lt;external_port&gt;" 
+    database: "&lt;desired_database_name&gt;" 
+    username: "eda_event_stream" 
+    password: "&lt;password_to_connect_with&gt;" 
+    sslmode: "prefer" 
+    type: "unmanaged" 
+  type: Opaque 
+----</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Apply the secret to your cluster:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>
+----
+$ oc create -f eda-event-stream-postgres-configuration-secret.yml
+----</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">When creating your <code class="ph codeph">AnsibleAutomationPlatform</code> custom resource, specify the secret under the Event-Driven Ansible spec:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>
+---- 
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform 
+metadata: 
+  name: myaap 
+  namespace: ansible-automation-platform 
+spec: 
+ eda: 
+  event_stream: 
+   postgres_configuration_secret: eda-event-stream-postgres-configuration 
+----</code></pre> 
+        </div> </li>
+      </ol>
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

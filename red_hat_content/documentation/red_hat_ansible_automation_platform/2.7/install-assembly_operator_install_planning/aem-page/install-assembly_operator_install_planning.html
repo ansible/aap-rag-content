@@ -1,0 +1,181 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="operator-install-planning"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Plan your installation of Ansible Automation Platform on Red Hat OpenShift Container Platform</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Red Hat Ansible Automation Platform is supported on both Red Hat Enterprise Linux and Red Hat OpenShift.</p> 
+      <p class="p">OpenShift operators help install and automate day-2 operations of complex, distributed software on Red Hat OpenShift Container Platform. The Ansible Automation Platform Operator enables you to deploy and manage Ansible Automation Platform components on Red Hat OpenShift Container Platform.</p> 
+      <p class="p">You can use this section to help plan your Red Hat Ansible Automation Platform installation on your Red Hat OpenShift Container Platform environment. Before installing, review the supported installation scenarios to determine which meets your requirements.</p> 
+      <p class="p"></p> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="con-about-operator"> 
+      <h2 class="title topictitle2" id="ariaid-title2">About Ansible Automation Platform Operator</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">The Ansible Automation Platform Operator provides cloud-native, push-button deployment of new Ansible Automation Platform instances in your OpenShift environment.</p> 
+       <p class="p">The Ansible Automation Platform Operator includes resource types to deploy and manage instances of automation controller and private automation hub.</p> 
+       <p class="p">It also includes automation controller job resources for defining and launching jobs inside your automation controller deployments.</p> 
+       <p class="p">Deploying Ansible Automation Platform instances with a Kubernetes native operator offers several advantages over launching instances from a playbook deployed on Red Hat OpenShift Container Platform, including upgrades and full lifecycle support for your Red Hat Ansible Automation Platform deployments.</p> 
+       <p class="p">You can install the Ansible Automation Platform Operator from the Red Hat Operators catalog in OperatorHub.</p> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relref">
+        <strong>Related reference</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-ref_ocp_a_env_a" title="The Operator-based growth topology provides a smaller footprint deployment without redundancy for organizations getting started with Ansible Automation Platform on Red Hat OpenShift Container Platform.">Operator topologies</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="ref-operator-ocp-version"> 
+      <h2 class="title topictitle2" id="ariaid-title3">OpenShift Container Platform version compatibility</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">For supported OpenShift Container Platform versions, see the Red Hat Ansible Automation Platform Life Cycle page.</p> 
+       <section class="section"></section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://access.redhat.com/support/policy/updates/ansible-automation-platform" target="_blank" rel="external noopener">Red Hat Ansible Automation Platform Life Cycle</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title4" id="ocp-supported-install"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Supported installation scenarios for Red Hat OpenShift Container Platform</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">You can use the OperatorHub on the Red Hat OpenShift Container Platform web console to install Ansible Automation Platform Operator.</p> 
+       <p class="p">Alternatively, you can install Ansible Automation Platform Operator from the OpenShift Container Platform command-line interface (CLI), <code class="ph codeph">oc</code>. </p> 
+       <p class="p">After you have installed Ansible Automation Platform Operator you must create an <strong class="ph b">Ansible Automation Platform</strong> custom resource (CR). This enables you to manage Ansible Automation Platform components from a single unified interface known as the platform gateway. In version 2.7, you must create an Ansible Automation Platform CR, even if you have an existing automation controller, automation hub, or Event-Driven Ansible, components.</p> 
+       <p class="p">If existing components have already been deployed, you must specify these components on the Ansible Automation Platform CR. You must create the custom resource in the same namespace as the existing components.</p> 
+       <table class="table">
+        <caption></caption>
+        <colgroup>
+         <col style="width:50%">
+         <col style="width:50%">
+        </colgroup>
+        <thead class="thead"> 
+         <tr class="row"> 
+          <th class="entry" id="ocp-supported-install__entry__1"><strong class="ph b">Supported scenarios</strong></th> 
+          <th class="entry" id="ocp-supported-install__entry__2"><strong class="ph b">Supported scenarios with existing components</strong></th> 
+         </tr> 
+        </thead>
+        <tbody class="tbody"> 
+         <tr class="row"> 
+          <td class="entry" headers="ocp-supported-install__entry__1"> 
+           <ul class="ul"> 
+            <li class="li">Ansible Automation Platform CR for blank slate install with automation controller, automation hub, and Event-Driven Ansible enabled</li> 
+            <li class="li">Ansible Automation Platform CR with just automation controller enabled</li> 
+            <li class="li">Ansible Automation Platform CR with just automation controller, automation hub enabled</li> 
+            <li class="li">Ansible Automation Platform CR with just automation controller, Event-Driven Ansible enabled</li> 
+           </ul> </td> 
+          <td class="entry" headers="ocp-supported-install__entry__2"> 
+           <ul class="ul"> 
+            <li class="li">Ansible Automation Platform CR created in the same namespace as an existing automation controller CR with the automation controller name specified on the Ansible Automation Platform CR spec</li> 
+            <li class="li">Same with automation controller and automation hub</li> 
+            <li class="li">Same with automation controller, automation hub, and Event-Driven Ansible</li> 
+            <li class="li">Same with automation controller and Event-Driven Ansible</li> 
+           </ul> </td> 
+         </tr> 
+        </tbody>
+       </table> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relconcepts">
+        <strong>Related concepts</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_installing_aap_operator_fetch_details#installing-aap-operator-fetch-details" title="You can use the OpenShift Container Platform CLI to fetch the web address and the password of the Automation controller that you created. To login to the platform gateway, you need the web address and the password.">Access Ansible Automation Platform through the CLI</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title5" id="con-operator-csrf-management"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Ansible Automation Platform Operator CSRF management</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">In Ansible Automation Platform version 2.7 the Ansible Automation Platform Operator on OpenShift Container Platform creates OpenShift Routes and configures your Cross-site request forgery (CSRF) settings automatically.</p> 
+       <p class="p">When using external ingress, you must configure your CSRF on the ingress.</p> 
+       <div class="note important note_important">
+        <span class="note__title">Important:</span> 
+        <div class="note__body"> 
+         <p class="p">In previous versions CSRF was configurable through the automation controller user interface, in version 2.7 automation controller settings are still present but have no impact on CSRF settings for the platform gateway. </p> 
+        </div>
+       </div> 
+       <p class="p">The following table helps to clarify which settings are applicable for which component.</p> 
+       <table class="table">
+        <caption></caption>
+        <colgroup>
+         <col style="width:50%">
+         <col style="width:50%">
+        </colgroup>
+        <thead class="thead"> 
+         <tr class="row"> 
+          <th class="entry" id="con-operator-csrf-management__entry__1"><strong class="ph b">UI setting</strong></th> 
+          <th class="entry" id="con-operator-csrf-management__entry__2"><strong class="ph b">Applicable for</strong></th> 
+         </tr> 
+        </thead>
+        <tbody class="tbody"> 
+         <tr class="row"> 
+          <td class="entry" headers="con-operator-csrf-management__entry__1"> <p class="p">Subscription</p> </td> 
+          <td class="entry" headers="con-operator-csrf-management__entry__2"> <p class="p">automation controller</p> </td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="con-operator-csrf-management__entry__1"> <p class="p">platform gateway</p> </td> 
+          <td class="entry" headers="con-operator-csrf-management__entry__2"> <p class="p">platform gateway</p> </td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="con-operator-csrf-management__entry__1"> <p class="p">User Preferences</p> </td> 
+          <td class="entry" headers="con-operator-csrf-management__entry__2"> <p class="p">User interface</p> </td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="con-operator-csrf-management__entry__1"> <p class="p">System</p> </td> 
+          <td class="entry" headers="con-operator-csrf-management__entry__2"> <p class="p">Automation controller</p> </td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="con-operator-csrf-management__entry__1"> <p class="p">Job</p> </td> 
+          <td class="entry" headers="con-operator-csrf-management__entry__2"> <p class="p">Automation controller</p> </td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="con-operator-csrf-management__entry__1"> <p class="p">Logging</p> </td> 
+          <td class="entry" headers="con-operator-csrf-management__entry__2"> <p class="p">Automation controller</p> </td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="con-operator-csrf-management__entry__1"> <p class="p">Troubleshooting</p> </td> 
+          <td class="entry" headers="con-operator-csrf-management__entry__2"> <p class="p">Automation controller</p> </td> 
+         </tr> 
+        </tbody>
+       </table> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist reltasks">
+        <strong>Related tasks</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-configure_your_ansible_automation_platform_deployment#proc-operator-config-csrf-gateway" title="The Red Hat Ansible Automation Platform Operator creates Openshift Routes and configures your Cross-site request forgery (CSRF) settings automatically. .">Configure your CSRF settings</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title6" id="con-operator-additional-resources"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Additional resources</h2> 
+      <p class="shortdesc">To learn more about OpenShift Container Platform OperatorHub you can review OpenShift Container Platform documentation.</p> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/openshift_container_platform/4.15/html/operators/understanding-operators#olm-understanding-operatorhub" target="_blank" rel="external noopener">Understanding OperatorHub</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

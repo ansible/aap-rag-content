@@ -1,0 +1,21 @@
+# Understand primary workloads for automation controller
+## Tune Event-Driven Ansible activations
+
+Activations are used by Event-Driven Ansible to run instances of `ansible-rulebook`. These activations can either connect to external event sources or listen to an event stream for incoming payloads.
+
+Activation and output management uses the following:
+
+- Event-Driven Ansible hybrid nodes
+- Platform gateway for event stream handling
+- The WebSocket server in each API node or pod
+- The database for audit event storage
+
+
+Activations process discrete payloads called events. The activation’s resource usage is affected by the event arrival rate and the complexity of the rulebook’s rules.
+
+When events match rules, they trigger actions, which launch jobs in automation controller. Event auditing stores audit events in the database and is enabled by default.
+
+Each event is sent from the activation to the WebSocket server to be serialized and written to the database. This process stresses the server and can cause performance issues. Selecting **Skip audit events** in the UI for a given activation eliminates this workload.
+
+When **Skip audit events** is selected, rules are still fired. However, the fire count in the API and UI is updated at a periodic interval (default 300 seconds) rather than immediately.
+

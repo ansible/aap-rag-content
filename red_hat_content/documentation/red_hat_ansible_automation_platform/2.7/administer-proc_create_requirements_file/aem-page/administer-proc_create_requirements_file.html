@@ -1,0 +1,50 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="create-requirements-file">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Create a requirements file</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Use a requirements file to add collections to your automation hub. </p> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">Requirements files are in YAML format and list the collections that you want to install in your automation hub. A standard <code class="ph codeph">requirements.yml</code> file contains the following parameters:</p> 
+      <ul class="ul"> 
+       <li class="li"><code class="ph codeph">name</code>: the name of the collection formatted as <code class="ph codeph">&lt;namespace&gt;.&lt;collection_name&gt;</code></li> 
+       <li class="li"><code class="ph codeph">version</code>: the collection version number</li> 
+      </ul> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <div class="ul steps-unordered">
+       <div class="li step p"> <span class="ph cmd">Create your requirements file. </span> 
+        <div class="itemgroup info"> 
+         <p class="p">In YAML format, collection information in your requirements file should contain the following information:</p> 
+         <pre class="pre codeblock language-bash"><code>collections:
+  - name: namespace.collection_name
+    version: 1.0.0</code></pre> 
+        </div> 
+       </div>
+      </div>
+     </section> 
+     <section class="example">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Example</h2>
+      </div> 
+      <p class="p">Be sure to specify the collection version number, otherwise you will sync all collection versions. Syncing all versions can require more space than expected.</p> 
+     </section> 
+     <section class="section postreq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">What to do next</h2>
+      </div> 
+      <p class="p">To sync the collections in your requirements file, follow the steps in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_create_synclist" title="You can sync certified and validated collections in Ansible automation hub from console.redhat.com.">Synchronizing content collections</a>.</p> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

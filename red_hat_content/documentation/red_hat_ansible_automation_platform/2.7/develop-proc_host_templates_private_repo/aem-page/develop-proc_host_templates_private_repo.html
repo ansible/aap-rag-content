@@ -1,0 +1,114 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="proc-host-templates-private-repo">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Host execution environment wizard templates in a private Git repository</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Copy the EE Builder wizard templates from the public Ansible GitHub repository to a private repository for use in private or air-gapped environments.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">You have access to a system that can reach <code class="ph codeph">github.com</code> to download template files (or you have already obtained the files).</li> 
+       <li class="li">You have a private Git repository accessible from your deployment environment.</li> 
+       <li class="li">For dynamic plugins in air-gapped environments: you have access to an internal container registry for mirroring GitHub Container Registry images.</li> 
+      </ul> 
+     </section> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">The EE Builder wizard uses templates to guide users through creating execution environment definitions. By default, these templates are loaded from the public <code class="ph codeph">ansible/ansible-rhdh-templates</code> repository on GitHub. If your deployment cannot reach GitHub — or you want to host templates in a private repository — copy the template files and update the catalog locations to point to your internal source.</p> 
+      <p class="p">After updating the catalog locations, import the templates into automation portal. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_create_ee_definition#proc-import-ee-template" title="Import a previously generated execution environment template to make it available for other users to create definitions with the same defaults.">Import an existing EE definition</a> for the import procedure.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">From a connected system, download the template YAML files:</span> 
+        <div class="itemgroup info"> 
+         <ul class="ul"> 
+          <li class="li"><a class="xref" href="https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.0/templates/ee-start-from-scratch.yaml" target="_blank" rel="external noopener">ee-start-from-scratch.yaml</a></li> 
+          <li class="li"><a class="xref" href="https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.0/templates/ee-cloud-automation.yaml" target="_blank" rel="external noopener">ee-cloud-automation.yaml</a></li> 
+          <li class="li"><a class="xref" href="https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.0/templates/ee-network-automation.yaml" target="_blank" rel="external noopener">ee-network-automation.yaml</a></li> 
+         </ul> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Push the template files to a private Git repository accessible from your deployment environment.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">In your Helm chart configuration, replace the public GitHub URLs with your private repository URLs:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>catalog:
+  locations:
+    - type: url
+      target: https://git.internal.example.com/ansible-templates/ee-start-from-scratch.yaml
+      rules:
+        - allow: [Template]
+    - type: url
+      target: https://git.internal.example.com/ansible-templates/ee-cloud-automation.yaml
+      rules:
+        - allow: [Template]
+    - type: url
+      target: https://git.internal.example.com/ansible-templates/ee-network-automation.yaml
+      rules:
+        - allow: [Template]</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">For Networking Automation and Cloud Automation templates: ensure the domain-specific collections they reference are available from a configured content source (private automation hub or internal Git repository).</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Apply the configuration. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_apply_configuration_changes" title="Apply configuration changes after modifying your Helm chart values or RHEL appliance configuration file for execution environment builder.">Apply configuration changes</a>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Import the templates into automation portal:</span> 
+        <ol type="a" class="ol substeps"> 
+         <li class="li substep"> <span class="ph cmd">Navigate to <strong class="ph b">Execution Environments &gt; Create</strong>.</span> </li> 
+         <li class="li substep"> <span class="ph cmd">Open the kebab menu and select <strong class="ph b">Import Template</strong>.</span> </li> 
+         <li class="li substep"> <span class="ph cmd">Paste the URL to the template file in your private Git repository.</span> </li> 
+         <li class="li substep"> <span class="ph cmd">Click <strong class="ph b">Analyze</strong>, then <strong class="ph b">Import</strong>.</span> </li> 
+        </ol> 
+        <div class="itemgroup info"> 
+         <p class="p">Alternatively, templates added to <code class="ph codeph">catalog.locations</code> in the Helm chart load automatically without manual import.</p> 
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <ol class="ol"> 
+       <li class="li">Log in to automation portal and navigate to <strong class="ph b">Execution Environments &gt; Create</strong>.</li> 
+       <li class="li">Verify that the templates loaded from your private repository appear.</li> 
+      </ol> 
+     </section> 
+     <section class="section postreq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">What to do next</h2>
+      </div> 
+      <p class="p"><strong class="ph b">Additional considerations for private or air-gapped environments</strong></p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">EE image destination:</strong> Private automation hub is the target registry for pushing built EE images. Configure the build registry in the execution environment builder wizard or template defaults to point to your private automation hub instance.</li> 
+       <li class="li"><strong class="ph b">Dynamic plugins:</strong> Automation portal dynamic plugins are installed from GitHub Container Registry. In air-gapped environments, mirror the required plugin images to an internal container registry. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_deploy_rhel_appliance_disconnected" title="Deploy the Ansible automation portal RHEL appliance in a disconnected or air-gapped environment where the appliance has no access to external registries or the internet.">Install in an air-gapped environment</a> in the Installing Ansible automation portal on OpenShift Container Platform guide.</li> 
+       <li class="li">Mirror content sources (private automation hub, internal Git) for collection discovery.</li> 
+       <li class="li">Configure proxy settings and CA certificates if your environment requires them for outbound connections. See Configuring proxy settings and Adding custom CA certificates in the Installing Ansible automation portal on OpenShift Container Platform guide.</li> 
+       <li class="li">If your internal Git hosts or registries use self-signed certificates, two separate settings apply: 
+        <ul class="ul"> 
+         <li class="li"><code class="ph codeph">checkSSL: false</code> — applies to <code class="ph codeph">ansibleGitContents</code> content discovery providers (see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_collection_discovery" title="Configure Git content discovery and private automation hub collection discovery so that Ansible collections are available in execution environment builder and the collection catalog.">Configure collection discovery sources</a>). Controls TLS verification when crawling Git repositories for <code class="ph codeph">galaxy.yml</code> files.</li> 
+         <li class="li"><code class="ph codeph">skipTlsVerifyForHosts</code> — applies to the CI activities page and other catalog interactions with Git hosts. Controls TLS verification when fetching workflow run data and repository metadata.</li> 
+        </ul> <p class="p">These settings serve different purposes. You may need to configure both if your internal hosts use self-signed certificates:</p> <pre class="pre codeblock"><code>catalog:
+  ansible:
+    skipTlsVerifyForHosts:
+      - git.internal.example.com
+      - registry.internal.example.com</code></pre> </li> 
+      </ul> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relinfo">
+      <strong>Related information</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="https://github.com/ansible/ansible-rhdh-templates" target="_blank" rel="external noopener">Ansible RHDH Templates repository on GitHub</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

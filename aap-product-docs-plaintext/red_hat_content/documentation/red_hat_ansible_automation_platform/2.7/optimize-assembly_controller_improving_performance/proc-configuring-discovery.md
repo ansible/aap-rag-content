@@ -1,0 +1,23 @@
+# Tune automation controller to improve performance
+## Configure WebSocket load balancing
+### Configure automatic discovery of other automation controller nodes
+
+You can configure WebsSocket connections to enable automation controller to automatically handle discovery of other automation controller nodes through the Instance record in the database.
+
+#### Procedure
+
+1.  Edit automation controller WebSocket information for port and protocol, and confirm whether to verify certificates with `True` or `False` when establishing the WebSocket connections:
+
+
+```
+BROADCAST_WEBSOCKET_PROTOCOL = 'http'
+BROADCAST_WEBSOCKET_PORT = 80
+BROADCAST_WEBSOCKET_VERIFY_CERT = False
+```
+
+2.  Restart automation controller with the following command:
+
+
+```
+$ automation-controller-service restart
+```

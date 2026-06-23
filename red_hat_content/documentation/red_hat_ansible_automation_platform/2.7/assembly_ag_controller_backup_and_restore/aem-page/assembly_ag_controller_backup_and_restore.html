@@ -1,0 +1,45 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="controller-backup-and-restore">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Backup and restore overview</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">You can backup and restore your system by using the Ansible Automation Platform setup playbook.</p> 
+     <div class="note note note_note">
+      <span class="note__title">Note:</span> 
+      <div class="note__body"> 
+       <p class="p">When backing up Ansible Automation Platform, use the installation program that matches your currently installed version of Ansible Automation Platform.</p> 
+       <p class="p">When restoring Ansible Automation Platform, use the latest installation program available at the time of the restore. For example, if you are restoring a backup taken from version <code class="ph codeph">2.6-1</code>, use the latest <code class="ph codeph">2.6-x</code> installation program available at the time of the restore.</p> 
+       <p class="p">Backup and restore functionality only works with the PostgreSQL versions supported by your current Ansible Automation Platform version. For more information, see <strong class="ph b">System requirements</strong> in <em class="ph i">Planning your installation</em>.</p> 
+      </div>
+     </div> 
+     <p class="p">The Ansible Automation Platform setup playbook is invoked as <code class="ph codeph">setup.sh</code> from the path where you unpacked the platform installer tar file. It uses the same inventory file used by the install playbook. The setup script takes the following arguments for backing up and restoring:</p> 
+     <ul class="ul"> 
+      <li class="li"><code class="ph codeph">-b</code>: Perform a database backup rather than an installation.</li> 
+      <li class="li"><code class="ph codeph">-r</code>: Perform a database restore rather than an installation.</li> 
+     </ul> 
+     <p class="p">As the root user, call <code class="ph codeph">setup.sh</code> with the appropriate parameters and the Ansible Automation Platform backup or restored as configured:</p> 
+     <pre class="pre">root@localhost:~# ./setup.sh -b
+root@localhost:~# ./setup.sh -r</pre> 
+     <p class="p">Backup files are created on the same path that <code class="ph codeph">setup.sh</code> script exists. You can change it by specifying the following <code class="ph codeph">EXTRA_VARS</code>:</p> 
+     <pre class="pre">root@localhost:~# ./setup.sh -e 'backup_dest=/path/to/backup_dir/' -b</pre> 
+     <p class="p">A default restore path is used unless you provide <code class="ph codeph">EXTRA_VARS</code> with a non-default path, as shown in the following example:</p> 
+     <pre class="pre">root@localhost:~# ./setup.sh -e 'restore_backup_file=/path/to/nondefault/backup.tar.gz' -r</pre> 
+     <p class="p">Optionally, you can override the inventory file used by passing it as an argument to the setup script:</p> 
+     <pre class="pre">setup.sh -i &lt;inventory file&gt;</pre> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relref">
+      <strong>Related reference</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/ref_controller_backup_restore_clustered_environments" title="Learn how to back up and restore automation controller in a clustered environment.">Backup and restore in clustered environments</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/ref_system_requirements" title="Your system must meet the following minimum system requirements to install and run Red Hat Ansible Automation Platform.">Red Hat Ansible Automation Platform system requirements</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

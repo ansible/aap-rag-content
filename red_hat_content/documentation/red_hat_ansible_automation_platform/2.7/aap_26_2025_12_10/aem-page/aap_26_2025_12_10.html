@@ -1,0 +1,399 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="aap-26-20251210">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Ansible Automation Platform patch release December 10, 2025</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">The following release notes detail the updates for the Ansible Automation Platform patch released on December 10, 2025.</p> 
+     <section class="section"> 
+      <p class="p">This release includes the following components and versions:</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:40%">
+        <col style="width:60%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="aap-26-20251210__entry__1">Release Date</th> 
+         <th class="entry" id="aap-26-20251210__entry__2">Component versions</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="aap-26-20251210__entry__1"> <p class="p">December 10, 2025</p> </td> 
+         <td class="entry" headers="aap-26-20251210__entry__2"> 
+          <ul class="ul"> 
+           <li class="li">Automation controller 4.7.6</li> 
+           <li class="li">Automation hub 4.11.4</li> 
+           <li class="li">Event-Driven Ansible 1.2.3</li> 
+           <li class="li">Container-based installer Ansible Automation Platform (bundle) 2.6-4</li> 
+           <li class="li">Container-based installer Ansible Automation Platform (online) 2.6-4</li> 
+           <li class="li">Receptor 1.6.2</li> 
+           <li class="li">RPM-based installer Ansible Automation Platform (bundle) 2.6-3.1</li> 
+           <li class="li">RPM-based installer Ansible Automation Platform (online) 2.6-3</li> 
+          </ul> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <p class="p">CSV Versions in this release:</p> 
+      <ul class="ul"> 
+       <li class="li">namespace: aap-operator.v2.6.0-0.1764966733</li> 
+       <li class="li">cluster: aap-operator.v2.6.0-0.1764966767</li> 
+      </ul> 
+     </section> 
+     <section class="section" id="aap-26-20251210___general">
+      <h2 class="title sectiontitle">General</h2> 
+      <dl class="dl"> 
+       <dt class="dt dlterm"> <strong class="ph b">Stakeholder Notification: Ansible Lightspeed Release 2.6 Sign-Off Issue</strong> 
+       </dt> 
+       <dd class="dd">
+        We are writing to inform you of an issue discovered during the final sign-off process for the Ansible Lightspeed 2.6 release that impacts a subset of customers.
+       </dd> 
+       <dt class="dt dlterm">
+        Issue Description
+       </dt> 
+       <dd class="dd"> 
+        <p class="p">Ansible Lightspeed customers who deploy using the Red Hat OpenShift Container Platform (RHOCP) installer will encounter a specific error when attempting to use the Chatbot feature to retrieve information about Ansible Automation Platform. This manifests as a <strong class="ph b">403 Forbidden error</strong>.</p> 
+        <p class="p">A similar issue also affects customers who utilize the <strong class="ph b">containerized installer</strong> with the <strong class="ph b">Enterprise topology</strong>. Crucially, this issue <strong class="ph b">does not affect</strong> customers using the containerized installer with the <strong class="ph b">Growth or All-in-One topology</strong>.</p> 
+       </dd> 
+       <dt class="dt dlterm">
+        Root Cause and Impact
+       </dt> 
+       <dd class="dd">
+        The 403 error is caused by a Cross-Site Request Forgery (CSRF) protection mechanism not correctly recognizing the origin of the Chatbot’s request in the affected deployment configurations. This prevents the Chatbot from functioning as intended for these specific customer segments.
+       </dd> 
+       <dt class="dt dlterm">
+        Workaround
+       </dt> 
+       <dd class="dd"> 
+        <div class="div"> 
+         <p class="p">We have identified a viable workaround that can be implemented by affected customers immediately:</p> 
+         <p class="p">Customers must edit their <code class="ph codeph">AnsibleAutomationPlatform</code> kind value in the configuration to include a new <code class="ph codeph">extra_setting</code> variable and wait for redeployment.</p> 
+         <table class="table">
+          <caption></caption>
+          <colgroup>
+           <col style="width:16.6666%">
+           <col style="width:33.3333%">
+           <col style="width:50.0001%">
+          </colgroup>
+          <thead class="thead"> 
+           <tr class="row"> 
+            <th class="entry" id="aap-26-20251210___general__entry__1">Setting Name</th> 
+            <th class="entry" id="aap-26-20251210___general__entry__2">Value</th> 
+            <th class="entry" id="aap-26-20251210___general__entry__3">Action Required</th> 
+           </tr> 
+          </thead>
+          <tbody class="tbody"> 
+           <tr class="row"> 
+            <td class="entry" headers="aap-26-20251210___general__entry__1"> <p class="p"> <code class="ph codeph">CSRF_TRUSTED_ORIGINS</code> </p> </td> 
+            <td class="entry" headers="aap-26-20251210___general__entry__2"> <p class="p"> <code class="ph codeph">&lt;Ansible Automation Platform Gateway FQDN&gt;</code> </p> </td> 
+            <td class="entry" headers="aap-26-20251210___general__entry__3"> <p class="p">Modify the <code class="ph codeph">AnsibleAutomationPlatform</code> kind value and then wait for the changes to become effective.</p> </td> 
+           </tr> 
+          </tbody>
+         </table> 
+         <p class="p">Example:</p> 
+         <pre class="pre codeblock language-python"><code>kind: AnsibleAutomationPlatform
+  spec:
+    lightspeed:
+      extra_settings:
+        - setting: CSRF_TRUSTED_ORIGINS
+          value: 'https://gateway-onprem-signoff-26.apps.aap-test2.w6n5.p1.openshiftapps.com'</code></pre> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">The <code class="ph codeph">&lt;Ansible Automation Platform Gateway FQDN&gt;</code> should be replaced with the customer’s actual Fully Qualified Domain Name for the platform gateway.</p> 
+          </div>
+         </div> 
+        </div> 
+       </dd> 
+       <dt class="dt dlterm">
+        Next Steps
+       </dt> 
+       <dd class="dd"> 
+        <p class="p">Our engineering team is prioritizing a permanent fix for this issue, which will be included in a forthcoming patch release. We will provide updates on the timeline for the fix shortly.</p> 
+        <p class="p">Please disseminate this information to your relevant customer-facing and support teams so they can proactively assist customers encountering this issue with the provided workaround.</p> 
+        <p class="p">Thank you for your understanding and continued support.</p> 
+       </dd> 
+      </dl> 
+     </section> 
+     <section class="section" id="aap-26-20251210___cve">
+      <h2 class="title sectiontitle">CVE</h2> 
+      <p class="p">With this update, the following CVEs have been addressed:</p> 
+      <ul class="ul"> 
+       <li class="li"><a class="xref" href="https://access.redhat.com/security/cve/cve-2025-64459" target="_blank" rel="external noopener">CVE-2025-64459</a><code class="ph codeph">ansible-automation-platform-26/gateway-rhel9</code>: Django SQL injection.(AAP-58110)</li> 
+       <li class="li"><a class="xref" href="https://access.redhat.com/security/cve/cve-2025-64459" target="_blank" rel="external noopener">CVE-2025-64459</a><code class="ph codeph">automation-controller</code>: Django SQL injection.(AAP-58117)</li> 
+       <li class="li"><a class="xref" href="https://access.redhat.com/security/cve/cve-2025-64459" target="_blank" rel="external noopener">CVE-2025-64459</a><code class="ph codeph">ansible-automation-platform-26/controller-rhel9</code>: Django SQL injection.(AAP-58104)</li> 
+       <li class="li"><a class="xref" href="https://access.redhat.com/security/cve/cve-2025-62727" target="_blank" rel="external noopener">CVE-2025-62727</a><code class="ph codeph">ansible-automation-platform-26/mcp-tools-rhel9</code>: Starlette DoS via Range header merging.(AAP-57017)</li> 
+       <li class="li"><a class="xref" href="https://access.redhat.com/security/cve/cve-2025-62727" target="_blank" rel="external noopener">CVE-2025-62727</a><code class="ph codeph">ansible-automation-platform-26/lightspeed-chatbot-rhel9</code>: Starlette DoS via Range header merging.(AAP-57011)</li> 
+       <li class="li"><a class="xref" href="https://access.redhat.com/security/cve/cve-2025-64459" target="_blank" rel="external noopener">CVE-2025-64459</a><code class="ph codeph">ansible-automation-platform-26/lightspeed-rhel9</code>: Django SQL injection.(AAP-58112)</li> 
+       <li class="li"><a class="xref" href="https://access.redhat.com/security/cve/cve-2025-64459" target="_blank" rel="external noopener">CVE-2025-64459</a><code class="ph codeph">python3.11-django</code>: Django SQL injection.</li> 
+      </ul> 
+     </section> 
+     <section class="section" id="aap-26-20251210___ansible_automation_platform">
+      <h2 class="title sectiontitle">Ansible Automation Platform</h2> 
+      <dl class="dl"> 
+       <dt class="dt dlterm">
+        Features
+       </dt> 
+       <dd class="dd"> 
+        <ul class="ul"> 
+         <li class="li">Ansible Automation Platform now provides support for IPv6 single-stack and dual-stack (IPv4 and IPv6) deployments in Red Hat OpenShift Container Platform, and RPM-based environments. Support for container-based environments will be introduced in a future patch release. To enable IPv6 in Ansible Automation Platform, set the <code class="ph codeph">FEATURE_GATEWAY_IPV6_USAGE_ENABLED</code> feature flag to True. For more information about using feature flags, see <a class="xref" href="https://access.redhat.com/articles/7109282" target="_blank" rel="external noopener">How to set feature flags for Red Hat Ansible Automation Platform</a>.(ANSTRAT-1575)</li> 
+        </ul> 
+       </dd> 
+      </dl> 
+      <p class="p"> <strong class="ph b">Availability to deploy and configure Ansible MCP servers</strong> </p> 
+      <ul class="ul"> 
+       <li class="li">Organization administrators can now deploy an Ansible Model Context Protocol (MCP) server on an Operator-based or containerized installation of Ansible Automation Platform 2.6. This functionality is available as a Technology Preview release.</li> 
+       <li class="li">Model Context Protocol (MCP) is an open standard that enables AI models to use external AI tools and services via a unified interface.</li> 
+       <li class="li">The following are the key capabilities: 
+        <ul class="ul"> 
+         <li class="li">Using the Ansible MCP server, you can connect your Ansible Automation Platform with your preferred external AI tool (such as Claude, Cursor, or ChatGPT). The AI tools can access key information about your Ansible Automation Platform environment and perform tasks.</li> 
+         <li class="li">Ansible users can query information, execute workflows, and perform automation tasks using natural language prompts directly within their preferred AI tool.</li> 
+        </ul> </li> 
+      </ul> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">Technology Preview features are not supported with Red Hat production service level agreements (SLAs) and might not be functionally complete. Red Hat does not recommend using them in production. These features provide early access to upcoming product features, enabling customers to test functionality and provide feedback during the development process. For more information about the support scope of Red Hat Technology Preview features, see <a class="xref" href="https://access.redhat.com/support/offerings/techpreview" target="_blank" rel="external noopener">Technology Preview Features Support Scope</a>.</p> 
+        <p class="p">For more information about deploying the Ansible MCP server, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_deploying_ansible_mcp_server#deploying-ansible-mcp-server" title="As an organization administrator, you can deploy the Model Context Protocol (MCP) server for Red Hat Ansible Automation Platform on an operator-based installation or container-based installation of Ansible Automation Platform.">Deploy the MCP server on Ansible Automation Platform</a>. (ANSTRAT-1567)</p> 
+       </div>
+      </div> 
+      <dl class="dl"> 
+       <dt class="dt dlterm">
+        Enhancements
+       </dt> 
+       <dd class="dd"> 
+        <ul class="ul"> 
+         <li class="li">Fixed an issue with missing Ansible Automation Platform 2.6 repositories for Red Hat Enterprise Linux 10, which previously prevented the successful build of devtools RPMs. This resulted in devtools failing to mirror Ansible Automation Platform 2.6 on Red Hat Enterprise Linux 10. With this release, we have built the devtools RPMs for Red Hat Enterprise Linux 10 on a dedicated channel which are now accessible to users.(AAP-53866)</li> 
+        </ul> 
+       </dd> 
+       <dt class="dt dlterm">
+        Bug Fixes
+       </dt> 
+       <dd class="dd"> 
+        <ul class="ul"> 
+         <li class="li">Fixed an issue where the python build dependencies wheel files were stored in container images.(AAP-59254)</li> 
+         <li class="li">Fixed an issue where the job template did not remain editable after the associated project was deleted.(AAP-58467)</li> 
+         <li class="li">Fixed a server error that could happen when assigning permissions via the <code class="ph codeph">/api/eda/</code> or <code class="ph codeph">/api/controller/</code> endpoints.(AAP-58622)</li> 
+         <li class="li">Fixed an issue where the job template did not remain editable after the associated project was deleted.(AAP-58467)</li> 
+         <li class="li">Fixed an issue where the project status update link on the job details page was broken.(AAP-57215)</li> 
+         <li class="li">Fixed an issue where the brand logo was missing in the <strong class="ph b">About</strong> page when accessing it from the <strong class="ph b">Overview</strong> page.(AAP-57133)</li> 
+         <li class="li">Fixed an issue where the <strong class="ph b">Resource Type</strong> filter in the <strong class="ph b">Roles</strong> page did not correctly filter by resource types like Credential, Project, and Execution Environment, that are found in both Automation Execution and Automation Decisions.(AAP-56691)</li> 
+         <li class="li">Fixed an issue where the <strong class="ph b">Launched by</strong> field appeared blank in the UI when the project update is triggered automatically, such as through <strong class="ph b">Update revision on launch</strong> or other automated conditions.(AAP-56643)</li> 
+         <li class="li">Fixed an issue where the playbook select dropdown did not automatically select a playbook if there was only one in the project.(AAP-56279)</li> 
+         <li class="li">Fixed an issue where the source control <strong class="ph b">Branch</strong> option was missing from the Inventory source.(AAP-56149)</li> 
+         <li class="li">Fixed an issue where the Azure AD name was inconsistently called <strong class="ph b">Azuread</strong> in the user interface. This has been corrected to <strong class="ph b">Azure AD</strong>.(AAP-55677)</li> 
+         <li class="li">Fixed an issue where the OpenAPI specification for the platform gateway REST API was not providing comprehensive documentation and detailed request/response schemas.(AAP-53643)</li> 
+         <li class="li">Fixed an issue where the edit form for a survey would not display in the UI if the survey was created without a default value using the ansible.controller collection.(AAP-51548)</li> 
+         <li class="li">Fixed an issue where the text on <strong class="ph b">Remotes</strong> and <strong class="ph b">Remote Registries</strong> pages was not accurate.(AAP-49838)</li> 
+         <li class="li">Fixed an issue where the source control branch for the <strong class="ph b">Project Sync Job Details</strong> was missing.(AAP-49450)</li> 
+         <li class="li">Fixed an issue where the collection hyperlink was broken in card view in private automation hub.(AAP-49006)</li> 
+         <li class="li">Fixed an issue where the <strong class="ph b">Search</strong> function failed to narrow results when adding host to group.(AAP-47510)</li> 
+         <li class="li">Fixed an issue where the custom login text had poor legibility and did not allow for HTML markup such as links.(AAP-47462)</li> 
+         <li class="li">Fixed an issue where the filtering by host name did not work as expected in the <strong class="ph b">Add Existing Host</strong> dialog.(AAP-45534)</li> 
+         <li class="li">Fixed an issue where the email notification URL for the workflow job template displayed a blank page.(AAP-43796)</li> 
+         <li class="li">Fixed an issue where creating a new template from <strong class="ph b">Project</strong> or <strong class="ph b">Inventory</strong> did not auto-populate the Project field.(AAP-41725)</li> 
+         <li class="li">Fixed an issue where the <strong class="ph b">Permission Denied</strong> message on the templates tab, when the user has permission, was misleading. Updated the messaging when job template creation is not available: Job template creation requires project access and the user is not currently assigned to any projects.(AAP-40800)</li> 
+         <li class="li">Fixed an issue where the repository URL in the <strong class="ph b">Details</strong> page was incorrect.(AAP-40160)</li> 
+         <li class="li">Fixed a survey validation issue where the minimum length value of a question could be set to greater than the maximum length value.(AAP-39932)</li> 
+         <li class="li">Fixed a survey validation issue where text was being treated as a number when evaluating its length.(AAP-39931)</li> 
+         <li class="li">Fixed an issue where the user was unable to create a schedule for <strong class="ph b">Constructed inventory</strong> synchronization. The <strong class="ph b">Create Schedule</strong> UI no longer presents the option to select a constructed inventory when the resource type is Inventory source.(AAP-38660)</li> 
+         <li class="li">Fixed an issue where the survey answers were not being saved when editing or creating a schedule.(AAP-37923)</li> 
+         <li class="li">Fixed an issue where the instance groups on a schedule could not be edited.(AAP-37872)</li> 
+         <li class="li">Fixed an issue where there was a <strong class="ph b">404</strong> error message on a validated repo sync on private automation hub. 
+          <ul class="ul"> 
+           <li class="li">Introduces an <strong class="ph b">Options</strong> section for the checkboxes <strong class="ph b">Signed collections only</strong> and <strong class="ph b">Sync all dependencies</strong>.</li> 
+           <li class="li">Adds an info message about syncing dependencies outside the repository.(AAP-36592)</li> 
+          </ul> </li> 
+         <li class="li">Fixed an issue where there was an inconsistency in the task timestamps between the <strong class="ph b">Overview</strong> and <strong class="ph b">Detail</strong> views.(AAP-36588)</li> 
+         <li class="li">Fixed an issue where an unchecked SSL verification caused <code class="ph codeph">ImagePullBackOff</code> errors. This caused failed job launches due to SSL certificate verification issues. With this release, SSL certificate verification is bypassed for <strong class="ph b">Container Registry</strong> type credentials.(AAP-33889)</li> 
+         <li class="li">Fixed an issue where users were encountering an issue with <code class="ph codeph">extra-vars</code><code class="ph codeph">number_list</code> containing more than 21 digits in non-quoted integer format, experiencing a UI display problem. Previously, the user interface incorrectly converted long numbers to scientific notation, making input difficult.(AAP-31805)</li> 
+        </ul> 
+       </dd> 
+       <dt class="dt dlterm">
+        Deprecated
+       </dt> 
+       <dd class="dd"> 
+        <ul class="ul"> 
+         <li class="li">The following endpoints have been deprecated for Ansible Automation Platform, MCP, and MVP in the OpenAPI Specifications; 
+          <ul class="ul"> 
+           <li class="li"><code class="ph codeph">UserViewSet</code> and <code class="ph codeph">DeprecatedRelatedUserViewSet</code> are deprecated.</li> 
+           <li class="li"><code class="ph codeph">UserTeamViewSet</code> and <code class="ph codeph">UserOrganizationViewSet</code> are deprecated.</li> 
+           <li class="li"><code class="ph codeph">authenticators</code> and <code class="ph codeph">authenticator_uid</code> fields are deprecated in <code class="ph codeph">UserSerializer</code>.(AAP-58322)</li> 
+          </ul> </li> 
+        </ul> 
+       </dd> 
+      </dl> 
+     </section> 
+     <section class="section" id="aap-26-20251210___ansible_automation_platform_operator">
+      <h2 class="title sectiontitle">Ansible Automation Platform Operator</h2> 
+      <dl class="dl"> 
+       <dt class="dt dlterm">
+        Enhancements
+       </dt> 
+       <dd class="dd"> 
+        <ul class="ul"> 
+         <li class="li">Event-Driven Ansible event-stream mTLS configuration has been added to the installer.(AAP-58343)</li> 
+         <li class="li">Added <code class="ph codeph">spec_overrides</code> field to the restore CR spec: 
+          <ul class="ul"> 
+           <li class="li">Added support for overriding Controller-specific settings via <code class="ph codeph">spec_overrides.controller</code>.</li> 
+           <li class="li">Added support for overriding automation hub specific settings via <code class="ph codeph">spec_overrides.hub</code>.</li> 
+           <li class="li">Added support for overriding Event-Driven Ansible specific settings via <code class="ph codeph">spec_overrides.eda</code>.</li> 
+           <li class="li">Added support for overriding database-specific settings via <code class="ph codeph">spec_overrides.database</code>.(AAP-60024)</li> 
+          </ul> </li> 
+        </ul> 
+       </dd> 
+       <dt class="dt dlterm">
+        Bug Fixes
+       </dt> 
+       <dd class="dd"> 
+        <ul class="ul"> 
+         <li class="li">Fixed an issue with object storage secrets that were not included in the Automation Hub backup.(AAP-59610)</li> 
+         <li class="li">Fixed the conditional failure for <code class="ph codeph">AnsibleWorkflow</code> job launch when using the <code class="ph codeph">AnsibleWorkflow</code> CR in Ansible Automation Platform 2.6.(AAP-59106)</li> 
+         <li class="li">Fixed an issue where there was an OpenShift Container Platform resource runner python library dependency missing from the container image.(AAP-59032)</li> 
+         <li class="li">Fixed a server error that could happen when assigning permissions via the <code class="ph codeph">/api/eda/</code> or <code class="ph codeph">/api/controller/</code> endpoints.(AAP-58622)</li> 
+        </ul> 
+       </dd> 
+      </dl> 
+     </section> 
+     <section class="section" id="aap-26-20251210___automation_controller">
+      <h2 class="title sectiontitle">Automation controller</h2> 
+      <dl class="dl"> 
+       <dt class="dt dlterm">
+        Features
+       </dt> 
+       <dd class="dd"> 
+        <ul class="ul"> 
+         <li class="li">Receptor collection version bumped to 2.0.8, which is compatible with Red Hat Enterprise Linux 10.(AAP-58421)</li> 
+         <li class="li">Added <code class="ph codeph">x-ai-description</code> to controller schema to provide AI friendly description of each endpoint.(AAP-59819)</li> 
+        </ul> 
+       </dd> 
+       <dt class="dt dlterm">
+        Bug Fixes
+       </dt> 
+       <dd class="dd"> 
+        <ul class="ul"> 
+         <li class="li">Fixed an issue where project update failed with no output, and project deletions failed. Automation controller now uses the force flag when syncing a project which has <strong class="ph b">Allow branch override</strong> enabled.(AAP-58533)</li> 
+         <li class="li">In this update, users attempting to install a software package on an unsupported architecture may encounter issues due to incorrect data in reminders. This has been resolved.(AAP-59728)</li> 
+         <li class="li">Fixed an issue where the project update failed with no output and project deletions also failed.(AAP-58533)</li> 
+         <li class="li">Fixed an issue where the OpenAPI specification for the Automation controller was incomplete, impeding MCP server integration development. This limited the seamless MCP server integration with the Ansible Automation Platform. The Automation controller’s REST API is now complete and accessible.(AAP-53640)</li> 
+        </ul> 
+       </dd> 
+      </dl> 
+     </section> 
+     <section class="section" id="aap-26-20251210___automation_hub">
+      <h2 class="title sectiontitle">Automation hub</h2> 
+      <dl class="dl"> 
+       <dt class="dt dlterm">
+        Bug Fixes
+       </dt> 
+       <dd class="dd"> 
+        <ul class="ul"> 
+         <li class="li">Fixed an issue with Automation hub authentication failure for users with the <strong class="ph b">Team Admin</strong> role: 
+          <ul class="ul"> 
+           <li class="li">Users assigned the <strong class="ph b">Team Admin</strong> role can now successfully authenticate to Automation hub. Previously, these users would receive a <strong class="ph b">401</strong> error when accessing Automation hub API endpoints due to an incompatibility between the <strong class="ph b">Team Admin</strong> role and Automation hub’s internal permission system.(AAP-58898)</li> 
+          </ul> </li> 
+         <li class="li">Fixed an issue where the password field on the Automation hub Django REST framework authentication page was missing the autocomplete attribute. As a consequence, the field did not align with security best practices regarding browser autofill. With this update, the password field uses the <code class="ph codeph">autocomplete="new-password"</code> attribute. As a result, the Automation hub API authentication page complies with recommended security settings.(AAP-59910)</li> 
+         <li class="li">Previously, upgrades from Ansible Automation Platform 2.5 to 2.6 failed when API access logging was enabled. This occurred due to an incorrect import path in the galaxy-ng package. This release corrects the import path.(AAP-59886)</li> 
+        </ul> 
+       </dd> 
+      </dl> 
+     </section> 
+     <section class="section" id="aap-26-20251210___container_based_ansible_automation_platform">
+      <h2 class="title sectiontitle">Container-based Ansible Automation Platform</h2> 
+      <dl class="dl"> 
+       <dt class="dt dlterm">
+        Enhancements
+       </dt> 
+       <dd class="dd"> 
+        <ul class="ul"> 
+         <li class="li">Configured podman PID limits, <code class="ph codeph">sysctls</code> for <code class="ph codeph">inotify</code> and kernel keys, and ulimit <code class="ph codeph">nofile</code> for user running Ansible Automation Platform service containers based on system resources.(AAP-59438)</li> 
+        </ul> 
+       </dd> 
+       <dt class="dt dlterm">
+        Bug Fixes
+       </dt> 
+       <dd class="dd"> 
+        <ul class="ul"> 
+         <li class="li">Fixed an issue where after uninstall/re-install of receptor jobs were unable to start due to stale exited containers with the same name were still present.(AAP-59609)</li> 
+        </ul> 
+       </dd> 
+      </dl> 
+     </section> 
+     <section class="section" id="aap-26-20251210___event_driven_ansible">
+      <h2 class="title sectiontitle">Event-Driven Ansible</h2> 
+      <dl class="dl"> 
+       <dt class="dt dlterm">
+        Enhancements
+       </dt> 
+       <dd class="dd"> 
+        <ul class="ul"> 
+         <li class="li">Added concise descriptions to API endpoints for Ansible Automation Platform MCP MVP endpoints (<code class="ph codeph">x-ai-description</code>).(AAP-58431)</li> 
+        </ul> 
+       </dd> 
+       <dt class="dt dlterm">
+        Bug Fixes
+       </dt> 
+       <dd class="dd"> 
+        <ul class="ul"> 
+         <li class="li">Fixed an issue where the OpenAPI specification for Event-Driven Ansible was not offering comprehensive documentation and detailed request/response schemas. Previously, developers integrating with Event-Driven Ansible via the MCP server had to manually explore APIs and format API calls without proper guidance, which impeded seamless integration. With this release, the OpenAPI specification for the Event-Driven Ansible REST API is now complete and well-documented. This enhancement enables seamless integration with the MCP server using Event-Driven Ansible.(AAP-53642)</li> 
+        </ul> 
+       </dd> 
+      </dl> 
+     </section> 
+     <section class="section" id="aap-26-20251210___lightspeed">
+      <h2 class="title sectiontitle">Lightspeed</h2> 
+      <dl class="dl"> 
+       <dt class="dt dlterm">
+        Technical Preview
+       </dt> 
+       <dd class="dd"> 
+        <ul class="ul"> 
+         <li class="li">This developer preview introduces support for Ansible MCP Servers.(AAP-57303)</li> 
+         <li class="li">This new feature enables users to access the Ansible Automation Platform 2.6 API directly from AI tools like Claude Code.(AAP-57217)</li> 
+        </ul> 
+       </dd> 
+       <dt class="dt dlterm">
+        Features
+       </dt> 
+       <dd class="dd">
+        Added the new Ansible Automation Platform MCP Server to the 2.6 stream.(AAP-58863)
+       </dd> 
+       <dt class="dt dlterm">
+        Bug Fixes
+       </dt> 
+       <dd class="dd"> 
+        <ul class="ul"> 
+         <li class="li">Fixed an issue of Ansible Automation Platform Multi-Channel Platform (MCP) servers crashing due to incomplete Epic and System Design Plan (SDP) creation, leading to unclear work requirements. As a result, the Ansible Automation Platform MCP Servers have created the System Design Plan and related tasks, addressing ANSTRAT-1567. This enhancement improves the efficiency of feature development for end users by completing the Ansible Automation Platform MCP Servers system design plan in an active manner.(AAP-53087)</li> 
+        </ul> 
+       </dd> 
+      </dl> 
+     </section> 
+     <section class="section" id="aap-26-20251210___receptor">
+      <h2 class="title sectiontitle">Receptor</h2> 
+      <dl class="dl"> 
+       <dt class="dt dlterm">
+        Features
+       </dt> 
+       <dd class="dd"> 
+        <ul class="ul"> 
+         <li class="li">Receptor collection version bumped to 2.0.8, which supports Red Hat Enterprise Linux 10 mesh nodes.(AAP-57987)</li> 
+        </ul> 
+       </dd> 
+       <dt class="dt dlterm">
+        Bug Fixes
+       </dt> 
+       <dd class="dd"> 
+        <ul class="ul"> 
+         <li class="li">Fixed an issue where the receptor-collection was not up to date with Automation hub standards. There is now an up to date Changelog included in receptor-collection.(AAP-58434)</li> 
+        </ul> 
+       </dd> 
+      </dl> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

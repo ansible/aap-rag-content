@@ -1,0 +1,53 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="self-service-determine-version-tags">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Determine version tags before you install</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Record the version values that you need before you install the Helm chart or mirror images for Ansible automation portal.</p> 
+     <table class="table">
+      <caption></caption>
+      <colgroup>
+       <col>
+       <col>
+      </colgroup>
+      <thead class="thead"> 
+       <tr class="row"> 
+        <th class="entry" id="self-service-determine-version-tags__entry__1">Value</th> 
+        <th class="entry" id="self-service-determine-version-tags__entry__2">Where to find it</th> 
+       </tr> 
+      </thead>
+      <tbody class="tbody"> 
+       <tr class="row"> 
+        <td class="entry" headers="self-service-determine-version-tags__entry__1">Supported portal, Ansible Automation Platform, and OpenShift Container Platform versions</td> 
+        <td class="entry" headers="self-service-determine-version-tags__entry__2">Ansible automation portal lifecycle page (for example, portal version <code class="ph codeph">2.1</code>).</td> 
+       </tr> 
+       <tr class="row"> 
+        <td class="entry" headers="self-service-determine-version-tags__entry__1">Helm chart version</td> 
+        <td class="entry" headers="self-service-determine-version-tags__entry__2">OpenShift <strong class="ph b">Helm</strong> catalog when you create the release, or run <code class="ph codeph">helm search repo openshift-helm-charts/redhat-rhaap-portal</code>.</td> 
+       </tr> 
+       <tr class="row"> 
+        <td class="entry" headers="self-service-determine-version-tags__entry__1"><code class="ph codeph">imageTagInfo</code> (<code class="ph codeph">&lt;plugin-version&gt;</code>)</td> 
+        <td class="entry" headers="self-service-determine-version-tags__entry__2">Default in the chart <strong class="ph b">YAML</strong> view, or run <code class="ph codeph">helm show values openshift-helm-charts/redhat-rhaap-portal --version &lt;chart-version&gt;</code> and find the value under <code class="ph codeph">redhat-developer-hub.global.imageTagInfo</code>.</td> 
+       </tr> 
+       <tr class="row"> 
+        <td class="entry" headers="self-service-determine-version-tags__entry__1"><code class="ph codeph">&lt;platform-version&gt;</code> (application image and catalog index)</td> 
+        <td class="entry" headers="self-service-determine-version-tags__entry__2">Run <code class="ph codeph">helm template &lt;release-name&gt; openshift-helm-charts/redhat-rhaap-portal --version &lt;chart-version&gt; -f &lt;values.yaml&gt; | grep CATALOG_INDEX_IMAGE</code>. Use the tag on <code class="ph codeph">plugin-catalog-index</code> (for example, <code class="ph codeph">:1.9</code>) for the hub image, <code class="ph codeph">mirror-plugins.sh</code>, and <code class="ph codeph">--plugin-index</code>.</td> 
+       </tr> 
+      </tbody>
+     </table> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relinfo">
+      <strong>Related information</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-lifecycle" target="_blank" rel="external noopener">Ansible automation portal lifecycle</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

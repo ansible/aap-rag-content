@@ -1,0 +1,341 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="installing-controller-operator"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Configure automation controller</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">You can use these instructions to configure the automation controller operator on Red Hat OpenShift Container Platform, specify custom resources, and deploy Ansible Automation Platform with an external database.</p> 
+      <p class="p">Automation controller configuration can be done through the automation controller extra_settings or directly in the user interface after deployment. However, it is important to note that configurations made in extra_settings take precedence over settings made in the user interface.</p> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">When an instance of automation controller is removed, the associated PVCs are not automatically deleted. This can cause issues during migration if the new deployment has the same name as the previous one. Therefore, it is recommended that you manually remove old PVCs before deploying a new automation controller instance in the same namespace.</p> 
+       </div>
+      </div> 
+      <section class="section" id="installing-controller-operator___prerequisites">
+       <h2 class="title sectiontitle">Prerequisites</h2> 
+       <ul class="ul"> 
+        <li class="li">You have installed the Red Hat Ansible Automation Platform catalog in Operator Hub.</li> 
+        <li class="li">For automation controller, a default StorageClass must be configured on the cluster for the operator to dynamically create needed PVCs. This is not necessary if an external PostgreSQL database is configured.</li> 
+        <li class="li">For Hub a StorageClass that supports ReadWriteMany must be available on the cluster to dynamically created the PVC needed for the content, redis and api pods. If it is not the default StorageClass on the cluster, you can specify it when creating your AutomationHub object.</li> 
+       </ul> 
+      </section> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist reltasks">
+       <strong>Related tasks</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-configure_your_ansible_automation_platform_deployment#proc-find-delete-PVCs" title="A persistent volume claim (PVC) is a storage volume used to store data that automation hub and automation controller applications use.">Find and delete PVCs</a></li>
+       </ul>
+      </div>
+      <div class="linklist relinfo">
+       <strong>Related information</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/openshift_container_platform/" target="_blank" rel="external noopener">OpenShift Container Platform product documentation</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-configuring-controller-image-pull-policy"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Configure your automation controller image pull policy</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Use this procedure to configure the image pull policy on your automation controller.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div>
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Red Hat OpenShift Container Platform.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Go to <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Installed Operators</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select your Ansible Automation Platform Operator deployment.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">Ansible Automation Platform</strong> tab.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click the ⋮ icon next to your Ansible Automation Platform instance and select <strong class="ph b">Edit AnsibleAutomationPlatform</strong>. </span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">YAML view</strong> and locate the <code class="ph codeph">spec.controller:</code> section. </span> 
+          <div class="itemgroup info"></div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Configure the image pull policy and resource requirements under the <code class="ph codeph">controller:</code> section:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>spec:
+  controller:
+    image_pull_policy: IfNotPresent  # Options: Always, Never, IfNotPresent
+    image_pull_secrets:
+      - pull-secret-name
+    web_resource_requirements:
+      limits:
+        cpu: 1000m
+        memory: 2Gi
+      requests:
+        cpu: 500m
+        memory: 1Gi
+    task_resource_requirements:
+      limits:
+        cpu: 2000m
+        memory: 4Gi
+      requests:
+        cpu: 1000m
+        memory: 2Gi
+    ee_resource_requirements:
+      limits:
+        cpu: 500m
+        memory: 1Gi
+      requests:
+        cpu: 250m
+        memory: 512Mi
+    redis_resource_requirements:
+      limits:
+        cpu: 500m
+        memory: 1Gi
+      requests:
+        cpu: 250m
+        memory: 512Mi
+    postgres_resource_requirements:
+      limits:
+        cpu: 1000m
+        memory: 2Gi
+      requests:
+        cpu: 500m
+        memory: 1Gi
+    postgres_storage_requirements:
+      limits:
+        storage: 10Gi
+      requests:
+        storage: 8Gi
+    replicas: 1
+    garbage_collect_secrets: false
+    create_preload_data: true</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Save</strong>.</span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">These settings apply to the automation controller component managed by this Ansible Automation Platform instance. If you specified an existing controller under <code class="ph codeph">controller.name</code>, these settings will update that instance.</p> 
+             <p class="p">For more examples of Ansible Automation Platform custom resources, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_operator_crs#appendix-operator-crs_appendix-operator-crs" title="This appendix provides a reference for the Ansible Automation Platform custom resources for various deployment scenarios.">Red Hat Ansible Automation Platform custom resources</a> </p> 
+            </div>
+           </div> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc_configuring-controller-ldap-security"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Configure your LDAP for automation controller</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can configure your LDAP SSL configuration for automation controller through any of the following options:</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">The automation controller user interface. <p class="p">The platform gateway user interface. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_set_up_ldap#controller-set-up-LDAP" title="As a platform administrator, you can configure LDAP as the source for account authentication information for Ansible Automation Platform users.">Configure LDAP authentication</a> for additional steps.</p> </li> 
+         <li class="li">The following procedure steps.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Create a secret in your Ansible Automation Platform namespace for the <code class="ph codeph">bundle-ca.crt</code> file (the filename must be <code class="ph codeph">bundle-ca.crt</code>): </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ oc create secret -n aap generic bundle-ca-secret --from-file=bundle-ca.crt</code></pre> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">The target filename for this operation must be <code class="ph codeph">bundle-ca.crt</code> and the secret name should be <code class="ph codeph">bundle-ca-secret</code>.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Add the <code class="ph codeph">bundle_cacert_secret</code> to the Ansible Automation Platform customer resource: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>...
+spec:
+  bundle_cacert_secret: bundle-ca-secret
+...</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">You can verify the expected certificate by running:</p> 
+        <pre class="pre codeblock"><code>oc get deployments -l 'app.kubernetes.io/component=aap-gateway'</code></pre> 
+        <p class="p">Followed by:</p> 
+        <pre class="pre codeblock"><code>oc exec -it deployment.apps/&lt;gateway-deployment-name-from-above&gt; -- openssl x509 -in /etc/pki/tls/certs/ca-bundle.crt -noout -text</code></pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-configuring-controller-route-options"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Configure automation controller route options</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">The Red Hat Ansible Automation Platform operator installation form allows you to further configure your automation controller operator route options under <strong class="ph b">Advanced configuration</strong>.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <div class="note important note_important">
+         <span class="note__title">Important:</span> 
+         <div class="note__body">
+          You must assign a unique metadata.name to each custom resource (CR) in your namespace. If you assign an <code class="ph codeph">AutomationControllerMeshIngress</code> the same name as your <code class="ph codeph">AnsibleAutomationPlatform</code> installation, the operator overrides default routes and services. This conflict causes the platform installation to fail.
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Red Hat OpenShift Container Platform.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Installed Operators</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select your Ansible Automation Platform Operator deployment.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b"><strong class="ph b">Ansible Automation Platform</strong></strong> tab.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click the ⋮ icon next to your Ansible Automation Platform instance and select <strong class="ph b">Edit AnsibleAutomationPlatform</strong> .</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">YAML view</strong> and locate the <code class="ph codeph">spec.controller:</code> section.<span class="ph uicontrol button"></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Configure the route options under the <code class="ph codeph">controller:</code> section:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>spec:
+  controller:
+    ingress_type: Route
+    route_host: controller.example.com  # Custom hostname for the route
+    route_tls_termination_mechanism: Edge  # Options: Edge, Passthrough
+    route_tls_secret: controller-tls-secret  # Optional: TLS credential secret
+    projects_persistence: false  # Enable/disable persistence for /var/lib/projects</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd"> Click <strong class="ph b">Save.</strong></span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">Edge termination is recommended for most instances. After configuring your route, you can customize additional route settings by adding them to the <code class="ph codeph">controller:</code> section in the Ansible Automation Platform custom resource.</p> 
+             <p class="p">For more examples of Ansible Automation Platform custom resources, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_operator_crs#appendix-operator-crs_appendix-operator-crs" title="This appendix provides a reference for the Ansible Automation Platform custom resources for various deployment scenarios.">Red Hat Ansible Automation Platform custom resources</a> . </p> 
+            </div>
+           </div> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="proc-controller-ingress-options"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Configure ingress options for automation controller</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">The Ansible Automation Platform Operator installation form allows you to further configure your automation controller operator ingress under <strong class="ph b">Advanced configuration</strong>.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div>
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Red Hat OpenShift Container Platform.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Installed Operators</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select your Ansible Automation Platform Operator deployment.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b"><strong class="ph b">Ansible Automation Platform</strong></strong> tab.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click the ⋮ icon next to your Ansible Automation Platform instance and select <strong class="ph b">Edit AnsibleAutomationPlatform</strong> .</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">YAML view</strong> and locate the <code class="ph codeph">spec.controller:</code> section.<span class="ph uicontrol button"></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Configure the route options under the <code class="ph codeph">controller:</code> section:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>spec:
+  controller:
+    ingress_type: Ingress
+    ingress_annotations: |
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/proxy-connect-timeout: "600"
+    ingress_tls_secret: controller-ingress-tls-secret</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Save</strong>.</span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">These settings apply to the automation controller component managed by this Ansible Automation Platform instance. The operator automatically updates the ingress configuration for the controller.</p> 
+             <p class="p">For more examples of Ansible Automation Platform custom resources, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_operator_crs#appendix-operator-crs_appendix-operator-crs" title="This appendix provides a reference for the Ansible Automation Platform custom resources for various deployment scenarios.">Red Hat Ansible Automation Platform custom resources</a> </p> 
+            </div>
+           </div> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">After you have configured your automation controller ingress setting, OpenShift Container Platform updates the pods. This may take a few minutes.</p> 
+        <p class="p">You can view the progress by navigating to <span class="ph menucascade"><span class="ph uicontrol">Workloads</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Pods</span></span> and locating the newly created instance.</p> 
+        <p class="p">Verify that the following operator pods provided by the Ansible Automation Platform Operator installation from automation controller are running:</p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:25%">
+          <col style="width:25%">
+          <col style="width:25%">
+          <col style="width:25%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="proc-controller-ingress-options__entry__1">Operator manager controllers</th> 
+           <th class="entry" id="proc-controller-ingress-options__entry__2">Automation controller</th> 
+           <th class="entry" id="proc-controller-ingress-options__entry__3">Automation hub</th> 
+           <th class="entry" id="proc-controller-ingress-options__entry__4">Event-Driven Ansible (EDA)</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="proc-controller-ingress-options__entry__1"> <p class="p">The operator manager controllers for each of the three operators, include the following:</p> 
+            <ul class="ul"> 
+             <li class="li">automation-controller-operator-controller-manager</li> 
+             <li class="li">automation-hub-operator-controller-manager</li> 
+             <li class="li">resource-operator-controller-manager</li> 
+             <li class="li">aap-gateway-operator-controller-manager</li> 
+             <li class="li">ansible-lightspeed-operator-controller-manager</li> 
+             <li class="li">eda-server-operator-controller-manager</li> 
+            </ul> </td> 
+           <td class="entry" headers="proc-controller-ingress-options__entry__2"> <p class="p">After deploying automation controller, you can see the addition of the following pods:</p> 
+            <ul class="ul"> 
+             <li class="li">controller</li> 
+             <li class="li">controller-postgres</li> 
+             <li class="li">controller-web</li> 
+             <li class="li">controller-task</li> 
+            </ul> </td> 
+           <td class="entry" headers="proc-controller-ingress-options__entry__3"> <p class="p">After deploying automation hub, you can see the addition of the following pods:</p> 
+            <ul class="ul"> 
+             <li class="li">hub-api</li> 
+             <li class="li">hub-content</li> 
+             <li class="li">hub-postgres</li> 
+             <li class="li">hub-redis</li> 
+             <li class="li">hub-worker</li> 
+            </ul> </td> 
+           <td class="entry" headers="proc-controller-ingress-options__entry__4"> <p class="p">After deploying EDA, you can see the addition of the following pods:</p> 
+            <ul class="ul"> 
+             <li class="li">eda-activation-worker</li> 
+             <li class="li">da-api</li> 
+             <li class="li">eda-default-worker</li> 
+             <li class="li">eda-event-stream</li> 
+             <li class="li">eda-scheduler</li> 
+            </ul> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">A missing pod can indicate the need for a pull secret. Pull secrets are required for protected or private image registries. See <a class="xref" href="https://docs.openshift.com/container-platform/4.11/openshift_images/managing_images/using-image-pull-secrets.html" target="_blank" rel="external noopener">Using image pull secrets</a> for more information. You can diagnose this issue further by running <code class="ph codeph">oc describe pod &lt;pod-name&gt;</code> to see if there is an ImagePullBackOff error on that pod.</p> 
+         </div>
+        </div> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-operator-troubleshoot"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Troubleshoot your Operator-based deployment of Ansible Automation Platform</h1> 
+     <p class="shortdesc">Use the commands and procedures in this section to diagnose and resolve common issues with your Ansible Automation Platform deployment on OpenShift Container Platform. Topics include viewing logs, inspecting resources, and collecting diagnostic data for Red Hat Support. </p> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="con-operator-understand-operator-logs"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Understand the automation controller operator logs</h2> 
+      <p class="shortdesc">If an <strong class="ph b">AutomationController</strong> instance fails to deploy, check the <code class="ph codeph">automation-controller-operator</code> container logs. These logs contain the installer role output required to debug deployment issues.</p> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-operator-viewing-events"> 
+      <h2 class="title topictitle2" id="ariaid-title3">View events in the OpenShift Container Platform</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can view events in the OpenShift Container Platform web console to monitor for errors and troubleshoot issues. This helps you quickly diagnose problems by examining the status of custom resources and their related events.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">You can debug by first reviewing the status conditions of the Ansible Automation Platform custom resource (CR) and then checking any nested CRs for errors.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">Log in to the OpenShift Container Platform web console.</span> </li>
+         <li class="li step"> <span class="ph cmd">In the navigation menu, select <span class="ph menucascade"><span class="ph uicontrol">Home</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Events</span></span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select your project from the project list.</span> </li>
+         <li class="li step"> <span class="ph cmd">To view events for a specific resource, navigate to that resource’s page. Many resource pages, such as pods and deployments, have their own <strong class="ph b">Events</strong> tab.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select a resource to bring you to the <strong class="ph b">Pod Details</strong> page.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Check the <strong class="ph b">Conditions</strong> section on the <strong class="ph b">Pod details</strong> page to confirm no errors are listed in the <strong class="ph b">Message</strong> column.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-viewing-operator-logs"> 
+      <h2 class="title topictitle2" id="ariaid-title4">View operator logs</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">The following procedure is an example of how to view the logs for an <code class="ph codeph">automation-controller-operator</code> pod.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">To find the pod name, run: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc get pods | grep operator</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">To view the logs for the pod, run: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc logs &lt;operator-pod-name&gt; -f</code></pre> 
+          </div> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Alternatively, to view the logs without first getting the pod name, run: </span> 
+            <div class="itemgroup info"> 
+             <pre class="pre codeblock"><code>oc logs deployments/automation-controller-operator-controller-manager -c automation-controller-manager -f</code></pre> 
+            </div> </li> 
+          </ol> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="proc-operator-config-log-verbosity"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Configure log verbosity</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can enable task output for debugging on any custom resources (CRs) by setting <code class="ph codeph">no_log</code> to <code class="ph codeph">false</code> in the component section of the <code class="ph codeph">AnsibleAutomationPlatform</code> CR.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">The logs then show output for any failed tasks that originally had <code class="ph codeph">no_log</code> set to <code class="ph codeph">true</code>. All Ansible Automation Platform components (automation controller, automation hub, and Event-Driven Ansible) support the <code class="ph codeph">no_log</code> setting.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Edit the Ansible Automation Platform CR and set the <code class="ph codeph">no_log</code> field to <code class="ph codeph">false</code> for the component you want to debug. </span> 
+          <div class="itemgroup info">
+           For automation controller: 
+           <pre class="pre codeblock"><code>apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  controller:
+    no_log: false</code></pre> 
+          </div> 
+          <div class="itemgroup info">
+           For automation hub: 
+           <pre class="pre codeblock"><code>apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  hub:
+    no_log: false</code></pre> 
+          </div> 
+          <div class="itemgroup info">
+           For Event-Driven Ansible 
+           <pre class="pre codeblock"><code>apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  eda:
+    no_log: false</code></pre> 
+          </div> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">This might expose sensitive data in the logs. On production clusters, this value must generally be set to <code class="ph codeph">true</code> unless you are actively debugging an issue.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">To increase the Ansible Playbook verbosity from the operator, set the verbosity level using an annotation on the Ansible Automation Platform CR:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+  annotations:
+    ansible.sdk.operatorframework.io/verbosity: "4"
+spec:
+  # ... component configuration ...</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="proc-operator-inspect-k8s-resource"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Inspect a OpenShift Container Platform resource</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">To inspect a OpenShift Container Platform resource, you must use the <code class="ph codeph">oc</code> command to get a summary or the full YAML definition of the resource.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">To view a human-readable summary of a resource, run: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc describe -n &lt;namespace&gt; &lt;resource&gt; &lt;resource-name&gt;</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">To view the complete YAML definition of a resource, use the <code class="ph codeph">-o yaml</code> flag: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc get -n &lt;namespace&gt; &lt;resource&gt; &lt;resource-name&gt; -o yaml</code></pre> 
+           <ul class="ul"> 
+            <li class="li">For example, to get the YAML for the <code class="ph codeph">automationcontroller</code> custom resource, run: <pre class="pre codeblock"><code>oc get -n aap automationcontroller aap -o yaml</code></pre> </li> 
+           </ul> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title7" id="ref-operator-core-aap-resources"> 
+      <h2 class="title topictitle2" id="ariaid-title7">Core Ansible Automation Platform resources</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The following table lists and describes the core custom resources (CRs) that the Ansible Automation Platform Operator manages. Understanding these resources will help you with advanced troubleshooting and configuration.</p> 
+       <section class="section"> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:50%">
+          <col style="width:50%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-operator-core-aap-resources__entry__1"> <strong class="ph b">Resource name</strong> </th> 
+           <th class="entry" id="ref-operator-core-aap-resources__entry__2"> <strong class="ph b">Description</strong> </th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-operator-core-aap-resources__entry__1"> <p class="p"> <code class="ph codeph">ansibleautomationplatform</code> </p> </td> 
+           <td class="entry" headers="ref-operator-core-aap-resources__entry__2"> <p class="p">CR for deploying the entire Ansible Automation Platform.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-operator-core-aap-resources__entry__1"> <p class="p"> <code class="ph codeph">ansibleautomationplatformbackup</code> </p> </td> 
+           <td class="entry" headers="ref-operator-core-aap-resources__entry__2"> <p class="p">CR for creating backups of the entire Ansible Automation Platform instance.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-operator-core-aap-resources__entry__1"> <p class="p"> <code class="ph codeph">ansibleautomationplatformrestore</code> </p> </td> 
+           <td class="entry" headers="ref-operator-core-aap-resources__entry__2"> <p class="p">CR for restoring the entire Ansible Automation Platform instance from a backup.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-operator-core-aap-resources__entry__1"> <p class="p"> <code class="ph codeph">automationcontroller</code> </p> </td> 
+           <td class="entry" headers="ref-operator-core-aap-resources__entry__2"> <p class="p">CR defining the desired state of an automation controller instance.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-operator-core-aap-resources__entry__1"> <p class="p"> <code class="ph codeph">automationcontrollerbackup</code> </p> </td> 
+           <td class="entry" headers="ref-operator-core-aap-resources__entry__2"> <p class="p">CR for creating backups of automation controller data and configuration.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-operator-core-aap-resources__entry__1"> <p class="p"> <code class="ph codeph">automationcontrollerrestore</code> </p> </td> 
+           <td class="entry" headers="ref-operator-core-aap-resources__entry__2"> <p class="p">CR for restoring the automation controller from a backup.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-operator-core-aap-resources__entry__1"> <p class="p"> <code class="ph codeph">automationhub</code> </p> </td> 
+           <td class="entry" headers="ref-operator-core-aap-resources__entry__2"> <p class="p">CR for deploying an automation hub (Galaxy) instance.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-operator-core-aap-resources__entry__1"> <p class="p"> <code class="ph codeph">automationhubbackup</code> </p> </td> 
+           <td class="entry" headers="ref-operator-core-aap-resources__entry__2"> <p class="p">CR for creating backups of automation hub data and configuration.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-operator-core-aap-resources__entry__1"> <p class="p"> <code class="ph codeph">automationhubrestore</code> </p> </td> 
+           <td class="entry" headers="ref-operator-core-aap-resources__entry__2"> <p class="p">CR for restoring automation hub from a backup.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-operator-core-aap-resources__entry__1"> <p class="p"> <code class="ph codeph">eda</code> </p> </td> 
+           <td class="entry" headers="ref-operator-core-aap-resources__entry__2"> <p class="p">CR for deploying an Event-Driven Ansible (EDA) instance.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-operator-core-aap-resources__entry__1"> <p class="p"> <code class="ph codeph">edabackup</code> </p> </td> 
+           <td class="entry" headers="ref-operator-core-aap-resources__entry__2"> <p class="p">CR for creating backups of EDA data and configuration.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-operator-core-aap-resources__entry__1"> <p class="p"> <code class="ph codeph">edarestore</code> </p> </td> 
+           <td class="entry" headers="ref-operator-core-aap-resources__entry__2"> <p class="p">CR for restoring EDA from a backup.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-operator-core-aap-resources__entry__1"> <p class="p"> <code class="ph codeph">ansiblelightspeed</code> </p> </td> 
+           <td class="entry" headers="ref-operator-core-aap-resources__entry__2"> <p class="p">CR for deploying an Red Hat Ansible Lightspeed instance.</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title8" id="ref-operator-standard-k8s-resources"> 
+      <h2 class="title topictitle2" id="ariaid-title8">Standard Kubernetes resources</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Standard Kubernetes resources are a core part of the OpenShift Container Platform. The following table describes the standard resources you can inspect to troubleshoot the state and configuration of an application.</p> 
+       <section class="section"> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:50%">
+          <col style="width:50%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-operator-standard-k8s-resources__entry__1"> <strong class="ph b">Resource name</strong> </th> 
+           <th class="entry" id="ref-operator-standard-k8s-resources__entry__2"> <strong class="ph b">Description</strong> </th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-operator-standard-k8s-resources__entry__1"> <p class="p"> <code class="ph codeph">pod</code> </p> </td> 
+           <td class="entry" headers="ref-operator-standard-k8s-resources__entry__2"> <p class="p">Smallest deployable unit containing one or more containers running the application workloads.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-operator-standard-k8s-resources__entry__1"> <p class="p"> <code class="ph codeph">deployment</code> </p> </td> 
+           <td class="entry" headers="ref-operator-standard-k8s-resources__entry__2"> <p class="p">Manages pod configuration and scaling.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-operator-standard-k8s-resources__entry__1"> <p class="p"> <code class="ph codeph">pvc</code> </p> </td> 
+           <td class="entry" headers="ref-operator-standard-k8s-resources__entry__2"> <p class="p">A PersistentVolumeClaim (PVC) is a request for storage resources, used for persistent data storage.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-operator-standard-k8s-resources__entry__1"> <p class="p"> <code class="ph codeph">service</code> </p> </td> 
+           <td class="entry" headers="ref-operator-standard-k8s-resources__entry__2"> <p class="p">Exposes pods as network services with stable IP addresses and DNS names within the cluster.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-operator-standard-k8s-resources__entry__1"> <p class="p"> <code class="ph codeph">ingress</code> </p> </td> 
+           <td class="entry" headers="ref-operator-standard-k8s-resources__entry__2"> <p class="p">Manages external HTTP and HTTPS access to services within the cluster.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-operator-standard-k8s-resources__entry__1"> <p class="p"> <code class="ph codeph">route</code> </p> </td> 
+           <td class="entry" headers="ref-operator-standard-k8s-resources__entry__2"> <p class="p">An OpenShift-specific resource for exposing services externally (similar to an ingress).</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-operator-standard-k8s-resources__entry__1"> <p class="p"> <code class="ph codeph">secrets</code> </p> </td> 
+           <td class="entry" headers="ref-operator-standard-k8s-resources__entry__2"> <p class="p">Stores sensitive data like passwords, tokens, and certificates.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-operator-standard-k8s-resources__entry__1"> <p class="p"> <code class="ph codeph">serviceaccount</code> </p> </td> 
+           <td class="entry" headers="ref-operator-standard-k8s-resources__entry__2"> <p class="p">Provides identity for processes running in pods to access permissions to other Kubernetes resources.</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title9" id="proc-operator-collect-diagnostic-data"> 
+      <h2 class="title topictitle2" id="ariaid-title9">Collect diagnostic data</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Use the <code class="ph codeph">oc adm must-gather</code> command to collect comprehensive diagnostic data about your cluster and the Ansible Automation Platform components. This data is essential when contacting Red Hat Support.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">To start the <code class="ph codeph">must-gather</code> tool, run: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc adm must-gather --image=registry.redhat.io/ansible-automation-platform-25/aap-must-gather-rhel8</code></pre> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">For version 2.6, the base image name changes to <code class="ph codeph">registry.redhat.io/ansible-automation-platform-26/aap-must-gather-rhel9</code>.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">View the collected data, use the <code class="ph codeph">omc</code> tool to query the <code class="ph codeph">must-gather</code> tarball as if it were a live cluster. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>omc use &lt;path-to-must-gather&gt;
+omc get pods</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://access.redhat.com/solutions/6997224" target="_blank" rel="external noopener">How to collect diagnostics data from Ansible Automation Platform running on OpenShift?</a></li>
+         <li class="linklist"><a class="link" href="https://access.redhat.com/solutions/4387261" target="_blank" rel="external noopener">How to generate a sos report within nodes without SSH in OpenShift Container Platform 4</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

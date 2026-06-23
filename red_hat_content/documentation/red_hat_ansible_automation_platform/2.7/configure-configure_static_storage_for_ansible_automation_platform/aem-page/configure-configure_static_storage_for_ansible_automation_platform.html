@@ -1,0 +1,112 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="GUID-e1c1cc2f-de6d-4bc1-a089-3572ae26c444"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Configure static storage for Ansible Automation Platform</h1> 
+     <div class="body conbody">
+      <p class="shortdesc"> Configure static storage when your environment does not support dynamic volume provisioning. This process ensures the Ansible Automation Platform Operator adopts manually created Persistent Volume Claims by using specific naming conventions.</p> 
+      <p class="p"></p> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="GUID-5f14c1c0-fec7-4ea0-9c6e-5ddf390fb840"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Understand static provisioning in the Ansible Automation Platform Operator</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">By default, the Ansible Automation Platform Operator uses dynamic provisioning to create the required storage for components such as the database and automation hub. If your environment does not allow dynamic provisioning, you must use static provisioning.</p> 
+       <p class="p"> <strong class="ph b" id="GUID-5f14c1c0-fec7-4ea0-9c6e-5ddf390fb840__docs-internal-guid-0f090160-7fff-fc27-d261-25b44baf2335"></strong>With static provisioning, you manually create Persistent Volumes (PVs) and Persistent Volume Claims (PVCs) before you deploy the <code class="ph codeph">AnsibleAutomationPlatform</code> custom resource. When the Operator starts the deployment, it searches the namespace for PVCs that match its internal naming conventions. If a matching PVC exists, the Operator binds to that claim instead of attempting to provision new storage.</p> 
+       <p class="p">Static provisioning also enables data persistence during redeployments. If you delete an <code class="ph codeph">AnsibleAutomationPlatform</code> instance, the Operator does not delete the associated PVCs. You can redeploy the instance using the same name to reconnect to the existing data. </p> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="GUID-12a3d08e-0a4a-4f67-bcca-272b7514162b"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Pre-create Persistent Volume Claims for manual provisioning</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Follow this process to manually prepare storage for an Ansible Automation Platform installation when dynamic provisioning is disabled. </p> 
+       <section class="section prereq" id="GUID-12a3d08e-0a4a-4f67-bcca-272b7514162b__prereq_1">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul" id="GUID-12a3d08e-0a4a-4f67-bcca-272b7514162b__ul_1"> 
+         <li class="li">You have an active OpenShift Container Platform CLI (<code class="ph codeph">oc</code>) session. </li> 
+         <li class="li">You have defined Persistent Volumes (PVs) that meet the minimum size and access mode requirements for your components.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Identify the name you intend to use for your <code class="ph codeph">AnsibleAutomationPlatform</code> deployment (for example, myaap).</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Create a PVC manifest for the PostgreSQL database using the required naming convention: <code class="ph codeph">postgres-15-&lt;deployment_name&gt;-0</code>,</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Ensure the <code class="ph codeph">accessModes</code> and <code class="ph codeph">resources.requests.storage</code> match your manually provisioned PV.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Apply the PVC manifest:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc apply -f postgres-pvc.yaml</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Repeat these steps for other components, such as automation Hub, using the correct naming conventions.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Leave the <code class="ph codeph">storage_class</code> fields empty or omit them from the specification. This forces the Operator to use the pre-created PVCs.</span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body">
+             Unlike core components, the <code class="ph codeph">AnsibleAutomationPlatformBackup</code> and <code class="ph codeph">Restore</code> custom resources provide a <code class="ph codeph">backup_pvc</code> parameter. You must use this parameter to specify your custom PVC name instead of relying on naming conventions.
+            </div>
+           </div> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result" id="GUID-12a3d08e-0a4a-4f67-bcca-272b7514162b__result_1">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Check the status of the PVCs to ensure they are in a Bound state:</p> 
+        <div class="p"> 
+         <pre class="pre codeblock"><code>oc get pvc -n &lt;namespace&gt;</code></pre> 
+        </div> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title4" id="GUID-e02bd2b8-b9ec-4eae-a69e-6a2f0617b26e"> 
+      <h2 class="title topictitle2" id="ariaid-title4">PVC naming conventions for Ansible Automation Platform components</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The Operator must find PVCs with exact names to adopt them for static provisioning. Replace <code class="ph codeph">&lt;instance_name&gt;</code> with the name of your <code class="ph codeph">AnsibleAutomationPlatform</code> custom resource.</p> 
+       <section class="section" id="GUID-e02bd2b8-b9ec-4eae-a69e-6a2f0617b26e__section_1"> 
+        <table class="table" id="GUID-e02bd2b8-b9ec-4eae-a69e-6a2f0617b26e__table_1">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:33.33333333333333%">
+          <col style="width:33.33333333333333%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="GUID-e02bd2b8-b9ec-4eae-a69e-6a2f0617b26e__table_1__entry__1">Component</th> 
+           <th class="entry" id="GUID-e02bd2b8-b9ec-4eae-a69e-6a2f0617b26e__table_1__entry__2">Required PVC name</th> 
+           <th class="entry" id="GUID-e02bd2b8-b9ec-4eae-a69e-6a2f0617b26e__table_1__entry__3">Default access mode</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="GUID-e02bd2b8-b9ec-4eae-a69e-6a2f0617b26e__table_1__entry__1">Ansible Automation Platform database</td> 
+           <td class="entry" headers="GUID-e02bd2b8-b9ec-4eae-a69e-6a2f0617b26e__table_1__entry__2"><code class="ph codeph">postgres-15-&lt;aap_cr_name&gt;-postgres-15-0</code></td> 
+           <td class="entry" headers="GUID-e02bd2b8-b9ec-4eae-a69e-6a2f0617b26e__table_1__entry__3">ReadWriteOnce</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="GUID-e02bd2b8-b9ec-4eae-a69e-6a2f0617b26e__table_1__entry__1">Automation hub storage</td> 
+           <td class="entry" headers="GUID-e02bd2b8-b9ec-4eae-a69e-6a2f0617b26e__table_1__entry__2"> <p class="p"><code class="ph codeph">&lt;instance_name&gt;-hub-file-storage</code> </p> <p class="p">(Required when <code class="ph codeph">storage_type</code> is set to <code class="ph codeph">file</code>)</p> </td> 
+           <td class="entry" headers="GUID-e02bd2b8-b9ec-4eae-a69e-6a2f0617b26e__table_1__entry__3">ReadWriteMany</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="GUID-e02bd2b8-b9ec-4eae-a69e-6a2f0617b26e__table_1__entry__1">Automation Hub Redis persistence</td> 
+           <td class="entry" headers="GUID-e02bd2b8-b9ec-4eae-a69e-6a2f0617b26e__table_1__entry__2"><code class="ph codeph">&lt;instance_name&gt;-hub-redis-data</code></td> 
+           <td class="entry" headers="GUID-e02bd2b8-b9ec-4eae-a69e-6a2f0617b26e__table_1__entry__3">ReadWriteOnce</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

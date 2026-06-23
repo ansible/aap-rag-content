@@ -1,0 +1,55 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="self-service-rhel-configure-ssl">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Replace self-signed SSL certificates</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">The Ansible automation portal RHEL appliance generates self-signed SSL certificates at first boot and stores them at <span class="ph filepath">/etc/portal/ssl/</span>. Replace these certificates with certificates from a trusted certificate authority for production use.</p> 
+     <section class="section" id="self-service-rhel-configure-ssl__replace-ssl-certificates">
+      <h2 class="title sectiontitle">Replace the SSL certificates</h2> 
+      <p class="p">Prerequisites:</p> 
+      <ul class="ul"> 
+       <li class="li">A TLS certificate and private key in PEM format, issued by a certificate authority trusted by your organization.</li> 
+       <li class="li">SSH access to the appliance.</li> 
+      </ul> 
+      <p class="p">Procedure:</p> 
+      <ol class="ol"> 
+       <li class="li">Copy your certificates to the appliance: <pre class="pre codeblock language-terminal"><code>$ sudo cp <var class="keyword varname">certificate-file</var>.pem /etc/portal/ssl/cert.pem
+$ sudo cp <var class="keyword varname">private-key-file</var>.pem /etc/portal/ssl/key.pem
+$ sudo chmod 644 /etc/portal/ssl/cert.pem
+$ sudo chmod 600 /etc/portal/ssl/key.pem</code></pre> </li> 
+       <li class="li">Restart the Ansible automation portal service: <pre class="pre codeblock language-terminal"><code>$ sudo systemctl restart portal</code></pre> </li> 
+      </ol> 
+      <p class="p">Verification:</p> 
+      <ul class="ul"> 
+       <li class="li">Verify that the Ansible automation portal is using the new certificate: <pre class="pre codeblock language-terminal"><code>$ curl -vk https://localhost 2&gt;&amp;1 | grep -i "issuer"</code></pre> <p class="p">The output displays the issuer from your certificate, not the self-signed issuer.</p> </li> 
+      </ul> 
+     </section> 
+     <section class="section" id="self-service-rhel-configure-ssl__trust-custom-certificate-authority">
+      <h2 class="title sectiontitle">Trust a custom certificate authority</h2> 
+      <p class="p">If your organization uses a custom certificate authority (CA) or a self-signed certificate for your Ansible Automation Platform instance, configure the Ansible automation portal RHEL appliance to trust it.</p> 
+      <p class="p">Prerequisites:</p> 
+      <ul class="ul"> 
+       <li class="li">The CA certificate or self-signed certificate in PEM format.</li> 
+       <li class="li">SSH access to the appliance.</li> 
+      </ul> 
+      <p class="p">Procedure:</p> 
+      <ol class="ol"> 
+       <li class="li">Copy the CA certificate or self-signed certificate to the appliance: <pre class="pre codeblock language-terminal"><code>$ sudo cp <var class="keyword varname">ca-certificate-file</var>.pem /etc/portal/ssl/ca-bundle.crt</code></pre> <p class="p">If you have multiple CA certificates to trust, concatenate them into a single bundle file before copying it to the appliance.</p> </li> 
+       <li class="li">Create a Quadlet drop-in to set the <code class="ph codeph">NODE_EXTRA_CA_CERTS</code> environment variable: <pre class="pre codeblock language-terminal"><code>$ sudo mkdir -p /etc/containers/systemd/portal.container.d
+$ echo -e '[Container]\nEnvironment=NODE_EXTRA_CA_CERTS=/etc/portal/ssl/ca-bundle.crt' \
+  | sudo tee /etc/containers/systemd/portal.container.d/ca-certs.conf</code></pre> </li> 
+       <li class="li">Reload systemd and restart the Ansible automation portal service: <pre class="pre codeblock language-terminal"><code>$ sudo systemctl daemon-reload
+$ sudo systemctl restart portal</code></pre> </li> 
+      </ol> 
+      <p class="p">Verification:</p> 
+      <ul class="ul"> 
+       <li class="li">Verify that the environment variable is set in the portal container: <pre class="pre codeblock language-terminal"><code>$ sudo podman exec portal env | grep NODE_EXTRA_CA_CERTS</code></pre> <p class="p">The output displays <code class="ph codeph">NODE_EXTRA_CA_CERTS=/etc/portal/ssl/ca-bundle.crt</code>.</p> </li> 
+      </ul> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

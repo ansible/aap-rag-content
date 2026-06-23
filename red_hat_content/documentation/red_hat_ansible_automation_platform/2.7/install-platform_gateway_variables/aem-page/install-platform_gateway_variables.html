@@ -1,0 +1,304 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-900c1705-0952-483e-8740-7ade36a5005c">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Platform gateway variables</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Reference information for the inventory file variables used to configure platform gateway.</p> 
+     <section class="section"> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:40%">
+        <col style="width:15%">
+        <col style="width:20%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1">Variable name</th> 
+         <th class="entry" id="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2">Description</th> 
+         <th class="entry" id="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3">Required or optional</th> 
+         <th class="entry" id="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">envoy_disable_https</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Controls whether or not HTTPS is disabled when accessing the platform UI. Set to <code class="ph codeph">true</code> to disable HTTPS (HTTP is used instead).</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">false</code>.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">envoy_http_port</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Port number on which the Envoy proxy listens for incoming HTTP connections.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">80</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">envoy_https_port</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Port number on which the Envoy proxy listens for incoming HTTPS connections.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">443</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_admin_email</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Email address used by Django for the admin user for platform gateway.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">admin@example.com</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_admin_password</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Platform gateway administrator password. Use of special characters for this variable is limited. The password can include any printable ASCII character except <code class="ph codeph">/</code>, <code class="ph codeph">"</code>, or <code class="ph codeph">@</code>.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Required</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_admin_user</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Username used to identify and create the administrator user in platform gateway.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">admin</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_control_plane_port</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Port number for the platform gateway control plane.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">50051</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_extra_settings</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Defines additional settings for use by platform gateway during installation.</p> <p class="p">For example:</p> <pre class="pre codeblock"><code>gateway_extra_settings=[{"setting": "OAUTH2_PROVIDER['ACCESS_TOKEN_EXPIRE_SECONDS']", "value": 600}]</code></pre> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">[]</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_grpc_auth_service_timeout</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Timeout duration (in seconds) for requests made to the gRPC service on platform gateway.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">30s</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_grpc_server_max_threads_per_process</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Maximum number of threads that each gRPC server process can create to handle requests on platform gateway.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">10</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_grpc_server_processes</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Number of processes for handling gRPC requests on platform gateway.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">5</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_main_url</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">URL of the main instance of platform gateway that clients connect to. Use if you are performing a clustered deployment and you need to use the URL of the load balancer instead of the component's server. The URL must start with <code class="ph codeph">http://</code> or <code class="ph codeph">https://</code> prefix.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_nginx_client_max_body_size</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Maximum allowed size for data sent to platform gateway through NGINX.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">5m</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_nginx_disable_hsts</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Controls whether HTTP Strict Transport Security (HSTS) is enabled or disabled for platform gateway. Set this variable to <code class="ph codeph">true</code> to disable HSTS.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_nginx_disable_https</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Controls whether HTTPS is enabled or disabled for platform gateway. Set this variable to <code class="ph codeph">true</code> to disable HTTPS.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_nginx_hsts_max_age</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Maximum duration (in seconds) that HTTP Strict Transport Security (HSTS) is enforced for platform gateway.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">63072000</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_nginx_http_port</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Port number that platform gateway listens on for HTTP requests.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">8083</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_nginx_https_port</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Port number that platform gateway listens on for HTTPS requests.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">8446</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_nginx_https_protocols</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Protocols that platform gateway will support when handling HTTPS traffic.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">[TLSv1.2, TLSv1.3]</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_nginx_user_headers</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">List of additional NGINX headers to add to platform gateway's NGINX configuration.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">[]</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_pg_cert_auth</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Controls whether client certificate authentication is enabled or disabled on the platform gateway PostgreSQL database. Set this variable to <code class="ph codeph">true</code> to enable client certificate authentication.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_pg_database</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Name of the PostgreSQL database used by platform gateway.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">gateway</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_pg_host</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Hostname of the PostgreSQL database used by platform gateway.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Required</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_pg_password</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Password for the platform gateway PostgreSQL database user. Use of special characters for this variable is limited. The <code class="ph codeph">!</code>, <code class="ph codeph">#</code>, <code class="ph codeph">0</code> and <code class="ph codeph">@</code> characters are supported. Use of other special characters can cause the setup to fail.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_pg_port</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Port number for the PostgreSQL database used by platform gateway.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">5432</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_pg_sslmode</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Controls the SSL mode to use when platform gateway connects to the PostgreSQL database. Valid options include <code class="ph codeph">verify-full</code>, <code class="ph codeph">verify-ca</code>, <code class="ph codeph">require</code>, <code class="ph codeph">prefer</code>, <code class="ph codeph">allow</code>, <code class="ph codeph">disable</code>.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">prefer</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_pg_tls_cert</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Path to the PostgreSQL SSL/TLS certificate file for platform gateway.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Required if using client certificate authentication.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_pg_tls_key</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Path to the PostgreSQL SSL/TLS key file for platform gateway.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Required if using client certificate authentication.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_pg_username</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Username for the platform gateway PostgreSQL database user.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">gateway</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_proxy_firewall_zone</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">The firewall zone where platform gateway related firewall rules are applied. This controls which networks can access platform gateway based on the zone's trust level.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">public</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_redis_disable_tls</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Controls whether TLS is enabled or disabled for platform gateway Redis. Set this variable to <code class="ph codeph">true</code> to disable TLS.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_redis_host</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Hostname of the Redis host used by platform gateway.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p">First node in the <code class="ph codeph">[automationgateway]</code> inventory group.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_redis_password</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Password for platform gateway Redis.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p">Randomly generated string.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_redis_port</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Port number for the Redis host for platform gateway.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">6379</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_redis_tls_cert</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Path to the platform gateway Redis certificate file.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_redis_tls_key</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Path to the platform gateway Redis key file.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_redis_username</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Username for platform gateway Redis.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">gateway</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_secret_key</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Secret key value used by platform gateway to sign and encrypt data.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_tls_cert</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Path to the SSL/TLS certificate file for platform gateway.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_tls_key</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Path to the SSL/TLS key file for platform gateway.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_tls_remote</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Denote whether the platform gateway provided certificate files are local to the installation program (<code class="ph codeph">false</code>) or on the remote component server (<code class="ph codeph">true</code>).</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_use_archive_compression</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Controls whether archive compression is enabled or disabled for platform gateway. You can control this functionality globally by using <code class="ph codeph">use_archive_compression</code>.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">true</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_use_db_compression</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Controls whether database compression is enabled or disabled for platform gateway. You can control this functionality globally by using <code class="ph codeph">use_db_compression</code>.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">true</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_uwsgi_listen_queue_size</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">Number of requests <code class="ph codeph">uwsgi</code> will allow in the queue on platform gateway until <code class="ph codeph">uwsgi_processes</code> can serve them.</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p"><code class="ph codeph">4096</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__1"> <p class="p"><code class="ph codeph">gateway_uwsgi_processes</code></p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__2"> <p class="p">The number of <code class="ph codeph">uwsgi</code> processes for the platform gateway container. The value is calculated based on the number of available vCPUs (virtual CPUs).</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-900c1705-0952-483e-8740-7ade36a5005c__entry__4"> <p class="p">The number of vCPUs multiplied by two, plus one.</p> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

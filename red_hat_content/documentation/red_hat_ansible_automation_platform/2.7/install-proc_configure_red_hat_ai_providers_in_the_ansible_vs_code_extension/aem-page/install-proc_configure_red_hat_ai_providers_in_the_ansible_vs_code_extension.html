@@ -1,0 +1,79 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="configure-red-hat-ai-providers-in-the-ansible-vs-code-extension">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure Red Hat AI providers in the Ansible VS Code extension</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">You can configure the Ansible VS Code extension to interact with models hosted on Red Hat AI infrastructure such as the RHEL AI Inference Server and OpenShift AI.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">You have installed the Ansible VS Code extension version 25.12.3 or later.</li> 
+       <li class="li">You already deployed and can access the Red Hat AI infrastructure (RHEL AI Inference Server or OpenShift AI).</li> 
+       <li class="li">You have the API endpoint URL for the inference server.</li> 
+       <li class="li">You have a valid API key or credential for the target model.</li> 
+       <li class="li">You know the specific Model Name.</li> 
+      </ul> 
+     </section> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">This integration enables you to use the "Bring Your Own LLM" (BYOLLM) capability to generate and explain Ansible playbooks and roles. You can use your own hosted models, such as Llama, Mistral, or OpenAI, without requiring external middleware.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">In Visual Studio Code, open the LLM provider settings:</span> 
+        <ol type="a" class="ol substeps"> 
+         <li class="li substep"> <span class="ph cmd">In the Activity Bar, select the <strong class="ph b">Ansible</strong> icon to open the Ansible Development Tools panel.</span> </li> 
+         <li class="li substep"> <span class="ph cmd">In the <strong class="ph b">GENERATIVE AI</strong> section, select the settings icon (cog) to open the LLM provider configuration.</span> </li> 
+        </ol> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">API Endpoint URL</strong> field, enter the full address of your RHEL AI or OpenShift AI instance.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Model Name/ID</strong> field, enter the specific identifier for the model you want to use (for example, <code class="ph codeph">granite-13b-chat-v2</code>).</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">API Key</strong> field, enter the credentials required to authenticate with your infrastructure.</span> 
+        <div class="itemgroup info"> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">The extension connects directly to the provider endpoint. It does not require the <code class="ph codeph">c.ai.ansible.redhat.com</code> middleware or Red Hat authentication to enable this feature.</p> 
+          </div>
+         </div> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Ensure that the Red Hat AI provider is selected as the active provider.</span> 
+        <div class="itemgroup info"> 
+         <div class="note important note_important">
+          <span class="note__title">Important:</span> 
+          <div class="note__body"> 
+           <p class="p">Only one provider can be active at a time. If you switch between providers, ensure you select the correct provider in the LLM provider configuration to enable the corresponding features.</p> 
+          </div>
+         </div> 
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <ol class="ol"> 
+       <li class="li">Open an Ansible playbook or role file in the editor.</li> 
+       <li class="li">Check the status bar to verify that the Red Hat AI provider status is displayed and indicates a successful connection.</li> 
+       <li class="li">Right-click within the editor and trigger <span class="ph menucascade"><span class="ph uicontrol">Ansible Lightspeed</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Generate Playbook</span></span>. If the configuration is correct, the extension generates content using the model hosted on your RHEL AI or OpenShift AI infrastructure.</li> 
+      </ol> 
+     </section> 
+     <section class="section tasktroubleshooting"> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Issue</strong>: The extension fails to connect or times out. <p class="p"><strong class="ph b">Resolution</strong>: Verify that the <strong class="ph b">API Endpoint URL</strong> is reachable from your network. The extension has a default timeout of 30 seconds. Check the <strong class="ph b">Output</strong> view in VS Code under the <strong class="ph b">Ansible Lightspeed</strong> channel for specific error logs.</p> </li> 
+       <li class="li"><strong class="ph b">Issue</strong>: Inline suggestions (ghost text) do not appear while typing. <p class="p"><strong class="ph b">Resolution</strong>: This is expected behavior. Inline task suggestions and content source matching are not supported for Red Hat AI infrastructure providers.</p> </li> 
+      </ul> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

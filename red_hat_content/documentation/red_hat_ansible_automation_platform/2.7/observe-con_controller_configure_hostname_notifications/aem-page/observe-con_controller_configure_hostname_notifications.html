@@ -1,0 +1,209 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="controller-configure-hostname-notifications"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Advanced notification settings</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">Automation controller uses the system hostname for notifications by default.</p> 
+      <p class="p">In Settings &gt; Automation Execution &gt; System, you can replace the default value in the <strong class="ph b">Base URL of the service</strong> field with your preferred hostname to change the notification hostname.</p> 
+      <p class="p">Refreshing your license also changes the notification hostname. New installations of automation controller do not have to set the hostname for notifications.</p> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="controller-create-custom-notifications"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Create custom notifications</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-con_controller_configure_hostname_notifications#controller-attributes-custom-notifications" title="Learn about the list of supported job attributes and the proper syntax for constructing the message text for notifications.">customize the text content</a> of each <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-proc_controller_create_notification_template#controller-notification-types" title="Automation controller supports multiple notification types that you can use to send notifications about job status and other events.">Notification type</a> on the notification form.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Administration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Notifiers</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create notifier</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Choose a notification type from the <strong class="ph b">Type</strong> list.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Enable <strong class="ph b">Customize messages</strong> by using the toggle. <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-notification-template-customize.png" alt="Customize notification"><br></span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">You can provide a custom message for various job events, such as the following: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"> <strong class="ph b">Start message body</strong> </li> 
+            <li class="li"> <strong class="ph b">success message body</strong> </li> 
+            <li class="li"> <strong class="ph b">Error message body</strong> </li> 
+            <li class="li"> <strong class="ph b">Workflow approved body</strong> </li> 
+            <li class="li"> <strong class="ph b">Workflow denied message body</strong> </li> 
+            <li class="li"> <strong class="ph b">Workflow pending message body</strong> </li> 
+            <li class="li"> <strong class="ph b">Workflow timed out message body</strong> <p class="p">The message forms vary depending on the type of notification that you are configuring. For example, messages for Email and PagerDuty notifications appear to be a typical email, with a body and a subject, in which case, automation controller displays the fields as <strong class="ph b">Message</strong> and <strong class="ph b">Message Body</strong>. Other notification types only expect a <strong class="ph b">Message</strong> for each type of event.</p> <p class="p">The <strong class="ph b">Message</strong> fields are pre-populated with a template containing a top-level variable, <code class="ph codeph">job</code> coupled with an attribute, such as <code class="ph codeph">id</code> or <code class="ph codeph">name</code>. Templates are enclosed in curly brackets and can draw from a fixed set of fields provided by automation controller, shown in the pre-populated message fields:</p> <p class="p">This pre-populated field suggests commonly displayed messages to a recipient who is notified of an event. You can customize these messages with different criteria by adding your own attributes for the job as needed. Custom notification messages are rendered using Jinja; the same templating engine used by Ansible playbooks.</p> <p class="p">Messages and message bodies have different types of content, as the following points outline:</p> </li> 
+            <li class="li">Messages are always just strings, one-liners only. New lines are not supported.</li> 
+            <li class="li">Message bodies are either a dictionary or a block of text: 
+             <ul class="ul"> 
+              <li class="li">The message body for Webhooks and PagerDuty uses dictionary definitions. The default message body for these is <code class="ph codeph">{{ job_metadata }}</code>, you can either leave that as it is or provide your own dictionary.</li> 
+              <li class="li">The message body for email uses a block of text or a multi-line string. The default message body is: <pre class="pre">{{ job_friendly_name }} #{{ job.id }} had status {{ job.status }}, view details at {{ url }} {{ job_metadata }}</pre><p class="p">You can edit this text leaving <code class="ph codeph">{{ job_metadata }}</code> in, or drop <code class="ph codeph">{{ job_metadata }}</code>. Since the body is a block of text, it can be any string you want. <code class="ph codeph">{{ job_metadata }}</code> is rendered as a dictionary containing fields that describe the job being executed. In all cases, <code class="ph codeph">{{ job_metadata }}</code> includes the following fields:</p> 
+               <ul class="ul"> 
+                <li class="li"><code class="ph codeph">id</code></li> 
+                <li class="li"><code class="ph codeph">name</code></li> 
+                <li class="li"><code class="ph codeph">url</code></li> 
+                <li class="li"><code class="ph codeph">created_by</code></li> 
+                <li class="li"><code class="ph codeph">started</code></li> 
+                <li class="li"><code class="ph codeph">finished</code></li> 
+                <li class="li"><code class="ph codeph">status</code></li> 
+                <li class="li"><code class="ph codeph">traceback</code><p class="p">You cannot query individual fields within <code class="ph codeph">{{ job_metadata }}</code>. When you use <code class="ph codeph">{{ job_metadata }}</code> in a notification template, all data is returned.</p><p class="p">The resulting dictionary looks like the following:</p><pre class="pre">{"id": 18,
+ "name": "Project - Space Procedures",
+ "url": "https://host/#/jobs/project/18",
+ "created_by": "admin",
+ "started": "2019-10-26T00:20:45.139356+00:00",
+ "finished": "2019-10-26T00:20:55.769713+00:00",
+ "status": "successful",
+ "traceback": ""
+}</pre><p class="p">If <code class="ph codeph">{{ job_metadata }}</code> is rendered in a job, it includes the following additional fields:</p></li> 
+                <li class="li"><code class="ph codeph">inventory</code></li> 
+                <li class="li"><code class="ph codeph">project</code></li> 
+                <li class="li"><code class="ph codeph">playbook</code></li> 
+                <li class="li"><code class="ph codeph">credential</code></li> 
+                <li class="li"><code class="ph codeph">limit</code></li> 
+                <li class="li"><code class="ph codeph">extra_vars</code></li> 
+                <li class="li"><code class="ph codeph">hosts</code><p class="p">The resulting dictionary is similar to the following:</p><pre class="pre">{"id": 12,
+ "name": "JobTemplate - Launch Rockets",
+ "url": "https://host/#/jobs/playbook/12",
+ "created_by": "admin",
+ "started": "2019-10-26T00:02:07.943774+00:00",
+ "finished": null,
+ "status": "running",
+ "traceback": "",
+ "inventory": "Inventory - Fleet",
+ "project": "Project - Space Procedures",
+ "playbook": "launch.yml",
+ "credential": "Credential - Mission Control",
+ "limit": "",
+ "extra_vars": "{}",
+ "hosts": {}
+}</pre><p class="p">If <code class="ph codeph">{{ job_metadata }}</code> is rendered in a workflow job, it includes the following additional field:</p></li> 
+                <li class="li"><code class="ph codeph">body</code> (This enumerates the nodes in the workflow job and includes a description of the job associated with each node) <p class="p">The resulting dictionary is similar to the following:</p><pre class="pre">{"id": 14,
+ "name": "Workflow Job Template - Launch Mars Mission",
+ "url": "https://host/#/workflows/14",
+ "created_by": "admin",
+ "started": "2019-10-26T00:11:04.554468+00:00",
+ "finished": "2019-10-26T00:11:24.249899+00:00",
+ "status": "successful",
+ "traceback": "",
+ "body": "Workflow job summary:
+
+         node #1 spawns job #15, \"Assemble Fleet JT\", which finished with status successful.
+         node #2 spawns job #16, \"Mission Start approval node\", which finished with status successful.\n
+         node #3 spawns job #17, \"Deploy Fleet\", which finished with status successful."
+}</pre><p class="p">If you create a notification template that uses invalid syntax or references unusable fields, an error message displays indicating the nature of the error. If you delete a notification’s custom message, the default message is shown in its place.</p> 
+                 <div class="note important note_important"> <span class="note__title">Important:</span> 
+                  <div class="note__body"> 
+                   <p class="p">If you save the notifications template without editing the custom message (or edit and revert back to the default values), the <strong class="ph b">Details</strong> screen assumes the defaults and does not display the custom message tables. If you edit and save any of the values, the entire table displays in the <strong class="ph b">Details</strong> screen.</p> 
+                  </div> 
+                 </div></li> 
+               </ul></li> 
+             </ul></li> 
+           </ul> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-con_controller_configure_hostname_notifications#controller-attributes-custom-notifications" title="Learn about the list of supported job attributes and the proper syntax for constructing the message text for notifications.">Supported attributes for custom notifications</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="controller-enable-disable-notifications"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Enable and disable notifications</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">You can set up notifications to notify you when a specific job starts, and on the success or failure at the end of the job run. Note the following behaviors:</p> 
+       <ul class="ul"> 
+        <li class="li">If a workflow job template has notification on start enabled, and a job template within that workflow also has notification on start enabled, you receive notifications for both.</li> 
+        <li class="li">You can enable notifications to run on many job templates within a workflow job template.</li> 
+        <li class="li">You can enable notifications to run on a sliced job template start and each slice generates a notification.</li> 
+        <li class="li">When you enable a notification to run on job start, and that notification gets deleted, the job template continues to run, but results in an error message.</li> 
+       </ul> 
+       <p class="p">You can enable notifications on job start, job success, and job failure, or a combination of these, from the <strong class="ph b">Notifications</strong> tab of the <strong class="ph b">Details</strong> page for the following resources:</p> 
+       <ul class="ul"> 
+        <li class="li">Job Templates</li> 
+        <li class="li">Workflow Templates</li> 
+        <li class="li">Projects</li> 
+       </ul> 
+       <p class="p">For workflow templates that have approval nodes, in addition to <strong class="ph b">Start</strong>, <strong class="ph b">Success</strong>, and <strong class="ph b">Failure</strong>, you can enable or disable certain approval-related events:</p> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relref"> <strong>Related reference</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_controller_approval_nodes#controller-approval-nodes" title="Use an Approval node to manually pause a workflow between playbooks. This allows you to review and approve the next step within a set timeframe or advance the process immediately.">Approval nodes</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="controller-reset-tower-base"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Reset TOWER_URL_BASE</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Automation controller determines how the base URL (<code class="ph codeph">TOWER_URL_BASE</code>) is defined by looking at an incoming request and setting the server address based on that incoming request.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">Automation controller takes settings values from the database first. If no settings values are found, it uses the values from the settings files. If you post a license by navigating to the automation controller host’s IP address, the posted license is written to the settings entry in the database.</p> 
+        <p class="p">Use the following procedure to reset <code class="ph codeph">TOWER_URL_BASE</code> if the wrong address has been picked up:</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System</span></span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Edit</span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Enter the address in the <strong class="ph b">Base URL of the service</strong> field for the DNS entry you want to appear in notifications.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title5" id="controller-notifications-api"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Notifications API</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">The Notifications API enables you to trigger notifications for various events in Automation controller. The Notifications API provides endpoints to trigger notifications for job events, such as when a job starts, succeeds, or fails.</p> 
+       <section class="section"> 
+        <p class="p">Use the <code class="ph codeph">started</code>, <code class="ph codeph">success</code>, or <code class="ph codeph">error</code> endpoints:</p> 
+        <pre class="pre">/api/v2/organizations/N/notification_templates_started/
+/api/v2/organizations/N/notification_templates_success/
+/api/v2/organizations/N/notification_templates_error/</pre> 
+        <p class="p">Additionally, the <code class="ph codeph">../../../N/notification_templates_started</code> endpoints have <code class="ph codeph">GET</code> and <code class="ph codeph">POST</code> actions for:</p> 
+        <ul class="ul"> 
+         <li class="li">Organizations</li> 
+         <li class="li">Projects</li> 
+         <li class="li">Inventory Sources</li> 
+         <li class="li">Job Templates</li> 
+         <li class="li">System Job Templates</li> 
+         <li class="li">Workflow Job Templates</li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title6" id="controller-attributes-custom-notifications"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Custom notification attributes</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">Learn about the list of supported job attributes and the proper syntax for constructing the message text for notifications.</p> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relinfo"> <strong>Related information</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="https://console.redhat.com/ansible/automation-hub/collections/validated/infra/aap_configuration/documentation/role/controller_notification_templates?version=" target="_blank" rel="external noopener">Controller notification templates</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

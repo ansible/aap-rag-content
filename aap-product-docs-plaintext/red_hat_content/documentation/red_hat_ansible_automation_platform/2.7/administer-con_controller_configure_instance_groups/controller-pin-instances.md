@@ -1,0 +1,21 @@
+# Configure instance groups from the API
+## Pin instances manually to specific instance groups
+
+If you have a special instance that needs to be only assigned to a specific instance group but do not want it to automatically join other groups by "percentage" or "minimum" policies, you can pin an instance manually to specific groups.,
+
+### Procedure
+
+1.  Add the instance to one or more instance groups' `policy_instance_list`.
+2.  Update the instance’s `managed_by_policy` property to be `False`. This prevents the instance from being automatically added to other groups based on percentage and minimum policy. It only belongs to the groups you have manually assigned it to:
+
+```
+HTTP PATCH /api/v2/instance_groups/N/
+{
+"policy_instance_list": ["special-instance"]
+}
+HTTP PATCH /api/v2/instances/X/
+{
+"managed_by_policy": False
+}
+```
+

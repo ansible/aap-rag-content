@@ -1,0 +1,16 @@
+# Add a source to an inventory
+## Source an inventory from Microsoft Azure resource manager
+
+Use the following procedure to configure an Microsoft Azure Resource Manager-sourced inventory.
+
+### Procedure
+
+1.  From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Inventories.
+2.  Select the inventory name you want a source to and click the **Sources** tab.
+3.  Click Create source.
+4.  In the **Create source** page, select **Microsoft Azure Resource Manager** from the **Source** list.
+5.  Enter the following details in the additional fields:
+6.  Optional: **Credential**: Choose from an existing Azure Credential. For more information, see [Managing user credentials](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_credentials#controller-credentials "Credentials authenticate the automation controller user when launching jobs against machines, synchronizing with inventory sources, and importing project content from a version control system.").
+7.  Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in [Adding a source](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-add-source "Use the following procedure to add a source to an inventory. When you add a source to an inventory, the system creates a new group for that source.").
+8.  Use the **Source variables** field to override variables used by the `azure_rm` inventory plugin. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two. For more information about these variables, see the [azure_rm inventory plugin documentation](https://console.redhat.com/ansible/automation-hub/repo/published/azure/azcollection/content/inventory/azure_rm).
+

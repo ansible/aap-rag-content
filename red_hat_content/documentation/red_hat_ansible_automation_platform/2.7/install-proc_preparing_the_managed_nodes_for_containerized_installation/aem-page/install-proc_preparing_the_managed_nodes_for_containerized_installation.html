@@ -1,0 +1,44 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="containerized-prepare-the-managed-nodes">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Prepare the managed nodes</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Managed nodes, or hosts, are the devices managed by Ansible Automation Platform. To ensure a secure containerized setup, create a dedicated user on each node for Ansible Automation Platform to use when connecting and running tasks.</p> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Log in to the host as the root user.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Create a new user. Replace <code class="ph codeph">&lt;username&gt;</code> with the username you want, for example <code class="ph codeph">aap</code>. </span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>$ sudo adduser &lt;username&gt;</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Set a password for the new user. Replace <code class="ph codeph">&lt;username&gt;</code> with the username you created. </span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>$ sudo passwd &lt;username&gt;</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Configure the user to run <code class="ph codeph">sudo</code> commands. </span> 
+        <div class="itemgroup info"> 
+         <p class="p">For a secure and maintainable installation, configure <code class="ph codeph">sudo</code> privileges for the installation user in a dedicated file within the <code class="ph codeph">/etc/sudoers.d/</code> directory.</p> 
+        </div> 
+        <ol type="a" class="ol substeps"> 
+         <li class="li substep substepexpand"> <span class="ph cmd">Create a dedicated <code class="ph codeph">sudoers</code> file for the user: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ sudo visudo -f /etc/sudoers.d/&lt;username&gt;</code></pre> 
+          </div> </li> 
+         <li class="li substep substepexpand"> <span class="ph cmd">Add the following line to the file, replacing <code class="ph codeph">&lt;username&gt;</code> with the username you created: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>&lt;username&gt; ALL=(ALL) NOPASSWD: ALL</code></pre> 
+          </div> </li> 
+         <li class="li substep substepexpand"> <span class="ph cmd">Save and exit the file.</span> </li> 
+        </ol> </li>
+      </ol>
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

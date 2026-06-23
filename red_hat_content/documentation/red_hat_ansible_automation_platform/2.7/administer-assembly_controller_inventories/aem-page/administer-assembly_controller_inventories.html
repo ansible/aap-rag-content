@@ -1,0 +1,56 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body id="controller-inventories"> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Define automation target hosts in your inventory files</h1> 
+    <div class="body conbody"> 
+     <p class="shortdesc">Ansible Automation Platform works against a list of managed nodes or hosts in your infrastructure that are logically organized, using an inventory file. The installer inventory can specify your installation scenario and describe host deployments to Ansible. </p> 
+     <p class="p">An inventory file enables Ansible to manage a large number of hosts with a single command. Inventories also help you automate more efficiently by reducing the number of command line options you have to specify. Inventories are divided into groups and these groups contain the hosts. Groups can be sourced manually, by entering host names into automation controller, or from one of its supported cloud providers. </p> 
+     <div class="note note note_note"> <span class="note__title">Note:</span> 
+      <div class="note__body"> 
+       <p class="p">If you have a custom dynamic inventory script, or a cloud provider that is not yet supported natively in automation controller, you can also import that into automation controller.</p> 
+       <p class="p"></p> 
+      </div> 
+     </div> 
+     <p class="p">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Inventories</span></span>. The <strong class="ph b">Inventories</strong> window displays a list of the inventories that are currently available.</p> 
+     <p class="p">The <strong class="ph b">Inventory details</strong> page includes:</p> 
+     <ul class="ul"> 
+      <li class="li"><strong class="ph b">Name</strong>: The inventory name.</li> 
+      <li class="li"> <strong class="ph b">Status</strong> <p class="p">The statuses are:</p> 
+       <ul class="ul"> 
+        <li class="li"><strong class="ph b">Success</strong>: When the inventory source sync completed successfully</li> 
+        <li class="li"><strong class="ph b">Disabled</strong>: No inventory source added to the inventory</li> 
+        <li class="li"><strong class="ph b">Error</strong>: When the inventory source sync completed with error</li> 
+       </ul> </li> 
+      <li class="li"><strong class="ph b">Type</strong>: Identifies whether it is a standard inventory, a Smart inventory, or a constructed inventory.</li> 
+      <li class="li"><strong class="ph b">Organization</strong>: The organization to which the inventory belongs. The following actions are available for the selected inventory: 
+       <ul class="ul"> 
+        <li class="li"><strong class="ph b">Edit</strong><img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png" width="15" alt="Edit">: Edit the properties for the selected inventory</li> 
+        <li class="li"><strong class="ph b">Duplicate</strong><img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/copy.png" width="15" alt="Copy">: Makes a copy of an existing inventory as a template for creating a new one</li> 
+        <li class="li"><strong class="ph b">Delete inventory</strong>: Delete the selected inventory</li> 
+       </ul> </li> 
+     </ul> 
+     <p class="p">Click the Inventory name to display the <strong class="ph b">Details</strong> page for the selected inventory, which shows the inventory’s groups and hosts.</p> 
+    </div> 
+    <nav role="navigation" class="related-links"> 
+     <ul class="ullinks"> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-ref_controller_smart_inventories#ref-controller-smart-inventories">Define a collection of hosts with Smart Inventories</a></strong><br>Smart Inventories are collections of hosts defined by a stored search that can be viewed such as a standard inventory and can be easily used with job runs. Organization administrators have admin permission for inventories in their organization and can create Smart Inventories.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_inventory_templates#controller-inventory-templates">Configure supported inventory plugin templates</a></strong><br>After upgrade to 4.x, existing configurations are migrated to the new format that produces an inventory output compatible with earlier versions. Use the following templates to aid in migrating your inventories to the new style inventory plugin output.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-ref_controller_constructed_inventories#ref-controller-constructed-inventories">Create dynamic groups with constructed inventories</a></strong><br>You can create a new inventory (called a constructed inventory) from a list of input inventories.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-ref_controller_inventory_plugins#ref-controller-inventory-plugins">Generate dynamic data from external sources with inventory plugins</a></strong><br>Automation controller uses inventory plugins to dynamically generate inventory data from external sources. These plugins enable automation controller to integrate with cloud providers, virtualization platforms, and other external systems to retrieve up-to-date information about managed nodes.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-add-source">Add a source to an inventory</a></strong><br>Use the following procedure to add a source to an inventory. When you add a source to an inventory, the system creates a new group for that source.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_run_ad_hoc_commands#proc-controller-run-ad-hoc-commands">Run ad hoc commands against a host in an inventory</a></strong><br>Learn how to run ad hoc commands against hosts in an inventory.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_inventory_file_importing#assembly-inventory-file-importing">Import your inventory file from source control</a></strong><br>With automation controller you can select an inventory file from source control, rather than creating one from scratch.</li> 
+     </ul> 
+     <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+      <br> 
+      <ul class="linklist"> 
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_inventory_file_importing#assembly-inventory-file-importing" title="With automation controller you can select an inventory file from source control, rather than creating one from scratch.">Import your inventory file from source control</a></li> 
+      </ul> 
+     </div> 
+    </nav> 
+   </article> 
+  </main>  
+ </body>
+</html>

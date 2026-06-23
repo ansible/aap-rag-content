@@ -1,0 +1,32 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="gw-managing-access">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Manage access with role-based access control</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Role-based access control (RBAC) restricts user access based on the user’s role within the organization they are assigned to in Ansible Automation Platform. The roles in RBAC refer to the levels of access that users have to Ansible Automation Platform components and resources.</p> 
+     <p class="p">You can control what users can do with the components of Ansible Automation Platform at a broad or granular level depending on your RBAC policy. You can choose whether the user is a system administrator or normal user and align roles and access permissions with their positions within the organization.</p> 
+     <p class="p">You can define roles with multiple permissions that can then be assigned to resources, teams, and users. The permissions that make up a role govern what the assigned role allows. Permissions are allocated with only the access needed for a user to perform the tasks appropriate for their role.</p> 
+     <div class="note important note_important">
+      <span class="note__title">Important:</span> 
+      <div class="note__body"> 
+       <p class="p">When managing users, teams, and organizations, use the Unified UI or the platform gateway API to ensure real-time synchronization across all platform components, including Event-Driven Ansible controller. If you use the legacy automation controller API, changes can take up to 15 minutes to propagate to Event-Driven Ansible controller, which can result in authentication errors for new users or teams.</p> 
+      </div>
+     </div> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_organizations">Structure groups and resources with organizations</a></strong><br>Administrators use organizations to group resources. Assigning a team or user to an organization grants access to all its contents. This simplifies management, as members automatically gain access to new resources added to the organization without needing individual permissions.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_organization_notifications#proc-controller-organization-notifications">Assign notifiers and execution environments to organizations</a></strong><br>When automation controller is enabled on the platform, you can review any notifier integrations you have set up and manage their settings within the organization resource.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_teams#assembly-controller-teams">Bulk-assign roles to users with teams</a></strong><br>As an administrator, you can use teams to bulk-assign roles to users that need to share the same access.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_users#assembly-controller-users">View, create, or assign roles to users</a></strong><br>A user is an individual or entity that can log in to the platform and perform tasks. Users are fundamental units to which roles can be assigned, either directly by an administrator or indirectly through a team.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_resources#assembly-gw-resources">Manage user access to resources</a></strong><br>Manage user access to Ansible Automation Platform resources via directly assigned or team-inherited roles. Resources vary by function, such as job templates and projects for automation execution, or decision environments and rulebook activations for automation decisions.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_roles#assembly-gw-roles">View, create, and assign roles to grant user access to resources</a></strong><br>Assign roles to teams or users to grant them targeted access to Red Hat Ansible Automation Platform resources. Defining these permissions allows you to safely govern who can view, modify, or execute tasks on resources like projects and inventories.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_secret_management">Configure an external secret management system for automation</a></strong><br>Configure machine and cloud credentials to allow your automation to securely access external services and machines. Encrypting and storing sensitive values like SSH keys and API tokens in the database helps ensure your authentication details remain protected.</li>
+     </ul>
+    </nav>
+   </article>
+  </main>
+ </body>
+</html>

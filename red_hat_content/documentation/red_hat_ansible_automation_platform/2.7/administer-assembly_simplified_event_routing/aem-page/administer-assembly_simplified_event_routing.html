@@ -1,0 +1,685 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="simplified-event-routing"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Respond to events from external systems</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">Simplified event routing provides Event-Driven Ansible controller the capability to capture and analyze data from various remote systems (like GitHub or GitLab) using event streams. You can attach one or more event streams to an activation by swapping out sources in a rulebook.</p> 
+      <p class="p">Event streams simplify connecting sources to rulebooks. This capability enables the creation of a single endpoint to receive alerts from an event source for utilization in multiple rulebooks.</p> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="event-streams"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Event streams</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">Event streams provide the secure, authenticated entry point for external systems to send events over the internet directly to Event-Driven Ansible controller,simplifying remote data ingestion.</p> 
+       <p class="p">Event-Driven Ansible controller supports six different event stream types.</p> 
+       <table class="table"> 
+        <caption> <span class="table--title-label">Table 1. </span><span class="title">Event Stream Types</span> 
+        </caption> 
+        <colgroup> 
+         <col style="width:33.3333%"> 
+         <col style="width:33.3333%"> 
+         <col style="width:33.3334%"> 
+        </colgroup> 
+        <thead class="thead"> 
+         <tr class="row"> 
+          <th class="entry" id="event-streams__entry__1">Type</th> 
+          <th class="entry" id="event-streams__entry__2">Description</th> 
+          <th class="entry" id="event-streams__entry__3">Vendor examples</th> 
+         </tr> 
+        </thead> 
+        <tbody class="tbody"> 
+         <tr class="row"> 
+          <td class="entry" headers="event-streams__entry__1"> <p class="p">Hashed Message Authentication Code (HMAC)</p> </td> 
+          <td class="entry" headers="event-streams__entry__2"> <p class="p">Uses a shared secret between Event-Driven Ansible controller and the vendors webhook server. This guarantees message integrity.</p> </td> 
+          <td class="entry" headers="event-streams__entry__3"> <p class="p">Github</p> </td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="event-streams__entry__1"> <p class="p">Basic Authentication</p> </td> 
+          <td class="entry" headers="event-streams__entry__2"> <p class="p">Uses HTTP basic authentication.</p> </td> 
+          <td class="entry" headers="event-streams__entry__3"> <p class="p">Datadog, Dynatrace</p> </td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="event-streams__entry__1"> <p class="p">Token Authentication</p> </td> 
+          <td class="entry" headers="event-streams__entry__2"> <p class="p">Validates incoming event data using a security token passed in the request header. While the standard HTTP header used is <strong class="ph b">Authorization</strong>, it can be customized for specific platforms, such as using <strong class="ph b">X-Gitlab-Token</strong> for GitLab integrations.</p> </td> 
+          <td class="entry" headers="event-streams__entry__3"> <p class="p">Gitlab, ServiceNow</p> </td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="event-streams__entry__1"> <p class="p">OAuth2</p> </td> 
+          <td class="entry" headers="event-streams__entry__2"> <p class="p">Uses Machine-to-Machine (M2M) mode with a grant type called <strong class="ph b">client credentials</strong>. The token is opaque.</p> </td> 
+          <td class="entry" headers="event-streams__entry__3"> <p class="p">Dynatrace</p> </td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="event-streams__entry__1"> <p class="p">OAuth2 with JWT</p> </td> 
+          <td class="entry" headers="event-streams__entry__2"> <p class="p">Uses M2M mode with a grant type called <strong class="ph b">client credentials</strong>. The token is JSON Web Token (JWT).</p> </td> 
+          <td class="entry" headers="event-streams__entry__3"> <p class="p">Datadog</p> </td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="event-streams__entry__1"> <p class="p">Elliptic Curve Digital Signature Algorithm (ECDSA)</p> </td> 
+          <td class="entry" headers="event-streams__entry__2"> <p class="p">Verifies message authenticity using a public/private key pair. The sender signs the message with a private key, and the receiver (Event-Driven Ansible controller) validates it with a public key.</p> </td> 
+          <td class="entry" headers="event-streams__entry__3"> <p class="p">SendGrid, Twilio</p> </td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="event-streams__entry__1"> <p class="p">Mutual Transport Layer Security (mTLS)</p> </td> 
+          <td class="entry" headers="event-streams__entry__2"> <p class="p">Ensures two-way authentication between Event-Driven Ansible controller and the client sending events through an event stream. It has two sub-types:</p> 
+           <ul class="ul"> 
+            <li class="li">Certificate</li> 
+            <li class="li">Subject</li> 
+           </ul> <p class="p">Needs the vendor’s CA certificate to be present in our servers at startup. This supports non-repudiation.</p> </td> 
+          <td class="entry" headers="event-streams__entry__3"> <p class="p">PagerDuty</p> </td> 
+         </tr> 
+        </tbody> 
+       </table> 
+       <div class="note important note_important"> <span class="note__title">Important:</span> 
+        <div class="note__body"> 
+         <p class="p">If you are using an mTLS event stream with a load balancer, you must enable SSL pass-through (or L4 routing) in your load balancer configuration.</p> 
+         <p class="p">This is required because the SSL termination and client certificate validation for mTLS must occur at the platform gateway proxy server. Consult your load balancer documentation for details on enabling SSL pass-through.</p> 
+        </div> 
+       </div> 
+       <p class="p">Event-Driven Ansible controller also supports four other specialized event streams that are based on the six basic event stream types:</p> 
+       <ul class="ul"> 
+        <li class="li">GitLab event stream</li> 
+        <li class="li">GitHub event stream</li> 
+        <li class="li">ServiceNow event stream</li> 
+        <li class="li">Dynatrace event stream</li> 
+       </ul> 
+       <p class="p">These specialized types limit the parameters you use by adding default values. For example, the GitHub event stream is a specialization of the HMAC event stream with many of the fields already populated. After the GitHub event stream credential has been saved, the recommended defaults for this event stream are displayed.</p> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="eda-create-event-stream-credential"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Create an event stream credential</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Create a credential to establish the authentication mechanism (like basic auth or HMAC) required for external systems to securely send events to an event stream.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">Each event stream must have exactly one credential.</li> 
+        </ul> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to the Ansible Automation Platform Dashboard.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Decisions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Credentials</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create credential</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Insert the following: </span> 
+          <div class="itemgroup info"> 
+           <dl class="dl"> 
+            <dt class="dt dlterm">
+              Name 
+            </dt> 
+            <dd class="dd">
+              Insert the name. 
+            </dd> 
+            <dt class="dt dlterm">
+              Description 
+            </dt> 
+            <dd class="dd">
+              This field is optional. 
+            </dd> 
+            <dt class="dt dlterm">
+              Organization 
+            </dt> 
+            <dd class="dd">
+              Click the list to select an organization or select <strong class="ph b">Default</strong>. 
+            </dd> 
+            <dt class="dt dlterm">
+              Credential type 
+            </dt> 
+            <dd class="dd"> 
+             <p class="p">Click the list to select your Credential type.</p> 
+             <div class="note note note_note"> <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">When you select the credential type, the <strong class="ph b">Type Details</strong> section is displayed with fields that are applicable for the credential type you selected.</p> 
+              </div> 
+             </div> 
+            </dd> 
+            <dt class="dt dlterm">
+              Type Details 
+            </dt> 
+            <dd class="dd">
+              Add the requested information for the credential type you selected. For example, if you selected the GitHub Event Stream credential type, you are required to add an HMAC Secret (symmetrical shared secret) between Event-Driven Ansible controller and the remote server. 
+            </dd> 
+           </dl> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create credential</span>.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section result"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Results</h3> 
+        </div> 
+        <p class="p">The Details page is displayed. From there or the <strong class="ph b">Credentials</strong> list view, you can edit or delete it.</p> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="eda-create-event-stream"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Create an event stream</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Create a dedicated stream endpoint to simplify how external systems send events, making it easier to route data to multiple rulebook activations.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">If you will be attaching your event stream to a rulebook activation, ensure that your activation has a decision environment and project already set up.</li> 
+         <li class="li">If you plan to connect to automation controller to run your rulebook activation, ensure that you have created a Red Hat Ansible Automation Platform credential type in addition to the decision environment and project. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/assembly_eda_set_up_rhaap_credential" title="When Event-Driven Ansible controller is deployed on Ansible Automation Platform, you can create a Red Hat Ansible Automation Platform credential to connect to automation controller through the use of an automation controller URL and a username and password.">Setting up a Red Hat Ansible Automation Platform credential</a>.</li> 
+        </ul> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Decisions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Event Streams</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create event stream</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Insert the following: </span> 
+          <div class="itemgroup info"> 
+           <dl class="dl"> 
+            <dt class="dt dlterm">
+              Name 
+            </dt> 
+            <dd class="dd">
+              Insert the name. 
+            </dd> 
+            <dt class="dt dlterm">
+              Organization 
+            </dt> 
+            <dd class="dd">
+              Click the list to select an organization or select <strong class="ph b">Default</strong>. 
+            </dd> 
+            <dt class="dt dlterm">
+              Event stream type 
+            </dt> 
+            <dd class="dd"> 
+             <p class="p">Select the event stream type you prefer.</p> 
+             <div class="note note note_note"> <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">This list displays at least 10 default event stream types that can be used to authenticate the connection coming from your remote server.</p> 
+              </div> 
+             </div> 
+            </dd> 
+            <dt class="dt dlterm">
+              Credentials 
+            </dt> 
+            <dd class="dd">
+              Select a credential from the list, preferably the one you created for your event stream. 
+            </dd> 
+            <dt class="dt dlterm">
+              Headers 
+            </dt> 
+            <dd class="dd"> 
+             <p class="p">Enter HTTP header keys, separated by commas, that you want to include in the event payload.</p> 
+             <div class="note important note_important"> <span class="note__title">Important:</span> 
+              <div class="note__body"> 
+               <p class="p">If your automation relies on HTTP headers being present in the event payload, you must explicitly define them to avoid unintentional exposure of sensitive information. For more information about HTTP headers and how to securely configure them, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_simplified_event_routing#eda-http-headers" title="In the context of Event-Driven Ansible and event streams, HTTP headers play a significant role because they carry the necessary context and security information about the incoming event from a third-party source (for example, GitHub, a monitoring tool, or a proprietary webhook).">HTTP headers</a> and <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_simplified_event_routing#eda-configure-http-headers" title="To enhance event stream security, you must explicitly define which HTTP headers are passed. These headers carry the critical context and authentication data required for processing.">Configuring HTTP headers securely for event streams</a>.</p> 
+              </div> 
+             </div> 
+            </dd> 
+            <dt class="dt dlterm">
+              Forward events to rulebook activation 
+            </dt> 
+            <dd class="dd"> 
+             <p class="p">Use this option to enable or disable the capability of forwarding events to rulebook activations.</p> 
+             <div class="note note note_note"> <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">The event stream’s event forwarding can be disabled for testing purposes while diagnosing connections and evaluating the incoming data. Disabling the <strong class="ph b">Forward events to rulebook activation</strong> option allows you to test the event stream connection with the remote system, analyze the header and payload, and if necessary, diagnose credential issues. This ensures that events are not be forwarded to rulebook activations causing rules and conditions to be triggered inadvertently while you are in test mode. Some enterprises might have policies to change secrets and passwords at regular cadence. You can enable/disable this option anytime after the event stream is created.</p> 
+              </div> 
+             </div> 
+            </dd> 
+           </dl> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create event stream</span>.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section result"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Results</h3> 
+        </div> 
+        <p class="p">After creating your event stream, the following outputs occur:</p> 
+        <ul class="ul"> 
+         <li class="li">The Details page is displayed. From there or the Event Streams list view, you can edit or delete it. Also, the Event Streams page shows all of the event streams you have created and the following columns for each event: <strong class="ph b">Events received</strong>, <strong class="ph b">Last event received</strong>, and <strong class="ph b">Event stream type</strong>. As the first two columns receive external data through the event stream, they are continuously updated to let you know they are receiving events from remote systems.</li> 
+         <li class="li">If you disabled the event stream, the Details page is displayed with a warning message, <strong class="ph b">This event stream is disabled</strong>. 
+          <div class="note note note_note"> <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">After an event stream is created, the associated credential cannot be deleted until the event stream it is attached to is deleted.</p> 
+           </div> 
+          </div> </li> 
+         <li class="li">Your new event stream generates a URL that is necessary when you configure the webhook on the remote system that sends events.</li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title5" id="eda-http-headers"> 
+      <h2 class="title topictitle2" id="ariaid-title5">HTTP headers</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">In the context of Event-Driven Ansible and event streams, HTTP headers play a significant role because they carry the necessary context and security information about the incoming event from a third-party source (for example, GitHub, a monitoring tool, or a proprietary webhook).</p> 
+       <p class="p">They include the following capabilities:</p> 
+       <dl class="dl"> 
+        <dt class="dt dlterm">
+          Authentication and non-repudiation 
+        </dt> 
+        <dd class="dd">
+          This is the most critical use. Headers often contain tokens, API keys, or security signatures (like an HMAC in an <code class="ph codeph">X-Hub-Signature</code> header) that Event-Driven Ansible uses to <em class="ph i">verify the sender’s identity</em> and ensure the event payload has not been tampered with. This supports non-repudiation—proof that the event came from a legitimate source. 
+        </dd> 
+        <dt class="dt dlterm">
+          Debugging and Logging 
+        </dt> 
+        <dd class="dd">
+          Headers provide crucial data points (<code class="ph codeph">Date</code>, <code class="ph codeph">User-Agent</code>, <code class="ph codeph">X-Request-ID</code>) for tracing the event’s path, helping system administrators and SREs <em class="ph i">debug</em> issues related to delayed or failed event processing. 
+        </dd> 
+       </dl> 
+       <p class="p">Headers are essential for all HTTP communication, serving several distinct purposes:</p> 
+       <ul class="ul"> 
+        <li class="li"><strong class="ph b">Context and metadata:</strong> Describe the data being sent (for example, <code class="ph codeph">Content-Type: application/json, Content-Length: 1024</code>).</li> 
+        <li class="li"><strong class="ph b">Client/Server Capabilities:</strong> Inform the receiving party of the sender’s capabilities or preferences (for example, <code class="ph codeph">Accept-Language: en-US</code>).</li> 
+        <li class="li"><strong class="ph b">Authentication/Authorization:</strong> Carry security credentials (for example, <code class="ph codeph">Authorization: Bearer &lt;token&gt;</code>).</li> 
+        <li class="li"><strong class="ph b">Caching:</strong> Controls how content should be cached by clients and proxies (for example, <code class="ph codeph">Cache-Control: max-age=3600</code>).</li> 
+        <li class="li"><strong class="ph b">Routing and Tracking:</strong> They facilitate network routing and transaction tracking, often via custom headers (for example, <code class="ph codeph">X-Request-ID</code>).</li> 
+       </ul> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="eda-configure-http-headers"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Configuring HTTP headers securely for event streams</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">To enhance event stream security, you must explicitly define which HTTP headers are passed. These headers carry the critical context and authentication data required for processing.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">To include all HTTP headers, enter an asterisk (*) in the Headers field. This allows all HTTP headers with the exception of a few headers: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Excluded:</strong> Headers that begin with <code class="ph codeph">X-Envoy</code>, <code class="ph codeph">X-Trusted-Proxy</code>, <code class="ph codeph">X-Forwarded-For</code>, and <code class="ph codeph">X-Real-Id</code></li> 
+            <li class="li"><strong class="ph b">Redacted:</strong> Authorization header (for example, <code class="ph codeph">Authorization: Redacted</code>) 
+             <div class="note important note_important"> <span class="note__title">Important:</span> 
+              <div class="note__body"> 
+               <p class="p">If the <strong class="ph b">Headers</strong> field is empty, none of the HTTP headers will be added to the event payload in Production and Test mode.</p> 
+              </div> 
+             </div> </li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">To include a specific set of HTTP headers, enter the names of the desired headers as a comma-delimited string (for example, <code class="ph codeph">Host,Authorization,X-Request-ID</code>).</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title7" id="eda-static-uuids"> 
+      <h2 class="title topictitle2" id="ariaid-title7">Static Unique Universal Identifiers (UUIDs) for event streams</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">You can configure an event stream with a static Unique Universal Identifier (UUID) to ensure its webhook URL remains consistent, even if the event stream service is recreated.</p> 
+       <p class="p">This feature is relevant for disaster recovery scenarios where external systems, like firewalls or third-party webhooks, cannot be easily reconfigured to use a new URL. Here are key concepts when considering using static UUIDs:</p> 
+       <dl class="dl"> 
+        <dt class="dt dlterm">
+          Disaster recovery support 
+        </dt> 
+        <dd class="dd">
+          A static UUID ensures that the external webhook URL, which follows the format, <code class="ph codeph">https://your-eda-server.com/api/eda/v1/external_event_stream/{uuid}/</code>, does not change upon service recreation. 
+        </dd> 
+        <dt class="dt dlterm">
+          Uniqueness 
+        </dt> 
+        <dd class="dd">
+          The UUID you provide must be unique across all existing event streams in the system. 
+        </dd> 
+        <dt class="dt dlterm">
+          Security warning 
+        </dt> 
+        <dd class="dd">
+          Static UUIDs make your webhook URLs predictable and, therefore, could reduce security. Only use this feature when URL consistency is critical and you have implemented strong additional security measures (like strong authentication and network restrictions). For normal operations, always use autogenerated (dynamic) UUIDs. 
+        </dd> 
+       </dl> 
+       <p class="p">You must ensure that additional security measures are in place, such as robust credential types (HMAC, mTLS) and network restrictions.</p> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title8" id="eda-update-static-UUID-API"> 
+      <h2 class="title topictitle2" id="ariaid-title8">Update an event stream with a static UUID (API Method)</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Access the API to set a static UUID, a feature critical for maintaining webhook URL consistency across service recreations, such as in disaster recovery scenarios.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">Ansible Automation Platform 2.6-next</li> 
+        </ul> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select &nbsp;<span class="ph uicontrol">Overview</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the URL, replace<span class="ph uicontrol">Overview</span> with the API endpoint, <code class="ph codeph">api/eda/v1/</code> (for example, <code class="ph codeph">https://&lt;<em class="ph i">gateway-host</em>&gt;/api/eda/v1/</code>). The <code class="ph codeph">Api V1 Root</code> page displays a list of Event-Driven Ansible resource URLs. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>{
+    "config": "http://&lt;<em class="ph i">gateway-host</em>&gt;/api/eda/v1/config/",
+    "status": "http://&lt;<em class="ph i">gateway-host</em>&gt;/api/eda/v1/status/",
+    "openapi-json": "http://&lt;<em class="ph i">gateway-host</em>&gt;/api/eda/v1/openapi.json",
+    "openapi-yaml": "http://&lt;<em class="ph i">gateway-host</em>&gt;/api/eda/v1/openapi.yaml",
+    "openapi-docs": "http://&lt;<em class="ph i">gateway-host</em>&gt;/api/eda/v1/docs/",
+    "openapi-redoc": "http://&lt;<em class="ph i">gateway-host</em>&gt;/api/eda/v1/redoc/",
+    "session-login": "http://&lt;<em class="ph i">gateway-host</em>&gt;/api/eda/v1/auth/session/login/",
+    "session-logout": "http://&lt;<em class="ph i">gateway-host</em>&gt;/api/eda/v1/auth/session/logout/",
+    "token-refresh": "http://&lt;<em class="ph i">gateway-host</em>&gt;/api/eda/v1/auth/token/refresh/",
+    "current-user": "http://&lt;<em class="ph i">gateway-host</em>&gt;/api/eda/v1/users/me/",
+    "project-list": "http://&lt;<em class="ph i">gateway-host</em>&gt;/api/eda/v1/projects/",
+    "rulebook-list": "http://&lt;<em class="ph i">gateway-host</em>&gt;/api/eda/v1/rulebooks/",
+    "activation-list": "http://&lt;<em class="ph i">gateway-host</em>&gt;/api/eda/v1/activations/",
+    "activationinstance-list": "http://&lt;<em class="ph i">gateway-host</em>&gt;/api/eda/v1/activation-instances/",
+    "auditrule-list": "http://&lt;<em class="ph i">gateway-host</em>&gt;/api/eda/v1/audit-rules/",
+    "user-list": "http://&lt;aap.platform&gt;/api/eda/v1/users/",
+    "controller-token-list": "http://&lt;<em class="ph i">gateway-host</em>&gt;/api/eda/v1/users/me/awx-tokens/",
+    "credentialtype-list": "http://&lt;<em class="ph i">gateway-host</em>&gt;/api/eda/v1/credential-types/",
+    "edacredential-list": "http://&lt;<em class="ph i">gateway-host</em>&gt;/api/eda/v1/eda-credentials/",
+    "credentialinputsource-list": "http://&lt;<em class="ph i">gateway-host</em>&gt;/api/eda/v1/credential-input-sources/",
+    "decisionenvironment-list": "http://&lt;<em class="ph i">gateway-host</em>&gt;/api/eda/v1/decision-environments/",
+    "organization-list": "http://&lt;<em class="ph i">gateway-host</em>&gt;/api/eda/v1/organizations/",
+    "team-list": "http://&lt;<em class="ph i">gateway-host</em>&gt;/api/eda/v1/teams/",
+    "eventstream-list": "http://&lt;<em class="ph i">gateway-host</em>&gt;/api/eda/v1/event-streams/"</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">At the end of the list, click the <code class="ph codeph">eventstream-list</code> URL. This takes you to the <span class="ph uicontrol">Event Stream List</span> page.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Locate and copy the <code class="ph codeph">“id”</code> of the event stream UUID that you want to update. This can be found at the end of the event stream data. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>},
+"id": *1*,
+"owner": "admin",
+"url": "https://&lt;platformURL&gt;/eda-event-streams/api/eda/v1/external_event_stream/bab8dddd-51cc-424f-87a4-0ed8ebe0a755/post/",
+"created_at": "2025-11-18T16:30:45.622363Z",
+"modified_at": "2025-11-18T16:30:45.622374Z",
+"test_content_type": "",
+"test_content": "",
+"test_error_message": "",
+"test_headers": "",
+"events_received": 0,
+"last_event_received_at": null</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Paste the id at the end of the URL (for example, <code class="ph codeph">https://&lt;platformURL&gt;.com/api/eda/v1/<em class="ph i">&lt;id#&gt;</em></code>) and press <strong class="ph b">Enter</strong>. The <strong class="ph b">Event Stream Instance</strong> page is displayed, including the current <code class="ph codeph">“uuid”</code> value.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the form at the end of the <strong class="ph b">Event Stream Instance</strong> page, update the value of the <code class="ph codeph">“uuid”</code> field to a unique static string of your choice.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Patch</strong>.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section result"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Results</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">Confirm that the UUID of your event stream has been updated to the new static string.</li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title9" id="eda-config-remote-sys-to-events"> 
+      <h2 class="title topictitle2" id="ariaid-title9">Configure your remote system to send events</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">After you have created your event stream, you must configure your remote system to send events to Event-Driven Ansible controller. The method used for this configuration varies, depending on the vendor for the event stream credential type you select.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">The URL that was generated when you created your event stream</li> 
+         <li class="li">Secrets or passwords that you set up in your event stream credential</li> 
+        </ul> 
+       </section> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">The following example demonstrates how to configure webhooks in a remote system like GitHub to send events to Event-Driven Ansible controller. Each vendor will have unique methods for configuring your remote system to send events to Event-Driven Ansible controller.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to your GitHub repository.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Your profile name → Your repositories</strong>. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note"> <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">If you do not have a repository, click <strong class="ph b">New</strong> to create a new one, select an owner, add a <strong class="ph b">Repository name</strong>, and click <strong class="ph b">Create repository</strong>.</p> 
+            </div> 
+           </div> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Navigate to <strong class="ph b">Settings</strong> (tool bar).</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">General</strong> navigation pane, select <strong class="ph b">Webhooks</strong>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Add webhook</strong>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Payload URL</strong> field, paste the URL you saved when you created your event stream.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select <strong class="ph b">application/json</strong> in the <strong class="ph b">Content type</strong> list.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Enter your <strong class="ph b">Secret</strong>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Add webhook</strong>.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section result"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Results</h3> 
+        </div> 
+        <p class="p">After the webhook has been added, it attempts to send a test payload to ensure there is connectivity between the two systems (GitHub and Event-Driven Ansible controller). If it can successfully send the data, you will see a green check mark next to the <strong class="ph b">Webhook URL</strong> with the message, <strong class="ph b">Last delivery was successful</strong>.</p> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title10" id="eda-verify-event-streams"> 
+      <h2 class="title topictitle2" id="ariaid-title10">Verify your event streams work</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Confirm end-to-end event flow by verifying the event stream receives data from the remote system, validating the webhook URL and authentication setup.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Decisions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Event Streams</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the event stream that you created to validate connectivity and ensure that the event stream sends data to the rulebook activation.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Verify that the events were received. The number of <strong class="ph b">Events received</strong> is displayed along with a header that contains details about the event. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">If you scroll down in the UI, you can also see the body of the payload with more information about the webhook.</p> 
+           <p class="p">The <strong class="ph b">Header</strong> and <strong class="ph b">Body</strong> sections for the event stream are displayed on the Details page. They differ based on the vendor who is sending the event. The header and body can be used to check the attributes in the event payload, which will help you in writing conditions in your rulebook.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Toggle the <strong class="ph b">Forward events to rulebook activation</strong> option to enable you to push your events to a rulebook activation.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section result"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Results</h3> 
+        </div> 
+        <p class="p">This moves the event stream to production mode and makes it easy to attach to rulebook activations. When this option is toggled off, your ability to forward events to a rulebook activation is disabled and the <strong class="ph b">This event stream is disabled</strong> message is displayed.</p> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title11" id="eda-replace-sources-with-event-streams"> 
+      <h2 class="title topictitle2" id="ariaid-title11">Replace sources and attach event streams to activations</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Replace complex source mappings with pre-configured event streams to simplify rulebook activation design and centralize incoming event routing.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">There are several key points to keep in mind regarding source mapping:</p> 
+        <ol class="ol"> 
+         <li class="li">An event stream can only be used once in a rulebook source swap. If you have multiple sources in the rulebook, you can only replace each source once.</li> 
+         <li class="li">The source mapping happens only in the current rulebook activation. You must repeat this process for any other activations using the same rulebook.</li> 
+         <li class="li">The source mapping is valid only if the rulebook doesn’t get modified. If the rulebook gets modified during the source mapping process, the source mapping would fail and it would have to be repeated.</li> 
+         <li class="li">If the rulebook is modified after the source mapping has been created and a <strong class="ph b">Restart</strong> happens, the rulebook activation fails.</li> 
+        </ol> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Decisions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Rulebook Activations</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create rulebook activation</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Insert the following: </span> 
+          <div class="itemgroup info"> 
+           <dl class="dl"> 
+            <dt class="dt dlterm">
+              Name 
+            </dt> 
+            <dd class="dd">
+              Insert the name. 
+            </dd> 
+            <dt class="dt dlterm">
+              Description 
+            </dt> 
+            <dd class="dd">
+              This field is optional. 
+            </dd> 
+            <dt class="dt dlterm">
+              Organization 
+            </dt> 
+            <dd class="dd">
+              Enter your organization name or select Default from the list. 
+            </dd> 
+            <dt class="dt dlterm">
+              Project 
+            </dt> 
+            <dd class="dd"> 
+             <p class="p">Projects are a logical collection of rulebooks. This field is optional.</p> 
+             <div class="note note note_note"> <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">Although this field is optional, selecting a project helps refine your list of rulebooks choices.</p> 
+              </div> 
+             </div> 
+            </dd> 
+            <dt class="dt dlterm">
+              Rulebook 
+            </dt> 
+            <dd class="dd"> 
+             <p class="p">Rulebooks are shown according to the project selected. Select a rulebook.</p> 
+             <div class="note note note_note"> <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">After you have selected a rulebook, the Event streams field is enabled. You can click the gear icon to display the Event streams mapping form.</p> 
+              </div> 
+             </div> 
+            </dd> 
+            <dt class="dt dlterm">
+              Event streams 
+            </dt> 
+            <dd class="dd"> 
+             <p class="p">All the event streams available and set up to forward events to rulebook actiavtions are displayed. If you have not created any event streams, this field remains disabled.</p> 
+             <p class="p">Click the gear icon to display the Event streams mapping UI.</p> 
+             <p class="p"> <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/eda-latest-event-streams-mapping.png" alt="Event streams mapping UI"> </p> 
+             <p class="p">Complete the following fields:</p> 
+             <dl class="dl"> 
+              <dt class="dt dlterm">
+                Rulebook source 
+              </dt> 
+              <dd class="dd"> 
+               <p class="p">A rulebook can contain multiple sources across multiple rulesets. You can map the same rulebook in multiple activations to multiple event streams. While managing event streams, unnamed sources are assigned temporary names (__SOURCE {n}) for identification purposes.</p> 
+               <p class="p">Select __SOURCE_1 from the list.</p> 
+              </dd> 
+              <dt class="dt dlterm">
+                Event stream 
+              </dt> 
+              <dd class="dd"> 
+               <p class="p">Select your event stream name from the list.</p> 
+               <p class="p">Click <span class="ph uicontrol button">Save</span>.</p> 
+               <p class="p">Event streams can replace matching sources in a rulebook, and are server-side webhooks that enable you to connect various event sources to your rulebook activations. Source types that can be replaced with the event stream’s source of type ansible.eda.pg_listener include ansible.eda.webhook and other compatible webhook source plugins. Replacing selected sources affects this activation only, and modifies the rulebook’s source type, source name, and arguments. Filters, rules, conditions, and actions are all unaffected.</p> 
+               <p class="p">You can select which source you want to replace with a single event stream. If there are multiple sources in your rulebook, you can choose to replace each one of them with event streams, but you are not required to replace each one. The following image displays which sources can be replaced.</p> 
+               <p class="p"> <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/eda-event-streams-swapping-sources.png" alt="Event streams replacement sources"> </p> 
+               <p class="p">The items in pink demonstrate the sources that can be replaced: source type, source name, and arguments. The remaining items (filters, rules, and actions) are not replaced.</p> 
+              </dd> 
+             </dl> 
+            </dd> 
+            <dt class="dt dlterm">
+              Credential 
+            </dt> 
+            <dd class="dd"> 
+             <p class="p">Select 0 or more credentials for this rulebook activation. This field is optional.</p> 
+             <div class="note note note_note"> <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">The credentials that display in this field are customized based on your rulebook activation and only include the following credential types: Vault, Red Hat Ansible Automation Platform, or any custom credential types that you have created. For more information on credentials, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_eda_credentials" title="You can use credentials to store secrets that can be used for authentication purposes with resources, such as decision environments, rulebook activations and projects for Event-Driven Ansible controller, and projects for automation controller.">Credentials</a>.</p> 
+              </div> 
+             </div> 
+            </dd> 
+            <dt class="dt dlterm">
+              Decision environment 
+            </dt> 
+            <dd class="dd"> 
+             <p class="p">A decision environment is a container image used to run Ansible rulebooks.</p> 
+             <div class="note note note_note"> <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">In Event-Driven Ansible controller, you cannot customize the pull policy of the decision environment. By default, it follows the behavior of the always policy. Every time an activation is started, the system tries to pull the most recent version of the image.</p> 
+              </div> 
+             </div> 
+            </dd> 
+            <dt class="dt dlterm">
+              Restart policy 
+            </dt> 
+            <dd class="dd"> 
+             <p class="p">This is the policy that determines how an activation should restart after the container process running the source plugin ends.</p> 
+             <ul class="ul"> 
+              <li class="li">Policies: 
+               <ol class="ol" type="a"> 
+                <li class="li"><strong class="ph b">Always</strong>: This restarts the rulebook activation immediately, regardless of whether it ends successfully or not, and occurs no more than 5 times.</li> 
+                <li class="li"><strong class="ph b">Never</strong>: This never restarts a rulebook activation when the container process ends.</li> 
+                <li class="li"><strong class="ph b">On failure</strong>: This restarts the rulebook activation after 60 seconds by default, only when the container process fails, and occurs no more than 5 times.</li> 
+               </ol> </li> 
+             </ul> 
+            </dd> 
+            <dt class="dt dlterm">
+              Log level 
+            </dt> 
+            <dd class="dd"> 
+             <p class="p">This field defines the severity and type of content in your logged events.</p> 
+             <ul class="ul"> 
+              <li class="li">Levels: 
+               <ol class="ol" type="a"> 
+                <li class="li"><strong class="ph b">Error</strong>: Logs that contain error messages that are displayed in the <strong class="ph b">History</strong> tab of an activation.</li> 
+                <li class="li"><strong class="ph b">Info</strong>: Logs that contain useful information about rulebook activations, such as a success or failure, triggered action names and their related action events, and errors.</li> 
+                <li class="li"><strong class="ph b">Debug</strong>: Logs that contain information that is only useful during the debug phase and might be of little value during production. This log level includes both error and log level data.</li> 
+               </ol> </li> 
+             </ul> 
+            </dd> 
+            <dt class="dt dlterm">
+              Service name 
+            </dt> 
+            <dd class="dd">
+              This defines a service name for Kubernetes to configure inbound connections if the activation exposes a port. This field is optional. 
+            </dd> 
+            <dt class="dt dlterm">
+              Rulebook activation enabled? 
+            </dt> 
+            <dd class="dd">
+              This automatically enables the rulebook activation to run. 
+            </dd> 
+            <dt class="dt dlterm">
+              Variables 
+            </dt> 
+            <dd class="dd">
+              The variables for the rulebook are in a JSON or YAML format. The content would be equivalent to the file passed through the <code class="ph codeph">--vars</code> flag of ansible-rulebook command. 
+            </dd> 
+            <dt class="dt dlterm">
+              Options 
+            </dt> 
+            <dd class="dd">
+              Check the <strong class="ph b">Skip audit events</strong> option if you do not want to see your events in the Rule Audit. 
+            </dd> 
+           </dl> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create rulebook activation</span>.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section result"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Results</h3> 
+        </div> 
+        <p class="p">After you create your rulebook activation, the <strong class="ph b">Details</strong> page is displayed. You can navigate to the <strong class="ph b">Event streams</strong> page to confirm your events have been received.</p> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

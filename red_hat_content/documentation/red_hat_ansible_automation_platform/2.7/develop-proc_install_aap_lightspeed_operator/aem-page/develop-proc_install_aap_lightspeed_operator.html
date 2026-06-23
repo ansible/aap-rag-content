@@ -1,0 +1,164 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="install-aap-lightspeed-operator"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Install the Red Hat Ansible Automation Platform operator</h1> 
+     <div class="body taskbody">
+      <p class="shortdesc">Use this procedure to install the Ansible Automation Platform operator on the Red Hat OpenShift Container Platform.</p> 
+      <section class="section prereq">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Before you begin</h2>
+       </div> 
+       <ul class="ul"> 
+        <li class="li">You have installed and configured automation controller.</li> 
+       </ul> 
+      </section> 
+      <section>
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Procedure</h2>
+       </div>
+       <ol class="ol steps">
+        <li class="li step"> <span class="ph cmd">Log in to the Red Hat OpenShift Container Platform as an administrator.</span> </li>
+        <li class="li step"> <span class="ph cmd">Create a namespace: </span> 
+         <ol type="a" class="ol substeps"> 
+          <li class="li substep"> <span class="ph cmd">Go to <span class="ph menucascade"><span class="ph uicontrol">Administration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Namespaces</span></span>.</span> </li> 
+          <li class="li substep"> <span class="ph cmd">Click <strong class="ph b">Create Namespace</strong>.</span> </li> 
+          <li class="li substep"> <span class="ph cmd">Enter a unique name for the namespace.</span> </li> 
+          <li class="li substep"> <span class="ph cmd">Click <strong class="ph b">Create</strong>.</span> </li> 
+         </ol> </li>
+        <li class="li step"> <span class="ph cmd">Install the operator: </span> 
+         <ol type="a" class="ol substeps"> 
+          <li class="li substep"> <span class="ph cmd">Go to <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">OperatorHub</span></span>.</span> </li> 
+          <li class="li substep"> <span class="ph cmd">Select the namespace where you want to install the Red Hat Ansible Automation Platform operator.</span> </li> 
+          <li class="li substep"> <span class="ph cmd">Search for the Ansible Automation Platform operator.</span> </li> 
+          <li class="li substep"> <span class="ph cmd">From the search results, select the Ansible Automation Platform (provided by Red Hat) tile.</span> </li> 
+          <li class="li substep"> <span class="ph cmd">Select an <strong class="ph b">Update Channel</strong>. You can select either <strong class="ph b">stable-2.x</strong> or <strong class="ph b">stable-2.x-cluster-scoped</strong> as the channel.</span> </li> 
+          <li class="li substep"> <span class="ph cmd">Select the destination namespace if you selected “stable-2.x” as the update channel.</span> </li> 
+          <li class="li substep"> <span class="ph cmd">Select <strong class="ph b">Install</strong>. It takes a few minutes for the operator to be installed.</span> </li> 
+         </ol> </li>
+        <li class="li step"> <span class="ph cmd">Click <strong class="ph b">View Operator</strong> to see the details of your newly installed Red Hat Ansible Automation Platform operator.</span> </li>
+       </ol>
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="create-connection-secrets"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Create a model configuration secret</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You must create a configuration secret to connect to an IBM watsonx Code Assistant model, which can be either an on-premise deployment or a cloud deployment.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have installed the Ansible Automation Platform operator 2.5.0-0.1753402603 or later on the Red Hat OpenShift Container Platform.</li> 
+         <li class="li">You have created an OAuth application in the automation controller.</li> 
+         <li class="li">You have obtained an API key and a model ID from IBM watsonx Code Assistant. <p class="p">For information about obtaining an API key and model ID from IBM watsonx Code Assistant, see the <a class="xref" href="https://cloud.ibm.com/docs/watsonx-code-assistant" target="_blank" rel="external noopener">IBM watsonx Code Assistant documentation</a>. For information about installing IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data, see the <a class="xref" href="https://www.ibm.com/docs/en/software-hub/5.1.x?topic=services-watsonx-code-assistant-red-hat-ansible-lightspeed" target="_blank" rel="external noopener"> watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data documentation</a>.</p> </li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Go to the Red Hat OpenShift Container Platform.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select <span class="ph menucascade"><span class="ph uicontrol">Workloads</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Secrets</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Create</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Key/value secret</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">From the <strong class="ph b">Projects</strong> list, select the namespace that you created when you installed the Red Hat Ansible Automation Platform operator.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Create</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Key/value secret</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In <strong class="ph b">Secret name</strong>, enter a unique name for the secret. For example, <code class="ph codeph">model-aiconnect</code>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Add the following keys and their associated values individually: </span> 
+          <div class="itemgroup info"> 
+           <table class="table">
+            <caption></caption>
+            <colgroup>
+             <col style="width:30%">
+             <col style="width:70%">
+            </colgroup>
+            <thead class="thead"> 
+             <tr class="row"> 
+              <th class="entry" id="create-connection-secrets__entry__1">Key</th> 
+              <th class="entry" id="create-connection-secrets__entry__2">Value</th> 
+             </tr> 
+            </thead>
+            <tbody class="tbody"> 
+             <tr class="row"> 
+              <td class="entry" headers="create-connection-secrets__entry__1"> <p class="p"> <code class="ph codeph">username</code> </p> </td> 
+              <td class="entry" headers="create-connection-secrets__entry__2"> <p class="p"> <span class="ph"> <em class="ph i">For on-premise deployment only</em> </span> </p> <p class="p"> <span class="ph">Enter the username you use to connect to an IBM Cloud Pak for Data deployment.</span> </p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="create-connection-secrets__entry__1"> <p class="p"> <code class="ph codeph">model_type</code> </p> </td> 
+              <td class="entry" headers="create-connection-secrets__entry__2"> <p class="p">Enter one of the following values per your IBM watsonx Code Assistant model:</p> 
+               <ul class="ul"> 
+                <li class="li">For on-premise deployment (IBM Cloud Pak for Data): <code class="ph codeph">wca-onprem</code></li> 
+                <li class="li">For cloud deployment (IBM Cloud): <code class="ph codeph">wca</code></li> 
+               </ul> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="create-connection-secrets__entry__1"> <p class="p"> <code class="ph codeph">model_url</code> </p> </td> 
+              <td class="entry" headers="create-connection-secrets__entry__2"> <p class="p">Enter the URL of the IBM watsonx Code Assistant model. For cloud deployment, the model URL could be <code class="ph codeph">https://api.dataplatform.cloud.ibm.com</code>.</p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="create-connection-secrets__entry__1"> <p class="p"> <code class="ph codeph">model_api_key</code> </p> </td> 
+              <td class="entry" headers="create-connection-secrets__entry__2"> <p class="p">Enter the API key of your IBM watsonx Code Assistant model that was generated during the model installation.</p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="create-connection-secrets__entry__1"> <p class="p"> <code class="ph codeph">model_id</code> </p> </td> 
+              <td class="entry" headers="create-connection-secrets__entry__2"> <p class="p">Enter the ID of your IBM watsonx Code Assistant model.</p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="create-connection-secrets__entry__1"> <p class="p"> <code class="ph codeph">model_verify_ssl</code> </p> </td> 
+              <td class="entry" headers="create-connection-secrets__entry__2"> <p class="p"> <span class="ph"> <em class="ph i">Optional, and supported on Ansible Automation Platform 2.5 and later</em> </span> </p> <p class="p"> <span class="ph">This key controls whether the SSL certificate of the IBM watsonx Code Assistant model is verified.</span> </p> <p class="p"> <span class="ph">Default = <code class="ph codeph">true</code></span> </p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="create-connection-secrets__entry__1"> <p class="p"> <code class="ph codeph">model_enable_anonymization</code> </p> </td> 
+              <td class="entry" headers="create-connection-secrets__entry__2"> <p class="p"> <span class="ph"> <em class="ph i">Optional and supported on Ansible Automation Platform 2.5.250730 and later</em> </span> </p> <p class="p"> <span class="ph">This key controls whether the anonymization of Personally Identifiable Information (PII) is enabled. PII information includes passwords, IP addresses, email addresses, and other sensitive data. When is enabled, users' personal information is modified to some generic values to protect their data and reduce the risk of data leaks.</span> </p> <p class="p"> <span class="ph">You can turn off anonymization by setting the value to <code class="ph codeph">false</code> to retain all original information entered by users and improve the quality of the answers. Disabling anonymization for Ansible Lightspeed hybrid deployments (the model is in IBM watsonx Code Assistant on IBM Cloud) results in users' PII being sent to IBM Cloud.</span> </p> <p class="p"> <span class="ph">Default = <code class="ph codeph">true</code></span> </p> </td> 
+             </tr> 
+            </tbody>
+           </table> 
+           <div class="note important note_important">
+            <span class="note__title">Important:</span> 
+            <div class="note__body"> 
+             <p class="p">Ensure that you do not accidentally add any whitespace characters (extra line, space, and so on) to the value fields. If there are any extra or erroneous characters in the secret, the connection to IBM watsonx Code Assistant fails.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Create</strong>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">After you create the model configuration secret, you must update the YAML file of the Ansible Automation Platform operator.</p> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="update-yaml-file"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Update the YAML file of the Ansible Automation Platform operator</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">After you create the model configuration secret, you must update the YAML file of the Ansible Automation Platform operator to use the secret.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Go to the Red Hat OpenShift Container Platform.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Installed Operators</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">From the list of installed operators, select the <strong class="ph b">Ansible Automation Platform</strong> operator.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Locate and select the <strong class="ph b">Ansible Automation Platform</strong> custom resource, and then click the required app.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">YAML</strong> tab.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Scroll the text to find the <code class="ph codeph">Lightspeed</code> category, and add the following details under the <code class="ph codeph">spec:</code> section: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>spec:
+  lightspeed:
+    disabled: false
+    model_config_secret_name: &lt;Name of the model configuration secret that you recently created.&gt;</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Save</strong>. The Ansible Lightspeed service takes a few minutes to set up.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

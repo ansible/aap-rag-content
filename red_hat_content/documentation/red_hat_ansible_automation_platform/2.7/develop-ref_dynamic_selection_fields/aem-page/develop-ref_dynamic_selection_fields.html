@@ -1,0 +1,49 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="dynamic-selection-fields">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Show different fields based on a selection</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Use an <code class="ph codeph">enum</code> field with <code class="ph codeph">dependencies</code> and <code class="ph codeph">allOf</code> to display different configuration fields for each option.</p> 
+     <section class="section"> 
+      <p class="p">In this example, selecting a database type reveals a version dropdown specific to that engine:</p> 
+      <pre class="pre codeblock"><code>    properties:
+      dbType:
+        title: Database type
+        type: string
+        enum:
+          - PostgreSQL
+          - MySQL
+    dependencies:
+      dbType:
+        allOf:
+          - if:
+              properties:
+                dbType:
+                  const: PostgreSQL
+            then:
+              properties:
+                version:
+                  type: number
+                  enum: [13, 14, 15]
+                  title: PostgreSQL version
+                  default: 15
+          - if:
+              properties:
+                dbType:
+                  const: MySQL
+            then:
+              properties:
+                version:
+                  type: string
+                  enum: ['5.7', '8.0']
+                  title: MySQL version
+                  default: '8.0'</code></pre> 
+      <p class="p">Each <code class="ph codeph">if</code>/<code class="ph codeph">then</code> block in the <code class="ph codeph">allOf</code> array matches one <code class="ph codeph">enum</code> value. Selecting "PostgreSQL" shows the PostgreSQL version list; selecting "MySQL" replaces it with the MySQL version list.</p> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

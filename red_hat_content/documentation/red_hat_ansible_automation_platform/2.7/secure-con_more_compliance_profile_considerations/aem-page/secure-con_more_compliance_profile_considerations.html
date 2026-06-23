@@ -1,0 +1,76 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="con-more_compliance-profile-considerations"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Automate nodes that comply with security profiles</h1> 
+     <p class="shortdesc">Edit specific security controls on your compliance-hardened RHEL nodes so Ansible Automation Platform can manage them properly. This helps ensure smooth automation in environments governed by strict profiles like CIS, PCI/DSS, or DISA STIG.</p> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-fapolicyd-on-rhel"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Fapolicyd on managed RHEL nodes</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Ansible jobs on RHEL nodes often fail if the <code class="ph codeph">fapolicyd</code> service is enabled. This occurs because the service prevents the execution of Python code copied to the node during task processing.</p> 
+       <section class="section"> 
+        <p class="p">To prevent this issue from occurring, use one of the following methods:</p> 
+        <ul class="ul"> 
+         <li class="li">Option 1: Set the fapolicyd service to permissive mode</li> 
+         <li class="li">Option 2: Create custom fapolicyd rules</li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-fapolicyd-permissive-mode"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Option 1: Set the fapolicyd service to permissive mode</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">The fapolicyd service can be set to "permissive" mode, meaning that it only logs fapolicyd rule violations, rather than enforcing them.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">To configure permissive mode for fapolicyd, use the following procedure:</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">Edit the file <code class="ph codeph">/etc/fapolicyd/fapolicyd.conf</code>, and set "permissive = 1".</span> </li>
+         <li class="li step"> <span class="ph cmd">Restart the <code class="ph codeph">fapolicy</code> service by running <code class="ph codeph">systemctl restart fapolicyd.service</code>.</span> </li>
+         <li class="li step"> <span class="ph cmd">In environments where this configuration might not meet a required compliance profile or local policy, discuss waiving the relevant security control with your security auditor.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-create-fapolicyd-rules"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Option 2: Create custom fapolicyd rules</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Where the <code class="ph codeph">fapolicyd</code> service must enforce its rules, consider crafting a custom set of rules to permit Ansible Automation Platform to run its Python code.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">The following example procedure treats the "ansible" service account as a trusted entity and enables it to run content in the local Ansible temporary directory (by default, <code class="ph codeph">$HOME/.ansible/tmp</code>).</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Create the file <code class="ph codeph">/etc/fapolicy/rules.d/50-ansible.rules</code> with the following content: </span> 
+          <div class="itemgroup info"> 
+           <p class="p"> <code class="ph codeph">allow perm=any uid=ansible trust=1 : dir=/home/ansible/.ansible/tmp/</code> </p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Restart the fapolicyd service: </span> 
+          <div class="itemgroup info"> 
+           <p class="p"> <code class="ph codeph">sudo systemctl restart fapolicyd.service</code> </p> 
+           <p class="p">This example rule might require modification to work with any other <code class="ph codeph">fapolicyd</code> rules that exist on the managed RHEL nodes, and must be thoroughly tested and approved by your security auditor before being put into production.</p> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

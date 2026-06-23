@@ -1,0 +1,49 @@
+# Secure your automation with container signing
+## Push a signed execution environment from your local system
+
+Sign an automation execution environment on a local system and push the signed execution environment to the automation hub registry.
+
+### Procedure
+
+1.  From a terminal, log in to Podman, or any container client currently in use, and pull the execution environment you want to sign.
+
+```
+podman pull <container-name>
+```
+
+2.  After the execution environment is pulled, add tags (for example: `latest`, `rc`, `beta`, or version numbers, such as `1.0`, `2.3`, and so on):
+
+
+```
+podman tag <container-name> <server-address>/<container-name>:<tag name>
+```
+
+3.  Sign the execution environment after changes have been made, and push it back up to the automation hub registry:
+
+
+```
+podman push <server-address>/<container-name>:<tag name> --tls-verify=false --sign-by <reference to the gpg key on your local>
+```
+If the execution environment is not signed, it can only be pushed with any current signature embedded. Alternatively, you can use the following script to push the execution environment without signing it:
+
+```
+podman push <server-address>/<container-name>:<tag name> --tls-verify=false
+```
+
+4.  After the execution environment has been pushed, navigate to Automation Content> (and then)Execution Environments.
+5.  To display the new execution environment, click the **Refresh** icon.
+6.  Click the name of the image to view your pushed image.
+
+### Results
+
+After the execution environment is signed, the status changes to "signed".
+
+The details page for each execution environment indicates whether it has been signed. If the details page indicates that an image is **Unsigned**, you can sign the execution environment from automation hub using the following steps:
+
+1. Click the execution environment name to navigate to the details page.
+2. Click the More Actions icon **⋮**. Three options are available:
+- **Sign execution environment**
+- **Use in Controller**
+- **Delete execution environment**
+3. Click **Sign execution environment** from the drop-down menu.
+

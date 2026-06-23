@@ -1,0 +1,186 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="lightspeed-about"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Red Hat Ansible Lightspeed Overview</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Red Hat Ansible Lightspeed with IBM watsonx Code Assistant is a generative AI service that helps automation teams create, adopt, and maintain Ansible content more efficiently. It uses natural language prompts to generate code recommendations for automation tasks based on Ansible best practices.</p> 
+      <p class="p">Red Hat Ansible Lightspeed is the cloud service that enables integration of generative AI into Ansible Automation Platform. This document specifically describes the integration of Red Hat Ansible Lightspeed with IBM watsonx Code Assistant.</p> 
+      <p class="p">Red Hat Ansible Lightspeed uses IBM watsonx Code Assistant models trained on subject matter expertise across the Ansible ecosystem, which includes Galaxy, GitHub, and Ansible certified and validated content. For ease of use, Red Hat Ansible Lightspeed is integrated with your existing Ansible developer workflows. For example, you can use your existing Git repositories (both public and private) to train your IBM watsonx Code Assistant models. You can also access Lightspeed content suggestions in VS Code through the Ansible VS code extension.</p> 
+      <section class="section" id="lightspeed-about___access_red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant">
+       <h2 class="title sectiontitle">Access Red Hat Ansible Lightspeed with IBM watsonx Code Assistant</h2> 
+       <p class="p">This section contains information about accessing both Red Hat Ansible Lightspeed cloud service and on-premise deployment.</p> 
+       <ul class="ul"> 
+        <li class="li"> <strong class="ph b">Red Hat Ansible Lightspeed cloud service</strong> <p class="p">To use the Red Hat Ansible Lightspeed cloud service, you must meet <strong class="ph b">one</strong> of the following requirements:</p> 
+         <ul class="ul"> 
+          <li class="li">Your organization has a trial or paid subscription to both the Red Hat Ansible Automation Platform and IBM watsonx Code Assistant.</li> 
+          <li class="li">Your organization has a trial or paid subscription to the Red Hat Ansible Automation Platform, and you have a Red Hat Ansible Lightspeed trial account. 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">A Red Hat Ansible Lightspeed trial account does not require an IBM watsonx Code Assistant subscription.</p> 
+            </div>
+           </div> </li> 
+         </ul> </li> 
+        <li class="li"> <strong class="ph b">Red Hat Ansible Lightspeed on-premise deployment</strong> <p class="p">To use an on-premise deployment of Red Hat Ansible Lightspeed, your organization must have the following subscriptions:</p> 
+         <ul class="ul"> 
+          <li class="li">A trial or paid subscription to the Red Hat Ansible Automation Platform</li> 
+          <li class="li">An installation of IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data</li> 
+         </ul> </li> 
+       </ul> 
+      </section> 
+      <section class="section" id="lightspeed-about___benefits_of_using_red_hat_ansible_lightspeed">
+       <h2 class="title sectiontitle">Benefits of using Red Hat Ansible Lightspeed</h2> 
+       <p class="p">Red Hat Ansible Lightspeed with IBM watsonx Code Assistant offers the following benefits:</p> 
+       <ul class="ul"> 
+        <li class="li"> <strong class="ph b">Reduces the onboarding learning period for Ansible developers</strong> <p class="p">With just a basic understanding of YAML syntax, Ansible developers can use natural language prompts in English language to describe the automation goal. Red Hat Ansible Lightspeed then offers Ansible code recommendations to help achieve the automation goal more efficiently. This combination of content and best practice suggestions reduces the learning curve and offers a smoother onboarding experience for new Ansible users.</p> <p class="p">For example, to get a multitask code recommendation, you can enter the prompt <code class="ph codeph">Install postgresql-server &amp; run postgresql-setup command</code>. The Ansible Lightspeed service reads the text, interacts with IBM watsonx Code Assistant, and generates code recommendations to automate a multitask that installs a PostgreSQL server and sets up a PostgreSQL database. You can then view and accept the code recommendations to create tasks in an Ansible YAML file.</p> </li> 
+        <li class="li"> <strong class="ph b">Increases productivity with quality content creation</strong> <p class="p">Red Hat Ansible Lightspeed offers automation code recommendations that adhere to Ansible best practices, and IBM watsonx Code Assistant provides model fine-tuning features to improve the accuracy of suggested content based on your organization’s existing Ansible content. Therefore, the AI-generated code recommendations are more accurate, more reliable, and integrated with your existing automation development workflows.</p> </li> 
+        <li class="li"> <strong class="ph b">Extends trust with AI-generated code recommendations</strong> <p class="p">The AI-generated code recommendations enable you to extend trust, with an automation code base that adheres to accepted Ansible best practices and significant data safeguards.</p> </li> 
+       </ul> 
+      </section> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="lightspeed-key-features"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Key features of Red Hat Ansible Lightspeed</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Red Hat Ansible Lightspeed offers the following key features:</p> 
+       <ul class="ul"> 
+        <li class="li"> <strong class="ph b">Ansible-specific IBM watsonx Code Assistant models</strong> <p class="p">Red Hat Ansible Lightspeed with IBM watsonx Code Assistant uses Ansible-specific IBM watsonx Granite models unique to your organization, which are provided, managed, and maintained by IBM.</p> </li> 
+        <li class="li"> <strong class="ph b">Red Hat Ansible Lightspeed cloud service and on-premise deployments</strong> <p class="p">Red Hat Ansible Lightspeed is available both as a cloud service and as an on-premise deployment. Red Hat Ansible Lightspeed on-premise deployments provide the Red Hat Ansible Automation Platform customers more control over their data and supports compliance with enterprise security policies. For example, organizations in sensitive industries with data privacy or air-gapped requirements can use on-premise deployments of both Red Hat Ansible Lightspeed and IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data. Red Hat Ansible Lightspeed on-premise deployments are supported on Red Hat Ansible Automation Platform version 2.4 and later.</p> </li> 
+        <li class="li"> <strong class="ph b">Red Hat Ansible Lightspeed trial</strong> <p class="p">Existing Ansible users can now start a free 90-day Red Hat Ansible Lightspeed cloud service trial. You can create single-task and multitask recommendations, generate playbooks, and view playbook explanations with a trial account.</p> <p class="p">To start your Red Hat Ansible Lightspeed trial, you need a trial or paid subscription to the Red Hat Ansible Automation Platform; however, you do not need a trial or paid subscription to IBM watsonx Code Assistant. For more information, see Starting a trial of Red Hat Ansible Lightspeed.</p> </li> 
+        <li class="li"> <strong class="ph b">Playbook and task generation</strong> <p class="p">This includes the following capabilities:</p> 
+         <ul class="ul"> 
+          <li class="li"> <strong class="ph b">Playbook generation and explanations</strong> <p class="p">Using the Ansible VS Code extension, you can create Ansible playbooks using a natural language interface in English. Red Hat Ansible Lightspeed with IBM watsonx Code Assistant reads the natural language prompts and generates an entire playbook recommendation based on your intent. You can also view the explanations for new or existing playbooks. The playbook explanations describe what the playbook or task within the playbook does and contextualize its impact.</p> </li> 
+          <li class="li"> <strong class="ph b">Single and multitask generation</strong> <p class="p">Using natural language prompts, you can generate single task or multiple task recommendations for Ansible task files and playbooks. To request multitask code recommendations, you can enter a sequence of natural language task prompts in a YAML file comment separated by ampersand (<strong class="ph b">&amp;</strong>) symbols.</p> <p class="p">Currently, Red Hat Ansible Lightspeed supports user prompts in English language only. However, there could be instances where the training data that was used to train the IBM watsonx Code Assistant models included non-English language. In such scenarios, the model can generate code recommendations for prompts made in the same non-English language, but the generated code recommendations might or might not be accurate.</p> </li> 
+         </ul> </li> 
+        <li class="li"> <strong class="ph b">Content source matching</strong> <p class="p">For each generated code recommendation, Red Hat Ansible Lightspeed lists content source matches, including details such as potential source, content author, and relevant licenses. You can use this data to gain insight into potential training data sources used to generate the code recommendations.</p> </li> 
+        <li class="li"> <strong class="ph b">Post-processing capabilities</strong> <p class="p">Red Hat Ansible Lightspeed offers post-processing capabilities that augment IBM watsonx Code Assistant and improve the quality and accuracy of code recommendations.</p> </li> 
+        <li class="li"> <strong class="ph b">Content maintenance and modernization</strong> <p class="p">The Ansible code bot scans existing content collections, roles, and playbooks through Git repositories, and proactively creates pull requests whenever best practices or quality improvement recommendations are available. The bot automatically submits pull requests to the repository, which proactively alerts the repository owner to a recommended change to their content.</p> </li> 
+        <li class="li"> <strong class="ph b">Telemetry data collection on the Admin dashboard</strong> <p class="p">Red Hat Ansible Lightspeed now collects Admin dashboard telemetry data that provides insight into how your organization users are using the Ansible Lightspeed service, and displays the metrics on the Admin dashboard. If you no longer want to collect and manage the Admin dashboard telemetry, you can disable it for your organization.</p> </li> 
+       </ul> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relconcepts">
+        <strong>Related concepts</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_starting_lightspeed_trial#start-lightspeed-trial" title="Red Hat Ansible Lightspeed cloud service provides a free 90-day trial for existing Ansible users.">Starting a trial of Red Hat Ansible Lightspeed</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="lightspeed-process"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Prerequisites</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Review the following licensing and connectivity requirements for setting up Red Hat Ansible Lightspeed.</p> 
+       <p class="p">To use the Red Hat Ansible Lightspeed cloud service, you must meet <strong class="ph b">one</strong> of the following requirements:</p> 
+       <ul class="ul"> 
+        <li class="li">Your organization has a trial or paid subscription to both the Red Hat Ansible Automation Platform and IBM watsonx Code Assistant.</li> 
+        <li class="li">Your organization has a trial or paid subscription to the Red Hat Ansible Automation Platform, and you have a Red Hat Ansible Lightspeed trial account. 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">A Red Hat Ansible Lightspeed trial account does not require an IBM watsonx Code Assistant subscription.</p> 
+          </div>
+         </div> </li> 
+       </ul> 
+       <p class="p">To use an on-premise deployment of Red Hat Ansible Lightspeed, your organization must have the following subscriptions:</p> 
+       <ul class="ul"> 
+        <li class="li">A trial or paid subscription to Red Hat Ansible Automation Platform</li> 
+        <li class="li">An installation of IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data</li> 
+       </ul> 
+       <p class="p">You must also install the following components:</p> 
+       <ul class="ul"> 
+        <li class="li">VS Code version 1.70.1 or later</li> 
+        <li class="li">The Ansible extension for VS Code version 2.8 or later</li> 
+       </ul> 
+       <section class="section" id="lightspeed-process___connectivity_requirements">
+        <h3 class="title sectiontitle">Connectivity requirements</h3> 
+        <p class="p">To generate code recommendations, the Ansible Lightspeed service in Visual Studio (VS) Code editor requires access to the outbound domain <cite class="cite">https://c.ai.ansible.redhat.com</cite>. The outbound connections are encrypted on TCP protocol port 443. </p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title4" id="training-data"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Data gathered to train the IBM watsonx Code Assistant models</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">This topic provides information about the data that is collected to train the IBM watsonx Code Assistant models.</p> 
+       <section class="section" id="training-data___models">
+        <h3 class="title sectiontitle">Models</h3> 
+        <p class="p">Red Hat Ansible Lightspeed with IBM watsonx Code Assistant uses Ansible-specific IBM watsonx Granite models unique to your organization. These models are provided, managed, and maintained by IBM.</p> 
+       </section> 
+       <section class="section" id="training-data___data_sources">
+        <h3 class="title sectiontitle">Data sources</h3> 
+        <p class="p">IBM watsonx Code Assistant models are trained on Ansible content from Ansible Galaxy, data from public Git repositories, and Red Hat Ansible subject matter expert examples.</p> 
+        <p class="p">If you publish content to Ansible Galaxy and want to restrict your Ansible Galaxy content from being used to train the models, you can opt out of sharing your Ansible Galaxy data in the Ansible Galaxy namespace configuration.</p> 
+       </section> 
+       <section class="section" id="training-data___data_telemetry">
+        <h3 class="title sectiontitle">Data telemetry</h3> 
+        <p class="p">Red Hat Ansible Lightspeed collects the following telemetry data by default:</p> 
+        <ul class="ul"> 
+         <li class="li">Operational telemetry data</li> 
+         <li class="li">Admin dashboard telemetry data</li> 
+        </ul> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">No telemetry data is collected in an Red Hat Ansible Lightspeed on-premise deployment.</p> 
+         </div>
+        </div> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title5" id="telemetry-data-collection-notice"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Telemetry data collection notice for the Admin dashboard</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">In connection with your use of this Red Hat offering, Red Hat may collect telemetry data about your use of the software. This data allows Red Hat to monitor the software and to improve Red Hat offerings and support, including identifying, troubleshooting, and responding to issues that impact users.</p> 
+       <p class="p">The telemetry data may also be used to enable you to track your entitlements to Red Hat subscriptions and take advantage of future Red Hat purchasing programs. It may also allow Red Hat to assist you in implementing upgrades to minimize service impact. The data may be shared internally within Red Hat to improve the user experience. If you are evaluating Red Hat software, the data will help Red Hat determine if you need assistance.</p> 
+       <section class="section" id="telemetry-data-collection-notice___what_information_does_red_hat_collect">
+        <h3 class="title sectiontitle">What information does Red Hat collect?</h3> 
+        <p class="p">Tools within the software monitor various metrics and this information is transmitted to Red Hat. The following metrics are monitored:</p> 
+        <ul class="ul"> 
+         <li class="li"> <strong class="ph b">Operational telemetry data</strong> <p class="p">This is the data that is required to operate and troubleshoot the Ansible Lightspeed service. For more information, refer the Enterprise Agreement. You cannot disable the collection of operational telemetry data.</p> <p class="p">This includes the following data:</p> 
+          <ul class="ul"> 
+           <li class="li">Organization you are logged into (Organization ID, account number)</li> 
+           <li class="li">Large language model (or models) that you are connected to</li> 
+          </ul> </li> 
+         <li class="li"> <strong class="ph b">Admin dashboard telemetry data</strong> <p class="p">This is the data that provides insight into how your organization users are using the Ansible Lightspeed service, and the metrics are displayed on the Admin dashboard.</p> <p class="p">This includes the following data:</p> 
+          <ul class="ul"> 
+           <li class="li">Prompts and content suggestions, including accept or reject of the content suggestions</li> 
+           <li class="li">User sentiment feedback <p class="p">You can also disable the Admin dashboard telemetry if you no longer want to collect and monitor the telemetry data.</p> </li> 
+          </ul> </li> 
+        </ul> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">No telemetry data is collected in an Red Hat Ansible Lightspeed on-premise deployment.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section class="section" id="telemetry-data-collection-notice___personal_data">
+        <h3 class="title sectiontitle">Personal Data</h3> 
+        <p class="p">Red Hat does not intend to collect personal information. If Red Hat discovers that personal information has been inadvertently received, Red Hat will delete such information.</p> 
+        <ul class="ul"> 
+         <li class="li">Retention <p class="p">Red Hat retains and stores telemetry data only for as long as it’s needed for the purposes described above or as otherwise required or permitted by law.</p> </li> 
+         <li class="li">Data security <p class="p">Red Hat employs technical and organizational measures designed to protect the telemetry data. Data stored in the Red Hat cloud is being protected, where possible, through encryption. Data is also segmented, and therefore is not accessible across organizations.</p> </li> 
+         <li class="li">Data sharing <p class="p">Red Hat may share telemetry data with its business partners in an aggregated form that does not identify customers. This data helps the partners better understand their markets and their customers' use of Red Hat offerings. The data also helps to ensure the successful integration of products jointly supported by those partners.</p> </li> 
+         <li class="li">Third Party Service Providers <p class="p">Red Hat may engage certain service providers to assist in the collection and storage of the telemetry data.</p> </li> 
+         <li class="li">User control/ enabling and disabling Admin Dashboard telemetry collection <p class="p">You cannot disable collection of operational telemetry data. Operational telemetry data includes only data that is necessary to operate and troubleshoot the service. However, you can disable the collection of Admin Dashboard telemetry data.</p> </li> 
+        </ul> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://www.redhat.com/en/about/privacy-policy" target="_blank" rel="external noopener">Red Hat Privacy Statement</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

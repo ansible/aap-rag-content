@@ -1,0 +1,209 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="enable-automation-dashboard-operator-installation">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Enable automation dashboard during operator installation</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Enable automation dashboard using declarative Custom Resource configuration to leverage operator-managed dashboard deployment with automatic feature flag propagation to metrics service.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">AnsibleAutomationPlatform CR has been deployed and reconciled successfully</li> 
+       <li class="li">Metrics service enabled in the AnsibleAutomationPlatform CR (<code class="ph codeph">spec.metrics</code> section present with <code class="ph codeph">disabled: false</code>)</li> 
+       <li class="li">You are running Ansible Automaton Platform operator (<code class="ph codeph">aap-operator</code>) and metrics service operator (<code class="ph codeph">automationmetricsservice-operator</code>) running</li> 
+       <li class="li">Understanding of Technology Preview features and limitations</li> 
+      </ul> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p"><strong class="ph b">Technology Preview:</strong> Automation dashboard is a Technology Preview feature in Red Hat Ansible Automation Platform 2.7 and is disabled by default. You must explicitly enable it by setting <code class="ph codeph">spec.feature_flags.FEATURE_DASHBOARD_COLLECTION_ENABLED: true</code> in your AnsibleAutomationPlatform Custom Resource.</p> 
+       </div>
+      </div> 
+     </section> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">This procedure enables automation dashboard for Red Hat Ansible Automation Platform 2.7 deployments using the operator on Kubernetes or OpenShift. By configuring the AnsibleAutomationPlatform Custom Resource with the dashboard feature flag, the operator automatically propagates the configuration to metrics service within the reconciliation cycle (typically under 2 minutes). This declarative approach eliminates manual pod configuration and enables version-controlled, GitOps-compatible dashboard state management with 100% operator-managed deployment.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Edit the AnsibleAutomationPlatform Custom Resource</span> 
+        <div class="itemgroup info"> 
+         <p class="p">Edit your existing <code class="ph codeph">AnsibleAutomationPlatform</code> CR to enable the dashboard collection feature flag. The feature flag is set at the top level of <code class="ph codeph">spec</code>, not inside <code class="ph codeph">spec.metrics</code>.</p> 
+         <pre class="pre codeblock"><code>kubectl edit AnsibleAutomationPlatform &lt;aap-cr-name&gt; -n &lt;namespace&gt;</code></pre> 
+         <p class="p">Or, if using OpenShift:</p> 
+         <pre class="pre codeblock"><code>oc edit AnsibleAutomationPlatform &lt;aap-cr-name&gt; -n &lt;namespace&gt;</code></pre> 
+         <p class="p">Add or update the <code class="ph codeph">feature_flags</code> section:</p> 
+         <pre class="pre codeblock"><code>spec:
+  feature_flags:
+    FEATURE_DASHBOARD_COLLECTION_ENABLED: true   # ADD THIS
+  metrics:
+    disabled: false
+    name: &lt;aap-cr-name&gt;-metrics
+  # ... rest of your existing spec unchanged</code></pre> 
+         <table class="table">
+          <caption></caption>
+          <colgroup>
+           <col style="width:33.33333333333333%">
+           <col style="width:16.666666666666664%">
+           <col style="width:50%">
+          </colgroup>
+          <thead class="thead"> 
+           <tr class="row"> 
+            <th class="entry" id="enable-automation-dashboard-operator-installation__entry__1">Field</th> 
+            <th class="entry" id="enable-automation-dashboard-operator-installation__entry__2">Default</th> 
+            <th class="entry" id="enable-automation-dashboard-operator-installation__entry__3">Purpose</th> 
+           </tr> 
+          </thead>
+          <tbody class="tbody"> 
+           <tr class="row"> 
+            <td class="entry" headers="enable-automation-dashboard-operator-installation__entry__1"><code class="ph codeph">spec.feature_flags.FEATURE_DASHBOARD_COLLECTION_ENABLED</code></td> 
+            <td class="entry" headers="enable-automation-dashboard-operator-installation__entry__2"><code class="ph codeph">false</code> (absent)</td> 
+            <td class="entry" headers="enable-automation-dashboard-operator-installation__entry__3">Enables automation dashboard data collection in metrics service (Technology Preview)</td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="enable-automation-dashboard-operator-installation__entry__1"><code class="ph codeph">spec.metrics.disabled</code></td> 
+            <td class="entry" headers="enable-automation-dashboard-operator-installation__entry__2"><code class="ph codeph">false</code></td> 
+            <td class="entry" headers="enable-automation-dashboard-operator-installation__entry__3">Enables the metrics service component. Must be<code class="ph codeph">false</code> for dashboard to function.</td> 
+           </tr> 
+          </tbody>
+         </table> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p"><code class="ph codeph">spec.feature_flags</code> is a top-level spec field on the AnsibleAutomationPlatform CR. Do not nest it under <code class="ph codeph">spec.metrics</code>.</p> 
+          </div>
+         </div> 
+         <p class="p">Save and exit. The Ansible Automation Platform operator automatically begins reconciliation.</p> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Verify Ansible Automation Platform operator reconciliation</span> 
+        <div class="itemgroup info"> 
+         <p class="p">The Ansible Automation Platform operator reconciles the AnsibleAutomationPlatform CR and propagates <code class="ph codeph">FEATURE_DASHBOARD_COLLECTION_ENABLED</code> to the MetricsService CR. Check the Ansible Automation Platform operator logs:</p> 
+         <pre class="pre codeblock"><code>kubectl logs -n &lt;namespace&gt; \
+deployment/aap-gateway-operator-controller-manager | tail -20</code></pre> 
+         <p class="p">Look for reconciliation activity on your Ansible Automation Platform CR name.</p> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Verify the feature flag reached the metrics service</span> 
+        <div class="itemgroup info"> 
+         <p class="p"><strong class="ph b">Expected output:</strong></p> 
+         <pre class="pre codeblock"><code>METRICS_SERVICE_FEATURE_DASHBOARD_COLLECTION_ENABLED: '@bool True'</code></pre> 
+         <p class="p">If this key is absent, the operator has not yet reconciled. Wait 1–2 minutes and re-check.</p> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">The <code class="ph codeph">@bool True</code> prefix is Dynaconf syntax for boolean values. This is expected and correct.</p> 
+          </div>
+         </div> 
+         <p class="p">You can also verify by using the pod environment directly:</p> 
+         <pre class="pre codeblock"><code>METRICS_POD=$(kubectl get pods -n &lt;namespace&gt; \
+  -l app.kubernetes.io/component=metrics-service \
+  --field-selector=status.phase=Running \
+  -o jsonpath='{.items[0].metadata.name}')
+
+kubectl exec -n &lt;namespace&gt; $METRICS_POD -- \
+  env | grep DASHBOARD</code></pre> 
+         <p class="p"><strong class="ph b">Expected output:</strong></p> 
+         <pre class="pre codeblock"><code>METRICS_SERVICE_FEATURE_DASHBOARD_COLLECTION_ENABLED=@bool True</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Verify metrics service pods restarted</span> 
+        <div class="itemgroup info"> 
+         <p class="p">After the ConfigMap is updated, the metrics service pods restart automatically to pick up the new environment variable. Confirm three pods are running:</p> 
+         <pre class="pre codeblock"><code>kubectl get pods -n &lt;namespace&gt; | grep metrics</code></pre> 
+         <p class="p"><strong class="ph b">Expected output (on three running pods):</strong></p> 
+         <pre class="pre codeblock"><code>&lt;aap-cr-name&gt;-metrics-web-&lt;hash&gt;        1/1   Running   0   &lt;age&gt;
+&lt;aap-cr-name&gt;-metrics-tasks-&lt;hash&gt;      1/1   Running   0   &lt;age&gt;
+&lt;aap-cr-name&gt;-metrics-scheduler-&lt;hash&gt;  1/1   Running   0   &lt;age&gt;</code></pre> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">There is no separate <span class="ph filepath">settings.yaml</span> file in the operator deployment. All metrics service configuration is managed by using the <code class="ph codeph">&lt;name&gt;-metrics-env-properties</code> ConfigMap.</p> 
+          </div>
+         </div> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Verify dashboard tables created</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code># Get database pod
+DB_POD=$(kubectl get pods -n &lt;namespace&gt; | grep postgres | awk '{print $1}')
+
+# Check dashboard tables exist
+kubectl exec -n &lt;namespace&gt; $DB_POD -- \
+  psql -U metrics_service -d metrics_service \
+  -c "SELECT table_name FROM information_schema.tables WHERE table_name LIKE 'dashboard%';"</code></pre> 
+         <p class="p"><strong class="ph b">Expected output:</strong> Six dashboard tables:</p> 
+         <ul class="ul"> 
+          <li class="li"><code class="ph codeph">dashboard_job_data</code></li> 
+          <li class="li"><code class="ph codeph">dashboard_job_data_host_summary</code></li> 
+          <li class="li"><code class="ph codeph">dashboard_job_data_label</code></li> 
+          <li class="li"><code class="ph codeph">dashboard_template_metadata</code></li> 
+          <li class="li"><code class="ph codeph">dashboard_subscription_cost</code></li> 
+          <li class="li"><code class="ph codeph">dashboard_filter_set</code></li> 
+         </ul> 
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <p class="p">Dashboard is successfully enabled when:</p> 
+      <ul class="ul"> 
+       <li class="li"><code class="ph codeph">spec.feature_flags.FEATURE_DASHBOARD_COLLECTION_ENABLED: true</code> is present in the AnsibleAutomationPlatform CR</li> 
+       <li class="li"><code class="ph codeph">&lt;name&gt;-metrics-env-properties</code> ConfigMap contains <code class="ph codeph">METRICS_SERVICE_FEATURE_DASHBOARD_COLLECTION_ENABLED: '@bool True'</code></li> 
+       <li class="li">Three metrics service pods running (web, tasks, scheduler)</li> 
+       <li class="li">Six dashboard tables exist in <code class="ph codeph">metrics_service</code> database</li> 
+      </ul> 
+     </section> 
+     <section class="example">
+      <h2 class="title sectiontitle">Troubleshoot</h2> 
+      <p class="p"><strong class="ph b">Issue: Feature flag not appearing in ConfigMap</strong></p> 
+      <p class="p"><strong class="ph b">Symptom:</strong> After editing the Ansible Automation Platform CR, <code class="ph codeph">METRICS_SERVICE_FEATURE_DASHBOARD_COLLECTION_ENABLED</code> does not appear in the ConfigMap.</p> 
+      <p class="p"><strong class="ph b">Solution:</strong></p> 
+      <ol class="ol"> 
+       <li class="li"> <p class="p">Confirm the change was applied to the Ansible Automation Platform CR:</p> <pre class="pre codeblock"><code>kubectl get AnsibleAutomationPlatform &lt;aap-cr-name&gt; \
+  -n &lt;namespace&gt; -o yaml | grep -A3 feature_flags</code></pre> <p class="p">Verify <code class="ph codeph">FEATURE_DASHBOARD_COLLECTION_ENABLED: true</code> is present under <code class="ph codeph">spec.feature_flags</code>.</p> </li> 
+       <li class="li"> <p class="p">Check Ansible Automation Platform operator logs for reconciliation errors:</p> <pre class="pre codeblock"><code>kubectl logs -n &lt;namespace&gt; \
+  deployment/aap-gateway-operator-controller-manager | grep -i error</code></pre> </li> 
+       <li class="li"> <p class="p">Check automationmetricsservice operator logs:</p> <pre class="pre codeblock"><code>kubectl logs -n &lt;namespace&gt; \
+  deployment/automationmetricsservice-operator-controller-manager | tail -30</code></pre> </li> 
+      </ol> 
+      <p class="p"><strong class="ph b">Dashboard UI returns 403 Forbidden errors</strong></p> 
+      <p class="p"><strong class="ph b">Symptom:</strong> Dashboard navigation appears in AAP UI but clicking it shows authentication errors</p> 
+      <p class="p"><strong class="ph b">Cause:</strong> Gateway has not registered metrics service for routing and authentication (known issue in early builds)</p> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist">
+      <strong>Prerequisites</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-con_understand_automation_dashboard_architecture" title="This module explains the automation dashboard architecture in Red Hat Ansible Automation Platform 2.7, including its integration with metrics service, deployment options, and Technology Preview limitations.">Understand automation dashboard architecture</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_install_metrics_service_with_containerized_installer" title="Enable and configure metrics service during containerized installation to automatically collect anonymized usage data and transmit it to Red Hat.">Install metrics service with containerized installer</a></li>
+      </ul>
+     </div>
+     <div class="linklist">
+      <strong>Alternative approaches</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-task_enable_automation_dashboard_containerized_installation" title="Enable automation dashboard data collection during the initial installation to start collecting ROI and cost analysis data without post-installation configuration.">Enable automation dashboard during containerized installation</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-task_enable_automation_dashboard_post_installation#enable-automation-dashboard-post-installation" title="Activate dashboard data collection with automatic historical data backfill to generate comprehensive usage and ROI reports without reinstalling the platform or losing historical automation activity data.">Enable automation dashboard post-installation</a></li>
+      </ul>
+     </div>
+     <div class="linklist">
+      <strong>Troubleshooting</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-ref_troubleshoot_automation_dashboard_configuration_and_deployment" title="Diagnose automation dashboard issues including Gateway integration failures, RBAC access problems, UI feature limitations, and data collection errors.">Troubleshoot automation dashboard configuration and deployment</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

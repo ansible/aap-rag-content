@@ -1,0 +1,188 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="controller-work-with-webhooks"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Trigger automation with webhooks</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">Use webhooks to run specified commands between applications over the web. Automation controller currently provides webhook integration with GitHub and GitLab.</p> 
+      <p class="p">Set up a webhook using GitHub or GitLab, then view the payload output.</p> 
+      <p class="p">The webhook post-status-back functionality for GitHub and GitLab is designed to work only under certain CI events. Receiving another kind of event results in messages such as the following in the service log:</p> 
+      <p class="p"> <code class="ph codeph">awx.main.models.mixins Webhook event did not have a status API endpoint associated, skipping.</code> </p> 
+     </div> 
+     <nav role="navigation" class="related-links"> 
+      <div class="linklist"> 
+       <ul class="linklist"> 
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_work_with_webhooks#controller-set-up-github-webhook" title="Automation controller has the ability to run jobs based on a triggered webhook event coming in.">Set up a GitHub webhook to trigger automation jobs</a></li> 
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_work_with_webhooks#controller-set-up-gitlab-webhook" title="Automation controller has the ability to run jobs based on a triggered webhook event coming in. Job status information (pending, error, success) can be sent back only for pull request events.">Set up a GitLab webhook</a></li> 
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_work_with_webhooks#controller-view-payload-output" title="When a webhook is triggered in automation controller, the payload data is sent to the specified URL.">View the payload output</a></li> 
+       </ul> 
+      </div> 
+     </nav> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="controller-set-up-github-webhook"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Set up a GitHub webhook to trigger automation jobs</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Automation controller has the ability to run jobs based on a triggered webhook event coming in.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">Job status information (pending, error, success) can be sent back only for pull request events. If you do not need automation controller to post job statuses back to the webhook service, go directly to step 3.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Generate a <em class="ph i">Personal Access Token</em> (PAT) for use with automation controller: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">In the profile settings of your GitHub account, select <strong class="ph b">Settings</strong>.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">&lt;&gt; Developer Settings</span></span>.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">On the <strong class="ph b">Developer Settings</strong> page, select <strong class="ph b">Personal access tokens</strong>.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Select <strong class="ph b">Tokens (classic)</strong></span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">From the <strong class="ph b">Personal access tokens</strong> screen, click <span class="ph uicontrol button">Generate a personal access token</span>.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">When prompted, enter your GitHub account password to continue.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">In the <strong class="ph b">Note</strong> field, enter a brief description about what this PAT is used for.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">In the <strong class="ph b">Select scopes</strong> fields, check the boxes next to <strong class="ph b">repo:status</strong>, <strong class="ph b">repo_deployment</strong>, and <strong class="ph b">public_repo</strong>. The automation webhook only needs repository scope access, with the exception of invites. For more information, see <a class="xref" href="https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-apps" target="_blank" rel="external noopener">Scopes for OAuth apps documentation</a>.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Generate token</span>. </span> 
+            <div class="itemgroup info"> 
+             <div class="note important note_important"> <span class="note__title">Important:</span> 
+              <div class="note__body"> 
+               <p class="p">When generating the token, ensure that you copy the PAT, as you need it in step 2. You cannot access this token again in GitHub.</p> 
+              </div> 
+             </div> 
+            </div> </li> 
+          </ol> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Use the PAT to optionally create a GitHub credential: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">Go to your instance and create a new credential for the GitHub PAT, using the generated token.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Make note of the name of this credential, as you use it in the job template that posts back to GitHub. <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-webhooks-github-pat-token.png" alt="GitHub PAT token"><br></span> </li> 
+           <li class="li substep"> <span class="ph cmd">Go to the job template with which you want to enable webhooks, and select the webhook service and credential you created in the preceding step. <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-webhooks-webhook-credential.png" alt="GitLab webhook credential"><br></span> </li> 
+           <li class="li substep"> <span class="ph cmd">Click <span class="ph uicontrol button">Save</span>. Your job template is set up to post back to GitHub.</span> </li> 
+          </ol> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Go to a GitHub repository where you want to configure webhooks and select <span class="ph menucascade"><span class="ph uicontrol">Settings</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Webhooks</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Add webhook</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">To complete the <strong class="ph b">Add webhook</strong> page, you must check the <strong class="ph b">Enable Webhook</strong> option in a job template or workflow job template. For more information, see step 3 in both <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_controller_create_job_template#controller-create-job-template" title="A job template is a definition and set of parameters for running an Ansible job. Use job templates to launch jobs.">Creating a job template</a> and <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_controller_create_workflow_template#controller-create-workflow-template" title="To create a new workflow job template, complete the following steps:">Creating a workflow job template</a>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Complete the following fields: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Payload URL</strong>: Copy the contents of the <strong class="ph b">Webhook URL</strong> from the job template and paste it here. The results are sent to this address from GitHub.</li> 
+            <li class="li"><strong class="ph b">Content type</strong>: Set it to <strong class="ph b">application/json</strong>.</li> 
+            <li class="li"><strong class="ph b">Secret</strong>: Copy the contents of the <strong class="ph b">Webhook Key</strong> from the job template and paste it here.</li> 
+            <li class="li"><strong class="ph b">Which events would you like to trigger this webhook?</strong>: Select the types of events you want to trigger a webhook. Any such event will trigger the job or workflow. To have the job status (pending, error, success) sent back to GitHub, you must select <strong class="ph b">Pull requests</strong> in the <strong class="ph b">Let me select individual events</strong> section. <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-webhooks-github-repo-choose-events.png" alt="Github repo choose events"><br></li> 
+            <li class="li"><strong class="ph b">Active</strong>: Leave this checked.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Add webhook</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">When your webhook is configured, it is displayed in the list of webhooks active for your repository, along with the ability to edit or delete it. Click a webhook, to go to the <strong class="ph b">Manage webhook</strong> screen.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Scroll to view the delivery attempts made to your webhook and whether they succeeded or failed.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relinfo"> <strong>Related information</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="https://docs.github.com/en/webhooks" target="_blank" rel="external noopener">Webhooks documentation</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="controller-set-up-gitlab-webhook"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Set up a GitLab webhook</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Automation controller has the ability to run jobs based on a triggered webhook event coming in. Job status information (pending, error, success) can be sent back only for pull request events.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">If automation controller is not required to post job statuses back to the webhook service, go directly to step 3.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Generate a <em class="ph i">Personal Access Token</em> (PAT) for use with automation controller: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">From the navigation panel in GitLab, select your avatar and <span class="ph menucascade"><span class="ph uicontrol">Edit profile</span></span>.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access tokens</span></span>.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Complete the following fields: </span> 
+            <div class="itemgroup info"> 
+             <ul class="ul"> 
+              <li class="li"><strong class="ph b">Token name</strong>: Enter a brief description about what this PAT is used for.</li> 
+              <li class="li"><strong class="ph b">Expiration date</strong>: Skip this field unless you want to set an expiration date for your webhook.</li> 
+              <li class="li"><strong class="ph b">Select scopes</strong>: Select those that are applicable to your integration. For automation controller, <strong class="ph b">api</strong> is the only selection necessary.</li> 
+             </ul> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create personal access token</span>. </span> 
+            <div class="itemgroup info"> 
+             <div class="note important note_important"> <span class="note__title">Important:</span> 
+              <div class="note__body"> 
+               <p class="p">When the token is generated, ensure that you copy the PAT, as you need it in step 2. You cannot access this token again in GitLab.</p> 
+              </div> 
+             </div> 
+            </div> </li> 
+          </ol> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Use the PAT to optionally create a GitLab credential: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">Go to your instance, and create a new credential for the GitLab PAT, using the generated token.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Make note of the name of this credential, as you use it in the job template that posts back to GitLab. <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-webhooks-create-credential-gitlab-pat-token.png" alt="GitLab PAT token"><br></span> </li> 
+           <li class="li substep"> <span class="ph cmd">Go to the job template with which you want to enable webhooks, and select the webhook service and credential you created in the preceding step. <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-gitlab-webhook-credential.png" alt="GitLab webhook credential"><br></span> </li> 
+           <li class="li substep"> <span class="ph cmd">Click <span class="ph uicontrol button">Save</span>. Your job template is set up to post back to GitLab.</span> </li> 
+          </ol> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Go to a GitLab repository where you want to configure webhooks.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Integrations</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">To complete the <strong class="ph b">Add webhook</strong> page, you must check the <strong class="ph b">Enable Webhook</strong> option in a job template or workflow job template. For more information, see step 3 in both <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_controller_create_job_template#controller-create-job-template" title="A job template is a definition and set of parameters for running an Ansible job. Use job templates to launch jobs.">Creating a job template</a> and <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_controller_create_workflow_template#controller-create-workflow-template" title="To create a new workflow job template, complete the following steps:">Creating a workflow job template</a>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Complete the following fields: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">URL</strong>: Copy the contents of the <strong class="ph b">Webhook URL</strong> from the job template and paste it here. The results are sent to this address from GitLab.</li> 
+            <li class="li"><strong class="ph b">Secret Token</strong>: Copy the contents of the <strong class="ph b">Webhook Key</strong> from the job template and paste it here.</li> 
+            <li class="li"><strong class="ph b">Trigger</strong>: Select the types of events you want to trigger a webhook. Any such event will trigger the job or workflow. To have job status (pending, error, success) sent back to GitLab, you must select <strong class="ph b">Merge request events</strong> in the <strong class="ph b">Trigger</strong> section.</li> 
+            <li class="li"><strong class="ph b">SSL verification</strong>: Leave <strong class="ph b">Enable SSL verification</strong> selected.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Add webhook</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">When your webhook is configured, it is displayed in the list <strong class="ph b">Project Webhooks</strong> for your repository, along with the ability to test events, edit or delete the webhook. Testing a webhook event displays the results on each page whether it succeeded or failed.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relinfo"> <strong>Related information</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="https://docs.gitlab.com/ee/user/project/integrations/webhooks.html" target="_blank" rel="external noopener">Webhooks</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="controller-view-payload-output"> 
+      <h2 class="title topictitle2" id="ariaid-title4">View the payload output</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">When a webhook is triggered in automation controller, the payload data is sent to the specified URL.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">You can view the entire payload exposed as an extra variable.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Jobs</span></span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select the job template with the webhook enabled.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select the <strong class="ph b">Details</strong> tab.</span> </li> 
+         <li class="li step"> <span class="ph cmd">In the <strong class="ph b">Extra Variables</strong> field, view the payload output from the <code class="ph codeph">awx_webhook_payload</code> variable, as shown in the following example: <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-webhooks-jobs-extra-vars-payload.png" alt="Webhooks extra variables payload"><br><br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-webhooks-jobs-extra-vars-payload-expanded.png" alt="Webhook extra variables payload expanded"><br></span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

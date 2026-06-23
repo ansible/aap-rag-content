@@ -1,0 +1,68 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body id="devtools-install-container"> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Install Ansible development tools on a container inside VS Code</h1> 
+    <div class="body taskbody"> 
+     <p class="shortdesc">The Dev Containers VS Code extension requires a <code class="ph codeph">.devcontainer</code> file to store settings for your dev containers. You must use the Ansible extension to scaffold a config file for your dev container, and reopen your directory in a container in VS Code.</p> 
+     <section class="section prereq"> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">Before you begin</h2> 
+      </div> 
+      <ul class="ul"> 
+       <li class="li">You have installed a containerization platform, for example Podman, Podman Desktop, Docker, or Docker Desktop.</li> 
+       <li class="li">You have a Red Hat login and you have logged in to the Red Hat registry at <code class="ph codeph">registry.redhat.io</code>. For information about logging in to <code class="ph codeph">registry.redhat.io</code>, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_devtools_requirements#devtools-setup-registry-redhat-io" title="All container images available through the Red Hat container catalog are hosted on an image registry, registry.redhat.io. The registry requires authentication for access to images.">Authenticating with the Red Hat container registry</a>.</li> 
+       <li class="li">You have installed VS Code.</li> 
+       <li class="li">You have installed the Ansible extension in VS Code.</li> 
+       <li class="li">You have installed the <a class="xref" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers" target="_blank" rel="external noopener">Microsoft Dev Containers</a> extension in VS Code.</li> 
+       <li class="li">If you are installing Ansible development tools on Windows, launch VS Code and connect to the WSL machine. Click the <code class="ph codeph">Remote</code>(<img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/vscode-remote-icon.png" width="15" alt="Remote">) icon. In the dropdown menu that appears, select the option to connect to the WSL machine.</li> 
+      </ul> 
+     </section> 
+     <section class="section context"> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">About this task</h2> 
+      </div> 
+     </section> 
+     <section> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">Procedure</h2> 
+      </div> 
+      <ol class="ol steps"> 
+       <li class="li step stepexpand"> <span class="ph cmd">In VS Code, navigate to your project directory.</span> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Click the Ansible icon in the VS Code activity bar to open the Ansible extension.</span> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Ansible Development Tools</strong> section of the Ansible extension, scroll down to the <strong class="ph b">ADD</strong> option and select <strong class="ph b">Devcontainer</strong>.</span> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Create a devcontainer</strong> page, select the <strong class="ph b">Downstream</strong> container image from the <strong class="ph b">Container image</strong> options. </span> 
+        <div class="itemgroup info"> 
+         <p class="p">This action adds <code class="ph codeph">devcontainer.json</code> files for both Podman and Docker in a <code class="ph codeph">.devcontainer</code> directory.</p> 
+        </div> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Reopen or reload the project directory: </span> 
+        <div class="itemgroup info"> 
+         <ul class="ul"> 
+          <li class="li">If VS Code detects that your directory contains a <code class="ph codeph">devcontainer.json</code> file, the following notification appears: <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/devtools-reopen-in-container.png" alt="Reopen in container"><br><p class="p">Click <strong class="ph b">Reopen in Container</strong>.</p></li> 
+          <li class="li">If the notification does not appear, click the <code class="ph codeph">Remote</code> (<img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/vscode-remote-icon.png" width="15" alt="Remote">) icon. In the dropdown menu that appears, select <strong class="ph b">Reopen in Container</strong>.</li> 
+         </ul> 
+        </div> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Select the dev container for Podman or Docker according to the containerization platform you are using. </span> 
+        <div class="itemgroup info"> 
+         <p class="p">The <strong class="ph b">Remote ()</strong> status in the VS Code Status bar displays <code class="ph codeph">opening Remote</code> and a notification indicates the progress in opening the container.</p> 
+        </div> </li> 
+      </ol> 
+     </section> 
+     <section class="section result"> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">Results</h2> 
+      </div> 
+      <p class="p">When the directory reopens in a container, the <strong class="ph b">Remote ()</strong> status displays <code class="ph codeph">Dev Container: ansible-dev-container</code>.</p> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">The base image for the container is a Universal Base Image Minimal (UBI Minimal) image that uses <code class="ph codeph">microdnf</code> as a package manager. The <code class="ph codeph">dnf</code> and <code class="ph codeph">yum</code> package managers are not available in the container.</p> 
+        <p class="p">For information about using <code class="ph codeph">microdnf</code> in containers based on UBI Minimal images, see <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/building_running_and_managing_containers/assembly_adding-software-to-a-ubi-container_building-running-and-managing-containers#proc_adding-software-in-a-minimal-ubi-container_assembly_adding-software-to-a-ubi-container" target="_blank" rel="external noopener">Adding software in a minimal UBI container</a> in the Red Hat Enterprise Linux <em class="ph i">Building, running, and managing containers</em> guide.</p> 
+       </div> 
+      </div> 
+     </section> 
+    </div> 
+   </article> 
+  </main>  
+ </body>
+</html>

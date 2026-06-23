@@ -1,0 +1,121 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="ref-controller-database-settings"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Tune the PostgreSQL database for optimal performance</h1> 
+     <div class="body refbody">
+      <p class="shortdesc">Improve the performance of automation controller, by configuring the following configuration parameters in the database:</p> 
+      <section class="section"> 
+       <p class="p"> <strong class="ph b">Maintenance</strong> </p> 
+       <p class="p">The <code class="ph codeph">VACUUM</code> and <code class="ph codeph">ANALYZE</code> tasks are important maintenance activities that can impact performance. In normal PostgreSQL operation, tuples that are deleted or obsoleted by an update are not physically removed from their table; they remain present until a <code class="ph codeph">VACUUM</code> is done. Therefore it’s necessary to do VACUUM periodically, especially on frequently-updated tables. <code class="ph codeph">ANALYZE</code> collects statistics about the contents of tables in the database, and stores the results in the <code class="ph codeph">pg_statistic</code> system catalog. Subsequently, the query planner uses these statistics to help determine the most efficient execution plans for queries. The autovacuuming PostgreSQL configuration parameter automates the execution of <code class="ph codeph">VACUUM</code> and <code class="ph codeph">ANALYZE</code> commands. Setting autovacuuming to <strong class="ph b">true</strong> is a good practice. However, autovacuuming will not occur if there is never any idle time on the database. If it is observed that autovacuuming is not sufficiently cleaning up space on the database disk, then scheduling specific vacuum tasks during specific maintenance windows can be a solution.</p> 
+       <p class="p"> <strong class="ph b">Configuration parameters</strong> </p> 
+       <p class="p">To improve the performance of the PostgreSQL server, configure the following <em class="ph i">Grand Unified Configuration</em> (GUC) parameters that manage database memory. You can find these parameters inside the <code class="ph codeph">$PDATA</code> directory in the <code class="ph codeph">postgresql.conf</code> file, which manages the configurations of the database server.</p> 
+       <ul class="ul"> 
+        <li class="li"><code class="ph codeph">shared_buffers</code>: determines how much memory is dedicated to the server for caching data. The default value for this parameter is 128 MB. When you modify this value, you must set it between 15% and 25% of the machine’s total RAM. 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body">
+           <p class="p">If you are compiling Postgres against OpenSSL 3.2, your system regresses to remove the parameter for User during startup. You can rectify this by using the BIO_get_app_data call instead of open_get_data. Only an administrator can make these changes, but it impacts all users connected to the PostgreSQL database. f you update your systems without the OpenSSL patch, you are not impacted, and you do not need to take action.</p>
+          </div>
+         </div>
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body">
+           <p class="p">You must restart the database server after changing the value for <code class="ph codeph">shared_buffers</code>.</p>
+          </div>
+         </div>
+         <div class="note warning note_warning">
+          <span class="note__title">Warning:</span> 
+          <div class="note__body">
+           <p class="p">If you are compiling Postgres against OpenSSL 3.2, your system regresses to remove the parameter for User during startup. You can rectify this by using the BIO_get_app_data call instead of open_get_data. Only an administrator can make these changes, but it impacts all users connected to the PostgreSQL database.</p>
+           <p class="p">If you update your systems without the OpenSSL patch, you are not impacted, and you do not need to take action.</p>
+          </div>
+         </div></li> 
+        <li class="li"><code class="ph codeph">work_mem</code>: provides the amount of memory to be used by internal sort operations and hash tables before disk-swapping. Sort operations are used for order by, distinct, and merge join operations. Hash tables are used in hash joins and hash-based aggregation. The default value for this parameter is 4 MB. Setting the correct value of the <code class="ph codeph">work_mem</code> parameter improves the speed of a search by reducing disk-swapping. 
+         <ul class="ul">
+          <li class="li">Use the following formula to calculate the optimal value of the <code class="ph codeph">work_mem</code> parameter for the database server: <pre class="pre">Total RAM * 0.25 / max_connections</pre>
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body">
+             Setting a large <code class="ph codeph">work_mem</code> can cause the PostgreSQL server to go out of memory (OOM) if there are too many open connections to the database.
+            </div>
+           </div></li>
+         </ul></li> 
+        <li class="li"><code class="ph codeph">max_connections</code>: specifies the maximum number of concurrent connections to the database server.</li> 
+        <li class="li"><code class="ph codeph">maintenance_work_mem</code>: provides the maximum amount of memory to be used by maintenance operations, such as vacuum, create index, and alter table add foreign key operations. The default value for this parameter is 64 MB. Use the following equation to calculate a value for this parameter: <pre class="pre">Total RAM * 0.05</pre>
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body">
+           <p class="p">Set <code class="ph codeph">maintenance_work_mem</code> higher than <code class="ph codeph">work_mem</code> to improve performance for vacuuming.</p>
+          </div>
+         </div></li> 
+       </ul> 
+      </section> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist relinfo">
+       <strong>Related information</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="https://www.postgresql.org/docs/13/runtime-config-autovacuum.html" target="_blank" rel="external noopener">Automatic Vacuuming</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-encrypting-plaintext-passwords"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Encrypt plain text passwords in automation controller configuration files</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Plain text passwords in automation controller configuration files pose a potential security risk.</p> 
+       <section class="section"> 
+        <p class="p">Configuration files are kept in the /etc/tower/conf.d/ folder. Files used to reach the database, for example, save passwords without encryption. This means that anyone who can read this folder can see the passwords clearly.</p> 
+        <p class="p">While permissions protect these folders, some security reports say this protection is good inadequate. The fix is to encrypt each of these passwords separately.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-encrypt-postgres-password"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Encrypt the PostgreSQL password</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Learn how to encrypt the PostgreSQL password used by automation controller for database connections.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">Perform the following steps on each node in the cluster:</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Edit <code class="ph codeph">/etc/tower/conf.d/postgres.py</code> using: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre">$ vim /etc/tower/conf.d/postgres.py</pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Add the following line to the top of the file. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre">from awx.main.utils import decrypt_value, get_encryption_key</pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Remove the password value listed after 'PASSWORD': and replace it with the following line, replacing the supplied value of <code class="ph codeph">$encrytpted..</code> with your own hash value: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre">decrypt_value(get_encryption_key('value'),'$encrypted$AESCBC$Z0FBQUFBQmNONU9BbGQ1VjJyNDJRVTRKaFRIR09Ib2U5TGdaYVRfcXFXRjlmdmpZNjdoZVpEZ21QRWViMmNDOGJaM0dPeHN2b194NUxvQ1M5X3dSc1gxQ29TdDBKRkljWHc9PQ=='),</pre> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">The hash value in this step is the output value of <code class="ph codeph">postgres_secret</code>.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">The full <code class="ph codeph">postgres.py</code> resembles the following: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre"># Ansible Automation platform controller database settings. from awx.main.utils import decrypt_value, get_encryption_key DATABASES = { 'default': { 'ATOMIC_REQUESTS': True, 'ENGINE': 'django.db.backends.postgresql', 'NAME': 'awx', 'USER': 'awx', 'PASSWORD': decrypt_value(get_encryption_key('value'),'$encrypted$AESCBC$Z0FBQUFBQmNONU9BbGQ1VjJyNDJRVTRKaFRIR09Ib2U5TGdaYVRfcXFXRjlmdmpZNjdoZVpEZ21QRWViMmNDOGJaM0dPeHN2b194NUxvQ1M5X3dSc1gxQ29TdDBKRkljWHc9PQ=='), 'HOST': '127.0.0.1', 'PORT': 5432, } }+</pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

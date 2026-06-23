@@ -1,0 +1,276 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-controller-project-signing"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Enforce project integrity with signing and verification</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">Use project signing and verification in your project directory to sign files. You can then verify whether or not that content has changed in any way, or files have been added to, or removed from the project unexpectedly.</p> 
+      <p class="p">To do this, you require a private key for signing and a matching public key for verifying.</p> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-controller-intro-proj-sign"> 
+      <h2 class="title topictitle2" id="ariaid-title2">About project signing</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">Automation controller supports content signing for projects to ensure the integrity and authenticity of project files. This feature helps to prevent tampering with project content by ensuring that any changes to files are detected during project synchronization.</p> 
+       <section class="section"> 
+        <p class="p">For project maintainers, the supported way to sign content is to use the <code class="ph codeph">ansible-sign</code> utility, using the <em class="ph i">command-line interface</em> (CLI) supplied with it.</p> 
+        <p class="p">The CLI aims to make it easy to use cryptographic technology such as <em class="ph i">GNU Privacy Guard</em> (GPG) to validate that files within a project have not been tampered with in any way. Currently, GPG is the only supported means of signing and validation.</p> 
+        <p class="p">Automation controller is used to verify the signed content. After a matching public key has been associated with the signed project, automation controller verifies that the files included during signing have not changed, and that files have been added or removed unexpectedly. If the signature is not valid or a file has changed, the project fails to update, and jobs making use of the project will not launch. Verification status of the project ensures that only secure, untampered content can be run in jobs.</p> 
+        <p class="p">If the repository has already been configured for signing and verification, the usual workflow for altering the project becomes the following:</p> 
+        <ol class="ol"> 
+         <li class="li">You have a project repository set up already and want to make a change to a file.</li> 
+         <li class="li">You make the change, and run the following command: <pre class="pre">ansible-sign project gpg-sign /path/to/project</pre> <p class="p">This command updates a checksum manifest and signs it.</p> </li> 
+         <li class="li">You commit the change, the updated checksum manifest, and the signature to the repository.</li> 
+        </ol> 
+        <p class="p">When you synchronize the project, automation controller pulls in the new changes, checks that the public key associated with the project in automation controller matches the private key that the checksum manifest was signed with (this prevents tampering with the checksum manifest itself), then re-calculates the checksums of each file in the manifest to ensure that the checksum matches (and thus that no file has changed). It also ensures that all files are accounted for:</p> 
+        <p class="p">Files must be included in, or excluded from, the <code class="ph codeph">MANIFEST.in</code> file. For more information on this file, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_controller_project_signing#con-controller-signing-your-project" title="Signing a project involves an Ansible project directory.">Sign a project</a>. If files have been added or removed unexpectedly, verification fails</p> 
+        <br> 
+        <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/content-sign-diagram.png" alt="Content signing procedure"> 
+        <br> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="ref-controller-proj-sign-prerequisites"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Sign content in automation projects</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">Prepare your Red Hat Enterprise Linux systems by enabling the correct repositories and subscriptions needed to install components for project signing. This step helps ensure that your environment is properly configured for content verification.</p> 
+       <section class="section"> 
+        <ul class="ul"> 
+         <li class="li">RHEL nodes must properly be subscribed to: 
+          <ul class="ul"> 
+           <li class="li">RHEL subscription with <strong class="ph b">baseos</strong> and <strong class="ph b">appstream</strong> repositories must be enabled.</li> 
+           <li class="li">Your Red Hat Ansible Automation Platform subscription and the proper channel must be enabled: <pre class="pre">ansible-automation-platform-2.5-for-rhel-8-x86_64-rpms for RHEL 8
+ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms for RHEL 9</pre></li> 
+          </ul></li> 
+         <li class="li">You require a valid GPG public or private keypair for signing content. For more information, see <a class="xref" href="https://www.redhat.com/sysadmin/creating-gpg-keypairs" target="_blank" rel="external noopener">How to create GPG keypairs</a>. <p class="p">For more information about GPG keys, see the <a class="xref" href="https://www.gnupg.org/documentation/index.html" target="_blank" rel="external noopener">GnuPG documentation</a>.</p><p class="p">Verify that you have a valid GPG keypair in your default GnuPG keyring, with the following command:</p><pre class="pre">gpg --list-secret-keys</pre><p class="p">If this command produces no output, or one line of output that states, <code class="ph codeph">trustdb was created</code>, then you do not have a secret key in your default keyring. In this case, see <a class="xref" href="https://www.redhat.com/sysadmin/creating-gpg-keypairs" target="_blank" rel="external noopener">How to create GPG keypairs</a> to learn how to create a new keypair before proceeding. If it produces any other output, you have a valid secret key and are ready to use <code class="ph codeph">ansible-sign</code>.</p></li> 
+        </ul> 
+       </section> 
+      </div> 
+      <article class="topic task nested2" aria-labelledby="ariaid-title4" id="proc-controller-adding-gpg-key"> 
+       <h3 class="title topictitle3" id="ariaid-title4">Add a GPG key to automation controller</h3> 
+       <div class="body taskbody"> 
+        <p class="shortdesc">You can add a GPG public key to automation controller and enable content signing and validation for your projects.</p> 
+        <section class="section context"> 
+         <div class="tasklabel"> 
+          <h4 class="sectiontitle tasklabel">About this task</h4> 
+         </div> 
+         <p class="p">To use the GPG key for content signing and validation in automation controller, add it by running the following command in the CLI:</p> 
+         <pre class="pre">$ gpg --list-keys
+$ gpg --export --armour &lt;key fingerprint&gt; &gt; my_public_key.asc</pre> 
+        </section> 
+        <section> 
+         <div class="tasklabel"> 
+          <h4 class="sectiontitle tasklabel">Procedure</h4> 
+         </div> 
+         <ol class="ol steps"> 
+          <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Credentials</span></span>.</span> </li> 
+          <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create credential</span>.</span> </li> 
+          <li class="li step stepexpand"> <span class="ph cmd">Give a meaningful name for the new credential, for example, "Infrastructure team public GPG key".</span> </li> 
+          <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Credential type</strong> field, select <strong class="ph b">GPG Public Key</strong>.</span> </li> 
+          <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Browse</strong> to locate and select the public key file, for example, <code class="ph codeph">my_public_key.asc</code>.</span> </li> 
+          <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create credential</span>. </span> 
+           <div class="itemgroup info"> 
+            <p class="p">You can select this credential in <code class="ph codeph">projects &lt;ug_projects_add&gt;</code>, and content verification automatically takes place on future project synchronizations.</p> 
+            <div class="note note note_note"> <span class="note__title">Note:</span> 
+             <div class="note__body"> 
+              <p class="p">Use the project cache SCM timeout to control how often you want automation controller to re-validate the signed content. When a project is configured to update on launch (of any job template configured to use that project), you can enable the cache timeout setting, which sets it to update after <code class="ph codeph">N</code> seconds have passed since the last update. If validation is running too often, you can slow down how often project updates occur by specifying the time in the <strong class="ph b">Cache Timeout</strong> field of the <strong class="ph b">Options Details</strong> view of the project.</p> 
+              <p class="p"> <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/project-update-launch-cache-timeout.png" alt="Project Cache Timeout option"> </p> 
+             </div> 
+            </div> 
+           </div> </li> 
+         </ol> 
+        </section> 
+       </div> 
+      </article> 
+      <article class="topic task nested2" aria-labelledby="ariaid-title5" id="proc-controller-use-ansible-sign"> 
+       <h3 class="title topictitle3" id="ariaid-title5">Install the ansible-sign CLI utility</h3> 
+       <div class="body taskbody"> 
+        <p class="shortdesc">Use the <code class="ph codeph">ansible-sign</code> utility to offer options for you to sign and verify whether the project is signed.</p> 
+        <section> 
+         <div class="tasklabel"> 
+          <h4 class="sectiontitle tasklabel">Procedure</h4> 
+         </div> 
+         <ol class="ol steps"> 
+          <li class="li step stepexpand"> <span class="ph cmd">Run the following command to install <code class="ph codeph">ansible-sign</code>: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre">$ dnf install ansible-sign</pre> 
+           </div> </li> 
+          <li class="li step stepexpand"> <span class="ph cmd">Verify that <code class="ph codeph">ansible-sign</code> was successfully installed using the following command: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre">$ ansible-sign --version</pre> 
+            <p class="p">Output similar to the following indicates that you have successfully installed <code class="ph codeph">ansible-sign</code>:</p> 
+            <pre class="pre">ansible-sign 0.1</pre> 
+           </div> </li> 
+         </ol> 
+        </section> 
+       </div> 
+      </article> 
+      <article class="topic concept nested2" aria-labelledby="ariaid-title6" id="con-controller-signing-your-project"> 
+       <h3 class="title topictitle3" id="ariaid-title6">Sign a project</h3> 
+       <div class="body conbody"> 
+        <p class="shortdesc">Signing a project involves an Ansible project directory.</p> 
+        <p class="p">The following sample project has a very simple structure: an inventory file, and two small playbooks under a playbooks directory:</p> 
+        <pre class="pre">$ cd sample-project/
+$ tree -a .
+.
+├── inventory
+└── playbooks
+    └── get_uptime.yml
+    └── hello.yml
+
+    1 directory, 3 files</pre> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">The commands used assume that your working directory is the root of your project. <code class="ph codeph">ansible-sign project</code> commands take the project root directory as their last argument.</p> 
+          <p class="p">Use <code class="ph codeph">.</code> to indicate the current working directory.</p> 
+         </div> 
+        </div> 
+        <p class="p"><code class="ph codeph">ansible-sign</code> protects content from tampering by taking checksums (SHA256) of all of the secured files in the project, compiling those into a checksum manifest file, and then signing that manifest file.</p> 
+        <p class="p">To sign content, create a <code class="ph codeph">MANIFEST.in</code> file in the project root directory that tells <code class="ph codeph">ansible-sign</code> which files to protect.</p> 
+        <p class="p">Internally, <code class="ph codeph">ansible-sign</code> uses the <code class="ph codeph">distlib.manifest</code> module of Python’s distlib library, therefore <code class="ph codeph">MANIFEST.in</code> must follow the syntax that this library specifies. For an explanation of the <code class="ph codeph">MANIFEST.in</code> file directives, see the Python Packaging User Guide.</p> 
+        <p class="p">In the sample project, two directives are included, resulting in the following <code class="ph codeph">MANIFEST.in</code> file:</p> 
+        <pre class="pre">include inventory
+recursive-include playbooks *.yml</pre> 
+        <p class="p">With this file in place, generate your checksum manifest file and sign it. Both of these steps are achieved in a single <code class="ph codeph">ansible-sign</code> command:</p> 
+        <pre class="pre">$ ansible-sign project gpg-sign .</pre> 
+        <p class="p">Successful execution displays output similar to the following:</p> 
+        <pre class="pre">[OK   ] GPG signing successful!
+[NOTE ] Checksum manifest: ./.ansible-sign/sha256sum.txt
+[NOTE ] GPG summary: signature created</pre> 
+        <p class="p">The project has now been signed.</p> 
+        <p class="p">Note that the <code class="ph codeph">gpg-sign</code> subcommand is under the <code class="ph codeph">project</code> subcommand.</p> 
+        <p class="p">For signing project content, every command starts with <code class="ph codeph">ansible-sign project</code>.</p> 
+        <p class="p">Every <code class="ph codeph">ansible-sign project</code> command takes the project root directory <code class="ph codeph">.</code> as its final argument.</p> 
+        <p class="p"><code class="ph codeph">ansible-sign</code> makes use of your default keyring and looks for the first available secret key that it can find, to sign your project. You can specify a specific secret key to use with the <code class="ph codeph">--fingerprint</code> option, or even a completely independent GPG home directory with the <code class="ph codeph">--gnupg-home</code> option.</p> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">If you are using a desktop environment, GnuPG automatically prompts you for your secret key’s passphrase.</p> 
+          <p class="p">If this functionality does not work, or you are working without a desktop environment, for example, through SSH, you can use the <code class="ph codeph">-p --prompt-passphrase</code> flag after <code class="ph codeph">gpg-sign</code> , which causes <code class="ph codeph">ansible-sign</code> to prompt for the password instead.</p> 
+         </div> 
+        </div> 
+        <p class="p">Note that an <code class="ph codeph">.ansible-sign</code> directory was created in the project directory. This directory contains the checksum manifest and a detached GPG signature for it.</p> 
+        <pre class="pre">$ tree -a .
+.
+├── .ansible-sign
+│   ├── sha256sum.txt
+│   └── sha256sum.txt.sig
+├── inventory
+├── MANIFEST.in
+└── playbooks
+    ├── get_uptime.yml
+    └── hello.yml</pre> 
+       </div> 
+       <nav role="navigation" class="related-links"> 
+        <div class="linklist relinfo"> <strong>Related information</strong> 
+         <br> 
+         <ul class="linklist"> 
+          <li class="linklist"><a class="link" href="https://setuptools.pypa.io/en/latest/userguide/miscellaneous.html" target="_blank" rel="external noopener">Python Packaging User Guide</a></li> 
+         </ul> 
+        </div> 
+       </nav> 
+      </article> 
+      <article class="topic reference nested2" aria-labelledby="ariaid-title7" id="ref-controller-verify-your-project"> 
+       <h3 class="title topictitle3" id="ariaid-title7">Verify your project</h3> 
+       <div class="body refbody"> 
+        <p class="shortdesc">To verify that a signed Ansible project has not been altered, you can use <code class="ph codeph">ansible-sign</code> to check whether the signature is valid and that the checksums of the files match what the checksum manifest says they should be.</p> 
+        <section class="section"> 
+         <p class="p">The <code class="ph codeph">ansible-sign project gpg-verify</code> command can be used to automatically verify both of these conditions.</p> 
+         <pre class="pre">$ ansible-sign project gpg-verify .
+[OK   ] GPG signature verification succeeded.
+[OK   ] Checksum validation succeeded.</pre> 
+         <div class="note note note_note"> <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">By default, <code class="ph codeph">ansible-sign</code> makes use of your default GPG keyring to look for a matching public key. You can specify a keyring file with the <code class="ph codeph">--keyring</code> option, or a different GPG home with the <code class="ph codeph">--gnugpg-home</code> option.</p> 
+          </div> 
+         </div> 
+         <p class="p">If verification fails for any reason, information is displayed to help you debug the cause. More verbosity can be enabled by passing the global <code class="ph codeph">--debug</code> flag, immediately after <code class="ph codeph">ansible-sign</code> in your commands.</p> 
+         <div class="note note note_note"> <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">When a GPG credential is used in a project, content verification automatically takes place on future project synchronizations.</p> 
+          </div> 
+         </div> 
+        </section> 
+       </div> 
+      </article> 
+      <article class="topic reference nested2" aria-labelledby="ariaid-title8" id="ref-controller-automate-signing"> 
+       <h3 class="title topictitle3" id="ariaid-title8">Automate signing</h3> 
+       <div class="body refbody"> 
+        <p class="shortdesc">In environments with highly-trusted <em class="ph i">Continuous Integration</em> (CI) environments such as OpenShift or Jenkins, it is possible to automate the signing process.</p> 
+        <section class="section"> 
+         <p class="p">For example, you can store your GPG private key in a CI platform of choice as a secret, and import that into GnuPG in the CI environment. You can then run through the signing workflow within the normal CI environment.</p> 
+         <p class="p">When signing a project by using GPG, the environment variable <code class="ph codeph">ANSIBLE_SIGN_GPG_PASSPHRASE</code> can be set to the passphrase of the signing key. This can be injected and masked or secured in a CI pipeline.</p> 
+         <p class="p">Depending on the scenario, <code class="ph codeph">ansible-sign</code> returns with a different exit-code, during both signing and verification. This can also be useful in the context of CI and automation, as a CI environment can act differently based on the failure. For example, it can send alerts for some errors, but fail silently for others.</p> 
+         <p class="p">These are the current exit codes used in <code class="ph codeph">ansible-sign</code>, which can be considered stable:</p> 
+         <table class="table"> 
+          <caption></caption> 
+          <colgroup> 
+           <col style="width:10.4166%"> 
+           <col style="width:34.375%"> 
+           <col style="width:55.208400000000005%"> 
+          </colgroup> 
+          <thead class="thead"> 
+           <tr class="row"> 
+            <th class="entry" id="ref-controller-automate-signing__entry__1">Exit code</th> 
+            <th class="entry" id="ref-controller-automate-signing__entry__2">Approximate meaning</th> 
+            <th class="entry" id="ref-controller-automate-signing__entry__3">Example scenarios</th> 
+           </tr> 
+          </thead> 
+          <tbody class="tbody"> 
+           <tr class="row"> 
+            <td class="entry" headers="ref-controller-automate-signing__entry__1"> <p class="p">0</p> </td> 
+            <td class="entry" headers="ref-controller-automate-signing__entry__2"> <p class="p">Success</p> </td> 
+            <td class="entry" headers="ref-controller-automate-signing__entry__3"> 
+             <ul class="ul"> 
+              <li class="li">Signing was successful</li> 
+              <li class="li">Verification was successful</li> 
+             </ul> </td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="ref-controller-automate-signing__entry__1"> <p class="p">1</p> </td> 
+            <td class="entry" headers="ref-controller-automate-signing__entry__2"> <p class="p">General failure</p> </td> 
+            <td class="entry" headers="ref-controller-automate-signing__entry__3"> 
+             <ul class="ul"> 
+              <li class="li">The checksum manifest file contained a syntax error during verification</li> 
+              <li class="li">The signature file did not exist during verification</li> 
+              <li class="li"><code class="ph codeph">MANIFEST.in</code> did not exist during signing</li> 
+             </ul> </td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="ref-controller-automate-signing__entry__1"> <p class="p">2</p> </td> 
+            <td class="entry" headers="ref-controller-automate-signing__entry__2"> <p class="p">Checksum verification failure</p> </td> 
+            <td class="entry" headers="ref-controller-automate-signing__entry__3"> 
+             <ul class="ul"> 
+              <li class="li">The checksum hashes calculated during verification differed from what was in the signed checksum manifest, for example, a project file was changed but the signing process was not re-completed.</li> 
+             </ul> </td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="ref-controller-automate-signing__entry__1"> <p class="p">3</p> </td> 
+            <td class="entry" headers="ref-controller-automate-signing__entry__2"> <p class="p">Signature verification failure</p> </td> 
+            <td class="entry" headers="ref-controller-automate-signing__entry__3"> 
+             <ul class="ul"> 
+              <li class="li">The signer’s public key was not in the user’s GPG keyring</li> 
+              <li class="li">The wrong GnuPG home directory or keyring file was specified</li> 
+              <li class="li">The signed checksum manifest file was modified in some way</li> 
+             </ul> </td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="ref-controller-automate-signing__entry__1"> <p class="p">4</p> </td> 
+            <td class="entry" headers="ref-controller-automate-signing__entry__2"> <p class="p">Signing process failure</p> </td> 
+            <td class="entry" headers="ref-controller-automate-signing__entry__3"> 
+             <ul class="ul"> 
+              <li class="li">The signer’s private key was not found in the GPG keyring</li> 
+              <li class="li">The wrong GnuPG home directory or keyring file was specified</li> 
+             </ul> </td> 
+           </tr> 
+          </tbody> 
+         </table> 
+        </section> 
+       </div> 
+      </article> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

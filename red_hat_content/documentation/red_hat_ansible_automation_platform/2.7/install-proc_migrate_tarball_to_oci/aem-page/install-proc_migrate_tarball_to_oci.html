@@ -1,0 +1,243 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="migrate-tarball-to-oci"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Migrate from HTTP plug-in registry to OCI container delivery</h1> 
+     <div class="body taskbody">
+      <p class="shortdesc">Migrate from the deprecated HTTP plug-in registry to OCI container image delivery by switching Helm values and updating your Kubernetes secret configuration.</p> 
+      <section class="section prereq">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Before you begin</h2>
+       </div> 
+       <p class="p">Before you begin, ensure you have:</p> 
+       <ul class="ul"> 
+        <li class="li">Registry credentials for <code class="ph codeph">registry.redhat.io</code> or your mirror registry. You can create a service account at the <a class="xref" href="https://access.redhat.com/terms-based-registry/" target="_blank" rel="external noopener">Red Hat registry service accounts</a> page.</li> 
+        <li class="li">Your Helm release name and namespace</li> 
+        <li class="li">OpenShift CLI (<code class="ph codeph">oc</code>) and Helm CLI installed</li> 
+        <li class="li">Existing Ansible automation portal installation with HTTP plug-in registry (tarball mode)</li> 
+        <li class="li">For air-gapped environments: access to your mirror registry from the OpenShift cluster</li> 
+       </ul> 
+       <p class="p">For detailed prerequisites on creating and configuring registry credentials, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_oci_container_delivery" title="Use OCI container delivery to pull plug-in artifacts from registry.redhat.io/ansible-automation-platform/automation-portal. The plug-in version must match the imageTagInfo value in your Helm chart configuration. This is the recommended method for new installations.">OCI container delivery</a>.</p> 
+      </section> 
+      <section class="section context">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">About this task</h2>
+       </div> 
+       <p class="p">The HTTP plug-in registry delivery method is deprecated and will be removed in a future release of Ansible Automation Platform. OCI container delivery is the recommended approach for new installations and production deployments.</p> 
+       <div class="note important note_important">
+        <span class="note__title">Important:</span> 
+        <div class="note__body"> 
+         <p class="p">Back up your current Helm values before you upgrade. Upgrades without <code class="ph codeph">-f backup-values.yaml</code> can reset custom OAuth, RBAC, and certificate settings. The migration process exports your values, edits only the plug-in delivery method, and reapplies all custom configuration.</p> 
+        </div>
+       </div> 
+      </section> 
+      <section>
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Procedure</h2>
+       </div>
+       <ol class="ol steps">
+        <li class="li step stepexpand"> <span class="ph cmd">Export your current Helm release values:</span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>$ helm get values &lt;release-name&gt; -n &lt;namespace&gt; &gt; backup-values.yaml</code></pre> 
+          <p class="p">Replace <code class="ph codeph">&lt;release-name&gt;</code> with your Helm release name (for example, <code class="ph codeph">redhat-rhaap-portal</code>) and <code class="ph codeph">&lt;namespace&gt;</code> with your OpenShift namespace (for example, <code class="ph codeph">default</code>).</p> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Create the <code class="ph codeph">auth.json</code> file and the OCI registry authentication secret.</span> 
+         <div class="itemgroup info"> 
+          <p class="p">The <code class="ph codeph">install-dynamic-plugins</code> init container uses the authentication secret directly and does not use cluster pull secrets or <code class="ph codeph">imagePullSecrets</code>. Follow these steps:</p> 
+          <ol class="ol" type="a"> 
+           <li class="li">Create the base64-encoded credentials. Use the <code class="ph codeph">-w0</code> flag to produce single-line output (required): <pre class="pre codeblock"><code>$ AUTHB64=$(printf '%s' '&lt;username&gt;:&lt;password&gt;' | base64 -w0)</code></pre> <p class="p">Use your Red Hat service account username and password for <code class="ph codeph">registry.redhat.io</code>, or your mirror registry credentials for air-gapped deployments.</p> </li> 
+           <li class="li">Create the <code class="ph codeph">auth.json</code> file: <pre class="pre codeblock"><code>$ cat &gt; auth.json &lt;&lt;EOF
+{
+  "auths": {
+    "registry.redhat.io": {
+      "auth": "${AUTHB64}"
+    }
+  }
+}
+EOF</code></pre> <p class="p">For mirror registries, replace <code class="ph codeph">registry.redhat.io</code> with your mirror registry host (for example, <code class="ph codeph">yb-artifactory</code> or <code class="ph codeph">mirror.example.com:5000</code>).</p> </li> 
+           <li class="li">Create the Kubernetes secret. The secret name must include your Helm release name: <pre class="pre codeblock"><code>$ oc create secret generic &lt;release-name&gt;-dynamic-plugins-registry-auth \
+  --from-file=auth.json=./auth.json -n &lt;namespace&gt;</code></pre> <p class="p">For example, if your release is <code class="ph codeph">redhat-rhaap-portal</code>, the secret name is <code class="ph codeph">redhat-rhaap-portal-dynamic-plugins-registry-auth</code>.</p> </li> 
+           <li class="li">Verify the secret was created correctly: <pre class="pre codeblock"><code>$ oc get secret &lt;release-name&gt;-dynamic-plugins-registry-auth \
+  -o jsonpath='{.data.auth\.json}' -n &lt;namespace&gt; | base64 -d</code></pre> <p class="p">The output should display valid JSON with your credentials intact.</p> </li> 
+          </ol> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Edit <code class="ph codeph">backup-values.yaml</code> to enable OCI delivery.</span> 
+         <div class="itemgroup info"> 
+          <p class="p">Keep all existing custom configuration (OAuth, RBAC, certificate settings, etc.). Add or modify only the plug-in delivery settings:</p> 
+          <pre class="pre codeblock language-yaml"><code>redhat-developer-hub:
+  global:
+    pluginMode: oci
+    imageTagInfo: "&lt;plugin-version&gt;"</code></pre> 
+          <p class="p">Replace <code class="ph codeph">&lt;plugin-version&gt;</code> with the version from your current Helm release (for example, <code class="ph codeph">2.2</code>). To find the current version, run:</p> 
+          <pre class="pre codeblock"><code>$ helm get values &lt;release-name&gt; -n &lt;namespace&gt; | grep imageTagInfo</code></pre> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Upgrade the Helm release:</span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>$ helm upgrade &lt;release-name&gt; openshift-helm-charts/redhat-rhaap-portal \
+  -n &lt;namespace&gt; -f backup-values.yaml</code></pre> 
+          <p class="p">If you also need to specify a chart version, add <code class="ph codeph">--version &lt;chart-version&gt;</code>.</p> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Verify the OCI plug-in installation by checking the init container logs.</span> 
+         <div class="itemgroup info"> 
+          <p class="p">After the Helm upgrade completes, the pod will restart. Check the <code class="ph codeph">install-dynamic-plugins</code> init container logs to confirm successful OCI pulls:</p> 
+          <pre class="pre codeblock"><code>$ oc logs &lt;pod-name&gt; -c install-dynamic-plugins -n &lt;namespace&gt;</code></pre> 
+          <p class="p">Successful output includes messages like:</p> 
+          <pre class="pre codeblock"><code>======= Installing dynamic plugin oci://registry.redhat.io/ansible-automation-platform/automation-portal:&lt;plugin-version&gt;!ansible-backstage-plugin-catalog-backend-module-rhaap
+...
+-&gt; Successfully installed dynamic plugin oci://registry.redhat.io/ansible-automation-platform/automation-portal:&lt;plugin-version&gt;!ansible-backstage-plugin-catalog-backend-module-rhaap</code></pre> 
+          <p class="p">The version in the log must match your <code class="ph codeph">imageTagInfo</code> value. If you see authentication errors or "No such image" messages, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-assembly_self_service_upgrading#migrate-tarball-to-oci-troubleshoot" title="Diagnose and resolve common errors during the migration from HTTP plug-in registry to OCI container delivery.">Troubleshooting the migration</a>.</p> 
+         </div> </li>
+        <li class="li step stepexpand"><strong>Optional: </strong> <span class="ph cmd">After you confirm the upgrade is successful, remove the deprecated plug-in registry resources:</span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>$ oc delete deployment,service,buildconfig,imagestream plugin-registry -n &lt;namespace&gt;</code></pre> 
+          <p class="p">This cleans up the in-cluster HTTP service that hosted the tarball files. Deletion is safe once OCI pulls are confirmed in the pod logs.</p> 
+         </div> </li>
+       </ol>
+      </section> 
+      <section class="section result">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Results</h2>
+       </div> 
+       <p class="p">You have successfully migrated from HTTP plug-in registry to OCI container delivery. Ansible automation portal now pulls plug-ins from the OCI registry instead of the deprecated tarball service.</p> 
+      </section> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="migrate-tarball-to-oci-disconnected"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Migrating in air-gapped and disconnected environments</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">For air-gapped or disconnected clusters, mirror the OCI images to your internal registry and configure the Helm chart to use your mirror.</p> 
+       <p class="p">For air-gapped or partially disconnected clusters, you must mirror the OCI images to your internal registry and configure the Helm chart to use your mirror instead of <code class="ph codeph">registry.redhat.io</code>.</p> 
+       <section class="section" id="migrate-tarball-to-oci-disconnected__disconnect-image-mirroring">
+        <h3 class="title sectiontitle">Mirroring Ansible plug-in images</h3> 
+        <p class="p">The Ansible plug-in OCI artifacts must be mirrored to your internal registry. Mirror the images from a host with access to <code class="ph codeph">registry.redhat.io</code>:</p> 
+        <pre class="pre codeblock"><code>$ podman pull registry.redhat.io/ansible-automation-platform/automation-portal:&lt;plugin-version&gt;
+$ podman tag registry.redhat.io/ansible-automation-platform/automation-portal:&lt;plugin-version&gt; \
+  &lt;your-mirror-registry&gt;/ansible-automation-platform/automation-portal:&lt;plugin-version&gt;
+$ podman push &lt;your-mirror-registry&gt;/ansible-automation-platform/automation-portal:&lt;plugin-version&gt;</code></pre> 
+        <p class="p">When mirroring, you must preserve the original repository path. For example, mirror <code class="ph codeph">registry.redhat.io/ansible-automation-platform/automation-portal:2.2</code> to <code class="ph codeph">&lt;your-mirror-registry&gt;/ansible-automation-platform/automation-portal:2.2</code>.</p> 
+       </section> 
+       <section class="section" id="migrate-tarball-to-oci-disconnected__disconnect-helm-values">
+        <h3 class="title sectiontitle">Configuring Helm values for mirror registry</h3> 
+        <p class="p">Edit your <code class="ph codeph">backup-values.yaml</code> to point to your mirror registry:</p> 
+        <pre class="pre codeblock language-yaml"><code>redhat-developer-hub:
+  global:
+    pluginMode: oci
+    imageTagInfo: "&lt;plugin-version&gt;"
+    imageRegistry: "&lt;your-mirror-registry-host&gt;"
+    catalogIndex:
+      image:
+        registry: "&lt;your-mirror-registry-host&gt;"
+  upstream:
+    backstage:
+      image:
+        repository: rhdh/rhdh-hub-rhel9
+        tag: "&lt;platform-version&gt;"
+    postgresql:
+      image:
+        repository: rhel9/postgresql-15
+        tag: "latest"</code></pre> 
+        <p class="p">Key points:</p> 
+        <ul class="ul"> 
+         <li class="li"><code class="ph codeph">imageRegistry</code> must be the registry <strong class="ph b">host only</strong> (for example, <code class="ph codeph">yb-artifactory</code> or <code class="ph codeph">mirror.example.com:5000</code>). Do not include a repository path.</li> 
+         <li class="li"><code class="ph codeph">catalogIndex.image.registry</code> must be set separately — it is not auto-derived from <code class="ph codeph">imageRegistry</code>. This is required for RHDH 1.9+.</li> 
+         <li class="li">If your mirror uses a non-standard repository path for the Ansible plug-in image, use <code class="ph codeph">ociPluginImage</code> instead to specify the full path: <pre class="pre codeblock language-yaml"><code>redhat-developer-hub:
+  global:
+    imageRegistry: "&lt;your-mirror-registry-host&gt;"
+    ociPluginImage: "&lt;your-mirror-registry-host&gt;/custom-path/automation-portal"</code></pre> </li> 
+        </ul> 
+       </section> 
+       <section class="section" id="migrate-tarball-to-oci-disconnected__disconnect-custom-ca">
+        <h3 class="title sectiontitle">Using custom CA certificates for private registries</h3> 
+        <p class="p">If your mirror registry uses a self-signed or internal CA certificate, the <code class="ph codeph">install-dynamic-plugins</code> init container will fail with an <code class="ph codeph">x509: certificate signed by unknown authority</code> error. You must mount your CA certificate into the init container.</p> 
+        <p class="p">The recommended approach is to create a ConfigMap and mount it at the per-registry trust path. For complete instructions, see the RHDH documentation on installing plug-ins from OCI registries by using custom certificates.</p> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://redhat-developer.github.io/red-hat-developers-documentation-rhdh/main/plugins-rhdh-install/#rinstall-plugins-from-oci-registries-by-using-custom-certificates" target="_blank" rel="external noopener">Install plugins from OCI registries by using custom certificates</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="migrate-tarball-to-oci-troubleshoot"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Troubleshooting the migration</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Diagnose and resolve common errors during the migration from HTTP plug-in registry to OCI container delivery.</p> 
+       <section class="section" id="migrate-tarball-to-oci-troubleshoot__auth-failures">
+        <h3 class="title sectiontitle">Authentication failures</h3> 
+        <p class="p"><strong class="ph b">Symptom:</strong> Init container logs show <code class="ph codeph">authentication required</code> or <code class="ph codeph">unauthorized: access denied</code>.</p> 
+        <p class="p"><strong class="ph b">Cause:</strong> The <code class="ph codeph">&lt;release-name&gt;-dynamic-plugins-registry-auth</code> secret is missing, malformed, or has incorrect credentials.</p> 
+        <p class="p"><strong class="ph b">Resolution:</strong></p> 
+        <ol class="ol"> 
+         <li class="li">Verify the secret exists: <pre class="pre codeblock"><code>$ oc get secret &lt;release-name&gt;-dynamic-plugins-registry-auth -n &lt;namespace&gt;</code></pre> </li> 
+         <li class="li">Check the secret contents: <pre class="pre codeblock"><code>$ oc get secret &lt;release-name&gt;-dynamic-plugins-registry-auth \
+  -o jsonpath='{.data.auth\.json}' -n &lt;namespace&gt; | base64 -d</code></pre> <p class="p">The output should be valid JSON with your credentials.</p> </li> 
+         <li class="li">Ensure the secret name matches your Helm release name exactly. For example, if your release is <code class="ph codeph">redhat-rhaap-portal</code>, the secret must be <code class="ph codeph">redhat-rhaap-portal-dynamic-plugins-registry-auth</code>.</li> 
+         <li class="li">Recreate the secret with correct credentials if needed: <pre class="pre codeblock"><code>$ oc delete secret &lt;release-name&gt;-dynamic-plugins-registry-auth -n &lt;namespace&gt;
+$ oc create secret generic &lt;release-name&gt;-dynamic-plugins-registry-auth \
+  --from-file=auth.json=./auth.json -n &lt;namespace&gt;</code></pre> </li> 
+        </ol> 
+       </section> 
+       <section class="section" id="migrate-tarball-to-oci-troubleshoot__duplicate-path">
+        <h3 class="title sectiontitle">Duplicate registry path in OCI URLs</h3> 
+        <p class="p"><strong class="ph b">Symptom:</strong> Init container logs or Helm values show duplicate paths, for example: <code class="ph codeph">oci://yb-artifactory/ansible-automation-platform/ansible-automation-platform/automation-portal:2.2</code>.</p> 
+        <p class="p"><strong class="ph b">Cause:</strong> The <code class="ph codeph">imageRegistry</code> value includes a repository path instead of being the registry host only.</p> 
+        <p class="p"><strong class="ph b">Resolution:</strong> Edit your <code class="ph codeph">backup-values.yaml</code> and set <code class="ph codeph">imageRegistry</code> to the registry host only, without the repository path:</p> 
+        <pre class="pre codeblock language-yaml"><code># Incorrect (includes repository path):
+imageRegistry: "yb-artifactory/ansible-automation-platform"
+
+# Correct (host only):
+imageRegistry: "yb-artifactory"</code></pre> 
+        <p class="p">Then re-run <code class="ph codeph">helm upgrade</code> with the corrected values file.</p> 
+       </section> 
+       <section class="section" id="migrate-tarball-to-oci-troubleshoot__certificate-error">
+        <h3 class="title sectiontitle">x509 certificate errors for private registries</h3> 
+        <p class="p"><strong class="ph b">Symptom:</strong> Init container logs show <code class="ph codeph">x509: certificate signed by unknown authority</code> or <code class="ph codeph">x509: certificate has expired</code>.</p> 
+        <p class="p"><strong class="ph b">Cause:</strong> Your mirror registry uses a self-signed or internal CA certificate that the <code class="ph codeph">skopeo</code> utility cannot verify.</p> 
+        <p class="p"><strong class="ph b">Resolution:</strong> Mount your CA certificate into the init container at the per-registry trust path. Obtain your CA certificate bundle (including the full chain), create a ConfigMap, and update your Helm values to mount it. For detailed instructions, see the RHDH documentation: <a class="xref" href="https://redhat-developer.github.io/red-hat-developers-documentation-rhdh/main/plugins-rhdh-install/#rinstall-plugins-from-oci-registries-by-using-custom-certificates" target="_blank" rel="external noopener">Install plugins from OCI registries by using custom certificates</a>.</p> 
+       </section> 
+       <section class="section" id="migrate-tarball-to-oci-troubleshoot__no-such-image">
+        <h3 class="title sectiontitle">No such image error</h3> 
+        <p class="p"><strong class="ph b">Symptom:</strong> Init container logs show <code class="ph codeph">Error: no such image</code> or <code class="ph codeph">manifest not found</code>.</p> 
+        <p class="p"><strong class="ph b">Cause:</strong> The OCI image does not exist in the specified registry, or the <code class="ph codeph">imageTagInfo</code> version does not match what is available.</p> 
+        <p class="p"><strong class="ph b">Resolution:</strong></p> 
+        <ol class="ol"> 
+         <li class="li">Verify the <code class="ph codeph">imageTagInfo</code> value in your Helm release matches an available version. Check the <a class="xref" href="https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-lifecycle" target="_blank" rel="external noopener">Ansible automation portal lifecycle</a> page.</li> 
+         <li class="li">If using a mirror registry, ensure the image was mirrored to the correct path. Run: <pre class="pre codeblock"><code>$ podman search &lt;your-mirror-registry&gt;/ansible-automation-platform/automation-portal</code></pre> </li> 
+         <li class="li">Confirm that <code class="ph codeph">imageRegistry</code> is set correctly and does not include a duplicate repository path (see the Duplicate registry path section above).</li> 
+        </ol> 
+       </section> 
+       <section class="section" id="migrate-tarball-to-oci-troubleshoot__integrity-check">
+        <h3 class="title sectiontitle">Integrity check errors</h3> 
+        <p class="p"><strong class="ph b">Symptom:</strong> Init container logs show <code class="ph codeph">integrity check failed</code> or <code class="ph codeph">digest mismatch</code>.</p> 
+        <p class="p"><strong class="ph b">Cause:</strong> The OCI image in your registry does not match the expected digest, or the image was corrupted during mirroring.</p> 
+        <p class="p"><strong class="ph b">Resolution:</strong></p> 
+        <ol class="ol"> 
+         <li class="li">Re-mirror the image from <code class="ph codeph">registry.redhat.io</code> using <code class="ph codeph">skopeo copy</code> instead of <code class="ph codeph">podman tag/push</code>. The <code class="ph codeph">skopeo copy</code> command preserves the original manifest digest: <pre class="pre codeblock"><code>$ skopeo copy \
+  docker://registry.redhat.io/ansible-automation-platform/automation-portal:&lt;plugin-version&gt; \
+  docker://&lt;your-mirror-registry&gt;/ansible-automation-platform/automation-portal:&lt;plugin-version&gt;</code></pre> </li> 
+         <li class="li">If the error persists, verify the image in your mirror registry: <pre class="pre codeblock"><code>$ skopeo inspect docker://&lt;your-mirror-registry&gt;/ansible-automation-platform/automation-portal:&lt;plugin-version&gt;</code></pre> </li> 
+         <li class="li">Ensure you are not using a stale local image cache. Delete and re-pull if needed.</li> 
+        </ol> 
+       </section> 
+       <section class="section" id="migrate-tarball-to-oci-troubleshoot__pod-logs-access">
+        <h3 class="title sectiontitle">Accessing init container logs</h3> 
+        <p class="p">To view the logs of the <code class="ph codeph">install-dynamic-plugins</code> init container:</p> 
+        <pre class="pre codeblock"><code>$ oc get pods -n &lt;namespace&gt; -l app.kubernetes.io/component=backstage
+$ oc logs &lt;pod-name&gt; -c install-dynamic-plugins -n &lt;namespace&gt;</code></pre> 
+        <p class="p">If the pod has already completed (e.g., if the init container succeeded), you can view the previous logs:</p> 
+        <pre class="pre codeblock"><code>$ oc logs &lt;pod-name&gt; -c install-dynamic-plugins --previous -n &lt;namespace&gt;</code></pre> 
+        <p class="p">If the pod is still running, stream logs in real time:</p> 
+        <pre class="pre codeblock"><code>$ oc logs -f &lt;pod-name&gt; -c install-dynamic-plugins -n &lt;namespace&gt;</code></pre> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

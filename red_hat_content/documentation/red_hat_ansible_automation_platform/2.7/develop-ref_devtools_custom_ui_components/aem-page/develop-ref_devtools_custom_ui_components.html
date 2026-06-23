@@ -1,0 +1,224 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="devtools-custom-ui-components"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Custom UI components and filters</h1> 
+     <div class="body refbody">
+      <p class="shortdesc">The <strong class="ph b">Ansible Backstage Plugins</strong> provide custom UI components that enhance the software template experience by integrating directly with Ansible Automation Platform resource selection and authentication.</p> 
+      <section class="section"></section> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="devtools-aap-token-field"> 
+      <h2 class="title topictitle2" id="ariaid-title2"> <code class="ph codeph">AAPTokenField</code> </h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The <code class="ph codeph">AAPTokenField</code> is a secure authentication field used in backstage scaffolder templates. It automatically fetches and stores an Ansible Automation Platform OAuth2 token, which is then available for all rhaap:* actions, enabling seamless authentication.</p> 
+       <section class="section"> 
+        <p class="p"> <strong class="ph b">AAPTokenField Properties</strong> </p> 
+        <p class="p">The following table details the field’s properties for use in a template’s properties section.</p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:20%">
+          <col style="width:20%">
+          <col style="width:60%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="devtools-aap-token-field__entry__1">Property</th> 
+           <th class="entry" id="devtools-aap-token-field__entry__2">Type</th> 
+           <th class="entry" id="devtools-aap-token-field__entry__3">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-aap-token-field__entry__1"> <p class="p"> <code class="ph codeph">title</code> </p> </td> 
+           <td class="entry" headers="devtools-aap-token-field__entry__2"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-aap-token-field__entry__3"> <p class="p">The label displayed in the UI (for example, "AAP Token"). Defaults to "AAP Token".</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-aap-token-field__entry__1"> <p class="p"> <code class="ph codeph">description</code> </p> </td> 
+           <td class="entry" headers="devtools-aap-token-field__entry__2"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-aap-token-field__entry__3"> <p class="p">A short help text displayed below the input field.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-aap-token-field__entry__1"> <p class="p"> <code class="ph codeph">ui:field</code> </p> </td> 
+           <td class="entry" headers="devtools-aap-token-field__entry__2"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-aap-token-field__entry__3"> <p class="p">Must be set to <code class="ph codeph">AAPTokenField</code>. This setting instructs Backstage to render a custom react component instead of a default input field.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-aap-token-field__entry__1"> <p class="p"> <code class="ph codeph">ui:backstage.review.show</code> </p> </td> 
+           <td class="entry" headers="devtools-aap-token-field__entry__2"> <p class="p">boolean</p> </td> 
+           <td class="entry" headers="devtools-aap-token-field__entry__3"> <p class="p">If <code class="ph codeph">true</code>, this field appears in the <strong class="ph b">Review</strong> step before scaffolding executes. The default value is <code class="ph codeph">true</code>.</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"> <strong class="ph b">Authentication flow and token management</strong> </p> 
+        <p class="p">All <code class="ph codeph">rhaap:*</code> actions require an OAuth2 token for authenticating with Ansible Automation Platform. The field manages the token through the following process:</p> 
+        <ul class="ul"> 
+         <li class="li">Token Source: The token is automatically obtained from the Ansible Automation Platform OAuth2 authentication provider.</li> 
+         <li class="li">Storage: The token is stored securely in Backstage secrets or fetched through the <code class="ph codeph">@ansible/backstage-plugin-auth-backend-module-rhaap-provider</code>.</li> 
+         <li class="li">Usage: The token is passed to each action using the <code class="ph codeph">token</code> input parameter.</li> 
+        </ul> 
+        <p class="p">When the RHAAP auth provider is used, the token is injected automatically and can be referenced in the workflow steps as shown:</p> 
+        <pre class="pre codeblock"><code>  - id: create-project
+    action: rhaap:create-project
+    input:
+      token: ${{ parameters.AAP_TOKEN }}
+      # ... other inputs</code></pre> 
+        <p class="p"> <strong class="ph b">Example</strong> </p> 
+        <p class="p">The following example shows how to declare and reference the AAPTokenField within a backstage template. Note that <code class="ph codeph">ui:widget: hidden</code> and <code class="ph codeph">ui:backstage: review: show: false</code> are used to ensure the token is not exposed in the UI.</p> 
+        <pre class="pre codeblock"><code>apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: my-AAP-template
+  title: Example AAP Template
+spec:
+  parameters:
+    - title: Authentication
+      properties:
+        token:
+          title: AAP Authentication Token
+          type: string
+          description: Oauth2 token
+          ui:field: AAPTokenField
+          ui:widget: hidden
+          ui:backstage:
+            review:
+              show: false
+  steps:
+    - id: launch-job
+      name: Launch AAP Job Template
+      action: rhaap:launch-job-template
+      input:
+        token: ${{ parameters.token }}
+        ...</code></pre> 
+        <p class="p"> <strong class="ph b">Error and validation handling</strong> </p> 
+        <p class="p">All <code class="ph codeph">rhaap:*</code> actions include built-in validation and user-friendly error reporting:</p> 
+        <ul class="ul"> 
+         <li class="li">Validation: If the token is missing or invalid, the action throws the error: "`Authorization token not provided`."</li> 
+         <li class="li">Error Messages: Actions catch API client errors, extracting and surfacing meaningful messages without exposing stack traces.</li> 
+         <li class="li">Workflow Safety: If a step fails due to authentication, subsequent steps are automatically skipped, ensuring a safe and predictable workflow.</li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="devtools-aap-resource-picker"> 
+      <h2 class="title topictitle2" id="ariaid-title3"> <code class="ph codeph">AAPResourcePicker</code> </h2> 
+      <div class="body refbody">
+       <p class="shortdesc"> <code class="ph codeph">AAPResourcePicker</code> is a dynamic field for Backstage scaffolder templates. It fetches Ansible Automation Platform resources (like inventories or credentials) via the Ansible Automation Platform API, allowing users to select resources for their automation workflows. </p> 
+       <section class="section"> 
+        <p class="p"> <strong class="ph b">AAPResourcePicker Properties</strong> </p> 
+        <p class="p">The following table details the essential properties for configuring the resource picker in a template’s <code class="ph codeph">properties</code> section.</p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:30%">
+          <col style="width:20%">
+          <col style="width:50%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="devtools-aap-resource-picker__entry__1">Property</th> 
+           <th class="entry" id="devtools-aap-resource-picker__entry__2">Type</th> 
+           <th class="entry" id="devtools-aap-resource-picker__entry__3">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-aap-resource-picker__entry__1"> <p class="p"> <code class="ph codeph">title</code> </p> </td> 
+           <td class="entry" headers="devtools-aap-resource-picker__entry__2"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-aap-resource-picker__entry__3"> <p class="p">The label displayed in the UI (for example, "Inventory").</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-aap-resource-picker__entry__1"> <p class="p"> <code class="ph codeph">description</code> </p> </td> 
+           <td class="entry" headers="devtools-aap-resource-picker__entry__2"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-aap-resource-picker__entry__3"> <p class="p">A short help text shown below the field.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-aap-resource-picker__entry__1"> <p class="p"> <code class="ph codeph">ui:field</code> </p> </td> 
+           <td class="entry" headers="devtools-aap-resource-picker__entry__2"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-aap-resource-picker__entry__3"> <p class="p">Must be set to <code class="ph codeph">AAPResourcePicker</code>.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-aap-resource-picker__entry__1"> <p class="p"> <code class="ph codeph">resource</code> </p> </td> 
+           <td class="entry" headers="devtools-aap-resource-picker__entry__2"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-aap-resource-picker__entry__3"> <p class="p">The specific Ansible Automation Platform (AAP) resource type to fetch and display (for example, <code class="ph codeph">inventories</code>, <code class="ph codeph">credentials</code>, or <code class="ph codeph">organizations</code>).</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-aap-resource-picker__entry__1"> <p class="p"> <code class="ph codeph">idKey</code> </p> </td> 
+           <td class="entry" headers="devtools-aap-resource-picker__entry__2"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-aap-resource-picker__entry__3"> <p class="p">The property name used to retrieve the resource ID (default: “id”).</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-aap-resource-picker__entry__1"> <p class="p"> <code class="ph codeph">nameKey</code> </p> </td> 
+           <td class="entry" headers="devtools-aap-resource-picker__entry__2"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-aap-resource-picker__entry__3"> <p class="p">The property name used to display the resource name in the list (default: “name”).</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-aap-resource-picker__entry__1"> <p class="p"> <code class="ph codeph">type</code> </p> </td> 
+           <td class="entry" headers="devtools-aap-resource-picker__entry__2"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-aap-resource-picker__entry__3"> <p class="p">Set to “array” for a multi-select field; omit this property for a single-select field.</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"> <strong class="ph b">Example</strong> </p> 
+        <p class="p">The following example demonstrates how to use the <code class="ph codeph">AAPResourcePicker</code> to create a single-select field for choosing an <strong class="ph b">Inventory</strong>.</p> 
+        <pre class="pre codeblock"><code>apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: my-AAP-template
+  title: Example AAP Template
+spec:
+  parameters:
+    - title: Authentication
+      properties:
+        jobInventory:
+          title: Inventory
+          description: Select inventory
+          resource: inventories
+          ui:field: AAPResourcePicker
+          default: DemoInventory</code></pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title4" id="devtools-custom-filters"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Custom filters</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The plugins provide custom filters to extract specific properties from resource objects, which is essential for passing data between backstage steps.</p> 
+       <section class="section"> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:20%">
+          <col style="width:50%">
+          <col style="width:30%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="devtools-custom-filters__entry__1">Filter</th> 
+           <th class="entry" id="devtools-custom-filters__entry__2">Purpose</th> 
+           <th class="entry" id="devtools-custom-filters__entry__3">Example Usage</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-custom-filters__entry__1"> <p class="p"> <code class="ph codeph">resourceFilter</code> </p> </td> 
+           <td class="entry" headers="devtools-custom-filters__entry__2"> <p class="p">Extracts a single, specific property from a resource object.</p> </td> 
+           <td class="entry" headers="devtools-custom-filters__entry__3"> <p class="p"> <code class="ph codeph">$!{{ parameters.organization | resourceFilter('name') }}</code> </p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-custom-filters__entry__1"> <p class="p"> <code class="ph codeph">multiResourceFilter</code> </p> </td> 
+           <td class="entry" headers="devtools-custom-filters__entry__2"> <p class="p">Extracts a specific property from multiple resource objects (when the input is an array).</p> </td> 
+           <td class="entry" headers="devtools-custom-filters__entry__3"> <p class="p"> <code class="ph codeph">$!{{ parameters.organization | multiResourceFilter('name') }}</code> </p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

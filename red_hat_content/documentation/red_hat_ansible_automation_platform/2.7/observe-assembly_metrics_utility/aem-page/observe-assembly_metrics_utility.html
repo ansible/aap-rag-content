@@ -1,0 +1,44 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="metrics-utility">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Generate consumption-based billing reports with the <code class="ph codeph">metrics-utility</code></h1> 
+    <div class="body conbody">
+     <p class="shortdesc">The Ansible Automation Platform metrics utility tool (<code class="ph codeph">metrics-utility</code>) is a command-line utility that is installed on a system containing an instance of automation controller.</p> 
+     <p class="p">When installed and configured, <code class="ph codeph">metrics-utility</code> gathers billing-related metrics from your system and creates a consumption-based billing report. The <code class="ph codeph">metrics-utility</code> tool is especially suited for users who have multiple managed hosts and want to use consumption-based billing. After a report is generated, it is deposited in a target location that you specify in the configuration file.</p> 
+     <p class="p"><code class="ph codeph">metrics-utility</code> collects two types of data from your system: configuration data and reporting data.</p> 
+     <p class="p">The configuration data includes the following information:</p> 
+     <ul class="ul"> 
+      <li class="li">Version information for automation controller and for the operating system</li> 
+      <li class="li">Subscription information</li> 
+      <li class="li">The base URL</li> 
+     </ul> 
+     <p class="p">The reporting data includes the following information:</p> 
+     <ul class="ul"> 
+      <li class="li">Job name and ID</li> 
+      <li class="li">Hostname</li> 
+      <li class="li">Inventory name</li> 
+      <li class="li">Organization name</li> 
+      <li class="li">Project name</li> 
+      <li class="li">Success or failure information</li> 
+      <li class="li">Report date and time</li> 
+     </ul> 
+     <p class="p">To ensure that <code class="ph codeph">metrics-utility</code> continues to work as configured, clear your report directories of outdated reports regularly.</p> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-con_configuring_the_metrics_utility#configuring-the-metrics-utility">Configure the metrics-utility</a></strong><br>Configure the <code class="ph codeph">metrics-utility</code> to gather and report usage data for your Ansible Automation Platform, both on Red Hat Enterprise Linux and OpenShift Container Platform.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-ref_fetching_a_monthly_report#ref-fetching-a-monthly-report">Configure a monthly usage report</a></strong><br>You can fetch a monthly report from Ansible Automation Platform to gather usage metrics and create a consumption-based billing report. To fetch a monthly report on Red Hat Enterprise Linux or on OpenShift Container Platform, use the following procedures:</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-proc_modifying_the_run_schedule#modifying-the-run-schedule">Configure the metrics-utility to run at specific times</a></strong><br>You can configure <code class="ph codeph">metrics-utility</code> to run at specified times and intervals. Run frequency is expressed in cronjobs. For more information on the cron utility, see <a class="xref" href="https://www.redhat.com/sysadmin/linux-cron-command" target="_blank" rel="external noopener">How to schedule jobs using the Linux <code class="ph codeph">Cron</code> utility</a>.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-ref_supported_storage#ref-supported-storage">Specify where to store consumption-based reports</a></strong><br>Supported storage is available for storing the raw data obtained by using the <code class="ph codeph">metrics-utility gather_automation_controller_billing_data</code> command and storing the generated reports obtained by using the <code class="ph codeph">metrics-utility build_report</code> command.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-ref_report_types#ref-report-types">Configure options for the Certified Cloud and Service Provider report (CCSPv2)</a></strong><br>Additional configurations for data gathering and report building based on a report type. Apply the environment variables to each report type based on your Ansible Automation Platform installation.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-ref_renewal_guidance#ref-renewal-guidance">Configure options in the RENEWAL_GUIDANCE report</a></strong><br>The <code class="ph codeph">RENEWAL_GUIDANCE</code> report provides historical usage from the HostMetric table, applying deduplication and showing real historical usage for renewal guidance purposes.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-ref_ccsp#ref-ccsp">Original Certified Cloud and Service Provider (CCSP) report</a></strong><br><code class="ph codeph">CCSP</code> is the original report format. It does not include many of the customization of CCSPv2, and the intention is only to use it for the CCSP partner program.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-ref_deduplication_hosts_metrics_utility#ref-deduplication-hosts-metrics-utility">How to deduplicate host data in reports</a></strong><br>Deduplication changes how <code class="ph codeph">metrics-utility</code> merges individual host records into countable managed nodes when building reports. Deduplication identifies identical hosts to ensure an accurate count of unique hosts.</li>
+     </ul>
+    </nav>
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,628 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body id="cont-b-env-a"> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Container enterprise topology</h1> 
+    <div class="body refbody"> 
+     <p class="shortdesc">The container-based enterprise topology provides redundancy and higher compute for large volumes of automation. </p> 
+     <section class="section"> 
+      <p class="p">Included are the tested infrastructure topology, system requirements, network port configurations, and an example inventory file for installation. </p> 
+     </section> 
+     <section class="section" id="cont-b-env-a___infrastructure_topology"> 
+      <h2 class="title sectiontitle">Infrastructure topology</h2> 
+      <p class="p">The Red&nbsp;Hat tested infrastructure topology for this deployment model:</p> 
+      <figure class="fig fignone"> 
+       <figcaption> <span class="fig--title-label">Figure 1. </span>Infrastructure topology diagram 
+       </figcaption> 
+       <img class="image" id="cont-b-env-a__image_1" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/cont-b-env-a-2_7.png" alt="Container enterprise topology diagram"> 
+      </figure> 
+      <p class="p">Red Hat tests each VM with these requirements:</p> 
+      <table class="table"> 
+       <caption> <span class="table--title-label">Table 1. </span><span class="title">Virtual machine requirements</span> 
+       </caption> 
+       <colgroup> 
+        <col style="width:50%"> 
+        <col style="width:50%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="cont-b-env-a___infrastructure_topology__entry__1">Requirement</th> 
+         <th class="entry" id="cont-b-env-a___infrastructure_topology__entry__2">Minimum requirement</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__1"> <p class="p">RAM</p> </td> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__2"> <p class="p">16 GB</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__1"> <p class="p">CPUs</p> </td> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__2"> <p class="p">4</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__1"> <p class="p">Local disk</p> </td> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__2"> 
+          <ul class="ul"> 
+           <li class="li">Total available disk space: 60 GB</li> 
+           <li class="li">Installation directory: 15 GB (if on a dedicated partition)</li> 
+           <li class="li"><code class="ph codeph">/var/tmp</code> for online installations: 1 GB</li> 
+           <li class="li"><code class="ph codeph">/var/tmp</code> for offline or bundled installations: 3 GB</li> 
+           <li class="li">Temporary directory (defaults to <code class="ph codeph">/tmp</code>) for offline or bundled installations: 10GB</li> 
+          </ul> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__1"> <p class="p">Disk IOPS</p> </td> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__2"> <p class="p">3000</p> </td> 
+        </tr> 
+       </tbody> 
+      </table> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p dir="ltr" class="p"> Metrics service node requirements:</p> 
+        <ul class="ul" id="cont-b-env-a__ul_1"> 
+         <li class="li"><strong class="ph b">RAM:</strong> 16 GB (4 GB minimum, 8 GB recommended for high-volume environments)</li> 
+         <li class="li"><strong class="ph b">CPUs:</strong> 4 (2 minimum)</li> 
+         <li class="li"><strong class="ph b">Local disk:</strong> 40 GB (20 GB minimum)</li> 
+         <li class="li"><strong class="ph b">Disk IOPS:</strong> 3000</li> 
+        </ul> 
+       </div> 
+      </div> 
+      <table class="table"> 
+       <caption> <span class="table--title-label">Table 2. </span><span class="title">Infrastructure topology components</span> 
+       </caption> 
+       <colgroup> 
+        <col style="width:33.3333%"> 
+        <col style="width:33.3333%"> 
+        <col style="width:33.3334%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="cont-b-env-a___infrastructure_topology__entry__11">VM count</th> 
+         <th class="entry" id="cont-b-env-a___infrastructure_topology__entry__12">Purpose</th> 
+         <th class="entry" id="cont-b-env-a___infrastructure_topology__entry__13">Example VM group names</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__11"> <p class="p">2</p> </td> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__12"> <p class="p">Platform gateway with colocated Redis</p> </td> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__13"> <p class="p"> <code class="ph codeph">automationgateway</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__11"> <p class="p">2</p> </td> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__12"> <p class="p">Automation controller</p> </td> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__13"> <p class="p"> <code class="ph codeph">automationcontroller</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__11"> <p class="p">1</p> </td> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__12"> <p class="p">Metrics service</p> </td> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__13"> <p class="p"><code class="ph codeph">automationmetrics</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__11"> <p class="p">2</p> </td> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__12"> <p class="p">Private automation hub with colocated Redis</p> </td> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__13"> <p class="p"> <code class="ph codeph">automationhub</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__11"> <p class="p">2</p> </td> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__12"> <p class="p">Event-Driven Ansible with colocated Redis</p> </td> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__13"> <p class="p"> <code class="ph codeph">automationeda</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__11"> <p class="p">1</p> </td> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__12"> <p class="p">Automation mesh hop node</p> </td> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__13"> <p class="p"> <code class="ph codeph">execution_nodes</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__11"> <p class="p">2</p> </td> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__12"> <p class="p">Automation mesh execution node</p> </td> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__13"> <p class="p"> <code class="ph codeph">execution_nodes</code> </p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__11"> <p class="p">1</p> </td> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__12"> <p class="p">Externally managed database service</p> </td> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__13"> <p class="p">N/A</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__11"> <p class="p">1</p> </td> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__12"> <p class="p">HAProxy load balancer in front of platform gateway (externally managed)</p> </td> 
+         <td class="entry" headers="cont-b-env-a___infrastructure_topology__entry__13"> <p class="p">N/A</p> </td> 
+        </tr> 
+       </tbody> 
+      </table> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <ul class="ul"> 
+         <li class="li">6 VMs are required for a Redis high availability (HA) compatible deployment. When installing Ansible Automation Platform with the containerized installer, Redis can be colocated on any Ansible Automation Platform component VMs of your choice except for execution nodes or the PostgreSQL database. They might also be assigned VMs specifically for Redis use.</li> 
+         <li class="li">External Redis is not supported for containerized Ansible Automation Platform.</li> 
+        </ul> 
+       </div> 
+      </div> 
+     </section> 
+     <section class="section" id="cont-b-env-a___tested_system_configurations"> 
+      <h2 class="title sectiontitle">Tested system configurations</h2> 
+      <p class="p">Red&nbsp;Hat has tested these configurations to install and run Red Hat Ansible Automation Platform:</p> 
+      <table class="table"> 
+       <caption> <span class="table--title-label">Table 3. </span><span class="title">System configuration</span> 
+       </caption> 
+       <colgroup> 
+        <col style="width:33.3333%"> 
+        <col style="width:33.3333%"> 
+        <col style="width:33.3334%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="cont-b-env-a___tested_system_configurations__entry__1">Type</th> 
+         <th class="entry" id="cont-b-env-a___tested_system_configurations__entry__2">Description</th> 
+         <th class="entry" id="cont-b-env-a___tested_system_configurations__entry__3">Notes</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___tested_system_configurations__entry__1"> <p class="p">Subscription</p> </td> 
+         <td class="entry" headers="cont-b-env-a___tested_system_configurations__entry__2"> 
+          <ul class="ul"> 
+           <li class="li">Valid Red Hat Ansible Automation Platform subscription</li> 
+           <li class="li">Valid Red Hat Enterprise Linux subscription (to consume the BaseOS and AppStream repositories)</li> 
+          </ul> </td> 
+         <td class="entry" headers="cont-b-env-a___tested_system_configurations__entry__3"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___tested_system_configurations__entry__1"> <p class="p">Operating system</p> </td> 
+         <td class="entry" headers="cont-b-env-a___tested_system_configurations__entry__2"> 
+          <ul class="ul"> 
+           <li class="li">Red Hat Enterprise Linux 9.6 or later minor versions of Red Hat Enterprise Linux 9.</li> 
+           <li class="li">Red Hat Enterprise Linux 10 or later minor versions of Red Hat Enterprise Linux 10.</li> 
+          </ul> </td> 
+         <td class="entry" headers="cont-b-env-a___tested_system_configurations__entry__3"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___tested_system_configurations__entry__1"> <p class="p">CPU architecture</p> </td> 
+         <td class="entry" headers="cont-b-env-a___tested_system_configurations__entry__2"> <p class="p">x86_64, AArch64, s390x (IBM Z), ppc64le (IBM Power)</p> </td> 
+         <td class="entry" headers="cont-b-env-a___tested_system_configurations__entry__3"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___tested_system_configurations__entry__1"> <p class="p"> <code class="ph codeph">ansible-core</code> </p> </td> 
+         <td class="entry" headers="cont-b-env-a___tested_system_configurations__entry__2"> 
+          <ul class="ul"> 
+           <li class="li">RHEL 9: installation program uses <code class="ph codeph">ansible-core</code> 2.14, Ansible Automation Platform operation uses <code class="ph codeph">ansible-core</code> 2.16.</li> 
+           <li class="li">RHEL 10: installation program uses <code class="ph codeph">ansible-core</code> 2.16, Ansible Automation Platform operation uses <code class="ph codeph">ansible-core</code> 2.16.</li> 
+          </ul> </td> 
+         <td class="entry" headers="cont-b-env-a___tested_system_configurations__entry__3"> 
+          <ul class="ul"> 
+           <li class="li">The installation program uses the <code class="ph codeph">ansible-core</code> package from the RHEL AppStream repository.</li> 
+           <li class="li">Ansible Automation Platform bundles <code class="ph codeph">ansible-core</code> 2.16 for operation, so you do not need to install it manually.</li> 
+          </ul> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___tested_system_configurations__entry__1"> <p class="p">Browser</p> </td> 
+         <td class="entry" headers="cont-b-env-a___tested_system_configurations__entry__2"> <p class="p">A currently supported version of Mozilla Firefox or Google Chrome.</p> </td> 
+         <td class="entry" headers="cont-b-env-a___tested_system_configurations__entry__3"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___tested_system_configurations__entry__1"> <p class="p">Database</p> </td> 
+         <td class="entry" headers="cont-b-env-a___tested_system_configurations__entry__2"> 
+          <ul class="ul"> 
+           <li class="li">For Ansible Automation Platform managed databases: PostgreSQL 15.</li> 
+           <li class="li">For customer provided (external) databases: PostgreSQL 15, 16, or 17.</li> 
+          </ul> </td> 
+         <td class="entry" headers="cont-b-env-a___tested_system_configurations__entry__3"> 
+          <ul class="ul"> 
+           <li class="li">External (customer supported) databases require International Components for Unicode (ICU) support.</li> 
+           <li class="li">External databases using PostgreSQL 16 or 17 must rely on external backup and restore processes. Backup and restore functionality is dependent on utilities provided with PostgreSQL 15.</li> 
+          </ul> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___tested_system_configurations__entry__1"> <p class="p">IP version</p> </td> 
+         <td class="entry" headers="cont-b-env-a___tested_system_configurations__entry__2"> <p class="p">IPv4, IPv6 (single-stack and dual-stack)</p> </td> 
+         <td class="entry" headers="cont-b-env-a___tested_system_configurations__entry__3"></td> 
+        </tr> 
+       </tbody> 
+      </table> 
+     </section> 
+     <section class="section" id="cont-b-env-a___network_ports"> 
+      <h2 class="title sectiontitle">Network ports</h2> 
+      <p class="p">Red Hat Ansible Automation Platform uses several ports to communicate with its services. These ports must be open and available for Red Hat Ansible Automation Platform to work. Ensure that these ports are available and are not blocked by a firewall.</p> 
+      <table class="table"> 
+       <caption> <span class="table--title-label">Table 4. </span><span class="title">Network ports and protocols</span> 
+       </caption> 
+       <colgroup> 
+        <col style="width:16.666666666666664%"> 
+        <col style="width:16.666666666666664%"> 
+        <col style="width:16.666666666666664%"> 
+        <col style="width:16.666666666666664%"> 
+        <col style="width:16.666666666666664%"> 
+        <col style="width:16.666666666666664%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="cont-b-env-a___network_ports__entry__1">Port number</th> 
+         <th class="entry" id="cont-b-env-a___network_ports__entry__2">Protocol</th> 
+         <th class="entry" id="cont-b-env-a___network_ports__entry__3">Service</th> 
+         <th class="entry" id="cont-b-env-a___network_ports__entry__4">Source</th> 
+         <th class="entry" id="cont-b-env-a___network_ports__entry__5">Destination</th> 
+         <th class="entry" id="cont-b-env-a___network_ports__entry__6">Description</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__1"> <p class="p">80/443</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__2"> <p class="p">TCP</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__3"> <p class="p">HTTP/HTTPS</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__4"> <p class="p">Event-Driven Ansible</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__5"> <p class="p">Automation hub</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__6"> <p class="p">Pull container decision environments</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__1"> <p class="p">80/443</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__2"> <p class="p">TCP</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__3"> <p class="p">HTTP/HTTPS</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__4"> <p class="p">Event-Driven Ansible</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__5"> <p class="p">Automation controller</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__6"> <p class="p">Launch automation controller jobs</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__1"> <p class="p">80/443</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__2"> <p class="p">TCP</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__3"> <p class="p">HTTP/HTTPS</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__4"> <p class="p">Automation controller</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__5"> <p class="p">Automation hub</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__6"> <p class="p">Pull collections and execution environment images</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__1"> <p class="p">80/443</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__2"> <p class="p">TCP</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__3"> <p class="p">HTTP/HTTPS</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__4"> <p class="p">HAProxy load balancer</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__5"> <p class="p">Platform gateway</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__6"> <p class="p">External load balancer access</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__1"> <p class="p">80/443</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__2"> <p class="p">TCP</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__3"> <p class="p">HTTP/HTTPS</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__4"> <p class="p">Platform gateway</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__5"> <p class="p">Automation controller</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__6"> <p class="p">Platform gateway to automation controller communication</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__1"> <p class="p">80/443</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__2"> <p class="p">TCP</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__3"> <p class="p">HTTP/HTTPS</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__4"> <p class="p">Platform gateway</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__5"> <p class="p">Automation hub</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__6"> <p class="p">Platform gateway to automation hub communication</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__1"> <p class="p">80/443</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__2"> <p class="p">TCP</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__3"> <p class="p">HTTP/HTTPS</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__4"> <p class="p">Platform gateway</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__5"> <p class="p">Metrics service</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__6"> <p class="p">Platform gateway to metrics service communication (internal routing for dashboard)</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__1"> <p class="p">5432</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__2"> <p class="p">TCP</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__3"> <p class="p">PostgreSQL</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__4"> <p class="p">Metrics service</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__5"> <p class="p">External database</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__6"> <p class="p">Metrics service database access (dual-database: <code class="ph codeph">metrics_service</code> read/write + awx read-only)</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__1"> <p class="p">80/443</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__2"> <p class="p">TCP</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__3"> <p class="p">HTTP/HTTPS</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__4"> <p class="p">Platform gateway</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__5"> <p class="p">Event-Driven Ansible</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__6"> <p class="p">Platform gateway to Event-Driven Ansible communication</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__1"> <p class="p">5432</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__2"> <p class="p">TCP</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__3"> <p class="p">PostgreSQL</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__4"> <p class="p">Event-Driven Ansible</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__5"> <p class="p">External database</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__6"> <p class="p">Event-Driven Ansible database access</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__1"> <p class="p">5432</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__2"> <p class="p">TCP</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__3"> <p class="p">PostgreSQL</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__4"> <p class="p">Platform gateway</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__5"> <p class="p">External database</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__6"> <p class="p">Platform gateway database access</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__1"> <p class="p">5432</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__2"> <p class="p">TCP</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__3"> <p class="p">PostgreSQL</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__4"> <p class="p">Automation hub</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__5"> <p class="p">External database</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__6"> <p class="p">Automation hub database access</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__1"> <p class="p">5432</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__2"> <p class="p">TCP</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__3"> <p class="p">PostgreSQL</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__4"> <p class="p">Automation controller</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__5"> <p class="p">External database</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__6"> <p class="p">Automation controller database access</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__1"> <p class="p">6379</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__2"> <p class="p">TCP</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__3"> <p class="p">Redis</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__4"> <p class="p">Event-Driven Ansible</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__5"> <p class="p">Redis node</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__6"> <p class="p">Job launching and data storage for Event-Driven Ansible</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__1"> <p class="p">6379</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__2"> <p class="p">TCP</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__3"> <p class="p">Redis</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__4"> <p class="p">Platform gateway</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__5"> <p class="p">Redis node</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__6"> <p class="p">Data storage and retrieval for platform gateway services</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__1"> <p class="p">16379</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__2"> <p class="p">TCP</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__3"> <p class="p">Redis</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__4"> <p class="p">Redis node</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__5"> <p class="p">Redis node</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__6"> <p class="p">Redis cluster bus communication</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__1"> <p class="p">27199</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__2"> <p class="p">TCP</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__3"> <p class="p">Receptor</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__4"> <p class="p">Automation controller</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__5"> <p class="p">Hop node and execution node</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__6"> <p class="p">Mesh nodes connect directly to controllers. Allows two-way communication for job distribution.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__1"> <p class="p">27199</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__2"> <p class="p">TCP</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__3"> <p class="p">Receptor</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__4"> <p class="p">Hop node</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__5"> <p class="p">Execution node</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__6"> <p class="p">Mesh nodes connect through hop nodes. Allows two-way communication in either direction.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__1"> <p class="p">8080/8443</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__2"> <p class="p">TCP</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__3"> <p class="p">HTTP/HTTPS</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__4"> <p class="p">Platform gateway</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__5"> <p class="p">Automation controller</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__6"> <p class="p">Automation controller NGINX ports. You can configure these ports with the following inventory variables: <code class="ph codeph">controller_nginx_http_port</code>, <code class="ph codeph">controller_nginx_https_port</code>.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__1"> <p class="p">8081/8444</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__2"> <p class="p">TCP</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__3"> <p class="p">HTTP/HTTPS</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__4"> <p class="p">Platform gateway</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__5"> <p class="p">Automation hub</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__6"> <p class="p">Automation hub NGINX ports. You can configure these ports with the following inventory variables: <code class="ph codeph">hub_nginx_http_port</code>, <code class="ph codeph">hub_nginx_https_port</code>.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__1"> <p class="p">8082/8445</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__2"> <p class="p">TCP</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__3"> <p class="p">HTTP/HTTPS</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__4"> <p class="p">Platform gateway</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__5"> <p class="p">Event-Driven Ansible</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__6"> <p class="p">Event-Driven Ansible NGINX ports. You can configure these ports with the following inventory variables: <code class="ph codeph">eda_nginx_http_port</code>, <code class="ph codeph">eda_nginx_https_port</code>.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__1"> <p class="p">8083/8446</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__2"> <p class="p">TCP</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__3"> <p class="p">HTTP/HTTPS</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__4"> <p class="p">Platform gateway</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__5"> <p class="p">Platform gateway</p> </td> 
+         <td class="entry" headers="cont-b-env-a___network_ports__entry__6"> <p class="p">Platform gateway NGINX ports. You can configure these ports with the following inventory variables: <code class="ph codeph">gateway_nginx_http_port</code>, <code class="ph codeph">gateway_nginx_https_port</code>.</p> </td> 
+        </tr> 
+       </tbody> 
+      </table> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">If you change any port values by using inventory variables, refer to <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_inventory_file_vars" title="The following tables contain information about the variables used in Ansible Automation Platform’s installation inventory files.">Inventory file variables</a> to review all default port values and ensure there are no port conflicts.</p> 
+       </div> 
+      </div> 
+     </section> 
+     <section class="section" id="cont-b-env-a__section_1"> 
+      <h2 class="title sectiontitle">Example inventory file</h2> 
+      <p class="p">Use the example inventory file to perform an installation:</p> 
+      <pre class="pre codeblock language-yaml"><code># This is the Ansible Automation Platform enterprise installer inventory file
+# Consult the docs if you are unsure what to add
+# For all optional variables consult the included README.md
+# or the Red Hat documentation
+
+# This section is for your platform gateway hosts
+# -----------------------------------------------------
+[automationgateway]
+gateway1.example.org
+gateway2.example.org
+
+# This section is for your automation controller hosts
+# -----------------------------------------------------
+[automationcontroller]
+controller1.example.org
+controller2.example.org
+
+# This section is for your Ansible Automation Platform execution hosts
+# -----------------------------------------------------
+[execution_nodes]
+hop1.example.org receptor_type='hop'
+exec1.example.org
+exec2.example.org
+
+# This section is for your automation hub hosts
+# -----------------------------------------------------
+[automationhub]
+hub1.example.org
+hub2.example.org
+
+# This section is for your Event-Driven Ansible controller hosts
+# -----------------------------------------------------
+[automationeda]
+eda1.example.org
+eda2.example.org
+
+[redis]
+gateway1.example.org
+gateway2.example.org
+hub1.example.org
+hub2.example.org
+eda1.example.org
+eda2.example.org
+
+[all:vars]
+
+# Common variables
+# -----------------------------------------------------
+postgresql_admin_username=&lt;set your own&gt;
+postgresql_admin_password=&lt;set your own&gt;
+registry_username=&lt;your RHN username&gt;
+registry_password=&lt;your RHN password&gt;
+
+# Platform gateway
+# -----------------------------------------------------
+gateway_admin_password=&lt;set your own&gt;
+gateway_pg_host=externaldb.example.org
+gateway_pg_database=&lt;set your own&gt;
+gateway_pg_username=&lt;set your own&gt;
+gateway_pg_password=&lt;set your own&gt;
+
+# Automation controller
+# -----------------------------------------------------
+controller_admin_password=&lt;set your own&gt;
+controller_pg_host=externaldb.example.org
+controller_pg_database=&lt;set your own&gt;
+controller_pg_username=&lt;set your own&gt;
+controller_pg_password=&lt;set your own&gt;
+
+# Automation hub
+# -----------------------------------------------------
+hub_admin_password=&lt;set your own&gt;
+hub_pg_host=externaldb.example.org
+hub_pg_database=&lt;set your own&gt;
+hub_pg_username=&lt;set your own&gt;
+hub_pg_password=&lt;set your own&gt;
+
+# Event-Driven Ansible controller
+# -----------------------------------------------------
+eda_admin_password=&lt;set your own&gt;
+eda_pg_host=externaldb.example.org
+eda_pg_database=&lt;set your own&gt;
+eda_pg_username=&lt;set your own&gt;
+eda_pg_password=&lt;set your own&gt;
+
+# Metrics Service
+# -----------------------------------------------------
+automationmetrics_pg_host=externaldb.example.org
+automationmetrics_pg_database=metrics_service
+automationmetrics_pg_username=metrics_service
+automationmetrics_pg_password=&lt;set your own&gt; 
+
+# Read-only access to controller database for data collection
+automationmetrics_controller_read_pg_host=externaldb.example.org
+automationmetrics_controller_read_pg_database=&lt;controller database name&gt;
+automationmetrics_controller_read_pg_username=ms_awx_readonly
+automationmetrics_controller_read_pg_password=&lt;set your own&gt;</code></pre> 
+     </section> 
+     <section class="section" id="cont-b-env-a___metrics_service_database_architecture"> 
+      <h2 class="title sectiontitle">Metrics service database architecture</h2> 
+      <p class="p">The enterprise topology uses an externally managed PostgreSQL database service. Metrics service requires provisioning of two database configurations:</p> 
+      <p class="p"><strong class="ph b">Database 1: <code class="ph codeph">metrics_service</code> (read/write)</strong></p> 
+      <p class="p">Purpose: Store metrics data, dashboard calculations, anonymized payloads</p> 
+      <p class="p">Database configuration:</p> 
+      <pre class="pre codeblock"><code>CREATE DATABASE metrics_service
+  WITH ENCODING='UTF8'
+       LC_COLLATE='en_US.UTF-8'
+       LC_CTYPE='en_US.UTF-8'
+       TEMPLATE=template0;
+
+CREATE USER metrics_service WITH PASSWORD '&lt;secure_password&gt;';
+GRANT ALL PRIVILEGES ON DATABASE metrics_service TO metrics_service;</code></pre> 
+      <p class="p">Storage requirements:</p> 
+      <ul class="ul"> 
+       <li class="li">Minimum: 20 GB</li> 
+       <li class="li">Recommended: 40 GB</li> 
+       <li class="li">High-volume (&gt;20,000 jobs/day): 60-80 GB</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Database 2: awx (read-only access)</strong></p> 
+      <p class="p">Purpose: Collect automation job data for metrics calculation</p> 
+      <p class="p">User configuration:</p> 
+      <pre class="pre codeblock"><code>CREATE USER ms_awx_readonly WITH PASSWORD '&lt;readonly_password&gt;';
+\c awx  -- Connect to automation controller database
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO ms_awx_readonly;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public
+  GRANT SELECT ON TABLES TO ms_awx_readonly;</code></pre> 
+      <p class="p">Security model:</p> 
+      <ul class="ul"> 
+       <li class="li"><code class="ph codeph">ms_awx_readonly</code> user has SELECT-only privileges</li> 
+       <li class="li">Prevents metrics service from modifying automation controller operations</li> 
+       <li class="li">Read-only access ensures separation of concerns</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">External database storage allocation</strong></p> 
+      <p class="p">Update your external PostgreSQL database storage to accommodate metrics service:</p> 
+      <table class="table"> 
+       <caption> <span class="table--title-label">Table 5. </span><span class="title">External database storage allocation</span> 
+       </caption> 
+       <colgroup> 
+        <col> 
+        <col> 
+        <col> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="cont-b-env-a___metrics_service_database_architecture__entry__1">Database</th> 
+         <th class="entry" id="cont-b-env-a___metrics_service_database_architecture__entry__2">Purpose</th> 
+         <th class="entry" id="cont-b-env-a___metrics_service_database_architecture__entry__3">Storage allocation</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___metrics_service_database_architecture__entry__1"><code class="ph codeph">gateway</code></td> 
+         <td class="entry" headers="cont-b-env-a___metrics_service_database_architecture__entry__2">Platform gateway</td> 
+         <td class="entry" headers="cont-b-env-a___metrics_service_database_architecture__entry__3">20 GB</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___metrics_service_database_architecture__entry__1"><code class="ph codeph">awx</code></td> 
+         <td class="entry" headers="cont-b-env-a___metrics_service_database_architecture__entry__2">Automation controller</td> 
+         <td class="entry" headers="cont-b-env-a___metrics_service_database_architecture__entry__3">80 GB</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___metrics_service_database_architecture__entry__1"><code class="ph codeph">metrics_service</code></td> 
+         <td class="entry" headers="cont-b-env-a___metrics_service_database_architecture__entry__2">Metrics service</td> 
+         <td class="entry" headers="cont-b-env-a___metrics_service_database_architecture__entry__3">40 GB</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___metrics_service_database_architecture__entry__1"><code class="ph codeph">pulp</code></td> 
+         <td class="entry" headers="cont-b-env-a___metrics_service_database_architecture__entry__2">Automation hub</td> 
+         <td class="entry" headers="cont-b-env-a___metrics_service_database_architecture__entry__3">60 GB</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___metrics_service_database_architecture__entry__1"><code class="ph codeph">eda</code></td> 
+         <td class="entry" headers="cont-b-env-a___metrics_service_database_architecture__entry__2">Event-Driven Ansible</td> 
+         <td class="entry" headers="cont-b-env-a___metrics_service_database_architecture__entry__3">20 GB</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="cont-b-env-a___metrics_service_database_architecture__entry__1">Total</td> 
+         <td class="entry" headers="cont-b-env-a___metrics_service_database_architecture__entry__2">All components</td> 
+         <td class="entry" headers="cont-b-env-a___metrics_service_database_architecture__entry__3">220 GB</td> 
+        </tr> 
+       </tbody> 
+      </table> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body">
+         Database storage consumption varies based on job frequency, playbook complexity, and retention policies. Monitor actual usage after deployment and adjust accordingly. 
+       </div> 
+      </div> 
+     </section> 
+    </div> 
+   </article> 
+  </main>  
+ </body>
+</html>

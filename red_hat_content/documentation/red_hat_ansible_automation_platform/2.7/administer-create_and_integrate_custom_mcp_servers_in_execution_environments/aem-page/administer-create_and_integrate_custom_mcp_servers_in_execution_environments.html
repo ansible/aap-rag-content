@@ -1,0 +1,792 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="GUID-031639ad-3f6a-48bc-893d-63f3c14c2e3b"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Create and integrate custom MCP Servers in execution environments</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Integrate custom <em class="ph i">Model Context Protocol</em> (MCP) servers into execution environments using the <code class="ph codeph">ansible.mcp_builder</code> framework to automate installation, configuration, and lifecycle management.</p> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body">
+        Individual MCP server implementations (including the reference examples for AWS, Azure, and GitHub) are Dev Preview and unsupported. Your organization is responsible for the MCP servers you choose to integrate.
+       </div>
+      </div> 
+      <p class="p"><strong class="ph b">Preparing your environment</strong></p> 
+      <p class="p">Before you begin, ensure you have the following:</p> 
+      <ul class="ul" id="GUID-031639ad-3f6a-48bc-893d-63f3c14c2e3b__ul_1"> 
+       <li class="li">ansible-builder &nbsp;: Version 3.1 or later installed on your build system. Install it using <p class="p"><code class="ph codeph">dnf install ansible-builder</code>.</p> </li> 
+       <li class="li">ansible-core: : Version 2.16 or later.</li> 
+       <li class="li">Access to a base Execution Environment image, for example, ee-minimal-rhel9 from the Red Hat registry.</li> 
+       <li class="li">The <code class="ph codeph">ansible.mcp_builder</code> collection (version 1.0.3 or later), installed using: <p class="p"><code class="ph codeph">ansible-galaxy collection install ansible.mcp_builder</code>.</p> </li> 
+       <li class="li">The&nbsp;<code class="ph codeph">ansible.mcp</code> collection (a required dependency), installed using: <p class="p"><code class="ph codeph">ansible-galaxy collection install ansible.mcp</code>.</p> </li> 
+       <li class="li">Familiarity with Ansible roles, collections, and execution environment definitions.</li> 
+      </ul> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="GUID-b44b104d-0ef0-4256-bd15-b1a7b9f4e868"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Evaluate MCP servers before installation</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">To protect your execution environment from vulnerabilities, evaluate <em class="ph i">Model Context protocol </em>(MCP) servers before installation by auditing code, pinning versions, enforcing read-only modes, and verifying permissions</p> 
+       <section class="section" id="GUID-b44b104d-0ef0-4256-bd15-b1a7b9f4e868__section_1"> 
+        <p class="p">Before including an MCP server in your execution environment:</p> 
+        <ul class="ul" id="GUID-b44b104d-0ef0-4256-bd15-b1a7b9f4e868__ul_1"> 
+         <li class="li"><strong class="ph b">Review the source code</strong>: MCP servers can execute arbitrary operations on your infrastructure. Audit the server code before installing, especially for servers from community or third-party sources.</li> 
+         <li class="li"><strong class="ph b">Pin to specific versions</strong>: Use explicit version numbers in your registry metadata rather than latest. <p class="p"><code class="ph codeph">cfn_mcp_version: "1.0.19"</code></p> <p class="p">This ensures reproducible builds and prevents unexpected behavior from upstream changes.</p> </li> 
+         <li class="li"><strong class="ph b">Use read-only mode where available</strong>: Many MCP servers support a read-only flag that prevents mutating operations: 
+          <div class="p"> 
+           <pre class="pre codeblock"><code>  cfn_mcp_registry:
+    - name: "awslabs.cfn-mcp-server"
+      type: "stdio"
+      lang: "pypi"
+      args: ["--readonly"]
+      description: "AWS CloudFormation MCP Server (read-only)"</code></pre> 
+          </div> </li> 
+         <li class="li"><strong class="ph b">Review required permissions</strong>: Understand what permissions each MCP server needs. For example, the CloudFormation MCP server requires <code class="ph codeph">cloudcontrol:*</code> and <code class="ph codeph">cloudformation:*</code> IAM permissions. Grant only the minimum permissions needed.</li> 
+        </ul> 
+       </section> 
+       <section class="section" id="GUID-b44b104d-0ef0-4256-bd15-b1a7b9f4e868__section_2">
+        <h3 class="title sectiontitle">Understand the MCP builder framework</h3> 
+        <p class="p"><code class="ph codeph">ansible.mcp_builder</code>&nbsp;collection provides a reusable framework for installing MCP servers inside execution environments. Rather than manually scripting installation steps in your container build, you define a role with metadata about your MCP server, and the framework handles the rest.</p> 
+        <p class="p">To automate the installation and lifecycle management of your servers, you must understand how the <code class="ph codeph">ansible.mcp_builder</code> framework operates.</p> 
+        <p class="p">The framework consists of three main components:</p> 
+        <ul class="ul" id="GUID-b44b104d-0ef0-4256-bd15-b1a7b9f4e868__ul_2"> 
+         <li class="li">The common role (<code class="ph codeph">ansible.mcp_builder.common</code>) provides shared installation logic for MCP servers. Based on the language specified in your role's registry metadata, the common role automatically: 
+          <ul class="ul" id="GUID-b44b104d-0ef0-4256-bd15-b1a7b9f4e868__ul_3"> 
+           <li class="li">Installs the appropriate language runtime (Go, Node.js, or Python/uv) if not already present.</li> 
+           <li class="li">Downloads and installs the MCP server package from the correct source (PyPI, npm, or Git).</li> 
+           <li class="li">Generates a unified manifest file (<code class="ph codeph">/opt/mcp/mcpservers.json</code>) listing all available MCP servers.</li> 
+           <li class="li">Creates the mcp_manage utility for listing, querying, and running installed MCP servers</li> 
+          </ul> </li> 
+         <li class="li">Your custom role defines metadata about the MCP server you want to install. At minimum, it includes: 
+          <ul class="ul" id="GUID-b44b104d-0ef0-4256-bd15-b1a7b9f4e868__ul_4"> 
+           <li class="li">A registry variable that specifies the server name, transport type, language, and description.</li> 
+           <li class="li">A tasks file that invokes the common role's <code class="ph codeph">install_manager</code> and <code class="ph codeph">generate_manifest</code>tasks.</li> 
+          </ul> </li> 
+         <li class="li">A playbook ties your custom role into the build process. This playbook is called by ansible-builder during the execution environment container build.</li> 
+        </ul> 
+       </section> 
+       <section class="section" id="GUID-b44b104d-0ef0-4256-bd15-b1a7b9f4e868__section_3"> 
+        <p class="p"><strong class="ph b">Select an installation method</strong></p> 
+        <table class="table" id="GUID-b44b104d-0ef0-4256-bd15-b1a7b9f4e868__table_1">
+         <caption></caption>
+         <colgroup>
+          <col>
+          <col>
+          <col>
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="GUID-b44b104d-0ef0-4256-bd15-b1a7b9f4e868__table_1__entry__1">Language</th> 
+           <th class="entry" id="GUID-b44b104d-0ef0-4256-bd15-b1a7b9f4e868__table_1__entry__2">Install method</th> 
+           <th class="entry" id="GUID-b44b104d-0ef0-4256-bd15-b1a7b9f4e868__table_1__entry__3">Example servers</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="GUID-b44b104d-0ef0-4256-bd15-b1a7b9f4e868__table_1__entry__1">pypi</td> 
+           <td class="entry" headers="GUID-b44b104d-0ef0-4256-bd15-b1a7b9f4e868__table_1__entry__2">Installed with uv tool install from PyPI</td> 
+           <td class="entry" headers="GUID-b44b104d-0ef0-4256-bd15-b1a7b9f4e868__table_1__entry__3">AWS CloudFormation MCP, AWS Core MCP, AWS IAM MCP</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="GUID-b44b104d-0ef0-4256-bd15-b1a7b9f4e868__table_1__entry__1">npm</td> 
+           <td class="entry" headers="GUID-b44b104d-0ef0-4256-bd15-b1a7b9f4e868__table_1__entry__2">Installed with npm install from the npm registry</td> 
+           <td class="entry" headers="GUID-b44b104d-0ef0-4256-bd15-b1a7b9f4e868__table_1__entry__3">Azure MCP</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="GUID-b44b104d-0ef0-4256-bd15-b1a7b9f4e868__table_1__entry__1">go</td> 
+           <td class="entry" headers="GUID-b44b104d-0ef0-4256-bd15-b1a7b9f4e868__table_1__entry__2">Built from source with go build from a Git repository</td> 
+           <td class="entry" headers="GUID-b44b104d-0ef0-4256-bd15-b1a7b9f4e868__table_1__entry__3">GitHub MCP</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="GUID-0abb3603-e613-48a4-815e-f4e8452d6722"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Track configurations with the MCP servers manifest</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Understand how the MCP servers manifest registers and automatically merges multiple server installations into the <code class="ph codeph">/opt/mcp/mcpservers.json</code> file so that you can effectively track and verify your execution environment configurations.</p> 
+       <section class="section" id="GUID-0abb3603-e613-48a4-815e-f4e8452d6722__section_1"> 
+        <p class="p">All installed MCP servers are registered in <code class="ph codeph">/opt/mcp/mcpservers.json</code>. This file follows the mcp.json format established by VS Code, with each server entry containing:</p> 
+        <pre class="pre codeblock"><code> {
+    "server-name": {
+        "type": "stdio",
+        "command": "/opt/mcp/bin/server-name",
+        "args": [],
+        "description": "Description of the MCP server"
+    }
+}</code></pre> 
+        <p class="p">For remote (HTTP-based) MCP servers, the entry uses url instead of command:</p> 
+        <pre class="pre codeblock"><code>{
+    "server-name": {
+        "type": "http",
+        "url": "https://remote-server:12345",
+        "args": [],
+        "description": "Remote MCP server"
+    }
+}</code></pre> 
+        <p class="p">When multiple playbooks install MCP servers into the same execution environment, the manifest merges automatically. Each subsequent installation appends its entries to the existing manifest without overwriting previous entries.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="GUID-97f799be-d3ff-4dcc-9a66-6b1c110ce763"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Create a custom MCP server role</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Develop a custom Ansible role to automate the installation, configuration, and management of your specific custom Model Context Protocol (MCP) server for seamless integration into execution environments.</p> 
+       <section class="section context" id="GUID-97f799be-d3ff-4dcc-9a66-6b1c110ce763__context_1">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">This procedure uses the AWS CloudFormation MCP Server (<code class="ph codeph">awslabs.cfn-mcp-server</code>) as a working example.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Create the collection directory structure and a new Ansible collection to hold your custom MCP role:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>mkdir -p collections/ansible_collections/myorg/mcp_cfn/roles/cfn_mcp/{defaults,tasks,meta}
+mkdir -p collections/ansible_collections/myorg/mcp_cfn/playbooks
+touch collections/ansible_collections/myorg/mcp_cfn/galaxy.yml
+touch collections/ansible_collections/myorg/mcp_cfn/README.md
+touch collections/ansible_collections/myorg/mcp_cfn/LICENSE
+touch collections/ansible_collections/myorg/mcp_cfn/roles/cfn_mcp/meta/main.yml</code></pre> 
+           <p class="p">The directory structure will look like this: </p> 
+           <pre class="pre codeblock"><code>collections/ansible_collections/myorg/mcp_cfn/
+├── galaxy.yml
+├── README.md
+├── LICENSE
+├── playbooks/
+│   └── install_cfn_mcp.yml
+└── roles/
+    └── cfn_mcp/
+        ├── defaults/
+        │   └── main.yml
+        ├── tasks/
+        │   └── main.yml
+        └── meta/
+            └── main.yml
+ </code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Define the collection metadata by creating <code class="ph codeph">galaxy.yml</code> at the root of your collection:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code># galaxy.yml
+---
+namespace: myorg
+name: mcp_cfn
+version: 1.0.19
+readme: README.md
+authors:
+  - Your Name
+description: Custom MCP role for AWS CloudFormation MCP Server
+license_file: LICENSE
+tags:
+  - mcp
+  - aws
+  - cloudformation
+dependencies:
+  ansible.mcp_builder: "&gt;=1.0.3"
+ </code></pre> 
+           <p class="p">The dependencies field ensures that the <code class="ph codeph">ansible.mcp_builder</code> collection is installed alongside your collection. </p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Define the role registry metadata by creating <code class="ph codeph">roles/cfn_mcp/defaults/main.yml </code> with the registry definition for your MCP server:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code># roles/cfn_mcp/defaults/main.yml
+---
+cfn_mcp_registry:
+  - name: "awslabs.cfn-mcp-server"
+    type: "stdio"
+    lang: "pypi"
+    args: []
+    description: "AWS CloudFormation MCP Server - manage AWS resources via Cloud Control API"
+
+cfn_mcp_version: "1.0.19"
+
+ </code></pre> 
+           <p class="p">The registry variable must follow the naming convention <code class="ph codeph">&lt;role_name&gt;_registry</code>. The fields are:</p> 
+           <table class="table" id="GUID-97f799be-d3ff-4dcc-9a66-6b1c110ce763__table_1">
+            <caption></caption>
+            <colgroup>
+             <col>
+             <col>
+             <col>
+            </colgroup>
+            <thead class="thead"> 
+             <tr class="row"> 
+              <th class="entry" id="GUID-97f799be-d3ff-4dcc-9a66-6b1c110ce763__table_1__entry__1">Field</th> 
+              <th class="entry" id="GUID-97f799be-d3ff-4dcc-9a66-6b1c110ce763__table_1__entry__2">Required</th> 
+              <th class="entry" id="GUID-97f799be-d3ff-4dcc-9a66-6b1c110ce763__table_1__entry__3">Description</th> 
+             </tr> 
+            </thead>
+            <tbody class="tbody"> 
+             <tr class="row"> 
+              <td class="entry" headers="GUID-97f799be-d3ff-4dcc-9a66-6b1c110ce763__table_1__entry__1">name</td> 
+              <td class="entry" headers="GUID-97f799be-d3ff-4dcc-9a66-6b1c110ce763__table_1__entry__2">Yes</td> 
+              <td class="entry" headers="GUID-97f799be-d3ff-4dcc-9a66-6b1c110ce763__table_1__entry__3">The executable name or package name of the MCP server.</td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="GUID-97f799be-d3ff-4dcc-9a66-6b1c110ce763__table_1__entry__1">type</td> 
+              <td class="entry" headers="GUID-97f799be-d3ff-4dcc-9a66-6b1c110ce763__table_1__entry__2">Yes</td> 
+              <td class="entry" headers="GUID-97f799be-d3ff-4dcc-9a66-6b1c110ce763__table_1__entry__3">Transport type: stdio for local servers, http for remote servers.</td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="GUID-97f799be-d3ff-4dcc-9a66-6b1c110ce763__table_1__entry__1">lang</td> 
+              <td class="entry" headers="GUID-97f799be-d3ff-4dcc-9a66-6b1c110ce763__table_1__entry__2">Yes</td> 
+              <td class="entry" headers="GUID-97f799be-d3ff-4dcc-9a66-6b1c110ce763__table_1__entry__3">Installation method: pypi, npm, or go.</td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="GUID-97f799be-d3ff-4dcc-9a66-6b1c110ce763__table_1__entry__1">args</td> 
+              <td class="entry" headers="GUID-97f799be-d3ff-4dcc-9a66-6b1c110ce763__table_1__entry__2">Yes</td> 
+              <td class="entry" headers="GUID-97f799be-d3ff-4dcc-9a66-6b1c110ce763__table_1__entry__3">List of default arguments passed to the server on startup.</td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="GUID-97f799be-d3ff-4dcc-9a66-6b1c110ce763__table_1__entry__1">description</td> 
+              <td class="entry" headers="GUID-97f799be-d3ff-4dcc-9a66-6b1c110ce763__table_1__entry__2">Yes</td> 
+              <td class="entry" headers="GUID-97f799be-d3ff-4dcc-9a66-6b1c110ce763__table_1__entry__3">Human-readable description shown in<code class="ph codeph">mcp_manage</code> list.</td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="GUID-97f799be-d3ff-4dcc-9a66-6b1c110ce763__table_1__entry__1">package</td> 
+              <td class="entry" headers="GUID-97f799be-d3ff-4dcc-9a66-6b1c110ce763__table_1__entry__2">No</td> 
+              <td class="entry" headers="GUID-97f799be-d3ff-4dcc-9a66-6b1c110ce763__table_1__entry__3">The package name if different from name (used for npm packages).</td> 
+             </tr> 
+            </tbody>
+           </table> 
+           <p class="p">The version variable must follow the naming convention <code class="ph codeph">&lt;role_name&gt;_version</code>. </p> 
+           <p class="p">For Go-based servers built from source, you also need build-related variables in defaults, as follows:</p> 
+           <pre class="pre codeblock"><code>myrole_build_repo: "https://github.com/example/my-mcp-server.git"
+myrole_build_repo_branch: "main"
+myrole_build_path: "example/build"
+ </code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Create the role tasks by creating <code class="ph codeph">roles/cfn_mcp/tasks/main.yml</code>:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code># roles/cfn_mcp/tasks/main.yml
+---
+- name: Include install manager tasks
+  ansible.builtin.include_role:
+    name: ansible.mcp_builder.common
+    tasks_from: install_manager
+
+- name: Update MCP servers manifest
+  ansible.builtin.include_role:
+    name: ansible.mcp_builder.common
+    tasks_from: generate_manifest
+
+- name: Verify CloudFormation MCP installation
+  ansible.builtin.command:
+    cmd: mcp_manage run {{ common_package_name }} --help
+  changed_when: false
+  register: cfn_mcp_verify_result
+  failed_when: false
+
+- name: Display verification status (success)
+  ansible.builtin.debug:
+    msg: "CloudFormation MCP Server installed and verified successfully."
+  when:
+    - cfn_mcp_verify_result.rc is defined
+    - cfn_mcp_verify_result.rc == 0
+
+- name: Display verification status (failure)
+  ansible.builtin.debug:
+    msg: "CloudFormation MCP Server verification failed. Check logs for details."
+  when:
+    - cfn_mcp_verify_result.rc is defined
+    - cfn_mcp_verify_result.rc != 0
+ </code></pre> 
+           <p class="p">The two <code class="ph codeph">include_role</code> tasks are the minimum required. The <code class="ph codeph">install_manager</code> task reads your registry metadata and installs the MCP server by using the appropriate method. The generate_manifest task adds the server to the <code class="ph codeph">mcpservers.json</code> manifest. </p> 
+           <p class="p">The verification step is optional but recommended. It confirms the installed server is callable. </p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Create the role metadata by creating <code class="ph codeph">roles/cfn_mcp/meta/main.yml</code>:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code># roles/cfn_mcp/meta/main.yml
+---
+galaxy_info:
+  role_name: "cfn_mcp"
+  author: "Your Name"
+  description: "Installs the AWS CloudFormation MCP server"
+  license: "GPL-3.0-or-later"
+  min_ansible_version: "2.16.0"
+  platforms:
+    - name: EL
+      versions:
+        - "9"
+  galaxy_tags:
+    - mcp
+    - aws
+    - cloudformation
+
+collections:
+  - ansible.mcp_builder
+ </code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Create the installation playbook <code class="ph codeph">playbooks/install_cfn_mcp.yml</code>:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code> # playbooks/install_cfn_mcp.yml
+---
+- name: Install custom CloudFormation MCP Server
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Ensure base functionality
+      ansible.builtin.include_role:
+        name: ansible.mcp_builder.common
+        public: true
+
+    - name: Install CloudFormation MCP Server
+      ansible.builtin.include_role:
+        name: myorg.mcp_cfn.cfn_mcp
+
+    - name: Fix ownership of all MCP installations for runtime user
+      ansible.builtin.file:
+        path: "{{ common_mcp_base_path }}"
+        state: directory
+        recurse: true
+        owner: "{{ common_runtime_user }}"
+        group: "{{ common_runtime_user }}"</code></pre> 
+           <div class="note important note_important">
+            <span class="note__title">Important:</span> 
+            <div class="note__body">
+             The first task must include <code class="ph codeph">ansible.mcp_builder.common</code> with <code class="ph codeph">public: true</code>. This initializes the framework and makes shared variables (such as <code class="ph codeph">common_mcp_base_path</code>) available to later tasks. The ownership fix at the end ensures the MCP server files are accessible by the non-root runtime user inside the execution environment. 
+            </div>
+           </div> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body">
+             The dev preview <code class="ph codeph">ansible.mcp_builder.install_mcp</code> playbook only supports roles within the <code class="ph codeph">ansible.mcp_builder</code> namespace. Custom roles in your own collection namespace require their own playbook, as shown above.
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd"> Build your collection into a distributable tar file:</span> 
+          <div class="itemgroup info">
+           <code class="ph codeph">cd collections/ansible_collections/myorg/mcp_cfn</code> 
+          </div> 
+          <div class="itemgroup info">
+           <code class="ph codeph">ansible-galaxy collection build --output-path /path/to/output/</code> 
+          </div> 
+          <div class="itemgroup stepresult"> 
+           <p class="p">This produces a file: <code class="ph codeph">myorg-mcp_cfn-1.0.19.tar.gz. </code></p> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="GUID-13ebbe6f-f0b4-4712-8057-09ffa935b40d"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Build an execution environment with your dev preview MCP server</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Use the ansible-builder tool to compile and build an execution environment container image that incorporates your dev preview Model Context Protocol (MCP) server role and its dependencies.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Create a working directory for the execution environment build and copy in the required collection tarballs: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>mkdir -p ee-build/
+cp myorg-mcp_cfn-1.0.19.tar.gz ee-build/
+cp ansible-mcp_builder-1.0.3.tar.gz ee-build/  # if using a local copy
+ </code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Create <code class="ph codeph">ee-build/requirements.yml </code> listing your collections: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code># requirements.yml
+---
+collections:
+  - name: ansible.mcp_builder
+    source: /build/configs/ansible-mcp_builder-1.0.3.tar.gz
+    type: file
+  - name: myorg.mcp_cfn
+    source: /build/configs/myorg-mcp_cfn-1.0.19.tar.gz
+    type: file
+  - name: ansible.mcp
+ </code></pre> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body">
+             The <code class="ph codeph">/build/configs/</code> path prefix is required. During the execution environment container build, ansible-builder copies files specified in additional_build_files into the build context under <code class="ph codeph">_build/&lt;dest&gt;/</code>, which is then mounted at <code class="ph codeph">/build/ </code>&nbsp;inside the container. 
+            </div>
+           </div> 
+           <p class="p">If your collections are published to Ansible Galaxy or automation hub, you can reference them by name instead of local paths:</p> 
+           <pre class="pre codeblock"><code> # requirements.yml (published collections)
+---
+collections:
+  - name: ansible.mcp_builder
+  - name: myorg.mcp_cfn
+  - name: ansible.mcp</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd"> Create <code class="ph codeph">ee-build/execution-environment.yml</code>:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code># execution-environment.yml
+---
+version: 3
+
+images:
+  base_image:
+    name: registry.redhat.io/ansible-automation-platform-25/ee-minimal-rhel9:latest
+
+dependencies:
+  galaxy: requirements.yml
+
+options:
+  package_manager_path: /usr/bin/microdnf
+
+additional_build_files:
+  - src: ansible-mcp_builder-1.0.3.tar.gz
+    dest: configs
+  - src: myorg-mcp_cfn-1.0.19.tar.gz
+    dest: configs
+
+additional_build_steps:
+  append_final: |
+    RUN ansible-playbook myorg.mcp_cfn.install_cfn_mcp</code></pre> 
+           <p class="p">Where:</p> 
+           <p class="p"><code class="ph codeph">additional_build_files</code>: Copies your collection tarballs into the container build context so they can be referenced during the build.</p> 
+           <p class="p"><code class="ph codeph">options.package_manager_path</code>: Set to <code class="ph codeph">/usr/bin/microdnf </code> for ee-minimal-rhel9, or <code class="ph codeph">/usr/bin/dnf </code> for UBI9-based images. </p> 
+           <p class="p"><code class="ph codeph">additional_build_steps.append_final</code>: Runs your installation playbook in the final build stage, after collections are installed. </p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Run ansible-builder to build your execution environment image:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>cd ee-build/
+ansible-builder build -t my-cfn-mcp-ee:latest -f execution-environment.yml -v 3</code></pre> 
+           <p class="p"> The build process: </p> 
+           <ol class="ol" type="a" id="GUID-13ebbe6f-f0b4-4712-8057-09ffa935b40d__ol_2"> 
+            <li class="li">Installs the base execution environment image dependencies.</li> 
+            <li class="li">Installs the <code class="ph codeph">ansible.mcp_builder</code>, <code class="ph codeph">myorg.mcp_cfn</code> , and <code class="ph codeph">ansible.mcp </code> collections. </li> 
+            <li class="li">Runs your installation playbook, which installs the MCP server and generates the manifest. </li> 
+           </ol> 
+           <p class="p">A successful build produces output ending with: </p> 
+           <pre class="pre codeblock"><code>Successfully tagged localhost/my-cfn-mcp-ee:latest
+Complete! The build context can be found at: /path/to/ee-build/context
+ </code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title6" id="GUID-0a909100-32a3-440c-ad1d-592258890f7a"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Combine custom and dev preview MCP servers</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Integrate both custom-developed and dev-preview Model Context Protocol (MCP) servers within a single execution environment to use comprehensive automation capabilities.</p> 
+       <section class="section" id="GUID-0a909100-32a3-440c-ad1d-592258890f7a__section_1"> 
+        <p class="p">To include both dev preview MCP servers from <code class="ph codeph">ansible.mcp_builder</code> (such as <code class="ph codeph">aws_ccapi_mcp</code>) and your custom role in the same execution environment, chain multiple playbook calls in <code class="ph codeph">additional_build_steps</code>:</p> 
+        <pre class="pre codeblock"><code>additional_build_steps:
+  append_final: |
+    RUN ansible-playbook ansible.mcp_builder.install_mcp -e mcp_servers=aws_ccapi_mcp
+    RUN ansible-playbook myorg.mcp_cfn.install_cfn_mcp
+ </code></pre> 
+        <p class="p">The manifest file merges automatically. The second playbook appends its entries to the existing <code class="ph codeph">mcpservers.json</code> created by the first.</p> 
+        <p class="p"></p> 
+       </section> 
+       <section class="section" id="GUID-0a909100-32a3-440c-ad1d-592258890f7a__section_2">
+        <h3 class="title sectiontitle">Test and verify your MCP server</h3> 
+        <p class="p">Verify your MCP server configuration by listing registered servers, inspecting the generated JSON manifest, and testing container connectivity with Podman.</p> 
+        <p class="p"><strong class="ph b">Testing your MCP server in the execution environment</strong></p> 
+        <p class="p">After building the execution environment, verify that your MCP server is correctly installed and functional.</p> 
+        <p class="p"><strong class="ph b">List the MCP servers registered in the manifest:</strong></p> 
+        <p class="p"><code class="ph codeph">podman run --rm my-cfn-mcp-ee:latest mcp_manage list</code></p> 
+        <p class="p"> Expected output:</p> 
+        <pre class="pre codeblock"><code>Available MCP servers:
+  - awslabs.cfn-mcp-server (type: stdio, path: /opt/mcp/bin/awslabs.cfn-mcp-server)</code></pre> 
+       </section> 
+       <section class="section" id="GUID-0a909100-32a3-440c-ad1d-592258890f7a__section_3"> 
+        <p class="p"><strong class="ph b">Verify the manifest file</strong></p> 
+        <p class="p">Inspect the generated manifest directly:</p> <code class="ph codeph">podman run --rm my-cfn-mcp-ee:latest cat /opt/mcp/mcpservers.json</code> 
+        <p class="p">Expected output:</p> 
+        <pre class="pre codeblock"><code>{
+    "awslabs.cfn-mcp-server": {
+        "args": [],
+        "command": "/opt/mcp/bin/awslabs.cfn-mcp-server",
+        "description": "AWS CloudFormation MCP Server - manage AWS resources via Cloud Control API",
+        "type": "stdio"
+    }
+}
+ </code></pre> 
+       </section> 
+       <section class="section" id="GUID-0a909100-32a3-440c-ad1d-592258890f7a__section_4"> 
+        <p class="p"><strong class="ph b">Test server connectivity</strong></p> 
+        <p class="p">Run the MCP server with <code class="ph codeph">--help</code> to confirm it is callable:</p> <code class="ph codeph">podman run --rm my-cfn-mcp-ee:latest mcp_manage run awslabs.cfn-mcp-server --help</code> 
+        <p class="p"> For servers that require credentials (such as AWS), pass environment variables:</p> 
+        <pre class="pre codeblock"><code>podman run --rm \
+  -e AWS_PROFILE=my-profile \
+  -e AWS_REGION=us-east-1 \
+  -v ~/.aws:/home/runner/.aws:ro \
+  my-cfn-mcp-ee:latest \
+  mcp_manage run awslabs.cfn-mcp-server</code></pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title7" id="GUID-95d36600-cc62-4c82-8507-55a879f1628f"> 
+      <h2 class="title topictitle2" id="ariaid-title7">Configure remote MCP servers</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">If you need to bypass local installation and dynamically choose your deployment mode at build time, configure your role to reference a remote MCP server via HTTP.</p> 
+       <section class="section" id="GUID-95d36600-cc62-4c82-8507-55a879f1628f__section_1"> 
+        <p class="p"><strong class="ph b"><strong class="ph b" id="GUID-95d36600-cc62-4c82-8507-55a879f1628f__docs-internal-guid-0cde36f1-7fff-66b8-e200-a460a1407562">Add a remote server to your role</strong></strong></p> 
+        <p class="p"> To define a remote MCP server, set the type to http in your registry metadata:</p> 
+        <pre class="pre codeblock"><code> # roles/cfn_mcp/defaults/main.yml (remote mode example)
+---
+cfn_mcp_registry:
+  - name: "awslabs.cfn-mcp-server"
+    type: "http"
+    lang: "pypi"
+    path: "https://my-mcp-host.example.com:8443/cfn"
+    args: []
+    description: "Remote AWS CloudFormation MCP Server"
+
+cfn_mcp_version: "latest"</code></pre> 
+        <p class="p">When type is http, the framework only registers the server in the manifest with its URL.</p> 
+       </section> 
+       <section class="section" id="GUID-95d36600-cc62-4c82-8507-55a879f1628f__section_2"> 
+        <p class="p"><strong class="ph b">Support both modes</strong></p> 
+        <p class="p">The GitHub MCP role in <code class="ph codeph">ansible.mcp_builder</code> demonstrates a pattern for supporting both embedded and remote modes. You can adopt this pattern by:</p> 
+        <ol class="ol" id="GUID-95d36600-cc62-4c82-8507-55a879f1628f__ol_1"> 
+         <li class="li">Creating a <code class="ph codeph">vars/remote.yml</code> file with the remote registry definition.</li> 
+         <li class="li">Loading it conditionally in your tasks:</li> 
+        </ol> 
+        <pre class="pre codeblock"><code># roles/cfn_mcp/tasks/main.yml
+---
+- name: Override registry for remote mode
+  ansible.builtin.include_vars:
+    file: remote.yml
+  when: cfn_mcp_mode | default('local') == 'remote'
+
+- name: Include install manager tasks
+  ansible.builtin.include_role:
+    name: ansible.mcp_builder.common
+    tasks_from: install_manager
+
+- name: Update MCP servers manifest
+  ansible.builtin.include_role:
+    name: ansible.mcp_builder.common
+    tasks_from: generate_manifest
+ </code></pre> 
+        <p class="p">You can then select the mode when building the execution environment:</p> 
+        <pre class="pre codeblock"><code>additional_build_steps:
+  append_final: |
+    RUN ansible-playbook myorg.mcp_cfn.install_cfn_mcp -e cfn_mcp_mode=remote
+ </code></pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title8" id="GUID-83109cc9-2b7a-4f9a-9def-999bd613272d"> 
+      <h2 class="title topictitle2" id="ariaid-title8">Secure your custom MCP servers</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Apply essential security configurations and best practices to safeguard your custom MCP servers, manage credentials securely, and harden your execution environments.</p> 
+       <section class="section" id="GUID-83109cc9-2b7a-4f9a-9def-999bd613272d__section_1"> 
+        <p class="p"><strong class="ph b">Managing credentials and secrets</strong></p> 
+        <p class="p">MCP servers frequently require credentials to interact with cloud providers or external services. Follow these practices:</p> 
+        <ul class="ul" id="GUID-83109cc9-2b7a-4f9a-9def-999bd613272d__ul_1"> 
+         <li class="li"><strong class="ph b">Never embed credentials into the execution environment image</strong>: Credentials embedded during build time persist in the container image layers and can be extracted. Instead, pass credentials at runtime using environment variables or mounted files.</li> 
+         <li class="li"><strong class="ph b">Use runtime environment variables</strong>: Pass credentials when launching the execution environment: <pre class="pre codeblock"><code> podman run --rm \
+    -e AWS_PROFILE=my-profile \
+    -e GITHUB_PERSONAL_ACCESS_TOKEN="$GITHUB_TOKEN" \
+    my-mcp-ee:latest …
+ </code></pre> </li> 
+         <li class="li"> <strong class="ph b">Mount credential files as read-only</strong>: For providers that use credential files (such as AWS), mount them read-only: <p class="p"><code class="ph codeph"> -v ~/.aws:/home/runner/.aws:ro</code></p> </li> 
+         <li class="li"><strong class="ph b">In Ansible Automation Platform, use credential types</strong>: When running MCP-enabled execution environments through Ansible Automation Platform, configure credentials through the automation controller credential management system rather than embedding them in playbooks or job templates. </li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title9" id="GUID-89c90b74-6726-4726-9b3a-a270ad190974"> 
+      <h2 class="title topictitle2" id="ariaid-title9">Use your MCP-enabled execution environment in Ansible Automation Platform</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">To secure your infrastructure and ensure predictable execution, evaluate MCP servers before installation by auditing code, pinning versions, enabling read-only modes, and enforcing least-privilege permissions.</p> 
+       <p class="p">After building and testing your execution environment locally, you can use it in Ansible Automation Platform.</p> 
+       <p class="p"><strong class="ph b">Push the image to a registry </strong></p> 
+       <p class="p">Tag and push your execution environment image to a container registry accessible by your Ansible Automation Platform instance:</p> 
+       <pre class="pre codeblock"><code>podman tag my-cfn-mcp-ee:latest registry.example.com/ee/my-cfn-mcp-ee:latest
+podman push registry.example.com/ee/my-cfn-mcp-ee:latest
+ </code></pre> 
+       <p class="p">If you are using the Private Automation Hub included with Ansible Automation Platform, push to its registry. </p> 
+      </div> 
+      <article class="topic task nested2" aria-labelledby="ariaid-title10" id="GUID-afb24308-b059-493e-a720-5c0806d50c69"> 
+       <h3 class="title topictitle3" id="ariaid-title10">Add the execution environment to Ansible Automation Platform</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">To execute automation tasks using your custom MCP server, add its execution environment to Ansible Automation Platform by registering the container image path and secure credentials in the administration settings.</p> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step"> <span class="ph cmd">In the navigation panel, select <strong class="ph b">Automation execution &gt; Administration &gt; Execution Environments</strong>.</span> </li>
+          <li class="li step"> <span class="ph cmd">Click <strong class="ph b">Add</strong>.</span> </li>
+          <li class="li step"> <span class="ph cmd">Enter the image path (for example, <code class="ph codeph">registry.example.com/ee/my-cfn-mcp-ee:latest</code>).</span> </li>
+          <li class="li step"> <span class="ph cmd">Configure registry credentials if required.</span> </li>
+          <li class="li step"> <span class="ph cmd">Save the execution environment.</span> </li>
+         </ol>
+        </section> 
+       </div> 
+      </article>
+      <article class="topic task nested2" aria-labelledby="ariaid-title11" id="GUID-e398a7a2-ab11-4bed-808d-d45839a4d5b6"> 
+       <h3 class="title topictitle3" id="ariaid-title11">Assign to a Job Template</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">Configure your job template with an MCP-enabled execution environment and credentials to ensure your automation jobs execute correctly.</p> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step"> <span class="ph cmd">In the navigation panel, select <code class="ph codeph">Automation execution &gt; Templates</code>.</span> </li>
+          <li class="li step"> <span class="ph cmd">Edit or create a <strong class="ph b">Job Template</strong>.</span> </li>
+          <li class="li step"> <span class="ph cmd">In the <strong class="ph b">Execution Environment</strong> field, select your MCP-enabled execution environment.</span> </li>
+          <li class="li step"> <span class="ph cmd">Configure any required credentials for the MCP server (such as AWS credentials).</span> </li>
+          <li class="li step"> <span class="ph cmd">Save and launch the template.</span> </li>
+         </ol>
+        </section> 
+       </div> 
+      </article>
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title12" id="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136"> 
+      <h2 class="title topictitle2" id="ariaid-title12">Debug common issues</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Diagnose and resolve initialization failures when your MCP server is unlisted or fails to execute. By systematically verifying build logs, installed files, and manifests, you can identify the root cause of deployment errors and successfully run your server.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Check the build log: Look for errors during the ansible-playbook step of the build output. Common issues include missing dependencies or network access failures during package download.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd"> Inspect the installed files: Verify the binary or script is present:</span> 
+          <div class="itemgroup info">
+           <code class="ph codeph">podman run --rm my-cfn-mcp-ee:latest ls -la /opt/mcp/bin/</code>
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Check the manifest separately from the binary: If <code class="ph codeph">mcp_manage</code> list shows the server but <code class="ph codeph">mcp_manage</code> run fails, the manifest was generated but the package installation may have failed silently.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Run the server directly: Bypass <code class="ph codeph">mcp_manage</code> and call the server binary directly to see raw error output:</span> 
+          <div class="itemgroup info"> <code class="ph codeph"> podman run --rm my-cfn-mcp-ee:latest /opt/mcp/bin/awslabs.cfn-mcp-server --help</code>
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section tasktroubleshooting" id="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__tasktroubleshooting_1"> 
+        <p class="p"><strong class="ph b">Troubleshoot build and runtime errors</strong></p> 
+        <p class="p">Diagnose and resolve common issues encountered when building, configuring, and integrating custom or built-in Model Context Protocol (MCP) servers within your execution environments. </p> 
+        <p class="p"><strong class="ph b">Build failures</strong></p> 
+        <table class="table" id="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__table_1">
+         <caption></caption>
+         <colgroup>
+          <col>
+          <col>
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__table_1__entry__1">Error</th> 
+           <th class="entry" id="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__table_1__entry__2">Reason</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__table_1__entry__1">Unable to find collection artifact file.</td> 
+           <td class="entry" headers="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__table_1__entry__2">This error occurs when the collection tarball path in requirements.yml does not match the path inside the container. Ensure: 
+            <ul class="ul" id="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__ul_1"> 
+             <li class="li">The tarball is listed in <code class="ph codeph">additional_build_files</code> with a dest value. </li> 
+             <li class="li">The source path in <code class="ph codeph">requirements.yml</code> uses <code class="ph codeph">/build/configs/&lt;filename&gt;</code> (not the host filesystem path).</li> 
+            </ul> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__table_1__entry__1">Package download fails during build</td> 
+           <td class="entry" headers="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__table_1__entry__2">The execution environment build environment requires network access to download packages from PyPI, npm, or Git repositories. If building behind a proxy, configure proxy settings in your container build environment. If building in an air-gapped environment, you must pre-download packages and include them using<code class="ph codeph">additional_build_files</code>.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__table_1__entry__1">Go build fails with "module not found"</td> 
+           <td class="entry" headers="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__table_1__entry__2">For Go-based MCP servers, ensure the<code class="ph codeph">build_repo</code> URL and<code class="ph codeph">build_repo_branch</code> are correct and accessible. The framework clones the repository and runs go mod download before building.</td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"><strong class="ph b">Runtime failures</strong></p> 
+        <table class="table" id="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__table_2">
+         <caption></caption>
+         <colgroup>
+          <col>
+          <col>
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__table_2__entry__1">Error</th> 
+           <th class="entry" id="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__table_2__entry__2">Reason</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__table_2__entry__1"><code class="ph codeph">mcp_manage</code>: command not found</td> 
+           <td class="entry" headers="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__table_2__entry__2"> <p class="p">The <code class="ph codeph">mcp_manage</code> script is installed at <code class="ph codeph">/opt/mcp/mcp_manage</code> with a symlink at <code class="ph codeph">/usr/local/bin/mcp_manage</code>. If it is missing, the common role's <code class="ph codeph">generate_management</code> task may have been skipped.</p> <p class="p">Ensure your playbook includes <code class="ph codeph">ansible.mcp_builder.common</code> with <code class="ph codeph">public: true</code> as the first task</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__table_2__entry__1">MCP server fails with permission errors</td> 
+           <td class="entry" headers="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__table_2__entry__2"> <p class="p">The execution environment runs as user 1000 (non-root). Ensure your playbook includes the ownership fix task:</p> 
+            <div class="p"> 
+             <pre class="pre codeblock"><code>- name: Fix ownership of all MCP installations for runtime user
+  ansible.builtin.file:
+    path: "{{ common_mcp_base_path }}"
+    state: directory
+    recurse: true
+    owner: "{{ common_runtime_user }}"
+    group: "{{ common_runtime_user }}"
+ </code></pre> 
+            </div> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__table_2__entry__1">Server listed but not executing</td> 
+           <td class="entry" headers="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__table_2__entry__2"> <p class="p">If <code class="ph codeph">mcp_manage</code> list shows your server but <code class="ph codeph">mcp_manage</code> run fails, check:</p> 
+            <div class="p"> 
+             <ul class="ul" id="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__ul_2"> 
+              <li class="li">The binary exists at the path shown in the manifest.</li> 
+              <li class="li">Required runtime dependencies are present (for example, <code class="ph codeph">Node.js</code> for npm-based servers).</li> 
+              <li class="li">Environment variables required by the server are passed at container runtime.</li> 
+             </ul> 
+            </div> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"><strong class="ph b">Variable validation errors </strong></p> 
+        <table class="table" id="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__table_3">
+         <caption></caption>
+         <colgroup>
+          <col>
+          <col>
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__table_3__entry__1">Error</th> 
+           <th class="entry" id="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__table_3__entry__2">Reason</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__table_3__entry__1">Missing registry variable</td> 
+           <td class="entry" headers="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__table_3__entry__2">The common role expects a registry variable named<code class="ph codeph">&lt;role_name&gt;_registry</code>. Ensure your<code class="ph codeph">defaults/main.yml</code> follows the naming convention. For a role named x<code class="ph codeph">defaults/main.yml</code>, the variable must be<code class="ph codeph">cfn_mcp_registry</code>.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__table_3__entry__1">Invalid language type</td> 
+           <td class="entry" headers="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__table_3__entry__2">The lang field in the registry must be one of: pypi, npm, or go. Any other value causes the install manager to skip installation. However,<code class="ph codeph">generate_manifest.yml</code> will fail with<code class="ph codeph">'dict object' has no attribute 'path' (rc=2)</code> because it expects a variable the skipped installer never set.</td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"><strong class="ph b">Understanding support boundaries</strong></p> 
+        <p class="p">Red Hat provides and supports the following components:</p> 
+        <ul class="ul" id="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__ul_3"> 
+         <li class="li">The <code class="ph codeph">ansible.mcp_builder</code> collection, including the common role and its installation framework.</li> 
+         <li class="li">The ansible-builder tool for creating execution environments. </li> 
+         <li class="li">The execution environment runtime within Ansible Automation Platform.</li> 
+        </ul> 
+        <p class="p">The following are the customer's responsibility:</p> 
+        <ul class="ul" id="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__ul_4"> 
+         <li class="li">Individual MCP server implementations. Red Hat does not support any specific MCP server, including the reference examples (AWS, Azure, GitHub) provided in the <code class="ph codeph">ansible.mcp_builder</code> collection. These examples are Dev Preview.</li> 
+         <li class="li">Custom MCP roles and collections. Your organization owns the creation, testing, and maintenance of custom roles.</li> 
+         <li class="li">MCP server security. Your organization is responsible for evaluating, auditing, and securing the MCP servers you deploy.</li> 
+         <li class="li">MCP server credentials and access controls. Configuring and securing access to external services is your responsibility. </li> 
+        </ul> 
+        <p class="p">If you encounter issues:</p> 
+        <ul class="ul" id="GUID-56d74bdb-173a-4f2b-ae5c-fd06a4f21136__ul_5"> 
+         <li class="li">For problems with ansible-builder, the common role, or the execution environment build process, contact Red Hat support.</li> 
+         <li class="li">For problems with a specific MCP server, contact the MCP server vendor or community. </li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

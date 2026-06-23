@@ -1,0 +1,198 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="ref-projects-manage-playbooks-with-source-control"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Configure playbooks to use source control management (SCM) systems</h1> 
+     <div class="body refbody"> 
+      <p class="shortdesc">Choose one of the following options when managing playbooks by using source control:</p> 
+      <section class="section"> 
+       <ul class="ul"> 
+        <li class="li"> <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_projects_manage_playbooks_with_source_control#proc-scm-git-subversion" title="Configure automation controller projects to synchronize Ansible playbooks directly from Git and Subversion. Integrating with Source Control Management supports collaboration and helps ensure you always deploy the latest automation code.">SCM Types - Configuring playbooks to use Git and Subversion</a> </li> 
+        <li class="li"> <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_projects_manage_playbooks_with_source_control#proc-scm-insights" title="Configure your projects to retrieve Ansible playbooks directly from Red Hat Lightspeed. Integrate with Red Hat Lightspeed to manage and deploy remediation playbooks identified through its analysis of your Red Hat Enterprise Linux environment.">SCM Type - Configuring playbooks to use Red Hat Lightspeed</a> </li> 
+        <li class="li"> <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_projects_manage_playbooks_with_source_control#proc-scm-remote-archive" title="Playbooks that use a remote archive enable projects to be based on a build process that produces a versioned artifact, or release, containing all the requirements for that project in a single archive.">SCM Type - Configuring playbooks to use a remote archive</a> </li> 
+       </ul> 
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-scm-git-subversion"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Configure playbooks to use Git and Subversion SCM types</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Configure automation controller projects to synchronize Ansible playbooks directly from Git and Subversion. Integrating with Source Control Management supports collaboration and helps ensure you always deploy the latest automation code.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">By following these steps, you can ensure your environment always uses the latest version of your playbooks directly from your chosen SCM.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Projects</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click the project name you want to use.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the project <strong class="ph b">Details</strong> tab, click <span class="ph uicontrol button">Edit project</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the appropriate option (Git or Subversion) from the <strong class="ph b">Source control type</strong> menu.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Enter the appropriate details into the following fields: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Source control URL</strong> - See an example in the tooltip .</li> 
+            <li class="li">Optional: <strong class="ph b">Source control branch/tag/commit</strong>: Enter the SCM branch, tags, commit hashes, arbitrary refs, or revision number (if applicable) from the source control (Git or Subversion) to checkout. Some commit hashes and references might not be available unless you also give a custom refspec in the next field. If left blank, the default is <code class="ph codeph">HEAD</code> which is the last checked out Branch, Tag, or Commit for this project.</li> 
+            <li class="li"><strong class="ph b">Source control refspec</strong> - This field is an option specific to git source control and only advanced users familiar and comfortable with git should specify which references to download from the remote repository. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_job_branch_overriding#controller-job-branch-overriding" title="In automation controller, you can configure projects to allow job templates to override the branch, tag, or reference used for source control.">Job branch overriding</a>.</li> 
+            <li class="li"><strong class="ph b">Source control credential</strong> - If authentication is required, select the appropriate source control credential.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: <strong class="ph b">Options</strong> - select the launch behavior, if applicable: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Clean</strong> - Removes any local modifications before performing an update.</li> 
+            <li class="li"><strong class="ph b">Delete</strong> - Deletes the local repository in its entirety before performing an update. Depending on the size of the repository this can significantly increase the amount of time required to complete an update.</li> 
+            <li class="li"><strong class="ph b">Track submodules</strong> - Tracks the latest commit. There is more information in the tooltip <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/question-circle.png" width="15" alt="tooltip">.</li> 
+            <li class="li"><strong class="ph b">Update revision on launch</strong> - Updates the revision of the project to the current revision in the remote source control, and caching the roles directory from <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_projects_manage_playbooks_with_source_control#ref-projects-galaxy-support" title="At the end of a project update, automation controller searches for the requirements.yml file in the roles directory, located at <project-top-level-directory>/roles/requirements.yml.">Ansible Galaxy support</a> or <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_projects_collections_support#ref-projects-collections-support" title="Automation controller supports project-specific Ansible collections in job runs.">Collections support</a>. Automation controller ensures that the local revision matches and that the roles and collections are up-to-date with the last update. In addition, to avoid job overflows if jobs are spawned faster than the project can synchronize, selecting this enables you to configure a Cache Timeout to cache previous project synchronizations for a given number of seconds.</li> 
+            <li class="li"><strong class="ph b">Allow branch override</strong> - Enables a job template or an inventory source that uses this project to start with a specified SCM branch or revision other than that of the project. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_job_branch_overriding#controller-job-branch-overriding" title="In automation controller, you can configure projects to allow job templates to override the branch, tag, or reference used for source control.">Job branch overriding</a>.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Save project</span>.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-scm-insights"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Configure playbooks to use Red Hat Lightspeed</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Configure your projects to retrieve Ansible playbooks directly from Red Hat Lightspeed. Integrate with Red Hat Lightspeed to manage and deploy remediation playbooks identified through its analysis of your Red Hat Enterprise Linux environment.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">This integration streamlines the process of addressing identified vulnerabilities and optimizing system configurations, ensuring your automation aligns with best practices and security recommendations.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Projects</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click the project name you want to use.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the project <strong class="ph b">Details</strong> tab, click <span class="ph uicontrol button">Edit project</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select <strong class="ph b">Red Hat Lightspeed</strong> from the <strong class="ph b">Source Control Type</strong> menu.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Red Hat Lightspeed credential</strong> field, select the appropriate credential for use with Red Hat Lightspeed, as Red Hat Lightspeed requires a credential for authentication.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: In the <strong class="ph b">Options</strong> field, select the launch behavior, if applicable: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Clean</strong> - Removes any local modifications before performing an update.</li> 
+            <li class="li"><strong class="ph b">Delete</strong> - Deletes the local repository in its entirety before performing an update. Depending on the size of the repository this can significantly increase the amount of time required to complete an update.</li> 
+            <li class="li"><strong class="ph b">Update revision on launch</strong> - Updates the revision of the project to the current revision in the remote source control, and caches the roles directory from <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_projects_manage_playbooks_with_source_control#ref-projects-galaxy-support" title="At the end of a project update, automation controller searches for the requirements.yml file in the roles directory, located at <project-top-level-directory>/roles/requirements.yml.">Ansible Galaxy support</a> or <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_projects_collections_support#ref-projects-collections-support" title="Automation controller supports project-specific Ansible collections in job runs.">Collections support</a>. Automation controller ensures that the local revision matches, and that the roles and collections are up-to-date. If jobs are spawned faster than the project can synchronize, selecting this enables you to configure a Cache Timeout to cache previous project synchronizations for a certain number of seconds, to avoid job overflow.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Save project</span>.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-scm-remote-archive"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Configure playbooks to use a remote archive</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Playbooks that use a remote archive enable projects to be based on a build process that produces a versioned artifact, or release, containing all the requirements for that project in a single archive.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Projects</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click the project name you want to use.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the project <strong class="ph b">Details</strong> tab, click <span class="ph uicontrol button">Edit project</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select <strong class="ph b">Remote Archive</strong> from the <strong class="ph b">Source control type</strong> menu.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Enter the appropriate details into the following fields: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Source control URL</strong> - requires a URL to a remote archive, such as a <em class="ph i">GitHub Release</em> or a build artifact stored in <em class="ph i">Artifactory</em> and unpacks it into the project path for use.</li> 
+            <li class="li"><strong class="ph b">Source control credential</strong> - If authentication is required, select the appropriate source control credential.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: In the <strong class="ph b">Options</strong> field, select the launch behavior, if applicable: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Clean</strong> - Removes any local modifications before performing an update.</li> 
+            <li class="li"><strong class="ph b">Delete</strong> - Deletes the local repository in its entirety before performing an update. Depending on the size of the repository this can significantly increase the amount of time required to complete an update.</li> 
+            <li class="li"><strong class="ph b">Update revision on launch</strong> - Not recommended. This option updates the revision of the project to the current revision in the remote source control, and caches the roles directory from <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_projects_manage_playbooks_with_source_control#ref-projects-galaxy-support" title="At the end of a project update, automation controller searches for the requirements.yml file in the roles directory, located at <project-top-level-directory>/roles/requirements.yml.">Ansible Galaxy support</a> or <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_projects_collections_support#ref-projects-collections-support" title="Automation controller supports project-specific Ansible collections in job runs.">Collections support</a>.</li> 
+            <li class="li"><strong class="ph b">Allow branch override</strong> - Not recommended. This option enables a job template that uses this project to launch with a specified SCM branch or revision other than that of the project’s. 
+             <div class="note note note_note"> <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">Since this source control type is intended to support the concept of unchanging artifacts, it is advisable to disable Galaxy integration (for roles, at a minimum).</p> 
+              </div> 
+             </div> </li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Save project</span>.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="proc-controller-updating-a-project"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Updating projects from source control</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Regularly updating your projects ensures your Ansible Automation Platform environment is synchronized with the latest versions of playbooks, roles, and collections from your integrated SCM repositories.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Projects</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click the sync <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/sync.png" width="15" alt="Sync"> icon next to the project that you want to update. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note"> <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">Immediately after adding a project setup to use source control, a sync starts that fetches the project details from the configured source control.</p> 
+            </div> 
+           </div> 
+           <ul class="ul"> 
+            <li class="li">Click the project’s status under the <strong class="ph b">Status</strong> column for further information about the update process.</li> 
+           </ul> 
+          </div> </li> 
+        </ol> 
+       </section> 
+       <section class="section result"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Results</h3> 
+        </div> 
+        <p class="p">This brings you to the <strong class="ph b">Output</strong> tab of the <strong class="ph b">Jobs</strong> section.</p> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title6" id="ref-projects-galaxy-support"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Reuse prebuilt automation by referencing roles</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">At the end of a project update, automation controller searches for the <code class="ph codeph">requirements.yml</code> file in the <code class="ph codeph">roles</code> directory, located at <code class="ph codeph">&lt;project-top-level-directory&gt;/roles/requirements.yml</code>.</p> 
+       <section class="section"> 
+        <p class="p">If this file is found, the following command automatically runs:</p> 
+        <pre class="pre">ansible-galaxy role install -r roles/requirements.yml -p &lt;project-specific cache location&gt;/requirements_roles -vvv</pre> 
+        <p class="p">This file enables you to reference Ansible Galaxy roles or roles within other repositories which can be checked out in conjunction with your own project. The addition of Ansible Galaxy access eliminates the need to create git submodules to achieve this result. Given that SCM projects, along with roles or collections, are pulled into and executed from a private job environment, a <code class="ph codeph">&lt;private job directory&gt;</code> specific to the project within <code class="ph codeph">/tmp</code> is created by default.</p> 
+        <p class="p">The cache directory is a subdirectory inside the global projects folder. You can copy the content from the cache location to <code class="ph codeph">&lt;job private directory&gt;/requirements_roles</code>.</p> 
+        <p class="p">By default, automation controller has a system-wide setting that enables you to dynamically download roles from the <code class="ph codeph">roles/requirements.yml</code> file for SCM projects. You can turn off this setting in the <strong class="ph b">Job Settings</strong> screen from the navigation panel <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Job</span></span>, by unchecking the <strong class="ph b">Enable Role Download</strong> box.</p> 
+        <p class="p">Whenever a project synchronization runs, automation controller determines if the project source and any roles from Galaxy or Collections are out of date with the project. Project updates download the roles inside the update.</p> 
+        <p class="p">If jobs need to pick up a change made to an upstream role, updating the project ensures that this happens. A change to the role means that a new commit was pushed to the <em class="ph i">provision-role</em> source control.</p> 
+        <p class="p">To make this change take effect in a job, you do not have to push a new commit to the <em class="ph i">playbooks</em> repository. You must update the project, which downloads roles to a local cache.</p> 
+        <p class="p">For instance, say you have two git repositories in source control. The first one is <em class="ph i">playbooks</em> and the project in automation controller points to this URL. The second one is <em class="ph i">provision-role</em> and it is referenced by the <code class="ph codeph">roles/requirements.yml</code> file inside of the <em class="ph i">playbooks</em> git repository.</p> 
+        <p class="p">Jobs download the most recent roles before every job run. Roles and collections are locally cached for performance reasons. You must select <strong class="ph b">Update revision on launch</strong> in the project <strong class="ph b">Options</strong> to ensure that the upstream role is re-downloaded before each job run:</p> 
+        <p class="p"> <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/projects-scm-update-options-update-on-launch-checked.png" alt="update-on-launch"> </p> 
+        <p class="p">The update happens much earlier in the process than the sync, so this identifies errors and details faster and in a more logical location.</p> 
+        <p class="p">If there are any directories that must be specifically exposed, you can specify those in the <strong class="ph b">Job Settings</strong> screen from the navigation panel <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Job</span></span>, in <strong class="ph b">Paths to expose to isolated Jobs</strong>. You can also update the following entry in the settings file:</p> 
+        <pre class="pre">AWX_ISOLATION_SHOW_PATHS = ['/list/of/', '/paths']</pre> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">If your playbooks need to use keys or settings defined in <code class="ph codeph">AWX_ISOLATION_SHOW_PATHS</code>, you must add <code class="ph codeph">AWX_ISOLATION_SHOW_PATHS</code> to <code class="ph codeph">/var/lib/awx/.ssh</code>.</p> 
+         </div> 
+        </div> 
+        <p class="p">If you made changes in the settings file, be sure to restart services with the <code class="ph codeph">automation-controller-service restart</code> command after your changes have been saved.</p> 
+        <p class="p">In the UI, you can configure these settings in the <strong class="ph b">Jobs Settings</strong> window.</p> 
+        <p class="p"> <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/configure-controller-jobs-path-to-expose.png" alt="Configure jobs"> </p> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

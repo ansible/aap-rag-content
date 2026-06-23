@@ -1,0 +1,234 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="eda-rulebook-troubleshooting"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Troubleshoot failed event-driven automation triggers</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Rulebook activations might occasionally fail due to various reasons. While many issues can be resolved through basic checks, diagnosing failures across a distributed system requires robust logging.</p> 
+      <p class="p">Event-Driven Ansible’s enhanced logging strategy includes the addition of unique tracking identifiers to all output to significantly improve troubleshooting.</p> 
+      <p class="p">Review the list of possible issues contained in this chapter that can cause activation failures and suggestions on how you can resolve them. For detailed log filtering using the new identifiers, see Event-Driven Ansible log filtering.</p> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist relconcepts">
+       <strong>Related concepts</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_rulebook_troubleshooting#eda-log-filtering" title="Event-Driven Ansible includes tracking identifiers in all log output to significantly improve troubleshooting. These identifiers help track user actions and activation processes across multiple services and log files.">Event-Driven Ansible log filtering</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="eda-log-filtering"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Event-Driven Ansible log filtering</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Event-Driven Ansible includes tracking identifiers in all log output to significantly improve troubleshooting. These identifiers help track user actions and activation processes across multiple services and log files.</p> 
+       <table class="table">
+        <caption>
+         <span class="table--title-label">Table 1. </span><span class="title">Event-Driven Ansible log tracking IDs</span>
+        </caption>
+        <colgroup>
+         <col style="width:25%">
+         <col style="width:25%">
+         <col style="width:25%">
+         <col style="width:25%">
+        </colgroup>
+        <thead class="thead"> 
+         <tr class="row"> 
+          <th class="entry" id="eda-log-filtering__entry__1">Identifier</th> 
+          <th class="entry" id="eda-log-filtering__entry__2">Abbreviation</th> 
+          <th class="entry" id="eda-log-filtering__entry__3">Purpose</th> 
+          <th class="entry" id="eda-log-filtering__entry__4">Location</th> 
+         </tr> 
+        </thead>
+        <tbody class="tbody"> 
+         <tr class="row"> 
+          <td class="entry" headers="eda-log-filtering__entry__1"> <p class="p">X-REQUEST-ID</p> </td> 
+          <td class="entry" headers="eda-log-filtering__entry__2"> <p class="p"> <code class="ph codeph">rid</code> </p> </td> 
+          <td class="entry" headers="eda-log-filtering__entry__3"> <p class="p">Tracks HTTP requests from the platform gateway through the entire Event-Driven Ansible request lifecycle. Use this to correlate UI actions or API calls with backend processing.</p> </td> 
+          <td class="entry" headers="eda-log-filtering__entry__4"> <p class="p">Included in the HTTP response headers and Event-Driven Ansible log entries.</p> </td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="eda-log-filtering__entry__1"> <p class="p">Log Tracking ID</p> </td> 
+          <td class="entry" headers="eda-log-filtering__entry__2"> <p class="p"> <code class="ph codeph">tid</code> </p> </td> 
+          <td class="entry" headers="eda-log-filtering__entry__3"> <p class="p">Tracks the <strong class="ph b">activation lifecycle</strong> from creation through completion, persisting across restarts and multiple log files.</p> </td> 
+          <td class="entry" headers="eda-log-filtering__entry__4"> <p class="p">Included in all activation-related log entries. It can be obtained from the activation <strong class="ph b">History</strong> tab in the UI.</p> </td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="eda-log-filtering__entry__1"> <p class="p">Activation Instance ID</p> </td> 
+          <td class="entry" headers="eda-log-filtering__entry__2"> <p class="p"> <code class="ph codeph">aiid</code> </p> </td> 
+          <td class="entry" headers="eda-log-filtering__entry__3"> <p class="p">Identifies the logs specific to a single execution instance of a rulebook activation, allowing you to view <code class="ph codeph">ansible-rulebook</code> output for that run.</p> </td> 
+          <td class="entry" headers="eda-log-filtering__entry__4"> <p class="p">Included in activation logs.</p> </td> 
+         </tr> 
+        </tbody>
+       </table> 
+       <div class="note note note_note">
+        <span class="note__title">Note:</span> 
+        <div class="note__body"> 
+         <p class="p">Not all processes originate from a user or external client. When an Event-Driven Ansible orchestrator internally triggers a process (for example, a monitor request), the <code class="ph codeph">rid</code> UUID is generated internally to track that process lifecycle and will not be present in the platform gateway logs.</p> 
+        </div>
+       </div> 
+       <p class="p">The enhanced log format places these identifiers at the start of the message, making them easy to filter:</p> 
+       <pre class="pre codeblock"><code>`[rid: &lt;UUID&gt;] [tid: &lt;UUID&gt;] [aiid: &lt;ID&gt;] aap_eda.tasks.orchestrator Processing request...`</code></pre> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="eda-using-log-filtering"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Use log filtering for troubleshooting</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Learn to filter logs using specialized tracking identifiers for efficient troubleshooting of activation issues and API request lifecycles.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd"> <strong class="ph b">Collect identifiers:</strong> </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">When an issue occurs, retrieve the <strong class="ph b">Log Tracking ID</strong> (<code class="ph codeph">tid</code>) from the failed activation instance’s logs in the UI <strong class="ph b">History tab</strong>.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">If the issue was triggered by a user action (like restarting an activation), obtain the <strong class="ph b">X-REQUEST-ID</strong> (<code class="ph codeph">rid</code>) from the HTTP response headers.</span> </li> 
+          </ol> </li>
+         <li class="li step"> <span class="ph cmd"> <strong class="ph b">Search system logs:</strong> </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">Use the collected UUID to search through your backend logs (worker, scheduler, API, and the like.). This filters out irrelevant noise, allowing you to focus on the full timeline of the specific request or activation across all services.</span> </li> 
+          </ol> </li>
+         <li class="li step"> <span class="ph cmd"> <strong class="ph b">Correlate timeline:</strong> </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">Use the common <code class="ph codeph">tid</code> to follow the activation’s progress (or failure) across different log files and services.</span> </li> 
+          </ol> </li>
+         <li class="li step"> <span class="ph cmd"> <strong class="ph b">Use support tools:</strong> </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">If necessary, use <code class="ph codeph">sosreport</code> or <code class="ph codeph">mustgather</code> tools, which automatically collect all relevant Event-Driven Ansible logs from <code class="ph codeph">/var/log/ansible-automation-platform/eda/</code>.</span> </li> 
+          </ol> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="eda-activation-stuck-pending"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Resolve rulebook activations stuck in pending state</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Diagnose and resolve issues preventing a rulebook activation from transitioning from Pending to a running, operational state.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <div class="ol steps">
+         <div class="li step p"> <span class="ph cmd">Confirm whether there are other running activations and if you have reached the limits (for example, memory or CPU limits). </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">If there are other activations running, terminate one or more of them, if possible.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">If not, verify that the <code class="ph codeph">dispatcherd</code> service and the PostgreSQL database are running and reachable.</span> 
+            <div class="itemgroup info"> 
+             <ul class="ul" id="eda-activation-stuck-pending__ul_1"> 
+              <li class="li">Use the <code class="ph codeph">dispatcherctl alive</code> command to verify the health and availability of background task workers.</li> 
+              <li class="li">Check the status of the <strong class="ph b">PostgreSQL</strong> service to ensure it can accept connections, as a database failure will prevent activations from transitioning out of the <span class="ph uicontrol">Pending</span> state.</li> 
+             </ul> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">If all systems are working as expected, check your eda-server internal logs in the worker, scheduler, API, and nginx containers and services to see if the problem can be determined. These logs reveal the source of the issue, such as an exception thrown by the code, a runtime error with network issues, or an error with the rulebook code. If your internal logs do not provide information that leads to resolution, report the issue to Red Hat support.</span> </li> 
+          </ol> 
+         </div>
+        </div>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="eda-activation-keeps-restarting"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Fix rulebook activations stuck in a restart loop</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Troubleshoot rulebook activations that restart repeatedly (indicating persistent errors) to diagnose and fix core issues preventing stable, continuous automation execution.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Decisions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Rulebook Activations</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">From the <strong class="ph b">Rulebook Activations</strong> page, select the activation in your list that keeps restarting. The Details page is displayed.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click the <strong class="ph b">History</strong> tab for more information and select the rulebook activation that keeps restarting. The Details tab is displayed and shows the output information.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Check the <strong class="ph b">Restart policy</strong> field for your activation. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">There are three selections available: <strong class="ph b">On failure</strong> (restarts a rulebook activation when the container process fails), <strong class="ph b">Always</strong> (always restarts regardless of success or failure with no more than 5 restarts), or <strong class="ph b">Never</strong> (never restarts when the container process ends).</p> 
+          </div> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">Confirm that your rulebook activation Restart policy is set to <strong class="ph b">On failure</strong>. This is an indication that an issue is causing it to fail.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">To possibly diagnose the problem, check the YAML code and the instance logs of the rulebook activation for errors.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">If you cannot find a solution with the restart policy values, proceed to the next steps related to the <strong class="ph b">Log level</strong>.</span> </li> 
+          </ol> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Check your log level for your activation. </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">If your default log level is <strong class="ph b">Error</strong>, go back to the <strong class="ph b">Rulebook Activation</strong> page and recreate your activation following procedures in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_rulebook_activations#eda-set-up-rulebook-activation" title="Create a rulebook activation to link a rulebook to a decision environment and event sources, initiating the event-driven automation process.">Setting up rulebook a activation</a>.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Change the <strong class="ph b">Log level</strong> to <strong class="ph b">Debug</strong>.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Run the activation again and navigate to the <strong class="ph b">History</strong> tab from the activation details page.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">On the <strong class="ph b">History</strong> page, click one of your recent activations and view the <strong class="ph b">Output</strong>.</span> </li> 
+          </ol> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="eda-activation-not-processing-event"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Resolve event processing failures in rulebook activations</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Troubleshoot why a running rulebook activation is failing to process events, focusing on common causes like source definition mismatches or internal processing errors.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd"><strong class="ph b">Check the rulebook source:</strong> Review the source plugin defined in your rulebook YAML (for example, ansible.eda.webhook, ansible.eda.kafka).</span> </li>
+         <li class="li step"> <span class="ph cmd"><strong class="ph b">Verify event input:</strong> Confirm that the events you are sending to Event-Driven Ansible controller are compatible with the source plugin defined in the rulebook. If the rulebook expects a Kafka message, it cannot process a generic webhook event.</span> </li>
+         <li class="li step"> <span class="ph cmd"><strong class="ph b">Confirm activation mapping:</strong> If you are using event streams, ensure the correct event stream is mapped to the rulebook during the activation setup. A mismatch here will result in the activation receiving no data.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title7" id="eda-activation-receives-events-no-actions"> 
+      <h2 class="title topictitle2" id="ariaid-title7">Troubleshoot actions that fail to trigger after receiving events</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">If your rulebook activation is <strong class="ph b">Running</strong> and successfully receiving events, but no actions are being executed, the issue is likely within the logic of your rulebook.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd"><strong class="ph b">Check rule conditions:</strong> Review the rulebook YAML to confirm that the conditions (the when statements) are accurately written and precisely match the structure and values of the incoming event payload.</span> </li>
+         <li class="li step"> <span class="ph cmd"><strong class="ph b">Verify indentation and syntax:</strong> Ensure all rulebook syntax and indentation are correct, as a simple error can prevent the rule engine from evaluating conditions.</span> </li>
+         <li class="li step"> <span class="ph cmd"><strong class="ph b">Validate actions:</strong> Confirm that the specified action is a recognized and correctly configured action (for example, <code class="ph codeph">run_job_template</code> with the proper arguments).</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title8" id="eda-event-streams-not-sending-events"> 
+      <h2 class="title topictitle2" id="ariaid-title8">Troubleshoot event streams that fail to send events</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Diagnose issues where an event stream is receiving data but failing to forward it, ensuring proper connectivity and correct credential setup.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <div class="ul steps-unordered">
+         <div class="li step p"> <span class="ph cmd">Try the following options to resolve this. </span> 
+          <ol class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Ensure that each of your event streams in Event-Driven Ansible controller is <em class="ph i">not</em> in <strong class="ph b">Test</strong> mode . This means activations would not receive the events.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Verify that the origin service is sending the request properly.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Check that the network connection to your platform gateway instance is stable. If you have set up event streams, this is the entry of the event stream request from the sender.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Verify that the proxy in the platform gateway is running.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Confirm that the event stream worker is up and running, and able to process the request.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Verify that your credential is correctly set up in the event stream.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Confirm that the request complies with the authentication mechanism determined by the set credential (for example, basic must contain a header with the credentials or HMAC must contain the signature of the content in a header, and similar). </span> 
+            <div class="itemgroup info"> 
+             <div class="note note note_note">
+              <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">The credentials might have been changed in Event-Driven Ansible controller, but not updated in the origin service.</p> 
+              </div>
+             </div> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Verify that the rulebook that is running in the activation reacts to these events. This would indicate that you wrote down the event source <em class="ph i">and</em> added actions that consume the events coming in. Otherwise, the event does reach the activation but there is nothing to activate it.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">If you are using self-signed certificates, you might want to disable certificate validation when sending webhooks from vendors. Most of the vendors have an option to disable certificate validation for testing or non-production environments.</span> </li> 
+          </ol> 
+         </div>
+        </div>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

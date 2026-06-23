@@ -1,0 +1,165 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-configuring-proxy-support"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Configure proxy support to manage network configuration</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">You can configure Red Hat Ansible Automation Platform to communicate with traffic by using a proxy. Proxy servers act as an intermediary for requests from clients seeking resources from other servers.</p> 
+      <p class="p">A client connects to the proxy server, requesting some service or available resource from a different server, and the proxy server evaluates the request as a way to simplify and control its complexity. The following sections describe the supported proxy configurations and how to set them up.</p> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist relinfo">
+       <strong>Related information</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/sticky-sessions.html" target="_blank" rel="external noopener">Sticky sessions for your Application Load Balancer</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-enable-proxy-support"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Enable proxy support through a load balancer</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">A proxy server acts as an intermediary for requests from clients seeking resources from other servers. There are two types of proxy servers: forward proxies and reverse proxies.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">A forward proxy deals with client traffic, regulating and securing it. To provide proxy server support, automation controller handles proxied requests (such as ALB, NLB , HAProxy, Squid, Nginx and tinyproxy in front of automation controller) using the <strong class="ph b">REMOTE_HOST_HEADERS</strong> list variable in the automation controller settings. By default, <strong class="ph b">REMOTE_HOST_HEADERS</strong> is set to <code class="ph codeph">["REMOTE_ADDR", "REMOTE_HOST"]</code>.</p> 
+        <p class="p">To enable proxy server support, edit the <strong class="ph b">REMOTE_HOST_HEADERS</strong> field in the settings page for your automation controller:</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Edit</span></span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Remote Host Headers</strong> field, enter the following values: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>[
+  "HTTP_X_FORWARDED_FOR",
+  "REMOTE_ADDR",
+  "REMOTE_HOST"
+]</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Save</span> to save your settings.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Automation controller determines the remote host’s IP address by searching through the list of headers in <strong class="ph b">Remote Host Headers</strong> until the first IP address is located.</p> 
+       </section> 
+      </div> 
+      <article class="topic task nested2" aria-labelledby="ariaid-title3" id="proc-known-proxies"> 
+       <h3 class="title topictitle3" id="ariaid-title3">About known proxies</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">When automation controller is configured with <code class="ph codeph">REMOTE_HOST_HEADERS = ['HTTP_X_FORWARDED_FOR', 'REMOTE_ADDR', 'REMOTE_HOST']</code>, it assumes that the value of <code class="ph codeph">X-Forwarded-For</code> has originated from the load balancer sitting in front of automation controller.</p> 
+        <section class="section context">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">About this task</h4>
+         </div> 
+         <p class="p">If automation controller is reachable without use of the load balancer, or if the proxy does not validate the header, the value of <code class="ph codeph">X-Forwarded-For</code> can be falsified to fake the originating IP addresses.</p> 
+         <p class="p">Using <code class="ph codeph">HTTP_X_FORWARDED_FOR</code> in the <code class="ph codeph">REMOTE_HOST_HEADERS</code> setting poses a vulnerability.</p> 
+         <p class="p">To avoid this, you can configure a list of known proxies that are allowed.</p> 
+        </section> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System</span></span>.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Enter a list of proxy IP addresses from which the service should trust custom remote header values in the <strong class="ph b">Proxy IP Allowed List</strong> field. </span> 
+           <div class="itemgroup info"> 
+            <div class="note note note_note">
+             <span class="note__title">Note:</span> 
+             <div class="note__body"> 
+              <p class="p">Load balancers and hosts that are not on the known proxies list result in a rejected request.</p> 
+             </div>
+            </div> 
+           </div> </li>
+         </ol>
+        </section> 
+       </div> 
+      </article>
+      <article class="topic task nested2" aria-labelledby="ariaid-title4" id="proc-configuring-known-proxies"> 
+       <h3 class="title topictitle3" id="ariaid-title4">Configure known proxies</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">Learn how to configure a list of known proxies for your automation controller, add the proxy IP addresses to the <strong class="ph b">Proxy IP Allowed List</strong> field in the System Settings page.</p> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System</span></span>.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Proxy IP Allowed List</strong> field, enter IP addresses that are permitted to connect to your automation controller, using the syntax in the following example: </span> 
+           <div class="itemgroup info"> 
+            <p class="p"> <strong class="ph b">Example Proxy IP Allowed List</strong> </p> 
+            <pre class="pre codeblock"><code>[
+  "example1.proxy.com:8080",
+  "example2.proxy.com:8080"
+]</code></pre> 
+            <div class="note important note_important">
+             <span class="note__title">Important:</span> 
+             <div class="note__body"> 
+              <ul class="ul"> 
+               <li class="li"><strong class="ph b">Proxy IP Allowed List</strong> requires proxies in the list are properly sanitizing header input and correctly setting an <code class="ph codeph">X-Forwarded-For</code> value equal to the real source IP of the client. Automation controller can rely on the IP addresses and hostnames in <strong class="ph b">Proxy IP Allowed List</strong> to provide non-spoofed values for <code class="ph codeph">X-Forwarded-For</code>.</li> 
+               <li class="li">Do not configure <code class="ph codeph">HTTP_X_FORWARDED_FOR</code> as an item in <strong class="ph b">Remote Host Headers</strong> unless <strong class="ph b">all</strong> of the following conditions are satisfied: 
+                <ul class="ul"> 
+                 <li class="li">You are using a proxied environment with ssl termination;</li> 
+                 <li class="li">The proxy provides sanitization or validation of the <code class="ph codeph">X-Forwarded-For</code> header to prevent client spoofing;</li> 
+                 <li class="li"><code class="ph codeph">/etc/tower/conf.d/remote_host_headers.py</code> defines <code class="ph codeph">PROXY_IP_ALLOWED_LIST</code> that contains only the originating IP addresses of trusted proxies or load balancers.</li> 
+                </ul> </li> 
+              </ul> 
+             </div>
+            </div> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Save</span> to save the settings.</span> </li>
+         </ol>
+        </section> 
+       </div> 
+      </article>
+      <article class="topic task nested2" aria-labelledby="ariaid-title5" id="proc-configuring-reverse-proxy"> 
+       <h3 class="title topictitle3" id="ariaid-title5">Configure a reverse proxy through a load balancer</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">A reverse proxy manages external requests, providing load balancing and security. To support this, add <code class="ph codeph">HTTP_X_FORWARDED_FOR</code> to the <strong class="ph b">Remote Host Headers</strong> in System Settings. This header identifies the client’s original IP address when connecting through a proxy or load balancer.</p> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System</span></span>.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Remote Host Headers</strong> field, enter the following values: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>[
+  "HTTP_X_FORWARDED_FOR",
+  "REMOTE_ADDR",
+  "REMOTE_HOST"
+]</code></pre> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Add the lines below to <code class="ph codeph">/etc/tower/conf.d/custom.py</code> to ensure the application uses the correct headers: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>USE_X_FORWARDED_PORT = True
+USE_X_FORWARDED_HOST = True</code></pre> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Save</span> to save the settings.</span> </li>
+         </ol>
+        </section> 
+       </div> 
+      </article>
+      <article class="topic concept nested2" aria-labelledby="ariaid-title6" id="con-sticky-sessions"> 
+       <h3 class="title topictitle3" id="ariaid-title6">Enable sticky sessions for automation hub</h3> 
+       <div class="body conbody">
+        <p class="shortdesc">By default, an application load balancer routes each request independently to a registered target based on the chosen load balancing algorithm.</p> 
+        <p class="p">To avoid authentication errors when running multiple instances of automation hub behind a load balancer, you must enable sticky sessions. Enabling sticky sessions sets a custom application cookie that matches the cookie configured on the load balancer to enable stickiness. This custom cookie can include any of the cookie attributes required by the application.</p> 
+       </div> 
+      </article>
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

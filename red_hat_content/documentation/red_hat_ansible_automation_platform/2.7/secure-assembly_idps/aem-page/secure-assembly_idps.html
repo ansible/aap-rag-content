@@ -1,0 +1,163 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-idps"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Automate network intrusion detection and prevention systems</h1> 
+     <p class="shortdesc">You can use Ansible Automation Platform to automate your <em class="ph i">Intrusion Detection and Prevention System</em> (IDPS). In this section, we use Snort as the IDPS. Use automation hub to consume content collections, such as tasks, roles, and modules to create automated workflows.</p> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="con-requirements"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Requirements and prerequisites</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">Before you begin automating your IDPS with Ansible Automation Platform, ensure that you have the proper installations and configurations necessary to successfully manage your IDPS.</p> 
+       <ul class="ul"> 
+        <li class="li">You have installed Ansible-core 2.15 or later.</li> 
+        <li class="li">SSH connection and keys are configured.</li> 
+        <li class="li">IDPS software (Snort) is installed and configured.</li> 
+        <li class="li">You have access to the IDPS server (Snort) to enforce new policies.</li> 
+       </ul> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-verifying-ids-install"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Verify your IDPS installation</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Use the following procedure to verify that Snort has been configured successfully:</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Call snort using <code class="ph codeph">sudo</code> and ask for the version: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>  $ sudo snort --version
+
+   ,,_     -*&gt; Snort! &lt;*-
+  o"  )~   Version 2.9.13 GRE (Build 15013)
+  ""    By Martin Roesch &amp; The Snort Team: http://www.snort.org/contact#team
+        Copyright (C) 2014-2019 Cisco and/or its affiliates. All rights reserved.
+        Copyright (C) 1998-2013 Sourcefire, Inc., et al.
+        Using libpcap version 1.5.3
+        Using PCRE version: 8.32 2012-11-30
+        Using ZLIB version: 1.2.7</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Verify that the service is actively running using the following command: </span> 
+          <div class="itemgroup info"> 
+           <p class="p"><code class="ph codeph">sudo systemctl</code>:</p> 
+           <pre class="pre codeblock"><code>$ sudo systemctl status snort
+● snort.service - Snort service
+   Loaded: loaded (/etc/systemd/system/snort.service; enabled; vendor preset: disabled)
+   Active: active (running) since Mon 2019-08-26 17:06:10 UTC; 1s ago
+  Main PID: 17217 (snort)
+   CGroup: /system.slice/snort.service
+           └─17217 /usr/sbin/snort -u root -g root -c /etc/snort/snort.conf -i eth0 -p -R 1 --pid-path=/var/run/snort --no-interface-pidfile --nolock-pidfile
+[...]</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">If the Snort service is not actively running, restart it with <code class="ph codeph">systemctl restart snort</code> and recheck the status.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">When you confirm that the service is actively running, exit the Snort server by simultaneously pressing <code class="ph codeph">CTRL</code> and <code class="ph codeph">D</code>, or by typing <code class="ph codeph">exit</code> on the command line. All further interaction will be done through Ansible Automation Platform from the Ansible control host.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title4" id="con-automate-ids-rules"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Automate your IDPS rules with Ansible Automation Platform</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">To automate your IDPS, use the <code class="ph codeph">ids_rule</code> role to create and change Snort rules. Snort uses rule-based language that analyzes your network traffic and compares it against the given rule set.</p> 
+       <p class="p">The following lab environment demonstrates what an Ansible security automation integration would look like. A machine called “Attacker” simulates a potential attack pattern on the target machine on which the IDPS is running.</p> 
+       <p class="p">Keep in mind that a real world setup will feature other vendors and technologies.</p> 
+       <br> 
+       <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/security-ids-sample-demo.png" alt="Sample Ansible security automation integration"> 
+       <br> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="proc-creating-ids-rule"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Create a new IDPS rule</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Use the <code class="ph codeph">ids_rule</code> role to manage your rules and signatures for IDPS.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You need <code class="ph codeph">root</code> privileges to make any changes on the Snort server.</li> 
+        </ul> 
+       </section> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">For example, you can set a new rule that looks for a certain pattern aligning with a previous attack on your firewall.</p> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Currently, the <code class="ph codeph">ids_rule</code> role only supports Snort IDPS.</p> 
+         </div> 
+        </div> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Install the <code class="ph codeph">ids_rule</code> role using the ansible-galaxy command: </span> 
+          <div class="itemgroup info"> 
+           <p class="p"> <code class="ph codeph">$ ansible-galaxy install ansible_security.ids_rule</code> </p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Create a new playbook file titled <code class="ph codeph">add_snort_rule.yml</code>. Set the following parameters: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>- name: Add Snort rule
+  hosts: snort</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Add the <code class="ph codeph">become</code> flag to ensure that Ansible handles privilege escalation. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>- name: Add Snort rule
+  hosts: snort
+  become: true</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Specify the name of your IDPS provider by adding the following variables: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>- name: Add Snort rule
+  hosts: snort
+  become: true
+
+  vars:
+    ids_provider: snort</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Add the following tasks and task-specific variables, for example, rules, Snort rules file, and the state of the rule - present or absent, to the playbook: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>- name: Add Snort rule
+  hosts: snort
+  become: true
+
+  vars:
+    ids_provider: snort
+
+  tasks:
+    -  name: Add snort password attack rule
+       include_role:
+         name: "ansible_security.ids_rule"
+       vars:
+         ids_rule: 'alert tcp any any -&gt; any any (msg:"Attempted /etc/passwd Attack"; uricontent:"/etc/passwd"; classtype:attempted-user; sid:99000004; priority:1; rev:1;)'
+         ids_rules_file: '/etc/snort/rules/local.rules'
+         ids_rule_state: present</code></pre> 
+           <p class="p">Tasks are components that make changes on the target machine. Since you are using a role that defines these tasks, the <code class="ph codeph">include_role</code> is the only entry you need.</p> 
+           <p class="p">The <code class="ph codeph">ids_rules_file</code> variable specifies a defined location for the <code class="ph codeph">local.rules</code> file, while the <code class="ph codeph">ids_rule_state</code> variable indicates that the rule should be created if it does not already exist.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Run the playbook by executing the following command: </span> 
+          <div class="itemgroup info"> 
+           <p class="p"> <code class="ph codeph">$ ansible-navigator run add_snort_rule.ym --mode stdout</code> </p> 
+           <p class="p">When the playbook runs, all of your tasks will be executed in addition to your newly created rules. Your playbook output confirms your PLAY, TASK, RUNNING HANDLER, and PLAY RECAP.</p> 
+          </div> </li> 
+        </ol> 
+       </section> 
+       <section class="section result"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Results</h3> 
+        </div> 
+        <p class="p">To verify that your IDPS rules were successfully created, SSH to the Snort server and view the content of the <code class="ph codeph">/etc/snort/rules/local.rules</code> file.</p> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

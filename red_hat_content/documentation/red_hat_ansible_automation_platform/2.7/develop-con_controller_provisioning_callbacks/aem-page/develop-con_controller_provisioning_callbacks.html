@@ -1,0 +1,143 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="controller-provisioning-callbacks"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Increase capacity through cloud bursting by provisioning callbacks</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Provisioning Callbacks are a feature of automation controller that enable a host to start a playbook run against itself, rather than waiting for a user to launch a job to manage the host from the automation controller console.</p> 
+      <p class="p">Provisioning Callbacks are only used to run playbooks on the calling host and are meant for cloud bursting. Cloud bursting is a cloud computing configuration that enables a private cloud to access public cloud resources by "bursting" into a public cloud when computing demand spikes.</p> 
+      <p class="p"> <strong class="ph b">Example</strong> </p> 
+      <p class="p">New instances with a need for client to server communication for configuration, such as transmitting an authorization key, not to run a job against another host. This provides for automatically configuring the following:</p> 
+      <ul class="ul"> 
+       <li class="li">A system after it has been provisioned by another system (such as AWS auto-scaling, or an operating system provisioning system such as Kickstart or preseed).</li> 
+       <li class="li">Launching a job programmatically without invoking the automation controller API directly.</li> 
+      </ul> 
+      <p class="p">The job template launched only runs against the host requesting the provisioning.</p> 
+      <p class="p">This is often accessed with a firstboot type script or from <code class="ph codeph">cron</code>.</p> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="controller-enable-provision-callbacks"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Enable Provisioning Callbacks</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Use the following procedure to enable provisioning callbacks for a job template.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <div class="ul steps-unordered">
+         <div class="li step p"> <span class="ph cmd">To enable callbacks, check the <strong class="ph b">Provisioning callback</strong> option in the job template. This displays <strong class="ph b">Provisioning callback details</strong> for the job template. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">If you intend to use automation controller’s provisioning callback feature with a dynamic inventory, set <strong class="ph b">Update on Launch</strong> for the inventory group used in the job template.</p> 
+            </div>
+           </div> 
+           <p class="p">Callbacks also require a host config key, to ensure that foreign hosts with the URL cannot request configuration. Give a custom value for the <strong class="ph b">Host config key</strong>. The host key can be reused across many hosts to apply this job template against multiple hosts. If you want to control what hosts are able to request configuration, you can change the key can at any time.</p> 
+          </div> 
+         </div>
+        </div>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="controller-use-REST-manually"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Use REST manually to callback</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can use the REST API to trigger automation controller callbacks manually.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Examine the callback URL in the UI, in the form: https://&lt;CONTROLLER_SERVER_NAME&gt;/api/v2/job_templates/7/callback/ </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">The "7" in the sample URL is the job template ID in automation controller.</li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Ensure that the request from the host is a POST. The following is an example using <code class="ph codeph">curl</code> (all on a single line): </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre">curl -k -i -H 'Content-Type:application/json' -XPOST -d '{"host_config_key": "redhat"}' \
+                  https://&lt;CONTROLLER_SERVER_NAME&gt;/api/v2/job_templates/7/callback/</pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Ensure that the requesting host is defined in your inventory for the callback to succeed.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Successful requests result in an entry on the <strong class="ph b">Jobs</strong> tab, where you can view the results and history. You can access the callback by using REST, but the suggested method of using the callback is to use one of the example scripts that includes automation controller:</p> 
+        <ul class="ul"> 
+         <li class="li"><code class="ph codeph">/usr/share/awx/request_tower_configuration.sh</code> (Linux/UNIX)</li> 
+         <li class="li"><code class="ph codeph">/usr/share/awx/request_tower_configuration.ps1</code> (Windows)</li> 
+        </ul> 
+        <p class="p">Their usage is described in the source code of the file by passing the <code class="ph codeph">-h</code> flag, as the following shows:</p> 
+        <pre class="pre codeblock"><code>./request_tower_configuration.sh -h
+Usage: ./request_tower_configuration.sh &lt;options&gt;
+
+
+Request server configuration from Ansible Tower.
+
+
+OPTIONS:
+ -h      Show this message
+ -s      Controller server (e.g. https://ac.example.com) (required)
+ -k      Allow insecure SSL connections and transfers
+ -c      Host config key (required)
+ -t      Job template ID (required)
+ -e      Extra variables</code></pre> 
+        <p class="p">This script can retry commands and is therefore a more robust way to use callbacks than a simple <code class="ph codeph">curl</code> request. The script retries once per minute for up to ten minutes.</p> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">This is an example script. Edit this script if you need more dynamic behavior when detecting failure scenarios, as any non-200 error code might not be a transient error requiring retry.</p> 
+         </div>
+        </div> 
+        <p class="p">You can use callbacks with dynamic inventory in automation controller. For example, when pulling cloud inventory from one of the supported cloud providers. In these cases, along with setting <strong class="ph b">Update On Launch</strong>, ensure that you configure an inventory cache timeout for the inventory source, to avoid hammering of your cloud’s API endpoints. Since the <code class="ph codeph">request_tower_configuration.sh</code> script polls once per minute for up to ten minutes, a suggested cache invalidation time for inventory (configured on the inventory source itself) would be one or two minutes.</p> 
+        <p class="p">Running the <code class="ph codeph">request_tower_configuration.sh</code> script from a cron job is not recommended, however, a suggested cron interval is every 30 minutes. Repeated configuration can be handled by scheduling automation controller so that the primary use of callbacks by most users is to enable a base image that is bootstrapped into the latest configuration when coming online. Running at first boot is best practice. First boot scripts are init scripts that typically self-delete, so you set up an init script that calls a copy of the <code class="ph codeph">request_tower_configuration.sh</code> script and make that into an auto scaling image.</p> 
+       </section> 
+       <section class="section tasktroubleshooting"> 
+        <p class="p">If automation controller fails to locate the host either by name or IP address in one of your defined inventories, the request is denied. When running a job template in this way, ensure that the host initiating the playbook run against itself is in the inventory. If the host is missing from the inventory, the job template fails with a <strong class="ph b">No Hosts Matched</strong> type error message.</p> 
+        <p class="p">If your host is not in the inventory and <strong class="ph b">Update on Launch</strong> is checked for the inventory group, automation controller attempts to update cloud based inventory sources before running the callback.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="controller-pass-extra-variables-provisioning-callbacks"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Pass extra variables to Provisioning Callbacks</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can pass <code class="ph codeph">extra_vars</code> in Provisioning Callbacks the same way you can in a regular job template. To pass <code class="ph codeph">extra_vars</code>, the data sent must be part of the body of the POST as application or JSON, as the content type.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <div class="ul steps-unordered">
+         <div class="li step p"> <span class="ph cmd">Pass extra variables by using one of these methods: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Use the following JSON format as an example when adding your own <code class="ph codeph">extra_vars</code> to be passed: <pre class="pre codeblock"><code>'{"extra_vars": {"variable1":"value1","variable2":"value2",...}}'</code></pre> </li> 
+            <li class="li">Pass extra variables to the job template call using <code class="ph codeph">curl</code>: <pre class="pre codeblock"><code>root@localhost:~$ curl -f -H 'Content-Type: application/json' -XPOST \
+-d '{"host_config_key": "redhat", "extra_vars": "{\"foo\": \"bar\"}"}' \
+https://&lt;CONTROLLER_SERVER_NAME&gt;/api/v2/job_templates/7/callback</code></pre> </li> 
+           </ul> 
+          </div> 
+         </div>
+        </div>
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#ref-controller-launch-jobs-with-curl" target="_blank" rel="external noopener">Launching Jobs with Curl </a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

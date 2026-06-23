@@ -1,0 +1,76 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-ffe13418-d298-4072-8533-a1eb87739035">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Redis variables</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Reference information for the inventory file variables used to configure Redis.</p> 
+     <section class="section"> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:40%">
+        <col style="width:15%">
+        <col style="width:20%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__1">Variable name</th> 
+         <th class="entry" id="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__2">Description</th> 
+         <th class="entry" id="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__3">Required or optional</th> 
+         <th class="entry" id="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__4">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__1"> <p class="p"><code class="ph codeph">redis_cluster_ip</code></p> </td> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__2"> <p class="p">The IPv4 address used by the Redis cluster to identify each host in the cluster. When defining hosts in the <code class="ph codeph">[redis]</code> group, use this variable to identify the IPv4 address if the default is not what you want. Redis clusters cannot use hostnames or IPv6 addresses.</p> </td> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__4"> <p class="p">Discovered IPv4 address from Ansible facts.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__1"> <p class="p"><code class="ph codeph">redis_firewall_zone</code></p> </td> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__2"> <p class="p">The firewall zone where Redis related firewall rules are applied. This controls which networks can access Redis based on the zone's trust level.</p> </td> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__4"> <p class="p"><code class="ph codeph">public</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__1"> <p class="p"><code class="ph codeph">redis_mode</code></p> </td> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__2"> <p class="p">The Redis mode to use for your Ansible Automation Platform installation. Valid options include: <code class="ph codeph">standalone</code> and <code class="ph codeph">cluster</code>.</p> </td> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__4"> <p class="p"><code class="ph codeph">cluster</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__1"> <p class="p"><code class="ph codeph">redis_tls_cert</code></p> </td> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__2"> <p class="p">Path to the Redis server TLS certificate.</p> </td> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__1"> <p class="p"><code class="ph codeph">redis_tls_key</code></p> </td> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__2"> <p class="p">Path to the Redis server TLS certificate key.</p> </td> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__1"> <p class="p"><code class="ph codeph">redis_tls_remote</code></p> </td> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__2"> <p class="p">Denote whether the Redis provided certificate files are local to the installation program (<code class="ph codeph">false</code>) or on the remote component server (<code class="ph codeph">true</code>).</p> </td> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__1"> <p class="p"><code class="ph codeph">redis_use_archive_compression</code></p> </td> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__2"> <p class="p">Controls whether archive compression is enabled or disabled for Redis. You can control this functionality globally by using <code class="ph codeph">use_archive_compression</code>.</p> </td> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-ffe13418-d298-4072-8533-a1eb87739035__entry__4"> <p class="p"><code class="ph codeph">true</code></p> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

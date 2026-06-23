@@ -1,0 +1,12 @@
+# Understand secret handling
+## Internal, external, and managed node connections
+### Internal services
+
+Automation controller connects to the following services as part of internal operation:
+
+PostgreSQL database
+The connection to the PostgreSQL database is done by password authentication over TCP, either through localhost or remotely (external database). This connection can use PostgreSQL’s built-in support for SSL/TLS, as natively configured by the installation program support. SSL/TLS protocols are configured by the default OpenSSL configuration.
+
+A Redis key or value store
+The connection to Redis is over a local UNIX socket, restricted to the awx service user.
+

@@ -1,0 +1,47 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="self-service-view-deployment"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Verify the configuration</h1> 
+     <p class="shortdesc">You can inspect the deployment logs and ConfigMap on the OpenShift console to verify that the deployment conforms with the settings in your Helm chart.</p> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="self-service-view-deployment-logs"> 
+      <h2 class="title topictitle2" id="ariaid-title2">View the deployment logs</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Inspect the <code class="ph codeph">install-dynamic-plugins</code> init container logs to confirm that plug-ins installed from your configured delivery method.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">In a browser, log in to your OpenShift instance.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Developer</strong> perspective, open the <strong class="ph b">Topology</strong> view for the namespace where you deployed the chart.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the deployment named <code class="ph codeph">&lt;release-name&gt;-rhaap-portal</code>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Open the deployment pod logs.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In the pod details page, select the <strong class="ph b">Logs</strong> tab.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">From <strong class="ph b">Init containers</strong>, select <code class="ph codeph">install-dynamic-plugins</code>.</span> 
+          <div class="itemgroup info"> 
+           <p class="p"><strong class="ph b">Expected log output for OCI delivery (recommended)</strong></p> 
+           <p class="p">When <code class="ph codeph">pluginMode</code> is <code class="ph codeph">oci</code>, successful installation resembles the following output:</p> 
+           <pre class="pre codeblock"><code>======= Installing dynamic plugin oci://registry.redhat.io/ansible-automation-platform/automation-portal:&lt;plugin-version&gt;!ansible-backstage-plugin-catalog-backend-module-rhaap
+...
+-&gt; Successfully installed dynamic plugin oci://registry.redhat.io/ansible-automation-platform/automation-portal:&lt;plugin-version&gt;!ansible-backstage-plugin-catalog-backend-module-rhaap</code></pre> 
+           <p class="p">Replace <code class="ph codeph">&lt;plugin-version&gt;</code> with the value from your <code class="ph codeph">imageTagInfo</code> setting. If you use a mirror registry, the registry host in the log reflects your <code class="ph codeph">imageRegistry</code> or <code class="ph codeph">ociPluginImage</code> configuration.</p> 
+           <p class="p"><strong class="ph b">Expected log output for HTTP plug-in registry (deprecated)</strong></p> 
+           <p class="p">When <code class="ph codeph">pluginMode</code> is <code class="ph codeph">tarball</code>, successful installation resembles the following output:</p> 
+           <pre class="pre codeblock"><code>======= Installing dynamic plugin http://plugin-registry:8080/ansible-backstage-plugin-catalog-backend-module-rhaap-dynamic-x.y.z.tgz
+...
+-&gt; Successfully installed dynamic plugin http://plugin-registry:8080/ansible-backstage-plugin-catalog-backend-module-rhaap-dynamic-x.y.z.tgz</code></pre> 
+           <p class="p">The tarball file name includes the plug-in version from your bundle.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">On the <strong class="ph b">Environment</strong> tab, verify that environment variables from your Helm chart appear as expected.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="managing-admin-dashboard-telemetry"> 
+     <h1 class="title topictitle1" id="ariaid-title1">View and manage Admin dashboard telemetry</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Red Hat Ansible Lightspeed collects the following telemetry data by default:</p> 
+      <ul class="ul"> 
+       <li class="li"> <strong class="ph b">Operational telemetry data</strong> <p class="p">This is the data that is required to operate and troubleshoot the Ansible Lightspeed service. For more information, refer the Enterprise Agreement. You cannot disable the collection of operational telemetry data.</p> <p class="p">This includes the following data:</p> 
+        <ul class="ul"> 
+         <li class="li">Organization you are logged into (Organization ID, account number)</li> 
+         <li class="li">Large language model (or models) that you are connected to</li> 
+        </ul> </li> 
+       <li class="li"> <strong class="ph b">Admin dashboard telemetry data</strong> <p class="p">This is the data that provides insight into how your organization users are using the Ansible Lightspeed service, and the metrics are displayed on the Admin dashboard.</p> <p class="p">This includes the following data:</p> 
+        <ul class="ul"> 
+         <li class="li">Prompts and content suggestions, including accept or reject of the content suggestions</li> 
+         <li class="li">User sentiment feedback <p class="p">You can also disable the Admin dashboard telemetry if you no longer want to collect and monitor the telemetry data.</p></li> 
+        </ul> </li> 
+      </ul> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">Viewing telemetry data on the Admin dashboard is not yet supported on Red Hat Ansible Lightspeed on-premise deployments.</p> 
+       </div>
+      </div> 
+      <section class="section" id="managing-admin-dashboard-telemetry___prerequisites">
+       <h2 class="title sectiontitle">Prerequisites</h2> 
+       <p class="p">To view and manage the Admin dashboard telemetry data, ensure that you have the following:</p> 
+       <ul class="ul"> 
+        <li class="li">You have organization administrator privileges to a Red Hat Customer Portal organization with a valid Red Hat Ansible Automation Platform subscription.</li> 
+        <li class="li">You have installed the Ansible VS Code extension v2.13.148 that is required to collect Admin dashboard telemetry.</li> 
+       </ul> 
+       <div class="note important note_important">
+        <span class="note__title">Important:</span> 
+        <div class="note__body">
+         Red Hat Ansible Lightspeed does not collect users' personal information, such as usernames or passwords. If any personal information is inadvertently received, the data is deleted. For more information about Red Hat Ansible Lightspeed’s privacy practices, see the Telemetry Data Collection Notice for the Admin dashboard.
+        </div>
+       </div> 
+      </section> 
+      <section class="section" id="managing-admin-dashboard-telemetry___what_telemetry_data_is_collected">
+       <h2 class="title sectiontitle">What telemetry data is collected?</h2> 
+       <p class="p">Following is the list of telemetry data that Red Hat Ansible Lightspeed collects:</p> 
+       <ul class="ul"> 
+        <li class="li">Details of the organization that you are logged into, such as organization ID and account number</li> 
+        <li class="li">Large language models that you are connected to</li> 
+        <li class="li">Inline suggestions that were accepted, rejected, or ignored by your organization users</li> 
+        <li class="li">User sentiment feedback</li> 
+        <li class="li">Top 10 modules returned in code recommendations</li> 
+       </ul> 
+      </section> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist relconcepts">
+       <strong>Related concepts</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_lightspeed_about#telemetry-data-collection-notice" title="In connection with your use of this Red Hat offering, Red Hat may collect telemetry data about your use of the software. This data allows Red Hat to monitor the software and to improve Red Hat offerings and support, including identifying, troubleshooting, and responding to issues that impact users.">Telemetry Data Collection Notice for the Admin dashboard</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="view-admin-dashboard"> 
+      <h2 class="title topictitle2" id="ariaid-title2">View the Admin dashboard telemetry</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">The Admin dashboard displays the analytics telemetry data that you can use to gain insight into how your organization users are using the Ansible Lightspeed service.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">The Admin dashboard displays the following charts:</p> 
+        <ul class="ul"> 
+         <li class="li"> <strong class="ph b">Inline suggestions accepted, rejected, or ignored by users</strong> <p class="p">This graph tracks the number of inline suggestions that were accepted, rejected, or ignored by users in your organization. Use this graph to gain insight into how your organization users are using the Ansible Lightspeed service.</p> </li> 
+         <li class="li"> <strong class="ph b">User sentiment</strong> <p class="p">This graph measures the users' feedback (feelings, opinions). Use this graph to gain insight into the overall user experience with Red Hat Ansible Lightspeed.</p> </li> 
+         <li class="li"> <strong class="ph b">Top 10 modules returned in code recommendations</strong> <p class="p">This graph displays the top 10 modules returned in code recommendations. Use this metric to determine which modules are being suggested the most to your organization’s automation developers.</p> </li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to the <a class="xref" href="https://console.redhat.com/preview/ansible/seats-administration" target="_blank" rel="external noopener">Ansible Lightspeed with IBM watsonx Code Assistant Hybrid Cloud Console</a> as an organization administrator.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <strong class="ph b">Ansible Lightspeed &gt; Admin Dashboard</strong>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The Admin dashboard displays a graphical representation of analytics telemetry data for the last 30 days by default.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Use the following filters to refine your telemetry data: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">To view the telemetry data for a specific time period or for a custom date range, select the date range from the <strong class="ph b">Quick Date Range</strong> list.</li> 
+            <li class="li">To view the telemetry data for a specific IBM watsonx Code Assistant model only, select the model ID from the <strong class="ph b">Model Name</strong> list. By default, the Admin dashboard displays telemetry data for all models.</li> 
+           </ul> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="disable-admin-dashboard-telemetry"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Disable the Admin dashboard telemetry</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Red Hat Ansible Lightspeed collects Admin dashboard telemetry by default to gain insight into how your organization uses the service. You can disable this telemetry to stop collecting analytics data.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have organization administrator privileges to a Red Hat Customer Portal organization with a valid Red Hat Ansible Automation Platform subscription.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">After you disable the Admin dashboard telemetry, the Ansible Lightspeed service no longer collects the analytics telemetry data for your organization. The earlier telemetry data is still available on the Admin dashboard, but no latest data is displayed. If you re-enable the Admin dashboard telemetry, the Ansible Lightspeed service starts collecting data for your organization, and the metrics are displayed on the Admin dashboard after 24 hours.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to the <a class="xref" href="https://c.ai.ansible.redhat.com/" target="_blank" rel="external noopener">Ansible Lightspeed portal</a> as an organization administrator.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">From the login screen, click <strong class="ph b">Admin Portal</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Under Admin Portal, click <strong class="ph b">Telemetry</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">To disable the Admin dashboard telemetry, select <strong class="ph b">Operational telemetry data only</strong>. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">To re-enable the Admin dashboard telemetry, select <strong class="ph b">Admin dashboard telemetry data</strong>.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Save</strong>.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

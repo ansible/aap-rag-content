@@ -1,0 +1,80 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="ref-controller-token-session-management"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Create, revoke, or clear tokens</h1> 
+     <div class="body refbody">
+      <p class="shortdesc">Ansible Automation Platform supports the following commands for OAuth2 token management:</p> 
+      <section class="section"> 
+       <ul class="ul"> 
+        <li class="li"> <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_token_session_management#ref-controller-create-oauth2-token" title="Use the following command to create OAuth2 tokens (specify the username for example_user):"> <code class="ph codeph">create_oauth2_token</code> </a> </li> 
+        <li class="li"> <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_token_session_management#ref-controller-revoke-oauth2-token" title="Use this command to revoke OAuth2 tokens, both application tokens and personal access tokens (PAT). It revokes all application tokens (but not their associated refresh tokens), and revokes all personal access tokens. However, you can also specify a user for whom to revoke all tokens."> <code class="ph codeph">revoke_oauth2_tokens</code> </a> </li> 
+        <li class="li"> <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_token_session_management#ref-controller-clear-sessions" title="Use the cleartokens command to delete all sessions that have expired."> <code class="ph codeph">cleartokens</code> </a> </li> 
+       </ul> 
+       <ul class="ul"> 
+        <li class="li"> <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_token_session_management#ref-controller-clear-sessions" title="Use the cleartokens command to delete all sessions that have expired."> <code class="ph codeph">clearsessions</code> </a> </li> 
+       </ul> 
+      </section> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-controller-create-oauth2-token"> 
+      <h2 class="title topictitle2" id="ariaid-title2"> <code class="ph codeph">create_oauth2_token</code> </h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Use the following command to create OAuth2 tokens (specify the username for <code class="ph codeph">example_user</code>):</p> 
+       <section class="section"> 
+        <div class="note important note_important">
+         <span class="note__title">Important:</span> 
+         <div class="note__body"> 
+          <p class="p">In Ansible Automation Platform 2.7, you must create all tokens through platform gateway. Component-level token creation has been removed.</p> 
+         </div>
+        </div> 
+        <pre class="pre">$ aap-gateway-manage create_oauth2_token --user example_user
+                                                                                                                                                                                                                    
+  New OAuth2 token for example_user: j89ia8OO79te6IAZ97L7E8bMgXCON2</pre> 
+        <p class="p">Ensure that you give a valid user when creating tokens. Otherwise, an error message that you attempted to issue the command without specifying a user, or supplied a username that does not exist, is displayed.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="ref-controller-revoke-oauth2-token"> 
+      <h2 class="title topictitle2" id="ariaid-title3"> <code class="ph codeph">revoke_oauth2_tokens</code> </h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Use this command to revoke OAuth2 tokens, both application tokens and personal access tokens (PAT). It revokes all application tokens (but not their associated refresh tokens), and revokes all personal access tokens. However, you can also specify a user for whom to revoke all tokens.</p> 
+       <section class="section"> 
+        <p class="p">To revoke all existing OAuth2 tokens use the following command:</p> 
+        <pre class="pre">$ aap-gateway-manage revoke_oauth2_tokens</pre> 
+        <p class="p">To revoke all OAuth2 tokens and their refresh tokens use the following command:</p> 
+        <pre class="pre">$ aap-gateway-manage revoke_oauth2_tokens --revoke_refresh</pre> 
+        <p class="p">To revoke all OAuth2 tokens for the user with <code class="ph codeph">id=example_user</code> (specify the username for <code class="ph codeph">example_user</code>):</p> 
+        <pre class="pre">$ aap-gateway-manage revoke_oauth2_tokens --user example_user</pre> 
+        <p class="p">To revoke all OAuth2 tokens and refresh token for the user with <code class="ph codeph">id=example_user</code>:</p> 
+        <pre class="pre">$ aap-gateway-manage revoke_oauth2_tokens --user example_user --revoke_refresh</pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title4" id="ref-controller-clear-tokens"> 
+      <h2 class="title topictitle2" id="ariaid-title4"> <code class="ph codeph">cleartokens</code> </h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Use the cleartokens command to delete all sessions that have expired. </p> 
+       <section class="section"> 
+        <p class="p">For more information, see <a class="xref" href="https://django-oauth-toolkit.readthedocs.io/en/latest/management_commands.html" target="_blank" rel="external noopener">cleartokens</a> in Django’s Oauth Toolkit documentation.</p> 
+        <p class="p">In Ansible Automation Platform 2.7, all user tokens are managed centrally through platform gateway. Clearing tokens removes access across all platform components. </p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title5" id="ref-controller-clear-sessions"> 
+      <h2 class="title topictitle2" id="ariaid-title5"> <code class="ph codeph">clearsessions</code> </h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Use the <code class="ph codeph">cleartokens</code> command to delete all sessions that have expired.</p> 
+       <section class="section"> 
+        <p class="p">In Ansible Automation Platform 2.7, all user tokens are managed centrally through platform gateway. Clearing tokens removes access across all platform components.</p> 
+        <p class="p">For more information, see <a class="xref" href="https://docs.djangoproject.com/en/4.2/topics/http/sessions/#clearing-the-session-store" target="_blank" rel="external noopener">Clearing the session store</a> in Django’s Oauth Toolkit documentation.</p> 
+        <p class="p">For more information about OAuth2 token management in the UI, see the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_token_based_authentication#assembly-controller-applications" title="Create and configure token-based authentication for external applications such as ServiceNow and Jenkins. With token-based authentication, external applications can easily integrate with Ansible Automation Platform.">Applications</a>.</p> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="task-uninstall-metrics-service">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Uninstall metrics service</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Completely uninstall all metrics service components and optionally preserve or delete data to cleanly remove the service without orphaned resources or configuration conflicts.</p> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <div class="note warning note_warning">
+       <span class="note__title">Warning:</span> 
+       <div class="note__body"> 
+        <p class="p">Uninstallation is destructive and irreversible. Back up the <code class="ph codeph">metrics_service</code> database before proceeding if you need to preserve historical metrics data.</p> 
+       </div>
+      </div> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Method 1: Use installer playbook (recommended)</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>cd /path/to/aap-containerized-installer
+ansible-playbook -i inventory uninstall.yml</code></pre> 
+         <p class="p">The <span class="ph filepath">uninstall.yml</span> playbook automatically removes all metrics service components:</p> 
+         <ul class="ul"> 
+          <li class="li">Stops and disables systemd services</li> 
+          <li class="li">Removes containers</li> 
+          <li class="li">Deletes systemd unit files</li> 
+          <li class="li">Removes Podman secrets</li> 
+          <li class="li">Deletes volume directories</li> 
+          <li class="li">Removes firewall rules</li> 
+         </ul> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p"><strong class="ph b">Optional:</strong> To also drop the database, add database cleanup tasks to your inventory configuration.</p> 
+          </div>
+         </div> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Method 2: Manual uninstall</span> 
+        <div class="itemgroup info"> 
+         <p class="p">Use this method if you need granular control over uninstall steps.</p> 
+         <p class="p"><strong class="ph b">Step 1: Stop and disable systemd services</strong></p> 
+         <pre class="pre codeblock"><code>systemctl --user stop automation-metrics-web.service automation-metrics-tasks.service automation-metrics-scheduler.service
+systemctl --user disable automation-metrics-web.service automation-metrics-tasks.service automation-metrics-scheduler.service</code></pre> 
+         <p class="p"><strong class="ph b">Step 2: Remove containers</strong></p> 
+         <pre class="pre codeblock"><code>podman rm -f automation-metrics-web
+podman rm -f automation-metrics-tasks
+podman rm -f automation-metrics-scheduler
+podman rm -f automation-metrics-init</code></pre> 
+         <p class="p"><strong class="ph b">Step 3: Delete systemd unit files</strong></p> 
+         <pre class="pre codeblock"><code>rm -f ~/.config/systemd/user/automation-metrics-web.service
+rm -f ~/.config/systemd/user/automation-metrics-tasks.service
+rm -f ~/.config/systemd/user/automation-metrics-scheduler.service
+systemctl --user daemon-reload</code></pre> 
+         <p class="p"><strong class="ph b">Step 4: Delete Podman secrets</strong></p> 
+         <pre class="pre codeblock"><code>podman secret rm automationmetrics_pg_password
+podman secret rm automationmetrics_controller_read_pg_password
+podman secret rm automationmetrics_secret_key
+podman secret rm automationmetrics_resource_server</code></pre> 
+         <p class="p"><strong class="ph b">Step 5: Remove volumes and data directories</strong></p> 
+         <pre class="pre codeblock"><code>rm -rf {{ aap_volumes_dir }}/automationmetrics</code></pre> 
+         <p class="p"><strong class="ph b">Step 6: Drop database (optional)</strong></p> 
+         <pre class="pre codeblock"><code>psql -h localhost -U postgres
+
+DROP DATABASE IF EXISTS metrics_service;
+DROP USER IF EXISTS metrics_service;
+DROP USER IF EXISTS ms_awx_readonly;</code></pre> 
+         <p class="p"><strong class="ph b">Step 7: Remove firewall rules</strong></p> 
+         <pre class="pre codeblock"><code>sudo firewall-cmd --remove-port=8087/tcp --permanent
+sudo firewall-cmd --remove-port=8450/tcp --permanent
+sudo firewall-cmd --reload</code></pre> 
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <p class="p"><strong class="ph b">Reinstallation with same database</strong></p> 
+      <p class="p">Metrics service <strong class="ph b">can</strong> be reinstalled using the same database:</p> 
+      <ul class="ul"> 
+       <li class="li">Django migrations are idempotent (safe to re-run)</li> 
+       <li class="li">No code-level block on reinstall</li> 
+       <li class="li"><code class="ph codeph">init-system-tasks</code> recreates Task rows</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Limitations:</strong></p> 
+      <ul class="ul"> 
+       <li class="li">Not officially tested or supported</li> 
+       <li class="li">Unexpected behavior possible</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Recommendation:</strong> Use a fresh database for reinstallation unless you have specific requirements to preserve existing data.</p> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist reltasks">
+      <strong>Related tasks</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_install_metrics_service_with_containerized_installer" title="Enable and configure metrics service during containerized installation to automatically collect anonymized usage data and transmit it to Red Hat.">Install metrics service with containerized installer</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

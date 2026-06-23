@@ -1,0 +1,253 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="controller-create-workflow-template"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Create a workflow job template</h1> 
+     <div class="body taskbody"> 
+      <p class="shortdesc">To create a new workflow job template, complete the following steps:</p> 
+      <section class="section context"> 
+       <div class="tasklabel"> 
+        <h2 class="sectiontitle tasklabel">About this task</h2> 
+       </div> 
+       <div class="note important note_important"> <span class="note__title">Important:</span> 
+        <div class="note__body"> 
+         <p class="p">If you set a limit to a workflow template, it is not passed down to the job template unless you check <strong class="ph b">Prompt on launch</strong> for the limit. This can lead to playbook failures if the limit is mandatory for the playbook that you are running.</p> 
+        </div> 
+       </div> 
+      </section> 
+      <section> 
+       <div class="tasklabel"> 
+        <h2 class="sectiontitle tasklabel">Procedure</h2> 
+       </div> 
+       <ol class="ol steps"> 
+        <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Templates</span></span>.</span> </li> 
+        <li class="li step stepexpand"> <span class="ph cmd">On the <strong class="ph b">Automation Templates</strong> page, select <strong class="ph b">Create workflow job template</strong> from the <strong class="ph b">Create template</strong> list.</span> </li> 
+        <li class="li step stepexpand"> <span class="ph cmd">Enter the appropriate details in the following fields: </span> 
+         <div class="itemgroup info"> 
+          <div class="note note note_note"> <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">If a field has the <strong class="ph b">Prompt on launch</strong> checkbox selected, either launching the workflow template, or using the workflow template within another workflow template, you are prompted for the value for that field. Most prompted values override any values set in the job template. Exceptions are noted in the following table.</p> 
+           </div> 
+          </div> 
+          <table class="table"> 
+           <caption></caption> 
+           <colgroup> 
+            <col style="width:33.3333%"> 
+            <col style="width:33.3333%"> 
+            <col style="width:33.3334%"> 
+           </colgroup> 
+           <thead class="thead"> 
+            <tr class="row"> 
+             <th class="entry" id="controller-create-workflow-template__entry__1"> <strong class="ph b">Field</strong> </th> 
+             <th class="entry" id="controller-create-workflow-template__entry__2"> <strong class="ph b">Options</strong> </th> 
+             <th class="entry" id="controller-create-workflow-template__entry__3"> <strong class="ph b">Prompt on Launch</strong> </th> 
+            </tr> 
+           </thead> 
+           <tbody class="tbody"> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-workflow-template__entry__1"> <p class="p">Name</p> </td> 
+             <td class="entry" headers="controller-create-workflow-template__entry__2"> <p class="p">Enter a name for the job.</p> </td> 
+             <td class="entry" headers="controller-create-workflow-template__entry__3"> <p class="p">N/A</p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-workflow-template__entry__1"> <p class="p">Description</p> </td> 
+             <td class="entry" headers="controller-create-workflow-template__entry__2"> <p class="p">Enter an arbitrary description as appropriate (optional).</p> </td> 
+             <td class="entry" headers="controller-create-workflow-template__entry__3"> <p class="p">N/A</p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-workflow-template__entry__1"> <p class="p">Organization</p> </td> 
+             <td class="entry" headers="controller-create-workflow-template__entry__2"> <p class="p">Choose the organization to use with this template from the organizations available to the logged in user.</p> </td> 
+             <td class="entry" headers="controller-create-workflow-template__entry__3"> <p class="p">N/A</p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-workflow-template__entry__1"> <p class="p">Inventory</p> </td> 
+             <td class="entry" headers="controller-create-workflow-template__entry__2"> <p class="p">Optionally, select the inventory to use with this template from the inventories available to the logged in user.</p> </td> 
+             <td class="entry" headers="controller-create-workflow-template__entry__3"> <p class="p">Yes</p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-workflow-template__entry__1"> <p class="p">Limit</p> </td> 
+             <td class="entry" headers="controller-create-workflow-template__entry__2"> <p class="p">A host pattern to further constrain the list of hosts managed or affected by the playbook. You can separate many patterns by colons (:). As with core Ansible:</p> 
+              <ul class="ul"> 
+               <li class="li">a:b means "in group a or b"</li> 
+               <li class="li">a:b:&amp;c means "in a or b but must be in c"</li> 
+               <li class="li">a:!b means "in a, and definitely not in b"</li> 
+              </ul> </td> 
+             <td class="entry" headers="controller-create-workflow-template__entry__3"> <p class="p">Yes</p> <p class="p">If selected, even if a default value is supplied, you are prompted upon launch to select a limit.</p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-workflow-template__entry__1"> <p class="p">Source control branch</p> </td> 
+             <td class="entry" headers="controller-create-workflow-template__entry__2"> <p class="p">Select a branch for the workflow. This branch is applied to all workflow job template nodes that prompt for a branch.</p> </td> 
+             <td class="entry" headers="controller-create-workflow-template__entry__3"> <p class="p">Yes</p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-workflow-template__entry__1"> <p class="p">Labels</p> </td> 
+             <td class="entry" headers="controller-create-workflow-template__entry__2"> 
+              <ul class="ul"> 
+               <li class="li">Optionally, supply labels that describe this workflow job template, such as <code class="ph codeph">dev</code> or <code class="ph codeph">test</code>. Use labels to group and filter workflow job templates and completed jobs in the display.</li> 
+               <li class="li">Labels are created when they are added to the workflow template. Labels are associated to a single Organization using the Project that is provided in the workflow template. Members of the Organization can create labels on a workflow template if they have edit permissions (such as the admin role).</li> 
+               <li class="li">Once you save the job template, the labels appear in the workflow job template <strong class="ph b">Details</strong> view.</li> 
+               <li class="li">Labels are only applied to the workflow templates not the job template nodes that are used in the workflow.</li> 
+               <li class="li">Select <img class="image" height="10" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/disassociate.png" width="10" alt="Disassociate"> beside a label to remove it. When a label is removed, it is no longer associated with that particular Job or Job Template, but it remains associated with any other jobs that reference it.</li> 
+              </ul> </td> 
+             <td class="entry" headers="controller-create-workflow-template__entry__3"> <p class="p">Yes</p> <p class="p">If selected, even if a default value is supplied, you are prompted when launching to supply additional labels, if needed. - You cannot delete existing labels, selecting <img class="image" height="10" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/disassociate.png" width="10" alt="Disassociate"> only removes the newly added labels, not existing default labels.</p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-workflow-template__entry__1"> <p class="p">Job tags</p> </td> 
+             <td class="entry" headers="controller-create-workflow-template__entry__2"> <p class="p">Type and select the <strong class="ph b">Create</strong> drop-down to specify which parts of the playbook should run.</p> </td> 
+             <td class="entry" headers="controller-create-workflow-template__entry__3"> <p class="p">Yes</p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-workflow-template__entry__1"> <p class="p">Skip tags</p> </td> 
+             <td class="entry" headers="controller-create-workflow-template__entry__2"> <p class="p">Type and select the <strong class="ph b">Create</strong> drop-down to specify certain tasks or parts of the playbook to skip.</p> </td> 
+             <td class="entry" headers="controller-create-workflow-template__entry__3"> <p class="p">Yes</p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-workflow-template__entry__1"> <p class="p">Extra variables</p> </td> 
+             <td class="entry" headers="controller-create-workflow-template__entry__2"> 
+              <ul class="ul"> 
+               <li class="li">Pass extra command line variables to the playbook.</li> 
+              </ul> <p class="p">This is the "-e" or "-extra-vars" command line parameter for ansible-playbook that is documented in the Ansible documentation at <a class="xref" href="https://docs.ansible.com/projects/ansible/latest/reference_appendices/general_precedence.html" target="_blank" rel="external noopener">Controlling how Ansible behaves: precedence rules</a>. - Give key or value pairs by using either YAML or JSON. These variables have a maximum value of precedence and overrides other variables specified elsewhere. The following is an example value: <code class="ph codeph">git_branch: production release_version: 1.5</code></p> </td> 
+             <td class="entry" headers="controller-create-workflow-template__entry__3"> <p class="p">Yes</p> <p class="p">If you want to be able to specify <code class="ph codeph">extra_vars</code> on a schedule, you must select <strong class="ph b">Prompt on launch</strong> for <strong class="ph b">Extra variables</strong> on the workflow job template, or enable a survey on the job template. Those answered survey questions become <code class="ph codeph">extra_vars</code>. For more information about extra variables, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_controller_job_template_variables#controller-extra-variables" title="You can pass extra variables to a automation controller job template in several ways, including through surveys and the API.">Extra Variables</a>.</p> </td> 
+            </tr> 
+           </tbody> 
+          </table> 
+         </div> </li> 
+        <li class="li step stepexpand"> <span class="ph cmd">Specify the following <strong class="ph b">Options</strong> for launching this template, if necessary: </span> 
+         <div class="itemgroup info"> 
+          <ul class="ul"> 
+           <li class="li">Check <strong class="ph b">Enable webhook</strong> to turn on the ability to interface with a predefined SCM system web service that is used to launch a workflow job template. GitHub and GitLab are the supported SCM systems. 
+            <ul class="ul"> 
+             <li class="li">If you enable webhooks, other fields display, prompting for additional information: 
+              <ul class="ul"> 
+               <li class="li"><strong class="ph b">Webhook service</strong>: Select which service to listen for webhooks from.</li> 
+               <li class="li"><strong class="ph b">Webhook URL</strong>: Automatically populated with the URL for the webhook service to POST requests to.</li> 
+               <li class="li"><strong class="ph b">Webhook key</strong>: Generated shared secret to be used by the webhook service to sign payloads sent to automation controller. You must configure this in the settings on the webhook service so that webhooks from this service are accepted in automation controller. For additional information about setting up webhooks, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_work_with_webhooks#controller-work-with-webhooks" title="Use webhooks to run specified commands between applications over the web. Automation controller currently provides webhook integration with GitHub and GitLab.">Working with Webhooks</a>.</li> 
+              </ul></li> 
+            </ul></li> 
+           <li class="li">Check <strong class="ph b">Enable concurrent jobs</strong> to allow simultaneous runs of this workflow. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_controller_capacity_determination#controller-capacity-determination" title="The automation controller capacity system determines how many jobs can run on an instance given the amount of resources available to the instance and the size of the jobs that are running (referred to as Impact). The algorithm used to determine this is based on the following two things:">Automation controller capacity determination and job impact</a>.</li> 
+          </ul> 
+         </div> </li> 
+        <li class="li step stepexpand"> <span class="ph cmd">When you have completed configuring the workflow template, click <span class="ph uicontrol button">Create workflow job template</span>. </span> 
+         <div class="itemgroup info"> 
+          <p class="p">Saving the template exits the workflow template page and the workflow visualizer opens where you can build a workflow. For more information, see the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_workflow_visualizer#controller-workflow-visualizer" title="The Workflow Visualizer provides a graphical way of linking together job templates, workflow templates, project syncs, and inventory syncs to build a workflow template.">Workflow visualizer</a> section. Otherwise, select one of these methods:</p> 
+          <ul class="ul"> 
+           <li class="li">Close the workflow visualizer to return to the <strong class="ph b">Details</strong> tab of the newly saved template. There you can complete the following tasks: 
+            <ul class="ul"> 
+             <li class="li">Review, edit, add permissions, notifications, schedules, and surveys</li> 
+             <li class="li">View completed jobs</li> 
+             <li class="li">Build a workflow template</li> 
+            </ul></li> 
+           <li class="li">Click <span class="ph uicontrol button">Launch template</span> to start the workflow. 
+            <div class="note note note_note"> <span class="note__title">Note:</span> 
+             <div class="note__body"> 
+              <p class="p">Save the template before launching, or <span class="ph uicontrol button">Launch template</span> remains disabled. The <strong class="ph b">Notifications</strong> tab is only present after you save the template.</p> 
+             </div> 
+            </div></li> 
+          </ul> 
+         </div> </li> 
+       </ol> 
+      </section> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="controller-work-with-permissions"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Work with permissions</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">You can manage permissions for workflow templates to control which users and teams can view or modify them.</p> 
+       <p class="p">Click the <strong class="ph b">Team Access</strong> or <strong class="ph b">User Access</strong> tab to review, grand, edit, and remove associated permissions for users along with team members.</p> 
+       <p class="p">Click <span class="ph uicontrol button">Add roles</span> to create new permissions for this workflow template by following the prompts to assign them.</p> 
+      </div> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="controller-work-with-notifications"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Work with notifications</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Administration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Notifiers</span></span>. You can review any notification integrations you have set up and their statuses, if they have run.</p> 
+       <p class="p">Use the toggles to enable or disable the notifications to use with your particular template. For more information, see Enable and disable notifications.</p> 
+       <p class="p">If no notifications have been set up, click <span class="ph uicontrol button">Add notifier</span> to create a new notification. For more information about configuring various notification types and extended messaging, see Notification types.</p> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-con_controller_configure_hostname_notifications#controller-enable-disable-notifications" title="You can set up notifications to notify you when a specific job starts, and on the success or failure at the end of the job run. Note the following behaviors:">Enable and disable notifications</a></li> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-proc_controller_create_notification_template#controller-notification-types" title="Automation controller supports multiple notification types that you can use to send notifications about job status and other events.">Notification types</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title4" id="controller-view-completed-workflow-jobs"> 
+      <h2 class="title topictitle2" id="ariaid-title4">View completed workflow jobs</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">You can view completed workflow jobs in automation controller to see the details of each job run.</p> 
+       <p class="p">The <strong class="ph b">Jobs</strong> tab provides the list of job templates that have run. Click the expand <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/arrow.png" width="15" alt="Expand">icon next to each job to view the details of each job.</p> 
+       <p class="p">From this view, you can click the job ID, name of the workflow job and see its graphical representation. The following example shows the job details of a workflow job:</p> 
+       <br> 
+       <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-wf-template-jobid-detail.png" alt="Workflow template job ID"> 
+       <br> 
+       <p class="p">The nodes are marked with labels to help you identify them. For more information, see the legend in the Workflow visualizer section.</p> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist reltasks"> <strong>Related tasks</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_workflow_visualizer#controller-build-workflow" title="You can build a workflow by adding nodes and defining their relationships in the workflow visualizer.">Workflow visualizer</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="controller-launch-workflow-template"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Launch a workflow job template</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can launch a workflow job template to run a series of job templates and workflow nodes in a defined order.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <div class="ul steps-unordered"> 
+         <div class="li step p"> <span class="ph cmd">Launch a workflow job template by using one of these methods: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Templates</span></span> and click the <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/rightrocket.png" width="15" alt="Launch"> icon next to the job template.</li> 
+            <li class="li">Click <span class="ph uicontrol button">Launch template</span> in the <strong class="ph b">Details</strong> tab of the workflow job template that you want to launch. <p class="p">Variables added for a workflow job template are automatically added in automation controller when launching, along with any extra variables set in the workflow job template and survey.</p> <p class="p">Events related to approvals on workflows are displayed in the activity stream (<img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/activitystream.png" width="15" alt="Activity stream">) with detailed information about the approval requests, if any.</p> </li> 
+           </ul> 
+          </div> 
+         </div> 
+        </div> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="controller-copy-workflow-job-template"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Duplicate a workflow job template</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Duplicate a workflow job template to create a copy of its structure. Note that associated schedules, notifications, and permissions are not copied and must be manually recreated for the new template.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Templates</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click the <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/options_menu.png" width="15" alt="More options">) icon associated with the template that you want to duplicate and select the <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/copy.png" width="15" alt="Duplicate Template"> Duplicate template icon. </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">The new template with the name of the template from which you duplicated and a timestamp displays in the list of templates.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click to open the new template and click <span class="ph uicontrol button">Edit template</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Replace the contents of the <strong class="ph b">Name</strong> field with a new name, and give or change the entries in the other fields to complete this page.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Save job template</span>. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note"> <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">If a resource has a related resource that you do not have the right level of permission to, you cannot duplicate the resource. For example, in the case where a project uses a credential that a current user only has Read access. However, for a workflow job template, if any of its nodes use an unauthorized job template, inventory, or credential, the workflow template can still be duplicated. But in the duplicated workflow job template, the corresponding fields in the workflow template node are absent.</p> 
+            </div> 
+           </div> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

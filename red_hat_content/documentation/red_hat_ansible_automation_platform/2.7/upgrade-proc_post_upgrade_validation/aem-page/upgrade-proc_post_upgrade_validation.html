@@ -1,0 +1,67 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="proc-post-upgrade-validation">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Validating gateway authentication after the 2.7 upgrade</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">After upgrading to Red Hat Ansible Automation Platform 2.7, validate that all platform components and integrations are functioning correctly with gateway-based authentication.</p> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p"><strong class="ph b">Validation checklist</strong></p> 
+      <p class="p">Confirm the following results to ensure the upgrade was successful:</p> 
+      <ul class="ul"> 
+       <li class="li">Users can log in to the platform gateway UI.</li> 
+       <li class="li">Direct access to component APIs (controller, hub, or EDA) returns an HTTP 401 Unauthorized response.</li> 
+       <li class="li">Job templates launch successfully through the platform gateway API.</li> 
+       <li class="li">Collections download from automation hub through the gateway.</li> 
+       <li class="li">Container registry authentication works using <code class="ph codeph">podman login</code> or <code class="ph codeph">docker login</code>.</li> 
+       <li class="li">Event-Driven Ansible rulebook activations are in a Running state.</li> 
+       <li class="li">Configuration as Code (CaC) playbooks execute successfully.</li> 
+       <li class="li">Third-party authentication providers, such as LDAP or SAML, function through the gateway.</li> 
+      </ul> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <div class="li stepsection">
+       Quick validation commands
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Test platform gateway API access:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>$ curl -H "Authorization: Bearer ${GATEWAY_TOKEN}" \
+  https://gateway.example.com/api/gateway/v1/ping/</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Verify direct access is blocked (should return 401):</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>$ curl -H "Authorization: Bearer ${OLD_TOKEN}" \
+  https://controller.example.com/api/v2/ping/</code></pre> 
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <p class="p">In Ansible Automation Platform 2.7, authentication at the component level is disabled for external requests. An HTTP 401 Unauthorized response for direct component access is the correct behavior.</p> 
+     </section> 
+     <section class="section postreq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">What to do next</h2>
+      </div> 
+      <p class="p">If validation steps fail, see the following resources:</p> 
+      <ul class="ul"> 
+       <li class="li">For authentication issues, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-mandatory_platform_gateway_authentication_in_ansible_automation_platform_2_7#con-mandatory-gateway-auth" title="In Red Hat Ansible Automation Platform 2.7, platform gateway is the only supported method for external authentication to platform components. Direct API access to automation controller, automation hub, and Event-Driven Ansible has been removed.">Mandatory platform gateway authentication</a>.</li> 
+       <li class="li">For large uploads failing after upgrade, you may need to adjust gateway upload settings. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gateway_route_timeouts#con-gateway-route-timeouts" title="In Ansible Automation Platform 2.7, all API access to platform components goes through platform gateway. Gateway-level timeout settings control how long platform gateway waits for backend services to respond before closing a connection.">Configure platform gateway route timeouts</a>.</li> 
+       <li class="li">For operational issues, see the specific component documentation.</li> 
+      </ul> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

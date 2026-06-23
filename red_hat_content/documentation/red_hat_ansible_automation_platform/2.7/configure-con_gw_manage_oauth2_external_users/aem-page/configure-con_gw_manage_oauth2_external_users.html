@@ -1,0 +1,67 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="gw-manage-oauth2-external-users"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Security settings for OAuth2 tokens and external users</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Configure your platform settings to enable OAuth2 token creation for external users. Allowing users authenticated via LDAP, SAML, or SSO to generate tokens prevents 403 Forbidden errors and helps ensure they maintain programmatic API access.</p> 
+      <p class="p">This default behavior is a deliberate security measure. Ansible Automation Platform prioritizes centralized control over token generation, which encourages administrators to select the appropriate method for enabling OAuth 2.0 user token generation for external authentication providers.</p> 
+      <p class="p">It is important to understand that an OAuth2 token is created within Ansible Automation Platform, and Ansible Automation Platform itself manages its lifecycle, including its expiration. This lifecycle is independent of the user’s session with their external Identity Provider (IdP). For example, if a user generates an Ansible Automation Platform token and their account is later disabled in the external IdP, the Ansible Automation Platform token remains valid until it expires or is manually revoked. Being aware of this interaction is crucial for a secure configuration, as it highlights the need for compensating controls if you enable token creation for external users.</p> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="gw-enable-oauth2-external-users"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Enable OAuth2 token creation for external users</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">To enable external users to create OAuth2 tokens, change the appropriate setting in your Ansible Automation Platform environment. Ensure the implementation of compensating security controls after enabling this setting.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">From the navigation panel, go to <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Platform gateway</span></span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Edit platform gateway</span> settings.</span> </li>
+         <li class="li step"> <span class="ph cmd">Change the <strong class="ph b">Allow external users to create OAuth2 tokens</strong> setting to <strong class="ph b">Enabled</strong>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Save platform gateway settings</span>.</span> </li>
+        </ol>
+       </section> 
+       <section class="section postreq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div> 
+        <p class="p">Implement the recommended security controls as described in <em class="ph i">Implementing security controls for external user OAuth2 tokens</em>.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="gw-oauth2-security-controls"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Implement security controls for external user OAuth2 tokens</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">After enabling OAuth2 token creation for external users, implement the following compensating controls to keep a strong security posture.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ul class="ul steps-unordered">
+         <li class="li step stepexpand"> <span class="ph cmd"><strong class="ph b">Limit token lifetime</strong>: Configure a shorter duration for OAuth2 tokens to reduce the window of exposure. </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">In your Ansible Automation Platform settings, adjust the <code class="ph codeph">OAUTH2_ACCESS_TOKEN_EXPIRE_SECONDS value</code>. A value of 28800 (8 hours) is recommended, limiting token validity to a standard workday.</li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd"><strong class="ph b">Enforce strict role-based access control (RBAC)</strong>: Grant users only the minimum necessary permissions. </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Assign users who create tokens to <strong class="ph b">Teams</strong> with highly restrictive roles. Avoid granting broad permissions that could lead to privilege escalation.</li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd"><strong class="ph b">Establish a clear offboarding process</strong>: Integrate token revocation into your organizational offboarding procedures. Your HR and IT offboarding processes must include a step for an Ansible Automation Platform administrator to revoke all active tokens for a departing user. Tokens can be manually revoked from the user’s profile under the <strong class="ph b">Tokens</strong> tab.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd"><strong class="ph b">Audit and monitor</strong>: Regularly review token-related activities for legitimacy in the <strong class="ph b">Activity Stream</strong>.</span> </li>
+        </ul>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

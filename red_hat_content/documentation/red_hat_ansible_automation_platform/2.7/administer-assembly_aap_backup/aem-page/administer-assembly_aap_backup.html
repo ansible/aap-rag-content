@@ -1,0 +1,297 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="aap-backup"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Back up your Ansible Automation Platform deployment</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Backing up your Red Hat Ansible Automation Platform deployment involves creating backup resources for your deployed instances.</p> 
+      <p class="p">Use the following procedures to create backup resources for your Red Hat Ansible Automation Platform deployment. We recommend taking backups before upgrading the Ansible Automation Platform Operator. Take a backup regularly in case you want to restore the platform to a previous state.</p> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="aap-platform-gateway-backup"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Back up your Ansible Automation Platform deployment</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Regularly backing up your <strong class="ph b">Ansible Automation Platform</strong> deployment is vital to protect against data loss. When you back up the platform, the operator automatically backs up all enabled components, including automation controller, automation hub, and Event-Driven Ansible.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You must be authenticated on OpenShift cluster.</li> 
+         <li class="li">You have installed Ansible Automation Platform Operator on the cluster.</li> 
+         <li class="li">You have deployed a <strong class="ph b">Ansible Automation Platform</strong> instance using the Ansible Automation Platform Operator.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Ansible Automation Platform Operator creates a PersistentVolumeClaim (PVC) for your Ansible Automation Platform Backup automatically. You can use your own pre-created PVC by using the <code class="ph codeph">backup_pvc</code> spec and specifying your PVC.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Red Hat OpenShift Container Platform.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Installed Operators</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select your Ansible Automation Platform Operator deployment.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Go to your <strong class="ph b">All Instances</strong> tab, and click <span class="ph uicontrol button">Create New</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select <strong class="ph b">Ansible Automation Platform Backup</strong> from the list. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">When creating the <strong class="ph b">Ansible Automation Platform Backup</strong> resource it also creates backup resources for each of the nested components that are enabled.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Name</strong> field, enter a name for the backup.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Deployment name</strong> field, enter the name of the deployed Ansible Automation Platform instance being backed up. For example if your Ansible Automation Platform deployment must be backed up and the deployment name is aap, enter 'aap' in the <strong class="ph b">Deployment name</strong> field.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create</span>. This results in an <strong class="ph b">AnsibleAutomationPlatformBackup</strong> resource similar to the following: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatformBackup
+metadata:
+  name: backup
+  namespace: aap
+spec:
+  no_log: true
+  deployment_name: aap</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">To verify that your backup was successful you can:</p> 
+        <ol class="ol"> 
+         <li class="li">Log in to Red Hat OpenShift Container Platform.</li> 
+         <li class="li">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Installed Operators</span></span>.</li> 
+         <li class="li">Select your Ansible Automation Platform Operator deployment.</li> 
+         <li class="li">Click <strong class="ph b">All Instances</strong>.</li> 
+        </ol> 
+        <p class="p">The <strong class="ph b">All Instances</strong> page displays the main backup and the backups for each component with the name you specified when creating your backup resource. The status for the following instances must be either <strong class="ph b">Running</strong> or <strong class="ph b">Successful</strong>:</p> 
+        <ul class="ul"> 
+         <li class="li">AnsibleAutomationPlatformBackup</li> 
+         <li class="li">AutomationControllerBackup</li> 
+         <li class="li">EDABackup</li> 
+         <li class="li">AutomationHubBackup</li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="aap-define-backup-pvc"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Define custom backup Persistent Volume Claims</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Define a custom Persistent Volume Claims (PVCs) to control backup storage allocation for each Ansible Automation Platform component. Specify unique PVC names, storage classes, and volume sizes at both global and component levels to differentiate between backup runs.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have an active Red Hat Ansible Automation Platform deployment on OpenShift Container Platform.</li> 
+         <li class="li">You have the <code class="ph codeph">oc</code> CLI tool installed and cluster administrator access.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Create a backup YAML file, for example <code class="ph codeph">custom-pvc-backup.yaml</code>) , that defines <code class="ph codeph">backup_pvc</code> and <code class="ph codeph">create_backup_pvc</code> parameters for each component: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock language-none"><code>apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatformBackup
+metadata:
+  name: aapbackup
+spec:
+  backup_pvc: custom-aap-backup-pvc (a)
+  backup_storage_class: nfs-local-rwx
+  backup_storage_requirements: 7Gi
+  create_backup_pvc: true (b)
+  deployment_name: aap
+  controller: (c)
+    backup_pvc: custom-controller-backup-pvc
+    backup_resource_requirements:
+      limits:
+        cpu: "4"
+        memory: 8Gi
+      requests:
+        cpu: "2"
+        memory: 4Gi
+    backup_storage_class: standard-csi
+    backup_storage_requirements: 7Gi
+    create_backup_pvc: true
+  eda:
+    backup_pvc: custom-eda-backup-pvc
+    backup_storage_class: standard-csi
+    backup_storage_requirements: 7Gi
+    create_backup_pvc: true
+  hub:
+    backup_pvc: custom-hub-backup-pvc
+    backup_storage_class: nfs-local-rwx
+    backup_storage_requirements: 7Gi
+    create_backup_pvc: true</code></pre> 
+          </div> 
+          <div class="itemgroup info"> 
+           <ol class="ol" type="a" id="aap-define-backup-pvc__ol_1"> 
+            <li class="li">Sets a custom PVC name for the platform gateway backup.</li> 
+            <li class="li">When set to <code class="ph codeph">true</code>, the operator creates the PVC automatically if it does not already exist.</li> 
+            <li class="li">Component-level settings override the global values for <code class="ph codeph">backup_pvc</code>, <code class="ph codeph">backup_storage_class</code>, and <code class="ph codeph">backup_storage_requirements</code>. Each component can define its own <code class="ph codeph">backup_pvc</code> to create a uniquely named PVC.</li> 
+           </ol> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Apply the configuration: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock language-none"><code>oc apply -f custom-pvc-backup.yaml</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <div class="p">
+         Confirm that the PVCs were created: 
+         <pre class="pre codeblock language-none"><code>oc get pvc -n &lt;namespace&gt;</code></pre> The output displays the custom PVCs for each component:
+        </div> 
+        <div class="p"> 
+         <table class="table" id="aap-define-backup-pvc__table_1">
+          <caption></caption>
+          <colgroup>
+           <col style="width:16.666666666666664%">
+           <col style="width:16.666666666666664%">
+           <col style="width:16.666666666666664%">
+           <col style="width:16.666666666666664%">
+           <col style="width:16.666666666666664%">
+           <col style="width:16.666666666666664%">
+          </colgroup>
+          <thead class="thead"> 
+           <tr class="row"> 
+            <th class="entry" id="aap-define-backup-pvc__table_1__entry__1">Name</th> 
+            <th class="entry" id="aap-define-backup-pvc__table_1__entry__2">Status</th> 
+            <th class="entry" id="aap-define-backup-pvc__table_1__entry__3">Volume</th> 
+            <th class="entry" id="aap-define-backup-pvc__table_1__entry__4">Capacity</th> 
+            <th class="entry" id="aap-define-backup-pvc__table_1__entry__5">Access Modes</th> 
+            <th class="entry" id="aap-define-backup-pvc__table_1__entry__6">Storage class</th> 
+           </tr> 
+          </thead>
+          <tbody class="tbody"> 
+           <tr class="row"> 
+            <td class="entry" headers="aap-define-backup-pvc__table_1__entry__1"> <pre lang="terminal" class="pre"><code class="ph codeph">custom-aap-backup-pvc</code></pre> </td> 
+            <td class="entry" headers="aap-define-backup-pvc__table_1__entry__2"> <pre lang="terminal" class="pre"><code class="ph codeph">Bound</code></pre> </td> 
+            <td class="entry" headers="aap-define-backup-pvc__table_1__entry__3"> <pre lang="terminal" class="pre"><code class="ph codeph">pv-aap </code></pre> </td> 
+            <td class="entry" headers="aap-define-backup-pvc__table_1__entry__4"> <pre lang="terminal" class="pre"><code class="ph codeph">7Gi</code></pre> </td> 
+            <td class="entry" headers="aap-define-backup-pvc__table_1__entry__5"> <pre lang="terminal" class="pre"><code class="ph codeph">RWX </code></pre> </td> 
+            <td class="entry" headers="aap-define-backup-pvc__table_1__entry__6"> <pre lang="terminal" class="pre"><code class="ph codeph">nfs-local-rwx</code></pre> </td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="aap-define-backup-pvc__table_1__entry__1"> <pre lang="terminal" class="pre"><code class="ph codeph">custom-controller-backup-pvc</code></pre> </td> 
+            <td class="entry" headers="aap-define-backup-pvc__table_1__entry__2"> <pre lang="terminal" class="pre"><code class="ph codeph">Bound</code></pre> </td> 
+            <td class="entry" headers="aap-define-backup-pvc__table_1__entry__3"> <pre lang="terminal" class="pre"><code class="ph codeph">pv-ctrl    </code></pre> </td> 
+            <td class="entry" headers="aap-define-backup-pvc__table_1__entry__4"> <pre lang="terminal" class="pre"><code class="ph codeph">7Gi</code></pre> </td> 
+            <td class="entry" headers="aap-define-backup-pvc__table_1__entry__5"> <pre lang="terminal" class="pre"><code class="ph codeph">RWO</code></pre> </td> 
+            <td class="entry" headers="aap-define-backup-pvc__table_1__entry__6"> <pre lang="terminal" class="pre"><code class="ph codeph">standard-csi</code></pre> </td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="aap-define-backup-pvc__table_1__entry__1"> <pre lang="terminal" class="pre"><code class="ph codeph">custom-eda-backup-pvc    </code></pre> </td> 
+            <td class="entry" headers="aap-define-backup-pvc__table_1__entry__2"> <pre lang="terminal" class="pre"><code class="ph codeph">Bound</code></pre> </td> 
+            <td class="entry" headers="aap-define-backup-pvc__table_1__entry__3"> <pre lang="terminal" class="pre"><code class="ph codeph">pv-eda </code></pre> </td> 
+            <td class="entry" headers="aap-define-backup-pvc__table_1__entry__4"> <pre lang="terminal" class="pre"><code class="ph codeph">7Gi</code></pre> </td> 
+            <td class="entry" headers="aap-define-backup-pvc__table_1__entry__5"> <pre lang="terminal" class="pre"><code class="ph codeph">RWO</code></pre> </td> 
+            <td class="entry" headers="aap-define-backup-pvc__table_1__entry__6"> <pre lang="terminal" class="pre"><code class="ph codeph">standard-csi</code></pre> </td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="aap-define-backup-pvc__table_1__entry__1"> <pre lang="terminal" class="pre"><code class="ph codeph">custom-hub-backup-pvc </code></pre> </td> 
+            <td class="entry" headers="aap-define-backup-pvc__table_1__entry__2"> <pre lang="terminal" class="pre"><code class="ph codeph">Bound</code></pre> </td> 
+            <td class="entry" headers="aap-define-backup-pvc__table_1__entry__3"> <pre lang="terminal" class="pre"><code class="ph codeph"> pv-hub </code></pre> </td> 
+            <td class="entry" headers="aap-define-backup-pvc__table_1__entry__4"> <pre lang="terminal" class="pre"><code class="ph codeph">7Gi</code></pre> </td> 
+            <td class="entry" headers="aap-define-backup-pvc__table_1__entry__5"> <pre lang="terminal" class="pre"><code class="ph codeph">RWX </code></pre> </td> 
+            <td class="entry" headers="aap-define-backup-pvc__table_1__entry__6"> <pre lang="terminal" class="pre"><code class="ph codeph"> nfs-local-rwx</code></pre> </td> 
+           </tr> 
+          </tbody>
+         </table> 
+        </div> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title4" id="aap-override-backup-configs"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Custom backup configurations for specific components</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">You can override the global backup configuration for specific components, such as automation controller, private automation hub, or Event-Driven Ansible controller. This enables each component to use its own storage class, PVC name, storage size, or resource limits during the backup process.</p> 
+       <p class="p"><strong class="ph b">Example: Overriding component resources</strong> </p> 
+       <p class="p">In this backup custom resource, each component has a unique PVC name and storage class::</p> 
+       <pre class="pre codeblock language-none"><code>apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatformBackup
+metadata:
+  name: custom-backup
+spec:
+  deployment_name: myaap
+  no_log: false
+  backup_storage_class: rook-cephfs &lt;1&gt;
+  hub:
+ backup_pvc: custom-hub-backup-pvc &lt;2&gt;
+    backup_storage_requirements: 25Gi
+    backup_storage_class: rook-cephfs
+    create_backup_pvc: true
+    no_log: false
+  controller:
+    backup_pvc: custom-controller-backup-pvc
+    backup_storage_requirements: 15Gi  
+    backup_storage_class: rook-block &lt;3&gt;
+    create_backup_pvc: true
+    no_log: false
+  eda:
+ backup_pvc: custom-eda-backup-pvc
+    backup_storage_requirements: 7Gi
+    backup_storage_class: rook-block
+    create_backup_pvc: true
+    no_log: false</code></pre> 
+       <ol class="ol" id="aap-override-backup-configs__ol_1"> 
+        <li class="li"> <p class="p">The global `backup_storage_class` applies to the platform gateway. Components that do not specify their own `backup_storage_class` inherit this value. </p> </li> 
+        <li class="li"> <p class="p">Each component can define its own `backup_pvc` to create a uniquely named PVC. Set `create_backup_pvc: true` to have the operator create the PVC automatically. </p> </li> 
+        <li class="li"> <p class="p">Component-level values, such as `backup_storage_class: rook-block`, override the global setting for that component.</p> </li> 
+       </ol> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="GUID-f23c6528-7e6d-415c-a60a-6b460787cd09"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Resolve naming conflicts when deploying an Automation Controller custom resource</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">If your <code class="ph codeph">AutomationController</code> customer resource matches an existing deployment, perform the following steps to resolve the issue.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">The name specified for the new <code class="ph codeph">AutomationController</code> custom resource must not match an existing deployment or the recovery process will fail. Persistent volume claims (PVCs) and Secrets remain after a deployment is deleted. If you want to reuse the same name you must delete previous PVCs and Secrets before creating a new custom resource.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Delete the existing <code class="ph codeph">AutomationController</code> and the associated postgres PVC:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc delete automationcontroller &lt;YOUR_DEPLOYMENT_NAME&gt; -n &lt;YOUR_NAMESPACE&gt;
+
+oc delete pvc postgres-13-&lt;YOUR_DEPLOYMENT_NAME&gt;-13-0 -n &lt;YOUR_NAMESPACE&gt;</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Use <code class="ph codeph">AutomationControllerRestore</code> with the same deployment_name in it:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc apply -f restore.yaml</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

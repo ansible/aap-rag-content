@@ -1,0 +1,288 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="upgrade-scenarios-rpm">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Supported RPM-based upgrade and migration scenarios</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Find the supported upgrade paths for your RPM-based Ansible Automation Platform deployment. This helps you plan the necessary steps for a smooth upgrade.</p> 
+     <section class="section" id="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_8">
+      <h2 class="title sectiontitle">RPM-based Ansible Automation Platform 2.4 on RHEL 8</h2> 
+      <div class="note warning note_warning">
+       <span class="note__title">Warning:</span> 
+       <div class="note__body">
+        Ansible Automation Platform 2.6 is the last version that supports RPM-based deployments. To upgrade to Ansible Automation Platform 2.7, migrate to a containerized or OpenShift Container Platform deployment first. 
+       </div>
+      </div> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:25%">
+        <col style="width:50%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_8__entry__1">Source</th> 
+         <th class="entry" id="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_8__entry__2">Target</th> 
+         <th class="entry" id="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_8__entry__3">Process</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_8__entry__1"> <p class="p">RPM-based Ansible Automation Platform 2.4 on RHEL 8</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_8__entry__2"> <p class="p">RPM-based Ansible Automation Platform 2.6 on RHEL 9</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_8__entry__3"> 
+          <ol class="ol"> 
+           <li class="li"><a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.4/html/automation_controller_administration_guide/controller-backup-and-restore" target="_blank" rel="external noopener">Backup your deployment of 2.4 RPM</a> on RHEL 8, then restore to a RHEL 9 environment running a fresh installation of RPM 2.4.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_aap_upgrade_overview" title="Ansible Automation Platform 2.6 includes changes that improve the overall platform upgrade experience.">Upgrade your RPM deployment</a> from 2.4 to 2.6.</li> 
+          </ol> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_8__entry__1"> <p class="p">RPM-based Ansible Automation Platform 2.4 on RHEL 8</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_8__entry__2"> <p class="p">Container-based Ansible Automation Platform 2.6 on RHEL 9</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_8__entry__3"> 
+          <ol class="ol"> 
+           <li class="li"><a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.4/html/automation_controller_administration_guide/controller-backup-and-restore" target="_blank" rel="external noopener">Backup your deployment of 2.4 RPM</a> on RHEL 8, then restore to a RHEL 9 environment running a fresh installation of RPM 2.4.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_aap_upgrade_overview" title="Ansible Automation Platform 2.6 includes changes that improve the overall platform upgrade experience.">Upgrade your RPM deployment</a> from 2.4 to 2.6.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_rpm_to_containerized_prerequisites" title="Before migrating from an RPM-based deployment to a container-based deployment, ensure you meet the following prerequisites:">Migrate your RPM deployment</a> 2.6 to a container deployment 2.6.</li> 
+          </ol> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_8__entry__1"> <p class="p">RPM-based Ansible Automation Platform 2.4 on RHEL 8</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_8__entry__2"> <p class="p">Container-based Ansible Automation Platform 2.6 on RHEL 10</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_8__entry__3"> 
+          <ol class="ol"> 
+           <li class="li"><a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.4/html/automation_controller_administration_guide/controller-backup-and-restore" target="_blank" rel="external noopener">Backup your deployment of 2.4 RPM</a> on RHEL 8, then restore to a RHEL 9 environment running a fresh installation of RPM 2.4.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_aap_upgrade_overview" title="Ansible Automation Platform 2.6 includes changes that improve the overall platform upgrade experience.">Upgrade your RPM deployment</a> from 2.4 to 2.6.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_rpm_to_containerized_prerequisites" title="Before migrating from an RPM-based deployment to a container-based deployment, ensure you meet the following prerequisites:">Migrate your RPM deployment</a> 2.6 to a container deployment 2.6.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-back_up_and_restore_your_containerized_deployment#backing-up-containerized-ansible-automation-platform" title="Perform a backup of your container-based installation of Ansible Automation Platform.">Backup your deployment of container 2.6</a> on RHEL 9, then restore to a RHEL 10 environment running a fresh container installation 2.6.</li> 
+          </ol> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_8__entry__1"> <p class="p">RPM-based Ansible Automation Platform 2.4 on RHEL 8</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_8__entry__2"> <p class="p">Ansible Automation Platform on OpenShift Container Platform 2.6</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_8__entry__3"> 
+          <ol class="ol"> 
+           <li class="li"><a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.4/html/automation_controller_administration_guide/controller-backup-and-restore" target="_blank" rel="external noopener">Backup your deployment of 2.4 RPM</a> on RHEL 8, then restore to a RHEL 9 environment running a fresh installation of RPM 2.4.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_aap_upgrade_overview" title="Ansible Automation Platform 2.6 includes changes that improve the overall platform upgrade experience.">Upgrade your RPM deployment</a> from 2.4 to 2.6.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_rpm_to_ocp_prerequisites" title="Before migrating from an RPM-based deployment to an OpenShift Container Platform deployment, ensure you meet the following prerequisites:">Migrate your RPM deployment</a> 2.6 to Ansible Automation Platform on OpenShift Container Platform 2.6.</li> 
+          </ol> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_9">
+      <h2 class="title sectiontitle">RPM-based Ansible Automation Platform 2.4 on RHEL 9</h2> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:25%">
+        <col style="width:50%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_9__entry__1">Source</th> 
+         <th class="entry" id="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_9__entry__2">Target</th> 
+         <th class="entry" id="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_9__entry__3">Process</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_9__entry__1"> <p class="p">RPM-based Ansible Automation Platform 2.4 on RHEL 9</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_9__entry__2"> <p class="p">RPM-based Ansible Automation Platform 2.6 on RHEL 9</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_9__entry__3"> 
+          <ol class="ol"> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_aap_upgrade_overview" title="Ansible Automation Platform 2.6 includes changes that improve the overall platform upgrade experience.">Upgrade your RPM deployment</a> from 2.4 to 2.6.</li> 
+          </ol> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_9__entry__1"> <p class="p">RPM-based Ansible Automation Platform 2.4 on RHEL 9</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_9__entry__2"> <p class="p">Container-based Ansible Automation Platform 2.6 on RHEL 9</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_9__entry__3"> 
+          <ol class="ol"> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_aap_upgrade_overview" title="Ansible Automation Platform 2.6 includes changes that improve the overall platform upgrade experience.">Upgrade your RPM deployment</a> from 2.4 to 2.6.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_rpm_to_containerized_prerequisites" title="Before migrating from an RPM-based deployment to a container-based deployment, ensure you meet the following prerequisites:">Migrate your RPM deployment</a> 2.6 to a container deployment 2.6.</li> 
+          </ol> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_9__entry__1"> <p class="p">RPM-based Ansible Automation Platform 2.4 on RHEL 9</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_9__entry__2"> <p class="p">Container-based Ansible Automation Platform 2.6 on RHEL 10</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_9__entry__3"> 
+          <ol class="ol"> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_aap_upgrade_overview" title="Ansible Automation Platform 2.6 includes changes that improve the overall platform upgrade experience.">Upgrade your RPM deployment</a> from 2.4 to 2.6.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_rpm_to_containerized_prerequisites" title="Before migrating from an RPM-based deployment to a container-based deployment, ensure you meet the following prerequisites:">Migrate your RPM deployment</a> 2.6 to a container deployment 2.6.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-back_up_and_restore_your_containerized_deployment#backing-up-containerized-ansible-automation-platform" title="Perform a backup of your container-based installation of Ansible Automation Platform.">Backup your deployment of container 2.6</a> on RHEL 9, then restore to a RHEL 10 environment running a fresh container installation 2.6.</li> 
+          </ol> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_9__entry__1"> <p class="p">RPM-based Ansible Automation Platform 2.4 on RHEL 9</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_9__entry__2"> <p class="p">Ansible Automation Platform on OpenShift Container Platform 2.6</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_4_on_rhel_9__entry__3"> 
+          <ol class="ol"> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_aap_upgrade_overview" title="Ansible Automation Platform 2.6 includes changes that improve the overall platform upgrade experience.">Upgrade your RPM deployment</a> from 2.4 to 2.6.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_rpm_to_ocp_prerequisites" title="Before migrating from an RPM-based deployment to an OpenShift Container Platform deployment, ensure you meet the following prerequisites:">Migrate your RPM deployment</a> 2.6 to Ansible Automation Platform on OpenShift Container Platform 2.6.</li> 
+          </ol> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_8">
+      <h2 class="title sectiontitle">RPM-based Ansible Automation Platform 2.5 on RHEL 8</h2> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:25%">
+        <col style="width:50%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_8__entry__1">Source</th> 
+         <th class="entry" id="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_8__entry__2">Target</th> 
+         <th class="entry" id="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_8__entry__3">Process</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_8__entry__1"> <p class="p">RPM-based Ansible Automation Platform 2.5 on RHEL 8</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_8__entry__2"> <p class="p">RPM-based Ansible Automation Platform 2.6 on RHEL 9</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_8__entry__3"> 
+          <ol class="ol"> 
+           <li class="li"><a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/assembly-platform-install-scenario#con-backup-aap_platform-install-scenario" target="_blank" rel="external noopener">Backup your deployment of 2.5 RPM</a> on RHEL 8, then restore to a RHEL 9 environment running a fresh installation of RPM 2.5.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_aap_upgrade_overview" title="Ansible Automation Platform 2.6 includes changes that improve the overall platform upgrade experience.">Upgrade your RPM deployment</a> from 2.5 to 2.6.</li> 
+          </ol> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_8__entry__1"> <p class="p">RPM-based Ansible Automation Platform 2.5 on RHEL 8</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_8__entry__2"> <p class="p">Container-based Ansible Automation Platform 2.6 on RHEL 9</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_8__entry__3"> 
+          <ol class="ol"> 
+           <li class="li"><a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/assembly-platform-install-scenario#con-backup-aap_platform-install-scenario" target="_blank" rel="external noopener">Backup your deployment of 2.5 RPM</a> on RHEL 8, then restore to a RHEL 9 environment running a fresh installation of RPM 2.5.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_aap_upgrade_overview" title="Ansible Automation Platform 2.6 includes changes that improve the overall platform upgrade experience.">Upgrade your RPM deployment</a> from 2.5 to 2.6.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_rpm_to_containerized_prerequisites" title="Before migrating from an RPM-based deployment to a container-based deployment, ensure you meet the following prerequisites:">Migrate your RPM deployment</a> 2.6 to a container deployment 2.6.</li> 
+          </ol> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_8__entry__1"> <p class="p">RPM-based Ansible Automation Platform 2.5 on RHEL 8</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_8__entry__2"> <p class="p">Container-based Ansible Automation Platform 2.6 on RHEL 10</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_8__entry__3"> 
+          <ol class="ol"> 
+           <li class="li"><a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/assembly-platform-install-scenario#con-backup-aap_platform-install-scenario" target="_blank" rel="external noopener">Backup your deployment of 2.5 RPM</a> on RHEL 8, then restore to a RHEL 9 environment running a fresh installation of RPM 2.5.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_aap_upgrade_overview" title="Ansible Automation Platform 2.6 includes changes that improve the overall platform upgrade experience.">Upgrade your RPM deployment</a> from 2.5 to 2.6.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_rpm_to_containerized_prerequisites" title="Before migrating from an RPM-based deployment to a container-based deployment, ensure you meet the following prerequisites:">Migrate your RPM deployment</a> 2.6 to a container deployment 2.6.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-back_up_and_restore_your_containerized_deployment#backing-up-containerized-ansible-automation-platform" title="Perform a backup of your container-based installation of Ansible Automation Platform.">Backup your deployment of container 2.6</a> on RHEL 9, then restore to a RHEL 10 environment running a fresh container installation 2.6.</li> 
+          </ol> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_8__entry__1"> <p class="p">RPM-based Ansible Automation Platform 2.5 on RHEL 8</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_8__entry__2"> <p class="p">Ansible Automation Platform on OpenShift Container Platform 2.6</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_8__entry__3"> 
+          <ol class="ol"> 
+           <li class="li"><a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/assembly-platform-install-scenario#con-backup-aap_platform-install-scenario" target="_blank" rel="external noopener">Backup your deployment of 2.5 RPM</a> on RHEL 8, then restore to a RHEL 9 environment running a fresh installation of RPM 2.5.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_aap_upgrade_overview" title="Ansible Automation Platform 2.6 includes changes that improve the overall platform upgrade experience.">Upgrade your RPM deployment</a> from 2.5 to 2.6.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_rpm_to_ocp_prerequisites" title="Before migrating from an RPM-based deployment to an OpenShift Container Platform deployment, ensure you meet the following prerequisites:">Migrate your RPM deployment</a> 2.6 to Ansible Automation Platform on OpenShift Container Platform 2.6.</li> 
+          </ol> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_9">
+      <h2 class="title sectiontitle">RPM-based Ansible Automation Platform 2.5 on RHEL 9</h2> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:25%">
+        <col style="width:50%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_9__entry__1">Source</th> 
+         <th class="entry" id="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_9__entry__2">Target</th> 
+         <th class="entry" id="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_9__entry__3">Process</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_9__entry__1"> <p class="p">RPM-based Ansible Automation Platform 2.5 on RHEL 9</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_9__entry__2"> <p class="p">RPM-based Ansible Automation Platform 2.6 on RHEL 9</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_9__entry__3"> 
+          <ul class="ul"> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_aap_upgrade_overview" title="Ansible Automation Platform 2.6 includes changes that improve the overall platform upgrade experience.">Upgrade your RPM deployment</a> from 2.5 to 2.6.</li> 
+          </ul> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_9__entry__1"> <p class="p">RPM-based Ansible Automation Platform 2.5 on RHEL 9</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_9__entry__2"> <p class="p">Container-based Ansible Automation Platform 2.6 on RHEL 9</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_9__entry__3"> 
+          <ol class="ol"> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_aap_upgrade_overview" title="Ansible Automation Platform 2.6 includes changes that improve the overall platform upgrade experience.">Upgrade your RPM deployment</a> from 2.5 to 2.6.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_rpm_to_containerized_prerequisites" title="Before migrating from an RPM-based deployment to a container-based deployment, ensure you meet the following prerequisites:">Migrate your RPM deployment</a> 2.6 to a container deployment 2.6.</li> 
+          </ol> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_9__entry__1"> <p class="p">RPM-based Ansible Automation Platform 2.5 on RHEL 9</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_9__entry__2"> <p class="p">Container-based Ansible Automation Platform 2.6 on RHEL 10</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_9__entry__3"> 
+          <ol class="ol"> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_aap_upgrade_overview" title="Ansible Automation Platform 2.6 includes changes that improve the overall platform upgrade experience.">Upgrade your RPM deployment</a> from 2.5 to 2.6.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_rpm_to_containerized_prerequisites" title="Before migrating from an RPM-based deployment to a container-based deployment, ensure you meet the following prerequisites:">Migrate your RPM deployment</a> 2.6 to a container deployment 2.6.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-back_up_and_restore_your_containerized_deployment#backing-up-containerized-ansible-automation-platform" title="Perform a backup of your container-based installation of Ansible Automation Platform.">Backup your deployment of container 2.6</a> on RHEL 9, then restore to a RHEL 10 environment running a fresh container installation 2.6.</li> 
+          </ol> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_9__entry__1"> <p class="p">RPM-based Ansible Automation Platform 2.5 on RHEL 9</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_9__entry__2"> <p class="p">Ansible Automation Platform on OpenShift Container Platform 2.6</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_5_on_rhel_9__entry__3"> 
+          <ol class="ol"> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_aap_upgrade_overview" title="Ansible Automation Platform 2.6 includes changes that improve the overall platform upgrade experience.">Upgrade your RPM deployment</a> from 2.5 to 2.6.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_rpm_to_ocp_prerequisites" title="Before migrating from an RPM-based deployment to an OpenShift Container Platform deployment, ensure you meet the following prerequisites:">Migrate your RPM deployment</a> 2.6 to Ansible Automation Platform on OpenShift Container Platform 2.6.</li> 
+          </ol> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_6_on_rhel_9">
+      <h2 class="title sectiontitle">RPM-based Ansible Automation Platform 2.6 on RHEL 9</h2> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:25%">
+        <col style="width:50%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_6_on_rhel_9__entry__1">Source</th> 
+         <th class="entry" id="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_6_on_rhel_9__entry__2">Target</th> 
+         <th class="entry" id="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_6_on_rhel_9__entry__3">Process</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_6_on_rhel_9__entry__1"> <p class="p">RPM-based Ansible Automation Platform 2.6 on RHEL 9</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_6_on_rhel_9__entry__2"> <p class="p">Container-based Ansible Automation Platform 2.6 on RHEL 10</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_6_on_rhel_9__entry__3"> 
+          <ol class="ol"> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_rpm_to_containerized_prerequisites" title="Before migrating from an RPM-based deployment to a container-based deployment, ensure you meet the following prerequisites:">Migrate your RPM deployment</a> 2.6 to a container deployment 2.6.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-back_up_and_restore_your_containerized_deployment#backing-up-containerized-ansible-automation-platform" title="Perform a backup of your container-based installation of Ansible Automation Platform.">Backup your deployment of container 2.6</a> on RHEL 9, then restore to a RHEL 10 environment running a fresh container installation 2.6.</li> 
+          </ol> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_6_on_rhel_9__entry__1"> <p class="p">RPM-based Ansible Automation Platform 2.6 on RHEL 9</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_6_on_rhel_9__entry__2"> <p class="p">Ansible Automation Platform on OpenShift Container Platform 2.6</p> </td> 
+         <td class="entry" headers="upgrade-scenarios-rpm___rpm_based_ansible_automation_platform_2_6_on_rhel_9__entry__3"> 
+          <ul class="ul"> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_rpm_to_ocp_prerequisites" title="Before migrating from an RPM-based deployment to an OpenShift Container Platform deployment, ensure you meet the following prerequisites:">Migrate your RPM deployment</a> 2.6 to Ansible Automation Platform on OpenShift Container Platform 2.6.</li> 
+          </ul> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="con-drill-down"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Change your Automation Analytics settings</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">You can drill down into cluster data to review more detailed information about successful or failed jobs.</p> 
+      <p class="p">The detailed view, presented on the <strong class="ph b">Job Explorer</strong> page, provides information on the cluster, organization, template, and job type. Filters you select on the <strong class="ph b">Clusters</strong> view carry over to the <strong class="ph b">Job Explorer</strong> page.</p> 
+      <p class="p">Details on those job templates will appear in the <strong class="ph b">Job Explorer</strong> view, modified by any filters you select in the <strong class="ph b">Clusters</strong> view.</p> 
+      <p class="p">For example, you can drill down to review details for failed jobs in a cluster.</p> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-view-failed-jobs"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Example: Review failed jobs</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can view detailed information about failed jobs across your organization by drilling down on a graph in the <strong class="ph b">Clusters</strong> view and using the <strong class="ph b">Job Explorer</strong> to refine results. Clicking a segment on the graph opens that information in the <strong class="ph b">Job Explorer</strong>, preserving filters applied in the <strong class="ph b">Clusters</strong> view.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Analytics</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Clusters</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Use the filter lists in the toolbar to apply filters for clusters and time range of your choosing.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click a segment on the graph. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">You are redirected to the <strong class="ph b">Job Explorer</strong> view, which displays a list of jobs corresponding to that day on the graph.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">To refine the list to show only failed jobs: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Select <strong class="ph b">Status</strong> from the <strong class="ph b">Filter by</strong> list.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Select the <strong class="ph b">Failed</strong> filter. </span> 
+            <div class="itemgroup info"> 
+             <p class="p">The <strong class="ph b">Job Explorer</strong> view updates to show only failed jobs run within the selected time range.</p> 
+            </div> </li> 
+          </ol> </li>
+        </ol>
+       </section> 
+       <section class="section postreq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">Add additional context to the view by applying more filters and selecting attributes to sort results.</li> 
+         <li class="li">Review more information for failed jobs on the automation controller job details page.</li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-top-template-job-explorer"> 
+      <h2 class="title topictitle2" id="ariaid-title3">View top templates job details for a specific cluster</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can view job instances for top templates in a cluster to learn more about individual job runs associated with that template or to apply filters to further drill down into the data.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Analytics</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Clusters</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click a template name in <strong class="ph b">Top Templates</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">View all jobs</span> in the modal that is displayed. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The <strong class="ph b">Job Explorer</strong> page displays all jobs on the chosen cluster associated with that template.</p> 
+           <p class="p">The view presented will preserve the contextual information of the template based on the parameters selected in the <strong class="ph b">Clusters</strong> view.</p> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="ignoring-nested-workflows"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Ignore nested workflows and jobs</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Ignoring nested workflows and jobs filters out duplicate workflow and job template entries and excludes those items from overall totals.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Select the settings icon on the <strong class="ph b">Job Explorer</strong> view.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Use the toggle switch to <strong class="ph b">Ignore nested workflows and jobs</strong>. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p"><strong class="ph b">About nested workflows</strong> Nested workflows enable you to create workflow job templates that call other workflow job templates. Nested workflows promotes reuse, as modular components, of workflows that include existing business logic and organizational requirements in automating complex processes and operations. To learn more about nested workflows, see Workflows in automation controller in the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_workflows#controller-workflows" title="Workflows enable you to configure a sequence of disparate job templates (or workflow templates) that might or might not share inventory, playbooks, or permissions.">Using automation execution</a>.</p> 
+            </div>
+           </div> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="task-configure-external-database-containerized">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure external PostgreSQL database for metrics service with containerized installer</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Configure metrics service to use an external PostgreSQL database to leverage enterprise database management, backup, and high availability infrastructure.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">External PostgreSQL 15 or later database server accessible from metrics service</li> 
+       <li class="li">Database administrator credentials with CREATE DATABASE and CREATE USER privileges</li> 
+       <li class="li">Network connectivity to database server (port 5432 default)</li> 
+       <li class="li">Firewall rules configured to allow connections from metrics service hosts</li> 
+       <li class="li">Ansible Automation Platform 2.7 containerized installer downloaded and extracted</li> 
+       <li class="li">Inventory file access with permission to modify <code class="ph codeph">[automationmetrics]</code> group and variables</li> 
+       <li class="li">Root or sudo access to metrics service host</li> 
+      </ul> 
+     </section> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">This procedure configures metrics service to use an external PostgreSQL database instead of installer-managed databases when deploying with the Ansible Automation Platform 2.7 containerized installer. By using enterprise database infrastructure, you eliminate installer-managed PostgreSQL processes (saving approximately 2 GB memory and 2 vCPU per database instance), reduce database provisioning time by approximately 50% (5 minutes versus 10 minutes), and enable centralized database management with unified backup, restore, and high availability for all Ansible Automation Platform components.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Create metrics_service database</span> 
+        <div class="itemgroup info"> 
+         <p class="p">Create the <code class="ph codeph">metrics_service</code> database with UTF-8 encoding to support internationalization and ensure compatibility with Django migrations.</p> 
+         <pre class="pre codeblock"><code>psql -h &lt;EXTERNAL_DB_HOST&gt; -U postgres
+
+CREATE DATABASE metrics_service
+  WITH ENCODING='UTF8'
+       LC_COLLATE='en_US.UTF-8'
+       LC_CTYPE='en_US.UTF-8'
+       TEMPLATE=template0;</code></pre> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p"><strong class="ph b">Why UTF-8 encoding:</strong> Django ORM requires UTF-8 encoding for proper handling of internationalized strings and special characters in metric data.</p> 
+          </div>
+         </div> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Create database users</span> 
+        <div class="itemgroup info"> 
+         <p class="p">Create two database users. The <code class="ph codeph">metrics_service</code> user has full database privileges for schema management. The <code class="ph codeph">ms_awx_readonly</code> user has SELECT-only privileges for secure data collection from automation controller.</p> 
+         <pre class="pre codeblock"><code>-- metrics service user (ALL privileges)
+CREATE USER metrics_service WITH PASSWORD '&lt;SECURE_PASSWORD&gt;';
+GRANT ALL PRIVILEGES ON DATABASE metrics_service TO metrics_service;
+\c metrics_service
+GRANT ALL ON SCHEMA public TO metrics_service;
+
+-- Read-only user for controller database
+\c postgres
+CREATE USER ms_awx_readonly WITH PASSWORD '&lt;READONLY_PASSWORD&gt;';
+\c awx
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO ms_awx_readonly;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO ms_awx_readonly;</code></pre> 
+         <div class="note important note_important">
+          <span class="note__title">Important:</span> 
+          <div class="note__body"> 
+           <p class="p">Change <code class="ph codeph">awx</code> to match your actual database name for automation controller. Common alternative names: <code class="ph codeph">automationcontroller</code>, <code class="ph codeph">tower</code>, <code class="ph codeph">awx_production</code>.</p> 
+          </div>
+         </div> 
+         <table class="table">
+          <caption></caption>
+          <colgroup>
+           <col>
+           <col>
+           <col>
+           <col>
+          </colgroup>
+          <thead class="thead"> 
+           <tr class="row"> 
+            <th class="entry" id="task-configure-external-database-containerized__entry__1">User</th> 
+            <th class="entry" id="task-configure-external-database-containerized__entry__2">Database</th> 
+            <th class="entry" id="task-configure-external-database-containerized__entry__3">Privileges</th> 
+            <th class="entry" id="task-configure-external-database-containerized__entry__4">Purpose</th> 
+           </tr> 
+          </thead>
+          <tbody class="tbody"> 
+           <tr class="row"> 
+            <td class="entry" headers="task-configure-external-database-containerized__entry__1"><code class="ph codeph">metrics_service</code></td> 
+            <td class="entry" headers="task-configure-external-database-containerized__entry__2"><code class="ph codeph">metrics_service</code></td> 
+            <td class="entry" headers="task-configure-external-database-containerized__entry__3">ALL</td> 
+            <td class="entry" headers="task-configure-external-database-containerized__entry__4">Django migrations, schema management, metrics data storage</td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="task-configure-external-database-containerized__entry__1"><code class="ph codeph">ms_awx_readonly</code></td> 
+            <td class="entry" headers="task-configure-external-database-containerized__entry__2"><code class="ph codeph">awx</code> (controller database)</td> 
+            <td class="entry" headers="task-configure-external-database-containerized__entry__3">SELECT ON ALL TABLES IN SCHEMA public</td> 
+            <td class="entry" headers="task-configure-external-database-containerized__entry__4">Read-only metrics collection from controller</td> 
+           </tr> 
+          </tbody>
+         </table> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p"><strong class="ph b">Security note:</strong> The <code class="ph codeph">ms_awx_readonly</code> user has only SELECT privileges, preventing any writes to automation controller data. This ensures metrics service cannot modify controller operations.</p> 
+          </div>
+         </div> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Configure pg_hba.conf</span> 
+        <div class="itemgroup info"> 
+         <p class="p">Add authentication rules to allow metrics service host to connect to both databases using secure <code class="ph codeph">scram-sha-256</code> authentication.</p> 
+         <pre class="pre codeblock"><code>host    metrics_service    metrics_service    &lt;METRICS_HOST_IP&gt;/32    scram-sha-256
+host    awx               ms_awx_readonly    &lt;METRICS_HOST_IP&gt;/32    scram-sha-256</code></pre> 
+         <p class="p"><strong class="ph b">Replace placeholders:</strong></p> 
+         <ul class="ul"> 
+          <li class="li"><code class="ph codeph">&lt;METRICS_HOST_IP&gt;</code>: IP address of the host running metrics service (from <code class="ph codeph">[automationmetrics]</code> inventory group)</li> 
+         </ul> 
+         <p class="p"><strong class="ph b">After editing pg_hba.conf:</strong></p> 
+         <pre class="pre codeblock"><code># Reload PostgreSQL configuration
+sudo systemctl reload postgresql</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Configure installer inventory</span> 
+        <div class="itemgroup info"> 
+         <p class="p">Edit the containerized installer inventory file to specify external database connection parameters:</p> 
+         <pre class="pre codeblock"><code>[automationmetrics]
+metrics.example.com
+
+[all:vars]
+automationmetrics_pg_host=external-db.example.com
+automationmetrics_pg_port=5432
+automationmetrics_pg_database=metrics_service
+automationmetrics_pg_username=metrics_service
+automationmetrics_pg_password='&lt;SECURE_PASSWORD&gt;'
+
+# Read-only access to controller database
+automationmetrics_controller_db=awx
+automationmetrics_controller_pg_username=ms_awx_readonly
+automationmetrics_controller_read_pg_password='&lt;READONLY_PASSWORD&gt;'
+automationmetrics_controller_read_pg_host=controller-db.example.com</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Run the containerized installer</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>cd /path/to/aap-containerized-installer
+ansible-playbook -i inventory install.yml</code></pre> 
+         <p class="p">The installer performs these actions:</p> 
+         <ol class="ol" type="a"> 
+          <li class="li">Skips PostgreSQL process creation for metrics service (uses external database)</li> 
+          <li class="li">Creates Podman secrets for external database credentials</li> 
+          <li class="li">Runs database migrations on external <code class="ph codeph">metrics_service</code> database</li> 
+          <li class="li">Deploys metrics service containers configured to connect to external databases</li> 
+         </ol> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Verify external database configuration</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code># Test database connectivity from metrics service host
+podman exec automation-metrics-web \
+  psql -h external-db.example.com -U metrics_service -d metrics_service -c "SELECT 1;"
+
+# Test read-only access to controller database
+podman exec automation-metrics-tasks \
+  psql -h controller-db.example.com -U ms_awx_readonly -d awx -c "SELECT COUNT(*) FROM main_job;"
+
+# Verify health endpoint
+curl http://localhost:8087/health/</code></pre> 
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <p class="p">External database is successfully configured when:</p> 
+      <ul class="ul"> 
+       <li class="li">No installer-managed PostgreSQL processes run on metrics service host</li> 
+       <li class="li">Metrics service can connect to external <code class="ph codeph">metrics_service</code> database</li> 
+       <li class="li">Metrics service can query controller database using <code class="ph codeph">ms_awx_readonly</code> user</li> 
+       <li class="li">Health endpoint returns <code class="ph codeph">{"status": "good", ...}</code> response</li> 
+      </ul> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist reltasks">
+      <strong>Related tasks</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_install_metrics_service_with_containerized_installer" title="Enable and configure metrics service during containerized installation to automatically collect anonymized usage data and transmit it to Red Hat.">Install metrics service with containerized installer</a></li>
+      </ul>
+     </div>
+     <div class="linklist relref">
+      <strong>Related reference</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_metrics_service_configuration_variables" title="Review configuration variables to customize metrics service deployment, database connections, security settings, and operational parameters.">Metrics service configuration variables reference</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

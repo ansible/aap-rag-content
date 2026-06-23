@@ -1,0 +1,15 @@
+# Build a definition file
+## Galaxy
+
+The `galaxy` entry points to a valid requirements file or includes inline content for the `ansible-galaxy collection install -r …​` command.
+
+The entry `requirements.yml` can be a relative path from the directory of the automation execution environment definition’s folder, or an absolute path.
+
+The content might look like the following:
+
+```
+collections:
+- community.aws
+- kubernetes.core
+```
+

@@ -1,0 +1,119 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="gw-managing-authentication"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Locate and manage authentication configurations</h1> 
+     <p class="shortdesc">After you have configured your authentication settings, you can view a list of authenticators, search, sort and view the details for each authenticator configured on the system.</p> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="gw-authentication-list-view"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Authentication list view</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">On the <strong class="ph b">Authentication Methods</strong> page, you can view and manage the configured authentication methods for your organization.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Authentication Methods</span></span>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The <strong class="ph b">Authentication Methods</strong> page is displayed.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create authentication</span> and follow the steps for creating an authentication method in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_config_authentication_type#gw-config-authentication-type" title="Ansible Automation Platform provides multiple authenticator plugins that you can configure to simplify the login experience for your organization.">Configuring an authentication type</a>. Otherwise, proceed to step 3.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the menu bar, you can sort the list of authentication methods by using the arrows in the menu bar for <strong class="ph b">Order</strong>, <strong class="ph b">Name</strong> and <strong class="ph b">Authentication type</strong>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click the toggles to <strong class="ph b">Enable</strong> or <strong class="ph b">Disable</strong> authenticators.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="gw-searching-authenticator"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Search for an authenticator</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can search for a previously configured authenticator from the Authentication list view.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Authentication Methods</span></span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">In the search bar, enter an appropriate keyword for the authentication method you want to search for and click the arrow icon.</span> </li> 
+         <li class="li step"> <span class="ph cmd">If you do not find what you are looking for, you can narrow your search. From the filter list, select <strong class="ph b">Name</strong> or <strong class="ph b">Authentication type</strong> depending on the search term you want to use.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Scroll through the list of search results and select the authenticator you want to review.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="gw-display-auth-details"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Display authenticator details</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">After you locate the authenticator you want to review, you can display the configuration details:</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Authentication Methods</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the list view, select the authenticator name displayed in the <strong class="ph b">Name</strong> column. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The authenticator <strong class="ph b">Details</strong> page is displayed.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the <strong class="ph b">Details</strong> page, you can review the configuration settings applied to the authenticator.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="gw-edit-authenticator"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Edit an authenticator</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can change the settings of previously configured authenticators from the <strong class="ph b">Authentication</strong> list view.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Authentication Methods</span></span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">In the list view, you can either: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">Select the <span class="ph uicontrol button">Edit</span><img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png" width="15" alt="Edit"> icon next to authenticator you want to modify, or</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Select the authenticator name displayed in the <strong class="ph b">Name</strong> column and click <span class="ph uicontrol button">Edit authenticator</span> from the <strong class="ph b">Details</strong> page.</span> </li> 
+          </ol> </li> 
+         <li class="li step"> <span class="ph cmd">Change the authentication details or mapping configurations as required.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Save</span>.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="gw-delete-authenticator"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Delete an authenticator</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Delete unused authenticators to prevent users from logging in through outdated identity providers. Remove these configurations to ensure your Ansible Automation Platform environment remains secure and organized.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">You can change the settings of previously configured authenticators from the <strong class="ph b">Authentication</strong> list view.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Authentication Methods</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the list view, select the checkbox next to the authenticator you want to delete.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select <strong class="ph b">Delete authentication</strong> from the <strong class="ph b">⋮</strong> list. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note"> <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">You can delete many authenticators by selecting the checkbox next to each authenticator you want to remove, and clicking <strong class="ph b">Delete selected authentication</strong> from the <strong class="ph b">⋮</strong> list on the menu bar.</p> 
+            </div> 
+           </div> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

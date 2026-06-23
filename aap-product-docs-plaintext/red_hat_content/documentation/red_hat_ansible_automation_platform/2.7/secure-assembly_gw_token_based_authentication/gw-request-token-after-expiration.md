@@ -1,0 +1,19 @@
+# Configure access to external applications with tokens
+## Get started with OAuth Applications
+### Request an access token after expiration
+
+The default expiration for access tokens is 1 year.
+
+The best way to set up application integrations by using the **Authorization code** grant type is to allowlist the origins for those cross-site requests. More generally, you must allowlist the service or application you are integrating with the platform, for which you want to provide access tokens.
+
+To do this, have your administrator add this allowlist to their local Ansible Automation Platform settings file:
+
+```
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOWED_ORIGIN_REGEXES = [
+r"http://django-oauth-toolkit.herokuapp.com*",
+r"http://www.example.com*"
+]
+```
+Where `<http://django-oauth-toolkit.herokuapp.com>` and `<http://www.example.com>` are applications requiring tokens with which to access the platform.
+

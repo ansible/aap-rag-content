@@ -1,0 +1,60 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="assembly-automation-mesh-operator-aap">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Scale with automation mesh in an operator environment</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Scaling your automation mesh is available on OpenShift deployments of Red Hat Ansible Automation Platform and is possible through adding or removing nodes from your cluster dynamically, using the <strong class="ph b">Instances</strong> resource of the Ansible Automation Platform UI, without running the installation script.</p> 
+     <p class="p">Instances serve as nodes in your mesh topology. Automation mesh enables you to extend the footprint of your automation. The location where you launch a job can be different from the location where the ansible-playbook runs.</p> 
+     <p class="p">To manage instances from the Ansible Automation Platform UI, you must have System Administrator or System Auditor permissions.</p> 
+     <p class="p">In general, the more processor cores (CPU) and memory (RAM) a node has, the more jobs that can be scheduled to run on that node at once.</p> 
+     <section class="section" id="assembly-automation-mesh-operator-aap___prerequisites">
+      <h2 class="title sectiontitle">Prerequisites</h2> 
+      <p class="p abstract">The automation mesh is dependent on hop and execution nodes running on <em class="ph i">Red Hat Enterprise Linux</em> (RHEL). Your Red Hat Ansible Automation Platform subscription grants you ten Red Hat Enterprise Linux licenses that can be used for running components of Ansible Automation Platform.</p> 
+      <p class="p">For more information about Red Hat Enterprise Linux subscriptions, see <strong class="ph b">Registering the system and managing subscriptions</strong> in the Red Hat Enterprise Linux documentation.</p> 
+      <p class="p">The following steps prepare the RHEL instances for deployment of the automation mesh.</p> 
+      <ol class="ol"> 
+       <li class="li">You require a Red Hat Enterprise Linux operating system. Each node in the mesh requires a static IP address, or a resolvable DNS hostname that Ansible Automation Platform can access.</li> 
+       <li class="li">Ensure that you have the minimum requirements for the RHEL virtual machine before proceeding. For more information, see the <strong class="ph b">System requirements</strong>.</li> 
+       <li class="li">Deploy the RHEL instances within the remote networks where communication is required. For information about creating virtual machines, see <strong class="ph b">Creating Virtual Machines</strong> in the <em class="ph i">Red Hat Enterprise Linux</em> documentation. Remember to scale the capacity of your virtual machines sufficiently so that your proposed tasks can run on them. 
+        <ul class="ul"> 
+         <li class="li">RHEL ISOs can be obtained from access.redhat.com.</li> 
+         <li class="li">RHEL cloud images can be built using Image Builder from console.redhat.com.</li> 
+        </ul> </li> 
+      </ol> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_set_up_virtual_machines#proc-set-up-virtual-machines">Set up VMs for use in mesh</a></strong><br>Prepare Red Hat Enterprise Linux virtual machines by setting up SSH access and enabling repositories. Deploying these VMs as nodes helps expand the execution capacity of your automation mesh.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_run_jobs_on_execution_nodes#proc-run-jobs-on-execution-nodes">Run jobs on execution nodes</a></strong><br>You must specify where jobs run from, or they default to running in the control cluster. To do this, set up a Job Template. For more information about Job Templates, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_job_templates" title="You can create both Job templates and Workflow job templates from Automation Execution > Templates .">Standardize and streamline automation with automation job templates</a>.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_topology_viewer#assembly-controller-topology-viewer">View details about mesh nodes with topology viewer</a></strong><br>Use the <strong class="ph b">Topology View</strong> to view node type, node health, and specific details about each node if you already have a mesh topology deployed.</li>
+     </ul>
+     <div class="linklist relconcepts">
+      <strong>Related concepts</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_controller_capacity_determination#controller-capacity-determination" title="The automation controller capacity system determines how many jobs can run on an instance given the amount of resources available to the instance and the size of the jobs that are running (referred to as Impact). The algorithm used to determine this is based on the following two things:">How job capacity is determined and impacts job runs</a></li>
+      </ul>
+     </div>
+     <div class="linklist relref">
+      <strong>Related reference</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/ref_system_requirements" title="Your system must meet the following minimum system requirements to install and run Red Hat Ansible Automation Platform.">Red Hat Ansible Automation Platform system requirements</a></li>
+      </ul>
+     </div>
+     <div class="linklist relinfo">
+      <strong>Related information</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_basic_system_settings/assembly_registering-the-system-and-managing-subscriptions_configuring-basic-system-settings" target="_blank" rel="external noopener">Registering the system and managing subscriptions</a></li>
+       <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_and_managing_virtualization/assembly_creating-virtual-machines_configuring-and-managing-virtualization" target="_blank" rel="external noopener">Creating Virtual Machines</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

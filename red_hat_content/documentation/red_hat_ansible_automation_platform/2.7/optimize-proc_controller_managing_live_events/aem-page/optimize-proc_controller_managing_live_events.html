@@ -1,0 +1,87 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="proc-controller-managing-live-events"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Manage live event streams to the UI</h1> 
+     <div class="body taskbody">
+      <p class="shortdesc">By default, automation controller streams live events to the user interface (UI) for jobs that are running.</p> 
+      <section class="section context">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">About this task</h2>
+       </div> 
+       <p class="p">Events are sent to any node where there is a UI client subscribed to a job. This task is expensive, and becomes more expensive as the number of events that the cluster is producing increases and the number of control nodes increases, because all events are broadcast to all nodes regardless of how many clients are subscribed to particular jobs.</p> 
+      </section> 
+      <section>
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Procedure</h2>
+       </div>
+       <div class="ul steps-unordered">
+        <div class="li step p"> <span class="ph cmd">To reduce the overhead of displaying live events in the UI, administrators can choose to either: </span> 
+         <div class="itemgroup info"> 
+          <ul class="ul"> 
+           <li class="li">Disable live streaming events.</li> 
+           <li class="li">Reduce the number of events shown per second or before truncating or hiding events in the UI.</li> 
+          </ul> 
+         </div> 
+        </div>
+       </div>
+      </section> 
+      <section class="section result">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Results</h2>
+       </div> 
+       <p class="p">When you disable live streaming of events, they are only loaded on hard refresh to a job’s output detail page. When you reduce the number of events shown per second, this limits the overhead of showing live events, but still provides live updates in the UI without a hard refresh.</p> 
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-controller-disabling-live-events"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Disable live streaming events</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can disable live streaming events in automation controller to reduce system load or for troubleshooting purposes.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <div class="ol steps">
+         <div class="li step p"> <span class="ph cmd">Disable live streaming events by using one of the following methods: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">In the API, set <code class="ph codeph">UI_LIVE_UPDATES_ENABLED</code> to <strong class="ph b">False</strong>.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">In the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System</span></span>. </span> 
+            <div class="itemgroup info"> 
+             <ol class="ol" type="i"> 
+              <li class="li">Click <span class="ph uicontrol button">Edit</span>.</li> 
+              <li class="li">Set the <strong class="ph b">Enable Activity Stream</strong> option to <strong class="ph b">Off</strong>.</li> 
+             </ol> 
+            </div> </li> 
+          </ol> 
+         </div>
+        </div>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="ref-controller-settings-to-modify-events"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Settings to modify rate and size of events</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">If your system generates a large number of events, the live streaming of events to the user interface (UI) can cause performance issues. You can disable live streaming of events or reduce the number of events that are displayed in the UI by modifying the following settings.</p> 
+       <section class="section"> 
+        <p class="p">If you cannot disable live streaming of events because of their size, reduce the number of events that are displayed in the UI. You can use the following settings to manage how many events are displayed:</p> 
+        <p class="p"><strong class="ph b">Settings available for editing in the UI or API</strong>:</p> 
+        <ul class="ul"> 
+         <li class="li"><code class="ph codeph">EVENT_STDOUT_MAX_BYTES_DISPLAY</code>: Maximum amount of <code class="ph codeph">stdout</code> to display (as measured in bytes). This truncates the size displayed in the UI. The default is 1024 bytes. Minimum = 0. </li> 
+         <li class="li"><code class="ph codeph">MAX_WEBSOCKET_EVENT_RATE</code>: Number of events to send to clients per second. Default is 30 messages/second. Minimum = 0 (no limit).</li> 
+        </ul> 
+        <p class="p"><strong class="ph b">Settings available by using file based settings</strong>:</p> 
+        <ul class="ul"> 
+         <li class="li"><code class="ph codeph">MAX_UI_JOB_EVENTS</code>: Number of events to display before truncating.This setting hides the rest of the events in the list. Default value is 4000. Minimum = 100. Set <code class="ph codeph">hidden=True</code>.</li> 
+         <li class="li"><code class="ph codeph">MAX_EVENT_RES_DATA</code>: The maximum size of the ansible callback event’s "res" data structure. The "res" is the full "result" of the module. When the maximum size of ansible callback events is reached, then the remaining output will be truncated. Default value is 700000 bytes.</li> 
+         <li class="li"><code class="ph codeph">LOCAL_STDOUT_EXPIRE_TIME</code>: The amount of time before a <code class="ph codeph">stdout</code> file is expired and removed locally. They can be regenerated on demand if downloaded again. The default value is 25992000 seconds (30 days).</li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

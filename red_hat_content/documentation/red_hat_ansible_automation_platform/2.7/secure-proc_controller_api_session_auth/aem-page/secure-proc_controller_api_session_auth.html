@@ -1,0 +1,93 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body id="controller-api-session-auth"> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Use session authentication</h1> 
+    <div class="body taskbody"> 
+     <p class="shortdesc">You can use session authentication when logging in to the platform gateway API or UI to manually create resources, such as inventories, projects, and job templates, and start jobs in the browser.</p> 
+     <section class="section context"> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">About this task</h2> 
+      </div> 
+      <p class="p">With this method, you can remain logged in for a prolonged period of time, not just for that HTTP request. For example, when browsing the API or UI in a browser such as Chrome or Mozilla Firefox. When you log in, a session cookie is created. You can remain logged in when navigating to different pages across the platform.</p> 
+      <p class="p">The following image represents the communication that occurs between the client and server in a session:</p> 
+      <br> 
+      <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/session-auth-architecture.png" alt="Session authentication architecture"> 
+      <br> 
+      <p class="p">Use the curl tool to see the activity that occurs when you log in through platform gateway.</p> 
+     </section> 
+     <section> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">Procedure</h2> 
+      </div> 
+      <ol class="ol steps"> 
+       <li class="li step stepexpand"> <span class="ph cmd">Use <code class="ph codeph">GET</code> to go to the <code class="ph codeph">/api/login/</code> endpoint to get the <code class="ph codeph">csrftoken</code> cookie: </span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>$ curl -k -c - https://&lt;gateway server name&gt;/api/gateway/v1/login/
+
+$YOUR_AAP_URL FALSE / TRUE 1780539778 csrftoken GODXonA5LyV1uAs8zvcD2k12DQJC74oB</code></pre> 
+        </div> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Extract the <code class="ph codeph">csrftoken</code> value from the cookie returned in the first step.</span> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd"><code class="ph codeph">POST</code> to the <code class="ph codeph">/api/login/</code> endpoint with username, password, and <code class="ph codeph">X-CSRFToken=&lt;token-value&gt;</code>: </span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>curl -X POST -H 'Content-Type: application/x-www-form-urlencoded' \
+
+--referer https://&lt;gateway server name&gt;/api/gateway/v1/login/ \
+
+-H 'X-CSRFToken: &lt;token-value&gt;' \
+
+--data 'username=admin&amp;password=$YOUR_ADMIN_PASSWORD' \
+
+--cookie 'csrftoken=GODXonA5LyV1uAs8zvcD2k12DQJC74oB' \
+
+https://&lt;gateway server name&gt;/api/gateway/v1/login/ -k -D - -o /dev/null</code></pre> 
+        </div> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Access and test the APIs that need authentication, for example <code class="ph codeph">/api/controller/v2/settings/all/</code>: </span> 
+        <div class="itemgroup info"> 
+         <div class="note note note_note"> <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">latform gateway performs all of these steps when you olog into the UI or API in the browser. You must use this procedure only when authenticating in the browser. For programmatic integration with platform gateway, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_controller_api_oauth2_token#controller-api-oauth2-token" title="OAuth (Open Authorization) is an open standard for token-based authentication and authorization. OAuth 2 authentication is commonly used when interacting with the platform gateway API programmatically.">OAuth2 token authentication</a>.</p> 
+          </div> 
+         </div> 
+         <pre class="pre codeblock"><code>$ curl -X GET -H 'Cookie: &lt;cookieID&gt;;' https://&lt;gateway server name&gt;/api/controller/v2/settings/all/ -k</code></pre> 
+        </div> </li> 
+      </ol> 
+     </section> 
+     <section class="section result"> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">Results</h2> 
+      </div> 
+      <p class="p">The following shows a typical response:</p> 
+      <pre class="pre codeblock"><code>Server: nginx
+Date: &lt;current date&gt;
+Content-Type: text/html; charset=utf-8
+Content-Length: 0
+Connection: keep-alive
+Location: /accounts/profile/
+X-API-Session-Cookie-Name: awx_sessionid
+Expires: &lt;date&gt;
+Cache-Control: max-age=0, no-cache, no-store, must-revalidate, private
+Vary: Cookie, Accept-Language, Origin
+Session-Timeout: 1800
+Content-Language: en
+X-API-Total-Time: 0.377s
+X-API-Request-Id: 700826696425433fb0c8807cd40c00a0
+Access-Control-Expose-Headers: X-API-Request-Id
+Set-Cookie: userLoggedIn=true; Path=/
+Set-Cookie: current_user=&lt;user cookie data&gt;; Path=/
+Set-Cookie: csrftoken=&lt;csrftoken&gt;; Path=/; SameSite=Lax
+Set-Cookie: awx_sessionid=&lt;your session id&gt;; expires=&lt;date&gt;; HttpOnly; Max-Age=1800; Path=/; SameSite=Lax
+Strict-Transport-Security: max-age=15768000</code></pre> 
+      <p class="p">When a user is successfully authenticated with this method, the server responds with a header called <code class="ph codeph">X-API-Session-Cookie-Name</code>, indicating the configured name of the session cookie. The default value is <code class="ph codeph">awx_session_id</code> which you can see later in the <code class="ph codeph">Set-Cookie</code> headers.</p> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">You can change the session expiration time by specifying it in the <code class="ph codeph">SESSION_COOKIE_AGE</code> parameter.</p> 
+       </div> 
+      </div> 
+     </section> 
+    </div> 
+   </article> 
+  </main>  
+ </body>
+</html>

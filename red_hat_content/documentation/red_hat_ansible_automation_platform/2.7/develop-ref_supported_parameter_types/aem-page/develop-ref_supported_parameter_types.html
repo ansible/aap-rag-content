@@ -1,0 +1,55 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="supported-parameter-types">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Supported parameter types</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Templates support standard Backstage parameter types and widgets. Ansible automation portal adds Ansible Automation Platform-specific field types for resource selection and authentication.</p> 
+     <section class="section"> 
+      <p class="p">Templates support standard Backstage parameter types (<code class="ph codeph">string</code>, <code class="ph codeph">number</code>, <code class="ph codeph">integer</code>, <code class="ph codeph">boolean</code>, <code class="ph codeph">array</code>) and widgets (<code class="ph codeph">textarea</code>, <code class="ph codeph">select</code>, <code class="ph codeph">checkboxes</code>, <code class="ph codeph">hidden</code>). For a complete reference of standard types and widgets, see the <a class="xref" href="https://backstage.io/docs/features/software-templates/input-examples" target="_blank" rel="external noopener">Backstage Software Templates documentation</a>.</p> 
+      <p class="p">Ansible automation portal adds the following Ansible Automation Platform-specific field types:</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:15%">
+        <col style="width:20%">
+        <col style="width:35%">
+        <col style="width:30%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="supported-parameter-types__entry__1">Type</th> 
+         <th class="entry" id="supported-parameter-types__entry__2">Widget</th> 
+         <th class="entry" id="supported-parameter-types__entry__3">Description</th> 
+         <th class="entry" id="supported-parameter-types__entry__4">Example use case</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="supported-parameter-types__entry__1"><code class="ph codeph">ui:field: AAPTokenField</code></td> 
+         <td class="entry" headers="supported-parameter-types__entry__2">Hidden token field</td> 
+         <td class="entry" headers="supported-parameter-types__entry__3">OAuth2 authentication token, auto-populated and hidden from the user.</td> 
+         <td class="entry" headers="supported-parameter-types__entry__4">Always present in auto-generated templates.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="supported-parameter-types__entry__1"><code class="ph codeph">resource</code> + <code class="ph codeph">ui:field: AAPResourcePicker</code></td> 
+         <td class="entry" headers="supported-parameter-types__entry__2">Ansible Automation Platform resource picker (single-select)</td> 
+         <td class="entry" headers="supported-parameter-types__entry__3">Select one Ansible Automation Platform resource by name.</td> 
+         <td class="entry" headers="supported-parameter-types__entry__4">Inventory, organization.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="supported-parameter-types__entry__1"><code class="ph codeph">type: array</code> + <code class="ph codeph">ui:field: AAPResourcePicker</code></td> 
+         <td class="entry" headers="supported-parameter-types__entry__2">Ansible Automation Platform resource picker (multi-select)</td> 
+         <td class="entry" headers="supported-parameter-types__entry__3">Select multiple Ansible Automation Platform resources by name.</td> 
+         <td class="entry" headers="supported-parameter-types__entry__4">Credentials.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <p class="p">These Ansible Automation Platform-specific fields are documented in detail in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_aap_resource_picker_fields" title="Use ui:field: AAPResourcePicker to let users select Ansible Automation Platform resources by name. Ansible automation portal queries the Ansible Automation Platform API and displays available resources in a picker.">AAP resource picker fields</a>.</p> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

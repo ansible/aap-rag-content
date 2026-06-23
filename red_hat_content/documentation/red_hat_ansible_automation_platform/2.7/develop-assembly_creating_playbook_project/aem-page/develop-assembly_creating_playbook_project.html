@@ -1,0 +1,106 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="creating-playbook-project"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Auto-generate the structure and files for your automation project</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Use the Ansible Automation Platform VS Code extension to scaffold a new Ansible playbook project. This process creates the necessary directory structure and configuration files, preparing your environment for playbook development.</p>
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="scaffolding-playbook-project"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Scaffold a playbook project</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">The following steps describe the process for scaffolding a new playbook project with the Ansible VS Code extension.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have installed Ansible development tools.</li> 
+         <li class="li">You have installed and opened the Ansible VS Code extension.</li> 
+         <li class="li">You have identified a directory where you want to save the project.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Open VS Code.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click the Ansible icon in the VS Code activity bar to open the Ansible extension.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select <strong class="ph b">Get started</strong> in the <strong class="ph b">Ansible content creator</strong> section. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The <strong class="ph b">Ansible content creator</strong> tab opens.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Create</strong> section, click <strong class="ph b">Ansible playbook project</strong>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The <strong class="ph b">Create Ansible project</strong> tab opens.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In the form in the <strong class="ph b">Create Ansible project</strong> tab, enter the following: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Destination directory</strong>: Enter the path to the directory where you want to scaffold your new playbook project. 
+             <div class="note note note_note">
+              <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">If you enter an existing directory name, the scaffolding process overwrites the contents of that directory. The scaffold process only allows you to use an existing directory if you enable the <code class="ph codeph">Force</code> option.</p> 
+              </div>
+             </div> 
+             <ul class="ul"> 
+              <li class="li">If you are using the containerized version of Ansible Dev tools, the destination directory path is relative to the container, not a path in your local system. To discover the current directory name in the container, run the <code class="ph codeph">pwd</code> command in a terminal in VS Code. If the current directory in the container is <code class="ph codeph">workspaces</code>, enter <code class="ph codeph">workspaces/&lt;destination_directory_name&gt;</code>.</li> 
+              <li class="li">If you are using a locally installed version of Ansible Dev tools, enter the full path to the directory, for example <code class="ph codeph">/user/&lt;username&gt;/projects/&lt;destination_directory_name&gt;</code>.</li> 
+             </ul> </li> 
+            <li class="li"><strong class="ph b">SCM organization and SCM project</strong>: Enter a name for the directory and subdirectory where you can store roles that you create for your playbooks.</li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Enter a name for the directory where you want to scaffold your new playbook project.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">After the project directory has been created, the following message appears in the <strong class="ph b">Logs</strong> pane of the <strong class="ph b">Create Ansible Project</strong> tab. In this example, the destination directory name is <code class="ph codeph">destination_directory_name</code>.</p> 
+        <pre class="pre codeblock"><code>------------------ ansible-creator logs ------------------
+    Note: ansible project created at /Users/username/test_project</code></pre> 
+        <p class="p">The following directories and files are created in your project directory:</p> 
+        <pre class="pre codeblock"><code>$ tree -a -L 5 .
+├── .devcontainer
+│&nbsp;&nbsp; ├── devcontainer.json
+│&nbsp;&nbsp; ├── docker
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── devcontainer.json
+│&nbsp;&nbsp; └── podman
+│&nbsp;&nbsp;     └── devcontainer.json
+├── .gitignore
+├── README.md
+├── ansible-navigator.yml
+├── ansible.cfg
+├── collections
+│&nbsp;&nbsp; ├── ansible_collections
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── scm_organization_name
+│&nbsp;&nbsp; │&nbsp;&nbsp;     └── scm_project_name
+│&nbsp;&nbsp; └── requirements.yml
+├── devfile.yaml
+├── inventory
+│&nbsp;&nbsp; ├── group_vars
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── all.yml
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── web_servers.yml
+│&nbsp;&nbsp; ├── host_vars
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── server1.yml
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── server2.yml
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── server3.yml
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── switch1.yml
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── switch2.yml
+│&nbsp;&nbsp; └── hosts.yml
+├── linux_playbook.yml
+├── network_playbook.yml
+└── site.yml</code></pre> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

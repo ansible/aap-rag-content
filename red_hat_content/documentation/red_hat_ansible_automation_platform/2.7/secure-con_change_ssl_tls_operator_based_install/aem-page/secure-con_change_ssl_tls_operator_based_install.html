@@ -1,0 +1,105 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="con-change-ssl-tls-operator-install"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Operator-based installations</h1> 
+     <p class="shortdesc">You can change the TLS certificates and keys for your operator-based Ansible Automation Platform installation.</p> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="change-ssl-controller-ocp"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Change the SSL/TLS certificate and key on automation controller on OpenShift Container Platform</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">The following procedure describes how to change the SSL/TLS certificate and key for automation controller running on OpenShift Container Platform.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Copy the signed SSL/TLS certificate and key to a secure location.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Create a TLS secret within OpenShift: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc create secret tls controller-certs-$(date +%F) --cert=/path/to/ssl.crt --key=/path/to/ssl.key -n &lt;namespace&gt;</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Edit the Ansible Automation Platform custom resource to add <code class="ph codeph">route_tls_secret</code> under the <code class="ph codeph">controller</code> section: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc edit ansibleautomationplatform &lt;aap-instance-name&gt; -n &lt;namespace&gt;</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Add or update the <code class="ph codeph">route_tls_secret</code> parameter under <code class="ph codeph">spec.controller</code>:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+  namespace: ansible-automation-platform
+spec:
+  controller:
+    route_tls_secret: controller-certs-2024-03-24</code></pre> 
+          </div> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">The name of the TLS secret is arbitrary. In this example, it is timestamped with the date that the secret is created, to differentiate it from other TLS secrets applied to the automation controller instance.</p> 
+             <p class="p">The operator automatically applies this configuration to the automation controllerinstance managed by this Ansible Automation Platform deployment.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Wait a few minutes for the changes to be applied.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Verify that new SSL/TLS certificate and key have been installed: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>true | openssl s_client -showcerts -connect ${CONTROLLER_FQDN}:443</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="change-ssl-hub-ocp"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Change the SSL/TLS certificate and key for automation hub on OpenShift Container Platform</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">The following procedure describes how to change the SSL/TLS certificate and key for your operator-based Ansible Automation Platform installation of automation hub running on OpenShift Container Platform.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Copy the signed SSL/TLS certificate and key to a secure location.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Create a TLS secret within OpenShift: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc create secret tls hub-certs-$(date +%F) --cert=/path/to/ssl.crt --key=/path/to/ssl.key -n &lt;namespace&gt;</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Edit the Ansible Automation Platform custom resource to add <code class="ph codeph">route_tls_secret</code> under the <code class="ph codeph">hub</code> section:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc edit ansibleautomationplatform &lt;aap-instance-name&gt; -n &lt;namespace&gt;</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Add or update the <code class="ph codeph">route_tls_secret</code> parameter under <code class="ph codeph">spec.hub</code>: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+  namespace: ansible-automation-platform
+spec:
+  hub:
+    route_tls_secret: hub-certs-2024-03-24</code></pre> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">The name of the TLS secret is arbitrary. In this example, it is timestamped with the date that the secret is created, to differentiate it from other TLS secrets applied to the automation hub instance.</p> 
+             <p class="p">The operator automatically applies this configuration to the automation hub instance managed by this Ansible Automation Platform deployment. </p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Wait a few minutes for the changes to be applied.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Verify that new SSL/TLS certificate and key have been installed: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>true | openssl s_client -showcerts -connect ${HUB_FQDN}:443</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

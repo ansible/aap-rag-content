@@ -1,0 +1,82 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="aap-27-20260603">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">CVE - Bug Fixes</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">The following release notes detail the CVEs and bug fixes for the Ansible Automation Platform general availability release on June 3, 2026.</p> 
+     <section class="section"> 
+      <p class="p">This release of Ansible Automation Platform delivers critical security patches addressing multiple CVEs across Automation Controller, Automation Hub, and Ansible Lightspeed, including fixes for a cryptography buffer overflow and a Dynaconf template injection vulnerability. It also includes bug fixes spanning authentication mapping, workload identity, schedule parsing, and Hub memory stability, alongside enhancements to proxy configuration support and MCP telemetry, and a new default-enabled metrics service for OpenShift deployments.</p> 
+      <ul class="ul" id="aap-27-20260603__ul_3"> 
+       <li class="li">namespace: aap-operator.v2.7.0-0.1779173639 </li> 
+       <li class="li">cluster: aap-operator.v2.7.0-0.1779173658</li> 
+      </ul> 
+     </section> 
+     <section class="section" id="aap-27-20260603___cve">
+      <h2 class="title sectiontitle">CVE</h2> 
+      <ul class="ul"> 
+       <li class="li">Automation controller 
+        <ul class="ul"> 
+         <li class="li"><a class="xref" href="https://access.redhat.com/security/cve/cve-2026-39892" target="_blank" rel="external noopener">CVE-2026-39892</a>: <code class="ph codeph">Cryptography</code> — buffer overflow via non-contiguous buffer in API. (AAP-75138)</li> 
+         <li class="li"><a class="xref" href="https://access.redhat.com/security/cve/cve-2026-39892" target="_blank" rel="external noopener">CVE-2026-39892</a>: Updated cryptography package to address version affected by known vulnerability. (AAP-72126)</li> 
+        </ul> </li> 
+       <li class="li">Automation hub 
+        <ul class="ul"> 
+         <li class="li"><a class="xref" href="https://access.redhat.com/security/cve/cve-2026-39892" target="_blank" rel="external noopener">CVE-2026-39892</a>: <code class="ph codeph">Cryptography</code> — buffer overflow via non-contiguous buffer in API. (AAP-75149)</li> 
+         <li class="li"><a class="xref" href="https://access.redhat.com/security/cve/cve-2026-33154" target="_blank" rel="external noopener">CVE-2026-33154</a>: <code class="ph codeph">Dynaconf</code> — arbitrary code execution via server-side template injection; dependency updated to 3.2.13. (AAP-69471)</li> 
+        </ul> </li> 
+       <li class="li">Ansible Lightspeed 
+        <ul class="ul"> 
+         <li class="li"><a class="xref" href="https://access.redhat.com/security/cve/cve-2026-39892" target="_blank" rel="external noopener">CVE-2026-39892</a>: aap-rag-content — cryptography buffer overflow via non-contiguous buffer in API. (AAP-75144)</li> 
+         <li class="li"><a class="xref" href="https://access.redhat.com/security/cve/cve-2026-39892" target="_blank" rel="external noopener">CVE-2026-39892</a>: <code class="ph codeph">aap-inventory-mcp-server</code> — cryptography buffer overflow via non-contiguous buffer in API. (AAP-75142)</li> 
+        </ul> </li> 
+       <li class="li">Execution environments 
+        <ul class="ul"> 
+         <li class="li"><a class="xref" href="https://access.redhat.com/security/cve/cve-2026-39892" target="_blank" rel="external noopener">CVE-2026-39892</a>: Updated cryptography package to address version affected by known vulnerability. (AAP-75235)</li> 
+        </ul> </li> 
+      </ul> 
+     </section> 
+     <section class="section" id="aap-27-20260603___bug_fixes">
+      <h2 class="title sectiontitle">Bug fixes</h2> 
+      <ul class="ul" id="aap-27-20260603__ul_1"> 
+       <li class="li">Ansible automation portal 
+        <ul class="ul" id="aap-27-20260603__ul_2"> 
+         <li class="li"><strong class="ph b">Survey and form rendering improvements</strong>: Nested survey parameters, conditional form schemas, and password fields now render correctly. Survey passwords are written as secrets.</li> 
+        </ul> </li> 
+      </ul> 
+      <ul class="ul"> 
+       <li class="li">Controller 
+        <ul class="ul"> 
+         <li class="li">Fixed an issue where OIDC workload identity tokens were not applied to cloud credentials during inventory sync, because <code class="ph codeph">populate_workload_identity_tokens()</code> did not include the cloud credential when called from <code class="ph codeph">RunInventoryUpdate</code>. (AAP-75205)</li> 
+         <li class="li">Fixed an issue where workflow node updates failed when the Job Template had labels without "Prompt on Launch" enabled, causing API or UI updates to prompt fields to return "Field is not configured to prompt on launch." The serializer now validates only the prompt fields included in the request rather than re-validating all persisted prompt state. (AAP-75202)</li> 
+         <li class="li">Fixed an issue where <code class="ph codeph">awxkit as_user()</code> failed to switch the authenticated user when requests were routed through the AAP gateway, because the gateway uses <code class="ph codeph">gateway_sessionid</code> instead of <code class="ph codeph">sessionid</code>. A fallback now checks <code class="ph codeph">gateway_sessionid</code> when no cookie matches <code class="ph codeph">session_cookie_name</code>. (AAP-75199)</li> 
+         <li class="li">Fixed an issue where the Thycotic Secret Server (Delinea) credential plugin failed with an HTTP 500 error when resolving credentials from Delinea Platform URLs due to an older version of <code class="ph codeph">python-tss-sdk</code>. (AAP-75198)</li> 
+         <li class="li">Fixed an issue where at CLI failed on clean install with ModuleNotFoundError: No module named 'packaging' because setup.py listed setuptools instead of packaging as a runtime dependency after the Python 3.12 upgrade. (AAP-74277)</li> 
+         <li class="li">Fixed an issue where schedules could not parse a valid RRULE with certain BYHOUR constraints. (AAP-72482)</li> 
+        </ul> </li> 
+       <li class="li">Django-ansible-base 
+        <ul class="ul"> 
+         <li class="li">Fixed an issue where an authenticator map of type "allow" could not recover access once it had been set to false by an earlier deny-all rule. (AAP-75209)</li> 
+         <li class="li">Fixed an issue where an authenticator map of type "allow" could not recover access once it had been set to false by an earlier deny-all rule. (AAP-75207)</li> 
+        </ul> </li> 
+       <li class="li">Hub 
+        <ul class="ul"> 
+         <li class="li">Fixed an issue where Automation Hub pods experienced sustained high memory usage under idle conditions because health probes caused progressive memory growth in pulpcore worker processes, approaching configured memory limits and triggering unnecessary HPA scaling events. (AAP-68883)</li> 
+        </ul> </li> 
+       <li class="li">Lightspeed 
+        <ul class="ul"> 
+         <li class="li">Fixed an issue where the containerized installer did not show the image used for Ansible Lightspeed chatbot BYOK configuration. (AAP-73534)</li> 
+         <li class="li">Fixed an issue where the containerized installer did not show the image used for Ansible Lightspeed chatbot BYOK configuration. (AAP-72986)</li> 
+        </ul> </li> 
+       <li class="li">Platform operator 
+        <ul class="ul"> 
+         <li class="li">Fixed an issue where a cluster-scoped operator could not resolve PostgreSQL database connections when components were installed in other namespaces. (AAP-75065)</li> 
+        </ul> </li> 
+      </ul> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

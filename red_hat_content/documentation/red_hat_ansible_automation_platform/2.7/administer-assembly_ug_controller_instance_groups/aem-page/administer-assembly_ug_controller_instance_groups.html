@@ -1,0 +1,232 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="controller-instance-groups"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Determine where automation runs with instance groups</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">An Instance Group enables you to group instances in a clustered environment. Policies dictate how instance groups behave and how jobs are executed. The following view displays the capacity levels based on policy algorithms:</p> 
+      <br> 
+      <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-instance-groups-list-view.png" alt="Instance groups list view"> 
+      <br> 
+     </div> 
+     <nav role="navigation" class="related-links"> 
+      <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+       <br> 
+       <ul class="linklist"> 
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_ug_controller_instance_groups#con-controller-instance-groups" title="Instances can be grouped into one or more instance groups. Instance groups can be assigned to one or more of the following listed resources:">Instance groups</a></li> 
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_controller_container_groups#controller-container-groups" title="Ansible Automation Platform supports container groups, which enable you to run jobs in automation controller regardless of whether automation controller is installed as a standalone, in a virtual environment, or in a container.">Container groups</a></li> 
+       </ul> 
+      </div> 
+     </nav> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="con-controller-instance-groups"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Instance groups</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">Instances can be grouped into one or more instance groups. Instance groups can be assigned to one or more of the following listed resources:</p> 
+       <ul class="ul"> 
+        <li class="li">Organizations</li> 
+        <li class="li">Inventories</li> 
+        <li class="li">Job templates</li> 
+       </ul> 
+       <p class="p">When a job associated with one of the resources executes, it is assigned to the instance group associated with the resource. During the execution process, instance groups associated with job templates are checked before those associated with inventories. Instance groups associated with inventories are checked before those associated with organizations. Therefore, instance group assignments for the three resources form the hierarchy:</p> 
+       <p class="p"> <strong class="ph b">Job Template &gt; Inventory &gt; Organization</strong> </p> 
+       <p class="p">Consider the following when working with instance groups:</p> 
+       <ul class="ul"> 
+        <li class="li">You can define other groups and group instances in those groups. These groups must be prefixed with <code class="ph codeph">instance_group_</code>. Instances are required to be in the <code class="ph codeph">automationcontroller</code> or <code class="ph codeph">execution_nodes</code> group alongside other <code class="ph codeph">instance_group_</code> groups. In a clustered setup, at least one instance must be present in the <code class="ph codeph">automationcontroller</code> group, which is displayed as <code class="ph codeph">controlplane</code> in the API instance groups. </li> 
+        <li class="li">You cannot modify the <code class="ph codeph">controlplane</code> instance group, and attempting to do so results in a permission denied error for any user. <p class="p">Therefore, the <strong class="ph b">Disassociate</strong> option is not available in the <strong class="ph b">Instances</strong> tab of <code class="ph codeph">controlplane</code>.</p> </li> 
+        <li class="li">A <code class="ph codeph">default</code> API instance group is automatically created with all nodes capable of running jobs. This is similar to any other instance group but if a specific instance group is not associated with a specific resource, then the job execution always falls back to the default instance group. The default instance group always exists, and you cannot delete or rename it.</li> 
+        <li class="li">Do not create a group named <code class="ph codeph">instance_group_default</code>.</li> 
+        <li class="li">Do not name any instance the same as a group name.</li> 
+       </ul> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="controller-create-instance-group"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Create an instance group</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can create instance groups with Automation controller to organize and manage your instances.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">Use the following procedure to create a new instance group.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Instance Groups</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create group</span> and select <strong class="ph b">Create instance group</strong> from the list.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Enter the appropriate details into the following fields: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Name</strong>: Names must be unique and must not be named "controller".</li> 
+            <li class="li"><strong class="ph b">Policy instance minimum</strong>: Enter the minimum number of instances to automatically assign to this group when new instances come online.</li> 
+            <li class="li"><strong class="ph b">Policy instance percentage</strong>: Use the slider to select a minimum percentage of instances to automatically assign to this group when new instances come online. 
+             <div class="note note note_note"> <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">Policy instance fields are not required to create a new instance group. If you do not specify values, then the <strong class="ph b">Policy instance minimum</strong> and <strong class="ph b">Policy instance percentage</strong> default to 0.</p> 
+              </div> 
+             </div> </li> 
+            <li class="li"><strong class="ph b">Max concurrent jobs</strong>: Specify the maximum number of forks that can be run for any given job.</li> 
+            <li class="li"><strong class="ph b">Max forks</strong>: Specify the maximum number of concurrent jobs that can be run for any given job. 
+             <div class="note note note_note"> <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">The default value of 0 for <strong class="ph b">Max concurrent jobs</strong> and <strong class="ph b">Max forks</strong> denotes no limit. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_controller_configure_instance_groups#controller-instance-group-capacity" title="There is external business logic that can drive the need to limit the concurrency of jobs sent to an instance group, or the maximum number of forks to be consumed.">Instance group capacity limits</a>.</p> 
+              </div> 
+             </div> </li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create instance group</span>, or, if you have edited an existing Instance Group click <span class="ph uicontrol button">Save instance group</span></span> </li> 
+        </ol> 
+       </section> 
+       <section class="section postreq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">What to do next</h3> 
+        </div> 
+        <p class="p">When you have successfully created the instance group the <strong class="ph b">Details</strong> tab of the newly created instance group enables you to review and edit your instance group information.</p> 
+        <p class="p">You can also edit <strong class="ph b">Instances</strong> and review <strong class="ph b">Jobs</strong> associated with this instance group:</p> 
+        <br> 
+        <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-instance-group-created.png" alt="Instance group successfully created"> 
+        <br> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="controller-associate-instances-to-instance-group"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Associate instances to an instance group</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Learn how to associate instances to an instance group in automation controller.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">Select the <strong class="ph b">Instances</strong> tab on the <strong class="ph b">Details</strong> page of an Instance Group.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Associate instance</span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click the checkbox next to one or more available instances from the list to select the instances you want to associate with the instance group and click <span class="ph uicontrol button">Confirm</span></span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="controller-view-jobs-associated-with-instance-group"> 
+      <h2 class="title topictitle2" id="ariaid-title5">View jobs associated with an instance group</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can view jobs associated with an instance group to monitor their status and details.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">Jobs</strong> tab of the <strong class="ph b">Instance Group</strong> window.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click the arrow <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/arrow.png" width="15" alt="Arrow"> icon next to a job to expand the view and show details about each job. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">Each job displays the following details:</p> 
+           <ul class="ul"> 
+            <li class="li">The job status</li> 
+            <li class="li">The ID and name</li> 
+            <li class="li">The type of job</li> 
+            <li class="li">The time it started and completed</li> 
+            <li class="li">Who started the job and applicable resources associated with it, such as the template, inventory, project, and execution environment</li> 
+           </ul> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relref"> <strong>Related reference</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_controller_configure_instance_groups#controller-instance-group-policies" title="You can configure automation controller instances to automatically join instance groups when they come online by defining a policy. These policies are evaluated for every new instance that comes online.">Instance group policies</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title6" id="controller-control-job-run"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Control where an automation job runs</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">Use instance groups to control job execution locations. While the controller automatically selects groups based on capacity, you can override this by associating groups with job templates, inventories, or organizations.</p> 
+       <p class="p">When a job is launched, automation controller checks for any instance groups associated with the job template, inventory, or organization (by way of project) in that order.</p> 
+       <p class="p">If you associate instance groups with a job template, inventory, or organization, a job run from that job template is not eligible for the default behavior. This means that if all of the instances inside of the instance groups associated with these three resources are out of capacity, the job remains in the pending state until capacity becomes available.</p> 
+       <p class="p">The order of preference in determining which instance group to submit the job to is as follows:</p> 
+       <ol class="ol"> 
+        <li class="li">Job template</li> 
+        <li class="li">Inventory</li> 
+        <li class="li">Organization (by way of project)</li> 
+       </ol> 
+       <p class="p">If you associate instance groups with the job template, and all of these are at capacity, then the job is submitted to instance groups specified on the inventory, and then the organization. Jobs must run in those groups in preferential order as resources are available.</p> 
+       <p class="p">You can still associate the global <code class="ph codeph">default</code> group with a resource, such as any of the custom instance groups defined in the playbook. You can use this to specify a preferred instance group on the job template or inventory, but still enable the job to be submitted to any instance if those are out of capacity.</p> 
+       <ul class="ul"> 
+        <li class="li">If you associate <code class="ph codeph">group_a</code> with a job template and also associate the <code class="ph codeph">default</code> group with its inventory, you enable the <code class="ph codeph">default</code> group to be used as a fallback in case <code class="ph codeph">group_a</code> gets out of capacity.</li> 
+        <li class="li">In addition, it is possible to not associate an instance group with one resource but choose another resource as the fallback. For example, not associating an instance group with a job template and having it fall back to the inventory or the organization’s instance group.</li> 
+       </ul> 
+       <p class="p">This presents the following possibilities:</p> 
+       <ol class="ol"> 
+        <li class="li">Associating instance groups with an inventory (omitting assigning the job template to an instance group) ensures that any playbook run against a specific inventory runs only on the group associated with it. This is useful in the situation where only those instances have a direct link to the managed nodes.</li> 
+        <li class="li">An administrator can assign instance groups to organizations. <p class="p">This enables the administrator to segment out the entire infrastructure and guarantee that each organization has capacity to run jobs without interfering with any other organization’s ability to run jobs.</p> <p class="p">An administrator can assign multiple groups to each organization, similar to the following scenario:</p> 
+         <ul class="ul"> 
+          <li class="li">There are three instance groups: <em class="ph i">A</em>, <em class="ph i">B</em>, and <em class="ph i">C</em>. There are two organizations: <em class="ph i">Org1</em> and <em class="ph i">Org2</em>.</li> 
+          <li class="li">The administrator assigns group <em class="ph i">A</em> to <em class="ph i">Org1</em>, group <em class="ph i">B</em> to <em class="ph i">Org2</em> and then assigns group <em class="ph i">C</em> to both <em class="ph i">Org1</em> and <em class="ph i">Org2</em> as an overflow for any extra capacity that might be needed.</li> 
+          <li class="li">The organization administrators are then free to assign inventory or job templates to whichever group they want, or let them inherit the default order from the organization.</li> 
+         </ul> </li> 
+       </ol> 
+       <br> 
+       <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ag-instance-groups-scenarios.png" alt="Instance groups scenarios"> 
+       <br> 
+       <p class="p">Arranging resources this way offers you flexibility. You can also create instance groups with only one instance, enabling you to direct work towards a very specific Host in the automation controller cluster.</p> 
+      </div> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title7" id="controller-group-policies-automationcontroller"> 
+      <h2 class="title topictitle2" id="ariaid-title7">Define instance groups in the inventory file</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">Define custom instance groups in the inventory file to organize nodes in your automation mesh. By correctly assigning nodes to the <code class="ph codeph">automationcontroller</code> or <code class="ph codeph">execution_nodes</code> groups, you ensure the installer validates the mesh topology and prevents configuration errors.</p> 
+       <section class="section"> 
+        <p class="p">Use the following criteria when defining nodes:</p> 
+        <ul class="ul"> 
+         <li class="li">Nodes in the <code class="ph codeph">automationcontroller</code> group can define <code class="ph codeph">node_type</code> hostvar to be <code class="ph codeph">hybrid</code> (default) or <code class="ph codeph">control</code>.</li> 
+         <li class="li">Nodes in the <code class="ph codeph">execution_nodes group</code> can define <code class="ph codeph">node_type</code> hostvar to be <code class="ph codeph">execution</code> (default) or <code class="ph codeph">hop</code>.</li> 
+        </ul> 
+        <p class="p">You can define custom groups in the inventory file by naming groups with <code class="ph codeph">instance_group_*</code> where <code class="ph codeph">*</code> becomes the name of the group in the API. You can also create custom instance groups in the API after the install has finished.</p> 
+        <p class="p">The current behavior expects a member of an <code class="ph codeph">instance_group_*</code> to be part of <code class="ph codeph">automationcontroller</code> or <code class="ph codeph">execution_nodes</code> group.</p> 
+       </section> 
+       <div class="example"> 
+        <h3 class="title sectiontitle">Define instance groups</h3> 
+        <pre class="pre">[automationcontroller]
+126-addr.tatu.home ansible_host=192.168.111.126  node_type=control
+
+[automationcontroller:vars]
+peers=execution_nodes
+
+[execution_nodes]
+
+[instance_group_test]
+110-addr.tatu.home ansible_host=192.168.111.110 receptor_listener_port=8928</pre> 
+       </div> 
+       <section class="section"> 
+        <p class="p">After you run the installation program, the following error is displayed:</p> 
+        <pre class="pre">TASK [ansible.automation_platform_installer.check_config_static : Validate mesh topology] ***
+fatal: [126-addr.tatu.home -&gt; localhost]: FAILED! =&gt; {"msg": "The host '110-addr.tatu.home' is not present in either [automationcontroller] or [execution_nodes]"}</pre> 
+        <p class="p">To fix this, move the box <code class="ph codeph">110-addr.tatu.home</code> to an <code class="ph codeph">execution_node</code> group, as follows:</p> 
+        <pre class="pre">[automationcontroller]
+126-addr.tatu.home ansible_host=192.168.111.126  node_type=control
+
+[automationcontroller:vars]
+peers=execution_nodes
+
+[execution_nodes]
+110-addr.tatu.home ansible_host=192.168.111.110 receptor_listener_port=8928
+
+[instance_group_test]
+110-addr.tatu.home</pre> 
+        <p class="p">This results in:</p> 
+        <pre class="pre">TASK [ansible.automation_platform_installer.check_config_static : Validate mesh topology] ***
+ok: [126-addr.tatu.home -&gt; localhost] =&gt; {"changed": false, "mesh": {"110-addr.tatu.home": {"node_type": "execution", "peers": [], "receptor_control_filename": "receptor.sock", "receptor_control_service_name": "control", "receptor_listener": true, "receptor_listener_port": 8928, "receptor_listener_protocol": "tcp", "receptor_log_level": "info"}, "126-addr.tatu.home": {"node_type": "control", "peers": ["110-addr.tatu.home"], "receptor_control_filename": "receptor.sock", "receptor_control_service_name": "control", "receptor_listener": false, "receptor_listener_port": 27199, "receptor_listener_protocol": "tcp", "receptor_log_level": "info"}}}</pre> 
+        <p class="p">After upgrading from automation controller 4.0 or earlier, the legacy <code class="ph codeph">instance_group_</code> member likely has the awx code installed. This places that node in the <code class="ph codeph">automationcontroller</code> group.</p> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

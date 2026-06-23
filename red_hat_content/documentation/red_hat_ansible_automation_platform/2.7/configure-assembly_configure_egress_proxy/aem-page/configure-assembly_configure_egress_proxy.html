@@ -1,0 +1,286 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-configure-egress-proxy"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Configure proxy servers for egress traffic</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">You can deploy Ansible Automation Platform so that egress from the platform for various purposes functions properly through proxy servers.</p> 
+      <p class="p">Egress proxy allows clients to make indirect (through a proxy server) requests to network services.</p> 
+      <p class="p">The client first connects to the proxy server and requests some resource, for example, email, located on another server. The proxy server then connects to the specified server and retrieves the resource from it.</p> 
+      <section class="section" id="assembly-configure-egress-proxy___overview">
+       <h2 class="title sectiontitle">Overview</h2> 
+       <p class="p">The egress proxy should be configured on the system and component level of Ansible Automation Platform, for all the RPM and containerized installation methods. For containerized installers, the system proxy configuration for Podman on the nodes solves most of the problems with access through the proxy. For RPM installation, both system and component configurations are needed.</p> 
+      </section> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref_proxy-backends"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Proxy backends</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">For HTTP and HTTPS proxies you can use a squid server. Squid is a forward proxy for the Web supporting HTTP, HTTPS, and FTP, reducing bandwidth and improving response times by caching and reusing frequently-requested web pages. It is licensed under the GNU GPL.</p> 
+       <section class="section"> 
+        <p class="p">Forward proxies are systems that intercept network traffic going to another network (typically the internet) and send it on the behalf of the internal systems. The squid proxy enables all required communication to pass through it.</p> 
+        <p class="p">Make sure all the required Ansible Automation Platform control plane ports are opened on the squid proxy backend. Ansible Automation Platform-specific ports:</p> 
+        <pre class="pre codeblock"><code>acl Safe_ports port 81
+acl Safe_ports port 82
+acl Safe_ports port 389
+acl Safe_ports port 444
+acl Safe_ports port 445
+acl SSL_ports port 22</code></pre> 
+        <p class="p">The following ports are for containerized installations:</p> 
+        <pre class="pre codeblock"><code>acl SSL_ports port 444
+acl SSL_ports port 445
+acl SSL_ports port 8443
+acl SSL_ports port 8444
+acl SSL_ports port 8445
+acl SSL_ports port 8446
+acl SSL_ports port 44321
+acl SSL_ports port 44322
+
+http_access deny !Safe_ports
+http_access deny CONNECT !SSL_ports</code></pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="ref-system-proxy-config"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Configure the system-level outbound proxy</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">An outbound proxy (egress proxy) is a server that acts as an intermediary for requests from clients seeking resources from other servers on the internet. It is used to regulate and secure client traffic, and to provide caching services to improve performance.</p> 
+       <section class="section"> 
+        <p class="p">The outbound proxy is configured on the system level for all the nodes in the control plane.</p> 
+        <p class="p">You must set the following environment variables:</p> 
+        <pre class="pre codeblock"><code>http_proxy=“http://external-proxy_0:3128”
+https_proxy=“http://external-proxy_0:3128”
+no_proxy=“localhost,127.0.0.0/8,10.0.0.0/8”</code></pre> 
+        <p class="p">You can also add those variables to the '/etc/environment' file to make them permanent.</p> 
+        <p class="p">The installation program ensures that all external communication during the installation goes through the proxy. For containerized installation, those variables ensure that Podman uses the egress proxy.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-controller-proxy-settings"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Configure component-level proxy settings</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">After using the RPM installation program, you must configure automation controller to use egress proxy.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">This is not required for containerized installers because Podman uses system configured proxy and redirects all the container traffic to the proxy.</p> 
+         </div>
+        </div> 
+        <p class="p">For automation controller, set the <code class="ph codeph">AWX_TASK_ENV</code> variable in <code class="ph codeph">/api/v2/settings/</code>. To do this through the UI use the following procedure:</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Job</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Edit</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Add the variables to the <strong class="ph b">Extra Environment Variables</strong> field </span> 
+          <div class="itemgroup info"> 
+           <p class="p">and set:</p> 
+           <pre class="pre codeblock"><code>"AWX_TASK_ENV": {
+"http_proxy": "http://external-proxy_0:3128",
+"https_proxy": "http://external-proxy_0:3128",
+"no_proxy": "localhost,127.0.0.0/8"
+                }</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="proc-controller-scm-ssh-proxy-config"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Configure project syncing using SSH to work with a proxy server</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">The following procedure for RPM-based Ansible Automation Platform describes how to use automation controller Project Sync by using the SSH protocol to work with a proxy server.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Perform the following steps on the automation controller nodes. If ansible-builder has not been installed yet, install it first. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code># subscription-manager repos --enable ansible-automation-platform-2.6-for-rhel-8-x86_64-rpms
+# dnf install ansible-builder</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Build a custom execution environment. </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">First, create a work directory: </span> 
+            <div class="itemgroup info"> 
+             <pre class="pre codeblock"><code># su - awx
+$ mkdir -p builder/newee
+$ cd builder/newee</code></pre> 
+            </div> </li> 
+          </ol> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Create an <code class="ph codeph">execution-environment.yml</code> file with the following content: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>version: 1
+
+build_arg_defaults:
+  EE_BASE_IMAGE: 'registry.redhat.io/ansible-automation-platform-24/ee-supported-rhel8:latest'
+
+additional_build_steps:
+  prepend:
+    - RUN microdnf install -y nc</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to registry.redhat.io. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ podman login registry.redhat.io</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Run ansible-builder to start the building process. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ cd /var/lib/awx/builder/newee/
+$ ansible-builder build -t my-env -v 3</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Add the custom execution environment you created.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">On the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Execution Environments</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create execution environment</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Image</strong> field add <code class="ph codeph">localhost/my-env:latest</code>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create execution environment</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Re-run the Ansible Automation Platform installation program with the following steps to replace the execution environment from the default to the customized environment which will be used as a Project syncs. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">Backup Ansible Automation Platform before running the installation program.</p> 
+            </div>
+           </div> 
+           <pre class="pre codeblock"><code># ./setup.sh -b</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Create an <code class="ph codeph">automationcontroller</code> file under the <code class="ph codeph">group_vars</code> directory in the same location as the <code class="ph codeph">setup.sh</code> file. The file contents are as follows: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>control_plane_execution_environment: localhost/my-env</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Run <code class="ph codeph">setup.sh</code></span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code># ./setup.sh</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Create <code class="ph codeph">ssh_config</code> under the directory. For example: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>Host github.com
+Hostname ssh.github.com
+ProxyCommand nc --proxy-type http --proxy proxy.example.com:port %h %p
+User git</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Add the <code class="ph codeph">ssh_config</code> file’s directory path in PATH to expose the isolated jobs so that the container execution environment can read <code class="ph codeph">ssh_config</code> file.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Job</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Edit</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">If the <code class="ph codeph">ssh_config</code> file has been created as <code class="ph codeph">/var/lib/awx/.ssh/ssh_config</code>, add this to <strong class="ph b">Paths to expose to isolated jobs</strong></span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">Ensure <code class="ph codeph">ssh_config</code> is owned by the AWX user. (<code class="ph codeph">#chown awx:awx /var/lib/awx/.ssh/ssh_config</code>)</p> 
+            </div>
+           </div> 
+           <pre class="pre codeblock"><code>[
+"/var/lib/awx/.ssh:/etc/ssh:O"
+]</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relconcepts">
+        <strong>Related concepts</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-define__create__and_build_execution_environments" title="Run automation consistently across nodes with execution environments, which are container images that contain everything you need to run your automation.">Define, create, and build execution environments</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="proc-proxy-AWS-inventory-sync"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Enable a configurable proxy environment for AWS inventory synchronization</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">To enable a configurable proxy environment for AWS inventory synchronization, you can manually edit the override configuration file or set the configuration in the platform UI:</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <ol class="ol"> 
+         <li class="li">Manually edit <code class="ph codeph">/usr/lib/systemd/system/receptor.service.d/override.conf</code> and add the following <code class="ph codeph">http_proxy</code> environment variables there: <pre class="pre codeblock"><code>http_proxy:&lt;value&gt;
+https_proxy:&lt;value&gt;
+proxy_username:&lt;value&gt;
+Proxy_password:&lt;value&gt;</code></pre><p class="p">Or</p></li> 
+         <li class="li">To do this through the UI use the following procedure:</li> 
+        </ol> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Job</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Edit</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Add the variables to the <strong class="ph b">Extra Environment Variables</strong> field </span> 
+          <div class="itemgroup info"> 
+           <p class="p">For example:</p> 
+           <pre class="pre codeblock"><code>"AWX_TASK_ENV": {
+        "no_proxy": "localhost,127.0.0.0/8,10.0.0.0/8",
+        "http_proxy": "http://proxy_host:3128/",
+        "https_proxy": "http://proxy_host:3128/"
+                },</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title7" id="GUID-950384cb-c0ec-4cf3-9289-53850681221a"> 
+      <h2 class="title topictitle2" id="ariaid-title7">Configure proxy settings for private automation hub</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Allow your private automation hub to sync Ansible Galaxy content with proxy settings.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have a <code class="ph codeph">requirements.yml</code> file that identifies those collections to synchronize from Ansible Galaxy as in the following example: <p class="p"><strong class="ph b">Requirements.yml example</strong></p> </li> 
+        </ul> 
+        <pre class="pre codeblock"><code>collections:
+  # Install a collection from Ansible Galaxy.
+  - name: community.aws
+    version: 5.2.0
+    source: https://galaxy.ansible.com</code></pre> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">You can edit the <strong class="ph b">community</strong> remote repository to synchronize chosen collections from Ansible Galaxy to your private automation hub. By default, your private automation hub community repository directs to <code class="ph codeph">galaxy.ansible.com/api/</code>.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li>
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Remotes</span></span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">In the <strong class="ph b">Details</strong> tab in the <strong class="ph b">Community</strong> remote, click <span class="ph uicontrol button">Edit remote</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">In the <strong class="ph b">YAML requirements</strong> field, paste the contents of your <code class="ph codeph">requirements.yml</code> file.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Save remote</span>.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">You can now synchronize collections identified in your <code class="ph codeph">requirements.yml</code> file from Ansible Galaxy to your private automation hub.</p> 
+       </section> 
+       <section class="section postreq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div> 
+        <p class="p">See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_create_synclist" title="You can sync certified and validated collections in Ansible automation hub from console.redhat.com.">Synchronizing content collections</a>for syncing steps.</p> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

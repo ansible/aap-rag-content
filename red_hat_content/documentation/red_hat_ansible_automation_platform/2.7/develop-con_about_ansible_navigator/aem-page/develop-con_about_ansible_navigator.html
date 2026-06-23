@@ -1,0 +1,373 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="con-about-ansible-navigator"> 
+     <h1 class="title topictitle1" id="ariaid-title1">What is automation content navigator?</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">Automation content navigator is a command line, content-creator-focused tool with a text-based user interface. You can use automation content navigator to:</p> 
+      <ul class="ul"> 
+       <li class="li">Launch and watch jobs and playbooks.</li> 
+       <li class="li">Share stored, completed playbook and job run artifacts in JSON format.</li> 
+       <li class="li">Browse and introspect automation execution environments.</li> 
+       <li class="li">Browse your file-based inventory.</li> 
+       <li class="li">Render Ansible module documentation and extract examples you can use in your playbooks.</li> 
+       <li class="li">View a detailed command output on the user interface.</li> 
+      </ul> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="con-navigator-mode"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Automation content navigator modes</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">automation content navigator provides two operating modes to support your development needs: a command line interface for quick tasks and an interactive text-based interface for complex evaluation and troubleshooting.</p> 
+       <dl class="dl"> 
+        <dt class="dt dlterm">
+          stdout mode 
+        </dt> 
+        <dd class="dd">
+          Accepts most of the existing Ansible commands and extensions at the command line. 
+        </dd> 
+        <dt class="dt dlterm">
+          text-based user interface mode 
+        </dt> 
+        <dd class="dd">
+          Provides an interactive, text-based interface to the Ansible commands. Use this mode to evaluate content, run playbooks, and troubleshoot playbooks after they run using artifact files. 
+        </dd> 
+       </dl> 
+       <section class="section" id="con-navigator-mode___stdout_mode"> 
+        <h3 class="title sectiontitle">stdout mode</h3> 
+        <p class="p">Use the <code class="ph codeph">-m stdout</code> subcommand with automation content navigator to use the familiar Ansible commands, such as <code class="ph codeph">ansible-playbook</code> within automation execution environments or on your local development environment. You can use commands you are familiar with for quick tasks.</p> 
+        <p class="p">Automation content navigator also provides extensive help in this mode:</p> 
+        <dl class="dl"> 
+         <dt class="dt dlterm"> <code class="ph codeph">--help</code> 
+         </dt> 
+         <dd class="dd">
+           Accessible from <code class="ph codeph">ansible-navigator</code> command or from any subcommand, such as <code class="ph codeph">ansible-navigator config --help</code>. 
+         </dd> 
+         <dt class="dt dlterm">
+           subcommand help 
+         </dt> 
+         <dd class="dd">
+           Accessible from the subcommand, for example <code class="ph codeph">ansible-navigator config --help-config</code>. This help displays the details of all the parameters supported from the related Ansible command. 
+         </dd> 
+        </dl> 
+       </section> 
+       <section class="section" id="con-navigator-mode___text_based_user_interface_mode"> 
+        <h3 class="title sectiontitle">Text-based user interface mode</h3> 
+        <p class="p">The text-based user interface mode provides enhanced interaction with automation execution environments, collections, playbooks, and inventory. This mode is compatible with integrated development environments (IDE), such as Visual Studio Code.</p> 
+        <br> 
+        <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-welcome.png" alt="Text-based user interface mode"> 
+        <br> 
+        <p class="p">This mode includes a number of helpful user interface options:</p> 
+        <dl class="dl"> 
+         <dt class="dt dlterm">
+           colon commands 
+         </dt> 
+         <dd class="dd">
+           You can access all the automation content navigator commands with a colon, such as <code class="ph codeph">:run</code> or <code class="ph codeph">:collections</code> 
+         </dd> 
+         <dt class="dt dlterm">
+           navigating the text-based interface 
+         </dt> 
+         <dd class="dd">
+           The screen shows how to page up or down, scroll, escape to a prior screen or access <code class="ph codeph">:help</code>. 
+         </dd> 
+         <dt class="dt dlterm">
+           output by line number 
+         </dt> 
+         <dd class="dd">
+           You can access any line number in the displayed output by preceding it with a colon, for example <code class="ph codeph">:12</code>. 
+         </dd> 
+         <dt class="dt dlterm">
+           color-coded output 
+         </dt> 
+         <dd class="dd">
+           With colors enabled, automation content navigator displays items, such as deprecated modules, in red. 
+         </dd> 
+         <dt class="dt dlterm">
+           pagination and scrolling 
+         </dt> 
+         <dd class="dd">
+           You can page up or down, scroll, or escape by using the options displayed at the bottom of each automation content navigator screen. 
+         </dd> 
+        </dl> 
+        <p class="p">You cannot switch between modes after automation content navigator is running.</p> 
+        <p class="p">This document uses the text-based user interface mode for most procedures.</p> 
+       </section> 
+      </div> 
+      <article class="topic concept nested2" aria-labelledby="ariaid-title3" id="unique_879943132"> 
+       <h3 class="title topictitle3" id="ariaid-title3">Automation content navigator modes</h3> 
+       <div class="body conbody"> 
+        <p class="shortdesc">automation content navigator provides two operating modes to support your development needs: a command line interface for quick tasks and an interactive text-based interface for complex evaluation and troubleshooting.</p> 
+        <dl class="dl"> 
+         <dt class="dt dlterm">
+           stdout mode 
+         </dt> 
+         <dd class="dd">
+           Accepts most of the existing Ansible commands and extensions at the command line. 
+         </dd> 
+         <dt class="dt dlterm">
+           text-based user interface mode 
+         </dt> 
+         <dd class="dd">
+           Provides an interactive, text-based interface to the Ansible commands. Use this mode to evaluate content, run playbooks, and troubleshoot playbooks after they run using artifact files. 
+         </dd> 
+        </dl> 
+        <section class="section" id="unique_879943132___stdout_mode"> 
+         <h4 class="title sectiontitle">stdout mode</h4> 
+         <p class="p">Use the <code class="ph codeph">-m stdout</code> subcommand with automation content navigator to use the familiar Ansible commands, such as <code class="ph codeph">ansible-playbook</code> within automation execution environments or on your local development environment. You can use commands you are familiar with for quick tasks.</p> 
+         <p class="p">Automation content navigator also provides extensive help in this mode:</p> 
+         <dl class="dl"> 
+          <dt class="dt dlterm"> <code class="ph codeph">--help</code> 
+          </dt> 
+          <dd class="dd">
+            Accessible from <code class="ph codeph">ansible-navigator</code> command or from any subcommand, such as <code class="ph codeph">ansible-navigator config --help</code>. 
+          </dd> 
+          <dt class="dt dlterm">
+            subcommand help 
+          </dt> 
+          <dd class="dd">
+            Accessible from the subcommand, for example <code class="ph codeph">ansible-navigator config --help-config</code>. This help displays the details of all the parameters supported from the related Ansible command. 
+          </dd> 
+         </dl> 
+        </section> 
+        <section class="section" id="unique_879943132___text_based_user_interface_mode"> 
+         <h4 class="title sectiontitle">Text-based user interface mode</h4> 
+         <p class="p">The text-based user interface mode provides enhanced interaction with automation execution environments, collections, playbooks, and inventory. This mode is compatible with integrated development environments (IDE), such as Visual Studio Code.</p> 
+         <br> 
+         <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-welcome.png" alt="Text-based user interface mode"> 
+         <br> 
+         <p class="p">This mode includes a number of helpful user interface options:</p> 
+         <dl class="dl"> 
+          <dt class="dt dlterm">
+            colon commands 
+          </dt> 
+          <dd class="dd">
+            You can access all the automation content navigator commands with a colon, such as <code class="ph codeph">:run</code> or <code class="ph codeph">:collections</code> 
+          </dd> 
+          <dt class="dt dlterm">
+            navigating the text-based interface 
+          </dt> 
+          <dd class="dd">
+            The screen shows how to page up or down, scroll, escape to a prior screen or access <code class="ph codeph">:help</code>. 
+          </dd> 
+          <dt class="dt dlterm">
+            output by line number 
+          </dt> 
+          <dd class="dd">
+            You can access any line number in the displayed output by preceding it with a colon, for example <code class="ph codeph">:12</code>. 
+          </dd> 
+          <dt class="dt dlterm">
+            color-coded output 
+          </dt> 
+          <dd class="dd">
+            With colors enabled, automation content navigator displays items, such as deprecated modules, in red. 
+          </dd> 
+          <dt class="dt dlterm">
+            pagination and scrolling 
+          </dt> 
+          <dd class="dd">
+            You can page up or down, scroll, or escape by using the options displayed at the bottom of each automation content navigator screen. 
+          </dd> 
+         </dl> 
+         <p class="p">You cannot switch between modes after automation content navigator is running.</p> 
+         <p class="p">This document uses the text-based user interface mode for most procedures.</p> 
+        </section> 
+       </div> 
+      </article> 
+      <article class="topic concept nested2" aria-labelledby="ariaid-title4" id="unique_1917047723"> 
+       <h3 class="title topictitle3" id="ariaid-title4">Automation content navigator modes</h3> 
+       <div class="body conbody"> 
+        <p class="shortdesc">automation content navigator provides two operating modes to support your development needs: a command line interface for quick tasks and an interactive text-based interface for complex evaluation and troubleshooting.</p> 
+        <dl class="dl"> 
+         <dt class="dt dlterm">
+           stdout mode 
+         </dt> 
+         <dd class="dd">
+           Accepts most of the existing Ansible commands and extensions at the command line. 
+         </dd> 
+         <dt class="dt dlterm">
+           text-based user interface mode 
+         </dt> 
+         <dd class="dd">
+           Provides an interactive, text-based interface to the Ansible commands. Use this mode to evaluate content, run playbooks, and troubleshoot playbooks after they run using artifact files. 
+         </dd> 
+        </dl> 
+        <section class="section" id="unique_1917047723___stdout_mode"> 
+         <h4 class="title sectiontitle">stdout mode</h4> 
+         <p class="p">Use the <code class="ph codeph">-m stdout</code> subcommand with automation content navigator to use the familiar Ansible commands, such as <code class="ph codeph">ansible-playbook</code> within automation execution environments or on your local development environment. You can use commands you are familiar with for quick tasks.</p> 
+         <p class="p">Automation content navigator also provides extensive help in this mode:</p> 
+         <dl class="dl"> 
+          <dt class="dt dlterm"> <code class="ph codeph">--help</code> 
+          </dt> 
+          <dd class="dd">
+            Accessible from <code class="ph codeph">ansible-navigator</code> command or from any subcommand, such as <code class="ph codeph">ansible-navigator config --help</code>. 
+          </dd> 
+          <dt class="dt dlterm">
+            subcommand help 
+          </dt> 
+          <dd class="dd">
+            Accessible from the subcommand, for example <code class="ph codeph">ansible-navigator config --help-config</code>. This help displays the details of all the parameters supported from the related Ansible command. 
+          </dd> 
+         </dl> 
+        </section> 
+        <section class="section" id="unique_1917047723___text_based_user_interface_mode"> 
+         <h4 class="title sectiontitle">Text-based user interface mode</h4> 
+         <p class="p">The text-based user interface mode provides enhanced interaction with automation execution environments, collections, playbooks, and inventory. This mode is compatible with integrated development environments (IDE), such as Visual Studio Code.</p> 
+         <br> 
+         <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-welcome.png" alt="Text-based user interface mode"> 
+         <br> 
+         <p class="p">This mode includes a number of helpful user interface options:</p> 
+         <dl class="dl"> 
+          <dt class="dt dlterm">
+            colon commands 
+          </dt> 
+          <dd class="dd">
+            You can access all the automation content navigator commands with a colon, such as <code class="ph codeph">:run</code> or <code class="ph codeph">:collections</code> 
+          </dd> 
+          <dt class="dt dlterm">
+            navigating the text-based interface 
+          </dt> 
+          <dd class="dd">
+            The screen shows how to page up or down, scroll, escape to a prior screen or access <code class="ph codeph">:help</code>. 
+          </dd> 
+          <dt class="dt dlterm">
+            output by line number 
+          </dt> 
+          <dd class="dd">
+            You can access any line number in the displayed output by preceding it with a colon, for example <code class="ph codeph">:12</code>. 
+          </dd> 
+          <dt class="dt dlterm">
+            color-coded output 
+          </dt> 
+          <dd class="dd">
+            With colors enabled, automation content navigator displays items, such as deprecated modules, in red. 
+          </dd> 
+          <dt class="dt dlterm">
+            pagination and scrolling 
+          </dt> 
+          <dd class="dd">
+            You can page up or down, scroll, or escape by using the options displayed at the bottom of each automation content navigator screen. 
+          </dd> 
+         </dl> 
+         <p class="p">You cannot switch between modes after automation content navigator is running.</p> 
+         <p class="p">This document uses the text-based user interface mode for most procedures.</p> 
+        </section> 
+       </div> 
+      </article> 
+      <article class="topic reference nested2" aria-labelledby="ariaid-title5" id="ref-navigator-command-summary"> 
+       <h3 class="title topictitle3" id="ariaid-title5">Automation content navigator commands</h3> 
+       <div class="body refbody"> 
+        <p class="shortdesc">The automation content navigator commands run familiar Ansible CLI commands in <code class="ph codeph">-m stdout</code> mode. You can use all the subcommands and options from the related Ansible CLI command. Use <code class="ph codeph">ansible-navigator --help</code> for details.</p> 
+        <section class="section"> 
+         <p class="p"> <strong class="ph b">Automation content navigator commands</strong> </p> 
+         <table class="table"> 
+          <caption></caption> 
+          <colgroup> 
+           <col style="width:33.3333%"> 
+           <col style="width:33.3333%"> 
+           <col style="width:33.3334%"> 
+          </colgroup> 
+          <thead class="thead"> 
+           <tr class="row"> 
+            <th class="entry" id="ref-navigator-command-summary__entry__1">Command</th> 
+            <th class="entry" id="ref-navigator-command-summary__entry__2">Description</th> 
+            <th class="entry" id="ref-navigator-command-summary__entry__3">CLI example</th> 
+           </tr> 
+          </thead> 
+          <tbody class="tbody"> 
+           <tr class="row"> 
+            <td class="entry" headers="ref-navigator-command-summary__entry__1"> <p class="p">collections</p> </td> 
+            <td class="entry" headers="ref-navigator-command-summary__entry__2"> <p class="p">Explore available collections</p> </td> 
+            <td class="entry" headers="ref-navigator-command-summary__entry__3"> <p class="p"> <code class="ph codeph">ansible-navigator collections --help</code> </p> </td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="ref-navigator-command-summary__entry__1"> <p class="p">config</p> </td> 
+            <td class="entry" headers="ref-navigator-command-summary__entry__2"> <p class="p">Explore the current Ansible configuration</p> </td> 
+            <td class="entry" headers="ref-navigator-command-summary__entry__3"> <p class="p"> <code class="ph codeph">ansible-navigator config --help</code> </p> </td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="ref-navigator-command-summary__entry__1"> <p class="p">doc</p> </td> 
+            <td class="entry" headers="ref-navigator-command-summary__entry__2"> <p class="p">Review documentation for a module or plugin</p> </td> 
+            <td class="entry" headers="ref-navigator-command-summary__entry__3"> <p class="p"> <code class="ph codeph">ansible-navigator doc --help</code> </p> </td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="ref-navigator-command-summary__entry__1"> <p class="p">images</p> </td> 
+            <td class="entry" headers="ref-navigator-command-summary__entry__2"> <p class="p">Explore execution environment images</p> </td> 
+            <td class="entry" headers="ref-navigator-command-summary__entry__3"> <p class="p"> <code class="ph codeph">ansible-navigator images --help</code> </p> </td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="ref-navigator-command-summary__entry__1"> <p class="p">inventory</p> </td> 
+            <td class="entry" headers="ref-navigator-command-summary__entry__2"> <p class="p">Explore an inventory</p> </td> 
+            <td class="entry" headers="ref-navigator-command-summary__entry__3"> <p class="p"> <code class="ph codeph">ansible-navigator inventory --help</code> </p> </td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="ref-navigator-command-summary__entry__1"> <p class="p">replay</p> </td> 
+            <td class="entry" headers="ref-navigator-command-summary__entry__2"> <p class="p">Explore a previous run using a playbook artifact</p> </td> 
+            <td class="entry" headers="ref-navigator-command-summary__entry__3"> <p class="p"> <code class="ph codeph">ansible-navigator replay --help</code> </p> </td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="ref-navigator-command-summary__entry__1"> <p class="p">run</p> </td> 
+            <td class="entry" headers="ref-navigator-command-summary__entry__2"> <p class="p">Run a playbook</p> </td> 
+            <td class="entry" headers="ref-navigator-command-summary__entry__3"> <p class="p"> <code class="ph codeph">ansible-navigator run --help</code> </p> </td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="ref-navigator-command-summary__entry__1"> <p class="p">welcome</p> </td> 
+            <td class="entry" headers="ref-navigator-command-summary__entry__2"> <p class="p">Start at the welcome page</p> </td> 
+            <td class="entry" headers="ref-navigator-command-summary__entry__3"> <p class="p"> <code class="ph codeph">ansible-navigator welcome --help</code> </p> </td> 
+           </tr> 
+          </tbody> 
+         </table> 
+        </section> 
+       </div> 
+      </article> 
+      <article class="topic reference nested2" aria-labelledby="ariaid-title6" id="ref-navigator-command-comparison"> 
+       <h3 class="title topictitle3" id="ariaid-title6">Relationship between Ansible and automation content navigator commands</h3> 
+       <div class="body refbody"> 
+        <p class="shortdesc">The automation content navigator commands run familiar Ansible CLI commands in <code class="ph codeph">-m stdout</code> mode. You can use all the subcommands and options available in the related Ansible CLI command. Use <code class="ph codeph">ansible-navigator --help</code> for details.</p> 
+        <section class="section"> 
+         <p class="p"> <strong class="ph b">Comparison of automation content navigator and Ansible CLI commands</strong> </p> 
+         <table class="table"> 
+          <caption></caption> 
+          <colgroup> 
+           <col style="width:50%"> 
+           <col style="width:50%"> 
+          </colgroup> 
+          <thead class="thead"> 
+           <tr class="row"> 
+            <th class="entry" id="ref-navigator-command-comparison__entry__1">automation content navigator command</th> 
+            <th class="entry" id="ref-navigator-command-comparison__entry__2">Ansible CLI command</th> 
+           </tr> 
+          </thead> 
+          <tbody class="tbody"> 
+           <tr class="row"> 
+            <td class="entry" headers="ref-navigator-command-comparison__entry__1"> <p class="p"> <code class="ph codeph">ansible-navigator collections</code> </p> </td> 
+            <td class="entry" headers="ref-navigator-command-comparison__entry__2"> <p class="p"> <code class="ph codeph">ansible-galaxy collection</code> </p> </td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="ref-navigator-command-comparison__entry__1"> <p class="p"> <code class="ph codeph">ansible-navigator config</code> </p> </td> 
+            <td class="entry" headers="ref-navigator-command-comparison__entry__2"> <p class="p"> <code class="ph codeph">ansible-config</code> </p> </td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="ref-navigator-command-comparison__entry__1"> <p class="p"> <code class="ph codeph">ansible-navigator doc</code> </p> </td> 
+            <td class="entry" headers="ref-navigator-command-comparison__entry__2"> <p class="p"> <code class="ph codeph">ansible-doc</code> </p> </td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="ref-navigator-command-comparison__entry__1"> <p class="p"> <code class="ph codeph">ansible-navigator inventory</code> </p> </td> 
+            <td class="entry" headers="ref-navigator-command-comparison__entry__2"> <p class="p"> <code class="ph codeph">ansible-inventory</code> </p> </td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="ref-navigator-command-comparison__entry__1"> <p class="p"> <code class="ph codeph">ansible-navigator run</code> </p> </td> 
+            <td class="entry" headers="ref-navigator-command-comparison__entry__2"> <p class="p"> <code class="ph codeph">ansible-playbook</code> </p> </td> 
+           </tr> 
+          </tbody> 
+         </table> 
+        </section> 
+       </div> 
+      </article> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

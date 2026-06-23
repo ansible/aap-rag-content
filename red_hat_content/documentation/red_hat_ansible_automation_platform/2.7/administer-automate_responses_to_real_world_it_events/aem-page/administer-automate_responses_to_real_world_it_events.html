@@ -1,0 +1,379 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="GUID-01323c9f-54fd-4bf5-b44d-195391406252"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Automate actions by routing external event streams: User scenarios</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">The following user scenario provides end-to-end instructions for integrating event streams with rulebook activations. You can automate responses to environmental events and streamline cross-platform workflows.</p> 
+      <p class="p">Modern IT environments generate a constant flow of operational data from diverse sources. Manually responding to these events creates bottlenecks and increases the risk of human error. Event-Driven Ansible addresses these challenges by creating a direct link between event-generating sources and automated remediation or orchestration tasks.</p> 
+      <p class="p">By implementing the scenarios in this chapter, you can move beyond simple point-to-point triggers to a more cohesive automation strategy. These workflows illustrate how the Red Hat Ansible Automation Platform controller acts as a central hub, receiving payloads from external platforms and transforming them into actionable, rule-based responses. This approach reduces time-to-resolution for common incidents and ensures that your infrastructure remains synchronized with your development and operational life cycles.</p> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="GUID-74a6d38f-a22a-4350-b79d-3442b2156998"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Route GitHub event streams to rulebook activations</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Routing GitHub event streams allows Event-Driven Ansible controller to automatically ingest webhook payloads. This connects your repository events directly to rulebook activations, instantly triggering automated responses to code changes.</p> 
+       <p class="p">Event-driven automation relies on a consistent connection between an event source and the instructions that process those events. By using GitHub event streams, you create a secure, direct integration point for webhooks triggered by repository activities, such as pull requests, issues, or code pushes. This integration serves as the bridge between the external Git provider and the Ansible ecosystem.</p> 
+       <p class="p">Simplified event routing optimizes this connection by automatically directing incoming GitHub payloads to the appropriate rulebook activation. This architecture reduces the complexity of managing multiple webhook endpoints and ensures that the metadata from the GitHub event is accurately passed to your automation rules. This allows for near real-time responses to development workflows, such as automatically running a CI/CD playbook or updating a ticket when a branch is merged.</p> 
+      </div> 
+      <article class="topic reference nested2" aria-labelledby="ariaid-title3" id="GUID-09c988b9-8f1d-4cfe-a7c4-e885830cd5ab"> 
+       <h3 class="title topictitle3" id="ariaid-title3">Prepare your GitHub repository and platform environment</h3> 
+       <div class="body refbody">
+        <p class="shortdesc">Before configuring simplified event routing, you must prepare your Red Hat Ansible Automation Platform environment and GitHub repository. Ensuring that your decision environment, credentials, and rulebooks are properly aligned prevents errors during activation.</p> 
+        <section class="section" id="GUID-09c988b9-8f1d-4cfe-a7c4-e885830cd5ab__section_1"> 
+         <p class="p">To successfully integrate GitHub event streams with rulebook activations, verify that the following components and configurations are in place:</p> 
+         <dl class="dl"> 
+          <dt class="dt dlterm">
+           Decision environment
+          </dt> 
+          <dd class="dd">
+           Use the image version that corresponds to your specific Ansible Automation Platform instance (for example, <code class="ph codeph">de-minimal-rhel9</code>).
+          </dd> 
+          <dt class="dt dlterm">
+           Event stream credentials
+          </dt> 
+          <dd class="dd">
+           Configure credentials specifically for simplified event routing within the controller interface.
+          </dd> 
+          <dt class="dt dlterm">
+           Project synchronization
+          </dt> 
+          <dd class="dd">
+           Ensure your Ansible project is synced to the Git repository containing your rulebook YAML files.
+          </dd> 
+          <dt class="dt dlterm">
+           Plugin compatibility
+          </dt> 
+          <dd class="dd">
+           Verify that your decision environment supports the required event source plugins (for example, <code class="ph codeph">eda.builtin</code>).
+          </dd> 
+          <dt class="dt dlterm">
+           User Permissions
+          </dt> 
+          <dd class="dd">
+           Confirm you have sufficient permissions to create and manage rulebook activations in the controller.
+          </dd> 
+          <dt class="dt dlterm">
+           Active Event Source
+          </dt> 
+          <dd class="dd">
+           A functional webhook or message bus must be configured to send signals to the controller.
+          </dd> 
+          <dt class="dt dlterm">
+           Correct Namespacing
+          </dt> 
+          <dd class="dd">
+           Ensure your rulebooks call current plugin namespaces (for example, using <code class="ph codeph">amazon.aws</code> rather than deprecated <code class="ph codeph">ansible.eda paths</code>).
+          </dd> 
+          <dt class="dt dlterm">
+           Rulebook Configuration
+          </dt> 
+          <dd class="dd">
+           Your rulebook must conform to the standard YAML format and specify the correct source and port (as in the following example).
+          </dd> 
+         </dl> 
+         <p class="p"><strong class="ph b">YAML</strong></p> 
+         <pre class="pre codeblock"><code> 
+--- 
+- name: Listen for GitHub Events 
+  hosts: all 
+  sources: 
+    - ansible.builtin.webhook: 
+        port: 5000 
+  rules: 
+    - name: Respond to a Pull Request 
+      condition: event.payload.action == "opened" 
+      action: 
+        debug: 
+          msg: "A new pull request was opened!"</code></pre> 
+        </section> 
+       </div> 
+      </article>
+      <article class="topic task nested2" aria-labelledby="ariaid-title4" id="GUID-a649fef8-a77a-4c2a-b051-d329058994ac"> 
+       <h3 class="title topictitle3" id="ariaid-title4">Create a GitHub event stream credential</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">Creating a GitHub event stream credential establishes the necessary authentication for the Red Hat Ansible Automation Platform controller to securely access your event source. This credential ensures that only authorized webhook payloads trigger your rulebook activations.</p> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step stepexpand"> <span class="ph cmd">Log in to <span class="ph uicontrol">Ansible Automation Platform</span>.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Select <span class="ph menucascade"><span class="ph uicontrol">Automation Decisions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Credentials</span></span>.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol">Create credential</span>.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Insert the following:</span> 
+           <div class="itemgroup info"> 
+            <dl class="dl"> 
+             <dt class="dt dlterm">
+              Name
+             </dt> 
+             <dd class="dd">
+              Enter the name (for example, <code class="ph codeph">&lt;<em class="ph i">_Your_GitHub_Credential_Name_</em>&gt;</code>).
+             </dd> 
+             <dt class="dt dlterm">
+              Description
+             </dt> 
+             <dd class="dd">
+              This field is optional, but for this user scenario, enter a description (for example, <code class="ph codeph">&lt;<em class="ph i">_GitHub credential_</em>&gt;</code>).
+             </dd> 
+             <dt class="dt dlterm">
+              Organization
+             </dt> 
+             <dd class="dd">
+              Select <span class="ph uicontrol">Default</span> from the list.
+             </dd> 
+             <dt class="dt dlterm">
+              Credential type
+             </dt> 
+             <dd class="dd">
+              From the list, select <span class="ph uicontrol">GitHub Event Stream</span>.
+             </dd> 
+             <dt class="dt dlterm">
+              Type Details / HMAC Secret
+             </dt> 
+             <dd class="dd">
+              Enter a secret value and store for future use when you <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_simplified_event_routing#eda-config-remote-sys-to-events" title="After you have created your event stream, you must configure your remote system to send events to Event-Driven Ansible controller. The method used for this configuration varies, depending on the vendor for the event stream credential type you select.">configure a GitHub webhook</a>.
+             </dd> 
+            </dl> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol">Create credential</span> to save your credential.</span> </li>
+         </ol>
+        </section> 
+       </div> 
+      </article>
+      <article class="topic task nested2" aria-labelledby="ariaid-title5" id="GUID-31be729d-bbaa-4d0a-a8ca-dfdd3bba6a9f"> 
+       <h3 class="title topictitle3" id="ariaid-title5">Create a GitHub event stream</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">Creating an event stream and linking it to a pre-configured credential generates a unique URL for webhook configuration. This URL serves as the dedicated endpoint for the Red Hat Ansible Automation Platform controller to receive and process incoming GitHub event payloads.</p> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step stepexpand"> <span class="ph cmd">From the Ansible Automation Platform navigation, click <span class="ph menucascade"><span class="ph uicontrol">Automation Decisions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Event Streams</span></span></span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol">Create event stream</span>.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Insert the following:</span> 
+           <div class="itemgroup info"> 
+            <dl class="dl"> 
+             <dt class="dt dlterm">
+              Name
+             </dt> 
+             <dd class="dd">
+              Enter the name of your event stream (for example, <code class="ph codeph">&lt;<em class="ph i">_Your_event_stream_</em>&gt;</code>).
+             </dd> 
+             <dt class="dt dlterm">
+              Event stream type
+             </dt> 
+             <dd class="dd">
+              From the list, select <span class="ph uicontrol">GitHub Event Stream</span>. After you select your type of event stream, more fields are displayed (for example, <span class="ph uicontrol">Credential</span>).
+             </dd> 
+             <dt class="dt dlterm">
+              URL
+             </dt> 
+             <dd class="dd">
+              This URL is created for the event stream. Copy it and save for use in the webhook configuration process.
+             </dd> 
+             <dt class="dt dlterm">
+              Forward events to rulebook activations
+             </dt> 
+             <dd class="dd">
+              Toggle this button to disable your event stream for now. Disabling this option allows you to test the allows you to configure your webhook in GitHub first and test the connection with your remote system.
+             </dd> 
+            </dl> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol">Create event stream</span>.</span> 
+           <div class="itemgroup info"> 
+            <div class="note note note_note">
+             <span class="note__title">Note:</span> 
+             <div class="note__body">
+              Your new event stream is displayed with a banner (warning) “This event stream is disabled.” This ensures that events will not be forwarded to rulebook activations causing rules and conditions to be triggered inadvertently while you are in test mode.
+             </div>
+            </div> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">View the <span class="ph uicontrol">Details</span> page of your new event stream, click <span class="ph uicontrol">Copy</span>, and paste the URL to use when you configure your webhook.</span> </li>
+         </ol>
+        </section> 
+       </div> 
+      </article>
+      <article class="topic task nested2" aria-labelledby="ariaid-title6" id="GUID-29a60aac-4a72-49ba-9459-4d98b7fc644b"> 
+       <h3 class="title topictitle3" id="ariaid-title6">Configure your remote system to send events through GitHub webhooks</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">Configuring a GitHub webhook establishes the outbound connection from your repository to the Red Hat Ansible Automation Platform controller. This configuration enables your remote system to transmit event data directly to your designated event stream URL.</p> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step stepexpand"> <span class="ph cmd">Go to your GitHub account to configure your event source.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">In the top right of the GitHub page, click<span class="ph menucascade"><span class="ph uicontrol">Your profile name</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Your repositories</span></span> and select the repository you want to configure.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Navigate to <span class="ph uicontrol">Settings</span> in the tool bar.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">In the left navigation, select <span class="ph uicontrol">Webhooks</span>.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">On the top right, click Add webhook to create a webhook in your GitHub repository that will send events to your event stream.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Complete the following fields:</span> 
+           <div class="itemgroup info"> 
+            <dl class="dl"> 
+             <dt class="dt dlterm">
+              Payload URL
+             </dt> 
+             <dd class="dd">
+              Copy and paste the URL you saved from the event stream you created.
+             </dd> 
+             <dt class="dt dlterm">
+              Content type
+             </dt> 
+             <dd class="dd">
+              Select application/json from the list.
+             </dd> 
+             <dt class="dt dlterm">
+              Secret
+             </dt> 
+             <dd class="dd">
+              Add your secret from your event stream credential you created earlier.
+             </dd> 
+             <dt class="dt dlterm">
+              SSL verification
+             </dt> 
+             <dd class="dd">
+              If you’re using self-signed SSL certificates, select <span class="ph uicontrol">Disable under SSL verification</span> to ensure a successful webhook connection. Otherwise, you can keep the <span class="ph uicontrol">Enable SSL verification</span> toggled on.
+             </dd> 
+            </dl> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol">Add webhook</span> to save your configuration.</span> </li>
+         </ol>
+        </section> 
+        <section class="section result" id="GUID-29a60aac-4a72-49ba-9459-4d98b7fc644b__result_1">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Results</h4>
+         </div>Your webhook is created, and you can return to Ansible Automation Platform.
+        </section> 
+       </div> 
+      </article>
+      <article class="topic task nested2" aria-labelledby="ariaid-title7" id="GUID-e9453c25-04cc-484f-b9fc-dbf95b6af538"> 
+       <h3 class="title topictitle3" id="ariaid-title7">Verify your GitHub event streams work</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">Verifying the event stream connection confirms that the Red Hat Ansible Automation Platform controller is successfully receiving data from the remote system. This validation ensures the integration is active and ready to trigger rulebook activations.</p> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step"> <span class="ph cmd">From the navigation panel in Ansible Automation Platform, select <span class="ph menucascade"><span class="ph uicontrol">Automation Decisions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Event Streams</span></span>.</span> </li>
+          <li class="li step"> <span class="ph cmd">Select the event stream you created (for example, <code class="ph codeph">&lt;<em class="ph i">_Your_Event_Stream_Name_</em>&gt;</code>.</span> </li>
+          <li class="li step"> <span class="ph cmd">Toggle the <span class="ph uicontrol">Forward events to rulebook activation</span> option in the top right to disable event forwarding. The <span class="ph uicontrol">Disable forwarding of events</span> message is displayed.</span> </li>
+          <li class="li step"> <span class="ph cmd">In the <span class="ph uicontrol">Disable forwarding of events</span> message window, click the <span class="ph uicontrol">Yes, I confirm I want to disable the forwarding of events</span> checkbox.</span> </li>
+          <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol">Disable forwarding of events</span>. A banner is displayed notifying you that events will not be forwarded to the rulebook activation where they are configured.</span> </li>
+          <li class="li step"> <span class="ph cmd">Verify that you received the most recent event and its associated payload.</span> </li>
+          <li class="li step"> <span class="ph cmd">In the <span class="ph uicontrol">Repo Event Stream</span> that you just created, re-enable the event-forwarding capability by toggling the <span class="ph uicontrol">Forward events to rulebook activation</span> option on.</span> </li>
+         </ol>
+        </section> 
+       </div> 
+      </article>
+      <article class="topic task nested2" aria-labelledby="ariaid-title8" id="GUID-a2f95999-c994-4158-8604-e53d5cd258ce"> 
+       <h3 class="title topictitle3" id="ariaid-title8">Replace sources and attach GitHub event streams to activations</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">Attaching an event stream to a rulebook activation links your incoming GitHub data to specific automation rules. This process involves selecting a project and updating the event source to subscribe to the previously configured event stream.</p> 
+        <section class="section prereq" id="GUID-a2f95999-c994-4158-8604-e53d5cd258ce__prereq_1">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Before you begin</h4>
+         </div>Ensure that your projects have been set up properly. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_projects#GUID-0372bdfb-6b7f-4de7-9a43-bd4431aab994" title="Set up a project to connect Event-Driven Ansible controller to a Git repository, enabling it to pull, sync, and manage the rulebooks used by your automation.">Set up a new project</a>
+        </section> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step"> <span class="ph cmd">From the Ansible Automation Platform navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Decisions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Rulebook Activations</span></span>.</span> </li>
+          <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol">Create rulebook activation</span> to create a rulebook for events on an application repository for Linux servers.</span> </li>
+          <li class="li step"> <span class="ph cmd">In the <span class="ph uicontrol">Name</span> field, enter the name of your rulebook (for example, <code class="ph codeph">&lt;<em class="ph i">_Your_rulebook_activation_</em>&gt;</code>).</span> </li>
+          <li class="li step"> <span class="ph cmd">For your <span class="ph uicontrol">Organization</span>, select <span class="ph uicontrol">Default</span> from the list.</span> </li>
+          <li class="li step"> <span class="ph cmd">From the <span class="ph uicontrol">Project</span> list, select the project with access to your rulebooks.</span> </li>
+          <li class="li step"> <span class="ph cmd">In the <span class="ph uicontrol">Rulebook</span> field, select the )rulebook associated with your project (for example, <code class="ph codeph">&lt;<em class="ph i">_Your-rulebook.yml_</em>&gt;</code>).</span> </li>
+          <li class="li step"> <span class="ph cmd">In the <span class="ph uicontrol">Event streams</span> field, click the gear icon to select which event stream the rulebook needs to subscribe to. The <span class="ph uicontrol">Event streams</span> window is displayed.</span> </li>
+          <li class="li step"> <span class="ph cmd">In the required <span class="ph uicontrol">Rulebook source</span> field, replace an <code class="ph codeph">ansible.builtin.webhook</code> or compatible custom source with the desired event stream. This modifies the activation only, while leaving your filters intact.</span> </li>
+          <li class="li step"> <span class="ph cmd">Select <span class="ph uicontrol">&lt;_Your_event_stream_&gt;</span> from the list of event streams that you created.</span> </li>
+          <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol">Save</span> to save your event stream.</span> </li>
+          <li class="li step"> <span class="ph cmd">Next to the <span class="ph uicontrol">Credential</span> field, click the <span class="ph uicontrol">Search</span> icon to access automation controller and connect with job templates and workflows. The <strong class="ph b">Select credential</strong> message is displayed.</span> </li>
+          <li class="li step"> <span class="ph cmd">Select the <span class="ph uicontrol">Red Hat AAP</span> credential and click <span class="ph uicontrol">Confirm</span>.</span> </li>
+          <li class="li step"> <span class="ph cmd">Select the appropriate <span class="ph uicontrol">Decision Environment</span> from the list.</span> </li>
+          <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol">Create rulebook activation</span>. The activation status is displayed (if successful, the <span class="ph uicontrol">Running</span> status displays).</span> </li>
+          <li class="li step"> <span class="ph cmd">Repeat the following steps to create an additional rulebook activation using the same process as your first activation:</span> 
+           <ol type="a" class="ol substeps" id="GUID-a2f95999-c994-4158-8604-e53d5cd258ce__substeps_1"> 
+            <li class="li substep"> <span class="ph cmd">In the <span class="ph uicontrol">Event streams</span> field, click the gear icon to select which event stream the rulebook needs to subscribe to.</span> </li> 
+            <li class="li substep"> <span class="ph cmd">Select the <span class="ph uicontrol">Repo Event Stream</span> from the list of event streams that you created.</span> </li> 
+            <li class="li substep"> <span class="ph cmd">Click <span class="ph uicontrol">Save</span> to save your event stream.</span> </li> 
+            <li class="li substep"> <span class="ph cmd">Click <span class="ph uicontrol">Create rulebook activation</span> to save the configuration and start the rulebook.</span> </li> 
+           </ol> </li>
+         </ol>
+        </section> 
+        <section class="section result" id="GUID-a2f95999-c994-4158-8604-e53d5cd258ce__result_1">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Results</h4>
+         </div>Now, there are two rulebook activations running and you can commit some code to one of your repositories. An event has been received and routed to your rulebooks.
+        </section> 
+       </div> 
+      </article>
+      <article class="topic task nested2" aria-labelledby="ariaid-title9" id="GUID-ad2678ac-969a-45dc-8bd7-2970f7e1d23c"> 
+       <h3 class="title topictitle3" id="ariaid-title9">Resend webhook data from your event stream type</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">Resending webhook data allows for efficient testing of new event routing configurations. This process verifies that the event stream successfully triggers the rulebook activation using existing payloads, eliminating the need to manually recreate events.</p> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step"> <span class="ph cmd">Go back to the <span class="ph uicontrol">GitHub Webhook / Manage webhook</span> page.</span> </li>
+          <li class="li step"> <span class="ph cmd">Click the <span class="ph uicontrol">Recent Deliveries</span> tab.</span> </li>
+          <li class="li step"> <span class="ph cmd">Click the ellipsis.</span> </li>
+          <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol">Redeliver</span>. A <span class="ph uicontrol">Redeliver payload</span> window is displayed with a delivery message.</span> </li>
+          <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol">Yes, redeliver this payload</span>.</span> </li>
+          <li class="li step"> <span class="ph cmd">Return to the <span class="ph uicontrol">Ansible Automation Platform</span> to check your rule audit.</span> </li>
+         </ol>
+        </section> 
+       </div> 
+      </article>
+      <article class="topic task nested2" aria-labelledby="ariaid-title10" id="GUID-fdf0126e-3e75-4d48-a9ca-a5ee740d9e96"> 
+       <h3 class="title topictitle3" id="ariaid-title10">Check the Rule Audit for events on your new event stream</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">Checking the Rule Audit provides a detailed record of events associated with a specific event stream. This administrative view allows for the verification of successful event processing and the inspection of actions triggered by incoming payloads.placeholder</p> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step"> <span class="ph cmd">From the Ansible Automation Platform navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Decisions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Rule Audit </span></span> to see the event and actions.</span> </li>
+          <li class="li step"> <span class="ph cmd">Select the name of the event in the list that is associated with the rulebook activation you created. The <span class="ph uicontrol">Details</span> tab is displayed.</span> </li>
+          <li class="li step"> <span class="ph cmd">Click the <span class="ph uicontrol">Events</span> tab to view the event details.</span> </li>
+          <li class="li step"> <span class="ph cmd">Click the <span class="ph uicontrol">Actions</span> tab to see what action took place.</span> </li>
+          <li class="li step"> <span class="ph cmd">If desired, click the <span class="ph uicontrol">Name</span> of the action and view the <span class="ph uicontrol">Details</span> tab to check the status.</span> </li>
+         </ol>
+        </section> 
+        <section class="section result" id="GUID-fdf0126e-3e75-4d48-a9ca-a5ee740d9e96__result_1">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Results</h4>
+         </div>Your code is pushed and your applications are deployed.
+        </section> 
+       </div> 
+       <nav role="navigation" class="related-links">
+        <div class="linklist relconcepts">
+         <strong>Related concepts</strong>
+         <br>
+         <ul class="linklist">
+          <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-automate_responses_to_real_world_it_events#GUID-74a6d38f-a22a-4350-b79d-3442b2156998" title="Routing GitHub event streams allows Event-Driven Ansible controller to automatically ingest webhook payloads. This connects your repository events directly to rulebook activations, instantly triggering automated responses to code changes.">Route GitHub event streams to rulebook activations</a></li>
+         </ul>
+        </div>
+        <div class="linklist relinfo">
+         <strong>Related information</strong>
+         <br>
+         <ul class="linklist">
+          <li class="linklist"><a class="link" href="https://interact.redhat.com/share/E1HhKjGqhls8JF5NsBNz" target="_blank" rel="external noopener">Automating Multi-Repo Deployments with Event-Driven Ansible Interact arcade</a></li>
+         </ul>
+        </div>
+       </nav> 
+      </article>
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="operator-link-components">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Deploy a new Ansible Automation Platform instance with components</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">After installing the Ansible Automation Platform Operator in your namespace you can set up your <strong class="ph b">Ansible Automation Platform</strong> instance. Then link all the platform components to a single user interface.</p> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div>
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Log in to Red Hat OpenShift Container Platform.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Installed Operators</span></span>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Select your Ansible Automation Platform Operator deployment.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">Details</strong> tab.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">On the <strong class="ph b">Ansible Automation Platform</strong> tile click <span class="ph uicontrol button">Create instance</span>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">From the <strong class="ph b">Create Ansible Automation Platform</strong> page enter a name for your instance in the <strong class="ph b">Name</strong> field.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">YAML view</span> and replace the <code class="ph codeph">spec</code> section with the following: </span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>spec:
+  database:
+    resource_requirements:
+      requests:
+        cpu: 200m
+        memory: 512Mi
+    storage_requirements:
+      requests:
+        storage: 100Gi
+
+  controller:
+    disabled: false
+
+  eda:
+    disabled: false
+
+  hub:
+    disabled: false
+    storage_type: file
+    file_storage_storage_class: &lt;read-write-many-storage-class&gt;
+    file_storage_size: 10Gi</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">You must specify your desired value for the <code class="ph codeph">&lt;read-write-many-storage-class&gt;</code> placeholder.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create</span>.</span> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <p class="p"> <strong class="ph b">Verify instance deployment (UI):</strong> </p> 
+      <ol class="ol"> 
+       <li class="li">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Installed Operators</span></span>.</li> 
+       <li class="li">Select your Ansible Automation Platform Operator deployment.</li> 
+       <li class="li">Select the <strong class="ph b">All instances</strong> tab.</li> 
+       <li class="li">Verify that the <strong class="ph b">Ansible Automation Platform</strong> instance, <strong class="ph b">Automation Controller</strong>, <strong class="ph b">Event-Driven Ansible</strong>, and <strong class="ph b">Automation Hub</strong> instances are listed.</li> 
+      </ol> 
+      <p class="p"> <strong class="ph b">Verify pod status (UI):</strong> </p> 
+      <ol class="ol"> 
+       <li class="li">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Workloads</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Pods</span></span>.</li> 
+       <li class="li">Switch to the project (namespace) where you deployed the instance.</li> 
+       <li class="li">Verify that all related pods display a <strong class="ph b">Running</strong> or <strong class="ph b">Completed</strong> status.</li> 
+      </ol> 
+      <p class="p"> <strong class="ph b">Verify Platform Route (CLI):</strong> </p> 
+      <p class="p">Run the following command to confirm the URL for accessing the platform gateway:</p> 
+      <pre class="pre codeblock"><code>oc get route</code></pre> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

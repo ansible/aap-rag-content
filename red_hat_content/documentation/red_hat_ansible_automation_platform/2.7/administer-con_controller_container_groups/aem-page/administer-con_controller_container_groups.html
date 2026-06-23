@@ -1,0 +1,251 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="controller-container-groups"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Control where automation runs with container groups</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">Ansible Automation Platform supports container groups, which enable you to run jobs in automation controller regardless of whether automation controller is installed as a standalone, in a virtual environment, or in a container.</p> 
+      <p class="p">Container groups act as a pool of resources within a virtual environment.</p> 
+      <p class="p">You can create instance groups to point to an OpenShift container. These are job environments that are provisioned on-demand as a pod that exists only for the duration of the playbook run. This is known as the ephemeral execution model and ensures a clean environment for every job run.</p> 
+      <p class="p">In some cases, you might want to set container groups to be "always-on", which you can configure through the creation of an instance.</p> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">Container groups upgraded from versions before automation controller 4.0 revert back to default and remove the old pod definition, clearing out all custom pod definitions in the migration.</p> 
+       </div> 
+      </div> 
+      <p class="p">Container groups are different from execution environments in that execution environments are container images and do not use a virtual environment. For more information, see<em class="ph i">Define, create, and build execution environments</em> in the Related Links section. </p> 
+     </div> 
+     <nav role="navigation" class="related-links"> 
+      <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+       <br> 
+       <ul class="linklist"> 
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-define__create__and_build_execution_environments" title="Run automation consistently across nodes with execution environments, which are container images that contain everything you need to run your automation.">Define, create, and build execution environments</a></li> 
+       </ul> 
+      </div> 
+     </nav> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="controller-create-container-group"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Create a container group</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can create a <code class="ph codeph">ContainerGroup</code> in automation controller to run jobs in containers on an OpenShift or Kubernetes cluster.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">A namespace that you can launch into. Every cluster has a "default" namespace, but you can use a specific namespace.</li> 
+         <li class="li">A service account that has the roles that enable it to launch and manage pods in this namespace. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_controller_container_groups#controller-create-service-account" title="Use service accounts in an OpenShift cluster or Kubernetes to run jobs in a container group through automation controller. After the service account is created, its credentials are provided to automation controller in the form of an OpenShift or Kubernetes API Bearer Token credential.">Creating a service account in OpenShift Container Platform or Kubernetes</a>.</li> 
+         <li class="li">If you are using execution environments in a private registry, and have a container registry credential associated with them in automation controller, the service account also needs the roles to get, create, and delete secrets in the namespace. If you do not want to give these roles to the service account, you can pre-create the <code class="ph codeph">ImagePullSecrets</code> and specify them on the pod spec for the <code class="ph codeph">ContainerGroup</code>. In this case, the execution environment must not have a container registry credential associated, or automation controller attempts to create the secret for you in the namespace.</li> 
+         <li class="li">A token associated with that service account. An OpenShift or Kubernetes Bearer Token.</li> 
+         <li class="li">A CA certificate associated with the cluster.</li> 
+        </ul> 
+       </section> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">A <code class="ph codeph">ContainerGroup</code> is a type of <code class="ph codeph">InstanceGroup</code> that has an associated credential you can use to connect to an OpenShift cluster.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Instance Groups</span></span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Create group</span> and select <strong class="ph b">Create container group</strong>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Enter a name for your new container group and select the credential you created before to associate it to the container group.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Create container group</span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Check the <strong class="ph b">Customize pod spec</strong> box and edit the <strong class="ph b">Pod spec override</strong> to include the namespace and service account name that you used in the previous steps.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="controller-create-service-account"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Create a service account in OpenShift Container Platform or Kubernetes</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Use service accounts in an OpenShift cluster or Kubernetes to run jobs in a container group through automation controller. After the service account is created, its credentials are provided to automation controller in the form of an OpenShift or Kubernetes API Bearer Token credential.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">To create a service account, download and use the following sample service account example, <code class="ph codeph">containergroup sa</code> and change it as required to obtain the credentials: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre">---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: containergroup-service-account
+  namespace: containergroup-namespace
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: role-containergroup-service-account
+  namespace: containergroup-namespace
+rules:
+  - verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+    apiGroups:
+      - ''
+    resources:
+      - pods
+  - verbs:
+      - get
+    apiGroups:
+      - ''
+    resources:
+      - pods/log
+  - verbs:
+      - create
+    apiGroups:
+      - ''
+    resources:
+      - pods/attach
+  - verbs:
+      - get
+      - create
+      - delete
+    apiGroups:
+      - ''
+    resources:
+      - secrets
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: role-containergroup-service-account-binding
+  namespace: containergroup-namespace
+subjects:
+- kind: ServiceAccount
+  name: containergroup-service-account
+  namespace: containergroup-namespace
+roleRef:
+  kind: Role
+  name: role-containergroup-service-account
+  apiGroup: rbac.authorization.k8s.io</pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Apply the configuration from <code class="ph codeph">containergroup-sa.yml</code>: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre">oc apply -f containergroup-sa.yml</pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Get an API token by generating a service account token: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre">oc create token containergroup-service-account --duration=$((365*24))h &gt; containergroup-sa.token</pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Get the CA certificate: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre">oc get secret -n openshift-ingress wildcard-tls -o jsonpath='{.data.ca\.crt}' | base64 -d &gt; containergroup-ca.crt</pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Use the contents of <code class="ph codeph">containergroup-sa.token</code> and <code class="ph codeph">containergroup-ca.crt</code> to provide the information for the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_controller_container_groups#controller-create-service-account" title="Use service accounts in an OpenShift cluster or Kubernetes to run jobs in a container group through automation controller. After the service account is created, its credentials are provided to automation controller in the form of an OpenShift or Kubernetes API Bearer Token credential.">OpenShift or Kubernetes API Bearer Token</a> required for the container group. </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">To create a container group, create a <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_controller_container_groups#controller-create-service-account" title="Use service accounts in an OpenShift cluster or Kubernetes to run jobs in a container group through automation controller. After the service account is created, its credentials are provided to automation controller in the form of an OpenShift or Kubernetes API Bearer Token credential.">OpenShift or Kubernetes API Bearer Token</a> credential to use with your container group.</span> </li> 
+          </ol> </li> 
+        </ol> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist reltasks"> <strong>Related tasks</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_create_credential" title="Learn how to create new credentials in Automation controller.">Creating new credentials</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="controller-customize-pod-spec"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Customize the pod specification</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Ansible Automation Platform provides a simple default pod specification, however, you can provide a custom YAML or JSON document that overrides the default pod specification.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">This field uses any custom fields such as <code class="ph codeph">ImagePullSecrets</code>, that can be "serialized" as valid pod JSON or YAML. A full list of options can be found in the <a class="xref" href="https://docs.openshift.com/online/pro/architecture/core_concepts/pods_and_services.html" target="_blank" rel="external noopener">Pods and Services</a> section of the OpenShift documentation.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Instance Groups</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create group</span> and select <strong class="ph b">Create container group</strong>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Check the option for <strong class="ph b">Customize pod spec</strong>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Enter a custom Kubernetes or OpenShift Pod specification in the <strong class="ph b">Pod spec override</strong> field. <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ag-instance-group-customize-cg-pod.png" alt="Customize pod specification"><br></span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create container group</span>. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note"> <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">The image when a job launches is determined by which execution environment is associated with the job. If you associate a container registry credential with the execution environment, then automation controller attempts to make an <code class="ph codeph">ImagePullSecret</code> to pull the image. If you prefer not to give the service account permission to manage secrets, you must pre-create the <code class="ph codeph">ImagePullSecret</code> and specify it on the pod specification, and omit any credential from the execution environment used.</p> 
+             <p class="p">For more information, see the <a class="xref" href="https://access.redhat.com/RegistryAuthentication#allowing-pods-to-reference-images-from-other-secured-registries-8" target="_blank" rel="external noopener">Allowing Pods to Reference Images from Other Secured Registries</a> section of the <em class="ph i">Red Hat Container Registry Authentication</em> article.</p> 
+            </div> 
+           </div> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">When you have created the container group successfully, the <strong class="ph b">Details</strong> tab of the newly created container group remains, which enables you to review and edit your container group information. This is the same menu that is opened if you click the <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png" width="15" alt="Edit"> icon from the <strong class="ph b">Instance Groups</strong> list view. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">You can also edit <strong class="ph b">Instances</strong> and review <strong class="ph b">Jobs</strong> associated with this instance group.</p> 
+           <br> 
+           <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ag-instance-group-successfully-created.png" alt="Instance group successfully created"> 
+           <br> 
+           <p class="p">Container groups and instance groups are labeled accordingly.</p> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="controller-verify-container-group"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Verify the container group functions</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Verify the deployment and termination of your container.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Create a mock inventory and associate the container group to it by populating the name of the container group in the <strong class="ph b">Instance groups</strong> field. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/proc_controller_adding_new_inventory" title="To add a new inventory, you must configure permissions, groups, hosts, and sources, then view the completed jobs.">Add a new inventory</a>. <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ag-inventories-create-new-test-inventory.png" alt="Create test inventory"><br></span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Create the <code class="ph codeph">localhost</code> host in the inventory with the following variables: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre">{'ansible_host': '127.0.0.1', 'ansible_connection': 'local'}</pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Launch an ad hoc job against the localhost using the <em class="ph i">ping</em> or <em class="ph i">setup</em> module. Even though the <strong class="ph b">Machine Credential</strong> field is required, it does not matter which one is selected for this test: <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ag-inventories-launch-adhoc-localhost.png" alt="Launch ad hoc localhost"><br><br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ag-inventories-launch-adhoc-localhost2.png" alt="Launch ad hoc localhost 2"><br></span> </li> 
+        </ol> 
+       </section> 
+       <section class="section result"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Results</h3> 
+        </div> 
+        <p class="p">You can see in the <strong class="ph b">Jobs</strong> details view that the container was reached successfully by using one of the ad hoc jobs.</p> 
+        <p class="p">If you have an OpenShift UI, you can see pods appear and disappear as they deploy and end. You can also use the CLI to perform a <code class="ph codeph">get pod</code> operation on your namespace to watch these same events occurring in real-time.</p> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title6" id="controller-container-capacity"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Container capacity limits</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">When using container groups in automation controller, you can set capacity limits for the containers that run the jobs.</p> 
+       <section class="section"> 
+        <p class="p">Capacity limits and quotas for containers are defined by objects in the Kubernetes API:</p> 
+        <ul class="ul"> 
+         <li class="li">To set limits on all pods within a given namespace, use the <code class="ph codeph">LimitRange</code> object. For more information see the <a class="xref" href="https://docs.openshift.com/online/pro/dev_guide/compute_resources.html#overview" target="_blank" rel="external noopener">Quotas and Limit Ranges</a> section of the OpenShift documentation.</li> 
+         <li class="li">To set limits directly on the pod definition launched by automation controller, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_controller_container_groups#controller-customize-pod-spec" title="Ansible Automation Platform provides a simple default pod specification, however, you can provide a custom YAML or JSON document that overrides the default pod specification.">Customizing the pod specification</a> and the <a class="xref" href="https://docs.openshift.com/online/pro/dev_guide/compute_resources.html#dev-compute-resources" target="_blank" rel="external noopener">Compute Resources</a> section of the OpenShift documentation.</li> 
+        </ul> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Container groups do not use the capacity algorithm that normal nodes use. You need to set the number of forks at the job template level. If you configure forks in automation controller, that setting is passed along to the container.</p> 
+         </div> 
+        </div> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

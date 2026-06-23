@@ -1,0 +1,333 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="con-upgrade-api-changes-27"> 
+     <h1 class="title topictitle1" id="ariaid-title1">API changes in Ansible Automation Platform 2.7</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Ansible Automation Platform 2.7 completes the migration of all API access to platform gateway. Direct API access to individual services that was deprecated in versions 2.5 and 2.6 has been removed in this release.</p> 
+      <p class="p">These changes impact your organization if you have API calls, scripts, or integrations that connect directly to automation controller, automation hub, or Event-Driven Ansible hosts. All API requests must now use platform gateway endpoints. Requests sent directly to component hosts return an HTTP 401 Unauthorized error.</p> 
+      <p class="p">This section highlights the changed APIs between 2.6 and 2.7.</p> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist relconcepts">
+       <strong>Related concepts</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-con_upgrade_api_changes_27#con-upgrade-api-general-changes-27" title="In Ansible Automation Platform 2.7, direct API access to individual platform components has been removed. All API access must go through platform gateway.">General API changes</a></li>
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-con_upgrade_api_changes_27#con-upgrade-api-specific-changes-27" title="In Red Hat Ansible Automation Platform 2.7, all API access must go through the platform gateway hostname. Direct access to component hostnames has been removed.">Specific API changes</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="con-upgrade-api-general-changes-27"> 
+      <h2 class="title topictitle2" id="ariaid-title2">General API changes</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">In Ansible Automation Platform 2.7, direct API access to individual platform components has been removed. All API access must go through platform gateway.</p> 
+       <div class="note important note_important">
+        <span class="note__title">Important:</span> 
+        <div class="note__body"> 
+         <p class="p">Service-specific API endpoints have been removed in Ansible Automation Platform 2.7. Direct component API access is no longer available. All API access must go through platform gateway.</p> 
+        </div>
+       </div> 
+       <table class="table">
+        <caption></caption>
+        <colgroup>
+         <col style="width:25%">
+         <col style="width:25%">
+         <col style="width:25%">
+         <col style="width:25%">
+        </colgroup>
+        <thead class="thead"> 
+         <tr class="row"> 
+          <th class="entry" id="con-upgrade-api-general-changes-27__entry__1">Component</th> 
+          <th class="entry" id="con-upgrade-api-general-changes-27__entry__2">2.4 and earlier endpoints start with...</th> 
+          <th class="entry" id="con-upgrade-api-general-changes-27__entry__3">2.5 and 2.6 endpoints start with...</th> 
+          <th class="entry" id="con-upgrade-api-general-changes-27__entry__4">2.7 endpoints start with...</th> 
+         </tr> 
+        </thead>
+        <tbody class="tbody"> 
+         <tr class="row"> 
+          <td class="entry" headers="con-upgrade-api-general-changes-27__entry__1">Automation controller</td> 
+          <td class="entry" headers="con-upgrade-api-general-changes-27__entry__2"><code class="ph codeph">/api/v2/</code></td> 
+          <td class="entry" headers="con-upgrade-api-general-changes-27__entry__3"><code class="ph codeph">/api/controller/v2/</code></td> 
+          <td class="entry" headers="con-upgrade-api-general-changes-27__entry__4">Must use platform gateway: <code class="ph codeph">/api/controller/v2/</code></td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="con-upgrade-api-general-changes-27__entry__1">Automation hub</td> 
+          <td class="entry" headers="con-upgrade-api-general-changes-27__entry__2"><code class="ph codeph">/api/automation-hub</code></td> 
+          <td class="entry" headers="con-upgrade-api-general-changes-27__entry__3"><code class="ph codeph">/api/galaxy/v1</code></td> 
+          <td class="entry" headers="con-upgrade-api-general-changes-27__entry__4">Must use platform gateway: <code class="ph codeph">/api/galaxy/v1</code></td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="con-upgrade-api-general-changes-27__entry__1">Platform gateway</td> 
+          <td class="entry" headers="con-upgrade-api-general-changes-27__entry__2">Not applicable</td> 
+          <td class="entry" headers="con-upgrade-api-general-changes-27__entry__3"><code class="ph codeph">/api/gateway/v1/</code></td> 
+          <td class="entry" headers="con-upgrade-api-general-changes-27__entry__4"><code class="ph codeph">/api/gateway/v1/</code></td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="con-upgrade-api-general-changes-27__entry__1">Event-Driven Ansible</td> 
+          <td class="entry" headers="con-upgrade-api-general-changes-27__entry__2">Not applicable</td> 
+          <td class="entry" headers="con-upgrade-api-general-changes-27__entry__3"><code class="ph codeph">/api/eda/v1/</code></td> 
+          <td class="entry" headers="con-upgrade-api-general-changes-27__entry__4">Must use platform gateway: <code class="ph codeph">/api/eda/v1/</code></td> 
+         </tr> 
+        </tbody>
+       </table> 
+       <p class="p">In Red Hat Ansible Automation Platform 2.7, these API endpoints are only accessible through the platform gateway hostname. Direct access to component hostnames (such as <code class="ph codeph">controller.example.com</code> or <code class="ph codeph">hub.example.com</code>) returns an HTTP 401 Unauthorized error.</p> 
+       <p class="p"><strong class="ph b">Example:</strong></p> 
+       <ul class="ul"> 
+        <li class="li">Works in 2.7: <code class="ph codeph">https://gateway.example.com/api/controller/v2/ping/</code></li> 
+        <li class="li">Blocked in 2.7: <code class="ph codeph">https://controller.example.com/api/v2/ping/</code></li> 
+       </ul> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="con-upgrade-api-specific-changes-27"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Specific API changes</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">In Red Hat Ansible Automation Platform 2.7, all API access must go through the platform gateway hostname. Direct access to component hostnames has been removed.</p> 
+       <table class="table">
+        <caption></caption>
+        <colgroup>
+         <col style="width:33.33333333333333%">
+         <col style="width:33.33333333333333%">
+         <col style="width:33.33333333333333%">
+        </colgroup>
+        <thead class="thead"> 
+         <tr class="row"> 
+          <th class="entry" id="con-upgrade-api-specific-changes-27__entry__1">Old (Ansible Automation Platform 2.6)</th> 
+          <th class="entry" id="con-upgrade-api-specific-changes-27__entry__2">New (Ansible Automation Platform 2.7)</th> 
+          <th class="entry" id="con-upgrade-api-specific-changes-27__entry__3">Status</th> 
+         </tr> 
+        </thead>
+        <tbody class="tbody"> 
+         <tr class="row"> 
+          <td class="entry" headers="con-upgrade-api-specific-changes-27__entry__1"><code class="ph codeph">https://controller.example.com/api/v2/*</code></td> 
+          <td class="entry" headers="con-upgrade-api-specific-changes-27__entry__2"><code class="ph codeph">https://gateway.example.com/api/controller/v2/*</code></td> 
+          <td class="entry" headers="con-upgrade-api-specific-changes-27__entry__3">Required</td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="con-upgrade-api-specific-changes-27__entry__1"><code class="ph codeph">https://hub.example.com/api/automation-hub/*</code></td> 
+          <td class="entry" headers="con-upgrade-api-specific-changes-27__entry__2"><code class="ph codeph">https://gateway.example.com/api/galaxy/*</code></td> 
+          <td class="entry" headers="con-upgrade-api-specific-changes-27__entry__3">Required</td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="con-upgrade-api-specific-changes-27__entry__1"><code class="ph codeph">https://eda.example.com/api/eda/v1/*</code></td> 
+          <td class="entry" headers="con-upgrade-api-specific-changes-27__entry__2"><code class="ph codeph">https://gateway.example.com/api/eda/v1/*</code></td> 
+          <td class="entry" headers="con-upgrade-api-specific-changes-27__entry__3">Required</td> 
+         </tr> 
+        </tbody>
+       </table> 
+       <div class="note note note_note">
+        <span class="note__title">Note:</span> 
+        <div class="note__body"> 
+         <p class="p">Attempting to access component hostnames directly (<code class="ph codeph">controller.example.com</code>, <code class="ph codeph">hub.example.com</code>, <code class="ph codeph">eda.example.com</code>) returns HTTP 401 Unauthorized in Red Hat Ansible Automation Platform 2.7.</p> 
+        </div>
+       </div> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="GUID-bc50aa1a-9717-4cde-816e-7f5bf1d78b75"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Update collection versions</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Older collection versions construct URLs and authentication flows that target component APIs directly. Only the latest collection versions route requests through platform gateway.</p> 
+       <section class="section prereq" id="GUID-bc50aa1a-9717-4cde-816e-7f5bf1d78b75__prereq_1">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul" id="GUID-bc50aa1a-9717-4cde-816e-7f5bf1d78b75__ul_1"> 
+         <li class="li">You have access to your project's <code class="ph codeph">requirements.yml</code> or execution environment definition files.</li> 
+         <li class="li">You have permissions to rebuild execution environments in your deployment.</li> 
+        </ul> 
+       </section> 
+       <section class="section context" id="GUID-bc50aa1a-9717-4cde-816e-7f5bf1d78b75__context_1">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">If your automation content still targets component endpoints or uses outdated collection versions, your playbooks and integrations will fail after the upgrade.</p> 
+        <div class="p">
+         You must complete two actions to ensure your automation content works with Ansible Automation Platform 2.7: 
+         <ul class="ul" id="GUID-bc50aa1a-9717-4cde-816e-7f5bf1d78b75__ul_2"> 
+          <li class="li">Upgrade all component collections to the latest versions for Ansible Automation Platform 2.7. The minimum required collection versions for Ansible Automation Platform 2.7 are as follows: 
+           <ul class="ul" id="GUID-bc50aa1a-9717-4cde-816e-7f5bf1d78b75__ul_4"> 
+            <li class="li"><code class="ph codeph">ansible.controller: 4.8.0</code></li> 
+            <li class="li"><code class="ph codeph">ansible.hub: 1.0.6</code></li> 
+            <li class="li"><code class="ph codeph">ansible.eda: 2.12.0</code></li> 
+            <li class="li"><code class="ph codeph">ansible.platform: 2.7.0</code></li> 
+           </ul> </li> 
+          <li class="li">Update connection values in your playbooks, inventory variables, and Configuration as Code content to use platform gateway.</li> 
+         </ul> 
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Update collection version pins in your <code class="ph codeph">requirements.yml </code>file to require the latest versions:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>
+collections: 
+  - name: ansible.controller version: "&gt;=4.8.0" 
+  - name: ansible.hub version: "&gt;=1.0.6" 
+  - name: ansible.eda version: "&gt;=2.12.0" 
+  - name: ansible.platform version: "&gt;=2.7.0"</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Rebuild your execution environments to include the updated collections.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Refresh project and collection dependencies in automation controller.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Verify the installed collection versions:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>ansible-galaxy collection list | grep -E "ansible\.(controller|hub|eda|platform)"</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Run a test playbook against your upgraded Ansible Automation Platform 2.7 environment to confirm that API calls route through platform gateway.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="GUID-a06203db-a80e-4275-94ce-d99041436e19"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Migrate playbook connection values to platform gateway</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">After upgrading to Ansible Automation Platform 2.7, all host, username, password, and token values in your playbooks must reference platform gateway. Connection values that target component hosts directly (such as <code class="ph codeph">controller.example.com</code> or <code class="ph codeph">hub.example.com</code>) cause authentication failures.</p> 
+       <section class="section prereq" id="GUID-a06203db-a80e-4275-94ce-d99041436e19__prereq_1">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul" id="GUID-a06203db-a80e-4275-94ce-d99041436e19__ul_1"> 
+         <li class="li">Ansible Automation Platform 2.7 is deployed and accessible through the platform gateway.</li> 
+         <li class="li">You have administrator access to platform gateway for creating credentials and tokens.</li> 
+         <li class="li">You have updated your collections to the latest versions for Ansible Automation Platform 2.7.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Create credentials, OAuth2 applications, and API tokens in platform gateway. In the Ansible Automation Platform UI, navigate to <span class="ph menucascade"><span class="ph uicontrol">Access</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Applications</span></span>to register OAuth2 applications, and <span class="ph menucascade"><span class="ph uicontrol">Access</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Tokens</span></span>to generate tokens.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Identify all playbooks, inventory variables, and Configuration as Code definitions that reference component-specific hosts, usernames, passwords, or tokens.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Replace component-specific connection values with platform gateway values.</span> 
+          <div class="itemgroup info">
+           The following table shows common variables and their required changes: 
+           <table class="table" id="GUID-a06203db-a80e-4275-94ce-d99041436e19__table_1">
+            <caption></caption>
+            <colgroup>
+             <col style="width:33.33333333333333%">
+             <col style="width:33.33333333333333%">
+             <col style="width:33.33333333333333%">
+            </colgroup>
+            <thead class="thead"> 
+             <tr class="row"> 
+              <th class="entry" id="GUID-a06203db-a80e-4275-94ce-d99041436e19__table_1__entry__1">Variable</th> 
+              <th class="entry" id="GUID-a06203db-a80e-4275-94ce-d99041436e19__table_1__entry__2">Before (2.6 and earlier)</th> 
+              <th class="entry" id="GUID-a06203db-a80e-4275-94ce-d99041436e19__table_1__entry__3">After (2.7)</th> 
+             </tr> 
+            </thead>
+            <tbody class="tbody"> 
+             <tr class="row"> 
+              <td class="entry" headers="GUID-a06203db-a80e-4275-94ce-d99041436e19__table_1__entry__1"><code class="ph codeph">controller_host</code></td> 
+              <td class="entry" headers="GUID-a06203db-a80e-4275-94ce-d99041436e19__table_1__entry__2"><code class="ph codeph">https://controller.example.com</code></td> 
+              <td class="entry" headers="GUID-a06203db-a80e-4275-94ce-d99041436e19__table_1__entry__3"><code class="ph codeph">https://gateway.example.com</code></td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="GUID-a06203db-a80e-4275-94ce-d99041436e19__table_1__entry__1"><code class="ph codeph">ah_host</code> / <code class="ph codeph">hub_host</code></td> 
+              <td class="entry" headers="GUID-a06203db-a80e-4275-94ce-d99041436e19__table_1__entry__2"><code class="ph codeph">https://hub.example.com</code></td> 
+              <td class="entry" headers="GUID-a06203db-a80e-4275-94ce-d99041436e19__table_1__entry__3"><code class="ph codeph">https://gateway.example.com</code></td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="GUID-a06203db-a80e-4275-94ce-d99041436e19__table_1__entry__1"><code class="ph codeph">eda_host</code></td> 
+              <td class="entry" headers="GUID-a06203db-a80e-4275-94ce-d99041436e19__table_1__entry__2"><code class="ph codeph">https://eda.example.com</code></td> 
+              <td class="entry" headers="GUID-a06203db-a80e-4275-94ce-d99041436e19__table_1__entry__3"><code class="ph codeph">https://gateway.example.com</code></td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="GUID-a06203db-a80e-4275-94ce-d99041436e19__table_1__entry__1"><code class="ph codeph">controller_username</code></td> 
+              <td class="entry" headers="GUID-a06203db-a80e-4275-94ce-d99041436e19__table_1__entry__2">Component-scoped user</td> 
+              <td class="entry" headers="GUID-a06203db-a80e-4275-94ce-d99041436e19__table_1__entry__3">Platform gateway user</td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="GUID-a06203db-a80e-4275-94ce-d99041436e19__table_1__entry__1"><code class="ph codeph">controller_password</code></td> 
+              <td class="entry" headers="GUID-a06203db-a80e-4275-94ce-d99041436e19__table_1__entry__2">Component-scoped password</td> 
+              <td class="entry" headers="GUID-a06203db-a80e-4275-94ce-d99041436e19__table_1__entry__3">Platform gateway password</td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="GUID-a06203db-a80e-4275-94ce-d99041436e19__table_1__entry__1"><code class="ph codeph">controller_oauthtoken</code></td> 
+              <td class="entry" headers="GUID-a06203db-a80e-4275-94ce-d99041436e19__table_1__entry__2">Controller-issued PAT</td> 
+              <td class="entry" headers="GUID-a06203db-a80e-4275-94ce-d99041436e19__table_1__entry__3">Platform gateway-issued token</td> 
+             </tr> 
+            </tbody>
+           </table> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Update your inventory files or environment variables to reflect the new values.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Test your updated playbooks against the upgraded environment.</span> </li>
+        </ol>
+       </section> 
+       <section class="example">
+        <h3 class="title sectiontitle">Example: Migrate a job launch playbook</h3> 
+        <p class="p">The following example shows a playbook that launches a job template. The "before" version targets automation controller directly. The "after" version targets platform gateway.</p> 
+        <div class="p">
+         <strong class="ph b">Before (targets automation controller directly)</strong> 
+         <pre class="pre codeblock"><code>
+- name: Launch a job template 
+  hosts: localhost 
+  connection: local 
+  gather_facts: false 
+
+  vars: 
+    aap_controller_host: "https://controller.example.com" 
+    aap_controller_username: "{{ lookup('env', 'AAP_CONTROLLER_USERNAME') }}"
+    aap_controller_password: "{{ lookup('env', 'AAP_CONTROLLER_PASSWORD') }}"            
+
+  tasks: 
+   - name: Launch the job 
+     ansible.controller.job_launch: 
+       job_template: "Deploy Application" 
+       controller_host: "{{ aap_controller_host }}" 
+       controller_username: "{{ aap_controller_username }}" 
+       controller_password: "{{ aap_controller_password }}"</code></pre> 
+        </div> 
+        <p class="p">This playbook fails after upgrading to Ansible Automation Platform 2.7 because <code class="ph codeph">ansible.controller </code>can no longer authenticate directly against the controller host.</p> 
+        <div class="p">
+         <strong class="ph b">After (targets platform gateway)</strong> 
+         <pre class="pre codeblock"><code>
+- name: Launch a job template 
+  hosts: localhost 
+  connection: local 
+  gather_facts: false 
+
+  vars: 
+   aap_gateway_host: "https://gateway.example.com" 
+   aap_gateway_username: "{{ lookup('env', 'AAP_GATEWAY_USERNAME') }}"
+   aap_gateway_password: "{{ lookup('env', 'AAP_GATEWAY_PASSWORD') }}" 
+
+ tasks: 
+   - name: Launch the job 
+     ansible.controller.job_launch: 
+       job_template: "Deploy Application" 
+       controller_host: "{{ aap_gateway_host }}" 
+       controller_username: "{{ aap_gateway_username }}"
+       controller_password: "{{ aap_gateway_password }}"</code></pre> 
+        </div> 
+        <p class="p">The <code class="ph codeph">controller_host</code> parameter now points to the platform gateway URL. The username and password are credentials created in platform gateway. The <code class="ph codeph">ansible.controller</code> collection (latest version) routes the API request through platform gateway.</p> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relconcepts">
+        <strong>Related concepts</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-con_upgrade_api_changes_27#con-upgrade-api-changes-27" title="Ansible Automation Platform 2.7 completes the migration of all API access to platform gateway. Direct API access to individual services that was deprecated in versions 2.5 and 2.6 has been removed in this release.">API changes in Ansible Automation Platform 2.7</a></li>
+        </ul>
+       </div>
+       <div class="linklist relref">
+        <strong>Related reference</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-ref_pre_upgrade_assessment_checklist#ref-pre-upgrade-assessment-checklist" title="Before upgrading to Red Hat Ansible Automation Platform 2.7, assess the environment to identify components and integrations that require migration to gateway-based authentication.">Pre-upgrade migration checklist</a></li>
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-ref_pre_upgrade_assessment_checklist#ref-pre-upgrade-detection-tooling" title="A CLI detection tool is available to identify direct API usage in Ansible Automation Platform 2.5 or 2.6 environments. The tool analyzes NGINX logs to detect requests that bypass platform gateway.">Pre-upgrade detection tooling</a></li>
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-ref_post_upgrade_requirements" title="After upgrading to Ansible Automation Platform 2.7, update tokens, scripts, and integrations to use platform gateway for all external authentication and API access.">Post-upgrade requirements</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

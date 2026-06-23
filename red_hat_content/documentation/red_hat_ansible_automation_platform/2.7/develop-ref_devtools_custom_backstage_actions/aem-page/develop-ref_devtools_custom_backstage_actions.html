@@ -1,0 +1,967 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="devtools-ansible-backstage-actions"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Custom Backstage actions</h1> 
+     <div class="body refbody">
+      <p class="shortdesc">The following actions enable you to manage Ansible Automation Platform resources within a software template workflow.</p> 
+      <section class="section"></section> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="devtools-create-project"> 
+      <h2 class="title topictitle2" id="ariaid-title2"> <code class="ph codeph">rhaap:create-project</code> </h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Create an Ansible Automation Platform project that links to a source control repository containing Ansible content.</p> 
+       <section class="section"> 
+        <p class="p"> <strong class="ph b">Input parameters</strong> </p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:20%">
+          <col style="width:20%">
+          <col style="width:10%">
+          <col style="width:50%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="devtools-create-project__entry__1">Parameter</th> 
+           <th class="entry" id="devtools-create-project__entry__2">Type</th> 
+           <th class="entry" id="devtools-create-project__entry__3">Required</th> 
+           <th class="entry" id="devtools-create-project__entry__4">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-project__entry__1"> <p class="p"> <code class="ph codeph">token</code> </p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__2"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__3"> <p class="p">Yes</p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__4"> <p class="p">OAuth2 token for Ansible Automation Platform authentication.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-project__entry__1"> <p class="p"> <code class="ph codeph">deleteIfExist</code> </p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__2"> <p class="p">boolean</p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__3"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__4"> <p class="p">If <code class="ph codeph">true</code>, the action deletes the project if it already exists before creating a new one.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-project__entry__1"> <p class="p"> <code class="ph codeph">values</code> </p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__2"> <p class="p">object</p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__3"> <p class="p">Yes</p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__4"> <p class="p">The project configuration object. See the "values" Object Structure table.</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"> <strong class="ph b">“values” Object Structure</strong> </p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:20%">
+          <col style="width:20%">
+          <col style="width:10%">
+          <col style="width:50%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="devtools-create-project__entry__17">Field</th> 
+           <th class="entry" id="devtools-create-project__entry__18">Type</th> 
+           <th class="entry" id="devtools-create-project__entry__19">Required</th> 
+           <th class="entry" id="devtools-create-project__entry__20">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-project__entry__17"> <p class="p"> <code class="ph codeph">projectName</code> </p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__18"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__19"> <p class="p">Yes</p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__20"> <p class="p">Name of the project.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-project__entry__17"> <p class="p"> <code class="ph codeph">projectDescription</code> </p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__18"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__19"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__20"> <p class="p">Description of the project.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-project__entry__17"> <p class="p"> <code class="ph codeph">organization</code> </p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__18"> <p class="p">object</p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__19"> <p class="p">Yes</p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__20"> <p class="p">Organization object with <code class="ph codeph">id</code> (number, required) and <code class="ph codeph">name</code> (string, optional).</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-project__entry__17"> <p class="p"> <code class="ph codeph">credentials</code> </p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__18"> <p class="p">object</p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__19"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__20"> <p class="p">Credential object with <code class="ph codeph">id</code> (number, required), <code class="ph codeph">name</code> (string, optional), and <code class="ph codeph">kind</code> (string, optional).</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-project__entry__17"> <p class="p"> <code class="ph codeph">scmUrl</code> </p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__18"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__19"> <p class="p">Yes</p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__20"> <p class="p">Source control URL (for example, GitHub/GitLab repository URL).</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-project__entry__17"> <p class="p"> <code class="ph codeph">scmBranch</code> </p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__18"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__19"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__20"> <p class="p">Source control branch, tag, or commit.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-project__entry__17"> <p class="p"> <code class="ph codeph">scmUpdateOnLaunch</code> </p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__18"> <p class="p">boolean</p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__19"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__20"> <p class="p">If <code class="ph codeph">true</code>, updates the project revision before each job run.</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"> <strong class="ph b">Output parameters</strong> </p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:20%">
+          <col style="width:20%">
+          <col style="width:60%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="devtools-create-project__entry__49">Parameter</th> 
+           <th class="entry" id="devtools-create-project__entry__50">Type</th> 
+           <th class="entry" id="devtools-create-project__entry__51">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-project__entry__49"> <p class="p"> <code class="ph codeph">project</code> </p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__50"> <p class="p">object</p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__51"> <p class="p">Created project details.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-project__entry__49"> <p class="p"> <code class="ph codeph">project.id</code> </p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__50"> <p class="p">number</p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__51"> <p class="p">Project ID in Ansible Automation Platform (AAP).</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-project__entry__49"> <p class="p"> <code class="ph codeph">project.name</code> </p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__50"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__51"> <p class="p">Project name.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-project__entry__49"> <p class="p"> <code class="ph codeph">project.description</code> </p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__50"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__51"> <p class="p">Project description.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-project__entry__49"> <p class="p"> <code class="ph codeph">project.url</code> </p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__50"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-create-project__entry__51"> <p class="p">Ansible Automation Platform URL for the project.</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"> <strong class="ph b">Example</strong> </p> 
+        <pre class="pre codeblock"><code>steps:
+  - id: create-aap-project
+    name: Create AAP Project
+    action: rhaap:create-project
+    input:
+      token: ${{ parameters.AAP_TOKEN }}
+      deleteIfExist: true
+      values:
+        projectName: ${{ parameters.projectName }}
+        organization: ${{ parameters.organization }}
+        scmUrl: https://github.com/my-org/ansible-playbooks
+        scmBranch: main
+        scmUpdateOnLaunch: true
+        credentials: GitHub Token</code></pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="devtools-create-ee"> 
+      <h2 class="title topictitle2" id="ariaid-title3"> <code class="ph codeph">rhaap:create-execution-environment</code> </h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Create an execution environment in Ansible Automation Platform that defines the container image used to run Ansible jobs.</p> 
+       <section class="section"> 
+        <p class="p"> <strong class="ph b">Input parameters</strong> </p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:20%">
+          <col style="width:20%">
+          <col style="width:10%">
+          <col style="width:50%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="devtools-create-ee__entry__1">Parameter</th> 
+           <th class="entry" id="devtools-create-ee__entry__2">Type</th> 
+           <th class="entry" id="devtools-create-ee__entry__3">Required</th> 
+           <th class="entry" id="devtools-create-ee__entry__4">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-ee__entry__1"> <p class="p"> <code class="ph codeph">token</code> </p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__2"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__3"> <p class="p">Yes</p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__4"> <p class="p">OAuth2 token for Ansible Automation Platform authentication.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-ee__entry__1"> <p class="p"> <code class="ph codeph">deleteIfExist</code> </p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__2"> <p class="p">boolean</p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__3"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__4"> <p class="p">If <code class="ph codeph">true</code>, the action deletes the execution environment if it already exists.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-ee__entry__1"> <p class="p"> <code class="ph codeph">values</code> </p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__2"> <p class="p">object</p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__3"> <p class="p">Yes</p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__4"> <p class="p">The execution environment configuration object.</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"> <strong class="ph b">“values” Object Structure</strong> </p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:20%">
+          <col style="width:20%">
+          <col style="width:10%">
+          <col style="width:50%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="devtools-create-ee__entry__17">Field</th> 
+           <th class="entry" id="devtools-create-ee__entry__18">Type</th> 
+           <th class="entry" id="devtools-create-ee__entry__19">Required</th> 
+           <th class="entry" id="devtools-create-ee__entry__20">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-ee__entry__17"> <p class="p"> <code class="ph codeph">environmentName</code> </p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__18"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__19"> <p class="p">Yes</p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__20"> <p class="p">Name of the execution environment.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-ee__entry__17"> <p class="p"> <code class="ph codeph">environmentDescription</code> </p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__18"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__19"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__20"> <p class="p">Description of the execution environment.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-ee__entry__17"> <p class="p"> <code class="ph codeph">organization</code> </p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__18"> <p class="p">object</p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__19"> <p class="p">Yes</p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__20"> <p class="p">Organization object with required <code class="ph codeph">id</code> (number) and optional <code class="ph codeph">name</code> (string).</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-ee__entry__17"> <p class="p"> <code class="ph codeph">image</code> </p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__18"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__19"> <p class="p">Yes</p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__20"> <p class="p">Full image location, including registry, image name, and tag (for example, <code class="ph codeph">quay.io/ansible/creator-ee:latest</code>).</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-ee__entry__17"> <p class="p"> <code class="ph codeph">pull</code> </p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__18"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__19"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__20"> <p class="p">Image pull policy: <code class="ph codeph">always</code>, <code class="ph codeph">missing</code>, or <code class="ph codeph">never</code>. Default is <code class="ph codeph">missing</code>.</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"> <strong class="ph b">Output parameters</strong> </p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:30%">
+          <col style="width:20%">
+          <col style="width:50%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="devtools-create-ee__entry__41">Parameter</th> 
+           <th class="entry" id="devtools-create-ee__entry__42">Type</th> 
+           <th class="entry" id="devtools-create-ee__entry__43">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-ee__entry__41"> <p class="p"> <code class="ph codeph">executionEnvironment</code> </p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__42"> <p class="p">object</p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__43"> <p class="p">Created execution environment details.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-ee__entry__41"> <p class="p"> <code class="ph codeph">executionEnvironment.id</code> </p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__42"> <p class="p">number</p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__43"> <p class="p">Execution environment ID.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-ee__entry__41"> <p class="p"> <code class="ph codeph">executionEnvironment.name</code> </p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__42"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__43"> <p class="p">Execution environment name.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-ee__entry__41"> <p class="p"> <code class="ph codeph">executionEnvironment.description</code> </p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__42"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__43"> <p class="p">Execution environment description.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-ee__entry__41"> <p class="p"> <code class="ph codeph">executionEnvironment.url</code> </p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__42"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-create-ee__entry__43"> <p class="p">Ansible Automation Platform (AAP) URL for the execution environment.</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"> <strong class="ph b">Example</strong> </p> 
+        <pre class="pre codeblock"><code>steps:
+  - id: create-ee
+    name: Create Execution Environment
+    action: rhaap:create-execution-environment
+    input:
+      token: ${{ parameters.AAP_TOKEN }}
+      deleteIfExist: false
+      values:
+        environmentName: Custom EE
+        environmentDescription: Execution environment with custom collections
+        organization: ${{ parameters.organization }}
+        image: quay.io/ansible/creator-ee:v0.16.0
+        pull: missing</code></pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title4" id="devtools-create-job-template"> 
+      <h2 class="title topictitle2" id="ariaid-title4"> <code class="ph codeph">rhaap:create-job-template</code> </h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Create a job template in Ansible Automation Platform that defines a reusable configuration for running Ansible playbooks.</p> 
+       <section class="section"> 
+        <p class="p"> <strong class="ph b">Input parameters</strong> </p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:20%">
+          <col style="width:20%">
+          <col style="width:10%">
+          <col style="width:50%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="devtools-create-job-template__entry__1">Parameter</th> 
+           <th class="entry" id="devtools-create-job-template__entry__2">Type</th> 
+           <th class="entry" id="devtools-create-job-template__entry__3">Required</th> 
+           <th class="entry" id="devtools-create-job-template__entry__4">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-job-template__entry__1"> <p class="p"> <code class="ph codeph">token</code> </p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__2"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__3"> <p class="p">Yes</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__4"> <p class="p">OAuth2 token for Ansible Automation Platform authentication.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-job-template__entry__1"> <p class="p"> <code class="ph codeph">deleteIfExist</code> </p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__2"> <p class="p">boolean</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__3"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__4"> <p class="p">If <code class="ph codeph">true</code>, the action deletes the job template if it already exists.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-job-template__entry__1"> <p class="p"> <code class="ph codeph">values</code> </p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__2"> <p class="p">object</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__3"> <p class="p">Yes</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__4"> <p class="p">The job template configuration object.</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"> <strong class="ph b">“values” Object Structure</strong> </p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:20%">
+          <col style="width:20%">
+          <col style="width:10%">
+          <col style="width:50%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="devtools-create-job-template__entry__17">Field</th> 
+           <th class="entry" id="devtools-create-job-template__entry__18">Type</th> 
+           <th class="entry" id="devtools-create-job-template__entry__19">Required</th> 
+           <th class="entry" id="devtools-create-job-template__entry__20">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-job-template__entry__17"> <p class="p"> <code class="ph codeph">templateName</code> </p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__18"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__19"> <p class="p">Yes</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__20"> <p class="p">Name of the job template.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-job-template__entry__17"> <p class="p"> <code class="ph codeph">templateDescription</code> </p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__18"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__19"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__20"> <p class="p">Description of the job template.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-job-template__entry__17"> <p class="p"> <code class="ph codeph">project</code> </p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__18"> <p class="p">object</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__19"> <p class="p">Yes</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__20"> <p class="p">Project object with required <code class="ph codeph">id</code> (number) and optional <code class="ph codeph">name</code> (string).</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-job-template__entry__17"> <p class="p"> <code class="ph codeph">organization</code> </p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__18"> <p class="p">object</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__19"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__20"> <p class="p">Organization object with <code class="ph codeph">id</code> (number, required) and <code class="ph codeph">name</code> (string, optional).</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-job-template__entry__17"> <p class="p"> <code class="ph codeph">jobInventory</code> </p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__18"> <p class="p">object</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__19"> <p class="p">Yes</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__20"> <p class="p">Inventory object with required <code class="ph codeph">id</code> (number) and optional <code class="ph codeph">name</code> (string).</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-job-template__entry__17"> <p class="p"> <code class="ph codeph">playbook</code> </p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__18"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__19"> <p class="p">Yes</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__20"> <p class="p">Path to the playbook file to execute.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-job-template__entry__17"> <p class="p"> <code class="ph codeph">templateDescription</code> </p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__18"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__19"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__20"> <p class="p">Description of the job template.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-job-template__entry__17"> <p class="p"> <code class="ph codeph">scmType</code> </p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__18"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__19"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__20"> <p class="p">Source control type (for example, <code class="ph codeph">Github</code> or <code class="ph codeph">Gitlab</code>).</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-job-template__entry__17"> <p class="p"> <code class="ph codeph">executionEnvironment</code> </p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__18"> <p class="p">object</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__19"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__20"> <p class="p">Execution environment object with required <code class="ph codeph">id</code> (number) and optional <code class="ph codeph">name</code> (string).</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-job-template__entry__17"> <p class="p"> <code class="ph codeph">extraVariables</code> </p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__18"> <p class="p">object</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__19"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__20"> <p class="p">Extra variables to pass to the playbook (key-value pairs).</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"> <strong class="ph b">Output parameters</strong> </p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:30%">
+          <col style="width:20%">
+          <col style="width:50%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="devtools-create-job-template__entry__61">Parameter</th> 
+           <th class="entry" id="devtools-create-job-template__entry__62">Type</th> 
+           <th class="entry" id="devtools-create-job-template__entry__63">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-job-template__entry__61"> <p class="p"> <code class="ph codeph">template</code> </p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__62"> <p class="p">object</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__63"> <p class="p">Created job template details.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-job-template__entry__61"> <p class="p"> <code class="ph codeph">template.id</code> </p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__62"> <p class="p">number</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__63"> <p class="p">Job template ID.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-job-template__entry__61"> <p class="p"> <code class="ph codeph">template.name</code> </p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__62"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__63"> <p class="p">Job template name.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-job-template__entry__61"> <p class="p"> <code class="ph codeph">template.description</code> </p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__62"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__63"> <p class="p">Job template description.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-create-job-template__entry__61"> <p class="p"> <code class="ph codeph">template.url</code> </p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__62"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-create-job-template__entry__63"> <p class="p">Ansible Automation Platform (AAP) URL for the job template.</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"> <strong class="ph b">Example</strong> </p> 
+        <pre class="pre codeblock"><code>steps:
+  - id: create-job-template
+    name: Create Job Template
+    action: rhaap:create-job-template
+    input:
+      token: ${{ parameters.AAP_TOKEN }}
+      deleteIfExist: true
+      values:
+        templateName: Deploy Application
+        templateDescription: Deploys the application to production
+        project: ${{ steps['create-aap-project'].output.project }}
+        organization: ${{ parameters.organization }}
+        jobInventory: ${{ parameters.jobInventory }}
+        playbook: deploy.yml
+        executionEnvironment: ${{ steps['create-ee'].output.executionEnvironment }}
+        extraVariables:
+          app_version: 1.0.0
+          environment: production</code></pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title5" id="devtools-launch-job-template"> 
+      <h2 class="title topictitle2" id="ariaid-title5"> <code class="ph codeph">rhaap:launch-job-template</code> </h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Launch an existing job template in Ansible Automation Platform.</p> 
+       <section class="section"> 
+        <p class="p"> <strong class="ph b">Input parameters</strong> </p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:20%">
+          <col style="width:20%">
+          <col style="width:10%">
+          <col style="width:50%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="devtools-launch-job-template__entry__1">Parameter</th> 
+           <th class="entry" id="devtools-launch-job-template__entry__2">Type</th> 
+           <th class="entry" id="devtools-launch-job-template__entry__3">Required</th> 
+           <th class="entry" id="devtools-launch-job-template__entry__4">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-launch-job-template__entry__1"> <p class="p"> <code class="ph codeph">token</code> </p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__2"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__3"> <p class="p">Yes</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__4"> <p class="p">OAuth2 token for Ansible Automation Platform authentication.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-launch-job-template__entry__1"> <p class="p"> <code class="ph codeph">values</code> </p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__2"> <p class="p">object</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__3"> <p class="p">Yes</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__4"> <p class="p">The job launch configuration object.</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"> <strong class="ph b">“values” Object Structure</strong> </p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:30%">
+          <col style="width:20%">
+          <col style="width:10%">
+          <col style="width:40%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="devtools-launch-job-template__entry__13">Field</th> 
+           <th class="entry" id="devtools-launch-job-template__entry__14">Type</th> 
+           <th class="entry" id="devtools-launch-job-template__entry__15">Required</th> 
+           <th class="entry" id="devtools-launch-job-template__entry__16">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-launch-job-template__entry__13"> <p class="p"> <code class="ph codeph">template</code> </p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__14"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__15"> <p class="p">Yes</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__16"> <p class="p">Job template name to launch.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-launch-job-template__entry__13"> <p class="p"> <code class="ph codeph">inventory</code> </p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__14"> <p class="p">object</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__15"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__16"> <p class="p">Override inventory with <code class="ph codeph">id</code> (number) and <code class="ph codeph">name</code> (string).</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-launch-job-template__entry__13"> <p class="p"> <code class="ph codeph">credentials</code> </p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__14"> <p class="p">array</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__15"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__16"> <p class="p">Array of credential objects to use.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-launch-job-template__entry__13"> <p class="p"> <code class="ph codeph">extraVariables</code> </p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__14"> <p class="p">object</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__15"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__16"> <p class="p">Extra variables to pass to the job (key-value pairs).</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-launch-job-template__entry__13"> <p class="p"> <code class="ph codeph">limit</code> </p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__14"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__15"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__16"> <p class="p">Host pattern to constrain which hosts the job runs against.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-launch-job-template__entry__13"> <p class="p"> <code class="ph codeph">jobType</code> </p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__14"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__15"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__16"> <p class="p">Job type: <code class="ph codeph">run</code> or <code class="ph codeph">check</code>.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-launch-job-template__entry__13"> <p class="p"> <code class="ph codeph">executionEnvironment</code> </p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__14"> <p class="p">object</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__15"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__16"> <p class="p">Override execution environment with <code class="ph codeph">id</code> (number) and <code class="ph codeph">name</code> (string).</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-launch-job-template__entry__13"> <p class="p"> <code class="ph codeph">verbosity</code> </p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__14"> <p class="p">object</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__15"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__16"> <p class="p">Verbosity level object with <code class="ph codeph">id</code> and <code class="ph codeph">name</code>.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-launch-job-template__entry__13"> <p class="p"> <code class="ph codeph">forks</code> </p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__14"> <p class="p">number</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__15"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__16"> <p class="p">Number of parallel processes (default: <code class="ph codeph">5</code>).</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-launch-job-template__entry__13"> <p class="p"> <code class="ph codeph">jobSliceCount</code> </p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__14"> <p class="p">number</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__15"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__16"> <p class="p">Divide the job into N slices.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-launch-job-template__entry__13"> <p class="p"> <code class="ph codeph">timeout</code> </p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__14"> <p class="p">number</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__15"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__16"> <p class="p">Job timeout in seconds (<code class="ph codeph">0</code> = no timeout).</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-launch-job-template__entry__13"> <p class="p"> <code class="ph codeph">diffMode</code> </p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__14"> <p class="p">boolean</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__15"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__16"> <p class="p">Enable diff mode to show changes.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-launch-job-template__entry__13"> <p class="p"> <code class="ph codeph">jobTags</code> </p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__14"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__15"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__16"> <p class="p">Comma-separated tags to run only specific tasks.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-launch-job-template__entry__13"> <p class="p"> <code class="ph codeph">skipTags</code> </p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__14"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__15"> <p class="p">No</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__16"> <p class="p">Comma-separated tags to skip specific tasks.</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"> <strong class="ph b">Output parameters</strong> </p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:30%">
+          <col style="width:20%">
+          <col style="width:50%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="devtools-launch-job-template__entry__73">Parameter</th> 
+           <th class="entry" id="devtools-launch-job-template__entry__74">Type</th> 
+           <th class="entry" id="devtools-launch-job-template__entry__75">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-launch-job-template__entry__73"> <p class="p"> <code class="ph codeph">data</code> </p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__74"> <p class="p">object</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__75"> <p class="p">Job execution details.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-launch-job-template__entry__73"> <p class="p"> <code class="ph codeph">data.id</code> </p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__74"> <p class="p">number</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__75"> <p class="p">Job ID.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-launch-job-template__entry__73"> <p class="p"> <code class="ph codeph">data.status</code> </p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__74"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__75"> <p class="p">Job status.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-launch-job-template__entry__73"> <p class="p"> <code class="ph codeph">data.url</code> </p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__74"> <p class="p">string</p> </td> 
+           <td class="entry" headers="devtools-launch-job-template__entry__75"> <p class="p">Ansible Automation Platform (AAP) URL for the job.</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"> <strong class="ph b">Example</strong> </p> 
+        <pre class="pre codeblock"><code>steps:
+  - id: launch-job
+    name: Launch Job Template
+    action: rhaap:launch-job-template
+    input:
+      token: ${{ parameters.AAP_TOKEN }}
+      values:
+        template: Deploy Application
+        inventory: ${{ parameters.jobInventory }}
+        credentials: ${{ parameters.credentials }}
+        extraVariables:
+          app_version: v1.0.1
+          deploy_env: production
+        jobType: run
+        verbosity: Normal
+        diffMode: true
+        timeout: 3600</code></pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title6" id="devtools-all-backstage-actions-example"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Example with all backstage actions present</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The following example displays how you can use multiple actions together.</p> 
+       <section class="section"> 
+        <pre class="pre codeblock"><code>apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: ansible-complete-setup
+  title: Complete Ansible Setup
+  description: Creates an Ansible project, execution environment, job template, and launches it
+spec:
+  owner: platform-team
+  type: service
+
+  parameters:
+    - title: Project Information
+      required:
+        - projectName
+        - repoUrl
+      properties:
+        projectName:
+          title: Project Name
+          type: string
+          description: Name of the Ansible project
+        repoUrl:
+          title: Repository URL
+          type: string
+          description: Git repository URL containing Ansible content
+
+    - title: AAP Configuration
+      required:
+        - organization
+        - jobInventory
+        - credentials
+      properties:
+        organization:
+          title: Organization
+          type: string
+          description: AAP Organization name
+          default: 1-org
+          ui:field: hidden  # To hide this field in the UI
+        jobInventory:
+          title: Inventory name
+          type: string
+          description: AAP Inventory name
+          resource: inventories
+          ui:field: AAPResourcePicker
+          default: my-inventory
+        credentials:
+          title: Credentials
+          description: Select SCM credential for Private repositories
+          resource: credentials
+          ui:field: AAPResourcePicker
+          default: my-machine-credential
+  steps:
+    # Step 1: Create AAP Project
+    - id: create-project
+      name: Create AAP Project
+      action: rhaap:create-project
+      input:
+        token: ${{ parameters.AAP_TOKEN }}
+        deleteIfExist: true
+        values:
+          projectName: ${{ parameters.projectName }}
+          organization: ${{ parameters.organization }}
+          scmUrl: ${{ parameters.repoUrl }}
+          scmBranch: main
+          scmUpdateOnLaunch: true
+
+    # Step 2: Create Execution Environment
+    - id: create-ee
+      name: Create Execution Environment
+      action: rhaap:create-execution-environment
+      input:
+        token: ${{ parameters.AAP_TOKEN }}
+        values:
+          environmentName: ${{ parameters.projectName }}-ee
+          organization: ${{ parameters.organization }}
+          image: quay.io/ansible/creator-ee:latest
+          pull: missing
+
+    # Step 3: Create Job Template
+    - id: create-template
+      name: Create Job Template
+      action: rhaap:create-job-template
+      input:
+        token: ${{ parameters.AAP_TOKEN }}
+        values:
+          templateName: ${{ parameters.projectName }}-deploy
+          templateDescription: Deployment job template
+          project: ${{ steps['create-project'].output.project }}
+          organization: ${{ parameters.organization }}
+          jobInventory: ${{ parameters.jobInventory }}
+          playbook: site.yml
+          executionEnvironment: ${{ steps['create-ee'].output.executionEnvironment }}
+
+    # Step 4: Launch the Job
+    - id: launch-job
+      name: Launch Job
+      action: rhaap:launch-job-template
+      input:
+        token: ${{ parameters.AAP_TOKEN }}
+        values:
+          template: ${{ parameters.projectName }}-deploy
+          inventory: ${{ parameters.jobInventory }}
+          credentials: ${{ parameters.credentials }}
+          jobType: run
+          extraVariables:
+            created_by: backstage
+            timestamp: ${{ '' | now }}
+
+  output:
+    links:
+      - title: AAP Project
+        url: ${{ steps['create-project'].output.project.url }}
+      - title: Job Template
+        url: ${{ steps['create-template'].output.template.url }}
+      - title: Job Execution
+        url: ${{ steps['launch-job'].output.data.url }}</code></pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title7" id="devtools-clean-up"> 
+      <h2 class="title topictitle2" id="ariaid-title7">rhaap:clean-up</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Remove resources created during a software template execution from Ansible Automation Platform. Use this action as a cleanup step to delete projects, execution environments, or job templates.</p> 
+       <section class="section">
+        <h3 class="title sectiontitle">Input parameters</h3> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col>
+          <col>
+          <col>
+          <col>
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="devtools-clean-up__entry__1">Parameter</th> 
+           <th class="entry" id="devtools-clean-up__entry__2">Type</th> 
+           <th class="entry" id="devtools-clean-up__entry__3">Required</th> 
+           <th class="entry" id="devtools-clean-up__entry__4">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-clean-up__entry__1"><code class="ph codeph">token</code></td> 
+           <td class="entry" headers="devtools-clean-up__entry__2">string</td> 
+           <td class="entry" headers="devtools-clean-up__entry__3">Yes</td> 
+           <td class="entry" headers="devtools-clean-up__entry__4">OAuth2 token for Ansible Automation Platform authentication.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-clean-up__entry__1"><code class="ph codeph">values</code></td> 
+           <td class="entry" headers="devtools-clean-up__entry__2">object</td> 
+           <td class="entry" headers="devtools-clean-up__entry__3">Yes</td> 
+           <td class="entry" headers="devtools-clean-up__entry__4">Object specifying which resources to remove.</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section">
+        <h3 class="title sectiontitle">values object structure</h3> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col>
+          <col>
+          <col>
+          <col>
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="devtools-clean-up__entry__13">Field</th> 
+           <th class="entry" id="devtools-clean-up__entry__14">Type</th> 
+           <th class="entry" id="devtools-clean-up__entry__15">Required</th> 
+           <th class="entry" id="devtools-clean-up__entry__16">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-clean-up__entry__13"><code class="ph codeph">project</code></td> 
+           <td class="entry" headers="devtools-clean-up__entry__14">object</td> 
+           <td class="entry" headers="devtools-clean-up__entry__15">No</td> 
+           <td class="entry" headers="devtools-clean-up__entry__16">Project to delete. Include <code class="ph codeph">projectName</code> and <code class="ph codeph">organization</code>.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-clean-up__entry__13"><code class="ph codeph">executionEnvironment</code></td> 
+           <td class="entry" headers="devtools-clean-up__entry__14">object</td> 
+           <td class="entry" headers="devtools-clean-up__entry__15">No</td> 
+           <td class="entry" headers="devtools-clean-up__entry__16">Execution environment to delete. Include <code class="ph codeph">environmentName</code> and <code class="ph codeph">organization</code>.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-clean-up__entry__13"><code class="ph codeph">template</code></td> 
+           <td class="entry" headers="devtools-clean-up__entry__14">object</td> 
+           <td class="entry" headers="devtools-clean-up__entry__15">No</td> 
+           <td class="entry" headers="devtools-clean-up__entry__16">Job template to delete. Include <code class="ph codeph">templateName</code> and <code class="ph codeph">organization</code>.</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section">
+        <h3 class="title sectiontitle">Output parameters</h3> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col>
+          <col>
+          <col>
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="devtools-clean-up__entry__29">Parameter</th> 
+           <th class="entry" id="devtools-clean-up__entry__30">Type</th> 
+           <th class="entry" id="devtools-clean-up__entry__31">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-clean-up__entry__29"><code class="ph codeph">cleanUp</code></td> 
+           <td class="entry" headers="devtools-clean-up__entry__30">string</td> 
+           <td class="entry" headers="devtools-clean-up__entry__31">Confirmation message indicating successful cleanup.</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section">
+        <h3 class="title sectiontitle">Example</h3> 
+        <pre class="pre codeblock language-yaml"><code>steps:
+  - id: cleanup
+    name: Clean Up Resources
+    action: rhaap:clean-up
+    input:
+      token: ${{ parameters.AAP_TOKEN }}
+      values:
+        project:
+          projectName: ${{ steps['create-project'].output.data.name }}
+          organization: ${{ parameters.organization | resourceFilter('name') }}
+        template:
+          templateName: ${{ steps['create-template'].output.data.name }}
+          organization: ${{ parameters.organization | resourceFilter('name') }}</code></pre> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

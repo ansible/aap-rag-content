@@ -1,0 +1,510 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-settings-navigator"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Automation content navigator command reference</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Configure automation content navigator settings to customize the tool for your specific development environment needs. This helps you optimize your workflow for efficiency.</p>
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="ref-navigator-overview-settings"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Create an automation content navigator settings file</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Alter default automation content navigator settings using the command line, environment variables, or a dedicated settings file. Using a settings file helps ensure consistent configuration across sessions.</p> 
+       <p class="p">Automation content navigator checks for a settings file in the following order and uses the first match:</p> 
+       <ul class="ul"> 
+        <li class="li"><code class="ph codeph">ANSIBLE_NAVIGATOR_CONFIG</code> - The settings file path environment variable if set.</li> 
+        <li class="li"><code class="ph codeph">./ansible-navigator.&lt;ext&gt;</code> - The settings file within the current project directory, with no dot in the file name.</li> 
+        <li class="li"><code class="ph codeph">\~/.ansible-navigator.&lt;ext&gt;</code> - Your home directory, with a dot in the file name.</li> 
+       </ul> 
+       <p class="p">Consider the following when you create an automation content navigator settings file:</p> 
+       <ul class="ul"> 
+        <li class="li">The settings file can be in <code class="ph codeph">JSON</code> or <code class="ph codeph">YAML</code> format.</li> 
+        <li class="li">For settings in <code class="ph codeph">JSON</code> format, the extension must be <code class="ph codeph">.json</code>.</li> 
+        <li class="li">For settings in <code class="ph codeph">YAML</code> format, the extension must be <code class="ph codeph">.yml</code> or <code class="ph codeph">.yaml</code>.</li> 
+        <li class="li">The project and home directories can only contain one settings file each.</li> 
+        <li class="li">If automation content navigator finds more than one settings file in either directory, it results in an error.</li> 
+       </ul> 
+       <p class="p">You can copy the example settings file below into one of those paths to start your <code class="ph codeph">ansible-navigator</code> settings file.</p> 
+       <pre class="pre codeblock language-yaml"><code>    ---
+    ansible-navigator:
+    #   ansible:
+    #     config: /tmp/ansible.cfg
+    #     cmdline: "--forks 15"
+    #     inventories:
+    #     - /tmp/test_inventory.yml
+    #     playbook: /tmp/test_playbook.yml
+    #   ansible-runner:
+    #     artifact-dir: /tmp/test1
+    #     rotate-artifacts-count: 10
+    #     timeout: 300
+    #   app: run
+    #   collection-doc-cache-path: /tmp/cache.db
+    #   color:
+    #     enable: False
+    #     osc4: False
+    #   editor:
+    #     command: vim_from_setting
+    #     console: False
+    #   documentation:
+    #     plugin:
+    #       name: shell
+    #       type: become
+    #   execution-environment:
+    #     container-engine: podman
+    #     enabled: False
+    #     environment-variables:
+    #       pass:
+    #         - ONE
+    #         - TWO
+    #         - THREE
+    #       set:
+    #         KEY1: VALUE1
+    #         KEY2: VALUE2
+    #         KEY3: VALUE3
+    #     image: test_image:latest
+    #     pull-policy: never
+    #     volume-mounts:
+    #     - src: "/test1"
+    #       dest: "/test1"
+    #       label: "Z"
+    #   help-config: True
+    #   help-doc: True
+    #   help-inventory: True
+    #   help-playbook: False
+    #   inventory-columns:
+    #     - ansible_network_os
+    #     - ansible_network_cli_ssh_type
+    #     - ansible_connection
+      logging:
+    #     append: False
+        level: critical
+    #     file: /tmp/log.txt
+    #   mode: stdout
+    #   playbook-artifact:
+    #     enable: True
+    #     replay: /tmp/test_artifact.json
+    #     save-as: /tmp/test_artifact.json</code></pre> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="ref-navigator-general-settings"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Automation content navigator general settings</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The following table describes each general parameter and setting options for automation content navigator.</p> 
+       <section class="section"> 
+        <table class="table">
+         <caption>
+          <span class="table--title-label">Table 1. </span><span class="title">Automation content navigator general parameters settings</span>
+         </caption>
+         <colgroup>
+          <col style="width:33.3333%">
+          <col style="width:33.3333%">
+          <col style="width:33.3334%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-navigator-general-settings__entry__1">Parameter</th> 
+           <th class="entry" id="ref-navigator-general-settings__entry__2">Description</th> 
+           <th class="entry" id="ref-navigator-general-settings__entry__3">Setting options</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__1"> <p class="p">ansible-runner-artifact-dir</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__2"> <p class="p">The directory path to store artifacts generated by ansible-runner.</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__3"> <p class="p"><strong class="ph b">Default:</strong> No default value set</p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--rad</code> or <code class="ph codeph">--ansible-runner-artifact-dir</code></p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_ANSIBLE_RUNNER_ARTIFACT_DIR</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  ansible-runner:
+    artifact-dir:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__1"> <p class="p">ansible-runner-rotate-artifacts-count</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__2"> <p class="p">Keep ansible-runner artifact directories, for last n runs. If set to 0, artifact directories are not deleted.</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__3"> <p class="p"><strong class="ph b">Default:</strong> No default value set</p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--rac</code> or <code class="ph codeph">--ansible-runner-rotate-artifacts-count</code></p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_ANSIBLE_RUNNER_ROTATE_ARTIFACTS_COUNT</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  ansible-runner:
+    rotate-artifacts-count:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__1"> <p class="p">ansible-runner-timeout</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__2"> <p class="p">The timeout value after which <code class="ph codeph">ansible-runner</code> force stops the execution.</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__3"> <p class="p"><strong class="ph b">Default:</strong> No default value set</p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--rt</code> or <code class="ph codeph">--ansible-runner-timeout</code></p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_ANSIBLE_RUNNER_TIMEOUT</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  ansible-runner:
+    timeout:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__1"> <p class="p">app</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__2"> <p class="p">Entry point for automation content navigator.</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__3"> <p class="p"><strong class="ph b">Choices</strong>: <code class="ph codeph">collections</code>, <code class="ph codeph">config</code>, <code class="ph codeph">doc</code>, <code class="ph codeph">images</code>, <code class="ph codeph">inventory</code>, <code class="ph codeph">replay</code>, <code class="ph codeph">run</code> or <code class="ph codeph">welcome</code></p> <p class="p"><strong class="ph b">Default</strong>: <code class="ph codeph">welcome</code></p> <p class="p"><strong class="ph b">CLI example</strong>: <code class="ph codeph">ansible-navigator collections</code></p> <p class="p"><strong class="ph b">ENV</strong>: <code class="ph codeph">ANSIBLE_NAVIGATOR_APP</code></p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  app:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__1"> <p class="p">cmdline</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__2"> <p class="p">Extra parameters passed to the corresponding command.</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__3"> <p class="p"><strong class="ph b">Default</strong>: No default value</p> <p class="p"><strong class="ph b">CLI</strong>: positional</p> <p class="p"><strong class="ph b">ENV</strong>: <code class="ph codeph">ANSIBLE_NAVIGATOR_CMDLINE</code></p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  ansible:
+    cmdline:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__1"> <p class="p">collection-doc-cache-path</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__2"> <p class="p">The path to the collection doc cache.</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__3"> <p class="p"><strong class="ph b">Default</strong>: <code class="ph codeph">$HOME/.cache/ansible-navigator/collection_doc_cache.db</code></p> <p class="p"><strong class="ph b">CLI</strong>: <code class="ph codeph">--cdcp</code> or <code class="ph codeph">--collection-doc-cache-path</code></p> <p class="p"><strong class="ph b">ENV</strong>: <code class="ph codeph">ANSIBLE_NAVIGATOR_COLLECTION_DOC_CACHE_PATH</code></p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  collection-doc-cache-path:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__1"> <p class="p">container-engine</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__2"> <p class="p">Specify the container engine (<code class="ph codeph">auto</code>=<code class="ph codeph">podman</code> then <code class="ph codeph">docker</code>).</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__3"> <p class="p"><strong class="ph b">Choices:</strong><code class="ph codeph">auto</code>, <code class="ph codeph">podman</code> or <code class="ph codeph">docker</code></p> <p class="p"> <strong class="ph b">Default:</strong> <code class="ph codeph">auto</code> </p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--ce</code> or <code class="ph codeph">--container-engine</code></p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_CONTAINER_ENGINE</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  execution-environment:
+    container-engine:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__1"> <p class="p">display-color</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__2"> <p class="p">Enable the use of color in the display.</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__3"> <p class="p"><strong class="ph b">Choices:</strong><code class="ph codeph">True</code> or <code class="ph codeph">False</code></p> <p class="p"> <strong class="ph b">Default:</strong> <code class="ph codeph">True</code> </p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--dc</code> or <code class="ph codeph">--display-color</code></p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">NO_COLOR</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  color:
+    enable:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__1"> <p class="p">editor-command</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__2"> <p class="p">Specify the editor used by automation content navigator</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__3"> <p class="p">Default:* vi +{line_number} {filename}</p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--ecmd</code> or <code class="ph codeph">--editor-command</code></p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_EDITOR_COMMAND</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  editor:
+    command:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__1"> <p class="p">editor-console</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__2"> <p class="p">Specify if the editor is console based.</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__3"> <p class="p"><strong class="ph b">Choices:</strong><code class="ph codeph">True</code> or <code class="ph codeph">False</code></p> <p class="p"> <strong class="ph b">Default:</strong> <code class="ph codeph">True</code> </p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--econ</code> or <code class="ph codeph">--editor-console</code></p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_EDITOR_CONSOLE</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  editor:
+    console:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__1"> <p class="p">execution-environment</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__2"> <p class="p">Enable or disable the use of an automation execution environment.</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__3"> <p class="p"><strong class="ph b">Choices:</strong><code class="ph codeph">True</code> or <code class="ph codeph">False</code></p> <p class="p"> <strong class="ph b">Default:</strong> <code class="ph codeph">True</code> </p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--ee</code> or <code class="ph codeph">--execution-environment</code></p> <p class="p"><strong class="ph b">ENV:</strong>* <code class="ph codeph">ANSIBLE_NAVIGATOR_EXECUTION_ENVIRONMENT</code></p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  execution-environment:
+    enabled:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__1"> <p class="p">execution-environment-image</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__2"> <p class="p">Specify the name of the automation execution environment image.</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__3"> <p class="p"> <strong class="ph b">Default:</strong> <code class="ph codeph">quay.io/ansible/ansible-runner:devel</code> </p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--eei</code> or <code class="ph codeph">--execution-environment-image</code></p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_EXECUTION_ENVIRONMENT_IMAGE</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  execution-environment:
+    image:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__1"> <p class="p">execution-environment-volume-mounts</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__2"> <p class="p">Specify volume to be bind mounted within an automation execution environment (<code class="ph codeph">--eev /home/user/test:/home/user/test:Z</code>)</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__3"> <p class="p"><strong class="ph b">Default:</strong> No default value set</p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--eev</code> or <code class="ph codeph">--execution-environment-volume-mounts</code></p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_EXECUTION_ENVIRONMENT_VOLUME_MOUNTS</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  execution-environment:
+    volume-mounts:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__1"> <p class="p">log-append</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__2"> <p class="p">Specify if log messages should be appended to an existing log file, otherwise a new log file is created per session.</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__3"> <p class="p"><strong class="ph b">Choices:</strong><code class="ph codeph">True</code> or <code class="ph codeph">False</code></p> <p class="p"><strong class="ph b">Default:</strong> True</p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--la</code> or <code class="ph codeph">--log-append</code></p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_LOG_APPEND</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  logging:
+    append:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__1"> <p class="p">log-file</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__2"> <p class="p">Specify the full path for the automation content navigator log file.</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__3"> <p class="p"> <strong class="ph b">Default:</strong> <code class="ph codeph">$PWD/ansible-navigator.log</code> </p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--lf</code> or <code class="ph codeph">--log-file</code></p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_LOG_FILE</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  logging:
+    file:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__1"> <p class="p">log-level</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__2"> <p class="p">Specify the automation content navigator log level.</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__3"> <p class="p"><strong class="ph b">Choices:</strong><code class="ph codeph">debug</code>, <code class="ph codeph">info</code>, <code class="ph codeph">warning</code>, <code class="ph codeph">error</code> or <code class="ph codeph">critical</code></p> <p class="p"> <strong class="ph b">Default:</strong> <code class="ph codeph">warning</code> </p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--ll</code> or <code class="ph codeph">--log-level</code></p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_LOG_LEVEL</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  logging:
+    level:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__1"> <p class="p">mode</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__2"> <p class="p">Specify the user-interface mode.</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__3"> <p class="p"><strong class="ph b">Choices:</strong><code class="ph codeph">stdout</code> or <code class="ph codeph">interactive</code></p> <p class="p"> <strong class="ph b">Default:</strong> <code class="ph codeph">interactive</code> </p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">-m</code> or <code class="ph codeph">--mode</code></p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_MODE</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  mode:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__1"> <p class="p">osc4</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__2"> <p class="p">Enable or disable terminal color changing support with OSC 4.</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__3"> <p class="p"><strong class="ph b">Choices:</strong><code class="ph codeph">True</code> or <code class="ph codeph">False</code></p> <p class="p"> <strong class="ph b">Default:</strong> <code class="ph codeph">True</code> </p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--osc4</code> or <code class="ph codeph">--osc4</code></p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_OSC4</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  color:
+    osc4:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__1"> <p class="p">pass-environment-variable</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__2"> <p class="p">Specify an exiting environment variable to be passed through to and set within the automation execution environment (<code class="ph codeph">--penv MY_VAR</code>)</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__3"> <p class="p"><strong class="ph b">Default:</strong> No default value set</p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--penv</code> or <code class="ph codeph">--pass-environment-variable</code></p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_PASS_ENVIRONMENT_VARIABLES</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  execution-environment:
+    environment-variables:
+      pass:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__1"> <p class="p">pull-policy</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__2"> <p class="p">Specify the image pull policy.</p> <p class="p"><code class="ph codeph">always</code> - Always pull the image</p> <p class="p"><code class="ph codeph">missing</code> - Pull if not locally available</p> <p class="p"><code class="ph codeph">never</code> - Never pull the image</p> <p class="p"><code class="ph codeph">tag</code> - If the image tag is <code class="ph codeph">latest</code> always pull the image, otherwise pull if not locally available</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__3"> <p class="p"><strong class="ph b">Choices:</strong><code class="ph codeph">always</code>, <code class="ph codeph">missing</code>, <code class="ph codeph">never</code>, or <code class="ph codeph">tag</code></p> <p class="p"> <strong class="ph b">Default:</strong> <code class="ph codeph">tag</code> </p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--pp</code> or <code class="ph codeph">--pull-policy</code></p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_PULL_POLICY</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  execution-environment:
+    pull-policy:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__1"> <p class="p">set-environment-variable</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__2"> <p class="p">Specify an environment variable and a value to be set within the automation execution environment <code class="ph codeph">(--senv MY_VAR=42</code>)</p> </td> 
+           <td class="entry" headers="ref-navigator-general-settings__entry__3"> <p class="p"><strong class="ph b">Default:</strong> No default value set</p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--senv</code> or <code class="ph codeph">--set-environment-variable</code></p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_SET_ENVIRONMENT_VARIABLES</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  execution-environment:
+    environment-variables:
+      set:</code></pre> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title4" id="ref-navigator-config-settings"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Automation content navigator <code class="ph codeph">config</code> subcommand settings</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The following table describes each parameter and setting options for the automation content navigator <code class="ph codeph">config</code> subcommand.</p> 
+       <section class="section"> 
+        <table class="table">
+         <caption>
+          <span class="table--title-label">Table 2. </span><span class="title">Automation content navigator <code class="ph codeph">config</code> subcommand parameters settings</span>
+         </caption>
+         <colgroup>
+          <col style="width:33.3333%">
+          <col style="width:33.3333%">
+          <col style="width:33.3334%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-navigator-config-settings__entry__1">Parameter</th> 
+           <th class="entry" id="ref-navigator-config-settings__entry__2">Description</th> 
+           <th class="entry" id="ref-navigator-config-settings__entry__3">Setting options</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-config-settings__entry__1"> <p class="p">config</p> </td> 
+           <td class="entry" headers="ref-navigator-config-settings__entry__2"> <p class="p">Specify the path to the Ansible configuration file.</p> </td> 
+           <td class="entry" headers="ref-navigator-config-settings__entry__3"> <p class="p"><strong class="ph b">Default:</strong> No default value set</p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">-c</code> or <code class="ph codeph">--config</code></p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_CONFIG</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  ansible:
+    config:
+      path:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-config-settings__entry__1"> <p class="p">help-config</p> </td> 
+           <td class="entry" headers="ref-navigator-config-settings__entry__2"> <p class="p">Help options for the <code class="ph codeph">ansible-config</code> command in <code class="ph codeph">stdout</code> mode.</p> </td> 
+           <td class="entry" headers="ref-navigator-config-settings__entry__3"> <p class="p"><strong class="ph b">Choices:</strong>* <code class="ph codeph">True</code> or <code class="ph codeph">False</code></p> <p class="p"> <strong class="ph b">Default:</strong> <code class="ph codeph">False</code> </p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--hc</code> or <code class="ph codeph">--help-config</code></p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_HELP_CONFIG</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  help-config:</code></pre> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title5" id="ref-navigator-doc-settings"> 
+      <h2 class="title topictitle2" id="ariaid-title5">automation content navigator <code class="ph codeph">doc</code> subcommand settings</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The following table describes each parameter and setting options for the automation content navigator <code class="ph codeph">doc</code> subcommand.</p> 
+       <section class="section"> 
+        <table class="table">
+         <caption>
+          <span class="table--title-label">Table 3. </span><span class="title">automation content navigator <code class="ph codeph">doc</code> subcommand parameters settings</span>
+         </caption>
+         <colgroup>
+          <col style="width:33.3333%">
+          <col style="width:33.3333%">
+          <col style="width:33.3334%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-navigator-doc-settings__entry__1">Parameter</th> 
+           <th class="entry" id="ref-navigator-doc-settings__entry__2">Description</th> 
+           <th class="entry" id="ref-navigator-doc-settings__entry__3">Setting options</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-doc-settings__entry__1"> <p class="p">help-doc</p> </td> 
+           <td class="entry" headers="ref-navigator-doc-settings__entry__2"> <p class="p">Help options for the <code class="ph codeph">ansible-doc</code> command in <code class="ph codeph">stdout</code> mode.</p> </td> 
+           <td class="entry" headers="ref-navigator-doc-settings__entry__3"> <p class="p"><strong class="ph b">Choices:</strong><code class="ph codeph">True</code> or <code class="ph codeph">False</code></p> <p class="p"> <strong class="ph b">Default:</strong> <code class="ph codeph">False</code> </p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--hd</code> or <code class="ph codeph">--help-doc</code></p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_HELP_DOC</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  help-doc:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-doc-settings__entry__1"> <p class="p">plugin-name</p> </td> 
+           <td class="entry" headers="ref-navigator-doc-settings__entry__2"> <p class="p">Specify the plugin name.</p> </td> 
+           <td class="entry" headers="ref-navigator-doc-settings__entry__3"> <p class="p"><strong class="ph b">Default:</strong> No default value set</p> <p class="p"><strong class="ph b">CLI:</strong> positional</p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_PLUGIN_NAME</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  documentation:
+    plugin:
+      name:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-doc-settings__entry__1"> <p class="p">plugin-type</p> </td> 
+           <td class="entry" headers="ref-navigator-doc-settings__entry__2"> <p class="p">Specify the plugin type.</p> </td> 
+           <td class="entry" headers="ref-navigator-doc-settings__entry__3"> <p class="p"><strong class="ph b">Choices:</strong><code class="ph codeph">become</code>, <code class="ph codeph">cache</code>, <code class="ph codeph">callback</code>, <code class="ph codeph">cliconf</code>, <code class="ph codeph">connection</code>, <code class="ph codeph">httpapi</code>, <code class="ph codeph">inventory</code>, <code class="ph codeph">lookup</code>, <code class="ph codeph">module</code>, <code class="ph codeph">netconf</code>, <code class="ph codeph">shell</code>, <code class="ph codeph">strategy</code>, or <code class="ph codeph">vars</code></p> <p class="p"> <strong class="ph b">Default:</strong> <code class="ph codeph">module</code> </p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">-t</code> or <code class="ph codeph">----type</code></p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_PLUGIN_TYPE</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  documentation:
+    plugin:
+      type:</code></pre> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title6" id="ref-navigator-inventory-settings"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Automation content navigator <code class="ph codeph">inventory</code> subcommand settings</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The following table describes each parameter and setting options for the automation content navigator <code class="ph codeph">inventory</code> subcommand.</p> 
+       <section class="section"> 
+        <table class="table">
+         <caption>
+          <span class="table--title-label">Table 4. </span><span class="title">Automation content navigator <code class="ph codeph">inventory</code> subcommand parameters settings</span>
+         </caption>
+         <colgroup>
+          <col style="width:33.3333%">
+          <col style="width:33.3333%">
+          <col style="width:33.3334%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-navigator-inventory-settings__entry__1">Parameter</th> 
+           <th class="entry" id="ref-navigator-inventory-settings__entry__2">Description</th> 
+           <th class="entry" id="ref-navigator-inventory-settings__entry__3">Setting options</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-inventory-settings__entry__1"> <p class="p">help-inventory</p> </td> 
+           <td class="entry" headers="ref-navigator-inventory-settings__entry__2"> <p class="p">Help options for the <code class="ph codeph">ansible-inventory</code> command in <code class="ph codeph">stdout</code> mode.</p> </td> 
+           <td class="entry" headers="ref-navigator-inventory-settings__entry__3"> <p class="p"><strong class="ph b">Choices:</strong><code class="ph codeph">True</code> or <code class="ph codeph">False</code></p> <p class="p"> <strong class="ph b">Default:</strong> <code class="ph codeph">False</code> </p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--hi</code> or <code class="ph codeph">--help-inventory</code></p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_INVENTORY_DOC</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  help-inventory:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-inventory-settings__entry__1"> <p class="p">inventory</p> </td> 
+           <td class="entry" headers="ref-navigator-inventory-settings__entry__2"> <p class="p">Specify an inventory file path or comma separated host list.</p> </td> 
+           <td class="entry" headers="ref-navigator-inventory-settings__entry__3"> <p class="p"><strong class="ph b">Default:</strong> no default value set</p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--i</code> or <code class="ph codeph">--inventory</code></p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_INVENTORIES</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  inventories:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-inventory-settings__entry__1"> <p class="p">inventory-column</p> </td> 
+           <td class="entry" headers="ref-navigator-inventory-settings__entry__2"> <p class="p">Specify a host attribute to show in the inventory view.</p> </td> 
+           <td class="entry" headers="ref-navigator-inventory-settings__entry__3"> <p class="p"><strong class="ph b">Default:</strong> No default value set</p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--ic</code> or <code class="ph codeph">--inventory-column</code></p> <p class="p"><strong class="ph b">ENV:</strong>* <code class="ph codeph">ANSIBLE_NAVIGATOR_INVENTORY_COLUMNS</code><strong class="ph b">Settings file:</strong></p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  inventory-columns:</code></pre> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title7" id="ref-navigator-replay-settings"> 
+      <h2 class="title topictitle2" id="ariaid-title7">Automation content navigator <code class="ph codeph">replay</code> subcommand settings</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The following table describes each parameter and setting options for the automation content navigator <code class="ph codeph">replay</code> subcommand.</p> 
+       <section class="section"> 
+        <table class="table">
+         <caption>
+          <span class="table--title-label">Table 5. </span><span class="title">Automation content navigator <code class="ph codeph">replay</code> subcommand parameters settings</span>
+         </caption>
+         <colgroup>
+          <col style="width:33.3333%">
+          <col style="width:33.3333%">
+          <col style="width:33.3334%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-navigator-replay-settings__entry__1">Parameter</th> 
+           <th class="entry" id="ref-navigator-replay-settings__entry__2">Description</th> 
+           <th class="entry" id="ref-navigator-replay-settings__entry__3">Setting options</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-replay-settings__entry__1"> <p class="p">playbook-artifact-replay</p> </td> 
+           <td class="entry" headers="ref-navigator-replay-settings__entry__2"> <p class="p">Specify the path for the playbook artifact to replay.</p> </td> 
+           <td class="entry" headers="ref-navigator-replay-settings__entry__3"> <p class="p"><strong class="ph b">Default:</strong> No default value set</p> <p class="p"><strong class="ph b">CLI:</strong> positional</p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_PLAYBOOK_ARTIFACT_REPLAY</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  playbook-artifact:
+    replay:</code></pre> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title8" id="ref-navigator-run-settings"> 
+      <h2 class="title topictitle2" id="ariaid-title8">Automation content navigator <code class="ph codeph">run</code> subcommand settings</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The following table describes each parameter and setting options for the automation content navigator <code class="ph codeph">run</code> subcommand.</p> 
+       <section class="section"> 
+        <table class="table">
+         <caption>
+          <span class="table--title-label">Table 6. </span><span class="title">Automation content navigator <code class="ph codeph">run</code> subcommand parameters settings</span>
+         </caption>
+         <colgroup>
+          <col style="width:33.3333%">
+          <col style="width:33.3333%">
+          <col style="width:33.3334%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-navigator-run-settings__entry__1">Parameter</th> 
+           <th class="entry" id="ref-navigator-run-settings__entry__2">Description</th> 
+           <th class="entry" id="ref-navigator-run-settings__entry__3">Setting options</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-run-settings__entry__1"> <p class="p">playbook-artifact-replay</p> </td> 
+           <td class="entry" headers="ref-navigator-run-settings__entry__2"> <p class="p">Specify the path for the playbook artifact to replay.</p> </td> 
+           <td class="entry" headers="ref-navigator-run-settings__entry__3"> <p class="p"><strong class="ph b">Default:</strong> No default value set</p> <p class="p"><strong class="ph b">CLI:</strong> positional</p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_PLAYBOOK_ARTIFACT_REPLAY</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  playbook-artifact:
+    replay:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-run-settings__entry__1"> <p class="p">help-playbook</p> </td> 
+           <td class="entry" headers="ref-navigator-run-settings__entry__2"> <p class="p">Help options for the <code class="ph codeph">ansible-playbook</code> command in <code class="ph codeph">stdout</code> mode.</p> </td> 
+           <td class="entry" headers="ref-navigator-run-settings__entry__3"> <p class="p"><strong class="ph b">Choices:</strong><code class="ph codeph">True</code> or <code class="ph codeph">False</code></p> <p class="p"> <strong class="ph b">Default:</strong> <code class="ph codeph">False</code> </p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--hp</code> or <code class="ph codeph">--help-playbook</code></p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_HELP_PLAYBOOK</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  help-playbook:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-run-settings__entry__1"> <p class="p">inventory</p> </td> 
+           <td class="entry" headers="ref-navigator-run-settings__entry__2"> <p class="p">Specify an inventory file path or comma separated host list.</p> </td> 
+           <td class="entry" headers="ref-navigator-run-settings__entry__3"> <p class="p"><strong class="ph b">Default:</strong> no default value set</p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--i</code> or <code class="ph codeph">--inventory</code></p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_INVENTORIES</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  inventories:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-run-settings__entry__1"> <p class="p">inventory-column</p> </td> 
+           <td class="entry" headers="ref-navigator-run-settings__entry__2"> <p class="p">Specify a host attribute to show in the inventory view.</p> </td> 
+           <td class="entry" headers="ref-navigator-run-settings__entry__3"> <p class="p"><strong class="ph b">Default:</strong> No default value set</p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--ic</code> or <code class="ph codeph">--inventory-column</code></p> <p class="p"><strong class="ph b">ENV:</strong>* <code class="ph codeph">ANSIBLE_NAVIGATOR_INVENTORY_COLUMNS</code><strong class="ph b">Settings file:</strong></p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  inventory-columns:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-run-settings__entry__1"> <p class="p">playbook</p> </td> 
+           <td class="entry" headers="ref-navigator-run-settings__entry__2"> <p class="p">Specify the playbook name.</p> </td> 
+           <td class="entry" headers="ref-navigator-run-settings__entry__3"> <p class="p"><strong class="ph b">Default:</strong> No default value set</p> <p class="p"><strong class="ph b">CLI:</strong> positional</p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_PLAYBOOK</code> </p> <p class="p"><strong class="ph b">Settings file:</strong>*</p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  ansible:
+    playbook:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-run-settings__entry__1"> <p class="p">playbook-artifact-enable</p> </td> 
+           <td class="entry" headers="ref-navigator-run-settings__entry__2"> <p class="p">Enable or disable the creation of artifacts for completed playbooks. Note: not compatible with <code class="ph codeph">--mode stdout</code> when playbooks require user input.</p> </td> 
+           <td class="entry" headers="ref-navigator-run-settings__entry__3"> <p class="p"><strong class="ph b">Choices:</strong><code class="ph codeph">True</code> or <code class="ph codeph">False</code></p> <p class="p"> <strong class="ph b">Default:</strong> <code class="ph codeph">True</code> </p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--pae</code> or <code class="ph codeph">--playbook-artifact-enable</code><strong class="ph b">ENV:</strong><code class="ph codeph">ANSIBLE_NAVIGATOR_PLAYBOOK_ARTIFACT_ENABLE</code><strong class="ph b">Settings file:</strong></p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  playbook-artifact:
+    enable:</code></pre> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-navigator-run-settings__entry__1"> <p class="p">playbook-artifact-save-as</p> </td> 
+           <td class="entry" headers="ref-navigator-run-settings__entry__2"> <p class="p">Specify the name for artifacts created from completed playbooks.</p> </td> 
+           <td class="entry" headers="ref-navigator-run-settings__entry__3"> <p class="p"> <strong class="ph b">Default:</strong> <code class="ph codeph">{playbook_dir}/{playbook_name}-artifact-{ts_utc}.json</code> </p> <p class="p"><strong class="ph b">CLI:</strong><code class="ph codeph">--pas</code> or <code class="ph codeph">--playbook-artifact-save-as</code></p> <p class="p"> <strong class="ph b">ENV:</strong> <code class="ph codeph">ANSIBLE_NAVIGATOR_PLAYBOOK_ARTIFACT_SAVE_AS</code> </p> <p class="p"> <strong class="ph b">Settings file:</strong> </p> <pre class="pre codeblock language-yaml"><code>ansible-navigator:
+  playbook-artifact:
+    save-as:</code></pre> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

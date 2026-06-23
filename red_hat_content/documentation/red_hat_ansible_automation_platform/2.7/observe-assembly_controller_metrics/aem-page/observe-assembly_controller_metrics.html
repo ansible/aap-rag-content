@@ -1,0 +1,76 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-controller-metrics"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Send metrics to system monitoring software</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">Automation controller provides metrics that can be used to monitor the health and performance of the system.</p> 
+      <p class="p">A metrics endpoint, <code class="ph codeph">/api/controller/v2/metrics/</code> is available in the API that produces instantaneous metrics about automation controller, which can be consumed by system monitoring software such as the open source project Prometheus.</p> 
+      <p class="p">The types of data shown at the <code class="ph codeph">metrics/</code> endpoint are <code class="ph codeph">Content-type: text/plain</code> and <code class="ph codeph">application/json</code>.</p> 
+      <p class="p">This endpoint has useful information, such as counts of how many active user sessions there are, or how many jobs are actively running on each automation controller node.</p> 
+      <p class="p">You can configure Prometheus to scrape these metrics from automation controller by hitting the automation controller metrics endpoint and storing this data in a time-series database.</p> 
+      <p class="p">Clients can later use Prometheus in conjunction with other software such as Grafana or Metricbeat to visualize that data and set up alerts.</p> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-controller-set-up-prometheus"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Set up Prometheus</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Learn how to use Prometheus to collect and visualize metrics from automation controller.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">You must install Prometheus on a virtual machine or container.</p> 
+        <p class="p">For more information, see the <a class="xref" href="https://prometheus.io/docs/introduction/first_steps/" target="_blank" rel="external noopener">First steps with Prometheus</a> documentation.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the Prometheus configuration file (typically <code class="ph codeph">prometheus.yml</code>), specify a <code class="ph codeph">&lt;token_value&gt;</code>, a valid username and password for an automation controller user that you have created, and a <code class="ph codeph">&lt;controller_host&gt;</code>. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note"> <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">Alternatively, you can provide an OAuth2 token (which can be generated at <code class="ph codeph">/api/v2/users/N/personal_tokens/</code>). By default, the configuration assumes a user with username=<code class="ph codeph">admin</code> and password=<code class="ph codeph">password</code>.</p> 
+            </div> 
+           </div> 
+           <p class="p">Using an OAuth2 Token, created at the <code class="ph codeph">/api/v2/tokens</code> endpoint to authenticate Prometheus with automation controller, the following example provides a valid scrape configuration if the URL for your automation controller’s metrics endpoint is <code class="ph codeph">/https://controller_host:443/metrics</code>.</p> 
+           <pre class="pre">scrape_configs
+
+  - job_name: 'controller'
+    tls_config:
+        insecure_skip_verify: True
+    metrics_path: /api/v2/metrics
+    scrape_interval: 5s
+    scheme: https
+    bearer_token: &lt;token_value&gt;
+    # basic_auth:
+    #   username: admin
+    #   password: password
+    static_configs:
+        - targets:
+            - &lt;controller_host&gt;</pre> 
+           <p class="p">For help configuring other aspects of Prometheus, such as alerts and service discovery configurations, see the <a class="xref" href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/" target="_blank" rel="external noopener">Prometheus configuration</a> documentation.</p> 
+           <p class="p">If Prometheus is already running, you must restart it to apply the configuration changes by making a <strong class="ph b">POST</strong> to the reload endpoint, or by killing the Prometheus process or service.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Use a browser to navigate to your graph in the Prometheus UI at <code class="ph codeph">/http://&lt;your_prometheus&gt;:9090/graph</code> and test out some queries. For example, you can query the current number of active automation controller user sessions by executing: <code class="ph codeph">awx_sessions_total{type="user"}</code>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p"> <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/metrics-prometheus-ui-query-example.png" alt="Prometheus queries"> </p> 
+          </div> </li> 
+        </ol> 
+       </section> 
+       <section class="section postreq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">What to do next</h3> 
+        </div> 
+        <p class="p">Refer to the metrics endpoint in the automation controller API for your instance (<code class="ph codeph">api/v2/metrics</code>) for more ways to query.</p> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

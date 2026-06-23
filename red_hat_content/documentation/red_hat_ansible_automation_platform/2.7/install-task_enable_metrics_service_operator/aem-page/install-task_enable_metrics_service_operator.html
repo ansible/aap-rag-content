@@ -1,0 +1,160 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="task-enable-metrics-service-operator">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Enable metrics service in operator deployments</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Enable metrics service using the operator to collect anonymized usage data without manual database configuration or inventory file editing.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">Ansible Automation Platform operator installed on OpenShift cluster</li> 
+       <li class="li">AnsibleAutomationPlatform custom resource (CR) created</li> 
+       <li class="li">Cluster administrator or equivalent permissions to edit custom resources</li> 
+      </ul> 
+     </section> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">Use this procedure when:</p> 
+      <ul class="ul"> 
+       <li class="li">Deploying Ansible Automation Platform on OpenShift using the operator</li> 
+       <li class="li">You need to enable anonymized usage data collection for Red Hat analytics</li> 
+       <li class="li">You want the operator to automatically provision database access and configuration</li> 
+      </ul> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">The operator handles all configuration automatically, including database access, OAuth integration with the gateway, and traffic routing through Envoy. No manual database passwords, inventory variables, or network configuration is required.</p> 
+       </div>
+      </div> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Edit the AnsibleAutomationPlatform custom resource</span> 
+        <div class="itemgroup info"> 
+         <p class="p">Add or modify the <code class="ph codeph">metrics</code> section in the CR specification:</p> 
+         <pre class="pre codeblock"><code>apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  controller:
+    disabled: false
+  eda:
+    disabled: false
+  hub:
+    disabled: false
+  metrics:
+    disabled: false</code></pre> 
+         <p class="p"><strong class="ph b">Example using <span class="keyword cmdname">oc edit</span>:</strong></p> 
+         <pre class="pre codeblock"><code>oc edit ansibleautomationplatform myaap -n ansible-automation-platform</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Apply the custom resource</span> 
+        <div class="itemgroup info"> 
+         <p class="p">If you edited the CR in a file:</p> 
+         <pre class="pre codeblock"><code>oc apply -f aap.yml</code></pre> 
+         <p class="p"><strong class="ph b">Result:</strong> The AAP gateway operator reconciles the change and creates the metrics service components.</p> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Verify that the MetricsService custom resource was created</span> 
+        <div class="itemgroup info"> 
+         <p class="p">The gateway operator automatically creates a MetricsService CR named <code class="ph codeph">&lt;aap-name&gt;-automationmetricsservice</code> in the same namespace:</p> 
+         <pre class="pre codeblock"><code>oc get metricsservice -n &lt;namespace&gt;</code></pre> 
+         <p class="p"><strong class="ph b">Example output:</strong></p> 
+         <pre class="pre codeblock"><code>NAME                                   AGE
+myaap-automationmetricsservice         2m</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Verify that metrics service pods are running</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>oc get pods -l app.kubernetes.io/component=automationmetricsservice -n &lt;namespace&gt;</code></pre> 
+         <p class="p"><strong class="ph b">Example output:</strong></p> 
+         <pre class="pre codeblock"><code>NAME                                        READY   STATUS    RESTARTS   AGE
+myaap-metrics-api-6f8b9c5d7f-xk9pj          1/1     Running   0          2m
+myaap-metrics-tasks-7d4c8b6f5d-j2k5h        1/1     Running   0          2m
+myaap-metrics-scheduler-5c9d7f8b6d-m3n7k    1/1     Running   0          2m</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Verify the health endpoint</span> 
+        <div class="itemgroup info"> 
+         <p class="p">Port-forward to the metrics service and check the health endpoint:</p> 
+         <pre class="pre codeblock"><code>oc port-forward svc/&lt;aap-name&gt;-metrics-api 8080:80 -n &lt;namespace&gt;</code></pre> 
+         <p class="p">In another terminal:</p> 
+         <pre class="pre codeblock"><code>curl http://localhost:8080/health/</code></pre> 
+         <p class="p"><strong class="ph b">Expected response when healthy:</strong></p> 
+         <pre class="pre codeblock"><code>{
+  "status": "good",
+  "checks": {
+    "database": "ok",
+    "segment_send": {"status": "ok", "last_success_at": "&lt;timestamp&gt;"}
+  }
+}</code></pre> 
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <p class="p">Metrics service is enabled and collecting anonymized usage data from your OpenShift deployment. The operator automatically configured:</p> 
+      <ul class="ul"> 
+       <li class="li">Database access to automation controller (read-only)</li> 
+       <li class="li">Dedicated metrics service database</li> 
+       <li class="li">OAuth integration with the platform gateway</li> 
+       <li class="li">Scheduled data collection tasks (hourly and daily)</li> 
+       <li class="li">Secure transmission to Red Hat Data Ingress via Segment</li> 
+      </ul> 
+     </section> 
+     <section class="example">
+      <h2 class="title sectiontitle">Disable metrics service</h2> 
+      <p class="p">To disable metrics service in operator deployments, set <code class="ph codeph">metrics.disabled: true</code> in the AnsibleAutomationPlatform CR and re-apply:</p> 
+      <pre class="pre codeblock"><code>spec:
+  metrics:
+    disabled: true</code></pre> 
+      <p class="p">Apply the change:</p> 
+      <pre class="pre codeblock"><code>oc apply -f aap.yml</code></pre> 
+      <p class="p">The gateway operator stops reconciling the metrics service on its next cycle. To fully remove the MetricsService CR:</p> 
+      <pre class="pre codeblock"><code>oc delete metricsservice &lt;aap-name&gt;-automationmetricsservice -n &lt;namespace&gt;</code></pre> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">Because ownerReferences are removed from the MetricsService CR in Ansible Automation Plateform 2.7, it is not automatically deleted when disabled. You must manually delete it if you want to fully remove metrics service.</p> 
+       </div>
+      </div> 
+     </section> 
+     <section class="section postreq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">What to do next</h2>
+      </div> 
+      <p class="p"><strong class="ph b">Verify data collection is running</strong></p> 
+      <p class="p">After the service has been running for at least 24 hours, check pod logs to confirm data transmission:</p> 
+      <pre class="pre codeblock"><code>oc logs -l app.kubernetes.io/component=automationmetricsservice-tasks -n &lt;namespace&gt; | grep "Successfully sent metrics"</code></pre> 
+      <p class="p">Look for log entries like:</p> 
+      <pre class="pre codeblock"><code>Successfully sent metrics to Segment.com (Size: &lt;size&gt; bytes, Chunks: &lt;chunks&gt;)</code></pre> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relconcepts">
+      <strong>Related concepts</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_understand_metrics_service_architecture" title="Learn the architectural components and deployment topology of metrics service to make informed infrastructure decisions and ensure successful integration with Ansible Automation Platform.">Understand metrics service architecture</a></li>
+      </ul>
+     </div>
+     <div class="linklist reltasks">
+      <strong>Related tasks</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_install_metrics_service_with_containerized_installer" title="Enable and configure metrics service during containerized installation to automatically collect anonymized usage data and transmit it to Red Hat.">Install metrics service with containerized installer</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

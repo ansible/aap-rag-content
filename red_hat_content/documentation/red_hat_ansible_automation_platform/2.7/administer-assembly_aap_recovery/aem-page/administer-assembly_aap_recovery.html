@@ -1,0 +1,266 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-aap-recovery"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Restore your Ansible Automation Platform deplopyment</h1> 
+     <p class="shortdesc">If you lose information on your system or experience issues with an upgrade, you can use the backup resources of your deployment instances. Use the following procedures to recover your Ansible Automation Platform deployment files.</p> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="aap-platform-gateway-restore"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Restore Ansible Automation Platform</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc"><strong class="ph b">Ansible Automation Platform</strong> manages any enabled components (such as, automation controller, automation hub, and Event-Driven Ansible), when you recover <strong class="ph b">Ansible Automation Platform</strong> you also restore these components.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You must be authenticated with an OpenShift cluster.</li> 
+         <li class="li">You have installed the Ansible Automation Platform Operator on the cluster.</li> 
+         <li class="li">The <strong class="ph b">AnsibleAutomationPlatformBackups</strong> deployment is available in your cluster.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">To restore Ansible Automation Platform Operator, create a single <strong class="ph b">AnsibleAutomationPlatformRestore</strong> resource. This resource creates and manages the restore objects for each platform component:</p> 
+        <ul class="ul"> 
+         <li class="li">AutomationControllerRestore</li> 
+         <li class="li">AutomationHubRestore</li> 
+         <li class="li">EDARestore</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">Log in to Red Hat OpenShift Container Platform.</span> </li>
+         <li class="li step"> <span class="ph cmd">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Installed Operators</span></span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select your Ansible Automation Platform Operator deployment.</span> </li>
+         <li class="li step"> <span class="ph cmd">Go to your <strong class="ph b">All Instances</strong> tab, and click <span class="ph uicontrol button">Create New</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select <strong class="ph b">Ansible Automation Platform Restore</strong> from the list.</span> </li>
+         <li class="li step"> <span class="ph cmd">For <strong class="ph b">Name</strong> enter the name for the recovery deployment.</span> </li>
+         <li class="li step"> <span class="ph cmd">For <strong class="ph b">New Ansible Automation Platform Name</strong> enter the new name for your Ansible Automation Platform instance.</span> </li>
+         <li class="li step"> <span class="ph cmd"><strong class="ph b">Backup Source</strong> defaults to <strong class="ph b">CR</strong>.</span> </li>
+         <li class="li step"> <span class="ph cmd">For <strong class="ph b">Backup name</strong> enter the name you chose when creating the backup.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Create</span>.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Your backup restores under the <strong class="ph b">AnsibleAutomationPlatformRestores</strong> tab.</p> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">The recovery is not complete until all the resources are successfully restored. Depending on the size of your database this can take some time.</p> 
+         </div>
+        </div> 
+        <p class="p">To verify that your recovery was successful you can:</p> 
+        <ol class="ol"> 
+         <li class="li">Go to <span class="ph menucascade"><span class="ph uicontrol">Workloads</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Pods</span></span>.</li> 
+         <li class="li">Confirm that all pods are in a <strong class="ph b">Running</strong> or <strong class="ph b">Completed</strong> state.</li> 
+        </ol> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relconcepts">
+        <strong>Related concepts</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator" title="As a system administrator, you can use Ansible Automation Platform Operator to deploy new Ansible Automation Platform instances in your OpenShift environment.">Installing on OpenShift Container Platform</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="aap-platform-pvc-restore"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Restore from a persistent volume claim (PVC)</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">A persistent volume claim (PVC) is a storage volume that stores data for automation hub and automation controller applications.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have an existing PVC containing a backup.</li> 
+         <li class="li">You have installed the Ansible Automation Platform Operator on Red Hat OpenShift Container Platform.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">These PVCs are independent of the applications and persist even if an application is deleted. You can restore data from a PVC as an alternative to recovering from an <strong class="ph b">Ansible Automation Platform</strong> backup.</p> 
+        <p class="p">For more information see the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-configure_your_ansible_automation_platform_deployment#proc-find-delete-PVCs" title="A persistent volume claim (PVC) is a storage volume used to store data that automation hub and automation controller applications use.">Finding and deleting PVCs</a> section of the <em class="ph i">Installing on OpenShift Container Platform</em> guide.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Red Hat OpenShift Container Platform.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Installed Operators</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select your Ansible Automation Platform Operator deployment.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Go to your <strong class="ph b">All Instances</strong> tab, and click <span class="ph uicontrol button">Create New</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select <strong class="ph b">Ansible Automation Platform Restore</strong> from the list.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">For <strong class="ph b">Name</strong> enter the name for the recovery deployment.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">For <strong class="ph b">New Ansible Automation Platform Name</strong> enter the new name for your Ansible Automation Platform instance.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">For <strong class="ph b">Backup Source</strong> select <strong class="ph b">PVC</strong>. </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd"><strong class="ph b">Backup PVC:</strong> Enter the name of your PVC.</span> </li> 
+           <li class="li substep"> <span class="ph cmd"><strong class="ph b">Backup Directory:</strong> Enter the path to your backup directory on your PVC.</span> </li> 
+          </ol> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">For <strong class="ph b">Backup name</strong> enter the name you chose when creating the backup.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Under <strong class="ph b">YAML view</strong> paste in the following example: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatformRestore
+metadata:
+  name: aap
+spec:
+  deployment_name: aap
+  backup_source: PVC
+  backup_pvc: aap-backup-claim
+  backup_dir: '/backups/aap-openshift-backup-2025-06-23-18:28:29'
+
+  controller:
+    backup_source: PVC
+    backup_pvc: aap-controller-backup-claim
+    backup_dir: '/backups/tower-openshift-backup-2025-06-23-182910'
+
+  hub:
+    backup_source: PVC
+    backup_pvc: aap-hub-backup-claim
+    backup_dir: '/backups/openshift-backup-2025-06-23-182853'
+    storage_type: file
+
+  eda:
+    backup_source: PVC
+    backup_pvc: aap-eda-backup-claim
+    backup_dir: '/backups/eda-openshift-backup-2025-06-23-18:29:11'</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create</span>.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Your backup restores under the <strong class="ph b">AnsibleAutomationPlatformRestores</strong> tab.</p> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">The recovery is not complete until all the resources are successfully restored. Depending on the size of your database this can take some time.</p> 
+         </div>
+        </div> 
+        <ol class="ol"> 
+         <li class="li">Go to <span class="ph menucascade"><span class="ph uicontrol">Workloads</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Pods</span></span>.</li> 
+         <li class="li">Confirm that all pods are in a <strong class="ph b">Running</strong> or <strong class="ph b">Completed</strong> state.</li> 
+        </ol> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relconcepts">
+        <strong>Related concepts</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator" title="As a system administrator, you can use Ansible Automation Platform Operator to deploy new Ansible Automation Platform instances in your OpenShift environment.">Installing on OpenShift Container Platform</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="aap-platform-ext-DB-restore"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Restore from an external database</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can restore an external database on Red Hat OpenShift Container Platform using the Operator. Use the following procedure to restore from an external database.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have an external database.</li> 
+         <li class="li">You have installed the Ansible Automation Platform Operator on OpenShift Container Platform.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <div class="note important note_important">
+         <span class="note__title">Important:</span> 
+         <div class="note__body"> 
+          <p class="p">Restoring from an external database force drops the database, which overrides your existing external database.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Red Hat OpenShift Container Platform.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Installed Operators</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select your Ansible Automation Platform Operator deployment.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Go to your <strong class="ph b">All Instances</strong> tab, and click <span class="ph uicontrol button">Create New</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select <strong class="ph b">Ansible Automation Platform Restore</strong> from the list.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">For <strong class="ph b">Name</strong> enter the name for the recovery deployment.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">For <strong class="ph b">New Ansible Automation Platform Name</strong> enter the new name for your Ansible Automation Platform instance. </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">If restoring to the same name Ansible Automation Platform then you must add <code class="ph codeph">force_drop_db: true</code> to drop the database on restore.</li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd"><strong class="ph b">Backup Source</strong> defaults to <strong class="ph b">CR</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">For <strong class="ph b">Backup name</strong> enter the name you chose when creating the backup. Under <strong class="ph b">YAML view</strong> paste in the following example: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatformRestore
+metadata:
+  name: aaprestore
+spec:
+  deployment_name: aap
+  backup_name: aapbackup
+  controller:
+    force_drop_db: true</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create</span>.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Your backup restores under the <strong class="ph b">AnsibleAutomationPlatformRestores</strong> tab.</p> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">The recovery is not complete until all the resources are successfully restored. Depending on the size of your database this can take some time.</p> 
+         </div>
+        </div> 
+        <p class="p">To verify that your recovery was successful you can:</p> 
+        <ol class="ol"> 
+         <li class="li">Go to <span class="ph menucascade"><span class="ph uicontrol">Workloads</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Pods</span></span>.</li> 
+         <li class="li">Confirm that all pods are in a <strong class="ph b">Running</strong> or <strong class="ph b">Completed</strong> state.</li> 
+        </ol> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relconcepts">
+        <strong>Related concepts</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_planning#operator-install-planning" title="Red Hat Ansible Automation Platform is supported on both Red Hat Enterprise Linux and Red Hat OpenShift.">Plan your installation of Ansible Automation Platform on Red Hat OpenShift Container Platform</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

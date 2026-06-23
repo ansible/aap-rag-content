@@ -1,0 +1,42 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="auto-generated-templates-overview">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Understanding auto-generated templates</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Ansible automation portal automatically generates templates from Ansible Automation Platform Job Templates. Each Ansible Automation Platform Job Template with the appropriate configuration becomes a template that users can execute from Ansible automation portal.</p> 
+     <div class="note note note_note">
+      <span class="note__title">Note:</span> 
+      <div class="note__body"> 
+       <p class="p">Templates in Ansible automation portal use Backstage Software Templates as the underlying technology. For details on supported usage, see the Ansible automation portal support policy.</p> 
+      </div>
+     </div> 
+     <p class="p">Auto-generated templates include:</p> 
+     <ul class="ul"> 
+      <li class="li">Form fields generated from Ansible Automation Platform Job Template Surveys and "Prompt on Launch" options.</li> 
+      <li class="li">Metadata (name, description, labels) mapped from Ansible Automation Platform Job Template properties.</li> 
+      <li class="li">A single step that launches the Ansible Automation Platform Job Template using the <code class="ph codeph">rhaap:launch-job-template</code> action.</li> 
+      <li class="li">Output that displays the job execution results to the user.</li> 
+     </ul> 
+     <p class="p">Users only see and execute templates for Ansible Automation Platform Job Templates they have Job Template Execute permission in Ansible Automation Platform.</p> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_auto_generated_what_users_see">What users see</a></strong><br>Auto-generated templates appear in the template catalog alongside custom templates. Users browse or search the catalog and select a template to run.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_auto_generated_template_example">Auto-generated template example</a></strong><br>The following example shows a template that Ansible automation portal auto-generates from an existing Ansible Automation Platform Job Template.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_how_templates_are_generated">How templates are generated</a></strong><br>When synchronization runs, Ansible automation portal reads Ansible Automation Platform Job Template configurations and generates corresponding templates.</li>
+     </ul>
+     <div class="linklist relinfo">
+      <strong>Related information</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="https://backstage.io/docs/features/software-templates/writing-templates" target="_blank" rel="external noopener">Backstage Software Templates</a></li>
+       <li class="linklist"><a class="link" href="https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-support-policy" target="_blank" rel="external noopener">Ansible automation portal support policy</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

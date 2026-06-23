@@ -1,0 +1,95 @@
+# Configure custom TLS certificates
+## Provide custom TLS certificates for each service
+
+Use this method if your organization manages TLS certificates outside of Ansible Automation Platform and requires manual provisioning.
+
+### Procedure
+
+-
+-
+
+
+```yaml
+# Platform gateway
+gateway_tls_cert=<path_to_tls_certificate>
+gateway_tls_key=<path_to_tls_key>
+gateway_pg_tls_cert=<path_to_tls_certificate>
+gateway_pg_tls_key=<path_to_tls_key>
+gateway_redis_tls_cert=<path_to_tls_certificate>
+gateway_redis_tls_key=<path_to_tls_key>
+
+# Automation controller
+controller_tls_cert=<path_to_tls_certificate>
+controller_tls_key=<path_to_tls_key>
+controller_pg_tls_cert=<path_to_tls_certificate>
+controller_pg_tls_key=<path_to_tls_key>
+
+# Automation hub
+hub_tls_cert=<path_to_tls_certificate>
+hub_tls_key=<path_to_tls_key>
+hub_pg_tls_cert=<path_to_tls_certificate>
+hub_pg_tls_key=<path_to_tls_key>
+
+# Event-Driven Ansible
+eda_tls_cert=<path_to_tls_certificate>
+eda_tls_key=<path_to_tls_key>
+eda_pg_tls_cert=<path_to_tls_certificate>
+eda_pg_tls_key=<path_to_tls_key>
+
+# Metrics service
+automationmetrics_tls_cert=<path_to_tls_certificate>
+automationmetrics_tls_key=<path_to_tls_key>
+automationmetrics_pg_tls_cert=<path_to_tls_certificate>
+automationmetrics_pg_tls_key=<path_to_tls_key>
+
+# PostgreSQL
+postgresql_tls_cert=<path_to_tls_certificate>
+postgresql_tls_key=<path_to_tls_key>
+
+# Receptor
+receptor_tls_cert=<path_to_tls_certificate>
+receptor_tls_key=<path_to_tls_key>
+
+# Redis
+redis_tls_cert=<path_to_tls_certificate>
+redis_tls_key=<path_to_tls_key>
+```
+
+-  If all components share the same fully qualified domain name (FQDN), use the same certificate and key for each service:
+
+
+```yaml
+gateway_tls_cert=/home/user/certs/myhost.example.com.crt
+gateway_tls_key=/home/user/certs/myhost.example.com.key
+controller_tls_cert=/home/user/certs/myhost.example.com.crt
+controller_tls_key=/home/user/certs/myhost.example.com.key
+hub_tls_cert=/home/user/certs/myhost.example.com.crt
+hub_tls_key=/home/user/certs/myhost.example.com.key
+eda_tls_cert=/home/user/certs/myhost.example.com.crt
+eda_tls_key=/home/user/certs/myhost.example.com.key
+automationmetrics_tls_cert=/home/user/certs/myhost.example.com.crt
+automationmetrics_tls_key=/home/user/certs/myhost.example.com.key
+postgresql_tls_cert=/home/user/certs/myhost.example.com.crt
+postgresql_tls_key=/home/user/certs/myhost.example.com.key
+```
+
+-  If components are deployed on separate hosts with different FQDNs, provide a unique certificate for each service:
+
+
+```yaml
+gateway_tls_cert=/home/user/certs/gateway.example.com.crt
+gateway_tls_key=/home/user/certs/gateway.example.com.key
+controller_tls_cert=/home/user/certs/controller.example.com.crt
+controller_tls_key=/home/user/certs/controller.example.com.key
+hub_tls_cert=/home/user/certs/hub.example.com.crt
+hub_tls_key=/home/user/certs/hub.example.com.key
+eda_tls_cert=/home/user/certs/eda.example.com.crt
+eda_tls_key=/home/user/certs/eda.example.com.key
+automationmetrics_tls_cert=/home/user/certs/metrics.example.com.crt
+automationmetrics_tls_key=/home/user/certs/metrics.example.com.key
+postgresql_tls_cert=/home/user/certs/postgresql.example.com.crt
+postgresql_tls_key=/home/user/certs/postgresql.example.com.key
+```
+Note:
+For enterprise topology with dedicated metrics service host, use metrics.example.com FQDN.
+

@@ -1,0 +1,102 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="controller-troubleshooting"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Troubleshoot automation controller</h1> 
+     <p class="shortdesc">Useful troubleshooting information for automation controller.</p> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="controller-unable-to-login-http"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Unable to login to automation controller through HTTP</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Access to automation controller is intentionally restricted through a secure protocol (HTTPS).</p> 
+       <section class="section"> 
+        <p class="p">In cases where your configuration is set up to run an automation controller node behind a load balancer or proxy as "HTTP only", and you only want to access it without SSL/TLS (for troubleshooting, for example), you must add the following settings in the <code class="ph codeph">custom.py</code> file located at <code class="ph codeph">/etc/tower/conf.d</code> of your automation controller instance:</p> 
+        <pre class="pre">SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False</pre> 
+        <p class="p">If you change these settings to <code class="ph codeph">false</code> it enables automation controller to manage cookies and login sessions when using the HTTP protocol. You must do this on every node of a cluster installation.</p> 
+        <p class="p">To apply the changes, run:</p> 
+        <pre class="pre">automation-controller-service restart</pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="controller-unable-to-run-job"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Unable to run a job</h2> 
+      <p class="shortdesc">If you are unable to run a job from a playbook, review the playbook YAML file. When importing a playbook, either manually or by a source control mechanism, remember that the host definition is controlled by automation controller and should be set to <code class="ph codeph">hosts:all</code>.</p> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title4" id="controller-playbooks-not-showing"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Playbooks do not show up in the Job Template list</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">If your playbooks are not showing up in the <strong class="ph b">Job Template</strong> list, check the following:</p> 
+       <section class="section"> 
+        <ul class="ul"> 
+         <li class="li">Ensure that the playbook is valid YML and can be parsed by Ansible.</li> 
+         <li class="li">Ensure that the permissions and ownership of the project path (<code class="ph codeph">/var/lib/awx/projects</code>) is set up so that the "awx" system user can view the files. Run the following command to change the ownership:</li> 
+        </ul> 
+        <pre class="pre">chown awx -R /var/lib/awx/projects/</pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title5" id="controller-playbook-pending"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Playbook stays in pending</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">If you are attempting to run a playbook job and it stays in the <code class="ph codeph">Pending</code> state indefinitely, try the following actions:</p> 
+       <section class="section"> 
+        <ul class="ul"> 
+         <li class="li">Ensure that all supervisor services are running through <code class="ph codeph">supervisorctl status</code>.</li> 
+         <li class="li">Ensure that the <code class="ph codeph">/var/ partition</code> has more than 1 GB of space available. Jobs do not complete with insufficient space on the <code class="ph codeph">/var/</code> partition.</li> 
+         <li class="li">Run <code class="ph codeph">automation-controller-service restart</code> on the automation controller server.</li> 
+        </ul> 
+        <p class="p">If you continue to have issues, run <code class="ph codeph">sosreport</code> as root on the automation controller server, then file a <a class="xref" href="http://support.ansible.com/" target="_blank" rel="external noopener">support request</a> with the result.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title6" id="controller-reuse-external-database-fail"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Prevent installation failures when reusing an external database</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">When reusing an external database for clustered installations, you must manually clear the database before performing subsequent installations.</p> 
+       <section class="section"> 
+        <p class="p">Instances have been reported where reusing the external database during subsequent installation of nodes causes installation failures.</p> 
+        <p class="p"> <strong class="ph b">Example</strong> </p> 
+        <p class="p">You perform a clustered installation. Then, you need to do this again and perform a second clustered installation reusing the same external database, only this subsequent installation failed.</p> 
+        <p class="p">When setting up an external database that has been used in a prior installation, you must manually clear the database used for the clustered node before any additional installations can succeed.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title7" id="controller-ec2-vpc-instances"> 
+      <h2 class="title topictitle2" id="ariaid-title7">View private EC2 VPC instances in the automation controller inventory</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">By default, automation controller only shows instances in a VPC that have an Elastic IP (EIP) associated with them.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Inventories</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the inventory that has the <strong class="ph b">Source</strong> set to <strong class="ph b">Amazon EC2</strong>, and click the <strong class="ph b">Source</strong> tab. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">In the <strong class="ph b">Source Variables</strong> field, enter:</p> 
+           <pre class="pre">vpc_destination_variable: private_ip_address</pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Save</span> and trigger an update of the group.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Once you complete these steps, you can see your VPC instances.</p> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Automation controller must be running inside the VPC with access to those instances if you want to configure them.</p> 
+         </div>
+        </div> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

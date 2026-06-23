@@ -1,0 +1,133 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="proc-controller-run-ad-hoc-commands"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Run ad hoc commands against a host in an inventory</h1> 
+     <div class="body taskbody">
+      <p class="shortdesc">Learn how to run ad hoc commands against hosts in an inventory.</p> 
+      <section class="section context">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">About this task</h2>
+       </div> 
+       <p class="p"><em class="ph i">Ad hoc</em> refers to using Ansible to perform a quick command, using /usr/bin/ansible, rather than the orchestration language, which is /usr/bin/ansible-playbook. An example of an ad hoc command might be rebooting 50 machines in your infrastructure. Anything you can do ad hoc can be accomplished by writing a playbook. Playbooks can also glue many other operations together.</p> 
+      </section> 
+      <section>
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Procedure</h2>
+       </div>
+       <ol class="ol steps">
+        <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Inventories</span></span>.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Select the inventory name you want to run an ad hoc command with.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Select an inventory source from the <strong class="ph b">Hosts</strong> or <strong class="ph b">Groups</strong> tab. The inventory source can be a single group or host, a selection of many hosts, or a selection of many groups.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Run Command</span>. The Run command window opens.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Enter the following information: </span> 
+         <div class="itemgroup info"> 
+          <ul class="ul"> 
+           <li class="li"><strong class="ph b">Module</strong>: Select one of the modules that the supports running commands against. 
+            <table class="table">
+             <caption></caption>
+             <colgroup>
+              <col style="width:25%">
+              <col style="width:25%">
+              <col style="width:25%">
+              <col style="width:25%">
+             </colgroup>
+             <tbody class="tbody">
+              <tr class="row">
+               <td class="entry"><p class="p">command</p></td>
+               <td class="entry"><p class="p">apt_repository</p></td>
+               <td class="entry"><p class="p">mount</p></td>
+               <td class="entry"><p class="p">win_service</p></td>
+              </tr>
+              <tr class="row">
+               <td class="entry"><p class="p">shell</p></td>
+               <td class="entry"><p class="p">apt_rpm</p></td>
+               <td class="entry"><p class="p">ping</p></td>
+               <td class="entry"><p class="p">win_updates</p></td>
+              </tr>
+              <tr class="row">
+               <td class="entry"><p class="p">yum</p></td>
+               <td class="entry"><p class="p">service</p></td>
+               <td class="entry"><p class="p">SELinux</p></td>
+               <td class="entry"><p class="p">win_group</p></td>
+              </tr>
+              <tr class="row">
+               <td class="entry"><p class="p">apt</p></td>
+               <td class="entry"><p class="p">group</p></td>
+               <td class="entry"><p class="p">setup</p></td>
+               <td class="entry"><p class="p">win_user</p></td>
+              </tr>
+              <tr class="row">
+               <td class="entry"><p class="p">apt_key</p></td>
+               <td class="entry"><p class="p">user</p></td>
+               <td class="entry"><p class="p">win_ping</p></td>
+               <td class="entry"><p class="p">win_user</p></td>
+              </tr>
+             </tbody>
+            </table></li> 
+           <li class="li"><strong class="ph b">Arguments</strong>: Provide arguments to be used with the module you selected.</li> 
+           <li class="li"><strong class="ph b">Limit</strong>: Enter the limit used to target hosts in the inventory. To target all hosts in the inventory enter <code class="ph codeph">all</code> or <code class="ph codeph">*</code>, or leave the field blank. This is automatically populated with whatever was selected in the previous view before clicking the launch button.</li> 
+           <li class="li"><strong class="ph b">Machine Credential</strong>: Select the credential to use when accessing the remote hosts to run the command. Choose the credential containing the username and SSH key or password that Ansible needs to log in to the remote hosts.</li> 
+           <li class="li"><strong class="ph b">Verbosity</strong>: Select a verbosity level for the standard output.</li> 
+           <li class="li"><strong class="ph b">Forks</strong>: If needed, select the number of parallel or simultaneous processes to use while executing the command.</li> 
+           <li class="li"><strong class="ph b">Show Changes</strong>: Select to enable the display of Ansible changes in the standard output. The default is OFF.</li> 
+           <li class="li"><strong class="ph b">Enable Privilege Escalation</strong>: If enabled, the playbook is run with administrator privileges. This is the equivalent of passing the <code class="ph codeph">--become</code> option to the <code class="ph codeph">ansible</code> command.</li> 
+           <li class="li"><strong class="ph b">Extra Variables</strong>: Provide extra command line variables to be applied when running this inventory. Enter variables using either JSON or YAML syntax. Use the radio button to toggle between the two.</li> 
+          </ul> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Next</span> to select the execution environment you want the ad hoc command to be run against.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Next</span> to select the credential you want to use.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Launch</span>. The results display in the <strong class="ph b">Output</strong> tab of the module’s job window.</span> </li>
+       </ol>
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="controller-config-notifications-source"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Configure notifications for the source</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">After you create a source for an inventory in automation controller, you can configure notifications for that source.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Inventories</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the inventory name you want to configure notifications for.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In the inventory <strong class="ph b">Details</strong> page, select the <strong class="ph b">Notifications</strong> tab. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">The <strong class="ph b">Notifications</strong> tab is only present when you have saved the newly-created source.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">If notifications are already set up, use the toggles to enable or disable the notifications to use with your particular source. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-con_controller_configure_hostname_notifications#controller-enable-disable-notifications" title="You can set up notifications to notify you when a specific job starts, and on the success or failure at the end of the job run. Note the following behaviors:">Enable and Disable Notifications</a>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">If you have not set up notifications, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_ug_controller_notifications#controller-notifications" title="A Notification Type such as Email, Slack or a Webhook, is an instance of a Notification Template, and has a name, description and configuration defined in the Notification template.">Notifiers</a> for more information.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Review your entries and selections.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Save</span>.</span> </li>
+        </ol>
+       </section> 
+       <section class="section postreq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div> 
+        <p class="p">When you define a source, it is displayed in the list of sources associated with the inventory. From the <strong class="ph b">Sources</strong> tab you can perform a sync on a single source, or sync all of them at once. You can also perform additional actions such as scheduling a sync process, and edit or delete the source.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="ref-controller-view-completed-jobs"> 
+      <h2 class="title topictitle2" id="ariaid-title3">View completed jobs</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">You can view completed jobs in automation controller by navigating to the <strong class="ph b">Jobs</strong> tab in the navigation panel.</p> 
+       <section class="section"> 
+        <p class="p">If you use an inventory to run a job, you can view details about those jobs in the <strong class="ph b">Jobs</strong> tab of the inventory and click <strong class="ph b">Expanded</strong> to view details about each job.</p> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

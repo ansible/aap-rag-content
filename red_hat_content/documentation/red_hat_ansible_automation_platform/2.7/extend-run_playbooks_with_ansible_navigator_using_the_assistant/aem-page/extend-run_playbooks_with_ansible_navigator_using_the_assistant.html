@@ -1,0 +1,30 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-74891ed4-8ad3-4409-905f-af18bbcb8e60">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Run playbooks with <code class="ph codeph">ansible-navigator</code> using the assistant</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">After you have built a suitable execution environment, you can ask the assistant to generate the correct <code class="ph codeph">ansible-navigator</code> command to execute your playbook in that particular environment.</p> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Ask the assistant to generate a command that runs the playbook in your execution environment. For example:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>Generate a command that runs this playbook in the execution environment &lt;your-file-name&gt;</code></pre> 
+         <p class="p">The assistant then generates an appropriate <code class="ph codeph">ansible-navigator</code> command, ensuring the <code class="ph codeph">--execution-environment-image</code> flag points to your newly built tag.</p> 
+         <div class="p">
+          A generated command might look like the following: 
+          <pre class="pre codeblock"><code>ansible-navigator run playbook.yml --execution-environment-image webserver-ee:1.0 --mode stdout</code></pre> 
+         </div> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">In the VS Code terminal, execute the command to run your automation within the custom environment.</span> </li>
+      </ol>
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,29 @@
+# Create dynamic groups with constructed inventories
+## Filter hosts by processor type
+
+You can create a constructed inventory that filters hosts by CPU type by using the `ansible_processor` fact.
+
+The following example involves filtering hosts by processor type (Intel) using the YAML format:
+
+```
+source_vars:
+
+plugin: constructed
+strict: true
+groups:
+intel_hosts: "GenuineIntel" in ansible_processor
+
+limit: intel_hosts
+```
+
+
+Note:
+
+Hosts in constructed inventories are not counted against your license allotment because they are referencing the original inventory host. Additionally, hosts that are disabled in the original inventories are not included in the constructed inventory.
+
+An inventory update run using `ansible-inventory` creates the constructed inventory contents.
+
+This is always configured to update-on-launch before a job, but you can still select a cache timeout value in case this takes too long.
+
+When creating a constructed inventory, the API ensures that it always has one inventory source associated with it. All inventory updates have an associated inventory source, and the fields needed for constructed inventory (`source_vars` and `limit`) are fields already present on the inventory source model.
+

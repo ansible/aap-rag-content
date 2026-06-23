@@ -1,0 +1,383 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="ref-self-service-portal-cli-commands">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Portal CLI commands reference</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">The Ansible automation portal appliance provides the <code class="ph codeph">ansible-portal</code> management CLI for administration and troubleshooting.</p> 
+     <section class="section">
+      <h2 class="title sectiontitle">Accessing the appliance</h2> 
+      <p class="p">You can access the appliance using SSH with the key you provided during initial configuration:</p> 
+      <pre class="pre codeblock language-terminal"><code>ssh -i /path/to/ssh-key/id_ed25519 -p <var class="keyword varname">port_number</var> admin@<var class="keyword varname">VM_IP</var></code></pre> 
+      <p class="p">Replace the following placeholders:</p> 
+      <ul class="ul"> 
+       <li class="li"><code class="ph codeph">/path/to/ssh-key/id_ed25519</code> with the path to your SSH private key.</li> 
+       <li class="li"><code class="ph codeph"><var class="keyword varname">port_number</var></code> with the SSH port number (default is 22).</li> 
+       <li class="li"><code class="ph codeph"><var class="keyword varname">VM_IP</var></code> with the IP address or hostname of your appliance.</li> 
+      </ul> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">The ansible-portal CLI</h2> 
+      <p class="p">The <code class="ph codeph">ansible-portal</code> command is the primary management interface for the appliance, following Red Hat Ansible tooling conventions (<code class="ph codeph">ansible-navigator</code>, <code class="ph codeph">ansible-builder</code>, <code class="ph codeph">ansible-lint</code>).</p> 
+      <pre class="pre codeblock language-terminal"><code>ansible-portal &lt;command&gt; [options]</code></pre> 
+      <table class="table">
+       <caption>
+        <span class="table--title-label">Table 1. </span><span class="title">Available commands</span>
+       </caption>
+       <colgroup>
+        <col>
+        <col>
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-self-service-portal-cli-commands__entry__1">Command</th> 
+         <th class="entry" id="ref-self-service-portal-cli-commands__entry__2">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__1"><code class="ph codeph">status</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__2">Show portal service status and diagnostics.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__1"><code class="ph codeph">backup</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__2">Create portal backup. Use <code class="ph codeph">--list</code> to list backups.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__1"><code class="ph codeph">restore <var class="keyword varname">file</var></code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__2">Restore from backup archive. Use <code class="ph codeph">--latest</code> for most recent.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__1"><code class="ph codeph">registry-login</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__2">Log in to container registry for image upgrades.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <p class="p">Run <code class="ph codeph">ansible-portal <var class="keyword varname">command</var> --help</code> for command-specific options.</p> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">ansible-portal status</h2> 
+      <p class="p">Displays the current status of all Ansible automation portal services.</p> 
+      <p class="p"><strong class="ph b">Usage:</strong></p> 
+      <pre class="pre codeblock language-terminal"><code>sudo ansible-portal status            # One-shot status display
+sudo ansible-portal status --watch    # Refresh status every 5 seconds</code></pre> 
+      <p class="p"><strong class="ph b">Description:</strong></p> 
+      <p class="p">Displays the current status of all Ansible automation portal services, including:</p> 
+      <ul class="ul"> 
+       <li class="li">Setup completion status</li> 
+       <li class="li">PostgreSQL database state and connectivity</li> 
+       <li class="li">Devtools service state</li> 
+       <li class="li">Portal service state and plug-in installation status</li> 
+       <li class="li">Scheduled backup status</li> 
+       <li class="li">Disk and memory resource usage</li> 
+      </ul> 
+      <p class="p">Use this command to verify that all services are running correctly after installation or troubleshooting. Use <code class="ph codeph">--watch</code> to continuously monitor service status.</p> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">ansible-portal backup</h2> 
+      <p class="p">Creates a backup of the portal configuration and data.</p> 
+      <p class="p"><strong class="ph b">Usage:</strong></p> 
+      <pre class="pre codeblock language-terminal"><code>sudo ansible-portal backup                          # Interactive backup (select content)
+sudo ansible-portal backup --full                   # Full backup (all items)
+sudo ansible-portal backup --minimal                # Required items only
+sudo ansible-portal backup --list                   # List existing backups
+sudo ansible-portal backup --export /path/to/dir/   # Copy latest backup to a directory</code></pre> 
+      <p class="p"><strong class="ph b">Description:</strong></p> 
+      <p class="p">Creates a backup archive containing the portal configuration, Podman secrets, and data. Use this command before making significant configuration changes or for disaster recovery planning.</p> 
+      <ul class="ul"> 
+       <li class="li"><code class="ph codeph">backup</code> without options starts an interactive backup where you select the content to include.</li> 
+       <li class="li"><code class="ph codeph">--full</code> creates a complete backup of all configuration and data.</li> 
+       <li class="li"><code class="ph codeph">--minimal</code> backs up only the required configuration items.</li> 
+       <li class="li"><code class="ph codeph">--list</code> lists existing backups.</li> 
+       <li class="li"><code class="ph codeph">--export</code> copies the latest backup to the specified directory. If no backup exists, one is created first.</li> 
+      </ul> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">Backup archives contain credentials in plain text. Restrict file permissions on backup archives. Encrypt archives before transferring to remote storage:</p> 
+        <pre class="pre codeblock language-terminal"><code>gpg --symmetric --cipher-algo AES256 /var/lib/portal/backups/<var class="keyword varname">backup-file</var>.tar.gz</code></pre> 
+       </div>
+      </div> 
+      <p class="p"><strong class="ph b">Example output:</strong></p> 
+      <pre class="pre codeblock language-terminal"><code>Backup contents selection
+═══════════════════════════════════════════════════════════
+
+Current selection (Y=included, N=excluded):
+
+━━━ Required (always included) ━━━
+  [Y] marker: Setup Marker
+      Setup complete marker file
+  [Y] config: Portal Configuration
+      Core configuration (app-config.production.yaml)
+
+━━━ Recommended ━━━
+  [Y] database: PostgreSQL Database
+      Full database dump
+  [Y] backup_config: Backup Settings
+      Backup schedule and retention
+  [Y] plugins: Plugin Configuration
+      Dynamic plug-ins config
+  [Y] ssl: SSL Certificates
+      HTTPS certificates (cert.pem, key.pem)
+
+━━━ Optional (sensitive) ━━━
+  [N] registry_auth: Registry Credentials
+      Container registry auth (auth.json)
+  [N] config_history: Config History
+      Previous configuration snapshots
+
+Options:
+  1. Proceed with current selection
+  2. Include all items (full backup)
+  3. Toggle optional items
+  4. Cancel
+
+Choice [1]: 1
+
+[INFO] Creating backup: portal-backup-2026-05-07T143022
+[INFO] Backing up configuration...
+[INFO] Backing up SSL certificates...
+[INFO] Backing up database...
+[OK] Database backed up
+[INFO] Backing up plugins configuration...
+[INFO] Creating backup archive...
+[OK] Backup created: /var/lib/portal/backups/portal-backup-2026-05-07T143022.tar.gz
+
+Backup file: /var/lib/portal/backups/portal-backup-2026-05-07T143022.tar.gz
+Size: 2.1M
+
+Contents included:
+  Portal Configuration
+  Setup Marker
+  PostgreSQL Database
+  Backup Settings
+  Plugin Configuration
+  SSL Certificates</code></pre> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">ansible-portal restore</h2> 
+      <p class="p">Restores the portal from a backup.</p> 
+      <p class="p"><strong class="ph b">Usage:</strong></p> 
+      <pre class="pre codeblock language-terminal"><code>sudo ansible-portal restore --list                  # List available backups
+sudo ansible-portal restore --latest                # Restore the newest backup
+sudo ansible-portal restore --latest --dry-run      # Preview restore without changes
+sudo ansible-portal restore /path/to/backup.tar.gz  # Restore a specific backup file</code></pre> 
+      <p class="p"><strong class="ph b">Description:</strong></p> 
+      <p class="p">Restores the portal configuration, Podman secrets, Quadlet drop-in files, and data from a backup created by <code class="ph codeph">ansible-portal backup</code>.</p> 
+      <ul class="ul"> 
+       <li class="li"><code class="ph codeph">--list</code> lists all available backups.</li> 
+       <li class="li"><code class="ph codeph">--latest</code> restores from the most recent backup.</li> 
+       <li class="li"><code class="ph codeph">--dry-run</code> previews what would be restored without making changes.</li> 
+       <li class="li">Specify a file path to restore from a specific backup archive.</li> 
+      </ul> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">Restoring a backup overwrites the current portal configuration. Use <code class="ph codeph">--dry-run</code> to preview the restore before executing. Create a backup of the current state before restoring if you want to preserve it.</p> 
+       </div>
+      </div> 
+      <p class="p"><strong class="ph b">Example output:</strong></p> 
+      <pre class="pre codeblock language-terminal"><code>[INFO] Using latest backup: portal-backup-2026-05-07T143022.tar.gz
+[INFO] Restoring from: /var/lib/portal/backups/portal-backup-2026-05-07T143022.tar.gz
+[INFO] Extracting backup...
+[INFO] Backup created: 2026-05-07T14:30:22+00:00
+[INFO] Stopping services...
+[INFO] Current config backed up
+[INFO] Restoring configuration...
+[INFO] Restoring Podman secrets...
+[OK] Podman secrets restored
+[INFO] Generated secrets drop-in: /etc/containers/systemd/portal.container.d/secrets.conf
+[INFO] Generated secrets drop-in: /etc/containers/systemd/postgres.container.d/secrets.conf
+[INFO] Generated postgres config drop-in: /etc/containers/systemd/postgres.container.d/config.conf (user=portal_user, db=portal_db)
+[OK] Configuration restored
+[INFO] Restoring plug-ins configuration...
+[OK] Plug-ins configuration restored
+[INFO] Starting PostgreSQL...
+[INFO] Restoring database...
+[OK] Database restored
+[INFO] Starting Portal...
+[OK] Restore complete.
+
+Services have been restarted.
+Check status with: portal-status</code></pre> 
+      <p class="p">Services stop during restore and restart automatically.</p> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">ansible-portal registry-login</h2> 
+      <p class="p">Manages container registry credentials for pulling portal images.</p> 
+      <p class="p"><strong class="ph b">Usage:</strong></p> 
+      <pre class="pre codeblock language-terminal"><code>sudo ansible-portal registry-login                 # Log in to registry.redhat.io (default)
+sudo ansible-portal registry-login <var class="keyword varname">registry_host</var> # Log in to a specific registry
+sudo ansible-portal registry-login --test          # Test stored credentials
+sudo ansible-portal registry-login --logout        # Remove stored credentials</code></pre> 
+      <p class="p"><strong class="ph b">Description:</strong></p> 
+      <p class="p">Manages authentication to container registries used for pulling Ansible automation portal images and updates.</p> 
+      <ul class="ul"> 
+       <li class="li"><code class="ph codeph">registry-login</code> without arguments prompts for credentials for <code class="ph codeph">registry.redhat.io</code>.</li> 
+       <li class="li">Specify a registry hostname to authenticate to a different registry, such as a private mirror.</li> 
+       <li class="li"><code class="ph codeph">--test</code> verifies that stored credentials are valid by inspecting the registry without downloading images.</li> 
+       <li class="li"><code class="ph codeph">--logout</code> clears stored credentials for the registry.</li> 
+      </ul> 
+      <p class="p">Use this command to configure registry authentication for <code class="ph codeph">bootc upgrade</code> operations. In disconnected environments, use this command to authenticate to your private registry mirror.</p> 
+      <p class="p">In disconnected environments where no registry is available, you can bypass the registry authentication gate by creating an override marker:</p> 
+      <pre class="pre codeblock language-terminal"><code>sudo touch /etc/portal/.registry-auth-override</code></pre> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Configuration management</h2> 
+      <p class="p">The appliance uses two YAML configuration files at <code class="ph codeph">/etc/portal/configs/app-config/</code>:</p> 
+      <dl class="dl"> 
+       <dt class="dt dlterm">
+        <code class="ph codeph">app-config.yaml</code>
+       </dt> 
+       <dd class="dd">
+        Infrastructure configuration (base URL, database connection, TLS, system defaults). This file is set during initial deployment and is not typically modified.
+       </dd> 
+       <dt class="dt dlterm">
+        <code class="ph codeph">app-config.production.yaml</code>
+       </dt> 
+       <dd class="dd">
+        Application configuration (Ansible Automation Platform connection, OAuth settings, SCM integrations, catalog sync). Edit this file for day-to-day configuration changes.
+       </dd> 
+      </dl> 
+      <p class="p">Sensitive values such as tokens and passwords are stored as Podman secrets and injected into the portal container through environment variable interpolation (<code class="ph codeph">${VAR}</code> syntax in the YAML files).</p> 
+      <p class="p"><strong class="ph b">Updating configuration</strong></p> 
+      <p class="p">To update the portal configuration:</p> 
+      <ol class="ol"> 
+       <li class="li">Edit the application configuration file: <pre class="pre codeblock language-terminal"><code>sudo vi /etc/portal/configs/app-config/app-config.production.yaml</code></pre> </li> 
+       <li class="li">Restart the portal service to apply the changes: <pre class="pre codeblock language-terminal"><code>sudo systemctl restart portal</code></pre> </li> 
+      </ol> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Managing secrets</h2> 
+      <p class="p">The portal stores sensitive values as Podman secrets, separate from the configuration files.</p> 
+      <table class="table">
+       <caption>
+        <span class="table--title-label">Table 2. </span><span class="title">Portal secrets reference</span>
+       </caption>
+       <colgroup>
+        <col>
+        <col>
+        <col>
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-self-service-portal-cli-commands__entry__11">Secret name</th> 
+         <th class="entry" id="ref-self-service-portal-cli-commands__entry__12">Environment variable</th> 
+         <th class="entry" id="ref-self-service-portal-cli-commands__entry__13">Type</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__11"><code class="ph codeph">portal_backend_secret</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__12"><code class="ph codeph">BACKEND_SECRET</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__13">Auto-generated</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__11"><code class="ph codeph">portal_postgresql_password</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__12"><code class="ph codeph">POSTGRESQL_PASSWORD</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__13">Auto-generated or user-provided</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__11"><code class="ph codeph">portal_postgresql_admin_password</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__12"><code class="ph codeph">POSTGRESQL_ADMIN_PASSWORD</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__13">Auto-generated</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__11"><code class="ph codeph">portal_aap_token</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__12"><code class="ph codeph">AAP_TOKEN</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__13">User-provided</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__11"><code class="ph codeph">portal_aap_oauth_client_secret</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__12"><code class="ph codeph">AAP_OAUTH_CLIENT_SECRET</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__13">User-provided</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__11"><code class="ph codeph">portal_github_token</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__12"><code class="ph codeph">GITHUB_TOKEN</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__13">Optional</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__11"><code class="ph codeph">portal_gitlab_token</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__12"><code class="ph codeph">GITLAB_TOKEN</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__13">Optional</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__11"><code class="ph codeph">portal_github_app_id</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__12"><code class="ph codeph">GITHUB_APP_ID</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__13">User-provided (EE Builder, GitHub App)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__11"><code class="ph codeph">portal_github_app_client_id</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__12"><code class="ph codeph">GITHUB_APP_CLIENT_ID</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__13">User-provided (EE Builder, GitHub App)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__11"><code class="ph codeph">portal_github_app_client_secret</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__12"><code class="ph codeph">GITHUB_APP_CLIENT_SECRET</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__13">User-provided (EE Builder, GitHub App)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__11"><code class="ph codeph">portal_github_app_private_key</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__12"><code class="ph codeph">GITHUB_APP_PRIVATE_KEY</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__13">User-provided (EE Builder, GitHub App)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__11"><code class="ph codeph">portal_github_oauth_client_id</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__12"><code class="ph codeph">GITHUB_OAUTH_CLIENT_ID</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__13">User-provided (EE Builder, GitHub OAuth)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__11"><code class="ph codeph">portal_github_oauth_client_secret</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__12"><code class="ph codeph">GITHUB_OAUTH_CLIENT_SECRET</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__13">User-provided (EE Builder, GitHub OAuth)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__11"><code class="ph codeph">portal_gitlab_oauth_client_id</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__12"><code class="ph codeph">GITLAB_OAUTH_CLIENT_ID</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__13">User-provided (EE Builder, GitLab OAuth)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__11"><code class="ph codeph">portal_gitlab_oauth_client_secret</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__12"><code class="ph codeph">GITLAB_OAUTH_CLIENT_SECRET</code></td> 
+         <td class="entry" headers="ref-self-service-portal-cli-commands__entry__13">User-provided (EE Builder, GitLab OAuth)</td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body">
+        <p class="p">EE Builder secrets (prefixed with <code class="ph codeph">portal_github_app_</code>, <code class="ph codeph">portal_github_oauth_</code>, or <code class="ph codeph">portal_gitlab_oauth_</code>) require a Quadlet drop-in file (<code class="ph codeph">ee-builder-secrets.conf</code>) to map Podman secrets to container environment variables. See the Configuring execution environment builder guide for instructions.</p>
+       </div>
+      </div> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body">
+        <p class="p">The <code class="ph codeph">portal-backup</code> utility does not capture EE Builder secrets or custom Quadlet drop-in files. Store secret values and the contents of <code class="ph codeph">ee-builder-secrets.conf</code> in a secure external location.</p>
+       </div>
+      </div> 
+      <p class="p"><strong class="ph b">Listing secrets</strong></p> 
+      <pre class="pre codeblock language-terminal"><code>sudo podman secret ls</code></pre> 
+      <p class="p"><strong class="ph b">Updating a secret</strong></p> 
+      <p class="p">To update a secret value, write the new value to a temporary file on tmpfs to avoid exposing it in the process list, then replace the secret:</p> 
+      <pre class="pre codeblock language-terminal"><code>temp_file=$(mktemp -p /dev/shm) &amp;&amp; chmod 600 "$temp_file"
+printf '%s' "<var class="keyword varname">new_token_value</var>" &gt; "$temp_file"
+sudo podman secret create --replace portal_aap_token "$temp_file"
+rm -f "$temp_file"
+sudo systemctl restart portal</code></pre> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relref">
+      <strong>Related reference</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_self_service_rhel_troubleshooting" title="Common issues and solutions for deploying and managing Ansible automation portal RHEL appliances.">Troubleshooting RHEL appliances</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-controller-resource-operator"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Ansible Automation Platform Resource Operator</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">The <strong class="ph b">Ansible Automation Platform Resource Operator</strong> is a custom resource that allows you to manage and define automation controller objects, such as projects and job templates, through YAML files.</p> 
+      <section class="section" id="assembly-controller-resource-operator___resource_operator_overview">
+       <h2 class="title sectiontitle">Resource Operator overview</h2> 
+       <p class="p abstract">Resource Operator is a custom resource (CR) that you can deploy after you have created your platform gateway deployment.</p> 
+       <p class="p">With Resource Operator you can define resources such as projects, job templates, and inventories in YAML files.</p> 
+       <p class="p">Ansible Automation Platform then uses the YAML files to create these resources. You can create the YAML through the <strong class="ph b">Form view</strong> that prompts you for keys and values for your YAML code. Alternatively, to work with YAML directly, you can select <strong class="ph b">YAML view</strong>.</p> 
+       <p class="p">The Resource Operator provides the following CRs:</p> 
+       <ul class="ul"> 
+        <li class="li">AnsibleJob</li> 
+        <li class="li">JobTemplate</li> 
+        <li class="li">Automation controller project</li> 
+        <li class="li">Automation controller schedule</li> 
+        <li class="li">Automation controller workflow</li> 
+        <li class="li">Automation controller workflow template:</li> 
+        <li class="li">Automation controller inventory</li> 
+        <li class="li">Automation controller credential</li> 
+       </ul> 
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-use-controller-resource-operator"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Use Resource Operator</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">The Resource Operator itself does not do anything until the user creates an object. As soon as the user creates an <strong class="ph b">AutomationControllerProject</strong> or <strong class="ph b">AnsibleJob</strong> resource, the Resource Operator starts processing that object.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">Install the Kubernetes-based cluster of your choice.</li> 
+         <li class="li">Deploy automation controller using the <code class="ph codeph">automation-controller-operator</code>.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div>
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">After installing the <code class="ph codeph">automation-controller-resource-operator</code> in your cluster, you must create a Kubernetes (k8s) secret with the connection information for your Ansible Automation Platform instance.</span> </li>
+         <li class="li step"> <span class="ph cmd">Then you can use Resource Operator to create a k8s resource to manage your Ansible Automation Platform instance.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-add-controller-access-token"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Connect Resource Operator to Ansible Automation Platform</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">To connect Resource Operator with platform gateway you must create a Kubernetes secret with the connection information for your Ansible Automation Platform instance.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">Use the following procedure to create an OAuth2 token for your user in the platform gateway UI.</p> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">You can only create OAuth 2 Tokens for your own user through the API or UI, which means you can only configure or view tokens from your own user profile.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Red Hat OpenShift Container Platform.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Users</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the username you want to create a token for.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select <span class="ph menucascade"><span class="ph uicontrol">Tokens</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Automation Execution</span></span></span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create Token</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">You can leave <strong class="ph b">Applications</strong> empty. Add a description and select <strong class="ph b">Read</strong> or <strong class="ph b">Write</strong> for the <strong class="ph b">Scope</strong>. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">Make sure you provide a valid user when creating tokens. Otherwise, you get an error message that you tried to issue the command without either specifying a user, or supplying a username that does not exist.</p> 
+            </div>
+           </div> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-create-connection-secret"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Create an Ansible Automation Platform connection secret for Resource Operator</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">To make your connection information available to the Resource Operator, create a k8s secret with the token and host value.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div>
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">The following is an example of the YAML for the connection secret. Save the following example to a file, for example, <code class="ph codeph">aap-connection-secret.yml</code>. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>apiVersion: v1
+kind: Secret
+metadata:
+  name: aap-access
+  type: Opaque
+stringData:
+  token: &lt;generated-token&gt;
+  host: https://aap-host.example.com/</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Edit the file with your host and token value.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Apply it to your cluster by running the <code class="ph codeph">kubectl create</code> command: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>kubectl create -f aap-connection-secret.yml</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

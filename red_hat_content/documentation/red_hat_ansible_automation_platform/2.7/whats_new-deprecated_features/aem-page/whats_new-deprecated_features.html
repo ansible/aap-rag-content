@@ -1,0 +1,120 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-15a70d21-d638-49fb-b6b6-6f6abb90af7b">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Deprecated features</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Deprecated features are still included in Ansible Automation Platform 2.7 and continue to be supported during this version's support cycle. However, the feature will be removed in a future release of Ansible Automation Platform and is not recommended for new deployments.</p> 
+     <ul class="ul" id="GUID-15a70d21-d638-49fb-b6b6-6f6abb90af7b__ul_1"> 
+      <li class="li">The <code class="ph codeph">ee-cloud</code>-services execution environment in Managed Application on Azure</li> 
+      <li class="li">Python 3.11 and earlier versions are deprecated.</li> 
+     </ul> 
+     <div class="p"> 
+      <dl class="dl"> 
+       <dt class="dt dlterm">
+        The <code class="ph codeph">ee-cloud-services</code> execution environment in Managed Application on Azure.
+       </dt> 
+       <dd class="dd"></dd> 
+      </dl> 
+     </div> 
+     <p class="p"> Starting with the release of Ansible Automation Platform (AAP) 2.7, the <code class="ph codeph">ee-cloud-services</code> execution environment will not be available in new deployments of Ansible Automation Platform on Microsoft Azure. Existing Ansible Automation Platform on Microsoft Azure customers are encouraged to transition their automation workflows to the ee-supported or build a new execution environment; the execution environment will remain until you choose to remove it. </p> 
+     <dl class="dl"> 
+      <dt class="dt dlterm">
+       Recommended migration steps
+      </dt> 
+      <dd class="dd"></dd> 
+     </dl> 
+     <p class="p"> To ensure your automation continues to run smoothly on version 2.7, follow these best practices:</p> 
+     <ol class="ol" id="GUID-15a70d21-d638-49fb-b6b6-6f6abb90af7b__ol_1"> 
+      <li class="li">Audit Current Job Templates: Identify which Job Templates currently use <code class="ph codeph">ee-cloud-services</code>.</li> 
+      <li class="li">Test with ee-supported: Switch the Execution Environment on a test Job Template to <code class="ph codeph">ee-supported</code>.</li> 
+      <li class="li"> Identify Missing Dependencies: If your playbooks fail due to missing Python libraries (e.g., boto3, azure-mgmt-compute) or specific Ansible collections, you will need to create a custom execution environment.</li> 
+      <li class="li">Build Custom execution envirnments using Ansible Builder: Use the <code class="ph codeph">ee-supported</code> or <code class="ph codeph">ee-minimal</code> image as your base in your execution-environment <code class="ph codeph">.yml</code> file.</li> 
+     </ol> 
+     <div class="note note note_note">
+      <span class="note__title">Note:</span> 
+      <div class="note__body">
+       For Managed Cloud customers, ensure your private automation hub is configured to sync the latest images from the Red Hat ecosystem to maintain access to the supported <code class="ph codeph">ee-supported</code> images. 
+      </div>
+     </div> 
+     <dl class="dl"> 
+      <dt class="dt dlterm">
+       Summary of support
+      </dt> 
+      <dd class="dd"></dd> 
+     </dl> 
+     <ul class="ul" id="GUID-15a70d21-d638-49fb-b6b6-6f6abb90af7b__ul_2"> 
+      <li class="li">Existing Installs: Upgraded environments may retain <code class="ph codeph">ee-cloud-services</code> for a limited grace period, but it is considered "End of Life." </li> 
+      <li class="li">Fresh Installs: <code class="ph codeph">ee-supported &amp; ee-minimal</code> are the only cloud-focused EE provided out of the box. </li> 
+      <li class="li">Event-Driven Ansible <code class="ph codeph">ansible.eda.noop</code> is deprecated and there will not be a replacement.</li> 
+     </ul> 
+     <div class="p"> 
+      <dl class="dl"> 
+       <dt class="dt dlterm">
+        Python 3.11 and earlier versions are deprecated 
+       </dt> 
+       <dd class="dd"></dd> 
+      </dl> Support for Python 3.11 and all earlier versions is being phased out across all Supported Execution Environments and Minimal Execution Environments. To ensure security compliance and access to the latest performance optimizations, users must migrate to Python 3.12 or higher. 
+     </div> 
+     <dl class="dl"> 
+      <dt class="dt dlterm">
+       Affected environments
+      </dt> 
+      <dd class="dd">
+       Supported Execution Environments
+      </dd> 
+     </dl> 
+     <p class="p">These environments typically include the full standard library and common pre-installed dependencies. </p> 
+     <dl class="dl"> 
+      <dt class="dt dlterm">
+       Minimal Execution Environments
+      </dt> 
+      <dd class="dd"></dd> 
+     </dl> 
+     <p class="p"> These are stripped-down, security-hardened environments used for Custom EE’s. </p> 
+     <dl class="dl"> 
+      <dt class="dt dlterm">
+       Action required
+      </dt> 
+      <dd class="dd"></dd> 
+     </dl> 
+     <p class="p"> Audit custom-built binaries. Python 3.11 minimal layers will no longer receive security vulnerability (CVE) patches. </p> 
+     <p class="p"><strong class="ph b">Recommendation</strong>: Move to the python:3.12+ or equivalent Minimal EE instance. </p> 
+     <dl class="dl"> 
+      <dt class="dt dlterm">
+       Why this is happening
+      </dt> 
+      <dd class="dd"></dd> 
+     </dl> 
+     <p class="p"> Python 3.12+ offers significant improvements that older environments cannot support, specifically: </p> 
+     <ul class="ul" id="GUID-15a70d21-d638-49fb-b6b6-6f6abb90af7b__ul_3"> 
+      <li class="li">Improved Error Messages: More precise tracebacks for faster debugging.</li> 
+      <li class="li">Performance: Advancements in the Faster CPython project.</li> 
+     </ul> 
+     <p class="p"> <strong class="ph b">Security</strong>: Removal of deprecated APIs and older TLS versions that are increasingly vulnerable.</p> 
+     <dl class="dl"> 
+      <dt class="dt dlterm">
+       Automation intelligent assistant
+      </dt> 
+      <dd class="dd">
+       Ansible Lightspeed Intelligent Assistant (ALIA) deprecated in AAP 2.5
+      </dd> 
+     </dl> 
+     <ul class="ul" id="GUID-15a70d21-d638-49fb-b6b6-6f6abb90af7b__ul_4"> 
+      <li class="li"> Ansible Lightspeed Intelligent Assistant (ALIA), included as a Technology Preview in Red Hat Ansible Automation Platform 2.5, is deprecated. ALIA in AAP 2.5 is no longer receiving new builds or ongoing security remediation. If you require supported intelligent assistant functionality, upgrade to Red Hat Ansible Automation Platform 2.6 or later. For more information about the support scope of Technology Preview features, see Technology preview in the Red Hat Ansible Automation Platform documentation.(AAP-70906)</li> 
+     </ul> 
+     <dl class="dl"> 
+      <dt class="dt dlterm">
+       Tarball plug-in delivery method for Ansible automation portal and Ansible plug-ins for Red Hat Developer Hub
+      </dt> 
+      <dd class="dd"></dd> 
+     </dl> 
+     <ul class="ul" id="GUID-15a70d21-d638-49fb-b6b6-6f6abb90af7b__ul_5"> 
+      <li class="li">The HTTP plug-in registry (tarball) delivery method for Ansible plug-ins for Red Hat Developer Hub and automation portal is deprecated. Use OCI container delivery instead. The tarball delivery method will be removed in a future release of Ansible Automation Platform.</li> 
+     </ul> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

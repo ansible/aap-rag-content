@@ -1,0 +1,129 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="writing-running-playbook"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Write your first automation task using the VS Code extension</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">Learn how to write, inspect, debug, and run Ansible playbooks directly within VS Code using Ansible development tools.</p> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="devtools-set-up-ansible-config"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Set up the Ansible configuration file</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">When you scaffolded your playbook project, an Ansible configuration file, <code class="ph codeph">ansible.cfg</code>, was added to the root directory of your project.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <div class="ul steps-unordered"> 
+         <div class="li step p"> <span class="ph cmd">If you have configured a default Ansible configuration file in <code class="ph codeph">/etc/ansible/ansible.cfg</code>, copy any settings that you want to reuse in your project from your default Ansible configuration file to the <code class="ph codeph">ansible.cfg</code> file in your project’s root directory. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">To learn more about the Ansible configuration file, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_execute_playbook_navigator#assembly-review-config-navigator" title="As a content creator, you can review your Ansible configuration with automation content navigator and interactively delve into settings.">Reviewing your Ansible configuration with automation content navigator</a>.</p> 
+          </div> 
+         </div> 
+        </div> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="writing-playbook"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Write your first playbook</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Create your first Ansible playbook within VS Code using the Ansible extension. The tools available help ensure that your syntax is correct and ready to run.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have installed and opened the Ansible VS Code extension.</li> 
+         <li class="li">You have opened a terminal in VS Code.</li> 
+         <li class="li">You have installed <code class="ph codeph">ansible-devtools</code>.</li> 
+        </ul> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Create a new .yml file in VS Code for your playbook, for example <code class="ph codeph">example_playbook.yml</code>. Put it in the same directory level as the example <code class="ph codeph">site.yml</code> file.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Add the following example code into the playbook file and save the file. The playbook consists of a single play that executes a <code class="ph codeph">ping</code> to your local machine. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>---
+- name: My first play
+  hosts: localhost
+  tasks:
+    - name: Ping my hosts
+      ansible.builtin.ping:</code></pre> 
+           <p class="p"><code class="ph codeph">Ansible-lint</code> runs in the background and displays errors in the <strong class="ph b">Problems</strong> tab of the terminal. There are no errors in this playbook:</p> 
+           <br> 
+           <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ansible-lint-no-errors.png" alt="Ansible-lint showing no errors in a playbook"> 
+           <br> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">If you want to add new content to the playbook, use the following rules: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Every playbook file must finish with a blank line.</li> 
+            <li class="li">Trailing spaces at the end of lines are not allowed.</li> 
+            <li class="li">Every playbook and every play require an identifier (name).</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Save your playbook file.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="inspect-playbook_context"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Inspect your playbook</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">The Ansible VS Code extension provides inline help, syntax highlighting, and assists you with indentation in <code class="ph codeph">.yml</code> files.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Open a playbook in VS Code.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Hover your mouse over a keyword or a module name: the Ansible extension provides documentation: <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ansible-lint-keyword-help.png" alt="Ansible-lint showing no errors in a playbook"><br></span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">If you begin to type the name of a module, for example <code class="ph codeph">ansible.builtin.ping</code>, the extension provides a list of suggestions. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">Select one of the suggestions to autocomplete the line.</p> 
+           <br> 
+           <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ansible-lint-module-completion.png" alt="Ansible-lint showing no errors in a playbook"> 
+           <br> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="debugging-playbook"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Debug your playbook</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Learn how to use VS Code to identify and understand error messages in playbooks.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">The following playbook contains multiple errors. Copy and paste it into a new file in VS Code. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>- name:
+  hosts: localhost
+  tasks:
+   - name:
+     ansible.builtin.ping:</code></pre> 
+           <p class="p">The errors are indicated with a wavy underline in VS Code.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Hover your mouse over an error to view the details: <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ansible-lint-errors.png" alt="Popup message explaining a playbook error"><br></span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Playbook files that contain errors are indicated with a number in the <strong class="ph b">Explorer</strong> pane.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">Problems</strong> tab of the VS Code terminal to view a list of the errors. <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ansible-lint-errors-explorer.png" alt="Playbook errors shown in Problems tab and explorer list"><br></span> 
+          <div class="itemgroup info"> 
+           <p class="p"><code class="ph codeph">$[0].tasks[0].name None is not of type 'string'</code> indicates that the playbook does not have a label.</p> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

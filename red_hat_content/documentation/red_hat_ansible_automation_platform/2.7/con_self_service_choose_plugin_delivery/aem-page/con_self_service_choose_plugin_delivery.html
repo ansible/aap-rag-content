@@ -1,0 +1,38 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="self-service-choose-plugin-delivery">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Plug-in delivery method</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Ansible automation portal supports two plug-in delivery methods. Use OCI container delivery for new installations, or plan to migrate from the deprecated HTTP plug-in registry.</p> 
+     <ul class="ul"> 
+      <li class="li"><strong class="ph b">OCI container delivery (recommended):</strong> Ansible automation portal pulls an Open Container Initiative (OCI) image from <code class="ph codeph">registry.redhat.io</code> that contains the Ansible plug-ins. Use this method for new installations and production deployments.</li> 
+      <li class="li"><strong class="ph b">HTTP plug-in registry (deprecated):</strong> You deploy an in-cluster HTTP service that hosts plug-in tarball files. This method is deprecated and will be removed in a future release of Ansible Automation Platform. If you already use this method, plan to migrate to OCI container delivery.</li> 
+     </ul> 
+     <div class="note important note_important">
+      <span class="note__title">Important:</span> 
+      <div class="note__body"> 
+       <p class="p">Set <code class="ph codeph">redhat-developer-hub.global.pluginMode</code> to <code class="ph codeph">oci</code>. The chart default is <code class="ph codeph">tarball</code>. Before you install, confirm your environment is supported on the Ansible automation portal lifecycle page (portal version, Ansible Automation Platform compatibility, and OpenShift Container Platform compatibility).</p> 
+      </div>
+     </div> 
+     <div class="note note note_note">
+      <span class="note__title">Note:</span> 
+      <div class="note__body"> 
+       <p class="p">For a disconnected cluster, complete the prerequisites in this guide, then continue with the disconnected installation guide.</p> 
+      </div>
+     </div> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relinfo">
+      <strong>Related information</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-lifecycle" target="_blank" rel="external noopener">Ansible automation portal lifecycle</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

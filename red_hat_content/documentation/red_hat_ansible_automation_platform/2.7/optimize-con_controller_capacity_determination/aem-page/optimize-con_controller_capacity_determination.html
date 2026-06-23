@@ -1,0 +1,68 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="controller-capacity-determination"> 
+     <h1 class="title topictitle1" id="ariaid-title1">How job capacity is determined and impacts job runs</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">The automation controller capacity system determines how many jobs can run on an instance given the amount of resources available to the instance and the size of the jobs that are running (referred to as Impact). The algorithm used to determine this is based on the following two things:</p> 
+      <ul class="ul"> 
+       <li class="li">How much memory is available to the system (<code class="ph codeph">mem_capacity</code>)</li> 
+       <li class="li">How much processing capacity is available to the system (<code class="ph codeph">cpu_capacity</code>)</li> 
+      </ul> 
+      <p class="p">Capacity also impacts instance groups. Since groups are made up of instances, instances can also be assigned to multiple groups. This means that impact to one instance can affect the overall capacity of other groups.</p> 
+      <p class="p">Instance groups, not instances themselves, can be assigned to be used by jobs at various levels.</p> 
+      <p class="p">When the Task Manager prepares its graph to decide the group a job runs on, it commits the capacity of an instance group to a job that is not ready to start yet.</p> 
+      <p class="p">In smaller configurations, if only one instance is available for a job to run, the Task Manager enables that job to run on the instance even if it pushes the instance over capacity. This guarantees that jobs do not get stuck as a result of an under-provisioned system.</p> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist relref">
+       <strong>Related reference</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-ref_controller_settings_control_execution_nodes#ref-controller-settings-control-execution-nodes" title="Configure capacity settings for control and execution nodes to manage resource allocation effectively.">Capacity settings for instance group and container group</a></li>
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_job_slicing#controller-job-slice-execution-behavior" title="When jobs are sliced, they can run on any node. Insufficient capacity in the system can cause some to run at a different time. When slice jobs are running, job details display the workflow and job slices currently running, and a link to view their details individually.">Job slice execution behavior</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="controller-resource-determination-for-capacity-algorithm"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Resource determination for capacity algorithm</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Capacity algorithms determine how many forks a system is capable of running simultaneously. These algorithms control how many systems Ansible can communicate with simultaneously.</p> 
+       <p class="p">Increasing the number of forks an automation controller system is running enables jobs to run faster by performing more work in parallel. However, this increases the load on the system, which can cause work to slow down.</p> 
+       <p class="p">The default, <code class="ph codeph">mem_capacity</code>, enables you to over-commit processing resources while protecting the system from running out of memory. If most of your work is not processor-bound, then selecting this mode maximizes the number of forks.</p> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="controller-memory-relative-capacity"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Memory relative capacity</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The memory relative capacity option allows you to set the maximum number of concurrent tasks (forks) that can run on a controller based on the amount of memory available on the system. This setting is useful for systems where memory is a limiting factor for running Ansible jobs.</p> 
+       <section class="section"> 
+        <p class="p"><code class="ph codeph">mem_capacity</code> is calculated relative to the amount of memory needed per fork. Taking into account the overhead for internal components, this is about 100MB per fork. When considering the amount of memory available to Ansible jobs, the capacity algorithm reserves 2GB of memory to account for the presence of other services. The algorithm formula for this is:</p> 
+        <pre class="pre codeblock"><code>(mem - 2048) / mem_per_fork</code></pre> 
+        <p class="p">The following is an example:</p> 
+        <pre class="pre codeblock"><code>(4096 - 2048) / 100 == ~20</code></pre> 
+        <p class="p">A system with 4GB of memory is capable of running 20 forks. The value <code class="ph codeph">mem_per_fork</code> is controlled by setting the value of <code class="ph codeph">SYSTEM_TASK_FORKS_MEM</code>, which defaults to 100.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title4" id="controller-cpu-relative-capacity"> 
+      <h2 class="title topictitle2" id="ariaid-title4">CPU relative capacity</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">automation controller uses the <code class="ph codeph">cpu_capacity</code> algorithm to determine the relative CPU capacity of managed nodes. This information is used to optimize the distribution of tasks across the available nodes.</p> 
+       <section class="section"> 
+        <p class="p">Ansible workloads are often processor-bound. In such cases, you can reduce the simultaneous workload to enable more tasks to run faster and reduce the average time-to-completion of those jobs.</p> 
+        <p class="p">Just as the <code class="ph codeph">mem_capacity</code> algorithm adjusts the amount of memory required per fork, the <code class="ph codeph">cpu_capacity</code> algorithm adjusts the amount of processing resources required per fork. The baseline value for this is four forks per core. The algorithm formula for this is:</p> 
+        <pre class="pre codeblock"><code>cpus * fork_per_cpu</code></pre> 
+        <p class="p">For example, a 4-core system looks like the following:</p> 
+        <pre class="pre codeblock"><code>4 * 4 == 16</code></pre> 
+        <p class="p">You can control the value of <code class="ph codeph">fork_per_cpu</code> by setting the value of <code class="ph codeph">SYSTEM_TASK_FORKS_CPU</code> which defaults to 4.</p> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="ref-troubleshoot-ee-builder">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Troubleshoot execution environment builder</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Identify and resolve common issues when configuring or using execution environment builder in Ansible automation portal.</p> 
+     <section class="section" id="ref-troubleshoot-ee-builder__common-issues">
+      <h2 class="title sectiontitle">Common issues</h2> 
+      <p class="p">For authentication, catalog sync, and general portal issues, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-ref_troubleshoot_portal_authentication" title="Identify and resolve common authentication and login issues when connecting Ansible automation portal to Ansible Automation Platform.">Troubleshoot Ansible automation portal authentication</a>.</p> 
+      <p class="p">The following table lists symptoms specific to execution environment builder, their causes, and the steps to resolve them.</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:28.57142857142857%">
+        <col style="width:28.57142857142857%">
+        <col style="width:42.857142857142854%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-troubleshoot-ee-builder__common-issues__entry__1">Symptom</th> 
+         <th class="entry" id="ref-troubleshoot-ee-builder__common-issues__entry__2">Cause</th> 
+         <th class="entry" id="ref-troubleshoot-ee-builder__common-issues__entry__3">Resolution</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__1"><strong class="ph b">Execution Environments</strong> sidebar item not visible</td> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__2">Missing <code class="ph codeph">ansible.execution-environments.view</code> permission.</td> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__3">An AAP administrator must grant the permission through RBAC. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_grant_ee_builder_access" title="Enable navigation permissions in the Ansible automation portal RBAC configuration so that non-admin users can access execution environment builder features.">Grant execution environment builder access</a>. Check logs for <code class="ph codeph">policy check failed</code> entries.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__1"><strong class="ph b">Collections</strong> sidebar item not visible</td> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__2">Missing <code class="ph codeph">ansible.collections.view</code> permission.</td> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__3">An AAP administrator must grant the permission through RBAC. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_grant_ee_builder_access" title="Enable navigation permissions in the Ansible automation portal RBAC configuration so that non-admin users can access execution environment builder features.">Grant execution environment builder access</a>.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__1"><strong class="ph b">Git Repositories</strong> sidebar item not visible</td> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__2">Missing <code class="ph codeph">ansible.git-repositories.view</code> permission.</td> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__3">An AAP administrator must grant the permission through RBAC. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_grant_ee_builder_access" title="Enable navigation permissions in the Ansible automation portal RBAC configuration so that non-admin users can access execution environment builder features.">Grant execution environment builder access</a>.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__1">Saving definition files fails with "OAuth authorization failed" or HTTP 401</td> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__2">GitHub or GitLab OAuth token expired or OAuth App credentials missing from <code class="ph codeph">secrets-scm</code>.</td> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__3">Re-authenticate through the Git provider selector in the wizard. Verify your AAP administrator has configured OAuth credentials and uncommented the auth provider block. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_app_ee_builder" title="Create and install a GitHub App so that execution environment builder can scan your organization's repositories for Ansible collections.">Configure a GitHub App for content discovery</a> or <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_gitlab_ee_builder" title="Configure GitLab content discovery and OAuth so that execution environment builder can scan GitLab groups for Ansible collections and save definition files.">Set up GitLab integration</a>. Check logs for <code class="ph codeph">Authentication failed for provider</code> entries.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__1">CI build fails with "secret not found" or "authentication required" in GitHub Actions</td> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__2">Missing or misconfigured GitHub repository secrets.</td> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__3">An AAP administrator must configure <code class="ph codeph">REGISTRY_PASSWORD</code>, <code class="ph codeph">REDHAT_REGISTRY_PASSWORD</code>, or <code class="ph codeph">ANSIBLE_GALAXY_SERVER_&lt;NAME&gt;_TOKEN</code> on the GitHub repository or organization. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_oauth_ee_builder" title="Configure a GitHub OAuth App so that users can save execution environment definition files to a GitHub repository and trigger automated image builds.">Configure a GitHub OAuth App for saving definitions</a>, "Automated image builds". Open the failing workflow run in GitHub Actions to see which secret is missing.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__1">Collections not appearing in wizard picker or collection catalog</td> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__2">Content sources not configured, not synced, or sync failed.</td> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__3">Verify with your AAP administrator that sources are configured and synced. Check logs for <code class="ph codeph">ansible content sync</code> errors. If using private automation hub, verify the base URL is reachable from the portal pod.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__1">Templates not visible on the <strong class="ph b">Execution Environments Create</strong> tab</td> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__2">Default templates unreachable, custom templates not registered, or user missing RBAC permissions.</td> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__3"> 
+          <ol class="ol"> 
+           <li class="li">Verify the user has the required RBAC permissions to view templates. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_grant_ee_builder_access" title="Enable navigation permissions in the Ansible automation portal RBAC configuration so that non-admin users can access execution environment builder features.">Grant execution environment builder access</a>.</li> 
+           <li class="li">Verify the Helm chart <code class="ph codeph">catalog.locations</code> entries point to accessible URLs.</li> 
+           <li class="li">If using a private Git source, confirm templates have been imported. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_host_templates_private_repo" title="Copy the EE Builder wizard templates from the public Ansible GitHub repository to a private repository for use in private or air-gapped environments.">Host execution environment wizard templates in a private Git repository</a>.</li> 
+          </ol> <p class="p">Check logs for <code class="ph codeph">catalog processing error</code> entries.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__1">GitLab save succeeds but no automated build triggered</td> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__2">Automated pipeline builds use GitHub Actions.</td> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__3">Automated pipeline builds require GitHub Actions. Build the execution environment locally using <code class="ph codeph">ansible-builder</code>, or save the definition to a GitHub repository to trigger CI.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__1">Build fails with "collection not installable" or <code class="ph codeph">ansible-galaxy</code> error</td> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__2">Collection <code class="ph codeph">galaxy.yml</code> is not at the repository root.</td> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__3"><code class="ph codeph">ansible-galaxy</code> can only install collections where <code class="ph codeph">galaxy.yml</code> is at the repository root. Collections discovered at deeper crawl levels appear in the catalog but cannot be installed. See the <code class="ph codeph">crawlDepth</code> note in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_collection_discovery" title="Configure Git content discovery and private automation hub collection discovery so that Ansible collections are available in execution environment builder and the collection catalog.">Configure collection discovery sources</a>.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__1">Sync returns incomplete results or logs show HTTP 429 errors</td> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__2">Repository provider API rate limit exhausted during content discovery.</td> 
+         <td class="entry" headers="ref-troubleshoot-ee-builder__common-issues__entry__3">Increase <code class="ph codeph">schedule.frequency</code> or reduce the number of scanned organizations. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_collection_discovery" title="Configure Git content discovery and private automation hub collection discovery so that Ansible collections are available in execution environment builder and the collection catalog.">Configure collection discovery sources</a>.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-proc_view_ee_builder_logs">View Ansible automation portal logs for execution environment builder</a></strong><br>View Ansible automation portal logs to diagnose authentication failures, sync errors, catalog registration issues, and SCM connectivity problems.</li>
+     </ul>
+    </nav>
+   </article>
+  </main>
+ </body>
+</html>

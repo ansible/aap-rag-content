@@ -1,0 +1,183 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="con-ee-builder-overview">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Understand execution environment builder</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Execution environment builder enables your teams to discover Ansible collections, create EE definitions, and build container images through Ansible automation portal.</p> 
+     <section class="section">
+      <h2 class="title sectiontitle">How it works</h2> 
+      <p class="p">Execution environment builder connects to your Git provider and private automation hub to accomplish three tasks:</p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Content discovery</strong> — scans Git repositories and private automation hub for Ansible collections (<code class="ph codeph">galaxy.yml</code> files). Populates the collection catalog that users browse when building an EE definition.</li> 
+       <li class="li"><strong class="ph b">Saving EE definition files to a repository</strong> — creates a set of definition files and saves them to a Git repository (new repo or pull request) on behalf of users via OAuth.</li> 
+       <li class="li"><strong class="ph b">Automated image builds</strong> — triggers a CI/CD pipeline (GitHub Actions) to produce a container image from the saved definition files.</li> 
+      </ul> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Configuration file</h2> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:50%">
+        <col style="width:25%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="con-ee-builder-overview__entry__1">Platform</th> 
+         <th class="entry" id="con-ee-builder-overview__entry__2">Configuration file</th> 
+         <th class="entry" id="con-ee-builder-overview__entry__3">Apply changes</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="con-ee-builder-overview__entry__1">OpenShift</td> 
+         <td class="entry" headers="con-ee-builder-overview__entry__2">Helm chart values file</td> 
+         <td class="entry" headers="con-ee-builder-overview__entry__3"><code class="ph codeph">helm upgrade</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-ee-builder-overview__entry__1">RHEL appliance</td> 
+         <td class="entry" headers="con-ee-builder-overview__entry__2"><code class="ph codeph">/etc/portal/configs/app-config/app-config.production.yaml</code></td> 
+         <td class="entry" headers="con-ee-builder-overview__entry__3">See <em class="ph i">Apply configuration changes</em> in Related links.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Secrets</h2> 
+      <p class="p">Sensitive values such as Git provider tokens, OAuth client secrets, and registry credentials are stored separately from the configuration file.</p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">OpenShift deployments:</strong> Store secrets with <code class="ph codeph">oc create secret generic</code>. Reference the secret name in your Helm chart values.</li> 
+       <li class="li"><strong class="ph b">RHEL appliance deployments:</strong> Store secrets with <code class="ph codeph">podman secret create</code> using the <code class="ph codeph">portal_</code> prefix naming convention (for example, <code class="ph codeph">portal_github_oauth_client_id</code>). Create a Quadlet drop-in file to map each secret to a container environment variable. For more information on referencing secrets in your service configuration, see the Configuring the automation portal RHEL appliance guide.</li> 
+      </ul> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">The <code class="ph codeph">portal-backup</code> utility does not currently capture EE Builder secrets or custom Quadlet drop-in files. After configuring EE Builder secrets, store the secret values and the contents of <code class="ph codeph">ee-builder-secrets.conf</code> in a secure external location (for example, a vault or password manager). After a <code class="ph codeph">portal-restore</code>, you must recreate the Podman secrets and the drop-in file manually.</p> 
+       </div>
+      </div> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">If you host execution environment wizard templates in a private Git repository or deploy in an air-gapped environment, complete the steps in Host execution environment wizard templates in a private Git repository before configuring discovery sources.</p> 
+       </div>
+      </div> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Prerequisites</h2> 
+      <p class="p">Before configuring execution environment builder, decide which Git provider your organization uses and understand the authentication method for each capability.</p> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">GitHub</h2> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:25%">
+        <col style="width:50%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="con-ee-builder-overview__entry__10">Capability</th> 
+         <th class="entry" id="con-ee-builder-overview__entry__11">Authentication method</th> 
+         <th class="entry" id="con-ee-builder-overview__entry__12">What it does</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="con-ee-builder-overview__entry__10">Content discovery</td> 
+         <td class="entry" headers="con-ee-builder-overview__entry__11">GitHub App or PAT</td> 
+         <td class="entry" headers="con-ee-builder-overview__entry__12">Scans repositories for<code class="ph codeph">galaxy.yml</code> files to populate the collection catalog</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-ee-builder-overview__entry__10">Saving definition files to a repository</td> 
+         <td class="entry" headers="con-ee-builder-overview__entry__11">GitHub OAuth App</td> 
+         <td class="entry" headers="con-ee-builder-overview__entry__12">Creates EE definition files and saves them to a new repo or opens a pull request</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-ee-builder-overview__entry__10">Automated image builds</td> 
+         <td class="entry" headers="con-ee-builder-overview__entry__11">GitHub OAuth App + repository or organization secrets</td> 
+         <td class="entry" headers="con-ee-builder-overview__entry__12">Builds a container image using GitHub Actions and pushes to a registry</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">GitLab</h2> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:25%">
+        <col style="width:50%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="con-ee-builder-overview__entry__22">Capability</th> 
+         <th class="entry" id="con-ee-builder-overview__entry__23">Authentication method</th> 
+         <th class="entry" id="con-ee-builder-overview__entry__24">What it does</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="con-ee-builder-overview__entry__22">Content discovery</td> 
+         <td class="entry" headers="con-ee-builder-overview__entry__23">PAT</td> 
+         <td class="entry" headers="con-ee-builder-overview__entry__24">Scans groups for<code class="ph codeph">galaxy.yml</code> files to populate the collection catalog</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-ee-builder-overview__entry__22">Saving definition files to a repository</td> 
+         <td class="entry" headers="con-ee-builder-overview__entry__23">GitLab OAuth App</td> 
+         <td class="entry" headers="con-ee-builder-overview__entry__24">Creates EE definition files and saves them to a new repo or opens a merge request</td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">Content discovery credentials (GitHub App or PAT) provide read-only access only. Any write operation (saving definition files, creating repositories) goes through the OAuth flow.</p> 
+       </div>
+      </div> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Security considerations</h2> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">OpenShift deployments:</strong> Store tokens and OAuth credentials in OpenShift secrets (<code class="ph codeph">oc create secret generic</code>), never in plain text or version control.</li> 
+       <li class="li"><strong class="ph b">RHEL appliance deployments:</strong> Store tokens using Podman secrets (<code class="ph codeph">podman secret create</code>).</li> 
+       <li class="li">Use minimum required token permissions for your use case.</li> 
+       <li class="li">Rotate PATs regularly according to your organization's security policy.</li> 
+      </ul> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_ee_definition_components">Execution environment definition components</a></strong><br>When you create a custom execution environment definition, you configure the core components that determine the environment's capabilities, security, and dependencies.</li>
+     </ul>
+     <div class="linklist relconcepts">
+      <strong>Related concepts</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_self_service_rhel_appliances" title="The Ansible automation portal RHEL virtual machine appliances provide pre-configured virtual machines that you can deploy across multiple virtualization platforms.">Configuring the automation portal RHEL appliance</a></li>
+      </ul>
+     </div>
+     <div class="linklist reltasks">
+      <strong>Related tasks</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_apply_configuration_changes" title="Apply configuration changes after modifying your Helm chart values or RHEL appliance configuration file for execution environment builder.">Apply configuration changes</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_host_templates_private_repo" title="Copy the EE Builder wizard templates from the public Ansible GitHub repository to a private repository for use in private or air-gapped environments.">Host execution environment wizard templates in a private Git repository</a></li>
+      </ul>
+     </div>
+     <div class="linklist relref">
+      <strong>Related reference</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_ee_builder_permissions" title="Execution environment builder uses navigation-level permissions that control which sidebar items and pages are visible to users in Ansible automation portal.">Execution environment builder permissions</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,37 @@
+# Full configuration examples
+## Full app-config-rhdh ConfigMap example for Ansible plug-ins entries
+
+This example details necessary settings like the creatorService URL, optional integrations for Ansible Automation Platform and OpenShift Dev Spaces, and the addition of Ansible software templates to the catalog.
+
+```
+kind: ConfigMap
+...
+metadata:
+name: app-config-rhdh
+...
+data:
+app-config-rhdh.yaml: |-
+ansible:
+creatorService:
+baseUrl: 127.0.0.1
+port: '8000'
+# Optional integrations
+rhaap:
+baseUrl: '<https://your-controller-url>'
+token: '<AAP Personal Access Token>'
+checkSSL: true
+devSpaces:
+baseUrl: '<https://MyDevSpacesURL>'
+automationHub:
+baseUrl: '<https://MyPrivateAutomationHubURL>'
+
+...
+catalog:
+locations:
+- type: url
+target: https://github.com/ansible/ansible-rhdh-templates/blob/main/all.yaml
+rules:
+- allow: [Template]
+...
+```
+

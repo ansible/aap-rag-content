@@ -1,0 +1,151 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-3a6955c2-8f8e-4f04-870f-531c00c90d00">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Build a searchable knowledge base image from your documentation</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">The <code class="ph codeph">rag-content</code> tool converts your documentation into a vector database that the intelligent assistant uses to retrieve relevant content when responding to queries. Use this procedure to download the tool version best suited to your system's hardware.</p> 
+     <section class="section prereq" id="GUID-3a6955c2-8f8e-4f04-870f-531c00c90d00__prereq_1">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div>Podman is installed and configured on your host system to manage container images.
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <div class="ul steps-unordered">
+       <div class="li step p"> <span class="ph cmd">Run the following command to "pull" (download) the appropriate container image.</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>podman pull registry.redhat.io/lightspeed-core/rag-tool-rhel9:v0.5-latest</code></pre> 
+        </div> 
+       </div>
+      </div>
+     </section> 
+    </div> 
+    <article class="topic task nested1" aria-labelledby="ariaid-title2" id="task_1"> 
+     <h2 class="title topictitle2" id="ariaid-title2">Create a vector database from your documentation</h2> 
+     <div class="body taskbody">
+      <p class="shortdesc">Generate a vector database after you have prepared your organization's documentation and converted it to a Markdown or plain-text file.</p> 
+      <section class="section prereq" id="task_1__prereq_2">
+       <div class="tasklabel">
+        <h3 class="sectiontitle tasklabel">Before you begin</h3>
+       </div> 
+       <ul class="ul" id="task_1__ul_1"> 
+        <li class="li">You have prepared your data for BYOK and converted the documentation to a Markdown or plain-text file format.</li> 
+        <li class="li">You have kept the BYOK data between 1 Mi and 999 Mi for best performance. While the system supports larger allocations up to 2 Gi, smaller volumes are recommended.</li> 
+        <li class="li">You have installed and configured Podman on your host system to manage container images.</li> 
+       </ul> 
+      </section> 
+      <section id="task_1__steps_1">
+       <div class="tasklabel">
+        <h3 class="sectiontitle tasklabel">Procedure</h3>
+       </div>
+       <ol class="ol steps" id="task_1__steps_1">
+        <li class="li step stepexpand"> <span class="ph cmd">Create a directory for your knowledge sources and outputs:</span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>mkdir -p knowledge-sources/my-org-docs
+mkdir -p output/vector_db
+cp -r /path/to/your/prepared/files/* knowledge-sources/my-org-docs/</code></pre> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Optional: Configure a metadata processor to add URL references (key="url") to indexed chunks. Use one of the following options: </span> 
+         <ol type="a" class="ol substeps" id="task_1__substeps_1"> 
+          <li class="li substep substepexpand"> <span class="ph cmd">Include the <a class="xref" href="https://github.com/lightspeed-core/rag-content?tab=readme-ov-file#yaml-frontmatter-support" target="_blank" rel="external noopener">YAML frontmatter</a> in the sources. </span> </li> 
+          <li class="li substep substepexpand"> <span class="ph cmd">Write a custom data processor, as shown in the following example:</span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code># custom_processor.py
+def add_metadata(chunk, source_file): 
+     chunk.metadata['url'] = f"https://docs.example.com/{source_file}"                                   
+     chunk.metadata['title'] = source_file.replace('-', ' ').title()
+     return chunk</code></pre> 
+           </div> </li> 
+         </ol> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Run the <code class="ph codeph">rag-content</code> tool to generate the vector database:</span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>podman run --rm \ 
+-u 0 \ 
+-v "$(pwd)/knowledge-sources/my-org-docs:/input:Z" \ 
+-v "$(pwd)/output:/output:Z" \
+registry.redhat.io/lightspeed-core/rag-tool-rhel9:v0.5-latest \ 
+   python /rag-content/scripts/generate_embeddings.py \ 
+    -f /input \ 
+    -o /output/vector_db \ 
+    -i my-docs-index \ 
+     --exclude-model \ 
+     --output-image /output/rag-content-output-latest.tar \ 
+     --image-name rag-content-output \ 
+     --image-tag latest</code></pre> 
+         </div> </li>
+       </ol>
+      </section> 
+      <section class="example">
+       <div class="tasklabel">
+        <h3 class="sectiontitle tasklabel">Example</h3>
+       </div>Replace the values in the command above with your own paths and names. Use the table below as a reference. 
+       <table class="table" id="task_1__table_1">
+        <caption></caption>
+        <colgroup>
+         <col style="width:33.33333333333333%">
+         <col style="width:33.33333333333333%">
+         <col style="width:33.33333333333333%">
+        </colgroup>
+        <thead class="thead"> 
+         <tr class="row"> 
+          <th class="entry" id="task_1__table_1__entry__1">Parameter</th> 
+          <th class="entry" id="task_1__table_1__entry__2">Description</th> 
+          <th class="entry" id="task_1__table_1__entry__3">What to provide</th> 
+         </tr> 
+        </thead>
+        <tbody class="tbody"> 
+         <tr class="row"> 
+          <td class="entry" headers="task_1__table_1__entry__1"><code class="ph codeph">$(pwd)/knowledge-sources/my-org-docs</code></td> 
+          <td class="entry" headers="task_1__table_1__entry__2">Source data path</td> 
+          <td class="entry" headers="task_1__table_1__entry__3">The full path to the folder containing your raw documents (PDFs, TXT, etc.).</td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="task_1__table_1__entry__1"><code class="ph codeph">$(pwd)/output</code></td> 
+          <td class="entry" headers="task_1__table_1__entry__2">Local output path</td> 
+          <td class="entry" headers="task_1__table_1__entry__3"> <p class="p">The folder on your computer where you want the finished database to be saved. <strong class="ph b"></strong></p> <p class="p"><strong class="ph b">Note</strong>: The HASH may differ depending on which container image was used previously.</p> </td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="task_1__table_1__entry__1"><code class="ph codeph">/output/vector_db</code></td> 
+          <td class="entry" headers="task_1__table_1__entry__2">Database folder Name</td> 
+          <td class="entry" headers="task_1__table_1__entry__3"> <p dir="ltr" class="p">The name of the subdirectory created inside your output folder to store the database.</p> </td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="task_1__table_1__entry__1"> <p dir="ltr" class="p"><code class="ph codeph">my-docs-index</code></p> </td> 
+          <td class="entry" headers="task_1__table_1__entry__2">Search index name</td> 
+          <td class="entry" headers="task_1__table_1__entry__3">A unique, descriptive name for this specific collection of data.</td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="task_1__table_1__entry__1"><code class="ph codeph">/output/rag-content-output-latest.tar</code></td> 
+          <td class="entry" headers="task_1__table_1__entry__2">Export filename</td> 
+          <td class="entry" headers="task_1__table_1__entry__3">The name of the compressed file (.tar) that contains your portable database.</td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="task_1__table_1__entry__1"><code class="ph codeph">rag-content-output</code></td> 
+          <td class="entry" headers="task_1__table_1__entry__2">Internal image Name</td> 
+          <td class="entry" headers="task_1__table_1__entry__3">The name assigned to the container is used if you load this data into another system later.</td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="task_1__table_1__entry__1"><code class="ph codeph">latest</code></td> 
+          <td class="entry" headers="task_1__table_1__entry__2">Version tag</td> 
+          <td class="entry" headers="task_1__table_1__entry__3">A version label (for example, v1.0 or April-2026) to track your database updates.</td> 
+         </tr> 
+        </tbody>
+       </table> 
+       <div class="note note note_note">
+        <span class="note__title">Note:</span> 
+        <div class="note__body"> 
+         <p class="p">If you encounter the following error message, you can ignore it, as it does not affect vector database creation: </p> 
+         <p class="p"><code class="ph codeph">AttributeError: 'SqliteKVStoreImpl' object has no attribute 'close'</code></p> 
+        </div>
+       </div> 
+      </section> 
+     </div> 
+    </article> 
+   </article>
+  </main>
+ </body>
+</html>

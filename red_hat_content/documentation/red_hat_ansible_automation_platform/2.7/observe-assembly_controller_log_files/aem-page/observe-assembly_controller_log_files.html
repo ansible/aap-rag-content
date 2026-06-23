@@ -1,0 +1,83 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-controller-log-files"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Access log information</h1> 
+     <p class="shortdesc">Automation controller logs are accessed in different ways depending on whether you have an RPM-based or containerized installation of Ansible Automation Platform.</p> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-controller-log-files-containerized"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Access automation controller logs for containerized Ansible Automation Platform</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Logs for containerized Ansible Automation Platform are not saved to specific files. The application logs are sent to the container <code class="ph codeph">stdout</code> and handled by Podman with <code class="ph codeph">journald</code>.</p> 
+       <section class="section"> 
+        <p class="p">The three containers associated with automation controller are:</p> 
+        <ul class="ul"> 
+         <li class="li"> <code class="ph codeph">automation-controller-rsyslog</code> </li> 
+         <li class="li"> <code class="ph codeph">automation-controller-task</code> </li> 
+         <li class="li"> <code class="ph codeph">automation-controller-web</code> </li> 
+        </ul> 
+        <p class="p">For more information about the purpose of each of these containers and how to inspect the logs, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-assembly_appendix_troubleshoot_containerized_aap#diagnosing-the-problem" title="For general container-based troubleshooting, you can inspect the container logs for any running service to help troubleshoot underlying issues.">Diagnosing the problem</a> in <em class="ph i">Containerized installation</em>.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="ref-controller-log-files"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Access automation controller logs for RPM-based Ansible Automation Platform</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Automation controller logfiles can be accessed from two centralized locations:</p> 
+       <section class="section"> 
+        <ul class="ul"> 
+         <li class="li"> <code class="ph codeph">/var/log/tower/</code> </li> 
+         <li class="li"> <code class="ph codeph">/var/log/supervisor/</code> </li> 
+        </ul> 
+        <p class="p">In the <code class="ph codeph">/var/log/tower/</code> directory, you can view logfiles captured by:</p> 
+        <ul class="ul"> 
+         <li class="li"><strong class="ph b">tower.log:</strong> Captures the log messages such as runtime errors that occur when the job is executed.</li> 
+         <li class="li"><strong class="ph b">callback_receiver.log:</strong> Captures callback receiver logs that handles callback events when running ansible jobs.</li> 
+         <li class="li"><strong class="ph b">dispatcher.log:</strong> Captures log messages for the automation controller dispatcher worker service.</li> 
+         <li class="li"><strong class="ph b">job_lifecycle.log:</strong> Captures details of the job run, whether it is blocked, and what condition is blocking it.</li> 
+         <li class="li"><strong class="ph b">management_playbooks.log:</strong> Captures the logs of management playbook runs, and isolated job runs such as copying the metadata.</li> 
+         <li class="li"><strong class="ph b">rsyslog.err:</strong> Captures rsyslog errors authenticating with external logging services when sending logs to them.</li> 
+         <li class="li"><strong class="ph b">task_system.log:</strong> Captures the logs of tasks that automation controller is running in the background, such as adding cluster instances and logs related to information gathering or processing for analytics.</li> 
+         <li class="li"><strong class="ph b">tower_rbac_migrations.log:</strong> Captures the logs for rbac database migration or upgrade.</li> 
+         <li class="li"><strong class="ph b">tower_system_tracking_migrations.log:</strong> Captures the logs of the controller system tracking migration or upgrade.</li> 
+         <li class="li"><strong class="ph b">wsbroadcast.log:</strong> Captures the logs of WebSocket connections in the controller nodes.</li> 
+        </ul> 
+        <p class="p">In the <code class="ph codeph">/var/log/supervisor/</code> directory, you can view logfiles captured by:</p> 
+        <ul class="ul"> 
+         <li class="li"><strong class="ph b">awx-callback-receiver.log:</strong> Captures the log of callback receiver that handles callback events when running ansible jobs, managed by <code class="ph codeph">supervisord</code>.</li> 
+         <li class="li"><strong class="ph b">awx-daphne.log:</strong> Captures the logs of WebSocket communication of WebUI.</li> 
+         <li class="li"><strong class="ph b">awx-dispatcher.log:</strong> Captures the logs that occur when dispatching a task to an automation controller instance, such as when running a job.</li> 
+         <li class="li"><strong class="ph b">awx-rsyslog.log:</strong> Captures the logs for the <code class="ph codeph">rsyslog</code> service.</li> 
+         <li class="li"><strong class="ph b">awx-uwsgi.log:</strong> Captures the logs related to uWSGI, which is an application server.</li> 
+         <li class="li"><strong class="ph b">awx-wsbroadcast.log:</strong> Captures the logs of the WebSocket service that is used by automation controller.</li> 
+         <li class="li"><strong class="ph b">failure-event-handler.stderr.log:</strong> Captures the standard errors for <code class="ph codeph">/usr/bin/failure-event-handler</code> supervisord’s subprocess.</li> 
+         <li class="li"><strong class="ph b">supervisord.log:</strong> Captures the logs related to <code class="ph codeph">supervisord</code> itself.</li> 
+         <li class="li"><strong class="ph b">wsrelay.log:</strong> Captures the communication logs within the WebSocket relay server.</li> 
+         <li class="li"><strong class="ph b">ws_heartbeat.log:</strong> Captures the periodic checks on the health of services running on the host.</li> 
+         <li class="li"><strong class="ph b">rsyslog_configurer.log:</strong> Captures rsyslog configuration activity associated with authenticating with external logging services.</li> 
+        </ul> 
+        <p class="p">The <code class="ph codeph">/var/log/supervisor/</code> directory includes <code class="ph codeph">stdout</code> files for all services as well.</p> 
+        <p class="p">You can expect the following log paths to be generated by services used by automation controller (and Ansible Automation Platform):</p> 
+        <ul class="ul"> 
+         <li class="li"> <strong class="ph b">/var/log/nginx/</strong> </li> 
+         <li class="li"> <strong class="ph b">/var/lib/pgsql/data/pg_log/</strong> </li> 
+         <li class="li"> <strong class="ph b">/var/log/redis/</strong> </li> 
+        </ul> 
+        <p class="p"> <strong class="ph b">Troubleshooting</strong> </p> 
+        <p class="p">Error logs can be found in the following locations:</p> 
+        <ul class="ul"> 
+         <li class="li">Automation controller server errors are logged in <code class="ph codeph">/var/log/tower</code>.</li> 
+         <li class="li">Supervisors logs can be found in <code class="ph codeph">/var/log/supervisor/</code>.</li> 
+         <li class="li">Nginx web server errors are logged in the httpd error log.</li> 
+         <li class="li">Configure other automation controller logging needs in <code class="ph codeph">/etc/tower/conf.d/</code>.</li> 
+        </ul> 
+        <p class="p">Explore client-side issues by using the JavaScript console built into most browsers and report any errors to Ansible through the Red Hat Customer portal at: <a class="xref" href="https://access.redhat.com/" target="_blank" rel="external noopener">https://access.redhat.com/</a>.</p> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

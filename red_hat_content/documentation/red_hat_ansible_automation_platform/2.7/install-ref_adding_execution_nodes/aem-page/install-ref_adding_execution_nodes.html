@@ -1,0 +1,42 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="adding-execution-nodes">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Add execution nodes</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Containerized Ansible Automation Platform can deploy remote execution nodes.</p> 
+     <section class="section"> 
+      <p class="p">You can define remote execution nodes in the <code class="ph codeph">[execution_nodes]</code> group of your inventory file:</p> 
+      <pre class="pre codeblock"><code>[execution_nodes]
+&lt;fqdn_of_your_execution_host&gt;</code></pre> 
+      <p class="p">By default, an execution node uses the following settings that you can update as needed:</p> 
+      <pre class="pre codeblock"><code>receptor_port=27199
+receptor_protocol=tcp
+receptor_type=execution</code></pre> 
+      <ul class="ul"> 
+       <li class="li"><code class="ph codeph">receptor_port</code> - The port number that receptor listens on for incoming connections from other receptor nodes.</li> 
+       <li class="li"><code class="ph codeph">receptor_type</code> - The role of the node. Valid options include <code class="ph codeph">execution</code> or <code class="ph codeph">hop</code>.</li> 
+       <li class="li"><code class="ph codeph">receptor_protocol</code> - The protocol used for communication. Valid options include <code class="ph codeph">tcp</code> or <code class="ph codeph">udp</code>.</li> 
+      </ul> 
+      <p class="p">By default, execution nodes automatically peer with all automation controller nodes. To configure an execution node to peer with specific automation controller nodes instead, use the <code class="ph codeph">receptor_peers</code> variable.</p> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">The value of <code class="ph codeph">receptor_peers</code> must be a comma-separated list of host names. Do not use inventory group names.</p> 
+       </div>
+      </div> 
+      <p class="p"> <strong class="ph b">Example:</strong> </p> 
+      <pre class="pre codeblock"><code>[execution_nodes]
+# Uses default peering (peers with all controller nodes)
+exec1.example.com
+# Only peers with specific controller nodes
+exec2.example.com receptor_peers='["controller1.example.com","controller2.example.com"]'
+# Hop node that peers with specific execution nodes
+hop1.example.com receptor_type=hop receptor_peers='["exec1.example.com","exec2.example.com"]'</code></pre> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

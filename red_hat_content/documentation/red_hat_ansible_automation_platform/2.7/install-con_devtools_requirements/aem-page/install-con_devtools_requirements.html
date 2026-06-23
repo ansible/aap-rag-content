@@ -1,0 +1,147 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="devtools-requirements"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Requirements</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">To install and use Ansible development tools, you must meet the following requirements. Extra requirements for Windows installations and containerized installations are indicated in the procedures.</p> 
+      <ul class="ul"> 
+       <li class="li">Python 3.10 or later.</li> 
+       <li class="li">VS Code (Visual Studio Code) with the Ansible extension added.</li> 
+       <li class="li">For containerized installations, the Microsoft Dev Containers VS Code extension.</li> 
+       <li class="li">A containerization platform, for example Podman, Podman Desktop, Docker, or Docker Desktop. 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">The installation procedure for Ansible development tools on Windows covers the use of Podman Desktop only.</p> 
+         </div>
+        </div> </li> 
+       <li class="li">You have a Red Hat account and you can log in to the Red Hat container registry at <code class="ph codeph">registry.redhat.io</code>.</li> 
+      </ul> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist">
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_devtools_install_vsc#devtools-install-vsc" title="Install VS Code by following the instructions found on the Download Visual Studio Code page in the official documentation.">Install and configure VS Code</a></li>
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_devtools_ms_dev_containers_ext" title="If you are installing the containerized version of Ansible development tools, you must install the Microsoft Dev Containers extension in VS Code.">Install and configure the Dev Containers extension</a></li>
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_devtools_requirements#devtools-install-podman-desktop-wsl" title="If you are installing Ansible development tools on a container in VS Code on Windows, there are extra requirements:">Requirements for Ansible development tools on Windows</a></li>
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_devtools_requirements#devtools-setup-registry-redhat-io" title="All container images available through the Red Hat container catalog are hosted on an image registry, registry.redhat.io. The registry requires authentication for access to images.">Authenticate with the Red Hat container registry</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="devtools-install-podman-desktop-wsl"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Requirements for Ansible development tools on Windows</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">If you are installing Ansible development tools on a container in VS Code on Windows, there are extra requirements:</p> 
+       <section class="section prereq" id="devtools-install-podman-desktop-wsl__prereq_1">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul" id="devtools-install-podman-desktop-wsl__ul_1"> 
+         <li class="li">Windows Subsystem for Linux(WSL2)</li> 
+         <li class="li">Podman Desktop</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Install WSL2 without a distribution: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ wsl --install --no-distribution</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Use <code class="ph codeph">cgroupsv2</code> by disabling <code class="ph codeph">cgroupsv1</code> for WSL2: </span> 
+          <div class="itemgroup info"> 
+           <p class="p">Edit the <code class="ph codeph">%USERPROFILE%/wsl.conf</code> file and add the following lines to force <code class="ph codeph">cgroupv2</code> usage:</p> 
+           <pre class="pre codeblock"><code>[wsl2]
+kernelCommandLine = cgroup_no_v1="all"</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Install Podman Desktop. Follow the instructions in <a class="xref" href="https://podman-desktop.io/docs/installation/windows-install" target="_blank" rel="external noopener">Installing Podman Desktop and Podman on Windows</a> in the Podman Desktop documentation. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">You do not need to change the default settings in the set-up wizard.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Ensure the podman machine is using <code class="ph codeph">cgroupsv2</code>: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ podman info | findstr cgroup</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Test Podman Desktop: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ podman run hello</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Configure the settings for Podman Desktop. Add a <code class="ph codeph">%USERPROFILE%\bin\docker.bat</code> file with the following content: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>@echo off
+podman %*</code></pre> 
+           <p class="p">This avoids having to install Docker as required by the VS Code <code class="ph codeph">Dev Container</code> extension.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Add the <code class="ph codeph">%USERPROFILE%\bin</code> directory to the <code class="ph codeph">PATH</code>: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">Select <strong class="ph b">Settings</strong> and search for "Edit environment variables for your account" to display all of the user environment variables.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Highlight "Path" in the top user variables box, click <span class="ph uicontrol button">Edit</span> and add the path.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Click <span class="ph uicontrol button">Save</span> to set the path for any new console that you open.</span> </li> 
+          </ol> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="devtools-setup-registry-redhat-io"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Authenticate with the Red Hat container registry</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">All container images available through the Red Hat container catalog are hosted on an image registry, <code class="ph codeph">registry.redhat.io</code>. The registry requires authentication for access to images.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have a Red Hat login. It is the same account that you use to log in to the Red Hat Customer Portal (access.redhat.com) and manage your Red Hat subscriptions.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">If you are planning to install the Ansible development tools on a container inside VS Code, you must log in to <code class="ph codeph">registry.redhat.io</code> before launching VS Code so that VS Code can pull the <code class="ph codeph">devtools</code> container from <code class="ph codeph">registry.redhat.io</code>.</p> 
+          <p class="p">If you are running Ansible development tools on a container inside VS Code and you want to pull execution environments or the <code class="ph codeph">devcontainer</code> to use as an execution environment, you must log in from a terminal prompt within the <code class="ph codeph">devcontainer</code> from a terminal inside VS Code.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Check whether you are already logged in to the <code class="ph codeph">registry.redhat.io</code> registry: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ podman login --get-login registry.redhat.io</code></pre> 
+           <p class="p">The command output displays your Red Hat login if you are logged in to <code class="ph codeph">registry.redhat.io</code>.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">If you are not logged in to <code class="ph codeph">registry.redhat.io</code>, use the <code class="ph codeph">podman login</code> command with your credentials to access content on the registry. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ podman login registry.redhat.io
+Username: my_redhat_username
+Password: ***********</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://access.redhat.com/RegistryAuthentication" target="_blank" rel="external noopener">Red Hat Container Registry Authentication</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

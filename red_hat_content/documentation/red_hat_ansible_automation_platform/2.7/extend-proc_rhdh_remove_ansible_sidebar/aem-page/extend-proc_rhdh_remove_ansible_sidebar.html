@@ -1,0 +1,57 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="rhdh-remove-ansible-sidebar">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Remove the Ansible sidebar navigation item</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">By default, the Ansible plug-ins add an Ansible item to the Red Hat Developer Hub sidebar navigation. You can remove the sidebar entry while keeping the <code class="ph codeph">/ansible</code> route accessible by URL.</p> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">If you are embedding the Ansible plug-ins into an existing Red Hat Developer Hub instance and do not want a separate Ansible sidebar entry, you can remove it by modifying the <code class="ph codeph">dynamicRoutes</code> configuration for the frontend plug-in.</p> 
+      <p class="p">The <code class="ph codeph">/ansible</code> route remains accessible by URL. Only the sidebar navigation item is removed.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">In your dynamic plug-ins configuration, locate the <code class="ph codeph">ansible.plugin-backstage-rhaap</code> frontend plug-in entry.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Remove the <code class="ph codeph">menuItem</code> block from the <code class="ph codeph">dynamicRoutes</code> section.</span> 
+        <div class="itemgroup info"> 
+         <p class="p"><strong class="ph b">Before (sidebar item enabled):</strong></p> 
+         <pre class="pre codeblock language-yaml"><code>pluginConfig:
+  dynamicPlugins:
+    frontend:
+      ansible.plugin-backstage-rhaap:
+        appIcons:
+          - importName: AnsibleLogo
+            name: AnsibleLogo
+        dynamicRoutes:
+          - importName: AnsiblePage
+            menuItem:
+              icon: AnsibleLogo
+              text: Ansible
+            path: /ansible</code></pre> 
+         <p class="p"><strong class="ph b">After (sidebar item removed):</strong></p> 
+         <pre class="pre codeblock language-yaml"><code>pluginConfig:
+  dynamicPlugins:
+    frontend:
+      ansible.plugin-backstage-rhaap:
+        appIcons:
+          - importName: AnsibleLogo
+            name: AnsibleLogo
+        dynamicRoutes:
+          - importName: AnsiblePage
+            path: /ansible</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Apply the changes. For Helm deployments, click <strong class="ph b">Upgrade</strong>. For Operator deployments, the deployment auto-reloads when the ConfigMap is updated.</span> </li>
+      </ol>
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

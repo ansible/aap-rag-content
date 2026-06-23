@@ -1,0 +1,34 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="troubleshoot-oidc-scope-mismatch">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Troubleshoot Generic OIDC scope mismatches</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Authentication fails when the Identity Provider (IdP) does not support the default scopes automatically appended by the system.</p> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">To prevent the system from appending this default scope, you must add a setting to your authenticator configuration.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Authentication Methods</span></span>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Select your OIDC authenticator from the list.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Edit authentication</span>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Additional Authenticator Fields</strong> section, add the following attribute and value. This input box supports either YAML or JSON. Ensure you add this key-value pair on a new line if there are other fields present: </span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-yaml"><code>IGNORE_DEFAULT_SCOPE: True</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Save your changes. The authenticator now only uses the scopes you explicitly defined, resolving any authentication failures related to unsupported scopes.</span> </li>
+      </ol>
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

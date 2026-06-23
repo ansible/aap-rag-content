@@ -1,0 +1,260 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="ref-troubleshoot-metrics-service">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Troubleshoot metrics service</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Diagnostic procedures and solutions for common metrics service issues to resolve problems and restore data collection.</p> 
+     <section class="section">
+      <h2 class="title sectiontitle">Diagnostic commands</h2> 
+      <pre class="pre codeblock"><code># Container status
+podman ps -a | grep automation-metrics
+
+# Systemd unit status (user scope)
+systemctl --user status automation-metrics-web.service
+systemctl --user status automation-metrics-tasks.service
+systemctl --user status automation-metrics-scheduler.service
+
+# Recent logs
+podman logs automation-metrics-web --tail 100
+podman logs automation-metrics-tasks --tail 100
+podman logs automation-metrics-scheduler --tail 100
+
+# Init container logs (for migration issues)
+podman logs automation-metrics-init
+
+# Health endpoint check (via nginx)
+# Returns HTTP 2** (e.g., 200) if ok, 50* (e.g., 503) if degraded
+curl https://localhost:8450/health/ ( http://localhost:8087/health if HTTPS is disabled).
+
+# Database connectivity
+psql -h localhost -U metrics_service -d metrics_service -c "SELECT 1;"
+psql -h localhost -U ms_awx_readonly -d awx -c "SELECT COUNT(*) FROM main_job LIMIT 1;"
+
+# Verify Podman secrets (should show 4 secrets)
+podman secret ls | grep automationmetrics
+
+# Verify dashboard collection feature flag status
+podman exec automation-metrics-web \
+  env | grep METRICS_SERVICE_FEATURE_ENABLED__DASHBOARD_COLLECTION</code></pre> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Common issues</h2> 
+      <table class="table frame-all">
+       <caption></caption>
+       <colgroup>
+        <col style="width:28.57142857142857%">
+        <col style="width:28.57142857142857%">
+        <col style="width:42.857142857142854%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry colsep-1 rowsep-1" id="ref-troubleshoot-metrics-service__entry__1">Symptom</th> 
+         <th class="entry colsep-1 rowsep-1" id="ref-troubleshoot-metrics-service__entry__2">Possible Cause</th> 
+         <th class="entry rowsep-1" id="ref-troubleshoot-metrics-service__entry__3">Solution</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-troubleshoot-metrics-service__entry__1"><strong class="ph b">Installation fails with:</strong><code class="ph codeph">unable to connect to database: FATAL: database "awx" does not exist</code></td> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-troubleshoot-metrics-service__entry__2">Separate database host topology issue. metrics service and controller databases on different hosts,<code class="ph codeph">DATABASES__awx__HOST</code> set incorrectly. OR<code class="ph codeph">controller_pg_database</code> set to non-default value but<code class="ph codeph">automationmetrics_controller_db</code> not updated to match.</td> 
+         <td class="entry rowsep-1" headers="ref-troubleshoot-metrics-service__entry__3"><strong class="ph b">Step 1:</strong> Verify<code class="ph codeph">automationmetrics_controller_read_pg_host</code> points to controller database host.<strong class="ph b">Step 2:</strong> Verify<code class="ph codeph">automationmetrics_controller_db</code> matches<code class="ph codeph">controller_pg_database</code>.<strong class="ph b">Example fix:</strong> If<code class="ph codeph">controller_pg_database=custom_awx_db</code>, set<code class="ph codeph">automationmetrics_controller_db=custom_awx_db</code>.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-troubleshoot-metrics-service__entry__1"><strong class="ph b">Installation fails:</strong><code class="ph codeph">controller_pg_database</code> mismatch</td> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-troubleshoot-metrics-service__entry__2"><code class="ph codeph">controller_pg_database</code> set to custom value,<code class="ph codeph">automationmetrics_controller_db</code> not set to same value</td> 
+         <td class="entry rowsep-1" headers="ref-troubleshoot-metrics-service__entry__3">Set<code class="ph codeph">automationmetrics_controller_db</code> to match<code class="ph codeph">controller_pg_database</code> exactly.<strong class="ph b">Example:</strong><code class="ph codeph">controller_pg_database=my_custom_awx</code> requires<code class="ph codeph">automationmetrics_controller_db=my_custom_awx</code>. Default for<code class="ph codeph">automationmetrics_controller_db</code> is<code class="ph codeph">awx</code>, which causes mismatch if controller uses different database name.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-troubleshoot-metrics-service__entry__1">Container exits immediately</td> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-troubleshoot-metrics-service__entry__2">Database connection failure</td> 
+         <td class="entry rowsep-1" headers="ref-troubleshoot-metrics-service__entry__3">Verify database credentials and connectivity</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-troubleshoot-metrics-service__entry__1">Port conflict error (ports 8087 or 8450)</td> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-troubleshoot-metrics-service__entry__2">Nginx port already in use</td> 
+         <td class="entry rowsep-1" headers="ref-troubleshoot-metrics-service__entry__3">Identify conflicting process:<code class="ph codeph">ss -tulpn | grep 8087</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-troubleshoot-metrics-service__entry__1">Permission denied errors</td> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-troubleshoot-metrics-service__entry__2">SELinux blocking container</td> 
+         <td class="entry rowsep-1" headers="ref-troubleshoot-metrics-service__entry__3">Check SELinux denials:<code class="ph codeph">ausearch -m avc</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-troubleshoot-metrics-service__entry__1">Connection timeout to Red Hat Data Ingress</td> 
+         <td class="entry colsep-1 rowsep-1" headers="ref-troubleshoot-metrics-service__entry__2">Firewall blocking HTTPS or proxy misconfiguration</td> 
+         <td class="entry rowsep-1" headers="ref-troubleshoot-metrics-service__entry__3">Allow outbound port 443; verify proxy configuration if used</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1" headers="ref-troubleshoot-metrics-service__entry__1">Task appears "stuck" or won't run</td> 
+         <td class="entry colsep-1" headers="ref-troubleshoot-metrics-service__entry__2">PostgreSQL advisory lock left held after process crash</td> 
+         <td class="entry" headers="ref-troubleshoot-metrics-service__entry__3">metrics service uses PostgreSQL advisory locks for task concurrency control. If a process crashes (segfault, OOM-kill), the lock may remain held.<strong class="ph b">Solution:</strong> Restart PostgreSQL or wait for lock timeout. Check for held locks:<code class="ph codeph">SELECT * FROM pg_locks WHERE locktype = 'advisory';</code></td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Service containers fail to start with validation errors</h2> 
+      <p class="p"><strong class="ph b">New in Ansible Automation Platform 2.7:</strong> Metrics service validates required production environment variables at startup to prevent misconfiguration.</p> 
+      <p class="p"><strong class="ph b">Symptom:</strong> Service containers fail to start with log messages indicating missing or invalid environment variables.</p> 
+      <p class="p"><strong class="ph b">Cause:</strong> Required production environment variables are not set or are incorrectly configured.</p> 
+      <p class="p"><strong class="ph b">Solution:</strong></p> 
+      <ol class="ol"> 
+       <li class="li">Check container logs for validation error messages: <pre class="pre codeblock"><code>podman logs automation-metrics-web --tail 50 | grep -i "validation\|error\|required"</code></pre> </li> 
+       <li class="li">Verify required environment variables are set correctly: <pre class="pre codeblock"><code>podman exec automation-metrics-web env | grep METRICS_SERVICE</code></pre> </li> 
+       <li class="li">Common validation failures: 
+        <table class="table frame-all">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:33.33333333333333%">
+          <col style="width:33.33333333333333%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry colsep-1 rowsep-1" id="ref-troubleshoot-metrics-service__entry__25">Validation Error</th> 
+           <th class="entry colsep-1 rowsep-1" id="ref-troubleshoot-metrics-service__entry__26">Required Variable</th> 
+           <th class="entry rowsep-1" id="ref-troubleshoot-metrics-service__entry__27">Solution</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry colsep-1 rowsep-1" headers="ref-troubleshoot-metrics-service__entry__25">Database host validation failed</td> 
+           <td class="entry colsep-1 rowsep-1" headers="ref-troubleshoot-metrics-service__entry__26"><code class="ph codeph">METRICS_SERVICE_DB_HOST</code></td> 
+           <td class="entry rowsep-1" headers="ref-troubleshoot-metrics-service__entry__27">Verify<code class="ph codeph">automationmetrics_pg_host</code> is set in inventory</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry colsep-1 rowsep-1" headers="ref-troubleshoot-metrics-service__entry__25">Controller database validation failed</td> 
+           <td class="entry colsep-1 rowsep-1" headers="ref-troubleshoot-metrics-service__entry__26"><code class="ph codeph">METRICS_SERVICE_CONTROLLER_DB_HOST</code></td> 
+           <td class="entry rowsep-1" headers="ref-troubleshoot-metrics-service__entry__27">Verify<code class="ph codeph">automationmetrics_controller_read_pg_host</code> is set</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry colsep-1" headers="ref-troubleshoot-metrics-service__entry__25">Secret key validation failed</td> 
+           <td class="entry colsep-1" headers="ref-troubleshoot-metrics-service__entry__26"><code class="ph codeph">METRICS_SERVICE_SECRET_KEY</code></td> 
+           <td class="entry" headers="ref-troubleshoot-metrics-service__entry__27">Verify Podman secret<code class="ph codeph">automationmetrics_secret_key</code> exists</td> 
+          </tr> 
+         </tbody>
+        </table> </li> 
+       <li class="li">After fixing environment variables, restart the service: <pre class="pre codeblock"><code>systemctl --user restart automation-metrics-web.service</code></pre> </li> 
+      </ol> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Rollup processing troubleshooting</h2> 
+      <p class="p">Metrics service uses a daily rollup process to aggregate hourly metrics data. The following scenarios describe common rollup issues and solutions.</p> 
+      <p class="p"><strong class="ph b">Scenario 1: Rollup task failing</strong></p> 
+      <p class="p"><strong class="ph b">Symptom:</strong> <code class="ph codeph">daily_metrics_rollup</code> task fails or shows errors in <code class="ph codeph">automation-metrics-scheduler</code> logs.</p> 
+      <p class="p"><strong class="ph b">Cause:</strong> Hourly collection tasks did not complete successfully before rollup runs at 2:00 AM.</p> 
+      <p class="p"><strong class="ph b">Explanation:</strong> The rollup task depends on hourly data being available. If hourly collectors (<code class="ph codeph">collect_hourly_metrics</code>) fail or are delayed, the rollup cannot aggregate incomplete data.</p> 
+      <p class="p"><strong class="ph b">Solution:</strong></p> 
+      <ol class="ol"> 
+       <li class="li">Verify hourly collection tasks completed successfully: <pre class="pre codeblock"><code>podman exec automation-metrics-web \
+  psql -h localhost -U metrics_service -d metrics_service -c \
+  "SELECT name, status, started, finished FROM dynamic_tasks_taskexecution
+   WHERE name LIKE 'collect_hourly_metrics%'
+   ORDER BY started DESC LIMIT 24;"</code></pre> <p class="p">Expected output: All hourly tasks should show <code class="ph codeph">status = 'success'</code> for the past 24 hours.</p> </li> 
+       <li class="li">Check scheduler logs for task execution order: <pre class="pre codeblock"><code>podman logs automation-metrics-scheduler --tail 100 | grep -E "collect_hourly_metrics|daily_metrics_rollup"</code></pre> </li> 
+       <li class="li">If hourly tasks are failing, investigate root cause (database connectivity, controller database access, query timeouts).</li> 
+       <li class="li">After fixing hourly collection, manually trigger rollup: <pre class="pre codeblock"><code>podman exec automation-metrics-web metrics-service tasks create \
+  --name "manual-rollup" \
+  --function daily_metrics_rollup</code></pre> </li> 
+      </ol> 
+      <p class="p"><strong class="ph b">Scenario 2: cleanup_metrics_data running before rollup completes</strong></p> 
+      <p class="p"><strong class="ph b">Symptom:</strong> Rollup produces incomplete results or missing data for recent periods.</p> 
+      <p class="p"><strong class="ph b">Cause:</strong> Data cleanup task (<code class="ph codeph">cleanup_metrics_data</code> at 4:00 AM) runs before rollup completes, purging hourly data that rollup still needs.</p> 
+      <p class="p"><strong class="ph b">Explanation:</strong> This should not happen given the schedule (rollup at 2:00 AM, cleanup at 4:00 AM), but can occur if rollup is delayed or takes longer than 2 hours due to large data volumes.</p> 
+      <p class="p"><strong class="ph b">Solution:</strong></p> 
+      <ol class="ol"> 
+       <li class="li">Check rollup task duration: <pre class="pre codeblock"><code>podman exec automation-metrics-web \
+  psql -h localhost -U metrics_service -d metrics_service -c \
+  "SELECT name, started, finished, (finished - started) AS duration
+   FROM dynamic_tasks_taskexecution
+   WHERE name = 'daily_metrics_rollup'
+   ORDER BY started DESC LIMIT 7;"</code></pre> </li> 
+       <li class="li">If rollup consistently takes &gt;2 hours, adjust cleanup schedule by setting later execution time (contact Red Hat Support for guidance on modifying task schedules).</li> 
+       <li class="li">Verify data retention settings allow sufficient overlap: <pre class="pre codeblock"><code>podman exec automation-metrics-web env | grep RETENTION</code></pre> <p class="p">Expected: Hourly data retained for 7 days (default), giving rollup sufficient time to process even if delayed.</p> </li> 
+      </ol> 
+      <p class="p"><strong class="ph b">Scenario 3: Stuck task auto-detection and reset (NEW GA feature)</strong></p> 
+      <p class="p"><strong class="ph b">New in Ansible Automation Platform 2.7:</strong> The scheduler automatically detects and resets tasks stuck in <code class="ph codeph">running</code> state beyond their timeout.</p> 
+      <p class="p"><strong class="ph b">Feature behavior:</strong></p> 
+      <ul class="ul"> 
+       <li class="li">Scheduler periodically checks for tasks in <code class="ph codeph">running</code> state longer than configured timeout</li> 
+       <li class="li">Automatically resets stuck tasks to allow retry on next schedule</li> 
+       <li class="li">Logs stuck task detection and reset actions in <code class="ph codeph">automation-metrics-scheduler</code> container logs</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">How to monitor automatic stuck task recovery:</strong></p> 
+      <ol class="ol"> 
+       <li class="li">Check scheduler logs for stuck task detection: <pre class="pre codeblock"><code>podman logs automation-metrics-scheduler | grep -i "stuck\|timeout\|reset"</code></pre> <p class="p">Expected output: Log messages indicating stuck task detection and automatic reset.</p> </li> 
+       <li class="li">Query task execution history to see reset tasks: <pre class="pre codeblock"><code>podman exec automation-metrics-web \
+  psql -h localhost -U metrics_service -d metrics_service -c \
+  "SELECT name, status, started, finished
+   FROM dynamic_tasks_taskexecution
+   WHERE status = 'timeout' OR status = 'reset'
+   ORDER BY started DESC LIMIT 10;"</code></pre> </li> 
+      </ol> 
+      <p class="p"><strong class="ph b">When manual intervention is still needed:</strong></p> 
+      <p class="p">Automatic recovery handles transient issues (network timeouts, temporary database locks). Manual intervention is required when:</p> 
+      <ul class="ul"> 
+       <li class="li">Same task repeatedly gets stuck (indicates underlying infrastructure issue)</li> 
+       <li class="li">Task execution observability metrics show declining success rates</li> 
+       <li class="li">Database queries from metrics service are slow (check controller database performance)</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Scenario 4: Task execution observability</strong></p> 
+      <p class="p"><strong class="ph b">New in Ansible Automation Platform 2.7:</strong> <code class="ph codeph">collect_daily_metrics</code> task with <code class="ph codeph">task_executions</code> service provides pipeline health metrics.</p> 
+      <p class="p"><strong class="ph b">Purpose:</strong> Monitor the health and performance of the metrics collection pipeline itself (meta-metrics).</p> 
+      <p class="p"><strong class="ph b">What is collected:</strong></p> 
+      <ul class="ul"> 
+       <li class="li">Task success rates for all collectors (hourly, daily, rollup, anonymization)</li> 
+       <li class="li">Task execution timing and duration</li> 
+       <li class="li">Task error counts and types</li> 
+       <li class="li">Collection throughput metrics</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">How to access pipeline health metrics:</strong></p> 
+      <ol class="ol"> 
+       <li class="li">Query task execution observability data: <pre class="pre codeblock"><code>podman exec automation-metrics-web \
+  psql -h localhost -U metrics_service -d metrics_service -c \
+  "SELECT * FROM task_executions ORDER BY collected_at DESC LIMIT 10;"</code></pre> </li> 
+       <li class="li">Identify declining success rates: <pre class="pre codeblock"><code>podman exec automation-metrics-web \
+  psql -h localhost -U metrics_service -d metrics_service -c \
+  "SELECT name,
+          COUNT(*) FILTER (WHERE status = 'success') AS success_count,
+          COUNT(*) FILTER (WHERE status = 'failure') AS failure_count,
+          ROUND(100.0 * COUNT(*) FILTER (WHERE status = 'success') / COUNT(*), 2) AS success_rate
+   FROM dynamic_tasks_taskexecution
+   WHERE started &gt; NOW() - INTERVAL '7 days'
+   GROUP BY name
+   ORDER BY success_rate ASC;"</code></pre> <p class="p">Expected: Success rates &gt;95% for all tasks. Rates &lt;90% indicate infrastructure issues requiring investigation.</p> </li> 
+       <li class="li">Monitor task duration trends: <pre class="pre codeblock"><code>podman exec automation-metrics-web \
+  psql -h localhost -U metrics_service -d metrics_service -c \
+  "SELECT name,
+          AVG(EXTRACT(EPOCH FROM (finished - started))) AS avg_duration_seconds,
+          MAX(EXTRACT(EPOCH FROM (finished - started))) AS max_duration_seconds
+   FROM dynamic_tasks_taskexecution
+   WHERE started &gt; NOW() - INTERVAL '7 days' AND status = 'success'
+   GROUP BY name
+   ORDER BY avg_duration_seconds DESC;"</code></pre> </li> 
+      </ol> 
+      <p class="p">Use pipeline health metrics to:</p> 
+      <ul class="ul"> 
+       <li class="li">Detect performance degradation early (increasing task durations)</li> 
+       <li class="li">Identify which collectors are failing most frequently</li> 
+       <li class="li">Validate infrastructure changes (e.g., database upgrades) haven't impacted collection</li> 
+      </ul> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-task_recover_after_reinstallation">Recover metrics service after reinstallation</a></strong><br>Restore metrics service operation when pods do not start after reinstalling Ansible Automation Platform by recreating the missing database credential secret.</li>
+     </ul>
+     <div class="linklist relref">
+      <strong>Related reference</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_metrics_service_configuration_variables" title="Review configuration variables to customize metrics service deployment, database connections, security settings, and operational parameters.">Metrics service configuration variables</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

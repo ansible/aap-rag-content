@@ -1,0 +1,136 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="aap-27-20260603">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Removed features</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">The following release notes detail the removed features for the Ansible Automation Platform general availability released on June 3, 2026</p> 
+     <section class="section"> 
+      <p class="p">Removed features are those that were deprecated in earlier releases. They are now removed from Ansible Automation Platform 2.7, and will no longer be supported.</p> 
+      <ul class="ul"> 
+       <li class="li">Removal of direct component API access</li> 
+       <li class="li">Removal of RPM Installer in Ansible Automation Platform 2.7</li> 
+      </ul> 
+     </section> 
+     <section class="section" id="aap-27-20260603___removal_of_direct_component_api_access">
+      <h2 class="title sectiontitle">Removal of direct component API access</h2> 
+      <p class="p">The next version of Ansible Automation Platform marks the completion of the platform unification initiative introduced in Ansible Automation Platform 2.5. With this release, the platform gateway becomes the sole entry point for all Ansible Automation Platform interactions, replacing direct API access to automation controller, automation hub, and Event-Driven Ansible. This change centralizes organization management, authentication, and access control through a single, unified interface — providing a more consistent and secure experience across all automation capabilities within the platform.</p> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body">
+        Any existing direct integrations with automation controller, automation hub, or Event-Driven Ansible APIs must be migrated to route through the platform gateway prior to upgrading to the next version of Ansible Automation Platform.
+       </div>
+      </div> 
+      <p class="p"></p> 
+     </section> 
+     <section class="section" id="aap-27-20260603__section_1"> 
+      <p class="p"><strong class="ph b">Minimum collection versions</strong></p> 
+      <p class="p">Ansible Automation Platform 2.7 requires the following minimum collection versions:</p> 
+      <div class="p"> 
+       <ul class="ul" id="aap-27-20260603__ul_1"> 
+        <li class="li"><span class="keyword cmdname">ansible.controller</span> version 4.8.0</li> 
+        <li class="li"><span class="keyword cmdname">ansible.hub version</span> version1.0.6</li> 
+        <li class="li"><span class="keyword cmdname">ansible.eda version</span> version 2.12.0</li> 
+        <li class="li"><span class="keyword cmdname">ansible.platform</span> version 2.7.0</li> 
+       </ul> See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-con_upgrade_api_changes_27#GUID-bc50aa1a-9717-4cde-816e-7f5bf1d78b75" title="Older collection versions construct URLs and authentication flows that target component APIs directly. Only the latest collection versions route requests through platform gateway.">Update collection versions</a> for more information.
+      </div> 
+     </section> 
+     <section class="section" id="aap-27-20260603___previous_compatibility_support">
+      <h2 class="title sectiontitle">Previous compatibility support</h2> 
+      <p class="p">Ansible Automation Platform 2.5 and 2.6 maintained backward compatibility with pre-unification access patterns to provide a transition period for customers migrating to the unified platform. This compatibility layer is now removed. Integrations that continued to function through an upgrade from 2.4 to 2.6 will require remediation before upgrading.</p> 
+     </section> 
+     <section class="section" id="aap-27-20260603___pre_upgrade_migration_assessment">
+      <h2 class="title sectiontitle">Pre-upgrade migration assessment</h2> 
+      <p class="p">Before upgrading, review your environment for the following direct-access patterns, all of which require a migration plan: </p> 
+      <table class="table" id="aap-27-20260603__table_1">
+       <caption></caption>
+       <colgroup>
+        <col style="width:50%">
+        <col style="width:50%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="aap-27-20260603__table_1__entry__1">Area</th> 
+         <th class="entry" id="aap-27-20260603__table_1__entry__2">What to Review</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="aap-27-20260603__table_1__entry__1">User &amp; Org Management</td> 
+         <td class="entry" headers="aap-27-20260603__table_1__entry__2">Any organization, team, or user management interfacing directly with automation controller or automation hub APIs or collections Authentication</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="aap-27-20260603__table_1__entry__1">Authentication</td> 
+         <td class="entry" headers="aap-27-20260603__table_1__entry__2">Legacy users authenticating with basic auth directly to automation controller</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="aap-27-20260603__table_1__entry__1">Tokens &amp; OAuth</td> 
+         <td class="entry" headers="aap-27-20260603__table_1__entry__2">Legacy Personal Access Tokens (PATs) or OAuth applications connecting directly to automation controller</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="aap-27-20260603__table_1__entry__1">Image Management</td> 
+         <td class="entry" headers="aap-27-20260603__table_1__entry__2">Any container registry processes managing images directly on private automation hub</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="aap-27-20260603__table_1__entry__1">Access Control</td> 
+         <td class="entry" headers="aap-27-20260603__table_1__entry__2">RBAC configurations managed directly on individual components rather than through platform gateway</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="aap-27-20260603__table_1__entry__1">Job Management</td> 
+         <td class="entry" headers="aap-27-20260603__table_1__entry__2">Job template or job re-execution triggers to launch jobs directly to automation controller</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="aap-27-20260603__table_1__entry__1">Inventory Management</td> 
+         <td class="entry" headers="aap-27-20260603__table_1__entry__2">Managing Inventory using automation controller to add, edit, or remove inventory groups or nodes</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="aap-27-20260603__table_1__entry__1">Project Management</td> 
+         <td class="entry" headers="aap-27-20260603__table_1__entry__2">Managing SCM projects using automation controller to add, edit, or remove projects.</td> 
+        </tr> 
+       </tbody>
+      </table> All of the above must be migrated to use the equivalent functionality provided by the platform gateway.
+     </section> 
+     <section class="section" id="aap-27-20260603___direct_access_detection_tooling">
+      <h2 class="title sectiontitle">Direct access detection tooling</h2> 
+      <p class="p">A CLI detection tool is available to identify direct API usage in Ansible Automation Platform 2.5 or 2.6 environments. The tool analyzes NGINX logs to detect requests that bypass platform gateway. You can run the tool directly from the GitHub repository using uvx.</p> 
+      <dl class="dl"> 
+       <dt class="dt dlterm">
+        Prerequisites 
+       </dt> 
+       <dd class="dd"> 
+        <ul class="ul"> 
+         <li class="li">Ansible Automation Platform 2.5 or 2.6 is installed.</li> 
+         <li class="li">You have one of the following, depending on your deployment type: 
+          <ul class="ul"> 
+           <li class="li">RPM or containerized deployments: An SOSReport.</li> 
+           <li class="li">OpenShift Container Platform deployments: A must-gather or ocp-inspect output</li> 
+          </ul> </li> 
+        </ul> 
+       </dd> 
+      </dl> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body">
+        The tool requires NGINX log format updates introduced in the Ansible Automation Platform 2.6 patch released March 25, 2026. If you are running an earlier 2.6.x patch and your logs do not contain the required fields, apply the provided patch script or upgrade to the latest 2.6.x release.
+       </div>
+      </div> 
+     </section> 
+     <section class="section" id="aap-27-20260603___procedure">
+      <h2 class="title sectiontitle">Procedure</h2> 
+      <ol class="ol" id="aap-27-20260603__ol_1"> 
+       <li class="li"> <p class="p">Scan a containerized or RPM SOSReport:</p> <p class="p"><code class="ph codeph">$ uvx --from "git+https://github.com/ansible/aap-detect-direct-component-access" aap-detect-direct-component-access /path/to/sosreport/</code></p> </li> 
+       <li class="li"> <p class="p">Scan an OpenShift Container Platform must-gather tarball:</p> <p class="p"><code class="ph codeph">$ uvx --from "git+https://github.com/ansible/aap-detect-direct-component-access" aap-detect-direct-component-access /path/to/must-gather/</code></p> </li> 
+       <li class="li"> <p class="p">Scan an OpenShift Container Platform inspect output:</p> <p class="p"><code class="ph codeph">$ uvx --from "git+https://github.com/ansible/aap-detect-direct-component-access" aap-detect-direct-component-access /path/to/ocp-inspect/</code></p> </li> 
+      </ol> 
+      <p class="p">The tool produces a summary of direct-access requests organized by component, source IP, and request path. Internal traffic such as health checks and readiness probes is excluded automatically.</p> 
+     </section> 
+     <section class="section" id="aap-27-20260603___removal_of_rpm_installer_in_ansible_automation_platform_2_7">
+      <h2 class="title sectiontitle">Removal of RPM installer in Ansible Automation Platform 2.7</h2> 
+      <p class="p">In Ansible Automation Platform 2.5 release, the RPM installer was deprecated. Starting with Ansible Automation Platform 2.7, we are no longer providing the installer, and customers who have Ansible Automation Platform installed using RPM must migrate to either the containerised or Openshift Ansible Automation Platform Operator. Follow the guidelines for migrating to a new topology. Customers must first migrate to the new supported topology on the version that they are currently running (that is, Ansible Automation Platform 2.6 RPM to Ansible Automation Platform 2.6 containerised) before upgrading to Ansible Automation Platform 2.7.</p> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

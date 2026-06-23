@@ -1,0 +1,313 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="ref-self-service-cloud-init-reference">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Cloud-init reference</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">The following tables describe all cloud-init fields supported by the Ansible automation portal RHEL appliance.</p> 
+     <section class="section">
+      <h2 class="title sectiontitle">SSH access (standard cloud-init)</h2> 
+      <table class="table">
+       <caption>
+        <span class="table--title-label">Table 1. </span><span class="title">SSH access fields</span>
+       </caption>
+       <colgroup>
+        <col>
+        <col>
+        <col>
+        <col>
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-self-service-cloud-init-reference__entry__1">Field</th> 
+         <th class="entry" id="ref-self-service-cloud-init-reference__entry__2">Required</th> 
+         <th class="entry" id="ref-self-service-cloud-init-reference__entry__3">Default</th> 
+         <th class="entry" id="ref-self-service-cloud-init-reference__entry__4">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__1"><code class="ph codeph">users[].name</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__2">Yes</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__3">--</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__4">Linux username for SSH access.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__1"><code class="ph codeph">users[].sudo</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__2">Yes</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__3">--</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__4">Sudo privileges. Use <code class="ph codeph">ALL=(ALL) NOPASSWD:ALL</code>.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__1"><code class="ph codeph">users[].ssh_authorized_keys[]</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__2">Yes</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__3">--</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__4">One or more SSH public keys.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Ansible Automation Platform connection</h2> 
+      <table class="table">
+       <caption>
+        <span class="table--title-label">Table 2. </span><span class="title">Ansible Automation Platform connection fields</span>
+       </caption>
+       <colgroup>
+        <col>
+        <col>
+        <col>
+        <col>
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-self-service-cloud-init-reference__entry__17">Field</th> 
+         <th class="entry" id="ref-self-service-cloud-init-reference__entry__18">Required</th> 
+         <th class="entry" id="ref-self-service-cloud-init-reference__entry__19">Default</th> 
+         <th class="entry" id="ref-self-service-cloud-init-reference__entry__20">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__17"><code class="ph codeph">aap.host_url</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__18">Yes</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__19">--</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__20">Ansible Automation Platform URL (for example, <code class="ph codeph">https://aap.example.com</code>).</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__17"><code class="ph codeph">aap.token</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__18">Yes</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__19">--</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__20">Ansible Automation Platform API token with administrator privileges.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__17"><code class="ph codeph">aap.check_ssl</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__18">No</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__19"><code class="ph codeph">true</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__20">Set <code class="ph codeph">false</code> for self-signed Ansible Automation Platform certificates.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__17"><code class="ph codeph">aap.oauth.client_id</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__18">Yes</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__19">--</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__20">OAuth 2.0 application client ID.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__17"><code class="ph codeph">aap.oauth.client_secret</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__18">Yes</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__19">--</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__20">OAuth 2.0 application client secret.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Database</h2> 
+      <table class="table">
+       <caption>
+        <span class="table--title-label">Table 3. </span><span class="title">Database fields</span>
+       </caption>
+       <colgroup>
+        <col>
+        <col>
+        <col>
+        <col>
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-self-service-cloud-init-reference__entry__41">Field</th> 
+         <th class="entry" id="ref-self-service-cloud-init-reference__entry__42">Required</th> 
+         <th class="entry" id="ref-self-service-cloud-init-reference__entry__43">Default</th> 
+         <th class="entry" id="ref-self-service-cloud-init-reference__entry__44">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__41"><code class="ph codeph">database.type</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__42">No</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__43"><code class="ph codeph">builtin</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__44"><code class="ph codeph">builtin</code> or <code class="ph codeph">external</code>. When set to <code class="ph codeph">builtin</code>, the <code class="ph codeph">database.external.*</code> fields are ignored. When set to <code class="ph codeph">external</code>, you must provide <code class="ph codeph">database.external.host</code> and <code class="ph codeph">database.external.password</code>.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__41"><code class="ph codeph">database.builtin.password</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__42">No</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__43"><code class="ph codeph">auto</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__44">PostgreSQL user password. <code class="ph codeph">auto</code> generates a random value.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__41"><code class="ph codeph">database.builtin.admin_password</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__42">No</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__43"><code class="ph codeph">auto</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__44">PostgreSQL admin password. <code class="ph codeph">auto</code> generates a random value.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__41"><code class="ph codeph">database.builtin.name</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__42">No</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__43"><code class="ph codeph">portal_db</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__44">Database name.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__41"><code class="ph codeph">database.builtin.user</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__42">No</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__43"><code class="ph codeph">portal_user</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__44">Database user.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__41"><code class="ph codeph">database.external.host</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__42">Yes (if external)</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__43">--</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__44">External PostgreSQL hostname.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__41"><code class="ph codeph">database.external.port</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__42">No</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__43"><code class="ph codeph">5432</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__44">External PostgreSQL port.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__41"><code class="ph codeph">database.external.name</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__42">No</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__43"><code class="ph codeph">portal_db</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__44">External database name.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__41"><code class="ph codeph">database.external.user</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__42">No</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__43"><code class="ph codeph">portal_user</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__44">External database user. Requires the <code class="ph codeph">CREATEDB</code> privilege.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__41"><code class="ph codeph">database.external.password</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__42">Yes (if external)</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__43">--</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__44">External database password.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__41"><code class="ph codeph">database.external.ssl</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__42">No</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__43"><code class="ph codeph">true</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__44">Enable SSL for external database connection.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Security</h2> 
+      <table class="table">
+       <caption>
+        <span class="table--title-label">Table 4. </span><span class="title">Security fields</span>
+       </caption>
+       <colgroup>
+        <col>
+        <col>
+        <col>
+        <col>
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-self-service-cloud-init-reference__entry__89">Field</th> 
+         <th class="entry" id="ref-self-service-cloud-init-reference__entry__90">Required</th> 
+         <th class="entry" id="ref-self-service-cloud-init-reference__entry__91">Default</th> 
+         <th class="entry" id="ref-self-service-cloud-init-reference__entry__92">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__89"><code class="ph codeph">security.backend_secret</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__90">No</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__91"><code class="ph codeph">auto</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__92">Backend authentication secret. <code class="ph codeph">auto</code> generates a random value.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Network</h2> 
+      <table class="table">
+       <caption>
+        <span class="table--title-label">Table 5. </span><span class="title">Network fields</span>
+       </caption>
+       <colgroup>
+        <col>
+        <col>
+        <col>
+        <col>
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-self-service-cloud-init-reference__entry__97">Field</th> 
+         <th class="entry" id="ref-self-service-cloud-init-reference__entry__98">Required</th> 
+         <th class="entry" id="ref-self-service-cloud-init-reference__entry__99">Default</th> 
+         <th class="entry" id="ref-self-service-cloud-init-reference__entry__100">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__97"><code class="ph codeph">network.port</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__98">No</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__99"><code class="ph codeph">443</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__100">Ansible automation portal HTTPS listen port. If you are using the standard port 443, you do not need to specify this field.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__97"><code class="ph codeph">network.base_url</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__98">No</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__99">Auto-detected</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__100">User-accessible URL that users enter in their browser. Set this when users access Ansible automation portal through a hostname, route, or load balancer. If omitted, auto-detected from the VM IP address.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Source control integrations</h2> 
+      <table class="table">
+       <caption>
+        <span class="table--title-label">Table 6. </span><span class="title">Source control integration fields</span>
+       </caption>
+       <colgroup>
+        <col>
+        <col>
+        <col>
+        <col>
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-self-service-cloud-init-reference__entry__109">Field</th> 
+         <th class="entry" id="ref-self-service-cloud-init-reference__entry__110">Required</th> 
+         <th class="entry" id="ref-self-service-cloud-init-reference__entry__111">Default</th> 
+         <th class="entry" id="ref-self-service-cloud-init-reference__entry__112">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__109"><code class="ph codeph">integrations.github.url</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__110">No</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__111"><code class="ph codeph">github.com</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__112">GitHub hostname. For GitHub Enterprise, omit <code class="ph codeph">https://</code>.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__109"><code class="ph codeph">integrations.github.token</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__110">No</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__111">--</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__112">GitHub personal access token.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__109"><code class="ph codeph">integrations.gitlab.url</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__110">No</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__111"><code class="ph codeph">gitlab.com</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__112">GitLab hostname. For self-hosted GitLab, omit <code class="ph codeph">https://</code>.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__109"><code class="ph codeph">integrations.gitlab.token</code></td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__110">No</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__111">--</td> 
+         <td class="entry" headers="ref-self-service-cloud-init-reference__entry__112">GitLab personal access token.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

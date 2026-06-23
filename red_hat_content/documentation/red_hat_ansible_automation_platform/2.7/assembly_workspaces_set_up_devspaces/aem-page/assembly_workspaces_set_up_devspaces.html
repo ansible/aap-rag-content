@@ -1,0 +1,52 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-workspaces-set-up-devspaces"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Set up and install Red Hat OpenShift dev spaces to run your Ansible container</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">An administrator must install Red Hat OpenShift Dev Spaces to create a OpenShift Dev Spaces dashboard from where developers can launch Ansible development workspaces.</p>
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="con-devspaces-prereqs"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Prerequisites</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Review the prerequisites listed here before setting up Ansible development workspaces. Meeting these requirements helps ensure a successful setup.</p> 
+       <ul class="ul"> 
+        <li class="li">You have access to a web browser and network connectivity.</li> 
+        <li class="li">You have installed Red Hat OpenShift Container Platform version 4.20.15 or later.</li> 
+        <li class="li">You have an active subscription that includes Red Hat OpenShift Dev Spaces.</li> 
+        <li class="li">You have installed Red Hat OpenShift Dev Spaces on your OpenShift Container Platform cluster.</li> 
+        <li class="li">You have a valid subscription to Red Hat Ansible Automation Platform.</li> 
+        <li class="li">You have access to a Git version control system.</li> 
+       </ul> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="devspaces-install"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Install Red Hat OpenShift dev spaces</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">An administrator must install Red Hat OpenShift Dev Spaces to generate an OpenShift Dev Spaces dashboard. The dashboard is the entry point for developers to launch Ansible development workspaces.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Follow the steps in <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_openshift_dev_spaces/latest/html/administration_guide/installing-devspaces#installing-devspaces-on-openshift-using-the-web-console" target="_blank" rel="external noopener">Installing Dev Spaces on OpenShift using the web console</a> in the <em class="ph i">Red Hat OpenShift Dev Spaces Administration guide</em> to install OpenShift Dev Spaces. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">This process includes the following steps:</p> 
+          </div> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">Log in to your OpenShift cluster as an administrator.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Install the OpenShift Dev Spaces operator from the OperatorHub.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Create an instance of the OpenShift Dev Spaces operator.</span> </li> 
+          </ol> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Share the URL for the OpenShift Dev Spaces dashboard with the users who need to launch Ansible development workspaces.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

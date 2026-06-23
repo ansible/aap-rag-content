@@ -1,0 +1,79 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="operator-upgrade-prereq"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Prerequisites and channel upgrades</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">To upgrade to a newer version of Ansible Automation Platform Operator, you must:</p> 
+      <p class="p">Ensure your system meets the system requirements detailed in the <strong class="ph b">Operator topologies</strong> section of the<em class="ph i">Tested deployment models</em> .</p> 
+      <ul class="ul"> 
+       <li class="li">Create <strong class="ph b">AutomationControllerBackup</strong> and <strong class="ph b">AutomationHubBackup</strong> objects. For help with this see <strong class="ph b">Backup and recovery for operator environments</strong></li> 
+       <li class="li">Review the <strong class="ph b">Release notes</strong> for the new Ansible Automation Platform version to which you are upgrading and any intermediate versions.</li> 
+       <li class="li">Determine the type of upgrade you want to perform. See the <strong class="ph b">Channel Upgrades</strong> section for more information.</li> 
+      </ul> 
+     </div> 
+     <nav role="navigation" class="related-links"> 
+      <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+       <br> 
+       <ul class="linklist"> 
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_aap_backup_recovery" title="To safeguard against unexpected data loss and application errors, it is critical that you perform periodic backups of your Red Hat Ansible Automation Platform deployment. In addition to data loss prevention, backups allow you to fall back to a different deployment state.">Backup and restore in an OpenShift environment</a></li> 
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-con_operator_upgrade_prereq#operator-channel-upgrade" title="Upgrading Ansible Automation Platform involves retrieving updates from a channel. A channel refers to a location where you can access your update from the OpenShift console UI.">Channel upgrades</a></li> 
+       </ul> 
+      </div> 
+      <div class="linklist relref"> <strong>Related reference</strong> 
+       <br> 
+       <ul class="linklist"> 
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-ref_ocp_a_env_a" title="The Operator-based growth topology provides a smaller footprint deployment without redundancy for organizations getting started with Ansible Automation Platform on Red Hat OpenShift Container Platform.">Operator topologies</a></li> 
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/platform_intro" title="Ansible Automation Platform unifies comprehensive automation capabilities, a robust ecosystem, and flexible deployment options into one strategic solution. It enables customers to automate and orchestrate workflows across domains for efficient, resilient, and consistent IT operations at scale.">Release notes</a></li> 
+       </ul> 
+      </div> 
+     </nav> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="operator-channel-upgrade"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Channel upgrades</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">Upgrading Ansible Automation Platform involves retrieving updates from a channel. A channel refers to a location where you can access your update from the OpenShift console UI.</p> 
+       <p class="p"><img class="image" id="operator-channel-upgrade__image_1" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/aap-operator-stable-2.7.png" alt="Update channel"></p> 
+       <section class="section" id="operator-channel-upgrade___in_channel_upgrades"> 
+        <h3 class="title sectiontitle">In-channel upgrades</h3> 
+        <p class="p">Most upgrades occur within a channel as follows:</p> 
+        <ol class="ol"> 
+         <li class="li">A new update becomes available in the marketplace, through the redhat-operator CatalogSource.</li> 
+         <li class="li">The system automatically creates a new InstallPlan for your Ansible Automation Platform subscription. 
+          <ul class="ul"> 
+           <li class="li">If set to <strong class="ph b">Manual</strong>, the InstallPlan needs manual approval in the OpenShift UI.</li> 
+           <li class="li">If set to <strong class="ph b">Automatic</strong>, it upgrades as soon as the new version is available. 
+            <div class="note note note_note"> <span class="note__title">Note:</span> 
+             <div class="note__body"> 
+              <p class="p">Set a manual install strategy on your Ansible Automation Platform Operator subscription during installation or upgrade. You will be prompted to approve upgrades when available in your chosen update channel. A stable channel is available for each X.Y release, following the naming pattern <code class="ph codeph">stable-<var class="keyword varname">X.Y</var></code>.</p> 
+             </div> 
+            </div> </li> 
+          </ul> </li> 
+         <li class="li">A new subscription, CSV, and operator containers are created alongside the old ones. The old resources are cleaned up after a successful install.</li> 
+        </ol> 
+       </section> 
+       <section class="section" id="operator-channel-upgrade___cross_channel_upgrades"> 
+        <h3 class="title sectiontitle">Cross-channel upgrades</h3> 
+        <p class="p">Upgrading between X.Y channels is always manual and intentional. Stable channels for major and minor versions are in the Operator Catalog. It is recommended to stay on the latest minor version channel for the latest patches.</p> 
+        <p class="p">If the subscription is set for manual upgrades, you must approve the upgrade in the UI. Then, the system upgrades the Operator to the latest version in that channel.</p> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">It is recommended to set a manual install strategy on your Ansible Automation Platform Operator subscription during installation or upgrade. You will be prompted to approve upgrades when they become available in your chosen update channel. Stable channels, such as stable-2.7, are available for each X.Y release.</p> 
+         </div> 
+        </div> 
+        <p class="p">The containers provided in the latest channel are updated regularly for OS upgrades and critical fixes. This allows customers to receive critical patches and CVE fixes faster. Larger changes and new features are saved for minor and major releases.</p> 
+        <p class="p">For each major or minor version channel, there is a corresponding "cluster-scoped" channel available. Cluster-scoped channels deploy operators that can manage all namespaces, while non-cluster-scoped channels can only manage resources in their own namespace.</p> 
+        <div class="note important note_important"> <span class="note__title">Important:</span> 
+         <div class="note__body"> 
+          <p class="p">Cluster-scoped bundles are not compatible with namespace-scoped bundles. Do not switch between namespace-scoped (<code class="ph codeph">stable-<var class="keyword varname">X.Y</var></code>) channels and cluster-scoped (<code class="ph codeph">stable-<var class="keyword varname">X.Y</var>-cluster-scoped</code>) channels. This is not supported.</p> 
+         </div> 
+        </div> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

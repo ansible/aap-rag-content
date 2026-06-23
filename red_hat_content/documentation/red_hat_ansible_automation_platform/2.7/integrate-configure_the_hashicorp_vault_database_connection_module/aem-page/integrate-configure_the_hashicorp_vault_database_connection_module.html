@@ -1,0 +1,129 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="GUID-a938c1b5-d8c0-4b1a-ae40-df118a990bf9"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Configure the hashicorp.vault.database_connection module</h1> 
+     <div class="body taskbody">
+      <p class="shortdesc">The hashicorp.vault.database_connection module performs <strong class="ph b">Create</strong>, <strong class="ph b">Update</strong>, <strong class="ph b">Delete</strong>, and <strong class="ph b">Reset</strong> operations on database connections for plug-ins. </p> 
+      <section class="section context" id="GUID-a938c1b5-d8c0-4b1a-ae40-df118a990bf9__context_1">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">About this task</h2>
+       </div>The corresponding community.hashi_vault modules are: 
+       <ul class="ul" id="GUID-a938c1b5-d8c0-4b1a-ae40-df118a990bf9__ul_1"> 
+        <li class="li"><code class="ph codeph">vault_database_connection_configure module</code>: Creates and updates the database connection.</li> 
+        <li class="li"><code class="ph codeph">vault_database_connection_delete module</code>: Delete a database connection.</li> 
+        <li class="li"><code class="ph codeph">vault_database_connection_reset module</code>: Closes a connection_name and its underlying plugin and restarts it with the configuration stored.</li> 
+       </ul> 
+      </section> 
+      <section>
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Procedure</h2>
+       </div>
+       <ol class="ol steps">
+        <li class="li step stepexpand"> <span class="ph cmd">Map the parameters from your existing <code class="ph codeph">community.hashi_vault</code> modules to the corresponding <code class="ph codeph">hashicorp.vault.database_connection</code> parameters.</span> 
+         <div class="itemgroup stepxmp"> 
+          <pre class="pre codeblock"><code>---
+module: database_connection
+short_description: Manage database secrets engine connections in HashiCorp Vault.
+version_added: 1.2.0
+author: my-name
+description:
+  - This module manages (create, update, delete, and reset) the lifecycle of database
+    connection configurations within the HashiCorp Vault Database secrets engine.
+
+options:
+ state:
+   description:
+     - Goal state for the database connection.
+     - Use V(present) to create or update the connection.
+     - Use V(reset) to trigger a connection reset.
+     - Use V(absent) to remove the connection configuration.
+   choices: [present, absent, reset]
+   default: present
+   type: str
+ database_mount_path:
+   description: Database secret engine mount path.
+   type: str
+   default: database
+   aliases: [vault_database_mount_path]
+ name:
+   description: The name of the database connection configuration.
+   required: true
+   type: str
+   aliases: [connection_name]
+ username:
+   description:
+     - The username to connect to the database.
+   required: false
+   type: str
+   aliases: [connection_username]
+ password:
+   description:
+     - The password to connect to the database.
+   required: false
+   type: str
+   aliases: [connection_password]
+ disable_escaping:
+   description: Determines whether special characters in the username and password fields will be escaped.
+   type: bool
+   default: false
+ connection_url:
+   description: The connection string used to connect to the database.
+   type: str
+ plugin_name:
+   description:
+     - The name of the plugin to use for this connection.
+     - Required when O(state=present).
+   required: false
+   type: str
+ plugin_version:
+   description:
+     - The semantic version of the plugin to use for this connection.
+   type: str
+   required: false
+ plugin_options:
+   description:
+     - Additional parameters specific to the plugin.
+     - This should be a dictionary of options required by the specific database plugin.
+   type: dict
+ verify_connection:
+   description: Specifies if the connection is verified during initial configuration.
+   default: true
+   type: bool
+ allowed_roles:
+   description: A list of roles authorized to use this connection.
+   type: list
+   elements: str
+ root_rotation_statements:
+   description:
+     - Specifies the database statements to be executed to rotate the root user's credentials.
+     - Refer to the specific Vault database plugin documentation for supported formatting.
+   type: list
+   elements: str
+ password_policy:
+   description:
+     - The name of the password policy to use when generating passwords for this database.
+     - If not specified, Vault uses a default policy (20 characters, mixed case, number, dash).
+   type: str
+extends_documentation_fragment:
+ - hashicorp.vault.vault_auth.modules
+ </code></pre> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Configure the following parameters: </span> 
+         <div class="itemgroup info"> 
+          <ul class="ul"> 
+           <li class="li"><strong class="ph b">Name</strong>: The name of the database connection configuration. Alias: connection_name</li> 
+           <li class="li"><strong class="ph b">plugin_name</strong>: If 0 (state=present) you must include the name of the plugin to use for this connection.</li> 
+          </ul> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Configure the <a class="xref" href="https://console.redhat.com/ansible/automation-hub/collections/published/hashicorp/vault/documentation/module/database_connection?version=" target="_blank" rel="external noopener">Parameters</a> for your <code class="ph codeph">hashicorp.vault.database_connection</code> module. </span> </li>
+       </ol>
+      </section> 
+     </div> 
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

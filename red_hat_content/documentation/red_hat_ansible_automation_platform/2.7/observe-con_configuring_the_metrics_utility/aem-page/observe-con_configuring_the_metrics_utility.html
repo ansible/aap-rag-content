@@ -1,0 +1,390 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="configuring-the-metrics-utility"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Configure the <code class="ph codeph">metrics-utility</code></h1> 
+     <p class="shortdesc">Configure the <code class="ph codeph">metrics-utility</code> to gather and report usage data for your Ansible Automation Platform, both on Red Hat Enterprise Linux and OpenShift Container Platform.</p> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="controller-metrics-utility-rhel"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Configure the <code class="ph codeph">metrics-utility</code> on Red Hat Enterprise Linux</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can configure the <code class="ph codeph">metrics-utility</code> on a Red Hat Enterprise Linux system to gather and report usage metrics for automation controller.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li"><strong class="ph b">Subscription:</strong> An active Ansible Automation Platform subscription.</li> 
+         <li class="li"><strong class="ph b">Installation:</strong> The <code class="ph codeph">metrics-utility</code> tool is included by default with the Ansible Automation Platform installation on the automation controller node. No separate installation is required.</li> 
+         <li class="li"><strong class="ph b">User privileges:</strong> You must be logged in as the <code class="ph codeph">root</code> user or the <code class="ph codeph">awx</code> user to run the <code class="ph codeph">metrics-utility</code> tool.</li> 
+        </ul> 
+        <div class="note important note_important">
+         <span class="note__title">Important:</span> 
+         <div class="note__body"> 
+          <p class="p">The <code class="ph codeph">metrics-utility</code> requires read access to <code class="ph codeph">/etc/tower/SECRET_KEY</code> to function correctly. Attempting to run this utility as a standard user (non-root or non-awx) results in a <code class="ph codeph">PermissionError</code> and execution failure.</p> 
+         </div>
+        </div> 
+        <p class="p">The following procedure gathers the relevant data and generate a <a class="xref" href="https://connect.redhat.com/en/programs/certified-cloud-service-provider" target="_blank" rel="external noopener">CCSP</a> report containing your usage metrics. You can configure these commands as <code class="ph codeph">cron</code> jobs to ensure they run at the beginning of every month. See <a class="xref" href="https://www.redhat.com/sysadmin/linux-cron-command" target="_blank" rel="external noopener">How to schedule jobs using the Linux <code class="ph codeph">cron</code> utility</a> for more on configuring using the cron syntax.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Create two scripts in your user’s home directory to set correct variables to ensure that <code class="ph codeph">metrics-utility</code> gathers all relevant data. </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">In <code class="ph codeph">/home/my-user/cron-gather</code>: </span> 
+            <div class="itemgroup info"> 
+             <pre class="pre codeblock"><code>#!/bin/sh
+
+# Specify the following variables to indicate where the report is deposited in your file system
+export METRICS_UTILITY_SHIP_TARGET=directory
+export METRICS_UTILITY_SHIP_PATH=/awx_devel/awx-dev/metrics-utility/shipped_data/billing
+
+# Run the following command to gather and store the data in the provided SHIP_PATH directory:
+metrics-utility gather_automation_controller_billing_data --ship --until=10m</code></pre> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">In <code class="ph codeph">/home/my-user/cron-report</code>: </span> 
+            <div class="itemgroup info"> 
+             <pre class="pre codeblock"><code>#!/bin/sh
+
+# Specify the following variables to indicate where the report is deposited in your file system
+export METRICS_UTILITY_SHIP_TARGET=directory
+export METRICS_UTILITY_SHIP_PATH=/awx_devel/awx-dev/metrics-utility/shipped_data/billing
+
+# Set these variables to generate a report:
+export METRICS_UTILITY_REPORT_TYPE=CCSPv2
+export METRICS_UTILITY_PRICE_PER_NODE=11.55 # in USD
+export METRICS_UTILITY_REPORT_SKU=MCT3752MO
+export METRICS_UTILITY_REPORT_SKU_DESCRIPTION="EX: Red Hat Ansible Automation Platform, Full Support (1 Managed Node, Dedicated, Monthly)"
+export METRICS_UTILITY_REPORT_H1_HEADING="CCSP Reporting &lt;Company&gt;: ANSIBLE Consumption"
+export METRICS_UTILITY_REPORT_COMPANY_NAME="Company Name"
+export METRICS_UTILITY_REPORT_EMAIL="email@email.com"
+export METRICS_UTILITY_REPORT_RHN_LOGIN="test_login"
+export METRICS_UTILITY_REPORT_COMPANY_BUSINESS_LEADER="BUSINESS LEADER"
+export METRICS_UTILITY_REPORT_COMPANY_PROCUREMENT_LEADER="PROCUREMENT LEADER"
+
+# Build the report
+metrics-utility build_report</code></pre> 
+            </div> </li> 
+          </ol> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">To ensure that these files are executable, run: </span> 
+          <div class="itemgroup info"> 
+           <p class="p"> <code class="ph codeph">chmod a+x /home/my-user/cron-gather /home/my-user/cron-report</code> </p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">To open the <code class="ph codeph">cron</code> file for editing, run: </span> 
+          <div class="itemgroup info"> 
+           <p class="p"> <code class="ph codeph">crontab -e</code> </p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">To configure the run schedule, add the following parameters to the end of the file and specify how often you want <code class="ph codeph">metrics-utility</code> to gather information and build a report using <a class="xref" href="https://www.redhat.com/sysadmin/linux-cron-command" target="_blank" rel="external noopener">cron syntax</a>. In the following example, the <code class="ph codeph">gather</code> command is configured to run every hour at 00 minutes. The <code class="ph codeph">build_report</code> command is configured to run on the second day of each month at 4:00 AM. </span> 
+          <div class="itemgroup info"> 
+           <p class="p"> <code class="ph codeph">0 */1 * * * /home/my-user/cron-gather</code> </p> 
+           <p class="p"> <code class="ph codeph">0 4 2 * * /home/my-user/cron-report</code> </p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Save and close the file.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Use the following verification steps to ensure correct configuration:</p> 
+        <ol class="ol"> 
+         <li class="li">To confirm that your <code class="ph codeph">cron</code> job entries have been saved correctly, run: <pre class="pre codeblock"><code>crontab -l</code></pre> </li> 
+         <li class="li">Inspect the <code class="ph codeph">cron</code> log to verify that the <code class="ph codeph">cron</code> daemon is executing the commands and that <code class="ph codeph">metrics-utility</code> is producing output: <pre class="pre codeblock"><code>cat /var/log/cron</code></pre> <p class="p">For reference, see the following example output:</p> <pre class="pre codeblock"><code>May  8 09:45:03 ip-10-0-6-23 CROND[51623]: (root) CMDOUT (No billing data for month: 2024-04)
+May  8 09:45:03 ip-10-0-6-23 CROND[51623]: (root) CMDEND (metrics-utility build_report)
+May  8 09:45:19 ip-10-0-6-23 crontab[51619]: (root) END EDIT (root)
+May  8 09:45:34 ip-10-0-6-23 crontab[51659]: (root) BEGIN EDIT (root)
+May  8 09:46:01 ip-10-0-6-23 CROND[51688]: (root) CMD (metrics-utility gather_automation_controller_billing_data --ship --until=10m)
+May  8 09:46:03 ip-10-0-6-23 CROND[51669]: (root) CMDOUT (/tmp/9e3f86ee-c92e-4b05-8217-72c496e6ffd9-2024-05-08-093402+0000-2024-05-08-093602+0000-0.tar.gz)
+May  8 09:46:03 ip-10-0-6-23 CROND[51669]: (root) CMDEND (metrics-utility gather_automation_controller_billing_data --ship --until=10m)
+May  8 09:46:26 ip-10-0-6-23 crontab[51659]: (root) END EDIT (root)</code></pre> <p class="p">The generated report will have the default name <code class="ph codeph">CCSP-&lt;YEAR&gt;-&lt;MONTH&gt;.xlsx</code> and is saved in the ship path that you specified in step 1a.</p> </li> 
+        </ol> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Time and date might vary depending on how your configure the run schedule.</p> 
+         </div>
+        </div> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="controller-metrics-utility-ocp"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Configure the <code class="ph codeph">metrics-utility</code> on OpenShift Container Platform from the Ansible Automation Platform operator</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">The <code class="ph codeph">metrics-utility</code> is a command-line tool that collects and reports metrics from your OpenShift Container Platform cluster to your automation controller instance.</p> 
+       <p class="p"><code class="ph codeph">metrics-utility</code> is included in the OpenShift Container Platform image beginning with version 4.12, 4.512, and 4.6. If your system does not have <code class="ph codeph">metrics-utility</code> installed, update your OpenShift image to the latest version.</p> 
+       <p class="p">Complete the following steps to configure the run schedule for <code class="ph codeph">metrics-utility</code> on OpenShift Container Platform using the Ansible Automation Platform operator:</p> 
+      </div> 
+      <article class="topic task nested2" aria-labelledby="ariaid-title4" id="proc-configure-a-config-map"> 
+       <h3 class="title topictitle3" id="ariaid-title4">Create a ConfigMap in the OpenShift UI YAML view</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">Learn how to create a ConfigMap in the OpenShift UI YAML view to inject configuration data for the <code class="ph codeph">metrics-utility</code> cronjobs.</p> 
+        <section class="section prereq">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Before you begin</h4>
+         </div> 
+         <ul class="ul"> 
+          <li class="li">A running OpenShift cluster</li> 
+          <li class="li">An operator-based installation of Ansible Automation Platform on OpenShift Container Platform.</li> 
+         </ul> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p"><code class="ph codeph">metrics-utility</code> runs as indicated by the parameters you set in the configuration file. You cannot run the utility manually on OpenShift Container Platform.</p> 
+          </div>
+         </div> 
+        </section> 
+        <section class="section context">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">About this task</h4>
+         </div> 
+         <p class="p">To inject the <code class="ph codeph">metrics-utility</code> cronjobs with configuration data, and create a ConfigMap in the OpenShift UI YAML view:</p> 
+        </section> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">ConfigMaps</span></span>.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create ConfigMap</span>.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">On the next screen, select the YAML view tab.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">In the YAML field, enter the following parameters with the appropriate variables set: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: automationcontroller-metrics-utility-configmap
+data:
+  METRICS_UTILITY_SHIP_TARGET: directory
+  METRICS_UTILITY_SHIP_PATH: /metrics-utility
+  METRICS_UTILITY_REPORT_TYPE: CCSPv2
+  METRICS_UTILITY_PRICE_PER_NODE: '11' # in USD
+  METRICS_UTILITY_REPORT_SKU: MCT3752MO
+  METRICS_UTILITY_REPORT_SKU_DESCRIPTION: "EX: Red Hat Ansible Automation Platform, Full Support (1 Managed Node, Dedicated, Monthly)"
+  METRICS_UTILITY_REPORT_H1_HEADING: "CCSP Reporting &lt;Company&gt;: ANSIBLE Consumption"
+  METRICS_UTILITY_REPORT_COMPANY_NAME: "Company Name"
+  METRICS_UTILITY_REPORT_EMAIL: "email@email.com"
+  METRICS_UTILITY_REPORT_RHN_LOGIN: "test_login"
+  METRICS_UTILITY_REPORT_COMPANY_BUSINESS_LEADER: "BUSINESS LEADER"
+  METRICS_UTILITY_REPORT_COMPANY_PROCUREMENT_LEADER: "PROCUREMENT LEADER"</code></pre> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create</span>.</span> </li>
+         </ol>
+        </section> 
+        <section class="section result">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Results</h4>
+         </div> 
+         <ul class="ul"> 
+          <li class="li">To verify that the ConfigMap was created and <code class="ph codeph">metrics-utility</code> is installed, select <strong class="ph b">ConfigMap</strong> from the navigation panel and search for your ConfigMap in the list.</li> 
+         </ul> 
+        </section> 
+       </div> 
+      </article>
+      <article class="topic task nested2" aria-labelledby="ariaid-title5" id="proc-deploy-controller"> 
+       <h3 class="title topictitle3" id="ariaid-title5">Deploy automation controller</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">automation controller includes a <code class="ph codeph">metrics-utility</code> cronjob that gathers usage information and generates a report at specified intervals.</p> 
+        <section class="section context">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">About this task</h4>
+         </div> 
+         <p class="p">To deploy automation controller and specify variables for how often <code class="ph codeph">metrics-utility</code> gathers usage information and generates a report, use the following procedure:</p> 
+        </section> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <strong class="ph b">Installed Operators</strong>.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Select <strong class="ph b">Ansible Automation Platform</strong>.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">In the Operator details, select the automation controller tab.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create automation controller</span>.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Select the YAML view option. The YAML now shows the default parameters for automation controller. The relevant parameters for <code class="ph codeph">metrics-utility</code> are the following: </span> 
+           <div class="itemgroup info"> 
+            <table class="table">
+             <caption></caption>
+             <colgroup>
+              <col style="width:50%">
+              <col style="width:50%">
+             </colgroup>
+             <thead class="thead"> 
+              <tr class="row"> 
+               <th class="entry" id="proc-deploy-controller__entry__1"> <strong class="ph b">Parameter</strong> </th> 
+               <th class="entry" id="proc-deploy-controller__entry__2"> <strong class="ph b">Variable</strong> </th> 
+              </tr> 
+             </thead>
+             <tbody class="tbody"> 
+              <tr class="row"> 
+               <td class="entry" headers="proc-deploy-controller__entry__1"> <p class="p"> <strong class="ph b"> <code class="ph codeph">metrics_utility_enabled</code> </strong> </p> </td> 
+               <td class="entry" headers="proc-deploy-controller__entry__2"> <p class="p">True.</p> </td> 
+              </tr> 
+              <tr class="row"> 
+               <td class="entry" headers="proc-deploy-controller__entry__1"> <p class="p"> <strong class="ph b"> <code class="ph codeph">metrics_utility_cronjob_gather_schedule</code> </strong> </p> </td> 
+               <td class="entry" headers="proc-deploy-controller__entry__2"> <p class="p"><code class="ph codeph">@hourly</code> or <code class="ph codeph">@daily</code>.</p> </td> 
+              </tr> 
+              <tr class="row"> 
+               <td class="entry" headers="proc-deploy-controller__entry__1"> <p class="p"> <strong class="ph b"> <code class="ph codeph">metrics_utility_cronjob_report_schedule</code> </strong> </p> </td> 
+               <td class="entry" headers="proc-deploy-controller__entry__2"> <p class="p"><code class="ph codeph">@daily</code> or <code class="ph codeph">@monthly</code>.</p> </td> 
+              </tr> 
+             </tbody>
+            </table> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Find the <code class="ph codeph">metrics_utility_enabled</code> parameter and change the variable to true.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Find the <code class="ph codeph">metrics_utility_cronjob_gather_schedule</code> parameter and enter a variable for how often the utility should gather usage information (for example, <code class="ph codeph">@hourly</code> or <code class="ph codeph">@daily</code>).</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Find the <code class="ph codeph">metrics_utility_cronjob_report_schedule</code> parameter and enter a variable for how often the utility generates a report (for example, <code class="ph codeph">@daily</code> or <code class="ph codeph">@monthly</code>).</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create</span>.</span> </li>
+         </ol>
+        </section> 
+       </div> 
+      </article>
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title6" id="controller-metrics-utility-containerized"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Configure the <code class="ph codeph">metrics-utility</code> on a manual containerized installation of Ansible Automation Platform</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">The <code class="ph codeph">metrics-utility</code> tool generates performance metrics and reports for Ansible Automation Platform installations.</p> 
+       <p class="p"><code class="ph codeph">metrics-utility</code> is included in the OpenShift Container Platform image beginning with version 4.12, 4.512, and 4.6. If your system does not have <code class="ph codeph">metrics-utility</code> installed, update your OpenShift image to the latest version.</p> 
+       <p class="p">Use the following steps to configure <code class="ph codeph">metrics-utility</code> on a manual containerized installation Ansible Automation Platform:</p> 
+       <ol class="ol"> 
+        <li class="li">Enable and configure <code class="ph codeph">metrics-utility</code> in the inventory file.</li> 
+        <li class="li">Apply your <code class="ph codeph">metrics-utility</code> configuration.</li> 
+        <li class="li">Verify the <code class="ph codeph">systemctl</code> timer.</li> 
+        <li class="li">Verify the data collection.</li> 
+        <li class="li">Locate the generated reports.</li> 
+       </ol> 
+       <div class="note note note_note">
+        <span class="note__title">Note:</span> 
+        <div class="note__body"> 
+         <p class="p">You must have an active Ansible Automation Platform subscription</p> 
+        </div>
+       </div> 
+       <p class="p"> <strong class="ph b">Minimum resource requirements</strong> </p> 
+       <p class="p">Using the <code class="ph codeph">metrics-utility</code> tool on a containerized installation of Ansible Automation Platform requires the following resources:</p> 
+       <ul class="ul"> 
+        <li class="li">CPU: 1 dedicated CPU core 
+         <ul class="ul">
+          <li class="li">100% of 1 core used during execution</li>
+         </ul></li> 
+        <li class="li">Memory: 
+         <ul class="ul">
+          <li class="li">Minimum: 256 MB RAM (supports up to ~10,000 job host summaries)</li>
+          <li class="li">Recommended: 512 MB RAM (standard deployments)</li>
+          <li class="li">Large-scale: 1 GB RAM (supports up to ~100,000 job host summaries) 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body">
+             <p class="p">Memory requirements scale with the number of hosts and jobs processed.</p>
+            </div>
+           </div></li>
+         </ul></li> 
+        <li class="li">Execution time: Report generation typically completes within 10-30 seconds, depending on data volume</li> 
+       </ul> 
+      </div> 
+      <article class="topic task nested2" aria-labelledby="ariaid-title7" id="proc-enable-configure-metrics-utility-inventory-file"> 
+       <h3 class="title topictitle3" id="ariaid-title7">Enable and configure the <code class="ph codeph">metrics-utility</code> in the inventory file</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">Modify your Ansible Automation Platform inventory file to enable and configure <code class="ph codeph">metrics-utility</code>.</p> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step stepexpand"> <span class="ph cmd">Modify your inventory file to enable <code class="ph codeph">metrics-utility</code> container deployment by adding the following line under the <code class="ph codeph">[automationcontroller]</code> section: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>metrics_utility_enabled=true</code></pre> 
+            <p class="p">This setting instructs the installation program to create and configure two dedicated <code class="ph codeph">automation-controller-metrics-utility</code> containers as part of your Ansible Automation Platform deployment. One of these containers is used to collect the data, and the other is used to build the report. If your Ansible Automation Platform deployment has already been configured, re-run the installation script to activate the container.</p> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Configure the reporting parameters by adding the <code class="ph codeph">metrics_utility_extra_settings</code> variable. This variable controls where reports are saved, what they contain, and other metadata. </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>metrics_utility_extra_settings=[
+{"setting": "METRICS_UTILITY_SHIP_TARGET", "value": "directory"},
+{"setting": "METRICS_UTILITY_SHIP_PATH", "value": "~/aap/controller/data/metrics/"},
+{"setting": "METRICS_UTILITY_REPORT_TYPE", "value": "CCSPv2"},
+{"setting": "METRICS_UTILITY_PRICE_PER_NODE", "value": "100"},
+{"setting": "METRICS_UTILITY_REPORT_COMPANY_NAME", "value": "My Company Inc"},
+{"setting": "METRICS_UTILITY_REPORT_EMAIL", "value": "admin@mycompany.com"},
+{"setting": "METRICS_UTILITY_REPORT_SKU", "value": "MCT3752MO"}]</code></pre> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Optional: Override the default data gathering schedule by adding the following variables with your <code class="ph codeph">systemd timer</code> expressions: </span> 
+           <div class="itemgroup info"> 
+            <div class="note note note_note">
+             <span class="note__title">Note:</span> 
+             <div class="note__body"> 
+              <p class="p"><code class="ph codeph">systemd timer</code> expressions differ from <code class="ph codeph">cron</code> expressions.</p> 
+             </div>
+            </div> 
+            <pre class="pre codeblock"><code># Gathers data every 30 minutes
+metrics_utility_cronjob_gather_schedule=*:0/30
+# Generates the report at midnight on the 2nd of the month
+metrics_utility_cronjob_report_schedule=*-*-02 00:00:00</code></pre> 
+           </div> </li>
+         </ol>
+        </section> 
+       </div> 
+      </article>
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title8" id="proc-applying-your-metrics-utility-config"> 
+      <h2 class="title topictitle2" id="ariaid-title8">Apply your <code class="ph codeph">metrics-utility</code> configuration</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">If you are running <code class="ph codeph">metrics-utility</code> on a new installation, you do not need to take any additional actions to apply your configuration.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">If you are applying your <code class="ph codeph">metrics-utility</code> configuration to an existing deployment, you must re-run the Ansible Automation Platform installer script. Re-running the script reads the updated inventory file, deploys the <code class="ph codeph">automation-controller-metrics-utility</code> container, and creates the <code class="ph codeph">systemd</code> user services and timers necessary to automate data collection and reporting. Use the following verification steps to ensure your <code class="ph codeph">metrics-utility</code> configuration has been applied and is running correctly:</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ul class="ul steps-unordered">
+         <li class="li step"> <span class="ph cmd">Verify your <code class="ph codeph">systemctl</code> timer.</span> </li>
+         <li class="li step"> <span class="ph cmd">Verify data collection.</span> </li>
+         <li class="li step"> <span class="ph cmd">Locate generated reports.</span> </li>
+        </ul>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <ol class="ol"> 
+         <li class="li">Run the following command to verify that your <code class="ph codeph">systemctl timer</code> job entries were saved correctly: <pre class="pre codeblock"><code>systemctl --user list-timers --no-pager | grep metrics-utility</code></pre><p class="p"><strong class="ph b">Example output:</strong></p><pre class="pre codeblock"><code>Wed 2025-08-13 10:45:00 IST 8min left Wed 2025-08-13 10:30:04 IST 6min ago   metrics-utility-build-report.timer metrics-utility-build-report.service
+Wed 2025-08-13 10:45:00 IST 8min left Wed 2025-08-13 10:30:04 IST 6min ago   metrics-utility-gather.timer   	metrics-utility-gather.service</code></pre></li> 
+         <li class="li">Use the following command to verify data collection by inspecting the output logs of the services you are running: <pre class="pre codeblock"><code>systemctl --user status metrics-utility-gather.service</code></pre><p class="p"><strong class="ph b">Example output:</strong></p><pre class="pre codeblock"><code>metrics-utility-gather.service - Podman metrics-utility-gather.service
+ 	Loaded: loaded (/home/aap/.config/systemd/user/metrics-utility-gather.service; disabled; preset: disabled)
+ 	Active: inactive (dead) since Wed 2025-08-13 10:00:06 IST; 5min ago
+   Duration: 2.008s
+TriggeredBy: ● metrics-utility-gather.timer
+   	Docs: man:podman-generate-systemd(1)
+	Process: 1472847 ExecStart=/usr/bin/podman start metrics-utility-gather (code=exited, status=0/SUCCESS)
+	Process: 1472927 ExecStop=/usr/bin/podman stop -t 10 metrics-utility-gather (code=exited, status=0/SUCCESS)
+	Process: 1472937 ExecStopPost=/usr/bin/podman stop -t 10 metrics-utility-gather (code=exited, status=0/SUCCESS)
+   Main PID: 1472874 (code=exited, status=0/SUCCESS)
+    	CPU: 197ms
+
+Aug 13 10:00:04 aap.example.org podman[1472847]: metrics-utility-gather
+Aug 13 10:00:04 aap.example.org systemd[993]: Started Podman metrics-utility-gather.service.
+Aug 13 10:00:05 aap.example.org metrics-utility-gather[1472874]: 2025-08-13 09:00:05,806 INFO 	[-] awx.main.analytics /tmp/3292ca44-3314-4f&gt;
+Aug 13 10:00:05 aap.example.org metrics-utility-gather[1472874]: /tmp/3292ca44-3314-4f0b-b3f6-ba4a1e47a2b1-2025-08-13-083505+0000-2025-08-13-0&gt;
+Aug 13 10:00:05 aap.example.org metrics-utility-gather[1472874]: 2025-08-13 09:00:05,808 INFO 	[-] awx.main.analytics /tmp/3292ca44-3314-4f&gt;
+Aug 13 10:00:05 aap.example.org metrics-utility-gather[1472874]: /tmp/3292ca44-3314-4f0b-b3f6-ba4a1e47a2b1-2025-08-13-083505+0000-2025-08-13-0&gt;
+Aug 13 10:00:06 aap.example.org podman[1472912]: 2025-08-13 10:00:06.169271763 +0100 IST m=+0.019922418 container died 5dc8d5674f1d1745258530f&gt;
+Aug 13 10:00:06 aap.example.org podman[1472912]: 2025-08-13 10:00:06.187584135 +0100 IST m=+0.038234790 container cleanup 5dc8d5674f1d17452585&gt;
+Aug 13 10:00:06 aap.example.org podman[1472927]: metrics-utility-gather
+Aug 13 10:00:06 aap.example.org podman[1472937]: metrics-utility-gather</code></pre></li> 
+         <li class="li">Locate the generated reports. Reports are saved in the directory you specified in the <code class="ph codeph">METRICS_UTILITY_SHIP_PATH</code> setting. 
+          <ul class="ul">
+           <li class="li">Path: Using the example provided in this document, the report path would be <code class="ph codeph">/aap/controller/data/metrics/</code>.</li>
+           <li class="li">Filename: The report name follows the format <code class="ph codeph">CCSP-&lt;YEAR&gt;-&lt;MONTH&gt;.xlsx</code>. For example, a report generated for August, 2025 would be named <code class="ph codeph">CCSP-2025-08.xlsx</code>.</li>
+          </ul></li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

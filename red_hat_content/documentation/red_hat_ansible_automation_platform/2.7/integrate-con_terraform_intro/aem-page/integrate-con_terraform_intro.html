@@ -1,0 +1,47 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="introduction"> 
+     <h1 class="title topictitle1" id="ariaid-title1">About the Terraform integration</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Many organizations find themselves using both Ansible Automation Platform and Terraform Enterprise or HCP Terraform, recognizing that these can work in harmony to create an improved experience for developers and operations teams.</p> 
+      <p class="p">While Terraform Enterprise and HCP Terraform excel at Infrastructure as Code (IaC) for provisioning and de-provisioning cloud resources, Ansible Automation Platform is a versatile, all-purpose automation solution ideal for configuration management, application deployment, and orchestrating complex IT workflows across diverse domains.</p> 
+      <p class="p">This integration directly addresses common challenges such as managing disparate automation tools, ensuring consistent configuration across hybrid cloud environments and accelerating deployment cycles. By bringing together Terraform’s declarative approach to infrastructure provisioning with Ansible Automation Platform’s procedural approach to configuration and orchestration, users can achieve:</p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Optimized costs:</strong> Reduce cloud waste, minimize manual processes, and combat tool sprawl. This integration can lead to a significant reduction in infrastructure costs and a high return on investment.</li> 
+       <li class="li"><strong class="ph b">Reduced risk:</strong> Lower the risk of breaches, enforce policies, and significantly decrease unplanned downtime. The ability to review Terraform plan output before applying it in a workflow, with approval steps, enhances security and compliance.</li> 
+       <li class="li"><strong class="ph b">Faster time to value:</strong> Boost developer productivity and deploy new compute resources more rapidly, leading to a faster time to market. This is achieved through unified lifecycle management and automation for Day 0 (provisioning), Day 1 (configuration), and Day 2 (ongoing management) operations.</li> 
+      </ul> 
+      <p class="p">By enabling direct calls between Ansible Automation Platform and Terraform Enterprise or HCP Terraform, organizations can unlock time to value by creating combined workflows, reduce risk through enhanced product integrations, and enhance Infrastructure-as-Code with Ansible Automation Platform content and practices. This allows for unified lifecycle management, enabling tasks from initial provisioning and configuration to ongoing health checks, incident response, patching, and infrastructure optimization.</p> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="integration-workflows"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Integration options for Terraform</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Depending on your existing setup, you can integrate these products from Ansible Automation Platform or from Terraform. Migration paths are provided for community users and for migrating from the <code class="ph codeph">cloud.terraform</code> collection to <code class="ph codeph">hashicorp.terraform</code>.</p> 
+       <section class="section" id="integration-workflows___ansible_initiated_workflow">
+        <h3 class="title sectiontitle">Ansible-initiated workflow</h3> 
+        <p class="p">Ansible automation hub collections allow Ansible Automation Platform users to leverage the Terraform Enterprise or HCP Terraform provisioning capabilities.</p> 
+        <p class="p"> <strong class="ph b">hashicorp.terraform collection</strong> </p> 
+        <p class="p">This collection provides API integration between Ansible Automation Platform and Terraform Enterprise or HCP Terraform. This solution works natively with Ansible Automation Platform and reduces setup complexity because it doesn’t require a binary installation and it includes a default execution environment.</p> 
+        <p class="p"> <strong class="ph b">cloud.terraform collection</strong> </p> 
+        <p class="p">This collection provides CLI integration between Ansible Automation Platform and Terraform Enterprise or HCP Terraform. To use this collection, you must install a binary and create an execution environment.</p> 
+        <p class="p">Although this collection is supported, we recommend using the <code class="ph codeph">hashicorp.terraform</code> collection instead to take advantage of its API capabilities.</p> 
+       </section> 
+       <section class="section" id="integration-workflows___migration_workflows">
+        <h3 class="title sectiontitle">Migration workflows</h3> 
+        <p class="p">Community edition users can migrate to Terraform Enterprise or HCP Terraform, and then integrate the Ansible Automation Platform capabilities using the <code class="ph codeph">cloud.terraform</code> (CLI) collection. However, we recommend using the <code class="ph codeph">hashicorp.terraform</code> (API) collection instead.</p> 
+        <p class="p">If you are already using the <code class="ph codeph">cloud.terraform</code> collection, you can migrate to <code class="ph codeph">hashicorp.terraform</code>.</p> 
+       </section> 
+       <section class="section" id="integration-workflows___terraform_initiated_workflow">
+        <h3 class="title sectiontitle">Terraform-initiated workflow</h3> 
+        <p class="p">For existing Terraform Enterprise or HCP Terraform users, Terraform can directly call Ansible Automation Platform at the end of provisioning for a more seamless and secure workflow. This enables Terraform Enterprise or HCP Terraform users to enhance their immutable infrastructure automation with Ansible Automation Platform Day 2 automation capabilities and manage infrastructure updates and lifecycle events.</p> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

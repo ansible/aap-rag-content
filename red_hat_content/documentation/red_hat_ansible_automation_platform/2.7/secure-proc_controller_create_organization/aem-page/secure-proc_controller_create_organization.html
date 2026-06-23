@@ -1,0 +1,70 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="proc-controller-create-organization"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Create an organization</h1> 
+     <div class="body taskbody">
+      <p class="shortdesc">Ansible Automation Platform automatically creates a default organization. If you have a self-support level license, you have only the default organization available and cannot delete it.</p> 
+      <section>
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Procedure</h2>
+       </div>
+       <ol class="ol steps">
+        <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Organizations</span></span>.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create organization</span>.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Enter the <strong class="ph b">Name</strong> and give a <strong class="ph b">Description</strong> for your organization. </span> 
+         <div class="itemgroup info"> 
+          <div class="note note note_note">
+           <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">If automation controller is enabled on the platform, continue with Step 4. Otherwise, proceed to Step 6.</p> 
+           </div>
+          </div> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Select the name of the <strong class="ph b">Execution environment</strong> or search for one that members of this organization can use to run automation.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Enter the name of the <strong class="ph b">Instance Groups</strong> on which to run this organization.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Optional: Enter the <strong class="ph b">Galaxy credentials</strong> or search from a list of existing ones.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">Max hosts</strong> for this organization. The default is 0. When this value is 0, it signifies no limit. If you try to add a host to an organization that has reached or exceeded its cap on hosts, an error message displays: </span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>You have already reached the maximum number of 1 hosts allowed for your organization. Contact your System Administrator for assistance.</code></pre> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Next</span>.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">If you selected more than 1 instance group, you can manage the order by dragging and dropping the instance group up or down in the list and clicking <span class="ph uicontrol button">Confirm</span>. </span> 
+         <div class="itemgroup info"> 
+          <div class="note note note_note">
+           <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">The execution precedence is determined by the order in which the instance groups are listed.</p> 
+           </div>
+          </div> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Next</span> and verify the organization settings.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Finish</span>.</span> </li>
+       </ol>
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="controller-review-organizations"> 
+      <h2 class="title topictitle2" id="ariaid-title2">View the Organizations list</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">The <strong class="ph b">Organizations</strong> page displays the existing organizations for your installation. From here, you can search for a specific organization, filter the list of organizations, or change the sort order for the list.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Organizations</span></span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">In the Search bar, enter an appropriate keyword for the organization you want to search for and click the arrow icon.</span> </li>
+         <li class="li step"> <span class="ph cmd">From the menu bar, you can sort the list of organizations by using the arrows for <strong class="ph b">Name</strong> to toggle your sorting preference.</span> </li>
+         <li class="li step"> <span class="ph cmd">You can also sort the list by selecting <strong class="ph b">Name</strong>, <strong class="ph b">Created</strong> or <strong class="ph b">Last modified</strong> from the <strong class="ph b">Sort</strong> list.</span> </li>
+         <li class="li step"> <span class="ph cmd">You can view organization details by clicking an organization <strong class="ph b">Name</strong> on the <strong class="ph b">Organizations</strong> page.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

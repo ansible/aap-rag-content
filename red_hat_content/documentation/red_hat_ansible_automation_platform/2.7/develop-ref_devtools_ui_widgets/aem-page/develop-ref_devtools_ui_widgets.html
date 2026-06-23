@@ -1,0 +1,364 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="devtools-ui-widgets"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Standard UI widgets</h1> 
+     <div class="body refbody">
+      <p class="shortdesc">Standard UI widgets provide enhanced components for user forms to capture various types of input.</p> 
+      <section class="section"></section> 
+      <section class="section" id="devtools-ui-widgets___textarea_widget">
+       <h2 class="title sectiontitle">Textarea widget</h2> 
+       <p class="p">The <code class="ph codeph">textarea</code> widget renders a multi-line text input field for capturing long-form user input such as descriptions or configuration content.</p> 
+       <pre class="pre codeblock"><code>properties:
+  description:
+    type: string
+    title: Description
+    ui:widget: textarea
+    ui:options:
+      rows: 5
+      placeholder: "Enter description..."</code></pre> 
+      </section> 
+      <section class="section" id="devtools-ui-widgets___select_widget">
+       <h2 class="title sectiontitle">Select widget</h2> 
+       <p class="p">The <code class="ph codeph">select</code> widget displays a dropdown menu that enables users to choose a single value from a predefined list of options.</p> 
+       <pre class="pre codeblock"><code>properties:
+  environment:
+    type: string
+    title: Environment
+    enum: ['dev', 'staging', 'prod']
+    ui:widget: select
+    default: 'dev'</code></pre> 
+      </section> 
+      <section class="section" id="devtools-ui-widgets___checkboxes_widgets">
+       <h2 class="title sectiontitle">Checkboxes widgets</h2> 
+       <p class="p">The <code class="ph codeph">checkboxes</code> widget renders a group of checkboxes, enabling the selection of multiple options from a list. The original plural "Checkboxes Widgets" is corrected to the singular form for style consistency.</p> 
+       <pre class="pre codeblock"><code>properties:
+  features:
+    type: array
+    title: Base Images
+    items:
+      type: string
+      enum: ['baseImage1', 'baseImage2', 'baseImage3']
+    ui:widget: checkboxes
+    uniqueItems: true</code></pre> 
+      </section> 
+      <section class="section" id="devtools-ui-widgets___hidden_widget">
+       <h2 class="title sectiontitle">Hidden widget</h2> 
+       <p class="p">The <code class="ph codeph">hidden</code> widget holds a fixed or prefilled value that is not visible to the user but is included in the submitted data. Use this widget for passing non-user-editable data, such as authentication tokens.</p> 
+       <pre class="pre codeblock"><code>kind: Template
+metadata:
+  name: my-AAP-template
+  title: Example AAP Template
+spec:
+  parameters:
+    - title: Authentication
+      properties:
+        token:
+          title: AAP Authentication Token
+          type: string
+          description: Oauth2 token
+          ui:field: AAPTokenField
+          ui:widget: hidden
+          ui:backstage:
+            review:
+              show: false
+  steps:
+    - id: launch-job
+      name: Launch AAP Job Template
+      action: rhaap:launch-job-templat
+      input:
+        token: ${{ parameters.token }}
+      ...</code></pre> 
+      </section> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="unique_1281456818"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Standard UI widgets</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Standard UI widgets provide enhanced components for user forms to capture various types of input.</p> 
+       <section class="section"></section> 
+       <section class="section" id="unique_1281456818___textarea_widget">
+        <h3 class="title sectiontitle">Textarea widget</h3> 
+        <p class="p">The <code class="ph codeph">textarea</code> widget renders a multi-line text input field for capturing long-form user input such as descriptions or configuration content.</p> 
+        <pre class="pre codeblock"><code>properties:
+  description:
+    type: string
+    title: Description
+    ui:widget: textarea
+    ui:options:
+      rows: 5
+      placeholder: "Enter description..."</code></pre> 
+       </section> 
+       <section class="section" id="unique_1281456818___select_widget">
+        <h3 class="title sectiontitle">Select widget</h3> 
+        <p class="p">The <code class="ph codeph">select</code> widget displays a dropdown menu that enables users to choose a single value from a predefined list of options.</p> 
+        <pre class="pre codeblock"><code>properties:
+  environment:
+    type: string
+    title: Environment
+    enum: ['dev', 'staging', 'prod']
+    ui:widget: select
+    default: 'dev'</code></pre> 
+       </section> 
+       <section class="section" id="unique_1281456818___checkboxes_widgets">
+        <h3 class="title sectiontitle">Checkboxes widgets</h3> 
+        <p class="p">The <code class="ph codeph">checkboxes</code> widget renders a group of checkboxes, enabling the selection of multiple options from a list. The original plural "Checkboxes Widgets" is corrected to the singular form for style consistency.</p> 
+        <pre class="pre codeblock"><code>properties:
+  features:
+    type: array
+    title: Base Images
+    items:
+      type: string
+      enum: ['baseImage1', 'baseImage2', 'baseImage3']
+    ui:widget: checkboxes
+    uniqueItems: true</code></pre> 
+       </section> 
+       <section class="section" id="unique_1281456818___hidden_widget">
+        <h3 class="title sectiontitle">Hidden widget</h3> 
+        <p class="p">The <code class="ph codeph">hidden</code> widget holds a fixed or prefilled value that is not visible to the user but is included in the submitted data. Use this widget for passing non-user-editable data, such as authentication tokens.</p> 
+        <pre class="pre codeblock"><code>kind: Template
+metadata:
+  name: my-AAP-template
+  title: Example AAP Template
+spec:
+  parameters:
+    - title: Authentication
+      properties:
+        token:
+          title: AAP Authentication Token
+          type: string
+          description: Oauth2 token
+          ui:field: AAPTokenField
+          ui:widget: hidden
+          ui:backstage:
+            review:
+              show: false
+  steps:
+    - id: launch-job
+      name: Launch AAP Job Template
+      action: rhaap:launch-job-templat
+      input:
+        token: ${{ parameters.token }}
+      ...</code></pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="unique_1540328855"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Standard UI widgets</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Standard UI widgets provide enhanced components for user forms to capture various types of input.</p> 
+       <section class="section"></section> 
+       <section class="section" id="unique_1540328855___textarea_widget">
+        <h3 class="title sectiontitle">Textarea widget</h3> 
+        <p class="p">The <code class="ph codeph">textarea</code> widget renders a multi-line text input field for capturing long-form user input such as descriptions or configuration content.</p> 
+        <pre class="pre codeblock"><code>properties:
+  description:
+    type: string
+    title: Description
+    ui:widget: textarea
+    ui:options:
+      rows: 5
+      placeholder: "Enter description..."</code></pre> 
+       </section> 
+       <section class="section" id="unique_1540328855___select_widget">
+        <h3 class="title sectiontitle">Select widget</h3> 
+        <p class="p">The <code class="ph codeph">select</code> widget displays a dropdown menu that enables users to choose a single value from a predefined list of options.</p> 
+        <pre class="pre codeblock"><code>properties:
+  environment:
+    type: string
+    title: Environment
+    enum: ['dev', 'staging', 'prod']
+    ui:widget: select
+    default: 'dev'</code></pre> 
+       </section> 
+       <section class="section" id="unique_1540328855___checkboxes_widgets">
+        <h3 class="title sectiontitle">Checkboxes widgets</h3> 
+        <p class="p">The <code class="ph codeph">checkboxes</code> widget renders a group of checkboxes, enabling the selection of multiple options from a list. The original plural "Checkboxes Widgets" is corrected to the singular form for style consistency.</p> 
+        <pre class="pre codeblock"><code>properties:
+  features:
+    type: array
+    title: Base Images
+    items:
+      type: string
+      enum: ['baseImage1', 'baseImage2', 'baseImage3']
+    ui:widget: checkboxes
+    uniqueItems: true</code></pre> 
+       </section> 
+       <section class="section" id="unique_1540328855___hidden_widget">
+        <h3 class="title sectiontitle">Hidden widget</h3> 
+        <p class="p">The <code class="ph codeph">hidden</code> widget holds a fixed or prefilled value that is not visible to the user but is included in the submitted data. Use this widget for passing non-user-editable data, such as authentication tokens.</p> 
+        <pre class="pre codeblock"><code>kind: Template
+metadata:
+  name: my-AAP-template
+  title: Example AAP Template
+spec:
+  parameters:
+    - title: Authentication
+      properties:
+        token:
+          title: AAP Authentication Token
+          type: string
+          description: Oauth2 token
+          ui:field: AAPTokenField
+          ui:widget: hidden
+          ui:backstage:
+            review:
+              show: false
+  steps:
+    - id: launch-job
+      name: Launch AAP Job Template
+      action: rhaap:launch-job-templat
+      input:
+        token: ${{ parameters.token }}
+      ...</code></pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title4" id="unique_782255872"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Standard UI widgets</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Standard UI widgets provide enhanced components for user forms to capture various types of input.</p> 
+       <section class="section"></section> 
+       <section class="section" id="unique_782255872___textarea_widget">
+        <h3 class="title sectiontitle">Textarea widget</h3> 
+        <p class="p">The <code class="ph codeph">textarea</code> widget renders a multi-line text input field for capturing long-form user input such as descriptions or configuration content.</p> 
+        <pre class="pre codeblock"><code>properties:
+  description:
+    type: string
+    title: Description
+    ui:widget: textarea
+    ui:options:
+      rows: 5
+      placeholder: "Enter description..."</code></pre> 
+       </section> 
+       <section class="section" id="unique_782255872___select_widget">
+        <h3 class="title sectiontitle">Select widget</h3> 
+        <p class="p">The <code class="ph codeph">select</code> widget displays a dropdown menu that enables users to choose a single value from a predefined list of options.</p> 
+        <pre class="pre codeblock"><code>properties:
+  environment:
+    type: string
+    title: Environment
+    enum: ['dev', 'staging', 'prod']
+    ui:widget: select
+    default: 'dev'</code></pre> 
+       </section> 
+       <section class="section" id="unique_782255872___checkboxes_widgets">
+        <h3 class="title sectiontitle">Checkboxes widgets</h3> 
+        <p class="p">The <code class="ph codeph">checkboxes</code> widget renders a group of checkboxes, enabling the selection of multiple options from a list. The original plural "Checkboxes Widgets" is corrected to the singular form for style consistency.</p> 
+        <pre class="pre codeblock"><code>properties:
+  features:
+    type: array
+    title: Base Images
+    items:
+      type: string
+      enum: ['baseImage1', 'baseImage2', 'baseImage3']
+    ui:widget: checkboxes
+    uniqueItems: true</code></pre> 
+       </section> 
+       <section class="section" id="unique_782255872___hidden_widget">
+        <h3 class="title sectiontitle">Hidden widget</h3> 
+        <p class="p">The <code class="ph codeph">hidden</code> widget holds a fixed or prefilled value that is not visible to the user but is included in the submitted data. Use this widget for passing non-user-editable data, such as authentication tokens.</p> 
+        <pre class="pre codeblock"><code>kind: Template
+metadata:
+  name: my-AAP-template
+  title: Example AAP Template
+spec:
+  parameters:
+    - title: Authentication
+      properties:
+        token:
+          title: AAP Authentication Token
+          type: string
+          description: Oauth2 token
+          ui:field: AAPTokenField
+          ui:widget: hidden
+          ui:backstage:
+            review:
+              show: false
+  steps:
+    - id: launch-job
+      name: Launch AAP Job Template
+      action: rhaap:launch-job-templat
+      input:
+        token: ${{ parameters.token }}
+      ...</code></pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title5" id="unique_984734634"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Standard UI widgets</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Standard UI widgets provide enhanced components for user forms to capture various types of input.</p> 
+       <section class="section"></section> 
+       <section class="section" id="unique_984734634___textarea_widget">
+        <h3 class="title sectiontitle">Textarea widget</h3> 
+        <p class="p">The <code class="ph codeph">textarea</code> widget renders a multi-line text input field for capturing long-form user input such as descriptions or configuration content.</p> 
+        <pre class="pre codeblock"><code>properties:
+  description:
+    type: string
+    title: Description
+    ui:widget: textarea
+    ui:options:
+      rows: 5
+      placeholder: "Enter description..."</code></pre> 
+       </section> 
+       <section class="section" id="unique_984734634___select_widget">
+        <h3 class="title sectiontitle">Select widget</h3> 
+        <p class="p">The <code class="ph codeph">select</code> widget displays a dropdown menu that enables users to choose a single value from a predefined list of options.</p> 
+        <pre class="pre codeblock"><code>properties:
+  environment:
+    type: string
+    title: Environment
+    enum: ['dev', 'staging', 'prod']
+    ui:widget: select
+    default: 'dev'</code></pre> 
+       </section> 
+       <section class="section" id="unique_984734634___checkboxes_widgets">
+        <h3 class="title sectiontitle">Checkboxes widgets</h3> 
+        <p class="p">The <code class="ph codeph">checkboxes</code> widget renders a group of checkboxes, enabling the selection of multiple options from a list. The original plural "Checkboxes Widgets" is corrected to the singular form for style consistency.</p> 
+        <pre class="pre codeblock"><code>properties:
+  features:
+    type: array
+    title: Base Images
+    items:
+      type: string
+      enum: ['baseImage1', 'baseImage2', 'baseImage3']
+    ui:widget: checkboxes
+    uniqueItems: true</code></pre> 
+       </section> 
+       <section class="section" id="unique_984734634___hidden_widget">
+        <h3 class="title sectiontitle">Hidden widget</h3> 
+        <p class="p">The <code class="ph codeph">hidden</code> widget holds a fixed or prefilled value that is not visible to the user but is included in the submitted data. Use this widget for passing non-user-editable data, such as authentication tokens.</p> 
+        <pre class="pre codeblock"><code>kind: Template
+metadata:
+  name: my-AAP-template
+  title: Example AAP Template
+spec:
+  parameters:
+    - title: Authentication
+      properties:
+        token:
+          title: AAP Authentication Token
+          type: string
+          description: Oauth2 token
+          ui:field: AAPTokenField
+          ui:widget: hidden
+          ui:backstage:
+            review:
+              show: false
+  steps:
+    - id: launch-job
+      name: Launch AAP Job Template
+      action: rhaap:launch-job-templat
+      input:
+        token: ${{ parameters.token }}
+      ...</code></pre> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

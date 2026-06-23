@@ -1,0 +1,93 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-workspaces-management"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Delete an Ansible development workspace</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Manage your Ansible development workspaces by understanding how to delete them from OpenShift Dev Spaces when they are no longer needed.</p> 
+      <p class="p">Deleting unused workspaces helps free up cluster resources and maintains a clean development environment within OpenShift Dev Spaces.</p> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist relinfo">
+       <strong>Related information</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_openshift_dev_spaces/latest/html-single/administration_guide/index" target="_blank" rel="external noopener">Red Hat OpenShift Dev Spaces Authentication guide</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="workspaces-delete"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Delete an Ansible development workspace</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">To delete the contents of an Ansible development workspace, you delete the workspace itself. This action removes all the pods, storage, and other resources associated with that specific workspace, effectively wiping its contents.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You know the name of the workspace you want to delete.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div>
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Stop the Ansible development workspace that you want to delete.</span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">To stop the workspace in the Dev Spaces dashboard, select the workspace that you want to delete and select <span class="ph menucascade"><span class="ph uicontrol">actions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Stop Workspace</span></span>.</li> 
+            <li class="li">To stop the workspace using OpenShift <code class="ph codeph">oc</code> commands, follow the steps in <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_openshift_dev_spaces/latest/html-single/user_guide/index#managing-workspaces-with-apis-stopping-workspaces" target="_blank" rel="external noopener">Stopping workspaces</a> in the Red Hat OpenShift Dev Spaces <em class="ph i">User Guide</em>.</li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Delete the workspace:</span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">To delete the workspace from the Dev Spaces dashboard, select the workspace that you want to delete and select <span class="ph menucascade"><span class="ph uicontrol">actions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Delete Workspace</span></span>.</li> 
+            <li class="li">To delete a workspace using OpenShift <code class="ph codeph">oc</code> commands, follow the steps in <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_openshift_dev_spaces/latest/html-single/user_guide/index#managing-workspaces-with-apis-removing-workspaces" target="_blank" rel="external noopener">Removing workspaces</a> in the Red Hat OpenShift Dev Spaces <em class="ph i">User Guide</em>.</li> 
+           </ul> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="devspaces-uninstall"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Uninstall OpenShift Dev Spaces</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Uninstall OpenShift Dev Spaces completely when it is no longer required. Remember that this action removes all related Ansible dev spaces user data.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div>
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <div class="ul steps-unordered">
+         <div class="li step p"> <span class="ph cmd">To uninstall OpenShift Dev Spaces, follow the steps in the <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_openshift_dev_spaces/latest/html/administration_guide/uninstalling-devspaces" target="_blank" rel="external noopener">Uninstalling Dev Spaces</a> chapter of the Red Hat OpenShift Dev Spaces <em class="ph i">Administration Guide</em>.</span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">Uninstalling Ansible dev spaces removes all Ansible dev spaces-related user data.</p> 
+            </div>
+           </div> 
+          </div> 
+         </div>
+        </div>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

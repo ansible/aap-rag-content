@@ -1,0 +1,238 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="proc-configure-github-oauth-ee-builder">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Save definition files to a GitHub repository</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Configure a GitHub OAuth App so that users can save execution environment definition files to a GitHub repository and trigger automated image builds.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">You have admin access to your GitHub organization settings.</li> 
+       <li class="li">If your GitHub organization restricts OAuth App access, you have confirmed that the <code class="ph codeph">repo</code> and <code class="ph codeph">workflow</code> scopes are permitted.</li> 
+      </ul> 
+     </section> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">When users complete the EE Builder wizard, they can save the generated definition files to a GitHub repository — either creating a new repository or opening a pull request on an existing one. The wizard creates the following files:</p> 
+      <ul class="ul"> 
+       <li class="li"><code class="ph codeph">&lt;ee-name&gt;.yml</code> — the EE definition with all dependencies (collections, Python packages, system packages) declared inline. The file name matches the name the user enters in the EE Builder form.</li> 
+       <li class="li"><code class="ph codeph">&lt;ee-name&gt;-template.yaml</code> — a reusable template file (with <code class="ph codeph">spec.type: execution-environment</code>) that captures the selected configuration. Administrators can register this template in the catalog so other users can create EE definitions from it.</li> 
+       <li class="li"><code class="ph codeph">ansible.cfg</code> — Galaxy server configuration (auto-generated from configured collection sources).</li> 
+       <li class="li"><code class="ph codeph">ee-build.yml</code> — GitHub Actions workflow for automated builds.</li> 
+      </ul> 
+      <p class="p">Users authenticate via OAuth when saving. The following OAuth scopes are required:</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:20%">
+        <col style="width:40%">
+        <col style="width:40%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="proc-configure-github-oauth-ee-builder__entry__1">OAuth scope</th> 
+         <th class="entry" id="proc-configure-github-oauth-ee-builder__entry__2">Purpose</th> 
+         <th class="entry" id="proc-configure-github-oauth-ee-builder__entry__3">When used</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="proc-configure-github-oauth-ee-builder__entry__1"><code class="ph codeph">repo</code></td> 
+         <td class="entry" headers="proc-configure-github-oauth-ee-builder__entry__2">Create repositories, push EE definition files, and open pull requests on behalf of the authenticated user.</td> 
+         <td class="entry" headers="proc-configure-github-oauth-ee-builder__entry__3">Every save operation (new repository or pull request to an existing repository).</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="proc-configure-github-oauth-ee-builder__entry__1"><code class="ph codeph">workflow</code></td> 
+         <td class="entry" headers="proc-configure-github-oauth-ee-builder__entry__2">Dispatch the <code class="ph codeph">ee-build.yml</code> GitHub Actions workflow to build and push the container image.</td> 
+         <td class="entry" headers="proc-configure-github-oauth-ee-builder__entry__3">When the user selects <strong class="ph b">Build Execution Environment</strong> during the save flow.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body">
+        <p class="p">If your GitHub organization uses OAuth App access restrictions, an organization owner must approve the OAuth App and grant the <code class="ph codeph">repo</code> and <code class="ph codeph">workflow</code> scopes before users can save definitions.</p>
+       </div>
+      </div> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Create a GitHub OAuth App in your organization settings under <strong class="ph b">Developer settings &gt; OAuth Apps</strong>. Enter the following details:</span> 
+        <div class="itemgroup info"> 
+         <ul class="ul"> 
+          <li class="li"><strong class="ph b">Application name:</strong> A descriptive name, for example <code class="ph codeph">ansible-portal-ee-builder</code>.</li> 
+          <li class="li"><strong class="ph b">Homepage URL:</strong> The URL of your automation portal deployment.</li> 
+          <li class="li"><strong class="ph b">Authorization callback URL:</strong> <code class="ph codeph">https://&lt;my_portal_domain&gt;/api/auth/github/handler/frame</code></li> 
+         </ul> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Note the <strong class="ph b">Client ID</strong> and generate a <strong class="ph b">Client secret</strong>. Save the client secret value immediately — you cannot view it again.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">If your organization restricts OAuth App access, navigate to <strong class="ph b">Organization settings &gt; Third-party access</strong> and approve the OAuth App.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Enable the GitHub auth provider in your configuration.</span> 
+        <div class="itemgroup info"> 
+         <p class="p"><strong class="ph b">OpenShift:</strong> Uncomment the <code class="ph codeph">auth.providers.github</code> block in your Helm chart configuration.</p> 
+         <p class="p"><strong class="ph b">RHEL appliance:</strong> Add the following <code class="ph codeph">auth.providers</code> block to <code class="ph codeph">/etc/portal/configs/app-config/app-config.production.yaml</code>. If an <code class="ph codeph">auth:</code> section already exists, add the <code class="ph codeph">providers:</code> section inside it:</p> 
+         <pre class="pre codeblock"><code>auth:
+  providers:
+    github:
+      production:
+        clientId: ${GITHUB_OAUTH_CLIENT_ID}
+        clientSecret: ${GITHUB_OAUTH_CLIENT_SECRET}</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Add the OAuth client credentials to your <code class="ph codeph">secrets-scm</code> secret.</span> 
+        <div class="itemgroup info"> 
+         <p class="p"><strong class="ph b">OpenShift — CLI:</strong></p> 
+         <pre class="pre codeblock"><code>$ oc patch secret secrets-scm -n &lt;namespace&gt; --type merge -p \
+  '{"stringData":{"github-oauth-client-id":"&lt;your_client_id&gt;","github-oauth-client-secret":"&lt;your_client_secret&gt;"}}'</code></pre> 
+         <p class="p">If <code class="ph codeph">secrets-scm</code> does not exist yet, include <code class="ph codeph">--from-literal=github-oauth-client-id=&lt;id&gt;</code> and <code class="ph codeph">--from-literal=github-oauth-client-secret=&lt;secret&gt;</code> in the <code class="ph codeph">oc create secret generic</code> command from the content discovery section.</p> 
+         <p class="p"><strong class="ph b">OpenShift — web console:</strong></p> 
+         <ol class="ol" type="a"> 
+          <li class="li">Navigate to <strong class="ph b">Workloads &gt; Secrets</strong>.</li> 
+          <li class="li">Edit the <code class="ph codeph">secrets-scm</code> secret and add keys <code class="ph codeph">github-oauth-client-id</code> and <code class="ph codeph">github-oauth-client-secret</code>.</li> 
+         </ol> 
+         <p class="p"><strong class="ph b">RHEL appliance:</strong></p> 
+         <pre class="pre codeblock"><code>$ echo -n '&lt;your_client_id&gt;' | sudo podman secret create portal_github_oauth_client_id -
+$ echo -n '&lt;your_client_secret&gt;' | sudo podman secret create portal_github_oauth_client_secret -</code></pre> 
+         <p class="p">Append to the Quadlet drop-in file:</p> 
+         <pre class="pre codeblock"><code>$ sudo tee -a /etc/containers/systemd/portal.container.d/ee-builder-secrets.conf &lt;&lt; 'EOF'
+Secret=portal_github_oauth_client_id,type=env,target=GITHUB_OAUTH_CLIENT_ID
+Secret=portal_github_oauth_client_secret,type=env,target=GITHUB_OAUTH_CLIENT_SECRET
+EOF</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">If you use a self-hosted GitHub Enterprise instance (not <code class="ph codeph">github.com</code>), add its URL to the CORS allowed origins so that OAuth redirects are accepted.</span> 
+        <div class="itemgroup info"> 
+         <p class="p"><strong class="ph b">OpenShift:</strong></p> 
+         <pre class="pre codeblock"><code>upstream:
+  backstage:
+    appConfig:
+      backend:
+        cors:
+          origin:
+            - ${BASE_URL}
+            - https://github.internal.example.com</code></pre> 
+         <p class="p"><strong class="ph b">RHEL appliance</strong> — add to the existing <code class="ph codeph">backend:</code> block in <code class="ph codeph">app-config.production.yaml</code>:</p> 
+         <pre class="pre codeblock"><code>backend:
+  cors:
+    origin:
+      - "https://portal.example.com"
+      - "https://github.internal.example.com"</code></pre> 
+         <div class="note important note_important">
+          <span class="note__title">Important:</span> 
+          <div class="note__body">
+           <p class="p">On RHEL appliances, <code class="ph codeph">app.baseUrl</code>, <code class="ph codeph">backend.baseUrl</code>, and <code class="ph codeph">backend.cors.origin</code> must all use the same portal URL. If any of these values are inconsistent, OAuth callbacks and API requests fail. Do not create a duplicate <code class="ph codeph">backend:</code> block — add <code class="ph codeph">cors</code> to the existing one.</p>
+          </div>
+         </div> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body">
+           <p class="p">If you only use <code class="ph codeph">github.com</code>, no CORS changes are needed.</p>
+          </div>
+         </div> 
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section postreq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">What to do next</h2>
+      </div> 
+      <p class="p">To enable automated image builds with GitHub Actions, configure repository secrets and variables. See Configure automated image builds below.</p> 
+      <p class="p"><strong class="ph b">Configure automated image builds (GitHub Actions)</strong></p> 
+      <p class="p">When a user saves an EE definition to a GitHub repository and selects <strong class="ph b">Build Execution Environment</strong>, the generated <code class="ph codeph">ee-build.yml</code> GitHub Actions workflow builds a container image and pushes it to a registry. Configure repository secrets and variables before users can run successful builds.</p> 
+      <p class="p">You need a GitHub organization or repositories where EE definitions are saved, destination registry credentials (for example, private automation hub), and source registry credentials for base images (for example, <code class="ph codeph">registry.redhat.io</code>).</p> 
+      <ol class="ol"> 
+       <li class="li">In GitHub, navigate to the repository where the EE definition was saved.</li> 
+       <li class="li">Go to <strong class="ph b">Settings &gt; Secrets and variables &gt; Actions</strong>.</li> 
+       <li class="li">Under <strong class="ph b">Secrets</strong>, click <strong class="ph b">New repository secret</strong> and add each required secret: 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:28.57142857142857%">
+          <col style="width:42.857142857142854%">
+          <col style="width:28.57142857142857%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="proc-configure-github-oauth-ee-builder__entry__10">Secret</th> 
+           <th class="entry" id="proc-configure-github-oauth-ee-builder__entry__11">Purpose</th> 
+           <th class="entry" id="proc-configure-github-oauth-ee-builder__entry__12">When required</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="proc-configure-github-oauth-ee-builder__entry__10"><code class="ph codeph">REGISTRY_PASSWORD</code></td> 
+           <td class="entry" headers="proc-configure-github-oauth-ee-builder__entry__11">Password for the destination container registry where built EE images are pushed (for example, private automation hub).</td> 
+           <td class="entry" headers="proc-configure-github-oauth-ee-builder__entry__12">Not required if pushing to GitHub Container Registry.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="proc-configure-github-oauth-ee-builder__entry__10"><code class="ph codeph">REDHAT_REGISTRY_PASSWORD</code></td> 
+           <td class="entry" headers="proc-configure-github-oauth-ee-builder__entry__11">Password for the source registry used to pull base images (for example, <code class="ph codeph">registry.redhat.io</code>).</td> 
+           <td class="entry" headers="proc-configure-github-oauth-ee-builder__entry__12">Not required if the base image is publicly available.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="proc-configure-github-oauth-ee-builder__entry__10"><code class="ph codeph">ANSIBLE_GALAXY_SERVER_&lt;NAME&gt;_TOKEN</code></td> 
+           <td class="entry" headers="proc-configure-github-oauth-ee-builder__entry__11">Galaxy server tokens matching <code class="ph codeph">[galaxy_server.&lt;name&gt;]</code> entries in <code class="ph codeph">ansible.cfg</code>. One secret per configured server.</td> 
+           <td class="entry" headers="proc-configure-github-oauth-ee-builder__entry__12">Required for authenticated collection sources.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="proc-configure-github-oauth-ee-builder__entry__10"><code class="ph codeph">AAP_EE_BUILDER_&lt;PROVIDER&gt;_&lt;CANONICAL&gt;_&lt;ORG&gt;_TOKEN</code></td> 
+           <td class="entry" headers="proc-configure-github-oauth-ee-builder__entry__11">Git collection tokens. EE Builder generates these token placeholders automatically based on the collection source. One secret per Git-sourced collection provider.</td> 
+           <td class="entry" headers="proc-configure-github-oauth-ee-builder__entry__12">Required when the EE definition includes collections from Git repositories.</td> 
+          </tr> 
+         </tbody>
+        </table> </li> 
+       <li class="li">Under <strong class="ph b">Variables</strong>, click <strong class="ph b">New repository variable</strong> and add each required variable: 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:28.57142857142857%">
+          <col style="width:42.857142857142854%">
+          <col style="width:28.57142857142857%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="proc-configure-github-oauth-ee-builder__entry__25">Variable</th> 
+           <th class="entry" id="proc-configure-github-oauth-ee-builder__entry__26">Purpose</th> 
+           <th class="entry" id="proc-configure-github-oauth-ee-builder__entry__27">When required</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="proc-configure-github-oauth-ee-builder__entry__25"><code class="ph codeph">REGISTRY_USERNAME</code></td> 
+           <td class="entry" headers="proc-configure-github-oauth-ee-builder__entry__26">Username for the destination container registry (for example, private automation hub).</td> 
+           <td class="entry" headers="proc-configure-github-oauth-ee-builder__entry__27">Not required if pushing to GitHub Container Registry.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="proc-configure-github-oauth-ee-builder__entry__25"><code class="ph codeph">REDHAT_REGISTRY_USERNAME</code></td> 
+           <td class="entry" headers="proc-configure-github-oauth-ee-builder__entry__26">Username for the source registry (for example, <code class="ph codeph">registry.redhat.io</code>).</td> 
+           <td class="entry" headers="proc-configure-github-oauth-ee-builder__entry__27">Not required if the base image is publicly available.</td> 
+          </tr> 
+         </tbody>
+        </table> </li> 
+      </ol> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body">
+        <p class="p">When using GitHub Container Registry as the destination registry, the workflow uses the built-in <code class="ph codeph">GITHUB_TOKEN</code> automatically. No additional <code class="ph codeph">REGISTRY_USERNAME</code> or <code class="ph codeph">REGISTRY_PASSWORD</code> configuration is required.</p>
+       </div>
+      </div> 
+      <div class="note tip note_tip">
+       <span class="note__title">Tip:</span> 
+       <div class="note__body">
+        <p class="p">Configure these as GitHub organization secrets and organization variables instead of repository-level settings. New repositories created in the organization inherit organization secrets automatically, so users do not need to configure secrets each time they save an EE definition to a new repository.</p>
+       </div>
+      </div> 
+      <p class="p">Trigger a build from Ansible automation portal or manually dispatch the <code class="ph codeph">ee-build.yml</code> workflow from GitHub Actions. Verify that all validation steps pass and the image is pushed to the configured registry.</p> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

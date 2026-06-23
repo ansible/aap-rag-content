@@ -1,0 +1,328 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Event-Driven Ansible controller variables</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Inventory file variables for Event-Driven Ansible controller.</p> 
+     <section class="section"> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:40%">
+        <col style="width:15%">
+        <col style="width:20%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1">Variable name</th> 
+         <th class="entry" id="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2">Description</th> 
+         <th class="entry" id="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3">Required or optional</th> 
+         <th class="entry" id="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_activation_workers</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Number of workers used for ansible-rulebook activation pods in Event-Driven Ansible.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">2</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_admin_email</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Email address used by Django for the admin user for Event-Driven Ansible.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">admin@example.com</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_admin_password</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Event-Driven Ansible administrator password. Use of special characters for this variable is limited. The password can include any printable ASCII character except <code class="ph codeph">/</code>, <code class="ph codeph">"</code>, or <code class="ph codeph">@</code>.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Required</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_admin_user</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Username used to identify and create the administrator user in Event-Driven Ansible.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">admin</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_debug</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Controls whether debug mode is enabled or disabled for Event-Driven Ansible. Set to <code class="ph codeph">true</code> to enable debug mode for Event-Driven Ansible.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_event_stream_mtls</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Controls whether event stream mutual TLS (mTLS) authentication is enabled or disabled for Event-Driven Ansible. Set this variable to <code class="ph codeph">false</code> to disable mTLS authentication.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">true</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_event_stream_mtls_prefix_path</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">The prefix path for the event stream mTLS URLs.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">/mtls/eda-event-streams</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_event_stream_prefix_path</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">API prefix path used for Event-Driven Ansible event-stream through platform gateway.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">/eda-event-streams</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_event_stream_url</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">URL for connecting to the event stream. The URL must start with the <code class="ph codeph">http://</code> or <code class="ph codeph">https://</code> prefix</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_extra_settings</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Defines additional settings for use by Event-Driven Ansible during installation.</p> <p class="p">For example:</p> <pre class="pre codeblock"><code>eda_extra_settings=[{"setting": "RULEBOOK_READINESS_TIMEOUT_SECONDS", "value": 120}]</code></pre> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">[]</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_firewall_zone</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">The firewall zone where Event-Driven Ansible related firewall rules are applied. This controls which networks can access Event-Driven Ansible based on the zone's trust level.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">public</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_gunicorn_workers</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">The number of Gunicorn worker processes to spawn for the Event-Driven Ansible controller API. Increasing this value improves the controller's ability to handle concurrent API requests and user interface interactions.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p">(Number of cores or threads) * 2 + 1</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"><code class="ph codeph">eda_gunicorn_timeout</code></td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2">The amount of time, in seconds, that a Gunicorn worker waits for an API request to complete before timing out and restarting. Increasing this value can prevent timeouts for long-running API operations.</td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3">Optional</td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4">10</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"><code class="ph codeph">eda_gunicorn_timeout_grace_period</code></td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2">The amount of time, in seconds, a Gunicorn worker has to finish processing requests after a timeout or restart signal is received. This provides a buffer for workers to exit gracefully before being forcibly terminated.</td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3">Optional</td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4">2</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_nginx_client_max_body_size</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Maximum allowed size for data sent to Event-Driven Ansible through NGINX.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">1m</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_nginx_disable_hsts</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Controls whether HTTP Strict Transport Security (HSTS) is enabled or disabled for Event-Driven Ansible. Set this variable to <code class="ph codeph">true</code> to disable HSTS.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_nginx_disable_https</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Controls whether HTTPS is enabled or disabled for Event-Driven Ansible. Set this variable to <code class="ph codeph">true</code> to disable HTTPS.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_nginx_hsts_max_age</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Maximum duration (in seconds) that HTTP Strict Transport Security (HSTS) is enforced for Event-Driven Ansible.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">63072000</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_nginx_http_port</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Port number that Event-Driven Ansible listens on for HTTP requests.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">8082</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_nginx_https_port</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Port number that Event-Driven Ansible listens on for HTTPS requests.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">8445</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_nginx_https_protocols</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Protocols that Event-Driven Ansible supports when handling HTTPS traffic.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">[TLSv1.2, TLSv1.3]</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_nginx_user_headers</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">List of additional NGINX headers to add to Event-Driven Ansible's NGINX configuration.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">[]</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_pg_cert_auth</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Controls whether client certificate authentication is enabled or disabled on the Event-Driven Ansible PostgreSQL database. Set this variable to <code class="ph codeph">true</code> to enable client certificate authentication.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_pg_database</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Name of the PostgreSQL database used by Event-Driven Ansible.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">eda</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_pg_host</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Hostname of the PostgreSQL database used by Event-Driven Ansible.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Required</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_pg_password</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Password for the Event-Driven Ansible PostgreSQL database user. Use of special characters for this variable is limited. The <code class="ph codeph">!</code>, <code class="ph codeph">#</code>, <code class="ph codeph">0</code> and <code class="ph codeph">@</code> characters are supported. Use of other special characters can cause the setup to fail.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Required if not using client certificate authentication.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_pg_port</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Port number for the PostgreSQL database used by Event-Driven Ansible.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">5432</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_pg_socket</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">UNIX socket used by Event-Driven Ansible to connect to the PostgreSQL database.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_pg_sslmode</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Determines the level of encryption and authentication for client server connections. Valid options include <code class="ph codeph">verify-full</code>, <code class="ph codeph">verify-ca</code>, <code class="ph codeph">require</code>, <code class="ph codeph">prefer</code>, <code class="ph codeph">allow</code>, <code class="ph codeph">disable</code>.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">prefer</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_pg_tls_cert</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Path to the PostgreSQL SSL/TLS certificate file for Event-Driven Ansible.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Required if using client certificate authentication.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_pg_tls_key</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Path to the PostgreSQL SSL/TLS key file for Event-Driven Ansible.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Required if using client certificate authentication.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_pg_username</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Username for the Event-Driven Ansible PostgreSQL database user.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">eda</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_safe_plugins</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">List of plugins that are allowed to run within Event-Driven Ansible.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">[]</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_secret_key</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Secret key value used by Event-Driven Ansible to sign and encrypt data.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_tls_cert</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Path to the SSL/TLS certificate file for Event-Driven Ansible.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_tls_key</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Path to the SSL/TLS key file for Event-Driven Ansible.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_tls_remote</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Denote whether the Event-Driven Ansible provided certificate files are local to the installation program (<code class="ph codeph">false</code>) or on the remote component server (<code class="ph codeph">true</code>).</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_type</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Event-Driven Ansible node type. Valid options include <code class="ph codeph">api</code>, <code class="ph codeph">event-stream</code>, <code class="ph codeph">hybrid</code>, <code class="ph codeph">worker</code>.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">hybrid</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_use_archive_compression</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Enables or disables compression for project and rulebook archives to reduce storage usage and network overhead during task execution. This can be overridden globally by the <code class="ph codeph">use_archive_compression</code> variable.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">true</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_use_db_compression</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">Controls whether database compression is enabled or disabled for Event-Driven Ansible. You can control this functionality globally by using <code class="ph codeph">use_db_compression</code>.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p"><code class="ph codeph">true</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"> <p class="p"><code class="ph codeph">eda_workers</code></p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p class="p">The number of worker processes to spawn for the Event-Driven Ansible controller. Increasing this value allows for more concurrent rulebook activations and background tasks.</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"> <p class="p">Number of cores or threads</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"><code class="ph codeph">eda_event_stream_mtls_url</code></td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2">The URL used for Mutual TLS (mTLS) authentication when connecting event streams to the Event-Driven Ansible controller.</td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3">Optional</td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"><code class="ph codeph">Gateway proxy URL</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"><code class="ph codeph">eda_event_stream_pg_username</code></td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2">The PostgreSQL account name for authenticating Event-Driven Ansible event stream database operations.</td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3">Optional</td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4">eda_event_stream</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"><code class="ph codeph">eda_event_stream_pg_password</code></td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2">The password used to authenticate with the PostgreSQL database dedicated to Event-Driven Ansible event streams. 
+          <div class="note note note_note">
+           <span class="note__title">Note:</span> 
+           <div class="note__body">
+            If you do not define a password, one will be automatically generated for you.
+           </div>
+          </div> </td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3">Optional</td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1"><code class="ph codeph">eda_event_stream_pg_cert_auth</code></td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2">Enables or disables certificate-based authentication for the PostgreSQL database connection used for Event-Driven Ansible event streams instead of a password.</td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3">Optional</td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"><code class="ph codeph">false</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1">eda_event_stream_pg_tls_cert</td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2">The client certificate used for TLS authentication between the Event-Driven Ansible event stream service and the PostgreSQL database.</td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3">Optional</td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1">eda_event_stream_pg_tls_key</td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2">The private key associated with the TLS certificate used to authenticate the Event-Driven Ansible event stream service with the PostgreSQL database.</td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3">Optional</td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__1">eda_event_stream_pg_sslmode</td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__2"> <p dir="ltr" class="p">The SSL connection mode used to determine the security level of the TLS connection between the Event-Driven Ansible event stream service and the PostgreSQL database.</p> For supported values, see the .<a class="xref" href="https://www.postgresql.org/docs/current/libpq-ssl.html#LIBPQ-SSL-PROTECTION" target="_blank" rel="external noopener">PostgreSQL SSL Mode Documentation</a></td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__3">Optional</td> 
+         <td class="entry" headers="GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209__entry__4"><code class="ph codeph">prefer</code></td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

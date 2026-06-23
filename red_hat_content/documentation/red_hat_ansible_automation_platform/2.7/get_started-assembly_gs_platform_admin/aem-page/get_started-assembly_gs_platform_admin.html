@@ -1,0 +1,278 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-gs-platform-admin"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Get started as a platform administrator</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">As a platform administrator, Ansible Automation Platform helps you enable your users and teams to develop and run automation.</p> 
+      <p class="p">Learn the basic steps to get set up as an administrator for Ansible Automation Platform, including configuring and maintaining the platform for users.</p> 
+      <p class="p">To get started as an administrator, learn to:</p> 
+      <ul class="ul"> 
+       <li class="li"> Log in for the first time. </li> 
+       <li class="li"> Configure authentication. </li> 
+       <li class="li"> Manage user access with role-based access control. </li> 
+      </ul> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-gs-logging-in"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Log in for the first time</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Log in to the Ansible Automation Platform as an administrator and enter your subscription information. You can then create user profiles and assign roles.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">With the login information provided after your installation completed, open a web browser and log in to Red Hat Ansible Automation Platform by navigating to the server URL at: <code class="ph codeph">https://&lt;AAP_SERVER_NAME&gt;/</code></span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Use the credentials specified during the installation process to login: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">The default username is <strong class="ph b">admin</strong>.</li> 
+            <li class="li">The password for <strong class="ph b">admin</strong> is the value specified during installation.</li> 
+           </ul> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section postreq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div> 
+        <p class="p">After your first login, you must add your subscription information to begin using the platform.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="adding-a-subscription"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Add your subscription</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">To add your subscription information, you can either upload your subscription manifest, or use your service account credentials to find the subscription associated with your account.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <p class="p">To add your subscription by uploading a subscription manifest, you must first:</p> 
+        <ul class="ul"> 
+         <li class="li">Obtain your manifest file. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_activate_1#assembly-aap-obtain-manifest-files" title="You can obtain a subscription manifest in the Subscription Allocations section of Red Hat Subscription Management.">Obtaining a manifest file</a> for more information.</li> 
+        </ul> 
+        <p class="p">To add your subscription using your service account credentials, you must first:</p> 
+        <ul class="ul"> 
+         <li class="li">Have <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_hybrid_cloud_console/1-latest/html/creating_and_managing_service_accounts/proc-ciam-svc-acct-overview-creating-service-acct#proc-ciam-svc-acct-create-creating-service-acct" target="_blank" rel="external noopener">created a service account</a> and saved the client ID and client secret.</li> 
+         <li class="li">Add your service account to the Subscription viewer user group to give it the ability to see your subscriptions. See the "Updates to subscription management" section in the Knowledgebase article <a class="xref" href="https://access.redhat.com/articles/7112649" target="_blank" rel="external noopener">Configure Ansible Automation Platform to authenticate through service account credentials</a> for instructions on how to do so.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">To add your subscription by uploading a subscription manifest: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">Drag the file to the field beneath <strong class="ph b">Red Hat subscription manifest</strong> or browse for the file on your local machine.</span> </li> 
+          </ol> </li>
+         <li class="li step"> <span class="ph cmd">To add your subscription with your service account credentials: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Click the <strong class="ph b">Service Account</strong> tab.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Enter the <strong class="ph b">client ID</strong> you received when you created your service account in the field labeled Client ID.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Enter the <strong class="ph b">client secret</strong> you received when you created your service account in the field labeled Client secret. </span> 
+            <div class="itemgroup info"> 
+             <p class="p">Your subscription appears in the <strong class="ph b">Subscription</strong> list.</p> 
+            </div> </li> 
+          </ol> </li>
+         <li class="li step"> <span class="ph cmd">Select your subscription and click <span class="ph uicontrol button">Next</span>. </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">Check the box indicating that you agree to the <strong class="ph b">End User License Agreement</strong>.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Review your information and click <span class="ph uicontrol button">Finish</span>.</span> </li> 
+          </ol> </li>
+        </ol>
+       </section> 
+       <section class="section tasktroubleshooting"> 
+        <p class="p">If you enter your client ID and client secret but cannot locate your subscription, you might not have the correct permissions set on your service account. For more information and troubleshooting guidance for service accounts, see <a class="xref" href="https://access.redhat.com/articles/7112649" target="_blank" rel="external noopener">Configure Ansible Automation Platform to authenticate through service account credentials</a>.</p> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://access.redhat.com/articles/5807761" target="_blank" rel="external noopener">Attaching your Ansible Automation Platform subscription to your instance</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title4" id="con-gs-config-authentication"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Configure authentication</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">After your first login as an administrator, begin configuring authentication for your users. Depending on your organization’s needs and resources, you can either:</p> 
+       <ul class="ul"> 
+        <li class="li">Set up authentication by creating users, teams, and organizations, and then assigning them roles that govern access.</li> 
+        <li class="li">Use an external source such as GitHub to configure authentication for your system.</li> 
+       </ul> 
+       <p class="p">The following sections serve as an introduction to authentication in Ansible Automation Platform.</p> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relconcepts">
+        <strong>Related concepts</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_configure_authentication" title="Configure authentication methods such as LDAP or SAML to simplify the user login experience. Providing the correct connection details for your chosen identity provider helps ensure seamless and secure access to Ansible Automation Platform.">Configure central authentication for Ansible Automation Platform</a></li>
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_managing_access" title="Role-based access control (RBAC) restricts user access based on the user’s role within the organization they are assigned to in Ansible Automation Platform. The roles in RBAC refer to the levels of access that users have to Ansible Automation Platform components and resources.">Managing access with role-based access control</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title5" id="con-gs-manage-RBAC"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Manage user access with role-based access control</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Role-based access control (RBAC) restricts user access based on the user’s role within the organization they are assigned to in Ansible Automation Platform. The roles in RBAC refer to the levels of access that users have to Ansible Automation Platform components and resources.</p> 
+       <p class="p">Use RBAC to control what users can do with the components of Ansible Automation Platform at a broad or granular level. You can choose whether the user is a system administrator or normal user, and align roles and access permissions with their positions within the organization.</p> 
+       <p class="p">You can define roles with multiple permissions that can then be assigned to resources, teams, and users. The permissions that make up a role govern what the assigned role allows. Permissions are allocated with only the access needed for a user to perform the tasks appropriate for their role.</p> 
+       <p class="p">The following procedures show how to get started with RBAC by creating a team, and a user to assign to the team. </p> 
+       <div class="note important note_important">
+        <span class="note__title">Important:</span> 
+        <div class="note__body"> 
+         <p class="p">When managing users, teams, and organizations, use the Unified UI or the platform gateway API to ensure real-time synchronization across all platform components, including Event-Driven Ansible controller. If you use the legacy automation controller API, changes can take up to 15 minutes to propagate to Event-Driven Ansible controller, which can result in authentication errors for new users or teams.</p> 
+        </div>
+       </div> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="proc-controller-create-organization"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Create an organization</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Ansible Automation Platform automatically creates a default organization. If you have a self-support level license, you have only the default organization available and cannot delete it.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Organizations</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create organization</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Enter the <strong class="ph b">Name</strong> and give a <strong class="ph b">Description</strong> for your organization. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">If automation controller is enabled on the platform, continue with Step 4. Otherwise, proceed to Step 6.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the name of the <strong class="ph b">Execution environment</strong> or search for one that members of this organization can use to run automation.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Enter the name of the <strong class="ph b">Instance Groups</strong> on which to run this organization.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: Enter the <strong class="ph b">Galaxy credentials</strong> or search from a list of existing ones.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">Max hosts</strong> for this organization. The default is 0. When this value is 0, it signifies no limit. If you try to add a host to an organization that has reached or exceeded its cap on hosts, an error message displays: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>You have already reached the maximum number of 1 hosts allowed for your organization. Contact your System Administrator for assistance.</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Next</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">If you selected more than 1 instance group, you can manage the order by dragging and dropping the instance group up or down in the list and clicking <span class="ph uicontrol button">Confirm</span>. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">The execution precedence is determined by the order in which the instance groups are listed.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Next</span> and verify the organization settings.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Finish</span>.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title7" id="proc-controller-creating-a-team"> 
+      <h2 class="title topictitle2" id="ariaid-title7">Create a team</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Manage teams by creating them, assigning an organization, and adding <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_teams#proc-gw-team-add-user" title="To assign a user to a team, the user must already have been created. For more information, see Creating a user. Assigning a user to a team adds them as a member only. Use the Roles tab to assign a role that gives users on the team resource access.">users</a> or <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_teams#proc-gw-add-admin-team" title="Assign existing users as administrators to a team so they can manage its membership and settings. This allows designated administrators to create new users and grant permissions within the team.">administrators</a>. Team members automatically inherit all assigned roles and permissions. Users must exist in the system before they can be added to a team.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Teams</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create team</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Enter a <strong class="ph b">Name</strong> and optionally give a <strong class="ph b">Description</strong> for the team.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select an <strong class="ph b">Organization</strong> to be associated with this team. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">Each team can only be assigned to one organization.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create team</span>. The <strong class="ph b">Details</strong> page opens, where you can review and edit your team information and access.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title8" id="proc-controller-creating-a-user"> 
+      <h2 class="title topictitle2" id="ariaid-title8">Create a user</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can create three types of users in Ansible Automation Platform:</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <dl class="dl"> 
+         <dt class="dt dlterm">
+          Normal user
+         </dt> 
+         <dd class="dd">
+          Normal users have read and write access limited to the resources (such as inventory, projects, and job templates) for which that user has been granted the appropriate roles and privileges. Normal users are the default type of user when no other <strong class="ph b">User type</strong> is specified.
+         </dd> 
+         <dt class="dt dlterm">
+          Ansible Automation Platform Administrator
+         </dt> 
+         <dd class="dd">
+          An administrator (also known as a Superuser) has full system administration privileges, with full read and write privileges over the entire installation. An administrator is typically responsible for managing all aspects of and delegating responsibilities for day-to-day work to various users.
+         </dd> 
+         <dt class="dt dlterm">
+          Ansible Automation Platform Auditor
+         </dt> 
+         <dd class="dd">
+          Auditors have read-only capability for all objects within the environment.
+         </dd> 
+        </dl> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Users</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create user</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Enter the details about your new user in the fields on the <strong class="ph b">Create user</strong> page. Fields marked with an asterisk (*) are required.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Normal users are the default when no <strong class="ph b">User type</strong> is specified. To define a user as an administrator or auditor, select a <strong class="ph b">User type</strong> from the drop-down menu. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">If you are modifying your own password, log out and log back in for the change to take effect.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">Organization</strong> to be assigned for this user. For information about creating a new organization, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_create_organization#proc-controller-create-organization" title="Ansible Automation Platform automatically creates a default organization. If you have a self-support level license, you have only the default organization available and cannot delete it.">Creating an organization</a>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create user</span>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">When the user is successfully created, the <strong class="ph b">User</strong> details screen opens. From here, you can review and change the user’s teams, roles, tokens and other membership details.</p> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">If the user is not newly-created, the details screen displays the user’s last login activity.</p> 
+            </div>
+           </div> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section postreq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div> 
+        <p class="p">If you log in as yourself, and view the details of your user profile, you can manage tokens from your user profile by selecting the <strong class="ph b">Tokens</strong> tab. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_create_application#proc-controller-apps-create-tokens" title="You can view a list of users that have tokens to access an application by selecting the Tokens tab in the OAuth Applications details page.">Adding a token</a>.</p> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

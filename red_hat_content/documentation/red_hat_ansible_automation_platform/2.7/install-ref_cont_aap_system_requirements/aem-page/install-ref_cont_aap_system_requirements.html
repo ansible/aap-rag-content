@@ -1,0 +1,187 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="system-requirements">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">System requirements</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Use this information when planning your installation of containerized Ansible Automation Platform.</p> 
+     <section class="section" id="system-requirements___prerequisites">
+      <h2 class="title sectiontitle">Prerequisites</h2> 
+      <ul class="ul"> 
+       <li class="li">Configure a dedicated non-root user on the Red Hat Enterprise Linux host. 
+        <ul class="ul"> 
+         <li class="li">This user requires <code class="ph codeph">sudo</code> or other Ansible supported privilege escalation (<code class="ph codeph">sudo</code> is recommended) to perform administrative tasks during the installation.</li> 
+         <li class="li">This user is responsible for the installation of containerized Ansible Automation Platform.</li> 
+         <li class="li">This user is also the service account for the containers running Ansible Automation Platform.</li> 
+        </ul> </li> 
+       <li class="li">For managed nodes, configure a dedicated user on each node. Ansible Automation Platform connects as this user to run tasks on the node. For more information about configuring a dedicated user on each node, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_preparing_the_managed_nodes_for_containerized_installation" title="Managed nodes, or hosts, are the devices managed by Ansible Automation Platform. To ensure a secure containerized setup, create a dedicated user on each node for Ansible Automation Platform to use when connecting and running tasks.">Prepare the managed nodes</a>.</li> 
+       <li class="li">For remote host installations, configure SSH public key authentication for the non-root user. For guidelines on setting up SSH public key authentication for the non-root user, see <a class="xref" href="https://access.redhat.com/solutions/4110681" target="_blank" rel="external noopener">How to configure SSH public key authentication for passwordless login</a>.</li> 
+       <li class="li">Ensure the Red Hat Enterprise Linux host has internet access if you are using the default online installation method.</li> 
+       <li class="li">Open the appropriate network ports if you have a firewall in place. For more information about the ports to open, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-ref_cont_b_env_a" title="The container-based enterprise topology provides redundancy and higher compute for large volumes of automation.">Container enterprise topology</a> in <em class="ph i">Tested deployment models</em>.</li> 
+      </ul> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">Podman does not support storing container images on an NFS share. To use an NFS share for the user home directory, set up the Podman storage backend path outside of the NFS share. For more information, see <a class="xref" href="https://www.redhat.com/en/blog/rootless-podman-nfs" target="_blank" rel="external noopener">Rootless Podman and NFS</a>.</p> 
+       </div>
+      </div> 
+     </section> 
+     <section class="section" id="system-requirements___ansible_automation_platform_system_requirements">
+      <h2 class="title sectiontitle">Ansible Automation Platform system requirements</h2> 
+      <p class="p">Your system must meet the following minimum system requirements to install and run Red Hat Ansible Automation Platform.</p> 
+      <table class="table">
+       <caption>
+        <span class="table--title-label">Table 1. </span><span class="title">System configuration</span>
+       </caption>
+       <colgroup>
+        <col style="width:33.3333%">
+        <col style="width:33.3333%">
+        <col style="width:33.3334%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="system-requirements___ansible_automation_platform_system_requirements__entry__1">Type</th> 
+         <th class="entry" id="system-requirements___ansible_automation_platform_system_requirements__entry__2">Description</th> 
+         <th class="entry" id="system-requirements___ansible_automation_platform_system_requirements__entry__3">Notes</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__1"> <p class="p">Subscription</p> </td> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__2"> 
+          <ul class="ul"> 
+           <li class="li">Valid Red Hat Ansible Automation Platform subscription</li> 
+           <li class="li">Valid Red Hat Enterprise Linux subscription (to consume the BaseOS and AppStream repositories)</li> 
+          </ul> </td> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__3"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__1"> <p class="p">Operating system</p> </td> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__2"> 
+          <ul class="ul"> 
+           <li class="li">Red Hat Enterprise Linux 9.6 or later minor versions of Red Hat Enterprise Linux 9.</li> 
+           <li class="li">Red Hat Enterprise Linux 10 or later minor versions of Red Hat Enterprise Linux 10.</li> 
+          </ul> </td> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__3"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__1"> <p class="p">CPU architecture</p> </td> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__2"> <p class="p">x86_64, AArch64, s390x (IBM Z), ppc64le (IBM Power)</p> </td> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__3"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__1"> <p class="p"> <code class="ph codeph">ansible-core</code> </p> </td> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__2"> 
+          <ul class="ul"> 
+           <li class="li">RHEL 9: installation program uses <code class="ph codeph">ansible-core</code> 2.14, Ansible Automation Platform operation uses <code class="ph codeph">ansible-core</code> 2.16.</li> 
+           <li class="li">RHEL 10: installation program uses <code class="ph codeph">ansible-core</code> 2.16, Ansible Automation Platform operation uses <code class="ph codeph">ansible-core</code> 2.16.</li> 
+          </ul> </td> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__3"> 
+          <ul class="ul"> 
+           <li class="li">The installation program uses the <code class="ph codeph">ansible-core</code> package from the RHEL AppStream repository.</li> 
+           <li class="li">Ansible Automation Platform bundles <code class="ph codeph">ansible-core</code> 2.16 for operation, so you do not need to install it manually.</li> 
+          </ul> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__1"> <p class="p">Browser</p> </td> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__2"> <p class="p">A currently supported version of Mozilla Firefox or Google Chrome.</p> </td> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__3"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__1"> <p class="p">Database</p> </td> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__2"> 
+          <ul class="ul"> 
+           <li class="li">For Ansible Automation Platform managed databases: PostgreSQL 15.</li> 
+           <li class="li">For customer provided (external) databases: PostgreSQL 15, 16, or 17.</li> 
+          </ul> </td> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__3"> 
+          <ul class="ul"> 
+           <li class="li">External (customer supported) databases require International Components for Unicode (ICU) support.</li> 
+           <li class="li">External databases using PostgreSQL 16 or 17 must rely on external backup and restore processes. Backup and restore functionality is dependent on utilities provided with PostgreSQL 15.</li> 
+          </ul> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__1"> <p class="p">IP version</p> </td> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__2"> <p class="p">IPv4, IPv6 (single-stack and dual-stack)</p> </td> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__3"></td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <p class="p">Each virtual machine (VM) has the following system requirements:</p> 
+      <table class="table">
+       <caption>
+        <span class="table--title-label">Table 2. </span><span class="title">Virtual machine requirements</span>
+       </caption>
+       <colgroup>
+        <col style="width:50%">
+        <col style="width:50%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="system-requirements___ansible_automation_platform_system_requirements__entry__25">Requirement</th> 
+         <th class="entry" id="system-requirements___ansible_automation_platform_system_requirements__entry__26">Minimum requirement</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__25"> <p class="p">RAM</p> </td> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__26"> 
+          <ul class="ul"> 
+           <li class="li">16 GB</li> 
+           <li class="li">32 GB required for growth topology bundled installations with <code class="ph codeph">hub_seed_collections=true</code>. Seeding the collections can take 45 or more minutes.</li> 
+          </ul> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__25"> <p class="p">CPUs</p> </td> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__26"> <p class="p">4</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__25"> <p class="p">Local disk</p> </td> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__26"> 
+          <ul class="ul"> 
+           <li class="li">Total available disk space: 60 GB</li> 
+           <li class="li">Installation directory: 15 GB (if on a dedicated partition)</li> 
+           <li class="li"><code class="ph codeph">/var/tmp</code> for online installations: 1 GB</li> 
+           <li class="li"><code class="ph codeph">/var/tmp</code> for offline or bundled installations: 3 GB</li> 
+           <li class="li">Temporary directory (defaults to <code class="ph codeph">/tmp</code>) for offline or bundled installations: 10GB</li> 
+          </ul> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__25"> <p class="p">Disk IOPS</p> </td> 
+         <td class="entry" headers="system-requirements___ansible_automation_platform_system_requirements__entry__26"> <p class="p">3000</p> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="system-requirements___database_requirements">
+      <h2 class="title sectiontitle">Database requirements</h2> 
+      <p class="p">Ansible Automation Platform can work with two varieties of database:</p> 
+      <ol class="ol"> 
+       <li class="li">Database installed with Ansible Automation Platform - This database consists of a PostgreSQL installation done as part of an Ansible Automation Platform installation using PostgreSQL packages that Red Hat provides.</li> 
+       <li class="li">Customer provided or configured database - This is an external database that the customer provides, whether on bare metal, virtual machine, container, or cloud hosted service.</li> 
+      </ol> 
+      <p class="p">Ansible Automation Platform requires a customer provided (external) database to have International Components for Unicode (ICU) support.</p> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relconcepts">
+      <strong>Related concepts</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_setup_postgresql_ext_database#setting-up-a-customer-provided-external-database" title="Set up an external (customer provided) PostgreSQL database for containerized Ansible Automation Platform to use your own database infrastructure.">Configure an external (customer provided) PostgreSQL database</a></li>
+      </ul>
+     </div>
+     <div class="linklist relinfo">
+      <strong>Related information</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="https://access.redhat.com/articles/4010491" target="_blank" rel="external noopener">Red Hat Ansible Automation Platform Database Scope of Coverage</a></li>
+       <li class="linklist"><a class="link" href="https://www.postgresql.org/docs/current/collation.html" target="_blank" rel="external noopener">Collation Support</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

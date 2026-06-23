@@ -1,0 +1,57 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="migration-prerequisites"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Migration prerequisites</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Prerequisites for migrating your Ansible Automation Platform deployment. For your specific migration path, ensure that you meet all necessary conditions before proceeding.</p> 
+      <div class="note warning note_warning">
+       <span class="note__title">Warning:</span> 
+       <div class="note__body">
+        To upgrade to Ansible Automation Platform 2.7, you must first migrate from your RPM-based deployment to a containerized or OpenShift Container Platform deployment. RPM-based deployments are not supported as an upgrade path to 2.7.
+       </div>
+      </div> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="containerized-to-ocp-prerequisites"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Containerized to OpenShift Container Platform migration prerequisites</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Before migrating from a container-based deployment to an OpenShift Container Platform deployment, ensure that you meet the following prerequisites:</p> 
+       <ul class="ul"> 
+        <li class="li">You have a source container-based deployment of Ansible Automation Platform.</li> 
+        <li class="li">The source deployment is on the latest async release of the version you are on.</li> 
+        <li class="li">You have a target OpenShift Container Platform environment ready.</li> 
+        <li class="li">You have an Ansible Automation Platform Operator available for the latest release of the Ansible Automation Platform version you are on.</li> 
+        <li class="li">You have decided between internal or external database configuration.</li> 
+        <li class="li">You have decided between internal or external Redis configuration.</li> 
+        <li class="li">There is network connectivity between the source and target environments.</li> 
+       </ul> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="containerized-to-managed-prerequisites"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Containerized to Managed Ansible Automation Platform migration prerequisites</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Before migrating from a container-based deployment to a Managed Ansible Automation Platform deployment, ensure that you meet the following prerequisites:</p> 
+       <ul class="ul"> 
+        <li class="li">You have a source container-based deployment of Ansible Automation Platform.</li> 
+        <li class="li">The source deployment is on the latest release of the Ansible Automation Platform version you are on.</li> 
+        <li class="li">You have a target Managed Ansible Automation Platform deployment.</li> 
+        <li class="li">You have enabled local authentication on the source deployment before the migration.</li> 
+        <li class="li">A local administrator account must be functional on the source deployment before migration. Verify this by performing a successful login to the source deployment.</li> 
+        <li class="li">You have a plan to retain a backup throughout the migration process and to ensure that your existing Ansible Automation Platform deployment remains active until your migration has completed successfully.</li> 
+        <li class="li">You have a plan for any environment changes based on the migration from a self-hosted Ansible Automation Platform deployment to a Managed Ansible Automation Platform deployment: 
+         <ul class="ul">
+          <li class="li">Job log retention changes from a customer-configured option to 30 days.</li>
+          <li class="li">Network changes occur when moving the control plane to the managed service.</li>
+          <li class="li">Automation mesh requires reconfiguration.</li>
+         </ul></li> 
+        <li class="li">You must reconfigure or re-create Single Sign-On (SSO) identity providers post-migration to account for URL changes.</li> 
+       </ul> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

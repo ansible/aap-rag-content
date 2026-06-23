@@ -1,0 +1,30 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="upgrade-api-changes">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">API changes for platform gateway</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Ansible Automation Platform uses a platform gateway that provides centralized API access to all services. While APIs for automation controller, automation hub, and Event-Driven Ansible remain accessible directly for backward compatibility, this direct access will be removed in a future release.</p> 
+     <p class="p">These changes impact your organization if you have API calls implemented directly with automation controller or private automation hub, or if you are integrating directly with automation controller or private automation hub hosts. You must migrate these integrations to the API endpoints exposed through the platform gateway to ensure they are not disrupted when direct service API access is removed in a future Ansible Automation Platform release.</p> 
+     <p class="p">For detailed API reference information, see the following sources:</p> 
+     <ul class="ul"> 
+      <li class="li">For platform gateway APIs, see the browsable API at <code class="ph codeph">https://&lt;gateway server name&gt;/api/gateway/v1</code>.</li> 
+      <li class="li">For automation controller APIs, see the browsable API at <code class="ph codeph">https://&lt;gateway server name&gt;/api/controller/v2</code>.</li> 
+      <li class="li">For automation hub APIs, see <strong class="ph b">Automation Hub API</strong> in <em class="ph i">API Catalog and Documentation</em>.</li> 
+      <li class="li">For Event-Driven Ansible APIs, see the browsable API at <code class="ph codeph">https://&lt;gateway server name&gt;/api/eda/v1</code>.</li> 
+     </ul> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relinfo">
+      <strong>Related information</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="https://developers.redhat.com/api-catalog/api/automation-hub" target="_blank" rel="external noopener">Automation Hub API</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

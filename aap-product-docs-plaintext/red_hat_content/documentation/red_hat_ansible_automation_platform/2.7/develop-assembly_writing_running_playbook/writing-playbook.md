@@ -1,0 +1,37 @@
+# Write your first automation task using the VS Code extension
+## Write your first playbook
+
+Create your first Ansible playbook within VS Code using the Ansible extension. The tools available help ensure that your syntax is correct and ready to run.
+
+### Before you begin
+
+- You have installed and opened the Ansible VS Code extension.
+- You have opened a terminal in VS Code.
+- You have installed `ansible-devtools`.
+
+### Procedure
+
+1.  Create a new .yml file in VS Code for your playbook, for example `example_playbook.yml`. Put it in the same directory level as the example `site.yml` file.
+2.  Add the following example code into the playbook file and save the file. The playbook consists of a single play that executes a `ping` to your local machine.
+
+```
+---
+- name: My first play
+hosts: localhost
+tasks:
+- name: Ping my hosts
+ansible.builtin.ping:
+```
+`Ansible-lint` runs in the background and displays errors in the **Problems** tab of the terminal. There are no errors in this playbook:
+
+
+![Ansible-lint showing no errors in a playbook](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ansible-lint-no-errors.png)
+
+3.  If you want to add new content to the playbook, use the following rules:
+
+- Every playbook file must finish with a blank line.
+- Trailing spaces at the end of lines are not allowed.
+- Every playbook and every play require an identifier (name).
+
+4.  Save your playbook file.
+

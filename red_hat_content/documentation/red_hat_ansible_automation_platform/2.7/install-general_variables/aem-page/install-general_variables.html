@@ -1,0 +1,190 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">General variables</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">General inventory file variables for Ansible Automation Platform.</p> 
+     <section class="section"> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:40%">
+        <col style="width:15%">
+        <col style="width:20%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1">Variable name</th> 
+         <th class="entry" id="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2">Description</th> 
+         <th class="entry" id="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3">Required or optional</th> 
+         <th class="entry" id="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1"> <p class="p"><code class="ph codeph">backup_dir</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2"> <p class="p">Directory used to store backup files.</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4"> <p class="p"><code class="ph codeph">~/backups</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1"> <p class="p"><code class="ph codeph">bundle_dir</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2"> <p class="p">Path to the bundle directory used when performing a bundle install.</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3"> <p class="p">Required if <code class="ph codeph">bundle_install=true</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4"> <p class="p"><code class="ph codeph">&lt;current_dir&gt;/bundle</code>.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1"> <p class="p"><code class="ph codeph">bundle_install</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2"> <p class="p">Controls whether or not to perform an offline or bundled installation. Set this variable to <code class="ph codeph">true</code> to enable an offline or bundled installation.</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4"> <p class="p"><code class="ph codeph">false</code> if using the setup installation program. <code class="ph codeph">true</code> if using the setup bundle installation program.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1"> <p class="p"><code class="ph codeph">ca_tls_cert</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2"> <p class="p">Path to the user-provided CA certificate file. When you specify this variable, the installation program automatically generates TLS certificates for each Ansible Automation Platform service signed by this CA. You do not need to define individual service certificate variables (such as <code class="ph codeph">gateway_tls_cert</code>, <code class="ph codeph">controller_tls_cert</code>, or <code class="ph codeph">hub_tls_cert</code>).</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1"> <p class="p"><code class="ph codeph">ca_tls_key</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2"> <p class="p">Path to the key file for the CA certificate provided in <code class="ph codeph">ca_tls_cert</code>. The installation program uses this key to sign the automatically generated TLS certificates for each Ansible Automation Platform service.</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1"> <p class="p"><code class="ph codeph">ca_tls_key_passphrase</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2"> <p class="p">Passphrase used to decrypt the key provided in <code class="ph codeph">ca_tls_key</code>.</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1"> <p class="p"><code class="ph codeph">ca_tls_remote</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2"> <p class="p">Denote whether the CA certificate files are local to the installation program (<code class="ph codeph">false</code>) or on the remote component server (<code class="ph codeph">true</code>).</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1"> <p class="p"><code class="ph codeph">client_request_timeout</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2"> <p class="p">Sets the HTTP timeout for end-user requests. The minimum value is <code class="ph codeph">10</code> seconds.</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4"> <p class="p"><code class="ph codeph">30</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1"> <p class="p"><code class="ph codeph">container_compress</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2"> <p class="p">Compression software to use for compressing container images.</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4"> <p class="p"><code class="ph codeph">gzip</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1"> <p class="p"><code class="ph codeph">container_keep_images</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2"> <p class="p">Controls whether or not to keep container images when uninstalling Ansible Automation Platform. Set to <code class="ph codeph">true</code> to keep container images when uninstalling Ansible Automation Platform.</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1"> <p class="p"><code class="ph codeph">container_pull_images</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2"> <p class="p">Controls whether or not to pull newer container images during installation. Set to <code class="ph codeph">false</code> to prevent pulling newer container images during installation.</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4"> <p class="p"><code class="ph codeph">true</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1"> <p class="p"><code class="ph codeph">custom_ca_cert</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2"> <p class="p">Path to the custom CA certificate file. Use this variable when you have manually provided TLS certificates for Ansible Automation Platform services (such as <code class="ph codeph">gateway_tls_cert</code>, <code class="ph codeph">controller_tls_cert</code>, or <code class="ph codeph">hub_tls_cert</code>) that are signed by a custom CA. This variable adds the CA certificate to the environment to ensure proper authentication and trust of the manually provided certificates. This variable is not needed when using <code class="ph codeph">ca_tls_cert</code> and <code class="ph codeph">ca_tls_key</code>, which automatically generate TLS certificates.</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1"> <p class="p"><code class="ph codeph">images_tmp_dir</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2"> <p class="p">The directory where the installation program temporarily stores container images during installation.</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4"> <p class="p">The system's temporary directory.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1"> <p class="p"><code class="ph codeph">pcp_firewall_zone</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2"> <p class="p">The firewall zone where Performance Co-Pilot related firewall rules are applied. This controls which networks can access Performance Co-Pilot based on the zone's trust level.</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4"> <p class="p">public</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1"> <p class="p"><code class="ph codeph">pcp_use_archive_compression</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2"> <p class="p">Controls whether archive compression is enabled or disabled for Performance Co-Pilot. You can control this functionality globally by using <code class="ph codeph">use_archive_compression</code>.</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4"> <p class="p"><code class="ph codeph">true</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1"> <p class="p"><code class="ph codeph">registry_auth</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2"> <p class="p">Controls whether to use registry authentication. When set to <code class="ph codeph">true</code>, <code class="ph codeph">registry_username</code> and <code class="ph codeph">registry_password</code> are required. Not applicable for disconnected (bundled) installations.</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4"> <p class="p"><code class="ph codeph">true</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1"> <p class="p"><code class="ph codeph">registry_ns_aap</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2"> <p class="p">Ansible Automation Platform registry namespace.</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4"> <p class="p"><code class="ph codeph">ansible-automation-platform-27</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1"> <p class="p"><code class="ph codeph">registry_ns_rhel</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2"> <p class="p">RHEL registry namespace.</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4"> <p class="p"><code class="ph codeph">rhel9</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1"> <p class="p"><code class="ph codeph">registry_password</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2"> <p class="p">Password credential for access to the registry source defined in <code class="ph codeph">registry_url</code>.</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3"> <p class="p">Required for online installations if <code class="ph codeph">registry_auth=true</code>. Not required for disconnected installations.</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1"> <p class="p"><code class="ph codeph">registry_tls_verify</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2"> <p class="p">Controls whether SSL/TLS certificate verification is enabled or disabled when making HTTPS requests.</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4"> <p class="p"><code class="ph codeph">true</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1"> <p class="p"><code class="ph codeph">registry_url</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2"> <p class="p">URL of the registry source from which to pull execution environment images.</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4"> <p class="p"><code class="ph codeph">registry.redhat.io</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1"> <p class="p"><code class="ph codeph">registry_username</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2"> <p class="p">Username credential for access to the registry source defined in <code class="ph codeph">registry_url</code>.</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3"> <p class="p">Required for online installations if <code class="ph codeph">registry_auth=true</code>. Not required for disconnected installations.</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1"> <p class="p"><code class="ph codeph">routable_hostname</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2"> <p class="p">Used if the machine running the installation program can only route to the target host through a specific URL. For example, if you use short names in your inventory, but the node running the installation program can only resolve that host by using a FQDN. If <code class="ph codeph">routable_hostname</code> is not set, it defaults to <code class="ph codeph">ansible_host</code>. If you do not set <code class="ph codeph">ansible_host</code>, <code class="ph codeph">inventory_hostname</code> is used as a last resort. This variable is used as a host variable for particular hosts and not under the <code class="ph codeph">[all:vars]</code> section.</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1"> <p class="p"><code class="ph codeph">setup_monitoring</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2"> <p class="p">Set to <code class="ph codeph">true</code> to enable Performance Co-Pilot for system performance monitoring and data collection on Ansible Automation Platform control plane nodes.</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1"> <p class="p"><code class="ph codeph">use_archive_compression</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2"> <p class="p">Controls at a global level whether the filesystem-related backup files are compressed before being sent to the host to run the backup operation. If set to <code class="ph codeph">true</code>, a <code class="ph codeph">tar.gz</code> file is generated on each Ansible Automation Platform host and then gzip compression is used. If set to <code class="ph codeph">false</code>, a simple tar file is generated. You can control this functionality at a component level by using the <code class="ph codeph">_use_archive_compression</code> variables.</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4"> <p class="p"><code class="ph codeph">true</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__1"> <p class="p"><code class="ph codeph">use_db_compression</code></p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__2"> <p class="p">Controls at a global level whether the database-related backup files are compressed before being sent to the host to run the backup operation. You can control this functionality at a component level by using the <code class="ph codeph">_use_db_compression</code> variables.</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124__entry__4"> <p class="p"><code class="ph codeph">true</code></p> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

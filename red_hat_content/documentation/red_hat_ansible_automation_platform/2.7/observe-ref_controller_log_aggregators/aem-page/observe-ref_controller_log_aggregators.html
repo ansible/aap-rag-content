@@ -1,0 +1,109 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="ref-controller-log-aggregators"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Configure third-party services</h1> 
+     <div class="body refbody"> 
+      <p class="shortdesc">The logging aggregator service works with the following monitoring and data analysis systems:</p> 
+      <section class="section"> 
+       <ul class="ul"> 
+        <li class="li"> <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-logging-aggregation#ref-controller-logging-splunk" target="_blank" rel="external noopener">Splunk</a> </li> 
+        <li class="li"> <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-logging-aggregation#ref-controller-logging-loggly" target="_blank" rel="external noopener">Loggly</a> </li> 
+        <li class="li"> <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-logging-aggregation#ref-controller-logging-sumologic" target="_blank" rel="external noopener">Sumologic</a> </li> 
+        <li class="li"> <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-logging-aggregation#ref-controller-logging-elastic-stack" target="_blank" rel="external noopener">Elastic Stack (formerly ELK stack)</a> </li> 
+       </ul> 
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-controller-set-up-logging"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Set up logging</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">To set up logging to any of the aggregator types for centralized logging follow these steps:</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ul class="ul steps-unordered"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Logging</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">On the <strong class="ph b">Logging settings</strong> page, click <span class="ph uicontrol button">Edit</span>. </span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">You can configure the following options: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Logging Aggregator</strong>: Enter the hostname or IP address that you want to send logs to.</li> 
+            <li class="li"><strong class="ph b">Logging Aggregator Port</strong>: Specify the port for the aggregator if it requires one. 
+             <div class="note note note_note"> <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">When the connection type is HTTPS, you can enter the hostname as a URL with a port number, after which, you are not required to enter the port again. However, TCP and UDP connections are determined by the hostname and port number combination, rather than URL. Therefore, in the case of a TCP or UDP connection, supply the port in the specified field. If a URL is entered in the <strong class="ph b">Logging Aggregator</strong> field instead, its hostname portion is extracted as the hostname.</p> 
+              </div> 
+             </div> </li> 
+            <li class="li"><strong class="ph b">Logging Aggregator Type</strong>: Click to select the aggregator service from the list: </li> 
+            <li class="li"><strong class="ph b">Logging Aggregator Username</strong>: Enter the username of the logging aggregator if required.</li> 
+            <li class="li"><strong class="ph b">Logging Aggregator Password/Token</strong>: Enter the password of the logging aggregator if required.</li> 
+            <li class="li"><strong class="ph b">Loggers to Send Data to the Log Aggregator Form</strong>: All four types of data are pre-populated by default. Click the tooltip <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/question-circle.png" width="15" alt="Help"> icon next to the field for additional information on each data type. Delete the data types you do not want.</li> 
+            <li class="li"><strong class="ph b">Cluster wide unique identifier</strong>: Use this to uniquely identify instances.</li> 
+            <li class="li"><strong class="ph b">Logging Aggregator Protocol</strong>: Click to select a connection type (protocol) to communicate with the log aggregator. Subsequent options vary depending on the selected protocol.</li> 
+            <li class="li"><strong class="ph b">TCP Connection Timeout</strong>: Specify the connection timeout in seconds. This option is only applicable to HTTPS and TCP log aggregator protocols.</li> 
+            <li class="li"><strong class="ph b">Logging Aggregator Level Threshold</strong>: Select the level of severity you want the log handler to report.</li> 
+            <li class="li"><strong class="ph b">Maximum number of messages that can be stored in the log action queue</strong>:Defines how large the <code class="ph codeph">rsyslog</code> action queue can grow in number of messages stored. This can have an impact on memory use. When the queue reaches 75% of this number, the queue starts writing to disk (<code class="ph codeph">queue.highWatermark</code> in <code class="ph codeph">rsyslog</code>). When it reaches 90%, <code class="ph codeph">NOTICE</code>, <code class="ph codeph">INFO</code>, and <code class="ph codeph">DEBUG</code> messages start to be discarded (<code class="ph codeph">queue.discardMark</code> with <code class="ph codeph">queue.discardSeverity=5</code>).</li> 
+            <li class="li"><strong class="ph b">Maximum disk persistence for rsyslogd action queuing (in GB)</strong>: The amount of data to store (in gigabytes) if an <code class="ph codeph">rsyslog</code> action takes time to process an incoming message (defaults to 1). Equivalent to the <code class="ph codeph">rsyslogd queue.maxdiskspace</code> setting on the action (e.g. <code class="ph codeph">omhttp</code>). It stores files in the directory specified by <code class="ph codeph">LOG_AGGREGATOR_MAX_DISK_USAGE_PATH</code>.</li> 
+            <li class="li"><strong class="ph b">File system location for rsyslogd disk persistence</strong>: Location to persist logs that should be retried after an outage of the external log aggregator (defaults to <code class="ph codeph">/var/lib/awx</code>). Equivalent to the <code class="ph codeph">rsyslogd queue.spoolDirectory</code> setting.: Configure a specific error message. When the API encounters an issue with a request, it typically returns an HTTP error code in the 400 range along with an error. When this happens, an error message is generated in the log that follows the following pattern: </li> 
+            <li class="li"><strong class="ph b">Log Format For API 4XX Errors: </strong>When the API encounters an issue with a request, it typically returns an HTTP error code in the 400 range along with an error. When this happens, an error message is generated in the log that follows the following pattern: <code class="ph codeph">' status {status_code} received by user {user_name} attempting to access {url_path} from {remote_addr} '</code></li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">You can set the following options: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Log System Tracking Facts Individually</strong>: Click the tooltip <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/question-circle.png" width="15" alt="Help"> icon for additional information, such as whether or not you want to turn it on, or leave it off by default.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Review your entries for your chosen logging aggregation. </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Enable External Logging</strong>: Select this checkbox if you want to send logs to an external log aggregator.</li> 
+            <li class="li"><strong class="ph b">Enable/disable HTTPS certificate verification</strong>: Certificate verification is enabled by default for the HTTPS log protocol. Select this checkbox if you want the log handler to verify the HTTPS certificate sent by the external log aggregator before establishing a connection.</li> 
+            <li class="li"><strong class="ph b">Enable rsyslogd debugging</strong>: Select this checkbox to enable high verbosity debugging for <code class="ph codeph">rsyslogd</code>. Useful for debugging connection issues for external log aggregation.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Save</span> or <span class="ph uicontrol button">Cancel</span> to abandon the changes. </span> </li> 
+        </ul> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relinfo"> <strong>Related information</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-logging-aggregation#proc-controller-api-4xx-error-config" target="_blank" rel="external noopener">API 4XX Error Configuration</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="ref-controller-troubleshoot-logging"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Troubleshoot logging</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">This section provides information to help troubleshoot logging issues in automation controller.</p> 
+       <section class="section"> 
+        <p class="p"> <strong class="ph b">Logging Aggregation</strong> </p> 
+        <p class="p">If you have sent a message with the test button to your configured logging service through http or https, but did not receive the message, check the <code class="ph codeph">/var/log/tower/rsyslog.err</code> log file. This is where errors are stored if they occurred when authenticating rsyslog with an http or https external logging service. Note that if there are no errors, this file does not exist.</p> 
+        <p class="p"> <strong class="ph b">API 4XX Errors</strong> </p> 
+        <p class="p">You can include the API error message for 4XX errors by modifying the log format for those messages. Refer to the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-ref_controller_log_aggregators#proc-controller-set-up-logging" title="To set up logging to any of the aggregator types for centralized logging follow these steps:">Set up logging</a>.</p> 
+        <p class="p"> <strong class="ph b">LDAP</strong> </p> 
+        <p class="p">You can enable logging messages for the LDAP adapter. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-ref_controller_log_aggregators#proc-controller-set-up-logging" title="To set up logging to any of the aggregator types for centralized logging follow these steps:">Set up logging</a>.</p> 
+        <p class="p"> <strong class="ph b">SAML</strong> </p> 
+        <p class="p">You can enable logging messages for the SAML adapter the same way you can enable logging for LDAP.</p> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relinfo"> <strong>Related information</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-logging-aggregation#proc-controller-api-4xx-error-config" target="_blank" rel="external noopener">API 4XX Error Configuration</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="configure-lightspeed-cloud-service"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Set up Red Hat Ansible Lightspeed cloud service</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">As a Red Hat customer portal administrator, you must configure Red Hat Ansible Lightspeed cloud service to connect to your IBM watsonx Code Assistant instance.</p> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">The IBM Cloud service instance of IBM watsonx Code Assistant is available in the following data centers:</p> 
+        <ul class="ul"> 
+         <li class="li">Dallas (<code class="ph codeph">us-south</code>)</li> 
+         <li class="li">Frankfurt (<code class="ph codeph">eu-de</code>)</li> 
+         <li class="li">Sydney (<code class="ph codeph">au-syd</code>) (Essentials plan only)</li> 
+        </ul> 
+        <p class="p">Ansible Lightspeed cloud deployments are configured to connect exclusively to the US (Dallas) IBM data center. Attempts to connect from non-US data centers will result in connection failure. If you want to use a non-Dallas IBM data center, then you must set up Ansible Lightspeed in the hybrid deployment model.</p> 
+       </div>
+      </div> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist relinfo">
+       <strong>Related information</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="https://cloud.ibm.com/docs/watsonx-code-assistant" target="_blank" rel="external noopener">Setting up your IBM watsonx Code Assistant for Red Hat Ansible Lightspeed service</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="log-in-administrator-portal"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Log in to the Ansible Lightspeed administrator portal</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Use the Ansible Lightspeed administrator portal to connect Red Hat Ansible Lightspeed to IBM watsonx Code Assistant.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have organization administrator privileges to a Red Hat Customer Portal organization with a valid Red Hat Ansible Automation Platform subscription.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to the <a class="xref" href="https://c.ai.ansible.redhat.com/" target="_blank" rel="external noopener">Ansible Lightspeed portal</a> as an organization administrator.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Log in</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Log in with Red Hat</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Enter your Red Hat account username and password. The Ansible Lightspeed Service uses Red Hat Single Sign-On (RH-SSO) for authentication. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">As part of the authentication process, the Ansible Lightspeed Service checks whether your organization has an active Ansible Automation Platform subscription. On successful authentication, the login screen is displayed along with your username and your assigned user role.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">From the login screen, click <strong class="ph b">Admin Portal</strong>.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">You are redirected to the Red Hat Ansible Lightspeed with IBM watsonx Code Assistant administrator portal where you can connect Red Hat Ansible Lightspeed to your IBM watsonx Code Assistant instance.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="obtain-config-wca-and-model-id"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Configure Red Hat Ansible Lightspeed cloud service</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Use this procedure to configure the Red Hat Ansible Lightspeed cloud service.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have obtained an API key and a model ID from IBM watsonx Code Assistant that you want to use in Red Hat Ansible Lightspeed. <p class="p">For information about how to obtain an API key and model ID from IBM watsonx Code Assistant, see the <a class="xref" href="https://cloud.ibm.com/docs/watsonx-code-assistant" target="_blank" rel="external noopener">IBM watsonx Code Assistant documentation</a>.</p> </li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">Log in to the <a class="xref" href="https://c.ai.ansible.redhat.com/" target="_blank" rel="external noopener">Ansible Lightspeed portal</a> as an organization administrator.</span> </li>
+         <li class="li step"> <span class="ph cmd">From the login screen, click <strong class="ph b">Admin Portal</strong>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Specify the API key of your IBM watsonx Code Assistant instance: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">Under <strong class="ph b">IBM Cloud API Key</strong>, click <strong class="ph b">Add API key</strong>. A screen to enter the <strong class="ph b">API Key</strong> is displayed.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Enter the API Key.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Optional: Click <strong class="ph b">Test</strong> to validate the API key.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Click <strong class="ph b">Save</strong>.</span> </li> 
+          </ol> </li>
+         <li class="li step"> <span class="ph cmd">Specify the model ID of the model that you want to use: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Click <strong class="ph b">Model Settings</strong>.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Under <strong class="ph b">Model ID</strong>, click <strong class="ph b">Add Model ID</strong>. A screen to enter the <strong class="ph b">Model Id</strong> is displayed.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Enter the <strong class="ph b">Model ID</strong> that you obtained in the previous procedure as the default model for your organization.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Optional: Click <strong class="ph b">Test model ID</strong> to validate the model ID.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Click <strong class="ph b">Save</strong>. </span> 
+            <div class="itemgroup info"> 
+             <p class="p">When the API key and model ID is successfully validated, Red Hat Ansible Lightspeed is connected to your IBM watsonx Code Assistant instance.</p> 
+            </div> </li> 
+          </ol> </li>
+        </ol>
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relconcepts">
+        <strong>Related concepts</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_troubleshoot_lightspeed_configuration_errors#troubleshooting-lightspeed-configuration-errors" title="This section provides information about errors when configuring the Red Hat Ansible Lightspeed and their workarounds.">Troubleshooting Red Hat Ansible Lightspeed configuration errors</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

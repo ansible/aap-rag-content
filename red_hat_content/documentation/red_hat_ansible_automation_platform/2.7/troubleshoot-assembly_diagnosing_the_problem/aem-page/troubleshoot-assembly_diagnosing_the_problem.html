@@ -1,0 +1,84 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="diagnosing-the-problem"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Collect configuration and diagnostic information</h1> 
+     <p class="shortdesc">To start troubleshooting Ansible Automation Platform, use the <code class="ph codeph">must-gather</code> command on OpenShift Container Platform or the <code class="ph codeph">sos</code> utility on a VM-based installation to collect configuration and diagnostic information. You can attach the output of these utilities to your support case.</p> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="troubleshoot-must-gather"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Troubleshoot Ansible Automation Platform on OpenShift Container Platform by using the must-gather command</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">The <code class="ph codeph">oc adm must-gather</code> command line interface (CLI) command collects information from your Ansible Automation Platform installation deployed on OpenShift Container Platform. It gathers information that is often needed for debugging issues, including resource definitions and service logs.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">The OpenShift CLI (<code class="ph codeph">oc</code>) is installed.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">Running the <code class="ph codeph">oc adm must-gather</code> CLI command creates a new directory containing the collected data that you can use to troubleshoot or attach to your support case.</p> 
+        <p class="p">If your OpenShift environment does not have access to <code class="ph codeph">registry.redhat.io</code> and you cannot run the <code class="ph codeph">must-gather</code> command, then run the <code class="ph codeph">oc adm inspect</code> command instead.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to your cluster: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc login <em class="ph i">&lt;openshift_url&gt;</em></code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Run one of the following commands based on your level of access in the cluster: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Run <code class="ph codeph">must-gather</code> across the entire cluster: <pre class="pre codeblock"><code>oc adm must-gather --image=registry.redhat.io/ansible-automation-platform-26/aap-must-gather-rhel9 --dest-dir <em class="ph i">&lt;dest_dir&gt;</em></code></pre> 
+             <ul class="ul"> 
+              <li class="li"><code class="ph codeph">--image</code> specifies the image that gathers data</li> 
+              <li class="li"><code class="ph codeph">--dest-dir</code> specifies the directory for the output</li> 
+             </ul> </li> 
+            <li class="li">Run <code class="ph codeph">must-gather</code> for a specific namespace in the cluster: <pre class="pre codeblock"><code>oc adm must-gather --image=registry.redhat.io/ansible-automation-platform-26/aap-must-gather-rhel9 --dest-dir <em class="ph i">&lt;dest_dir&gt;</em> -- /usr/bin/ns-gather <em class="ph i">&lt;namespace&gt;</em></code></pre> 
+             <ul class="ul"> 
+              <li class="li"><code class="ph codeph">-- /usr/bin/ns-gather</code> limits the <code class="ph codeph">must-gather</code> data collection to a specified namespace</li> 
+             </ul> </li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">To attach the <code class="ph codeph">must-gather</code> archive to your support case, create a compressed file from the <code class="ph codeph">must-gather</code> directory created before and attach it to your support case. </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">For example, on a computer that uses a Linux operating system, run the following command, replacing <code class="ph codeph"><em class="ph i">&lt;must-gather-local.5421342344627712289/&gt;</em></code> with the <code class="ph codeph">must-gather</code> directory name: <pre class="pre codeblock"><code>$ tar cvaf must-gather.tar.gz <em class="ph i">&lt;must-gather.local.5421342344627712289/&gt;</em></code></pre> </li> 
+           </ul> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://docs.openshift.com/container-platform/4.15/cli_reference/openshift_cli/getting-started-cli.html" target="_blank" rel="external noopener">Installing the OpenShift CLI</a></li>
+         <li class="linklist"><a class="link" href="https://docs.openshift.com/container-platform/4.15/cli_reference/openshift_cli/administrator-cli-commands.html#oc-adm-inspect" target="_blank" rel="external noopener">ocm adm inspect</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="troubleshoot-sosreport"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Troubleshoot Ansible Automation Platform on VM-based installations by generating an sos report</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The <code class="ph codeph">sos</code> utility collects configuration, diagnostic, and troubleshooting data from your Ansible Automation Platform on a VM-based installation.</p> 
+       <section class="section"> 
+        <p class="p">For more information about installing and using the <code class="ph codeph">sos</code> utility, see <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/getting_the_most_from_your_support_experience/index#generating-an-sos-report-for-technical-support_getting-the-most-from-your-support-experience" target="_blank" rel="external noopener">Generating an sos report for technical support</a>.</p> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

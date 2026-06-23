@@ -1,0 +1,84 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="devtools-components"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Ansible development tools components and workflow</h1> 
+     <div class="body refbody">
+      <p class="shortdesc">You can operate some Ansible development tools from the VS Code UI when you have installed the Ansible extension, and the remainder from the command line. VS Code is a free open-source code editor available on Linux, Mac, and Windows.</p> 
+      <section class="section"> 
+       <dl class="dl"> 
+        <dt class="dt dlterm">
+         Ansible VS Code extension
+        </dt> 
+        <dd class="dd"> 
+         <p class="p">This is not packaged with the Ansible Automation Platform RPM package, but it is an integral part of the automation creation workflow. From the VS Code UI, you can use the Ansible development tools for the following tasks:</p> 
+         <div class="div"> 
+          <ul class="ul"> 
+           <li class="li">Scaffold directories for a playbook project or a collection.</li> 
+           <li class="li">Write playbooks with the help of syntax highlighting and auto-completion.</li> 
+           <li class="li">Debug your playbooks with a linter.</li> 
+           <li class="li">Execute playbooks with Ansible Core using <code class="ph codeph">ansible-playbook</code>.</li> 
+           <li class="li">Execute playbooks in an execution environment with <code class="ph codeph">ansible-navigator</code>.</li> 
+          </ul> 
+         </div> 
+         <p class="p">From the VS Code extension, you can also connect to Red Hat Ansible Lightspeed with IBM watsonx Code Assistant.</p> 
+        </dd> 
+        <dt class="dt dlterm">
+         Command-line Ansible development tools
+        </dt> 
+        <dd class="dd"> 
+         <p class="p">You can perform the following tasks with Ansible development tools from the command line, including the terminal in VS Code:</p> 
+         <ul class="ul"> 
+          <li class="li">Create an execution environment.</li> 
+          <li class="li">Test your playbooks, roles, modules, plugins and collections.</li> 
+         </ul> 
+        </dd> 
+       </dl> 
+      </section> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="developer-workflow"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Development workflow</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">The development workflow for automation content includes three stages: Create, Test, and Deploy. Follow these stages to successfully manage and publish your automation.</p>
+      </div> 
+      <article class="topic reference nested2" aria-labelledby="ariaid-title3" id="devtools-workflow"> 
+       <h3 class="title topictitle3" id="ariaid-title3">Workflow</h3> 
+       <div class="body refbody">
+        <p class="shortdesc">The workflow for developing automation content involves three key stages: Create, Test, and Deploy.</p> 
+        <section class="section" id="devtools-workflow___create">
+         <h4 class="title sectiontitle">Create</h4> 
+         <p class="p">In the create stage, you create a new playbook project locally, using VS Code. The following is a typical workflow:</p> 
+         <ol class="ol"> 
+          <li class="li">Install and run the Ansible extension in VS Code.</li> 
+          <li class="li">Scaffold a playbook project from VS Code.</li> 
+          <li class="li">Add playbook files to your project and edit them in VS Code.</li> 
+         </ol> 
+        </section> 
+        <section class="section" id="devtools-workflow___test">
+         <h4 class="title sectiontitle">Test</h4> 
+         <ol class="ol"> 
+          <li class="li">Debug your playbook with the help of <code class="ph codeph">ansible-lint</code>.</li> 
+          <li class="li">Select or create an automation execution environment so that your local environment replicates the environment on Ansible Automation Platform.</li> 
+          <li class="li">Run your playbooks from VS Code, using <code class="ph codeph">ansible-playbook</code> or using <code class="ph codeph">ansible-navigator</code> with an execution environment.</li> 
+          <li class="li">Test your playbooks by running them on an execution environment that replicates your production environment.</li> 
+         </ol> 
+        </section> 
+        <section class="section" id="devtools-workflow___deploy">
+         <h4 class="title sectiontitle">Deploy</h4> 
+         <ol class="ol"> 
+          <li class="li">Push your playbooks project to a source control repository.</li> 
+          <li class="li">Set up credentials on Ansible Automation Platform to pull from your source control repository and create a project for your playbook repository.</li> 
+          <li class="li">If you have created an execution environment, push it to private automation hub.</li> 
+          <li class="li">Create a job template on Ansible Automation Platform that runs a playbook from your project, and specify the execution environment that you want to use.</li> 
+         </ol> 
+        </section> 
+       </div> 
+      </article>
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

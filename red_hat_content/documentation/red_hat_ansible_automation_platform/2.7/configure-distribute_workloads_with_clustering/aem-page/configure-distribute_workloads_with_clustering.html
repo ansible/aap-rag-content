@@ -1,0 +1,41 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-255aab5f-9f87-416c-813b-9ab58d2f9e00">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Distribute workloads with clustering</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Clustering is sharing load between hosts. Each instance must be able to act as an entry point for UI and API access. </p> 
+     <div class="p"> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body">
+        Administrators can use load balancers in front of as many instances as they want and keep good data visibility. However, load balancing is optional, and it is possible to have ingress on one or all instances as needed.
+       </div>
+      </div> 
+     </div> 
+     <p class="p">Each instance must be able to join the automation controller cluster and to expand its ability to run jobs. This is a simple system where jobs can run anywhere rather than be directed on where to run. Also, you can group clustered instances into different pools or queues, called instance groups. </p> 
+     <p class="p"> Ansible Automation Platform supports container-based clusters by using Kubernetes, meaning you can install new automation controller instances on this platform without any variation or diversion in functionality. You can create instance groups to point to a Kubernetes container. </p> 
+     <p class="p">The following operating systems are supported for establishing a clustered environment:</p> 
+     <p class="p"><span class="ph uicontrol">Supported operating systems </span></p> 
+     <div class="p"> 
+      <ul class="ul" id="GUID-255aab5f-9f87-416c-813b-9ab58d2f9e00__ul_1"> 
+       <li class="li">Red Hat Enterprise Linux 8 or later</li> 
+      </ul> 
+     </div> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-planning_your_cluster#GUID-188aeda0-13d3-4314-abc2-d3c30e281db6">Planning your cluster environment</a></strong><br>Learn about prerequisites and considerations for setting up a cluster.</li>
+     </ul>
+     <div class="linklist">
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_ug_controller_instance_groups#controller-instance-groups" title="An Instance Group enables you to group instances in a clustered environment. Policies dictate how instance groups behave and how jobs are executed. The following view displays the capacity levels based on policy algorithms:">Determine where automation runs with instance groups</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_controller_container_groups#controller-container-groups" title="Ansible Automation Platform supports container groups, which enable you to run jobs in automation controller regardless of whether automation controller is installed as a standalone, in a virtual environment, or in a container.">Control where automation runs with container groups</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

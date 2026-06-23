@@ -1,0 +1,24 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="known-issues">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Known issues</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">The following release notes detail the known issues for the Ansible Automation Platform general availability released on June 3, 2026</p> 
+     <section class="section">
+      <h2 class="title sectiontitle">Execution environment builder</h2> 
+      <ul class="ul"> 
+       <li class="li">Git-backed auto-discovery of EE definitions is not implemented; definitions created in EE builder still register in the catalog. Planned for a future release.</li> 
+       <li class="li">Automated image builds run on GitHub only; GitLab CI/CD builds are planned for a future release.</li> 
+      </ul> 
+      <ul class="ul" id="known-issues__ul_1"> 
+       <li class="li">Referenced documents are not sorted by relevance when BYOK is enabled. When you use BYOK with the intelligent assistant, document link ordering in the referenced documents list may not reflect query relevance.(AAP-72138)</li> 
+       <li class="li">Internal file IDs visible in the intelligent assistant's responses. Depending on the LLM you have integrated, the intelligent assistant's responses may expose internal file IDs (identified by a file- prefix).(AAP-72989)</li> 
+      </ul> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

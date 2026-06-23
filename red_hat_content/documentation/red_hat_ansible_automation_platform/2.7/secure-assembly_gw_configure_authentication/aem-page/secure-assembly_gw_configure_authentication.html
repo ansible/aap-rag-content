@@ -1,0 +1,59 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="gw-configure-authentication">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure central authentication for Ansible Automation Platform</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Configure authentication methods such as LDAP or SAML to simplify the user login experience. Providing the correct connection details for your chosen identity provider helps ensure seamless and secure access to Ansible Automation Platform.</p> 
+     <div class="p">
+      Configuring authentication involves the following procedures: 
+      <ul class="ul" id="gw-configure-authentication__ul_1"> 
+       <li class="li">Selecting an authentication type, where you select the type of authenticator plugin you want to configure, including the authentication details for the authentication type selected.</li> 
+       <li class="li">Mapping, where you define mapping rule types and triggers to control access to the system, and mapping order where you can define the mapping precedence.</li> 
+      </ul> 
+     </div> 
+     <div class="note important note_important">
+      <span class="note__title">Important:</span> 
+      <div class="note__body"> 
+       <ul class="ul"> 
+        <li class="li">During an upgrade to Ansible Automation Platform 2.6, platform gateway uses a new central authentication service.</li> 
+        <li class="li">After the upgrade, local users that used to exist in automation controller can be automatically converted into local platform gateway users. Other types of authentication from automation controller, such as LDAP, SAML, or OIDC, are migrated to platform gateway but platform gateway might need additional configuration before those users are ready for use.</li> 
+       </ul> 
+      </div>
+     </div> 
+     <p class="p">Local user passwords are not automatically synchronized between automation controller and platform gateway after an upgrade. Platform gateway uses the following process to authenticate a local user for the first time:</p> 
+     <ul class="ul"> 
+      <li class="li">Platform gateway attempts to authenticate the user with the platform gateway password.</li> 
+      <li class="li">If the attempt fails, platform gateway authenticates the user with the automation controller password.</li> 
+      <li class="li">On successful authentication, platform gateway updates the user’s password in its database.</li> 
+      <li class="li">The user is authenticated directly by platform gateway on subsequent logins.</li> 
+     </ul> 
+     <section class="section" id="gw-configure-authentication___prerequisites">
+      <h2 class="title sectiontitle">Prerequisites</h2> 
+      <ul class="ul"> 
+       <li class="li">A running installation of Ansible Automation Platform 2.6 or later</li> 
+       <li class="li">A running instance of your authentication source</li> 
+       <li class="li">Administrator rights to the Ansible Automation Platform</li> 
+       <li class="li">Any connection information needed to connect Ansible Automation Platform 2.6 to your source (see individual authentication types for details).</li> 
+      </ul> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-mandatory_platform_gateway_authentication_in_ansible_automation_platform_2_7#con-mandatory-gateway-auth">Mandatory platform gateway authentication in Ansible Automation Platform 2.7</a></strong><br>In Red Hat Ansible Automation Platform 2.7, platform gateway is the only supported method for external authentication to platform components. Direct API access to automation controller, automation hub, and Event-Driven Ansible has been removed.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gw_pluggable_authentication#gw-pluggable-authentication">Pluggable authentication</a></strong><br>Authentication verifies a user's identity to Red Hat Ansible Automation Platform. While users can authenticate through a username and password, configuring external sources like LDAP, SAML, or OIDC enables a single sign-on (SSO) experience using existing enterprise credentials. </li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-configuration_notes_for_all_authentication_types#GUID-f389509b-7aa7-4ac6-be07-4b6e5ef67c45">Configuration notes for all authentication types</a></strong><br>Managing authentication configuration includes updating callback URLs for OAuth and SSO authenticators and configuring timeout values for password-based authenticators.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_config_authentication_type">Configure an authentication type to simplify user logins</a></strong><br>Ansible Automation Platform provides multiple authenticator plugins that you can configure to simplify the login experience for your organization. </li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gw_user_association_and_attr_sync">User and external authentication mapping</a></strong><br>Ansible Automation Platform manages user accounts and synchronizes attributes by centralizing user identification around a matching email address. You can sign in with existing accounts from different sources while maintaining a consistent user profile and access permissions.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-mapping">Map external authenticators to Ansible Automation Platform</a></strong><br>To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (such as username and email address) or what groups they belong to, you can configure authenticator maps.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_managing_authentication#gw-managing-authentication">Locate and manage authentication configurations</a></strong><br>After you have configured your authentication settings, you can view a list of authenticators, search, sort and view the details for each authenticator configured on the system.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gw_gcp_network_port_limits#gw-gcp-network-port-limits">Configure Google Cloud for increased authentication performance</a></strong><br>Increase the default port limit on your Google Cloud Platform (GCP) Cloud NAT gateway to prevent authentication and performance issues during high traffic. This helps ensure stable connectivity for Ansible Automation Platform deployments on OpenShift (version 4.17 and above).</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_token_based_authentication#gw-token-based-authentication">Configure access to external applications with tokens</a></strong><br>Token-based authentication permits authentication of third-party tools and services with the platform through integrated OAuth 2 token support. Ansible Automation Platform utilizes both OAuth Tokens and Personal Access Tokens (PATs).</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gateway_route_timeouts#con-gateway-route-timeouts">Configure platform gateway route timeouts</a></strong><br>In Ansible Automation Platform 2.7, all API access to platform components goes through platform gateway. Gateway-level timeout settings control how long platform gateway waits for backend services to respond before closing a connection.</li>
+     </ul>
+    </nav>
+   </article>
+  </main>
+ </body>
+</html>

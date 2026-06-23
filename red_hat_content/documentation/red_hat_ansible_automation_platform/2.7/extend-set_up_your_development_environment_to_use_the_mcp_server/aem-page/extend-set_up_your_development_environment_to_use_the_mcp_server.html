@@ -1,0 +1,46 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-4d2f57f7-85da-4d5a-a290-7629aa239182">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Set up your development environment to use the MCP server</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Use the Ansible AI assistant to query your environment to understand what tools you have installed, and to install <code class="ph codeph">ansible-dev-tools</code> and set up your development environment.</p> 
+     <section class="section prereq" id="GUID-4d2f57f7-85da-4d5a-a290-7629aa239182__prereq_1">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div>The latest version of Python is installed. 
+     </section> 
+     <section class="section context" id="GUID-4d2f57f7-85da-4d5a-a290-7629aa239182__context_1">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div>First, run environment diagnostics. Use the AI assistant to assess your local environment to understand what tools, versions, and collections are currently installed.
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Open GitHub Copilot Chat.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Enter a natural language prompt such as: </span> 
+        <ol type="a" class="ol substeps" id="GUID-4d2f57f7-85da-4d5a-a290-7629aa239182__substeps_1"> 
+         <li class="li substep"> <span class="ph cmd"><code class="ph codeph">Check my Ansible environment and tell me what's installed.</code></span> </li> 
+         <li class="li substep"> <span class="ph cmd"><code class="ph codeph">What collections are installed?</code> </span> </li> 
+        </ol> 
+        <div class="itemgroup stepxmp">
+         The assistant will trigger the <code class="ph codeph">ade_environment_info</code> tool.
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Review the output, which typically includes: </span> 
+        <ol type="a" class="ol substeps" id="GUID-4d2f57f7-85da-4d5a-a290-7629aa239182__substeps_2"> 
+         <li class="li substep"> <span class="ph cmd">Workspace path and Python version</span> </li> 
+         <li class="li substep"> <span class="ph cmd">Virtual Environment status</span> </li> 
+         <li class="li substep"> <span class="ph cmd">A list of Installed Collections.</span> </li> 
+         <li class="li substep"> <span class="ph cmd">The installation status of Ansible Development Tools (ADT).</span> </li> 
+        </ol> </li>
+      </ol>
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

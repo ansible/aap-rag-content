@@ -1,0 +1,194 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="ref-controller-constructed-inventories"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Create dynamic groups with constructed inventories</h1> 
+     <div class="body refbody">
+      <p class="shortdesc">You can create a new inventory (called a constructed inventory) from a list of input inventories.</p> 
+      <section class="section"> 
+       <p class="p">A constructed inventory has copies of hosts and groups in its input inventories, permitting jobs to target groups of servers across many inventories. Groups and hostvars can be added to the inventory content, and hosts can be filtered to limit the size of the constructed inventory.</p> 
+       <p class="p">The key factors of a constructed inventory are:</p> 
+       <ul class="ul"> 
+        <li class="li">The normal Ansible hostvars namespace is available</li> 
+        <li class="li">They provide groups</li> 
+       </ul> 
+       <p class="p">Constructed inventories take <code class="ph codeph">source_vars</code> and <code class="ph codeph">limit</code> as inputs and transform its <code class="ph codeph">input_inventories</code> into a new inventory, complete with groups. Groups (existing or constructed) can then be referenced in the <code class="ph codeph">limit</code> field to reduce the number of hosts produced.</p> 
+       <p class="p">You can construct groups based on these host properties:</p> 
+       <ul class="ul"> 
+        <li class="li">RHEL major or minor versions</li> 
+        <li class="li">Windows hosts</li> 
+        <li class="li">Cloud based instances tagged in a certain region</li> 
+        <li class="li">other</li> 
+       </ul> 
+       <p class="p">The examples described in later sections are organized by the structure of the input inventories.</p> 
+      </section> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-controller-inv-debugging-tips"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Debugging tips</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">When using constructed inventory scripts, you might need to debug your Jinja2 templates.</p> 
+       <section class="section"> 
+        <p class="p">It is important to set the <code class="ph codeph">strict</code> parameter to <code class="ph codeph">true</code> so that you can debug problems with your templates. If the template fails to render, an error occurs in the associated inventory update for that constructed inventory.</p> 
+        <p class="p">When encountering errors, increase verbosity to get more details.</p> 
+        <p class="p">Giving a default, such as <code class="ph codeph">| default("running")</code> is a generic use of Jinja2 templates in Ansible. Doing this avoids errors from the template when you set <code class="ph codeph">strict: true</code>.</p> 
+        <p class="p">You can also set <code class="ph codeph">strict: false</code>, and so enable the template to produce an error, which results in the host not getting included in that group. However, doing this makes it difficult to debug issues in the future if your templates continue to grow in complexity.</p> 
+        <p class="p">You might still have to debug the intended function of the templates if they are not producing the expected inventory content. For example, if a <code class="ph codeph">groups</code> group has a complex filter (such as <code class="ph codeph">shutdown_in_product_dev</code>) but does not contain any hosts in the resultant constructed inventory, then use the <code class="ph codeph">compose</code> parameter to help debug.</p> 
+        <p class="p"> <strong class="ph b">Example</strong> </p> 
+        <pre class="pre">source_vars:
+
+plugin: constructed
+strict: true
+groups:
+  shutdown_in_product_dev: state | default("running") == "shutdown" and account_alias == "product_dev"
+compose:
+  resolved_state: state | default("running")
+  is_in_product_dev: account_alias == "product_dev"
+
+limit: ``</pre> 
+        <p class="p">Running with a blank <code class="ph codeph">limit</code> returns all hosts. You can use this to inspect specific variables on specific hosts, giving insight into where problems in the <code class="ph codeph">groups</code> lie.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="ref-controller-inv-nested-groups"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Nested groups</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">You can create nested groups in your inventory to organize hosts and apply variables at different levels.</p> 
+       <section class="section"> 
+        <p class="p">A nested group consists of two groups where one is a child of the other. In the following example, the child group has another host inside of it, and the parent group has a variable defined.</p> 
+        <p class="p">Because of the way Ansible core operates, the variable of the parent group is available in the namespace as a playbook is running, and can be used for filtering.</p> 
+        <p class="p">The following example inventory file, <code class="ph codeph">nested.yml</code> is in YAML format:</p> 
+        <pre class="pre">all:
+  children:
+    groupA:
+      vars:
+        filter_var: filter_val
+      children:
+        groupB:
+          hosts:
+            host1: {}
+    ungrouped:
+      hosts:
+        host2: {}</pre> 
+        <p class="p">Because <code class="ph codeph">host1</code> is in <code class="ph codeph">groupB</code>, it is also in <code class="ph codeph">groupA</code>.</p> 
+        <p class="p"> <strong class="ph b">Filter on nested group names</strong> </p> 
+        <p class="p">Use the following YAML format to filter on nested group names:</p> 
+        <pre class="pre">`source_vars`:
+
+plugin: constructed
+
+`limit`: `groupA`</pre> 
+        <p class="p"> <strong class="ph b">Filter on nested group property</strong> </p> 
+        <p class="p">Use the following YAML format to filter on a group variable, even if the host is indirectly a member of that group.</p> 
+        <p class="p">In the inventory content, note that <code class="ph codeph">host2</code> is not expected to have the variable <code class="ph codeph">filter_var</code> defined, because it is not in any of the groups. Because <code class="ph codeph">strict: true</code> is used, use a default value so that hosts without that variable are defined. Using this, <code class="ph codeph">host2</code>, returns <code class="ph codeph">false</code> from the expression, instead of producing an error. <code class="ph codeph">host1</code> inherits the variable from its groups, and is returned.</p> 
+        <pre class="pre">source_vars:
+
+plugin: constructed
+strict: true
+groups:
+  filter_var_is_filter_val: filter_var | default("") == "filter_val"
+
+limit: filter_var_is_filter_val</pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title4" id="ref-controller-inv-ansible-facts"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Ansible facts</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">You can create an inventory that uses Ansible facts to populate host variables.</p> 
+       <section class="section"> 
+        <p class="p">To create an inventory with Ansible facts, you must run a playbook against the inventory that has the setting <code class="ph codeph">gather_facts: true</code>. The facts differ system-to-system. The following examples are not intended to address all known scenarios.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title5" id="ref-controller-filter-environ-variables"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Filter on environment variables</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">You can filter hosts in an inventory by using the <code class="ph codeph">ansible_env</code> variable in a constructed inventory plugin.</p> 
+       <section class="section"> 
+        <pre class="pre">source_vars:
+
+plugin: constructed
+strict: true
+groups:
+  hosts_using_xterm: ansible_env.TERM == "xterm"
+
+limit: hosts_using_xterm</pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title6" id="ref-controller-filter-hosts-cpu-type"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Filter hosts by processor type</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">You can create a constructed inventory that filters hosts by CPU type by using the <code class="ph codeph">ansible_processor</code> fact.</p> 
+       <section class="section"> 
+        <p class="p">The following example involves filtering hosts by processor type (Intel) using the YAML format:</p> 
+        <pre class="pre">source_vars:
+
+plugin: constructed
+strict: true
+groups:
+  intel_hosts: "GenuineIntel" in ansible_processor
+
+limit: intel_hosts</pre> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Hosts in constructed inventories are not counted against your license allotment because they are referencing the original inventory host. Additionally, hosts that are disabled in the original inventories are not included in the constructed inventory.</p> 
+         </div>
+        </div> 
+        <p class="p">An inventory update run using <code class="ph codeph">ansible-inventory</code> creates the constructed inventory contents.</p> 
+        <p class="p">This is always configured to update-on-launch before a job, but you can still select a cache timeout value in case this takes too long.</p> 
+        <p class="p">When creating a constructed inventory, the API ensures that it always has one inventory source associated with it. All inventory updates have an associated inventory source, and the fields needed for constructed inventory (<code class="ph codeph">source_vars</code> and <code class="ph codeph">limit</code>) are fields already present on the inventory source model.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title7" id="ref-controller-group-name-vars-filtering"> 
+      <h2 class="title topictitle2" id="ariaid-title7">Filtering on group name and variables</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">You can filter on a combination of groups and variables. For example, you can filter hosts that match a group variable value and also match a host variable value.</p> 
+       <section class="section"> 
+        <p class="p">There are two approaches to executing this filter:</p> 
+        <ul class="ul"> 
+         <li class="li">Define two groups: one group to match the group variable and the other group to match the host variable value. Use the <code class="ph codeph">limit</code> pattern to return the hosts that are in both groups. This is the recommended approach.</li> 
+         <li class="li">Define one group. In the definition, include the condition that the group and host variables must match specific values. Use the <code class="ph codeph">limit</code> pattern to return all the hosts in the new group.</li> 
+        </ul> 
+       </section> 
+       <div class="example">
+        <h3 class="title sectiontitle">Example</h3> 
+        <p class="p">The following inventory file defines four hosts and sets group and host variables. It defines a product group, a sustaining group, and it sets two hosts to a shutdown state.</p> 
+        <p class="p">The goal is to create a filter that returns only production hosts that are shutdown.</p> 
+        <pre class="pre">[account_1234]
+host1
+host2 state=shutdown
+
+[account_4321]
+host3
+host4 state=shutdown
+
+[account_1234:vars]
+account_alias=product_dev
+
+[account_4321:vars]
+account_alias=sustaining</pre> 
+        <p class="p">The goal here is to return only shutdown hosts that are present in the group with the <code class="ph codeph">account_alias</code> variable equal to <code class="ph codeph">product_dev</code>. There are two approaches to this, both shown in YAML format. The first one suggested is recommended.</p> 
+        <ol class="ol"> 
+         <li class="li"><strong class="ph b">Construct 2 groups, limit to intersection</strong>: <p class="p"><code class="ph codeph">source_vars</code>:</p> <pre class="pre codeblock"><code>plugin: constructed
+strict: true
+groups:
+  is_shutdown: state | default("running") == "shutdown"
+  product_dev: account_alias == "product_dev"</code></pre> <p class="p"><code class="ph codeph">limit</code>: <code class="ph codeph">is_shutdown:&amp;product_dev</code></p> <p class="p">This constructed inventory input creates a group for both categories and uses the <code class="ph codeph">limit</code> (host pattern) to only return hosts that are in the intersection of those two groups.</p> <p class="p">When a variable is or is not defined (depending on the host), you can give a default. For example, use <code class="ph codeph">| default("running")</code> if you know what value it should have when it is not defined. This helps with debugging, as described in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-ref_controller_constructed_inventories#ref-controller-inv-debugging-tips" title="When using constructed inventory scripts, you might need to debug your Jinja2 templates.">Debugging tips</a>.</p> </li> 
+         <li class="li"><strong class="ph b">Construct 1 group, limit to group</strong>: <p class="p"><code class="ph codeph">source_vars</code>:</p> <pre class="pre codeblock"><code>plugin: constructed
+strict: true
+groups:
+  shutdown_in_product_dev: state | default("running") == "shutdown" and account_alias == "product_dev"</code></pre> <p class="p"><code class="ph codeph">limit</code>: <code class="ph codeph">shutdown_in_product_dev</code></p> <p class="p">This input creates one group that only includes hosts that match both criteria. The limit is then just the group name by itself, returning <strong class="ph b">host2</strong>. The same as the earlier approach.</p> </li> 
+        </ol> 
+       </div> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="con-patch-automation-with-aap"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Automate software patching</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">Software patching is a fundamental activity of security and IT operations teams everywhere. Keeping patches up to date is critical to remediating software vulnerabilities and meeting compliance requirements, but patching systems manually at scale can be time-consuming and error-prone.</p> 
+      <p class="p">Organizations should put thought into patch management strategies that meet their security, compliance, and business objectives, to prioritize the types of patches to apply (known exploits, critical or important vulnerabilities, optimizations, routine updates, new features, and so on) against the IT assets available across the enterprise. Once policies and priorities have been defined and a patching plan is established, the manual tasks involved in patch management can be automated using Red Hat Ansible Automation Platform to improve patch deployment speed and accuracy, reduce human error, and limit downtime.</p> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="con-benefits-of-patch-automation"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Benefits of patch automation</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">Patch automation reduces manual effort, accelerates patch deployment across all systems, and improves consistency by eliminating human errors in complex updates. In more detail it provides:</p> 
+       <ul class="ul"> 
+        <li class="li">Reduces error-prone manual effort.</li> 
+        <li class="li">Decreases time to deploy patches at scale.</li> 
+        <li class="li">Ensures consistency of patches across similar systems. Manual patching of similar systems can result in human error (forgetting one or more, patching using different versions) that impacts consistency.</li> 
+        <li class="li">Enables orchestration of complex patching scenarios where an update might require taking a system snapshot before applying a patch, or might require additional configuration changes when the patch is applied.</li> 
+       </ul> 
+      </div> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="con-patching-examples"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Patching examples</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">You can modify and thoroughly test the following playbooks that serve as patching examples, to fit the target environment before production use.</p> 
+       <p class="p">These examples use the <code class="ph codeph">ansible.builtin.dnf</code> module for managing packages on RHEL and other operating systems that use the <code class="ph codeph">dnf</code> package manager. Modules for patching other Linux operating systems, Microsoft Windows, and many network devices are also available.</p> 
+      </div> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title4" id="ref-keep-up-to-date"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Keep everything up to date</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">For non-production systems like labs, you can automate weekly patching using a job template. This example playbook updates all RPMs to the latest versions on a regular cadence to keep your servers current.</p> 
+       <section class="section"> 
+        <pre class="pre codeblock"><code>- name: Install all available RPM updates
+  hosts: target_hosts
+  become: true
+
+  tasks:
+    - name: Install latest RPMs
+      ansible.builtin.dnf:
+        name: '*'
+        state: latest</code></pre> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title5" id="ref-install-security-updates"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Install security updates only</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">For organizations with a policy requiring that all RPMs including security errata be kept up to date, the following playbook might be used in a regularly scheduled job template.</p> 
+       <section class="section"> 
+        <pre class="pre codeblock"><code>- name: Install all security-related RPM updates
+  hosts: target_hosts
+  become: true
+
+  tasks:
+    - name: Install latest RPMs with security errata
+      ansible.builtin.dnf:
+        name: '*'
+        security: true
+        state: latest</code></pre> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title6" id="ref-specify-package-versions"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Specify package versions</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">For production systems, a well-established configuration management practice is to deploy only known, tested combinations of software to ensure that systems are configured correctly and perform as expected.</p> 
+       <section class="section"> 
+        <p class="p">This includes deploying only known versions of operating system software and patches to ensure that system updates do not introduce problems with production applications.</p> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">The following example playbook installs a specific version of the <code class="ph codeph">httpd</code> RPM and its dependencies when the target host uses the RHEL 9 operating system. This playbook does not take action if the specified versions are already in place or if a different version of RHEL is installed.</p> 
+         </div> 
+        </div> 
+        <pre class="pre codeblock"><code>- name: Install specific RPM versions
+  hosts: target_hosts
+  gather_facts: true
+  become: true
+
+  vars:
+    httpd_packages_rhel9:
+      - httpd-2.4.53-11.el9_2.5
+      - httpd-core-2.4.53-11.el9_2.5
+      - httpd-filesystem-2.4.53-11.el9_2.5
+      - httpd-tools-2.4.53-11.el9_2.5
+      - mod_http2-1.15.19-4.el9_2.4
+      - mod_lua-2.4.53-11.el9_2.5
+
+  tasks:
+    - name: Install httpd and dependencies
+      ansible.builtin.dnf:
+        name: '{{ httpd_packages_rhel9 }}'
+        state: present
+        allow_downgrade: true
+    when:
+      - ansible_distribution == "RedHat"
+      - ansible_distribution_major_version == "9"</code></pre> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">By setting <code class="ph codeph">allow_downgrade: true</code>, if a newer version of any defined package is installed on the system, it is downgraded to the specified version instead.</p> 
+         </div> 
+        </div> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title7" id="ref-complex-patching-scenarios"> 
+      <h2 class="title topictitle2" id="ariaid-title7">Complex patching scenarios</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">In Ansible Automation Platform, multiple automation jobs can be chained together into workflows, which can be used to coordinate multiple steps in a complex patching scenario.</p> 
+       <section class="section"> 
+        <p class="p">The following example complex patching scenario demonstrates taking virtual machine snapshots, patching the virtual machines, and creating tickets when an error is encountered in the workflow.</p> 
+        <ol class="ol"> 
+         <li class="li">Run a project sync to ensure the latest playbooks are available. In parallel, run an inventory sync to make sure the latest list of target hosts is available.</li> 
+         <li class="li">Take a snapshot of each target host. 
+          <ol class="ol" type="a"> 
+           <li class="li">If the snapshot task fails, submit a ticket with the relevant information.</li> 
+          </ol> </li> 
+         <li class="li">Patch each of the target hosts. 
+          <ol class="ol" type="a"> 
+           <li class="li">If the patching task fails, restore the snapshot and submit a ticket with the relevant information.</li> 
+          </ol> </li> 
+         <li class="li">Delete each snapshot where the patching task was successful.</li> 
+        </ol> 
+        <p class="p">The following workflow visualization shows how the components of the example complex patching scenario are executed:</p> 
+        <p class="p"> <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/workflow.png" alt="Workflow representation"> </p> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_workflows#controller-workflows" title="Workflows enable you to configure a sequence of disparate job templates (or workflow templates) that might or might not share inventory, playbooks, or permissions.">Workflows in automation controller</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

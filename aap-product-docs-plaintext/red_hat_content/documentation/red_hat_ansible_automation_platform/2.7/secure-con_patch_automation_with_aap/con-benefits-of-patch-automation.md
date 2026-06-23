@@ -1,0 +1,10 @@
+# Automate software patching
+## Benefits of patch automation
+
+Patch automation reduces manual effort, accelerates patch deployment across all systems, and improves consistency by eliminating human errors in complex updates. In more detail it provides:
+
+- Reduces error-prone manual effort.
+- Decreases time to deploy patches at scale.
+- Ensures consistency of patches across similar systems. Manual patching of similar systems can result in human error (forgetting one or more, patching using different versions) that impacts consistency.
+- Enables orchestration of complex patching scenarios where an update might require taking a system snapshot before applying a patch, or might require additional configuration changes when the patch is applied.
+

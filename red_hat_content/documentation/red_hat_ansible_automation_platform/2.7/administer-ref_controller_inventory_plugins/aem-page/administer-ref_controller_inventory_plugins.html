@@ -1,0 +1,248 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="ref-controller-inventory-plugins"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Generate dynamic data from external sources with inventory plugins</h1> 
+     <div class="body refbody"> 
+      <p class="shortdesc">Automation controller uses inventory plugins to dynamically generate inventory data from external sources. These plugins enable automation controller to integrate with cloud providers, virtualization platforms, and other external systems to retrieve up-to-date information about managed nodes.</p> 
+      <section class="section"> 
+       <p class="p">Inventory updates use dynamically-generated YAML files which are parsed by their inventory plugin. In automation controller, you can provide the inventory plugin configuration directly to automation controller using the inventory source <code class="ph codeph">source_vars</code> for the following inventory sources:</p> 
+       <ul class="ul"> 
+        <li class="li"> <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-assembly_ag_controller_troubleshooting#controller-ec2-vpc-instances" title="By default, automation controller only shows instances in a VPC that have an Elastic IP (EIP) associated with them.">Amazon Web Services EC2</a> </li> 
+        <li class="li"> <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-inv-source-gce" title="Learn how to configure a Google-sourced inventory:">Google Compute Engine</a> </li> 
+        <li class="li"> <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-azure-resource-manager" title="Use the following procedure to configure an Microsoft Azure Resource Manager-sourced inventory.">Microsoft Azure Resource Manager</a> </li> 
+        <li class="li"> <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-inv-source-vm-vcenter" title="You can configure automation controller to synchronize inventory from a VMware vCenter server. You can manage virtual machines as part of your automation workflows.">VMware vCenter</a> </li> 
+        <li class="li"> <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-inv-source-vm-esxi" title="Learn how to configure a VMWare ESXi sourced inventory.">VMWare ESXI</a> </li> 
+        <li class="li"> <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-inv-source-satellite" title="automation controller can integrate with Red Hat Satellite 6 as a dynamic inventory source.">Red Hat Satellite 6</a> </li> 
+        <li class="li"> <span class="xref">Red Hat Lightspeed</span> </li> 
+        <li class="li"> <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-inv-source-openstack" title="You can create an inventory source that uses the OpenStack inventory plugin to dynamically generate inventory from your OpenStack cloud.">OpenStack</a> </li> 
+        <li class="li"> <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-inv-source-rh-virt" title="Learn how to configure a Red Hat virtualization-sourced inventory.">Red Hat Virtualization</a> </li> 
+        <li class="li"> <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-inv-source-aap" title="An inventory that is sourced from Red Hat Ansible Automation Platform uses the Red Hat Ansible Automation Platform inventory plugin to gather inventory data from the Red Hat Ansible Automation Platform platform.">Red Hat Ansible Automation Platform</a> </li> 
+        <li class="li"> <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-inv-source-terraform" title="Use the following procedure to create a Terraform State inventory source.">Terraform State</a> </li> 
+        <li class="li"> <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-inv-source-open-shift-virt" title="Learn how to add an OpenShift Virtualization inventory source to an existing inventory.">OpenShift Virtualization</a> </li> 
+       </ul> 
+       <p class="p">Newly created configurations for inventory sources contain the default plugin configuration values. If you want your newly created inventory sources to match the output of a legacy source, you must apply a specific set of configuration values for that source. To ensure backward compatibility, automation controller uses "templates" for each of these sources to force the output of inventory plugins into the legacy format.</p> 
+       <p class="p">For more information about sources and their templates, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-controller_inventory_templates#controller-inventory-templates" title="After upgrade to 4.x, existing configurations are migrated to the new format that produces an inventory output compatible with earlier versions. Use the following templates to aid in migrating your inventories to the new style inventory plugin output.">Supported inventory plugin templates</a>.</p> 
+       <p class="p"><code class="ph codeph">source_vars</code> that contain <code class="ph codeph">plugin: xxx.yyy.zzz</code> as a top-level key are replaced with the fully-qualified inventory plugin name at runtime based on the <code class="ph codeph">InventorySource</code> source.</p> 
+       <p class="p">For example, if you select <code class="ph codeph">ec2</code> for the <code class="ph codeph">InventorySource</code> then, at run time, the plugin is set to <code class="ph codeph">amazon.aws.aws_ec2</code>.</p> 
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="GUID-6a73bd50-d948-423d-a2ac-5ee46aa1d48f"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Add permissions to inventories</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Use the following procedure to add permissions to inventories: </p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p"></p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Inventories</span></span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select a template, and in the <strong class="ph b">User Access</strong> or <strong class="ph b">Team Access</strong> tab, click <span class="ph uicontrol">Add roles</span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select a user or team to add and click <span class="ph uicontrol">Next</span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select the checkbox next to a name to add one or more users or teams from the list as members. </span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol">Next</span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select the roles you want the selected users or teams to have. Different resources have different options available. </span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol">Finish</span> to apply the roles to the selected users or teams and to add them as members. The updated roles assigned for each user and team are displayed. </span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-controller-removing-inv-permissions"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Remove a permission</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Learn how to remove specific permissions from a user associated with a resource. Disassociating a role restricts a user’s access to functionalities or data they no longer need.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <div class="ul steps-unordered"> 
+         <div class="li step p"> <span class="ph cmd">To remove roles for a particular user, click the <img class="image" height="10" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/disassociate.png" width="10" alt="Disassociate"> icon next to its resource. This launches a confirmation window, asking you to confirm the disassociation.</span> 
+         </div> 
+        </div> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-controller-add-groups"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Add groups to inventories</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can add groups to standard inventories in automation controller to organize hosts.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">Inventories are divided into groups, which can contain hosts and other groups. Groups are only applicable to standard inventories and are not a configurable directly through a Smart Inventory. You can associate an existing group through hosts that are used with standard inventories.</p> 
+        <p class="p">The following actions are available for standard inventories:</p> 
+        <ul class="ul"> 
+         <li class="li">Create a new Group</li> 
+         <li class="li">Create a new Host</li> 
+         <li class="li">Run a command on the selected Inventory</li> 
+         <li class="li">Edit Inventory properties</li> 
+         <li class="li">View activity streams for Groups and Hosts</li> 
+         <li class="li">Obtain help building your Inventory</li> 
+        </ul> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Inventory sources are not associated with groups. Spawned groups are top-level and can still have child groups. All of these spawned groups can have hosts.</p> 
+         </div> 
+        </div> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Inventories</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the Inventory name you want to add groups to.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the Inventory <strong class="ph b">Details</strong> page, select the <strong class="ph b">Groups</strong> tab.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create group</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Enter the appropriate details: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Name</strong>: Required</li> 
+            <li class="li">Optional: <strong class="ph b">Description</strong>: Enter a description as appropriate.</li> 
+            <li class="li">Optional: <strong class="ph b">Variables</strong>: Enter definitions and values to be applied to all hosts in this group. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create group</span>.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section result"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Results</h3> 
+        </div> 
+        <p class="p">When you have added a group to a template, the Group <strong class="ph b">Details</strong> page is displayed.</p> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="proc-controller-add-groups-to-groups"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Add groups within groups</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can create a hierarchy of groups by adding groups within groups. This allows you to create nested groupings of hosts for easier management and organization.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">When you have added a group to a template, the Group <strong class="ph b">Details</strong> page is displayed.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">Related Groups</strong> tab.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Add existing group</span> to add a group that already exists in your configuration or <span class="ph uicontrol button">Create group</span> to create a new group.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">If creating a new group, enter the appropriate details into the required and optional fields: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Name</strong> (required):</li> 
+            <li class="li">Optional: <strong class="ph b">Description</strong>: Enter a description as appropriate.</li> 
+            <li class="li">Optional: <strong class="ph b">Variables</strong>: Enter definitions and values to be applied to all hosts in this group. Enter variables using either JSON or YAML syntax. Use the radio button to toggle between the two.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create group</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">The <strong class="ph b">Create group</strong> window closes and the newly created group is displayed as an entry in the list of groups associated with the group that it was created for.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section postreq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">What to do next</h3> 
+        </div> 
+        <p class="p">If you select to add an existing group, available groups appear in a separate selection window. When you select a group, it is displayed in the list of groups associated with the group.</p> 
+        <ul class="ul"> 
+         <li class="li">To configure additional groups and hosts under the subgroup, click the name of the subgroup from the list of groups and repeat the steps listed before.</li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title6" id="ref-controller-view-edit-inv-groups"> 
+      <h2 class="title topictitle2" id="ariaid-title6">View or edit inventory groups</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">The groups list view displays all your inventory groups, or you can filter it to only display the root groups. An inventory group is considered a root group if it is not a subset of another group.</p> 
+       <section class="section"> 
+        <p class="p">You can delete a subgroup without concern for dependencies, because automation controller looks for dependencies such as child groups or hosts. If any exist, a confirmation window displays for you to select whether to delete the root group and all of its subgroups and hosts; or to promote the subgroups so they become the top-level inventory groups, along with their hosts.</p> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title7" id="proc-controller-add-hosts"> 
+      <h2 class="title topictitle2" id="ariaid-title7">Add hosts to inventory groups</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can add hosts to an inventory either by creating new hosts or by associating existing hosts with the inventory.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">You can configure hosts for the inventory and for groups and groups within groups.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Inventories</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the inventory name you want to add groups to.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the Inventory <strong class="ph b">Details</strong> page, select the <strong class="ph b">Hosts</strong> tab.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create host</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select whether to add a host that already exists in your configuration or create a new host.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">If creating a new host, set the toggle to <strong class="ph b">On</strong> to include this host while running jobs.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Enter the appropriate details: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Name</strong> (required):</li> 
+            <li class="li">Optional: <strong class="ph b">Description</strong>: Enter a description as appropriate.</li> 
+            <li class="li">Optional: <strong class="ph b">Variables</strong>: Enter definitions and values to be applied to all hosts in this group, as in the following example: <pre class="pre">{
+  ansible_user : &lt;username to ssh into&gt;
+  ansible_ssh_pass : &lt;password for the username&gt;
+  ansible_become_pass: &lt;password for becoming the root&gt;
+}</pre><p class="p">Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two.</p></li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create host</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">The <strong class="ph b">Create host</strong> window closes and the newly created host is displayed in the list of hosts associated with the group that it was created for. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">If you select to add an existing host, available hosts appear in a separate selection window.</p> 
+           <p class="p">When you select a host, it is displayed in the list of hosts associated with the group.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">You can disassociate a host from this screen by selecting the host and clicking the <img class="image" height="10" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/disassociate.png" width="10" alt="Disassociate"> icon. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note"> <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">You can also run ad hoc commands from this screen. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_run_ad_hoc_commands#proc-controller-run-ad-hoc-commands" title="Learn how to run ad hoc commands against hosts in an inventory.">Running Ad Hoc commands</a>.</p> 
+            </div> 
+           </div> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">To configure additional groups for the host, click the name of the host from the list of hosts. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">This opens the <strong class="ph b">Details</strong> tab of the selected host.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">Groups</strong> tab to configure groups for the host.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Associate groups</span> to associate the host with an existing group. Available groups appear in a separate selection window.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the groups to associate with the host and click <span class="ph uicontrol button">Confirm</span>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">When a group is associated, it is displayed in the list of groups associated with the host.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">If you used a host to run a job, you can view details about those jobs in the <strong class="ph b">Completed Jobs</strong> tab of the host.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Expanded</span> to view details about each job. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note"> <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">You can create hosts in bulk by using the newly added endpoint in the API, <code class="ph codeph">/api/v2/bulk/host_create</code>. This endpoint accepts JSON and you can specify the target inventory and a list of hosts to add to the inventory. These hosts must be unique within the inventory. Either all hosts are added, or an error is returned indicating why the operation was not able to complete. Use the <strong class="ph b">OPTIONS</strong> request to return the relevant schema.</p> 
+            </div> 
+           </div> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

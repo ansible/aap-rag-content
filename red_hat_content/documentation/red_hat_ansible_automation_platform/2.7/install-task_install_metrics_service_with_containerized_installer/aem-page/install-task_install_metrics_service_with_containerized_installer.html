@@ -1,0 +1,164 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="task-install-metrics-service-containerized">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Install metrics service with containerized installer</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Enable and configure metrics service during containerized installation to automatically collect anonymized usage data and transmit it to Red Hat.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">Red Hat Enterprise Linux 9.2 or later installed and configured</li> 
+       <li class="li">Active Red Hat Ansible Automation Platform subscription</li> 
+       <li class="li">Ansible Automation Platform 2.7 containerized installer downloaded and extracted</li> 
+       <li class="li">Infrastructure meets requirements</li> 
+       <li class="li">Root or sudo access to installation host</li> 
+      </ul> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">Metrics service is enabled by default in Ansible Automation Platform 2.7. You do not need to explicitly enable it unless you previously disabled it.</p> 
+       </div>
+      </div> 
+     </section> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">This procedure configures metrics service during the initial containerized installation of Ansible Automation Platform 2.7. Metrics service is enabled by default and automatically collects anonymized usage data, stores it in its own PostgreSQL database with read-only access to the controller database, and transmits data to Red Hat without post-installation configuration.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Define metrics service inventory group</span> 
+        <div class="itemgroup info"> 
+         <p class="p">Edit the inventory file and add the <code class="ph codeph">[automationmetrics]</code> group:</p> 
+         <pre class="pre codeblock"><code>[automationcontroller]
+aap.example.com
+
+[automationmetrics]
+aap.example.com
+
+[database]
+aap.example.com
+
+[all:vars]
+postgresql_admin_username=postgres
+postgresql_admin_password='&lt;secure_password&gt;'
+
+# Optional: Enable automation dashboard data collection (Tech Preview)
+# Default: disabled
+FEATURE_DASHBOARD_COLLECTION_ENABLED: false</code></pre> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">Metrics service is NOT required to be co-located with automation controller. Place it on any node based on your deployment topology.</p> 
+          </div>
+         </div> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Run the containerized installer</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>cd /path/to/aap-containerized-installer
+ansible-playbook -i inventory install.yml</code></pre> 
+         <p class="p">The installer performs the following sequence:</p> 
+         <ol class="ol" type="a"> 
+          <li class="li"><strong class="ph b">Database setup:</strong> Creates <code class="ph codeph">metrics_service</code> database, <code class="ph codeph">metrics_service</code> user (ALL privileges), and <code class="ph codeph">ms_awx_readonly</code> user (SELECT-only on controller database)</li> 
+          <li class="li"><strong class="ph b">Podman secrets:</strong> Creates four secrets: 
+           <ul class="ul"> 
+            <li class="li"><code class="ph codeph">automationmetrics_pg_password</code></li> 
+            <li class="li"><code class="ph codeph">automationmetrics_controller_read_pg_password</code></li> 
+            <li class="li"><code class="ph codeph">automationmetrics_secret_key</code></li> 
+            <li class="li"><code class="ph codeph">automationmetrics_resource_server</code></li> 
+           </ul> </li> 
+          <li class="li"><strong class="ph b">Database migrations:</strong> Runs <code class="ph codeph">automation-metrics-init</code> container (one-shot; runs <code class="ph codeph">migrate</code>, <code class="ph codeph">init-default-settings</code>, <code class="ph codeph">init-service-id</code>, <code class="ph codeph">init-system-tasks</code>)</li> 
+          <li class="li"><strong class="ph b">Service deployment:</strong> Creates three containers: <code class="ph codeph">automation-metrics-web</code>, <code class="ph codeph">automation-metrics-tasks</code>, <code class="ph codeph">automation-metrics-scheduler</code></li> 
+          <li class="li"><strong class="ph b">Systemd integration:</strong> Generates three user-scope systemd units: <code class="ph codeph">automation-metrics-web.service</code>, <code class="ph codeph">automation-metrics-tasks.service</code>, <code class="ph codeph">automation-metrics-scheduler.service</code></li> 
+          <li class="li"><strong class="ph b">Firewall configuration:</strong> Opens ports 8087/tcp (HTTP) and 8450/tcp (HTTPS)</li> 
+         </ol> 
+        </div> </li>
+       <li class="li step stepexpand"><strong>Optional: </strong> <span class="ph cmd">Enable automation dashboard</span> 
+        <div class="itemgroup info"> 
+         <p class="p">Automation dashboard provides ROI calculations, cost savings analysis, and executive reporting. It uses metrics service as its backend for data collection and storage.</p> 
+         <p class="p">To enable automation dashboard data collection during installation, set:</p> 
+         <pre class="pre codeblock"><code>FEATURE_DASHBOARD_COLLECTION_ENABLED: true</code></pre> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p"><strong class="ph b">Dependency:</strong> Dashboard collection requires metrics service to be enabled. The installer fails preflight checks if you enable automation dashboard without metrics service.</p> 
+          </div>
+         </div> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Verify installation</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code># Container status
+podman ps | grep automation-metrics
+
+# Systemd service status (user scope)
+systemctl --user status automation-metrics-web.service
+systemctl --user status automation-metrics-tasks.service
+systemctl --user status automation-metrics-scheduler.service
+
+# Init container logs (confirms successful initialization)
+podman logs automation-metrics-init
+# Expected output:
+# Running database migrations...
+# Initializing default settings...
+# Initializing django-ansible-base ServiceID...
+# Initializing system tasks...
+
+# Health endpoint (via nginx)
+curl http://localhost:8087/health/
+
+# Database connectivity
+podman exec automation-metrics-web \
+  psql -h localhost -U metrics_service -d metrics_service -c "SELECT version();"</code></pre> 
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <p class="p">Metrics service is successfully installed when:</p> 
+      <ul class="ul"> 
+       <li class="li">All three containers (<code class="ph codeph">automation-metrics-web</code>, <code class="ph codeph">automation-metrics-tasks</code>, <code class="ph codeph">automation-metrics-scheduler</code>) are running</li> 
+       <li class="li">All three systemd user-scope services are active and enabled</li> 
+       <li class="li">Health endpoint returns <code class="ph codeph">{"status": "good", ...}</code> response</li> 
+       <li class="li">Database connectivity confirmed</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">What happens next:</strong></p> 
+      <p class="p">After installation, metrics service automatically:</p> 
+      <ul class="ul"> 
+       <li class="li">Begins collecting usage data from automation controller database</li> 
+       <li class="li">Anonymizes data. Any private object names are marked as Custom.</li> 
+       <li class="li">Transmits anonymized data to Red Hat Data Ingress via Gateway <span class="ph filepath">/api/metrics/</span> endpoint</li> 
+       <li class="li">Provides health monitoring at <span class="ph filepath">http://localhost:8087/health/</span> (via nginx)</li> 
+      </ul> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist reltasks">
+      <strong>Related tasks</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_configure_external_database_containerized" title="Configure metrics service to use an external PostgreSQL database to leverage enterprise database management, backup, and high availability infrastructure.">Configure external PostgreSQL database for containerized installer</a></li>
+      </ul>
+     </div>
+     <div class="linklist relref">
+      <strong>Related reference</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_metrics_service_deployment_requirements" title="Review infrastructure requirements and prerequisites for deploying metrics service to provision appropriate resources and ensure successful deployment without capacity or compatibility issues.">Metrics service deployment requirements</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_metrics_service_configuration_variables" title="Review configuration variables to customize metrics service deployment, database connections, security settings, and operational parameters.">Metrics service configuration variables reference</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="con-eda-crds"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Event-Driven Ansible custom resources</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">The Event-Driven Ansible operator provides custom resources for deploying, configuring, and protecting a standalone Event-Driven Ansible instance on OpenShift Container Platform.</p> 
+      <p class="p">The <code class="ph codeph">EDA</code> custom resource deploys and configures Event-Driven Ansible independently of the full Ansible Automation Platform deployment. Event-Driven Ansible enables event-driven automation workflows by connecting event sources to automation actions. Use this custom resource when you need to manage Event-Driven Ansible as a standalone component rather than through the <code class="ph codeph">AnsibleAutomationPlatform</code> resource.</p> 
+      <p class="p">The <code class="ph codeph">EDABackup</code> and <code class="ph codeph">EDARestore</code> custom resources manage data protection for standalone Event-Driven Ansible deployments. A backup captures the Event-Driven Ansible database and configuration. A restore recreates the deployment from a previously created backup.</p> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="EDA"> 
+      <h2 class="title topictitle2" id="ariaid-title2">EDA [eda.ansible.com/v1alpha1]</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The <code class="ph codeph">EDA</code> custom resource deploys and configures a standalone Event-Driven Ansible instance for event-driven automation workflows.</p> 
+       <section class="section" id="EDA__description">
+        <h3 class="title sectiontitle">Description</h3> 
+        <table class="table" id="EDA__desc-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:66.66666666666666%">
+         </colgroup>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">API Group</strong></td> 
+           <td class="entry"><code class="ph codeph">eda.ansible.com</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">API Version</strong></td> 
+           <td class="entry"><code class="ph codeph">v1alpha1</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">Kind</strong></td> 
+           <td class="entry"><code class="ph codeph">EDA</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">Scope</strong></td> 
+           <td class="entry">Namespaced</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section" id="EDA__spec">
+        <h3 class="title sectiontitle">Specification</h3> 
+        <table class="table" id="EDA__spec-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:28.57142857142857%">
+          <col style="width:14.285714285714285%">
+          <col style="width:42.857142857142854%">
+          <col style="width:14.285714285714285%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="EDA__spec-table__entry__1">Field</th> 
+           <th class="entry" id="EDA__spec-table__entry__2">Type</th> 
+           <th class="entry" id="EDA__spec-table__entry__3">Description</th> 
+           <th class="entry" id="EDA__spec-table__entry__4">Default</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="EDA__spec-table__entry__1"><code class="ph codeph">automation_server_url</code></td> 
+           <td class="entry" headers="EDA__spec-table__entry__2">String</td> 
+           <td class="entry" headers="EDA__spec-table__entry__3">URL of the automation controller instance for Event-Driven Ansible to connect to.</td> 
+           <td class="entry" headers="EDA__spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="EDA__spec-table__entry__1"><code class="ph codeph">automation_server_ssl_verify</code></td> 
+           <td class="entry" headers="EDA__spec-table__entry__2">String</td> 
+           <td class="entry" headers="EDA__spec-table__entry__3">Enable or disable SSL verification for the automation controller connection. Set to<code class="ph codeph">no</code> to disable.</td> 
+           <td class="entry" headers="EDA__spec-table__entry__4"><code class="ph codeph">yes</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="EDA__spec-table__entry__1"><code class="ph codeph">database</code></td> 
+           <td class="entry" headers="EDA__spec-table__entry__2">Object</td> 
+           <td class="entry" headers="EDA__spec-table__entry__3">Database configuration. Contains<code class="ph codeph">database_secret</code> (String) specifying the name of a Kubernetes secret with external database connection details.</td> 
+           <td class="entry" headers="EDA__spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="EDA__spec-table__entry__1"><code class="ph codeph">api</code></td> 
+           <td class="entry" headers="EDA__spec-table__entry__2">Object</td> 
+           <td class="entry" headers="EDA__spec-table__entry__3">Event-Driven Ansible API pod configuration. Contains<code class="ph codeph">replicas</code> (Integer) and<code class="ph codeph">resource_requirements</code> (Object).</td> 
+           <td class="entry" headers="EDA__spec-table__entry__4">1 replica</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="EDA__spec-table__entry__1"><code class="ph codeph">ui</code></td> 
+           <td class="entry" headers="EDA__spec-table__entry__2">Object</td> 
+           <td class="entry" headers="EDA__spec-table__entry__3">Event-Driven Ansible UI pod configuration. Contains<code class="ph codeph">replicas</code> (Integer) and<code class="ph codeph">resource_requirements</code> (Object).</td> 
+           <td class="entry" headers="EDA__spec-table__entry__4">1 replica</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="EDA__spec-table__entry__1"><code class="ph codeph">scheduler</code></td> 
+           <td class="entry" headers="EDA__spec-table__entry__2">Object</td> 
+           <td class="entry" headers="EDA__spec-table__entry__3">Event-Driven Ansible scheduler pod configuration. Contains<code class="ph codeph">replicas</code> (Integer) and<code class="ph codeph">resource_requirements</code> (Object).</td> 
+           <td class="entry" headers="EDA__spec-table__entry__4">1 replica</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="EDA__spec-table__entry__1"><code class="ph codeph">default_worker</code></td> 
+           <td class="entry" headers="EDA__spec-table__entry__2">Object</td> 
+           <td class="entry" headers="EDA__spec-table__entry__3">Event-Driven Ansible default worker pod configuration. Contains<code class="ph codeph">replicas</code> (Integer) and<code class="ph codeph">resource_requirements</code> (Object).</td> 
+           <td class="entry" headers="EDA__spec-table__entry__4">1 replica</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="EDA__spec-table__entry__1"><code class="ph codeph">activation_worker</code></td> 
+           <td class="entry" headers="EDA__spec-table__entry__2">Object</td> 
+           <td class="entry" headers="EDA__spec-table__entry__3">Event-Driven Ansible activation worker pod configuration. Contains<code class="ph codeph">replicas</code> (Integer) and<code class="ph codeph">resource_requirements</code> (Object).</td> 
+           <td class="entry" headers="EDA__spec-table__entry__4">1 replica</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="EDA__spec-table__entry__1"><code class="ph codeph">event_stream</code></td> 
+           <td class="entry" headers="EDA__spec-table__entry__2">Object</td> 
+           <td class="entry" headers="EDA__spec-table__entry__3">Event-Driven Ansible event stream pod configuration. Contains<code class="ph codeph">replicas</code> (Integer) and<code class="ph codeph">resource_requirements</code> (Object).</td> 
+           <td class="entry" headers="EDA__spec-table__entry__4">1 replica</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="EDA__spec-table__entry__1"><code class="ph codeph">worker</code></td> 
+           <td class="entry" headers="EDA__spec-table__entry__2">Object</td> 
+           <td class="entry" headers="EDA__spec-table__entry__3">Event-Driven Ansible worker pod configuration. Contains<code class="ph codeph">replicas</code> (Integer) and<code class="ph codeph">resource_requirements</code> (Object).</td> 
+           <td class="entry" headers="EDA__spec-table__entry__4">2 replicas</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section" id="EDA__example">
+        <h3 class="title sectiontitle">Example custom resource</h3> 
+        <pre class="pre codeblock"><code>apiVersion: eda.ansible.com/v1alpha1
+kind: EDA
+metadata:
+  name: my-eda
+spec:
+  automation_server_ssl_verify: 'no'
+  api:
+    replicas: 2
+  activation_worker:
+    replicas: 2
+  event_stream:
+    replicas: 2</code></pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="EDABackupRestore"> 
+      <h2 class="title topictitle2" id="ariaid-title3">EDABackup and EDARestore [eda.ansible.com/v1alpha1]</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The <code class="ph codeph">EDABackup</code> and <code class="ph codeph">EDARestore</code> custom resources manage backup and restore operations for standalone Event-Driven Ansible deployments.</p> 
+       <section class="section" id="EDABackupRestore__backup-description">
+        <h3 class="title sectiontitle">EDABackup</h3> 
+        <table class="table" id="EDABackupRestore__backup-desc-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:66.66666666666666%">
+         </colgroup>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">API Group</strong></td> 
+           <td class="entry"><code class="ph codeph">eda.ansible.com</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">API Version</strong></td> 
+           <td class="entry"><code class="ph codeph">v1alpha1</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">Kind</strong></td> 
+           <td class="entry"><code class="ph codeph">EDABackup</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">Scope</strong></td> 
+           <td class="entry">Namespaced</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section" id="EDABackupRestore__backup-spec">
+        <h3 class="title sectiontitle">EDABackup spec</h3> 
+        <table class="table" id="EDABackupRestore__backup-spec-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:28.57142857142857%">
+          <col style="width:14.285714285714285%">
+          <col style="width:42.857142857142854%">
+          <col style="width:14.285714285714285%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="EDABackupRestore__backup-spec-table__entry__1">Field</th> 
+           <th class="entry" id="EDABackupRestore__backup-spec-table__entry__2">Type</th> 
+           <th class="entry" id="EDABackupRestore__backup-spec-table__entry__3">Description</th> 
+           <th class="entry" id="EDABackupRestore__backup-spec-table__entry__4">Default</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="EDABackupRestore__backup-spec-table__entry__1"><code class="ph codeph">deployment_name</code></td> 
+           <td class="entry" headers="EDABackupRestore__backup-spec-table__entry__2">String</td> 
+           <td class="entry" headers="EDABackupRestore__backup-spec-table__entry__3">Name of the<code class="ph codeph">EDA</code> instance to back up. Required.</td> 
+           <td class="entry" headers="EDABackupRestore__backup-spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="EDABackupRestore__backup-spec-table__entry__1"><code class="ph codeph">no_log</code></td> 
+           <td class="entry" headers="EDABackupRestore__backup-spec-table__entry__2">Boolean</td> 
+           <td class="entry" headers="EDABackupRestore__backup-spec-table__entry__3">Suppress logging of sensitive data during the backup process.</td> 
+           <td class="entry" headers="EDABackupRestore__backup-spec-table__entry__4"><code class="ph codeph">true</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="EDABackupRestore__backup-spec-table__entry__1"><code class="ph codeph">backup_pvc</code></td> 
+           <td class="entry" headers="EDABackupRestore__backup-spec-table__entry__2">String</td> 
+           <td class="entry" headers="EDABackupRestore__backup-spec-table__entry__3">Name of the persistent volume claim (PVC) to use for backup storage.</td> 
+           <td class="entry" headers="EDABackupRestore__backup-spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="EDABackupRestore__backup-spec-table__entry__1"><code class="ph codeph">backup_storage_class</code></td> 
+           <td class="entry" headers="EDABackupRestore__backup-spec-table__entry__2">String</td> 
+           <td class="entry" headers="EDABackupRestore__backup-spec-table__entry__3">Kubernetes storage class for the backup PVC.</td> 
+           <td class="entry" headers="EDABackupRestore__backup-spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="EDABackupRestore__backup-spec-table__entry__1"><code class="ph codeph">backup_storage_requirements</code></td> 
+           <td class="entry" headers="EDABackupRestore__backup-spec-table__entry__2">String</td> 
+           <td class="entry" headers="EDABackupRestore__backup-spec-table__entry__3">Storage size for the backup PVC, for example<code class="ph codeph">7Gi</code>.</td> 
+           <td class="entry" headers="EDABackupRestore__backup-spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="EDABackupRestore__backup-spec-table__entry__1"><code class="ph codeph">create_backup_pvc</code></td> 
+           <td class="entry" headers="EDABackupRestore__backup-spec-table__entry__2">Boolean</td> 
+           <td class="entry" headers="EDABackupRestore__backup-spec-table__entry__3">Set to<code class="ph codeph">true</code> to have the operator create the PVC automatically.</td> 
+           <td class="entry" headers="EDABackupRestore__backup-spec-table__entry__4"><code class="ph codeph">false</code></td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section" id="EDABackupRestore__backup-example">
+        <h3 class="title sectiontitle">Example EDABackup custom resource</h3> 
+        <pre class="pre codeblock"><code>apiVersion: eda.ansible.com/v1alpha1
+kind: EDABackup
+metadata:
+  name: eda-backup
+spec:
+  deployment_name: my-eda
+  backup_pvc: eda-backup-pvc
+  backup_storage_requirements: 7Gi
+  create_backup_pvc: true</code></pre> 
+       </section> 
+       <section class="section" id="EDABackupRestore__restore-description">
+        <h3 class="title sectiontitle">EDARestore</h3> 
+        <table class="table" id="EDABackupRestore__restore-desc-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:66.66666666666666%">
+         </colgroup>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">API Group</strong></td> 
+           <td class="entry"><code class="ph codeph">eda.ansible.com</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">API Version</strong></td> 
+           <td class="entry"><code class="ph codeph">v1alpha1</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">Kind</strong></td> 
+           <td class="entry"><code class="ph codeph">EDARestore</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">Scope</strong></td> 
+           <td class="entry">Namespaced</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section" id="EDABackupRestore__restore-spec">
+        <h3 class="title sectiontitle">EDARestore spec</h3> 
+        <table class="table" id="EDABackupRestore__restore-spec-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:28.57142857142857%">
+          <col style="width:14.285714285714285%">
+          <col style="width:42.857142857142854%">
+          <col style="width:14.285714285714285%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="EDABackupRestore__restore-spec-table__entry__1">Field</th> 
+           <th class="entry" id="EDABackupRestore__restore-spec-table__entry__2">Type</th> 
+           <th class="entry" id="EDABackupRestore__restore-spec-table__entry__3">Description</th> 
+           <th class="entry" id="EDABackupRestore__restore-spec-table__entry__4">Default</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="EDABackupRestore__restore-spec-table__entry__1"><code class="ph codeph">deployment_name</code></td> 
+           <td class="entry" headers="EDABackupRestore__restore-spec-table__entry__2">String</td> 
+           <td class="entry" headers="EDABackupRestore__restore-spec-table__entry__3">Name of the<code class="ph codeph">EDA</code> instance to restore. Required.</td> 
+           <td class="entry" headers="EDABackupRestore__restore-spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="EDABackupRestore__restore-spec-table__entry__1"><code class="ph codeph">backup_name</code></td> 
+           <td class="entry" headers="EDABackupRestore__restore-spec-table__entry__2">String</td> 
+           <td class="entry" headers="EDABackupRestore__restore-spec-table__entry__3">Name of the<code class="ph codeph">EDABackup</code> resource to restore from. Required.</td> 
+           <td class="entry" headers="EDABackupRestore__restore-spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="EDABackupRestore__restore-spec-table__entry__1"><code class="ph codeph">no_log</code></td> 
+           <td class="entry" headers="EDABackupRestore__restore-spec-table__entry__2">Boolean</td> 
+           <td class="entry" headers="EDABackupRestore__restore-spec-table__entry__3">Suppress logging of sensitive data during the restore process.</td> 
+           <td class="entry" headers="EDABackupRestore__restore-spec-table__entry__4"><code class="ph codeph">true</code></td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section" id="EDABackupRestore__restore-example">
+        <h3 class="title sectiontitle">Example EDARestore custom resource</h3> 
+        <pre class="pre codeblock"><code>apiVersion: eda.ansible.com/v1alpha1
+kind: EDARestore
+metadata:
+  name: eda-restore
+spec:
+  deployment_name: my-eda
+  backup_name: eda-backup</code></pre> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

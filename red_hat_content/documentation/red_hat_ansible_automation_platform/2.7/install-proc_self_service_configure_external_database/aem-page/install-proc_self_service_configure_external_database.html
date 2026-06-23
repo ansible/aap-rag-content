@@ -1,0 +1,207 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="self-service-configure-external-database">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure an external PostgreSQL database for Ansible automation portal</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">By default, Ansible automation portal deploys an embedded PostgreSQL instance. For production deployments, configure Ansible automation portal to use an external PostgreSQL database managed by your organization's database team.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">You have administrator access to your OpenShift Container Platform cluster.</li> 
+       <li class="li">You have access to an external PostgreSQL database server.</li> 
+       <li class="li">You have a PostgreSQL user with the <code class="ph codeph">CREATEDB</code> privilege, or you are using the <code class="ph codeph">postgres</code> superuser. Ansible automation portal requires <code class="ph codeph">CREATEDB</code> because it creates multiple databases at runtime. Consult your database administrator to provision this user if needed.</li> 
+       <li class="li">Network connectivity is available between your OpenShift Container Platform cluster and the external PostgreSQL server. Verify that firewalls and security groups allow traffic on the PostgreSQL port (default 5432).</li> 
+       <li class="li">Ansible automation portal is installed or you are preparing to install it.</li> 
+      </ul> 
+     </section> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">Ansible automation portal creates multiple databases automatically at runtime. You do not need to pre-create databases. The database user must have the <code class="ph codeph">CREATEDB</code> privilege so that the application can create and manage its own databases.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Create a secret in OpenShift Container Platform with your database credentials.</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-terminal"><code>$ oc create secret generic portal-postgresql-external \
+  --from-literal=POSTGRES_USER=<var class="keyword varname">database-user</var> \
+  --from-literal=POSTGRES_PASSWORD='<var class="keyword varname">database-password</var>' \
+  --from-literal=POSTGRES_HOST=<var class="keyword varname">database-host</var> \
+  --from-literal=POSTGRES_PORT=5432 \
+  -n <var class="keyword varname">namespace</var></code></pre> 
+         <p class="p">Replace <var class="keyword varname">database-user</var> with your PostgreSQL user name, <var class="keyword varname">database-host</var> with your PostgreSQL server hostname or IP address, and <var class="keyword varname">namespace</var> with the namespace where Ansible automation portal is installed.</p> 
+         <p class="p"><strong class="ph b">Using the OpenShift Container Platform web console:</strong></p> 
+         <ol class="ol" type="a"> 
+          <li class="li">Navigate to <strong class="ph b">Workloads</strong> &gt; <strong class="ph b">Secrets</strong> in the namespace where Ansible automation portal is installed.</li> 
+          <li class="li">Click <strong class="ph b">Create</strong> &gt; <strong class="ph b">Key/value secret</strong>.</li> 
+          <li class="li">Set the <strong class="ph b">Secret name</strong> to <code class="ph codeph">portal-postgresql-external</code>.</li> 
+          <li class="li">Add the following key/value pairs: 
+           <table class="table">
+            <caption></caption>
+            <colgroup>
+             <col>
+             <col>
+            </colgroup>
+            <thead class="thead"> 
+             <tr class="row"> 
+              <th class="entry" id="self-service-configure-external-database__entry__1">Key</th> 
+              <th class="entry" id="self-service-configure-external-database__entry__2">Value</th> 
+             </tr> 
+            </thead>
+            <tbody class="tbody"> 
+             <tr class="row"> 
+              <td class="entry" headers="self-service-configure-external-database__entry__1"><code class="ph codeph">POSTGRES_USER</code></td> 
+              <td class="entry" headers="self-service-configure-external-database__entry__2">Your database user name</td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="self-service-configure-external-database__entry__1"><code class="ph codeph">POSTGRES_PASSWORD</code></td> 
+              <td class="entry" headers="self-service-configure-external-database__entry__2">Your database password</td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="self-service-configure-external-database__entry__1"><code class="ph codeph">POSTGRES_HOST</code></td> 
+              <td class="entry" headers="self-service-configure-external-database__entry__2">Your PostgreSQL server hostname or IP address</td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="self-service-configure-external-database__entry__1"><code class="ph codeph">POSTGRES_PORT</code></td> 
+              <td class="entry" headers="self-service-configure-external-database__entry__2"><code class="ph codeph">5432</code></td> 
+             </tr> 
+            </tbody>
+           </table> </li> 
+          <li class="li">Click <strong class="ph b">Create</strong>.</li> 
+         </ol> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Update your Ansible automation portal Helm chart values to use the external database.</span> 
+        <div class="itemgroup info"> 
+         <p class="p">Add or modify the following configuration in your <span class="ph filepath">values.yaml</span> file:</p> 
+         <pre class="pre codeblock language-yaml"><code>redhat-developer-hub:
+  upstream:
+    postgresql:
+      enabled: false
+      auth:
+        existingSecret: portal-postgresql-external
+        secretKeys:
+          adminPasswordKey: POSTGRES_PASSWORD
+    backstage:
+      appConfig:
+        backend:
+          database:
+            connection:
+              host: ${POSTGRES_HOST}
+              port: ${POSTGRES_PORT}
+              user: ${POSTGRES_USER}
+              password: ${POSTGRES_PASSWORD}
+      extraEnvVarsSecrets:
+        - portal-postgresql-external</code></pre> 
+         <ul class="ul"> 
+          <li class="li"><code class="ph codeph">postgresql.enabled: false</code> disables the embedded PostgreSQL instance.</li> 
+          <li class="li"><code class="ph codeph">postgresql.auth.existingSecret</code> points the Helm chart's internal secret references to your external credential secret. This ensures the <code class="ph codeph">POSTGRESQL_ADMIN_PASSWORD</code> environment variable, which the chart injects unconditionally, resolves to a valid secret.</li> 
+          <li class="li"><code class="ph codeph">postgresql.auth.secretKeys.adminPasswordKey</code> tells the chart which key in your secret contains the database password, so you need only one password key in your secret.</li> 
+          <li class="li"><code class="ph codeph">appConfig.backend.database.connection</code> overrides the default database connection to use your external PostgreSQL server.</li> 
+          <li class="li"><code class="ph codeph">extraEnvVarsSecrets</code> injects the secret keys as environment variables into the Ansible automation portal container, which the <code class="ph codeph">appConfig</code> block references using <code class="ph codeph">${}</code> syntax.</li> 
+         </ul> 
+        </div> </li>
+       <li class="li step stepexpand"><strong>Optional: </strong> <span class="ph cmd">Configure TLS for the database connection.</span> 
+        <div class="itemgroup info"> 
+         <p class="p">If your external PostgreSQL server requires TLS, create a certificate secret containing the CA certificate and optionally the client certificate and private key.</p> 
+         <pre class="pre codeblock language-terminal"><code>$ cat &lt;&lt;EOF | oc -n <var class="keyword varname">namespace</var> create -f -
+apiVersion: v1
+kind: Secret
+metadata:
+  name: portal-postgresql-certs
+type: Opaque
+stringData:
+  postgres-ca.pem: |-
+    -----BEGIN CERTIFICATE-----
+    <var class="keyword varname">ca-certificate-content</var>
+    -----END CERTIFICATE-----
+EOF</code></pre> 
+         <p class="p">If your PostgreSQL server uses client certificate authentication (mTLS), add <code class="ph codeph">postgres-key.key</code> and <code class="ph codeph">postgres-crt.pem</code> entries to the secret. For server-only TLS verification, only <code class="ph codeph">postgres-ca.pem</code> is required.</p> 
+         <p class="p">Add <code class="ph codeph">PGSSLMODE</code> and <code class="ph codeph">NODE_EXTRA_CA_CERTS</code> to your credential secret:</p> 
+         <pre class="pre codeblock language-terminal"><code>$ oc -n <var class="keyword varname">namespace</var> patch secret portal-postgresql-external --type merge -p \
+  '{"stringData":{"PGSSLMODE":"verify-full","NODE_EXTRA_CA_CERTS":"/opt/app-root/src/postgres-ca.pem"}}'</code></pre> 
+         <p class="p">Then add the TLS configuration and volume mount to your Helm chart values. Merge these settings with the configuration from the previous step:</p> 
+         <pre class="pre codeblock language-yaml"><code>redhat-developer-hub:
+  upstream:
+    backstage:
+      appConfig:
+        backend:
+          database:
+            connection:
+              host: ${POSTGRES_HOST}
+              port: ${POSTGRES_PORT}
+              user: ${POSTGRES_USER}
+              password: ${POSTGRES_PASSWORD}
+              ssl:
+                rejectUnauthorized: true
+                ca:
+                  $file: /opt/app-root/src/postgres-ca.pem
+      extraEnvVarsSecrets:
+        - portal-postgresql-external
+      extraVolumes:
+        - name: postgres-ca
+          secret:
+            secretName: portal-postgresql-certs
+            items:
+              - key: postgres-ca.pem
+                path: postgres-ca.pem
+      extraVolumeMounts:
+        - name: postgres-ca
+          mountPath: /opt/app-root/src/postgres-ca.pem
+          subPath: postgres-ca.pem</code></pre> 
+         <p class="p">If your PostgreSQL server requires client certificate authentication (mTLS), add the following to the <code class="ph codeph">ssl</code> block and mount the additional certificate files:</p> 
+         <pre class="pre codeblock language-yaml"><code>              ssl:
+                rejectUnauthorized: true
+                ca:
+                  $file: /opt/app-root/src/postgres-ca.pem
+                key:
+                  $file: /opt/app-root/src/postgres-key.key
+                cert:
+                  $file: /opt/app-root/src/postgres-crt.pem</code></pre> 
+         <p class="p">Add the corresponding volumes and mounts for the client key and certificate alongside the <code class="ph codeph">postgres-ca</code> entries.</p> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Apply the configuration by upgrading your Ansible automation portal Helm release.</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-terminal"><code>$ helm upgrade <var class="keyword varname">release-name</var> <var class="keyword varname">chart-name</var> \
+  -f values.yaml \
+  -n <var class="keyword varname">namespace</var></code></pre> 
+         <p class="p">Replace <var class="keyword varname">release-name</var> with your Helm release name and <var class="keyword varname">chart-name</var> with the Ansible automation portal chart reference.</p> 
+         <p class="p"><strong class="ph b">Using the OpenShift Container Platform web console:</strong></p> 
+         <ol class="ol" type="a"> 
+          <li class="li">Navigate to <strong class="ph b">Operators</strong> &gt; <strong class="ph b">Installed Operators</strong> and select the Ansible automation portal operator in your namespace.</li> 
+          <li class="li">Click the <strong class="ph b">Helm Releases</strong> tab, then click your Ansible automation portal release.</li> 
+          <li class="li">Click <strong class="ph b">Actions</strong> &gt; <strong class="ph b">Upgrade</strong>.</li> 
+          <li class="li">Switch to the <strong class="ph b">YAML view</strong> and merge the external database configuration into the existing values.</li> 
+          <li class="li">Click <strong class="ph b">Upgrade</strong> to apply the changes.</li> 
+         </ol> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Wait for Ansible automation portal pods to restart and initialize the database schema.</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-terminal"><code>$ oc get pods -n <var class="keyword varname">namespace</var> -w</code></pre> 
+         <p class="p">In the OpenShift Container Platform web console, navigate to <strong class="ph b">Workloads</strong> &gt; <strong class="ph b">Pods</strong> in your namespace. Wait until all Ansible automation portal pods show a status of <strong class="ph b">Running</strong>.</p> 
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <ol class="ol"> 
+       <li class="li">Verify that the Ansible automation portal pods are running: <pre class="pre codeblock language-terminal"><code>$ oc get pods -n <var class="keyword varname">namespace</var></code></pre> <p class="p">All Ansible automation portal pods should show a status of <code class="ph codeph">Running</code>.</p> </li> 
+       <li class="li">Check the Ansible automation portal logs to confirm the database connection: <pre class="pre codeblock language-terminal"><code>$ oc logs -n <var class="keyword varname">namespace</var> deploy/<var class="keyword varname">release-name</var>-rhaap-portal | grep -i "database\|postgres"</code></pre> <p class="p">You should see log entries indicating a successful database connection without errors.</p> </li> 
+       <li class="li">Connect to your external PostgreSQL database and verify that Ansible automation portal created the required databases. You should see multiple databases created by Ansible automation portal, one per plugin.</li> 
+       <li class="li">Access the Ansible automation portal web interface and verify that the application loads correctly.</li> 
+      </ol> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

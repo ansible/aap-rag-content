@@ -1,0 +1,144 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="proc-configure-gitlab-ee-builder">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Set up GitLab integration for execution environment builder</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Configure GitLab content discovery and OAuth so that execution environment builder can scan GitLab groups for Ansible collections and save definition files.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">You have a GitLab account with access to the groups automation portal needs to scan.</li> 
+       <li class="li">You have admin access to your GitLab instance or group settings.</li> 
+      </ul> 
+     </section> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">Complete this section if your organization uses GitLab for content discovery or saving definition files. If you use GitHub only, skip to <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_collection_discovery" title="Configure Git content discovery and private automation hub collection discovery so that Ansible collections are available in execution environment builder and the collection catalog.">Configure collection discovery sources</a>.</p> 
+      <p class="p">GitLab uses a Personal Access Token for content discovery.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <div class="li stepsection">
+       Content discovery (scanning repositories for collections)
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Create a GitLab PAT with the following scopes:</span> 
+        <div class="itemgroup info"> 
+         <ul class="ul"> 
+          <li class="li"><code class="ph codeph">read_repository</code></li> 
+          <li class="li"><code class="ph codeph">api</code></li> 
+         </ul> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Store the PAT.</span> 
+        <div class="itemgroup info"> 
+         <p class="p"><strong class="ph b">OpenShift — CLI:</strong></p> 
+         <pre class="pre codeblock"><code>$ oc create secret generic secrets-scm \
+  --from-literal=gitlab-token=&lt;your_gitlab_pat&gt; \
+  -n &lt;namespace&gt;</code></pre> 
+         <p class="p">If you already have a <code class="ph codeph">secrets-scm</code> secret (for example, with GitHub credentials), patch it instead:</p> 
+         <pre class="pre codeblock"><code>$ oc patch secret secrets-scm -n &lt;namespace&gt; --type merge -p \
+  '{"stringData":{"gitlab-token":"&lt;your_gitlab_pat&gt;"}}'</code></pre> 
+         <p class="p"><strong class="ph b">OpenShift — web console:</strong></p> 
+         <ol class="ol" type="a"> 
+          <li class="li">Navigate to <strong class="ph b">Workloads &gt; Secrets</strong>.</li> 
+          <li class="li">Edit or create the <code class="ph codeph">secrets-scm</code> secret and add key <code class="ph codeph">gitlab-token</code>.</li> 
+         </ol> 
+         <p class="p"><strong class="ph b">RHEL appliance:</strong></p> 
+         <pre class="pre codeblock"><code>$ echo -n '&lt;your_gitlab_pat&gt;' | sudo podman secret create portal_gitlab_token -</code></pre> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body">
+           <p class="p">If you configured a GitLab personal access token during RHEL appliance installation (via cloud-init), the <code class="ph codeph">portal_gitlab_token</code> secret already exists and is active for content discovery. Running the command above updates the existing secret with a new value.</p>
+          </div>
+         </div> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">If you use a self-hosted GitLab instance (not <code class="ph codeph">gitlab.com</code>), add its URL to the CORS allowed origins.</span> 
+        <div class="itemgroup info"> 
+         <p class="p"><strong class="ph b">OpenShift:</strong></p> 
+         <pre class="pre codeblock"><code>upstream:
+  backstage:
+    appConfig:
+      backend:
+        cors:
+          origin:
+            - ${BASE_URL}
+            - https://gitlab.internal.example.com</code></pre> 
+         <p class="p"><strong class="ph b">RHEL appliance</strong> — add to the existing <code class="ph codeph">backend:</code> block in <code class="ph codeph">app-config.production.yaml</code>:</p> 
+         <pre class="pre codeblock"><code>backend:
+  cors:
+    origin:
+      - "https://portal.example.com"
+      - "https://gitlab.internal.example.com"</code></pre> 
+         <div class="note important note_important">
+          <span class="note__title">Important:</span> 
+          <div class="note__body">
+           <p class="p">On RHEL appliances, <code class="ph codeph">app.baseUrl</code>, <code class="ph codeph">backend.baseUrl</code>, and <code class="ph codeph">backend.cors.origin</code> must all use the same portal URL. If any of these values are inconsistent, OAuth callbacks and API requests fail. Do not create a duplicate <code class="ph codeph">backend:</code> block — add <code class="ph codeph">cors</code> to the existing one.</p>
+          </div>
+         </div> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body">
+           <p class="p">If you only use <code class="ph codeph">gitlab.com</code>, no CORS changes are needed.</p>
+          </div>
+         </div> 
+        </div> </li>
+      </ol>
+      <div class="li stepsection">
+       Save definition files to a GitLab repository (OAuth)
+      </div>
+      <ol class="ol steps" start="4">
+       <li class="li step stepexpand"> <span class="ph cmd">Create a GitLab OAuth application in your GitLab instance under <strong class="ph b">Admin Area &gt; Applications</strong> (or group-level settings). Enter the following details:</span> 
+        <div class="itemgroup info"> 
+         <ul class="ul"> 
+          <li class="li"><strong class="ph b">Name:</strong> A descriptive name, for example <code class="ph codeph">ansible-portal-ee-builder</code>.</li> 
+          <li class="li"><strong class="ph b">Redirect URI:</strong> <code class="ph codeph">https://&lt;my_portal_domain&gt;/api/auth/gitlab/handler/frame</code></li> 
+          <li class="li"><strong class="ph b">Scopes:</strong> Select <code class="ph codeph">write_repository</code>.</li> 
+         </ul> 
+         <p class="p">The <code class="ph codeph">write_repository</code> scope lets automation portal push EE definition files and open merge requests on behalf of the authenticated user. It is used for every save operation (new repository or merge request to an existing repository).</p> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Note the <strong class="ph b">Application ID</strong> and <strong class="ph b">Secret</strong>. Save the secret value immediately — you cannot view it again.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Enable the GitLab auth provider in your configuration.</span> 
+        <div class="itemgroup info"> 
+         <p class="p"><strong class="ph b">OpenShift:</strong> Uncomment the <code class="ph codeph">auth.providers.gitlab</code> block in your Helm chart configuration.</p> 
+         <p class="p"><strong class="ph b">RHEL appliance:</strong> Add the following <code class="ph codeph">auth.providers</code> block to <code class="ph codeph">/etc/portal/configs/app-config/app-config.production.yaml</code>. If an <code class="ph codeph">auth:</code> section already exists, add the <code class="ph codeph">providers:</code> section inside it:</p> 
+         <pre class="pre codeblock"><code>auth:
+  providers:
+    gitlab:
+      production:
+        clientId: ${GITLAB_OAUTH_CLIENT_ID}
+        clientSecret: ${GITLAB_OAUTH_CLIENT_SECRET}</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Add the OAuth client credentials to your <code class="ph codeph">secrets-scm</code> secret.</span> 
+        <div class="itemgroup info"> 
+         <p class="p"><strong class="ph b">OpenShift — CLI:</strong></p> 
+         <pre class="pre codeblock"><code>$ oc patch secret secrets-scm -n &lt;namespace&gt; --type merge -p \
+  '{"stringData":{"gitlab-oauth-client-id":"&lt;your_client_id&gt;","gitlab-oauth-client-secret":"&lt;your_client_secret&gt;"}}'</code></pre> 
+         <p class="p"><strong class="ph b">OpenShift — web console:</strong></p> 
+         <ol class="ol" type="a"> 
+          <li class="li">Navigate to <strong class="ph b">Workloads &gt; Secrets</strong>.</li> 
+          <li class="li">Edit the <code class="ph codeph">secrets-scm</code> secret and add keys <code class="ph codeph">gitlab-oauth-client-id</code> and <code class="ph codeph">gitlab-oauth-client-secret</code>.</li> 
+         </ol> 
+         <p class="p"><strong class="ph b">RHEL appliance:</strong></p> 
+         <pre class="pre codeblock"><code>$ echo -n '&lt;your_client_id&gt;' | sudo podman secret create portal_gitlab_oauth_client_id -
+$ echo -n '&lt;your_client_secret&gt;' | sudo podman secret create portal_gitlab_oauth_client_secret -</code></pre> 
+         <p class="p">Append to the Quadlet drop-in file:</p> 
+         <pre class="pre codeblock"><code>$ sudo tee -a /etc/containers/systemd/portal.container.d/ee-builder-secrets.conf &lt;&lt; 'EOF'
+Secret=portal_gitlab_oauth_client_id,type=env,target=GITLAB_OAUTH_CLIENT_ID
+Secret=portal_gitlab_oauth_client_secret,type=env,target=GITLAB_OAUTH_CLIENT_SECRET
+EOF</code></pre> 
+        </div> </li>
+      </ol>
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-controller-improving-performance"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Tune automation controller to improve performance</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Tune your automation controller to optimize performance and scalability. When planning your workload, ensure that you identify your performance and scaling needs, adjust for any limitations, and monitor your deployment.</p> 
+      <p class="p">Automation controller is a distributed system with many components that you can tune, including the following:</p> 
+      <ul class="ul"> 
+       <li class="li">Task system in charge of scheduling jobs</li> 
+       <li class="li">Control Plane in charge of controlling jobs and processing output</li> 
+       <li class="li">Execution plane where jobs run</li> 
+       <li class="li">Web server in charge of serving the API</li> 
+       <li class="li">WebSocket system that serve and broadcast WebSocket connections and data</li> 
+       <li class="li">Database used by many components</li> 
+      </ul> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="con-websocket-setup"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Configure WebSocket load balancing</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">You can configure automation controller to align the WebSocket configuration with your nginx or load balancer configuration.</p> 
+       <p class="p">Automation controller nodes are interconnected through WebSockets to distribute all WebSocket-emitted messages throughout your system. This configuration setup enables any browser client WebsSocket to subscribe to any job that might be running on any automation controller node. WebSocket clients are not routed to specific automation controller nodes. Instead, any automation controller node can handle any WebSocket request and each automation controller node must know about all WebSocket messages destined for all clients.</p> 
+       <p class="p">You can configure WebSockets at <code class="ph codeph">/etc/tower/conf.d/websocket_config.py</code> in all of your automation controller nodes and the changes become effective after the service restarts.</p> 
+       <p class="p">Automation controller automatically handles discovery of other automation controller nodes through the Instance record in the database.</p> 
+       <div class="note important note_important">
+        <span class="note__title">Important:</span> 
+        <div class="note__body"> 
+         <p class="p">Your automation controller nodes are designed to broadcast WebSocket traffic across a private, trusted subnet (and not the open Internet). Therefore, if you turn off HTTPS for WebSocket broadcasting, the WebSocket traffic, composed mostly of Ansible Playbook stdout, is sent unencrypted between automation controller nodes.</p> 
+        </div>
+       </div> 
+      </div> 
+      <article class="topic task nested2" aria-labelledby="ariaid-title3" id="proc-configuring-discovery"> 
+       <h3 class="title topictitle3" id="ariaid-title3">Configure automatic discovery of other automation controller nodes</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">You can configure WebsSocket connections to enable automation controller to automatically handle discovery of other automation controller nodes through the Instance record in the database.</p> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step stepexpand"> <span class="ph cmd">Edit automation controller WebSocket information for port and protocol, and confirm whether to verify certificates with <code class="ph codeph">True</code> or <code class="ph codeph">False</code> when establishing the WebSocket connections: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>BROADCAST_WEBSOCKET_PROTOCOL = 'http'
+BROADCAST_WEBSOCKET_PORT = 80
+BROADCAST_WEBSOCKET_VERIFY_CERT = False</code></pre> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Restart automation controller with the following command: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre">$ automation-controller-service restart</pre> 
+           </div> </li>
+         </ol>
+        </section> 
+       </div> 
+      </article>
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="proc-create-team-templates">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Create standardized execution environment templates for teams</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Create pre-configured EE templates so that your teams start from a known-good baseline without choosing every dependency from scratch.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">You have configured content discovery and synced content sources.</li> 
+       <li class="li">You have the AAP Administrator role.</li> 
+       <li class="li">You know which collections and dependencies your team requires.</li> 
+      </ul> 
+     </section> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">When a user creates an EE definition through execution environment builder, the process generates a reusable <code class="ph codeph">&lt;ee-name&gt;-template.yaml</code> file (with <code class="ph codeph">spec.type: execution-environment</code>) that captures all selected defaults. The template structure follows the same format as the built-in "Start from scratch" template (<code class="ph codeph">ee-start-from-scratch.yaml</code> from the <code class="ph codeph">ansible-rhdh-templates</code> repository). You can use this to build standardized templates for each team.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">As an AAP administrator, log in to automation portal.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Navigate to <strong class="ph b">Execution Environments &gt; Create</strong>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">Start from scratch</strong> template.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Select a base image appropriate for your environment.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">In the collections picker, select the collections your team requires. For each collection, select the source (for example, <code class="ph codeph">rh-certified</code> from your private automation hub).</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Add any Python requirements and system packages the team needs.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Name the definition (for example, <code class="ph codeph">team-ops-ee</code>) and add a descriptive tag such as <code class="ph codeph">team-ops</code>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Select <strong class="ph b">Publish to a Git repository</strong> and save the definition to your organization's private Git repository.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">After the definition is created, locate the generated <code class="ph codeph">&lt;ee-name&gt;-template.yml</code> file in the repository and customize the following sections for your team.</span> 
+        <div class="itemgroup info"> 
+         <p class="p">Execution environment builder generates a reusable template with three parameter steps matching the wizard.</p> 
+         <p class="p"><strong class="ph b">Metadata</strong> — set the name, description, and tags so team members can find the template:</p> 
+         <pre class="pre codeblock"><code>metadata:
+  name: team-ops-ee
+  title: Team Ops EE
+  description: "Pre-configured EE for the operations team"
+  annotations:
+    ansible.io/saved-template: 'true'
+  tags:
+    - execution-environment
+    - team-ops</code></pre> 
+         <p class="p"><strong class="ph b">Collections</strong> — pre-fill the collections your team needs, with version constraints and source:</p> 
+         <pre class="pre codeblock"><code>collections:
+  default:
+    - name: ansible.netcommon
+      version: "&gt;=2.0.0"
+      source: rh-certified
+    - name: ansible.utils
+      version: "&gt;=1.5.0"
+      source: rh-certified</code></pre> 
+         <p class="p"><strong class="ph b">Build destination</strong> — set where the built image is pushed:</p> 
+         <pre class="pre codeblock"><code>publishAndBuild:
+  properties:
+    buildRegistry:
+      default: 'Private Automation Hub (PAH)'
+    buildImageName:
+      default: team-ops/team-ops-ee
+    buildImageTag:
+      default: latest
+    registryTlsVerify:
+      default: true</code></pre> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body">
+           <p class="p">Set <code class="ph codeph">registryTlsVerify</code> to <code class="ph codeph">false</code> for registries using self-signed certificates. Set <code class="ph codeph">buildRegistry</code> to <code class="ph codeph">'Custom Registry'</code> and add a <code class="ph codeph">customRegistryUrl</code> if you use an internal registry other than private automation hub.</p>
+          </div>
+         </div> 
+         <p class="p">For the complete template structure including all steps and actions, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_ee_builder_template_structure" title="The full structure of a team execution environment template as generated by execution environment builder, with key fields and customization options.">Complete execution environment template reference</a>.</p> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Register the template in automation portal:</span> 
+        <ol type="a" class="ol substeps"> 
+         <li class="li substep"> <span class="ph cmd">Navigate to <strong class="ph b">Execution Environments &gt; Create</strong>.</span> </li> 
+         <li class="li substep"> <span class="ph cmd">Open the kebab menu and select <strong class="ph b">Import Template</strong>.</span> </li> 
+         <li class="li substep"> <span class="ph cmd">Paste the URL to the template file in your Git repository.</span> </li> 
+         <li class="li substep"> <span class="ph cmd">Click <strong class="ph b">Analyze</strong>, then <strong class="ph b">Import</strong>.</span> </li> 
+        </ol> 
+        <div class="itemgroup info"> 
+         <p class="p">Alternatively, add the template to <code class="ph codeph">catalog.locations</code> in your Helm chart configuration for automatic loading.</p> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Configure RBAC to control access to the template.</span> 
+        <div class="itemgroup info"> 
+         <p class="p">For example, create a role <code class="ph codeph">team-ops-ee-users</code> with <code class="ph codeph">catalog.entity.read</code> permission and add a conditional rule scoping it to entities with <code class="ph codeph">metadata.tags</code> containing <code class="ph codeph">team-ops</code>. Assign the role to the appropriate group. For full RBAC configuration instructions, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_grant_ee_builder_access" title="Enable navigation permissions in the Ansible automation portal RBAC configuration so that non-admin users can access execution environment builder features.">Grant execution environment builder access</a>.</p> 
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <ol class="ol"> 
+       <li class="li">Log in as a member of the target team group.</li> 
+       <li class="li">Navigate to <strong class="ph b">Execution Environments &gt; Create</strong>.</li> 
+       <li class="li">Verify the team template appears.</li> 
+       <li class="li">Launch the template and verify the wizard pre-populates the expected collections and dependencies.</li> 
+      </ol> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body">
+        <p class="p">This pattern works for any team — swap the collections, base image, and registry defaults to match your team's domain and infrastructure.</p>
+       </div>
+      </div> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

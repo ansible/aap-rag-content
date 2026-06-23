@@ -1,0 +1,58 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="proc-grant-ee-builder-access">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Grant execution environment builder access to a role</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Enable navigation permissions in the Ansible automation portal RBAC configuration so that non-admin users can access execution environment builder features.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">You have configured base RBAC roles per <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_configure#rhdh-configure-rbac" title="Red Hat Developer Hub offers Role-based Access Control (RBAC) functionality. RBAC can then be applied to the Ansible plug-ins content.">Configure role-based access control for Ansible automation portal</a>.</li> 
+       <li class="li">You have the AAP Administrator role and access to <strong class="ph b">Administration &gt; RBAC</strong> in automation portal.</li> 
+      </ul> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">In automation portal, navigate to <strong class="ph b">Administration &gt; RBAC</strong> in the sidebar.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Select an existing role to edit, or click <strong class="ph b">Create Role</strong> to create a new role (for example, <code class="ph codeph">ee-builder-users</code>).</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">In the permissions section, add the execution environment builder permissions.</span> 
+        <div class="itemgroup info"> 
+         <p class="p">For the list of permissions, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_ee_builder_permissions" title="Execution environment builder uses navigation-level permissions that control which sidebar items and pages are visible to users in Ansible automation portal.">Execution environment builder permissions</a>.</p> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">If creating a new role, assign the role to the appropriate users or groups.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Save</strong>.</span> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <p class="p">To verify the configuration:</p> 
+      <ol class="ol"> 
+       <li class="li">Log out and log in as a user assigned to the modified role.</li> 
+       <li class="li">Verify that the expected sidebar items are visible based on the permissions you assigned.</li> 
+       <li class="li">If you granted full access, navigate to <strong class="ph b">Execution Environments &gt; Create</strong> and verify that templates are visible and the wizard launches.</li> 
+      </ol> 
+      <p class="p">To hide execution environment builder from specific user groups, remove these permissions from their assigned roles.</p> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relref">
+      <strong>Related reference</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_ee_builder_permissions" title="Execution environment builder uses navigation-level permissions that control which sidebar items and pages are visible to users in Ansible automation portal.">Execution environment builder permissions</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="self-service-configure-custom-ssl">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure custom SSL certificates for the Ansible automation portal</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">If your Ansible Automation Platform instance uses custom or self-signed SSL certificates, configure the Ansible automation portal to trust those certificates to prevent authentication failures.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">You have administrator access to your Red Hat OpenShift Container Platform cluster.</li> 
+       <li class="li">You have the custom Certificate Authority (CA) certificate file used by your Ansible Automation Platform instance.</li> 
+       <li class="li">The Ansible automation portal is installed in your Red Hat OpenShift Container Platform cluster.</li> 
+      </ul> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Obtain the CA certificate file from your Ansible Automation Platform instance.</span> 
+        <div class="itemgroup info"> 
+         <p class="p">If you do not have the CA certificate file, you can extract it from your Ansible Automation Platform server:</p> 
+         <pre class="pre codeblock language-terminal"><code>$ openssl s_client -showcerts -connect <var class="keyword varname">aap-hostname</var>:443 &lt;/dev/null 2&gt;/dev/null | openssl x509 -outform PEM &gt; aap-ca-cert.pem</code></pre> 
+         <p class="p">Replace <var class="keyword varname">aap-hostname</var> with your Ansible Automation Platform hostname.</p> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Log in to your Red Hat OpenShift Container Platform cluster with administrator privileges.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Create a ConfigMap containing your custom CA certificate:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-terminal"><code>$ oc create configmap custom-ca-bundle \
+  --from-file=ca-bundle.crt=aap-ca-cert.pem \
+  -n <var class="keyword varname">namespace</var></code></pre> 
+         <p class="p">Replace <var class="keyword varname">namespace</var> with the namespace where the Ansible automation portal is installed.</p> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Update your Ansible automation portal Helm chart values to mount the custom CA certificate.</span> 
+        <div class="itemgroup info"> 
+         <p class="p">Add the <code class="ph codeph">custom-ca</code> volume and volume mount to your values file:</p> 
+         <pre class="pre codeblock language-yaml"><code>upstream:
+  backstage:
+    extraVolumes:
+      - name: custom-ca
+        configMap:
+          name: custom-ca-bundle
+    extraVolumeMounts:
+      - name: custom-ca
+        mountPath: /etc/pki/ca-trust/source/anchors/
+        readOnly: true</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Apply the updated configuration by upgrading the Ansible automation portal Helm chart:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-terminal"><code>$ helm upgrade <var class="keyword varname">release-name</var> <var class="keyword varname">chart-name</var> \
+  -f values.yaml \
+  -n <var class="keyword varname">namespace</var></code></pre> 
+         <p class="p">Replace <var class="keyword varname">release-name</var> with your Helm release name and <var class="keyword varname">chart-name</var> with the Ansible automation portal chart name.</p> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Wait for the Ansible automation portal pods to restart with the new configuration.</span> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <ol class="ol"> 
+       <li class="li">Verify that the Ansible automation portal pods are running: <pre class="pre codeblock language-terminal"><code>$ oc get pods -n <var class="keyword varname">namespace</var></code></pre> <p class="p">All Ansible automation portal pods should show a status of <code class="ph codeph">Running</code>.</p> </li> 
+       <li class="li">Attempt to sign in to the Ansible automation portal using your Ansible Automation Platform credentials. <p class="p">If the SSL certificate configuration is correct, you can authenticate successfully without SSL verification errors.</p> </li> 
+       <li class="li">Check the Ansible automation portal logs for SSL-related errors: <pre class="pre codeblock language-terminal"><code>$ oc logs -n <var class="keyword varname">namespace</var> <var class="keyword varname">pod-name</var> | grep -i ssl</code></pre> <p class="p">If you see no SSL verification errors, the custom CA certificate is trusted correctly.</p> </li> 
+      </ol> 
+     </section> 
+     <section class="section tasktroubleshooting"> 
+      <p class="p">If you continue to experience SSL verification errors after following this procedure:</p> 
+      <ul class="ul"> 
+       <li class="li">Verify that the CA certificate file contains the complete certificate chain.</li> 
+       <li class="li">Ensure that the certificate file is in PEM format.</li> 
+       <li class="li">Confirm that the Ansible Automation Platform hostname in your configuration matches the hostname in the SSL certificate.</li> 
+       <li class="li">Check that the <code class="ph codeph">checkSSL</code> parameter in your Helm values is set to <code class="ph codeph">true</code> (the default). Setting it to <code class="ph codeph">false</code> disables SSL verification entirely, which is not recommended for production environments.</li> 
+      </ul> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

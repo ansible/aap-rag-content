@@ -1,0 +1,270 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="troubleshooting-lightspeed-configuration-errors"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Troubleshoot Red Hat Ansible Lightspeed configuration errors</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">This section provides information about errors when configuring the Red Hat Ansible Lightspeed and their workarounds.</p> 
+      <section class="section" id="troubleshooting-lightspeed-configuration-errors___cannot_access_the_ansible_lightspeed_administrator_portal"> 
+       <h2 class="title sectiontitle">Cannot access the Ansible Lightspeed administrator portal</h2> 
+       <p class="p">The Ansible Lightspeed administrator portal can be accessed by the Red Hat organization administrator only.</p> 
+       <p class="p">If you are the Red Hat organization administrator, before you access the Ansible Lightspeed administrator portal, ensure that:</p> 
+       <ul class="ul"> 
+        <li class="li">You have a valid Ansible Automation Platform subscription.</li> 
+       </ul> 
+      </section> 
+      <section class="section" id="troubleshooting-lightspeed-configuration-errors___cannot_save_the_api_key"> 
+       <h2 class="title sectiontitle">Cannot save the API key</h2> 
+       <p class="p">When you enter the IBM watsonx Code Assistant API key, authentication fails and shows the following error message:</p> 
+       <p class="p"> <code class="ph codeph">IBM Cloud API key is invalid</code> </p> 
+       <p class="p">Red Hat Ansible Lightspeed verifies the API key by generating an associated access token. To resolve the error, ensure that you have not accidentally included any extra spaces when obtaining the API key from IBM watsonx Code Assistant. If you still cannot upload the API key, contact IBM Support.</p> 
+      </section> 
+      <section class="section" id="troubleshooting-lightspeed-configuration-errors___cannot_configure_the_model_id_due_to_authentication_failure"> 
+       <h2 class="title sectiontitle">Cannot configure the model ID due to authentication failure</h2> 
+       <p class="p">When you enter the model ID in the Red Hat Ansible Lightspeed administrator portal, the authentication fails.</p> 
+       <p class="p">To resolve the error, ensure that:</p> 
+       <ul class="ul"> 
+        <li class="li">You have configured a valid API key before you upload the model ID.</li> 
+        <li class="li">You have not accidentally included any extra spaces when entering the model ID.</li> 
+       </ul> 
+      </section> 
+      <section class="section" id="troubleshooting-lightspeed-configuration-errors___cannot_configure_the_model_id_due_to_inference_failure"> 
+       <h2 class="title sectiontitle">Cannot configure the model ID due to inference failure</h2> 
+       <p class="p">While validating the model ID, Red Hat Ansible Lightspeed performs a test inference. If Red Hat Ansible Lightspeed detects an error, the validation fails and an <code class="ph codeph">Inference failed</code> message is displayed.</p> 
+       <p class="p">To resolve the error, ensure that:</p> 
+       <ul class="ul"> 
+        <li class="li">You have a valid API key and model ID.</li> 
+        <li class="li">You have not accidentally included any extra spaces when obtaining the API key and model ID from IBM watsonx Code Assistant.</li> 
+       </ul> 
+      </section> 
+     </div> 
+     <nav role="navigation" class="related-links"> 
+      <div class="linklist relinfo"> <strong>Related information</strong> 
+       <br> 
+       <ul class="linklist"> 
+        <li class="linklist"><a class="link" href="https://cloud.ibm.com/docs/get-support?topic=get-support-open-case" target="_blank" rel="external noopener">IBM Support</a></li> 
+       </ul> 
+      </div> 
+     </nav> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="troubleshooting-onpremise-deployment-errors"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Troubleshoot Red Hat Ansible Lightspeed on-premise deployment errors</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">This section provides information about errors when configuring the Red Hat Ansible Lightspeed on-premise deployment and their workarounds.</p> 
+       <section class="section" id="troubleshooting-onpremise-deployment-errors___cannot_log_out_of_the_ansible_lightspeed_portal"> 
+        <h3 class="title sectiontitle">Cannot log out of the Ansible Lightspeed portal</h3> 
+        <p class="p">After you log out from the Ansible Lightspeed portal, you are redirected to the automation controller API page instead of Ansible Lightspeed.</p> 
+        <p class="p">This error indicates that the logout redirect URI was not configured while setting up your Red Hat Ansible Lightspeed on-premise deployment. You must configure the logout redirect URI by adding the <strong class="ph b">LOGOUT_ALLOWED_HOSTS</strong> entry to the YAML file.</p> 
+       </section> 
+       <section class="section" id="troubleshooting-onpremise-deployment-errors___cannot_connect_to_the_ansible_lightspeed_service_from_the_ansible_vs_code_extension"> 
+        <h3 class="title sectiontitle">Cannot connect to the Ansible Lightspeed service from the Ansible VS Code extension</h3> 
+        <p class="p">The following scenarios are possible:</p> 
+        <ul class="ul"> 
+         <li class="li">The log-in attempt fails with the following error message: <p class="p"><code class="ph codeph">Enable lightspeed services from settings to use the feature.</code></p> <p class="p">This error indicates that Ansible Lightspeed is not enabled in the Ansible VS Code extension. To resolve this error, perform the following tasks:</p> 
+          <ol class="ol"> 
+           <li class="li">Open the VS Code application.</li> 
+           <li class="li">From the <strong class="ph b">Activity</strong> bar, click the <strong class="ph b">Extensions</strong> icon.</li> 
+           <li class="li">From the <strong class="ph b">Installed Extensions</strong> list, select <strong class="ph b">Ansible</strong>.</li> 
+           <li class="li">From the <strong class="ph b">Ansible</strong> extension page, click the <strong class="ph b">Settings</strong> icon (<img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/settings-icon-ansible-vscode-extension.png" alt="Settings icon">) and select <strong class="ph b">Extension Settings</strong>.</li> 
+           <li class="li">Select <strong class="ph b">Ansible Lightspeed</strong> settings and then select the <strong class="ph b">Enable Ansible Lightspeed</strong> checkbox.</li> 
+          </ol> </li> 
+         <li class="li">You are redirected to an incorrect Ansible Lightspeed instance on clicking the <span class="ph uicontrol button">Connect</span> button. <p class="p">This error indicates an incorrect route URL was used while configuring the Ansible Lightspeed service in Ansible VS Code extension. Ensure that you have configured the correct value in the route URL without any suffix. For more information, see Configuring Ansible VS Code extension for Red Hat Ansible Lightspeed on-premise deployment.</p> </li> 
+         <li class="li">Cannot request code recommendations <p class="p">The following error message is displayed:</p> <p class="p"><code class="ph codeph">An error occurred attempting to complete your request. Please try again later.</code></p> <p class="p">This error indicates that the Ansible Lightspeed service is not running or is running with issues. Please check the Lightspeed service logs (the pod with suffix <code class="ph codeph">-api</code>) for more details and error codes.</p> </li> 
+         <li class="li">Cannot request code recommendations <p class="p">The following error message is displayed:</p> <p class="p"><code class="ph codeph">The IBM watsonx Code Assistant is unavailable. Please try again later.</code></p> <p class="p">or:</p> <p class="p"><code class="ph codeph">IBM watsonx Code Assistant Model ID is invalid. Please contact your administrator.</code></p> <p class="p">This error indicates that the model secret contains incorrect values. To resolve this error, ensure that you have not accidentally added any whitespace characters (extra line, space, and so on) to the <code class="ph codeph">username</code>, <code class="ph codeph">model_url</code>, and <code class="ph codeph">model_api_key</code> parameters in the model connection secret. For more information, see Creating connection secrets.</p> </li> 
+        </ul> 
+       </section> 
+       <section class="section" id="troubleshooting-onpremise-deployment-errors___cannot_connect_to_the_ansible_lightspeed_service_due_to_ssl_connection_error"> 
+        <h3 class="title sectiontitle">Cannot connect to the Ansible Lightspeed service due to SSL connection error</h3> 
+        <p class="p">If you are using self-signed certificates on the model server, you might encounter SSL certification verification errors, causing the connection between Ansible Lightspeed service and the model server to fail. The following error message is displayed:</p> 
+        <pre class="pre codeblock"><code>Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED]
+certificate verify failed: self signed certificate in certificate chain (_ssl.c:1006)'))</code></pre> 
+        <p class="p">To resolve this error, use one of the following workarounds based on your Ansible Automation Platform version:</p> 
+        <ul class="ul"> 
+         <li class="li">For Red Hat Ansible Automation Platform 2.5 and later:</li> 
+        </ul> 
+        <p class="p">Specify the optional key/value pair as <code class="ph codeph">model_verify_ssl=true</code> in the model secret to connect to an IBM watsonx Code Assistant model. For details about the procedure, see Creating connection secrets.</p> 
+        <ul class="ul"> 
+         <li class="li">For Red Hat Ansible Automation Platform 2.4:</li> 
+        </ul> 
+        <p class="p">You can disable the SSL protection between the model server and the Ansible Lightspeed service. For example, you can disable the SSL protection when you are on a testing environment. To disable the SSL protection, you must add the following extra setting in the Red Hat Ansible Lightspeed Custom Resource Definition (CRD) YAML file under the <code class="ph codeph">spec:</code> section:</p> 
+        <pre class="pre codeblock"><code>extra_settings:
+    - setting: ANSIBLE_AI_MODEL_MESH_API_VERIFY_SSL
+      value: false</code></pre> 
+        <div class="note important note_important"> <span class="note__title">Important:</span> 
+         <div class="note__body"> 
+          <p class="p"><strong class="ph b">Reenabling the SSL protection</strong> You must re-enable the SSL protection when deploying on a production environment. To re-enable the SSL protection, simply remove the extra setting from the YAML file.</p> 
+         </div> 
+        </div> 
+        <p class="p">To reenable the SSL protection, perform the following tasks: . Go to the Red Hat OpenShift Container Platform. . Select <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Installed Operators</span></span>. . From the <strong class="ph b">Projects</strong> list, select the namespace that you created when you installed the Red Hat Ansible Automation Platform operator. . Locate and select the <strong class="ph b">Ansible Automation Platform</strong> operator. . Locate and select the Ansible Automation Platform custom resource, and then click the required app. . Select the <strong class="ph b">YAML</strong> tab. The editor switches to a YAML editor view. . Scroll and find the spec: section, and add the following parameter under the <code class="ph codeph">spec:</code> section:</p> 
+        <pre class="pre codeblock"><code>extra_settings:
+    - setting: ANSIBLE_AI_MODEL_MESH_API_VERIFY_SSL
+      value: false</code></pre> 
+        <ol class="ol"> 
+         <li class="li">Click <strong class="ph b">Save</strong>.</li> 
+         <li class="li">Restart the automation controller pods to apply the revised YAML: 
+          <ol class="ol" type="a"> 
+           <li class="li">From the Red Hat OpenShift Container Platform, select <span class="ph menucascade"><span class="ph uicontrol">Workloads</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Pods</span></span>.</li> 
+           <li class="li">Locate and select the Ansible Lightspeed pod that you updated.</li> 
+           <li class="li">Click the <strong class="ph b">Edit</strong> icon beside the pod and select <strong class="ph b">Delete Pod</strong>. <p class="p">The select pod gets deleted and a new pod gets created.</p> </li> 
+          </ol> </li> 
+        </ol> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist reltasks"> <strong>Related tasks</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_configuring_lightspeed_onpremise#configure-vscode-extension-onpremise-deployment" title="To access the on-premise deployment of Red Hat Ansible Lightspeed, all Ansible users within your organization must install the Ansible Visual Studio (VS) Code extension in their VS Code editor, and configure the extension to connect to the on-premise deployment.">Configuring Ansible VS Code extension for Red Hat Ansible Lightspeed on-premise deployment</a></li> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_install_aap_lightspeed_operator#create-connection-secrets" title="You must create a configuration secret to connect to an IBM watsonx Code Assistant model, which can be either an on-premise deployment or a cloud deployment.">Creating connection secrets</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="troubleshoot-ansible-vscode-errors"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Troubleshoot Ansible Visual Studio Code extension errors</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">Use this topic to troubleshoot issues with Ansible VS Code.</p> 
+       <section class="section" id="troubleshoot-ansible-vscode-errors___cannot_view_the_generated_code_recommendations_using_the_ansible_vs_code_extension"> 
+        <h3 class="title sectiontitle">Cannot view the generated code recommendations using the Ansible VS Code extension</h3> 
+        <p class="p">The following scenarios are possible:</p> 
+        <ul class="ul"> 
+         <li class="li">You receive a <code class="ph codeph">403 error</code> message. <p class="p">To resolve this error, ensure that:</p> 
+          <ul class="ul"> 
+           <li class="li">Your organization administrator has configured Red Hat Ansible Lightspeed for your organization.</li> 
+           <li class="li">You meet <strong class="ph b">one</strong> of the following requirements: 
+            <ul class="ul"> 
+             <li class="li">Your organization has a trial or paid subscription to both the Red Hat Ansible Automation Platform and IBM watsonx Code Assistant.</li> 
+             <li class="li">Your organization has a trial or paid subscription to the Red Hat Ansible Automation Platform, and you have a Red Hat Ansible Lightspeed trial account.</li> 
+            </ul> </li> 
+          </ul> </li> 
+         <li class="li">You have not configured the required Ansible VS code extension settings. 
+          <ul class="ul"> 
+           <li class="li">To resolve this error, ensure that you have enabled the <strong class="ph b">Lightspeed:Enabled</strong> and <span class="ph menucascade"><span class="ph uicontrol">Lightspeed</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Suggestions:Enabled</span></span> settings.</li> 
+          </ul> </li> 
+         <li class="li">You receive a <code class="ph codeph">Failure on completion requests</code> error when you make inference requests in VS Code. <p class="p">This error occurs because your organization has a trial or paid subscription to both Ansible Automation Platform and IBM watsonx Code Assistant. However, your organization administrator has not configured an IBM watsonx Code Assistant model for your organization.</p> </li> 
+         <li class="li">You receive an <code class="ph codeph">Ansible Lightspeed encountered an error. Try again after some time.</code> error message when you make single-task or multitask requests. <p class="p">This error occurs when you use a remote SSH extension with VS Code to request single or multitask recommendations in playbooks. However, the task recommendations are generated when using a role. This error occurs in workspaces that contain a large number of roles.</p> </li> 
+         <li class="li">Your VS Code Workspace settings override user settings. <p class="p">If your Workspace settings are configured, they can override our user settings even if you have configured the Ansible VS Code extension correctly. The Workspace settings can disable your VS Code extension settings, and therefore you cannot access the Ansible Lightspeed service.</p> <p class="p">To resolve this error, ensure that there are no Workspace settings configured in VS Code.</p> </li> 
+         <li class="li">You entered a multitask prompt, but code recommendations were not generated. <p class="p">To resolve this error, log out of VS Code and log in again using your Red Hat account.</p> </li> 
+         <li class="li">You clicked a different location or switched to a different window; therefore, the populated code recommendations disappeared. <p class="p">The Red Hat Ansible Lightspeed service could take multiple seconds per task to populate the code recommendations. If you are using a multitask prompt, the Red Hat Ansible Lightspeed service takes a bit longer to populate the results. Do not move your cursor or press any key while the code recommendation is being generated. If you change the cursor location or press any key, the Ansible VS Code extension cancels the request and the Red Hat Ansible Lightspeed service does not process your request. In this scenario, you must get the cursor back to its original position and repopulate the results.</p> </li> 
+        </ul> 
+       </section> 
+       <section class="section" id="troubleshoot-ansible-vscode-errors___cannot_request_code_recommendations_by_using_the_ansible_vs_code_extension"> 
+        <h3 class="title sectiontitle">Cannot request code recommendations by using the Ansible VS Code extension</h3> 
+        <p class="p">The following error message is displayed: <code class="ph codeph">Your trial to the generative AI model has expired. Refer to your IBM Cloud Account to re-enable access to the IBM watsonx Code Assistant.</code></p> 
+        <p class="p">To resolve this error, refer to your IBM Cloud account and select an upgrade option.</p> 
+       </section> 
+       <section class="section" id="troubleshoot-ansible-vscode-errors___cannot_connect_to_ansible_vs_code_extension_when_using_a_proxy_configuration_or_a_self_signed_certificate_or_both"> 
+        <h3 class="title sectiontitle">Cannot connect to Ansible VS code extension when using a proxy configuration or a self-signed certificate or both</h3> 
+        <p class="p">You might encounter errors when connecting with to the Ansible VS code extension through a proxy. Connections to the outbound domain <code class="ph codeph">https://c.ai.ansible.redhat.com</code> fail and a network error message is displayed.</p> 
+        <p class="p">To resolve this issue, you must add the URL <code class="ph codeph">https://c.ai.ansible.redhat.com/</code> in VS Code proxy settings. If you are using Red Hat Single Sign-On (RH-SSO) to authenticate users, then you must also grant access to <code class="ph codeph">https://sso.redhat.com</code> in VS code proxy settings.</p> 
+        <p class="p">To modify the proxy settings in VS code, perform the following tasks:</p> 
+        <ol class="ol"> 
+         <li class="li">Open Visual Studio Code.</li> 
+         <li class="li">Navigate to <strong class="ph b">File &gt; Preferences &gt; Settings</strong>.</li> 
+         <li class="li">Select <span class="ph menucascade"><span class="ph uicontrol">Application</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Proxy</span></span> in the sidebar.</li> 
+         <li class="li">In the <strong class="ph b">Http: Proxy</strong> field, add the following URLs to the proxy: 
+          <ul class="ul"> 
+           <li class="li"><code class="ph codeph">https://c.ai.ansible.redhat.com/</code></li> 
+           <li class="li"><code class="ph codeph">https://sso.redhat.com</code>, if you are using RH-SSO to authenticate users.</li> 
+          </ul> </li> 
+         <li class="li">In the <strong class="ph b">http: Proxy Support</strong> drop down list, select <strong class="ph b">Override</strong>.</li> 
+         <li class="li">Search for and select the following configuration keys: 
+          <ul class="ul"> 
+           <li class="li"><strong class="ph b">Electron Fetch</strong></li> 
+           <li class="li"><strong class="ph b">System Certificates V2</strong> if you are using your own Certificate Authority (CA).</li> 
+          </ul> </li> 
+        </ol> 
+        <p class="p">For information about how to set up proxy support in VS Code, see the Related Links section below.</p> 
+       </section> 
+       <section class="section" id="troubleshoot-ansible-vscode-errors___cannot_connect_to_ansible_vs_code_extension_due_to_network_issues"> 
+        <h3 class="title sectiontitle">Cannot connect to Ansible VS code extension due to network issues</h3> 
+        <p class="p">If you encounter network issues, use the <strong class="ph b">Network Proxy Test</strong> extension to test the connection:</p> 
+        <ol class="ol"> 
+         <li class="li">Install the VS code extension <strong class="ph b">Network Proxy Test</strong>.</li> 
+         <li class="li">Use the <strong class="ph b">Network Proxy Test: Test Connection</strong> action to target the server and the endpoint using the parameter <code class="ph codeph">/check/status end-point</code>. <p class="p">For example:</p> <p class="p"><code class="ph codeph">https://c.ai.ansible.redhat.com/check/status/</code> to test the connection to Red Hat Ansible Lightspeed cloud service.</p> </li> 
+        </ol> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist"> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_install_ansible_vscode_extension#configure-vscode-extension" title="Configure third-party LLM providers, such as IBM watsonx Code Assistant or Google Gemini, within the Ansible VS Code extension.">Configure the Ansible VS Code extension</a></li> 
+         <li class="linklist"><a class="link" href="https://code.visualstudio.com/docs/getstarted/settings#_workspace-settings" target="_blank" rel="external noopener">Workspace settings</a></li> 
+         <li class="linklist"><a class="link" href="https://code.visualstudio.com/docs/setup/network#_proxy-server-support" target="_blank" rel="external noopener">Proxy server support</a></li> 
+         <li class="linklist"><a class="link" href="https://www.chromium.org/developers/design-documents/network-stack/proxy-settings-fallback/" target="_blank" rel="external noopener">Proxy settings and fallback</a></li> 
+         <li class="linklist"><a class="link" href="https://marketplace.visualstudio.com/items?itemName=chrmarti.network-proxy-test" target="_blank" rel="external noopener">Network Proxy Test</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title4" id="troubleshoot-ansible-code-bot-errors"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Troubleshoot Ansible code bot errors</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">This section provides information about errors when using the Ansible code bot and their workarounds.</p> 
+       <section class="section" id="troubleshoot-ansible-code-bot-errors___cannot_access_ansible_code_bot"> 
+        <h3 class="title sectiontitle">Cannot access Ansible code bot</h3> 
+        <p class="p">After you install Ansible code bot and attempt to log in, you receive the following error message:</p> 
+        <p class="p"> <code class="ph codeph">Your organization does not have a valid Red Hat Ansible Lightspeed subscription</code> </p> 
+        <p class="p">After you install Ansible code bot, you are redirected to a page that shows an active subscription status, as shown in the following image:</p> 
+        <figure class="fig fignone"> 
+         <figcaption> <span class="fig--title-label">Figure 1. </span>Ansible code bot login screen with an active subscription 
+         </figcaption> 
+         <br> 
+         <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/code-bot-login-screen.png" alt="Ansible code bot login screen with an active subscription"> 
+         <br> 
+        </figure> 
+        <p class="p">If the login screen displays an inactive subscription status, Ansible code bot does not scan your Git repositories. The error occurs because your organization does not have a valid Ansible Automation Platform subscription. To resolve this error, ensure that you are part of an organization that has a valid Red Hat Ansible Automation Platform subscription.</p> 
+       </section> 
+       <section class="section" id="troubleshoot-ansible-code-bot-errors___cannot_scan_your_git_repository_using_ansible_code_bot"> 
+        <h3 class="title sectiontitle">Cannot scan your Git repository using Ansible code bot</h3> 
+        <p class="p">If the Ansible code bot is not configured correctly, it does not scan your Git repositories or does not create pull requests.</p> 
+        <p class="p">To resolve Ansible code bot errors, ensure that:</p> 
+        <ul class="ul"> 
+         <li class="li">You have selected all the Git repositories that you want to scan.</li> 
+         <li class="li">You have a <code class="ph codeph">.yml</code> configuration file named <code class="ph codeph">ansible-code-bot.yml</code> in your repository <code class="ph codeph">.github</code> folder. For example, <code class="ph codeph">.github/ansible-code-bot.yml</code>.</li> 
+        </ul> 
+        <p class="p">Run a manual scan on your git repositories by adding the <strong class="ph b">ansible-code-bot-scan</strong> topic to your repository. For more information, see Manually scan your Git repositories.</p> 
+        <p class="p">If the Ansible code bot still cannot scan your Git repository, the following scenarios are possible:</p> 
+        <ul class="ul"> 
+         <li class="li">The Ansible code bot did not identify any ansible-lint violations in the Git repository.</li> 
+         <li class="li">The Ansible code bot does not have permission to scan the Git repository.</li> 
+         <li class="li">Your organization does not have a valid Red Hat Ansible Automation Platform subscription.</li> 
+        </ul> 
+       </section> 
+       <section class="section" id="troubleshoot-ansible-code-bot-errors___cannot_create_pull_requests"> 
+        <h3 class="title sectiontitle">Cannot create pull requests</h3> 
+        <p class="p">You might encounter an error where the Ansible code bot cannot create pull requests after scanning your Git repositories.</p> 
+        <p class="p">To resolve this error, ensure that:</p> 
+        <ul class="ul"> 
+         <li class="li">You have verified that there are are no duplicate pull requests. For more information, see How Ansible code bot handles duplicate pull requests.</li> 
+         <li class="li">You have deleted the branches after closing the pull requests created by the Ansible code bot. For more information, see Deleting a branch used for a pull request.</li> 
+        </ul> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_configure_repository_scans#ansible-code-bot-duplicate-pr" title="This section outlines the conditional logic used by the Ansible code bot to manage repository scanning and pull request generation.">How Ansible code bot handles duplicate pull requests</a></li> 
+        </ul> 
+       </div> 
+       <div class="linklist reltasks"> <strong>Related tasks</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_using_code_bot_for_suggestions#manually-scan-repo" title="You can manually scan your Git repositories if you did not set up a scanning schedule for your Ansible code bot or if you do not want to wait for the next scheduled scan.">Manually scan your Git repositories</a></li> 
+        </ul> 
+       </div> 
+       <div class="linklist relinfo"> <strong>Related information</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/deleting-and-restoring-branches-in-a-pull-request#deleting-a-branch-used-for-a-pull-request" target="_blank" rel="external noopener">Deleting a branch used for a pull request</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

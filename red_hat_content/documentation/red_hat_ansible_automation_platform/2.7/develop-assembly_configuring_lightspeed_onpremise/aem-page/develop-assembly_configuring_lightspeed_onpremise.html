@@ -1,0 +1,315 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="configuring-lightspeed-onpremise"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Set up Red Hat Ansible Lightspeed on-premise deployment</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">As an administrator, you can deploy Ansible Lightspeed on-premise and connect it to IBM watsonx Code Assistant. Once the deployment is complete, you can use the Ansible Lightspeed service through the Ansible Visual Studio (VS) Code extension.</p> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <ul class="ul"> 
+         <li class="li">Red Hat Ansible Lightspeed on-premise deployments are supported on Red Hat Ansible Automation Platform version 2.4 and later.</li> 
+         <li class="li">The IBM Cloud service instance of IBM watsonx Code Assistant is available in the following data centers: 
+          <ul class="ul"> 
+           <li class="li">Dallas (<code class="ph codeph">us-south</code>)</li> 
+           <li class="li">Frankfurt (<code class="ph codeph">eu-de</code>)</li> 
+           <li class="li">Sydney (<code class="ph codeph">au-syd</code>) (Essentials plan only)</li> 
+          </ul> </li> 
+        </ul> 
+        <p class="p">Ansible Lightspeed cloud deployments are configured to connect exclusively to the US (Dallas) IBM data center. Attempts to connect from non-US data centers will result in connection failure. If you want to use a non-Dallas IBM data center, then you must set up Ansible Lightspeed in hybrid deployment model. For more information about IBM’s supported data centers, see the topic Setting up your watsonx Code Assistant for Red Hat Ansible Lightspeed service in <em class="ph i">IBM watsonx Code Assistant</em> documentation.</p> 
+       </div> 
+      </div> 
+     </div> 
+     <nav role="navigation" class="related-links"> 
+      <div class="linklist relinfo"> <strong>Related information</strong> 
+       <br> 
+       <ul class="linklist"> 
+        <li class="linklist"><a class="link" href="https://cloud.ibm.com/docs/watsonx-code-assistant" target="_blank" rel="external noopener">Setting up your watsonx Code Assistant for Red Hat Ansible Lightspeed service</a></li> 
+       </ul> 
+      </div> 
+     </nav> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="overview-lightspeed-onpremise"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Overview</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">This section provides information about the system requirements, prerequisites, and the process for setting up a Red Hat Ansible Lightspeed on-premise deployment.</p> 
+       <section class="section" id="overview-lightspeed-onpremise___deployment_models"> 
+        <h3 class="title sectiontitle">Deployment models</h3> 
+        <p class="p">You can use one of the following modes of deployment:</p> 
+        <ul class="ul"> 
+         <li class="li"> <strong class="ph b">On-premise deployment</strong> <p class="p">Both Red Hat Ansible Lightspeed and the IBM watsonx Code Assistant model (IBM Cloud Pak for Data) are on-premise deployments. Telemetry data is not collected for an on-premise mode of deployment.</p> </li> 
+         <li class="li"> <strong class="ph b">Hybrid deployment</strong> <p class="p">Red Hat Ansible Lightspeed is an on-premise deployment, while IBM watsonx Code Assistant model is a cloud deployment. Telemetry data is not collected for hybrid deployments.</p> <p class="p">A hybrid deployment model provides the following benefits:</p> 
+          <ul class="ul"> 
+           <li class="li">Enables you to set up an on-premise deployment of Red Hat Ansible Lightspeed, with IBM watsonx Code Assistant model on a cloud environment.</li> 
+           <li class="li">Provides the freedom and flexibility to choose an environment that best suits your organizational needs.</li> 
+           <li class="li">Enables organizations to use the Ansible Automation Platform for user authentication, instead of logging into the Red Hat cloud.</li> 
+           <li class="li">Enables organizations to deploy the Ansible Automation Platform in their preferred region.</li> 
+          </ul> </li> 
+        </ul> 
+       </section> 
+       <section class="section" id="overview-lightspeed-onpremise___system_requirements"> 
+        <h3 class="title sectiontitle">System requirements</h3> 
+        <p class="p">Your system must meet the following minimum system requirements to install and run the Red Hat Ansible Lightspeed on-premise deployment.</p> 
+        <table class="table"> 
+         <caption></caption> 
+         <colgroup> 
+          <col style="width:50%"> 
+          <col style="width:50%"> 
+         </colgroup> 
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="overview-lightspeed-onpremise___system_requirements__entry__1">Requirement</th> 
+           <th class="entry" id="overview-lightspeed-onpremise___system_requirements__entry__2">Minimum requirement</th> 
+          </tr> 
+         </thead> 
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="overview-lightspeed-onpremise___system_requirements__entry__1"> <p class="p">RAM</p> </td> 
+           <td class="entry" headers="overview-lightspeed-onpremise___system_requirements__entry__2"> <p class="p">5 GB</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="overview-lightspeed-onpremise___system_requirements__entry__1"> <p class="p">CPU</p> </td> 
+           <td class="entry" headers="overview-lightspeed-onpremise___system_requirements__entry__2"> <p class="p">1</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="overview-lightspeed-onpremise___system_requirements__entry__1"> <p class="p">Local disk</p> </td> 
+           <td class="entry" headers="overview-lightspeed-onpremise___system_requirements__entry__2"> <p class="p">40 GB</p> </td> 
+          </tr> 
+         </tbody> 
+        </table> 
+        <p class="p">To see the rest of the Red Hat Ansible Automation Platform system requirements, see the System requirements section of <em class="ph i">Planning your installation</em>.</p> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">You must also have installed IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data. The installation includes a base model that you can use to set up your Red Hat Ansible Lightspeed on-premise deployment. For installation information, see the watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data documentation.</p> 
+         </div> 
+        </div> 
+       </section> 
+       <section class="section" id="overview-lightspeed-onpremise___prerequisites"> 
+        <h3 class="title sectiontitle">Prerequisites</h3> 
+        <ul class="ul"> 
+         <li class="li">You have installed Red Hat Ansible Automation Platform on your Red Hat OpenShift Container Platform environment.</li> 
+         <li class="li">You have administrator privileges for Red Hat Ansible Automation Platform.</li> 
+         <li class="li">You have installed IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data.</li> 
+         <li class="li">Your system meets the minimum system requirements to set up Red Hat Ansible Lightspeed on-premise deployment.</li> 
+         <li class="li">You have obtained an API key and a model ID from IBM watsonx Code Assistant. <p class="p">For information about obtaining an API key and model ID from IBM watsonx Code Assistant, see the IBM watsonx Code Assistant documentation. For information about installing IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data, see the watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data documentation.</p></li> 
+         <li class="li">You have an existing external PostgreSQL database configured for the Red Hat Ansible Automation Platform, or have a database created for you when configuring the Red Hat Ansible Lightspeed on-premise deployment.</li> 
+        </ul> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relinfo"> <strong>Related information</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/planning_your_installation/platform-system-requirements" target="_blank" rel="external noopener">System requirements</a></li> 
+         <li class="linklist"><a class="link" href="https://www.ibm.com/docs/en/software-hub/5.1.x?topic=services-watsonx-code-assistant-red-hat-ansible-lightspeed" target="_blank" rel="external noopener">watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data documentation</a></li> 
+         <li class="linklist"><a class="link" href="https://cloud.ibm.com/docs/watsonx-code-assistant" target="_blank" rel="external noopener">IBM watsonx Code Assistant documentation</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="configure-vscode-extension-onpremise-deployment"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Configure Ansible VS Code extension for Red Hat Ansible Lightspeed on-premise deployment</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">To access the on-premise deployment of Red Hat Ansible Lightspeed, all Ansible users within your organization must install the Ansible Visual Studio (VS) Code extension in their VS Code editor, and configure the extension to connect to the on-premise deployment.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have installed VS Code version 1.70.1 or later.</li> 
+        </ul> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Obtain the URL of your Ansible Lightspeed instance: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">In Red Hat OpenShift Container Platform, select <span class="ph menucascade"><span class="ph uicontrol">Networking</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Routes</span></span> and locate the Red Hat Ansible Lightspeed instance that was created.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">From the <strong class="ph b">Location</strong> column, copy the URL of your Ansible Lightspeed instance. </span> 
+            <div class="itemgroup info"> 
+             <p class="p">The URL will be in the following format: <code class="ph codeph">https://&lt;lightspeed_route&gt;/complete/aap/</code></p> 
+            </div> </li> 
+          </ol> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Open the VS Code application.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the <strong class="ph b">Activity</strong> bar, click the <strong class="ph b">Extensions</strong> icon.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the <strong class="ph b">Installed Extensions</strong> list, select <strong class="ph b">Ansible</strong>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the <strong class="ph b">Ansible</strong> extension page, click the <strong class="ph b">Settings</strong> icon (<img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/settings-icon-ansible-vscode-extension.png" alt="Settings icon">) and select <strong class="ph b">Extension Settings</strong>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select <strong class="ph b">Ansible Lightspeed</strong> settings and specify the following information: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">In the <strong class="ph b">URL for Ansible Lightspeed</strong> field, enter the <strong class="ph b">Route URL</strong> of the Red Hat Ansible Lightspeed on-premise deployment. Ansible users must have Ansible Automation Platform controller credentials. <p class="p">After configuring Ansible VS Code extension to connect to Red Hat Ansible Lightspeed on-premise deployment, you must <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_install_ansible_vscode_extension#login-vscode-extension" title="After installing and configuring the VS Code extension, you can log in to the Ansible Lightspeed service.">log in to Ansible Lightspeed through the Ansible VS Code extension</a>.</p> 
+             <div class="note note note_note"> <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">If your organization recently subscribed to the Red Hat Ansible Automation Platform, it might take a few hours for Red Hat Ansible Lightspeed to detect the new subscription. In VS Code, use the <strong class="ph b">Refresh</strong> button in the Ansible extension from the Activity bar to check again.</p> 
+              </div> 
+             </div> </li> 
+           </ul> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="connect-to-different-ibm-wca-model"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Connect to a different IBM watsonx Code Assistant model</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">After you have set up the Red Hat Ansible Lightspeed on-premise deployment successfully, you can modify the deployment if you want to connect to another IBM watsonx Code Assistant model.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have set up a Red Hat Ansible Lightspeed on-premise deployment.</li> 
+         <li class="li">You have obtained an API key and a model ID of the IBM watsonx Code Assistant model you want to connect to.</li> 
+         <li class="li">You have created a new model configuration secret for the IBM watsonx Code Assistant model that you want to connect to. For information about creating a model configuration secrets, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_install_aap_lightspeed_operator#create-connection-secrets" title="You must create a configuration secret to connect to an IBM watsonx Code Assistant model, which can be either an on-premise deployment or a cloud deployment.">Creating a model configuration secret</a>.</li> 
+        </ul> 
+       </section> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">For example, you connected to the default IBM watsonx Code Assistant model but now want to connect to a custom model instead. To connect to another IBM watsonx Code Assistant model, you must create new connection secrets, and then update the connection secrets and parameters on an existing Ansible Automation Platform operator.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Go to the Red Hat OpenShift Container Platform.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Installed Operators</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the list of installed operators, select the <strong class="ph b">Ansible Automation Platform</strong> operator.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Locate and select the <strong class="ph b">Ansible Automation Platform</strong> custom resource, and then click the required app.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">YAML</strong> tab.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Scroll the text to find the <code class="ph codeph">spec</code> section under <code class="ph codeph">Lightspeed</code> category. For example: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>spec:
+  lightspeed:
+    disabled: false
+    model_config_secret_name: &lt;Name of the model configuration secret that you recently created.&gt;</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Replace the <code class="ph codeph">model_config_secret_name</code> value with the name of the IBM watsonx Code Assistant that you want to connect to.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Save</strong>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The new Ansible Lightspeed pods are created. After the new pods are running successfully, the old Ansible Lightspeed pods are terminated.</p> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="monitor-lightspeed-onpremise-deployment"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Monitor your Red Hat Ansible Lightspeed on-premise deployment</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">After the Red Hat Ansible Lightspeed on-premise deployment is successful, use the following procedure to monitor the metrics on an API endpoint <code class="ph codeph">/metrics</code>.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">Create a <strong class="ph b">system auditor</strong> user: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">Create a user with a <strong class="ph b">system auditor</strong> role in the Red Hat Ansible Automation Platform. For the procedure, see the <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/getting_started_with_ansible_automation_platform/assembly-gs-platform-admin#proc-gs-platform-admin-create-user" target="_blank" rel="external noopener">Creating a user</a> section of <em class="ph i">Getting started with Ansible Automation Platform</em>.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Verify that you can log in to the Ansible Lightspeed portal for on-premise deployment (<code class="ph codeph">https://&lt;lightspeed_route&gt;/</code>) as the newly-created system auditor user, and then log out.</span> </li> 
+          </ol> </li> 
+         <li class="li step"> <span class="ph cmd">Create a token for the <strong class="ph b">system auditor</strong> user: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Log in to the Ansible Lightspeed portal for on-premise deployment (<code class="ph codeph">https://&lt;lightspeed_route&gt;/admin</code>) as an administrator by using the following credentials: </span> 
+            <div class="itemgroup info"> 
+             <ul class="ul"> 
+              <li class="li">Username: <strong class="ph b">admin</strong></li> 
+              <li class="li">Password: The secret that is named as <code class="ph codeph">&lt;lightspeed-custom-resource-name&gt;-admin-password</code> in the Red Hat OpenShift Container Platform cluster namespace where Red Hat Ansible Lightspeed is deployed.</li> 
+             </ul> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">On the Django administration window, select <strong class="ph b">Users</strong> from the Users area. A list of users is displayed.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Verify that the user with the system auditor role is listed in the <strong class="ph b">Users</strong> list.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">From the Django Oauth toolkit area, select <span class="ph menucascade"><span class="ph uicontrol">Access tokens</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Add</span></span>.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Provide the following information and click <strong class="ph b">Save</strong>: </span> 
+            <div class="itemgroup info"> 
+             <ul class="ul"> 
+              <li class="li"><strong class="ph b">User</strong>: Use the magnifying glass icon to search and select the user with the system auditor role.</li> 
+              <li class="li"><strong class="ph b">Token</strong>: Specify a token for the user. Copy this token for later use.</li> 
+              <li class="li"><strong class="ph b">Id token</strong>: Select the token ID.</li> 
+              <li class="li"><strong class="ph b">Application</strong>: Select <strong class="ph b">Ansible Lightspeed for VS Code</strong>.</li> 
+              <li class="li"><strong class="ph b">Expires</strong>: Select the date and time when you want the token to expire.</li> 
+              <li class="li"><strong class="ph b">Scope</strong>: Specify the scope as <strong class="ph b">read write</strong>. <p class="p">An access token is created for the user with a system auditor role.</p> </li> 
+             </ul> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Log out from the Ansible Lightspeed portal for on-premise deployment.</span> </li> 
+          </ol> </li> 
+         <li class="li step"> <span class="ph cmd">Monitor your Red Hat Ansible Lightspeed on-premise deployment, by using the authorization token of the user with the system auditor role, to access the metrics endpoint <code class="ph codeph">https://&lt;lightspeed_route&gt;/metrics</code>.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="use-rest-api"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Use the Ansible Lightspeed REST API</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">As the platform administrator, you can configure and use the Ansible Lightspeed REST API to build a custom automation development and tooling workflow outside of VS Code. For information about the Ansible Lightspeed REST API, see <a class="xref" href="https://developers.redhat.com/api-catalog/api/ansible-lightspeed" target="_blank" rel="external noopener">Ansible AI Connect. 1.0.0 (v1)</a> in the API catalog.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">Ensure that you are using the Red Hat Ansible Automation Platform operator patch version 2.5-20250305.9 or later and Red Hat Ansible Lightspeed operator version 2.5.250225 or later.</li> 
+        </ul> 
+       </section> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">The Ansible Lightspeed REST API is available for Ansible Automation Platform 2.5 and later.</p> 
+         </div> 
+        </div> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the platform user for whom you want to grant REST API access. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">You can select an existing user or create a platform user in the Red Hat Ansible Automation Platform. For the procedure, see the <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/getting_started_with_ansible_automation_platform/assembly-gs-platform-admin#proc-gs-platform-admin-create-user" target="_blank" rel="external noopener">Creating a user</a> section of <em class="ph i">Getting started with Ansible Automation Platform</em>.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Verify that you can log in to the Ansible Lightspeed portal for on-premise deployment (<code class="ph codeph">https://&lt;lightspeed_route&gt;/</code>) as the platform user you selected or created, and then log out.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Create a token for the platform user: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Log in to the Ansible Lightspeed portal for on-premise deployment (<code class="ph codeph">https://&lt;lightspeed_route&gt;/admin</code>) as an administrator by using the following credentials: </span> 
+            <div class="itemgroup info"> 
+             <ul class="ul"> 
+              <li class="li">Username: <strong class="ph b">admin</strong></li> 
+              <li class="li">Password: The secret that is named as <code class="ph codeph">&lt;lightspeed-custom-resource-name&gt;-admin-password</code> in the Red Hat OpenShift Container Platform cluster namespace where Red Hat Ansible Lightspeed is deployed.</li> 
+             </ul> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">On the Django administration window, select <strong class="ph b">Users</strong> from the Users area. A list of users is displayed.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Verify that the platform user is listed in the <strong class="ph b">Users</strong> list.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">From the Django Oauth toolkit area, select <span class="ph menucascade"><span class="ph uicontrol">Access tokens</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Add</span></span>.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Provide the following information and click <strong class="ph b">Save</strong>: </span> 
+            <div class="itemgroup info"> 
+             <ul class="ul"> 
+              <li class="li"><strong class="ph b">User</strong>: Use the magnifying glass icon to search and select the newly-created or existing user for whom you want to grant API access.</li> 
+              <li class="li"><strong class="ph b">Token</strong>: Specify a token for the user. Copy this token for later use.</li> 
+              <li class="li"><strong class="ph b">Id token</strong>: Select the token ID.</li> 
+              <li class="li"><strong class="ph b">Application</strong>: Select <strong class="ph b">Ansible Lightspeed for VS Code</strong>.</li> 
+              <li class="li"><strong class="ph b">Expires</strong>: Select the date and time when you want the token to expire.</li> 
+              <li class="li"><strong class="ph b">Scope</strong>: Specify the scope as <strong class="ph b">read write</strong>. <p class="p">An access token is created for the user.</p></li> 
+             </ul> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Log out from the Ansible Lightspeed portal for on-premise deployment.</span> </li> 
+          </ol> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Make a direct call to the Ansible Lightspeed REST API by specifying the newly-created token in the authorization header: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>curl -H "Authorization: Bearer &lt;token&gt;"
+https://&lt;lightspeed_route&gt;/api/v1/me/</code></pre> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

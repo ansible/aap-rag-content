@@ -1,0 +1,26 @@
+# Install and configure the Ansible VS Code extension
+## Install the Ansible VS Code extension
+
+Use the following procedure to install the Ansible Lightspeed extension in VS Code.
+
+### Before you begin
+
+- VS Code version 1.70.1 or later.
+
+
+Note:
+
+You can also install VScode derivatives, such as VScode Insider or VS Codium.
+
+### Procedure
+
+1.  Open the VS Code application.
+2.  From the navigation menu, click the **Extensions** icon.
+3.  In the **Search** field, enter **Ansible**.
+4.  Select **Ansible** to choose the Ansible language support extension published by Red Hat.
+5.  Click **Install**.
+6.  After installation is complete, verify your VSCode installation:
+1.  Create a new YAML file using the `.yml` or `.yaml` file extension.
+2.  From the **Status** toolbar, click the language indicator and select **Ansible** to associate the Ansible language type with the new YAML file.
+3.  Start writing a test playbook. Contextual aids are displayed as you start creating your content.
+
