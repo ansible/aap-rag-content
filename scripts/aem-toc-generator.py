@@ -322,7 +322,7 @@ def process_batch(base_dir):
     print(f"\nBatch complete: {count} generated, {errors} errors")
 
 
-def main():
+def main():  # pragma: no cover
     """CLI entry point for single-file or batch TOC generation."""
     parser = argparse.ArgumentParser(description="Generate TOC JSON from AEM-page HTML files")
     parser.add_argument("--input", "-i", help="Path to input AEM HTML file")

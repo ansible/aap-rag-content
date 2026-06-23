@@ -240,7 +240,7 @@ class MimirParser:  # pylint: disable=too-many-instance-attributes
             self.process_md()
 
 
-def main():  # pylint: disable=too-many-locals,too-many-branches,too-many-statements
+def main():  # pragma: no cover  # pylint: disable=too-many-locals,too-many-branches,too-many-statements
     """Extract and parse Mimir archives into plaintext for RAG."""
     start = time.time()
     try:  # pylint: disable=too-many-nested-blocks
