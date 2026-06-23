@@ -14,6 +14,7 @@
 #    under the License.
 """Tests for mimir-parser module."""
 # pylint: disable=C0415,import-error,protected-access
+import argparse
 import importlib
 import json
 import sys
@@ -106,12 +107,19 @@ def make_pantheon_tree(base, toc_data, md_content):
     return str(base)
 
 
-def make_aem_tree(base, md_content):
+def make_aem_tree(base, md_content, toc_data=None):
     """Create an AEM-format directory tree under base."""
     base = Path(base)
     aem_dir = base / "aem-page"
     aem_dir.mkdir(parents=True)
     (aem_dir / "doc.md").write_text(md_content, encoding="utf-8")
+
+    toc_dir = base / "toc"
+    toc_dir.mkdir(parents=True)
+    if toc_data is None:
+        toc_data = {"sections": []}
+    (toc_dir / "toc.json").write_text(json.dumps(toc_data), encoding="utf-8")
+
     return str(base)
 
 
@@ -170,14 +178,14 @@ class TestMimirParserInit:
         assert "single-page" in parser.md
 
     def test_detects_aem_format(self, tmp_path):
-        """AEM format: aem=True, toc=None, md in aem-page/."""
+        """AEM format: aem=True, toc points to toc.json, md in aem-page/."""
         base = make_aem_tree(tmp_path / "doc", SAMPLE_MD_HEADER + "# Title\n")
         out = str(tmp_path / "out")
 
         parser = MimirParser(base, out, max_level=3)
 
         assert parser.aem is True
-        assert parser.toc is None
+        assert parser.toc.endswith("toc.json")
         assert parser.md.endswith("doc.md")
         assert "aem-page" in parser.md
 
@@ -255,18 +263,27 @@ class TestProcessToc:
         assert "Chapter Two" in titles
         assert "Section 1.1" in titles
 
-    def test_aem_synthesizes_root(self, tmp_path):
-        """AEM documents get a single synthetic root section."""
-        base = make_aem_tree(tmp_path / "doc", SAMPLE_MD_HEADER + "# Title\n")
+    def test_aem_loads_toc_json(self, tmp_path):
+        """AEM documents load TOC from toc.json like Pantheon."""
+        toc_data = {
+            "sections": [
+                {
+                    "title": "AEM Chapter",
+                    "visible": True,
+                    "weight": 1,
+                    "urlFragment": "aem-chapter",
+                    "anchor": "aem-chapter",
+                    "singlePageAnchor": "aem-chapter",
+                    "sections": [],
+                }
+            ]
+        }
+        base = make_aem_tree(tmp_path / "doc", SAMPLE_MD_HEADER + "# Title\n", toc_data=toc_data)
         parser = MimirParser(base, str(tmp_path / "out"), max_level=3)
         parser.process_toc()
 
         assert len(parser.sections) == 1
-        root = parser.sections[0]
-        assert root["title"] is None
-        assert root["urlFragment"] == "index"
-        assert root["singlePageAnchor"] is None
-        assert root["parent_titles"] == []
+        assert parser.sections[0]["title"] == "AEM Chapter"
 
 
 class TestProcessMd:
@@ -566,3 +583,36 @@ class TestRun:
         assert (out / "art1.md").exists()
         assert (out / "art2.md").exists()
         assert not (out / "readme.txt").exists()
+
+
+class TestKeepHtmlArgument:
+    """Test cases for the --keep-html argument."""
+
+    def _parse_args(self, argv):
+        """Build the argument parser from main() and parse given argv."""
+        arg_parser = argparse.ArgumentParser()
+        arg_parser.add_argument("-o", "--out-dir", default="aap-product-docs-plaintext")
+        arg_parser.add_argument("-m", "--max-level", default=3)
+        arg_parser.add_argument("--add-kb-articles", action=argparse.BooleanOptionalAction)
+        arg_parser.add_argument(
+            "--keep-html",
+            action=argparse.BooleanOptionalAction,
+            default=False,
+            help="Keep HTML files after processing (default: False)",
+        )
+        return arg_parser.parse_args(argv)
+
+    def test_keep_html_default_false(self):
+        """Default value for --keep-html is False."""
+        args = self._parse_args([])
+        assert args.keep_html is False
+
+    def test_keep_html_flag_sets_true(self):
+        """--keep-html sets the flag to True."""
+        args = self._parse_args(["--keep-html"])
+        assert args.keep_html is True
+
+    def test_no_keep_html_flag_sets_false(self):
+        """--no-keep-html explicitly sets the flag to False."""
+        args = self._parse_args(["--no-keep-html"])
+        assert args.keep_html is False

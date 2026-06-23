@@ -18,6 +18,10 @@ located in the `src/` directory, which provides document processing and
 vector database generation capabilities. The [custom_processor_aap.py script](./scripts/custom_processor_aap.py)
 uses this package to process AAP documentation and build the vector database.
 
+The [aem-toc-generator](./scripts/aem-toc-generator.md) script generates
+Mimir-compatible TOC JSON files from AEM-page HTML files. It is invoked
+automatically by `mimir-parser.py` during archive extraction.
+
 
 ## Input files for Vector DBs
 

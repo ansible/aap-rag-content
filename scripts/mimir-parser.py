@@ -1,6 +1,6 @@
 """Parse Mimir documentation archives into plaintext for RAG ingestion."""
 
-# pylint: disable=invalid-name
+# pylint: disable=invalid-name,duplicate-code
 import argparse
 import configparser
 import json
@@ -59,26 +59,15 @@ class MimirParser:  # pylint: disable=too-many-instance-attributes
 
         if not kb_article:
             self.sections = []
-            if self.aem:
-                self.toc = None  # AEM archives lack a usable TOC file
-                self.md = (
-                    self.base_dir
-                    + "/aem-page/"
-                    + next(
-                        filter(lambda x: x.endswith(".md"), os.listdir(self.base_dir + "/aem-page"))
-                    )
+            self.toc = self.base_dir + "/toc/" + os.listdir(self.base_dir + "/toc")[0]
+            md_dir = "aem-page" if self.aem else "single-page"
+            self.md = (
+                self.base_dir
+                + f"/{md_dir}/"
+                + next(
+                    filter(lambda x: x.endswith(".md"), os.listdir(self.base_dir + f"/{md_dir}"))
                 )
-            else:  # legacy Pantheon format
-                self.toc = self.base_dir + "/toc/" + os.listdir(self.base_dir + "/toc")[0]
-                self.md = (
-                    self.base_dir
-                    + "/single-page/"
-                    + next(
-                        filter(
-                            lambda x: x.endswith(".md"), os.listdir(self.base_dir + "/single-page")
-                        )
-                    )
-                )
+            )
 
     def process_section(self, section, level, parent_titles=None):
         """Recursively walk TOC sections up to max_level."""
@@ -103,30 +92,17 @@ class MimirParser:  # pylint: disable=too-many-instance-attributes
                 )
 
     def process_toc(self):
-        """Load TOC JSON or synthesize a root section for AEM documents."""
-        if not self.toc:
-            # AEM: synthesize a single root section since no TOC is available
-            self.sections.append(
-                {
-                    "title": None,
-                    "visible": True,
-                    "weight": 1,
-                    "urlFragment": "index",
-                    "anchor": None,
-                    "singlePageAnchor": None,
-                    "parent_titles": [],
-                }
-            )
-        else:
-            with open(self.toc, encoding="utf-8") as f:
-                toc = json.loads(f.read())
-            self.process_section(toc, -1)
+        """Load TOC JSON."""
+        with open(self.toc, encoding="utf-8") as f:
+            toc = json.loads(f.read())
+        self.process_section(toc, -1)
 
     def process_md(
         self, md=None
     ):  # pylint: disable=too-many-locals,too-many-branches,too-many-statements
         """Parse a markdown file, split by TOC sections, and write output."""
         in_md_header = False
+        in_example = False
         config = "[__default__]\n"
         link_to_section = re.compile(r"\]\((#[\w\-]+)\)")
         f = None
@@ -191,21 +167,25 @@ class MimirParser:  # pylint: disable=too-many-instance-attributes
                 in_md_header = True
                 continue
 
-            # AEM: only process the first heading; Pantheon: match all headings against TOC
+            if line.startswith("```"):
+                in_example = not in_example
+
             if (
                 not self.kb_article
+                and not in_example
                 and line.startswith("#")
-                and (not self.aem or section_index == 0)
+                and section_index < len(self.sections)
             ):
-                section = self.sections[section_index]
                 title = line.replace("\xa0", " ")
                 title = re.sub(r"^#+\s*", "", title)
                 title = re.sub(r"^Chapter\s*", "", title)
-                title_to_match = (
-                    title if self.aem else section["title"]
-                )  # AEM: match against itself (no TOC)
+                section = self.sections[section_index]
+                title_to_match = section["title"]
                 single_page_anchor = section["singlePageAnchor"]
-                if title == title_to_match or single_page_anchor is None:
+                if title == title_to_match and single_page_anchor == "":
+                    # print(f"INFO: Skip: {md_file} - {title}")
+                    section_index += 1
+                elif title == title_to_match or single_page_anchor is None:
                     if single_page_anchor is None:
                         single_page_anchor = "__index__"
                     base_url = self.doc_metadata["extra"]["reference_url"]
@@ -260,14 +240,20 @@ class MimirParser:  # pylint: disable=too-many-instance-attributes
             self.process_md()
 
 
-def main():
+def main():  # pylint: disable=too-many-locals,too-many-branches,too-many-statements
     """Extract and parse Mimir archives into plaintext for RAG."""
     start = time.time()
-    try:
+    try:  # pylint: disable=too-many-nested-blocks
         arg_parser = argparse.ArgumentParser()
         arg_parser.add_argument("-o", "--out-dir", default="aap-product-docs-plaintext")
         arg_parser.add_argument("-m", "--max-level", default=3)
         arg_parser.add_argument("--add-kb-articles", action=argparse.BooleanOptionalAction)
+        arg_parser.add_argument(
+            "--keep-html",
+            action=argparse.BooleanOptionalAction,
+            default=False,
+            help="Keep HTML files after processing (default: False)",
+        )
 
         args = arg_parser.parse_args()
 
@@ -302,6 +288,37 @@ def main():
                     check=True,
                 )
                 print(output)
+                print("Generating TOC files from AEM HTML files...")
+                toc_script = os.path.join(
+                    os.path.dirname(os.path.abspath(__file__)),
+                    "aem-toc-generator.py",
+                )
+                for source_dir in SOURCE_DIRS:
+                    if not os.path.isdir(source_dir):
+                        continue
+                    for doc_name in sorted(os.listdir(source_dir)):
+                        aem_dir = os.path.join(source_dir, doc_name, "aem-page")
+                        if not os.path.isdir(aem_dir):
+                            continue
+                        html_files = [f for f in os.listdir(aem_dir) if f.endswith(".html")]
+                        if not html_files:
+                            continue
+                        input_path = os.path.join(aem_dir, html_files[0])
+                        output_path = os.path.join(source_dir, doc_name, "toc", "toc.json")
+                        subprocess.run(
+                            [
+                                sys.executable,
+                                toc_script,
+                                "-i",
+                                input_path,
+                                "-o",
+                                output_path,
+                            ],
+                            capture_output=True,
+                            text=True,
+                            check=True,
+                        )
+                print("TOC generation complete.")
                 if args.add_kb_articles:
                     print("Extracting knowledge base articles...")
                     output = subprocess.run(
@@ -313,14 +330,17 @@ def main():
                     print(output.stdout)
                     print(output.stderr)
                     print("done!")
-                print("Delete html files")
-                output = subprocess.run(
-                    "find red_hat_content -name *.html -type f -delete".split(" "),
-                    capture_output=True,
-                    text=True,
-                    check=True,
-                )
-                print(output)
+                if args.keep_html:
+                    print("Keeping html files")
+                else:
+                    print("Delete html files")
+                    output = subprocess.run(
+                        "find red_hat_content -name *.html -type f -delete".split(" "),
+                        capture_output=True,
+                        text=True,
+                        check=True,
+                    )
+                    print(output)
             except subprocess.CalledProcessError:
                 traceback.print_stack()
                 sys.exit(2)
