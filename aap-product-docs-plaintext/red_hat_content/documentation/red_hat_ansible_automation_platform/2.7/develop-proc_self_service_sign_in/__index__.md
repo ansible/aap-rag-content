@@ -29,33 +29,3 @@ Note:
 
 While you can disable SSL validation by setting `checkSSL: false` in the Helm chart configuration, this approach is not recommended for production environments as it reduces security. Instead, configure Ansible automation portal to trust your custom CA certificate.
 
-## View templates
-
-View your accessible automation templates, displayed as tiles, on the **Templates** landing page of the Ansible automation portal console.
-
-### Before you begin
-
-- You have signed in to Ansible automation portal.
-
-### Procedure
-
-1.  In a browser, sign in to Ansible automation portal.
-2.  In the navigation pane, select **Templates** to open a landing page where tiles are displayed, representing the templates that you have access to.
-![Templates view](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/self-service-templates-view.png)
-
-## Synchronize auto-generated templates
-
-The auto-generated self-service templates are synchronized from the job templates in Ansible Automation Platform to Ansible automation portal. You can manually trigger a sync from the **Templates** page.
-
-### About this task
-
-Note:
-
-This synchronization fetches updates for auto-generated self-service templates only.
-
-### Procedure
-
-1.  In a browser, sign in to Ansible automation portal.
-2.  In the navigation pane, select **Templates** to display the templates that you have access to.
-![Templates view](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/self-service-templates-view.png)
-3.  Select **Sync now** to launch a synchronization.

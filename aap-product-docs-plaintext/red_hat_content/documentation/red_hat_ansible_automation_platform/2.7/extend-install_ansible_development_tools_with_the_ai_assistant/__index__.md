@@ -19,6 +19,3 @@ The system:
 - If ADT is not installed, it will attempt installation via `pip` or `pipx`.
 If ADT is not already installed, the AI assistant chooses a package manager (`pip` or `pipx`) and installs ADT automatically.
 
-## What to do next
-
-When installation is complete, the assistant will return a message in the Copilot chat window confirming that ADT has been installed successfully. You can also prompt the assistant to `check my Ansible environment again`. If the installation was successful, the assistant will verify that ADT is in your environment.

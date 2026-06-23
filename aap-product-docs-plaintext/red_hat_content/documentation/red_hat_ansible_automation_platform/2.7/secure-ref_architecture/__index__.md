@@ -20,14 +20,3 @@ Restrict access to the ports used by the Ansible Automation Platform components 
 - Restrict SSH access to the Ansible Automation Platform servers from the installation host and other trusted systems used for maintenance access to the Ansible Automation Platform servers.
 - Restrict HTTPS access to the automation controller, automation hub, and Event-Driven Ansible controller from trusted networks and clients.
 
-## DNS, NTP, and service planning
-
-When installing Ansible Automation Platform, DNS and NTP configurations are crucial for a successful deployment and proper operation.
-
-## DNS
-
-Define a valid Fully Qualified Domain Name (FQDN) for all infrastructure nodes in your installation inventory file. Resolving these to a routable IP address in DNS passes installer checks and helps ensure a successful setup.
-
-## DNS and load balancing
-
-When using a load balancer with Ansible Automation Platform, an additional FQDN is required. For example, `aap.example.com` could be used for the load balancer to direct traffic to each platform gateway component defined in the installation inventory.

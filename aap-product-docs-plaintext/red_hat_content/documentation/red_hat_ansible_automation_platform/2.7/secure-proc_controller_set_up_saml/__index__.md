@@ -137,10 +137,3 @@ You can configure an HTTPS redirect for SAML in operator-based deployments to si
 
 To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (such as username and email address) or to what groups they belong.
 
-## Configure transparent SAML logins
-
-For transparent logins to work, you must first get IdP-initiated logins to work.
-
-### Procedure
-
-Set the `RelayState` on the IdP to "IdP".

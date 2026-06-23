@@ -65,12 +65,3 @@ delegate_to: localhost
 var: azure
 ```
 
-## Use 'delegate_to' and any lookup variable
-
-```
-- command: somecommand
-environment:
-USERNAME: '{{ lookup("env", "USERNAME") }}'
-PASSWORD: '{{ lookup("env", "PASSWORD") }}'
-delegate_to: somehost
-```

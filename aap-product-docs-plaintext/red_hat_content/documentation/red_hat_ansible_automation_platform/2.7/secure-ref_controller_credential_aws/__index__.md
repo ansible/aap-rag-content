@@ -25,14 +25,3 @@ To use implicit IAM role credentials, do not attach AWS cloud credentials in aut
 
 Attaching your AWS cloud credential to your job template forces the use of your AWS credentials, not your IAM role credentials.
 
-## Access Amazon EC2 credentials in an Ansible Playbook
-
-You can get AWS credential parameters from a job runtime environment:
-
-```
-vars:
-aws:
-access_key: '{{ lookup("env", "AWS_ACCESS_KEY_ID") }}'
-secret_key: '{{ lookup("env", "AWS_SECRET_ACCESS_KEY") }}'
-security_token: '{{ lookup("env", "AWS_SECURITY_TOKEN") }}'
-```

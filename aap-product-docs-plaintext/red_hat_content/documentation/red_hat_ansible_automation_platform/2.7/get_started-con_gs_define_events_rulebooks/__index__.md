@@ -4,17 +4,3 @@ An Ansible rulebook is a collection of rulesets that references one or more sour
 
 Rulebooks are to Event-Driven Ansible what playbooks are to Ansible Automation Platform as a whole. Like a playbook, a rulebook defines automation tasks for the platform, along with when they should be triggered.
 
-## Rulebook actions
-
-Rulebooks use an "if-this-then-that” logic that tells Event-Driven Ansible what actions to activate when a rule is triggered. Event-Driven Ansible listens to the controller event stream and, when an event triggers a rule, activates an automation action in response.
-
-Rulebooks can trigger the following activations:
-
--  `run_job_template`
-- `run_playbook` (only supported with ansible-rulebook CLI)
--  `debug`
--  `print_event`
--  `set_fact`
--  `post_event`
--  `retract_fact`
--  `shutdown`

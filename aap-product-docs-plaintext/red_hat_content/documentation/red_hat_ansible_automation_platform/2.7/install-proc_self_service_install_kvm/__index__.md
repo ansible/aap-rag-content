@@ -110,20 +110,3 @@ All three services should show `active (running)`.
 
 Continue to [Connect and verify Ansible automation portal](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_connect_verify "After deploying the Ansible automation portal appliance, update the OAuth redirect URI, verify service health, and sign in to the portal.") to complete the post-installation steps.
 
-## Remove the VM
-
-Delete the VM and its storage after an evaluation.
-
-### About this task
-
-To delete the VM and its storage after an evaluation, run the following commands.
-
-### Procedure
-
-Destroy the VM, remove its definition and storage, and clean up the working directory.
-
-```terminal
-$ sudo virsh destroy "$VM_NAME"
-$ sudo virsh undefine "$VM_NAME" --remove-all-storage
-$ rm -rf "$WORK_DIR"
-```

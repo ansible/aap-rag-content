@@ -39,27 +39,3 @@ https_proxy: 'https://192.168.0.XXX:3128'
 no_proxy: 10.0.0.0/8
 ```
 
-## Modify a deployed instance
-
-Apply configuration changes to a deployed Automation Controller instance by updating the Operator settings and redeploying the pods to ensure your new environment variables take effect.
-
-The configuration is stored as a ConfigMap resource. See it in the **OCP console > ConfigMaps > <instancename>-automationcontroller-configmap**.
-
-To modify the settings after deployment, use the Operator.
-
-After editing `extra_settings`, perform the deployment again.
-
-Go to **OCP console > Deployments > your instance > Decrease the Pod count > Increase the Pod count**.
-
-You can also redeploy it in the command line utility as follows:
-
-```
-oc scale --replicas=0 deployment.apps/<instancename> -n ansible-automation-platform deployment.apps/<instancename> scaled
-oc scale --replicas=1 deployment.apps/<instancename> -n ansible-automation-platform deployment.apps/<instancename> scaled
-```
-
-**Verify**
-
-See the settings in the Web UI at **Settings > Jobs settings > Extra Environment Variables**.
-
-If you need to set another value, you can define it in the same way. `extra_settings` settings is stored statically in the `/etc/tower/settings.py` file in the`automationcontroller` instance.

@@ -13,10 +13,3 @@ From the introduction of Ansible Automation Platform 2, our promise has been to 
 
 Because your team is not just preparing for the future, you are automating for it.
 
-## Platform services in 2.6
-
-These are the major service versions in Ansible Automation Platform 2.6. For more current information, see the entire [Life Cycle](https://access.redhat.com/support/policy/updates/ansible-automation-platform).
-
-| Ansible-core version | Ansible Automation Platform UI version | Automation controller (automation execution) version | Automation hub (automation content) version | Event-Driven Ansible controller (automation decisions) version | Platform gateway version |
-| -------------------- | -------------------------------------- | ---------------------------------------------------- | ------------------------------------------- | -------------------------------------------------------------- | ------------------------ |
-| <br>2.16             | <br>2.6.1                              | <br>4.7.1                                            | <br>4.11.0                                  | <br>1.2.0                                                      | <br>2.6.20251001         |
