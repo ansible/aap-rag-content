@@ -68,7 +68,7 @@ dependencies = [
     "filelock==3.20.3",
     "llama-stack-client==0.4.3",
     "llama-stack==0.4.3",
-    "llama-stack-api==0.4.4",  # Must match llama-stack version
+    "llama-stack-api==0.7.2",  # Must match llama-stack version
     "pillow==12.2.0", # Transient dep pinned to handle CVE-2026-40192
     "pyjwt>=2.13.0",  # Transient dep pinned for CVE-2026-48526
     "python-dotenv>=1.2.2", # CVE-2026-28684

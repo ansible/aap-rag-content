@@ -1014,9 +1014,9 @@ llama-stack==0.4.3 \
     --hash=sha256:423207eae2b640894992a9075ff9dd6300ff904ab06a49fe38cfe0bb809d4669 \
     --hash=sha256:70d379ae9dbb5b1d0693f14054d9817aba183ffcd805133f0a4442baee132c6d
     # via aap-rag-content (pyproject.toml)
-llama-stack-api==0.4.4 \
-    --hash=sha256:3973ca3bacf86916e04e521f77e7909533eec7364d32c3eabc35dc2976dbfe7d \
-    --hash=sha256:7bbc63330ed186502dcd48f65cae014dbeb788ba5690be738c98693cfcd2f599
+llama-stack-api==0.7.2 \
+    --hash=sha256:ab6939de33a0664b5d35be4985ec038ee205b5242bb01e3e97aa55728e7f7b1d \
+    --hash=sha256:b25b6bb25f275791affaa334ef119b5ec3df4da69c8a1d5ef2ea3fccbe18b1f9
     # via
     #   aap-rag-content (pyproject.toml)
     #   llama-stack
