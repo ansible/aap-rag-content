@@ -98,7 +98,7 @@ jobs:
       - name: Upload Python coverage to Codecov
         # Skip for fork PRs where secrets are not available
         if: always() && (github.event.pull_request.head.repo.full_name == github.repository || github.event_name != 'pull_request')
-        uses: codecov/codecov-action@0f8570b1a125f4937846a11fcfa3bcd548bd8c97 # v4.6.0
+        uses: codecov/codecov-action@b9fd7d16f6d7d1b5d2bec1a2887e65ceed900238 # v4.6.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           url: ${{ vars.CODECOV_URL }}
