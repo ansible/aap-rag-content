@@ -1010,9 +1010,9 @@ jsonschema-specifications==2025.9.1 \
     --hash=sha256:98802fee3a11ee76ecaca44429fda8a41bff98b00a0f2838151b113f210cc6fe \
     --hash=sha256:b540987f239e745613c7a9176f3edb72b832a4ac465cf02712288397832b5e8d
     # via jsonschema
-llama-stack==0.4.3 \
-    --hash=sha256:423207eae2b640894992a9075ff9dd6300ff904ab06a49fe38cfe0bb809d4669 \
-    --hash=sha256:70d379ae9dbb5b1d0693f14054d9817aba183ffcd805133f0a4442baee132c6d
+llama-stack==0.7.2 \
+    --hash=sha256:5a48cb47c334f8b2b3bc42eb79dd922e538d95292753b877bbb5eb3035db3aba \
+    --hash=sha256:8894b082e816c4b622f81fbeaa0a7a4684433f1a8b325e33f79732461b2496b8
     # via aap-rag-content (pyproject.toml)
 llama-stack-api==0.4.4 \
     --hash=sha256:3973ca3bacf86916e04e521f77e7909533eec7364d32c3eabc35dc2976dbfe7d \
