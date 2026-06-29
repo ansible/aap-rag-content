@@ -2667,9 +2667,9 @@ transformers==5.9.0 \
     --hash=sha256:1d19509bcff7028ebc6b277d71caa712e8353778463d38764237d14b42b52788 \
     --hash=sha256:25997cb8fa6053533171634b6162d7df54346530ec2aa9b42bb834e63668c842
     # via sentence-transformers
-typer==0.25.1 \
-    --hash=sha256:75caa44ed46a03fb2dab8808753ffacdbfea88495e74c85a28c5eefcf5f39c89 \
-    --hash=sha256:9616eb8853a09ffeabab1698952f33c6f29ffdbceb4eaeecf571880e8d7664cc
+typer==0.26.8 \
+    --hash=sha256:3512ca79ac5c11113414b36e80281b872884477722440691c89d1112e321a49c \
+    --hash=sha256:c244a6bd558886fe3f8780efb6bdd28bb9aff005a94eedebaa5cb32926fe2f7e
     # via
     #   huggingface-hub
     #   transformers
