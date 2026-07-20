@@ -1766,9 +1766,9 @@ pyaml==26.2.1 \
     --hash=sha256:489dd82997235d4cfcf76a6287fce2f075487d77a6567c271e8d790583690c68 \
     --hash=sha256:6261c2f0a2f33245286c794ad6ec234be33a73d2b05427079fd343e2812a87cf
     # via llama-stack-client
-pyasn1==0.6.3 \
-    --hash=sha256:697a8ecd6d98891189184ca1fa05d1bb00e2f84b5977c481452050549c8a72cf \
-    --hash=sha256:a80184d120f0864a52a073acc6fc642847d0be408e7c7252f31390c0f4eadcde
+pyasn1==0.6.4 \
+    --hash=sha256:9c447d8431c947fe4c8febc4ed9e760bc29011a5b01e5c74b67025bd9fb8ce81 \
+    --hash=sha256:deda9277cfd454080ec40b207fb6df82206a3a2688735233cdcd8d3d565f088b
     # via aap-rag-content (pyproject.toml)
 pycparser==3.0 \
     --hash=sha256:600f49d217304a5902ac3c37e1281c9fe94e4d0489de643a9504c5cdfdfc6b29 \
