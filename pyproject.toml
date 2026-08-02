@@ -62,10 +62,10 @@ dependencies = [
     # aiosqlite 0.22+ hangs on exit due to llama-stack not closing connections properly
     # https://github.com/llamastack/llama-stack/issues/4587
     "aiosqlite==0.22.1",
-    "chardet==5.2.0",
+    "chardet==7.4.3",
     "cryptography==46.0.7", # Transient dep pinned to handle CVE
     "faiss-cpu==1.12",
-    "filelock==3.20.3",
+    "filelock==3.32.2",
     "llama-stack-client==0.4.3",
     "llama-stack==0.4.3",
     "llama-stack-api==0.4.4",  # Must match llama-stack version
@@ -73,10 +73,10 @@ dependencies = [
     "pyjwt>=2.13.0",  # Transient dep pinned for CVE-2026-48526
     "python-dotenv>=1.2.2", # CVE-2026-28684
     "pyasn1==0.6.4",  # CVE-2026-59886
-    "python-multipart==0.0.27", # CVE-2026-42561
-    "requests==2.32.5",
+    "python-multipart==0.0.32", # CVE-2026-42561
+    "requests==2.34.2",
     "sentence-transformers==5.3.0",
-    "sqlalchemy[asyncio]==2.0.46",
+    "sqlalchemy[asyncio]==2.0.51",
     "starlette>=1.3.1",  # Bumped for CVE-2026-54283
     "torch",
     "urllib3==2.7.0",
