@@ -57,7 +57,7 @@ requires-dist = [
     { name = "filelock", specifier = "==3.32.2" },
     { name = "llama-stack", specifier = "==0.4.3" },
     { name = "llama-stack-api", specifier = "==0.4.4" },
-    { name = "llama-stack-client", specifier = "==0.4.3" },
+    { name = "llama-stack-client", specifier = "==0.7.5" },
     { name = "pillow", specifier = "==12.3.0" },
     { name = "pyasn1", specifier = "==0.6.4" },
     { name = "pyjwt", specifier = ">=2.13.0" },
@@ -775,7 +775,7 @@ wheels = [
 
 [[package]]
 name = "llama-stack-client"
-version = "0.4.3"
+version = "0.7.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anyio" },
@@ -794,9 +794,9 @@ dependencies = [
     { name = "tqdm" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/db/3d/2aaeeef910e821ef7d3e65f3d773ba183cc84b7852f877396f64619a250c/llama_stack_client-0.4.3.tar.gz", hash = "sha256:cb807be258206e8fedeb5e5ceba7be7108d3badb31d74199406808c3d1679c35", size = 352952, upload-time = "2026-01-26T21:45:09.725Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/dc/89/141b8b50fc9ec5e99d1cc0fcac096f48f7235d94088694b14298f0b8621f/llama_stack_client-0.7.5.tar.gz", hash = "sha256:80d419bbcb8b1cec2e190536e576576ed2fbbf47882465d72fc6061ef9dcadb2", size = 372960, upload-time = "2026-07-27T14:30:55.176Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/1e/39/193aad0d49d834539fdc04c5f774fda22283267aff2400b68ffeb307474c/llama_stack_client-0.4.3-py3-none-any.whl", hash = "sha256:97b8cc5032bad4f0cdd1b0ae992cf44f5554679d315b7c40f46deb358c041f50", size = 375940, upload-time = "2026-01-26T21:45:08.067Z" },
+    { url = "https://files.pythonhosted.org/packages/a6/e1/01a1887689422da1f4e586c5362d2959317d1faee9cfee6e46d9b9ee772a/llama_stack_client-0.7.5-py3-none-any.whl", hash = "sha256:fd3fefff6c8edf18d3e6e3a951dae350b0f28a2b9ec6c9faa368d03f72a16db4", size = 375337, upload-time = "2026-07-27T14:30:53.62Z" },
 ]
 
 [[package]]
