@@ -63,7 +63,7 @@ dependencies = [
     # https://github.com/llamastack/llama-stack/issues/4587
     "aiosqlite==0.22.1",
     "chardet==5.2.0",
-    "cryptography==50.0.0", # Transient dep pinned to handle CVE
+    "cryptography>=50.0.0,<51", # Transient dep pinned to handle CVE
     "faiss-cpu==1.12",
     "filelock==3.32.2",
     "llama-stack-client==0.4.3",
@@ -77,7 +77,7 @@ dependencies = [
     "requests==2.34.2",
     "sentence-transformers==5.3.0",
     "sqlalchemy[asyncio]==2.0.51",
-    "starlette>=1.3.1",  # Bumped for CVE-2026-54283
+    "starlette>=1.3.1,<2",  # Bumped for CVE-2026-54283
     "torch",
     "urllib3==2.7.0",
 ]
