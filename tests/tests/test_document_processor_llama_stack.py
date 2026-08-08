@@ -482,8 +482,9 @@ registered_resources:
             new=AsyncMock(side_effect=[(True, None), (False, "boom")]),
         )
 
+        coro = doc._upload_and_process_files(client, "test-index")
         with pytest.raises(RuntimeError, match="Failed to process 1/2 files"):
-            asyncio.run(doc._upload_and_process_files(client, "test-index"))
+            asyncio.run(coro)
 
     def _test_save(self, mocker, config):
         """Helper function to set up and verify save functionality."""
