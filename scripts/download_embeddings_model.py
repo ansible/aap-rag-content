@@ -4,7 +4,7 @@ import argparse
 import os
 import shutil
 
-from aap_rag_content.utils import normalize_cli_path
+from aap_rag_content.utils import resolve_within_cwd
 
 if __name__ == "__main__":
 
@@ -21,32 +21,20 @@ if __name__ == "__main__":
 
     from huggingface_hub import snapshot_download
 
-    # OLS-823: sanitize local directory
-    local_directory = os.path.normpath("/" + args.local_dir).lstrip("/")
-    if local_directory == "":
-        local_directory = "."
-    local_directory = normalize_cli_path(local_directory)
+    # OLS-823: validate local directory stays under the working directory
+    local_directory = resolve_within_cwd(args.local_dir)
 
-    snapshot_download(
-        repo_id=args.hf_repo_id, local_dir=normalize_cli_path(local_directory)
-    )
+    snapshot_download(repo_id=args.hf_repo_id, local_dir=local_directory)
 
     # workaround for https://github.com/UKPLab/sentence-transformers/pull/2460
-    os.makedirs(
-        normalize_cli_path(os.path.join(local_directory, "2_Normalize")),
-        exist_ok=True,
-    )
+    os.makedirs(os.path.join(local_directory, "2_Normalize"), exist_ok=True)
 
     # pretend local_dir is HF cache
-    with open(
-        normalize_cli_path(os.path.join(local_directory, "version.txt")),
-        "w",
-        encoding="utf-8",
-    ) as f:
+    with open(os.path.join(local_directory, "version.txt"), "w", encoding="utf-8") as f:
         f.write("1")
 
     # remove pytorch_model.bin, load the model from model.safetensors
-    os.remove(normalize_cli_path(os.path.join(local_directory, "pytorch_model.bin")))
+    os.remove(os.path.join(local_directory, "pytorch_model.bin"))
 
-    shutil.rmtree(normalize_cli_path(os.path.join(local_directory, "onnx")))
-    shutil.rmtree(normalize_cli_path(os.path.join(local_directory, "openvino")))
+    shutil.rmtree(os.path.join(local_directory, "onnx"))
+    shutil.rmtree(os.path.join(local_directory, "openvino"))

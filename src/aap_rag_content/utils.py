@@ -173,3 +173,27 @@ def normalize_cli_path(path: str) -> str:
         The normalized path, safe to pass to filesystem calls.
     """
     return os.path.normpath(path)
+
+
+def resolve_within_cwd(path: str) -> str:
+    """Resolve a CLI-supplied path and reject it if it escapes the working directory.
+
+    Unlike normalize_cli_path(), this asserts containment rather than merely
+    normalizing: the returned path is guaranteed to be the current directory
+    itself or a descendant of it.
+
+    Args:
+        path: A path provided via a CLI argument.
+
+    Returns:
+        The resolved absolute path.
+
+    Raises:
+        ValueError: If the resolved path is not the current directory or a
+            descendant of it.
+    """
+    base = Path.cwd().resolve()
+    resolved = (base / path).resolve()
+    if resolved != base and base not in resolved.parents:
+        raise ValueError(f"Path escapes the working directory: {path}")
+    return str(resolved)

@@ -143,3 +143,30 @@ class TestNormalizeCliPath:
     def test_leaves_absolute_path_unchanged(self):
         """A clean absolute path is returned as-is."""
         assert utils.normalize_cli_path("/tmp/output") == "/tmp/output"
+
+
+class TestResolveWithinCwd:
+    """Test cases for resolve_within_cwd()."""
+
+    def test_relative_path_resolves_under_cwd(self):
+        """A simple relative path resolves to a descendant of cwd."""
+        from pathlib import Path
+
+        resolved = utils.resolve_within_cwd("some/output/dir")
+        assert Path(resolved) == Path.cwd() / "some/output/dir"
+
+    def test_empty_path_resolves_to_cwd(self):
+        """An empty path resolves to the working directory itself."""
+        from pathlib import Path
+
+        assert Path(utils.resolve_within_cwd("")) == Path.cwd()
+
+    def test_dot_dot_escape_raises(self):
+        """A path that escapes the working directory via '..' is rejected."""
+        with pytest.raises(ValueError, match="escapes the working directory"):
+            utils.resolve_within_cwd("../../etc/passwd")
+
+    def test_absolute_path_outside_cwd_raises(self):
+        """An absolute path outside cwd is rejected even without '..'."""
+        with pytest.raises(ValueError, match="escapes the working directory"):
+            utils.resolve_within_cwd("/etc/passwd")
