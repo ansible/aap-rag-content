@@ -141,6 +141,93 @@ class TestDocumentProcessor:
         doc_processor.db.add_docs.assert_called_once_with(docs)
         assert len(docs) == doc_processor._num_embedded_files
 
+    def _make_processor_with_docs(self, mock_processor, mocker, docs):
+        """Build a DocumentProcessor whose reader.load_data() returns the given docs."""
+        params = mock_processor["params"].copy()
+        params["vector_store_type"] = "llamastack-faiss"
+        doc_processor = document_processor.DocumentProcessor(**params)
+
+        reader_mock = mocker.patch.object(document_processor, "SimpleDirectoryReader")
+        reader_mock.return_value.load_data.return_value = docs
+        return doc_processor
+
+    def test_process_unreachable_warn_keeps_all_docs(self, mock_processor, mocker):
+        """unreachable_action='warn' (default) keeps unreachable docs untouched."""
+        docs = [
+            mocker.Mock(metadata={"title": "a", "url_reachable": True}),
+            mocker.Mock(metadata={"title": "b", "url_reachable": False}),
+        ]
+        doc_processor = self._make_processor_with_docs(mock_processor, mocker, docs)
+
+        doc_processor.process(mock.sentinel.docs_dir, mocker.Mock())
+
+        doc_processor.db.add_docs.assert_called_once_with(docs)
+        assert doc_processor._num_embedded_files == len(docs)
+
+    def test_process_fail_raises_on_unreachable(self, mock_processor, mocker):
+        """unreachable_action='fail' raises RuntimeError when any doc is unreachable."""
+        docs = [
+            mocker.Mock(metadata={"title": "a", "url_reachable": True}),
+            mocker.Mock(metadata={"title": "b", "url_reachable": False}),
+        ]
+        doc_processor = self._make_processor_with_docs(mock_processor, mocker, docs)
+
+        with pytest.raises(RuntimeError, match="unreachable"):
+            doc_processor.process(
+                mock.sentinel.docs_dir, mocker.Mock(), unreachable_action="fail"
+            )
+        doc_processor.db.add_docs.assert_not_called()
+
+    def test_process_fail_passes_when_all_reachable(self, mock_processor, mocker):
+        """unreachable_action='fail' does not raise when every doc is reachable."""
+        docs = [
+            mocker.Mock(metadata={"title": "a", "url_reachable": True}),
+            mocker.Mock(metadata={"title": "b", "url_reachable": True}),
+        ]
+        doc_processor = self._make_processor_with_docs(mock_processor, mocker, docs)
+
+        doc_processor.process(
+            mock.sentinel.docs_dir, mocker.Mock(), unreachable_action="fail"
+        )
+        doc_processor.db.add_docs.assert_called_once_with(docs)
+
+    def test_process_drop_removes_unreachable_docs(self, mock_processor, mocker):
+        """unreachable_action='drop' removes unreachable docs before saving."""
+        reachable = mocker.Mock(metadata={"title": "a", "url_reachable": True})
+        unreachable = mocker.Mock(metadata={"title": "b", "url_reachable": False})
+        docs = [reachable, unreachable]
+        doc_processor = self._make_processor_with_docs(mock_processor, mocker, docs)
+
+        doc_processor.process(
+            mock.sentinel.docs_dir, mocker.Mock(), unreachable_action="drop"
+        )
+
+        doc_processor.db.add_docs.assert_called_once_with([reachable])
+        assert doc_processor._num_embedded_files == 1
+
+    def test_process_drop_keeps_ignore_listed_docs(self, mock_processor, mocker):
+        """unreachable_action='drop' keeps docs whose title is in ignore_list even if unreachable."""
+        reachable = mocker.Mock(metadata={"title": "a", "url_reachable": True})
+        ignored_unreachable = mocker.Mock(
+            metadata={"title": "b", "url_reachable": False}
+        )
+        dropped_unreachable = mocker.Mock(
+            metadata={"title": "c", "url_reachable": False}
+        )
+        docs = [reachable, ignored_unreachable, dropped_unreachable]
+        doc_processor = self._make_processor_with_docs(mock_processor, mocker, docs)
+
+        doc_processor.process(
+            mock.sentinel.docs_dir,
+            mocker.Mock(),
+            unreachable_action="drop",
+            ignore_list=["b"],
+        )
+
+        saved_docs = doc_processor.db.add_docs.call_args[0][0]
+        assert set(saved_docs) == {reachable, ignored_unreachable}
+        assert dropped_unreachable not in saved_docs
+
     def test_save(self, mock_processor):
         """Test saving the document processor's database to disk."""
         params = mock_processor["params"].copy()
