@@ -781,5 +781,4 @@ class DocumentProcessor:
 
     def save(self, index: str, output_dir: str) -> None:
         """Save all the documents we've added to the vector database."""
-        exec_time = int(time.time() - self._start_time)
-        self.db.save(index, output_dir, self._num_embedded_files, exec_time)
+        self.db.save(index, output_dir)

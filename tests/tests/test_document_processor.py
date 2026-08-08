@@ -236,3 +236,7 @@ class TestDocumentProcessor:
         doc_processor = document_processor.DocumentProcessor(**params)
 
         doc_processor.save(mock.sentinel.index, mock.sentinel.output_dir)
+
+        doc_processor.db.save.assert_called_once_with(
+            mock.sentinel.index, mock.sentinel.output_dir
+        )
