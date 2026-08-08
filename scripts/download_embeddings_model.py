@@ -4,6 +4,8 @@ import argparse
 import os
 import shutil
 
+from aap_rag_content.utils import normalize_cli_path
+
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(
@@ -23,6 +25,7 @@ if __name__ == "__main__":
     local_directory = os.path.normpath("/" + args.local_dir).lstrip("/")
     if local_directory == "":
         local_directory = "."
+    local_directory = normalize_cli_path(local_directory)
 
     snapshot_download(repo_id=args.hf_repo_id, local_dir=local_directory)
 

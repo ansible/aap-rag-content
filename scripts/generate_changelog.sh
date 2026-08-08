@@ -27,7 +27,7 @@ REPO_PUBLISHED_DATE="$(date -d "${REPO_PUBLISHED}"  '+%A, %B %d, %Y')"
 echo -e "# ${REPO_NAME} Versions\n\nHere is the most recent update for ${REPO_NAME}:\n" > ${CHANGELOGS_FILE}
 echo "- ${REPO_NAME} Version ${REPO_TAG_NAME} Released on ${REPO_PUBLISHED_DATE}">> ${CHANGELOGS_FILE}
 
-if [ ! -d "${METADATA_DIR}" ]; then
+if [[ ! -d "${METADATA_DIR}" ]]; then
   mkdir -p ${METADATA_DIR}
 fi
 echo "{ \"url\":\"${REPO_BASE_URL}\" }"> ${METADATA_FILE}

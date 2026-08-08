@@ -122,3 +122,24 @@ class TestUtils:
 
         args = parser.parse_args(["--suppress-ping-url"])
         assert args.suppress_ping_url is True
+
+
+class TestNormalizeCliPath:
+    """Test cases for normalize_cli_path()."""
+
+    def test_collapses_dot_dot_segments(self):
+        """A '..'-escaping path is collapsed to its literal normalized form."""
+        assert utils.normalize_cli_path("../../etc/passwd") == "../../etc/passwd"
+        assert utils.normalize_cli_path("a/b/../c") == "a/c"
+
+    def test_collapses_redundant_separators(self):
+        """Redundant slashes and './' segments are removed."""
+        assert utils.normalize_cli_path("a//b/./c/") == "a/b/c"
+
+    def test_leaves_simple_relative_path_unchanged(self):
+        """A simple relative path is returned as-is."""
+        assert utils.normalize_cli_path("output_dir") == "output_dir"
+
+    def test_leaves_absolute_path_unchanged(self):
+        """A clean absolute path is returned as-is."""
+        assert utils.normalize_cli_path("/tmp/output") == "/tmp/output"
