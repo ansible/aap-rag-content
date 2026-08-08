@@ -408,6 +408,84 @@ registered_resources:
         )
         assert doc.documents == fake_out_docs
 
+    def test_upload_single_file_with_retry_succeeds_after_transient_failure(
+        self, mocker, llama_stack_processor
+    ):
+        """A failed attempt is retried and a later success returns (True, None)."""
+        import asyncio
+
+        doc = document_processor._LlamaStackDB(llama_stack_processor["config"])
+        client = mocker.Mock()
+        client.files.create = AsyncMock(return_value=mocker.Mock(id="file_1"))
+        client.vector_stores.files.create = AsyncMock()
+
+        failed = mocker.Mock(status="failed", last_error="boom")
+        completed = mocker.Mock(status="completed")
+        mocker.patch.object(
+            doc,
+            "_wait_for_file_processing",
+            new=AsyncMock(side_effect=[failed, completed]),
+        )
+
+        rag_doc = mocker.Mock(document_id="doc1", content="hello", metadata={})
+        success, error = asyncio.run(
+            doc._upload_single_file_with_retry(
+                client, mocker.Mock(id="vs_1"), rag_doc, {}
+            )
+        )
+
+        assert success is True
+        assert error is None
+        assert client.files.create.await_count == 2
+
+    def test_upload_single_file_with_retry_exhausts_retries(
+        self, mocker, llama_stack_processor
+    ):
+        """Every attempt raising returns (False, error) after max_retries."""
+        import asyncio
+
+        doc = document_processor._LlamaStackDB(llama_stack_processor["config"])
+        client = mocker.Mock()
+        client.files.create = AsyncMock(side_effect=RuntimeError("network down"))
+        sleep_mock = mocker.patch(
+            "aap_rag_content.document_processor.asyncio.sleep", new=AsyncMock()
+        )
+
+        rag_doc = mocker.Mock(document_id="doc1", content="hello", metadata={})
+        success, error = asyncio.run(
+            doc._upload_single_file_with_retry(
+                client, mocker.Mock(id="vs_1"), rag_doc, {}, max_retries=3
+            )
+        )
+
+        assert success is False
+        assert error == "network down"
+        assert client.files.create.await_count == 3
+        assert sleep_mock.await_count == 2  # slept between attempts, not after the last
+
+    def test_upload_and_process_files_raises_when_docs_fail(
+        self, mocker, llama_stack_processor
+    ):
+        """_upload_and_process_files raises RuntimeError when any doc fails all retries."""
+        import asyncio
+
+        doc = document_processor._LlamaStackDB(llama_stack_processor["config"])
+        client = mocker.Mock()
+        client.vector_stores.create = AsyncMock(return_value=mocker.Mock(id="vs_1"))
+        doc.documents = [
+            mocker.Mock(document_id="doc1", content="a", metadata={}),
+            mocker.Mock(document_id="doc2", content="b", metadata={}),
+        ]
+        mocker.patch.object(
+            doc,
+            "_upload_single_file_with_retry",
+            new=AsyncMock(side_effect=[(True, None), (False, "boom")]),
+        )
+
+        coro = doc._upload_and_process_files(client, "test-index")
+        with pytest.raises(RuntimeError, match="Failed to process 1/2 files"):
+            asyncio.run(coro)
+
     def _test_save(self, mocker, config):
         """Helper function to set up and verify save functionality."""
         doc = document_processor._LlamaStackDB(config)
