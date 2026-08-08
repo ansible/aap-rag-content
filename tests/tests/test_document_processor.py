@@ -171,10 +171,11 @@ class TestDocumentProcessor:
             mocker.Mock(metadata={"title": "b", "url_reachable": False}),
         ]
         doc_processor = self._make_processor_with_docs(mock_processor, mocker, docs)
+        metadata = mocker.Mock()
 
         with pytest.raises(RuntimeError, match="unreachable"):
             doc_processor.process(
-                mock.sentinel.docs_dir, mocker.Mock(), unreachable_action="fail"
+                mock.sentinel.docs_dir, metadata, unreachable_action="fail"
             )
         doc_processor.db.add_docs.assert_not_called()
 
