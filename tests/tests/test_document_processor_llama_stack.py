@@ -539,6 +539,21 @@ registered_resources:
 
         return client_instance
 
+    def test_save_logs_and_reraises_on_failure(self, mocker, llama_stack_processor):
+        """save() logs via LOG.exception and re-raises when llama-stack fails."""
+        doc = document_processor._LlamaStackDB(llama_stack_processor["config"])
+        mocker.patch.object(doc, "write_yaml_config")
+        mocker.patch("os.makedirs")
+        log_mock = mocker.patch.object(document_processor, "LOG")
+        mocker.patch.object(
+            doc, "_run_llama_stack", new=AsyncMock(side_effect=RuntimeError("boom"))
+        )
+
+        with pytest.raises(RuntimeError, match="boom"):
+            doc.save(mock.sentinel.index, "out_dir")
+
+        log_mock.exception.assert_called_once_with("Failed to insert document")
+
     def test_save_manual_chunking(self, mocker, llama_stack_processor):
         """Test saving documents with manual chunking workflow."""
         client = self._test_save(mocker, llama_stack_processor["config"])

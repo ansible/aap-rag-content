@@ -4,8 +4,47 @@ import argparse
 import os
 import shutil
 
-if __name__ == "__main__":
+from aap_rag_content.utils import resolve_within_cwd
 
+
+def download_model(local_dir: str, hf_repo_id: str) -> str:
+    """Download a model snapshot from HuggingFace and prepare it for offline use.
+
+    Args:
+        local_dir: CLI-supplied directory to download the model to. Must stay
+            within the working directory.
+        hf_repo_id: HuggingFace repo id of the model.
+
+    Returns:
+        The resolved absolute path the model was downloaded to.
+    """
+    os.environ["HF_HUB_DISABLE_PROGRESS_BARS"] = "1"
+
+    from huggingface_hub import snapshot_download
+
+    # OLS-823: validate local directory stays under the working directory
+    local_directory = resolve_within_cwd(local_dir)
+
+    snapshot_download(repo_id=hf_repo_id, local_dir=local_directory)
+
+    # workaround for https://github.com/UKPLab/sentence-transformers/pull/2460
+    os.makedirs(os.path.join(local_directory, "2_Normalize"), exist_ok=True)
+
+    # pretend local_dir is HF cache
+    with open(os.path.join(local_directory, "version.txt"), "w", encoding="utf-8") as f:
+        f.write("1")
+
+    # remove pytorch_model.bin, load the model from model.safetensors
+    os.remove(os.path.join(local_directory, "pytorch_model.bin"))
+
+    shutil.rmtree(os.path.join(local_directory, "onnx"))
+    shutil.rmtree(os.path.join(local_directory, "openvino"))
+
+    return local_directory
+
+
+def main() -> None:
+    """Parse CLI arguments and download the requested model."""
     parser = argparse.ArgumentParser(
         description="Script to download models from HuggingFace"
     )
@@ -15,26 +54,8 @@ if __name__ == "__main__":
     parser.add_argument("-r", "--hf-repo-id", required=True, help="Model repo id")
     args = parser.parse_args()
 
-    os.environ["HF_HUB_DISABLE_PROGRESS_BARS"] = "1"
+    download_model(args.local_dir, args.hf_repo_id)
 
-    from huggingface_hub import snapshot_download
 
-    snapshot_download(repo_id=args.hf_repo_id, local_dir=args.local_dir)
-
-    # workaround for https://github.com/UKPLab/sentence-transformers/pull/2460
-    os.makedirs(os.path.join(args.local_dir, "2_Normalize"), exist_ok=True)
-
-    # OLS-823: sanitize local directory
-    local_directory = os.path.normpath("/" + args.local_dir).lstrip("/")
-    if local_directory == "":
-        local_directory = "."
-
-    # pretend local_dir is HF cache
-    with open(os.path.join(local_directory, "version.txt"), "w", encoding="utf-8") as f:
-        f.write("1")
-
-    # remove pytorch_model.bin, load the model from model.safetensors
-    os.remove(os.path.join(args.local_dir, "pytorch_model.bin"))
-
-    shutil.rmtree(os.path.join(args.local_dir, "onnx"))
-    shutil.rmtree(os.path.join(args.local_dir, "openvino"))
+if __name__ == "__main__":
+    main()
