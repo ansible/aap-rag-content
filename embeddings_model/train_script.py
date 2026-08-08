@@ -28,6 +28,7 @@ import torch_xla.distributed.parallel_loader as pl
 import os
 from shutil import copyfile
 
+from aap_rag_content.utils import normalize_cli_path
 
 from transformers import (
     AdamW,
@@ -213,8 +214,7 @@ def produce_data(args, queue, filepaths, dataset_indices):
                                 break
                         
                         if not in_batch:
-                            for text in sample:
-                                texts_in_batch.add(text)
+                            texts_in_batch.update(sample)
                             batch_device.append(sample)
 
                     queue.put(batch_device)
@@ -291,6 +291,8 @@ if __name__ == "__main__":
     parser.add_argument('data_config', help="A data_config.json file")
     parser.add_argument('output')
     args = parser.parse_args()
+    args.output = normalize_cli_path(args.output)
+    args.data_config = normalize_cli_path(args.data_config)
 
     # Ensure global batch size is divisble by data_sample_size
     assert (args.batch_size*args.nprocs) % args.datasets_per_batch == 0

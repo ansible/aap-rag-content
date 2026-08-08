@@ -19,22 +19,22 @@ if __name__ == "__main__":
 
     from huggingface_hub import snapshot_download
 
-    snapshot_download(repo_id=args.hf_repo_id, local_dir=args.local_dir)
-
-    # workaround for https://github.com/UKPLab/sentence-transformers/pull/2460
-    os.makedirs(os.path.join(args.local_dir, "2_Normalize"), exist_ok=True)
-
     # OLS-823: sanitize local directory
     local_directory = os.path.normpath("/" + args.local_dir).lstrip("/")
     if local_directory == "":
         local_directory = "."
+
+    snapshot_download(repo_id=args.hf_repo_id, local_dir=local_directory)
+
+    # workaround for https://github.com/UKPLab/sentence-transformers/pull/2460
+    os.makedirs(os.path.join(local_directory, "2_Normalize"), exist_ok=True)
 
     # pretend local_dir is HF cache
     with open(os.path.join(local_directory, "version.txt"), "w", encoding="utf-8") as f:
         f.write("1")
 
     # remove pytorch_model.bin, load the model from model.safetensors
-    os.remove(os.path.join(args.local_dir, "pytorch_model.bin"))
+    os.remove(os.path.join(local_directory, "pytorch_model.bin"))
 
-    shutil.rmtree(os.path.join(args.local_dir, "onnx"))
-    shutil.rmtree(os.path.join(args.local_dir, "openvino"))
+    shutil.rmtree(os.path.join(local_directory, "onnx"))
+    shutil.rmtree(os.path.join(local_directory, "openvino"))

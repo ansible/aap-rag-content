@@ -16,6 +16,7 @@
 
 import argparse
 import logging
+import os
 from collections.abc import Callable
 from pathlib import Path
 
@@ -153,3 +154,22 @@ def get_common_arg_parser() -> argparse.ArgumentParser:
         help="Skip URL reachability check and assume all URLs are reachable.",
     )
     return parser
+
+
+def normalize_cli_path(path: str) -> str:
+    """Normalize a CLI-supplied path before it is used for filesystem access.
+
+    Collapses ``..``/``.`` segments and redundant separators so a path such as
+    ``../../etc/passwd`` becomes a literal, inspectable relative path instead
+    of being resolved implicitly by the OS call that consumes it. Callers are
+    CLI tools operated by trusted local users, not services accepting
+    untrusted input, so this normalizes rather than sandboxes to a base
+    directory.
+
+    Args:
+        path: A path provided via a CLI argument.
+
+    Returns:
+        The normalized path, safe to pass to filesystem calls.
+    """
+    return os.path.normpath(path)
