@@ -192,14 +192,11 @@ class AEMHTMLParser(HTMLParser):  # pylint: disable=too-many-instance-attributes
 
     def _extract_root_title_fallback(self, html_content):
         """Extract the document title from the first h1 with topictitle class."""
-        m = re.search(
-            r'<h1[^>]*class="[^"]*topictitle[^"]*"[^>]*>(.*?)</h1>',
-            html_content,
-            re.DOTALL,
-        )
-        if m:
-            title = re.sub(r"<[^>]+>", "", m.group(1))
-            self.root.title = " ".join(title.split())
+        for m in re.finditer(r"<h1\b[^>]*>(.*?)</h1>", html_content, re.DOTALL):
+            if "topictitle" in m.group(0):
+                title = re.sub(r"<[^>]+>", "", m.group(1))
+                self.root.title = " ".join(title.split())
+                break
 
 
 class TOCGenerator:  # pylint: disable=too-few-public-methods

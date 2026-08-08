@@ -111,7 +111,7 @@ class TestMetadataProcessor:
 
         result = md_processor.get_file_title(processor_data["file_path"])
 
-        assert "" == result
+        assert result == ""
         mock_file.assert_called_once_with(
             processor_data["file_path"], "r", encoding="utf-8"
         )

@@ -169,8 +169,8 @@ class SimpleDirectoryReader(BaseReader):
             doc_id = str(uuid.uuid4())
             return Document(text=text, metadata=metadata, doc_id=doc_id)
 
-        except Exception as e:
-            LOG.error("Failed to read file %s: %s", file_path, e)
+        except Exception:
+            LOG.exception("Failed to read file %s", file_path)
             return None
 
     def load_data(self, num_workers: Optional[int] = 0) -> list[Document]:

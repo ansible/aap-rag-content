@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$#" -ne 4 ]
+if [[ "$#" -ne 4 ]]
 then
   echo "Usage: generate_changelog.sh <name> <gh_api_base_url> <gh_base_url> <changelogs_file>"
   exit 1
@@ -11,8 +11,8 @@ REPO_API_BASE_URL=$2
 REPO_BASE_URL=$3
 CHANGELOGS_FILE=$4
 
-METADATA_DIR=`echo ${CHANGELOGS_FILE}|sed 's/\(.*\)\/\(.*\)txt/\1\/.metadata/'`
-METADATA_FILE=`echo ${CHANGELOGS_FILE}|sed 's/\(.*\)\/\(.*\)txt/\1\/.metadata\/\2json/'`
+METADATA_DIR=$(echo ${CHANGELOGS_FILE}|sed 's/\(.*\)\/\(.*\)txt/\1\/.metadata/')
+METADATA_FILE=$(echo ${CHANGELOGS_FILE}|sed 's/\(.*\)\/\(.*\)txt/\1\/.metadata\/\2json/')
 
 echo ${METADATA_DIR}
 echo ${METADATA_FILE}

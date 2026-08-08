@@ -72,11 +72,10 @@ class TestUtils:
         handlers = {"known": lambda args: None}
 
         # Simulate parsing an unknown command by mocking parse_args
+        parser_with_unknown = argparse.ArgumentParser()
+        parser_with_unknown.parse_args = lambda: argparse.Namespace(command="unknown")
+
         with pytest.raises(SystemExit) as exc_info:
-            parser_with_unknown = argparse.ArgumentParser()
-            parser_with_unknown.parse_args = lambda: argparse.Namespace(
-                command="unknown"
-            )
             utils.run_cli_command(parser_with_unknown, handlers)
 
         assert "Unknown command: unknown" in str(exc_info.value)
