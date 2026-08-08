@@ -240,10 +240,103 @@ class MimirParser:  # pylint: disable=too-many-instance-attributes
             self.process_md()
 
 
-def main():  # pragma: no cover  # pylint: disable=too-many-locals,too-many-branches,too-many-statements
+def _decrypt_and_extract_archive(in_file, out_file):  # pragma: no cover
+    """Decrypt the Mimir archive and extract the configured source directories."""
+    secret = os.getenv("MIMIR_ENC_SECRET")
+    if not secret:
+        print("Envvar MIMIR_ENC_SECRET is not defined.")
+        sys.exit(1)
+    openssl_cmd = (
+        f"openssl enc -aes-256-cbc -d -pbkdf2"
+        f" -pass pass:{secret}"
+        f" -in {in_file} -out {out_file}"
+    )
+    subprocess.run(openssl_cmd.split(" "), capture_output=True, text=True, check=True)
+    dirs = " ".join(SOURCE_DIRS)
+    output = subprocess.run(
+        f"tar xvzf {out_file} {dirs}".split(" "), capture_output=True, text=True, check=True
+    )
+    print(output)
+
+
+def _generate_toc_files():  # pragma: no cover
+    """Generate TOC json files from AEM HTML pages for each source directory."""
+    print("Generating TOC files from AEM HTML files...")
+    toc_script = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)), "aem-toc-generator.py"
+    )
+    for source_dir in SOURCE_DIRS:
+        if not os.path.isdir(source_dir):
+            continue
+        for doc_name in sorted(os.listdir(source_dir)):
+            aem_dir = os.path.join(source_dir, doc_name, "aem-page")
+            if not os.path.isdir(aem_dir):
+                continue
+            html_files = [f for f in os.listdir(aem_dir) if f.endswith(".html")]
+            if not html_files:
+                continue
+            input_path = os.path.join(aem_dir, html_files[0])
+            output_path = os.path.join(source_dir, doc_name, "toc", "toc.json")
+            subprocess.run(
+                [sys.executable, toc_script, "-i", input_path, "-o", output_path],
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+    print("TOC generation complete.")
+
+
+def _extract_kb_articles(out_file):  # pragma: no cover
+    """Extract knowledge base articles from the archive."""
+    print("Extracting knowledge base articles...")
+    output = subprocess.run(
+        f"tar xzf {out_file} {KNOWLEDGE_BASE_ARTICLES_DIR}".split(" "),
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    print(output.stdout)
+    print(output.stderr)
+    print("done!")
+
+
+def _cleanup_html_files():  # pragma: no cover
+    """Delete extracted HTML files, now that TOC/plaintext generation is done."""
+    print("Delete html files")
+    output = subprocess.run(
+        "find red_hat_content -name *.html -type f -delete".split(" "),
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    print(output)
+
+
+def _process_mimir_archive(in_file, out_file, args):  # pragma: no cover
+    """Decrypt, extract and post-process the Mimir archive, cleaning up on exit."""
+    try:
+        _decrypt_and_extract_archive(in_file, out_file)
+        _generate_toc_files()
+        if args.add_kb_articles:
+            _extract_kb_articles(out_file)
+        if args.keep_html:
+            print("Keeping html files")
+        else:
+            _cleanup_html_files()
+    except subprocess.CalledProcessError:
+        traceback.print_stack()
+        sys.exit(2)
+    finally:
+        if os.path.exists(in_file):
+            os.unlink(in_file)
+        if os.path.exists(out_file):
+            os.unlink(out_file)
+
+
+def main():  # pragma: no cover
     """Extract and parse Mimir archives into plaintext for RAG."""
     start = time.time()
-    try:  # pylint: disable=too-many-nested-blocks
+    try:
         arg_parser = argparse.ArgumentParser()
         arg_parser.add_argument("-o", "--out-dir", default="aap-product-docs-plaintext")
         arg_parser.add_argument("-m", "--max-level", default=3)
@@ -264,91 +357,7 @@ def main():  # pragma: no cover  # pylint: disable=too-many-locals,too-many-bran
         out_file = "mimir/mimir-extract-latest.tgz"
         in_file = out_file + ".enc"
         if os.path.exists(in_file):
-            try:
-                secret = os.getenv("MIMIR_ENC_SECRET")
-                if not secret:
-                    print("Envvar MIMIR_ENC_SECRET is not defined.")
-                    sys.exit(1)
-                openssl_cmd = (
-                    f"openssl enc -aes-256-cbc -d -pbkdf2"
-                    f" -pass pass:{secret}"
-                    f" -in {in_file} -out {out_file}"
-                )
-                subprocess.run(
-                    openssl_cmd.split(" "),
-                    capture_output=True,
-                    text=True,
-                    check=True,
-                )
-                dirs = " ".join(SOURCE_DIRS)
-                output = subprocess.run(
-                    f"tar xvzf {out_file} {dirs}".split(" "),
-                    capture_output=True,
-                    text=True,
-                    check=True,
-                )
-                print(output)
-                print("Generating TOC files from AEM HTML files...")
-                toc_script = os.path.join(
-                    os.path.dirname(os.path.abspath(__file__)),
-                    "aem-toc-generator.py",
-                )
-                for source_dir in SOURCE_DIRS:
-                    if not os.path.isdir(source_dir):
-                        continue
-                    for doc_name in sorted(os.listdir(source_dir)):
-                        aem_dir = os.path.join(source_dir, doc_name, "aem-page")
-                        if not os.path.isdir(aem_dir):
-                            continue
-                        html_files = [f for f in os.listdir(aem_dir) if f.endswith(".html")]
-                        if not html_files:
-                            continue
-                        input_path = os.path.join(aem_dir, html_files[0])
-                        output_path = os.path.join(source_dir, doc_name, "toc", "toc.json")
-                        subprocess.run(
-                            [
-                                sys.executable,
-                                toc_script,
-                                "-i",
-                                input_path,
-                                "-o",
-                                output_path,
-                            ],
-                            capture_output=True,
-                            text=True,
-                            check=True,
-                        )
-                print("TOC generation complete.")
-                if args.add_kb_articles:
-                    print("Extracting knowledge base articles...")
-                    output = subprocess.run(
-                        f"tar xzf {out_file} {KNOWLEDGE_BASE_ARTICLES_DIR}".split(" "),
-                        capture_output=True,
-                        text=True,
-                        check=True,
-                    )
-                    print(output.stdout)
-                    print(output.stderr)
-                    print("done!")
-                if args.keep_html:
-                    print("Keeping html files")
-                else:
-                    print("Delete html files")
-                    output = subprocess.run(
-                        "find red_hat_content -name *.html -type f -delete".split(" "),
-                        capture_output=True,
-                        text=True,
-                        check=True,
-                    )
-                    print(output)
-            except subprocess.CalledProcessError:
-                traceback.print_stack()
-                sys.exit(2)
-            finally:
-                if os.path.exists(in_file):
-                    os.unlink(in_file)
-                if os.path.exists(out_file):
-                    os.unlink(out_file)
+            _process_mimir_archive(in_file, out_file, args)
         else:
             print(f"{in_file} is not found. Skip the file extraction step.")
 
