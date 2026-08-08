@@ -27,17 +27,26 @@ if __name__ == "__main__":
         local_directory = "."
     local_directory = normalize_cli_path(local_directory)
 
-    snapshot_download(repo_id=args.hf_repo_id, local_dir=local_directory)
+    snapshot_download(
+        repo_id=args.hf_repo_id, local_dir=normalize_cli_path(local_directory)
+    )
 
     # workaround for https://github.com/UKPLab/sentence-transformers/pull/2460
-    os.makedirs(os.path.join(local_directory, "2_Normalize"), exist_ok=True)
+    os.makedirs(
+        normalize_cli_path(os.path.join(local_directory, "2_Normalize")),
+        exist_ok=True,
+    )
 
     # pretend local_dir is HF cache
-    with open(os.path.join(local_directory, "version.txt"), "w", encoding="utf-8") as f:
+    with open(
+        normalize_cli_path(os.path.join(local_directory, "version.txt")),
+        "w",
+        encoding="utf-8",
+    ) as f:
         f.write("1")
 
     # remove pytorch_model.bin, load the model from model.safetensors
-    os.remove(os.path.join(local_directory, "pytorch_model.bin"))
+    os.remove(normalize_cli_path(os.path.join(local_directory, "pytorch_model.bin")))
 
-    shutil.rmtree(os.path.join(local_directory, "onnx"))
-    shutil.rmtree(os.path.join(local_directory, "openvino"))
+    shutil.rmtree(normalize_cli_path(os.path.join(local_directory, "onnx")))
+    shutil.rmtree(normalize_cli_path(os.path.join(local_directory, "openvino")))
