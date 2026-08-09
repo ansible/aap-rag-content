@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi9/python-312 as builder
+FROM quay.io/lightspeed-core/rag-content-cpu as builder
 ARG EMBEDDING_MODEL=sentence-transformers/all-mpnet-base-v2
 ARG AAP_VERSION=2.6
 
@@ -10,17 +10,9 @@ COPY additional_docs ./additional_docs
 COPY solution-guides-plaintext ./solution-guides-plaintext
 
 COPY scripts/custom_processor_aap.py .
-COPY requirements.txt ./requirements.txt
-COPY embeddings_model ./embeddings_model
 COPY src/aap_rag_content ./aap_rag_content
 
-RUN python3.12 -m venv .venv
-RUN pip3.12 install --upgrade pip
-RUN pip3.12 install --no-cache-dir --extra-index-url https://download.pytorch.org/whl/cpu -r requirements.txt
-
-RUN cd embeddings_model; if [ ! -f model.safetensors ]; then  \
-        curl -L -O https://huggingface.co/sentence-transformers/all-mpnet-base-v2/resolve/9a3225965996d404b775526de6dbfe85d3368642/model.safetensors; \
-    fi
+RUN microdnf install -y gzip
 
 ENV PYTHONPATH=/rag-content
 RUN python custom_processor_aap.py  \
@@ -35,7 +27,8 @@ RUN python custom_processor_aap.py  \
 
 COPY tests ./tests
 COPY pyproject.toml ./pyproject.toml
-RUN pip3.12 install --no-cache-dir pytest
+RUN python3.12 -m ensurepip --default-pip
+RUN python3.12 -m pip install --no-cache-dir pytest
 RUN PYTHONPATH=/rag-content TRANSFORMERS_OFFLINE=1 HF_HOME=/rag-content/embeddings_model REQUIRE_VECTOR_DB=1 python3.12 -m pytest tests/tests/test_vector_query.py -v -c pyproject.toml
 
 WORKDIR /rag-content/llama_stack_vector_db
