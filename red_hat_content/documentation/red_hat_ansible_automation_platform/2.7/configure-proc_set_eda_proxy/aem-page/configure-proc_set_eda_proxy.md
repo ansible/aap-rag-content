@@ -1,6 +1,6 @@
 +++
-title = "Configure proxy settings for Event-Driven Ansible - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Configure proxy settings for Event-Driven Ansible - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-proc_set_eda_proxy"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/configure-proc_set_eda_proxy/aem-page/configure-proc_set_eda_proxy.html"
 last_crumb = "Configure proxy settings for Event-Driven Ansible"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure proxy settings for Event-Driven Ansible"
 oversized = "false"

@@ -12,4 +12,5 @@ Internal platform operations continue to function normally using internal JWT-ba
 ```
 $ podman login <platform-host> --username <gateway-username> --password
 ```
+
 For large container image uploads, you might need to adjust platform gateway route timeout settings.

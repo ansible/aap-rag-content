@@ -18,9 +18,7 @@ In the **Virtual Networks** page in the Azure portal, use the following settings
 
 1. Under **Remote virtual network**, select the settings for the virtual network that you want to peer with Azure:
 
-
 - **Summary**:
-
 
 * **Peering link name**: *<aap_to_hub_peering_link_name>*
 * **Subscription**: Select the subscription where you deployed the Ansible Automation Platform on Microsoft Azure.
@@ -28,16 +26,13 @@ In the **Virtual Networks** page in the Azure portal, use the following settings
 
 - **Peering settings**:
 
-
 * **Traffic to remote virtual network**: *Allow*
 * **Traffic forwarded from remote virtual network**: *Allow*
 * **Virtual network gateway or Route Server**: *Use the remote virtual network’s gateway or Route server*
 
 2. Under **Local virtual network**, select the settings the Ansible Automation Platform on Microsoft Azure virtual network:
 
-
 - **Summary**:
-
 
 * **Peering link name**: *<hub_to_aap_peering_link_name>*
 * **Traffic to remote virtual network**: *Allow*

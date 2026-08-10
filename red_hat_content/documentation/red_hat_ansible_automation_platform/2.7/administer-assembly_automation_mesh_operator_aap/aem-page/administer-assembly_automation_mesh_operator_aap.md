@@ -1,7 +1,7 @@
 +++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_automation_mesh_operator_aap"
 template = "docs/aem-title.html"
 title = "Scale with automation mesh in an operator environment - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_automation_mesh_operator_aap"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_automation_mesh_operator_aap/", "Scale with automation mesh in an operator environment"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_automation_mesh_operator_aap/aem-page/administer-assembly_automation_mesh_operator_aap.html"
 last_crumb = "Scale with automation mesh in an operator environment"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Scale with automation mesh in an operator environment"
 oversized = "false"

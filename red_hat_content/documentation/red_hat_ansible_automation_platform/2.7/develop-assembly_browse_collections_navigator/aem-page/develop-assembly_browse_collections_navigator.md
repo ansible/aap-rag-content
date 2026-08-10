@@ -1,7 +1,7 @@
 +++
-title = "Browse collections in a text-based format - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_browse_collections_navigator"
+title = "Browse collections in a text-based format - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_intro_navigator/", "Emulate a platform environment locally with automation content navigator"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_browse_collections_navigator/aem-page/develop-assembly_browse_collections_navigator.html"
 last_crumb = "Browse collections in a text-based format"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Browse collections in a text-based format"
 oversized = "false"
@@ -43,7 +43,6 @@ Shows if the collection is contained within an automation execution environment 
 
 PATH
 Reflects the collections location within the automation execution environment or local file system based on the collection TYPE field.
-
 
 ![Automation content navigator collections display](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-collections-shadow.png)  
 

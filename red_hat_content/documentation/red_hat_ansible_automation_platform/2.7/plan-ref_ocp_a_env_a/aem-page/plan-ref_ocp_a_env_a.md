@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/plan-ref_ocp_a_env_a/aem-page/plan-ref_ocp_a_env_a.html"
 last_crumb = "Operator growth topology"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Operator growth topology"
 oversized = "false"
@@ -80,7 +80,6 @@ Red Hat tests a Single Node OpenShift (SNO) cluster with these requirements:
 | <br>1 | <br>Database pod                               |
 | <br>1 | <br>Redis pod                                  |
 
-
  Note:
 
 Metrics service is deployed automatically when the AnsibleAutomationPlatform Custom Resource (CR) includes metrics configuration. The operator creates a MetricsService CR (named `<aap-name>`-metrics) and manages three pods:
@@ -88,7 +87,6 @@ Metrics service is deployed automatically when the AnsibleAutomationPlatform Cus
 - `<aap-name>`- **metrics-web** - REST API for metrics and dashboard data
 - `<aap-name>`- **metrics-tasks** - dispatcherd worker for background data collection
 - `<aap-name>`- **metrics-scheduler** - APScheduler for periodic collection tasks (6-hourly schedule)
-
 
 All database provisioning, secrets management, and routing configuration is handled automatically by the operators.
 
@@ -104,14 +102,14 @@ Red Hat has tested these configurations to install and run Red Hat Ansible Autom
 
 *Table 3. Tested system configurations*
 
-| Type                  | Description                                                                                                                           | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br>Subscription      | <br>Valid Red Hat Ansible Automation Platform subscription                                                                            |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| <br>Red Hat OpenShift | `Version`: 4.14`num_of_control_nodes`: 1`num_of_worker_nodes`: 1                                                                      | <br>Single Node OpenShift (SNO) tested with 32 GB RAM, 16 CPUs, 128 GB disk. Metrics service adds approximately 3.5 Gi RAM request (7 Gi limit).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| <br>Ansible-core      | <br>Ansible-core version 2.16 or later                                                                                                |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| <br>Browser           | <br>A currently supported version of Mozilla Firefox or Google Chrome.                                                                |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Type                  | Description                                                                                                                           | Notes                                                                                                                                                                                                    |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <br>Subscription      | <br>Valid Red Hat Ansible Automation Platform subscription                                                                            |                                                                                                                                                                                                          |
+| <br>Red Hat OpenShift | `Version`: 4.14`num_of_control_nodes`: 1`num_of_worker_nodes`: 1                                                                      | <br>Single Node OpenShift (SNO) tested with 32 GB RAM, 16 CPUs, 128 GB disk. Metrics service adds approximately 3.5 Gi RAM request (7 Gi limit).                                                         |
+| <br>Ansible-core      | <br>Ansible-core version 2.16 or later                                                                                                |                                                                                                                                                                                                          |
+| <br>Browser           | <br>A currently supported version of Mozilla Firefox or Google Chrome.                                                                |                                                                                                                                                                                                          |
 | <br>Database          | For Ansible Automation Platform managed databases: PostgreSQL 15For customer provided (external) databases: PostgreSQL 15, 16, or 17. | External (customer supported) databases require International Components for Unicode (ICU) support.External databases using PostgreSQL 16 or 17 must rely on external backup and restore processes. Backup and restore functionality depends on utilities provided with PostgreSQL 15.       Warning:   <br>Operator-deployed database connection limits<br>The operator-deployed PostgreSQL database has a default `max_connections` limit of 100 and a maximum database size of 100 GB.<br>Do not use the operator-deployed database if any of the following conditions apply:   <br>You are running more than 1 replica of any component (platform gateway, automation controller, automation hub, Event-Driven Ansible, or metrics service).The automation controller capacity exceeds 100 concurrent jobs.Total database connections from all components exceed 100.Estimated 30-day database storage exceeds 100 GB.<br>If your deployment exceeds any of these limits, use an external database instead of the operator-deployed database.<br>Database storage consumption depends on your workload, including job frequency, playbook task count, output verbosity, and the number of managed hosts per job. Higher verbosity levels can increase storage consumption by 3-5x. |
-| <br>IP version        | <br>IPv4, IPv6 (single-stack and dual-stack)                                                                                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| <br>IP version        | <br>IPv4, IPv6 (single-stack and dual-stack)                                                                                          |                                                                                                                                                                                                          |
 
 ## Example custom resource file
 
@@ -151,7 +149,6 @@ The operator automatically creates:
 - `ms_awx_readonly` user in the automation controller database with SELECT-only permissions
 - All database connection secrets as Kubernetes secrets
 
-
 No manual database setup required for operator deployments with managed databases.
 
 **Secrets management**
@@ -163,7 +160,6 @@ The operator creates and manages these Kubernetes secrets:
 - `<aap-name>`- `automationmetrics-secret-key` - Django secret key
 - `<aap-name>`- `automationmetrics-resource-server` - Resource server configuration
 
-
 **Gateway routing**
 
 The operator configures Envoy routing through platform gateway:
@@ -171,7 +167,6 @@ The operator configures Envoy routing through platform gateway:
 - Dashboard requests route to `/api/metrics/` endpoint
 - Internal communication between gateway and metrics service web pod
 - No external exposure of metrics service (access only through gateway)
-
 
 **ConfigMap**
 
@@ -197,6 +192,7 @@ GRANT ALL PRIVILEGES ON DATABASE metrics_service TO metrics_service;
 \c metrics_service
 GRANT ALL ON SCHEMA public TO metrics_service;
 ```
+
 **Create read-only user for controller database:**
 
 ```
@@ -206,6 +202,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO ms_awx_readonly;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public
   GRANT SELECT ON TABLES TO ms_awx_readonly;
 ```
+
 **Configure external database in CR:**
 
 ```
@@ -240,7 +237,6 @@ Red Hat Ansible Automation Platform uses several ports to communicate with its s
 | <br>80/443  | <br>HTTP/HTTPS | <br>Platform | <br>Customer clients                     | <br>OpenShift Container Platform ingress |
 | <br>27199   | <br>TCP        | <br>Receptor | <br>OpenShift Container Platform cluster | <br>Execution node                       |
 | <br>27199   | <br>TCP        | <br>Receptor | <br>OpenShift Container Platform cluster | <br>Hop node                             |
-
 
  Note:
 

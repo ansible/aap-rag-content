@@ -7,7 +7,6 @@ You can manage playbooks and playbook directories different ways:
 - By placing them manually under the Project Base Path on your automation controller server.
 - By placing your playbooks into a source code management (SCM) system supported by the automation controller.
 
-
 These include Git, Subversion, Mercurial and Red Hat Lightspeed.
 
 For more information on creating a Red Hat Lightspeed project, see Setting up Red Hat Lightspeed Remediations.
@@ -42,7 +41,6 @@ In cases where you have a large project (around 10 GB), disk space on `/tmp` may
 - **Never updated** - The project is configured for source control, but has never been updated.
 - **OK** - The project is not configured for source control, and is correctly in place.
 - **Missing** - Projects are absent from the project base path of `/var/lib/awx/projects`. This is applicable for manual or source control managed projects.
-
 
 Note:
 

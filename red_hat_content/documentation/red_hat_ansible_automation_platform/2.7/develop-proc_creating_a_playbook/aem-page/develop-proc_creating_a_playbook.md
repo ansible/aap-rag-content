@@ -1,6 +1,6 @@
 +++
-title = "Create a simple playbook to connect to managed hosts - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_creating_a_playbook"
+title = "Create a simple playbook to connect to managed hosts - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_creating_a_playbook/aem-page/develop-proc_creating_a_playbook.html"
 last_crumb = "Create a simple playbook to connect to managed hosts"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Create a simple playbook to connect to managed hosts"
 oversized = "false"
@@ -81,6 +81,7 @@ ok: [192.0.2.52] => {
 192.0.2.51: ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 192.0.2.52: ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
+
     In this output you can see:
 
   - The names that you give the play and each task. Always use descriptive names that make it easy to verify and troubleshoot playbooks.

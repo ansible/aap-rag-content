@@ -3,7 +3,6 @@
 
 - New ansible-rulebook built-in modules The following event sources and event filters will be available as built-in modules in 'ansible-rulebook', and removed from 'ansible.collection'.
 
-
 The following is the list of new built-in modules:
 
 'eda.builtin.dashes_to_underscores'(filter) 'eda.builtin.generic'(source) 'eda.builtin.insert_hosts_to_meta'(filter) 'eda.builtin.json_filter'(filter) 'eda.builtin.normalize_keys'(filter) 'eda.builtin.pg_listener'(source) 'eda.builtin.range'(source) 'eda.builtin.webhook'(source)

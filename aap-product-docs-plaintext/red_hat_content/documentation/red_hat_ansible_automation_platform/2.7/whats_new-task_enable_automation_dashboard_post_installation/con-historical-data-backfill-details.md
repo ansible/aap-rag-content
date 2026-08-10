@@ -14,7 +14,6 @@ When you enable dashboard post-installation, metrics service initiates a histori
 - **Data query:** Requests all jobs in Controller (AWX) database between `since` and `until`
 - **Collection:** Collects whatever data exists in that timeframe
 
-
 Important:
 
 90 days is the starting point, not a minimum or maximum requirement. Metrics service collects all available data within the 90-day window.
@@ -26,7 +25,6 @@ Important:
 | 90+ days of job history                  | 90 days        | Backfill collects maximum (90 days from since point) |
 | 30 days of job history                   | 30 days        | Backfill collects all available data (no error)      |
 | 0 days of job history (new installation) | 0 jobs         | Backfill completes successfully with`job_count: 0`   |
-
 
 **Key points:**
 
@@ -47,7 +45,6 @@ The backfill process runs to completion automatically and cannot be paused or re
 | Duration           | Varies based on data volume; typically completes within 24 hours for large datasets    |
 | Automatic          | Yes - no manual intervention required after enablement                                 |
 
-
 **Estimated completion times:**
 
 | Data Volume (Controller Jobs) | Estimated Backfill Duration |
@@ -56,7 +53,6 @@ The backfill process runs to completion automatically and cannot be paused or re
 | 10,000 - 50,000 jobs          | 5–20 minutes                |
 | 50,000 - 100,000 jobs         | 20–45 minutes               |
 | > 100,000 jobs                | 45 minutes–2 hours          |
-
 
 Note:
 

@@ -10,6 +10,7 @@ VMWARE_USER
 VMWARE_PASSWORD
 VMWARE_VALIDATE_CERTS
 ```
+
 These are fields prompted in the user interface.
 
 VMware credentials require the following inputs:
@@ -17,7 +18,6 @@ VMware credentials require the following inputs:
 - **vCenter Host**: The vCenter hostname or IP address to connect to.
 - **Username**: The username to use to connect to vCenter.
 - **Password**: The password to use to connect to vCenter.
-
 
 Note:
 

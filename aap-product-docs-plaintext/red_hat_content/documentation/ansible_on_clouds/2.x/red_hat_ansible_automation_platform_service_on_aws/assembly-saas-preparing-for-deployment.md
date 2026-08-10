@@ -33,7 +33,6 @@ To configure bi-directional connectivity, complete the following steps:
 
 1. Submit [Customer support](https://access.redhat.com/support/cases/?extIdCarryOver=true&sc_cid=RHCTG0250000454096#/case/new/get-support?caseCreate=true) cases to Red Hat to begin this process.
 
-
 1. A separate ticket must be created for ingress and egress
 
 2. The Redhat SRE team will work together with the customer and enable AWS PrivateLink Connectivity via the support case.
@@ -42,7 +41,7 @@ To begin this process see [Enabling AWS PrivateLink connectivity](https://docs.r
 
 #### 5.2.1.4. Performance guidelines for Event-Driven Ansible on Ansible Automation Platform Service on AWS
 
-Use this information to plan and configure [Event-Driven Ansible](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_decisions/index) on Ansible Automation Platform Service on AWS.
+Use this information to plan and configure [Event-Driven Ansible](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_decisions/index) on Ansible Automation Platform Service on AWS.
 
 All customer workloads differ, and performance results may vary. Red Hat recommends monitoring **Subscription Watch** for Ansible Automation Platform Service on AWS meters within Hybrid Cloud Console and creating cost alerts in AWS.
 

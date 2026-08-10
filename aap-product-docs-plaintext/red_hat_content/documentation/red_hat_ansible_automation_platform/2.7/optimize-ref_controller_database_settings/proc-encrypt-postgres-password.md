@@ -28,6 +28,7 @@ from awx.main.utils import decrypt_value, get_encryption_key
 ```
 decrypt_value(get_encryption_key('value'),'$encrypted$AESCBC$Z0FBQUFBQmNONU9BbGQ1VjJyNDJRVTRKaFRIR09Ib2U5TGdaYVRfcXFXRjlmdmpZNjdoZVpEZ21QRWViMmNDOGJaM0dPeHN2b194NUxvQ1M5X3dSc1gxQ29TdDBKRkljWHc9PQ=='),
 ```
+
 Note:
 The hash value in this step is the output value of `postgres_secret`.
 

@@ -22,9 +22,7 @@ You can select an existing user or create a platform user in the Red Hat Ansible
 
 3. Create a token for the platform user:
 
-
 1. Log in to the Ansible Lightspeed portal for on-premise deployment (`https://<lightspeed_route>/admin`) as an administrator by using the following credentials:
-
 
 - Username: **admin**
 - Password: The secret that is named as `<lightspeed-custom-resource-name>-admin-password` in the Red Hat OpenShift Container Platform cluster namespace where Red Hat Ansible Lightspeed is deployed.
@@ -36,7 +34,6 @@ You can select an existing user or create a platform user in the Red Hat Ansible
 4. From the Django Oauth toolkit area, select Access tokens → Add.
 
 5. Provide the following information and click **Save**:
-
 
 - **User**: Use the magnifying glass icon to search and select the newly-created or existing user for whom you want to grant API access.
 

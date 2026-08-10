@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_virtualization/aem-page/secure-ref_controller_credential_virtualization.html"
 last_crumb = "Red Hat Virtualization credential type"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Red Hat Virtualization credential type"
 oversized = "false"
@@ -36,6 +36,7 @@ OVIRT_URL
 OVIRT_USERNAME
 OVIRT_PASSWORD
 ```
+
 Provide the following information for Red Hat Virtualization credentials:
 
 - **Host (Authentication URL)**: The host URL or IP address to connect to. To sync with the inventory, the credential URL needs to include the `ovirt-engine/api` path.

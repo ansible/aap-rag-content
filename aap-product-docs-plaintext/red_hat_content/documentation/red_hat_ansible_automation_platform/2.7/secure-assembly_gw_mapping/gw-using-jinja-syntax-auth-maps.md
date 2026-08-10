@@ -15,7 +15,6 @@ An **Organization** authenticator map is created with the following configuratio
 - **Attribute** value: Enter `users_orgs`.
 - **External data received**: `["Database", "Networking"]` (The attribute values returned by the Identity Provider)
 
-
 This results in the authenticator map being evaluated twice, once for `Org Database` and once for `Org Networking`.
 
 **Example 2: Multiple attributes**

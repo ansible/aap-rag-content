@@ -1,13 +1,12 @@
 # 7. Red Hat Ansible Automation Platform Service on AWS Private Link Connectivity
-## 7.4. Enabling AWS PrivateLink connectivity
-### 7.4.2. Configuring AWS PrivateLink connectivity from Red Hat managed control plane to customer VPCs
+## 7.5. Enabling AWS PrivateLink connectivity
+### 7.5.2. Configuring AWS PrivateLink connectivity from Red Hat managed control plane to customer VPCs
 
 This configuration allows the Ansible Automation Platform control plane to connect to your private resources, such as internal Git or private automation hub.
 
 **Procedure**
 
-1. Create an Endpoint Service in your VPC:
-
+1. Create the NLB and Endpoint Service in your customer VPC:
 
 1. Confirm your private resource is behind an AWS Network Load Balancer (NLB).
 
@@ -17,17 +16,9 @@ This configuration allows the Ansible Automation Platform control plane to conne
 Important
 You must select the service type that supports Interface endpoints and enable the Private DNS option.
 
-2. To initiate control plane egress, you must submit a **separate** [Customer support](https://access.redhat.com/support/cases/?extIdCarryOver=true&sc_cid=RHCTG0250000454096#/case/new/get-support?caseCreate=true) case using the **Egress PrivateLink request template**.
+2. Copy your Endpoint Service Name into the Egress template and submit the support request
 
-3. Red Hat uses the information provided to create an Interface Endpoint on their side. When Red Hat creates this endpoint, they select the category "Endpoint services that use NLBs and GWLBs" to connect to your service.
-
-4. Your Internal Network or IT Team must configure the Internal DNS.
-
-5. To ensure users route through the secure PrivateLink connection, you must request a Split-Horizon DNS configuration.
-
-6. Copy the **Egress PrivateLink request template**, fill in your specific VPC Endpoint Service Name, and submit it to Red Hat.
-
-**Egress PrivateLink request template**
+Copy the resulting VPC Endpoint Service Name from your Endpoint Service configuration into the following **Egress PrivateLink request template**, fill in the remaining details, and submit a **separate** [Customer support](https://access.redhat.com/support/cases/?extIdCarryOver=true&sc_cid=RHCTG0250000454096#/case/new/get-support?caseCreate=true) case to Red Hat.
 
 ```
 Subject:
@@ -46,4 +37,28 @@ Please confirm when Red Hat has initiated the connection request so we can appro
 
 Thank you.
 ```
+
+3. Approve the pending endpoint connection request after Red Hat SRE initiates it
+
+Red Hat uses the information you provided to create an Interface Endpoint on their side. When Red Hat creates this endpoint, they select the category "Endpoint services that use NLBs and GWLBs" to connect to your service.
+
+When Red Hat SRE initiates the connection request, approve the pending endpoint connection request in your AWS console:
+
+1. Log in to the AWS console and navigate to VPC → Endpoint services.
+2. Select your Endpoint Service.
+3. On the **Endpoint connections** tab, locate the pending connection from Red Hat and click Accept endpoint connection request.
+
+4. Configure internal and split-horizon DNS
+
+After Red Hat completes the endpoint connection, work with your organization’s internal DNS or network team to ensure name resolution routes traffic over the PrivateLink connection.
+
+Your internal DNS team must implement one of the following approaches:
+
+- **Split-horizon DNS (customer-managed)**: Configure split-horizon DNS so that the Fully Qualified Domain Name (FQDN) of your private resource (for example, `git.company.com`) resolves to the private IP addresses of the AWS resources behind the Endpoint Service you created in the first step. This ensures that DNS queries within your environment return private addresses instead of public ones, and that traffic to the resource uses the secure PrivateLink path.
+
+- **Private DNS on the Endpoint Service (control plane resolution)**: If you enabled the **Private DNS** option when you created your Endpoint Service in the first step, the Ansible Automation Platform control plane can natively resolve your resource’s FQDN over the egress PrivateLink connection. AWS maps DNS queries from the control plane to the private IP addresses of Red Hat’s consuming Interface Endpoint, allowing secure connectivity without additional customer DNS changes for the control plane path.
+
+
+Note
+If you use split-horizon DNS, coordinate with your internal DNS team before you configure Ansible Automation Platform to use the private resource. The FQDN you register in Ansible Automation Platform (for example, `git.company.com`) must match the name your DNS team maps to the private IP addresses behind your Endpoint Service.
 

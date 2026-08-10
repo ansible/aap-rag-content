@@ -26,9 +26,25 @@
           "singlePageAnchor": "enable-dashboard-operator-post-install"
         },
         {
-          "title": "Historical data backfill details",
+          "title": "Export automation dashboard data to CSV",
           "visible": true,
           "weight": 3,
+          "urlFragment": "GUID-7d7f55ce-2701-4de0-ac7a-996378c55fe8",
+          "anchor": null,
+          "singlePageAnchor": "GUID-7d7f55ce-2701-4de0-ac7a-996378c55fe8"
+        },
+        {
+          "title": "Filter automation dashboard by date range",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "GUID-9839288b-a4e1-4c6a-9434-da893c2367ab",
+          "anchor": null,
+          "singlePageAnchor": "GUID-9839288b-a4e1-4c6a-9434-da893c2367ab"
+        },
+        {
+          "title": "Historical data backfill details",
+          "visible": true,
+          "weight": 5,
           "urlFragment": "con-historical-data-backfill-details",
           "anchor": null,
           "singlePageAnchor": "con-historical-data-backfill-details"
@@ -36,7 +52,7 @@
         {
           "title": "Difference between automation dashboard enablement during-installation and post-installation",
           "visible": true,
-          "weight": 4,
+          "weight": 6,
           "urlFragment": "GUID-a3d6c034-5a95-4b67-b8ac-bb9d253e4864",
           "anchor": null,
           "singlePageAnchor": "GUID-a3d6c034-5a95-4b67-b8ac-bb9d253e4864"

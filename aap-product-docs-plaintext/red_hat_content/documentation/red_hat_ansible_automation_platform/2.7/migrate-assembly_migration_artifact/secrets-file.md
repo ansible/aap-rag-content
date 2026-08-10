@@ -15,7 +15,6 @@ hub_secret_key: <redacted>
 hub_db_fields_encryption_key: <redacted>
 ```
 
-
 Note:
 
 Ensure the `secrets.yml` file is encrypted and kept in a secure location.

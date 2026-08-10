@@ -13,5 +13,6 @@ The content might look like the following:
 libxml2-devel [platform:rpm]
 subversion [platform:rpm]
 ```
+
 Entries from multiple collections are combined into a single file. This is processed by `bindep` and then passed to `dnf`. Only requirements with no profiles or no runtime requirements will be installed to the image.
 

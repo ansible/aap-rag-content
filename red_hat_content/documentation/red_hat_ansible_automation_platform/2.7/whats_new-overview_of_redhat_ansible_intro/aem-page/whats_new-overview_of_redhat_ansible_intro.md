@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-overview_of_redhat_ansible_intro"
 title = "Ansible Automation Platform release notes - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-overview_of_redhat_ansible_intro/", "Ansible Automation Platform release notes"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/whats_new-overview_of_redhat_ansible_intro/aem-page/whats_new-overview_of_redhat_ansible_intro.html"
 last_crumb = "Ansible Automation Platform release notes"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Ansible Automation Platform release notes"
 oversized = "false"
@@ -38,7 +38,6 @@ Automate at scale on proven foundation. Red Hat Ansible Automation Platform 2.7 
 - Unlock more value with the new automation dashboard, which allows you to securely measure automation ROI, with customized tracking and reporting.
 - Operate more efficiently with the new Ansible Lightspeed Intelligent Assistant, which harnesses generative AI to provide on-demand support, for a more intuitive platform experience.
 - Achieve new levels of scale with the Ansible automation portal, which enables platform administrators to quickly and easily scale automation service delivery to new users and teams.
-
 
 Because your team is not just preparing for the future, you’re automating for it.
 

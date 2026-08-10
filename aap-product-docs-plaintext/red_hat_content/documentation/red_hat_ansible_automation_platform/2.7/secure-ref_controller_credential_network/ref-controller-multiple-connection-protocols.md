@@ -14,6 +14,5 @@ The most common protocol is CLI over SSH. You set the communication protocol wit
 | <br> `ansible.netcommon.httpapi`     | <br>API over HTTP/HTTPS | <br>network\_os setting | <br>yes     |
 | <br> `local`                         | <br>depends on provider | <br>provider setting    | <br>no      |
 
-
 The `ansible_connection: local` is deprecated. Use one of the persistent connection types listed above instead. With persistent connections, you can define the hosts and credentials only once, rather than in every task. You must also set the `network_os` variable for the specific network platform you are communicating with.
 

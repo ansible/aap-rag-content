@@ -50,5 +50,6 @@ Pass the `-u` option with the Ansible command if the username is different on th
 "ping": "pong"
 }
 ```
+
 You have successfully built an inventory.
 

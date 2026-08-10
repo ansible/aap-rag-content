@@ -13,7 +13,6 @@ Ansible Automation Platform credentials require the following inputs:
 - **Password**: The password to use to connect to it.
 - **Oauth Token**: If username and password are not used, provide an OAuth token to use to authenticate.
 
-
 The `env` injectors for Ansible Automation Platform are as follows:
 
 ```

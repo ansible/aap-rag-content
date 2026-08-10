@@ -9,7 +9,6 @@ Workflows use the same behavior (hierarchy) of variable precedence as job templa
 - Workflow job template survey (defaults)
 - Workflow job launch extra variables
 
-
 Workflows included in a workflow follow the same variable precedence, they only inherit variables if they are specifically prompted for, or defined as part of a survey.
 
 In addition to the workflow `extra_vars`, jobs and workflows run as part of a workflow can inherit variables in the artifacts dictionary of a parent job in the workflow (also combining with ancestors further upstream in its branch).
@@ -28,13 +27,11 @@ tasks:
 local_action: 'shell curl -F "file=@integration_results.txt" https://file.io'
 register: result
 
-
 - name: "Artifact URL of test results to Workflows"
 set_stats:
 data:
 integration_results_url:  "{{ (result.stdout|from_json).link }}"
 ```
-
 
 - use_set_stats.yml: second playbook in the workflow:
 
@@ -48,17 +45,16 @@ url: "{{ integration_results_url }}"
 return_content: true
 register: results
 
-
 - name: "Output test results"
 debug:
 msg: "{{ results.content }}"
 ```
+
 The `set_stats` module processes this workflow as follows:
 
 1. The contents of an integration result is uploaded to the web.
 2. Through the `invoke_set_stats` playbook, `set_stats` is then invoked to artifact the URL of the uploaded `integration_results.txt` into the Ansible variable `integration_results_url`.
 3. The second playbook in the workflow consumes the Ansible extra variable `integration_results_url`. It calls out to the web by using the URI module to get the contents of the file uploaded by the previous job template job. Then, it prints out the contents of the obtained file.
-
 
 Note:
 

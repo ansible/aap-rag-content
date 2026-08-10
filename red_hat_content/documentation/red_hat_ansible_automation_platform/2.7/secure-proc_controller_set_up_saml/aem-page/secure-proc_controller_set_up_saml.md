@@ -1,7 +1,7 @@
 +++
+title = "Configure SAML authentication - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_set_up_saml"
 template = "docs/aem-title.html"
-title = "Configure SAML authentication - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_configure_authentication/", "Configure central authentication for Ansible Automation Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-proc_controller_set_up_saml/aem-page/secure-proc_controller_set_up_saml.html"
 last_crumb = "Configure SAML authentication"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure SAML authentication"
 oversized = "false"
@@ -73,6 +73,7 @@ Based on groups and attributes optionally provided by the SAML IdP, users can be
 ```
 GET_ALL_EXTRA_DATA: true
 ```
+
     Alternatively, you can include a list of SAML IdP attributes in the **SAML IDP to extra_data attribute mapping** field.
 
   Note:
@@ -116,6 +117,7 @@ GET_ALL_EXTRA_DATA: true
 "sign_request": True,
 }
 ```
+
     This field is the equivalent to the `SOCIAL_AUTH_SAML_SP_EXTRA` in the API. For more information, see [OneLogin’s SAML Python Toolkit](https://github.com/SAML-Toolkits/python-saml#settings) to learn about the valid service provider extra (SP_EXTRA) parameters.
 
   Note:
@@ -139,6 +141,7 @@ GET_ALL_EXTRA_DATA: true
 // Set an array with the possible auth context values: array ('urn:oasis:names:tc:SAML:2.0:ac:classes:Password', 'urn:oasis:names:tc:SAML:2.0:ac:classes:X509'),
 "requestedAuthnContext": true,
 ```
+
     For more information and additional options, see [OneLogin’s SAML Python Toolkit](https://github.com/SAML-Toolkits/python-saml#settings).
 
 20.  Optional: In the **SAML IDP to extra_data attribute mapping** field, enter values to map IDP attributes to extra_data attributes. These values will include additional user information beyond standard attributes such as Email or Username to be mapped. For example:
@@ -149,6 +152,7 @@ GET_ALL_EXTRA_DATA: true
 - UserType
 - Organization
 ```
+
     For more information on the values you can include, see [advanced SAML settings](https://python-social-auth.readthedocs.io/en/latest/backends/saml.html#advanced-settings).
 
   Important:

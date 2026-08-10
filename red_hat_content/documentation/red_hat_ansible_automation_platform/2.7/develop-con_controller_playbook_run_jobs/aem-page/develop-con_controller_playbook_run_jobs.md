@@ -1,7 +1,7 @@
 +++
-title = "View output for your playbook job runs - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_playbook_run_jobs"
+title = "View output for your playbook job runs - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_jobs/", "Use jobs to run playbooks against an inventory of hosts"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-con_controller_playbook_run_jobs/aem-page/develop-con_controller_playbook_run_jobs.html"
 last_crumb = "View output for your playbook job runs"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "View output for your playbook job runs"
 oversized = "false"
@@ -41,7 +41,6 @@ The events summary displays the following events that are run as part of this pl
 - The amount of time it took to complete the playbook run is shown in the **Elapsed** field
 
 ![Job events summary](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-jobs-events-summary.png)  
-
 
 You can Relaunch job, Cancel job, download ![Download](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/download.png) the job output, or delete ![Delete](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/delete-button.png) the job.
 
@@ -76,9 +75,7 @@ This shows the tasks that failed and have `ignore_errors: yes configured`.
 
 The following example shows a search with only unreachable hosts:
 
-
 ![Stdout pane unreachable](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-std-out-unreachable.png)  
-
 
 For more information about using the search, see the [Search](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/assembly-controller-search) section.
 
@@ -96,9 +93,7 @@ Learn how to view the details of a playbook run in Automation controller.
 
 Access the **Details** tab to view details about the job execution:
 
-
 ![Job details for example run](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-job-details-for-example-job.png)  
-
 
 You can view the following details for an executed job:
 
@@ -116,7 +111,6 @@ You can view the following details for an executed job:
 - **Execution environment**: The name of the execution environment used in this job.
 - **Credentials**: The credentials used in this job.
 - **Extra variables**: Any extra variables passed when creating the job template are displayed here.
-
 
 Select one of these items to view the corresponding job templates, projects, and other objects.
 
@@ -139,12 +133,12 @@ By default, automation controller uses the system’s `tmp` directory (`/tmp` by
 ```
 AWX_ISOLATION_BASE_PATH = "/opt/tmp"
 ```
+
 If there are any additional directories that should specifically be exposed from the host to the container that playbooks run in, you can specify those in the **Paths to expose to isolated jobs** field of the **Jobs Settings** page, or in the REST API at `/api/v2/settings/jobs`:
 
 ```
 AWX_ISOLATION_SHOW_PATHS = ['/list/of/', '/paths']
 ```
-
 
  Note:
 
@@ -152,6 +146,5 @@ AWX_ISOLATION_SHOW_PATHS = ['/list/of/', '/paths']
 - If your playbooks need to use keys or settings defined in `AWX_ISOLATION_SHOW_PATHS`, then add this file to `/var/lib/awx/.ssh`.
 
 The fields described here can be found on the **Jobs settings** page:
-
 
 ![Jobs settings options](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/job-settings-full.png)  

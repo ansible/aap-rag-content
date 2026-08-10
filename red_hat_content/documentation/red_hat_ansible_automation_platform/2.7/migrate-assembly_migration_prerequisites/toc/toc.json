@@ -10,9 +10,45 @@
       "singlePageAnchor": null,
       "sections": [
         {
-          "title": "Containerized to OpenShift Container Platform migration prerequisites",
+          "title": "Prerequisites for migrating using the aap_snapshot collection",
           "visible": true,
           "weight": 1,
+          "urlFragment": "GUID-dbe00398-21b1-4de0-91e1-2deecf041e84",
+          "anchor": null,
+          "singlePageAnchor": "GUID-dbe00398-21b1-4de0-91e1-2deecf041e84",
+          "sections": [
+            {
+              "title": "Prerequisites for the OCP deployment import",
+              "visible": true,
+              "weight": 1,
+              "urlFragment": "GUID-dbe00398-21b1-4de0-91e1-2deecf041e84",
+              "anchor": "GUID-8b7afdde-ad3d-4fb0-89c3-cf965ce1338f",
+              "singlePageAnchor": "GUID-8b7afdde-ad3d-4fb0-89c3-cf965ce1338f",
+              "sections": [
+                {
+                  "title": "Control node requirements",
+                  "visible": true,
+                  "weight": 1,
+                  "urlFragment": "GUID-dbe00398-21b1-4de0-91e1-2deecf041e84",
+                  "anchor": "GUID-8b7afdde-ad3d-4fb0-89c3-cf965ce1338f__prereqs-control-node",
+                  "singlePageAnchor": "GUID-8b7afdde-ad3d-4fb0-89c3-cf965ce1338f__prereqs-control-node"
+                },
+                {
+                  "title": "OCP environment requirements",
+                  "visible": true,
+                  "weight": 2,
+                  "urlFragment": "GUID-dbe00398-21b1-4de0-91e1-2deecf041e84",
+                  "anchor": "GUID-8b7afdde-ad3d-4fb0-89c3-cf965ce1338f__prereqs-ocp-environment",
+                  "singlePageAnchor": "GUID-8b7afdde-ad3d-4fb0-89c3-cf965ce1338f__prereqs-ocp-environment"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Containerized to OpenShift Container Platform migration prerequisites",
+          "visible": true,
+          "weight": 2,
           "urlFragment": "containerized-to-ocp-prerequisites",
           "anchor": null,
           "singlePageAnchor": "containerized-to-ocp-prerequisites"
@@ -20,7 +56,7 @@
         {
           "title": "Containerized to Managed Ansible Automation Platform migration prerequisites",
           "visible": true,
-          "weight": 2,
+          "weight": 3,
           "urlFragment": "containerized-to-managed-prerequisites",
           "anchor": null,
           "singlePageAnchor": "containerized-to-managed-prerequisites"

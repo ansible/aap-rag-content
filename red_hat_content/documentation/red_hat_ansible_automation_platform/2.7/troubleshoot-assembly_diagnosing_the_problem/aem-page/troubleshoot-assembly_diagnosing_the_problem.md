@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/troubleshoot-assembly_diagnosing_the_problem/aem-page/troubleshoot-assembly_diagnosing_the_problem.html"
 last_crumb = "Collect configuration and diagnostic information"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Collect configuration and diagnostic information"
 oversized = "false"
@@ -57,16 +57,18 @@ oc login <openshift_url>
   - Run `must-gather` across the entire cluster:
 
 ```
-oc adm must-gather --image=registry.redhat.io/ansible-automation-platform-26/aap-must-gather-rhel9 --dest-dir <dest_dir>
+oc adm must-gather --image=registry.redhat.io/ansible-automation-platform-27/aap-must-gather-rhel9 --dest-dir <dest_dir>
 ```
+
     * `--image` specifies the image that gathers data
     * `--dest-dir` specifies the directory for the output
 
   - Run `must-gather` for a specific namespace in the cluster:
 
 ```
-oc adm must-gather --image=registry.redhat.io/ansible-automation-platform-26/aap-must-gather-rhel9 --dest-dir <dest_dir> -- /usr/bin/ns-gather <namespace>
+oc adm must-gather --image=registry.redhat.io/ansible-automation-platform-27/aap-must-gather-rhel9 --dest-dir <dest_dir> -- /usr/bin/ns-gather <namespace>
 ```
+
     * `-- /usr/bin/ns-gather` limits the `must-gather` data collection to a specified namespace
 
 3.  To attach the `must-gather` archive to your support case, create a compressed file from the `must-gather` directory created before and attach it to your support case.   - For example, on a computer that uses a Linux operating system, run the following command, replacing `<must-gather-local.5421342344627712289/>` with the `must-gather` directory name:

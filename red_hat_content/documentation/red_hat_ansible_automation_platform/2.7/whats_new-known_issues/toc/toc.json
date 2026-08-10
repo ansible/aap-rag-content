@@ -7,7 +7,25 @@
       "weight": 1,
       "urlFragment": "index",
       "anchor": null,
-      "singlePageAnchor": null
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Automation intelligent assistant",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "known-issues__section_1",
+          "anchor": null,
+          "singlePageAnchor": "known-issues__section_1"
+        },
+        {
+          "title": "The MCP server for Red Hat Ansible Automation Platform",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "known-issues__section_2",
+          "anchor": null,
+          "singlePageAnchor": "known-issues__section_2"
+        }
+      ]
     }
   ]
 }

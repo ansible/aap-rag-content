@@ -1,5 +1,5 @@
 # Understanding Ansible Automation Platform synchronization
-## Troubleshooting Ansible Automation Platform synchronization
+## Troubleshoot Ansible Automation Platform synchronization
 ### No Users or Teams appearing in portal
 
 **Issue:** Expected users or teams are missing from the portal interface.

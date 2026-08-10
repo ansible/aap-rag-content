@@ -15,6 +15,7 @@ To use a custom Certificate Authority (CA) to generate TLS certificates for all 
 ca_tls_cert=<path_to_ca_tls_certificate>
 ca_tls_key=<path_to_ca_tls_key>
 ```
+
 Where:
 
 `ca_tls_cert`

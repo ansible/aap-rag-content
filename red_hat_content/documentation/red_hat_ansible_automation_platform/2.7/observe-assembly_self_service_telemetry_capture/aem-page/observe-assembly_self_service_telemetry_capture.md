@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/observe-assembly_self_service_telemetry_capture/aem-page/observe-assembly_self_service_telemetry_capture.html"
 last_crumb = "Capture telemetry data for the Ansible self-service portal"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Capture telemetry data for the Ansible self-service portal"
 oversized = "false"
@@ -40,7 +40,6 @@ Red Hat collects and analyses the following data:
 - Anonymized username hashes, which are unique identifiers used solely to identify the number of unique users of the RHDH application.
 - Feedback and sentiment submitted through the Ansible automation portal feedback form, including a 1-5 star rating and feedback text. Users must acknowledge that they share the feedback with Red Hat before submitting.
 
-
 Note:
 
 The feedback form is optional and disabled by default. You can enable for your users if you choose.
@@ -69,6 +68,7 @@ redhat-developer-hub:
           package: >-
             ./dynamic-plugins/dist/backstage-community-plugin-analytics-provider-segment
 ```
+
     To re-enable telemetry data collection, delete these lines.
 
 7.  Click Upgrade to apply the changes to the Helm chart and restart the pod.

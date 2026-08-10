@@ -9,4 +9,5 @@ This can lead to issues with overwhelming the underlying Kubernetes pod if the a
 SYSTEM_TASK_ABS_MEM = 3gi
 SYSTEM_TASK_ABS_CPU = 750m
 ```
+
 This acts as a soft limit within the application that enables automation controller to control how much work it attempts to run, while not risking any CPU throttling from Kubernetes itself, or being reaped if memory usage peaks above the required limit. These settings accept the same format accepted by resource requests and limits in the Kubernetes resource definition.

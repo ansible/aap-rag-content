@@ -14,6 +14,7 @@ tasks:
 - name:
 ansible.builtin.ping:
 ```
+
 The errors are indicated with a wavy underline in VS Code.
 
 2.  Hover your mouse over an error to view the details:

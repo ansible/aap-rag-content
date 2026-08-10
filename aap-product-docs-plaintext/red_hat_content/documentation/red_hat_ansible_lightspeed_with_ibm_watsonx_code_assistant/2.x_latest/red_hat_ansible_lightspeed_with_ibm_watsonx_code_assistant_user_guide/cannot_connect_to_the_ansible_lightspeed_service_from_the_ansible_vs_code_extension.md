@@ -10,7 +10,6 @@ The following scenarios are possible:
 
 This error indicates that Ansible Lightspeed is not enabled in the Ansible VS Code extension. To resolve this error, perform the following tasks:
 
-
 1. Open the VS Code application.
 2. From the **Activity** bar, click the **Extensions** icon.
 3. From the **Installed Extensions** list, select **Ansible**.

@@ -1,6 +1,6 @@
 +++
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/migrate-assembly_migration_artifact"
+template = "docs/aem-title.html"
 title = "Contents of the migration artifact - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/migrate-assembly_migration_artifact/aem-page/migrate-assembly_migration_artifact.html"
 last_crumb = "Contents of the migration artifact"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Contents of the migration artifact"
 oversized = "false"
@@ -28,6 +28,10 @@ type = "aem-page"
 # Contents of the migration artifact
 
 The migration artifact packages all necessary data and configurations from your source environment. Verify its structure and contents to ensure a successful migration.
+
+Note:
+
+If you are migrating using the `ansible.aap_snapshot` collection, see *What the aap_snapshot migration artifact contains* for the collection-specific artifact format and contents.
 
 ## Artifact structure
 
@@ -86,7 +90,6 @@ hub_pg_database: <redacted>
 hub_secret_key: <redacted>
 hub_db_fields_encryption_key: <redacted>
 ```
-
 
 Note:
 

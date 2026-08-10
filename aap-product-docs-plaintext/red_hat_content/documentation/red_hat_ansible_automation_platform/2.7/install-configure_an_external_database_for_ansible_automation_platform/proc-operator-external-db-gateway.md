@@ -15,11 +15,10 @@ If you choose to use an externally managed database with version 16 or 17 you mu
 
 ### About this task
 
-| Scenario                              | Action required                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| <br>Fresh install                     | <br>You must specify a single external database instance for the platform to use for the following:<br>Platform gatewayAutomation controllerAutomation hubEvent-Driven AnsibleMetrics serviceRed Hat Ansible Lightspeed (If enabled)<br>See the *aap-configuring-external-db-all-default-components.yml* example in the [Custom resources](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_operator_crs#unique_2099983463 "Refer to the following custom resources you can use for various Ansible Automation Platform deployment scenarios.") section for help with this.<br>If using Red Hat Ansible Lightspeed, use the *aap-configuring-external-db-with-lightspeed-enabled.yml* example. |
-| <br>Existing external database in 2.4 | <br>Your existing external database remains the same after upgrading but you must specify the `external-postgres-configuration-gateway` (spec.database.database\_secret) on the Ansible Automation Platform custom resource.<br>For detailed steps, see [Upgrading an external database for platform gateway on on Ansible Automation Platform](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-configure_an_external_database_for_ansible_automation_platform#GUID-b94a38e1-9266-4338-a29a-1fd21ee08f5a "To upgrade from Ansible Automation Platform 2.4 to 2.6 with an external database, you must scale down your Operator deployment, upgrade your PostgreSQL, then scale your deployment back up.")        |
-
+| Scenario                              | Action required                                                                                                                                                                                          |
+| ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <br>Fresh install                     | <br>You must specify a single external database instance for the platform to use for the following:<br>Platform gatewayAutomation controllerAutomation hubEvent-Driven AnsibleMetrics serviceRed Hat Ansible Lightspeed (If enabled)<br>See the *aap-configuring-external-db-all-default-components.yml* example in the [Custom resources](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_operator_crs#unique_741654949 "Refer to the following custom resources you can use for various Ansible Automation Platform deployment scenarios.") section for help with this.<br>If using Red Hat Ansible Lightspeed, use the *aap-configuring-external-db-with-lightspeed-enabled.yml* example. |
+| <br>Existing external database in 2.4 | <br>Your existing external database remains the same after upgrading but you must specify the `external-postgres-configuration-gateway` (spec.database.database\_secret) on the Ansible Automation Platform custom resource.<br>For detailed steps, see [Upgrading an external database for platform gateway on on Ansible Automation Platform](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-configure_an_external_database_for_ansible_automation_platform#GUID-b94a38e1-9266-4338-a29a-1fd21ee08f5a "To upgrade from Ansible Automation Platform 2.4 to 2.6 with an external database, you must scale down your Operator deployment, upgrade your PostgreSQL, then scale your deployment back up.") |
 
 To deploy Ansible Automation Platform with an external database, you must first create a Kubernetes secret with credentials for connecting to the database.
 
@@ -53,6 +52,7 @@ password: "<password_to_connect_with>"
 type: "unmanaged"
 type: Opaque
 ```
+
 Where:
 
 <target_namespace>
@@ -72,8 +72,9 @@ Value for variable `password` should not contain single or double quotes (', ") 
 ```
 $ oc create -f external-postgres-configuration-secret.yml
 ```
+
 Note:
-The following example is for a platform gateway deployment. To configure an external database for all components, use the *aap-configuring-external-db-all-default-components.yml* example in the [Custom resources](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_operator_crs#unique_2099983463 "Refer to the following custom resources you can use for various Ansible Automation Platform deployment scenarios.") section.
+The following example is for a platform gateway deployment. To configure an external database for all components, use the *aap-configuring-external-db-all-default-components.yml* example in the [Custom resources](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_operator_crs#unique_741654949 "Refer to the following custom resources you can use for various Ansible Automation Platform deployment scenarios.") section.
 
 3.  When creating your `AnsibleAutomationPlatform` custom resource object, specify the secret on your spec, following the example below:
 

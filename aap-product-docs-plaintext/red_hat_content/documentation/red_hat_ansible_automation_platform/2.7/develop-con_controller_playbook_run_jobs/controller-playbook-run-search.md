@@ -26,9 +26,7 @@ This shows the tasks that failed and have `ignore_errors: yes configured`.
 
 The following example shows a search with only unreachable hosts:
 
-
 ![Stdout pane unreachable](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-std-out-unreachable.png)
-
 
 For more information about using the search, see the [Search](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/assembly-controller-search) section.
 

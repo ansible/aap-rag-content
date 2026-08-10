@@ -34,7 +34,7 @@
           "singlePageAnchor": "rhdh-add-plugin-software-templates"
         },
         {
-          "title": "Configure Role Based Access Control",
+          "title": "Configure role-based access control",
           "visible": true,
           "weight": 4,
           "urlFragment": "rhdh-configure-rbac",

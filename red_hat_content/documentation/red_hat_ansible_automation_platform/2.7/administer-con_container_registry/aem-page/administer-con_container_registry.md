@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-con_container_registry/aem-page/administer-con_container_registry.html"
 last_crumb = "Manage containers in your private automation hub"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Manage containers in your private automation hub"
 oversized = "false"
@@ -60,7 +60,6 @@ As of **April 1st, 2025**, `quay.io` is adding three additional endpoints. As a 
 -  `cdn05.quay.io`
 -  `cdn06.quay.io`
 
-
 To avoid problems pulling container images, customers must allow outbound TCP connections (ports 80 and 443) to the following hostnames:
 
 -  `cdn.quay.io`
@@ -70,7 +69,6 @@ To avoid problems pulling container images, customers must allow outbound TCP co
 -  `cdn04.quay.io`
 -  `cdn05.quay.io`
 -  `cdn06.quay.io`
-
 
 This change should be made to any firewall configuration that specifically enables outbound connections to `registry.redhat.io` or `registry.access.redhat.com`.
 

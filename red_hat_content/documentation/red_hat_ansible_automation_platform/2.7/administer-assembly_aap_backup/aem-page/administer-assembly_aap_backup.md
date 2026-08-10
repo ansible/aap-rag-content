@@ -1,7 +1,7 @@
 +++
 title = "Back up your Ansible Automation Platform deployment - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_aap_backup"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_aap_backup_recovery/", "Back up and restore in an OpenShift environment"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_aap_backup/aem-page/administer-assembly_aap_backup.html"
 last_crumb = "Back up your Ansible Automation Platform deployment"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Back up your Ansible Automation Platform deployment"
 oversized = "false"
@@ -80,7 +80,6 @@ To verify that your backup was successful you can:
 2. Navigate to Operators> (and then)Installed Operators.
 3. Select your Ansible Automation Platform Operator deployment.
 4. Click **All Instances**.
-
 
 The **All Instances** page displays the main backup and the backups for each component with the name you specified when creating your backup resource. The status for the following instances must be either **Running** or **Successful**:
 
@@ -156,6 +155,7 @@ Confirm that the PVCs were created:
 ```none
 oc get pvc -n <namespace>
 ```
+
 The output displays the custom PVCs for each component:
 
 | Name                                 | Status        | Volume              | Capacity    | Access Modes | Storage class         |
@@ -202,7 +202,6 @@ spec:
     no_log: false
 ```
 
-
 1.      The global `backup_storage_class` applies to the platform gateway. Components that do not specify their own `backup_storage_class` inherit this value.
 
 2.      Each component can define its own `backup_pvc` to create a uniquely named PVC. Set `create_backup_pvc: true` to have the operator create the PVC automatically.
@@ -225,7 +224,7 @@ The name specified for the new `AutomationController` custom resource must not m
 ```
 oc delete automationcontroller <YOUR_DEPLOYMENT_NAME> -n <YOUR_NAMESPACE>
 
-    oc delete pvc postgres-13-<YOUR_DEPLOYMENT_NAME>-13-0 -n <YOUR_NAMESPACE>
+    oc delete pvc postgres-15-<YOUR_DEPLOYMENT_NAME>-15-0 -n <YOUR_NAMESPACE>
 ```
 
 2.  Use `AutomationControllerRestore` with the same deployment_name in it:

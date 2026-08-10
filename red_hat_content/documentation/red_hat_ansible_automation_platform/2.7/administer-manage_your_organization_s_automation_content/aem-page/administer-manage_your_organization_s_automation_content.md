@@ -1,7 +1,7 @@
 +++
-title = "Manage your organization's automation content - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-manage_your_organization_s_automation_content"
+template = "docs/aem-title.html"
+title = "Manage your organization's automation content - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-manage_your_organization_s_automation_content/", "Manage your organization's automation content"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-manage_your_organization_s_automation_content/aem-page/administer-manage_your_organization_s_automation_content.html"
 last_crumb = "Manage your organization's automation content"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Manage your organization's automation content"
 oversized = "false"

@@ -12,5 +12,4 @@ Enter the following information for OpenStack credentials:
 - Optional: **Domain Name**: Give the FQDN to be used to connect to OpenStack.
 - Optional: **Region Name**: Give the region name. For some cloud providers, such as OVH, the region must be specified.
 
-
 If you are interested in using OpenStack Cloud Credentials, see [Associate cloud credentials with a job template](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_cloud_credentials#controller-cloud-credentials "Automation controller can use Cloud Credentials to authenticate to cloud providers."), which includes a sample playbook.

@@ -24,6 +24,22 @@
           "urlFragment": "con-direct-access-prevention-27",
           "anchor": null,
           "singlePageAnchor": "con-direct-access-prevention-27"
+        },
+        {
+          "title": "Prepare platform gateway accounts for the 2.7 upgrade",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "proc-prepare-gateway-accounts-upgrade",
+          "anchor": null,
+          "singlePageAnchor": "proc-prepare-gateway-accounts-upgrade"
+        },
+        {
+          "title": "Post-upgrade requirements",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "ref-post-upgrade-requirements",
+          "anchor": null,
+          "singlePageAnchor": "ref-post-upgrade-requirements"
         }
       ]
     }

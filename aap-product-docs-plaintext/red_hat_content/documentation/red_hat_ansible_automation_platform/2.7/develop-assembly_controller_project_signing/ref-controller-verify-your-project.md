@@ -12,7 +12,6 @@ $ ansible-sign project gpg-verify .
 [OK   ] Checksum validation succeeded.
 ```
 
-
 Note:
 
 By default, `ansible-sign` makes use of your default GPG keyring to look for a matching public key. You can specify a keyring file with the `--keyring` option, or a different GPG home with the `--gnugpg-home` option.

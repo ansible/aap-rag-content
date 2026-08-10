@@ -1,7 +1,7 @@
 +++
-title = "Terraform: Backend configuration - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_terraform"
+title = "Terraform: Backend configuration - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_credentials/", "Configure credentials to authenticate remote systems and services"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_terraform/aem-page/secure-ref_controller_credential_terraform.html"
 last_crumb = "Terraform: Backend configuration"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Terraform: Backend configuration"
 oversized = "false"
@@ -44,8 +44,6 @@ Terraform backend configuration requires the following inputs:
 - Optional: **Description**
 
 - **Backend configuration**: Drag a file here or browse to upload. Example configuration for an S3 backend:
-
-
 
 ```
 bucket = "my-terraform-state-bucket"

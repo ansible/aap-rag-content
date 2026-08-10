@@ -18,6 +18,7 @@ terraform plan -out=tfplan.out
 ```
 terraform apply tfplan.out
 ```
+
 This creates and sends an event to the specified event stream. As each resource is created, TF actions are invoked and the corresponding Ansible Automation Platform playbooks are executed sequentially.
 
 ### Results

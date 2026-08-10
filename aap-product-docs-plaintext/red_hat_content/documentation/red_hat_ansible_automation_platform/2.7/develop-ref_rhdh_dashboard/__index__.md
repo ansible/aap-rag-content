@@ -2,9 +2,7 @@
 
 After logging into Red Hat Developer Hub (RHDH), use the Ansible navigation panel item to view the plug-in dashboard. The dashboard shows the full automation workflow, from learning to deploying jobs on Ansible Automation Platform.
 
-
 ![Ansible plug-in dashboard](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/rhdh-plugin-dashboard.png)
-
 
 The plug-in dashboard illustrates the steps you need to take from learning about Ansible to deploying automation jobs from Ansible Automation Platform:
 

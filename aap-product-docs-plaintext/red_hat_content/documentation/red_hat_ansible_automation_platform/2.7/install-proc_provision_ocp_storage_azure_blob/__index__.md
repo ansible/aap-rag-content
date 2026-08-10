@@ -43,6 +43,7 @@ storage_type: azure
 object_storage_azure_secret: test-azure
 ```
 
+
 Note:
 If you have an existing automation hub instance, specify its name using `hub.name: existing-hub-name` to apply these settings to the existing instance.
 

@@ -1,7 +1,7 @@
 +++
-title = "Metrics service deployment requirements - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_metrics_service_deployment_requirements"
+title = "Metrics service deployment requirements - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_understand_metrics_service_architecture/", "Understand metrics service architecture"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-ref_metrics_service_deployment_requirements/aem-page/install-ref_metrics_service_deployment_requirements.html"
 last_crumb = "Metrics service deployment requirements"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Metrics service deployment requirements"
 oversized = "false"
@@ -40,7 +40,6 @@ Review infrastructure requirements and prerequisites for deploying metrics servi
 | **PostgreSQL**                  | **15 or later**    | For`metrics_service` database and**awx/automation controller** database                                                   |
 | **Ansible Automation Platform** | **2.7.0 or later** | Metrics service integrated with Ansible Automation Platform 2.7 containerized installer                                   |
 
-
 Important:
 
 Metrics service does not support RHEL 8. All Ansible Automation Platform 2.7 deployments require RHEL 9.2 or later.
@@ -53,7 +52,6 @@ Metrics service does not support RHEL 8. All Ansible Automation Platform 2.7 dep
 | Daily summaries     | Aggregated daily metrics                                                                      | 30 days                                                                        | Daily at 4:00-5:30 AM |
 | Anonymized payloads | Anonymized data sent to Red Hat Data Ingress                                                  | 7 days (after successful transmission) / 30 days (unsent/pending transmission) | Daily at 4:00-5:30 AM |
 | Dashboard data      | Job execution data for dashboard reporting (when`FEATURE_DASHBOARD_COLLECTION_ENABLED: true`) | 90 days                                                                        | Daily at 5:30 AM      |
-
 
 Note:
 
@@ -71,10 +69,9 @@ metrics service hardware requirements are the same as Gateway specifications:
 | **Storage (container)** | Included in database storage                    | Included in database storage                    | For container images and temporary processing                |
 | **Network bandwidth**   | Standard Ansible Automation Platform networking | Standard Ansible Automation Platform networking | For data transmission to Red Hat Data Ingress via Gateway    |
 
-
 Note:
 
-Metrics service is not required to be co-located with automation controller. It can run on any node defined in the `[automationmetrics]` inventory group. Hardware requirements can be shared (AIO Growth topology) or dedicated (Enterprise Multi-Node topology).
+Metrics service can run on any node defined in the `[automationmetrics]` inventory group. Hardware requirements can be shared (AIO Growth topology) or dedicated (Enterprise Multi-Node topology).
 
 **Filesystem requirements**
 
@@ -93,7 +90,6 @@ Metrics service is not required to be co-located with automation controller. It 
 | metrics service → Gateway                   | HTTPS      | 443            | Outbound  | Anonymized data transmission to`/api/metrics/` endpoint |
 | Monitoring → metrics service (optional)     | HTTP       | 8087           | Inbound   | Health check endpoint at`/health/` via nginx            |
 
-
 **Proxy Support:** metrics service supports HTTP/HTTPS proxy configuration via standard environment variables (`HTTP_PROXY`, `HTTPS_PROXY`, `NO_PROXY`).
 
 ## Database requirements
@@ -102,7 +98,6 @@ Metrics service is not required to be co-located with automation controller. It 
 | ----------------------------- | ----------------- | ----------------------------------------------- | ------------------------------------------------------------------------ |
 | `metrics_service`             | `metrics_service` | ALL                                             | metrics service's own data storage, Django migrations, schema management |
 | **awx/automation controller** | `ms_awx_readonly` | **GRANT SELECT ON ALL TABLES IN SCHEMA public** | Read-only access to controller data for metrics collection               |
-
 
 **PostgreSQL Version:** 15 or later (both databases)
 
@@ -124,13 +119,11 @@ Metrics service is designed for minimal impact on automation controller operatio
 | **Database query performance**    | Read-only access | No write impact on controller database                             |
 | **Network bandwidth**             | Minimal          | Anonymized payloads transmitted daily (varies by environment size) |
 
-
 **Collection strategy**:
 
 - Hourly micro-batches with chunked processing (1000 rows per batch)
 - Read-only database access prevents controller impact
 - Scheduled during low-usage periods (1:00 AM - 5:00 AM for daily tasks)
-
 
 **Data retention (local to metrics service database)**
 
@@ -141,12 +134,15 @@ Metrics service is designed for minimal impact on automation controller operatio
 | Anonymized payloads    | 7 days                           | Compressed before transmission                |
 | Dashboard report data  | 90 days (when dashboard enabled) | Largest storage consumer if dashboard enabled |
 
-
 All data is purged automatically by `cleanup_metrics_data` task (daily at 4:00 AM).
 
 ## Capacity planning guidelines
 
 **When to scale metrics service resources**
+
+Note:
+
+Metrics service is deployed as a single instance on one node. Scale vertically by increasing CPU, RAM, or storage on that node. Multi-node or horizontal scaling is not supported.
 
 | Condition                                          | Recommended Action                                      |
 | -------------------------------------------------- | ------------------------------------------------------- |
@@ -155,13 +151,11 @@ All data is purged automatically by `cleanup_metrics_data` task (daily at 4:00 A
 | Database size exceeds 10 GB                        | Increase storage OR reduce retention periods            |
 | Task execution failures increase                   | Check database performance, verify network connectivity |
 
-
 **Storage growth estimates** (without dashboard):
 
 - Small environment (1000 jobs/day): ~50-100 MB/day
 - Medium environment (5000 jobs/day): ~200-300 MB/day
 - Large environment (20,000 jobs/day): ~500-800 MB/day
-
 
 **Storage growth with dashboard enabled** (90-day retention):
 
@@ -178,12 +172,10 @@ Metrics service handles disconnected environments gracefully:
 - No impact on automation controller operations when disconnected
 - Local collection continues normally
 
-
 **When connectivity is restored:**
 
 - Next scheduled anonymization/transmission cycle resumes
 - Only most recent anonymized payload is sent (older payloads are purged per retention policy)
 - No backlog buildup or resource exhaustion
-
 
 **Recommendation for disconnected environments:** Disable `ANONYMIZED_DATA_COLLECTION` feature flag if permanent disconnection is expected. This prevents log noise from failed transmission attempts while allowing local collection to continue.

@@ -9,16 +9,13 @@ When building workflows, consider the following:
 
 ![Node always](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-wf-root-node-always.png)
 
-
 - A node can have multiple parents, and children can be linked to any of the states of success, failure, or always. If always, then the state is neither success nor failure. States apply at the node level, not at the workflow job template level. A workflow job is marked as successful unless it is canceled or encounters an error.
 
 ![Sibling nodes all edge types](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-wf-sibling-nodes-all-edge-types.png)
 
-
 - If you remove a job or workflow template within the workflow, the nodes previously connected to those deleted, automatically get connected upstream and retain the edge type as in the following example:
 
 ![Node delete scenario](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-wf-node-delete-scenario.png)
-
 
 - You can have a convergent workflow, where multiple jobs converge into one. In this scenario, any of the jobs or all of them must complete before the next one runs, as shown in the following example:
 ![Node convergence](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-wf-node-convergence.png)
@@ -28,9 +25,7 @@ When building workflows, consider the following:
 
 ![Workflow diagram](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-workflow-diagram.png)
 
-
 - It is possible to launch several workflows simultaneously, and set a schedule for when to launch them. You can set notifications on workflows, such as when a job completes, similar to that of job templates.
-
 
 Note:
 

@@ -1,5 +1,5 @@
 # 7. Red Hat Ansible Automation Platform Service on AWS Private Link Connectivity
-## 7.4. Enabling AWS PrivateLink connectivity
+## 7.5. Enabling AWS PrivateLink connectivity
 
 To enable private link connectivity, submit a customer support ticket and the Red Hat team will work with you on the next steps.
 

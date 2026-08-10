@@ -11,7 +11,6 @@ Creates a workflow on the automation controller.
 | `inventory`              | String | Name of the inventory to associate with the workflow.                                       | -              |
 | `runner_pull_policy`     | String | Image pull policy for the runner pod.                                                       | `IfNotPresent` |
 
-
 **Example:**
 
 ```

@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-assembly_gs_platform_admin"
 title = "Get started as a platform administrator - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-assembly_gs_platform_admin"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-assembly_gs_platform_admin/", "Get started as a platform administrator"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/get_started-assembly_gs_platform_admin/aem-page/get_started-assembly_gs_platform_admin.html"
 last_crumb = "Get started as a platform administrator"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Get started as a platform administrator"
 oversized = "false"
@@ -63,7 +63,6 @@ To add your subscription by uploading a subscription manifest, you must first:
 
 - Obtain your manifest file. See [Obtaining a manifest file](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_activate_1#assembly-aap-obtain-manifest-files "You can obtain a subscription manifest in the Subscription Allocations section of Red Hat Subscription Management.") for more information.
 
-
 To add your subscription using your service account credentials, you must first:
 
 - Have [created a service account](https://docs.redhat.com/en/documentation/red_hat_hybrid_cloud_console/1-latest/html/creating_and_managing_service_accounts/proc-ciam-svc-acct-overview-creating-service-acct#proc-ciam-svc-acct-create-creating-service-acct) and saved the client ID and client secret.
@@ -89,7 +88,6 @@ After your first login as an administrator, begin configuring authentication for
 
 - Set up authentication by creating users, teams, and organizations, and then assigning them roles that govern access.
 - Use an external source such as GitHub to configure authentication for your system.
-
 
 The following sections serve as an introduction to authentication in Ansible Automation Platform.
 

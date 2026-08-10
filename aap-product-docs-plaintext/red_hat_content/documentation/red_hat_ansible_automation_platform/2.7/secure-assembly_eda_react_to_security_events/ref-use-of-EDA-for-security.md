@@ -18,7 +18,6 @@ Event-Driven Ansible can automate the following common security use cases:
 - Compliance and hardening
 - Phishing mitigation
 
-
 The following is an example workflow scenario using Event-Driven Ansible for detection of and response to unauthorized SSH access:
 
 1. **Event Source**: A security monitoring tool detects multiple failed SSH login attempts.

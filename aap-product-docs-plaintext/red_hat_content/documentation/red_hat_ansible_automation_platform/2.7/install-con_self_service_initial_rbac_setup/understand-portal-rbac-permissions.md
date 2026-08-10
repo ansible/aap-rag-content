@@ -8,13 +8,11 @@ Ansible automation portal and Ansible Automation Platform use separate but relat
 - Controls which users can view templates in the Ansible automation portal catalog.
 - Controls which users can access portal templates and submit jobs.
 
-
 **Ansible Automation Platform RBAC:**
 
 - **Controls synchronization scope:** Only Ansible Automation Platform job templates accessible by the configured Ansible Automation Platform token (ansible.rhaap.token) are synchronized to Ansible automation portal.
-- **Controls Ansible Automation Platform job template visibility and execution:** Ansible Automation Platform permissions determine whether authenticated users can view and execute Ansible Automation Platform job templates in Ansible automation portal.
+- **Controls auto-generated template visibility:** Ansible Automation Platform permissions determine whether authenticated users can view and execute auto-generated templates in Ansible automation portal. Custom templates are not filtered by Ansible Automation Platform permissions.
 - **Validates execution permissions:** When a Ansible automation portal user executes a template, Ansible Automation Platform checks that user’s execute permissions before launching the job.
-
 
 Note:
 

@@ -1,7 +1,7 @@
 +++
-title = "New features and enhancements - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-new_features_and_enhancements"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-new_features_and_enhancements"
+title = "New features and enhancements - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-overview_of_redhat_ansible_intro/", "Ansible Automation Platform release notes"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/whats_new-new_features_and_enhancements/aem-page/whats_new-new_features_and_enhancements.html"
 last_crumb = "New features and enhancements"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "New features and enhancements"
 oversized = "false"
@@ -29,7 +29,37 @@ type = "aem-page"
 
 The following release notes detail the new features and enhancements for the Ansible Automation Platform general availability release on June 3, 2026.
 
-## Automation portal Red Hat Enterprise Linux appliance
+## The Configuration as Code with the ansible.platform collection
+
+The ansible.platform collection is the unified Configuration as Code (CaC) interface for Ansible Automation Platform 2.7. It provides 22 modules and 1 lookup plugin for managing platform resources through the platform gateway API, replacing direct access to individual component APIs.
+
+For more information, see Configure your platform with Configuration as Code in the Ansible Automation Platform documentation.
+
+All ansible.platform modules now run as action plugins on the Ansible controller node instead of on managed nodes. This is a behavioral change that affects all playbooks using this collection.
+
+What changed
+
+- All ansible.platform tasks now run on the controller, not on managed nodes. Playbooks must target localhost with connection: local or connection: ansible.platform.http.
+- `delegate_to` to a remote host no longer works for ansible.platform tasks.
+- A new connection mode, connection: ansible.platform.http, reuses authenticated sessions across tasks in a play. Authentication happens once instead of per task, significantly reducing overhead for large CaC deployments.
+
+New modules
+The following modules are new in ansible.platform for Ansible Automation Platform 2.7:
+
+| Module                 | Description                                                                               |
+| ---------------------- | ----------------------------------------------------------------------------------------- |
+| `feature_flag`         | Query and manage run-time feature flags for the platform.                                 |
+| `ca_certificate`       | Manage CA certificates for mutual TLS (mTLS) authentication between services.             |
+| `role_team_assignment` | Assign roles to teams for specific resources or organizations. Supports batch operations. |
+| `role_definition`      | Create custom RBAC role definitions with specific permissions scoped to a content type.   |
+| `ui_plugin_route`      | Configure UI plugin routes for front-end plugin integration with platform gateway.        |
+
+New features in existing modules
+
+- **Mutual TLS support**: The service and route modules support an `enable_mtls` parameter for mutual TLS authentication between services.
+- **Route timeouts**: The service, route, and `ui_plugin_route` modules support `request_timeout_seconds` and `idle_timeout_seconds` parameters for per-route timeout configuration.
+- **OIDC User Identity**: The authenticator module supports OpenID Connect User Identity configuration for platform gateway, enabling OIDC integration for user authentication and authorization.
+- **Batch role assignments**: The `role_user_assignment` module supports object_ids for assigning a role to a user across multiple resources in a single task.
 
 Ansible automation portal is now available as a pre-built RHEL 9 virtual machine appliance. The appliance packages automation portal as a QCOW2 or VMDK disk image that you deploy on your existing virtualization infrastructure.
 
@@ -37,7 +67,6 @@ Ansible automation portal is now available as a pre-built RHEL 9 virtual machine
   * Multi-platform deployment: Deploy on RHEL with KVM, Red Hat OpenShift Virtualization, or VMware vSphere.
   * Automated first-boot configuration: Provide SSH keys and AAP OAuth credentials in a cloud-init user-data file. The appliance configures itself on first boot with no manual steps.
   * Atomic upgrades and rollback: Built on RHEL 9 image mode (bootc). Upgrade the appliance atomically while preserving configuration and data, and roll back to the previous version if needed.
-
 
 For more information, see the Ansible automation portal documentation.
 
@@ -64,7 +93,6 @@ Execution environment (EE) builder in Ansible automation portal is now generally
   * **Portable definitions**: Download a `.tar` without committing to Git, or import a template from a URL for reuse.
   * **Catalogs**: Search and filter EE definitions and collections with parsed content, metadata, dependencies, and source links.
 
-
 For more information, see *Using execution environment builder* in the Ansible automation portal documentation.
 
 ## Installation and Upgrades
@@ -75,7 +103,7 @@ For more information, see *Using execution environment builder* in the Ansible a
 - Migrating from one installation method to another must occur on the same AAP version.
 - Removal of direct external routes/ingress in automation controller, EDA and AutomationHub API
 
-## The MCP server for Red Hat Ansible Automation Platform
+## General availability of the MCP server for Red Hat Ansible Automation Platform
 
 - The MCP server has moved from technical preview to general availability.
 - Extending Red Hat maintained content use cases via the MCP plugin.
@@ -195,7 +223,6 @@ New features and enhancements
 ## Event-Driven Ansible ansible.eda and ansible-rulebook changes
 
 - New ansible-rulebook built-in modules The following event sources and event filters will be available as built-in modules in 'ansible-rulebook', and removed from 'ansible.collection'.
-
 
 The following is the list of new built-in modules:
 

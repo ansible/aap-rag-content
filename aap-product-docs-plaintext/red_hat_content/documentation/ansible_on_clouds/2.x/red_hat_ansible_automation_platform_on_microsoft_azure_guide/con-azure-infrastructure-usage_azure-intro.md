@@ -33,7 +33,7 @@ The Kubernetes cluster used to deploy Ansible Automation Platform applications a
 
 Important
 
-All deployments will move from the Azure Kubernetes Service (AKS) **Free tier** to the **Standard tier** as part of infrastructure changes when upgrading to Ansible Automation Platform 2.6.
+All deployments will move from the Azure Kubernetes Service (AKS) **Free tier** to the **Standard tier** as part of infrastructure changes when upgrading to Ansible Automation Platform 2.5.
 
 **Service Shape for all Ansible Automation Platform plan sizes:**
 

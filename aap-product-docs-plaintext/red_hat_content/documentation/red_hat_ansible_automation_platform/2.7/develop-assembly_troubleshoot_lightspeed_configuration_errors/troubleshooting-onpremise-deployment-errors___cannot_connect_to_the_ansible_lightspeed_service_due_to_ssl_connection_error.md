@@ -8,15 +8,14 @@ If you are using self-signed certificates on the model server, you might encount
 Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED]
 certificate verify failed: self signed certificate in certificate chain (_ssl.c:1006)'))
 ```
+
 To resolve this error, use one of the following workarounds based on your Ansible Automation Platform version:
 
 - For Red Hat Ansible Automation Platform 2.5 and later:
 
-
 Specify the optional key/value pair as `model_verify_ssl=true` in the model secret to connect to an IBM watsonx Code Assistant model. For details about the procedure, see Creating connection secrets.
 
 - For Red Hat Ansible Automation Platform 2.4:
-
 
 You can disable the SSL protection between the model server and the Ansible Lightspeed service. For example, you can disable the SSL protection when you are on a testing environment. To disable the SSL protection, you must add the following extra setting in the Red Hat Ansible Lightspeed Custom Resource Definition (CRD) YAML file under the `spec:` section:
 
@@ -25,7 +24,6 @@ extra_settings:
 - setting: ANSIBLE_AI_MODEL_MESH_API_VERIFY_SSL
 value: false
 ```
-
 
 Important:
 
@@ -38,7 +36,6 @@ extra_settings:
 - setting: ANSIBLE_AI_MODEL_MESH_API_VERIFY_SSL
 value: false
 ```
-
 
 1. Click **Save**.
 2. Restart the automation controller pods to apply the revised YAML:

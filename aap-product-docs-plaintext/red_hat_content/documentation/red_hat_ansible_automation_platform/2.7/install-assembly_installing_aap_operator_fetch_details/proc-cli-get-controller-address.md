@@ -23,5 +23,6 @@ $ oc get routes -n ansible-automation-platform
 NAME      HOST/PORT                                              PATH   SERVICES          PORT   TERMINATION     WILDCARD
 example   example-ansible-automation-platform.apps-crc.testing          example-service   http   edge/Redirect   None
 ```
+
 The address for the platform gateway instance is `example-ansible-automation-platform.apps-crc.testing`.
 

@@ -9,7 +9,6 @@ Enable automation dashboard using declarative Custom Resource configuration to l
 - You are running Ansible Automaton Platform operator (`aap-operator`) and metrics service operator (`automationmetricsservice-operator`) running
 - Understanding of Technology Preview features and limitations
 
-
 Important:
 
 **Technology Preview:** Automation dashboard is a Technology Preview feature in Red Hat Ansible Automation Platform 2.7 and is disabled by default. You must explicitly enable it by setting `spec.feature_flags.FEATURE_DASHBOARD_COLLECTION_ENABLED: true` in your AnsibleAutomationPlatform Custom Resource.
@@ -26,11 +25,13 @@ Edit your existing `AnsibleAutomationPlatform` CR to enable the dashboard collec
 ```
 kubectl edit AnsibleAutomationPlatform <aap-cr-name> -n <namespace>
 ```
+
 Or, if using OpenShift:
 
 ```
 oc edit AnsibleAutomationPlatform <aap-cr-name> -n <namespace>
 ```
+
 Add or update the `feature_flags` section:
 
 ```
@@ -42,6 +43,7 @@ disabled: false
 name: <aap-cr-name>-metrics
 # ... rest of your existing spec unchanged
 ```
+
 | Field                                                     | Default          | Purpose                                                                              |
 | --------------------------------------------------------- | ---------------- | ------------------------------------------------------------------------------------ |
 | `spec.feature_flags.FEATURE_DASHBOARD_COLLECTION_ENABLED` | `false` (absent) | Enables automation dashboard data collection in metrics service (Technology Preview) |
@@ -58,6 +60,7 @@ The Ansible Automation Platform operator reconciles the AnsibleAutomationPlatfor
 kubectl logs -n <namespace> \
 deployment/aap-gateway-operator-controller-manager | tail -20
 ```
+
 Look for reconciliation activity on your Ansible Automation Platform CR name.
 
 3.  Verify the feature flag reached the metrics service
@@ -66,6 +69,7 @@ Look for reconciliation activity on your Ansible Automation Platform CR name.
 ```
 METRICS_SERVICE_FEATURE_DASHBOARD_COLLECTION_ENABLED: '@bool True'
 ```
+
 If this key is absent, the operator has not yet reconciled. Wait 1–2 minutes and re-check.
 
 Note:
@@ -82,6 +86,7 @@ METRICS_POD=$(kubectl get pods -n <namespace> \
 kubectl exec -n <namespace> $METRICS_POD -- \
 env | grep DASHBOARD
 ```
+
 **Expected output:**
 
 ```
@@ -94,6 +99,7 @@ After the ConfigMap is updated, the metrics service pods restart automatically t
 ```
 kubectl get pods -n <namespace> | grep metrics
 ```
+
 **Expected output (on three running pods):**
 
 ```
@@ -101,6 +107,7 @@ kubectl get pods -n <namespace> | grep metrics
 <aap-cr-name>-metrics-tasks-<hash>      1/1   Running   0   <age>
 <aap-cr-name>-metrics-scheduler-<hash>  1/1   Running   0   <age>
 ```
+
 Note:
 There is no separate settings.yaml file in the operator deployment. All metrics service configuration is managed by using the `<name>-metrics-env-properties` ConfigMap.
 
@@ -116,6 +123,7 @@ kubectl exec -n <namespace> $DB_POD -- \
 psql -U metrics_service -d metrics_service \
 -c "SELECT table_name FROM information_schema.tables WHERE table_name LIKE 'dashboard%';"
 ```
+
 **Expected output:** Six dashboard tables:
 
 - `dashboard_job_data`
@@ -144,17 +152,14 @@ Dashboard is successfully enabled when:
 
 1.      Confirm the change was applied to the Ansible Automation Platform CR:
 
-
-
 ```
 kubectl get AnsibleAutomationPlatform <aap-cr-name> \
 -n <namespace> -o yaml | grep -A3 feature_flags
 ```
+
 Verify `FEATURE_DASHBOARD_COLLECTION_ENABLED: true` is present under `spec.feature_flags`.
 
 2.      Check Ansible Automation Platform operator logs for reconciliation errors:
-
-
 
 ```
 kubectl logs -n <namespace> \
@@ -162,8 +167,6 @@ deployment/aap-gateway-operator-controller-manager | grep -i error
 ```
 
 3.      Check automationmetricsservice operator logs:
-
-
 
 ```
 kubectl logs -n <namespace> \

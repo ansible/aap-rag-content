@@ -11,7 +11,6 @@ There are several additional benefits including:
 - Centralized logging helps meet compliance mandates by providing a single source of truth for auditing purposes.
 - Third Party integration with a centralized log management platform like Splunk, Logstash, ElasticSearch, or Loggly to collect and analyze logs.
 
-
 The logging aggregator service works with the following monitoring and data analysis systems:
 
 - Splunk

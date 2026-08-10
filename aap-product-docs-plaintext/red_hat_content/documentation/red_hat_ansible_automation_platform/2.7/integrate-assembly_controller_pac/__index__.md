@@ -12,7 +12,6 @@ Before you can implement policy enforcement in your Ansible Automation Platform 
 - Configured Ansible Automation Platform with settings required for authenticating to your OPA server.
 - Some familiarity with OPA and the Rego language, which is the language policies are written in.
 
-
 For policy enforcement to work correctly, you must both configure the OPA server in your policy settings, and associate a specific policy with a particular resource. For example, a particular organization, inventory, or job template.
 
 Note:

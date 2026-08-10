@@ -8,7 +8,6 @@ The following include examples of details needed to add a notification template:
 - The token and a list of channels are needed for a Slack notification template
 - The URL and Headers are needed for a Webhook notification template
 
-
 When a job fails, a notification is sent using the configuration that you define in the notification template.
 
 The following shows the typical flow for the notification system:

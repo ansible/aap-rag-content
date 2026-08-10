@@ -20,7 +20,6 @@ When you select **HashiCorp Vault Secret Lookup** for **Credential Type**, give 
 - **Path to Auth**: specify a path if other than the default path of `/approle`.
 - **API Version** (required): select v1 for static lookups and v2 for versioned lookups.
 
-
 LDAP authentication requires LDAP to be configured in HashiCorp’s Vault UI and a policy added to the user. Cubbyhole is the name of the default secret mount. If you have proper permissions, you can create other mounts and write key values to those.
 
 To test the lookup, create another credential that uses Hashicorp Vault lookup.

@@ -11,6 +11,7 @@ def main(event: dict, arg1, arg2):
 # Process event data here
 return event
 ```
+
 You can use this filter in a rulebook by adding it to the filters list in an event source:
 
 ```

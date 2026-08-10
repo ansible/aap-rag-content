@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
 title = "Troubleshoot your Operator-based deployment of Ansible Automation Platform - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-assembly_operator_troubleshoot"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-assembly_operator_troubleshoot/", "Troubleshoot your Operator-based deployment of Ansible Automation Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/troubleshoot-assembly_operator_troubleshoot/aem-page/troubleshoot-assembly_operator_troubleshoot.html"
 last_crumb = "Troubleshoot your Operator-based deployment of Ansible Automation Platform"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Troubleshoot your Operator-based deployment of Ansible Automation Platform"
 oversized = "false"
@@ -72,6 +72,7 @@ oc get pods | grep operator
 ```
 oc logs <operator-pod-name> -f
 ```
+
   1.  Alternatively, to view the logs without first getting the pod name, run:
   
 
@@ -112,6 +113,7 @@ spec:
   hub:
     no_log: false
 ```
+
   For Event-Driven Ansible
 
 ```
@@ -123,6 +125,7 @@ spec:
   eda:
     no_log: false
 ```
+
   
   Note:
       This might expose sensitive data in the logs. On production clusters, this value must generally be set to `true` unless you are actively debugging an issue.
@@ -160,6 +163,7 @@ oc describe -n <namespace> <resource> <resource-name>
 ```
 oc get -n <namespace> <resource> <resource-name> -o yaml
 ```
+
   - For example, to get the YAML for the `automationcontroller` custom resource, run:
 
 ```
@@ -211,10 +215,8 @@ Use the `oc adm must-gather` command to collect comprehensive diagnostic data ab
   
 
 ```
-oc adm must-gather --image=registry.redhat.io/ansible-automation-platform-25/aap-must-gather-rhel8
+oc adm must-gather --image=registry.redhat.io/<platform-version>/aap-must-gather-rhel<rhel-version>
 ```
-  Note:
-      For version 2.6, the base image name changes to `registry.redhat.io/ansible-automation-platform-26/aap-must-gather-rhel9`.
 
 2.  View the collected data, use the `omc` tool to query the `must-gather` tarball as if it were a live cluster.
 

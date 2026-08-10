@@ -1,4 +1,4 @@
-# Ansible Automation Platform 2.7 patch release June 17, 2026
+# Ansible Automation Platform patch release June 17, 2026
 ## Controller
 
 - Fixed an issue where Execution Nodes were incorrectly included in the Control Plane. (AAP-78341)

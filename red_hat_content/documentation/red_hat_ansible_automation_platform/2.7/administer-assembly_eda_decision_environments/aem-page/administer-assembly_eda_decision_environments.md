@@ -1,7 +1,7 @@
 +++
-title = "Create runtime environments for event-driven automation - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_decision_environments"
 template = "docs/aem-title.html"
+title = "Create runtime environments for event-driven automation - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_user_guide_overview/", "Trigger automation from events with Event-Driven Ansible"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_decision_environments/aem-page/administer-assembly_eda_decision_environments.html"
 last_crumb = "Create runtime environments for event-driven automation"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Create runtime environments for event-driven automation"
 oversized = "false"
@@ -58,7 +58,6 @@ The following table lists the supported plugins in the `de-minimal` image, inclu
 | `eda.builtin.range`                 | <br>Event source | `ansible.eda.range`                 |
 | `eda.builtin.webhook`               | <br>Event source | `ansible.eda.webhook`               |
 
-
 The following event sources have been made available in dedicated collections. The original `ansible.eda` names are currently supported as deprecated plugins in `de-minimal`, but you must transition to the new `de-supported` versions to ensure long-term compatibility and overall improvements:
 
 *Table 2. `de\-supported` event sources*
@@ -68,7 +67,6 @@ The following event sources have been made available in dedicated collections. T
 | `amazon.aws.aws_cloudtrail`            | `ansible.eda.aws_cloudtrail`          |
 | `amazon.aws.aws_sqs_queue`             | `ansible.eda.aws_sqs_queue`           |
 | `azure.azcollection.azure_service_bus` | `ansible.eda.azure_service_bus`       |
-
 
 In addition, the `de-minimal` image currently provides event sources that are not supported, and will be removed in a future release:
 
@@ -88,26 +86,26 @@ Customize a decision environment container image to ensure your rulebook activat
 - Event-Driven Ansible
 - Ansible Builder > = 3.0
 
-
 Important:
 
-- Use the correct Event-Driven Ansible controller decision environment in Ansible Automation Platform to prevent rulebook activation failure.   * If you want to connect Event-Driven Ansible controller to Ansible Automation Platform 2.4, you must use `registry.redhat.io/ansible-automation-platform-24/de-minimal-rhel9:latest` (recommended) or `registry.redhat.io/ansible-automation-platform-24/de-minimal-rhel8:latest`
-  * If you want to connect Event-Driven Ansible controller to Ansible Automation Platform 2.5, you must use `registry.redhat.io/ansible-automation-platform-25/de-minimal-rhel9:latest` (recommended) or `registry.redhat.io/ansible-automation-platform-25/de-minimal-rhel8:latest`
-  * If you want to connect Event-Driven Ansible controller to Ansible Automation Platform 2.6, you must use `registry.redhat.io/ansible-automation-platform-26/de-minimal-rhel9:latest`
+Use the `de-minimal` decision environment image that matches your version of Ansible Automation Platform to prevent rulebook activation failure. Use `registry.redhat.io/<platform-version>/de-minimal-rhel<rhel-version>:latest`.
 
 ### Procedure
 
-1.  Use `de-minimal` as the base image with Ansible Builder to build your custom decision environments. This image is built from a base image provided by Red Hat at [Ansible Automation Platform minimal decision environment](https://catalog.redhat.com/software/containers/ansible-automation-platform-25/de-minimal-rhel9/650a5672a370728c710acaab). Important:
+1.  Use `de-minimal` as the base image with Ansible Builder to build your custom decision environments. This image is built from a base image provided by Red Hat at [Ansible Automation Platform minimal decision environment](https://catalog.redhat.com/en/search?q=de-minimal&searchType=Containers). Important:
   The `ansible.eda` collection is already installed in the `de-minimal `base image. To prevent Ansible Builder from attempting to reinstall it, add `ansible.eda` to the `exclude.all_from_collections` list as shown in the following examples.
 
 The following is an example of the Ansible Builder definition file that uses `de-minimal` as a base image to build a custom decision environment with the ansible.eda collection:
+
+  Note:
+      Replace `<platform-version>` with the namespace for your version of Ansible Automation Platform. Replace `<rhel-version>` with your Red Hat Enterprise Linux version
 
 ```
 version: 3
 
     images:
   base_image:
-    name: 'registry.redhat.io/ansible-automation-platform-25/de-minimal-rhel9:latest'
+    name: 'registry.redhat.io/<platform-version>/de-minimal-rhel<rhel-version>:latest'
 
     dependencies:
   galaxy:
@@ -126,13 +124,15 @@ version: 3
 
 2.  Optional: If you need other Python packages or RPMs, add the following to a single definition file:
   
+  Note:
+      Replace `<platform-version>` with the namespace for your version of Ansible Automation Platform. Replace `<rhel-version>` with your Red Hat Enterprise Linux version
 
 ```
 version: 3
 
     images:
   base_image:
-    name: 'registry.redhat.io/ansible-automation-platform-25/de-minimal-rhel9:latest'
+    name: 'registry.redhat.io/<platform-version>/de-minimal-rhel<rhel-version>:latest'
 
     dependencies:
   galaxy:
@@ -159,7 +159,7 @@ Set up a new decision environment to define the dedicated, containerized runtime
 ### Before you begin
 
 - You have set up a credential, if necessary. For more information, see the [Setting up credentials](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_eda_set_up_credential#eda-set-up-credential "Create a credential to securely store sensitive data (like tokens and passwords) required for rulebook activations to connect to source plugins or private registries.") section.
-- You have pushed a decision environment image to an image repository or you chose to use the `de-minimal`[image](https://catalog.redhat.com/en/software/containers/ansible-automation-platform-26/de-minimal-rhel9/66fed7ad6ae4c44aa5de8c72) located in [registry.redhat.io](http://registry.redhat.io/).
+- You have pushed a decision environment image to an image repository or you chose to use the `de-minimal`[image](https://catalog.redhat.com/en/search?q=de-minimal&searchType=Containers) located in [registry.redhat.io](http://registry.redhat.io/).
 
 ### Procedure
 

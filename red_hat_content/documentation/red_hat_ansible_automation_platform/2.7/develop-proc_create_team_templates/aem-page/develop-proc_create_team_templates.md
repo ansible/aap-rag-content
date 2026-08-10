@@ -1,16 +1,16 @@
 +++
-template = "docs/aem-title.html"
 title = "Create standardized execution environment templates for teams - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_create_team_templates"
+template = "docs/aem-title.html"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_app_ee_builder/", "Configure a GitHub App for content discovery"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-build_execution_environments_with_the_automation_portal/", "Build execution environments with automation portal"]]
 category = "Develop"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_create_team_templates/aem-page/develop-proc_create_team_templates.html"
 last_crumb = "Create standardized execution environment templates for teams"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Create standardized execution environment templates for teams"
 oversized = "false"
@@ -65,6 +65,7 @@ metadata:
     - execution-environment
     - team-ops
 ```
+
     **Collections** — pre-fill the collections your team needs, with version constraints and source:
 
 ```
@@ -77,6 +78,7 @@ collections:
       version: ">=1.5.0"
       source: rh-certified
 ```
+
     **Build destination** — set where the built image is pushed:
 
 ```
@@ -91,6 +93,7 @@ publishAndBuild:
     registryTlsVerify:
       default: true
 ```
+
   Note:
       Set `registryTlsVerify` to `false` for registries using self-signed certificates. Set `buildRegistry` to `'Custom Registry'` and add a `customRegistryUrl` if you use an internal registry other than private automation hub.
 
@@ -113,7 +116,8 @@ publishAndBuild:
 3. Verify the team template appears.
 4. Launch the template and verify the wizard pre-populates the expected collections and dependencies.
 
-
 Note:
 
 This pattern works for any team — swap the collections, base image, and registry defaults to match your team's domain and infrastructure.
+
+After updating the configuration, apply your changes. See [Apply configuration changes](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_apply_configuration_changes "Apply configuration changes after modifying your Helm chart values or RHEL appliance configuration file for execution environment builder.").

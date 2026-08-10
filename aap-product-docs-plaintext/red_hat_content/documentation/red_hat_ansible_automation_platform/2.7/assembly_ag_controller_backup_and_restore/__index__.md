@@ -15,23 +15,25 @@ The Ansible Automation Platform setup playbook is invoked as `setup.sh` from the
 - `-b`: Perform a database backup rather than an installation.
 - `-r`: Perform a database restore rather than an installation.
 
-
 As the root user, call `setup.sh` with the appropriate parameters and the Ansible Automation Platform backup or restored as configured:
 
 ```
 root@localhost:~# ./setup.sh -b
 root@localhost:~# ./setup.sh -r
 ```
+
 Backup files are created on the same path that `setup.sh` script exists. You can change it by specifying the following `EXTRA_VARS`:
 
 ```
 root@localhost:~# ./setup.sh -e 'backup_dest=/path/to/backup_dir/' -b
 ```
+
 A default restore path is used unless you provide `EXTRA_VARS` with a non-default path, as shown in the following example:
 
 ```
 root@localhost:~# ./setup.sh -e 'restore_backup_file=/path/to/nondefault/backup.tar.gz' -r
 ```
+
 Optionally, you can override the inventory file used by passing it as an argument to the setup script:
 
 ```

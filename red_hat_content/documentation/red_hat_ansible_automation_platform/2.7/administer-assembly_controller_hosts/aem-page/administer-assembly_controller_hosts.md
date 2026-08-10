@@ -1,7 +1,7 @@
 +++
-title = "Add new hosts as automation targets - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_hosts"
+template = "docs/aem-title.html"
+title = "Add new hosts as automation targets - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-define_where_automation_runs_with_host_and_node_groupings/", "Define where automation runs with host and node groupings"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_hosts/aem-page/administer-assembly_controller_hosts.html"
 last_crumb = "Add new hosts as automation targets"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Add new hosts as automation targets"
 oversized = "false"

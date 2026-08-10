@@ -29,6 +29,7 @@ icon: AnsibleLogo
 text: Ansible
 path: /ansible
 ```
+
 **After (sidebar item removed):**
 
 ```yaml

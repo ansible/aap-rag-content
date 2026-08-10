@@ -2,7 +2,7 @@
   "version": "1.1",
   "sections": [
     {
-      "title": "Set up GitLab integration for execution environment builder",
+      "title": "Configure a GitLab OAuth App for saving definitions",
       "visible": true,
       "weight": 1,
       "urlFragment": "index",

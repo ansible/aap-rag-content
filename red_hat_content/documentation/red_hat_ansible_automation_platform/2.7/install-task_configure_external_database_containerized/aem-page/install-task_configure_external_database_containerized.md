@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-task_configure_external_database_containerized/aem-page/install-task_configure_external_database_containerized.html"
 last_crumb = "Configure external PostgreSQL database for metrics service with containerized installer"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure external PostgreSQL database for metrics service with containerized installer"
 oversized = "false"
@@ -57,6 +57,7 @@ psql -h <EXTERNAL_DB_HOST> -U postgres
        LC_CTYPE='en_US.UTF-8'
        TEMPLATE=template0;
 ```
+
   Note:
       **Why UTF-8 encoding:** Django ORM requires UTF-8 encoding for proper handling of internationalized strings and special characters in metric data.
 
@@ -77,6 +78,7 @@ CREATE USER ms_awx_readonly WITH PASSWORD '<READONLY_PASSWORD>';
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO ms_awx_readonly;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO ms_awx_readonly;
 ```
+
   Important:
       Change `awx` to match your actual database name for automation controller. Common alternative names: `automationcontroller`, `tower`, `awx_production`.
 
@@ -94,6 +96,7 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO ms_awx_reado
 host    metrics_service    metrics_service    <METRICS_HOST_IP>/32    scram-sha-256
 host    awx               ms_awx_readonly    <METRICS_HOST_IP>/32    scram-sha-256
 ```
+
     **Replace placeholders:**
 
   - `<METRICS_HOST_IP>`: IP address of the host running metrics service (from `[automationmetrics]` inventory group)
@@ -132,6 +135,7 @@ automationmetrics_controller_read_pg_host=controller-db.example.com
 cd /path/to/aap-containerized-installer
 ansible-playbook -i inventory install.yml
 ```
+
     The installer performs these actions:
 
   1. Skips PostgreSQL process creation for metrics service (uses external database)

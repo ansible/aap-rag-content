@@ -1,7 +1,7 @@
 +++
 template = "docs/aem-title.html"
+title = "Restore your Ansible Automation Platform deployment - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_aap_recovery"
-title = "Restore your Ansible Automation Platform deplopyment - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_aap_backup_recovery/", "Back up and restore in an OpenShift environment"]]
@@ -9,10 +9,10 @@ category = "Administer"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_aap_recovery/aem-page/administer-assembly_aap_recovery.html"
-last_crumb = "Restore your Ansible Automation Platform deplopyment"
-modified = "2026-06-05T07:48:10.594Z"
+last_crumb = "Restore your Ansible Automation Platform deployment"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
-name = "Restore your Ansible Automation Platform deplopyment"
+name = "Restore your Ansible Automation Platform deployment"
 oversized = "false"
 page_slug = "administer-assembly_aap_recovery"
 portal_content_subtype = "title"
@@ -25,7 +25,7 @@ toc = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-a
 type = "aem-page"
 +++
 
-# Restore your Ansible Automation Platform deplopyment
+# Restore your Ansible Automation Platform deployment
 
 If you lose information on your system or experience issues with an upgrade, you can use the backup resources of your deployment instances. Use the following procedures to recover your Ansible Automation Platform deployment files.
 

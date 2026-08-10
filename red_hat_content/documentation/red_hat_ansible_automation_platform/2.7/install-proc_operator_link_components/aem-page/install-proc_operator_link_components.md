@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_operator_link_components/aem-page/install-proc_operator_link_components.html"
 last_crumb = "Deploy a new Ansible Automation Platform instance with components"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Deploy a new Ansible Automation Platform instance with components"
 oversized = "false"
@@ -78,13 +78,11 @@ spec:
 3. Select the **All instances** tab.
 4. Verify that the **Ansible Automation Platform** instance, **Automation Controller**, **Event-Driven Ansible**, and **Automation Hub** instances are listed.
 
-
  **Verify pod status (UI):**
 
 1. Navigate to Workloads> (and then)Pods.
 2. Switch to the project (namespace) where you deployed the instance.
 3. Verify that all related pods display a **Running** or **Completed** status.
-
 
  **Verify Platform Route (CLI):**
 

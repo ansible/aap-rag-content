@@ -13,5 +13,4 @@ Auto-generated templates include:
 - A single step that launches the Ansible Automation Platform Job Template using the `rhaap:launch-job-template` action.
 - Output that displays the job execution results to the user.
 
-
 Users only see and execute templates for Ansible Automation Platform Job Templates they have Job Template Execute permission in Ansible Automation Platform.

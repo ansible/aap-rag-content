@@ -1,7 +1,7 @@
 +++
 title = "Discover existing Ansible content for RHEL system roles - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_rhdh_firewall_example_discover"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_rhdh_using/", "Streamline development by integrating Red Hat Developer Hub plug-ins"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_rhdh_firewall_example_discover/aem-page/develop-proc_rhdh_firewall_example_discover.html"
 last_crumb = "Discover existing Ansible content for RHEL system roles"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Discover existing Ansible content for RHEL system roles"
 oversized = "false"
@@ -104,6 +104,7 @@ Create a new playbook and use the RHEL System Role collection to automate your R
       ansible.builtin.include_role:
         name: redhat.rhel_system_roles.firewall
 ```
+
   Note:
       You can use Ansible Lightspeed with IBM watsonx Code Assistant from the Ansible VS Code extension to help you generate playbooks. For more information, refer to the [Ansible Lightspeed with IBM watsonx Code Assistant User Guide](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index).
 

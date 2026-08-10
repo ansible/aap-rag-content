@@ -18,7 +18,6 @@ You can sync certified and validated collections in Ansible automation hub from 
 * `ansible-galaxy.s3.amazonaws.com`
 - SSL inspection is disabled either when using self signed certificates or for the Red Hat domains.
 
-
 Important:
 
 Before you begin your content sync, ensure that you have the resources to sync the collections you need.
@@ -46,6 +45,17 @@ When syncing content, keep in mind that automation hub does not check other repo
 
 ## Results
 
-The **Sync status** column updates to notify you whether the synchronization is successful.
+After you initiate a sync, the **Sync status** column on the Automation Content> (and then)Repositories page updates to show the current state of the operation.
 
-- Navigate to Automation Content> (and then)Collections to confirm that your collections content has synchronized successfully.
+| Sync status | Description                                                                           |
+| ----------- | ------------------------------------------------------------------------------------- |
+| Completed   | The sync finished successfully. The repository content is up to date with the remote. |
+| Failed      | The sync encountered an error. Check the sync task details for more information.      |
+| Syncing     | The sync is in progress.                                                              |
+| No sync     | The repository has never been synced.                                                 |
+
+To verify the sync results, navigate to Automation Content> (and then)Collections and confirm that the expected content appears.
+
+**Check when a repository was last synced**
+
+The Automation Content> (and then)Remotes page shows the "Last updated" timestamp for each remote configuration. The timestamp also reflects the most recent successful sync for that remote. You can also retrieve the last sync time from the API. Send a GET request to `/api/galaxy/pulp/api/v3/repositories/ansible/ansible/` and check the` last_synced_metadata_time` field in the response. The field is null if the repository has never been synced.

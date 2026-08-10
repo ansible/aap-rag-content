@@ -1,16 +1,16 @@
 +++
-template = "docs/aem-title.html"
 title = "Remove the Ansible sidebar navigation item - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-proc_rhdh_remove_ansible_sidebar"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-proc_rhdh_remove_ansible_sidebar/", "Remove the Ansible sidebar navigation item"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_intro/", "Ansible plug-ins for Red Hat Developer Hub"]]
 category = "Extend"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-proc_rhdh_remove_ansible_sidebar/aem-page/extend-proc_rhdh_remove_ansible_sidebar.html"
 last_crumb = "Remove the Ansible sidebar navigation item"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Remove the Ansible sidebar navigation item"
 oversized = "false"
@@ -56,6 +56,7 @@ pluginConfig:
               text: Ansible
             path: /ansible
 ```
+
     **After (sidebar item removed):**
 
 ```yaml

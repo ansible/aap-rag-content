@@ -12,6 +12,7 @@
 ```
 Set up a complete Ansible development environment with Python 3.11, and install the collections amazon.aws and ansible.posix
 ```
+
 The assistant will trigger the `ade_setup_environment`tool. The system will automatically perform the following configuration steps:
 - Create a Virtual Environment: The assistant creates a virtual environment (for example, `venv/`) in your workspace.
 - Install Core Tools: The assistant installs `ansible-core `and `ansible-lint` in the new virtual environment.

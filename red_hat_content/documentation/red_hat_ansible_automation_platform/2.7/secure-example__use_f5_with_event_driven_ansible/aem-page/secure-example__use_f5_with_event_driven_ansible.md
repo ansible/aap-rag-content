@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-example__use_f5_with_event_driven_ansible/aem-page/secure-example__use_f5_with_event_driven_ansible.html"
 last_crumb = "Example: Use F5 with Event-Driven Ansible"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Example: Use F5 with Event-Driven Ansible"
 oversized = "false"
@@ -62,13 +62,11 @@ Encrypting AWS CloudTrail logs is important for several reasons:
 - Prevent tampering: CloudTrail’s log encryption helps prevent logs from being tampered with. This helps maintain log integrity and an accurate record of all API calls made to your AWS account.
 - Secure data: CloudTrail log’s encryption provides an additional layer of security for data. In the event that your S3 bucket is compromised, the encrypted logs cannot be accessed without the encryption key.
 
-
 The Event-Driven Ansible rulebook is comprised of the following components to assist in actions on the log files:
 
 - **Sources**: define which event source will be used
 - **Rules**: define which conditionals will be matched from the event source
 - **Actions**: trigger events when conditions are met
-
 
 In the following example, the rulebook implements a ruleset with three rules as follows:
 

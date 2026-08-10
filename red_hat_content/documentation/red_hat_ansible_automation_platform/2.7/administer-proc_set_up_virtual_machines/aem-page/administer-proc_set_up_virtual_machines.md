@@ -1,6 +1,6 @@
 +++
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_set_up_virtual_machines"
+template = "docs/aem-title.html"
 title = "Set up VMs for use in mesh - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-proc_set_up_virtual_machines/aem-page/administer-proc_set_up_virtual_machines.html"
 last_crumb = "Set up VMs for use in mesh"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Set up VMs for use in mesh"
 oversized = "false"
@@ -36,6 +36,7 @@ Prepare Red Hat Enterprise Linux virtual machines by setting up SSH access and e
 ```
 ssh [username]@[host_ip_address]
 ```
+
     For example, for an Ansible Automation Platform instance running on Amazon Web Services.
 
 ```
@@ -48,11 +49,13 @@ ssh ec2-user@10.0.0.6
 ```
 sudo subscription-manager register --auto-attach
 ```
+
     If Simple Content Access is enabled for your account, use:
 
 ```
 sudo subscription-manager register
 ```
+
     For more information about Simple Content Access, see [Getting started with simple content access](https://docs.redhat.com/en/documentation/subscription_central/1-latest/html/getting_started_with_simple_content_access/index).
 
 4.  Enable Ansible Automation Platform subscriptions and the proper Red Hat Ansible Automation Platform channel:
@@ -61,11 +64,13 @@ sudo subscription-manager register
 ```
 # subscription-manager repos --enable ansible-automation-platform-2.5-for-rhel-8-x86_64-rpms
 ```
+
     For RHEL 9
 
 ```
 # subscription-manager repos --enable ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms
 ```
+
     For ARM
 
 ```
@@ -85,6 +90,7 @@ sudo dnf upgrade -y
 ```
 sudo dnf install -y ansible-core
 ```
+
    Note:
       Ansible core is required on the machine that runs the automation mesh configuration bundle playbooks. This document assumes that happens on the execution node. However, this step can be omitted if you run the playbook from a different machine. You cannot run directly from the control node, this is not currently supported, but future support expects that the control node has direct connectivity to the execution node.
 
@@ -166,6 +172,7 @@ all:
           ansible_user: <username> # user provided
           ansible_ssh_private_key_file: ~/.ssh/<id_rsa>
 ```
+
   - Ensure `ansible_host` is set to the IP address or DNS of the node.
   - Set `ansible_user` to the username running the installation.
   - Set `ansible_ssh_private_key_file` to contain the filename of the private key used to connect to the instance.
@@ -177,6 +184,7 @@ all:
 ```
 ansible_ssh_common_args: <your ssh ProxyCommand setting>
 ```
+
     This instructs the `install-receptor.yml` playbook to use the proxy command to connect through the local DNS node to the private node.
 
 9.  When the attributes are configured, click Save. The **Details** page of the created instance opens.
@@ -187,11 +195,13 @@ ansible_ssh_common_args: <your ssh ProxyCommand setting>
 ```
 ansible-galaxy collection install ansible.receptor
 ```
+
     or
 
 ```
 ansible-galaxy install -r requirements.yml
 ```
+
   - Installing the receptor collection dependency from the `requirements.yml` file consistently retrieves the receptor version specified there. Additionally, it retrieves any other collection dependencies that might be needed in the future.
   - Install the receptor collection on all nodes where your playbook will run, otherwise an error occurs.
 
@@ -208,19 +218,21 @@ sudo firewall-cmd --permanent --zone=public --add-port=27199/tcp
 ```
 ansible-playbook -i inventory.yml install_receptor.yml
 ```
+
    Note:
       OpenSSL is required for this playbook. You can install it by running the following command:
 
 ```
 openssl -v
 ```
+
     If it returns then a version OpenSSL is installed. Otherwise you need to install OpenSSL with:
 
 ```
 sudo dnf install -y openssl
 ```
-    After this playbook runs, your automation mesh is configured.
 
+    After this playbook runs, your automation mesh is configured.
 
 ![Instances list view](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/instances_list_view2.png)  
    Note:
@@ -280,7 +292,6 @@ Use the following procedure to create a new instance group.
 When you have successfully created the instance group the **Details** tab of the newly created instance group enables you to review and edit your instance group information.
 
 You can also edit **Instances** and review **Jobs** associated with this instance group:
-
 
 ![Instance group successfully created](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-instance-group-created.png)  
 

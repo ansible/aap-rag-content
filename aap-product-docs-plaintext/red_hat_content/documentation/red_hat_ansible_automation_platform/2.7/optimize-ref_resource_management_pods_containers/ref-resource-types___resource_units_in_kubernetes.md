@@ -15,6 +15,7 @@ To specify CPU units less than 1.0 or 1000m you must use the milliCPU form. For 
 ```
 128974848, 129e6, 129M,  128974848000m, 123Mi
 ```
+
 Pay attention to the case of the suffixes. If you request 400m of memory, this is a request for 0.4 bytes, not 400 mebibytes (400Mi) or 400 megabytes (400M).
 
 **Example CPU and memory specification** The following cluster has enough free resources to schedule a task pod with a dedicated 100m CPU and 250Mi. The cluster can also withstand bursts over that dedicated usage up to 2000m CPU and 2Gi memory.
@@ -29,5 +30,6 @@ limits:
 cpu: 2000m
 memory: 2Gi
 ```
+
 Automation controller will not schedule jobs that use more resources than the limit set. If the task pod does use more resources than the limit set, the container is OOMKilled by Kubernetes and restarted.
 

@@ -4,7 +4,7 @@ Enable navigation permissions in the Ansible automation portal RBAC configuratio
 
 ## Before you begin
 
-- You have configured base RBAC roles per [Configure role-based access control for Ansible automation portal](/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_configure#rhdh-configure-rbac "Red Hat Developer Hub offers Role-based Access Control (RBAC) functionality. RBAC can then be applied to the Ansible plug-ins content.").
+- You have configured base RBAC roles per [Configure role-based access control for Ansible automation portal](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-configure_portal_rbac "Configure RBAC permissions in Ansible automation portal to control which users can view and execute templates, and which sidebar items are visible to non-admin users.").
 - You have the AAP Administrator role and access to **Administration > RBAC** in automation portal.
 
 ## Procedure
@@ -24,6 +24,5 @@ To verify the configuration:
 1. Log out and log in as a user assigned to the modified role.
 2. Verify that the expected sidebar items are visible based on the permissions you assigned.
 3. If you granted full access, navigate to **Execution Environments > Create** and verify that templates are visible and the wizard launches.
-
 
 To hide execution environment builder from specific user groups, remove these permissions from their assigned roles.

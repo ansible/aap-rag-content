@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_self_service_initial_rbac_setup"
-template = "docs/aem-title.html"
 title = "Set up initial RBAC rules in Ansible automation portal - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_about/", "Install Ansible automation portal (OpenShift Container Platform only)"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-con_self_service_initial_rbac_setup/aem-page/install-con_self_service_initial_rbac_setup.html"
 last_crumb = "Set up initial RBAC rules in Ansible automation portal"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Set up initial RBAC rules in Ansible automation portal"
 oversized = "false"
@@ -31,6 +31,8 @@ After you install Ansible automation portal and synchronize it with Ansible Auto
 
 You must configure initial Role-Based Access Control (RBAC) permissions to allow non-admin users to view and execute synchronized Ansible Automation Platform job templates.
 
+For the complete RBAC configuration procedure, including navigation permissions required for non-admin users to access portal pages, see [Configure role-based access control for Ansible automation portal](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-configure_portal_rbac "Configure RBAC permissions in Ansible automation portal to control which users can view and execute templates, and which sidebar items are visible to non-admin users.").
+
  Important:
 
 Role-Based Access Control (RBAC) differs by template type:
@@ -47,13 +49,11 @@ Ansible automation portal and Ansible Automation Platform use separate but relat
 - Controls which users can view templates in the Ansible automation portal catalog.
 - Controls which users can access portal templates and submit jobs.
 
-
  **Ansible Automation Platform RBAC:**
 
 - **Controls synchronization scope:** Only Ansible Automation Platform job templates accessible by the configured Ansible Automation Platform token (ansible.rhaap.token) are synchronized to Ansible automation portal.
-- **Controls Ansible Automation Platform job template visibility and execution:** Ansible Automation Platform permissions determine whether authenticated users can view and execute Ansible Automation Platform job templates in Ansible automation portal.
+- **Controls auto-generated template visibility:** Ansible Automation Platform permissions determine whether authenticated users can view and execute auto-generated templates in Ansible automation portal. Custom templates are not filtered by Ansible Automation Platform permissions.
 - **Validates execution permissions:** When a Ansible automation portal user executes a template, Ansible Automation Platform checks that user’s execute permissions before launching the job.
-
 
  Note:
 
@@ -111,7 +111,7 @@ On successful completion, your new role is included in the **All roles** list wh
 
 ## Configure conditional access
 
-Optionally, you can configure conditional Ansible automation portal RBAC policies to filter role access to specific Ansible Automation Platform job templates by tag for specific Ansible Automation Platform teams or users.
+You can configure conditional Ansible automation portal RBAC policies to filter role access to specific Ansible Automation Platform job templates by tag for specific Ansible Automation Platform teams or users.
 
 ### Before you begin
 
@@ -147,18 +147,18 @@ Ansible Automation Platform labels are converted to lowercase tags with special 
 
 7.  In the condition builder, configure a rule to filter by tag:
 
-  - **Rule:** Select `HAS_METADATA` from the dropdown menu
-  - **Key:** Enter `tags`
-  - **Value:** Enter the tag value to filter by (for example, `network-automation`)
+  - **Rule:** Select `HAS_METADATA` from the dropdown menu.
+  - **Key:** Enter `tags`.
+  - **Value:** Enter the tag value to filter by (for example, `network-automation`).
 
 8.  Select the **Scaffolder** plugin and enable all scaffolder permissions:
 
-  -  `scaffolder.template.parameter.read`
-  -  `scaffolder.template.step.read`
-  -  `scaffolder.action.execute`
-  -  `scaffolder.task.cancel`
-  -  `scaffolder.task.create`
-  -  `scaffolder.task.read`
+  - `scaffolder.template.parameter.read`
+  - `scaffolder.template.step.read`
+  - `scaffolder.action.execute`
+  - `scaffolder.task.cancel`
+  - `scaffolder.task.create`
+  - `scaffolder.task.read`
 
 9.  Click Next to review your settings, then click Create to create the new role.
 
@@ -171,6 +171,42 @@ On successful completion, your new role is included in the **All roles** list wh
   - If you did not configure conditional access, the user should see all Ansible Automation Platform job templates for which they have job template **Execute** permissions in Ansible Automation Platform.
 3. To verify execution permissions work correctly, attempt to execute a template:
   1. If the user has job template **Execute** permissions in Ansible Automation Platform for the template, the user can view the template, and the job launches successfully.
+
+### What to do next
+
+**Restrict visibility of custom templates**
+
+Auto-generated templates inherit visibility from Ansible Automation Platform permissions. Custom templates require a different approach because they are visible to all users by default. Use tag-based conditional policies to restrict which users can see specific custom templates.
+
+1. Add a tag to the custom template YAML file in the `metadata.tags` field:
+
+```yaml
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: deploy-to-prod
+  title: Deploy to Production
+  tags:
+    - restricted
+```
+
+2. Log in to Ansible automation portal as an administrator.
+3. Navigate to Administration> (and then)RBAC.
+4. Create a role for users who should see the restricted template (for example, `template-admins`). Assign the role to the appropriate teams or users. Grant `catalog.entity.read` and all scaffolder permissions without conditions.
+5. Edit the default authenticated user role to add a conditional policy that hides templates tagged `restricted`:
+  - Select the **Catalog** plugin and enable `catalog.entity.read`.
+  - Click **Conditional** to configure a condition-based policy.
+  - **Rule:** Select `HAS_METADATA`.
+  - **Key:** Enter `tags`.
+  - **Value:** Enter `restricted`.
+  - Set the condition to **NOT** so that users in this role can see all templates *except* those tagged `restricted`.
+6. Click **Next** to review your settings, then click **Create** or **Save**.
+
+Users assigned to the `template-admins` role see all templates. Users in the default role see all templates except those tagged `restricted`.
+
+ Tip:
+
+To verify which conditional rules are available in your portal instance, query the `GET /api/plugins/condition-rules` API endpoint. Use `HAS_METADATA` with `key: tags` for catalog-level visibility filtering.
 
 ## Permissions reference for Ansible Automation Platform job template access
 
@@ -207,7 +243,6 @@ catalog:
           frequency: {minutes: 60}
           timeout: {seconds: 30}
 ```
-
 
  Note:
 

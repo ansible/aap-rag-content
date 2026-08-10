@@ -5,7 +5,7 @@ After you have built an execution environment, use it to run jobs. To do so, fir
 
 ### Before you begin
 
-- An execution environment created using `ansible-builder` as described in [Define, create, and build execution environments](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-define__create__and_build_execution_environments "Run automation consistently across nodes with execution environments, which are container images that contain everything you need to run your automation.").
+- An execution environment created using `ansible-builder` as described in [Define, create, and build execution environments](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-define__create__and_build_execution_environments#GUID-9ff94bd4-fddf-4320-833a-295d20920a1c "Run automation consistently across nodes with execution environments, which are container images that contain everything you need to run your automation.").
 - Organization administrator privileges (if the execution environment is associated with an organization).
 - A credential with a username, host, and password (if assigned to the execution environment).
 

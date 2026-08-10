@@ -16,5 +16,4 @@ The following external credential types are available for use in Event-Driven An
 - Thycotic Secret Server
 - GitHub App Installation Access Token
 
-
 The process for using these credentials in a rulebook activation is consistent with how they are used in automation controller.

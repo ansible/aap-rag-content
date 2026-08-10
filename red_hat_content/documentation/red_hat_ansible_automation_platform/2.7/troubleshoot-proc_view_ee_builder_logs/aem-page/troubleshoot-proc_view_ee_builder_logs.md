@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-proc_view_ee_builder_logs"
-title = "View Ansible automation portal logs for execution environment builder - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "View Ansible automation portal logs for execution environment builder - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-proc_view_ee_builder_logs"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-ref_troubleshoot_ee_builder/", "Troubleshoot execution environment builder"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/troubleshoot-proc_view_ee_builder_logs/aem-page/troubleshoot-proc_view_ee_builder_logs.html"
 last_crumb = "View Ansible automation portal logs for execution environment builder"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "View Ansible automation portal logs for execution environment builder"
 oversized = "false"
@@ -38,14 +38,11 @@ Ansible automation portal logs contain diagnostic information for troubleshootin
 1.  Access the logs for your deployment type.
   -          For OpenShift deployments, run the following command to view backend logs:
 
-
-
 ```
 $ oc logs -n *namespace* deployment/*portal-deployment-name* -c backstage-backend
 ```
+
          To filter results for relevant entries, pipe the output through `grep`:
-
-
 
 ```
 $ oc logs -n *namespace* deployment/*portal-deployment-name* -c backstage-backend | grep -i "catalog\|ansible\|sync\|error"
@@ -53,14 +50,11 @@ $ oc logs -n *namespace* deployment/*portal-deployment-name* -c backstage-backen
 
   -          For RHEL appliance deployments, use `journalctl` to view recent portal logs:
 
-
-
 ```
 $ sudo journalctl -u portal --since "1 hour ago"
 ```
+
          Alternatively, view container logs directly:
-
-
 
 ```
 $ sudo podman logs *portal-container-name*

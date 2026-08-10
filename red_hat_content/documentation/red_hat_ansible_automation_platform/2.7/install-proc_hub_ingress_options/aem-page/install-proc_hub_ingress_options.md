@@ -1,7 +1,7 @@
 +++
 template = "docs/aem-title.html"
-title = "Configure ingress options for automation hub - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_hub_ingress_options"
+title = "Configure ingress options for automation hub - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator/", "Install on OpenShift Container Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_hub_ingress_options/aem-page/install-proc_hub_ingress_options.html"
 last_crumb = "Configure ingress options for automation hub"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure ingress options for automation hub"
 oversized = "false"
@@ -69,10 +69,9 @@ You can view the progress by navigating to Workloads> (and then)Pods and locatin
 
 Verify that the following operator pods provided by the Ansible Automation Platform Operator installation from automation hub are running:
 
-| Operator manager controllers                                                                                                                                                                                                | Automation controller                                                                                                | Automation hub                                                                                                                    |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Operator manager controllers                                                                                                                                                                             | Automation controller                                                                                                | Automation hub                                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | <br>The operator manager controllers for each of the 3 operators, include the following:<br>automation-controller-operator-controller-managerautomation-hub-operator-controller-managerresource-operator-controller-manager | <br>After deploying automation controller, you will see the addition of these pods:<br>controllercontroller-postgres | <br>After deploying automation hub, you will see the addition of these pods:<br>hub-apihub-contenthub-postgreshub-redishub-worker |
-
 
 Note:
 

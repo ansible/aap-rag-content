@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_terraform_provider_using_tf_actions_eda"
-title = "Use TF Actions with Event-Driven Ansible - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Use TF Actions with Event-Driven Ansible - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_terraform_introduction/", "Integrate with IBM HashiCorp Terraform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/integrate-assembly_terraform_provider_using_tf_actions_eda/aem-page/integrate-assembly_terraform_provider_using_tf_actions_eda.html"
 last_crumb = "Use TF Actions with Event-Driven Ansible"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Use TF Actions with Event-Driven Ansible"
 oversized = "false"
@@ -235,6 +235,7 @@ terraform plan -out=tfplan.out
 ```
 terraform apply tfplan.out
 ```
+
     This creates and sends an event to the specified event stream. As each resource is created, TF actions are invoked and the corresponding Ansible Automation Platform playbooks are executed sequentially.
 
 ### Results

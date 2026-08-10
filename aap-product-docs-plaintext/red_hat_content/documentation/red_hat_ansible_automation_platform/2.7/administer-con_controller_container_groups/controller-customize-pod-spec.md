@@ -21,7 +21,6 @@ For more information, see the [Allowing Pods to Reference Images from Other Secu
 
 6.  When you have created the container group successfully, the **Details** tab of the newly created container group remains, which enables you to review and edit your container group information. This is the same menu that is opened if you click the ![Edit](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png) icon from the **Instance Groups** list view. You can also edit **Instances** and review **Jobs** associated with this instance group.
 
-
 ![Instance group successfully created](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ag-instance-group-successfully-created.png)
 Container groups and instance groups are labeled accordingly.
 

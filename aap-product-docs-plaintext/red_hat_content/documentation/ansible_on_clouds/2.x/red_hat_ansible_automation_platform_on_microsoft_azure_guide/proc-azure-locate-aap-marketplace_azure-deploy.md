@@ -19,7 +19,6 @@ Before you can start provisioning your Ansible Automation Platform on Microsoft 
 
 7. The **Overview** tab contains important information about activating your subscription for Ansible Automation Platform.
 
-
 1. Read the entire **Before you begin** section.
 2. Follow the **Click here** link to enable your subscription. You cannot use Ansible Automation Platform without a valid subscription.
 

@@ -56,6 +56,14 @@
           "urlFragment": "aap-27-20260603___removal_of_rpm_installer_in_ansible_automation_platform_2_7",
           "anchor": null,
           "singlePageAnchor": "aap-27-20260603___removal_of_rpm_installer_in_ansible_automation_platform_2_7"
+        },
+        {
+          "title": "ansible.hub collection",
+          "visible": true,
+          "weight": 7,
+          "urlFragment": "aap-27-20260603__section_2",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260603__section_2"
         }
       ]
     }

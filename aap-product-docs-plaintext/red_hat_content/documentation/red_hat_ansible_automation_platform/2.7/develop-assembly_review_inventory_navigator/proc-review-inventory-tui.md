@@ -14,6 +14,7 @@ You can review Ansible inventories with the automation content navigator text-ba
 ```
 $ ansible-navigator
 ```
+
 Optional: type `ansible-navigator inventory -i simple_inventory.yml` from the command line to view the inventory.
 
 2.  Review the inventory.
@@ -34,6 +35,7 @@ NAME               TAXONOMY                      TYPE
 1│nodes              all                           group
 2│ungrouped          all                           group
 ```
+
 The `TAXONOMY` field details the hierarchy of groups the selected group or node belongs to.
 
 4.  Type the number corresponding to the group you want to delve into.

@@ -21,6 +21,7 @@ tasks:
 - name: Clear gathered facts from all currently targeted hosts
 meta: clear_facts
 ```
+
 You can find the API endpoint for fact caching at:
 
 http://<controller server name>/api/v2/hosts/x/ansible_facts

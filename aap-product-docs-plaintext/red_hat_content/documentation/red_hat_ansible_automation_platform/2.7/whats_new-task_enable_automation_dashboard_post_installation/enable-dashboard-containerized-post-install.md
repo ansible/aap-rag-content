@@ -23,6 +23,7 @@ FEATURE_DASHBOARD_COLLECTION_ENABLED: true
 cd /path/to/aap-containerized-installer
 ansible-playbook -i inventory install.yml
 ```
+
 Note:
 There is no separate update playbook. Re-running install.yml on an existing installation automatically detects the current state and applies only the necessary updates (in this case, dashboard enablement).
 
@@ -44,6 +45,7 @@ After enabling automation dashboard, metrics service backfills up to 90 days of 
 podman logs automation-metrics-scheduler | grep -i initial_dashboard
 podman logs automation-metrics-tasks | grep -i initial_dashboard
 ```
+
 Expected log messages:
 
 **automation-metrics-scheduler:**
@@ -57,6 +59,7 @@ Expected log messages:
 
 {"timestamp": "2026-04-22T09:03:39.665Z", "level": "INFO", "logger": "apscheduler.executors.default", "message": "Running job \"DB Task: initial_dashboard_collection (trigger: date[2026-04-22 09:03:39 UTC], next run at: 2026-04-22 09:03:39 UTC)\" (scheduled at 2026-04-22 09:03:39.664342+00:00)"}
 ```
+
 **automation-metrics-tasks:**
 
 ```
@@ -73,6 +76,7 @@ podman exec automation-metrics-database \
 psql -h localhost -U metrics_service -d metrics_service \
 -c "SELECT COUNT(*), MIN(finished), MAX(finished) FROM dashboard_job_data;"
 ```
+
 Expected output for successful collection:
 
 - `COUNT > 0` - Data has been collected

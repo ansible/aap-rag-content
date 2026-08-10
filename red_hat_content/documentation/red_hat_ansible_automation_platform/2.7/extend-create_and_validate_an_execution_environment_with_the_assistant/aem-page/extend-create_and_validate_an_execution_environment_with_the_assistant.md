@@ -1,16 +1,16 @@
 +++
+title = "Create and validate an execution environment with the assistant - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-create_and_validate_an_execution_environment_with_the_assistant"
 template = "docs/aem-title.html"
-title = "Create and validate an execution environment with the assistant - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-enable_ai_in_the_ansible_vs_code_extension_with_the_mcp_server/", "Enable AI in the Ansible VS Code extension with the MCP server"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-enable_the_vs_code_extension_ai_assistant/", "Enable the VS Code extension AI assistant"]]
 category = "Extend"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-create_and_validate_an_execution_environment_with_the_assistant/aem-page/extend-create_and_validate_an_execution_environment_with_the_assistant.html"
 last_crumb = "Create and validate an execution environment with the assistant"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Create and validate an execution environment with the assistant"
 oversized = "false"
@@ -45,6 +45,7 @@ To create an execution environment, first generate a definition file that define
 ```
 Create an execution environment definition file. Use ee-minimal as the base, include ansible.builtin and the community.general collection, add git as a system package, and tag it as webserver-ee:1.0.
 ```
+
 In response, the assistant triggers the `define_and_build_execution_env` tool to formulate a prompt using your requirements and the internal `ee-rules.md` resource. Note:
   No file is created in this step. The assistant prepares the context for accurate YAML generation.
 
@@ -54,6 +55,7 @@ In response, the assistant triggers the `define_and_build_execution_env` tool to
 ```
 Now generate the execution-environment.yml content based on the prompt you received.
 ```
+
 The assistant calls the tool again, this time with the `generatedYaml` parameter. The tool validates the generated YAML against the execution environment schema.
 
 ## What to do next
@@ -97,6 +99,7 @@ Use the AI assistant to validate an existing definition file against the schema 
 ```
 Check if my execution-environment.yml file is valid and follows best practices
 ```
+
 The assistant then analyzes the file structure against the execution environment v3 schema and rules. It verifies required sections (for example, `version`, `images`, `dependencies`) and identifies missing fields or incorrect formatting.
 
 2.  Review the assessment to confirm that it includes your requirements.
@@ -118,6 +121,7 @@ After the definition file is created and validated, you can prompt the assistant
 ```
 How do I build this execution environment? What are the next steps?
 ```
+
 This prompts the assistant to generate an `ansible-builder` command tailored to your file and tag.
 
 2.  Copy the build command that was generated and run it in your VS Code terminal. An example command might look like this:

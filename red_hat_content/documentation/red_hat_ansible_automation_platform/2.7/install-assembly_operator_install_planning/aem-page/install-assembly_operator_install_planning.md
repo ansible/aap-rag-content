@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_planning"
 title = "Plan your installation of Ansible Automation Platform on Red Hat OpenShift Container Platform - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator/", "Install on OpenShift Container Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_planning/aem-page/install-assembly_operator_install_planning.html"
 last_crumb = "Plan your installation of Ansible Automation Platform on Red Hat OpenShift Container Platform"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Plan your installation of Ansible Automation Platform on Red Hat OpenShift Container Platform"
 oversized = "false"
@@ -59,8 +59,8 @@ After you have installed Ansible Automation Platform Operator you must create an
 
 If existing components have already been deployed, you must specify these components on the Ansible Automation Platform CR. You must create the custom resource in the same namespace as the existing components.
 
-| **Supported scenarios**                                                                                                                                                                                                                                                                                                                                                                     | **Supported scenarios with existing components**                                                                                                                                                                                                                                                                                                                                 |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Supported scenarios**                                                                                                                                                                                  | **Supported scenarios with existing components**                                                                                                                                                         |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Ansible Automation Platform CR for blank slate install with automation controller, automation hub, and Event-Driven Ansible enabledAnsible Automation Platform CR with just automation controller enabledAnsible Automation Platform CR with just automation controller, automation hub enabledAnsible Automation Platform CR with just automation controller, Event-Driven Ansible enabled | Ansible Automation Platform CR created in the same namespace as an existing automation controller CR with the automation controller name specified on the Ansible Automation Platform CR specSame with automation controller and automation hubSame with automation controller, automation hub, and Event-Driven AnsibleSame with automation controller and Event-Driven Ansible |
 
 ## Ansible Automation Platform Operator CSRF management

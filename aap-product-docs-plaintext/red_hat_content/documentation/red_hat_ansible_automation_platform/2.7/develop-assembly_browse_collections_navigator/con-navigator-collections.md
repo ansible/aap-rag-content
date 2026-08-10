@@ -14,6 +14,5 @@ Shows if the collection is contained within an automation execution environment 
 PATH
 Reflects the collections location within the automation execution environment or local file system based on the collection TYPE field.
 
-
 ![Automation content navigator collections display](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-collections-shadow.png)
 

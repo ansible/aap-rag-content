@@ -7,7 +7,6 @@ CCSPv2 is a report which shows the following information:
 - The content of all inventories
 - Content usage
 
-
 The primary use of this report is for partners under the [CCSP](https://connect.redhat.com/en/programs/certified-cloud-service-provider) program, but all customers can use it to obtain on-premise reporting showing managed nodes, jobs and content usage across their automation controller organizations.
 
 Set the report type by using `METRICS_UTILITY_REPORT_TYPE=CCSPv2`.

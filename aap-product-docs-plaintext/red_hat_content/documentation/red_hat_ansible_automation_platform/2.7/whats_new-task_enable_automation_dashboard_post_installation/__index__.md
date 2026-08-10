@@ -9,7 +9,6 @@ Activate dashboard data collection with automatic historical data backfill to ge
 - For containerized: access to the installer inventory file
 - For operator: `kubectl` or `oc` access and edit permissions on the AnsibleAutomationPlatform CR
 
-
 Important:
 
 **Technology Preview:** Automation dashboard is a Technology Preview feature in Red Hat Ansible Automation Platform 2.7. Enabling it post-installation triggers up to 90 days of historical data backfill from Controller database. Monitor data collection logs to know when complete dashboard data is available.

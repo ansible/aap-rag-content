@@ -4,13 +4,13 @@ path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-inst
 template = "docs/aem-title.html"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-enable_ai_in_the_ansible_vs_code_extension_with_the_mcp_server/", "Enable AI in the Ansible VS Code extension with the MCP server"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-enable_the_vs_code_extension_ai_assistant/", "Enable the VS Code extension AI assistant"]]
 category = "Extend"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-install_ansible_development_tools_with_the_ai_assistant/aem-page/extend-install_ansible_development_tools_with_the_ai_assistant.html"
 last_crumb = "Install Ansible Development Tools with the AI assistant"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Install Ansible Development Tools with the AI assistant"
 oversized = "false"
@@ -40,6 +40,7 @@ If you do not have Ansible Development Tools installed, you can instruct the ass
   
   
 ```
+
 The assistant then triggers the `adt_check_env` tool.
   The system:
   - Checks if ADT is already installed. If so, it will report: "ADT (`ansible-dev-tools`) is already installed".

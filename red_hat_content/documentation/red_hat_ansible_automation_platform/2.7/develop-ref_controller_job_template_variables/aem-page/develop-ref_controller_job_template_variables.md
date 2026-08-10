@@ -1,6 +1,6 @@
 +++
-template = "docs/aem-title.html"
 title = "Set extra variables in job templates - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_controller_job_template_variables"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-ref_controller_job_template_variables/aem-page/develop-ref_controller_job_template_variables.html"
 last_crumb = "Set extra variables in job templates"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Set extra variables in job templates"
 oversized = "false"
@@ -61,7 +61,6 @@ Along with any extra variables set in the job template and survey, automation co
 - `awx_workflow_job_name`: If applicable, the name of the workflow job that launched this job. Note this is also the same as the workflow job template.
 - `awx_inventory_id`: If applicable, the ID of the inventory this job uses.
 - `awx_inventory_name`: If applicable, the name of the inventory this job uses.
-
 
 For compatibility, all variables are also given an "awx" prefix, for example, `awx_job_id`.
 
@@ -150,7 +149,6 @@ satellites:
   - satcom
 ```
 
-
 - The configuration in JSON format:
 
 ```
@@ -159,6 +157,7 @@ satellites:
   "satellites": ["sputnik", "explorer", "satcom"]
 }
 ```
+
 The following table notes the behavior (hierarchy) of variable precedence in automation controller as it compares to variable precedence in Ansible.
 
  **Automation controller Variable Precedence Hierarchy (last listed wins)**

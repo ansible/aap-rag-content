@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-title = "Install automation dashboard to calculate savings (RHEL only) - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_view_key_metrics"
+title = "Install automation dashboard to calculate savings (RHEL only) - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_view_key_metrics/", "Install automation dashboard to calculate savings (RHEL only)"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_view_key_metrics/aem-page/install-assembly_view_key_metrics.html"
 last_crumb = "Install automation dashboard to calculate savings (RHEL only)"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Install automation dashboard to calculate savings (RHEL only)"
 oversized = "false"
@@ -44,71 +44,6 @@ Automation dashboard helps you:
 - Analyze job execution times and failure rates to pinpoint areas for automation improvement.
 - Use the generated data to make informed decisions about automation strategy, resource allocation, and prioritization of automation projects.
 
-
-**Automation Dashboard and Red Hat Ansible Automation Platform 2.7**
-
-In Red Hat Ansible Automation Platform 2.7, two dashboard solutions are available:
-
-- **Native Automation Dashboard (Technology Preview):** Integrated into Red Hat Ansible Automation Platform 2.7 as part of the Metrics Service. Suitable for single Red Hat Ansible Automation Platform instance monitoring with integrated Red Hat Ansible Automation Platform UI experience.
-- **Standalone automation dashboard:** This guide describes the standalone utility, which continues to be supported in Red Hat Ansible Automation Platform 2.7 and later releases. Use the standalone utility when you need:
-  * Multi-instance monitoring (aggregating data across multiple Red Hat Ansible Automation Platform deployments)
-  * Independent dashboard infrastructure separate from Red Hat Ansible Automation Platform installation
-  * Dashboard for Red Hat Ansible Automation Platform versions prior to 2.7
-
-## Choose between standalone and native dashboard (Red Hat Ansible Automation Platform 2.7+)
-
-If you are running Red Hat Ansible Automation Platform 2.7, two dashboard options are available. Use this guidance to determine which dashboard solution meets your needs.
-
-**Use standalone automation dashboard when:**
-
-- **Multi-cluster monitoring is required:** You need to aggregate data across multiple Red Hat Ansible Automation Platform deployments (for example, production, staging, and development environments)
-- **Using Red Hat Ansible Automation Platform version is 2.4, 2.5, or 2.6:** Native dashboard is only available in Red Hat Ansible Automation Platform 2.7
-- **Independent infrastructure preferred:** You want dashboard infrastructure separate from Red Hat Ansible Automation Platform installation (for example, different security zones, independent scaling, disaster recovery isolation)
-
-
-**Use native Automation Dashboard (Red Hat Ansible Automation Platform 2.7) when:**
-
-- **Single Red Hat Ansible Automation Platform instance monitoring:** You only need to monitor one Red Hat Ansible Automation Platform deployment
-- **Integrated experience preferred:** You want dashboard integrated into Red Hat Ansible Automation Platform unified UI with Gateway authentication
-- **No additional infrastructure:** You do not want to deploy separate VMs or containers for dashboard
-- **Using a new Red Hat Ansible Automation Platform 2.7 deployment:** You are installing Red Hat Ansible Automation Platform 2.7 for the first time
-
-## Coexistence
-
-Both dashboard solutions can run simultaneously. For example, you might use:
-
-- **Standalone dashboard:** For aggregated view across multiple Red Hat Ansible Automation Platform environments
-- **Native dashboard:** For detailed single-instance view of your Red Hat Ansible Automation Platform 2.7 production cluster
-
-## Architecture comparison
-
-**Standalone dashboard infrastructure:**
-
-- Separate RHEL host or VM
-- Dedicated PostgreSQL database
-- Independent Redis instance
-- Podman containerized deployment
-- Manual OAuth2 token configuration
-- Pulls data by using Red Hat Ansible Automation Platform API
-
-
-**Native dashboard infrastructure (Technology Preview):**
-
-- Integrated with Metrics Service (no separate VM)
-- Uses Metrics Service PostgreSQL database
-- Automatic Gateway authentication
-- Enabled by using installer flag
-- Data collected by Metrics Service backend
-
-## Migration considerations
-
-Important:
-
-There is no automatic migration path from standalone dashboard to native dashboard in Red Hat Ansible Automation Platform 2.7. If you plan to transition from standalone to native dashboard in the future:
-
-- Continue using standalone dashboard until multi-instance support is added to native dashboard (planned for future GA release)
-- Contact Red Hat Support for guidance on migration planning
-
 ## Install automation dashboard
 
 Install automation dashboard to collect and analyze key metrics related to job execution, efficiency, and automation savings across your Ansible Automation Platform deployments.
@@ -140,7 +75,7 @@ Install automation dashboard to collect and analyze key metrics related to job e
 - Open firewall access to allow for bidirectional communication between Ansible Automation Platform instances and the automation dashboard.   * This includes HTTPS/443 (or your Ansible Automation Platform configured port) from the dashboard to the Ansible Automation Platform instance(s).
   * Port 8447 is the default ingress port for the automation dashboard. This port can be configured during installation.
   * RHEL firewall ports that might block 5432 to PostgreSQL.
-- A supported version of `ansible-core` installed on supported RHEL versions.
+- A supported version of `ansible-core` installed on supported RHEL versions.   * Optional: If your Ansible Automation Platform endpoint uses a TLS certificate signed by a private or organizational CA, have the CA certificate file (`.pem`) available on the installer host.
 
 ### Procedure
 
@@ -193,6 +128,7 @@ sudo dnf install ansible-core
 cp -i inventory.example inventory
 vi inventory
 ```
+
   Important:
 
   - This is an example tested inventory containing default values for Ansible Automation Platform 2.4, 2.5, 2.6, and 2.7.
@@ -232,8 +168,8 @@ aap_auth_provider_client_secret=TODO
 initial_sync_days=1
 # initial_sync_since=2025-08-08
 
-    # Hide warnings when insecure https request are made.
-# Use this if your AAP uses self-signed TLS certificate.
+    # Hide warnings when insecure https requests are made.
+# If your Ansible Automation Platform uses a certificate signed by a private CA, set custom_ca_cert instead of disabling warnings. Only use this setting if you have reviewed and accepted the security implications of unverified TLS connections.
 # show_urllib3_insecure_request_warning=False
 
     # Force clean install-like
@@ -296,14 +232,7 @@ bundle_dir='{{ lookup("ansible.builtin.env", "PWD") }}/bundle'
 # nginx_dashboard_admin_exposed=False
 ```
 
-7.  Install the required Ansible collections. You must complete this step to prevent module resolution errors during the installation.
-  
-
-```
-ansible-galaxy collection install -r requirements.yml
-```
-
-8.  Run the installation program.
+7.  Run the installation program.
 
 ```bash
 ansible-playbook -i inventory ansible.containerized_installer.dashboard_install --ask-become-pass
@@ -318,6 +247,7 @@ PLAY RECAP *********************************************************************
 ec2-54-147-26-173.compute-1.amazonaws.com : ok=126  changed=51   unreachable=0    failed=0    skipped=42   rescued=0    ignored=0
 localhost                  : ok=12   changed=0    unreachable=0    failed=0    skipped=9    rescued=0    ignored=0
 ```
+
 Alternative configurations are possible (for example, the database for automation dashboard can be set on a different host). This requires additional changes to variables in the inventory file. Consult the [Inventory variables](/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-inventory_file_variables_for_automation_dashboard#GUID-91739484-5e4b-43a7-a0f2-72ef805f6535 "The inventory variables required by the automation dashboard installation program are described in the following table:") section of this document for available variables.
 
 ### Configure automation dashboard
@@ -339,16 +269,20 @@ Integrate your Ansible Automation Platform instances into the automation dashboa
 
 ```yaml
 clusters:
-  - protocol: https
-    address: <aap_controller_url>
-    port: 443
-    access_token: <access_token_string>
-    refresh_token: <refresh_token_string>
-    client_id: <client_id_string>
-    client_secret: <client_secret_string>
-    verify_ssl: false
-    name: <unique_cluster_name>
+     - protocol: https
+     address: <aap_controller_url>
+     port: 443
+     access_token: <access_token_string>
+     refresh_token: <refresh_token_string>
+     client_id: <client_id_string>
+     client_secret: <client_secret_string>
+     verify_ssl: false
+     sync_schedules:
+          name: Every 5 minutes sync
+          rrule: DTSTART;TZID=Europe/Ljubljana:20250630T070000 FREQ=MINUTELY;Interval=5
+          enabled: true
 ```
+
   Note:
       For Red Hat Ansible Automation Platform 2.7 Users: If you only need to monitor a single Red Hat Ansible Automation Platform 2.7 instance, consider using the native Automation Dashboard integrated into Red Hat Ansible Automation Platform 2.7 instead of standalone dashboard. Native dashboard provides an integrated UI experience with Red Hat Ansible Automation Platform Gateway authentication. However, if you need to aggregate data across multiple Red Hat Ansible Automation Platform instances (regardless of version), continue using this standalone dashboard utility.
 
@@ -357,8 +291,8 @@ clusters:
     When configuring the `verify_ssl` parameter, choose the setting that matches your Ansible Automation Platform certificate type:
 
   - **Commercial certificates:** Set `verify_ssl: true`.
-  - **Self-signed certificates:** Set `verify_ssl: false`. Note:
-            The automation dashboard cannot verify self-signed certificates against a custom Certificate Authority (CA).
+  - **Self-signed certificates:** Set `verify_ssl: false`.     * **Private or organizational Certificate Authority certificates:** Set `verify_ssl: true` and ensure `custom_ca_cert` is set in your inventory file. The installer configures the `REQUESTS_CA_BUNDLE` and `SSL_CERT_FILE` environment variables in the dashboard containers, enabling Python's requests library to trust certificates signed by your private Certificate Authority (CA). Note:
+                  Do not set `verify_ssl: false` or `aap_auth_provider_check_ssl=false` to work around TLS certificate errors when using a private CA. Disabling SSL verification removes authentication security and exposes OAuth credentials and sync data to interception. If TLS verification fails with a private CA, set `custom_ca_cert` in your inventory file to provide your CA certificate, then reinstall.
 
 3.  You can add one or more Ansible Automation Platform instances (of the same Ansible Automation Platform version) into the automation dashboard configuration for pulling and combining data by using the following:
   
@@ -393,6 +327,7 @@ clusters:
         rrule: DTSTART;TZID=Europe/Ljubljana:20250630T070000 FREQ=MINUTELY;INTERVAL=5
        enabled: true
 ```
+
   Note:
       The `access_token`, `refresh_token`, and `client_secret` are stored in the automation dashboard database. These values are encrypted for security.
 
@@ -402,6 +337,7 @@ clusters:
 podman cp clusters.yaml automation-dashboard-web:/tmp
 podman exec -it automation-dashboard-web /venv/bin/python manage.py setclusters /tmp/clusters.yaml
 ```
+
   Note:
   If the system cannot remove the file from the /tmp/ directory, it displays an error message and continues running.
   Note:
@@ -482,6 +418,7 @@ clusters:
         rrule: DTSTART;TZID=Europe/Ljubljana:20250630T070000 FREQ=MINUTELY;INTERVAL=5
         enabled: true
 ```
+
   Note:
       Displaying the encrypted `access_token` and `refresh_token` in plain text for debugging requires the `--decrypt` flag. Do not use this command on unsecured systems.
 
@@ -491,12 +428,12 @@ clusters:
 
 If you come across error messages during installation, consult the following table:
 
-| Issue         | Possible Cause                                                                                                               | Solution                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| <br>401 error | <br>This is an unauthorized access message indicating authentication errors such as wrong credentials or tokens.             | <br>Verify that your access token is correct in `clusters.yaml`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| <br>401 error | <br>A temporary 401 error is expected behavior when the token expires, followed immediately by trying to refresh.            | <br>If the automatic token refresh fails (for example, due to invalid `client_secret` or `refresh_token`), use the `getclusters``--decrypt` command to manually verify that the credentials stored in the database match those in your source `clusters.yaml` file. If they do not match, re-run the `setclusters` command with the correct configuration. You can only use the refresh token once. If you need to execute `setclusters` because of invalid access token, create new access and refresh tokens, and use them in your source `clusters.yaml`. |
-| <br>404 error | <br>This is a “not found” message indicating that something is not configured correctly or pointing to the correct endpoint. | <br>Verify that your Ansible Automation Platform instance URLs used in `clusters.yaml` are correct.                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-
+| Issue                                                             | Possible Cause                                                                                                                                                                                           | Solution                                                                                                                                                                                                 |
+| ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <br>401 error                                                     | <br>This is an unauthorized access message indicating authentication errors such as wrong credentials or tokens.                                                                                         | <br>Verify that your access token is correct in `clusters.yaml`                                                                                                                                          |
+| <br>401 error                                                     | <br>A temporary 401 error is expected behavior when the token expires, followed immediately by trying to refresh.                                                                                        | <br>If the automatic token refresh fails (for example, due to invalid `client_secret` or `refresh_token`), use the `getclusters``--decrypt` command to manually verify that the credentials stored in the database match those in your source `clusters.yaml` file. If they do not match, re-run the `setclusters` command with the correct configuration. You can only use the refresh token once. If you need to execute `setclusters` because of invalid access token, create new access and refresh tokens, and use them in your source `clusters.yaml`. |
+| <br>404 error                                                     | <br>This is a “not found” message indicating that something is not configured correctly or pointing to the correct endpoint.                                                                             | <br>Verify that your Ansible Automation Platform instance URLs used in `clusters.yaml` are correct.                                                                                                      |
+| <br>OAuth login fails with "Something wrong during authorization" | <br>When using a private CA, Python's requests library does not use the system CA trust store by default. It uses the bundled certificate CA store unless `REQUESTS_CA_BUNDLE` or `SSL_CERT_FILE` is set. If `custom_ca_cert` is not configured in the inventory, the dashboard containers ignore the mounted CA bundle entirely. | <br>Set `custom_ca_cert=/path/to/organizational-ca.pem` in your inventory file and reinstall. Do not set `aap_auth_provider_check_ssl=false` as a workaround. After reinstall, verify the fix by running: `podman exec automation-dashboard-web printenv REQUESTS_CA_BUNDLE`. Expected output: `/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem`. |
 
 A successful installation should be running the following three container services:
 
@@ -507,6 +444,7 @@ postgresql
 automation-dashboard-task
 automation-dashboard-web
 ```
+
 You can check your container logs by running the following:
 
 ```bash
@@ -530,6 +468,7 @@ May 22 13:02:13 automation-dashboard automation-dashboard-task[1607]: INFO 2025-
 May 22 13:02:13 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:13,821 connector 2 140568371550016 Executing GET request to >
 May 22 13:02:16 automation-dashboard automation-dashboard-task[1607]: ERROR 2025-05-22 13:02:16,892 connector 2 140568371550016 GET request failed with ...
 ```
+
 The following log snippet shows a successful token refresh:
 
 Note:
@@ -550,6 +489,7 @@ ERROR GET after reauth response.status_code=200
 INFO Executing GET request to https://app.example.com:443/api/controller/v2/job_templates/?page_size=200&page=1
 Executing GET request to https://app.example.com:443/api/controller/v2/jobs/?page_size=100&page=1&order_by=finished&finished__gt=2025-10-23T13:01:09.768681Z
 ```
+
 Check how the services are running by using `systemd`:
 
 ```bash
@@ -624,7 +564,6 @@ Uninstall automation dashboard and its dependencies by using a single command, e
 ansible-playbook -i inventory
 ansible.containerized_installer.dashboard_uninstall
 ```
-
 
 Note:
 

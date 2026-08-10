@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_change_ssl_tls_operator_based_install"
-title = "Operator-based installations - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Operator-based installations - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_changing_ssl_certs_keys/", "Renew and change SSL/TLS certificates"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_change_ssl_tls_operator_based_install/aem-page/secure-con_change_ssl_tls_operator_based_install.html"
 last_crumb = "Operator-based installations"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Operator-based installations"
 oversized = "false"
@@ -63,6 +63,7 @@ spec:
   controller:
     route_tls_secret: controller-certs-2024-03-24
 ```
+
   
   Note:
       The name of the TLS secret is arbitrary. In this example, it is timestamped with the date that the secret is created, to differentiate it from other TLS secrets applied to the automation controller instance.
@@ -111,6 +112,7 @@ spec:
   hub:
     route_tls_secret: hub-certs-2024-03-24
 ```
+
   Note:
       The name of the TLS secret is arbitrary. In this example, it is timestamped with the date that the secret is created, to differentiate it from other TLS secrets applied to the automation hub instance.
 

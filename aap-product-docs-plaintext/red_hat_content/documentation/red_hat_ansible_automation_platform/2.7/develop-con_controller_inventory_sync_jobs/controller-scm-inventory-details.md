@@ -21,5 +21,4 @@ You can view the following details for an executed job:
 - **Instance group**: Indicates the instance group on which the job ran, if specified.
 - **Job tags**: Tags show the various job operations executed.
 
-
 Select these items to view the corresponding job templates, projects, and other objects.

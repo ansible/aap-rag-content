@@ -12,6 +12,5 @@ Automate at scale on proven foundation. Red Hat Ansible Automation Platform 2.7 
 - Operate more efficiently with the new Ansible Lightspeed Intelligent Assistant, which harnesses generative AI to provide on-demand support, for a more intuitive platform experience.
 - Achieve new levels of scale with the Ansible automation portal, which enables platform administrators to quickly and easily scale automation service delivery to new users and teams.
 
-
 Because your team is not just preparing for the future, you’re automating for it.
 

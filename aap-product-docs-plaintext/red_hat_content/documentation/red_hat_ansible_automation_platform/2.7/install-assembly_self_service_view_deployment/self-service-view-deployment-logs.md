@@ -20,6 +20,7 @@ When `pluginMode` is `oci`, successful installation resembles the following outp
 ...
 -> Successfully installed dynamic plugin oci://registry.redhat.io/ansible-automation-platform/automation-portal:<plugin-version>!ansible-backstage-plugin-catalog-backend-module-rhaap
 ```
+
 Replace `<plugin-version>` with the value from your `imageTagInfo` setting. If you use a mirror registry, the registry host in the log reflects your `imageRegistry` or `ociPluginImage` configuration.
 
 **Expected log output for HTTP plug-in registry (deprecated)**
@@ -31,6 +32,7 @@ When `pluginMode` is `tarball`, successful installation resembles the following 
 ...
 -> Successfully installed dynamic plugin http://plugin-registry:8080/ansible-backstage-plugin-catalog-backend-module-rhaap-dynamic-x.y.z.tgz
 ```
+
 The tarball file name includes the plug-in version from your bundle.
 
 7.  On the **Environment** tab, verify that environment variables from your Helm chart appear as expected.

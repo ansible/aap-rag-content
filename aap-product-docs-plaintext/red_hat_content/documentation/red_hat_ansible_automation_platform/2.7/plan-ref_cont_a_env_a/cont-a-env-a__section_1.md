@@ -81,5 +81,6 @@ eda_pg_password=<set your own>
 # ----------------------------------------------------- automationmetrics_pg_host=aap.example.org
 automationmetrics_pg_password=<set your own>
 ```
+
 SSH keys are only required when installing on remote hosts. If doing a self contained local VM based installation, you can use `ansible_connection=local`.
 

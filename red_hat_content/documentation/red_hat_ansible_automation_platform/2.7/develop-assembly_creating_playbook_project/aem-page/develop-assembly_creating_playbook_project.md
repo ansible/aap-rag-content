@@ -1,6 +1,6 @@
 +++
-title = "Auto-generate the structure and files for your automation project - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Auto-generate the structure and files for your automation project - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_creating_playbook_project"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_creating_playbook_project/aem-page/develop-assembly_creating_playbook_project.html"
 last_crumb = "Auto-generate the structure and files for your automation project"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Auto-generate the structure and files for your automation project"
 oversized = "false"
@@ -67,6 +67,7 @@ After the project directory has been created, the following message appears in t
 ------------------ ansible-creator logs ------------------
     Note: ansible project created at /Users/username/test_project
 ```
+
 The following directories and files are created in your project directory:
 
 ```

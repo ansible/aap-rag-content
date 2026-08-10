@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansible_automation_platform_custom_resources"
 template = "docs/aem-title.html"
 title = "Ansible Automation Platform custom resources - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansible_automation_platform_custom_resources"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansible_automation_platform_custom_resources/", "Ansible Automation Platform custom resources"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/reference-ansible_automation_platform_custom_resources/aem-page/reference-ansible_automation_platform_custom_resources.html"
 last_crumb = "Ansible Automation Platform custom resources"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Ansible Automation Platform custom resources"
 oversized = "false"

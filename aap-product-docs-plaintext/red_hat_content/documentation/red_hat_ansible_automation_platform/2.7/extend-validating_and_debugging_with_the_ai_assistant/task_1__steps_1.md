@@ -8,6 +8,7 @@
 ```
 Run ansible_lint on my webserver playbook and apply automatic fixes.
 ```
+
 The assistant triggers the `ansible_lint`tool wiht the `fix:true` parameter.
 
 2.  The tool then processes the file and applies corrections for issues such as:

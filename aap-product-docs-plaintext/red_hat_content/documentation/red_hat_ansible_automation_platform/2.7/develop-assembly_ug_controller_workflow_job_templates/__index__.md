@@ -9,7 +9,6 @@ These resources include the following:
 - Project syncs
 - Inventory source syncs
 
-
 You can create both Job templates and Workflow job templates from Automation Execution> (and then)Templates.
 
 For Job templates, see Job templates.
@@ -22,9 +21,7 @@ From this screen you can launch ![Launch icon](/webassets/aem/red_hat_ansible_au
 
 Only workflow templates have the workflow visualizer ![Workflow visualizer](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/visualizer.png) icon as a shortcut for accessing the workflow editor.
 
-
 ![Workflow templates home](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-wf-templates-home.png)
-
 
 Note:
 

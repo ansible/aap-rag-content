@@ -28,7 +28,6 @@ Red Hat Ansible Automation Platform uses several ports to communicate with its s
 | <br>8082/8445 | <br>TCP  | <br>HTTP/HTTPS | <br>Platform gateway      | <br>Event-Driven Ansible                                                                              | <br>Event-Driven Ansible NGINX ports. You can configure these ports with the following inventory variables: `eda_nginx_http_port`, `eda_nginx_https_port`.                |
 | <br>8083/8446 | <br>TCP  | <br>HTTP/HTTPS | <br>Platform gateway      | <br>Platform gateway                                                                                  | <br>Platform gateway NGINX ports. You can configure these ports with the following inventory variables: `gateway_nginx_http_port`, `gateway_nginx_https_port`.            |
 
-
 Note:
 
 If you change any port values by using inventory variables, refer to [Inventory file variables](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_inventory_file_vars "The following tables contain information about the variables used in Ansible Automation Platform’s installation inventory files.") to review all default port values and ensure there are no port conflicts.

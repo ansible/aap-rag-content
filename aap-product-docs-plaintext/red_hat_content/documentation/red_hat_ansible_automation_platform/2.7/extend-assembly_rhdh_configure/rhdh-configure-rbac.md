@@ -1,7 +1,7 @@
 # Configure the Ansible plug-ins
-## Configure Role Based Access Control
+## Configure role-based access control
 
-Red Hat Developer Hub offers Role-based Access Control (RBAC) functionality. RBAC can then be applied to the Ansible plug-ins content.
+Red Hat Developer Hub offers role-based access control (RBAC) functionality. RBAC can then be applied to the Ansible plug-ins content.
 
 ### Procedure
 
@@ -10,8 +10,6 @@ Assign the following roles:
 - Members of the `admin:superUsers` group can select templates in the **Create** tab of the Ansible plug-ins to create playbook and collection projects.
 
 - Members of the `admin:users` group can view templates in the **Create** tab of the Ansible plug-ins. The following example adds RBAC to Red Hat Developer Hub.
-
-
 
 ```
 data:
@@ -27,4 +25,5 @@ users:
 superUsers:
 - name: user:default/<user-admin-idb>
 ```
+
 For more information about permission policies and managing RBAC, refer to the [*Authorization in Red Hat Developer Hub*](https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.9/html-single/authorization_in_red_hat_developer_hub/index) guide.

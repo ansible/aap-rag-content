@@ -27,6 +27,7 @@ name  | default_version | installed_version |comment
 hstore | 1.7           |                   | data type for storing sets of (key, value) pairs
 (1 row)
 ```
+
 **Example output with `hstore` not available**:
 
 ```
@@ -47,6 +48,7 @@ dnf install postgresql-contrib
 ```
 $ psql -d <automation hub database> -c "CREATE EXTENSION hstore;"
 ```
+
 In the following output, the `installed_version` field lists the `hstore` extension used, indicating that `hstore` is enabled.
 
 ```

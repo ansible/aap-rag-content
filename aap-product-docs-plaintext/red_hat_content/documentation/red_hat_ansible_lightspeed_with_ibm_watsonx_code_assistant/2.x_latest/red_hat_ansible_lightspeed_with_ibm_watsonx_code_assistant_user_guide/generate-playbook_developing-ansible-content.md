@@ -8,7 +8,6 @@ You can use the natural language interface in the Ansible VS Code extension to g
 
 - You meet **one** of the following requirements:
 
-
 * Your organization has a trial or paid subscription to both the Red Hat Ansible Automation Platform and IBM watsonx Code Assistant.
 * Your organization has a trial or paid subscription to the Red Hat Ansible Automation Platform, and you have a Red Hat Ansible Lightspeed trial account.
 
@@ -36,7 +35,6 @@ The following illustration displays the **Ansible Content Creator** page:
 After a few seconds, the recommended steps for your playbook intent are displayed in the **Review the suggested steps for your playbook and modify as needed** field.
 
 6. Perform one of the following tasks:
-
 
 - If the steps match your intent: Click **Generate Playbook**.
 - If any modifications are required: Click the editor and update the tasks or steps to suit your intent.

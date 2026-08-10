@@ -1,6 +1,6 @@
 +++
-title = "Publish your image to a container registry - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Publish your image to a container registry - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-publish_your_image_to_a_container_registry"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-publish_your_image_to_a_container_registry/aem-page/extend-publish_your_image_to_a_container_registry.html"
 last_crumb = "Publish your image to a container registry"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Publish your image to a container registry"
 oversized = "false"
@@ -82,7 +82,6 @@ Verify that the image is available:
 ```
 podman search registry.example.com/aap/my-org-byok-rag --list-tags
 ```
-
 
 The command outputs a list of all available versions, as in the following example output:
 

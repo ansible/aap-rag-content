@@ -1,0 +1,31 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Provide feedback on the Ansible Lightspeed service",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Before you begin",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-5320fad4-aaf3-4a5e-8885-c7d3e616d53d__prereq_1",
+          "anchor": null,
+          "singlePageAnchor": "GUID-5320fad4-aaf3-4a5e-8885-c7d3e616d53d__prereq_1"
+        },
+        {
+          "title": "About this task",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "GUID-5320fad4-aaf3-4a5e-8885-c7d3e616d53d__context_1",
+          "anchor": null,
+          "singlePageAnchor": "GUID-5320fad4-aaf3-4a5e-8885-c7d3e616d53d__context_1"
+        }
+      ]
+    }
+  ]
+}

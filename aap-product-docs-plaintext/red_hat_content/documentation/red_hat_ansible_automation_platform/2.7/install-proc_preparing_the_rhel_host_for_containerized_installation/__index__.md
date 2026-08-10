@@ -11,6 +11,7 @@ Containerized Ansible Automation Platform runs the component services as Podman 
 ```
 hostname -f
 ```
+
 Example output:
 
 ```
@@ -37,6 +38,7 @@ $ sudo subscription-manager register
 ```
 $ sudo dnf repolist
 ```
+
 Example output for RHEL 9:
 
 ```
@@ -45,6 +47,7 @@ repo id                                                    repo name
 rhel-9-for-x86_64-appstream-rpms                           Red Hat Enterprise Linux 9 for x86_64 - AppStream (RPMs)
 rhel-9-for-x86_64-baseos-rpms                              Red Hat Enterprise Linux 9 for x86_64 - BaseOS (RPMs)
 ```
+
 Example output for RHEL 10:
 
 ```
@@ -53,6 +56,7 @@ repo id                                                    repo name
 rhel-10-for-x86_64-appstream-rpms                          Red Hat Enterprise Linux 10 for x86_64 - AppStream (RPMs)
 rhel-10-for-x86_64-baseos-rpms                             Red Hat Enterprise Linux 10 for x86_64 - BaseOS (RPMs)
 ```
+
 - For disconnected installations, follow the steps in [Obtain and configure RPM source dependencies](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_containerized_disconnected_installation#obtaining-and-configuring-rpm-dependencies "The Ansible Automation Platform containerized setup bundle installation program does not include RPM source dependencies from the BaseOS and AppStream repositories. It relies on the host system’s package manager to resolve these dependencies.") to access these repositories.
 
 5.  Ensure the host can resolve host names and IP addresses using DNS. This is essential to ensure services can talk to one another.

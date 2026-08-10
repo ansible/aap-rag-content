@@ -10,6 +10,5 @@ Using the **Job Explorer** you can:
 - View more details for top templates running on a cluster;
 - Filter out nested workflows and jobs.
 
-
 You can review the features and details of the **Job Explorer** in the following sections.
 

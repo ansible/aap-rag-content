@@ -10,6 +10,5 @@ This integration directly addresses common challenges such as managing disparate
 - **Reduced risk:** Lower the risk of breaches, enforce policies, and significantly decrease unplanned downtime. The ability to review Terraform plan output before applying it in a workflow, with approval steps, enhances security and compliance.
 - **Faster time to value:** Boost developer productivity and deploy new compute resources more rapidly, leading to a faster time to market. This is achieved through unified lifecycle management and automation for Day 0 (provisioning), Day 1 (configuration), and Day 2 (ongoing management) operations.
 
-
 By enabling direct calls between Ansible Automation Platform and Terraform Enterprise or HCP Terraform, organizations can unlock time to value by creating combined workflows, reduce risk through enhanced product integrations, and enhance Infrastructure-as-Code with Ansible Automation Platform content and practices. This allows for unified lifecycle management, enabling tasks from initial provisioning and configuration to ongoing health checks, incident response, patching, and infrastructure optimization.
 

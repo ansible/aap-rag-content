@@ -1,7 +1,7 @@
 +++
-title = "Plug-in delivery method - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
+title = "Compare plug-in delivery methods - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_self_service_choose_plugin_delivery"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"]]
@@ -9,10 +9,10 @@ category = ""
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/con_self_service_choose_plugin_delivery/aem-page/con_self_service_choose_plugin_delivery.html"
-last_crumb = "Plug-in delivery method"
-modified = "2026-06-05T07:48:10.594Z"
+last_crumb = "Compare plug-in delivery methods"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
-name = "Plug-in delivery method"
+name = "Compare plug-in delivery methods"
 oversized = "false"
 page_slug = "con_self_service_choose_plugin_delivery"
 portal_content_subtype = "title"
@@ -25,13 +25,12 @@ toc = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/con_self_ser
 type = "aem-page"
 +++
 
-# Plug-in delivery method
+# Compare plug-in delivery methods
 
 Ansible automation portal supports two plug-in delivery methods. Use OCI container delivery for new installations, or plan to migrate from the deprecated HTTP plug-in registry.
 
 - **OCI container delivery (recommended):** Ansible automation portal pulls an Open Container Initiative (OCI) image from `registry.redhat.io` that contains the Ansible plug-ins. Use this method for new installations and production deployments.
 - **HTTP plug-in registry (deprecated):** You deploy an in-cluster HTTP service that hosts plug-in tarball files. This method is deprecated and will be removed in a future release of Ansible Automation Platform. If you already use this method, plan to migrate to OCI container delivery.
-
 
 Important:
 

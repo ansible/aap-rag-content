@@ -24,4 +24,3 @@ Importing templates requires AAP administrator access. Only users with the AAP A
 ### Results
 
 The imported template appears on the **Create** tab. Launch the template to verify the wizard pre-populates the expected collections and configuration.
-

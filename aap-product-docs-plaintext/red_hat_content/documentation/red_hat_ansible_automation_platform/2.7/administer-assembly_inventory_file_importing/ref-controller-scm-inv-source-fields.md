@@ -9,14 +9,12 @@ The source fields used are:
 - `source_path`: the relative path inside the project indicating a directory or a file. If left blank, "" is still a relative path indicating the root directory of the project.
 - `source_vars`: if set on a "file" type inventory source then they are passed to the environment variables when running.
 
-
 Additionally:
 
 - An update of the project automatically triggers an inventory update where it is used.
 - An update of the project is scheduled immediately after creation of the inventory source.
 - Neither inventory nor project updates are blocked while a related job is running.
 - In cases where you have a large project (around 10 GB), disk space on `/tmp` can be an issue.
-
 
 You can specify a location manually in the automation controller UI from the **Add source** page of an inventory. Refer to [Adding a source](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-add-source "Use the following procedure to add a source to an inventory. When you add a source to an inventory, the system creates a new group for that source.") for instructions on creating an inventory source.
 

@@ -16,7 +16,6 @@ A rulebook specifies actions to be performed when a rule is triggered. A rule ge
 -  `debug`
 -  `none`
 
-
 To view further details, see Ansible Actions.
 
 A rulebook activation is a process running in the background defined by a decision environment executing a specific rulebook. You can set up your rulebook activation by following Set up a rulebook activation.

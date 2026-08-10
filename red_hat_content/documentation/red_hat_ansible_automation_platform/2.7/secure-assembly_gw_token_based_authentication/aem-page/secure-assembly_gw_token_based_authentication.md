@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_token_based_authentication/aem-page/secure-assembly_gw_token_based_authentication.html"
 last_crumb = "Configure access to external applications with tokens"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure access to external applications with tokens"
 oversized = "false"
@@ -92,44 +92,40 @@ You can only use the authorization code type to acquire an access token when usi
 - This allows an external application to obtain a token from Ansible Automation Platform for a user, using their credentials.
 - Compartmentalized tokens issued for a particular application enables those tokens to be easily managed. For example, revoking *all* tokens associated with that application without having to revoke all tokens in the system.
 
-### Request an access token after expiration
+### Refresh an access token after expiration
 
-The default expiration for access tokens is 1 year.
+You can use a refresh token to request a new access token after the original token expires.
 
-The best way to set up application integrations by using the **Authorization code** grant type is to allowlist the origins for those cross-site requests. More generally, you must allowlist the service or application you are integrating with the platform, for which you want to provide access tokens.
+#### About this task
 
-To do this, have your administrator add this allowlist to their local Ansible Automation Platform settings file:
+The default expiration for OAuth2 access tokens is 31,536,000 seconds (1 year). You can configure this value in the `OAUTH2_PROVIDER` settings in `etc/ansible-automation-platform/gateway/settings.py`.
 
-```
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOWED_ORIGIN_REGEXES = [
-    r"http://django-oauth-toolkit.herokuapp.com*",
-    r"http://www.example.com*"
-]
-```
-Where `<http://django-oauth-toolkit.herokuapp.com>` and `<http://www.example.com>` are applications requiring tokens with which to access the platform.
+When an access token expires, use the original refresh token to request a new access token without re-authorizing.
 
-### OAuth2 application and token migration (2.4 to 2.6)
+#### Procedure
 
-During the upgrade from Ansible Automation Platform 2.4 to 2.6, there are important changes to how OAuth2 applications and tokens are managed. Ansible Automation Platform now uses platform gateway OAuth applications and deprecates automation controller OAuth applications.
-
-- **Automation controller OAuth applications**: You can view and edit existing automation controller applications, but new ones can no longer be created. These legacy applications continue to function, but they might be removed in a future release. Plan to migrate to platform gateway OAuth applications.
-- **Automation controller tokens**: Automation controller personal access tokens (PATs), are also deprecated. Guide users to move to platform gateway PATs.
-- **Platform gateway OAuth applications and tokens**: Platform applications and tokens offer an updated interface and are the standard for future use. Move to these applications and tokens.
-
-### Manage `OAUTH2_PROVIDER` settings
-
-The `OAUTH2_PROVIDER` settings from automation controller are managed by platform gateway after upgrading from 2.4. to 2.6. The default token expiration values might differ between automation controller and platform gateway.
-
-- The default access token expiration is updated from 1,000 years to 1 year. This change increases credential security through more frequent token rotation.
-
-- Platform gateway’s default OAUTH2_PROVIDER settings are:
+1.  Make a POST request to the `/o/token/` endpoint with your client credentials in the Authorization header:
+  
 
 ```
-{
-  "ACCESS_TOKEN_EXPIRE_SECONDS": 31536000000,
-  "REFRESH_TOKEN_EXPIRE_SECONDS": 2628000,
-  "AUTHORIZATION_CODE_EXPIRE_SECONDS": 600
-}
+curl -X POST \
+  -H "Authorization: Basic <base64(client_id:client_secret)>" \
+  -d "grant_type=refresh_token" \
+  -d "refresh_token=<your_refresh_token>" \
+  https://<platform_gateway>/o/token/
 ```
-    If you previously set a token expiration shorter than one year, you must manually update the platform gateway settings to match your required configuration.
+
+    Replace `<base64(client_id:client_secret)>` with the Base64-encoded string of your application client ID and client secret, separated by a colon.
+
+    Replace `<your_refresh_token>` with the refresh token returned in the original token response.
+
+    Replace `<platform_gateway>` with the hostname of your platform gateway.
+
+2.  Verify that the response includes a new `access_token` and `refresh_token`.
+      The server revokes the previous refresh token after use.
+
+#### What to do next
+
+Note:
+
+Refresh tokens expire after approximately 30 days (2,628,000 seconds) by default. After the refresh token expires, you must complete a full re-authorization. You can configure this value with the `REFRESH_TOKEN_EXPIRE_SECONDS` setting in `OAUTH2_PROVIDER` in `/etc/ansible-automation-platform/gateway/settings.py`.

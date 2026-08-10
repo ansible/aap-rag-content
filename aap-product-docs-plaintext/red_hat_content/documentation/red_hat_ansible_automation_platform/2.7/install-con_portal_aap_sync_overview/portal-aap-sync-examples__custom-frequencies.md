@@ -21,6 +21,7 @@ schedule:
 frequency: { minutes: 5 }
 timeout: { seconds: 30 }
 ```
+
 Standard synchronization:
 
 ```yaml
@@ -40,6 +41,7 @@ schedule:
 frequency: { hours: 1 }
 timeout: { minutes: 15 }
 ```
+
 Slow synchronization:
 
 ```yaml

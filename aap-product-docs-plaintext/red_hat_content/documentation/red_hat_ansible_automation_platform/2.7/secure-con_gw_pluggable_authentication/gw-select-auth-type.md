@@ -42,5 +42,4 @@ When you select an identity provider:
 - Confirm that the provider requires administrator approval for email changes, or that email changes trigger re-verification.
 - If the provider does not meet these requirements, use a different provider or implement compensating controls.
 
-
 For more information about how the platform links external identities to accounts, see [User association and attribute synchronization](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gw_user_association_and_attr_sync "Ansible Automation Platform manages user accounts and synchronizes attributes by centralizing user identification around a matching email address. You can sign in with existing accounts from different sources while maintaining a consistent user profile and access permissions.").

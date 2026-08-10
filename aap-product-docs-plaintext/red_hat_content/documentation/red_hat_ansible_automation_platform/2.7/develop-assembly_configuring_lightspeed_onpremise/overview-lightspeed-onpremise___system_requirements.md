@@ -10,7 +10,6 @@ Your system must meet the following minimum system requirements to install and r
 | <br>CPU        | <br>1               |
 | <br>Local disk | <br>40 GB           |
 
-
 To see the rest of the Red Hat Ansible Automation Platform system requirements, see the System requirements section of *Planning your installation*.
 
 Note:

@@ -20,13 +20,13 @@ Access allowed = True
 Superuser permission = Undefined
 Admin of teams = None
 ```
-And, you might have maps that need to be processed are processed in the following order:
+
+And, you might have maps that need to be processed in the following order:
 
 1. **Allow** rule set to never
 2. **Allow** rule based on group
 3. **Superuser** rule based on user attributes
 4. **Team** admin rule based on user group
-
 
 The first **Allow** map, set to never, denies access to the system and the in-memory representation looks like:
 
@@ -35,6 +35,7 @@ Access allowed = False
 Superuser permission = Undefined
 Admin of teams = None
 ```
+
 However, if the user matches the second **Allow** map (the group-based allow), the permissions change to the following:
 
 ```
@@ -42,6 +43,7 @@ Access allowed = True
 Superuser permission = Undefined
 Admin of teams = None
 ```
+
 Where the user is subsequently granted access to Ansible Automation Platform because they have the required groups.
 
 Next, the **Superuser** map checks user attributes. If no match is found, it does not revoke existing permissions by default. Therefore, the permissions remain the same as the results from the previous map:
@@ -51,13 +53,15 @@ Access allowed = True
 Superuser permission = Skipped
 Admin of teams = None
 ```
-To revoke superuser access, you can select the **Revoke** option on the **Superuser** map. That way, when the user does not meet the attribute criteria, the permissions update to False such as the following:
+
+To revoke superuser access, you can select the **Block non-matching users** option on the **Superuser** map. That way, when the user does not meet the attribute criteria, the permissions update to False such as the following:
 
 ```
 Access allowed = True
 Superuser permission = False
 Admin of teams = None
 ```
+
 The final **Team** map checks the user’s groups coming from the authenticator for admin access on the team “My Team”. If the user has the required group, the permissions update to the following:
 
 ```
@@ -65,13 +69,15 @@ Access allowed = True
 Superuser permission = False
 Admin of teams = “My Team”
 ```
-If the user lacks the required group, permissions remain unchanged unless the **Revoke** option has been selected on the map, in which case permissions update to the following:
+
+If the user lacks the required group, permissions remain unchanged unless the **Block non-matching users** option has been selected on the map, in which case permissions update to the following:
 
 ```
 Access allowed = True
 Superuser permission = False
 Admin of teams = Revoke admin of “My Team”
 ```
+
 After processing all maps in the order defined, the final permissions reconcile, updating the user’s access based on the map rules.
 
 In summary, authenticators validate users and delegate system authorization to the authenticator maps. Authenticator maps are executed in order creating an in-memory representation of the users' permissions which get reconciled with the actual permissions after all maps are executed.
@@ -84,5 +90,5 @@ Means that a match is detected and the platform should grant the user access to 
 SKIPPED
 Means that the user did not match the trigger in the map and, the platform skips processing this map and continues to check the remaining maps. This is useful if you want to grant users additional permissions in the system without having to change the authenticator maps.
 
-However, when the **Revoke** option is selected, **SKIPPED** becomes **DENY** and users who do not meet the required trigger criteria are denied access to the corresponding role or permission. This ensures that only users with matching trigger conditions are granted access.
+However, when the **Block non-matching users** option is selected, **SKIPPED** becomes **DENY** and users who do not meet the required trigger criteria are denied access to the corresponding role or permission. This ensures that only users with matching trigger conditions are granted access.
 

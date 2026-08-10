@@ -1,6 +1,6 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-ansible_platform_collection_modules"
 title = "Modules in the ansible.platform collection - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-ansible_platform_collection_modules"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/configure-ansible_platform_collection_modules/aem-page/configure-ansible_platform_collection_modules.html"
 last_crumb = "Modules in the ansible.platform collection"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Modules in the ansible.platform collection"
 oversized = "false"
@@ -63,11 +63,10 @@ The `ansible.platform` collection provides modules for managing Ansible Automati
 
 ## Platform configuration
 
-| Module         | Description                                                                                                                                                                                                                                                                                       | Supported states                  |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
+| Module         | Description                                                                                                                                                                                              | Supported states                  |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
 | `settings`     | Modify platform-wide settings including token authentication, JWT configuration, password policies, and session settings. This module has no`state` parameter and always applies changes. To get a full list of available setting keys for your environment, query the platform gateway REST API. | N/A (always applies)              |
-| `feature_flag` | Query and manage feature flags. Only run-time flags can be modified; install-time flags are read-only. This module defaults to`exists` instead of`present`, so you must explicitly set`state: present` to modify a flag.                                                                          | present, absent, exists, enforced |
-
+| `feature_flag` | Query and manage feature flags. Only run-time flags can be modified; install-time flags are read-only. This module defaults to`exists` instead of`present`, so you must explicitly set`state: present` to modify a flag. | present, absent, exists, enforced |
 
 The `settings` module requires a dictionary of setting keys and values, but the full list of available keys depends on your Ansible Automation Platform deployment. To discover all available setting keys and their current values, query the following REST API endpoint on your platform gateway:
 
@@ -83,6 +82,6 @@ The `settings` module requires a dictionary of setting keys and values, but the 
 
 ## Lookup plugin
 
-| Plugin        | Description                                                                                                                                                                                                                                                                                                                                                                |
-| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Plugin        | Description                                                                                                                                                                                              |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `gateway_api` | Query Ansible Automation Platform component API endpoints through the platform gateway. Supports pagination, filtering, and returning objects or IDs. Use for read-only lookups of users, teams, organizations, settings, and other resources. The automation controller, platform gateway, Event-Driven Ansible, and automation hub APIs can be queried with this plugin. |

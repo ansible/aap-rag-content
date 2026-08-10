@@ -1,4 +1,4 @@
-# Ansible Automation Platform 2.7 patch release June 17, 2026
+# Ansible Automation Platform patch release June 17, 2026
 ## Platform-operator
 
 - Added proxy variables for hub operator deployments. (AAP-73663)

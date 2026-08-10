@@ -1,6 +1,6 @@
 +++
-title = "Recommended security practices for access controls - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_initial_configuration"
+title = "Recommended security practices for access controls - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-ref_initial_configuration/aem-page/secure-ref_initial_configuration.html"
 last_crumb = "Recommended security practices for access controls"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Recommended security practices for access controls"
 oversized = "false"
@@ -42,12 +42,11 @@ The following Ansible content collections are available for managing Ansible Aut
 
 *Table 1. Ansible content collections*
 
-| Validated Collection           | Collection Purpose                                                                                                                                                                                                                                                                                                                                                                                                  |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br> `infra.aap_utilities`     | <br>Ansible content for automating day 1 and day 2 operations of Ansible Automation Platform, including installation, backup and restore, certificate management, and more.                                                                                                                                                                                                                                         |
+| Validated Collection           | Collection Purpose                                                                                                                                                                                       |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <br> `infra.aap_utilities`     | <br>Ansible content for automating day 1 and day 2 operations of Ansible Automation Platform, including installation, backup and restore, certificate management, and more.                              |
 | <br> `infra.aap_configuration` | <br>A collection of roles to manage the creation of Ansible Automation Platform components, including users and groups (RBAC), projects, job templates and workflows, credentials, and more. This collection includes functionality from the older `infra.controller_configuration`, `infra.ah_configuration` and `infra.eda_configuration` and should be used in their place with Ansible Automation Platform 2.6. |
-| <br> `infra.ee_utilities`      | <br>A collection of roles for creating and managing execution environment images, or migrating from the older Tower virtualenvs to execution environments.                                                                                                                                                                                                                                                          |
-
+| <br> `infra.ee_utilities`      | <br>A collection of roles for creating and managing execution environment images, or migrating from the older Tower virtualenvs to execution environments.                                               |
 
 Many organizations use CI/CD platforms to configure pipelines or other methods to manage this type of infrastructure. However, using Ansible Automation Platform natively, a webhook can be configured to link a Git-based repository natively. In this way, Ansible can respond to Git events to trigger Job Templates directly. This removes the need for external CI components from this overall process and thus reduces the attack surface.
 
@@ -57,7 +56,6 @@ These practices enable version control of all infrastructure and configuration. 
 - Ensuring that inspection tools are in place.
 - Ensuring that no plain text secrets are committed.
 - Ensuring that pre-commit hooks and any other policies are followed.
-
 
 CaC also encourages using external vault systems which removes the need to store any sensitive data in the repository, or deal with having to individually vault files as needed. This is particularly important when storing Ansible Automation Platform configuration in a source code repository, as automation controller credentials and Event-Driven Ansible credentials must be provided to the collection variables in plain text which should not be committed to a source repository. For more information on using external vault systems, see [External credential vault considerations](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_credential_management_planning#con-external-credential-vault "Secrets management is an essential component of maintaining a secure automation platform. We recommend the following secrets management practice:").
 
@@ -72,7 +70,6 @@ There are several additional benefits including:
 - Identifying performance bottlenecks and optimizing the Ansible playbooks by analyzing execution times and resource usage from the logs.
 - Centralized logging helps meet compliance mandates by providing a single source of truth for auditing purposes.
 - Third Party integration with a centralized log management platform like Splunk, Logstash, ElasticSearch, or Loggly to collect and analyze logs.
-
 
 The logging aggregator service works with the following monitoring and data analysis systems:
 

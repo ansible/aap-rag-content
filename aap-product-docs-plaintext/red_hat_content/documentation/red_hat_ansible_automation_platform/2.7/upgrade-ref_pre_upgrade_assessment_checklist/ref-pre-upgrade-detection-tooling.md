@@ -12,7 +12,6 @@ You can run the tool directly from the GitHub repository using `uvx`.
 * Containerized deployments: An SOSReport.
 * OpenShift Container Platform deployments: A must-gather or ocp-inspect output.
 
-
 Note:
 
 The tool requires NGINX log format updates introduced in the Ansible Automation Platform 2.6 patch released March 25, 2026. If you are running an earlier 2.6.x patch and your logs do not contain the required fields, apply the provided patch script or upgrade to the latest 2.6.x release.
@@ -22,11 +21,13 @@ The tool requires NGINX log format updates introduced in the Ansible Automation 
 ```
 $ uvx --from "git+https://github.com/ansible/aap-detect-direct-component-access" aap-detect-direct-component-access /path/to/sosreport/
 ```
+
 **Scan an OpenShift must-gather tarball:**
 
 ```
 $ uvx --from "git+https://github.com/ansible/aap-detect-direct-component-access" aap-detect-direct-component-access /path/to/must-gather/
 ```
+
 **Scan an OpenShift Container Platform inspect output:**
 
 ```

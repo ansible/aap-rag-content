@@ -9,7 +9,6 @@ A private offer is sent to you directly from a Red Hat seller. A private offer i
 
 - A Red Hat seller issues you a purchase order and provides it to you by email.
 
-
 * For manual steps see [Viewing and subscribing to a private offer](https://docs.aws.amazon.com/marketplace/latest/buyerguide/buyer-private-offers.html#buyer-private-offers-subscribing) page on the AWS Marketplace
 
 **Procedure**
@@ -26,16 +25,13 @@ A private offer is sent to you directly from a Red Hat seller. A private offer i
 
 6. Select Click Set up your account. This redirects you to Red Hat Single Sign-On where you must:
 
-
 1. Create or sign into your Red Hat account.
 
 2. Connect your AWS account to the Red Hat account.
 
-
 1. If you are connecting to your accounts for the first time you must accept the terms and conditions and click Connect accounts. This redirects you to the **Provision environment** page on the Red Hat Hybrid Cloud Console. Here you can start configuring your environment.
 
 7. Enter your AWS account ID and click Verify.
-
 
 - This account ID must be the account ID that purchased the offer from the AWS Marketplace. The system does not recognize associated or nested accounts.
 

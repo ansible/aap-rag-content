@@ -11,14 +11,12 @@ Install the Ansible code bot to get code recommendations for your repositories, 
 
 3. Select the Ansible repositories that you want the app to access:
 
-
 - **All repositories**: Provides access to read the metadata of all repositories.
 - **Only select repositories**: Provides access to read the metadata of only the repositories that you select.
 
 4. Optional: If you selected **Only select repositories** in the previous step, select the repositories that you want the Ansible code bot to access from the **Select repositories** list.
 
 5. Click **Install & Authorize**. A message is displayed that specifies the following permissions are granted automatically to the bot during installation:
-
 
 - Read access to metadata
 - Read and write access to code and pull requests
@@ -27,13 +25,11 @@ Install the Ansible code bot to get code recommendations for your repositories, 
 
 7. Log in to the Ansible code bot dashboard:
 
-
 1. On the **Authorize Ansible code bot** page, verify your account and repository permissions.
 
 2. Click **Authorize Ansible**.
 
 From the **Authorize Ansible code bot** page, the following actions occur:
-
 
 - Ansible code bot verifies that you are a part of an organization that has an active subscription to Red Hat Ansible Automation Platform.
 

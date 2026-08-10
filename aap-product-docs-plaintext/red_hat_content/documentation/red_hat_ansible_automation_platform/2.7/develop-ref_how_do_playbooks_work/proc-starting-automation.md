@@ -16,4 +16,5 @@ Create a project folder on your filesystem.
 mkdir ansible_quickstart
 cd ansible_quickstart
 ```
+
 Using a single directory structure makes it easier to add to source control, and reuse and share automation content.

@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_view_deployment"
 title = "Verify the configuration - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_about/", "Install Ansible automation portal (OpenShift Container Platform only)"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_view_deployment/aem-page/install-assembly_self_service_view_deployment.html"
 last_crumb = "Verify the configuration"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Verify the configuration"
 oversized = "false"
@@ -50,6 +50,7 @@ Inspect the `install-dynamic-plugins` init container logs to confirm that plug-i
 ...
 -> Successfully installed dynamic plugin oci://registry.redhat.io/ansible-automation-platform/automation-portal:<plugin-version>!ansible-backstage-plugin-catalog-backend-module-rhaap
 ```
+
     Replace `<plugin-version>` with the value from your `imageTagInfo` setting. If you use a mirror registry, the registry host in the log reflects your `imageRegistry` or `ociPluginImage` configuration.
 
     **Expected log output for HTTP plug-in registry (deprecated)**
@@ -61,6 +62,7 @@ Inspect the `install-dynamic-plugins` init container logs to confirm that plug-i
 ...
 -> Successfully installed dynamic plugin http://plugin-registry:8080/ansible-backstage-plugin-catalog-backend-module-rhaap-dynamic-x.y.z.tgz
 ```
+
     The tarball file name includes the plug-in version from your bundle.
 
 7.  On the **Environment** tab, verify that environment variables from your Helm chart appear as expected.

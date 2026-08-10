@@ -11,7 +11,6 @@ curl -X POST -d "token=rQONsve372fQwuc2pn76k3IHDCYpi7" \
 http://<gateway>/o/revoke_token/ -i
 ```
 
-
 Note:
 
 - The special OAuth 2 endpoints only support using the `x-www-form-urlencoded`**Content-type**, so as a result, none of the `/o/*` endpoints accept `application/json`.

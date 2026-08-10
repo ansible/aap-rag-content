@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_jobs"
-title = "Use jobs to run playbooks against an inventory of hosts - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Use jobs to run playbooks against an inventory of hosts - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_jobs/", "Use jobs to run playbooks against an inventory of hosts"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_jobs/aem-page/develop-assembly_ug_controller_jobs.html"
 last_crumb = "Use jobs to run playbooks against an inventory of hosts"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Use jobs to run playbooks against an inventory of hosts"
 oversized = "false"
@@ -31,9 +31,7 @@ A job is an instance of automation controller launching an Ansible Playbook agai
 
 The **Jobs** list view displays a list of jobs and their statuses, shown as completed successfully, failed, or as an active (running) job. The default view is collapsed (Compact) with the job name, status, job type, start, and finish times. You can click the arrow ![Arrow](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/arrow.png) icon to expand and see more information. You can sort this list by various criteria, and perform a search to filter the jobs of interest.
 
-
 ![Jobs list expanded](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-jobs-list-all-expanded.png)  
-
 
 From this screen you can complete the following tasks:
 
@@ -42,11 +40,8 @@ From this screen you can complete the following tasks:
 - Relaunch ![Launch](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/rightrocket.png) jobs
 - Cancel or delete selected jobs
 
-
 The relaunch operation only applies to relaunches of playbook runs and does not apply to project or inventory updates, system jobs, and workflow jobs. When a job relaunches, the **Output** view is displayed. Selecting any type of job also takes you to the **Output** view for that job, where you can filter jobs by various criteria:
 
-
 ![Job details view filters](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-job-details-view-filters.png)  
-
 
 - The **Event** option in the **Search output** list enables you to filter by the events of interest, such as errors, host failures, host retries, and items skipped. You can include as many events in the filter as necessary.

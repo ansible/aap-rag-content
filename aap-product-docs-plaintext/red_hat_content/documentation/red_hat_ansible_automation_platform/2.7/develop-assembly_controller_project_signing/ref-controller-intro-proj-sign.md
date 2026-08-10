@@ -18,6 +18,7 @@ If the repository has already been configured for signing and verification, the 
 ```
 ansible-sign project gpg-sign /path/to/project
 ```
+
 This command updates a checksum manifest and signs it.
 
 3. You commit the change, the updated checksum manifest, and the signature to the repository.
@@ -25,7 +26,6 @@ This command updates a checksum manifest and signs it.
 When you synchronize the project, automation controller pulls in the new changes, checks that the public key associated with the project in automation controller matches the private key that the checksum manifest was signed with (this prevents tampering with the checksum manifest itself), then re-calculates the checksums of each file in the manifest to ensure that the checksum matches (and thus that no file has changed). It also ensures that all files are accounted for:
 
 Files must be included in, or excluded from, the `MANIFEST.in` file. For more information on this file, see [Sign a project](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_controller_project_signing#con-controller-signing-your-project "Signing a project involves an Ansible project directory."). If files have been added or removed unexpectedly, verification fails
-
 
 ![Content signing procedure](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/content-sign-diagram.png)
 

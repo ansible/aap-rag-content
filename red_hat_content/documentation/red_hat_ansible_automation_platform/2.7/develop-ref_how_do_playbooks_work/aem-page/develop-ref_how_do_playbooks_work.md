@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_how_do_playbooks_work"
-title = "How do Ansible Playbooks work - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "How do Ansible Playbooks work - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_how_do_playbooks_work"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-assembly_intro_to_playbooks_1/", "Get started automating with playbooks"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-ref_how_do_playbooks_work/aem-page/develop-ref_how_do_playbooks_work.html"
 last_crumb = "How do Ansible Playbooks work"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "How do Ansible Playbooks work"
 oversized = "false"
@@ -65,7 +65,6 @@ Ansible modules are grouped in collections with a *Fully Qualified Collection Na
 - Configuration management
 - Communication
 
-
  ![Structure of a typical playbook](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/playbook.png)
 
 ## How do I use Ansible Playbooks
@@ -86,6 +85,7 @@ After installing the open source Ansible project or Red Hat Ansible Automation P
 ```
 $ sudo dnf install ansible
 ```
+
 in the Red Hat Enterprise Linux CLI, you can use the `ansible-playbook` command to run Ansible Playbooks.
 
 ### From within the platform
@@ -109,4 +109,5 @@ Get started with Ansible by creating an automation project, building an inventor
 mkdir ansible_quickstart
 cd ansible_quickstart
 ```
+
 Using a single directory structure makes it easier to add to source control, and reuse and share automation content.

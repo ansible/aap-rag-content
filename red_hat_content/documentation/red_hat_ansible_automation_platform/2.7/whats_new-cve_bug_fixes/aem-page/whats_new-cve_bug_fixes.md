@@ -1,7 +1,7 @@
 +++
-title = "CVE - Bug Fixes - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-cve_bug_fixes"
+template = "docs/aem-title.html"
+title = "CVE - Bug Fixes - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-overview_of_redhat_ansible_intro/", "Ansible Automation Platform release notes"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/whats_new-cve_bug_fixes/aem-page/whats_new-cve_bug_fixes.html"
 last_crumb = "CVE - Bug Fixes"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "CVE - Bug Fixes"
 oversized = "false"
@@ -53,7 +53,6 @@ This release of Ansible Automation Platform delivers critical security patches a
 - Ansible automation portal
   * **Survey and form rendering improvements**: Nested survey parameters, conditional form schemas, and password fields now render correctly. Survey passwords are written as secrets.
 
-
 - Controller
   * Fixed an issue where OIDC workload identity tokens were not applied to cloud credentials during inventory sync, because `populate_workload_identity_tokens()` did not include the cloud credential when called from `RunInventoryUpdate`. (AAP-75205)
   * Fixed an issue where workflow node updates failed when the Job Template had labels without "Prompt on Launch" enabled, causing API or UI updates to prompt fields to return "Field is not configured to prompt on launch." The serializer now validates only the prompt fields included in the request rather than re-validating all persisted prompt state. (AAP-75202)
@@ -71,3 +70,15 @@ This release of Ansible Automation Platform delivers critical security patches a
   * Fixed an issue where the containerized installer did not show the image used for Ansible Lightspeed chatbot BYOK configuration. (AAP-72986)
 - Platform operator
   * Fixed an issue where a cluster-scoped operator could not resolve PostgreSQL database connections when components were installed in other namespaces. (AAP-75065)
+- ansible.platform collection
+  * Fixed broken idempotency for redirect_uris and organization fields in the application module. Previously, redirect_uris was compared as a list against the API's space-separated string, and organization was compared as a name against the API's integer foreign key, causing false drift detection.
+  * Fixed a deletion bug in role_team_assignment where assignments were not correctly removed when state: absent was specified.
+  * The role_user_assignment module now raises a clear error when the specified role_definition or user does not exist on the gateway.
+  * Fixed false idempotency failures in the service_key module caused by the API returning $encrypted$ for secret on GET responses.
+  * Fixed task-level environment: variables (for example, SSL_CERT_FILE, REQUESTS_CA_BUNDLE, proxy settings) not being forwarded to the manager subprocess when using connection: ansible.platform.http.
+  * Fixed malformed URLs in the ansible.platform.gateway_api lookup plugin caused by scheme and hostname not being stripped from the URL builder.
+  * Restored async: / poll: 0 parallelism for all ansible.platform action plugins. The fork-based async mechanism that infra.aap_configuration gateway roles depend on was broken during the action plugin rewrite.
+  * Fixed empty-string handling for aap_request_timeout / gateway_request_timeout. The AAP built-in credential type injects an empty string when the field is not configured, which previously caused validation to fail. Empty strings are now stripped and the 10-second default is used.
+  * Fixed aap_validate_certs alias resolution. When aap_validate_certs: false was set via module_defaults or group, it was silently ignored. The parameter is now resolved correctly so that false is honored.
+  * Fixed pagination in the gateway_api lookup / search_api for relative next URLs. AAP returns the next link as a relative path which is now resolved against base_url with urljoin.
+  * Fixed the gateway_api lookup / search_api to support the Galaxy/Hub pagination envelope. Hub list responses use a different response shape than DRF, and return_all now handles both envelopes so /api/galaxy/ endpoints no longer silently return only the first page.

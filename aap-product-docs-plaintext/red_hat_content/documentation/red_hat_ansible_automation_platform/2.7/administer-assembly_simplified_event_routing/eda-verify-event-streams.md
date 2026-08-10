@@ -1,9 +1,10 @@
 # Respond to events from external systems
-## Verify your event streams work
+## Event streams
+### Verify your event streams work
 
 Confirm end-to-end event flow by verifying the event stream receives data from the remote system, validating the webhook URL and authentication setup.
 
-### Procedure
+#### Procedure
 
 1.  Log in to Ansible Automation Platform.
 2.  From the navigation panel, select Automation Decisions> (and then)Event Streams.
@@ -14,7 +15,7 @@ The **Header** and **Body** sections for the event stream are displayed on the D
 
 5.  Toggle the **Forward events to rulebook activation** option to enable you to push your events to a rulebook activation.
 
-### Results
+#### Results
 
 This moves the event stream to production mode and makes it easy to attach to rulebook activations. When this option is toggled off, your ability to forward events to a rulebook activation is disabled and the **This event stream is disabled** message is displayed.
 

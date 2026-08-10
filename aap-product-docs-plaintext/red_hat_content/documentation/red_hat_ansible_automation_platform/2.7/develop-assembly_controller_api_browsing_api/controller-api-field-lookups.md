@@ -6,6 +6,7 @@ Field lookups allow you to filter API results based on specific criteria. You ca
 ```
 ?field__lookup=value
 ```
+
 The following field lookups are supported:
 
 - exact: Exact match (default lookup if not specified, see the following note for more information).
@@ -26,7 +27,6 @@ The following field lookups are supported:
 - in: Check whether the given field’s value is present in the list provided; expects a list of items.
 - You can specify boolean values as `True` or `1` for true, `False` or `0` for false (both case-insensitive).
 
-
 For example, `?created__gte=2023-01-01` provides a list of items created after 1/1/2023.
 
 You can specify null values as `None` or `Null` (both case-insensitive), though we recommend using the `isnull` lookup to explicitly check for null values.
@@ -34,7 +34,6 @@ You can specify null values as `None` or `Null` (both case-insensitive), though 
 You can specify lists (for the `in` lookup) as a comma-separated list of values. Filtering based on the requesting user’s level of access by query string parameter:
 
 - `role_level`: Level of role to filter on, such as `admin_role`
-
 
 Note:
 

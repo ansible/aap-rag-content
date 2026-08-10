@@ -1,7 +1,7 @@
 +++
 title = "Manage firewall policies and rules with security automation - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_firewall_policy_manage"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_firewall_policy_manage"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_firewall_policy_manage/", "Manage firewall policies and rules with security automation"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-assembly_firewall_policy_manage/aem-page/secure-assembly_firewall_policy_manage.html"
 last_crumb = "Manage firewall policies and rules with security automation"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Manage firewall policies and rules with security automation"
 oversized = "false"
@@ -49,7 +49,6 @@ The following lab environment is a simplified example of a real-world enterprise
 
 Your entire team can use Ansible security automation to address investigations, threat hunting, and incident response all on one platform. Red Hat Ansible Automation Platform provides you with certified content collections that are easy to consume and reuse within your security team.
 
-
 ![Simplified security lab environment](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/security-lab-environment.png)  
 
 ## Create a new firewall rule
@@ -85,7 +84,6 @@ Use the `acl_manager` role to create a new firewall rule for blocking a source I
 
 3.  Run the playbook:
       `$ ansible-navigator run --ee false <playbook.yml>`.
-
 
 ![Playbook with new firewall rule](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/security-create-rule.png)  
 
@@ -126,7 +124,6 @@ Use the acl_manager role to delete a security rule.
 
 3.  Run the playbook:
       `$ ansible-navigator run --ee false <playbook.yml>`:
-
 
 ![Playbook with deleted firewall rule](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/security-delete-rule.png)  
 

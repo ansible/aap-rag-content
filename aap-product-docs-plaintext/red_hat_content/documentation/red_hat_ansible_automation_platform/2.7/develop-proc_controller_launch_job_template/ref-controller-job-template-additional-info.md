@@ -9,7 +9,6 @@ A job can require additional information to run. The following data can be reque
 - A survey, if one has been configured for the job templates
 - Extra variables, if requested by the job template
 
-
 Note:
 
 If a job has user-provided values, then those are respected upon relaunch. If the user did not specify a value, then the job uses the default value from the job template. Jobs are not relaunched as-is. They are relaunched with the user prompts re-applied to the job template.

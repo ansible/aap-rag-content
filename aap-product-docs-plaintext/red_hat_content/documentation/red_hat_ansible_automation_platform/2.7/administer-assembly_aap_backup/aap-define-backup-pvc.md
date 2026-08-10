@@ -66,6 +66,7 @@ Confirm that the PVCs were created:
 ```none
 oc get pvc -n <namespace>
 ```
+
 The output displays the custom PVCs for each component:
 
 | Name                                 | Status        | Volume              | Capacity    | Access Modes | Storage class         |

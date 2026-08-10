@@ -9,7 +9,10 @@ The following example shows how you can set up an inventory file for horizontal 
 
 3.88.116.111 routable_hostname=automationedacontroller-api.example.com eda_node_type=api
 
+# event-stream node
+3.88.116.112 routable_hostname=automationedacontroller-event-stream.example.com eda_node_type=event-stream
+
 # worker node
-3.88.116.112 routable_hostname=automationedacontroller-api.example.com eda_node_type=worker
+3.88.116.113 routable_hostname=automationedacontroller-worker.example.com eda_node_type=worker
 ```
 

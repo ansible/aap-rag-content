@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-background_task_processing_for_event_driven_ansible"
-title = "Background task processing for Event-Driven Ansible - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Background task processing for Event-Driven Ansible - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-background_task_processing_for_event_driven_ansible"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_user_guide_overview/", "Trigger automation from events with Event-Driven Ansible"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-background_task_processing_for_event_driven_ansible/aem-page/administer-background_task_processing_for_event_driven_ansible.html"
 last_crumb = "Background task processing for Event-Driven Ansible"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Background task processing for Event-Driven Ansible"
 oversized = "false"

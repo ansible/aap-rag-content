@@ -1,6 +1,8 @@
-# Ansible Automation Platform 2.7 patch release June 17, 2026
+# Ansible Automation Platform patch release June 17, 2026
 ## Event-Driven Ansible
 
+- [CVE-2026-11807](https://access.redhat.com/security/cve/CVE-2026-11807) – Rollup: Websocket Missing Authorization Allows Credential Theft via activation_id Spoofing in:
+* eda-controller-rhel9 for Ansible Automation Platform 2.7. AAP-78382
 - [CVE-2026-44432](https://access.redhat.com/security/cve/cve-2026-44432) - urllib3: Denial of Service due to excessive HTTP response decompression in:
 * eda-controller-rhel9 for Ansible Automation Platform 2.7. AAP-77887
 * de-minimal-rhel9 for Ansible Automation Platform 2.7. AAP-77254

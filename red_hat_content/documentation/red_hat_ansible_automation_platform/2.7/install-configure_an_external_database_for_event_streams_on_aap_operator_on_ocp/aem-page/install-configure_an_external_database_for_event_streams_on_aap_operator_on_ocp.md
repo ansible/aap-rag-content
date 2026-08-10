@@ -1,6 +1,6 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-configure_an_external_database_for_event_streams_on_aap_operator_on_ocp"
 title = "Configure an external database for event streams in Operator on OpenShift Container Platform - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-configure_an_external_database_for_event_streams_on_aap_operator_on_ocp"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-configure_an_external_database_for_event_streams_on_aap_operator_on_ocp/aem-page/install-configure_an_external_database_for_event_streams_on_aap_operator_on_ocp.html"
 last_crumb = "Configure an external database for event streams in Operator on OpenShift Container Platform"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure an external database for event streams in Operator on OpenShift Container Platform"
 oversized = "false"

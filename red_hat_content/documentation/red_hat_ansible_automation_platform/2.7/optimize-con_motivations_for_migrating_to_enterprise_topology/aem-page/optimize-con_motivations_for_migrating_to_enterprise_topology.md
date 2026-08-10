@@ -1,6 +1,6 @@
 +++
-title = "Scale up to an enterprise topology - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_motivations_for_migrating_to_enterprise_topology"
+title = "Scale up to an enterprise topology - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-con_motivations_for_migrating_to_enterprise_topology/aem-page/optimize-con_motivations_for_migrating_to_enterprise_topology.html"
 last_crumb = "Scale up to an enterprise topology"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Scale up to an enterprise topology"
 oversized = "false"
@@ -61,7 +61,6 @@ Motivations for customizing the documented enterprise deployment models include 
 - Enabling independent scaling of components, such as automation controller API compared to execution capacity
 - Supporting workload growth or specific SLAs
 
-
 This requires custom resource allocation and performance tuning based on identified needs, rather than adherence to a general pattern.
 
 Before customizing and scaling, you must identify specific bottlenecks within your Ansible Automation Platform environment, such as:
@@ -71,7 +70,6 @@ Before customizing and scaling, you must identify specific bottlenecks within yo
 - Database performance
 - Event-Driven Ansible event handling.
 
-
 Use platform monitoring tools and analytics to identify bottlenecks. After bottlenecks are identified, you can approach scaling each component vertically or horizontally.
 
 ## API request flow and latency sources for performance tuning
@@ -80,17 +78,17 @@ The Ansible Automation Platform API uses distributed services. Performance depen
 
 *Table 1. API Service architecture and performance considerations*
 
-| Layer                                            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Performance Consideration                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br>Client Request                               | <br>The request from the client.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | <br>The request from the client might have timeout parameters set. In the VM-based installation and containerized installation program, a variable `client_request_timeout` is used to inform downstream component timeouts. This value must match the timeout of the external load balancer. The size of the request body and headers can also impact performance.                                                                                                                                                                                                                                                                                                                                                                                                              |
-| <br>Ingress Point                                | <br>The first point of entry into Ansible Automation Platform, typically an OpenShift Container Platform Route or a customer-provided Load Balancer, directing traffic to an available platform gateway pod/instance.                                                                                                                                                                                                                                                                                                             | <br>Performance is dependent on the configuration, capacity, and health of the load balancer or OpenShift Container Platform Route. Any timeout for the external load balancer must be greater than or equal to the `client_request_timeout` setting passed to the installation program. This layer is responsible for distributing traffic if there are multiple platform gateway nodes/pods.                                                                                                                                                                                                                                                                                                                                                                                   |
-| <br>Envoy Proxy                                  | <br>Located within the platform gateway pod/instance, this proxy handles authorization, internal routing, and applies filters to the request. Authorization by the gRPC service is performed before the Envoy forwards the request to the destination service.                                                                                                                                                                                                                                                                    | <br>Introduces minimal latency, typically on the order of 10 milliseconds. Can handle hundreds of concurrent requests.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| <br>Platform gateway gRPC Authentication Service | <br>A local gRPC service within the platform gateway container responsible for authenticating each request. This service can interact with external authentication services (LDAP/SAML) and the database for validation. Authentication with the gRPC service can be disabled for individual URL routes, notably requests to the platform gateway service itself are not authenticated by this gRPC service (for example, under `/api/gateway/v1/`). These requests are authenticated by the platform gateway API service itself. | <br>Potential source of latency. The service is multi-processed and multi-threaded, with capacity determined by `GRPC_SERVER_PROCESSES` and `GRPC_SERVER_MAX_THREADS_PER_PROCESS`. If all workers are busy, then requests queue, which adds to latency. In containerized or VM-based installation, its timeout is informed by the `client_request_timeout`. Slow database connections for session validation also negatively impact performance.                                                                                                                                                                                                                                                                                                                                 |
-| <br>External Authentication Service (LDAP/SAML)  | <br>An optional external service invoked by the platform gateway gRPC Authentication Service for validating user credentials.                                                                                                                                                                                                                                                                                                                                                                                                     | <br>Potential source of latency. When external authentication services (e.g., LDAP or SAML) are configured, they are invoked during the gRPC authentication stage. Slow response times from these external systems can significantly increase the total latency for each request processed. It is the user’s responsibility to provide a low-latency, reliable external authentication service.                                                                                                                                                                                                                                                                                                                                                                                  |
-| <br>API Service Nginx Proxy                      | <br>After authentication, Envoy forwards the request to the component API node or Service in OpenShift Container Platform. Nginx receives the request. Each distinct API service component has its own Nginx proxy that determines if the request is for a WSGI application, an ASGI-based WebSocket service, or static content.                                                                                                                                                                                                  | <br>Introduces minimal latency, typically on the order of 10 milliseconds. Can handle hundreds of concurrent requests.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| <br>WSGI Server (`uWSGI` / `Gunicorn`)           | <br>Handles standard API requests forwarded by Nginx. These servers process requests, validate JWT tokens, run API operations, and frequently interact with the database.                                                                                                                                                                                                                                                                                                                                                         | <br>Primary source of latency. API requests are handled by each component’s web application served by a WSGI server (`uWSGI` for automation controller and platform gateway and `Gunicorn` for automation hub and Event-Driven Ansible), and their timeout is also informed by the `client_request_timeout` in VM-based installation and container-based installation. In OpenShift Container Platform, the timeout on the platform gateway Route is propagated to inform this same setting. The servers are configured with a maximum number of concurrent workers. If all workers are busy, the request is queued. After a worker picks up a request, it validates the authentication and executes the API operation, which typically involves further database communication. |
-| <br>Databases                                    | <br>Almost every request requires interacting with the database to do activities such as validating sessions, storing data, and executing API operations.                                                                                                                                                                                                                                                                                                                                                                         | <br>Critical performance factor. Almost every request requires interacting with the database. The responsiveness of database connections remains a critical factor in API performance, impacting both the gRPC authentication service and the WSGI server processing. Responsiveness can be impacted by network latency between the database and components, as well as performance of the database itself.                                                                                                                                                                                                                                                                                                                                                                      |
-| <br>Client Response                              | <br>The final response returned to the client after the request has been processed and traversed back through the system components (Nginx proxy, Envoy, and the initial load balancer/Route).                                                                                                                                                                                                                                                                                                                                    | <br>The final response returned to the client after the request has been processed and traversed back through the system components (Nginx proxy, Envoy, and the initial load balancer/Route).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Layer                                            | Description                                                                                                                                                                                              | Performance Consideration                                                                                                                                                                                |
+| ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <br>Client Request                               | <br>The request from the client.                                                                                                                                                                         | <br>The request from the client might have timeout parameters set. In the VM-based installation and containerized installation program, a variable `client_request_timeout` is used to inform downstream component timeouts. This value must match the timeout of the external load balancer. The size of the request body and headers can also impact performance. |
+| <br>Ingress Point                                | <br>The first point of entry into Ansible Automation Platform, typically an OpenShift Container Platform Route or a customer-provided Load Balancer, directing traffic to an available platform gateway pod/instance. | <br>Performance is dependent on the configuration, capacity, and health of the load balancer or OpenShift Container Platform Route. Any timeout for the external load balancer must be greater than or equal to the `client_request_timeout` setting passed to the installation program. This layer is responsible for distributing traffic if there are multiple platform gateway nodes/pods. |
+| <br>Envoy Proxy                                  | <br>Located within the platform gateway pod/instance, this proxy handles authorization, internal routing, and applies filters to the request. Authorization by the gRPC service is performed before the Envoy forwards the request to the destination service. | <br>Introduces minimal latency, typically on the order of 10 milliseconds. Can handle hundreds of concurrent requests.                                                                                   |
+| <br>Platform gateway gRPC Authentication Service | <br>A local gRPC service within the platform gateway container responsible for authenticating each request. This service can interact with external authentication services (LDAP/SAML) and the database for validation. Authentication with the gRPC service can be disabled for individual URL routes, notably requests to the platform gateway service itself are not authenticated by this gRPC service (for example, under `/api/gateway/v1/`). These requests are authenticated by the platform gateway API service itself. | <br>Potential source of latency. The service is multi-processed and multi-threaded, with capacity determined by `GRPC_SERVER_PROCESSES` and `GRPC_SERVER_MAX_THREADS_PER_PROCESS`. If all workers are busy, then requests queue, which adds to latency. In containerized or VM-based installation, its timeout is informed by the `client_request_timeout`. Slow database connections for session validation also negatively impact performance. |
+| <br>External Authentication Service (LDAP/SAML)  | <br>An optional external service invoked by the platform gateway gRPC Authentication Service for validating user credentials.                                                                            | <br>Potential source of latency. When external authentication services (e.g., LDAP or SAML) are configured, they are invoked during the gRPC authentication stage. Slow response times from these external systems can significantly increase the total latency for each request processed. It is the user’s responsibility to provide a low-latency, reliable external authentication service. |
+| <br>API Service Nginx Proxy                      | <br>After authentication, Envoy forwards the request to the component API node or Service in OpenShift Container Platform. Nginx receives the request. Each distinct API service component has its own Nginx proxy that determines if the request is for a WSGI application, an ASGI-based WebSocket service, or static content. | <br>Introduces minimal latency, typically on the order of 10 milliseconds. Can handle hundreds of concurrent requests.                                                                                   |
+| <br>WSGI Server (`uWSGI` / `Gunicorn`)           | <br>Handles standard API requests forwarded by Nginx. These servers process requests, validate JWT tokens, run API operations, and frequently interact with the database.                                | <br>Primary source of latency. API requests are handled by each component’s web application served by a WSGI server (`uWSGI` for automation controller and platform gateway and `Gunicorn` for automation hub and Event-Driven Ansible), and their timeout is also informed by the `client_request_timeout` in VM-based installation and container-based installation. In OpenShift Container Platform, the timeout on the platform gateway Route is propagated to inform this same setting. The servers are configured with a maximum number of concurrent workers. If all workers are busy, the request is queued. After a worker picks up a request, it validates the authentication and executes the API operation, which typically involves further database communication. |
+| <br>Databases                                    | <br>Almost every request requires interacting with the database to do activities such as validating sessions, storing data, and executing API operations.                                                | <br>Critical performance factor. Almost every request requires interacting with the database. The responsiveness of database connections remains a critical factor in API performance, impacting both the gRPC authentication service and the WSGI server processing. Responsiveness can be impacted by network latency between the database and components, as well as performance of the database itself. |
+| <br>Client Response                              | <br>The final response returned to the client after the request has been processed and traversed back through the system components (Nginx proxy, Envoy, and the initial load balancer/Route).           | <br>The final response returned to the client after the request has been processed and traversed back through the system components (Nginx proxy, Envoy, and the initial load balancer/Route).           |
 
 ### Sources of latency and scaling strategies
 
@@ -100,12 +98,10 @@ The primary sources of latency across all layers are:
 - The authentication phase, particularly if external authentication systems exhibit slow response times
 - The actual processing time and associated database interactions within the Python WSGI application
 
-
 Scaling strategies include the following:
 
 - Using more performant authentication methods, such as Session or Token
 - Horizontally scaling platform gateway and API service pods to increase worker availability and minimize queue times
-
 
 The following sections describe how to identify which of the Ansible Automation Platform services provide which APIs and provide considerations for scaling them. For more information on the performance of different authentication methods, see [Considerations for scaling the platform gateway proxy and authentication service](/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_motivations_for_migrating_to_enterprise_topology#scaling-gateway-proxy-and-authentication "Scale the platform gateway proxy and authentication services if request volume exceeds capacity. Horizontal scaling is preferred. Vertical scaling does not automatically adjust worker pools for gRPC, Envoy, Nginx, and WSGI services.").
 
@@ -119,7 +115,6 @@ Scale your services when key performance indicators suggest a component is reach
 - High CPU utilization
 - Errors that occur during periods of high traffic
 
-
 ### High API latency
 
 Sustained high latency on API requests is a key performance indicator. All requests are made through the platform platform gateway, which acts as a proxy and forwards requests to the services in question. The request is sent to the destination service depending on which route is in the URL of the API request:
@@ -129,7 +124,6 @@ Sustained high latency on API requests is a key performance indicator. All reque
 - Event-Driven Ansible: `/api/eda`
 - Event-Driven Ansible Event Streams: `/eda-event-streams/api/eda/v1/external_event_stream/`
 - automation hub: `/api/galaxy`
-
 
 Monitoring latency on the different routes through the Envoy proxy logs helps you identify which service requires scaling. These routes are present in the proxy container of platform gateway pods in OpenShift Container Platform. For VM-based installation and container-based installation installations, check the proxy logs of the platform gateway nodes. Exceeding target API thresholds (for example, 99th percentile >1500ms) indicates a need to trigger alerts. You might also need to scale web services.
 
@@ -165,7 +159,6 @@ The most performant authentication methods are:
 - Session authentication
 - Basic authentication must not be used for high-frequency API automation because CPU-intensive password hashing introduces significant request latency. If Basic authentication is used in combination with LDAP authentication, reaching out to the LDAP service can introduce significant latency, especially if the LDAP service has limited availability. For this reason, we recommend creating OAuth Tokens to perform automation against the API.
 
-
 Horizontally scaling the platform gateway service pods also increases the number of health checks to each component’s API, because each Envoy tracks this separately. You can observe these in logs with the user agent `Envoy/HC`. Since health checks flow through the same services and queues as user-initiated requests, if overall request times slow due to overload, health checks can also timeout. When this occurs, Envoy stops forwarding requests to these service nodes until they pass their health check again.
 
 ### Special considerations for scaling the platform gateway proxy and authentication service on OpenShift Container Platform
@@ -175,6 +168,7 @@ It is particularly important that the service is horizontally scaled sufficientl
 ```
 *** uWSGI listen queue of socket ":8000" (fd: 3) full !!! (101/100) ***
 ```
+
 This error occurs due to a limitation of uWSGI tying its backlog length to the kernel parameter `somaxconn`. It is possible to raise this kernel parameter in OpenShift Container Platform, but doing so requires allowing “unsafe sysctls”.
 
 ## Scale the automation controller API service
@@ -188,7 +182,6 @@ Key performance indicators for the automation controller API service include the
 - High API latency for requests under `/api/controller`
 - High CPU utilization on the API pods or nodes
 - Platform gateway returning `503` errors because the service is too busy to respond to health checks
-
 
 The automation controller API service is located in web pods on operator-based installation and in control or hybrid nodes on VM-based installation or container-based installation.
 
@@ -214,6 +207,7 @@ It is particularly important that the service is horizontally scaled sufficientl
 ```
 *** uWSGI listen queue of socket ":8000" (fd: 3) full !!! (101/100) ***
 ```
+
 This error occurs due to a limitation of uWSGI tying its backlog length to the kernel parameter `somaxconn`. It is possible to raise this kernel parameter in OpenShift Container Platform, but doing so requires allowing “unsafe sysctls”.
 
 ## Scale the Event-Driven Ansible API service
@@ -225,7 +219,6 @@ Scaling Event-Driven Ansible involves considerations for each of its service typ
 - API and WebSocket service
 - EventStream service
 
-
 API requests routed to `/api/eda` and `/api/eda-event-stream` are handled by two separate `Gunicorn` deployments. In OpenShift Container Platform, these services must be scaled independently. For VM-based installation and container-based installation, you can scale these services together by increasing the number of hybrid nodes.
 
 ### Event-Driven Ansible API and WebSocket service
@@ -236,7 +229,6 @@ The Event-Driven Ansible API service handles `HTTP` requests to the application,
 - High CPU utilization on the API pods/nodes
 - Platform gateway returning `503` errors because the service is too busy to respond to health checks
 
-
 A WebSocket service is deployed alongside the API service to manage the output of the rulebook activations. Each activation maintains a persistent WebSocket connection to this service to communicate status and receive instructions. A large number of activations or a large amount of output from activations can overwhelm the WebSocket server, leading to failures.
 
 Consider the following strategies to scale the Event-Driven Ansible API and WebSocket service:
@@ -245,7 +237,6 @@ Consider the following strategies to scale the Event-Driven Ansible API and WebS
       Ensure that you scale the `eda-api` deployment in proportion to the number of activations being run.
 
 - VM-based installation or container-based installation: Horizontally scale the WebSocket service alongside the API service by adding more hybrid nodes. This increases capacity for all Event-Driven Ansible components simultaneously.
-
 
 To identify whether your deployment experienced a bottleneck in the WebSocket service, check the activation logs for the following errors:
 
@@ -273,7 +264,6 @@ Scaling automation hub involves considerations for each of its service types:
 - Pulp workers service: manages syncs and content uploads
 - Content service: manages content delivery after content has been processed and stored
 
-
 Separate `Gunicorn` deployments back these services and handle different types of requests. In OpenShift Container Platform, these services must be scaled independently. In VM-based installation and container-based installation, a standard automation hub node hosts all services, and scaling is achieved by adding more nodes.
 
 ### Automation hub API service
@@ -283,7 +273,6 @@ The automation hub API service handles metadata-driven requests for the applicat
 - High API latency for requests under `/api/galaxy`
 - High CPU utilization on the API pods or nodes
 - Platform gateway returning `503` errors because the service is too busy to respond to health checks
-
 
 Consider the following strategies to scale the automaton automation hub API service:
 
@@ -298,7 +287,6 @@ The Pulp worker and content services manage all operations related to content sy
 - High Content upload or download rates: Frequent pushing or pulling of automation execution environments by automation controller, Event-Driven Ansible, or large Collection uploads or downloads by automation clients.
 - Disk I/O bottlenecks: Performance issues related to read/write operations on the underlying content storage (`/var/lib/pulp`), often shown as high disk I/O wait times.
 - Pulp worker saturation: High CPU utilization or queuing within pulp processes, indicating an inability to keep up with content processing and serving.
-
 
 To scale your Pulp worker and content services, consider the following scaling strategies:
 

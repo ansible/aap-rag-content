@@ -11,7 +11,6 @@ Provide the following information for container credentials:
 - Optional: **Verify SSL**: You can check this option to verify the server’s SSL/TLS certificate is valid and trusted. Environments that use internal or private *Certificate Authority* (CA) must leave this option unchecked to disable verification.
 - **Certificate Authority data**: Include the `BEGIN CERTIFICATE` and `END CERTIFICATE` lines when pasting the certificate, if provided.
 
-
 A container group is a type of instance group that has an associated credential that enables connection to an OpenShift cluster. To set up a container group, you must have the following items:
 
 - A namespace you can start into. Although every cluster has a default namespace, you can use a specific namespace.

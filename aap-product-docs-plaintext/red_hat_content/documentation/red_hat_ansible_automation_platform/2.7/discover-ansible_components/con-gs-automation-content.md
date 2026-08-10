@@ -10,12 +10,10 @@ You can access automation hub in one of two ways:
 - On the Red Hat-hosted Hybrid Cloud Console, where you can find Red Hat validated or certified content that you can sync to your platform environment.
 - On a self-hosted, on-premise private automation hub, where you can curate content for your automation users and manage access to collections and execution environments.
 
-
 Depending on the way you access automation hub, you may have access to different types of content collections.
 
 There are two types of Red Hat Ansible content:
 
 - Ansible Certified Content Collections, which Red Hat builds, supports, and maintains. Certified collections are included in your subscription to Red Hat Ansible Automation Platform and can be found in automation hub.
 - Ansible validated content collections, which are customizable and therefore do not have a support guarantee, but have been tested in the Ansible Automation Platform environment.
-
 

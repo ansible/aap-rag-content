@@ -9,10 +9,8 @@ Use the `oc adm must-gather` command to collect comprehensive diagnostic data ab
 
 
 ```
-oc adm must-gather --image=registry.redhat.io/ansible-automation-platform-25/aap-must-gather-rhel8
+oc adm must-gather --image=registry.redhat.io/<platform-version>/aap-must-gather-rhel<rhel-version>
 ```
-Note:
-For version 2.6, the base image name changes to `registry.redhat.io/ansible-automation-platform-26/aap-must-gather-rhel9`.
 
 2.  View the collected data, use the `omc` tool to query the `must-gather` tarball as if it were a live cluster.
 

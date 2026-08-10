@@ -9,11 +9,10 @@ aap_c_1.example.com
 aap_c_2.example.com
 aap_c_3.example.com
 ```
+
 The following image displays the topology of this mesh network.
 
-
 ![The topology map of the multiple hybrid node mesh configuration consists of an automation controller group. The automation controller group contains three hybrid nodes: aap_c_1, aap_c_2, and aap_c_3. The control nodes are peered to one another as follows: aap_c_3 is peered to aap_c_1 and aap_c_1 is peered to aap_c_2.](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/mesh-multiple-hybrid-nodes.png)
-
 
 The default `node_type` for nodes in the control plane is `hybrid`. You can explicitly set the `node_type` of individual nodes to `hybrid` in the `[automationcontroller group]`:
 
@@ -23,6 +22,7 @@ aap_c_1.example.com node_type=hybrid
 aap_c_2.example.com node_type=hybrid
 aap_c_3.example.com node_type=hybrid
 ```
+
 Alternatively, you can set the `node_type` of all nodes in the `[automationcontroller]` group. When you add new nodes to the control plane they are automatically set to hybrid nodes.
 
 ```yaml
@@ -34,6 +34,7 @@ aap_c_3.example.com
 [automationcontroller:vars]
 node_type=hybrid
 ```
+
 If you think that you might add control nodes to your control plane in future, it is better to define a separate group for the hybrid nodes, and set the `node_type` for the group:
 
 ```yaml

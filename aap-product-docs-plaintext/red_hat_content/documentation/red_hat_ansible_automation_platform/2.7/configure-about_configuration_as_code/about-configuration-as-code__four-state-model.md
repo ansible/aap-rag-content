@@ -25,7 +25,6 @@ description: "Production automation resources"
 state: enforced
 ```
 
-
 Note:
 
 Not all modules support every state. The `settings` module has no `state` parameter and always applies changes. The `token` module supports only `present` and `absent` and is not idempotent. The `feature_flag` module defaults to `exists` instead of `present`, so you must explicitly set `state: present` to modify a flag. For a complete list of supported states per module, see the module reference.

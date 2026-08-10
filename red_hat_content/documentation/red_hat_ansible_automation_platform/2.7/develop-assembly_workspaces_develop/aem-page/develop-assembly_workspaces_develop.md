@@ -1,6 +1,6 @@
 +++
-title = "Develop automation content in your workspace - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_workspaces_develop"
+title = "Develop automation content in your workspace - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_workspaces_develop/aem-page/develop-assembly_workspaces_develop.html"
 last_crumb = "Develop automation content in your workspace"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Develop automation content in your workspace"
 oversized = "false"
@@ -73,7 +73,6 @@ The administrator in OpenShift Dev Spaces configures the duration of this inacti
 6.  Open the terminal in VS Code: click the main menu icon in the **Activity** bar and select Terminal> (and then)New Terminal.
 7.  Select the **Problems** tab in the terminal to view issues that `ansible-lint` has identified. In the following example, one error is selected in the **Problems** tab, and the corresponding line in the playbook is highlighted.
 
-
 ![Playbook and ansible-lint messages](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/playbook.png)  
 
 8.  When you have resolved the problems in your playbook, a message is displayed in the **Problems** tab of the terminal.
@@ -119,6 +118,7 @@ ansible-navigator:
   playbook-artifact:
     enable: false
 ```
+
     The Ansible dev spaces image includes a default execution environment. You only need to add additional settings such as `environment-variables`, `volume-mounts`, or `container-options` if your project requires them.
 
 3. **Optional:** To override the default execution environment image, add the `image` setting under the `execution-environment` section:

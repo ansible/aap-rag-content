@@ -1,4 +1,4 @@
-# Prepare the OpenShift Container Platform target environment and import migration content
+# Import migration content to OCP manually
 ## Prepare and assess the target environment
 
 Transfer the migration artifact, create an OpenShift Container Platform project, and deploy Ansible Automation Platform using the Operator with configurations matching your source environment.

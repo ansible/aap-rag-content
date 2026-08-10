@@ -10,7 +10,6 @@ To ensure reliable and consistent automation, follow these best practices for ma
 - Do not import content from other projects or common file-system locations, such as `/opt`, at runtime. All content must be explicitly defined within the EE.
 - Working directory: The playbook directory is used as the current working directory at runtime. However, always use the `playbook_dir` variable instead of relying on the current working directory path.
 
-
 Warning:
 
 Automation controller does not support interactive features.

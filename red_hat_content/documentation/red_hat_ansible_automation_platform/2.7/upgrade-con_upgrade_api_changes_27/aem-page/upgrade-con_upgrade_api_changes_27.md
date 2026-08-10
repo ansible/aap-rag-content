@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/upgrade-con_upgrade_api_changes_27/aem-page/upgrade-con_upgrade_api_changes_27.html"
 last_crumb = "API changes in Ansible Automation Platform 2.7"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "API changes in Ansible Automation Platform 2.7"
 oversized = "false"
@@ -48,7 +48,6 @@ Service-specific API endpoints have been removed in Ansible Automation Platform 
 | Platform gateway      | Not applicable                          | `/api/gateway/v1/`                  | `/api/gateway/v1/`                               |
 | Event-Driven Ansible  | Not applicable                          | `/api/eda/v1/`                      | Must use platform gateway: `/api/eda/v1/`        |
 
-
 In Red Hat Ansible Automation Platform 2.7, these API endpoints are only accessible through the platform gateway hostname. Direct access to component hostnames (such as `controller.example.com` or `hub.example.com`) returns an HTTP 401 Unauthorized error.
 
 **Example:**
@@ -65,7 +64,6 @@ In Red Hat Ansible Automation Platform 2.7, all API access must go through the p
 | `https://controller.example.com/api/v2/*`      | `https://gateway.example.com/api/controller/v2/*` | Required |
 | `https://hub.example.com/api/automation-hub/*` | `https://gateway.example.com/api/galaxy/*`        | Required |
 | `https://eda.example.com/api/eda/v1/*`         | `https://gateway.example.com/api/eda/v1/*`        | Required |
-
 
 Note:
 

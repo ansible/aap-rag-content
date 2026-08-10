@@ -10,9 +10,25 @@
       "singlePageAnchor": null,
       "sections": [
         {
-          "title": "Obtain and configure RPM source dependencies",
+          "title": "Disconnected installation inventory requirements",
           "visible": true,
           "weight": 1,
+          "urlFragment": "aap-containerized-disconnected-installation__disconnected-installation-inventory",
+          "anchor": null,
+          "singlePageAnchor": "aap-containerized-disconnected-installation__disconnected-installation-inventory"
+        },
+        {
+          "title": "Verify bundle structure",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "aap-containerized-disconnected-installation__verify-bundle-structure",
+          "anchor": null,
+          "singlePageAnchor": "aap-containerized-disconnected-installation__verify-bundle-structure"
+        },
+        {
+          "title": "Obtain and configure RPM source dependencies",
+          "visible": true,
+          "weight": 3,
           "urlFragment": "obtaining-and-configuring-rpm-dependencies",
           "anchor": null,
           "singlePageAnchor": "obtaining-and-configuring-rpm-dependencies",

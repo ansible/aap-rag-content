@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_self_service_rhel_configure_ssl/aem-page/install-proc_self_service_rhel_configure_ssl.html"
 last_crumb = "Replace self-signed SSL certificates"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Replace self-signed SSL certificates"
 oversized = "false"
@@ -36,7 +36,6 @@ Prerequisites:
 - A TLS certificate and private key in PEM format, issued by a certificate authority trusted by your organization.
 - SSH access to the appliance.
 
-
 Procedure:
 
 1. Copy your certificates to the appliance:
@@ -61,6 +60,7 @@ Verification:
 ```terminal
 $ curl -vk https://localhost 2>&1 | grep -i "issuer"
 ```
+
      The output displays the issuer from your certificate, not the self-signed issuer.
 
 ## Trust a custom certificate authority
@@ -72,7 +72,6 @@ Prerequisites:
 - The CA certificate or self-signed certificate in PEM format.
 - SSH access to the appliance.
 
-
 Procedure:
 
 1. Copy the CA certificate or self-signed certificate to the appliance:
@@ -80,6 +79,7 @@ Procedure:
 ```terminal
 $ sudo cp *ca-certificate-file*.pem /etc/portal/ssl/ca-bundle.crt
 ```
+
      If you have multiple CA certificates to trust, concatenate them into a single bundle file before copying it to the appliance.
 
 2. Create a Quadlet drop-in to set the `NODE_EXTRA_CA_CERTS` environment variable:
@@ -104,4 +104,5 @@ Verification:
 ```terminal
 $ sudo podman exec portal env | grep NODE_EXTRA_CA_CERTS
 ```
+
      The output displays `NODE_EXTRA_CA_CERTS=/etc/portal/ssl/ca-bundle.crt`.

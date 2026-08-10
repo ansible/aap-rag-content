@@ -66,9 +66,17 @@
           "singlePageAnchor": "receptor-certificate-considerations"
         },
         {
-          "title": "Redis certificate considerations",
+          "title": "Understand the receptor mesh CA trust bundle",
           "visible": true,
           "weight": 8,
+          "urlFragment": "GUID-efb50fd2-52ba-423e-a238-aae797e4ef53",
+          "anchor": null,
+          "singlePageAnchor": "GUID-efb50fd2-52ba-423e-a238-aae797e4ef53"
+        },
+        {
+          "title": "Redis certificate considerations",
+          "visible": true,
+          "weight": 9,
           "urlFragment": "redis-certificate-considerations",
           "anchor": null,
           "singlePageAnchor": "redis-certificate-considerations"
@@ -76,7 +84,7 @@
         {
           "title": "Use custom Receptor signing keys",
           "visible": true,
-          "weight": 9,
+          "weight": 10,
           "urlFragment": "using-custom-receptor-signing-keys",
           "anchor": null,
           "singlePageAnchor": "using-custom-receptor-signing-keys"

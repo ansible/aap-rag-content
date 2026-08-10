@@ -1,7 +1,7 @@
 +++
+title = "Backup and restore overview - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/assembly_ag_controller_backup_and_restore"
 template = "docs/aem-title.html"
-title = "Backup and restore overview - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/assembly_ag_controller_backup_and_restore/aem-page/assembly_ag_controller_backup_and_restore.html"
 last_crumb = "Backup and restore overview"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Backup and restore overview"
 oversized = "false"
@@ -42,23 +42,25 @@ The Ansible Automation Platform setup playbook is invoked as `setup.sh` from the
 - `-b`: Perform a database backup rather than an installation.
 - `-r`: Perform a database restore rather than an installation.
 
-
 As the root user, call `setup.sh` with the appropriate parameters and the Ansible Automation Platform backup or restored as configured:
 
 ```
 root@localhost:~# ./setup.sh -b
 root@localhost:~# ./setup.sh -r
 ```
+
 Backup files are created on the same path that `setup.sh` script exists. You can change it by specifying the following `EXTRA_VARS`:
 
 ```
 root@localhost:~# ./setup.sh -e 'backup_dest=/path/to/backup_dir/' -b
 ```
+
 A default restore path is used unless you provide `EXTRA_VARS` with a non-default path, as shown in the following example:
 
 ```
 root@localhost:~# ./setup.sh -e 'restore_backup_file=/path/to/nondefault/backup.tar.gz' -r
 ```
+
 Optionally, you can override the inventory file used by passing it as an argument to the setup script:
 
 ```

@@ -1,4 +1,4 @@
-# Red Hat Ansible Lightspeed Overview
+# Understand Red Hat Ansible Lightspeed with IBM watsonx Code Assistant
 ## Prerequisites
 
 Review the following licensing and connectivity requirements for setting up Red Hat Ansible Lightspeed.
@@ -14,10 +14,8 @@ To use an on-premise deployment of Red Hat Ansible Lightspeed, your organization
 - A trial or paid subscription to Red Hat Ansible Automation Platform
 - An installation of IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data
 
-
 You must also install the following components:
 
 - VS Code version 1.70.1 or later
 - The Ansible extension for VS Code version 2.8 or later
-
 

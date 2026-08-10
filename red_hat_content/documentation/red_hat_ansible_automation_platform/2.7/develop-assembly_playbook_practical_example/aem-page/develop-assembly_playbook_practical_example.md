@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_playbook_practical_example"
-template = "docs/aem-title.html"
 title = "Example: automate software updates - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_playbook_practical_example"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-assembly_intro_to_playbooks_1/", "Get started automating with playbooks"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_playbook_practical_example/aem-page/develop-assembly_playbook_practical_example.html"
 last_crumb = "Example: automate software updates"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Example: automate software updates"
 oversized = "false"
@@ -37,7 +37,6 @@ At a minimum, each play defines two things:
 
 - the managed nodes to target, using a pattern
 - at least one task to run
-
 
 Note:
 
@@ -76,11 +75,11 @@ In this example, the first play targets the web servers; the second play targets
         name: postgresql
         state: started
 ```
+
 The playbook contains two plays:
 
 - The first checks if the web server software is up to date and runs the update if necessary.
 - The second checks if database server software is up to date and runs the update if necessary.
-
 
 Your playbook can include more than just a hosts line and tasks.
 

@@ -1,7 +1,7 @@
 +++
-title = "Scale automation across your infrastructure with automation mesh - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_planning_mesh"
 template = "docs/aem-title.html"
+title = "Scale automation across your infrastructure with automation mesh - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_planning_mesh/", "Scale automation across your infrastructure with automation mesh"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_planning_mesh/aem-page/administer-assembly_planning_mesh.html"
 last_crumb = "Scale automation across your infrastructure with automation mesh"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Scale automation across your infrastructure with automation mesh"
 oversized = "false"
@@ -47,7 +47,6 @@ Automation mesh is useful for:
 
 - traversing difficult network topologies
 - bringing execution capabilities (the machine running `ansible-playbook`) closer to your target hosts
-
 
 The nodes (control, hop, and execution instances) are interconnected through a receptor mesh, forming a virtual mesh.
 
@@ -130,6 +129,7 @@ The following inventory consists of a single control node in the control plane:
 [automationcontroller]
 control-plane-1.example.com node_type=control
 ```
+
 If you set `node_type` to `control` in the `vars` stanza for the control plane nodes, then all of the nodes in control plane are control nodes.
 
 ```
@@ -158,6 +158,7 @@ The following stanza defines a single hop node and an execution node in the exec
 execution-plane-1.example.com node_type=hop
 execution-plane-2.example.com
 ```
+
 If you want to set the `node_type` at the group level, you must create separate groups for the execution nodes and the hop nodes.
 
 ```
@@ -199,4 +200,5 @@ node_type=control
 execution-node-1.example.com peers=execution-node-2.example.com
 execution-node-2.example.com
 ```
+
 See the example automation mesh topologies in this section for more examples of how to implement mesh nodes.

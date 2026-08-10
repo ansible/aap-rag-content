@@ -25,5 +25,6 @@ curl -o "gateway_openapi_spec.yaml" "https://$AAP_INSTANCE/api/gateway/v1/docs/s
 ```
 curl -o "gateway_openapi_spec.json" "https://$AAP_INSTANCE/api/gateway/v1/docs/schema/?format=json"
 ```
+
 Important:
 Replace `$AAP_INSTANCE` with your Ansible Automation Platform hostname in the commands.

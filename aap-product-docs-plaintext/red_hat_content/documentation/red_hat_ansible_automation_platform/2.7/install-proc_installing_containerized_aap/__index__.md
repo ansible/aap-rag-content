@@ -5,7 +5,7 @@ Run the `install` playbook to install containerized Ansible Automation Platform 
 ## Before you begin
 
 - You have prepared the Red Hat Enterprise Linux host
-- You have prepared the managed nodes
+- You have created the installation user
 - You have downloaded Ansible Automation Platform
 - You have configured the inventory file
 - You are logged in to the Red Hat Enterprise Linux host as your non-root user
@@ -19,21 +19,25 @@ Run the `install` playbook to install containerized Ansible Automation Platform 
 ```
 ansible-playbook -i <inventory_file_name> ansible.containerized_installer.install
 ```
+
 For example:
 
 ```
 ansible-playbook -i inventory ansible.containerized_installer.install
 ```
+
 You can add additional parameters to the installation command as needed:
 
 ```
 ansible-playbook -i <inventory_file_name> -e @<vault_file_name> --ask-vault-pass -K -v ansible.containerized_installer.install
 ```
+
 For example:
 
 ```
 ansible-playbook -i inventory -e @vault.yml --ask-vault-pass -K -v  ansible.containerized_installer.install
 ```
+
 - `-i <inventory_file_name>` - The inventory file to use for the installation.
 - `-e @<vault_file_name> --ask-vault-pass` - (Optional) If you are using a vault to store sensitive variables, add this to the installation command.
 - `-K` - (Optional) If your privilege escalation (becoming root) requires you to enter a password, add this to the installation command. You are then prompted for the BECOME password.

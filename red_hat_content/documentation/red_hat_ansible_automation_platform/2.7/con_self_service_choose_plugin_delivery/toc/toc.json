@@ -2,7 +2,7 @@
   "version": "1.1",
   "sections": [
     {
-      "title": "Plug-in delivery method",
+      "title": "Compare plug-in delivery methods",
       "visible": true,
       "weight": 1,
       "urlFragment": "index",

@@ -1,7 +1,7 @@
 +++
 title = "Access Ansible Automation Platform through the CLI - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_installing_aap_operator_fetch_details"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator/", "Install on OpenShift Container Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_installing_aap_operator_fetch_details/aem-page/install-assembly_installing_aap_operator_fetch_details.html"
 last_crumb = "Access Ansible Automation Platform through the CLI"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Access Ansible Automation Platform through the CLI"
 oversized = "false"
@@ -53,6 +53,7 @@ $ oc get routes -n ansible-automation-platform
 NAME      HOST/PORT                                              PATH   SERVICES          PORT   TERMINATION     WILDCARD
 example   example-ansible-automation-platform.apps-crc.testing          example-service   http   edge/Redirect   None
 ```
+
 The address for the platform gateway instance is `example-ansible-automation-platform.apps-crc.testing`.
 
 ## Fetch the platform gateway password
@@ -74,6 +75,7 @@ oc get secret/<your instance name>-<admin_user>-password -o yaml
 ```
 oc get secret/example-admin-password -o yaml
 ```
+
     The base64 encoded password for the platform gateway instance is listed in the `metadata` field in the output:
 
 ```

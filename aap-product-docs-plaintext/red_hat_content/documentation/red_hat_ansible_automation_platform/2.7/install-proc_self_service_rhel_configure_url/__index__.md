@@ -38,6 +38,14 @@ $ sudo systemctl restart portal
 4.  If you set a custom port, open that port on any firewall and, for Red Hat OpenShift Virtualization deployments, update the OpenShift route.
 5.  Update the OAuth redirect URI in Ansible Automation Platform to match the new URL.
 
+1. In Ansible Automation Platform, navigate to **Access Management** > **OAuth Applications**.
+2. Edit the OAuth application used by Ansible automation portal.
+3. Set the redirect URI to `https://*new-url*/api/auth/rhaap/handler/frame`.
+4. Save the application.
+For the initial OAuth redirect URI setup after deployment, see [Connect and verify Ansible automation portal](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_connect_verify "After deploying the Ansible automation portal appliance, update the OAuth redirect URI, verify service health, and sign in to the portal.").
+
+For more information about managing OAuth applications in Ansible Automation Platform, see [Configure access to external applications with tokens](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_token_based_authentication#gw-token-based-authentication "Token-based authentication permits authentication of third-party tools and services with the platform through integrated OAuth 2 token support. Ansible Automation Platform utilizes both OAuth Tokens and Personal Access Tokens (PATs).").
+
 ## Results
 
 Verify that Ansible automation portal is accessible at the new URL:
@@ -45,4 +53,5 @@ Verify that Ansible automation portal is accessible at the new URL:
 ```terminal
 $ curl -fk https://*new-url*
 ```
+
 A successful response confirms that the URL and port are configured correctly.

@@ -57,7 +57,6 @@ Replace the values in the command above with your own paths and names. Use the t
 | `rag-content-output`                    | Internal image Name  | The name assigned to the container is used if you load this data into another system later.                                                                                |
 | `latest`                                | Version tag          | A version label (for example, v1.0 or April-2026) to track your database updates.                                                                                          |
 
-
 Note:
 
 If you encounter the following error message, you can ignore it, as it does not affect vector database creation:

@@ -20,6 +20,7 @@ For **Ansible Automation Platform 2.7** (base metrics service without dashboard)
 cd /path/to/aap-containerized-installer
 ansible-playbook -i inventory backup.yml
 ```
+
 The backup.yml playbook automatically backs up:
 
 - `metrics_service` database
@@ -52,6 +53,7 @@ pg_dump -h localhost -U metrics_service -F c -b -v \
 -f /backup/metrics_service_$(date +%Y%m%d_%H%M%S).dump \
 metrics_service
 ```
+
 **Step 2: Back up volumes**
 
 ```
@@ -70,6 +72,7 @@ Restoring from backup overwrites current metrics service data.
 cd /path/to/aap-containerized-installer
 ansible-playbook -i inventory restore.yml
 ```
+
 The restore.yml playbook automatically performs the restore sequence:
 
 1. Unarchives backup data
@@ -86,6 +89,7 @@ Use this method for custom restore procedures or troubleshooting.
 ```
 systemctl --user stop automation-metrics-web.service automation-metrics-tasks.service automation-metrics-scheduler.service
 ```
+
 **Step 2: Restore database**
 
 ```
@@ -94,6 +98,7 @@ psql -h localhost -U postgres -c "CREATE DATABASE metrics_service;"
 pg_restore -h localhost -U metrics_service -d metrics_service -v \
 /backup/metrics_service_TIMESTAMP.dump
 ```
+
 Note:
 The restore sequence (from installer tasks/restore.yml): unarchive data → restore secrets (via common/restore_secrets.yml) → import TLS certificates (via tasks/tls_postgresql.yml) → restore database → restart services.
 

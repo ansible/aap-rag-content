@@ -50,17 +50,25 @@
               "singlePageAnchor": "con-about-ansible-mcp-server___server_level_and_user_level_permissions"
             },
             {
-              "title": "Telemetry data collection for the MCP server",
+              "title": "Data visibility and sensitive data handling",
               "visible": true,
               "weight": 5,
+              "urlFragment": "con-about-ansible-mcp-server",
+              "anchor": "con-about-ansible-mcp-server__section_1",
+              "singlePageAnchor": "con-about-ansible-mcp-server__section_1"
+            },
+            {
+              "title": "Telemetry data collection for the MCP server",
+              "visible": true,
+              "weight": 6,
               "urlFragment": "con-about-ansible-mcp-server",
               "anchor": "con-about-ansible-mcp-server___telemetry_data_collection_for_ansible_mcp_server",
               "singlePageAnchor": "con-about-ansible-mcp-server___telemetry_data_collection_for_ansible_mcp_server"
             },
             {
-              "title": "Prerequisites",
+              "title": "Requirements to deploy the MCP server",
               "visible": true,
-              "weight": 6,
+              "weight": 7,
               "urlFragment": "con-about-ansible-mcp-server",
               "anchor": "con-about-ansible-mcp-server___prerequisites",
               "singlePageAnchor": "con-about-ansible-mcp-server___prerequisites"
@@ -68,7 +76,7 @@
             {
               "title": "Overview of deploying the MCP server",
               "visible": true,
-              "weight": 7,
+              "weight": 8,
               "urlFragment": "con-about-ansible-mcp-server",
               "anchor": "con-about-ansible-mcp-server___overview_of_deploying_the_ansible_mcp_server",
               "singlePageAnchor": "con-about-ansible-mcp-server___overview_of_deploying_the_ansible_mcp_server"
@@ -116,9 +124,17 @@
               "singlePageAnchor": "troubleshoot-ansible-mcp-server-errors",
               "sections": [
                 {
-                  "title": "API output format rejected with 406 Status Code",
+                  "title": "SSL certificate validation fails when the MCP server connects to Ansible Automation Platform",
                   "visible": true,
                   "weight": 1,
+                  "urlFragment": "proc-create-api-token-ansible-mcp-server",
+                  "anchor": "troubleshoot-ansible-mcp-server-errors__section_1",
+                  "singlePageAnchor": "troubleshoot-ansible-mcp-server-errors__section_1"
+                },
+                {
+                  "title": "API output format rejected with 406 Status Code",
+                  "visible": true,
+                  "weight": 2,
                   "urlFragment": "proc-create-api-token-ansible-mcp-server",
                   "anchor": "troubleshoot-ansible-mcp-server-errors___api_output_format_rejected_with_406_status_code",
                   "singlePageAnchor": "troubleshoot-ansible-mcp-server-errors___api_output_format_rejected_with_406_status_code"
@@ -126,7 +142,7 @@
                 {
                   "title": "User requests rejected with 400 status code",
                   "visible": true,
-                  "weight": 2,
+                  "weight": 3,
                   "urlFragment": "proc-create-api-token-ansible-mcp-server",
                   "anchor": "troubleshoot-ansible-mcp-server-errors___user_requests_rejected_with_400_status_code",
                   "singlePageAnchor": "troubleshoot-ansible-mcp-server-errors___user_requests_rejected_with_400_status_code"
@@ -134,7 +150,7 @@
                 {
                   "title": "MCP server permissions are changed post deployment",
                   "visible": true,
-                  "weight": 3,
+                  "weight": 4,
                   "urlFragment": "proc-create-api-token-ansible-mcp-server",
                   "anchor": "troubleshoot-ansible-mcp-server-errors___ansible_mcp_server_permissions_are_changed_post_deployment",
                   "singlePageAnchor": "troubleshoot-ansible-mcp-server-errors___ansible_mcp_server_permissions_are_changed_post_deployment"

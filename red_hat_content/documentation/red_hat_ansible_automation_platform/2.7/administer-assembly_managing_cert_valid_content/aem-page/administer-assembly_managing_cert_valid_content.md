@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_managing_cert_valid_content/aem-page/administer-assembly_managing_cert_valid_content.html"
 last_crumb = "Red Hat Certified, validated, and Ansible Galaxy content in automation hub"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Red Hat Certified, validated, and Ansible Galaxy content in automation hub"
 oversized = "false"
@@ -33,7 +33,6 @@ Ansible Automation Platform offers two types of content that you can use to buil
 
 - Ansible Certified Content Collections, which are included with your Ansible Automation Platform subscription.
 - Ansible validated content collections.
-
 
 You can update these collections manually by downloading their packages, or sync content through console.redhat.com.
 

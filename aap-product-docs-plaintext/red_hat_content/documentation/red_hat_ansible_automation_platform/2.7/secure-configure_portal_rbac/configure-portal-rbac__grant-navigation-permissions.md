@@ -6,7 +6,6 @@ Before you begin:
 - You have configured base RBAC roles as described in the [Configure RBAC for synchronization](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-configure_portal_rbac#configure-portal-rbac__configure-rbac-for-synchronization) section.
 - You have the AAP Administrator role and access to Administration> (and then)RBAC in Ansible automation portal.
 
-
 Procedure:
 
 1. In Ansible automation portal, navigate to Administration> (and then)RBAC in the sidebar.
@@ -16,7 +15,6 @@ Procedure:
 - For execution environment builder users: `ansible.execution-environments.view`, `ansible.collections.view`, and `ansible.git-repositories.view`.
 4. If creating a new role, assign the role to the appropriate users or groups.
 5. Click **Save**.
-
 
 To hide specific sidebar items from a user group, remove the corresponding permissions from their assigned roles.
 

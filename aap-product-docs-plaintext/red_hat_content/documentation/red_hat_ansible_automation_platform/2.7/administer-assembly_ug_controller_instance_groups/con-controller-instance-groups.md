@@ -7,7 +7,6 @@ Instances can be grouped into one or more instance groups. Instance groups can b
 - Inventories
 - Job templates
 
-
 When a job associated with one of the resources executes, it is assigned to the instance group associated with the resource. During the execution process, instance groups associated with job templates are checked before those associated with inventories. Instance groups associated with inventories are checked before those associated with organizations. Therefore, instance group assignments for the three resources form the hierarchy:
 
 **Job Template > Inventory > Organization**

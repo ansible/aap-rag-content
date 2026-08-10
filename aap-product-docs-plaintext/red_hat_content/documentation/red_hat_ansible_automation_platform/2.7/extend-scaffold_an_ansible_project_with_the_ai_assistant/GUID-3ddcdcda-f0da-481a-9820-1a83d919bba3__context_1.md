@@ -12,6 +12,7 @@ Use the AI assistant to ensure that your project aligns with best practices and 
 ```
 Show me Ansible best practices and coding guidelines so that I can write high-quality playbooks.
 ```
+
 This triggers the `ansible_content_best_practices `tool, which will display the guidelines for you to read within the editor.
 
 3.  Enter a prompt requesting The Zen of Ansible. For example:
@@ -20,5 +21,6 @@ This triggers the `ansible_content_best_practices `tool, which will display the 
 ```
 Show me The Zen of Ansible.
 ```
+
 This triggers the `zen_of_ansible` tool, which will list Zen of Ansible principles for you to read within the editor.
 

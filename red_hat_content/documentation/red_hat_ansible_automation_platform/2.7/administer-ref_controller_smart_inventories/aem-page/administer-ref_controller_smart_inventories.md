@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-ref_controller_smart_inventories"
 title = "Define a collection of hosts with Smart Inventories - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_inventories/", "Define automation target hosts in your inventory files"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-ref_controller_smart_inventories/aem-page/administer-ref_controller_smart_inventories.html"
 last_crumb = "Define a collection of hosts with Smart Inventories"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Define a collection of hosts with Smart Inventories"
 oversized = "false"
@@ -42,7 +42,6 @@ The `Inventory` model has the following new fields that are blank by default but
 - Set `kind` to `smart` for Smart Inventories.
 - Set `host_filter` AND `kind` to `smart` for Smart Inventories.
 
-
 The `host` model has a related endpoint, `smart_inventories` that identifies a set of all the Smart Inventories a host is associated with. The membership table updates every time a job runs against a smart inventory.
 
 Note:
@@ -59,7 +58,6 @@ You can view inventories without being editable:
 - Names of Host and Group created as a result of an inventory source synchronization.
 - You cannot move or edit Group records.
 
-
 You cannot create hosts from a Smart Inventory host endpoint (`/inventories/N/hosts/`) as with a normal inventory. The administrator of a Smart Inventory has permission to edit fields such as the name, description, variables, and the ability to delete. The administrator does not have the permission to change the `host_filter`, because that affects which hosts (that have a primary membership inside another inventory) are included in the smart inventory.
 
 `host_filter` only applies to hosts inside of inventories inside the Smart Inventory’s organization.
@@ -74,7 +72,6 @@ In some situations, you can change the following:
 - Groups created as a result of inventory source synchronizations.
 - Variables on Host and Group are not changeable, even as the local System Administrator.
 
-
 Hosts associated with the Smart Inventory are manifested at view time. If the results of a Smart Inventory contains more than one host with identical hostnames, only one of the matching hosts is included as part of the Smart Inventory, ordered by Host ID.
 
 ## Smart Host Filters
@@ -88,6 +85,7 @@ For example:
 ```
 /api/v2/hosts?host_filter=ansible_facts__ansible_processor_vcpus=8
 ```
+
 The `host_filter` parameter permits:
 
 - grouping with ()
@@ -97,7 +95,6 @@ The `host_filter` parameter permits:
   * `[] is used to denote a json array in the path specification
   * `""` can be used in the value when spaces are wanted in the value
 - "classic" Django queries may be embedded in the `host_filter`
-
 
 **Examples**:
 
@@ -110,6 +107,7 @@ The `host_filter` parameter permits:
 /api/v2/hosts/?host_filter=ansible_facts__ansible_env__PYTHONUNBUFFERED="true"
 /api/v2/hosts/?host_filter=(name=localhost or name=database) and (groups__name=east or groups__name="west coast") and ansible_facts__an
 ```
+
 You can search `host_filter` by **host name**, **group name**, and **Ansible facts**.
 
 Group search has the following format:
@@ -117,17 +115,18 @@ Group search has the following format:
 ```
 groups.name:groupA
 ```
+
 Fact search has the following format:
 
 ```
 ansible_facts.ansible_fips:false
 ```
+
 You can also perform Smart Search searches, which consist of a host name and host description.
 
 ```
 host_filter=name=my_host
 ```
-
 
 Note:
 

@@ -10,7 +10,6 @@ Before you begin:
 - Users who execute job templates through Ansible automation portal must have job template execute permissions assigned in Ansible Automation Platform.
 - The **Allow external users to create OAuth2 tokens** setting is enabled in Settings> (and then)Platform gateway settings in Ansible Automation Platform.
 
-
 Procedure:
 
 1. Log in to Ansible automation portal as an administrator.

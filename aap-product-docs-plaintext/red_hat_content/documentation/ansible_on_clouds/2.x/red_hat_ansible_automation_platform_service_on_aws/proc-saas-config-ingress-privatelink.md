@@ -1,30 +1,18 @@
 # 7. Red Hat Ansible Automation Platform Service on AWS Private Link Connectivity
-## 7.4. Enabling AWS PrivateLink connectivity
-### 7.4.1. Configuring AWS PrivateLink connectivity from customer VPC to Red Hat managed control plane
+## 7.5. Enabling AWS PrivateLink connectivity
+### 7.5.1. Configuring AWS PrivateLink connectivity from customer VPC to Red Hat managed control plane
 
 This configuration allows your internal users and automation to access the Ansible Automation Platform UI and API over PrivateLink.
 
 **Procedure**
 
-1. To request Ingress PrivateLink submit a [Customer support](https://access.redhat.com/support/cases/?extIdCarryOver=true&sc_cid=RHCTG0250000454096#/case/new/get-support?caseCreate=true) case to Red Hat using the **Ingress AWS PrivateLink request template** step 2.
+1. Submit the Ingress PrivateLink support request
 
-2. You must include your:
+Copy the following **Ingress AWS PrivateLink request template**, fill in your deployment details, and submit a [Customer support](https://access.redhat.com/support/cases/?extIdCarryOver=true&sc_cid=RHCTG0250000454096#/case/new/get-support?caseCreate=true) case to Red Hat.
 
+You must include your: * **AWS Account ID** * **Region** * **Deployment URL**
 
-- **AWS Account ID**.
-- **Region**.
-- **Deployment URL**.
-- After Red Hat provides you with a VPC Endpoint Service Name, you must create a VPC Endpoint in your AWS account that points to the provided service name.
-
-3. For your **Ingress AWS PrivateLink request template**:
-
-
-- Select "Endpoint services that use NLBs and GWLBs".
-
-
-* In the **Service name** field, paste the VPC Endpoint Service Name provided by Red Hat and click Verify service.
-
-- Complete the network and security group configuration as required by your organization.
++
 
 ```
 Subject:
@@ -47,4 +35,13 @@ Please create the Endpoint Service configuration on the Control Plane side and p
 
 Thank you.
 ```
+
+2. Create a VPC Endpoint after Red Hat Support responds with your Service Name
+
+After Red Hat provides you with a VPC Endpoint Service Name, create a VPC Endpoint in your AWS account that points to the provided service name:
+
+1. In the AWS console, navigate to VPC → Endpoints and click Create endpoint.
+2. Select "Endpoint services that use NLBs and GWLBs".
+3. In the **Service name** field, paste the VPC Endpoint Service Name provided by Red Hat and click Verify service.
+4. Complete the network and security group configuration as required by your organization.
 

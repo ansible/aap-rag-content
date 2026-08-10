@@ -15,6 +15,7 @@ Choose the installation program you need based on your Red Hat Enterprise Linux 
 ```
 scp [options] <path_to_source_file> <path_to_destination>
 ```
+
 For example, use the following `scp` command to copy the installation program `.tar.gz` file to an AWS EC2 instance with a private key (replace the placeholder `<>` values with your actual information):
 
 ```

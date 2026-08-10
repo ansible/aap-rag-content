@@ -5,7 +5,6 @@ Deprecated features are still included in Ansible Automation Platform 2.7 and co
 - The `ee-cloud`-services execution environment in Managed Application on Azure
 - Python 3.11 and earlier versions are deprecated.
 
-
 The `ee-cloud-services` execution environment in Managed Application on Azure.
 
 Starting with the release of Ansible Automation Platform (AAP) 2.7, the `ee-cloud-services` execution environment will not be available in new deployments of Ansible Automation Platform on Microsoft Azure. Existing Ansible Automation Platform on Microsoft Azure customers are encouraged to transition their automation workflows to the ee-supported or build a new execution environment; the execution environment will remain until you choose to remove it.
@@ -19,7 +18,6 @@ To ensure your automation continues to run smoothly on version 2.7, follow these
 3. Identify Missing Dependencies: If your playbooks fail due to missing Python libraries (e.g., boto3, azure-mgmt-compute) or specific Ansible collections, you will need to create a custom execution environment.
 4. Build Custom execution envirnments using Ansible Builder: Use the `ee-supported` or `ee-minimal` image as your base in your execution-environment `.yml` file.
 
-
 Note:
 
 For Managed Cloud customers, ensure your private automation hub is configured to sync the latest images from the Red Hat ecosystem to maintain access to the supported `ee-supported` images.
@@ -29,7 +27,6 @@ Summary of support
 - Existing Installs: Upgraded environments may retain `ee-cloud-services` for a limited grace period, but it is considered "End of Life."
 - Fresh Installs: `ee-supported & ee-minimal` are the only cloud-focused EE provided out of the box.
 - Event-Driven Ansible `ansible.eda.noop` is deprecated and there will not be a replacement.
-
 
 Python 3.11 and earlier versions are deprecated
 
@@ -57,7 +54,6 @@ Python 3.12+ offers significant improvements that older environments cannot supp
 - Improved Error Messages: More precise tracebacks for faster debugging.
 - Performance: Advancements in the Faster CPython project.
 
-
 **Security**: Removal of deprecated APIs and older TLS versions that are increasingly vulnerable.
 
 Automation intelligent assistant
@@ -65,7 +61,19 @@ Ansible Lightspeed Intelligent Assistant (ALIA) deprecated in AAP 2.5
 
 - Ansible Lightspeed Intelligent Assistant (ALIA), included as a Technology Preview in Red Hat Ansible Automation Platform 2.5, is deprecated. ALIA in AAP 2.5 is no longer receiving new builds or ongoing security remediation. If you require supported intelligent assistant functionality, upgrade to Red Hat Ansible Automation Platform 2.6 or later. For more information about the support scope of Technology Preview features, see Technology preview in the Red Hat Ansible Automation Platform documentation.(AAP-70906)
 
-
 Tarball plug-in delivery method for Ansible automation portal and Ansible plug-ins for Red Hat Developer Hub
 
 - The HTTP plug-in registry (tarball) delivery method for Ansible plug-ins for Red Hat Developer Hub and automation portal is deprecated. Use OCI container delivery instead. The tarball delivery method will be removed in a future release of Ansible Automation Platform.
+
+ansible.platform collection — deprecated parameters
+The following parameters are deprecated and scheduled for removal in a future release of Ansible Automation Platform. Update your playbooks to use the replacement parameters.
+
+| Module | Deprecated parameter  | Replacement                   | Details                                                                                     |
+| ------ | --------------------- | ----------------------------- | ------------------------------------------------------------------------------------------- |
+| user   | organizations         | role\_user\_assignment module | Use the role\_user\_assignment module to assign organization roles to users.                |
+| user   | is\_platform\_auditor | role\_user\_assignment module | Assign the Platform Auditor role using the role\_user\_assignment module.                   |
+| user   | authenticators        | associated\_authenticators    | Use the associated\_authenticators parameter instead.                                       |
+| user   | authenticator\_uid    | associated\_authenticators    | Use the associated\_authenticators parameter instead.                                       |
+| user   | object\_id            | object\_ids                   | The object\_ids parameter accepts a list, enabling batch role assignments in a single task. |
+
+For migration guidance and before/after examples, see Configuration as Code migration guide for Ansible Automation Platform 2.7 in the Ansible Automation Platform documentation.

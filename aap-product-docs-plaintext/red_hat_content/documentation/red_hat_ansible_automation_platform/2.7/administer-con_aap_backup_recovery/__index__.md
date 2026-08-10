@@ -9,7 +9,6 @@ A backup resource of your Red Hat Ansible Automation Platform deployment include
 - `secret_key`, `admin_password`, and `broadcast_websocket` secrets.
 - Database configuration.
 
-
 Note:
 
 Be sure to secure your backup resources because they can include sensitive information.

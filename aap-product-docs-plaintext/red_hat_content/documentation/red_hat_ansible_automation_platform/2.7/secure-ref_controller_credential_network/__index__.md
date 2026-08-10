@@ -16,8 +16,6 @@ For information on combining credential types, see [Using Machine and Network cr
 
 Automation controller uses the following environment variables for Network credentials:
 
-
-
 ```
 ANSIBLE_NET_USERNAME
 ANSIBLE_NET_PASSWORD

@@ -1,6 +1,6 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_configure_authentication"
 title = "Configure central authentication for Ansible Automation Platform - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_configure_authentication"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_configure_authentication/aem-page/secure-assembly_gw_configure_authentication.html"
 last_crumb = "Configure central authentication for Ansible Automation Platform"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure central authentication for Ansible Automation Platform"
 oversized = "false"
@@ -45,7 +45,6 @@ Local user passwords are not automatically synchronized between automation contr
 - If the attempt fails, platform gateway authenticates the user with the automation controller password.
 - On successful authentication, platform gateway updates the user’s password in its database.
 - The user is authenticated directly by platform gateway on subsequent logins.
-
 
 ## Prerequisites
 

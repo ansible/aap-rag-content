@@ -14,9 +14,8 @@ Navigate to **Execution Environments > Create** and select a template. The wizar
 AAP administrators manage which templates are available and can control access with RBAC. The following built-in templates are available:
 
 - **Start from scratch** -- minimal starting point for custom definitions (loaded by default).
-- **Networking Automation** -- pre-selected networking collections (included in Helm chart but commented out by default; requires collections to be discoverable from a configured content source).
-- **Cloud Automation** -- pre-selected cloud collections (included in Helm chart but commented out by default; requires collections to be discoverable from a configured content source).
-
+- **Networking Automation** -- pre-selected networking collections (requires collections to be discoverable from a configured content source).
+- **Cloud Automation** -- pre-selected cloud collections (requires collections to be discoverable from a configured content source).
 
 Custom templates created by your AAP administrator also appear on this page. See [Create standardized EE templates for teams](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_create_team_templates "Create pre-configured EE templates so that your teams start from a known-good baseline without choosing every dependency from scratch.") for details.
 

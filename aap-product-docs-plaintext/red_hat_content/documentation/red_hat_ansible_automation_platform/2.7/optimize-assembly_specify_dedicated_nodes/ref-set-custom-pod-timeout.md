@@ -7,7 +7,6 @@ With `extra_settings`, you can pass many custom settings by using the awx-operat
 | --------------------- | ------------------ | ------- |
 | <br> `extra_settings` | <br>Extra settings | <br>‘’  |
 
-
 **Example configuration of `extra_settings` parameter**
 
 ```
@@ -22,6 +21,7 @@ value: "cn=admin,dc=example,dc=com"
 - setting: SYSTEM_TASK_ABS_MEM
 value: "500"
 ```
+
 **Custom pod timeouts**
 
 A container group job in automation controller transitions to the `running` state just before you submit the pod to the Kubernetes API. Automation controller then expects the pod to enter the `Running` state before `AWX_CONTAINER_GROUP_POD_PENDING_TIMEOUT` seconds has elapsed. You can set `AWX_CONTAINER_GROUP_POD_PENDING_TIMEOUT` to a higher value if you want automation controller to wait for longer before canceling jobs that fail to enter the `Running` state. `AWX_CONTAINER_GROUP_POD_PENDING_TIMEOUT` is how long automation controller waits from creation of a pod until the Ansible work begins in the pod. You can also extend the time if the pod cannot be scheduled because of resource constraints. You can do this using `extra_settings` on the automation controller specification. The default value is two hours.

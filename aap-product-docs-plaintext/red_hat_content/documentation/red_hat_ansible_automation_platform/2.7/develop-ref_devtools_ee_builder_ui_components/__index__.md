@@ -15,12 +15,11 @@ ui:field: BaseImagePicker
 
 Displays a selection of pre-configured base container images for execution environment definitions. Includes an option to specify a custom image.
 
-| Property    | Description                                                             |
-| ----------- | ----------------------------------------------------------------------- |
-| `ui:field`  | `BaseImagePicker`                                                       |
-| `enum`      | Array of base image references, plus `custom` for a custom image entry. |
-| `enumNames` | Display labels for each base image option.                              |
-
+| Property    | Description                                                            |
+| ----------- | ---------------------------------------------------------------------- |
+| `ui:field`  | `BaseImagePicker`                                                      |
+| `enum`      | Array of base image references, plus`custom` for a custom image entry. |
+| `enumNames` | Display labels for each base image option.                             |
 
 **Example:**
 
@@ -41,10 +40,10 @@ enumNames:
 
 Provides an interactive interface for selecting Ansible collections to include in an execution environment. Supports searching and adding collections from private automation hub, Galaxy, and SCM repositories. Includes version selection and source management.
 
-| Property   | Description                                                                                  |
-| ---------- | -------------------------------------------------------------------------------------------- |
-| `ui:field` | `CollectionsPicker`                                                                          |
-| `type`     | `array` (returns an array of collection objects with `name`, `version`, and `source` fields) |
+| Property   | Description                                                                               |
+| ---------- | ----------------------------------------------------------------------------------------- |
+| `ui:field` | `CollectionsPicker`                                                                       |
+| `type`     | `array` (returns an array of collection objects with`name`,`version`, and`source` fields) |
 
 ## PackagesPicker
 
@@ -82,36 +81,25 @@ Provides an interface for adding discovery tags to an execution environment defi
 | `ui:field` | `EETagsPicker`                            |
 | `type`     | `array` (returns an array of tag strings) |
 
-## MCPServersPicker
-
-Displays available Model Context Protocol (MCP) servers as selectable cards. Users can select which MCP servers to integrate with their execution environment.
-
-| Property            | Description                                                          |
-| ------------------- | -------------------------------------------------------------------- |
-| `ui:field`          | `MCPServersPicker`                                                   |
-| `type`              | `array` (returns an array of selected MCP server identifier strings) |
-| `schema.items.enum` | Array of available MCP server identifiers.                           |
-
 ## ScmSelector
 
 Provides a source control management (SCM) provider selector with built-in authentication. Users select a configured GitHub or GitLab instance, then authenticate through the SCM provider's OAuth flow. The component validates credentials and displays connection status.
 
-| Property                                       | Description                                                                                                   |
-| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `ui:field`                                     | `ScmSelector`                                                                                                 |
-| `type`                                         | `string` (returns the selected SCM provider identifier)                                                       |
-| `ui:options.providers`                         | Array of provider configuration objects with `label`, `provider` (`github` or `gitlab`), and optional `host`. |
-| `ui:options.requestUserCredentials.secretsKey` | Key used to store the authenticated SCM token in template secrets.                                            |
+| Property                                       | Description                                                                                               |
+| ---------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `ui:field`                                     | `ScmSelector`                                                                                             |
+| `type`                                         | `string` (returns the selected SCM provider identifier)                                                   |
+| `ui:options.providers`                         | Array of provider configuration objects with`label`,`provider` (`github` or`gitlab`), and optional`host`. |
+| `ui:options.requestUserCredentials.secretsKey` | Key used to store the authenticated SCM token in template secrets.                                        |
 
 ## AdditionalBuildStepsPicker
 
 Provides an interface for specifying custom build steps to include in the execution environment build process. Supports multiple build phases with command entry.
 
-| Property   | Description                                                                            |
-| ---------- | -------------------------------------------------------------------------------------- |
-| `ui:field` | `AdditionalBuildStepsPicker`                                                           |
-| `type`     | `array` (returns an array of build step objects with `stepType` and `commands` fields) |
-
+| Property   | Description                                                                          |
+| ---------- | ------------------------------------------------------------------------------------ |
+| `ui:field` | `AdditionalBuildStepsPicker`                                                         |
+| `type`     | `array` (returns an array of build step objects with`stepType` and`commands` fields) |
 
 **Available build step phases:**
 

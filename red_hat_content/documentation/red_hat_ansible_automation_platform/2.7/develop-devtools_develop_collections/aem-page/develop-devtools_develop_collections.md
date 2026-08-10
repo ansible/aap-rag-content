@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
 title = "Package and distribute automation content with collections - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-devtools_develop_collections"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_devtools_intro/", "Create, test, and deploy automation content with ansible-dev-tools"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-devtools_develop_collections/aem-page/develop-devtools_develop_collections.html"
 last_crumb = "Package and distribute automation content with collections"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Package and distribute automation content with collections"
 oversized = "false"
@@ -98,6 +98,7 @@ The following message appears in the **Logs** pane of the **Create Ansible colle
 
     Note: collection company_namespace.myapp_network created at /path/to/collections/directory
 ```
+
 The following directories and files are created in your `collections/` directory:
 
 ```
@@ -154,6 +155,7 @@ my_role
 └── vars
     └── main.yml
 ```
+
 An Ansible role has a defined directory structure with seven main standard directories. Each role must must include at least one of these directories. You can omit any directories the role does not use. Each directory contains a `main.yml` file.
 
 #### Procedure
@@ -199,6 +201,7 @@ company_namespace
     ├── tests
     └── vars
 ```
+
     The `run` role is a default role directory that is created when you scaffold the collection.
 
 4.  Update your playbooks to use the fully qualified collection name (FQDN) for your new roles in your collection. Note:

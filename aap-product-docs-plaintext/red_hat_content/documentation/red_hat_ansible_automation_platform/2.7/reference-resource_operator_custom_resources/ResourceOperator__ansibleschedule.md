@@ -12,7 +12,6 @@ Creates a schedule on the automation controller to run a job template at specifi
 | `unified_job_template` | String | Name of the job template or workflow to schedule.                                                                                            | -              |
 | `runner_pull_policy`   | String | Image pull policy for the runner pod.                                                                                                        | `IfNotPresent` |
 
-
 **Example:**
 
 ```

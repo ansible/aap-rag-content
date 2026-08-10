@@ -5,16 +5,12 @@ Save execution environment definition files to a GitHub or GitLab repository and
 
 ### Before you begin
 
-- Your AAP administrator has configured GitHub or GitLab OAuth. See [Configure a GitHub OAuth App for saving definitions](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_oauth_ee_builder "Configure a GitHub OAuth App so that users can save execution environment definition files to a GitHub repository and trigger automated image builds.") or [Set up GitLab integration](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_gitlab_ee_builder "Configure GitLab content discovery and OAuth so that execution environment builder can scan GitLab groups for Ansible collections and save definition files.").
-- For automated builds: your AAP administrator has configured GitHub repository secrets.
+- Your AAP administrator has configured GitHub or GitLab OAuth. See [Configure a GitHub OAuth App for saving definitions](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_oauth_ee_builder "Configure a GitHub OAuth App so that users can save execution environment definition files to a GitHub repository and trigger automated image builds.") or [Configure a GitLab OAuth App for saving definitions](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_gitlab_ee_builder "Configure a GitLab OAuth App so that users can save execution environment definition files to a GitLab repository.").
+- For automated builds: your AAP administrator has configured GitHub repository secrets or GitLab CI/CD variables.
 
 ### About this task
 
 When you select **Publish to a Git repository** in the wizard, the definition files are saved to a GitHub or GitLab repository and can optionally trigger an automated container image build.
-
-Note:
-
-Automated image builds are available for GitHub only in this release. GitLab CI support is planned for a future release.
 
 ### Procedure
 
@@ -32,10 +28,9 @@ The following files are saved to the repository:
 - `<ee-name>.yml` -- EE definition with all dependencies inline. The file name matches the name you entered in the form.
 - `<ee-name>-template.yaml` -- reusable template file that administrators can register in the catalog.
 - `ansible.cfg` -- galaxy server configuration.
-- `ee-build.yml` (GitHub only) -- GitHub Actions workflow for automated builds.
+- `ee-build.yml` (GitHub) or `.gitlab-ci.yml` (GitLab) -- CI/CD pipeline workflow for automated builds.
 
-
-After saving, check the build status directly from the GitHub Actions tab on the target repository.
+After saving, check the build status from the GitHub Actions tab or the GitLab CI/CD Pipelines page on the target repository.
 
 Note:
 

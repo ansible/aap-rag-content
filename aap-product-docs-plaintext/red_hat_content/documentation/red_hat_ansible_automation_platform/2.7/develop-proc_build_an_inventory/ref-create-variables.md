@@ -15,6 +15,7 @@ webserver02:
 ansible_host: 192.0.2.150
 http_port: 443
 ```
+
 Variables can also apply to all hosts in a group.
 
 ```
@@ -29,4 +30,5 @@ http_port: 443
 vars:
 ansible_user: my_server_user
 ```
+
 For more information about inventories and Ansible inventory variables, see [About the Installer Inventory file](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/planning_your_installation/about_the_installer_inventory_file) and [Inventory file variables](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars).

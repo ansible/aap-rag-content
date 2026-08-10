@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 title = "Create dynamic groups with constructed inventories - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-ref_controller_constructed_inventories"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_inventories/", "Define automation target hosts in your inventory files"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-ref_controller_constructed_inventories/aem-page/administer-ref_controller_constructed_inventories.html"
 last_crumb = "Create dynamic groups with constructed inventories"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Create dynamic groups with constructed inventories"
 oversized = "false"
@@ -36,7 +36,6 @@ The key factors of a constructed inventory are:
 - The normal Ansible hostvars namespace is available
 - They provide groups
 
-
 Constructed inventories take `source_vars` and `limit` as inputs and transform its `input_inventories` into a new inventory, complete with groups. Groups (existing or constructed) can then be referenced in the `limit` field to reduce the number of hosts produced.
 
 You can construct groups based on these host properties:
@@ -45,7 +44,6 @@ You can construct groups based on these host properties:
 - Windows hosts
 - Cloud based instances tagged in a certain region
 - other
-
 
 The examples described in later sections are organized by the structure of the input inventories.
 
@@ -78,6 +76,7 @@ compose:
 
 limit: ``
 ```
+
 Running with a blank `limit` returns all hosts. You can use this to inspect specific variables on specific hosts, giving insight into where problems in the `groups` lie.
 
 ## Nested groups
@@ -104,6 +103,7 @@ all:
       hosts:
         host2: {}
 ```
+
 Because `host1` is in `groupB`, it is also in `groupA`.
 
  **Filter on nested group names**
@@ -117,6 +117,7 @@ plugin: constructed
 
 `limit`: `groupA`
 ```
+
  **Filter on nested group property**
 
 Use the following YAML format to filter on a group variable, even if the host is indirectly a member of that group.
@@ -172,7 +173,6 @@ groups:
 limit: intel_hosts
 ```
 
-
 Note:
 
 Hosts in constructed inventories are not counted against your license allotment because they are referencing the original inventory host. Additionally, hosts that are disabled in the original inventories are not included in the constructed inventory.
@@ -213,11 +213,10 @@ account_alias=product_dev
 [account_4321:vars]
 account_alias=sustaining
 ```
+
 The goal here is to return only shutdown hosts that are present in the group with the `account_alias` variable equal to `product_dev`. There are two approaches to this, both shown in YAML format. The first one suggested is recommended.
 
 1. **Construct 2 groups, limit to intersection**:     `source_vars`:
-
-
 
 ```
 plugin: constructed
@@ -226,6 +225,7 @@ groups:
   is_shutdown: state | default("running") == "shutdown"
   product_dev: account_alias == "product_dev"
 ```
+
      `limit`: `is_shutdown:&product_dev`
 
      This constructed inventory input creates a group for both categories and uses the `limit` (host pattern) to only return hosts that are in the intersection of those two groups.
@@ -234,14 +234,13 @@ groups:
 
 2. **Construct 1 group, limit to group**:     `source_vars`:
 
-
-
 ```
 plugin: constructed
 strict: true
 groups:
   shutdown_in_product_dev: state | default("running") == "shutdown" and account_alias == "product_dev"
 ```
+
      `limit`: `shutdown_in_product_dev`
 
      This input creates one group that only includes hosts that match both criteria. The limit is then just the group name by itself, returning **host2**. The same as the earlier approach.

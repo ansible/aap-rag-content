@@ -17,5 +17,4 @@ Automation controller provides a secret management system that include integrati
 - Thycotic Secret Server
 - GitHub app token lookup
 
-
 These external secret values are fetched before running a playbook that needs them.

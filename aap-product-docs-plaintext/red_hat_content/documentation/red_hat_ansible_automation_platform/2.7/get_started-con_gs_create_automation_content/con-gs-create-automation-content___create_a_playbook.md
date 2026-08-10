@@ -8,7 +8,6 @@ A playbook contains one or more plays. A basic play contains the following param
 - **Become statements**: this optional statement can be set to `true` or `yes` to enable privilege escalation using a become plugin (such as `sudo`, `su`, `pfexec`, `doas`, `pbrun`, `dzdo`, `ksu`).
 - **Tasks**: this is the list of actions that get executed against each host in the play.
 
-
 Here is an example of a play in a playbook. You can see the name of the play, the host, and the list of tasks included in the play.
 
 ```
@@ -33,6 +32,7 @@ playbook: hello_world.yml
 job_type: run
 state: present
 ```
+
 For more detailed guidance on authoring playbooks, consult the following documentation:
 
 - Developing automation content

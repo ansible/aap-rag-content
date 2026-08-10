@@ -4,13 +4,13 @@ template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_ee_builder_permissions"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_ee_builder_permissions/", "Execution environment builder permissions"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-build_execution_environments_with_the_automation_portal/", "Build execution environments with automation portal"]]
 category = "Develop"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-ref_ee_builder_permissions/aem-page/develop-ref_ee_builder_permissions.html"
 last_crumb = "Execution environment builder permissions"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Execution environment builder permissions"
 oversized = "false"
@@ -33,7 +33,7 @@ Execution environment builder uses navigation-level permissions that control whi
 
 Execution environment builder uses the same permission model as the rest of Ansible automation portal. Users with the AAP Administrator role have all permissions inherently. Non-admin users require an RBAC role with the correct permissions before they can access execution environment builder features.
 
-If you have already configured base RBAC roles per [Configure role-based access control for Ansible automation portal](/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_configure#rhdh-configure-rbac "Red Hat Developer Hub offers Role-based Access Control (RBAC) functionality. RBAC can then be applied to the Ansible plug-ins content."), add the execution environment builder permissions to your existing role. If you have not yet set up RBAC, complete that guide first.
+If you have already configured base RBAC roles per [Configure role-based access control for Ansible automation portal](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-configure_portal_rbac "Configure RBAC permissions in Ansible automation portal to control which users can view and execute templates, and which sidebar items are visible to non-admin users."), add the execution environment builder permissions to your existing role. If you have not yet set up RBAC, complete that guide first.
 
 These permissions determine whether a user can see the execution environment builder features at all. They do not replace the base automation portal permissions configured during initial RBAC setup.
 
@@ -47,22 +47,12 @@ The following permissions control visibility of execution environment builder fe
 | `ansible.collections.view`            | **Collections** menu — collection catalog for EE definitions     | Disabled |
 | `ansible.git-repositories.view`       | **Git Repositories** menu — saving and syncing EE definitions    | Disabled |
 
-
 Each permission can be assigned individually for granular control.
 
 ## Base automation portal permissions
 
-Note:
-
-The following permissions control base automation portal sidebar items and are not specific to execution environment builder. They are configured in [Configure role-based access control for Ansible automation portal](/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_configure#rhdh-configure-rbac "Red Hat Developer Hub offers Role-based Access Control (RBAC) functionality. RBAC can then be applied to the Ansible plug-ins content.").
-
-| Permission               | Controls                                 | Default  |
-| ------------------------ | ---------------------------------------- | -------- |
-| `ansible.templates.view` | **Templates** menu — template management | Disabled |
-| `ansible.history.view`   | **History** menu — build history         | Disabled |
+Base automation portal navigation permissions (`ansible.templates.view` and `ansible.history.view`) are not specific to execution environment builder. For details, see [Configure role-based access control for Ansible automation portal](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-configure_portal_rbac "Configure RBAC permissions in Ansible automation portal to control which users can view and execute templates, and which sidebar items are visible to non-admin users.").
 
 ## Administrator-only actions
-
-Note:
 
 Importing and deleting EE definitions and templates are restricted actions. Only users with the AAP Administrator role or users who have been explicitly granted the Backstage catalog delete permission can perform these actions.

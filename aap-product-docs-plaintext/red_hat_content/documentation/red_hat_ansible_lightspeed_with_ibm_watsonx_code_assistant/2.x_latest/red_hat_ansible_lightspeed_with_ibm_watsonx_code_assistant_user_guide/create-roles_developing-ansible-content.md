@@ -8,7 +8,6 @@ You can use the natural language interface in the Ansible VS Code extension to c
 
 - You meet **one** of the following requirements:
 
-
 * Your organization has a trial or paid subscription to both the Red Hat Ansible Automation Platform and IBM watsonx Code Assistant.
 * Your organization has a trial or paid subscription to the Red Hat Ansible Automation Platform, and you have a Red Hat Ansible Lightspeed trial account.
 
@@ -24,9 +23,7 @@ You can use the natural language interface in the Ansible VS Code extension to c
 
 3. Use one of the following methods to create a role:
 
-
 - **From the Ansible panel**:
-
 
 1. From the navigation menu, click the **Ansible** icon.
 2. Click **Generate a role**.
@@ -40,7 +37,6 @@ The **Create a role with Ansible Lightspeed** page is displayed on the right pan
 4. From the **Select the collection to create role in** list, choose the collection where you want to create the role. You must have a collection inside your workspace to create a role.
 
 If you do not have a collection, you must create it by using one of the following methods:
-
 
 - By using the following command:
 
@@ -57,7 +53,6 @@ For more information, see the topic [About content collections](https://docs.red
 After a few seconds, the recommended steps for your role intent are displayed in the **Review the suggested steps for your role and modify as needed** field.
 
 6. Perform the following tasks:
-
 
 1. Review and optionally change the role name.
 

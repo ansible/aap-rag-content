@@ -8,17 +8,14 @@ The following scenarios are possible:
 
 To resolve this error, ensure that:
 
-
 * Your organization administrator has configured Red Hat Ansible Lightspeed for your organization.
 
 * You meet **one** of the following requirements:
-
 
 + Your organization has a trial or paid subscription to both the Red Hat Ansible Automation Platform and IBM watsonx Code Assistant.
 + Your organization has a trial or paid subscription to the Red Hat Ansible Automation Platform, and you have a Red Hat Ansible Lightspeed trial account.
 
 - You have not configured the required Ansible VS code extension settings.
-
 
 * To resolve this error, ensure that you have enabled the **Lightspeed:Enabled** and Lightspeed → Suggestions:Enabled settings. For more information, see [Configure the Ansible VS Code extension](#configure-vscode-extension_developing-ansible-content "5.2.3.&nbsp;Configuring the Ansible VS Code extension").
 

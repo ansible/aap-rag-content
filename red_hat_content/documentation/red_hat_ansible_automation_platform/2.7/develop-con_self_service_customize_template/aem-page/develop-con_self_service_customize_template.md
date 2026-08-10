@@ -1,7 +1,7 @@
 +++
 title = "Add and launch custom self-service templates - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_self_service_customize_template"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_self_service_login/", "Launch automation templates from Ansible automation portal"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-con_self_service_customize_template/aem-page/develop-con_self_service_customize_template.html"
 last_crumb = "Add and launch custom self-service templates"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Add and launch custom self-service templates"
 oversized = "false"
@@ -29,31 +29,97 @@ type = "aem-page"
 
 Custom self-service templates are stored as YAML files in repositories in GitHub or Gitlab. When a user launches a software template from Ansible automation portal, they must fill in a form with the values needed to run the associated job template in Ansible Automation Platform.
 
-The custom self-service template YAML file must have a `token:` section that includes a `ui:field:` key for the authentication token for Ansible Automation Platform. This generates a field for the token in the form that appears when the user launches the template in Ansible automation portal. The user enters the token: it is used to authenticate job template execution in Ansible Automation Platform.
+Custom self-service templates are YAML files stored in GitHub or GitLab repositories. Each template defines a user form and one or more `rhaap:*` action steps that execute automation in Ansible Automation Platform.
 
-The following example shows the `token:` section in a template. For security reasons, set the value of `token.ui:backstage.review.show` to `false` to ensure that the token is not visible to the user.
+In the `steps` section, reference the authentication token as `${{ secrets.aapToken }}`. Ansible automation portal automatically injects this token when a user submits the form. Do not include `token` in the `parameters.required` list.
+
+Business inputs such as software names, versions, or inventory selections belong in the `parameters` section. The `values.template` field must match the exact name of the job template in Ansible Automation Platform.
+
+The following example shows a custom template that lets users select a software package and version, then launches the corresponding job template in Ansible Automation Platform:
 
 ```
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: software-installation
+  title: Software Installation
+  description: Install software via an AAP job template from the Automation Portal
 spec:
-  ...
+  owner: group:default/team-platform
+  type: service
+
   parameters:
-    ...
+    - title: Software
+      required:
+        - SoftwareName
+        - Softwareversion
       properties:
-        token:
-          title: Token
+        SoftwareName:
           type: string
-          description: Oauth2 token
-          ui:field: AAPTokenField
-          ui:widget: hidden
-          ui:backstage:
-            review:
-              show: false
+          title: Software name
+          enum:
+            - Postgresql
+            - Nginx
+            - Grafana
+
+      dependencies:
+        SoftwareName:
+          oneOf:
+            - properties:
+                SoftwareName:
+                  const: Postgresql
+                Softwareversion:
+                  type: string
+                  title: Choose a version
+                  enum:
+                    - v13
+                    - v14
+                    - v16
+              required:
+                - Softwareversion
+
+            - properties:
+                SoftwareName:
+                  const: Nginx
+                Softwareversion:
+                  type: string
+                  title: Choose a version
+                  enum:
+                    - v2.4
+                    - v2.5
+                    - v2.6
+              required:
+                - Softwareversion
+
+            - properties:
+                SoftwareName:
+                  const: Grafana
+                Softwareversion:
+                  type: string
+                  title: Choose a version
+                  enum:
+                    - v2
+                    - v3
+                    - v4
+              required:
+                - Softwareversion
+
+  steps:
+    - id: launch-job
+      name: Launch AAP job template
+      action: rhaap:launch-job-template
+      input:
+        token: ${{ secrets.aapToken }}
+        values:
+          template: test job
+          extraVariables:
+            software_name: ${{ parameters.SoftwareName }}
+            software_version: ${{ parameters.Softwareversion }}
 ```
 
+Important:
 
-Note:
-
-Setting the `ui:widget: hidden` field hides the Red Hat Ansible Automation Platform token input in the form.
+Starting in Ansible Backstage Plugins v2.2.0, the portal no longer passes the OAuth token in template form values. Templates that use `${{ parameters.token }}` in `rhaap:*` action steps will fail with a `Could not create entity` error. Always use `${{ secrets.aapToken }}` to access the real OAuth token.
 
 ## Add a template to Ansible automation portal
 
@@ -68,7 +134,6 @@ You can add a custom self-service template to the **Templates** view of your Ans
 metadata:
   name: provision-database-custom
 ```
-
 
 - You must be logged in to Ansible automation portal as an Ansible Automation Platform platform administrator.
 

@@ -45,41 +45,41 @@
           "title": "Standard UI widgets",
           "visible": true,
           "weight": 5,
-          "urlFragment": "unique_1281456818",
+          "urlFragment": "unique_1552709555",
           "anchor": null,
-          "singlePageAnchor": "unique_1281456818",
+          "singlePageAnchor": "unique_1552709555",
           "sections": [
             {
               "title": "Textarea widget",
               "visible": true,
               "weight": 1,
-              "urlFragment": "unique_1281456818",
-              "anchor": "unique_1281456818___textarea_widget",
-              "singlePageAnchor": "unique_1281456818___textarea_widget"
+              "urlFragment": "unique_1552709555",
+              "anchor": "unique_1552709555___textarea_widget",
+              "singlePageAnchor": "unique_1552709555___textarea_widget"
             },
             {
               "title": "Select widget",
               "visible": true,
               "weight": 2,
-              "urlFragment": "unique_1281456818",
-              "anchor": "unique_1281456818___select_widget",
-              "singlePageAnchor": "unique_1281456818___select_widget"
+              "urlFragment": "unique_1552709555",
+              "anchor": "unique_1552709555___select_widget",
+              "singlePageAnchor": "unique_1552709555___select_widget"
             },
             {
               "title": "Checkboxes widgets",
               "visible": true,
               "weight": 3,
-              "urlFragment": "unique_1281456818",
-              "anchor": "unique_1281456818___checkboxes_widgets",
-              "singlePageAnchor": "unique_1281456818___checkboxes_widgets"
+              "urlFragment": "unique_1552709555",
+              "anchor": "unique_1552709555___checkboxes_widgets",
+              "singlePageAnchor": "unique_1552709555___checkboxes_widgets"
             },
             {
               "title": "Hidden widget",
               "visible": true,
               "weight": 4,
-              "urlFragment": "unique_1281456818",
-              "anchor": "unique_1281456818___hidden_widget",
-              "singlePageAnchor": "unique_1281456818___hidden_widget"
+              "urlFragment": "unique_1552709555",
+              "anchor": "unique_1552709555___hidden_widget",
+              "singlePageAnchor": "unique_1552709555___hidden_widget"
             }
           ]
         },
@@ -87,41 +87,41 @@
           "title": "Standard UI widgets",
           "visible": true,
           "weight": 6,
-          "urlFragment": "unique_1540328855",
+          "urlFragment": "unique_1360708595",
           "anchor": null,
-          "singlePageAnchor": "unique_1540328855",
+          "singlePageAnchor": "unique_1360708595",
           "sections": [
             {
               "title": "Textarea widget",
               "visible": true,
               "weight": 1,
-              "urlFragment": "unique_1540328855",
-              "anchor": "unique_1540328855___textarea_widget",
-              "singlePageAnchor": "unique_1540328855___textarea_widget"
+              "urlFragment": "unique_1360708595",
+              "anchor": "unique_1360708595___textarea_widget",
+              "singlePageAnchor": "unique_1360708595___textarea_widget"
             },
             {
               "title": "Select widget",
               "visible": true,
               "weight": 2,
-              "urlFragment": "unique_1540328855",
-              "anchor": "unique_1540328855___select_widget",
-              "singlePageAnchor": "unique_1540328855___select_widget"
+              "urlFragment": "unique_1360708595",
+              "anchor": "unique_1360708595___select_widget",
+              "singlePageAnchor": "unique_1360708595___select_widget"
             },
             {
               "title": "Checkboxes widgets",
               "visible": true,
               "weight": 3,
-              "urlFragment": "unique_1540328855",
-              "anchor": "unique_1540328855___checkboxes_widgets",
-              "singlePageAnchor": "unique_1540328855___checkboxes_widgets"
+              "urlFragment": "unique_1360708595",
+              "anchor": "unique_1360708595___checkboxes_widgets",
+              "singlePageAnchor": "unique_1360708595___checkboxes_widgets"
             },
             {
               "title": "Hidden widget",
               "visible": true,
               "weight": 4,
-              "urlFragment": "unique_1540328855",
-              "anchor": "unique_1540328855___hidden_widget",
-              "singlePageAnchor": "unique_1540328855___hidden_widget"
+              "urlFragment": "unique_1360708595",
+              "anchor": "unique_1360708595___hidden_widget",
+              "singlePageAnchor": "unique_1360708595___hidden_widget"
             }
           ]
         },
@@ -129,41 +129,41 @@
           "title": "Standard UI widgets",
           "visible": true,
           "weight": 7,
-          "urlFragment": "unique_782255872",
+          "urlFragment": "unique_2032220240",
           "anchor": null,
-          "singlePageAnchor": "unique_782255872",
+          "singlePageAnchor": "unique_2032220240",
           "sections": [
             {
               "title": "Textarea widget",
               "visible": true,
               "weight": 1,
-              "urlFragment": "unique_782255872",
-              "anchor": "unique_782255872___textarea_widget",
-              "singlePageAnchor": "unique_782255872___textarea_widget"
+              "urlFragment": "unique_2032220240",
+              "anchor": "unique_2032220240___textarea_widget",
+              "singlePageAnchor": "unique_2032220240___textarea_widget"
             },
             {
               "title": "Select widget",
               "visible": true,
               "weight": 2,
-              "urlFragment": "unique_782255872",
-              "anchor": "unique_782255872___select_widget",
-              "singlePageAnchor": "unique_782255872___select_widget"
+              "urlFragment": "unique_2032220240",
+              "anchor": "unique_2032220240___select_widget",
+              "singlePageAnchor": "unique_2032220240___select_widget"
             },
             {
               "title": "Checkboxes widgets",
               "visible": true,
               "weight": 3,
-              "urlFragment": "unique_782255872",
-              "anchor": "unique_782255872___checkboxes_widgets",
-              "singlePageAnchor": "unique_782255872___checkboxes_widgets"
+              "urlFragment": "unique_2032220240",
+              "anchor": "unique_2032220240___checkboxes_widgets",
+              "singlePageAnchor": "unique_2032220240___checkboxes_widgets"
             },
             {
               "title": "Hidden widget",
               "visible": true,
               "weight": 4,
-              "urlFragment": "unique_782255872",
-              "anchor": "unique_782255872___hidden_widget",
-              "singlePageAnchor": "unique_782255872___hidden_widget"
+              "urlFragment": "unique_2032220240",
+              "anchor": "unique_2032220240___hidden_widget",
+              "singlePageAnchor": "unique_2032220240___hidden_widget"
             }
           ]
         },
@@ -171,41 +171,41 @@
           "title": "Standard UI widgets",
           "visible": true,
           "weight": 8,
-          "urlFragment": "unique_984734634",
+          "urlFragment": "unique_158633861",
           "anchor": null,
-          "singlePageAnchor": "unique_984734634",
+          "singlePageAnchor": "unique_158633861",
           "sections": [
             {
               "title": "Textarea widget",
               "visible": true,
               "weight": 1,
-              "urlFragment": "unique_984734634",
-              "anchor": "unique_984734634___textarea_widget",
-              "singlePageAnchor": "unique_984734634___textarea_widget"
+              "urlFragment": "unique_158633861",
+              "anchor": "unique_158633861___textarea_widget",
+              "singlePageAnchor": "unique_158633861___textarea_widget"
             },
             {
               "title": "Select widget",
               "visible": true,
               "weight": 2,
-              "urlFragment": "unique_984734634",
-              "anchor": "unique_984734634___select_widget",
-              "singlePageAnchor": "unique_984734634___select_widget"
+              "urlFragment": "unique_158633861",
+              "anchor": "unique_158633861___select_widget",
+              "singlePageAnchor": "unique_158633861___select_widget"
             },
             {
               "title": "Checkboxes widgets",
               "visible": true,
               "weight": 3,
-              "urlFragment": "unique_984734634",
-              "anchor": "unique_984734634___checkboxes_widgets",
-              "singlePageAnchor": "unique_984734634___checkboxes_widgets"
+              "urlFragment": "unique_158633861",
+              "anchor": "unique_158633861___checkboxes_widgets",
+              "singlePageAnchor": "unique_158633861___checkboxes_widgets"
             },
             {
               "title": "Hidden widget",
               "visible": true,
               "weight": 4,
-              "urlFragment": "unique_984734634",
-              "anchor": "unique_984734634___hidden_widget",
-              "singlePageAnchor": "unique_984734634___hidden_widget"
+              "urlFragment": "unique_158633861",
+              "anchor": "unique_158633861___hidden_widget",
+              "singlePageAnchor": "unique_158633861___hidden_widget"
             }
           ]
         }

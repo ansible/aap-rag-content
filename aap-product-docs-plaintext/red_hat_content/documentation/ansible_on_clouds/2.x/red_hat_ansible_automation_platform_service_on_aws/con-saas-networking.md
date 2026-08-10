@@ -14,7 +14,7 @@ The following is an example of an execution node in a private address space with
 
 You can also configure the automation mesh with outbound connectivity from the control plane to your execution plane, allowing you to specify the ports used by the automation mesh.
 
-You can use the [Automation mesh for managed cloud or operator environments](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/automation_mesh_for_managed_cloud_or_operator_environments/index) documentation for instructions.
+You can use the [Automation mesh for managed cloud or operator environments](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/automation_mesh_for_managed_cloud_or_operator_environments/index) documentation for instructions.
 
 #### 5.3.2.2. PrivateLink configuration types
 

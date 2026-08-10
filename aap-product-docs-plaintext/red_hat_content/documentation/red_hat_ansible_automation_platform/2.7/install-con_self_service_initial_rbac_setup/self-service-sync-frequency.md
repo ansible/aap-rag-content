@@ -22,7 +22,6 @@ frequency: {minutes: 60}
 timeout: {seconds: 30}
 ```
 
-
 Note:
 
 Increasing the synchronization frequency generates extra traffic.

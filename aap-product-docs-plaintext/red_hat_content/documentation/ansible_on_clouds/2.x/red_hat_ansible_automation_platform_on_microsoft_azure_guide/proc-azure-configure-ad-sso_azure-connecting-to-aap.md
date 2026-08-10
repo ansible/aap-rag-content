@@ -6,7 +6,7 @@ Set up your Microsoft Entra ID SSO configuration.
 
 **Procedure**
 
-- For help with setting up and configuring your enterprise authentication, see the *Chapter 3. Configuring Microsoft Entra ID authentication* section of the [Access management and authentication](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/index) guide.
+- For help with setting up and configuring your enterprise authentication, see the *Chapter 3. Configuring Microsoft Entra ID authentication* section of the [Access management and authentication](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/access_management_and_authentication/index) guide.
 
 #### 5.4.2.1. Creating a registered application in Microsoft Entra ID
 
@@ -27,7 +27,6 @@ To create a Microsoft Entra ID SSO configuration you must first register for Mic
 6. In the **App registrations** page, click **+ New registration**.
 
 7. Configure the new registration as follows:
-
 
 - In the **Name** field, enter the same name that you used for the deployed application.
 - Select the default value for **Supported account types**.
@@ -56,12 +55,10 @@ You need this value for the *Microsoft Entra ID OAuth2 Key* in the Ansible Autom
 
 4. Provide a description for the new secret.
 
-
 - It is not possible to automatically renew a certificate or identify when it is about to expire.
 - It is useful to include the date in the description, for example: *Ansible Automation Platform Client Secret <Today’s Date in YYYY-MM-DD format>*.
 
 5. Provide an expiration date for the new secret.
-
 
 1. The maximum lifetime for the certificate is 2 years. Unless you have specific security needs that prevent the creation of a long term certificate, select an expiration date of **24 months**.
 
@@ -90,6 +87,7 @@ az account set --subscription <your_subscription_id>
 ```
 az ad sp create-for-rbac --name ansible --role Contributor
 ```
+
 The output displays the *appID* and *tenant* keys for the service principal:
 
 ```
@@ -115,6 +113,7 @@ To view records of updated or deleted service principles, run the following Azur
 ```
 az ad sp list -o table | grep ansible
 ```
+
 This command does not display the secrets for your service principals. Delete the service principal and create a new one if the secret is lost.
 
 When you create a new service principal to replace an expired or deleted one, you must update the credential that uses the service principal that you are replacing. If the credential is not updated, automations that use that credential will fail.

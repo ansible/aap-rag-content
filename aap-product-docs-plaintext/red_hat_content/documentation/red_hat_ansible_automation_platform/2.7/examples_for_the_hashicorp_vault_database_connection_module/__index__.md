@@ -26,6 +26,7 @@ allowed_roles:
 register: db_connection_result
 
 ```
+
 After (`hashicorp.vault`):
 
 ```
@@ -43,6 +44,7 @@ username: "admin_user"
 password: "secure_password"
 
 ```
+
 **Example 2: Update a database connection with MySQL**
 
 Before (`community.hashi_vault`):
@@ -65,6 +67,7 @@ allowed_roles:
 register: mysql_connection_result
 
 ```
+
 After (`hashicorp.vault`):
 
 ```
@@ -83,6 +86,7 @@ username: "vaultuser"
 password: "secretpassword"
 
 ```
+
 **Example 3: Reset a database connection**
 
 Before (`community.hashi_vault`):
@@ -97,6 +101,7 @@ password: '{{ passwd }}'
 connection_name: mysql-sample-connection
 register: result
 ```
+
 After (`hashicorp.vault`):
 
 ```
@@ -106,6 +111,7 @@ name: mysql-sample-connection
 state: reset
 
 ```
+
 **Example 4: Delete a database connection**
 
 Before (`community.hashi_vault`):
@@ -124,6 +130,7 @@ register: result
 ansible.builtin.debug:
 msg: "{{ result }}"
 ```
+
 After (`hashicorp.vault`):
 
 ```

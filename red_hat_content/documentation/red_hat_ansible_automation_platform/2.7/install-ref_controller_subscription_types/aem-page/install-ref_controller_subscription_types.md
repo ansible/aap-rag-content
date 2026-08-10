@@ -1,7 +1,7 @@
 +++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_controller_subscription_types"
 template = "docs/aem-title.html"
 title = "Subscription Types - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_controller_subscription_types"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-ref_controller_subscription_types/aem-page/install-ref_controller_subscription_types.html"
 last_crumb = "Subscription Types"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Subscription Types"
 oversized = "false"
@@ -41,7 +41,6 @@ Red Hat Ansible Automation Platform is provided at various levels of support and
   * Maintenance and upgrades included
   * Review the SLA at [Product Support Terms of Service](https://access.redhat.com/support/offerings/production/sla)
   * Review the [Red Hat Support Severity Level Definitions](https://access.redhat.com/support/policy/severity)
-
 
 All subscription levels include regular updates and releases of automation controller, Ansible, and any other components of the Ansible Automation Platform.
 

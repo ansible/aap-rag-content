@@ -1,6 +1,6 @@
-# Prepare the managed nodes
+# Create the installation user
 
-Managed nodes, or hosts, are the devices managed by Ansible Automation Platform. To ensure a secure containerized setup, create a dedicated user on each node for Ansible Automation Platform to use when connecting and running tasks.
+To ensure a secure containerized setup, create a dedicated user on each Red Hat Enterprise Linux host for the containerized installation program to use when connecting and running tasks.
 
 ## Procedure
 

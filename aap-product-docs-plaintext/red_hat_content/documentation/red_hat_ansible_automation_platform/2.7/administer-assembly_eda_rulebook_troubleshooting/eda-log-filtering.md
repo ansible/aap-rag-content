@@ -11,7 +11,6 @@ Event-Driven Ansible includes tracking identifiers in all log output to signific
 | <br>Log Tracking ID        | <br> `tid`   | <br>Tracks the **activation lifecycle** from creation through completion, persisting across restarts and multiple log files.                                                         | <br>Included in all activation-related log entries. It can be obtained from the activation **History** tab in the UI. |
 | <br>Activation Instance ID | <br> `aiid`  | <br>Identifies the logs specific to a single execution instance of a rulebook activation, allowing you to view `ansible-rulebook` output for that run.                               | <br>Included in activation logs.                                                                                      |
 
-
 Note:
 
 Not all processes originate from a user or external client. When an Event-Driven Ansible orchestrator internally triggers a process (for example, a monitor request), the `rid` UUID is generated internally to track that process lifecycle and will not be present in the platform gateway logs.

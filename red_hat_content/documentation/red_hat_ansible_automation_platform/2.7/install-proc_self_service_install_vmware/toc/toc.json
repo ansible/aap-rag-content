@@ -18,12 +18,20 @@
           "singlePageAnchor": "self-service-install-vmware__prerequisites"
         },
         {
-          "title": "Install using the vSphere web client",
+          "title": "Installing the appliance",
           "visible": true,
           "weight": 2,
-          "urlFragment": "self-service-install-vmware__install-using-vsphere-web-client",
+          "urlFragment": "self-service-install-vmware__install-on-vsphere",
           "anchor": null,
-          "singlePageAnchor": "self-service-install-vmware__install-using-vsphere-web-client"
+          "singlePageAnchor": "self-service-install-vmware__install-on-vsphere"
+        },
+        {
+          "title": "Using VMware guestinfo properties",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "self-service-install-vmware__using-vmware-guestinfo-properties",
+          "anchor": null,
+          "singlePageAnchor": "self-service-install-vmware__using-vmware-guestinfo-properties"
         }
       ]
     }

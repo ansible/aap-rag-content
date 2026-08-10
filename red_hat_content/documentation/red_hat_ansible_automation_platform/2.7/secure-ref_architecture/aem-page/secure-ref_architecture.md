@@ -1,7 +1,7 @@
 +++
 title = "Plan your topology and networking configuration - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_architecture"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_architecture"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_hardening_aap/", "Harden the platform security posture"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-ref_architecture/aem-page/secure-ref_architecture.html"
 last_crumb = "Plan your topology and networking configuration"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Plan your topology and networking configuration"
 oversized = "false"
@@ -34,8 +34,7 @@ It is possible to install Ansible Automation Platform on different infrastructur
 The following diagram is a tested container enterprise architecture:
 
 *Figure 1. Reference architecture overview*
-
-![Infrastructure reference architecture that Red Hat has tested that customers can use when self-managing Ansible Automation Platform](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/cont-b-env-a.png)
+![Infrastructure reference architecture that Red Hat has tested that customers can use when self-managing Ansible Automation Platform](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/cont-b-env-a-2_7.png)
 
 When planning firewall or cloud network security group configurations related to Ansible Automation Platform, see the Network Ports section of your chosen topology in [Installation and deployment models](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/plan-ref_installation_deployment_models) to understand what network ports need to be opened on a firewall or security group.
 

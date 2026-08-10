@@ -27,16 +27,18 @@ oc login <openshift_url>
 - Run `must-gather` across the entire cluster:
 
 ```
-oc adm must-gather --image=registry.redhat.io/ansible-automation-platform-26/aap-must-gather-rhel9 --dest-dir <dest_dir>
+oc adm must-gather --image=registry.redhat.io/ansible-automation-platform-27/aap-must-gather-rhel9 --dest-dir <dest_dir>
 ```
+
 * `--image` specifies the image that gathers data
 * `--dest-dir` specifies the directory for the output
 
 - Run `must-gather` for a specific namespace in the cluster:
 
 ```
-oc adm must-gather --image=registry.redhat.io/ansible-automation-platform-26/aap-must-gather-rhel9 --dest-dir <dest_dir> -- /usr/bin/ns-gather <namespace>
+oc adm must-gather --image=registry.redhat.io/ansible-automation-platform-27/aap-must-gather-rhel9 --dest-dir <dest_dir> -- /usr/bin/ns-gather <namespace>
 ```
+
 * `-- /usr/bin/ns-gather` limits the `must-gather` data collection to a specified namespace
 
 3.  To attach the `must-gather` archive to your support case, create a compressed file from the `must-gather` directory created before and attach it to your support case.   - For example, on a computer that uses a Linux operating system, run the following command, replacing `<must-gather-local.5421342344627712289/>` with the `must-gather` directory name:

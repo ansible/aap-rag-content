@@ -15,7 +15,6 @@ Run the `setup.sh` script
 $ sudo ./setup.sh
 ```
 
-
 Note:
 
 If you are running the setup as a non-root user with `sudo` privileges, you can use the following command:

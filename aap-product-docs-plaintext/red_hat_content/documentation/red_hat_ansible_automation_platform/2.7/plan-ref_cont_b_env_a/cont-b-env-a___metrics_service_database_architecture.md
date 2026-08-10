@@ -19,12 +19,12 @@ TEMPLATE=template0;
 CREATE USER metrics_service WITH PASSWORD '<secure_password>';
 GRANT ALL PRIVILEGES ON DATABASE metrics_service TO metrics_service;
 ```
+
 Storage requirements:
 
 - Minimum: 20 GB
 - Recommended: 40 GB
 - High-volume (>20,000 jobs/day): 60-80 GB
-
 
 **Database 2: awx (read-only access)**
 
@@ -39,12 +39,12 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO ms_awx_readonly;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public
 GRANT SELECT ON TABLES TO ms_awx_readonly;
 ```
+
 Security model:
 
 - `ms_awx_readonly` user has SELECT-only privileges
 - Prevents metrics service from modifying automation controller operations
 - Read-only access ensures separation of concerns
-
 
 **External database storage allocation**
 
@@ -60,7 +60,6 @@ Update your external PostgreSQL database storage to accommodate metrics service:
 | `pulp`            | Automation hub        | 60 GB              |
 | `eda`             | Event-Driven Ansible  | 20 GB              |
 | Total             | All components        | 220 GB             |
-
 
 Note:
 

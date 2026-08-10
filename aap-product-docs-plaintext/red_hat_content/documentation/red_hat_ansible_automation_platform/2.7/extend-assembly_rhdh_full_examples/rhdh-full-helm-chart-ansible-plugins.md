@@ -57,9 +57,16 @@ extraContainers:
 - adt
 - server
 image: >-
-registry.redhat.io/ansible-automation-platform-2.7/ansible-dev-tools-rhel9:latest
+registry.redhat.io/ansible-automation-platform-27/ansible-dev-tools-rhel9:latest
 imagePullPolicy: IfNotPresent
 name: ansible-devtools-server
 ports:
 - containerPort: 8000
+resources:
+requests:
+cpu: 1
+memory: 1Gi
+limits:
+cpu: 2500m
+memory: 2.5Gi
 ```

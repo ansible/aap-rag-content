@@ -1,0 +1,31 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Disable the automation intelligent assistant on an operator-based deployment",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Before you begin",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-6783ea1e-5dcd-48fc-8a0c-ada46bc03949__prereq_1",
+          "anchor": null,
+          "singlePageAnchor": "GUID-6783ea1e-5dcd-48fc-8a0c-ada46bc03949__prereq_1"
+        },
+        {
+          "title": "What to do next",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "GUID-6783ea1e-5dcd-48fc-8a0c-ada46bc03949__postreq_1",
+          "anchor": null,
+          "singlePageAnchor": "GUID-6783ea1e-5dcd-48fc-8a0c-ada46bc03949__postreq_1"
+        }
+      ]
+    }
+  ]
+}

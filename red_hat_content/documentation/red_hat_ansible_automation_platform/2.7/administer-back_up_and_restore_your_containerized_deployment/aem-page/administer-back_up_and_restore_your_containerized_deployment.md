@@ -1,7 +1,7 @@
 +++
-title = "Back up and restore your containerized deployment - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-back_up_and_restore_your_containerized_deployment"
 template = "docs/aem-title.html"
+title = "Back up and restore your containerized deployment - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-back_up_and_restore_your_containerized_deployment/", "Back up and restore your containerized deployment"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-back_up_and_restore_your_containerized_deployment/aem-page/administer-back_up_and_restore_your_containerized_deployment.html"
 last_crumb = "Back up and restore your containerized deployment"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Back up and restore your containerized deployment"
 oversized = "false"
@@ -93,6 +93,7 @@ use_db_compression=true
 ```
 $ ansible-playbook -i <path_to_inventory> ansible.containerized_installer.backup
 ```
+
     The backup process creates archives of the following data:
 
   - PostgreSQL databases
@@ -107,36 +108,62 @@ To customize the backup process, you can use the following variables in your inv
 
 -      Exclude paths that contain duplicated data, such as snapshot subdirectories, by using the `hub_data_path_exclude` variable.
 
-     For example, to exclude a `.snapshots` subdirectory from the backup, add the following to your inventory file:
-
-
+     For example, to exclude a `.snapshot` subdirectory from the backup, add the following to your inventory file:
 
 ```
-hub_data_path_exclude=["*/.snapshots", "*/.snapshots/*"]
+hub_data_path_exclude=["*/.snapshot", "*/.snapshot/*"]
 ```
+
      Alternatively, you can pass this variable at runtime by using the `-e` flag:
 
-
-
 ```
-$ ansible-playbook -i inventory ansible.containerized_installer.backup -e hub_data_path_exclude="['*/.snapshots', '*/.snapshots/*']"
+$ ansible-playbook -i inventory ansible.containerized_installer.backup -e hub_data_path_exclude="['*/.snapshot', '*/.snapshot/*']"
 ```
+
      You can also define the exclusion patterns in a YAML extra variables file and pass it at runtime:
 
      **exclude_vars.yml**
 
-
-
 ```
 hub_data_path_exclude:
-    - "*/.snapshots/*"
-    - "*/.snapshots"
+    - "*/.snapshot/*"
+    - "*/.snapshot"
 ```
-
 
 ```
 $ ansible-playbook -i inventory ansible.containerized_installer.backup -e @exclude_vars.yml
 ```
+
+## Skip database backup when using an external database
+
+If your Ansible Automation Platform deployment uses an external database, you can skip database backup operations and manage database backups separately using your database provider's tools or a third-party backup solution.
+
+### About this task
+
+When `postgresql_skip_data` is set to `true`, the backup playbook archives configuration files and data files and skips database backup operations.
+
+You must skip database backup if your external database is running PostgreSQL 16 or later. Ansible Automation Platform backup tooling uses PostgreSQL 15 client tools, which cannot perform `pg_dump` operations against a PostgreSQL 16 or later database. If you run the backup playbook without setting `postgresql_skip_data=true` in this scenario, the playbook fails.
+
+### Procedure
+
+1.  Add the `postgresql_skip_data` variable to your inventory file:
+  
+
+```
+postgresql_skip_data=true
+```
+
+2.  Run the `backup` playbook:
+  
+
+```
+$ ansible-playbook -i <path_to_inventory>
+  ansible.containerized_installer.backup
+```
+
+  The backup process archives configuration files and data files and skips database backup operations.
+
+3.  Back up your PostgreSQL database using your external database provider's tools or a third-party backup solution.
 
 ## Restore containerized Ansible Automation Platform
 
@@ -167,6 +194,7 @@ Restore functionality only works with the PostgreSQL versions supported by your 
 ```
 $ ansible-playbook -i <path_to_inventory> ansible.containerized_installer.restore
 ```
+
          This restores the important data deployed by the containerized installer such as:
 
     * PostgreSQL databases
@@ -180,12 +208,9 @@ $ ansible-playbook -i <path_to_inventory> ansible.containerized_installer.restor
     Restoring to a different environment with different hostnames is not recommended and is intended only as a workaround.
     1. For each component, identify the backup file from the source environment that contains the PostgreSQL dump file. For example:
 
-
-
 ```
 $ cd ansible-automation-platform-containerized-setup-<version_number>/backups
 ```
-
 
 ```
 $ tar tvf gateway_env1-gateway-node1.tar.gz | grep db
@@ -197,12 +222,9 @@ $ tar tvf gateway_env1-gateway-node1.tar.gz | grep db
 
     3. Rename the backup files on the target environment to reflect the new node names. For example:
 
-
-
 ```
 $ cd ansible-automation-platform-containerized-setup-<version_number>/backups
 ```
-
 
 ```
 $ mv gateway_env1-gateway-node1.tar.gz gateway_env2-gateway-node1.tar.gz
@@ -210,12 +232,9 @@ $ mv gateway_env1-gateway-node1.tar.gz gateway_env2-gateway-node1.tar.gz
 
     4. For enterprise topologies, ensure that the component backup file containing the `component.db` file is listed first in its group within the inventory file. For example:
 
-
-
 ```
 $ cd ansible-automation-platform-containerized-setup-<version_number>
 ```
-
 
 ```
 $ ls backups/gateway*
@@ -224,18 +243,15 @@ $ ls backups/gateway*
 gateway_env2-gateway-node2.tar.gz
 ```
 
-
 ```
 $ tar tvf backups/gateway_env2-gateway-node1.tar.gz | grep db
 
             -rw-r--r-- ansible/ansible 416687 2025-06-30 11:05 aap/backups/gateway.db
 ```
 
-
 ```
 $ tar tvf backups/gateway_env2-gateway-node2.tar.gz | grep db
 ```
-
 
 ```
 $ vi inventory
@@ -244,6 +260,38 @@ $ vi inventory
 env2-gateway-node1
 env2-gateway-node2
 ```
+
+## Skip database restore when using an external database
+
+If your Ansible Automation Platform deployment uses an external database, and you are restoring the database separately through your database provider or a third-party tool, you can skip database restore operations by using the `postgresql_skip_data` variable.
+
+### About this task
+
+You must set `postgresql_skip_data` to `true` if no database dump file exists in the backup archive, for example if you used `postgresql_skip_data` during backup. If the restore playbook cannot find a database dump file and `postgresql_skip_data` is not set, the playbook fails.
+
+Important:
+
+Restore your external PostgreSQL database before running the restore playbook. The restore playbook starts all Ansible Automation Platform services immediately after restoring configuration files. If the database is not yet restored when services start, the services cannot connect to a valid database.
+
+### Procedure
+
+1.  Restore your PostgreSQL database using your external database provider's tools or a third-party restore solution.
+2.  Add the `postgresql_skip_data` variable to your inventory file:
+  
+
+```
+postgresql_skip_data=true
+```
+
+3.  Run the `restore` playbook:
+  
+
+```
+$ ansible-playbook -i <path_to_inventory>
+  ansible.containerized_installer.restore
+```
+
+    The restore playbook restores configuration files and data files and skips database restore operations.
 
 ## Back up and restore metrics service
 
@@ -266,6 +314,7 @@ For **Ansible Automation Platform 2.7** (base metrics service without dashboard)
 cd /path/to/aap-containerized-installer
 ansible-playbook -i inventory backup.yml
 ```
+
     The backup.yml playbook automatically backs up:
 
   - `metrics_service` database
@@ -298,6 +347,7 @@ pg_dump -h localhost -U metrics_service -F c -b -v \
   -f /backup/metrics_service_$(date +%Y%m%d_%H%M%S).dump \
   metrics_service
 ```
+
     **Step 2: Back up volumes**
 
 ```
@@ -316,6 +366,7 @@ tar -czf /backup/automationmetrics_data_$(date +%Y%m%d_%H%M%S).tar.gz \
 cd /path/to/aap-containerized-installer
 ansible-playbook -i inventory restore.yml
 ```
+
     The restore.yml playbook automatically performs the restore sequence:
 
   1. Unarchives backup data
@@ -332,6 +383,7 @@ ansible-playbook -i inventory restore.yml
 ```
 systemctl --user stop automation-metrics-web.service automation-metrics-tasks.service automation-metrics-scheduler.service
 ```
+
     **Step 2: Restore database**
 
 ```
@@ -340,6 +392,7 @@ psql -h localhost -U postgres -c "CREATE DATABASE metrics_service;"
 pg_restore -h localhost -U metrics_service -d metrics_service -v \
   /backup/metrics_service_TIMESTAMP.dump
 ```
+
   Note:
       The restore sequence (from installer tasks/restore.yml): unarchive data → restore secrets (via common/restore_secrets.yml) → import TLS certificates (via tasks/tls_postgresql.yml) → restore database → restart services.
 

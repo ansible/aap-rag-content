@@ -8,27 +8,32 @@ Ensure that any special characters in the specified value are URL-encoded. For e
 ```
 ?field=value%20xyz
 ```
+
 Fields can also span relations, only for fields and relationships defined in the database:
 
 ```
 ?other__field=value
 ```
+
 To exclude results matching certain criteria, prefix the field parameter with `not__`:
 
 ```
 ?not__field=value
 ```
+
 By default, all query string filters are AND’ed together, so only the results matching all filters are returned. To combine results matching any one of multiple criteria, prefix each query string parameter with `or__`:
 
 ```
 ?or__field=value&or__field=othervalue
 ?or__not__field=value&or__field=othervalue
 ```
+
 The default AND filtering applies all filters simultaneously to each related object being filtered across database relationships. The chain filter instead applies filters separately for each related object. To use this, prefix the query string parameter with `chain__`:
 
 ```
 ?chain__related__field=value&chain__related__field2=othervalue
 ?chain__not__related__field=value&chain__related__field2=othervalue
 ```
+
 If you write the first query as `?relatedfield=value&relatedfield2=othervalue`, it returns only the primary objects where the same related object satisfied both conditions. As written by using the chain filter, it would return the intersection of primary objects matching each condition.
 

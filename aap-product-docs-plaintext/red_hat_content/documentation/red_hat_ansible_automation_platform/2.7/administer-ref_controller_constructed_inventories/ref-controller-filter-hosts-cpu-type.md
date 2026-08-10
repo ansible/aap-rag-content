@@ -16,7 +16,6 @@ intel_hosts: "GenuineIntel" in ansible_processor
 limit: intel_hosts
 ```
 
-
 Note:
 
 Hosts in constructed inventories are not counted against your license allotment because they are referencing the original inventory host. Additionally, hosts that are disabled in the original inventories are not included in the constructed inventory.

@@ -7,7 +7,6 @@ Upload internally-developed collections in `tar.gz` file format to your private 
 
 - You have a namespace to which you can upload the collection.
 
-
 Important:
 
 Attempting to upload very large collections will result in an error.

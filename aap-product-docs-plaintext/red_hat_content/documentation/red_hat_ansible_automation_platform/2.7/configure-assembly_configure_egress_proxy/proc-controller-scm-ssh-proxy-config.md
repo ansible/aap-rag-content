@@ -23,12 +23,14 @@ $ cd builder/newee
 
 3.  Create an `execution-environment.yml` file with the following content:
 
+Note:
+Replace `<platform-version>` with the namespace for your version of Ansible Automation Platform. Replace `<rhel-version>` with your Red Hat Enterprise Linux version
 
 ```
 version: 1
 
 build_arg_defaults:
-EE_BASE_IMAGE: 'registry.redhat.io/ansible-automation-platform-24/ee-supported-rhel8:latest'
+EE_BASE_IMAGE: 'registry.redhat.io/<platform-version>/ee-supported-rhel<rhel-version>:latest'
 
 additional_build_steps:
 prepend:

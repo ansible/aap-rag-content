@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/integrate-con_terraform_intro/aem-page/integrate-con_terraform_intro.html"
 last_crumb = "About the Terraform integration"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "About the Terraform integration"
 oversized = "false"
@@ -36,7 +36,6 @@ This integration directly addresses common challenges such as managing disparate
 - **Optimized costs:** Reduce cloud waste, minimize manual processes, and combat tool sprawl. This integration can lead to a significant reduction in infrastructure costs and a high return on investment.
 - **Reduced risk:** Lower the risk of breaches, enforce policies, and significantly decrease unplanned downtime. The ability to review Terraform plan output before applying it in a workflow, with approval steps, enhances security and compliance.
 - **Faster time to value:** Boost developer productivity and deploy new compute resources more rapidly, leading to a faster time to market. This is achieved through unified lifecycle management and automation for Day 0 (provisioning), Day 1 (configuration), and Day 2 (ongoing management) operations.
-
 
 By enabling direct calls between Ansible Automation Platform and Terraform Enterprise or HCP Terraform, organizations can unlock time to value by creating combined workflows, reduce risk through enhanced product integrations, and enhance Infrastructure-as-Code with Ansible Automation Platform content and practices. This allows for unified lifecycle management, enabling tasks from initial provisioning and configuration to ongoing health checks, incident response, patching, and infrastructure optimization.
 

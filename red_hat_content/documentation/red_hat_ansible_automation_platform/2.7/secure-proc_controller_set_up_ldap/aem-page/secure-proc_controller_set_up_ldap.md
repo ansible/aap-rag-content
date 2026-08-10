@@ -1,7 +1,7 @@
 +++
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_set_up_ldap"
 title = "Configure LDAP authentication - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_set_up_ldap"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_configure_authentication/", "Configure central authentication for Ansible Automation Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-proc_controller_set_up_ldap/aem-page/secure-proc_controller_set_up_ldap.html"
 last_crumb = "Configure LDAP authentication"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure LDAP authentication"
 oversized = "false"
@@ -77,6 +77,7 @@ cn=josie,cn=users,dc=website,dc=com
 ```
 uid=%(user)s,cn=users,cn=accounts,dc=example,dc=com
 ```
+
     where: `uid` is the user identifier, `cn` is the common name and `dc` is the domain component.
 
   Note:
@@ -93,6 +94,7 @@ uid=%(user)s,cn=users,cn=accounts,dc=example,dc=com
 OPT_REFERRALS: 0
 OPT_NETWORK_TIMEOUT: 30
 ```
+
     See the [python-LDAP Reference](https://www.python-ldap.org/en/python-ldap-3.4.3/reference/ldap.html#options) for possible options and values that can be set.
 
 13.  Depending on the selected **LDAP Group Type**, different parameters are available in the **LDAP Group Type Parameters** field to account for this. `LDAP_GROUP_TYPE_PARAMS` is a dictionary, which is converted to `kwargs` and passed to the **LDAP Group Type** class selected. There are two common parameters used by group types: `name_attr` and `member_attr`. Where `name_attr` defaults to `cn` and `member_attr` defaults to `member`:
@@ -101,6 +103,7 @@ OPT_NETWORK_TIMEOUT: 30
 ```
 {"name_attr": "cn", "member_attr": "member"}
 ```
+
     To determine the parameters that a specific **LDAP Group Type** requires, refer to the [django_auth_ldap documentation](https://django-auth-ldap.readthedocs.io/en/latest/reference.html#django_auth_ldap.config.LDAPGroupType) on the classes `init` parameters.
 
 14.  In the **LDAP Group Search** field, specify which groups should be searched and how to search them as shown in the following example:
@@ -135,6 +138,7 @@ OPT_NETWORK_TIMEOUT: 30
 "(cn=%(user)s)"
 ]
 ```
+
     If the **LDAP User DN Template** is not set, the Ansible Automation Platform authenticates to LDAP using the **Bind DN Template** and **LDAP Bind Password**. After authentication, an LDAP search is performed to locate the user specified by this field. If the user is found, Ansible Automation Platform validates the provided password against the user found by the LDAP search. Multiple search queries are supported for users with `LDAPUnion` by entering multiple search terms as shown in the following example:
 
 ```
@@ -151,6 +155,7 @@ OPT_NETWORK_TIMEOUT: 30
      ]
 ]
 ```
+
     If non-unique users are found during multiple searches, those users will not be able to log in to Ansible Automation Platform. Based on the example provided, if a user with `uid=jdoe` was found in both the `ou=users,dc=example,dc=com` and `ou=employees,dc=subdivision,dc=com`, neither `jdoe` user would be able to log in. All other unique users that are found in either branch would still be able to log in.
 
   Note:
@@ -174,6 +179,7 @@ You can authenticate to the automation controller server by using LDAP. However,
 ```
 2025-08-26 16:40:56,141 WARNING   django_auth_ldap Caught LDAPError while authenticating: SERVER_DOWN({'result': -1, 'desc': "Can't contact LDAP server", 'ctrls': [], 'info': 'error:0A000086:SSL routines::certificate verify failed (self-signed certificate)'})
 ```
+
 To get Ansible Automation Platform to trust the certificate coming from LDAP, perform the following procedure on all platform gateway instances.
 
 ### Procedure

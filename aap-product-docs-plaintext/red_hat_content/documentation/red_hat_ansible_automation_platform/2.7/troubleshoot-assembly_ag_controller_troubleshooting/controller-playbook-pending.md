@@ -7,6 +7,5 @@ If you are attempting to run a playbook job and it stays in the `Pending` state 
 - Ensure that the `/var/ partition` has more than 1 GB of space available. Jobs do not complete with insufficient space on the `/var/` partition.
 - Run `automation-controller-service restart` on the automation controller server.
 
-
 If you continue to have issues, run `sosreport` as root on the automation controller server, then file a [support request](http://support.ansible.com/) with the result.
 

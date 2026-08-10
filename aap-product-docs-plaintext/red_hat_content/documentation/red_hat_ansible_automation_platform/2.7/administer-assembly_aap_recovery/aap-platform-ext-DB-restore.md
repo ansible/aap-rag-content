@@ -1,4 +1,4 @@
-# Restore your Ansible Automation Platform deplopyment
+# Restore your Ansible Automation Platform deployment
 ## Restore from an external database
 
 You can restore an external database on Red Hat OpenShift Container Platform using the Operator. Use the following procedure to restore from an external database.

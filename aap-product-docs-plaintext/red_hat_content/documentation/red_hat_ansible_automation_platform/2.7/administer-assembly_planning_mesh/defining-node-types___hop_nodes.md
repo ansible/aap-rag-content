@@ -9,6 +9,7 @@ The following stanza defines a single hop node and an execution node in the exec
 execution-plane-1.example.com node_type=hop
 execution-plane-2.example.com
 ```
+
 If you want to set the `node_type` at the group level, you must create separate groups for the execution nodes and the hop nodes.
 
 ```

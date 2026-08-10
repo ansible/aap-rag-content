@@ -9,6 +9,7 @@
 ```
 Analyze my web server playbook and tell me which Ansible collections are being used.
 ```
+
 The assistant then analyzes the content and identifies:
 - Collections: Which collections are required (for example,` ansible.builtin`, `community.general`).
 - Modules: Specific modules utilized within the tasks.

@@ -15,6 +15,7 @@ To ensure an execution environment pulled from the remote registry is properly s
 ```
 sudo <name of editor> /etc/containers/policy.json
 ```
+
 The file that is displayed is similar to this:
 
 ```
@@ -34,6 +35,7 @@ The file that is displayed is similar to this:
 }
 }
 ```
+
 This file shows that neither `quay.io`, or `docker.io` will perform the verification, because the type is `insecureAcceptAnything` which overrides the default type of `reject`. However, `<server-address>` will perform the verification, because the parameter `type` is set to `"signedBy"`.
 
 Note:
@@ -70,4 +72,5 @@ The only `keyType` currently supported is GPG keys.
 ```
 podman pull <server-address>/<container-name>:<tag name> --tls-verify=false
 ```
+
 This response verifies the execution environment has been signed with no errors. If the execution environment is not signed, the command fails.

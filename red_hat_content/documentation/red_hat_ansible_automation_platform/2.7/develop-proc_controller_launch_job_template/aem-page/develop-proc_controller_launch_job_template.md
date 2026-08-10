@@ -1,6 +1,6 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_controller_launch_job_template"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_controller_launch_job_template"
 title = "Launch a job template - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_controller_launch_job_template/aem-page/develop-proc_controller_launch_job_template.html"
 last_crumb = "Launch a job template"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Launch a job template"
 oversized = "false"
@@ -49,7 +49,6 @@ A job can require additional information to run. The following data can be reque
 - Passwords or passphrases that have been set to **Ask**
 - A survey, if one has been configured for the job templates
 - Extra variables, if requested by the job template
-
 
  Note:
 
@@ -104,7 +103,6 @@ Along with any extra variables set in the job template and survey, automation co
 - `awx_inventory_id`: If applicable, the ID of the inventory this job uses.
 - `awx_inventory_name`: If applicable, the name of the inventory this job uses.
 
-
 For compatibility, all variables are also given an "awx" prefix, for example, `awx_job_id`.
 
 ## Relaunch a job template
@@ -157,7 +155,6 @@ New and changed facts are logged through automation controller’s logging facil
 -  `inventory_id`
 -  `ansible_facts`
 
-
 `ansible facts` is a dictionary of all Ansible facts for `host_name` in the automation controller inventory, `inventory_id`.
 
  Note:
@@ -185,6 +182,7 @@ The following is an example playbook that uses the Ansible `clear_facts` meta ta
     - name: Clear gathered facts from all currently targeted hosts
       meta: clear_facts
 ```
+
 You can find the API endpoint for fact caching at:
 
 http://<controller server name>/api/v2/hosts/x/ansible_facts

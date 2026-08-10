@@ -1,7 +1,7 @@
 +++
 title = "Details about data collected for Automation Analytics - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-ref_controller_data_collection_details"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-ref_controller_data_collection_details"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_user_data_tracking/", "Get insights on automation across your environment with Automation Analytics"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-ref_controller_data_collection_details/aem-page/optimize-ref_controller_data_collection_details.html"
 last_crumb = "Details about data collected for Automation Analytics"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Details about data collected for Automation Analytics"
 oversized = "false"
@@ -44,7 +44,6 @@ Automation Analytics collects the following classes of data from automation cont
   * running and pending jobs
 - Job execution details (start time, finish time, launch type, and success)
 - Automation task details (success, host id, playbook/role, task name, and module used)
-
 
 You can use `awx-manage gather_analytics` (without `--ship`) to inspect the data that automation controller sends, so that you can satisfy your data collection concerns. This creates a .tar file that contains the analytics data that is sent to Red Hat.
 

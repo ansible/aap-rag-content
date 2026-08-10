@@ -1,0 +1,31 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Start a trial of Red Hat Ansible Lightspeed",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Before you begin",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-18c40519-4460-49a9-b5fb-bc899818dff1__prereq_1",
+          "anchor": null,
+          "singlePageAnchor": "GUID-18c40519-4460-49a9-b5fb-bc899818dff1__prereq_1"
+        },
+        {
+          "title": "About this task",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "GUID-18c40519-4460-49a9-b5fb-bc899818dff1__context_1",
+          "anchor": null,
+          "singlePageAnchor": "GUID-18c40519-4460-49a9-b5fb-bc899818dff1__context_1"
+        }
+      ]
+    }
+  ]
+}

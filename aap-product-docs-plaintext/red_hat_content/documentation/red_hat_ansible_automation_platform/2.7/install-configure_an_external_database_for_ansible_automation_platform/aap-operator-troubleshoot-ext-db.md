@@ -8,6 +8,7 @@ When upgrading the Ansible Automation Platform Operator you may encounter an err
 ```
 NotImplementedError: can't parse timestamptz with DateStyle 'Redwood, SHOW_TIME': '18-MAY-23 20:33:55.765755 +00:00'
 ```
+
 Errors like this occur when you have an external database with an unexpected DateStyle set. You can refer to the following steps to resolve this issue.
 
 ### Procedure
@@ -40,5 +41,6 @@ datestyle = 'iso, mdy'
 ```
 # systemctl reload postgresql
 ```
+
 Note:
 Running this command does not disrupt database operations.

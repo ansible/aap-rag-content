@@ -6,7 +6,7 @@ Configure Git content discovery and private automation hub collection discovery 
 
 - You have completed GitHub or GitLab integration setup and credentials are configured.
 - You know which GitHub organizations or GitLab groups contain your Ansible collections.
-- If using private automation hub, you know the base URL and which repositories to sync.
+- If using private automation hub, you know which repositories to sync.
 
 ## About this task
 
@@ -24,6 +24,7 @@ Two discovery providers are available:
 $ helm get values <release_name> -n <namespace> -o yaml > current-values.yaml
 $ vi current-values.yaml
 ```
+
 **OpenShift — web console:**
 
 Navigate to **Helm > Installed Helm Charts**. Select your automation portal release and click **Upgrade** to open the values editor.
@@ -74,6 +75,7 @@ schedule:
 frequency: {minutes: 120}
 timeout: {minutes: 30}
 ```
+
 Important:
 The `name` field (for example, `github-public`) is a canonical identifier used internally by automation portal. It does not need to match your organization name. The `host` field is the actual fully qualified domain name (FQDN) of your Git provider (for example, `github.com` or `github.internal.example.com`).
 
@@ -84,7 +86,7 @@ Update the following values for your environment:
 - Set `checkSSL: false` for hosts with self-signed certificates.
 - Adjust `branches`, `tags`, and `schedule` values for your environment.
 Note:
-Content discovery consumes repository provider API quota. Large organizations with frequent sync schedules may hit rate limits (HTTP 429), causing incomplete results. Increase `schedule.frequency` or reduce the number of scanned organizations to stay within your repository provider's limits.
+Content discovery consumes repository provider API quota. Large organizations with frequent sync schedules may hit rate limits (HTTP 429), causing incomplete results. Reduce the number of scanned organizations to stay within your repository provider's limits. GitHub Apps provide considerably higher rate limits than PATs for GitHub organization syncs.
 
 Note:
 The `crawlDepth` parameter controls how many directory levels deep the provider searches for `galaxy.yml` files within each repository. The default is `1`, which discovers only collections with `galaxy.yml` at the repository root. Collections discovered at deeper levels appear in the catalog but cannot be installed by `ansible-galaxy` or used in EE builds. To adjust crawl depth, add it to the org configuration:
@@ -115,6 +117,7 @@ schedule:
 frequency: {days: 1}
 timeout: {minutes: 60}
 ```
+
 Note:
 Synchronization time depends on the number of collections and metadata in your configured repositories. Large repositories can take significantly longer. To reduce sync time, configure your private automation hub to sync only the collections your teams need.
 

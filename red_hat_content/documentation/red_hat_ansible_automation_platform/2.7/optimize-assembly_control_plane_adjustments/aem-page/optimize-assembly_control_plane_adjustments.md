@@ -1,7 +1,7 @@
 +++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_control_plane_adjustments"
 title = "Adjust the control plane to tune performance - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_control_plane_adjustments"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_pod_spec_modifications/", "Performance tuning for operator environments"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-assembly_control_plane_adjustments/aem-page/optimize-assembly_control_plane_adjustments.html"
 last_crumb = "Adjust the control plane to tune performance"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Adjust the control plane to tune performance"
 oversized = "false"
@@ -55,7 +55,6 @@ See also [Jobs scheduled on the worker nodes](/documentation/en-us/red_hat_ansib
 | <br> `task_resource_requirements`  | <br>Task container resource requirements                | <br>requests: {CPU: 100m, memory: 128Mi} |
 | <br> `ee_resource_requirements`    | <br>EE control plane container resource requirements    | <br>requests: {CPU: 100m, memory: 128Mi} |
 | <br> `redis_resource_requirements` | <br>Redis control plane container resource requirements | <br>requests: {CPU:100m, memory: 128Mi}  |
-
 
 The use of `topology_spread_constraints` to maximally spread control nodes onto separate underlying Kubernetes worker nodes is recommended. A reasonable set of requests and limits would be limits whose sum is equal to the actual resources on the node. If only `limits` are set, then the request is automatically set to be equal to the limit. But because some variability of resource usage between the containers in the control pod is permitted, you can set `requests` to a lower amount, for example to 25% of the resources available on the node. An example of container customization for a cluster where the worker nodes have 4 CPUs and 16 GB of RAM could be:
 
@@ -102,4 +101,5 @@ This can lead to issues with overwhelming the underlying Kubernetes pod if the a
 SYSTEM_TASK_ABS_MEM = 3gi
 SYSTEM_TASK_ABS_CPU = 750m
 ```
+
 This acts as a soft limit within the application that enables automation controller to control how much work it attempts to run, while not risking any CPU throttling from Kubernetes itself, or being reaped if memory usage peaks above the required limit. These settings accept the same format accepted by resource requests and limits in the Kubernetes resource definition.

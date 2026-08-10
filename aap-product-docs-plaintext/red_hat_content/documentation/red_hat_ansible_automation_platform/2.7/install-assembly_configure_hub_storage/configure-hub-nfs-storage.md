@@ -11,6 +11,7 @@ NFS is a type of shared storage that is supported in containerized installations
 ```yaml
 hub_shared_data_path=<path_to_nfs_share>
 ```
+
 The value must match the format `host:dir`, for example `nfs-server.example.com:/exports/hub`.
 
 2.  (Optional) To change the mount options for your NFS share, use the `hub_shared_data_mount_opts` variable. The default value is `rw,sync,hard`.

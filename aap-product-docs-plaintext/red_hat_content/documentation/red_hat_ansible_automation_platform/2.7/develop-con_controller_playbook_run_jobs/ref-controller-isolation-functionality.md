@@ -10,12 +10,12 @@ By default, automation controller uses the system’s `tmp` directory (`/tmp` by
 ```
 AWX_ISOLATION_BASE_PATH = "/opt/tmp"
 ```
+
 If there are any additional directories that should specifically be exposed from the host to the container that playbooks run in, you can specify those in the **Paths to expose to isolated jobs** field of the **Jobs Settings** page, or in the REST API at `/api/v2/settings/jobs`:
 
 ```
 AWX_ISOLATION_SHOW_PATHS = ['/list/of/', '/paths']
 ```
-
 
 Note:
 
@@ -23,6 +23,5 @@ Note:
 - If your playbooks need to use keys or settings defined in `AWX_ISOLATION_SHOW_PATHS`, then add this file to `/var/lib/awx/.ssh`.
 
 The fields described here can be found on the **Jobs settings** page:
-
 
 ![Jobs settings options](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/job-settings-full.png)

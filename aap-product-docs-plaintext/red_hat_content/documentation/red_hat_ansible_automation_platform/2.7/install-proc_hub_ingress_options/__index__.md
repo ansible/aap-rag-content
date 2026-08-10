@@ -42,10 +42,9 @@ You can view the progress by navigating to Workloads> (and then)Pods and locatin
 
 Verify that the following operator pods provided by the Ansible Automation Platform Operator installation from automation hub are running:
 
-| Operator manager controllers                                                                                                                                                                                                | Automation controller                                                                                                | Automation hub                                                                                                                    |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Operator manager controllers                                                                                                                                                                             | Automation controller                                                                                                | Automation hub                                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | <br>The operator manager controllers for each of the 3 operators, include the following:<br>automation-controller-operator-controller-managerautomation-hub-operator-controller-managerresource-operator-controller-manager | <br>After deploying automation controller, you will see the addition of these pods:<br>controllercontroller-postgres | <br>After deploying automation hub, you will see the addition of these pods:<br>hub-apihub-contenthub-postgreshub-redishub-worker |
-
 
 Note:
 

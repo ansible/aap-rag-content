@@ -21,17 +21,17 @@
           "title": "Install and configure the Ansible VS Code extension",
           "visible": true,
           "weight": 2,
-          "urlFragment": "unique_1537923320",
+          "urlFragment": "unique_1725722105",
           "anchor": null,
-          "singlePageAnchor": "unique_1537923320",
+          "singlePageAnchor": "unique_1725722105",
           "sections": [
             {
               "title": "Connectivity requirements",
               "visible": true,
               "weight": 1,
-              "urlFragment": "unique_1537923320",
-              "anchor": "unique_1537923320___connectivity_requirements",
-              "singlePageAnchor": "unique_1537923320___connectivity_requirements"
+              "urlFragment": "unique_1725722105",
+              "anchor": "unique_1725722105___connectivity_requirements",
+              "singlePageAnchor": "unique_1725722105___connectivity_requirements"
             }
           ]
         },

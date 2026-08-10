@@ -1,0 +1,63 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Troubleshoot the migration",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Authentication failures",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "migrate-tarball-to-oci-troubleshoot__auth-failures",
+          "anchor": null,
+          "singlePageAnchor": "migrate-tarball-to-oci-troubleshoot__auth-failures"
+        },
+        {
+          "title": "Duplicate registry path in OCI URLs",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "migrate-tarball-to-oci-troubleshoot__duplicate-path",
+          "anchor": null,
+          "singlePageAnchor": "migrate-tarball-to-oci-troubleshoot__duplicate-path"
+        },
+        {
+          "title": "x509 certificate errors for private registries",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "migrate-tarball-to-oci-troubleshoot__certificate-error",
+          "anchor": null,
+          "singlePageAnchor": "migrate-tarball-to-oci-troubleshoot__certificate-error"
+        },
+        {
+          "title": "No such image error",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "migrate-tarball-to-oci-troubleshoot__no-such-image",
+          "anchor": null,
+          "singlePageAnchor": "migrate-tarball-to-oci-troubleshoot__no-such-image"
+        },
+        {
+          "title": "Integrity check errors",
+          "visible": true,
+          "weight": 5,
+          "urlFragment": "migrate-tarball-to-oci-troubleshoot__integrity-check",
+          "anchor": null,
+          "singlePageAnchor": "migrate-tarball-to-oci-troubleshoot__integrity-check"
+        },
+        {
+          "title": "Accessing init container logs",
+          "visible": true,
+          "weight": 6,
+          "urlFragment": "migrate-tarball-to-oci-troubleshoot__pod-logs-access",
+          "anchor": null,
+          "singlePageAnchor": "migrate-tarball-to-oci-troubleshoot__pod-logs-access"
+        }
+      ]
+    }
+  ]
+}

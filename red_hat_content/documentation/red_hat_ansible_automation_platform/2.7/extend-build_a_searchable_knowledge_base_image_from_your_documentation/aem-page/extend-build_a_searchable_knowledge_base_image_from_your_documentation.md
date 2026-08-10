@@ -1,6 +1,6 @@
 +++
-title = "Build a searchable knowledge base image from your documentation - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-build_a_searchable_knowledge_base_image_from_your_documentation"
+title = "Build a searchable knowledge base image from your documentation - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-build_a_searchable_knowledge_base_image_from_your_documentation/aem-page/extend-build_a_searchable_knowledge_base_image_from_your_documentation.html"
 last_crumb = "Build a searchable knowledge base image from your documentation"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Build a searchable knowledge base image from your documentation"
 oversized = "false"
@@ -107,7 +107,6 @@ Replace the values in the command above with your own paths and names. Use the t
 | `/output/rag-content-output-latest.tar` | Export filename      | The name of the compressed file (.tar) that contains your portable database.                                                                                               |
 | `rag-content-output`                    | Internal image Name  | The name assigned to the container is used if you load this data into another system later.                                                                                |
 | `latest`                                | Version tag          | A version label (for example, v1.0 or April-2026) to track your database updates.                                                                                          |
-
 
 Note:
 

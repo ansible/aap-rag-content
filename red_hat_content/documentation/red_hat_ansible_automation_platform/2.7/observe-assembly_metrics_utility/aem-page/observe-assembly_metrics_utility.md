@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/observe-assembly_metrics_utility/aem-page/observe-assembly_metrics_utility.html"
 last_crumb = "Generate consumption-based billing reports with the metrics-utility"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Generate consumption-based billing reports with the metrics-utility"
 oversized = "false"
@@ -39,7 +39,6 @@ The configuration data includes the following information:
 - Subscription information
 - The base URL
 
-
 The reporting data includes the following information:
 
 - Job name and ID
@@ -49,6 +48,5 @@ The reporting data includes the following information:
 - Project name
 - Success or failure information
 - Report date and time
-
 
 To ensure that `metrics-utility` continues to work as configured, clear your report directories of outdated reports regularly.

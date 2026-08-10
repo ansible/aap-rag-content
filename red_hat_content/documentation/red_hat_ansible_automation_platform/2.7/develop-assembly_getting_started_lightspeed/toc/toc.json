@@ -24,32 +24,6 @@
           "urlFragment": "getting-started-lightspeed_lightspeed-intro___administer_the_ansible_lightspeed_service",
           "anchor": null,
           "singlePageAnchor": "getting-started-lightspeed_lightspeed-intro___administer_the_ansible_lightspeed_service"
-        },
-        {
-          "title": "Overview",
-          "visible": true,
-          "weight": 3,
-          "urlFragment": "ref-gs-admins",
-          "anchor": null,
-          "singlePageAnchor": "ref-gs-admins",
-          "sections": [
-            {
-              "title": "Choosing and configuring your deployment",
-              "visible": true,
-              "weight": 1,
-              "urlFragment": "ref-gs-admins",
-              "anchor": "ref-gs-admins___choosing_and_configuring_your_deployment",
-              "singlePageAnchor": "ref-gs-admins___choosing_and_configuring_your_deployment"
-            },
-            {
-              "title": "Administering the Ansible Lightspeed Service",
-              "visible": true,
-              "weight": 2,
-              "urlFragment": "ref-gs-admins",
-              "anchor": "ref-gs-admins___administering_the_ansible_lightspeed_service",
-              "singlePageAnchor": "ref-gs-admins___administering_the_ansible_lightspeed_service"
-            }
-          ]
         }
       ]
     }

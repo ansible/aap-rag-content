@@ -17,7 +17,6 @@ Inventory updates use dynamically-generated YAML files which are parsed by their
 -  [Terraform State](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-inv-source-terraform "Use the following procedure to create a Terraform State inventory source.")
 -  [OpenShift Virtualization](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-inv-source-open-shift-virt "Learn how to add an OpenShift Virtualization inventory source to an existing inventory.")
 
-
 Newly created configurations for inventory sources contain the default plugin configuration values. If you want your newly created inventory sources to match the output of a legacy source, you must apply a specific set of configuration values for that source. To ensure backward compatibility, automation controller uses "templates" for each of these sources to force the output of inventory plugins into the legacy format.
 
 For more information about sources and their templates, see [Supported inventory plugin templates](/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-controller_inventory_templates#controller-inventory-templates "After upgrade to 4.x, existing configurations are migrated to the new format that produces an inventory output compatible with earlier versions. Use the following templates to aid in migrating your inventories to the new style inventory plugin output.").

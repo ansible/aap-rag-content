@@ -51,13 +51,11 @@ file_storage_size: 10Gi
 3. Select the **All instances** tab.
 4. Verify that the **Ansible Automation Platform** instance, **Automation Controller**, **Event-Driven Ansible**, and **Automation Hub** instances are listed.
 
-
 **Verify pod status (UI):**
 
 1. Navigate to Workloads> (and then)Pods.
 2. Switch to the project (namespace) where you deployed the instance.
 3. Verify that all related pods display a **Running** or **Completed** status.
-
 
 **Verify Platform Route (CLI):**
 

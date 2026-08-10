@@ -49,7 +49,6 @@ To verify that your backup was successful you can:
 3. Select your Ansible Automation Platform Operator deployment.
 4. Click **All Instances**.
 
-
 The **All Instances** page displays the main backup and the backups for each component with the name you specified when creating your backup resource. The status for the following instances must be either **Running** or **Successful**:
 
 - AnsibleAutomationPlatformBackup

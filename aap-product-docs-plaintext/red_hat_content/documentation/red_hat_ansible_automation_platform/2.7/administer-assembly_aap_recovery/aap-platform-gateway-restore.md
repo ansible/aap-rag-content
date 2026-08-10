@@ -1,4 +1,4 @@
-# Restore your Ansible Automation Platform deplopyment
+# Restore your Ansible Automation Platform deployment
 ## Restore Ansible Automation Platform
 
 **Ansible Automation Platform** manages any enabled components (such as, automation controller, automation hub, and Event-Driven Ansible), when you recover **Ansible Automation Platform** you also restore these components.

@@ -10,6 +10,7 @@ Use the `started`, `success`, or `error` endpoints:
 /api/v2/organizations/N/notification_templates_success/
 /api/v2/organizations/N/notification_templates_error/
 ```
+
 Additionally, the `../../../N/notification_templates_started` endpoints have `GET` and `POST` actions for:
 
 - Organizations

@@ -9,6 +9,7 @@ Prepare Red Hat Enterprise Linux virtual machines by setting up SSH access and e
 ```
 ssh [username]@[host_ip_address]
 ```
+
 For example, for an Ansible Automation Platform instance running on Amazon Web Services.
 
 ```
@@ -21,11 +22,13 @@ ssh ec2-user@10.0.0.6
 ```
 sudo subscription-manager register --auto-attach
 ```
+
 If Simple Content Access is enabled for your account, use:
 
 ```
 sudo subscription-manager register
 ```
+
 For more information about Simple Content Access, see [Getting started with simple content access](https://docs.redhat.com/en/documentation/subscription_central/1-latest/html/getting_started_with_simple_content_access/index).
 
 4.  Enable Ansible Automation Platform subscriptions and the proper Red Hat Ansible Automation Platform channel:
@@ -34,11 +37,13 @@ For RHEL 8
 ```
 # subscription-manager repos --enable ansible-automation-platform-2.5-for-rhel-8-x86_64-rpms
 ```
+
 For RHEL 9
 
 ```
 # subscription-manager repos --enable ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms
 ```
+
 For ARM
 
 ```
@@ -58,6 +63,7 @@ sudo dnf upgrade -y
 ```
 sudo dnf install -y ansible-core
 ```
+
 Note:
 Ansible core is required on the machine that runs the automation mesh configuration bundle playbooks. This document assumes that happens on the execution node. However, this step can be omitted if you run the playbook from a different machine. You cannot run directly from the control node, this is not currently supported, but future support expects that the control node has direct connectivity to the execution node.
 

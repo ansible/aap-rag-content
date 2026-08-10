@@ -1,6 +1,6 @@
 # Deploy the MCP server on Ansible Automation Platform
 ## Overview
-### Prerequisites
+### Requirements to deploy the MCP server
 
 - Platform version: An instance of Ansible Automation Platform 2.6 or later.
 - Deployment environment:

@@ -50,17 +50,15 @@ peers=automationcontroller
 [remote_multi_hop]
 aap_h_3 peers=local_hop
 ```
+
 The following image displays the topology of this mesh network.
 
-
 ![The topology map of the configuration consists of an automation controller group, a local execution group, a hop node group, and a remote execution node group. The automation controller group consists of three control nodes: aap_c_1, aap_c_2, and aap_c_3. The local execution nodes are aap_e_1 and aap_e_2. Every control node is peered to every local execution node. The hop node group contains two hop nodes, aap_h_1 and aap_h_2. It is peered to the controller group. The remote execution node group contains one execution node, aap_e_3. It is peered to the hop node group. A remote hop node group, consisting of node aap_h_3, is peered with the local hop node group. An execution node, aap_e_4, is peered with the remote hop group](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/mesh-multi-hop.png)
-
 
 The `[automationcontroller:vars]` stanza sets the node types for all nodes in the control plane and defines how the control nodes peer to the local execution nodes:
 
 - All nodes in the control plane are automatically peered to one another.
 - All nodes in the control plane are peered with all local execution nodes.
-
 
 The `[local_hop:vars]` stanza peers all nodes in the `[local_hop]` group with all the control nodes.
 

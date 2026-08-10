@@ -25,6 +25,7 @@ schedule:
 frequency: { hours: 1 }
 timeout: { minutes: 15 }
 ```
+
 This configuration syncs:
 
 - All Users and Teams from the "Default" organization

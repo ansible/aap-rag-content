@@ -1,6 +1,6 @@
 +++
-title = "Create a registry service account - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_set_registry_username_password"
+title = "Create a registry service account - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_set_registry_username_password/aem-page/install-proc_set_registry_username_password.html"
 last_crumb = "Create a registry service account"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Create a registry service account"
 oversized = "false"

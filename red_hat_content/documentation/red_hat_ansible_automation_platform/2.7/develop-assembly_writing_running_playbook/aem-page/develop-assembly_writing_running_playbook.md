@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_writing_running_playbook/aem-page/develop-assembly_writing_running_playbook.html"
 last_crumb = "Write your first automation task using the VS Code extension"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Write your first automation task using the VS Code extension"
 oversized = "false"
@@ -62,8 +62,8 @@ Create your first Ansible playbook within VS Code using the Ansible extension. T
     - name: Ping my hosts
       ansible.builtin.ping:
 ```
-    `Ansible-lint` runs in the background and displays errors in the **Problems** tab of the terminal. There are no errors in this playbook:
 
+    `Ansible-lint` runs in the background and displays errors in the **Problems** tab of the terminal. There are no errors in this playbook:
 
 ![Ansible-lint showing no errors in a playbook](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ansible-lint-no-errors.png)  
 
@@ -86,7 +86,6 @@ The Ansible VS Code extension provides inline help, syntax highlighting, and ass
 ![Ansible-lint showing no errors in a playbook](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ansible-lint-keyword-help.png)  
 3.  If you begin to type the name of a module, for example `ansible.builtin.ping`, the extension provides a list of suggestions. Select one of the suggestions to autocomplete the line.
 
-
 ![Ansible-lint showing no errors in a playbook](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ansible-lint-module-completion.png)  
 
 ## Debug your playbook
@@ -104,6 +103,7 @@ Learn how to use VS Code to identify and understand error messages in playbooks.
    - name:
      ansible.builtin.ping:
 ```
+
     The errors are indicated with a wavy underline in VS Code.
 
 2.  Hover your mouse over an error to view the details:  

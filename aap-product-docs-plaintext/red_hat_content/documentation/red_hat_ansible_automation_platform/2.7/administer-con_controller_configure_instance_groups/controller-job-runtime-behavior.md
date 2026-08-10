@@ -10,7 +10,6 @@ When you run a job associated with an instance group, note the following behavio
 - If an instance is performing work and it is a member of multiple groups, then capacity is reduced from all groups for which it is a member.
 - De-provisioning an instance removes capacity from the cluster wherever that instance was assigned. For more information, see the [Deprovisioning instance groups](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_controller_configure_instance_groups#controller-deprovision-instance-group "Re-running the setup playbook won't deprovision instances, as clusters can't distinguish between intentional offline status or failure. Instead, shut down all services on the automation controller instance, then run the deprovisioning tool from another instance.") section.
 
-
 Note:
 
 Not all instances are required to be provisioned with an equal capacity.

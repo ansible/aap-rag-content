@@ -9,6 +9,5 @@ Google cloud credentials are exposed as the following environment variables duri
 -  `GCE_PROJECT`
 -  `GCE_CREDENTIALS_FILE_PATH`
 
-
 Each Google module implicitly uses these credentials when run through the controller without having to set the `service_account_email`, `project_id`, or `pem_file` module options.
 

@@ -1,7 +1,7 @@
 +++
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-casc_migration_guide_aap_27"
 title = "Configuration as Code migration guide for Ansible Automation Platform 2.7 - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-casc_migration_guide_aap_27"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-casc_migration_guide_aap_27/", "Configuration as Code migration guide for Ansible Automation Platform 2.7"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/configure-casc_migration_guide_aap_27/aem-page/configure-casc_migration_guide_aap_27.html"
 last_crumb = "Configuration as Code migration guide for Ansible Automation Platform 2.7"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configuration as Code migration guide for Ansible Automation Platform 2.7"
 oversized = "false"
@@ -42,7 +42,6 @@ You must upgrade to the latest version of all component collections shipped for 
 | `ansible.eda`        | Event-Driven Ansible API modules through platform gateway.                          |
 | `ansible.platform`   | Platform gateway authentication, tokens, and platform-wide resource management.     |
 
-
 After you upgrade the collections, complete the following tasks:
 
 - Pin or upgrade collections in `requirements.yml` and execution environments to the latest versions available for your release.
@@ -59,13 +58,11 @@ Do not continue using the following patterns:
 - Legacy Personal Access Tokens (PATs) or API tokens issued directly from automation controller, automation hub, or Event-Driven Ansible controller.
 - Username and password pairs scoped only to a single component.
 
-
 Instead, do the following:
 
 - Create credentials, OAuth2 applications, and API tokens in platform gateway.
 - Update existing playbooks, inventory variables, and Configuration as Code content to use the platform gateway URL for `aap_hostname` or equivalent module parameters.
 - Use platform gateway-issued tokens for `aap_token` or equivalent authentication parameters.
-
 
 For detailed setup instructions and before/after examples, see [Set up your automation environment for Configuration as Code](/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-set_up_automation_environment_for_casc "Configuration as Code is a way of working where you define and manage the configuration of Ansible Automation Platform using version-controlled configuration files, such as YAML, instead of clicking through the web UI.").
 
@@ -85,10 +82,10 @@ The following parameters are deprecated and scheduled for removal in a future re
 
 Ansible Automation Platform 2.7 removes the following modules from the `ansible.hub` collection. Use the `ansible.platform` replacements instead. Other modules in the `ansible.hub` collection remain available.
 
-| Removed module         | Replacement              | Action required                                                                                                                                                                                                                       |
-| ---------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Removed module         | Replacement              | Action required                                                                                                                                                                                          |
+| ---------------------- | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ansible.hub.ah_user`  | `ansible.platform.user`  | Update all playbooks that use `ansible.hub.ah_user` to use `ansible.platform.user`. The `ansible.platform.user` module manages users through platform gateway and supports additional parameters such as `associated_authenticators`. |
-| `ansible.hub.ah_token` | `ansible.platform.token` | Update all playbooks that use `ansible.hub.ah_token` to use `ansible.platform.token`. Note that the `ansible.platform.token` module is not idempotent; each run creates a new token.                                                  |
+| `ansible.hub.ah_token` | `ansible.platform.token` | Update all playbooks that use `ansible.hub.ah_token` to use `ansible.platform.token`. Note that the `ansible.platform.token` module is not idempotent; each run creates a new token.                     |
 
 ## New modules
 
@@ -132,6 +129,7 @@ The following example shows how to update a playbook that uses deprecated parame
       - "Demo-Organization"
     is_platform_auditor: true
 ```
+
 **After (2.7)**
 
 ```yaml

@@ -12,6 +12,7 @@ http_proxy=“http://external-proxy_0:3128”
 https_proxy=“http://external-proxy_0:3128”
 no_proxy=“localhost,127.0.0.0/8,10.0.0.0/8”
 ```
+
 You can also add those variables to the '/etc/environment' file to make them permanent.
 
 The installation program ensures that all external communication during the installation goes through the proxy. For containerized installation, those variables ensure that Podman uses the egress proxy.

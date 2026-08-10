@@ -8,6 +8,7 @@ You can authenticate to the automation controller server by using LDAP. However,
 ```
 2025-08-26 16:40:56,141 WARNING   django_auth_ldap Caught LDAPError while authenticating: SERVER_DOWN({'result': -1, 'desc': "Can't contact LDAP server", 'ctrls': [], 'info': 'error:0A000086:SSL routines::certificate verify failed (self-signed certificate)'})
 ```
+
 To get Ansible Automation Platform to trust the certificate coming from LDAP, perform the following procedure on all platform gateway instances.
 
 ### Procedure

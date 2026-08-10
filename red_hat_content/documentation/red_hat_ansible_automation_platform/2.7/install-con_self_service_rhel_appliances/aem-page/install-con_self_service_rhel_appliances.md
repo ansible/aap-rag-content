@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-con_self_service_rhel_appliances/aem-page/install-con_self_service_rhel_appliances.html"
 last_crumb = "Deploy Ansible automation portal RHEL appliance"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Deploy Ansible automation portal RHEL appliance"
 oversized = "false"
@@ -33,7 +33,6 @@ The appliances are available in the following formats:
 
 - **QCOW2** - For Red Hat OpenShift Virtualization and KVM-based environments
 - **VMDK** - For VMware `vSphere` infrastructure
-
 
 ## Supported platforms
 
@@ -60,7 +59,7 @@ Baked-in configuration
 For advanced installations using the Ansible collection to build a customized appliance image with pre-baked settings.
 
 VMware `guestinfo` properties
-For VMware deployments, provide SSH keys and portal configuration through `guestinfo` properties set in `vSphere`.
+For VMware vSphere deployments, deliver cloud-init user-data through the standard VMware `guestinfo.userdata` datasource as an alternative to the ISO method.
 
 cloud-init user-data
 For cloud and Red Hat OpenShift Virtualization deployments, provide SSH keys and portal configuration through cloud-init user-data. The appliance configures itself automatically on first boot.
@@ -76,7 +75,6 @@ The initial configuration includes:
 - Ansible Automation Platform URL, OAuth application credentials, and admin token
 - Database settings (built-in or external PostgreSQL)
 - Base URL and network configuration
-
 
 Note:
 

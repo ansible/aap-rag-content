@@ -10,7 +10,6 @@ Enable and configure metrics service during containerized installation to automa
 - Infrastructure meets requirements
 - Root or sudo access to installation host
 
-
 Important:
 
 Metrics service is enabled by default in Ansible Automation Platform 2.7. You do not need to explicitly enable it unless you previously disabled it.
@@ -24,24 +23,6 @@ This procedure configures metrics service during the initial containerized insta
 1.  Define metrics service inventory group
 Edit the inventory file and add the `[automationmetrics]` group:
 
-```
-[automationcontroller]
-aap.example.com
-
-[automationmetrics]
-aap.example.com
-
-[database]
-aap.example.com
-
-[all:vars]
-postgresql_admin_username=postgres
-postgresql_admin_password='<secure_password>'
-
-# Optional: Enable automation dashboard data collection (Tech Preview)
-# Default: disabled
-FEATURE_DASHBOARD_COLLECTION_ENABLED: false
-```
 Note:
 Metrics service is NOT required to be co-located with automation controller. Place it on any node based on your deployment topology.
 
@@ -52,6 +33,7 @@ Metrics service is NOT required to be co-located with automation controller. Pla
 cd /path/to/aap-containerized-installer
 ansible-playbook -i inventory install.yml
 ```
+
 The installer performs the following sequence:
 
 1. **Database setup:** Creates `metrics_service` database, `metrics_service` user (ALL privileges), and `ms_awx_readonly` user (SELECT-only on controller database)
@@ -65,18 +47,7 @@ The installer performs the following sequence:
 5. **Systemd integration:** Generates three user-scope systemd units: `automation-metrics-web.service`, `automation-metrics-tasks.service`, `automation-metrics-scheduler.service`
 6. **Firewall configuration:** Opens ports 8087/tcp (HTTP) and 8450/tcp (HTTPS)
 
-3. **Optional:** Enable automation dashboard
-Automation dashboard provides ROI calculations, cost savings analysis, and executive reporting. It uses metrics service as its backend for data collection and storage.
-
-To enable automation dashboard data collection during installation, set:
-
-```
-FEATURE_DASHBOARD_COLLECTION_ENABLED: true
-```
-Note:
-**Dependency:** Dashboard collection requires metrics service to be enabled. The installer fails preflight checks if you enable automation dashboard without metrics service.
-
-4.  Verify installation
+3.  Verify installation
 
 
 ```
@@ -112,7 +83,6 @@ Metrics service is successfully installed when:
 - All three systemd user-scope services are active and enabled
 - Health endpoint returns `{"status": "good", ...}` response
 - Database connectivity confirmed
-
 
 **What happens next:**
 

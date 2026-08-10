@@ -1,16 +1,16 @@
 +++
-title = "Configure a Personal Access Token for GitHub content discovery - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_pat_ee_builder"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_pat_ee_builder"
+title = "Configure a Personal Access Token for GitHub content discovery - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_app_ee_builder/", "Configure a GitHub App for content discovery"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-build_execution_environments_with_the_automation_portal/", "Build execution environments with automation portal"]]
 category = "Develop"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_configure_pat_ee_builder/aem-page/develop-proc_configure_pat_ee_builder.html"
 last_crumb = "Configure a Personal Access Token for GitHub content discovery"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure a Personal Access Token for GitHub content discovery"
 oversized = "false"
@@ -35,7 +35,7 @@ Create and store a GitHub Personal Access Token (PAT) so that execution environm
 
 ## About this task
 
-PATs provide a simpler setup with user-scoped access. If you are already using PATs for automation portal, you can continue using them. Choose this option or a GitHub App for content discovery. GitHub App and PAT are mutually exclusive.
+PATs provide a simpler setup with user-scoped access. If you are already using PATs for automation portal, you can continue using them. A GitHub App is the recommended option for content discovery. You do not need both, but having both does not break the install.
 
 ## Procedure
 
@@ -53,6 +53,7 @@ $ oc create secret generic secrets-scm \
   --from-literal=github-token=<your_github_pat> \
   -n <namespace>
 ```
+
     **OpenShift — web console:**
 
   1. Navigate to **Workloads > Secrets > Create > Key/value secret**.
@@ -63,6 +64,7 @@ $ oc create secret generic secrets-scm \
 ```
 $ echo -n '<your_github_pat>' | sudo podman secret create portal_github_token -
 ```
+
   Note:
       If you configured a GitHub personal access token during RHEL appliance installation (via cloud-init), the `portal_github_token` secret already exists and is active for content discovery. Running the command above updates the existing secret with a new value.
 

@@ -25,6 +25,7 @@ my_role
 └── vars
 └── main.yml
 ```
+
 An Ansible role has a defined directory structure with seven main standard directories. Each role must must include at least one of these directories. You can omit any directories the role does not use. Each directory contains a `main.yml` file.
 
 #### Procedure
@@ -70,6 +71,7 @@ company_namespace
 ├── tests
 └── vars
 ```
+
 The `run` role is a default role directory that is created when you scaffold the collection.
 
 4.  Update your playbooks to use the fully qualified collection name (FQDN) for your new roles in your collection. Note:

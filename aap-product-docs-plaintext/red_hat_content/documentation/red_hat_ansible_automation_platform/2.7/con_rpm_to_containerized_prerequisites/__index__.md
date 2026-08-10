@@ -12,3 +12,7 @@ Completing this migration is a required step if you plan to upgrade to Ansible A
 - You have downloaded the containerized installation program for the latest release of the Ansible Automation Platform version you are on.
 - You have enough storage for database dumps and backups.
 - There is network connectivity between the source and target environments.
+
+Important:
+
+Before completing this migration, see [How do I migrate Ansible Automation Platform 2.6 from an RPM to a containerized installation?](https://access.redhat.com/solutions/7138894) on the Red Hat Customer Portal for the migration procedures.

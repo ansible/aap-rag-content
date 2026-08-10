@@ -8,7 +8,7 @@ A disconnected installation installs containerized Ansible Automation Platform w
 
 - You have prepared the Red Hat Enterprise Linux host
 - You have obtained and configured the RPM source dependencies. The installation program uses your host system’s `dnf` package manager to resolve these dependencies.
-- You have prepared the managed nodes
+- You have created the installation user
 - You have downloaded the containerized Ansible Automation Platform setup bundle from the [Ansible Automation Platform download page](https://access.redhat.com/downloads/content/480/ver=2.6/rhel---9/2.6/x86_64/product-software).
 - You understand that metrics service is a required component in Ansible Automation Platform 2.7 and will be installed automatically. Metrics service operates fully in disconnected environments without requiring internet access.
 
@@ -44,7 +44,6 @@ In disconnected environments, metrics service operates as follows:
 - Users can access metrics dashboards and reports through the automation dashboard (when enabled)
 - No internet connection is required for metrics collection or local analysis
 
-
 **Optional data transmission to Red Hat:**
 
 - By default, metrics service attempts to transmit anonymized usage data to Red Hat at `api.segment.io:443`
@@ -66,6 +65,7 @@ UPDATE dynamic_settings_setting
 SET current_value = 'false'
 WHERE setting_key = 'ANONYMIZED_DATA_COLLECTION';
 ```
+
 This change takes effect immediately. No restart is required.
 
 **What happens when data transmission is disabled**
@@ -80,14 +80,13 @@ This change takes effect immediately. No restart is required.
 
 In disconnected environments, metrics service does not require outbound internet access. Ensure the following internal connectivity:
 
-*Table 1. Metrics service network connectivity requirements*
+*Table 2. Metrics service network connectivity requirements*
 
 | Source                | Destination                                | Port | Protocol | Purpose                             |
 | --------------------- | ------------------------------------------ | ---- | -------- | ----------------------------------- |
 | Metrics service       | PostgreSQL (metrics\_service database)     | 5432 | TCP      | Read/write metrics data             |
 | Metrics service       | PostgreSQL (automationcontroller database) | 5432 | TCP      | Read-only access to automation data |
 | Automation controller | Metrics service                            | 443  | TCP      | Internal metrics collection API     |
-
 
 Note:
 

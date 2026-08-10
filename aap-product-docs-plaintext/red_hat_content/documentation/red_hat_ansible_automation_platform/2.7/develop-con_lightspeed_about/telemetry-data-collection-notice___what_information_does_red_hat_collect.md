@@ -1,4 +1,4 @@
-# Red Hat Ansible Lightspeed Overview
+# Understand Red Hat Ansible Lightspeed with IBM watsonx Code Assistant
 ## Telemetry data collection notice for the Admin dashboard
 ### What information does Red Hat collect?
 

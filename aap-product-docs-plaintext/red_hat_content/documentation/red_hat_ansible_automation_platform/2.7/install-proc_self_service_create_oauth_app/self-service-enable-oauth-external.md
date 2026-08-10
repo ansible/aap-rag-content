@@ -1,5 +1,5 @@
 # Create an OAuth application
-## Enable Oauth token creation for external users
+## Enable OAuth token creation for external users
 
 Ansible automation portal uses Ansible Automation Platform or authentication and as an OAuth provider.
 

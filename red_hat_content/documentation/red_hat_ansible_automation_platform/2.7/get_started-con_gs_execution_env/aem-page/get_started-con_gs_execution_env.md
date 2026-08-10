@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/get_started-con_gs_execution_env/aem-page/get_started-con_gs_execution_env.html"
 last_crumb = "Create automation runtimes with execution and decision environments"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Create automation runtimes with execution and decision environments"
 oversized = "false"
@@ -42,7 +42,6 @@ Automation execution environments contain:
 - System dependencies
 - Custom user needs
 
-
 You can either use the default base execution environment included in your Ansible Automation Platform subscription, or you can define and create an automation execution environment using Ansible Builder.
 
 ## Use the base automation execution environment
@@ -59,7 +58,6 @@ Ansible Automation Platform includes the following execution environments:
 
 - `Minimal` - Includes the latest Ansible-core 2.15 release along with Ansible Runner, but does not include collections or other content
 - `EE Supported` - Minimal, plus all Red Hat-supported collections and dependencies
-
 
 Base images included with Ansible Automation Platform are hosted on the Red Hat Ecosystem Catalog (`registry.redhat.io`).
 
@@ -84,7 +82,7 @@ After you have built an execution environment, use it to run jobs. To do so, fir
 
 ### Before you begin
 
-- An execution environment created using `ansible-builder` as described in [Define, create, and build execution environments](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-define__create__and_build_execution_environments "Run automation consistently across nodes with execution environments, which are container images that contain everything you need to run your automation.").
+- An execution environment created using `ansible-builder` as described in [Define, create, and build execution environments](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-define__create__and_build_execution_environments#GUID-9ff94bd4-fddf-4320-833a-295d20920a1c "Run automation consistently across nodes with execution environments, which are container images that contain everything you need to run your automation.").
 - Organization administrator privileges (if the execution environment is associated with an organization).
 - A credential with a username, host, and password (if assigned to the execution environment).
 
@@ -132,7 +130,6 @@ In decision environments, sources, which are typically Python code, are distribu
 - Java Runtime Environment for Drools rule engine
 - ansible-rulebook python package
 - ansible.eda collection
-
 
 You can use the base decision environment and build your own customized Decision Environments with additional collections and collection dependencies. You can build a decision environment using a Dockerfile or optionally you can deploy your CA certificate into the image.
 

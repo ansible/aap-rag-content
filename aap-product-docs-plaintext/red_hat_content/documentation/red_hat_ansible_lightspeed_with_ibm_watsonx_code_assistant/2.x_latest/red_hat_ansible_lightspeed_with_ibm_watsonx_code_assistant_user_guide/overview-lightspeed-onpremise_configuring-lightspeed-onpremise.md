@@ -18,7 +18,6 @@ Red Hat Ansible Lightspeed is an on-premise deployment, while IBM watsonx Code A
 
 A hybrid deployment model provides the following benefits:
 
-
 * Enables you to set up an on-premise deployment of Red Hat Ansible Lightspeed, with IBM watsonx Code Assistant model on a cloud environment.
 * Provides the freedom and flexibility to choose an environment that best suits your organizational needs.
 * Enables organizations to use the Ansible Automation Platform for user authentication, instead of logging into the Red Hat cloud.

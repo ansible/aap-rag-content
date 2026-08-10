@@ -29,10 +29,8 @@ Machine credentials require the following inputs:
 * **machinectl**: Enables you to manage containers through the `systemd` machine manager.
 * **sesu**: Enables your remote/login user to run commands as another user through the CA Privileged Access Manager.
 
-
 - **Privilege Escalation Username**: You see this field only if you selected an option for privilege escalation. Enter the username to use with escalation privileges on the remote system.
 - **Privilege Escalation Password**: You see this field only if you selected an option for privilege escalation. Enter the password to use to authenticate the user through the selected privilege escalation type on the remote system. This password is stored encrypted in the database. You can also configure automation controller to ask the user for the password at launch time by selecting **Prompt on launch**. In these cases, a dialog opens when the job is launched, promoting the user to enter the password and password confirmation.
-
 
 Note:
 

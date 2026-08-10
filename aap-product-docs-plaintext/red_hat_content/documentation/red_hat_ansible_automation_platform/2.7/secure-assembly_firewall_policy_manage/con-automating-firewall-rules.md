@@ -9,6 +9,5 @@ The following lab environment is a simplified example of a real-world enterprise
 
 Your entire team can use Ansible security automation to address investigations, threat hunting, and incident response all on one platform. Red Hat Ansible Automation Platform provides you with certified content collections that are easy to consume and reuse within your security team.
 
-
 ![Simplified security lab environment](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/security-lab-environment.png)
 

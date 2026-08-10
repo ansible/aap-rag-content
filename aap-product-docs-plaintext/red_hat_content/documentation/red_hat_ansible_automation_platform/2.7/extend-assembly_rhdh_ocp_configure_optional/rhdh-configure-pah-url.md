@@ -34,3 +34,4 @@ baseUrl: '<https://MyOwnPAHUrl>'
 4.  In the OpenShift Developer UI, select the `Red Hat Developer Hub` pod.
 5.  Open **Actions**.
 6.  Click **Restart rollout**.
+

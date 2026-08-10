@@ -13,6 +13,7 @@ Another parameter available is `max_forks`. This provides additional flexibility
 max_concurrent_jobs: 10
 max_forks: 50
 ```
+
 If 10 jobs that use 5 forks each are run, an eleventh job waits until one of these finishes to run on that group (or be scheduled on a different group with capacity).
 
 If 2 jobs are running with 20 forks each, then a third job with a `task_impact` of 11 or more waits until one of these finishes to run on that group (or be scheduled on a different group with capacity).

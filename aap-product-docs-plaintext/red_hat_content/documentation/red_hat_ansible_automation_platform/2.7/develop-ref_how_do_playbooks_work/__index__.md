@@ -38,6 +38,5 @@ Ansible modules are grouped in collections with a *Fully Qualified Collection Na
 - Configuration management
 - Communication
 
-
 ![Structure of a typical playbook](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/playbook.png)
 

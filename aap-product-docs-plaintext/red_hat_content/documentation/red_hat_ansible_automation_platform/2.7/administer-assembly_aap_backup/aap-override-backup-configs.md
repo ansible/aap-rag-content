@@ -36,7 +36,6 @@ create_backup_pvc: true
 no_log: false
 ```
 
-
 1.      The global `backup_storage_class` applies to the platform gateway. Components that do not specify their own `backup_storage_class` inherit this value.
 
 2.      Each component can define its own `backup_pvc` to create a uniquely named PVC. Set `create_backup_pvc: true` to have the operator create the PVC automatically.

@@ -18,6 +18,7 @@ automation-controller-service stop
 ```
 awx-manage deprovision_instance --hostname=<name used in inventory file>
 ```
+
 For example:
 
 ```
@@ -31,6 +32,7 @@ Deprovisioning instance groups in automation controller does not automatically d
 ```
 awx-manage unregister_queue --queuename=<name>
 ```
+
 Removing an instance’s membership from an instance group in the inventory file and re-running the setup playbook does not ensure that the instance is not added back to a group. To be sure that an instance is not added back to a group, remove it through the API and also remove it in your inventory file. You can also stop defining instance groups in the inventory file. You can manage instance group topology through the automation controller UI. For more information about managing instance groups in the UI, see [Managing Instance Groups](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_ug_controller_instance_groups#controller-instance-groups "An Instance Group enables you to group instances in a clustered environment. Policies dictate how instance groups behave and how jobs are executed. The following view displays the capacity levels based on policy algorithms:").
 
 Note:

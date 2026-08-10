@@ -7,7 +7,6 @@ You can perform the following tasks from the Ansible VS Code extension:
 
 - **Create single task or multitask requests by using natural language prompts**
 
-
 * Create a single task prompt
 
 Write a description of your task in the `- name:` key of a new task line in your Ansible file. For example, to automate a task of installing PostgreSQL server, you can enter the prompt `- name: Install postgresql-server`.

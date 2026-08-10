@@ -36,17 +36,15 @@ aap_e_3.example.com
 [instance_group_remote:vars]
 peers=hop
 ```
+
 The following image displays the topology of this mesh network.
 
-
 ![The topology map of the configuration consists of an automation controller group, a local execution group, a hop node group, and a remote execution node group. The automation controller group consists of two control nodes: aap_c_1 and aap_c_2. The local execution nodes are aap_e_1 and aap_e_2. Every control node is peered to every local execution node. The hop node group contains one hop node, aap_h_1. It is peered to the controller group. The remote execution node group contains one execution node, aap_e_3. It is peered to the hop node group.](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/mesh-segegrated-execution.png)
-
 
 The `[automationcontroller:vars]` stanza sets the node types for all nodes in the control plane and defines how the control nodes peer to the local execution nodes:
 
 - All nodes in the control plane are automatically peered to one another.
 - All nodes in the control plane are peered with all local execution nodes.
-
 
 If the name of a group of nodes begins with `instance_group_`, the installer recognises it as an instance group and adds it to the Ansible Automation Platform user interface.
 

@@ -35,7 +35,6 @@ $ podman ps --all --format "{{.Names}}"
 | <br>Receptor              | <br> `receptor`                                  | <br>Facilitates secure and reliable communication within Ansible Automation Platform.                                                                                    |
 | <br>Redis                 | <br> `redis-<suffix>`                            | <br>Responsible for caching, real-time analytics and fast data retrieval.                                                                                                |
 
-
 **Inspecting the logs**
 
 Containerized Ansible Automation Platform uses `journald` for Podman logging. To inspect any running container logs, run the `journalctl` command:
@@ -43,6 +42,7 @@ Containerized Ansible Automation Platform uses `journald` for Podman logging. To
 ```
 $ journalctl CONTAINER_NAME=<container_name>
 ```
+
 Example command with output:
 
 ```
@@ -52,11 +52,13 @@ Oct 08 01:40:12 aap.example.org automation-gateway-proxy[1919]: [2024-10-08 00:4
 Oct 08 01:40:12 aap.example.org automation-gateway-proxy[1919]: [2024-10-08 00:40:12.885][2][info][upstream] [external/envoy/source/common/upstream/cds_ap>
 Oct 08 01:40:19 aap.example.org automation-gateway-proxy[1919]: [2024-10-08T00:40:16.753Z] "GET /up HTTP/1.1" 200 - 0 1138 10 0 "192.0.2.1" "python->
 ```
+
 To view the logs of a running container in real-time, run the `podman logs -f` command:
 
 ```
 $ podman logs -f <container_name>
 ```
+
 **Controlling container operations**
 
 You can control operations for a container by running the `systemctl` command:
@@ -64,6 +66,7 @@ You can control operations for a container by running the `systemctl` command:
 ```
 $ systemctl --user status <container_name>
 ```
+
 Example command with output:
 
 ```
@@ -90,6 +93,7 @@ Oct 08 11:44:10 aap.example.org automation-gateway-proxy[1919]: [2024-10-08T10:4
 Oct 08 11:44:13 aap.example.org automation-gateway-proxy[1919]: [2024-10-08 10:44:13.856][2][info][upstream] [external/envoy/source/common/upstream/cds_ap>
 Oct 08 11:44:13 aap.example.org automation-gateway-proxy[1919]: [2024-10-08 10:44:13.856][2][info][upstream] [external/envoy/source/common/upstream/cds_ap
 ```
+
 **Getting container information about the execution plane**
 
 To get container information about automation controller, Event-Driven Ansible, and `execution_nodes` nodes, prefix any Podman commands with either:
@@ -97,11 +101,13 @@ To get container information about automation controller, Event-Driven Ansible, 
 ```
 CONTAINER_HOST=unix://run/user/<user_id>/podman/podman.sock
 ```
+
 or
 
 ```
 CONTAINERS_STORAGE_CONF=<user_home_directory>/aap/containers/storage.conf
 ```
+
 Example with output:
 
 ```

@@ -1,7 +1,7 @@
 +++
-title = "Ansible Automation Platform patch release June 4, 2026 - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-aap_27_2026_06_04"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-aap_27_2026_06_04"
+title = "Ansible Automation Platform patch release June 4, 2026 - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-overview_of_redhat_ansible_intro/", "Ansible Automation Platform release notes"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/whats_new-aap_27_2026_06_04/aem-page/whats_new-aap_27_2026_06_04.html"
 last_crumb = "Ansible Automation Platform patch release June 4, 2026"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Ansible Automation Platform patch release June 4, 2026"
 oversized = "false"
@@ -31,10 +31,9 @@ The following release notes detail the CVEs and Bug fixes for the Ansible Automa
 
 This release includes the following components and versions:
 
-| Release Date     | Component versions                                                                                                                                                                                                                 |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Release Date     | Component versions                                                                                                                                                                                       |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | <br>June 4, 2026 | Automation controller 4.8.0Automation hub 4.12.1Event-Driven Ansible 1.3.1Container-based installer Ansible Automation Platform (bundle) 2.7-1.1Container-based installer Ansible Automation Platform (online) 2.7-1Receptor 1.6.5 |
-
 
 CSV Versions in this release:
 

@@ -17,7 +17,6 @@ Creates a credential on the automation controller for authenticating with extern
 | `password_secret`    | String | Name of a Kubernetes secret containing the password for cloud credentials.                  | -              |
 | `runner_pull_policy` | String | Image pull policy for the runner pod.                                                       | `IfNotPresent` |
 
-
 **Example (SSH):**
 
 ```

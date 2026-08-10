@@ -1,7 +1,7 @@
 +++
-title = "Configure operator-based Ansible Automation Platform to use egress proxy - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-configure_operator_based_ansible_automation_platform_to_use_egress_proxy"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-configure_operator_based_ansible_automation_platform_to_use_egress_proxy"
+title = "Configure operator-based Ansible Automation Platform to use egress proxy - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-configure_a_proxy_to_communicate_with_external_systems/", "Configure a proxy to communicate with external systems"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/configure-configure_operator_based_ansible_automation_platform_to_use_egress_proxy/aem-page/configure-configure_operator_based_ansible_automation_platform_to_use_egress_proxy.html"
 last_crumb = "Configure operator-based Ansible Automation Platform to use egress proxy"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure operator-based Ansible Automation Platform to use egress proxy"
 oversized = "false"

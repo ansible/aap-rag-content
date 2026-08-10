@@ -28,7 +28,7 @@ For information on the standalone automation dashboard, see View automation job 
 | Multi-Instance Support   | Single Ansible Automation Platform instance only (Technology Preview limitation)                                                                                                              | Multiple Ansible Automation Platform instances supported                               |
 | Default State            | Disabled (opt-in by using feature flag)                                                                                                                                                       | N/A (separate installation)                                                            |
 | Database                 | Metrics service database                                                                                                                                                                      | Standalone postgres instance                                                           |
-| Historical Data Backfill | Up to 90 days from Controller DB when enabled post-installation                                                                                                                               | Configurable backfill period                                                           |
+| Historical Data Backfill | Aligns with controller’s configured retention period                                                                                                                                          | Configurable backfill period                                                           |
 
 ## Architecture components
 
@@ -93,7 +93,6 @@ The automation dashboard provides REST APIs for programmatic access to dashboard
 | --------- | ------ | -------------------------------- | ---------------------------------------------- |
 | period    | string | Time period for data aggregation | last\_30\_days, last\_60\_days, last\_90\_days |
 
-
 **Optional Filter Query Parameters:**
 
 | Parameter    | Type    | Description               | Example         |
@@ -102,7 +101,6 @@ The automation dashboard provides REST APIs for programmatic access to dashboard
 | template     | integer | Filter by job template ID | ?template=5     |
 | project      | integer | Filter by project ID      | ?project=10     |
 | label        | integer | Filter by label ID        | ?label=2        |
-
 
 Important:
 
@@ -127,13 +125,13 @@ curl -k -u admin:<password> \
 curl -k -u admin:<password> \
 "https://<AAP-FQDN>/api/metrics/v1/dashboard_reports/report/?period=last_90_days&organization=3&organization=5"
 ```
+
 **Response:** Paginated JSON response containing job template aggregations with:
 
 - Cost and savings calculations
 - ROI metrics
 - Job execution statistics
 - Time saved calculations
-
 
 **Report details endpoint**
 
@@ -151,13 +149,13 @@ curl -k -u admin:<password> \
 curl -k -u admin:<password> \
 "https://<AAP-FQDN>/api/metrics/v1/dashboard_reports/report/details/?period=last_90_days"
 ```
+
 **Response:** JSON response containing:
 
 - Summary statistics (total jobs, total savings, total time saved)
 - Top 10 users by automation usage
 - Top 10 projects by savings
 - Time-series data for graphs
-
 
 **Filter list endpoints**
 
@@ -167,7 +165,6 @@ These endpoints provide lists of available filter options for dropdown menus:
 - **Templates:** `GET /api/metrics/v1/dashboard_reports/templates/`
 - **Projects:** `GET /api/metrics/v1/dashboard_reports/projects/`
 - **Labels:** `GET /api/metrics/v1/dashboard_reports/labels/`
-
 
 Note:
 
@@ -187,6 +184,7 @@ These endpoints return the complete list of available filter values from the Con
 curl -k -u admin:<password> \
 https://<AAP-FQDN>/api/metrics/v1/dashboard_reports/subscription_costs/
 ```
+
 **Example - Update cost parameters:**
 
 ```
@@ -198,6 +196,7 @@ https://<AAP-FQDN>/api/metrics/v1/dashboard_reports/subscription_costs/ \
 "currency": "USD"
 }'
 ```
+
 **API documentation**
 
 For complete API schema and additional endpoints, access the OpenAPI specification:
@@ -206,7 +205,6 @@ For complete API schema and additional endpoints, access the OpenAPI specificati
 curl -k -u admin:<password> \
 https://<AAP-FQDN>/api/metrics/v1/dashboard_reports/schema/
 ```
-
 
 Note:
 
@@ -225,17 +223,20 @@ When `FEATURE_DASHBOARD_COLLECTION_ENABLED: true` is configured (containerized) 
 | Database Impact  | Minimal - read-only queries by using ms\_awx\_readonly user, optimized for low overhead |
 | Topology Support | Single VM (growth topology) supported with 6-hourly collection                          |
 
-
 **Dashboard collection configuration**
 
 The following configuration variables control dashboard collection behavior:
 
-| Variable                                                              | Default           | Purpose                                                          | User-Configurable?          |
-| --------------------------------------------------------------------- | ----------------- | ---------------------------------------------------------------- | --------------------------- |
-| FEATURE\_DASHBOARD\_COLLECTION\_ENABLED                               | False             | Enables/disables all dashboard data collection                   | Yes                         |
-| FEATURE\_DASHBOARD\_COLLECTION\_ENABLED\_\_COLLECTION\_SCHEDULE\_CRON | "0 \*/6 \* \* \*" | Incremental data collection schedule (every 6 hours)             | No                          |
-| retention\_period\_days                                               | 90                | How many days JobData records are stored (configurable per task) | Internal configuration only |
-
+| Metric                         | Specification                                                                                                                                                                                            |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Collection frequency           | Hourly (merged into existing `hourly_unified_jobs` collector)                                                                                                                                            |
+| Controller DB queries per hour | 2 (unchanged from base metrics collection — dashboard adds zero additional queries)                                                                                                                      |
+| Database access                | Read-only by using `ms_awx_readonly` user                                                                                                                                                                |
+| Query optimization             | Incremental data collection (only new/updated records since last collection)                                                                                                                             |
+| Initial backfill               | Up to 90 days of historical data on first enable (configurable via `INITIAL_BACKFILL_DAYS`); cursor-paginated in batches of 10,000 (configurable via `BACKFILL_BATCH_SIZE`, recommended 5,000 for production) |
+| Backfill timeout               | 10-minute dispatcherd task timeout; 100K+ jobs completes within this window at batch\_size=5,000                                                                                                         |
+| Topology support               | Single VM (growth topology) and dedicated node (enterprise topology) supported                                                                                                                           |
+| Fault isolation                | Dashboard sync hook failures cannot abort the anonymized rollup pipeline                                                                                                                                 |
 
 Note:
 
@@ -247,7 +248,6 @@ In Technology Preview, the collection schedule is fixed at 6 hours.
 - **ROI calculations:** Time saved, cost savings, manual effort avoided
 - **Automation savings metrics:** Efficiency gains and resource optimization
 - **Executive reporting data:** High-level usage trends and adoption metrics
-
 
 **Detailed metrics schema:**
 
@@ -269,7 +269,6 @@ In Technology Preview, the collection schedule is fixed at 6 hours.
 | launched\_by\_username | str (nullable)      | auth\_user.username               | Name of the user that started the job                                                 |
 | awx\_created           | datetime            | main\_unifiedjob.created          | Date created in AWX/Automation Controller                                             |
 | awx\_modified          | datetime            | main\_unifiedjob.modified         | Last changed date in AWX/Automation Controller (watermark for incremental collection) |
-
 
 **Related raw data tables:**
 
@@ -303,7 +302,6 @@ The integrated dashboard in Ansible Automation Platform 2.7 Technology Preview d
 | Multiple Ansible Automation Platform instances (different versions) | Not supported              | Use standalone dashboard utility for multi-instance aggregation |
 | Multiple Ansible Automation Platform instances (same version)       | Not supported              | Use standalone dashboard utility for multi-instance aggregation |
 
-
 Note:
 
 If you need to aggregate data across multiple Ansible Automation Platform instances, continue using the standalone automation dashboard utility (Ansible Automation Platform 2.6 approach).
@@ -320,12 +318,14 @@ Create a feature flags variables file (for example, feature_flags.yml) with the 
 feature_flags:
 FEATURE_DASHBOARD_COLLECTION_ENABLED: True
 ```
+
 Then pass the file to the installer using the -e flag:
 
 ```
 cd /path/to/aap-containerized-installer
 ansible-playbook -i inventory ansible.containerized_installer.install -e @feature_flags.yml
 ```
+
 **Operator deployment**
 
 ```
@@ -333,6 +333,7 @@ spec:
 feature_flags:
 FEATURE_DASHBOARD_COLLECTION_ENABLED: true
 ```
+
 This maps to the internal metrics service configuration:
 
 ```
@@ -344,6 +345,7 @@ FEATURE_DASHBOARD_COLLECTION_ENABLED: true
 env | grep DASHBOARD
 METRICS_SERVICE_FEATURE_DASHBOARD_COLLECTION_ENABLED=true
 ```
+
 **Feature flag behavior**
 
 | Feature Flag State | Behavior                                                                                                           |

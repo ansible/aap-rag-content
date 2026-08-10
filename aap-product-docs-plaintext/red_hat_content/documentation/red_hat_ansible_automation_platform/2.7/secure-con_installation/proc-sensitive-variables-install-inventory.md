@@ -1,7 +1,7 @@
 # Installation settings to secure your platform
 ## Secure sensitive variables with ansible vault
 
-By securing sensitive values in the installation inventory file with Ansible Vault, both RPM-based and containerized Ansible Automation Platform installations benefit from improved security, password hygiene, and maintainability.
+By securing sensitive values in the installation inventory file with Ansible Vault, Ansible Automation Platform benefits from improved security, password hygiene, and maintainability.
 
 ### Procedure
 

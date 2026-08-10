@@ -35,7 +35,6 @@ when:
 - ansible_distribution_major_version == "9"
 ```
 
-
 Note:
 
 By setting `allow_downgrade: true`, if a newer version of any defined package is installed on the system, it is downgraded to the specified version instead.

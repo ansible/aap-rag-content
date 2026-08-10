@@ -8,7 +8,6 @@ At a minimum, each play defines two things:
 - the managed nodes to target, using a pattern
 - at least one task to run
 
-
 Note:
 
 Use the fully-qualified collection name in your playbooks to ensure the correct module is selected, because multiple collections can contain modules with the same name (for example, `user`).
@@ -46,11 +45,11 @@ ansible.builtin.service:
 name: postgresql
 state: started
 ```
+
 The playbook contains two plays:
 
 - The first checks if the web server software is up to date and runs the update if necessary.
 - The second checks if database server software is up to date and runs the update if necessary.
-
 
 Your playbook can include more than just a hosts line and tasks.
 

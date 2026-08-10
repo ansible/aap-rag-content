@@ -6,7 +6,7 @@ Set up a new decision environment to define the dedicated, containerized runtime
 ### Before you begin
 
 - You have set up a credential, if necessary. For more information, see the [Setting up credentials](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_eda_set_up_credential#eda-set-up-credential "Create a credential to securely store sensitive data (like tokens and passwords) required for rulebook activations to connect to source plugins or private registries.") section.
-- You have pushed a decision environment image to an image repository or you chose to use the `de-minimal`[image](https://catalog.redhat.com/en/software/containers/ansible-automation-platform-26/de-minimal-rhel9/66fed7ad6ae4c44aa5de8c72) located in [registry.redhat.io](http://registry.redhat.io/).
+- You have pushed a decision environment image to an image repository or you chose to use the `de-minimal`[image](https://catalog.redhat.com/en/search?q=de-minimal&searchType=Containers) located in [registry.redhat.io](http://registry.redhat.io/).
 
 ### Procedure
 

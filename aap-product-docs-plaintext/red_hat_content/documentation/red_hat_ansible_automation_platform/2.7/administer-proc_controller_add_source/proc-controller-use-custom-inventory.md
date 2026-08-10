@@ -23,6 +23,7 @@ keyed_groups:
 - key: os
 prefix: os
 ```
+
 Note:
 Refer to the official [Ansible documentation](https://console.redhat.com/ansible/automation-hub/repo/published/servicenow/itsm/content/inventory/now/) for detailed guidance on using and configuring the `servicenow.itsm.now` plugin.
 

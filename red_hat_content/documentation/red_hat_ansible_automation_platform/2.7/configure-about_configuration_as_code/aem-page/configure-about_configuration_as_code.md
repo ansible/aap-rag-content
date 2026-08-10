@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/configure-about_configuration_as_code/aem-page/configure-about_configuration_as_code.html"
 last_crumb = "Configuration as Code with the ansible.platform collection"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configuration as Code with the ansible.platform collection"
 oversized = "false"
@@ -65,7 +65,6 @@ The following example uses the `enforced` state to ensure that an organization h
     state: enforced
 ```
 
-
 Note:
 
 Not all modules support every state. The `settings` module has no `state` parameter and always applies changes. The `token` module supports only `present` and `absent` and is not idempotent. The `feature_flag` module defaults to `exists` instead of `present`, so you must explicitly set `state: present` to modify a flag. For a complete list of supported states per module, see the module reference.
@@ -106,6 +105,7 @@ The `ansible.platform` collection defines an action group called `gateway` that 
         organization: "My Organization"
         state: present
 ```
+
 You can also use environment variables instead of specifying connection parameters in your playbook. The recommended naming convention is to use `AAP_` prefixed variable names, but `GATEWAY_` prefixed names are also accepted for backward compatibility:
 
 - `AAP_HOSTNAME` or `GATEWAY_HOSTNAME`
@@ -121,6 +121,5 @@ You can authenticate to Ansible Automation Platform by using one of the followin
 
 - **Username and password**: Set the `aap_username` and `aap_password` module parameters.
 - **OAuth2 token**: Set the `aap_token` module parameter with a token string or a token object returned by the `ansible.platform.token` module.
-
 
 All authentication module parameters accept both `aap_` and `gateway_` prefixed names for backward compatibility.

@@ -1,6 +1,6 @@
 +++
-title = "Configure content signing on private automation hub - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_configure_content_signing_on_pah"
+title = "Configure content signing on private automation hub - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-proc_configure_content_signing_on_pah/aem-page/administer-proc_configure_content_signing_on_pah.html"
 last_crumb = "Configure content signing on private automation hub"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure content signing on private automation hub"
 oversized = "false"
@@ -46,6 +46,7 @@ To successfully sign and publish Ansible Certified Content Collections, you must
 ```
 {"file": "filename", "signature": "filename.asc"}
 ```
+
     All the file names are relative paths inside the current working directory. The file name must remain the same for the detached signature.
 
     **Example:** The following script produces signatures for content:
@@ -72,6 +73,7 @@ else
    exit $STATUS
 fi
 ```
+
     After you deploy a private automation hub with signing enabled to your Ansible Automation Platform cluster, new UI additions are displayed in collections.
 
 2.  Review the Ansible Automation Platform installer inventory file for options that begin with `automationhub_*`.
@@ -87,6 +89,7 @@ automationhub_require_content_approval = True
 automationhub_collection_signing_service_key = /abs/path/to/galaxy_signing_service.gpg
 automationhub_collection_signing_service_script = /abs/path/to/collection_signing.sh
 ```
+
     The two new keys (**automationhub_auto_sign_collections** and **automationhub_require_content_approval**) indicate that the collections must be signed and approved after they are uploaded to private automation hub.
 
 ## Download signature public keys
@@ -129,6 +132,7 @@ If a collection has been signed by automation hub, the server provides ASCII arm
 ```
 gpg --import --no-default-keyring --keyring ~/.ansible/pubring.kbx my-public-key.asc
 ```
+
   Note:
       In addition to any signatures provided by automation hub, signature sources can also be provided in the requirements file and on the command line. Signature sources should be URIs.
 
@@ -140,6 +144,7 @@ ansible-galaxy collection install namespace.collection
 --signature https://examplehost.com/detached_signature.asc
 --signature file:///path/to/local/detached_signature.asc --keyring ~/.ansible/pubring.kbx
 ```
+
     You can use this option multiple times to provide multiple signatures.
 
 3.  Confirm that the collections in a requirements file list any additional signature sources following the collection’s signatures key, as in the following example.
@@ -155,6 +160,7 @@ collections:
 
     ansible-galaxy collection verify -r requirements.yml --keyring ~/.ansible/pubring.kbx
 ```
+
     When you install a collection from automation hub, the signatures provided by the server are saved along with the installed collections to verify the collection’s authenticity.
 
 4.  (Optional) If you need to verify the internal consistency of your collection again without querying the Ansible Galaxy server, run the same command you used previously using the `--offline` option.

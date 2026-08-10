@@ -2,7 +2,7 @@
 
 Red Hat Customer Content Services
 
-[Legal Notice](https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#idm140547383478672)
+[Legal Notice](https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#idm139962681059392)
 
 **Abstract**
 

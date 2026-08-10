@@ -7,4 +7,3 @@ Jobs are the primary workload for automation controller and run on the execution
 - Workflow, sliced, and bulk jobs
 - System jobs
 
-

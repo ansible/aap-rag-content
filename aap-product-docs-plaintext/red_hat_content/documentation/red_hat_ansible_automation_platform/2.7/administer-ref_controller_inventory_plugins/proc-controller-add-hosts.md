@@ -30,6 +30,7 @@ ansible_ssh_pass : <password for the username>
 ansible_become_pass: <password for becoming the root>
 }
 ```
+
 Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two.
 
 8.  Click Create host.

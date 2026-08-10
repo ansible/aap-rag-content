@@ -20,7 +20,6 @@ Derive the total capacity by summing the resource consumed by parallel execution
 * 1000 tasks x 300 managed hosts per hour = 300,000 events per hour at minimum.
 * You must run the job to see exactly how many events it produces, because this is dependent on the specific task and verbosity. For example, a debug task printing “Hello World” produces 6 job events with the verbosity of 1 on one host. With a verbosity of 3, it produces 34 job events on one host. Therefore, you must estimate that the task produces at least 6 events. This would produce closer to 3,000,000 events per hour, or approximately 833 events per second.
 
-
 **Determining quantity of execution and control nodes needed**
 
 Reference the experimental results in the following table that shows the observed event processing rate of a single control node with 5 execution nodes of equal size (API Capacity column). The default “forks” setting of job templates is 5.
@@ -33,7 +32,6 @@ Using this default, the maximum number of jobs a control node can dispatch to ex
 | <br>4 CPU at 2.5Ghz, 16 GB RAM execution node, a maximum of 3000 IOPS disk | <br>n/a                          | <br>137                    | <br>n/a                  | <br>n/a                                           | <br>n/a                                           | <br>n/a                                          |
 | <br>4 CPU at 2.5Ghz, 16 GB RAM database node, a maximum of 3000 IOPS disk  | <br>n/a                          | <br>n/a                    | <br>n/a                  | <br>n/a                                           | <br>n/a                                           | <br>n/a                                          |
 
-
 Because controlling jobs competes with job event processing on the control node, over-provisioning control capacity can reduce processing times. When processing times are high, you can experience a delay between when the job runs and when you can view the output in the API or UI.
 
 For this example, for a workload on 300 managed hosts, executing 1000 tasks per hour per host, 10 concurrent jobs with forks set to 5 on playbooks, and an average event size 1 Mb, use the following procedure:
@@ -41,7 +39,6 @@ For this example, for a workload on 300 managed hosts, executing 1000 tasks per 
 - Deploy 1 execution node, 1 control node, 1 database node of 4 CPU at 2.5Ghz, 16 GB RAM, and disks that have about 3000 IOPS.
 - Keep the default fork setting of 5 on job templates.
 - Use the capacity change feature in the instance view of the UI on the control node to reduce the capacity down to 16, the lowest value, to reserve more of the control node’s capacity for processing events.
-
 
 For more information about workloads with high levels of API interaction, see [Scaling Automation Controller for API Driven Workloads](https://www.ansible.com/blog/scaling-automation-controller-for-api-driven-workloads). For more information about managing capacity with instances, see [Managing capacity with Instances](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_automation_mesh_operator_aap "Scaling your automation mesh is available on OpenShift deployments of Red Hat Ansible Automation Platform and is possible through adding or removing nodes from your cluster dynamically, using the Instances resource of the Ansible Automation Platform UI, without running the installation script."). For more information about operator-based deployments, see [Red Hat Ansible Automation Platform considerations for operator environments](/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_pod_spec_modifications "A pod in Kubernetes is the smallest deployable compute unit, consisting of one or more containers sharing networking and storage on a single host. Red Hat Ansible Automation Platform uses a default pod specification, which can be customized with a user-defined YAML or JSON document.").
 

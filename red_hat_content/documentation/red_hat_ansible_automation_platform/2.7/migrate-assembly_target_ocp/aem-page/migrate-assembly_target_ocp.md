@@ -1,7 +1,7 @@
 +++
-title = "Prepare the OpenShift Container Platform target environment and import migration content - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/migrate-assembly_target_ocp"
+template = "docs/aem-title.html"
+title = "Import migration content to OCP manually - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/migrate-assembly_target_environment/", "Prepare, configure, and validate the target environment"]]
@@ -9,10 +9,10 @@ category = "Migrate"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/migrate-assembly_target_ocp/aem-page/migrate-assembly_target_ocp.html"
-last_crumb = "Prepare the OpenShift Container Platform target environment and import migration content"
-modified = "2026-06-05T07:48:10.594Z"
+last_crumb = "Import migration content to OCP manually"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
-name = "Prepare the OpenShift Container Platform target environment and import migration content"
+name = "Import migration content to OCP manually"
 oversized = "false"
 page_slug = "migrate-assembly_target_ocp"
 portal_content_subtype = "title"
@@ -25,7 +25,7 @@ toc = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/migrate-asse
 type = "aem-page"
 +++
 
-# Prepare the OpenShift Container Platform target environment and import migration content
+# Import migration content to OCP manually
 
 Prepare and assess your target OpenShift Container Platform environment, and import and reconcile your migrated content.
 
@@ -46,11 +46,15 @@ Transfer the migration artifact, create an OpenShift Container Platform project,
 
 To import your environment, scale down Ansible Automation Platform components, restore databases, replace encryption secrets, and scale services back up.
 
+### Before you begin
+
+- The Ansible Automation Platform deployment is named `aap` in the default `aap` namespace with all default database names and database users.
+
 ### About this task
 
 Note:
 
-The import process requires the latest version of Ansible Automation Platform named `aap` in the default `aap` namespace and all default database names and database users.
+To import migration content manually using `oc` commands, scale down Ansible Automation Platform components, restore databases, replace encryption secrets, and scale services back up. If your source environment is an RPM, containerized, or OCP operator deployment, use the `ansible.aap_snapshot` collection import procedure instead. See [Import Ansible Automation Platform data into an OCP deployment](/documentation/en-us/red_hat_ansible_automation_platform/2.7/import_ansible_automation_platform_data_into_an_ocp_deployment "Run the artifact_import playbook from the ansible.aap_snapshot collection to restore your Ansible Automation Platform configuration, credentials, and content onto an OpenShift Container Platform operator-managed deployment.") .
 
 ### Procedure
 
@@ -80,6 +84,7 @@ pod/resource-operator-controller-manager-86b8f7bb54-cvz6d             2/2     Ru
 ```
 oc scale --replicas=0 deployment aap-gateway-operator-controller-manager automation-controller-operator-controller-manager
 ```
+
         Example output:
 
 ```
@@ -177,6 +182,7 @@ export AAP_TEMP_POSTGRES=$(oc get pods --no-headers -o custom-columns="metadata.
 ```
 echo $AAP_TEMP_POSTGRES
 ```
+
         Example output:
 
 ```
@@ -218,6 +224,7 @@ oc exec -it deployment.apps/aap-temp-postgres -- /bin/bash
 ```
 cd /tmp/aap-temp-pvc && ls -l
 ```
+
         Example output:
 
 ```
@@ -233,6 +240,7 @@ drwxrws---. 2 root       1000900000   16384 Jun 13 17:40 lost+found
 ```
 sha256sum --check artifact.tar.sha256
 ```
+
         Example output:
 
 ```
@@ -245,6 +253,7 @@ artifact.tar: OK
 ```
 tar xf artifact.tar && cd artifact && sha256sum --check sha256sum.txt
 ```
+
         Example output:
 
 ```
@@ -341,6 +350,7 @@ oc delete -f aap-temp-pvc.yaml
 ```
 oc scale --replicas=1 deployment aap-gateway-operator-controller-manager automation-controller-operator-controller-manager
 ```
+
         Example output:
 
 ```
@@ -370,6 +380,7 @@ localhost                  : ok=45   changed=0    unreachable=0    failed=0    s
 ```
 oc patch ansibleautomationplatform aap --type=merge -p '{"spec":{"idle_aap":false}}'
 ```
+
         Example output:
 
 ```
@@ -385,6 +396,7 @@ pod/aap-gateway-6c989b846c-47b91 2/2 Running 0 45s
 ```
 for i in HTTPPort Route ServiceNode; do oc exec -it deployment.apps/aap-gateway -- aap-gateway-manage shell -c 'from aap_gateway_api.models import '$i';print('$i'.objects.all().delete())'; done
 ```
+
     Example output:
 
 ```
@@ -406,6 +418,7 @@ export AAP_CONTROLLER_POD=$(oc get pods --no-headers -o custom-columns=":metadat
 ```
 echo $AAP_CONTROLLER_POD
 ```
+
         Example output:
 
 ```
@@ -419,6 +432,7 @@ aap-controller-task-759b6d9759-r59q9
 oc exec -it $AAP_CONTROLLER_POD -- /bin/bash
 awx-manage list_instances
 ```
+
         Example output:
 
 ```

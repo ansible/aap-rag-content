@@ -1,7 +1,7 @@
 +++
+title = "Configure playbooks to use source control management (SCM) systems - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_projects_manage_playbooks_with_source_control"
 template = "docs/aem-title.html"
-title = "Configure playbooks to use source control management (SCM) systems - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_controller_projects/", "Logically group playbooks with projects"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-ref_projects_manage_playbooks_with_source_control/aem-page/develop-ref_projects_manage_playbooks_with_source_control.html"
 last_crumb = "Configure playbooks to use source control management (SCM) systems"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure playbooks to use source control management (SCM) systems"
 oversized = "false"
@@ -137,6 +137,7 @@ If this file is found, the following command automatically runs:
 ```
 ansible-galaxy role install -r roles/requirements.yml -p <project-specific cache location>/requirements_roles -vvv
 ```
+
 This file enables you to reference Ansible Galaxy roles or roles within other repositories which can be checked out in conjunction with your own project. The addition of Ansible Galaxy access eliminates the need to create git submodules to achieve this result. Given that SCM projects, along with roles or collections, are pulled into and executed from a private job environment, a `<private job directory>` specific to the project within `/tmp` is created by default.
 
 The cache directory is a subdirectory inside the global projects folder. You can copy the content from the cache location to `<job private directory>/requirements_roles`.
@@ -162,7 +163,6 @@ If there are any directories that must be specifically exposed, you can specify 
 ```
 AWX_ISOLATION_SHOW_PATHS = ['/list/of/', '/paths']
 ```
-
 
  Note:
 

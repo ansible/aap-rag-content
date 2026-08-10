@@ -36,7 +36,6 @@ The dynamic plug-in init container does not use cluster-level image mirror confi
 | `ansible-automation-platform/automation-portal:<plugin-version>`                                                                   | `registry.redhat.io` | Ansible plug-in OCI artifacts (OCI delivery only)                                    |
 | `rhdh/rhdh-plugin-catalog-index-rhel9:<rhdh_version>`                                                                              | `registry.redhat.io` | Plug-in catalog index (rebuilt by `mirror-plugins.sh`)                               |
 
-
 Replace version placeholders with the versions bundled with your Helm chart. See the [Ansible Automation Portal Lifecycle](https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-lifecycle) page for version mappings.
 
 ### Procedure
@@ -49,6 +48,7 @@ $ skopeo copy \
 docker://registry.redhat.io/rhdh/rhdh-hub-rhel9:<rhdh_version> \
 docker://<disconnected_registry_url>/rhdh/rhdh-hub-rhel9:<rhdh_version>
 ```
+
 This image is used for both the main application container and the `install-dynamic-plugins` init container. Replace `<rhdh_version>` with the Red Hat Developer Hub version bundled with your Helm chart.
 
 2.  If you use the built-in PostgreSQL database, copy the PostgreSQL image.
@@ -59,6 +59,7 @@ $ skopeo copy \
 docker://registry.redhat.io/rhel9/postgresql-<version>:<tag> \
 docker://<disconnected_registry_url>/rhel9/postgresql-<version>:<tag>
 ```
+
 Replace `<version>` with the PostgreSQL major version and `<tag>` with the image tag bundled with your Helm chart. See the [Ansible Automation Portal Lifecycle](https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-lifecycle) page for version mappings.
 
 3.  Copy the plug-in catalog index image:
@@ -69,6 +70,7 @@ $ skopeo copy \
 docker://registry.redhat.io/rhdh/rhdh-plugin-catalog-index-rhel9:<rhdh_version> \
 docker://<disconnected_registry_url>/rhdh/rhdh-plugin-catalog-index-rhel9:<rhdh_version>
 ```
+
 The Mirror dynamic plug-in artifacts procedure rebuilds this image with updated registry references. You must still mirror the original image because the script uses it as its source.
 
 4.  If you use OCI container delivery, copy the Ansible plug-ins OCI artifacts image:
@@ -88,6 +90,7 @@ $ skopeo copy \
 docker://registry.redhat.io/ansible-automation-platform-25/ansible-dev-tools-rhel8:latest \
 docker://<disconnected_registry_url>/ansible-automation-platform-25/ansible-dev-tools-rhel8:latest
 ```
+
 **Ansible Automation Platform 2.6:**
 
 ```terminal
@@ -103,5 +106,6 @@ Verify that each image is accessible in your disconnected registry. For example:
 ```terminal
 $ skopeo inspect docker://<disconnected_registry_url>/rhdh/rhdh-hub-rhel9:<rhdh_version>
 ```
+
 A successful response returns the image manifest metadata. An error indicates the image was not mirrored correctly.
 

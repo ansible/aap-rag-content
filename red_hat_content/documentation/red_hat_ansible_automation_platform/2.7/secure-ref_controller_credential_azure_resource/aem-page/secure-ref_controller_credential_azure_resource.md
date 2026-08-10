@@ -1,7 +1,7 @@
 +++
 template = "docs/aem-title.html"
-title = "Microsoft Azure Resource Manager credential type - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_azure_resource"
+title = "Microsoft Azure Resource Manager credential type - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_credentials/", "Configure credentials to authenticate remote systems and services"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_azure_resource/aem-page/secure-ref_controller_credential_azure_resource.html"
 last_crumb = "Microsoft Azure Resource Manager credential type"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Microsoft Azure Resource Manager credential type"
 oversized = "false"
@@ -39,7 +39,6 @@ Microsoft Azure Resource Manager credentials require the following inputs:
 - **Tenant ID**: The Tenant ID for the Microsoft Azure account.
 - **Azure Cloud Environment**: The variable associated with Azure cloud or Azure stack environments.
 
-
 These fields are equivalent to the variables in the API.
 
 To pass service principal credentials, define the following variables:
@@ -51,6 +50,7 @@ AZURE_SUBSCRIPTION_ID
 AZURE_TENANT
 AZURE_CLOUD_ENVIRONMENT
 ```
+
 To pass an Active Directory username and password pair, define the following variables:
 
 ```
@@ -58,6 +58,7 @@ AZURE_AD_USER
 AZURE_PASSWORD
 AZURE_SUBSCRIPTION_ID
 ```
+
 You can also pass credentials as parameters to a task within a playbook. The order of precedence is parameters, then environment variables, and finally a file found in your home directory.
 
 To pass credentials as parameters to a task, use the following parameters for service principal credentials:
@@ -69,6 +70,7 @@ subscription_id
 tenant
 azure_cloud_environment
 ```
+
 Alternatively, pass the following parameters for Active Directory username and password:
 
 ```

@@ -10,7 +10,6 @@ Custom credentials support the following ways of injecting their authentication 
 - Ansible extra variables
 - File-based templating, which means generating `.ini` or `.conf` files that contain credential values
 
-
 You can attach one SSH and multiple cloud credentials to a job template. Each cloud credential must be of a different type. Only one of each type of credential is permitted. Vault credentials and machine credentials are separate entities.
 
 Note:

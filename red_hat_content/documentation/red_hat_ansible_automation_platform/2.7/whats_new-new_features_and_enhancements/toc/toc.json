@@ -10,7 +10,7 @@
       "singlePageAnchor": null,
       "sections": [
         {
-          "title": "Automation portal Red Hat Enterprise Linux appliance",
+          "title": "The Configuration as Code with the ansible.platform collection",
           "visible": true,
           "weight": 1,
           "urlFragment": "aap-27-20260603___automation_portal_red_hat_enterprise_linux_appliance",
@@ -42,7 +42,7 @@
           "singlePageAnchor": "aap-27-20260603___installation_and_upgrades"
         },
         {
-          "title": "The MCP server for Red Hat Ansible Automation Platform",
+          "title": "General availability of the MCP server for Red Hat Ansible Automation Platform",
           "visible": true,
           "weight": 5,
           "urlFragment": "aap-27-20260603___mcp_tech_preview",

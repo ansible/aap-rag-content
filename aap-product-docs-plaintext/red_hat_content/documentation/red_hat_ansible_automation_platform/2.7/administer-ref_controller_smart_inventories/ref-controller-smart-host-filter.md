@@ -10,6 +10,7 @@ For example:
 ```
 /api/v2/hosts?host_filter=ansible_facts__ansible_processor_vcpus=8
 ```
+
 The `host_filter` parameter permits:
 
 - grouping with ()
@@ -19,7 +20,6 @@ The `host_filter` parameter permits:
 * `[] is used to denote a json array in the path specification
 * `""` can be used in the value when spaces are wanted in the value
 - "classic" Django queries may be embedded in the `host_filter`
-
 
 **Examples**:
 
@@ -32,6 +32,7 @@ The `host_filter` parameter permits:
 /api/v2/hosts/?host_filter=ansible_facts__ansible_env__PYTHONUNBUFFERED="true"
 /api/v2/hosts/?host_filter=(name=localhost or name=database) and (groups__name=east or groups__name="west coast") and ansible_facts__an
 ```
+
 You can search `host_filter` by **host name**, **group name**, and **Ansible facts**.
 
 Group search has the following format:
@@ -39,17 +40,18 @@ Group search has the following format:
 ```
 groups.name:groupA
 ```
+
 Fact search has the following format:
 
 ```
 ansible_facts.ansible_fips:false
 ```
+
 You can also perform Smart Search searches, which consist of a host name and host description.
 
 ```
 host_filter=name=my_host
 ```
-
 
 Note:
 

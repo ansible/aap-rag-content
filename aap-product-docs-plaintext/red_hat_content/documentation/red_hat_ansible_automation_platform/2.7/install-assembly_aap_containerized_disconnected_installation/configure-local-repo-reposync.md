@@ -32,12 +32,14 @@ $ sudo dnf install yum-utils
 $ sudo reposync -m --download-metadata --gpgcheck \
 -p <path_to_download>
 ```
+
 For example:
 
 ```
 $ sudo reposync -m --download-metadata --gpgcheck \
 -p rhel-repos
 ```
+
 - Use reposync with the `--download-metadata` option and without the `--newest-only` option for optimal download time.
 
 4.  After the `reposync` operation is complete, compress the directory:

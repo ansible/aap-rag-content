@@ -36,24 +36,9 @@ type: service
 parameters:
 - title: "Please enter the following details"
 required:
-- token
 - inventory
 - app_name
 properties:
-# Always present: OAuth token for AAP authentication (hidden from user)
-token:
-title: Token
-type: string
-description: Oauth2 token
-ui:field: AAPTokenField
-ui:widget: hidden
-ui:backstage:
-review:
-show: false
-ui:options:
-disabled: true
-hidden: true
-
 # AAP artifact: "Prompt on Launch" -> Inventory
 inventory:
 title: Inventory
@@ -75,7 +60,7 @@ steps:
 name: Deploy Application
 action: rhaap:launch-job-template
 input:
-token: ${{ parameters.token }}
+token: ${{ secrets.aapToken }}
 values:
 # AAP artifact: Job Template name identifies which template to launch
 template: Deploy Application
@@ -97,16 +82,16 @@ content: |
 
 The following table maps each generated field to its Ansible Automation Platform source:
 
-| Ansible Automation Platform source | Ansible Automation Platform value             | Generated field               | Transformation                                                                                   |
-| ---------------------------------- | --------------------------------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------ |
-| N/A                                | `default`                                     | `metadata.namespace`          | Hardcoded to `default`.                                                                          |
-| Job Template > Name                | Deploy Application                            | `metadata.name`               | Lowercase with hyphens.                                                                          |
-| Job Template > Name                | Deploy Application                            | `metadata.title`              | Copied directly.                                                                                 |
-| Job Template > Description         | Deploy application to target environment      | `metadata.description`        | Copied directly.                                                                                 |
-| Job Template > Labels              | `automation`, `aap`                           | `metadata.tags`               | Lowercase, special characters replaced with hyphens.                                             |
-| Always present                     | OAuth2 token                                  | `parameters.token`            | Auto-populated and hidden from user.                                                             |
-| Prompt on Launch > Inventory       | Production Servers                            | `parameters.inventory`        | `AAPResourcePicker`; user selects by name, resolved to Ansible Automation Platform ID at launch. |
-| Survey > Question 1                | app\_name (text, required, default: "my-app") | `parameters.app_name`         | Variable, title, type, and default copied from Survey spec.                                      |
-| Job Template > Name                | Deploy Application                            | `input.values.template`       | Identifies which Ansible Automation Platform Job Template to launch.                             |
-| Prompt on Launch value             | `${{ parameters.inventory }}`                 | `input.values.inventory`      | Name resolved to Ansible Automation Platform ID at launch.                                       |
-| Survey answers                     | `${{ parameters.app_name }}`                  | `input.values.extraVariables` | Passed as `extra_vars` to the Ansible Automation Platform Job.                                   |
+| Ansible Automation Platform source | Ansible Automation Platform value             | Generated field               | Transformation                                                                                       |
+| ---------------------------------- | --------------------------------------------- | ----------------------------- | ---------------------------------------------------------------------------------------------------- |
+| N/A                                | `default`                                     | `metadata.namespace`          | Hardcoded to `default`.                                                                              |
+| Job Template > Name                | Deploy Application                            | `metadata.name`               | Lowercase with hyphens.                                                                              |
+| Job Template > Name                | Deploy Application                            | `metadata.title`              | Copied directly.                                                                                     |
+| Job Template > Description         | Deploy application to target environment      | `metadata.description`        | Copied directly.                                                                                     |
+| Job Template > Labels              | `automation`, `aap`                           | `metadata.tags`               | Lowercase, special characters replaced with hyphens.                                                 |
+| Always present                     | OAuth2 token                                  | `secrets.aapToken`            | Auto-injected by the portal into the Backstage secrets context. Not included in template parameters. |
+| Prompt on Launch > Inventory       | Production Servers                            | `parameters.inventory`        | `AAPResourcePicker`; user selects by name, resolved to Ansible Automation Platform ID at launch.     |
+| Survey > Question 1                | app\_name (text, required, default: "my-app") | `parameters.app_name`         | Variable, title, type, and default copied from Survey spec.                                          |
+| Job Template > Name                | Deploy Application                            | `input.values.template`       | Identifies which Ansible Automation Platform Job Template to launch.                                 |
+| Prompt on Launch value             | `${{ parameters.inventory }}`                 | `input.values.inventory`      | Name resolved to Ansible Automation Platform ID at launch.                                           |
+| Survey answers                     | `${{ parameters.app_name }}`                  | `input.values.extraVariables` | Passed as `extra_vars` to the Ansible Automation Platform Job.                                       |

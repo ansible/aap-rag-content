@@ -27,6 +27,7 @@ $ oc create secret generic portal-postgresql-external \
 --from-literal=POSTGRES_PORT=5432 \
 -n *namespace*
 ```
+
 Replace *database-user* with your PostgreSQL user name, *database-host* with your PostgreSQL server hostname or IP address, and *namespace* with the namespace where Ansible automation portal is installed.
 
 **Using the OpenShift Container Platform web console:**
@@ -68,6 +69,7 @@ password: ${POSTGRES_PASSWORD}
 extraEnvVarsSecrets:
 - portal-postgresql-external
 ```
+
 - `postgresql.enabled: false` disables the embedded PostgreSQL instance.
 - `postgresql.auth.existingSecret` points the Helm chart's internal secret references to your external credential secret. This ensures the `POSTGRESQL_ADMIN_PASSWORD` environment variable, which the chart injects unconditionally, resolves to a valid secret.
 - `postgresql.auth.secretKeys.adminPasswordKey` tells the chart which key in your secret contains the database password, so you need only one password key in your secret.
@@ -91,6 +93,7 @@ postgres-ca.pem: |-
 -----END CERTIFICATE-----
 EOF
 ```
+
 If your PostgreSQL server uses client certificate authentication (mTLS), add `postgres-key.key` and `postgres-crt.pem` entries to the secret. For server-only TLS verification, only `postgres-ca.pem` is required.
 
 Add `PGSSLMODE` and `NODE_EXTRA_CA_CERTS` to your credential secret:
@@ -99,6 +102,7 @@ Add `PGSSLMODE` and `NODE_EXTRA_CA_CERTS` to your credential secret:
 $ oc -n *namespace* patch secret portal-postgresql-external --type merge -p \
 '{"stringData":{"PGSSLMODE":"verify-full","NODE_EXTRA_CA_CERTS":"/opt/app-root/src/postgres-ca.pem"}}'
 ```
+
 Then add the TLS configuration and volume mount to your Helm chart values. Merge these settings with the configuration from the previous step:
 
 ```yaml
@@ -131,6 +135,7 @@ extraVolumeMounts:
 mountPath: /opt/app-root/src/postgres-ca.pem
 subPath: postgres-ca.pem
 ```
+
 If your PostgreSQL server requires client certificate authentication (mTLS), add the following to the `ssl` block and mount the additional certificate files:
 
 ```yaml
@@ -143,6 +148,7 @@ $file: /opt/app-root/src/postgres-key.key
 cert:
 $file: /opt/app-root/src/postgres-crt.pem
 ```
+
 Add the corresponding volumes and mounts for the client key and certificate alongside the `postgres-ca` entries.
 
 4.  Apply the configuration by upgrading your Ansible automation portal Helm release.
@@ -153,6 +159,7 @@ $ helm upgrade *release-name* *chart-name* \
 -f values.yaml \
 -n *namespace*
 ```
+
 Replace *release-name* with your Helm release name and *chart-name* with the Ansible automation portal chart reference.
 
 **Using the OpenShift Container Platform web console:**
@@ -169,6 +176,7 @@ Replace *release-name* with your Helm release name and *chart-name* with the Ans
 ```terminal
 $ oc get pods -n *namespace* -w
 ```
+
 In the OpenShift Container Platform web console, navigate to **Workloads** > **Pods** in your namespace. Wait until all Ansible automation portal pods show a status of **Running**.
 
 ## Results
@@ -178,6 +186,7 @@ In the OpenShift Container Platform web console, navigate to **Workloads** > **P
 ```terminal
 $ oc get pods -n *namespace*
 ```
+
 All Ansible automation portal pods should show a status of `Running`.
 
 2. Check the Ansible automation portal logs to confirm the database connection:
@@ -185,6 +194,7 @@ All Ansible automation portal pods should show a status of `Running`.
 ```terminal
 $ oc logs -n *namespace* deploy/*release-name*-rhaap-portal | grep -i "database\|postgres"
 ```
+
 You should see log entries indicating a successful database connection without errors.
 
 3. Connect to your external PostgreSQL database and verify that Ansible automation portal created the required databases. You should see multiple databases created by Ansible automation portal, one per plugin.

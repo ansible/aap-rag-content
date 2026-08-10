@@ -1,5 +1,5 @@
 # Understanding Ansible Automation Platform synchronization
-## Troubleshooting Ansible Automation Platform synchronization
+## Troubleshoot Ansible Automation Platform synchronization
 ### No Job Templates appearing in portal
 
 **Issue:** Expected Job Templates are missing from the portal interface.

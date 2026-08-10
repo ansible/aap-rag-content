@@ -1,16 +1,16 @@
 +++
 title = "Apply configuration changes - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_apply_configuration_changes"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_apply_configuration_changes"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_app_ee_builder/", "Configure a GitHub App for content discovery"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-build_execution_environments_with_the_automation_portal/", "Build execution environments with automation portal"]]
 category = "Develop"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_apply_configuration_changes/aem-page/develop-proc_apply_configuration_changes.html"
 last_crumb = "Apply configuration changes"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Apply configuration changes"
 oversized = "false"
@@ -41,6 +41,7 @@ You can apply changes at any point — you do not need to complete all configura
 ```
 $ helm upgrade <release_name> <chart_name> -f <values_file> -n <namespace>
 ```
+
     **OpenShift — web console:**
 
   1. Navigate to **Helm > Installed Helm Charts**.
@@ -54,8 +55,9 @@ $ sudo systemctl stop portal.service
 $ sudo podman rm -f portal
 $ sudo systemctl start portal.service
 ```
+
   Note:
-      The `daemon-reload` and `stop/rm/start` sequence is required when Quadlet drop-in files have been added or changed (for example, after adding EE Builder secrets). If you only changed `app-config.production.yaml` without modifying drop-in files, `sudo systemctl restart portal` is sufficient.
+      The `daemon-reload` and `stop/rm/start` sequence is required when Podman secrets have been added or changed. If you only changed `app-config.production.yaml` without modifying secrets, `sudo systemctl restart portal` is sufficient.
 
 2.  Verify that the service is running.
       **OpenShift — CLI:**
@@ -64,6 +66,7 @@ $ sudo systemctl start portal.service
 $ oc rollout status deployment -n <namespace>
 $ oc get pods -n <namespace>
 ```
+
     **OpenShift — web console:**
 
     Navigate to **Workloads > Pods**. Filter by your namespace and verify that all pods show Running status with no restarts.

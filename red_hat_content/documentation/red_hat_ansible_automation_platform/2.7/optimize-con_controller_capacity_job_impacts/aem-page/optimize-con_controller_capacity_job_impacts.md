@@ -1,6 +1,6 @@
 +++
-title = "Job type impact on capacity - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Job type impact on capacity - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_controller_capacity_job_impacts"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-con_controller_capacity_job_impacts/aem-page/optimize-con_controller_capacity_job_impacts.html"
 last_crumb = "Job type impact on capacity"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Job type impact on capacity"
 oversized = "false"
@@ -50,7 +50,6 @@ Job types including the following, have a fixed impact:
 - Inventory updates: 1
 - Project updates: 1
 - System jobs: 5
-
 
 Note:
 

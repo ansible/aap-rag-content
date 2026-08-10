@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-ref_dynamic_toggle_fields/aem-page/develop-ref_dynamic_toggle_fields.html"
 last_crumb = "Show or hide fields based on a toggle"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Show or hide fields based on a toggle"
 oversized = "false"
@@ -59,4 +59,5 @@ parameters:
                   title: Max sync delay (ms)
                   default: 500
 ```
+
 When `showAdvanced` is `true`, the form displays `maxSyncDelay`. When `showAdvanced` is `false`, the field is hidden.

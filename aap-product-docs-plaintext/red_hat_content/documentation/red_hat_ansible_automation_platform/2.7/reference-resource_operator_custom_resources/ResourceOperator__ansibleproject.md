@@ -15,7 +15,6 @@ Creates a project (a logical collection of Ansible playbooks) on the automation 
 | `description`        | String | Description of the project.                                                                 | -              |
 | `runner_pull_policy` | String | Image pull policy for the runner pod. Options: `Always`, `Never`, `IfNotPresent`.           | `IfNotPresent` |
 
-
 **Example:**
 
 ```

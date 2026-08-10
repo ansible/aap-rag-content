@@ -9,11 +9,9 @@ The following are the benefits of the MCP server:
 - Provides a standardized interface for securely querying infrastructure data and executing automation workflows within the Ansible Automation Platform.
 - Enables agentic workflows to interact with the Ansible Automation Platform.
 
-
 **For Ansible users**:
 
 - Provides the ability to use the chatbot interface of their preferred external AI tool to get information about their Ansible Automation Platform environment, and run automation jobs directly through that tool.
-
 
 **For developers**:
 

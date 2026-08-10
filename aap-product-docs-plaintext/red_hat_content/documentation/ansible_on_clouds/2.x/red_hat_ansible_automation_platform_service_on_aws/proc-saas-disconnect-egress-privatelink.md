@@ -1,0 +1,57 @@
+# 7. Red Hat Ansible Automation Platform Service on AWS Private Link Connectivity
+## 7.6. Disconnecting and deleting AWS PrivateLink connectivity
+### 7.6.2. Disconnecting Egress AWS PrivateLink connectivity (PUSH model)
+
+This procedure removes Egress PrivateLink connectivity used for the PUSH model, including control plane access to private execution nodes, Git, and private automation hub in your VPC.
+
+**Procedure**
+
+1. Submit a **separate** [Customer support](https://access.redhat.com/support/cases/?extIdCarryOver=true&sc_cid=RHCTG0250000454096#/case/new/get-support?caseCreate=true) case to request Egress PrivateLink disconnection. Include the following in your request:
+
+- **AWS Account ID**
+- **Deployment ID**
+- **Endpoint Service Name**
+- **Service Regions/AZs**
+
+2. Wait for Red Hat to delete the consumer VPC endpoint on the control plane side and confirm that you can proceed.
+
+
+Important
+Do not delete your Endpoint Service, NLB, or related components until Red Hat confirms removal on the control plane side. Deleting customer-side resources first can leave the connection in a failed or disconnected state and prevent a clean teardown.
+
+3. After Red Hat confirms removal, remove split-horizon DNS configuration for the private resources that were accessed through PrivateLink.
+
+4. Delete the AWS Endpoint Service, NLB, and any other AWS resources that were created solely for this Egress PrivateLink connection.
+
+5. Verify connectivity:
+
+- Confirm whether PUSH model execution nodes or private resources such as Git and private automation hub still require access from the control plane.
+- If alternate connectivity is required, configure it before you decommission the Endpoint Service and NLB.
+
+**Egress PrivateLink disconnection request template**
+
++
+
+```
+Subject:
+Request to Disconnect Egress PrivateLink: <Instance ID>
+
+Body:
+Hello Red Hat Support,
+
+We would like to disconnect Egress PrivateLink connectivity for our AAP on AWS instance. This PrivateLink connection is used for PUSH model access from the AAP control plane to our private resources (for example, execution nodes, private automation hub, and Git).
+
+Deployment details:
+AAP Deployment Name/ID: <for example, ans-123456>
+
+Configuration details:
+Our AWS Account ID: <Your 12-digit AWS Account ID>
+Our Endpoint Service Name: <for example, com.amazonaws.vpce.us-east-1.vpce-svc-xxxxxxxx>
+Service Regions/AZs: <for example, us-east-1 / us-east-1a, us-east-1b>
+
+Action required:
+Please delete the consumer VPC endpoint on the control plane side and confirm when we can safely delete our Endpoint Service, NLB, and related AWS resources.
+
+Thank you.
+```
+

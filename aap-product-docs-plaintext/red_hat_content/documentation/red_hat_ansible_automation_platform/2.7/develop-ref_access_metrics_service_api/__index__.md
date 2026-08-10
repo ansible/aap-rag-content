@@ -11,7 +11,6 @@ Metrics service exposes a REST API at `/api/v1/` with endpoints for task managem
 - **Containerized installer**: `https://<gateway-route>/api/metrics/v1/` (via Gateway route)
 - **OpenShift operator**: `https://<gateway-route>/api/v1/` (via Gateway route)
 
-
 **Authentication:**
 
 API requests require authentication using Ansible Automation Platform Gateway credentials. Include a valid authentication token in the request headers:
@@ -19,6 +18,7 @@ API requests require authentication using Ansible Automation Platform Gateway cr
 ```
 curl -H "Authorization: Bearer <token>" https://<gateway-route>/api/metrics/v1/health/
 ```
+
 For local development or troubleshooting on the metrics service host, you can access the API directly (bypassing Gateway authentication):
 
 ```
@@ -55,6 +55,7 @@ oc exec deployment/metrics-service-web -n <namespace> -- curl http://localhost:8
 }
 }
 ```
+
 **Status values:**
 
 | Status      | Meaning                                             | Action                             |
@@ -62,7 +63,6 @@ oc exec deployment/metrics-service-web -n <namespace> -- curl http://localhost:8
 | `good`      | All components healthy                              | No action required                 |
 | `degraded`  | Some components unhealthy but service functional    | Investigate degraded components    |
 | `unhealthy` | Critical components failing, service non-functional | Immediate troubleshooting required |
-
 
 **Example usage:**
 
@@ -79,12 +79,12 @@ targets:
 - https://<gateway-route>/api/metrics/v1/health/
 bearer_token: <token>
 ```
+
 **Response codes:**
 
 - `200 OK`: Service is healthy (`status: "good"`)
 - `503 Service Unavailable`: Service is degraded or unhealthy
 - `401 Unauthorized`: Invalid or missing authentication token (Gateway access only)
-
 
 **/api/v1/tasks/**
 
@@ -102,7 +102,6 @@ bearer_token: <token>
 | `status`  | string  | Filter by task status (`success`,`failure`,`running`,`pending`) | `?status=failure`              |
 | `limit`   | integer | Maximum results to return (default: 50, max: 500)               | `?limit=100`                   |
 | `offset`  | integer | Pagination offset                                               | `?offset=50`                   |
-
 
 **Response schema:**
 
@@ -133,6 +132,7 @@ bearer_token: <token>
 ]
 }
 ```
+
 **Example usage:**
 
 ```
@@ -148,13 +148,13 @@ curl https://<gateway-route>/api/metrics/v1/tasks/?status=failure \
 curl https://<gateway-route>/api/metrics/v1/tasks/?name=daily_anonymize_and_prepare \
 -H "Authorization: Bearer <token>"
 ```
+
 **Use cases:**
 
 - Monitor task success rates over time
 - Identify which collectors are failing
 - Troubleshoot collection pipeline performance
 - Alert on task failures (integrate with monitoring systems)
-
 
 **/api/metrics/v1/feature_flag_state/**
 
@@ -173,7 +173,6 @@ This endpoint exposes internal feature enablement settings used for troubleshoot
 - Red Hat Support troubleshooting: Verify internal settings during support cases
 - Support-guided opt-out verification: Confirm settings after Red Hat Support applies opt-out configuration
 
-
 **Example usage (support-guided only):**
 
 ```
@@ -181,12 +180,12 @@ This endpoint exposes internal feature enablement settings used for troubleshoot
 curl https://<gateway-route>/api/metrics/v1/feature_flag_state/ \
 -H "Authorization: Bearer <token>"
 ```
+
 **Response includes internal settings:**
 
 - `METRICS_COLLECTION`: Controls local data collection
 - `ANONYMIZED_DATA_COLLECTION`: Controls transmission to Red Hat
 - `DASHBOARD_COLLECTION`: Controls dashboard-specific data
-
 
 For information about these settings, contact Red Hat Support.
 
@@ -208,7 +207,6 @@ This endpoint exposes internal feature enablement settings used for troubleshoot
 - Support-guided configuration: Red Hat Support may use this endpoint to apply configuration changes
 - Audit trail: Track configuration changes made by Red Hat Support
 
-
 **Example usage (support-guided only):**
 
 ```
@@ -216,7 +214,6 @@ This endpoint exposes internal feature enablement settings used for troubleshoot
 curl https://<gateway-route>/api/v1/settings/ \
 -H "Authorization: Bearer <token>"
 ```
-
 
 Note:
 
@@ -236,6 +233,7 @@ https://<gateway-route>/api/v1/tasks/         → metrics-service-web:8006/api/v
 https://<gateway-route>/api/v1/feature_flag_state/ → metrics-service-web:8006/api/v1/feature_flag_state/
 https://<gateway-route>/api/v1/settings/      → metrics-service-web:8006/api/v1/settings/
 ```
+
 **Troubleshooting routing issues:**
 
 If API requests return `404 Not Found` when accessing through Gateway:
@@ -244,7 +242,6 @@ If API requests return `404 Not Found` when accessing through Gateway:
 2. Check Gateway logs for routing errors
 3. Verify metrics service pods are running
 4. Test direct access to metrics service (bypass Gateway) to isolate routing vs service issues
-
 
 **Authentication**
 
@@ -261,6 +258,7 @@ curl -X POST https://<gateway-route>/api/gateway/v1/tokens/ \
 "password": "<password>"
 }'
 ```
+
 Response:
 
 ```
@@ -269,12 +267,14 @@ Response:
 "expires": "2026-05-20T18:00:00Z"
 }
 ```
+
 Use the token in subsequent API requests:
 
 ```
 curl https://<gateway-route>/api/v1/health/ \
 -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 ```
+
 **Service accounts:**
 
 For automation and monitoring integrations, create a dedicated service account with minimal privileges:
@@ -290,6 +290,7 @@ curl -X POST https://<gateway-route>/api/gateway/v1/service_accounts/ \
 "scopes": ["metrics:read"]
 }'
 ```
+
 **Troubleshooting authentication:**
 
 | Error              | Cause                    | Solution                                                                      |
@@ -314,6 +315,7 @@ static_configs:
 - targets:
 - '<gateway-route>'
 ```
+
 **Nagios monitoring**
 
 ```
@@ -338,6 +340,7 @@ echo "CRITICAL: metrics service is unreachable"
 exit 2
 fi
 ```
+
 **Ansible playbook integration**
 
 ```

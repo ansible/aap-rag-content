@@ -15,7 +15,6 @@ The events summary displays the following events that are run as part of this pl
 
 ![Job events summary](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-jobs-events-summary.png)
 
-
 You can Relaunch job, Cancel job, download ![Download](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/download.png) the job output, or delete ![Delete](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/delete-button.png) the job.
 
 Hover over a section of the host status bar in the **Output** view and the number of hosts associated with that status displays.

@@ -22,6 +22,7 @@ $ ansible-playbook -i <path_to_inventory_file> ansible.containerized_installer.l
 ```
 $ sudo sos report -e aap_containerized -k aap_containerized.username=*<username>*
 ```
+
 where *<username>* is the service account or user running the containerized installation.
 
 4.  Optional: To define additional parameters, specify them with the `-e` option. For example:
@@ -30,6 +31,7 @@ where *<username>* is the service account or user running the containerized inst
 ```
 $ ansible-playbook -i <path_to_inventory_file> ansible.containerized_installer.log_gathering -e 'target_sos_directory=<path_to_files>' -e 'case_number=0000000' -e 'clean=true' -e 'upload=true' -s
 ```
+
 1.  You can use the `-s` option to step through each task in the playbook and confirm its execution. This is optional but can be helpful for debugging.
 2.  The following is a list of the parameters you can use with the `log_gathering` playbook:
 *Table 1. Parameter reference*

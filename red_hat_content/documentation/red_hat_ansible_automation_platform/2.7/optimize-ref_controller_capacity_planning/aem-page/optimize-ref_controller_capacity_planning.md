@@ -1,7 +1,7 @@
 +++
+title = "Capacity plan for node types and workload characteristics - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-ref_controller_capacity_planning"
-title = "Capacity plan for node types and workload characteristics - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_controller_improving_performance/", "Tune automation controller to improve performance"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-ref_controller_capacity_planning/aem-page/optimize-ref_controller_capacity_planning.html"
 last_crumb = "Capacity plan for node types and workload characteristics"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Capacity plan for node types and workload characteristics"
 oversized = "false"
@@ -59,7 +59,6 @@ You can configure four types of nodes in an automation controller deployment:
 - Execution nodes
 - Hop nodes
 
-
 However, for an operator-based environment, there are no hybrid or control nodes. There are container groups, which make up containers running on the Kubernetes cluster. That comprises the control plane. That control plane is local to the Kubernetes cluster in which Red Hat Ansible Automation Platform is deployed.
 
 ## Benefits of scaling control nodes
@@ -72,7 +71,6 @@ Vertically scaling a control node by deploying a larger virtual machine with mor
 
 - The number of jobs that a control node can perform control tasks for, which requires both more CPU and memory.
 - The number of job events a control node can process concurrently.
-
 
 Scaling CPU and memory in the same proportion is recommended, for example, 1 CPU: 4 GB RAM. Even when memory consumption is high, increasing the CPU of an instance can often relieve pressure. The majority of the memory that control nodes consume is from unprocessed events that are stored in a memory-based queue.
 

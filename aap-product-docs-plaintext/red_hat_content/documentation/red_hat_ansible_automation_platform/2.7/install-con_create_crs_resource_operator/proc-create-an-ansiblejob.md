@@ -34,6 +34,7 @@ test_var: test
 job_tags: "provision,install,configuration"  # Specify tags to run
 skip_tags: "configuration,restart"           # Skip tasks with a given tag
 ```
+
 Note:
 You must enable prompt on launch for inventories and extra variables if you are configuring those. To enable **Prompt on launch**, within the automation controller UI: From the Resources> (and then)Templates page, select your template and select the **Prompt on launch** checkbox next to **Inventory** and **Variables** sections.
 

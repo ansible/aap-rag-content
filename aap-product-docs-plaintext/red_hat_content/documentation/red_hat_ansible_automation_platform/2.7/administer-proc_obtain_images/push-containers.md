@@ -16,6 +16,7 @@ You can push tagged execution environments to private automation hub to create n
 ```
 $ podman login -u=<username> -p=<password> <aap_url>
 ```
+
 Warning:
 Let Podman prompt you for your password when you log in. Entering your password at the same time as your username can expose your password to the shell history.
 

@@ -1,7 +1,7 @@
 +++
 title = "View, create, or assign roles to users - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_users"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_managing_access/", "Manage access with role-based access control"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_users/aem-page/secure-assembly_controller_users.html"
 last_crumb = "View, create, or assign roles to users"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "View, create, or assign roles to users"
 oversized = "false"
@@ -181,7 +181,6 @@ Roles are labeled with their associated Ansible Automation Platform component an
 - **Automation Execution** refers to automation controller
 - **Automation Decisions** refers to Event-Driven Ansible
 - **Automation Content** refers to automation hub
-
 
 When assigning roles, ensure that you are selecting the required resource in the correct component context, because resources such as projects and credentials can be associated with both Automation Execution and Automation Decisions.
 

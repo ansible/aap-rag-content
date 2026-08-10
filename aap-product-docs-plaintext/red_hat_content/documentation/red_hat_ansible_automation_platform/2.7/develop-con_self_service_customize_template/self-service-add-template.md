@@ -13,7 +13,6 @@ metadata:
 name: provision-database-custom
 ```
 
-
 - You must be logged in to Ansible automation portal as an Ansible Automation Platform platform administrator.
 
 ### About this task

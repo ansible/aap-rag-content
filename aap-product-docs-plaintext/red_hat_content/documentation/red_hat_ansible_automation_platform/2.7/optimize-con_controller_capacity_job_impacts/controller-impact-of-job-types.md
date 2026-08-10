@@ -11,7 +11,6 @@ Job types including the following, have a fixed impact:
 - Project updates: 1
 - System jobs: 5
 
-
 Note:
 
 If you do not set a forks value on your job template, your job uses Ansible’s default forks value of five. However, it uses fewer if your job has fewer than five hosts. In general, setting a forks value higher than what the system is capable of can cause issues by running out of memory or over-committing CPU. The job template fork values that you use must fit on the system. If you have playbooks using 1000 forks but none of your systems individually has that much capacity, then your systems are undersized and at risk of performance or resource issues.

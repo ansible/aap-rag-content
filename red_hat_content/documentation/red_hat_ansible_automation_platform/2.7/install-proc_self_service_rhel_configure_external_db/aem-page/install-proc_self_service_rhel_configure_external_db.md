@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_rhel_configure_external_db"
 template = "docs/aem-title.html"
 title = "Configure an external database - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_rhel_configure_external_db"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_self_service_rhel_appliances/", "Deploy Ansible automation portal RHEL appliance"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_self_service_rhel_configure_external_db/aem-page/install-proc_self_service_rhel_configure_external_db.html"
 last_crumb = "Configure an external database"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure an external database"
 oversized = "false"
@@ -63,6 +63,7 @@ backend:
         require: true
     client: pg
 ```
+
     The database user requires the `CREATEDB` privilege.
 
 3.  Store the database password as a Podman secret:
@@ -86,4 +87,5 @@ Check the portal logs to verify the database connection:
 ```terminal
 $ sudo journalctl -u portal --no-pager | grep -i "database"
 ```
+
 The output shows a successful database connection with no errors.

@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-title = "Examples for the hashicorp.vault.database_connection module - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/examples_for_the_hashicorp_vault_database_connection_module"
+title = "Examples for the hashicorp.vault.database_connection module - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/examples_for_the_hashicorp_vault_database_connection_module/aem-page/examples_for_the_hashicorp_vault_database_connection_module.html"
 last_crumb = "Examples for the hashicorp.vault.database_connection module"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Examples for the hashicorp.vault.database_connection module"
 oversized = "false"
@@ -53,6 +53,7 @@ postgresql://{{'{{username}}'}}:{{'{{password}}'}}@postgres.example.com:5432/app
   register: db_connection_result
 
 ```
+
 After (`hashicorp.vault`):
 
 ```
@@ -70,6 +71,7 @@ After (`hashicorp.vault`):
     password: "secure_password"
 
 ```
+
  **Example 2: Update a database connection with MySQL**
 
 Before (`community.hashi_vault`):
@@ -92,6 +94,7 @@ Before (`community.hashi_vault`):
   register: mysql_connection_result
 
 ```
+
 After (`hashicorp.vault`):
 
 ```
@@ -110,6 +113,7 @@ After (`hashicorp.vault`):
     password: "secretpassword"
 
 ```
+
  **Example 3: Reset a database connection**
 
 Before (`community.hashi_vault`):
@@ -124,6 +128,7 @@ Before (`community.hashi_vault`):
    connection_name: mysql-sample-connection
  register: result
 ```
+
 After (`hashicorp.vault`):
 
 ```
@@ -133,6 +138,7 @@ After (`hashicorp.vault`):
     state: reset
 
 ```
+
  **Example 4: Delete a database connection**
 
 Before (`community.hashi_vault`):
@@ -151,6 +157,7 @@ Before (`community.hashi_vault`):
  ansible.builtin.debug:
    msg: "{{ result }}"
 ```
+
 After (`hashicorp.vault`):
 
 ```

@@ -1,6 +1,6 @@
 +++
-title = "Prerequisites - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_prerequisites"
+title = "Prerequisites - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_prerequisites/aem-page/extend-assembly_rhdh_prerequisites.html"
 last_crumb = "Prerequisites"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Prerequisites"
 oversized = "false"
@@ -46,7 +46,6 @@ Red Hat recommends performing the following initial configuration tasks in Red H
 
 - Authentication in Red Hat Developer Hub
 - Authorization in Red Hat Developer Hub
-
 
 Note:
 

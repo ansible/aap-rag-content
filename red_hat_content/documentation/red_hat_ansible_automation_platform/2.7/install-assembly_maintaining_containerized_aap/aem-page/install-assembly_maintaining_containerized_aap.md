@@ -1,6 +1,6 @@
 +++
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_maintaining_containerized_aap"
+template = "docs/aem-title.html"
 title = "Maintain containerized Ansible Automation Platform - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_maintaining_containerized_aap/aem-page/install-assembly_maintaining_containerized_aap.html"
 last_crumb = "Maintain containerized Ansible Automation Platform"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Maintain containerized Ansible Automation Platform"
 oversized = "false"
@@ -53,6 +53,7 @@ $ podman secret list
 ```
 $ podman secret inspect --showsecret <secret_key_variable> | jq -r .[].SecretData
 ```
+
         For example:
 
 ```
@@ -65,6 +66,7 @@ $ podman secret inspect --showsecret controller_secret_key | jq -r .[].SecretDat
 ```
 $ ansible-playbook -i inventory ansible.containerized_installer.uninstall
 ```
+
   - This stops all systemd units and containers and then deletes all resources used by the containerized installer such as:
     * configuration and data directories and files
     * systemd unit files

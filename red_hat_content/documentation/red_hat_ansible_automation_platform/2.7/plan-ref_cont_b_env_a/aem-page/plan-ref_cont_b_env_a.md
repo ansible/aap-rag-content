@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-ref_cont_b_env_a"
 title = "Container enterprise topology - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-ref_cont_b_env_a"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-assembly_overview_tested_deployment_models/", "Choose a deployment method and topology"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/plan-ref_cont_b_env_a/aem-page/plan-ref_cont_b_env_a.html"
 last_crumb = "Container enterprise topology"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Container enterprise topology"
 oversized = "false"
@@ -42,13 +42,16 @@ Red Hat tests each VM with these requirements:
 
 *Table 1. Virtual machine requirements*
 
-| Requirement    | Minimum requirement                                                                                                                                                                                                                                                           |
-| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br>RAM        | <br>16 GB                                                                                                                                                                                                                                                                     |
-| <br>CPUs       | <br>4                                                                                                                                                                                                                                                                         |
-| <br>Local disk | Total available disk space: 60 GBInstallation directory: 15 GB (if on a dedicated partition)`/var/tmp` for online installations: 1 GB`/var/tmp` for offline or bundled installations: 3 GBTemporary directory (defaults to `/tmp`) for offline or bundled installations: 10GB |
-| <br>Disk IOPS  | <br>3000                                                                                                                                                                                                                                                                      |
+| Requirement    | Minimum requirement                                                                                                                                                                                      |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <br>RAM        | <br>16 GB                                                                                                                                                                                                |
+| <br>CPUs       | <br>4                                                                                                                                                                                                    |
+| <br>Local disk | Total available disk space: 60 GBInstallation directory: 15 GB (if on a dedicated partition)`/var/tmp` for online installations: 1 GB`/var/tmp` for offline or bundled installations: 3 GBTemporary directory (defaults to `/tmp`) for offline or bundled installations: 10 GB |
+| <br>Disk IOPS  | <br>3000                                                                                                                                                                                                 |
 
+ Note:
+
+Hop nodes do not have a minimum RAM requirement. They route traffic through the automation mesh, and network latency is a more important factor than RAM or CPU.
 
  Note:
 
@@ -73,7 +76,6 @@ Metrics service node requirements:
 | <br>1    | <br>Externally managed database service                                     | <br>N/A                     |
 | <br>1    | <br>HAProxy load balancer in front of platform gateway (externally managed) | <br>N/A                     |
 
-
  Note:
 
 - 6 VMs are required for a Redis high availability (HA) compatible deployment. When installing Ansible Automation Platform with the containerized installer, Redis can be colocated on any Ansible Automation Platform component VMs of your choice except for execution nodes or the PostgreSQL database. They might also be assigned VMs specifically for Redis use.
@@ -85,15 +87,15 @@ Red Hat has tested these configurations to install and run Red Hat Ansible Autom
 
 *Table 3. System configuration*
 
-| Type                 | Description                                                                                                                                                                                                                                   | Notes                                                                                                                                                                                                                                                                                       |
-| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br>Subscription     | Valid Red Hat Ansible Automation Platform subscriptionValid Red Hat Enterprise Linux subscription (to consume the BaseOS and AppStream repositories)                                                                                          |                                                                                                                                                                                                                                                                                             |
-| <br>Operating system | Red Hat Enterprise Linux 9.6 or later minor versions of Red Hat Enterprise Linux 9.Red Hat Enterprise Linux 10 or later minor versions of Red Hat Enterprise Linux 10.                                                                        |                                                                                                                                                                                                                                                                                             |
-| <br>CPU architecture | <br>x86\_64, AArch64, s390x (IBM Z), ppc64le (IBM Power)                                                                                                                                                                                      |                                                                                                                                                                                                                                                                                             |
-| <br> `ansible-core`  | RHEL 9: installation program uses `ansible-core` 2.14, Ansible Automation Platform operation uses `ansible-core` 2.16.RHEL 10: installation program uses `ansible-core` 2.16, Ansible Automation Platform operation uses `ansible-core` 2.16. | The installation program uses the `ansible-core` package from the RHEL AppStream repository.Ansible Automation Platform bundles `ansible-core` 2.16 for operation, so you do not need to install it manually.                                                                               |
-| <br>Browser          | <br>A currently supported version of Mozilla Firefox or Google Chrome.                                                                                                                                                                        |                                                                                                                                                                                                                                                                                             |
-| <br>Database         | For Ansible Automation Platform managed databases: PostgreSQL 15.For customer provided (external) databases: PostgreSQL 15, 16, or 17.                                                                                                        | External (customer supported) databases require International Components for Unicode (ICU) support.External databases using PostgreSQL 16 or 17 must rely on external backup and restore processes. Backup and restore functionality is dependent on utilities provided with PostgreSQL 15. |
-| <br>IP version       | <br>IPv4, IPv6 (single-stack and dual-stack)                                                                                                                                                                                                  |                                                                                                                                                                                                                                                                                             |
+| Type                 | Description                                                                                                                                                                                              | Notes                                                                                                                                                                                                    |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <br>Subscription     | Valid Red Hat Ansible Automation Platform subscriptionValid Red Hat Enterprise Linux subscription (to consume the BaseOS and AppStream repositories)                                                     |                                                                                                                                                                                                          |
+| <br>Operating system | Red Hat Enterprise Linux 9.6 or later minor versions of Red Hat Enterprise Linux 9.Red Hat Enterprise Linux 10 or later minor versions of Red Hat Enterprise Linux 10.                                   |                                                                                                                                                                                                          |
+| <br>CPU architecture | <br>x86\_64, AArch64                                                                                                                                                                                     | <br>IBM Z (s390x) and IBM Power (ppc64le) are not supported in Ansible Automation Platform 2.7. For IBM architecture support, use Ansible Automation Platform 2.6. IBM architecture support may return in a future major release. |
+| <br> `ansible-core`  | RHEL 9: installation program uses `ansible-core` 2.14, Ansible Automation Platform operation uses `ansible-core` 2.16.RHEL 10: installation program uses `ansible-core` 2.16, Ansible Automation Platform operation uses `ansible-core` 2.16. | The installation program uses the `ansible-core` package from the RHEL AppStream repository.Ansible Automation Platform bundles `ansible-core` 2.16 for operation, so you do not need to install it manually. |
+| <br>Browser          | <br>A currently supported version of Mozilla Firefox or Google Chrome.                                                                                                                                   |                                                                                                                                                                                                          |
+| <br>Database         | For Ansible Automation Platform managed databases: PostgreSQL 15.For customer provided (external) databases: PostgreSQL 15, 16, or 17.                                                                   | External (customer supported) databases require International Components for Unicode (ICU) support.External databases using PostgreSQL 16 or 17 must rely on external backup and restore processes. Backup and restore functionality is dependent on utilities provided with PostgreSQL 15. |
+| <br>IP version       | <br>IPv4, IPv6 (single-stack and dual-stack)                                                                                                                                                             |                                                                                                                                                                                                          |
 
 ## Network ports
 
@@ -125,7 +127,6 @@ Red Hat Ansible Automation Platform uses several ports to communicate with its s
 | <br>8081/8444 | <br>TCP  | <br>HTTP/HTTPS | <br>Platform gateway      | <br>Automation hub              | <br>Automation hub NGINX ports. You can configure these ports with the following inventory variables: `hub_nginx_http_port`, `hub_nginx_https_port`.                      |
 | <br>8082/8445 | <br>TCP  | <br>HTTP/HTTPS | <br>Platform gateway      | <br>Event-Driven Ansible        | <br>Event-Driven Ansible NGINX ports. You can configure these ports with the following inventory variables: `eda_nginx_http_port`, `eda_nginx_https_port`.                |
 | <br>8083/8446 | <br>TCP  | <br>HTTP/HTTPS | <br>Platform gateway      | <br>Platform gateway            | <br>Platform gateway NGINX ports. You can configure these ports with the following inventory variables: `gateway_nginx_http_port`, `gateway_nginx_https_port`.            |
-
 
  Note:
 
@@ -255,12 +256,12 @@ CREATE DATABASE metrics_service
 CREATE USER metrics_service WITH PASSWORD '<secure_password>';
 GRANT ALL PRIVILEGES ON DATABASE metrics_service TO metrics_service;
 ```
+
 Storage requirements:
 
 - Minimum: 20 GB
 - Recommended: 40 GB
 - High-volume (>20,000 jobs/day): 60-80 GB
-
 
 **Database 2: awx (read-only access)**
 
@@ -275,12 +276,12 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO ms_awx_readonly;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public
   GRANT SELECT ON TABLES TO ms_awx_readonly;
 ```
+
 Security model:
 
 - `ms_awx_readonly` user has SELECT-only privileges
 - Prevents metrics service from modifying automation controller operations
 - Read-only access ensures separation of concerns
-
 
 **External database storage allocation**
 
@@ -296,7 +297,6 @@ Update your external PostgreSQL database storage to accommodate metrics service:
 | `pulp`            | Automation hub        | 60 GB              |
 | `eda`             | Event-Driven Ansible  | 20 GB              |
 | Total             | All components        | 220 GB             |
-
 
  Note:
 

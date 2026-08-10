@@ -106,6 +106,7 @@ token: "{{ vault_token }}"
 path: hello
 register: response
 ```
+
 After (hashicorp.vault)
 
 ```
@@ -129,6 +130,7 @@ Before (community.hashi_vault)
 ansible.builtin.debug:
 msg: "{{ lookup('community.hashi_vault.vault_kv1_get', 'hello', url='https://vault:8201') }}"
 ```
+
 After (hashicorp.vault)
 
 ```

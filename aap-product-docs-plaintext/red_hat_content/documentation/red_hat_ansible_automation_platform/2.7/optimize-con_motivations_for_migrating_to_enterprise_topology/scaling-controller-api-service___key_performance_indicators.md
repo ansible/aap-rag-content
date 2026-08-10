@@ -8,6 +8,5 @@ Key performance indicators for the automation controller API service include the
 - High CPU utilization on the API pods or nodes
 - Platform gateway returning `503` errors because the service is too busy to respond to health checks
 
-
 The automation controller API service is located in web pods on operator-based installation and in control or hybrid nodes on VM-based installation or container-based installation.
 

@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 title = "AnsibleAutomationPlatform [aap.ansible.com/v1alpha1] - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansible_automation_platform_custom_resources/", "Ansible Automation Platform custom resources"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_/aem-page/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_.html"
 last_crumb = "AnsibleAutomationPlatform [aap.ansible.com/v1alpha1]"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "AnsibleAutomationPlatform [aap.ansible.com/v1alpha1]"
 oversized = "false"
@@ -41,45 +41,45 @@ The `AnsibleAutomationPlatform` custom resource is the top-level resource for de
 
 The top-level `spec` fields for the `AnsibleAutomationPlatform` custom resource.
 
-| Field                  | Type    | Description                                                                                                                                                                                                                                          | Default        |
-| ---------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
-| `no_log`               | Boolean | Development setting to enable additional logging output.                                                                                                                                                                                             | `false`        |
-| `image_pull_policy`    | String  | Image pull policy for all platform pods. Options:`Always`,`Never`,`IfNotPresent`.                                                                                                                                                                    | `IfNotPresent` |
-| `bundle_cacert_secret` | String  | Name of a Kubernetes secret containing custom CA certificates to trust.                                                                                                                                                                              | -              |
-| `redis_mode`           | String  | Redis deployment mode. Set to`cluster` to enable Redis cluster mode.                                                                                                                                                                                 | -              |
-| `api`                  | Object  | Configuration for the platform gateway API pods. See[spec.api](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-api).                     | -              |
-| `redis`                | Object  | Configuration for the platform Redis pods. See[spec.redis](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-redis).                       | -              |
-| `database`             | Object  | Configuration for the platform database. See[spec.database](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-database).                   | -              |
+| Field                  | Type    | Description                                                                                                                                                                                              | Default        |
+| ---------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| `no_log`               | Boolean | Development setting to enable additional logging output.                                                                                                                                                 | `false`        |
+| `image_pull_policy`    | String  | Image pull policy for all platform pods. Options:`Always`,`Never`,`IfNotPresent`.                                                                                                                        | `IfNotPresent` |
+| `bundle_cacert_secret` | String  | Name of a Kubernetes secret containing custom CA certificates to trust.                                                                                                                                  | -              |
+| `redis_mode`           | String  | Redis deployment mode. Set to`cluster` to enable Redis cluster mode.                                                                                                                                     | -              |
+| `api`                  | Object  | Configuration for the platform gateway API pods. See[spec.api](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-api). | -              |
+| `redis`                | Object  | Configuration for the platform Redis pods. See[spec.redis](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-redis). | -              |
+| `database`             | Object  | Configuration for the platform database. See[spec.database](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-database). | -              |
 | `controller`           | Object  | Configuration for the automation controller component. See[spec.controller](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-controller). | -              |
-| `eda`                  | Object  | Configuration for the Event-Driven Ansible component. See[spec.eda](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-eda).                | -              |
-| `hub`                  | Object  | Configuration for the automation hub component. See[spec.hub](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-hub).                      | -              |
-| `lightspeed`           | Object  | Configuration for the Ansible Lightspeed component. See[spec.lightspeed](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-lightspeed).    | -              |
+| `eda`                  | Object  | Configuration for the Event-Driven Ansible component. See[spec.eda](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-eda). | -              |
+| `hub`                  | Object  | Configuration for the automation hub component. See[spec.hub](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-hub). | -              |
+| `lightspeed`           | Object  | Configuration for the Ansible Lightspeed component. See[spec.lightspeed](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-lightspeed). | -              |
 
 ## spec.api
 
 Configuration for the platform gateway API pods.
 
-| Field                   | Type    | Description                                                                                                                                                                                                                                                                        | Default            |
-| ----------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| `replicas`              | Integer | Number of gateway API pod replicas.                                                                                                                                                                                                                                                | `1`                |
+| Field                   | Type    | Description                                                                                                                                                                                              | Default            |
+| ----------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| `replicas`              | Integer | Number of gateway API pod replicas.                                                                                                                                                                      | `1`                |
 | `resource_requirements` | Object  | Kubernetes resource requests and limits for the gateway API pods. See[Resource requirements object](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__resource-requirements). | See defaults table |
 
 ## spec.redis
 
 Configuration for the platform Redis pods.
 
-| Field                   | Type    | Description                                                                                                                                                                                                                                                                  | Default            |
-| ----------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| `replicas`              | Integer | Number of Redis pod replicas.                                                                                                                                                                                                                                                | `1`                |
+| Field                   | Type    | Description                                                                                                                                                                                              | Default            |
+| ----------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| `replicas`              | Integer | Number of Redis pod replicas.                                                                                                                                                                            | `1`                |
 | `resource_requirements` | Object  | Kubernetes resource requests and limits for the Redis pods. See[Resource requirements object](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__resource-requirements). | See defaults table |
 
 ## spec.database
 
 Configuration for the platform database.
 
-| Field                   | Type   | Description                                                                                                                                                                                                                                                                                                                               | Default            |
-| ----------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| `database_secret`       | String | Name of a Kubernetes secret containing external database connection details. Required when using an external database instead of the operator-deployed database.                                                                                                                                                                          | -                  |
+| Field                   | Type   | Description                                                                                                                                                                                              | Default            |
+| ----------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| `database_secret`       | String | Name of a Kubernetes secret containing external database connection details. Required when using an external database instead of the operator-deployed database.                                         | -                  |
 | `resource_requirements` | Object | Kubernetes resource requests and limits for the operator-deployed database pod. Ignored when using an external database. See[Resource requirements object](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__resource-requirements). | See defaults table |
 
 ## spec.controller

@@ -1,6 +1,6 @@
 +++
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_working_with_signed_containers"
+template = "docs/aem-title.html"
 title = "Secure your automation with container signing - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_working_with_signed_containers/aem-page/administer-assembly_working_with_signed_containers.html"
 last_crumb = "Secure your automation with container signing"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Secure your automation with container signing"
 oversized = "false"
@@ -135,6 +135,7 @@ podman tag <container-name> <server-address>/<container-name>:<tag name>
 ```
 podman push <server-address>/<container-name>:<tag name> --tls-verify=false --sign-by <reference to the gpg key on your local>
 ```
+
     If the execution environment is not signed, it can only be pushed with any current signature embedded. Alternatively, you can use the following script to push the execution environment without signing it:
 
 ```
@@ -187,6 +188,7 @@ To ensure an execution environment pulled from the remote registry is properly s
 ```
 sudo <name of editor> /etc/containers/policy.json
 ```
+
     The file that is displayed is similar to this:
 
 ```
@@ -206,6 +208,7 @@ sudo <name of editor> /etc/containers/policy.json
   }
 }
 ```
+
     This file shows that neither `quay.io`, or `docker.io` will perform the verification, because the type is `insecureAcceptAnything` which overrides the default type of `reject`. However, `<server-address>` will perform the verification, because the parameter `type` is set to `"signedBy"`.
 
   Note:
@@ -242,4 +245,5 @@ sudo <name of editor> /etc/containers/policy.json
 ```
 podman pull <server-address>/<container-name>:<tag name> --tls-verify=false
 ```
+
 This response verifies the execution environment has been signed with no errors. If the execution environment is not signed, the command fails.

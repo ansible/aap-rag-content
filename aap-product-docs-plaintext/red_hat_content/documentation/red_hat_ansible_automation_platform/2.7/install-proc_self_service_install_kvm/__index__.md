@@ -1,4 +1,4 @@
-# Install Ansible automation portal on RHEL with KVM
+# Install Ansible automation portal on Red Hat Enterprise Linux KVM/QEMU
 
 Deploy the Ansible automation portal appliance on a RHEL 9 host with KVM using `virt-install`.
 
@@ -62,6 +62,9 @@ $ echo "instance-id: ${VM_NAME}" > meta-data
 $ genisoimage -output cloud-init.iso -volid cidata -joliet -rock user-data meta-data
 ```
 
+Note:
+Cloud-init runs only once per instance ID. If you need to re-apply cloud-init configuration to an existing VM, change the `instance-id` value in the `meta-data` file to a new unique value, regenerate the ISO, and reattach it before rebooting.
+
 7.  Copy the disk image and create the VM.
 
 
@@ -92,8 +95,9 @@ SSH into the Ansible automation portal RHEL appliance and confirm that all servi
 
 ```terminal
 $ ssh -i <private-key> <username>@<vm-ip>
-$ sudo systemctl status portal postgres devtools
+$ sudo ansible-portal status
 ```
+
 Example output for a healthy Ansible automation portal RHEL appliance:
 
 ```terminal
@@ -104,6 +108,7 @@ Active: active (running) since ...
 devtools.service - Ansible development tools
 Active: active (running) since ...
 ```
+
 All three services should show `active (running)`.
 
 ## What to do next

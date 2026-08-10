@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_installing_builder"
-template = "docs/aem-title.html"
 title = "Install Ansible Builder to create or edit execution environments - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_installing_builder/", "Install Ansible Builder to create or edit execution environments"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_installing_builder/aem-page/install-proc_installing_builder.html"
 last_crumb = "Install Ansible Builder to create or edit execution environments"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Install Ansible Builder to create or edit execution environments"
 oversized = "false"
@@ -32,7 +32,7 @@ Install Ansible Builder to create custom execution environments that contain the
 ## Before you begin
 
 - You have installed the Podman container runtime.
-- You have valid subscriptions attached on the host. With a valid subscription you can access the subscription-only resources needed to install `ansible-builder`, and ensures that the necessary repository for `ansible-builder` is automatically enabled. See [Attaching your Red Hat Ansible Automation Platform subscription](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_attaching_subscriptions_1 "You must have valid subscriptions on all nodes before installing Red Hat Ansible Automation Platform.") for more information. Note:
+- You have valid subscriptions attached on the host. With a valid subscription you can access the subscription-only resources needed to install `ansible-builder`, and ensures that the necessary repository for `ansible-builder` is automatically enabled. See [Attaching your Red Hat Ansible Automation Platform subscription](/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-proc_attaching_subscriptions "You must have valid subscriptions on all nodes before installing Red Hat Ansible Automation Platform.") for more information. Note:
       To install the developer tools without consuming a managed node subscription, you can use MCT4589-Red Hat Ansible Developer, Standard (10 Managed Nodes), which is available at no cost. This subscription requires the approval of the Ansible Business Unit.
 
 ## Procedure
@@ -43,4 +43,5 @@ Install Ansible Builder to create custom execution environments that contain the
 #  dnf install --enablerepo=ansible-automation-platform-*aap-version*-for-rhel-*rhel-version*-x86_64-rpms
   ansible-builder
 ```
+
 Replace *aap-version* with your Ansible Automation Platform version and *rhel-version* with your Red Hat Enterprise Linux major version.

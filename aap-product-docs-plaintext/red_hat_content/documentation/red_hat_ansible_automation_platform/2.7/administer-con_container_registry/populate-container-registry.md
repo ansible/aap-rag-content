@@ -23,7 +23,6 @@ As of **April 1st, 2025**, `quay.io` is adding three additional endpoints. As a 
 -  `cdn05.quay.io`
 -  `cdn06.quay.io`
 
-
 To avoid problems pulling container images, customers must allow outbound TCP connections (ports 80 and 443) to the following hostnames:
 
 -  `cdn.quay.io`
@@ -33,7 +32,6 @@ To avoid problems pulling container images, customers must allow outbound TCP co
 -  `cdn04.quay.io`
 -  `cdn05.quay.io`
 -  `cdn06.quay.io`
-
 
 This change should be made to any firewall configuration that specifically enables outbound connections to `registry.redhat.io` or `registry.access.redhat.com`.
 

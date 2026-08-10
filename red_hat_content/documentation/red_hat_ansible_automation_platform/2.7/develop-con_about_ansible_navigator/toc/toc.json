@@ -38,24 +38,24 @@
               "visible": true,
               "weight": 3,
               "urlFragment": "con-navigator-mode",
-              "anchor": "unique_879943132",
-              "singlePageAnchor": "unique_879943132",
+              "anchor": "unique_1749101259",
+              "singlePageAnchor": "unique_1749101259",
               "sections": [
                 {
                   "title": "stdout mode",
                   "visible": true,
                   "weight": 1,
                   "urlFragment": "con-navigator-mode",
-                  "anchor": "unique_879943132___stdout_mode",
-                  "singlePageAnchor": "unique_879943132___stdout_mode"
+                  "anchor": "unique_1749101259___stdout_mode",
+                  "singlePageAnchor": "unique_1749101259___stdout_mode"
                 },
                 {
                   "title": "Text-based user interface mode",
                   "visible": true,
                   "weight": 2,
                   "urlFragment": "con-navigator-mode",
-                  "anchor": "unique_879943132___text_based_user_interface_mode",
-                  "singlePageAnchor": "unique_879943132___text_based_user_interface_mode"
+                  "anchor": "unique_1749101259___text_based_user_interface_mode",
+                  "singlePageAnchor": "unique_1749101259___text_based_user_interface_mode"
                 }
               ]
             },
@@ -64,24 +64,24 @@
               "visible": true,
               "weight": 4,
               "urlFragment": "con-navigator-mode",
-              "anchor": "unique_1917047723",
-              "singlePageAnchor": "unique_1917047723",
+              "anchor": "unique_257348988",
+              "singlePageAnchor": "unique_257348988",
               "sections": [
                 {
                   "title": "stdout mode",
                   "visible": true,
                   "weight": 1,
                   "urlFragment": "con-navigator-mode",
-                  "anchor": "unique_1917047723___stdout_mode",
-                  "singlePageAnchor": "unique_1917047723___stdout_mode"
+                  "anchor": "unique_257348988___stdout_mode",
+                  "singlePageAnchor": "unique_257348988___stdout_mode"
                 },
                 {
                   "title": "Text-based user interface mode",
                   "visible": true,
                   "weight": 2,
                   "urlFragment": "con-navigator-mode",
-                  "anchor": "unique_1917047723___text_based_user_interface_mode",
-                  "singlePageAnchor": "unique_1917047723___text_based_user_interface_mode"
+                  "anchor": "unique_257348988___text_based_user_interface_mode",
+                  "singlePageAnchor": "unique_257348988___text_based_user_interface_mode"
                 }
               ]
             },

@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_terraform_migrating_from_cloud_terraform"
 title = "Migrate from cloud.terraform to hashicorp.terraform - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_terraform_migrating_from_cloud_terraform"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_terraform_introduction/", "Integrate with IBM HashiCorp Terraform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/integrate-assembly_terraform_migrating_from_cloud_terraform/aem-page/integrate-assembly_terraform_migrating_from_cloud_terraform.html"
 last_crumb = "Migrate from cloud.terraform to hashicorp.terraform"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Migrate from cloud.terraform to hashicorp.terraform"
 oversized = "false"
@@ -130,7 +130,6 @@ These before and after examples help users understand how the modules can be con
    variables:
      environment: prod
 ```
-
 
 -  **After (`hashicorp.terraform.*`):**
   * The `configuration_version` module:

@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_inventory_sync_jobs"
-template = "docs/aem-title.html"
 title = "Sync inventory data with external sources - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_jobs/", "Use jobs to run playbooks against an inventory of hosts"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-con_controller_inventory_sync_jobs/aem-page/develop-con_controller_inventory_sync_jobs.html"
 last_crumb = "Sync inventory data with external sources"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Sync inventory data with external sources"
 oversized = "false"
@@ -45,9 +45,7 @@ You can perform an inventory update while a related job is running. In cases whe
 
 Access the **Details** tab to view details about the job execution:
 
-
 ![Show job details for inventory sync](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/sync.png)  
-
 
 You can view the following details for an executed job:
 
@@ -65,7 +63,6 @@ You can view the following details for an executed job:
 - **Execution Environment**: The execution environment used.
 - **Execution node**: The node used to run the job.
 - **Instance Group**: The name of the instance group used with this job (automation controller is the default instance group).
-
 
 Selecting these items enables you to view the corresponding job templates, projects, and other objects.
 
@@ -99,6 +96,5 @@ You can view the following details for an executed job:
 - **Execution node**: Indicates the node on which the job ran.
 - **Instance group**: Indicates the instance group on which the job ran, if specified.
 - **Job tags**: Tags show the various job operations executed.
-
 
 Select these items to view the corresponding job templates, projects, and other objects.

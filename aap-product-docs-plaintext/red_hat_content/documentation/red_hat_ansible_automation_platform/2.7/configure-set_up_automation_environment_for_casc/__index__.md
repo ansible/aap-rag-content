@@ -44,6 +44,7 @@ $ANSIBLE_VAULT;1.1;AES256
 3363636462646534330a616437646665393738386235306361653333313338656563346633396434
 35346164656437326231326433323934643133353436323562373762616531326463
 ```
+
 You encrypted the value of the `aap_password` variable, which you will use in the next step.
 
 3.  Create the /my_ansible_project/vars/all.yml file with variables for connecting to your Ansible Automation Platform and variables for creating Role-Based Access Control (RBAC) objects:
@@ -78,6 +79,7 @@ role_for_user_in_org: "Organization Auditor"
 custom_role_name: "NetOps ReadOnly"
 custom_role_description: "Read-only access to network objects"
 ```
+
 Note:
 The `aap_hostname` variable must point to your platform gateway URL, not to individual service endpoints such as automation controller or automation hub. The `aap_username` and `aap_password` variables are your platform gateway credentials.
 
@@ -88,6 +90,7 @@ aap_hostname: "<GATEWAY>"
 aap_token: "<GATEWAY_OAUTH2_TOKEN>"
 aap_validate_certs: false
 ```
+
 For more information about creating tokens, see [Adding tokens](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/html/access_management_and_authentication/gw-token-based-authentication#proc-controller-apps-create-tokens) in *Access management and authentication*.
 
 4.  Compose the /my_ansible_project/RBAC_settings.yml playbook, which creates RBAC objects and assigns roles to those objects:
@@ -170,11 +173,12 @@ aap_username: "{{ aap_username }}"
 aap_password: "{{ aap_password }}"
 aap_validate_certs: "{{ aap_validate_certs }}"
 ```
+
 If you are using token-based authentication, replace the `aap_username` and `aap_password` parameters with `aap_token` in each task.
 
 Many values in this playbook are provided in the form of variables, such as object names, their details, Ansible Automation Platform credentials. You can easily reuse the variables throughout files in your Ansible project, which will also simplify the creation and maintenance of the project and reduce the number of errors.
 
-Refer to the all.yml file to see the expanded values of those variables. For details about the module parameters, default values, and further examples how to use the modules, see the resources on Automation hub for the [ansible.platform](https://console.redhat.com/ansible/automation-hub/repo/published/ansible/platform/content/?showing=module) collection.
+Refer to the all.yml file to see the expanded values of those variables. For details about the module parameters, default values, and further examples how to use the modules, see the resources on Automation hub for the `ansible.platform` collection.
 
 5.  Push the variables and the playbook to your Git repository so that automation controller can later read in the correct data.
 
@@ -247,6 +251,7 @@ changed: [localhost]
 PLAY RECAP *********************************************************************
 localhost: ok=6 changed=6 unreachable=0 failed=0 skipped=0 rescued=0 ignored=0
 ```
+
 The output message shows that you ran the job template against 1 target (your localhost). At the same time, you created:
 
 - An organization.

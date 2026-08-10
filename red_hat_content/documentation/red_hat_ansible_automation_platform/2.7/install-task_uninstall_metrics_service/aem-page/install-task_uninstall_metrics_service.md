@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-task_uninstall_metrics_service/aem-page/install-task_uninstall_metrics_service.html"
 last_crumb = "Uninstall metrics service"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Uninstall metrics service"
 oversized = "false"
@@ -44,6 +44,7 @@ Uninstallation is destructive and irreversible. Back up the `metrics_service` da
 cd /path/to/aap-containerized-installer
 ansible-playbook -i inventory uninstall.yml
 ```
+
     The uninstall.yml playbook automatically removes all metrics service components:
 
   - Stops and disables systemd services
@@ -64,6 +65,7 @@ ansible-playbook -i inventory uninstall.yml
 systemctl --user stop automation-metrics-web.service automation-metrics-tasks.service automation-metrics-scheduler.service
 systemctl --user disable automation-metrics-web.service automation-metrics-tasks.service automation-metrics-scheduler.service
 ```
+
     **Step 2: Remove containers**
 
 ```
@@ -72,6 +74,7 @@ podman rm -f automation-metrics-tasks
 podman rm -f automation-metrics-scheduler
 podman rm -f automation-metrics-init
 ```
+
     **Step 3: Delete systemd unit files**
 
 ```
@@ -80,6 +83,7 @@ rm -f ~/.config/systemd/user/automation-metrics-tasks.service
 rm -f ~/.config/systemd/user/automation-metrics-scheduler.service
 systemctl --user daemon-reload
 ```
+
     **Step 4: Delete Podman secrets**
 
 ```
@@ -88,11 +92,13 @@ podman secret rm automationmetrics_controller_read_pg_password
 podman secret rm automationmetrics_secret_key
 podman secret rm automationmetrics_resource_server
 ```
+
     **Step 5: Remove volumes and data directories**
 
 ```
 rm -rf {{ aap_volumes_dir }}/automationmetrics
 ```
+
     **Step 6: Drop database (optional)**
 
 ```
@@ -102,6 +108,7 @@ psql -h localhost -U postgres
 DROP USER IF EXISTS metrics_service;
 DROP USER IF EXISTS ms_awx_readonly;
 ```
+
     **Step 7: Remove firewall rules**
 
 ```
@@ -120,11 +127,9 @@ Metrics service **can** be reinstalled using the same database:
 - No code-level block on reinstall
 - `init-system-tasks` recreates Task rows
 
-
 **Limitations:**
 
 - Not officially tested or supported
 - Unexpected behavior possible
-
 
 **Recommendation:** Use a fresh database for reinstallation unless you have specific requirements to preserve existing data.

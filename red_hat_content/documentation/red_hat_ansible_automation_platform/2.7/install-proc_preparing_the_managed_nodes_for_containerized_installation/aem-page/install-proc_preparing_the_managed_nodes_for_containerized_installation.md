@@ -1,7 +1,7 @@
 +++
+title = "Create the installation user - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_preparing_the_managed_nodes_for_containerized_installation"
 template = "docs/aem-title.html"
-title = "Prepare the managed nodes - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_aap_containerized_installation_intro/", "Install containerized Ansible Automation Platform"]]
@@ -9,10 +9,10 @@ category = "Install"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_preparing_the_managed_nodes_for_containerized_installation/aem-page/install-proc_preparing_the_managed_nodes_for_containerized_installation.html"
-last_crumb = "Prepare the managed nodes"
-modified = "2026-06-05T07:48:10.594Z"
+last_crumb = "Create the installation user"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
-name = "Prepare the managed nodes"
+name = "Create the installation user"
 oversized = "false"
 page_slug = "install-proc_preparing_the_managed_nodes_for_containerized_installation"
 portal_content_subtype = "title"
@@ -25,9 +25,9 @@ toc = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc
 type = "aem-page"
 +++
 
-# Prepare the managed nodes
+# Create the installation user
 
-Managed nodes, or hosts, are the devices managed by Ansible Automation Platform. To ensure a secure containerized setup, create a dedicated user on each node for Ansible Automation Platform to use when connecting and running tasks.
+To ensure a secure containerized setup, create a dedicated user on each Red Hat Enterprise Linux host for the containerized installation program to use when connecting and running tasks.
 
 ## Procedure
 

@@ -1,6 +1,6 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_building_definition_file"
 title = "Build a definition file - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_building_definition_file"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-con_building_definition_file/aem-page/administer-con_building_definition_file.html"
 last_crumb = "Build a definition file"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Build a definition file"
 oversized = "false"
@@ -33,6 +33,10 @@ After you install Ansible Builder, you can create a definition file that Ansible
 
 The following is an example of a version 3 definition file. Each definition file must specify the major version number of the Ansible Builder feature set it uses. If not specified, Ansible Builder defaults to version 1, making most new features and definition keywords unavailable.
 
+Note:
+
+Replace `<platform-version>` with the namespace for your version of Ansible Automation Platform. Replace `<rhel-version>` with your Red Hat Enterprise Linux version
+
 ```
 version: 3
 
@@ -48,7 +52,7 @@ dependencies:
 
 images:
   base_image:
-    name: registry.redhat.io/ansible-automation-platform-26/ee-minimal-rhel9:latest
+    name: registry.redhat.io/ansible-automation-platform-27/ee-minimal-rhel9:2.16
 
 # Custom package manager path for the RHEL based images
 options:
@@ -74,7 +78,6 @@ additional_build_steps:
     - RUN echo This is a post-install command!
     - RUN ls -la /etc
 ```
-
 
 - `build_arg_defaults`: Lists default values for build arguments.
 - `dependencies`: Specifies the location of various requirements files.
@@ -140,6 +143,7 @@ The content might look like the following:
 libxml2-devel [platform:rpm]
 subversion [platform:rpm]
 ```
+
 Entries from multiple collections are combined into a single file. This is processed by `bindep` and then passed to `dnf`. Only requirements with no profiles or no runtime requirements will be installed to the image.
 
 ## Images
@@ -148,6 +152,6 @@ The `images` section of the definition file identifies the base image. Verificat
 
 The following table shows a list of values that you can use in `images`:
 
-| Value             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br> `base_image` | <br>Specifies the parent image for the automation execution environment which enables a new image to be built that is based on an existing image. This is typically a supported execution environment base image such as *ee-minimal* or *ee-supported*, but it can also be an execution environment image that you have created and want to customize further.<br>A `name` key is required for the container image to use. Specify the `signature _original_name` key if the image is mirrored within your repository, but is signed with the image’s original signature key. Image names must contain a tag, such as `:latest`.<br>The default image is `registry.redhat.io/ansible-automation-platform-24/ee-minimal-rhel8:latest`. |
+| Value             | Description                                                                                                                                                                                              |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <br> `base_image` | <br>Specifies the parent image for the automation execution environment which enables a new image to be built that is based on an existing image. This is typically a supported execution environment base image such as *ee-minimal* or *ee-supported*, but it can also be an execution environment image that you have created and want to customize further.<br>A `name` key is required for the container image to use. Specify the `signature _original_name` key if the image is mirrored within your repository, but is signed with the image’s original signature key. Image names must contain a tag, such as `:latest`.<br>Red Hat provides `ee-minimal` and `ee-supported` base images on `registry.redhat.io`. See the [Red Hat ecosystem catalog](https://catalog.redhat.com/en/search?searchType=Containers&build_categories_list=Automation+execution+environment) for available images for your version of Ansible Automation Platform. |

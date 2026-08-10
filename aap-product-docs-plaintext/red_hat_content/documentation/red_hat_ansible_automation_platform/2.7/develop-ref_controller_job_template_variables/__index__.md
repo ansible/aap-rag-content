@@ -35,6 +35,5 @@ Note:
 - `awx_inventory_id`: If applicable, the ID of the inventory this job uses.
 - `awx_inventory_name`: If applicable, the name of the inventory this job uses.
 
-
 For compatibility, all variables are also given an "awx" prefix, for example, `awx_job_id`.
 

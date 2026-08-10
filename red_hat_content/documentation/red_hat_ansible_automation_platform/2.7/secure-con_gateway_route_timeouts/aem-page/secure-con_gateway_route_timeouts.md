@@ -1,7 +1,7 @@
 +++
+title = "Configure platform gateway route timeouts - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gateway_route_timeouts"
-title = "Configure platform gateway route timeouts - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_configure_authentication/", "Configure central authentication for Ansible Automation Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_gateway_route_timeouts/aem-page/secure-con_gateway_route_timeouts.html"
 last_crumb = "Configure platform gateway route timeouts"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure platform gateway route timeouts"
 oversized = "false"
@@ -98,6 +98,7 @@ You can configure platform gateway route timeouts during installation or redeplo
     request_timeout_seconds: 600
     idle_timeout_seconds: 600
 ```
+
     For containerized deployments:
 
 ```
@@ -123,6 +124,7 @@ Upload a large container image to automation hub:
 ```
 $ podman push <large-image> <gateway-host>/automation-hub/<repository>/<image>:<tag>
 ```
+
 Confirm that the upload completes without timeout errors.
 
 ## Configure gateway routes using the API
@@ -163,6 +165,7 @@ $ curl -k -X PATCH \
   }' \
   https://<gateway_host>/api/gateway/v1/routes/$ROUTE_ID/
 ```
+
     For containerized deployments:
 
 ```
@@ -185,6 +188,7 @@ $ curl -k -X GET \
   -H "Authorization: Bearer <token>" \
   https://<gateway_host>/api/gateway/v1/routes/
 ```
+
 Upload a large container image to automation hub and verify completion without errors.
 
 ## Configure Ansible Lightspeed route timeouts
@@ -221,6 +225,7 @@ These fields replace the `max_stream_duration` and `stream_idle_timeout` global 
         request_timeout_seconds: 3600
         idle_timeout_seconds: 60
 ```
+
   - `request_timeout_seconds` - Maximum total duration in seconds for streaming requests. Replaces the former `max_stream_duration` setting.
   - `idle_timeout_seconds` - Idle timeout in seconds. The connection closes if no data is transmitted within this period. Replaces the former `stream_idle_timeout` setting.
 
@@ -241,6 +246,7 @@ $ curl -s -k \
   https://<gateway-host>/api/gateway/v1/routes/ \
   | python3 -m json.tool
 ```
+
 Locate the Lightspeed route and confirm that `effective_timeout_seconds` and `effective_idle_timeout_seconds` reflect the expected values.
 
 ## Gateway timeout recommendations

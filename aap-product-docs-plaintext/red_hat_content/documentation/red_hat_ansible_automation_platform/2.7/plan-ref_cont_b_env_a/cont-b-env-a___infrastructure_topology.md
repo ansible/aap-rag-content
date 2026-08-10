@@ -10,13 +10,16 @@ Red Hat tests each VM with these requirements:
 
 *Table 1. Virtual machine requirements*
 
-| Requirement    | Minimum requirement                                                                                                                                                                                                                                                           |
-| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br>RAM        | <br>16 GB                                                                                                                                                                                                                                                                     |
-| <br>CPUs       | <br>4                                                                                                                                                                                                                                                                         |
-| <br>Local disk | Total available disk space: 60 GBInstallation directory: 15 GB (if on a dedicated partition)`/var/tmp` for online installations: 1 GB`/var/tmp` for offline or bundled installations: 3 GBTemporary directory (defaults to `/tmp`) for offline or bundled installations: 10GB |
-| <br>Disk IOPS  | <br>3000                                                                                                                                                                                                                                                                      |
+| Requirement    | Minimum requirement                                                                                                                                                                                      |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <br>RAM        | <br>16 GB                                                                                                                                                                                                |
+| <br>CPUs       | <br>4                                                                                                                                                                                                    |
+| <br>Local disk | Total available disk space: 60 GBInstallation directory: 15 GB (if on a dedicated partition)`/var/tmp` for online installations: 1 GB`/var/tmp` for offline or bundled installations: 3 GBTemporary directory (defaults to `/tmp`) for offline or bundled installations: 10 GB |
+| <br>Disk IOPS  | <br>3000                                                                                                                                                                                                 |
 
+Note:
+
+Hop nodes do not have a minimum RAM requirement. They route traffic through the automation mesh, and network latency is a more important factor than RAM or CPU.
 
 Note:
 
@@ -40,7 +43,6 @@ Metrics service node requirements:
 | <br>2    | <br>Automation mesh execution node                                          | <br> `execution_nodes`      |
 | <br>1    | <br>Externally managed database service                                     | <br>N/A                     |
 | <br>1    | <br>HAProxy load balancer in front of platform gateway (externally managed) | <br>N/A                     |
-
 
 Note:
 

@@ -7,6 +7,5 @@ The following lab environment demonstrates what an Ansible security automation i
 
 Keep in mind that a real world setup will feature other vendors and technologies.
 
-
 ![Sample Ansible security automation integration](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/security-ids-sample-demo.png)
 

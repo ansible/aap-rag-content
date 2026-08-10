@@ -5,9 +5,7 @@ Learn how to view the details of a playbook run in Automation controller.
 
 Access the **Details** tab to view details about the job execution:
 
-
 ![Job details for example run](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-job-details-for-example-job.png)
-
 
 You can view the following details for an executed job:
 
@@ -25,7 +23,6 @@ You can view the following details for an executed job:
 - **Execution environment**: The name of the execution environment used in this job.
 - **Credentials**: The credentials used in this job.
 - **Extra variables**: Any extra variables passed when creating the job template are displayed here.
-
 
 Select one of these items to view the corresponding job templates, projects, and other objects.
 

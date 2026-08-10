@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_controller_access_machine_credentials_playbook"
-template = "docs/aem-title.html"
 title = "Access machine credentials in an ansible playbook - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_controller_access_machine_credentials_playbook"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_credentials/", "Configure credentials to authenticate remote systems and services"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_controller_access_machine_credentials_playbook/aem-page/secure-con_controller_access_machine_credentials_playbook.html"
 last_crumb = "Access machine credentials in an ansible playbook"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Access machine credentials in an ansible playbook"
 oversized = "false"
@@ -66,10 +66,8 @@ Machine credentials require the following inputs:
   * **machinectl**: Enables you to manage containers through the `systemd` machine manager.
   * **sesu**: Enables your remote/login user to run commands as another user through the CA Privileged Access Manager.
 
-
 - **Privilege Escalation Username**: You see this field only if you selected an option for privilege escalation. Enter the username to use with escalation privileges on the remote system.
 - **Privilege Escalation Password**: You see this field only if you selected an option for privilege escalation. Enter the password to use to authenticate the user through the selected privilege escalation type on the remote system. This password is stored encrypted in the database. You can also configure automation controller to ask the user for the password at launch time by selecting **Prompt on launch**. In these cases, a dialog opens when the job is launched, promoting the user to enter the password and password confirmation.
-
 
  Note:
 
@@ -89,7 +87,6 @@ When you assign multiple credential types to a job template, {ControllerName} in
 
 - **Machine credentials** set the SSH username, password, and key used by Ansible Automation Platform to connect to hosts. These values are passed through the `ansible -u` flag and SSH authentication.
 - **Network credentials** set the `ANSIBLE_NET_USERNAME` and `ANSIBLE_NET_PASSWORD` environment variables, which Ansible Automation Platform networking modules use to authenticate to network devices.
-
 
  Note:
 

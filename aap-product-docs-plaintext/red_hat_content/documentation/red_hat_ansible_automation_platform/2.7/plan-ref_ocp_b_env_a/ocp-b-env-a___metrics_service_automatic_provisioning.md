@@ -9,7 +9,6 @@ When you create an AnsibleAutomationPlatform custom resource with metrics servic
 - Configures database connection secrets
 - Sets resource limits and replicas
 
-
 **2. Database configuration**
 
 - Reads customer-provided database secrets (external database scenario) or creates managed database credentials
@@ -18,17 +17,14 @@ When you create an AnsibleAutomationPlatform custom resource with metrics servic
 * `<instance>`-automationmetricsservice-awx-postgres-configuration - automation controller read-only credentials
 - Database connectivity is verified at pod start time by an init container in the web pod, which polls until `manage.py check --database default` succeeds. The AWX read-only connection is validated at application runtime, not during operator reconciliation.
 
-
 **3. Service routing**
 
 - Creates a Kubernetes Service (`<instance>`-automationmetricsservice-service) on port 8000, targeting the web pod on port 8080
 - Registers the metrics service with the platform gateway (Envoy) at `/api/metrics/`, making the API accessible through the standard Ansible Automation Platform gateway URL
 
-
 **4. Backup integration**
 
 - Backup resources are not created automatically during provisioning. They are created on-demand when you trigger a backup by applying an AnsibleAutomationPlatformBackup custom resource. The operator then creates a MetricsServiceBackup CR, which provisions a PersistentVolumeClaim for backup staging and runs a `pg_dump` of the metrics database.
-
 
 **Validation**
 
@@ -41,6 +37,7 @@ oc get metricsservice -n <namespace>
 # Verify all 3 pods are running
 oc get pods -n <namespace> | grep automationmetricsservice
 ```
+
 Expected output:
 
 ```

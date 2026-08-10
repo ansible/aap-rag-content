@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
 title = "Authentication changes in Ansible Automation Platform 2.7 - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-con_auth_changes_27"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-con_auth_changes_27/", "Authentication changes in Ansible Automation Platform 2.7"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/upgrade-con_auth_changes_27/aem-page/upgrade-con_auth_changes_27.html"
 last_crumb = "Authentication changes in Ansible Automation Platform 2.7"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Authentication changes in Ansible Automation Platform 2.7"
 oversized = "false"
@@ -45,7 +45,6 @@ The following features and access methods are removed in this release:
 - Third-party authentication provider configuration (LDAP, SAML, RADIUS, TACACS+) within automation controller.
 - Direct external routes or ingress to automation controller and automation hub.
 
-
 Important:
 
 If you use Red Hat Ansible Lightspeed and have automation or scripts that change the `max_stream_duration` or `stream_idle_timeout` global proxy settings, you must update your scripts. These global settings have been removed, and you should now use the per-route service timeouts that are configurable on any route.
@@ -55,3 +54,37 @@ If you use Red Hat Ansible Lightspeed and have automation or scripts that change
 In Ansible Automation Platform 2.7, platform components are configured to accept only platform gateway JWT authentication, ensuring that all external access goes through platform gateway.
 
 When deployed as part of Ansible Automation Platform, this enforcement is immutable and cannot be changed through configuration files or environment variables, ensuring no bypass is possible.
+
+## Prepare platform gateway accounts for the 2.7 upgrade
+
+In Red Hat Ansible Automation Platform 2.6, users without a platform gateway account can authenticate using an automation controller password. In Ansible Automation Platform 2.7, this fallback authentication mechanism is removed.
+
+### About this task
+
+Important:
+
+You must configure platform gateway accounts for all users before upgrading. Users cannot authenticate after the upgrade if they rely on the automation controller password fallback.
+
+### Procedure
+
+1.  Identify users who authenticate through the automation controller password fallback.
+2.  Create platform gateway accounts for these users or instruct users to set platform gateway passwords.
+  
+  Note:
+      If you miss this step before upgrading, automation controller accounts are automatically created in platform gateway during the upgrade, but passwords are not set. Users with automatically-created accounts must reset their passwords before they can log in.
+
+### Results
+
+Confirm that all active users can log in to their platform gateway accounts.
+
+## Post-upgrade requirements
+
+After upgrading to Ansible Automation Platform 2.7, update tokens, scripts, and integrations to use platform gateway for all external authentication and API access.
+
+After upgrading to Ansible Automation Platform 2.7, perform the following actions:
+
+- **Regenerate tokens:** Regenerate all Personal Access Tokens through platform gateway.
+- **Update CaC:** Update Configuration as Code files to use platform gateway URLs.
+- **Update scripts:** Update scripts and integrations to point to platform gateway.
+- **Update container registry:** Re-authenticate to the container registry.
+- **Update collection connection parameters:** Update playbooks that use `ansible.controller`, `ansible.hub`, or `ansible.eda` collections to point to the platform gateway hostname instead of direct component hostnames. For example, change `controller_host` from `controller.example.com` to `gateway.example.com`. Token parameters such as `controller_oauthtoken` must use tokens created through platform gateway.

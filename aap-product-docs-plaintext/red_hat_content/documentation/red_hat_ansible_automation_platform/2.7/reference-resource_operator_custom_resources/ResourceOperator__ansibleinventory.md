@@ -14,7 +14,6 @@ Creates an inventory on the automation controller.
 | `instance_groups`   | Array  | List of instance groups to associate with the inventory.                                                | -         |
 | `variables`         | Object | Inventory variables as key-value pairs. Supports strings, booleans, numbers, lists, and nested objects. | -         |
 
-
 **Example:**
 
 ```

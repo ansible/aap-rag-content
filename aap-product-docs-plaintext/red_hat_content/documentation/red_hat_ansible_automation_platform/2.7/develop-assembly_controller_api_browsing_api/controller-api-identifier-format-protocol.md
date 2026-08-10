@@ -8,7 +8,6 @@ Resources are identifiable by their unique keys, which are tuples of resource fi
 1. The key must contain only fields that are either the `name` field, or text fields with a finite number of possible choices (such as credential type resource’s `kind` field).
 2. The only permitted exceptional field that breaks the preceding rule is a many-to-one related field relating to a resource other than itself, which is also allowed to have a slug.
 
-
 If there are resources `Foo` and `Bar`, both `Foo` and `Bar` contain a name field and a choice field that can only have values "yes" or "no". Additionally, resource `Foo` has a many-to-one field (a foreign key) relating to `Bar`, for example `fk`. `Foo` has a unique key tuple (`name`, `choice`, `fk`) and `Bar` has a unique key tuple (`name`, `choice`). `Bar` can have named URL because it satisfies the preceding first rule. `Foo` can also have named URL, even though it breaks the first rule, the extra field breaking rule number one is the `fk` field, which is many-to-one-related to `Bar` and `Bar` can have named URL.
 
 For resources satisfying rule number one, their human-readable unique identifiers are combinations of foreign key fields, delimited by `` `. In specific, resource `Bar` in the preceding example has slug format `<name><choice> ``.
@@ -21,7 +20,6 @@ For resources satisfying rule number two, if traced back through the extra forei
 - Recursively generate unique identifiers for each resource. The underlying resource is pointing to using a foreign key (a child of a traceback tree node).
 - Treat generated unique identifiers as the rest of the identifier components. Sort them in lexicographic order of corresponding foreign keys.
 - Combine all components together using `++` to generate the final identifier format.
-
 
 When generating an identifier format for resource `Foo`, the API generates the standalone formats, ``<name><choice>` for `Foo` and `<fk.name><fk.choice>`` for `Bar`, then combines them together to be `<name><choice>+<fk.name>+<fk.choice>`.
 

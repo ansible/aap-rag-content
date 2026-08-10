@@ -9,7 +9,6 @@ RHDH provides the foundational features for the self-service portal, including:
 - Web interface components and navigation
 - Template and catalog management
 
-
 The self-service portal extends RHDH with Ansible Automation Platform-specific plugins that enable automation job execution, template synchronization, and integration with Ansible Automation Platform organizations and job templates.
 
 For information about support policies and the lifecycle for Ansible automation portal, see *Supported platforms*.

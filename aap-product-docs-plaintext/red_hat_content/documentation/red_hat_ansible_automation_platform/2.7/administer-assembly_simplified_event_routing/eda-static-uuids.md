@@ -1,5 +1,6 @@
 # Respond to events from external systems
-## Static Unique Universal Identifiers (UUIDs) for event streams
+## Event streams
+### Static Unique Universal Identifiers (UUIDs) for event streams
 
 You can configure an event stream with a static Unique Universal Identifier (UUID) to ensure its webhook URL remains consistent, even if the event stream service is recreated.
 

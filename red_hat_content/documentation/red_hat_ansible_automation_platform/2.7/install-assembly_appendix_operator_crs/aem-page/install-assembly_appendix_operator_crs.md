@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_operator_crs/aem-page/install-assembly_appendix_operator_crs.html"
 last_crumb = "Red Hat Ansible Automation Platform custom resources"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Red Hat Ansible Automation Platform custom resources"
 oversized = "false"
@@ -134,7 +134,6 @@ spec:
     ## uncomment if using Azure storage for Content pod
     # storage_type: azure
     # object_storage_azure_secret: azure-secret-name
-
 
 # End state:
 # * Automation controller: existing-controller registered with Ansible Automation Platform UI
@@ -310,7 +309,6 @@ spec:
     # storage_type: azure
     # object_storage_azure_secret: azure-secret-name
 
-
 # End state:
 # * Automation controller deployed and named: myaap-controller
 # * * Event-Driven Ansible deployed and named: myaap-eda
@@ -350,7 +348,6 @@ spec:
      database_secret: external-postgres-configuration-gateway
 ```
 
-
 Note:
 
 The system uses the external database for platform gateway, and automation controller, automation hub, and Event-Driven Ansible continues to use the existing databases that were used in 2.4.
@@ -380,7 +377,6 @@ spec:
     auth_config_secret_name: 'auth-configuration-secret'
     model_config_secret_name: 'model-configuration-secret'
 ```
-
 
 Note:
 
@@ -535,7 +531,6 @@ spec:
     ## uncomment if using Azure storage for Content pod
     # storage_type: azure
     # object_storage_azure_secret: azure-secret-name
-
 
 # End state:
 # * Automation controller: existing-controller registered with Ansible Automation Platform UI
@@ -768,7 +763,6 @@ spec:
     # storage_type: azure
     # object_storage_azure_secret: azure-secret-name
 
-
 # End state:
 # * Automation controller: existing-controller registered with Ansible Automation Platform UI
 # * * Event-Driven Ansible deployed and named: myaap-eda
@@ -943,7 +937,6 @@ spec:
     # storage_type: azure
     # object_storage_azure_secret: azure-secret-name
 
-
 # End state:
 # * Automation controller deployed and named: myaap-controller
 # * * Event-Driven Ansible deployed and named: myaap-eda
@@ -983,7 +976,6 @@ spec:
      database_secret: external-postgres-configuration-gateway
 ```
 
-
 Note:
 
 The system uses the external database for platform gateway, and automation controller, automation hub, and Event-Driven Ansible continues to use the existing databases that were used in 2.4.
@@ -1013,7 +1005,6 @@ spec:
     auth_config_secret_name: 'auth-configuration-secret'
     model_config_secret_name: 'model-configuration-secret'
 ```
-
 
 Note:
 
@@ -1168,7 +1159,6 @@ spec:
     ## uncomment if using Azure storage for Content pod
     # storage_type: azure
     # object_storage_azure_secret: azure-secret-name
-
 
 # End state:
 # * Automation controller: existing-controller registered with Ansible Automation Platform UI

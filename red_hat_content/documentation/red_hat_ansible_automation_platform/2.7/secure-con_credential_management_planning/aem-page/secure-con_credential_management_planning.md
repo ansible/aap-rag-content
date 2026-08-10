@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-title = "Manage platform credentials - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_credential_management_planning"
+title = "Manage platform credentials - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_hardening_aap/", "Harden the platform security posture"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_credential_management_planning/aem-page/secure-con_credential_management_planning.html"
 last_crumb = "Manage platform credentials"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Manage platform credentials"
 oversized = "false"
@@ -34,7 +34,6 @@ Ansible Automation Platform manages three sets of secrets:
 - User passwords for **local Ansible Automation Platform users**.
 - Secrets for Ansible Automation Platform **operational use** (database password, message bus password, and so on).
 - Secrets for **automation use** (SSH keys, cloud credentials, external password vault credentials, and so on).
-
 
 Implementing a privileged access or credential management solution to protect credentials from compromise is a highly recommended practice. Organizations should audit the use of, and provide additional programmatic control over, access and privilege escalation.
 

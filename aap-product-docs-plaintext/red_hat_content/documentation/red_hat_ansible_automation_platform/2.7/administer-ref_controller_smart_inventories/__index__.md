@@ -15,7 +15,6 @@ The `Inventory` model has the following new fields that are blank by default but
 - Set `kind` to `smart` for Smart Inventories.
 - Set `host_filter` AND `kind` to `smart` for Smart Inventories.
 
-
 The `host` model has a related endpoint, `smart_inventories` that identifies a set of all the Smart Inventories a host is associated with. The membership table updates every time a job runs against a smart inventory.
 
 Note:
@@ -32,7 +31,6 @@ You can view inventories without being editable:
 - Names of Host and Group created as a result of an inventory source synchronization.
 - You cannot move or edit Group records.
 
-
 You cannot create hosts from a Smart Inventory host endpoint (`/inventories/N/hosts/`) as with a normal inventory. The administrator of a Smart Inventory has permission to edit fields such as the name, description, variables, and the ability to delete. The administrator does not have the permission to change the `host_filter`, because that affects which hosts (that have a primary membership inside another inventory) are included in the smart inventory.
 
 `host_filter` only applies to hosts inside of inventories inside the Smart Inventory’s organization.
@@ -46,7 +44,6 @@ In some situations, you can change the following:
 - A new Host created manually on Inventory with Inventory sources.
 - Groups created as a result of inventory source synchronizations.
 - Variables on Host and Group are not changeable, even as the local System Administrator.
-
 
 Hosts associated with the Smart Inventory are manifested at view time. If the results of a Smart Inventory contains more than one host with identical hostnames, only one of the matching hosts is included as part of the Smart Inventory, ordered by Host ID.
 

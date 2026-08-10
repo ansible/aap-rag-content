@@ -1,7 +1,7 @@
 +++
+title = "Activate webhook-based automation in Openshift - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_eda_activate_webhook"
-title = "Activate webhook-based automation in Openshift - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_user_guide_overview/", "Trigger automation from events with Event-Driven Ansible"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-proc_eda_activate_webhook/aem-page/administer-proc_eda_activate_webhook.html"
 last_crumb = "Activate webhook-based automation in Openshift"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Activate webhook-based automation in Openshift"
 oversized = "false"
@@ -32,7 +32,6 @@ In Openshift environments, you can activate webhooks by creating a route to expo
 ## Before you begin
 
 - You have created a rulebook activation.
-
 
 Note:
 

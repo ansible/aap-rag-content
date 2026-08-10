@@ -6,12 +6,12 @@
 ```
 cd <path-to-source-file>/ansible-automation-platform-containerized-setup-<version_number>
 ```
+
 **For offline or bundled installations**
 
 ```
 cd <path-to-source-file/ansible-automation-platform-containerized-setup-bundle-<version_number>-<arch_name>
 ```
-
 
 1. Open the `inventory` file with a text editor.
 

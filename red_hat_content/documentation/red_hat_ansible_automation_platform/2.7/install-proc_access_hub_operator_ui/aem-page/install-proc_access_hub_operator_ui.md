@@ -1,7 +1,7 @@
 +++
 title = "Finding the automation hub route - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_access_hub_operator_ui"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator/", "Install on OpenShift Container Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_access_hub_operator_ui/aem-page/install-proc_access_hub_operator_ui.html"
 last_crumb = "Finding the automation hub route"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Finding the automation hub route"
 oversized = "false"
@@ -54,6 +54,7 @@ spec:
   pulp_settings:
     ansible_collect_download_count: true
 ```
+
 When `ansible_collect_download_count` is enabled, automation hub will display a download count by the collection.
 
 ## Add allowed container registries
@@ -110,6 +111,7 @@ To successfully sign and publish Ansible Certified Content Collections, you must
 ```
 {"file": "filename", "signature": "filename.asc"}
 ```
+
     All the file names are relative paths inside the current working directory. The file name must remain the same for the detached signature.
 
     **Example:** The following script produces signatures for content:
@@ -176,6 +178,7 @@ gpg --export --armor <your-gpg-key-id> > signing_service.gpg
 
     oc create secret generic signing-galaxy --from-file=signing_service.gpg
 ```
+
     The secret must have a key named `signing_service.gpg`.
 
 3.  Configure the AnsibleAutomationPlatform CR.

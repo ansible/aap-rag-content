@@ -1,16 +1,16 @@
 +++
-template = "docs/aem-title.html"
 title = "Create an execution environment definition using the UI wizard - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_create_ee_definition"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_create_ee_definition/", "Create an execution environment definition using the UI wizard"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-build_execution_environments_with_the_automation_portal/", "Build execution environments with automation portal"]]
 category = "Develop"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_create_ee_definition/aem-page/develop-proc_create_ee_definition.html"
 last_crumb = "Create an execution environment definition using the UI wizard"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Create an execution environment definition using the UI wizard"
 oversized = "false"
@@ -41,9 +41,8 @@ Navigate to **Execution Environments > Create** and select a template. The wizar
 AAP administrators manage which templates are available and can control access with RBAC. The following built-in templates are available:
 
 - **Start from scratch** -- minimal starting point for custom definitions (loaded by default).
-- **Networking Automation** -- pre-selected networking collections (included in Helm chart but commented out by default; requires collections to be discoverable from a configured content source).
-- **Cloud Automation** -- pre-selected cloud collections (included in Helm chart but commented out by default; requires collections to be discoverable from a configured content source).
-
+- **Networking Automation** -- pre-selected networking collections (requires collections to be discoverable from a configured content source).
+- **Cloud Automation** -- pre-selected cloud collections (requires collections to be discoverable from a configured content source).
 
 Custom templates created by your AAP administrator also appear on this page. See [Create standardized EE templates for teams](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_create_team_templates "Create pre-configured EE templates so that your teams start from a known-good baseline without choosing every dependency from scratch.") for details.
 
@@ -80,16 +79,12 @@ Save execution environment definition files to a GitHub or GitLab repository and
 
 ### Before you begin
 
-- Your AAP administrator has configured GitHub or GitLab OAuth. See [Configure a GitHub OAuth App for saving definitions](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_oauth_ee_builder "Configure a GitHub OAuth App so that users can save execution environment definition files to a GitHub repository and trigger automated image builds.") or [Set up GitLab integration](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_gitlab_ee_builder "Configure GitLab content discovery and OAuth so that execution environment builder can scan GitLab groups for Ansible collections and save definition files.").
-- For automated builds: your AAP administrator has configured GitHub repository secrets.
+- Your AAP administrator has configured GitHub or GitLab OAuth. See [Configure a GitHub OAuth App for saving definitions](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_oauth_ee_builder "Configure a GitHub OAuth App so that users can save execution environment definition files to a GitHub repository and trigger automated image builds.") or [Configure a GitLab OAuth App for saving definitions](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_gitlab_ee_builder "Configure a GitLab OAuth App so that users can save execution environment definition files to a GitLab repository.").
+- For automated builds: your AAP administrator has configured GitHub repository secrets or GitLab CI/CD variables.
 
 ### About this task
 
 When you select **Publish to a Git repository** in the wizard, the definition files are saved to a GitHub or GitLab repository and can optionally trigger an automated container image build.
-
-Note:
-
-Automated image builds are available for GitHub only in this release. GitLab CI support is planned for a future release.
 
 ### Procedure
 
@@ -107,10 +102,9 @@ The following files are saved to the repository:
 - `<ee-name>.yml` -- EE definition with all dependencies inline. The file name matches the name you entered in the form.
 - `<ee-name>-template.yaml` -- reusable template file that administrators can register in the catalog.
 - `ansible.cfg` -- galaxy server configuration.
-- `ee-build.yml` (GitHub only) -- GitHub Actions workflow for automated builds.
+- `ee-build.yml` (GitHub) or `.gitlab-ci.yml` (GitLab) -- CI/CD pipeline workflow for automated builds.
 
-
-After saving, check the build status directly from the GitHub Actions tab on the target repository.
+After saving, check the build status from the GitHub Actions tab or the GitLab CI/CD Pipelines page on the target repository.
 
 Note:
 
@@ -128,7 +122,7 @@ Adjust the execution environment build configuration when targeting a private or
 ### Procedure
 
 1.  In the wizard, select **Custom Registry** instead of private automation hub and enter your internal registry URL.
-2.  Clear the **Verify TLS certificates** checkbox if your internal registry uses self-signed certificates.
+2.  Clear the **Verify TLS certificates** checkbox if your internal registry uses self-signed certificates that are not trusted by the GitHub Actions runner or GitLab Runner executing the build.
 3.  Select a base image from your internal registry instead of the default `registry.redhat.io` images.
 
 ## Download definition files without saving to a repository
@@ -170,131 +164,3 @@ Importing templates requires AAP administrator access. Only users with the AAP A
 ### Results
 
 The imported template appears on the **Create** tab. Launch the template to verify the wizard pre-populates the expected collections and configuration.
-
-## Execution environment builder custom UI components
-
-Custom UI components are available for use in software templates to provide specialized form fields for creating and configuring execution environment definitions in Ansible automation portal.
-
-To use a component in your template, set the `ui:field` property on a parameter:
-
-```yaml
-parameters:
-  myField:
-    type: string
-    ui:field: BaseImagePicker
-```
-
-### BaseImagePicker
-
-Displays a selection of pre-configured base container images for execution environment definitions. Includes an option to specify a custom image.
-
-| Property    | Description                                                             |
-| ----------- | ----------------------------------------------------------------------- |
-| `ui:field`  | `BaseImagePicker`                                                       |
-| `enum`      | Array of base image references, plus `custom` for a custom image entry. |
-| `enumNames` | Display labels for each base image option.                              |
-
-
-**Example:**
-
-```yaml
-baseImage:
-  title: Base image
-  type: string
-  ui:field: BaseImagePicker
-  enum:
-    - registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.18
-    - custom
-  enumNames:
-    - Red Hat Ansible Minimal EE - Ansible Core 2.18 (RHEL 9)
-    - Custom Image
-```
-
-### CollectionsPicker
-
-Provides an interactive interface for selecting Ansible collections to include in an execution environment. Supports searching and adding collections from private automation hub, Galaxy, and SCM repositories. Includes version selection and source management.
-
-| Property   | Description                                                                                  |
-| ---------- | -------------------------------------------------------------------------------------------- |
-| `ui:field` | `CollectionsPicker`                                                                          |
-| `type`     | `array` (returns an array of collection objects with `name`, `version`, and `source` fields) |
-
-### PackagesPicker
-
-Enables adding Python packages or system packages to an execution environment definition. Supports direct entry and bulk addition through comma-separated values.
-
-| Property   | Description                                        |
-| ---------- | -------------------------------------------------- |
-| `ui:field` | `PackagesPicker`                                   |
-| `type`     | `array` (returns an array of package name strings) |
-
-### FileUploadPicker
-
-Provides a file upload interface for importing requirements files, such as `requirements.txt` for Python packages or `bindep.txt` for system packages. The file content is parsed and merged with manually entered values.
-
-| Property   | Description                                     |
-| ---------- | ----------------------------------------------- |
-| `ui:field` | `FileUploadPicker`                              |
-| `type`     | `string` (returns the file content as a string) |
-
-### EEFileNamePicker
-
-A text input field for specifying the execution environment definition name. Validates the name against existing EE definitions in the catalog to prevent duplicates and enforces naming conventions.
-
-| Property   | Description        |
-| ---------- | ------------------ |
-| `ui:field` | `EEFileNamePicker` |
-| `type`     | `string`           |
-
-### EETagsPicker
-
-Provides an interface for adding discovery tags to an execution environment definition. Tags help users find and categorize EE definitions in the catalog.
-
-| Property   | Description                               |
-| ---------- | ----------------------------------------- |
-| `ui:field` | `EETagsPicker`                            |
-| `type`     | `array` (returns an array of tag strings) |
-
-### MCPServersPicker
-
-Displays available Model Context Protocol (MCP) servers as selectable cards. Users can select which MCP servers to integrate with their execution environment.
-
-| Property            | Description                                                          |
-| ------------------- | -------------------------------------------------------------------- |
-| `ui:field`          | `MCPServersPicker`                                                   |
-| `type`              | `array` (returns an array of selected MCP server identifier strings) |
-| `schema.items.enum` | Array of available MCP server identifiers.                           |
-
-### ScmSelector
-
-Provides a source control management (SCM) provider selector with built-in authentication. Users select a configured GitHub or GitLab instance, then authenticate through the SCM provider OAuth flow. The component validates credentials and displays connection status.
-
-| Property                                       | Description                                                                                                   |
-| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `ui:field`                                     | `ScmSelector`                                                                                                 |
-| `type`                                         | `string` (returns the selected SCM provider identifier)                                                       |
-| `ui:options.providers`                         | Array of provider configuration objects with `label`, `provider` (`github` or `gitlab`), and optional `host`. |
-| `ui:options.requestUserCredentials.secretsKey` | Key used to store the authenticated SCM token in template secrets.                                            |
-
-### AdditionalBuildStepsPicker
-
-Provides an interface for specifying custom build steps to include in the execution environment build process. Supports multiple build phases with command entry.
-
-| Property   | Description                                                                            |
-| ---------- | -------------------------------------------------------------------------------------- |
-| `ui:field` | `AdditionalBuildStepsPicker`                                                           |
-| `type`     | `array` (returns an array of build step objects with `stepType` and `commands` fields) |
-
-
-**Available build step phases:**
-
-| Phase             | Description                                                   |
-| ----------------- | ------------------------------------------------------------- |
-| `prepend_base`    | Commands to run before base image dependencies are installed. |
-| `append_base`     | Commands to run after base image dependencies are installed.  |
-| `prepend_galaxy`  | Commands to run before Galaxy collections are installed.      |
-| `append_galaxy`   | Commands to run after Galaxy collections are installed.       |
-| `prepend_builder` | Commands to run before builder dependencies are installed.    |
-| `append_builder`  | Commands to run after builder dependencies are installed.     |
-| `prepend_final`   | Commands to run before the final image stage.                 |
-| `append_final`    | Commands to run after the final image stage.                  |

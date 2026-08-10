@@ -1,7 +1,7 @@
 +++
-title = "Understand and configure notifications - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_ug_controller_notifications"
 template = "docs/aem-title.html"
+title = "Understand and configure notifications - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_ug_controller_notifications/", "Understand and configure notifications"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/observe-assembly_ug_controller_notifications/aem-page/observe-assembly_ug_controller_notifications.html"
 last_crumb = "Understand and configure notifications"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Understand and configure notifications"
 oversized = "false"
@@ -34,7 +34,6 @@ The following include examples of details needed to add a notification template:
 - A username, password, server, and recipients are needed for an Email notification template
 - The token and a list of channels are needed for a Slack notification template
 - The URL and Headers are needed for a Webhook notification template
-
 
 When a job fails, a notification is sent using the configuration that you define in the notification template.
 

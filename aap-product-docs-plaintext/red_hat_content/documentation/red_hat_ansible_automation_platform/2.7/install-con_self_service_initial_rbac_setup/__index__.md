@@ -4,6 +4,8 @@ After you install Ansible automation portal and synchronize it with Ansible Auto
 
 You must configure initial Role-Based Access Control (RBAC) permissions to allow non-admin users to view and execute synchronized Ansible Automation Platform job templates.
 
+For the complete RBAC configuration procedure, including navigation permissions required for non-admin users to access portal pages, see [Configure role-based access control for Ansible automation portal](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-configure_portal_rbac "Configure RBAC permissions in Ansible automation portal to control which users can view and execute templates, and which sidebar items are visible to non-admin users.").
+
 Important:
 
 Role-Based Access Control (RBAC) differs by template type:

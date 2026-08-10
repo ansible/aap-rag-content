@@ -1,6 +1,6 @@
 +++
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_review_inventory_navigator"
+template = "docs/aem-title.html"
 title = "View groups and hosts in your inventory - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_review_inventory_navigator/aem-page/develop-assembly_review_inventory_navigator.html"
 last_crumb = "View groups and hosts in your inventory"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "View groups and hosts in your inventory"
 oversized = "false"
@@ -44,6 +44,7 @@ You can review Ansible inventories with the automation content navigator text-ba
 ```
 $ ansible-navigator
 ```
+
     Optional: type `ansible-navigator inventory -i simple_inventory.yml` from the command line to view the inventory.
 
 2.  Review the inventory.
@@ -64,6 +65,7 @@ $ ansible-navigator
 1│nodes              all                           group
 2│ungrouped          all                           group
 ```
+
     The `TAXONOMY` field details the hierarchy of groups the selected group or node belongs to.
 
 4.  Type the number corresponding to the group you want to delve into.

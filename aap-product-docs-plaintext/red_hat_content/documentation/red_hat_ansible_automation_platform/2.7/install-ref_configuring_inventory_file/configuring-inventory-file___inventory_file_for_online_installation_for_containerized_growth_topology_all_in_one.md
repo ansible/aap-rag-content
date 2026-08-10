@@ -3,6 +3,10 @@
 
 Use the example inventory file to perform an online installation for the containerized growth topology (all-in-one):
 
+Note:
+
+The growth topology (all-in-one) deploys all Ansible Automation Platform components, including metrics service, on a single host.
+
 ```yaml
 # This is the Ansible Automation Platform installer inventory file intended for the container growth deployment topology.
 # This inventory file expects to be run from the host where Ansible Automation Platform will be installed.
@@ -91,7 +95,7 @@ automationmetrics_controller_read_pg_host=aap.example.org
 automationmetrics_controller_read_pg_password=<set your own>
 ```
 
-
 - `ansible_connection=local` - Used for all-in-one installations where the installation program is run on the same node that hosts Ansible Automation Platform.   * If the installation program is run from a separate node, do not include `ansible_connection=local`. In this case, use an SSH connection instead.
 - `[database]` - This group in the inventory file defines the Ansible Automation Platform managed database.
+- Growth topology exception: All components, including metrics service, are deployed on the same host.
 

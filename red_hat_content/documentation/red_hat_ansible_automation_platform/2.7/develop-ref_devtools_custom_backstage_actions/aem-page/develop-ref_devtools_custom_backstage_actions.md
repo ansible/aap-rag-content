@@ -1,6 +1,6 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_devtools_custom_backstage_actions"
 title = "Custom Backstage actions - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_devtools_custom_backstage_actions"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-ref_devtools_custom_backstage_actions/aem-page/develop-ref_devtools_custom_backstage_actions.html"
 last_crumb = "Custom Backstage actions"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Custom Backstage actions"
 oversized = "false"
@@ -41,7 +41,6 @@ Create an Ansible Automation Platform project that links to a source control rep
 | <br> `deleteIfExist` | <br>boolean | <br>No   | <br>If `true`, the action deletes the project if it already exists before creating a new one. |
 | <br> `values`        | <br>object  | <br>Yes  | <br>The project configuration object. See the "values" Object Structure table.                |
 
-
  **“values” Object Structure**
 
 | Field                     | Type        | Required | Description                                                                                                   |
@@ -54,7 +53,6 @@ Create an Ansible Automation Platform project that links to a source control rep
 | <br> `scmBranch`          | <br>string  | <br>No   | <br>Source control branch, tag, or commit.                                                                    |
 | <br> `scmUpdateOnLaunch`  | <br>boolean | <br>No   | <br>If `true`, updates the project revision before each job run.                                              |
 
-
  **Output parameters**
 
 | Parameter                  | Type       | Description                                          |
@@ -65,7 +63,6 @@ Create an Ansible Automation Platform project that links to a source control rep
 | <br> `project.description` | <br>string | <br>Project description.                             |
 | <br> `project.url`         | <br>string | <br>Ansible Automation Platform URL for the project. |
 
-
  **Example**
 
 ```
@@ -74,7 +71,7 @@ steps:
     name: Create AAP Project
     action: rhaap:create-project
     input:
-      token: ${{ parameters.AAP_TOKEN }}
+      token: ${{ secrets.aapToken }}
       deleteIfExist: true
       values:
         projectName: ${{ parameters.projectName }}
@@ -97,7 +94,6 @@ Create an execution environment in Ansible Automation Platform that defines the 
 | <br> `deleteIfExist` | <br>boolean | <br>No   | <br>If `true`, the action deletes the execution environment if it already exists. |
 | <br> `values`        | <br>object  | <br>Yes  | <br>The execution environment configuration object.                               |
 
-
  **“values” Object Structure**
 
 | Field                         | Type       | Required | Description                                                                                                          |
@@ -107,7 +103,6 @@ Create an execution environment in Ansible Automation Platform that defines the 
 | <br> `organization`           | <br>object | <br>Yes  | <br>Organization object with required `id` (number) and optional `name` (string).                                    |
 | <br> `image`                  | <br>string | <br>Yes  | <br>Full image location, including registry, image name, and tag (for example, `quay.io/ansible/creator-ee:latest`). |
 | <br> `pull`                   | <br>string | <br>No   | <br>Image pull policy: `always`, `missing`, or `never`. Default is `missing`.                                        |
-
 
  **Output parameters**
 
@@ -119,7 +114,6 @@ Create an execution environment in Ansible Automation Platform that defines the 
 | <br> `executionEnvironment.description` | <br>string | <br>Execution environment description.                                   |
 | <br> `executionEnvironment.url`         | <br>string | <br>Ansible Automation Platform (AAP) URL for the execution environment. |
 
-
  **Example**
 
 ```
@@ -128,7 +122,7 @@ steps:
     name: Create Execution Environment
     action: rhaap:create-execution-environment
     input:
-      token: ${{ parameters.AAP_TOKEN }}
+      token: ${{ secrets.aapToken }}
       deleteIfExist: false
       values:
         environmentName: Custom EE
@@ -150,7 +144,6 @@ Create a job template in Ansible Automation Platform that defines a reusable con
 | <br> `deleteIfExist` | <br>boolean | <br>No   | <br>If `true`, the action deletes the job template if it already exists. |
 | <br> `values`        | <br>object  | <br>Yes  | <br>The job template configuration object.                               |
 
-
  **“values” Object Structure**
 
 | Field                       | Type       | Required | Description                                                                                |
@@ -166,7 +159,6 @@ Create a job template in Ansible Automation Platform that defines a reusable con
 | <br> `executionEnvironment` | <br>object | <br>No   | <br>Execution environment object with required `id` (number) and optional `name` (string). |
 | <br> `extraVariables`       | <br>object | <br>No   | <br>Extra variables to pass to the playbook (key-value pairs).                             |
 
-
  **Output parameters**
 
 | Parameter                   | Type       | Description                                                     |
@@ -177,7 +169,6 @@ Create a job template in Ansible Automation Platform that defines a reusable con
 | <br> `template.description` | <br>string | <br>Job template description.                                   |
 | <br> `template.url`         | <br>string | <br>Ansible Automation Platform (AAP) URL for the job template. |
 
-
  **Example**
 
 ```
@@ -186,7 +177,7 @@ steps:
     name: Create Job Template
     action: rhaap:create-job-template
     input:
-      token: ${{ parameters.AAP_TOKEN }}
+      token: ${{ secrets.aapToken }}
       deleteIfExist: true
       values:
         templateName: Deploy Application
@@ -212,7 +203,6 @@ Launch an existing job template in Ansible Automation Platform.
 | <br> `token`  | <br>string | <br>Yes  | <br>OAuth2 token for Ansible Automation Platform authentication. |
 | <br> `values` | <br>object | <br>Yes  | <br>The job launch configuration object.                         |
 
-
  **“values” Object Structure**
 
 | Field                       | Type        | Required | Description                                                                |
@@ -232,7 +222,6 @@ Launch an existing job template in Ansible Automation Platform.
 | <br> `jobTags`              | <br>string  | <br>No   | <br>Comma-separated tags to run only specific tasks.                       |
 | <br> `skipTags`             | <br>string  | <br>No   | <br>Comma-separated tags to skip specific tasks.                           |
 
-
  **Output parameters**
 
 | Parameter          | Type       | Description                                            |
@@ -242,7 +231,6 @@ Launch an existing job template in Ansible Automation Platform.
 | <br> `data.status` | <br>string | <br>Job status.                                        |
 | <br> `data.url`    | <br>string | <br>Ansible Automation Platform (AAP) URL for the job. |
 
-
  **Example**
 
 ```
@@ -251,7 +239,7 @@ steps:
     name: Launch Job Template
     action: rhaap:launch-job-template
     input:
-      token: ${{ parameters.AAP_TOKEN }}
+      token: ${{ secrets.aapToken }}
       values:
         template: Deploy Application
         inventory: ${{ parameters.jobInventory }}
@@ -326,7 +314,7 @@ spec:
       name: Create AAP Project
       action: rhaap:create-project
       input:
-        token: ${{ parameters.AAP_TOKEN }}
+        token: ${{ secrets.aapToken }}
         deleteIfExist: true
         values:
           projectName: ${{ parameters.projectName }}
@@ -340,7 +328,7 @@ spec:
       name: Create Execution Environment
       action: rhaap:create-execution-environment
       input:
-        token: ${{ parameters.AAP_TOKEN }}
+        token: ${{ secrets.aapToken }}
         values:
           environmentName: ${{ parameters.projectName }}-ee
           organization: ${{ parameters.organization }}
@@ -352,7 +340,7 @@ spec:
       name: Create Job Template
       action: rhaap:create-job-template
       input:
-        token: ${{ parameters.AAP_TOKEN }}
+        token: ${{ secrets.aapToken }}
         values:
           templateName: ${{ parameters.projectName }}-deploy
           templateDescription: Deployment job template
@@ -367,7 +355,7 @@ spec:
       name: Launch Job
       action: rhaap:launch-job-template
       input:
-        token: ${{ parameters.AAP_TOKEN }}
+        token: ${{ secrets.aapToken }}
         values:
           template: ${{ parameters.projectName }}-deploy
           inventory: ${{ parameters.jobInventory }}
@@ -400,11 +388,11 @@ Remove resources created during a software template execution from Ansible Autom
 
 ### values object structure
 
-| Field                  | Type   | Required | Description                                                                    |
-| ---------------------- | ------ | -------- | ------------------------------------------------------------------------------ |
-| `project`              | object | No       | Project to delete. Include `projectName` and `organization`.                   |
-| `executionEnvironment` | object | No       | Execution environment to delete. Include `environmentName` and `organization`. |
-| `template`             | object | No       | Job template to delete. Include `templateName` and `organization`.             |
+| Field                  | Type   | Required | Description                                                                  |
+| ---------------------- | ------ | -------- | ---------------------------------------------------------------------------- |
+| `project`              | object | No       | Project to delete. Include`projectName` and`organization`.                   |
+| `executionEnvironment` | object | No       | Execution environment to delete. Include`environmentName` and`organization`. |
+| `template`             | object | No       | Job template to delete. Include`templateName` and`organization`.             |
 
 ### Output parameters
 
@@ -420,7 +408,7 @@ steps:
     name: Clean Up Resources
     action: rhaap:clean-up
     input:
-      token: ${{ parameters.AAP_TOKEN }}
+      token: ${{ secrets.aapToken }}
       values:
         project:
           projectName: ${{ steps['create-project'].output.data.name }}

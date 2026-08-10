@@ -15,6 +15,7 @@ The following procedure adds a label to a node.
 ```
 kubectl get nodes --show-labels
 ```
+
 The output is similar to this (shown here in a table):
 
 | Name           | Status    | Roles      | Age    | Version     | Labels                                   |
@@ -29,11 +30,13 @@ The output is similar to this (shown here in a table):
 ```
 kubectl label nodes <your-node-name> <aap_node_type>=<execution>
 ```
+
 For example:
 
 ```
 kubectl label nodes <your-node-name> disktype=ssd
 ```
+
 where `<your-node-name>` is the name of your chosen node.
 
 3.  Verify that your chosen node has a `disktype=ssd` label:

@@ -1,4 +1,4 @@
-# Ansible Automation Platform 2.7 patch release June 17, 2026
+# Ansible Automation Platform patch release June 17, 2026
 ## Highlights
 
 - **Metrics Service Backup & Restore** — Full backup and restore support is now available for the Metrics Service and its operator, ensuring data resilience across reinstall and disaster recovery scenarios.

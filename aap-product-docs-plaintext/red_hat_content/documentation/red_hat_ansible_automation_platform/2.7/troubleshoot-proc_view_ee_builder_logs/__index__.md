@@ -11,14 +11,11 @@ Ansible automation portal logs contain diagnostic information for troubleshootin
 1.  Access the logs for your deployment type.
 -          For OpenShift deployments, run the following command to view backend logs:
 
-
-
 ```
 $ oc logs -n *namespace* deployment/*portal-deployment-name* -c backstage-backend
 ```
+
 To filter results for relevant entries, pipe the output through `grep`:
-
-
 
 ```
 $ oc logs -n *namespace* deployment/*portal-deployment-name* -c backstage-backend | grep -i "catalog\|ansible\|sync\|error"
@@ -26,14 +23,11 @@ $ oc logs -n *namespace* deployment/*portal-deployment-name* -c backstage-backen
 
 -          For RHEL appliance deployments, use `journalctl` to view recent portal logs:
 
-
-
 ```
 $ sudo journalctl -u portal --since "1 hour ago"
 ```
+
 Alternatively, view container logs directly:
-
-
 
 ```
 $ sudo podman logs *portal-container-name*

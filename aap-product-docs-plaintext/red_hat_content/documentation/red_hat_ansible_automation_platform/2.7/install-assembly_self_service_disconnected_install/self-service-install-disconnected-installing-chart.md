@@ -70,6 +70,7 @@ image:
 repository: rhel9/postgresql-<version>
 tag: "<postgresql_tag>"
 ```
+
 Note:
 The Helm chart pins the PostgreSQL image by SHA256 digest. If your mirroring method does not preserve digests, set `postgresql.image.tag` to the tag you used when mirroring the image.
 
@@ -104,6 +105,7 @@ image:
 repository: rhel9/postgresql-<version>
 tag: "<postgresql_tag>"
 ```
+
 Note:
 Replace `<rhdh_version>` and `<version>` with the versions bundled with your Helm chart. See the [Ansible Automation Portal Lifecycle](https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-lifecycle) page for version mappings.
 
@@ -122,6 +124,7 @@ redhat-rhaap-portal-x.y.z.tgz \
 --namespace "${MY_NAMESPACE}" \
 -f /path/to/values-oci.yaml
 ```
+
 To apply changes after deployment, upgrade the Helm release. If you install from the OpenShift web console, use Developer -> Helm -> select the release -> Actions -> Upgrade -> YAML view.
 
 To upgrade from the command line:
@@ -132,6 +135,7 @@ redhat-rhaap-portal-x.y.z.tgz \
 --namespace "${MY_NAMESPACE}" \
 -f /path/to/values-oci.yaml
 ```
+
 Alternatively, you can pass values using `--set` flags.
 
 **OCI delivery:**
@@ -144,11 +148,13 @@ redhat-rhaap-portal-x.y.z.tgz \
 --set redhat-developer-hub.global.imageRegistry="<disconnected_registry_url>" \
 --set redhat-developer-hub.global.pluginMode=oci
 ```
+
 To also set `ociPluginImage` via `--set`:
 
 ```terminal
 --set redhat-developer-hub.global.ociPluginImage="<disconnected_registry_url>/custom-path/automation-portal"
 ```
+
 **HTTP plug-in registry delivery:**
 
 ```terminal

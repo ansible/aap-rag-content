@@ -2,7 +2,7 @@
   "version": "1.1",
   "sections": [
     {
-      "title": "Prepare the OpenShift Container Platform target environment and import migration content",
+      "title": "Import migration content to OCP manually",
       "visible": true,
       "weight": 1,
       "urlFragment": "index",

@@ -1,16 +1,16 @@
 +++
+template = "docs/aem-title.html"
 title = "Upgrade metrics service - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-task_upgrade_metrics_service"
-template = "docs/aem-title.html"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-upgrade_additional_services_for_ansible_automation_platform/", "Upgrade additional services for Ansible Automation Platform"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-task_upgrade_metrics_service/", "Upgrade metrics service"]]
 category = "Upgrade"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/upgrade-task_upgrade_metrics_service/aem-page/upgrade-task_upgrade_metrics_service.html"
 last_crumb = "Upgrade metrics service"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Upgrade metrics service"
 oversized = "false"
@@ -59,6 +59,7 @@ systemctl --user stop automation-metrics-web.service automation-metrics-tasks.se
 cd /path/to/new-installer
 ansible-playbook -i inventory install.yml
 ```
+
   Note:
       There is no separate upgrade.yml playbook. The install.yml playbook handles upgrades. The role's tasks/update.yml automatically detects image changes, stops services, and recreates containers with the new image.
 
@@ -72,6 +73,7 @@ podman logs automation-metrics-init
     # Verify database schema
 psql -h localhost -U metrics_service -d metrics_service -c "\dt"
 ```
+
   Note:
       The update.yml task in the automationmetrics role automatically handles container image updates and sets a recreate flag when newer images are detected.
 
@@ -91,12 +93,10 @@ systemctl --user start automation-metrics-web.service automation-metrics-tasks.s
 1. Uninstall metrics service.
 2. Reinstall previous version using previous installer
 
-
 **Important limitations:**
 
 - Backup & restore is **not guaranteed to work** if the version goes down (version downgrade)
 - Django migrations may not be reversible
 - Database schema changes may be incompatible with older versions
-
 
 **Recommendation:** Test upgrades in non-production environments first to validate upgrade path and verify data integrity before upgrading production systems.

@@ -15,13 +15,11 @@ In enterprise topology, metrics service runs as 3 pods with the following resour
 | metrics-tasks     | 500m        | 2 Gi           | 1000m     | 4 Gi         | 1                  |
 | metrics-scheduler | 500m        | 2 Gi           | 1000m     | 4 Gi         | 1 (must not scale) |
 
-
 **Scaling considerations:**
 
 - **metrics-web pod:** Can be scaled to 2 replicas for high availability and load distribution
 - **metrics-tasks pod:** Can not be scaled past 1 replica
 - **metrics-scheduler pod:** Must remain at 1 replica to prevent duplicate scheduled tasks
-
 
 Configure pod resource requests and limits in the AnsibleAutomationPlatform CR:
 
@@ -57,7 +55,6 @@ limits:
 cpu: 200m
 memory: 1Gi
 ```
-
 
 Note:
 

@@ -1,7 +1,7 @@
 +++
 title = "Install containerized Ansible Automation Platform - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_installing_containerized_aap"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_aap_containerized_installation_intro/", "Install containerized Ansible Automation Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_installing_containerized_aap/aem-page/install-proc_installing_containerized_aap.html"
 last_crumb = "Install containerized Ansible Automation Platform"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Install containerized Ansible Automation Platform"
 oversized = "false"
@@ -32,7 +32,7 @@ Run the `install` playbook to install containerized Ansible Automation Platform 
 ## Before you begin
 
 - You have prepared the Red Hat Enterprise Linux host
-- You have prepared the managed nodes
+- You have created the installation user
 - You have downloaded Ansible Automation Platform
 - You have configured the inventory file
 - You are logged in to the Red Hat Enterprise Linux host as your non-root user
@@ -46,21 +46,25 @@ Run the `install` playbook to install containerized Ansible Automation Platform 
 ```
 ansible-playbook -i <inventory_file_name> ansible.containerized_installer.install
 ```
+
     For example:
 
 ```
 ansible-playbook -i inventory ansible.containerized_installer.install
 ```
+
     You can add additional parameters to the installation command as needed:
 
 ```
 ansible-playbook -i <inventory_file_name> -e @<vault_file_name> --ask-vault-pass -K -v ansible.containerized_installer.install
 ```
+
     For example:
 
 ```
 ansible-playbook -i inventory -e @vault.yml --ask-vault-pass -K -v  ansible.containerized_installer.install
 ```
+
   - `-i <inventory_file_name>` - The inventory file to use for the installation.
   - `-e @<vault_file_name> --ask-vault-pass` - (Optional) If you are using a vault to store sensitive variables, add this to the installation command.
   - `-K` - (Optional) If your privilege escalation (becoming root) requires you to enter a password, add this to the installation command. You are then prompted for the BECOME password.

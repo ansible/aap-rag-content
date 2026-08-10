@@ -13,7 +13,6 @@ Creates a workflow job template that links together a sequence of job templates 
 | `inventory`         | String | Default inventory for the workflow template.                                                                                                                              | -       |
 | `workflow_nodes`    | Array  | List of workflow nodes defining the sequence of jobs. Each node contains an `identifier` and a `unified_job_template` object with `name`, `type`, and `inventory` fields. | -       |
 
-
 **Example:**
 
 ```

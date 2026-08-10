@@ -39,15 +39,15 @@ env | grep METRICS_SERVICE_FEATURE_ENABLED__DASHBOARD_COLLECTION
 
 ## Common issues
 
-| Symptom                                                                                           | Possible Cause                                                                                                                                                                                                                                            | Solution                                                                                                                                                                                                                                                                                                          |
-| ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Installation fails with:**`unable to connect to database: FATAL: database "awx" does not exist` | Separate database host topology issue. metrics service and controller databases on different hosts,`DATABASES__awx__HOST` set incorrectly. OR`controller_pg_database` set to non-default value but`automationmetrics_controller_db` not updated to match. | **Step 1:** Verify`automationmetrics_controller_read_pg_host` points to controller database host.**Step 2:** Verify`automationmetrics_controller_db` matches`controller_pg_database`.**Example fix:** If`controller_pg_database=custom_awx_db`, set`automationmetrics_controller_db=custom_awx_db`.               |
-| **Installation fails:**`controller_pg_database` mismatch                                          | `controller_pg_database` set to custom value,`automationmetrics_controller_db` not set to same value                                                                                                                                                      | Set`automationmetrics_controller_db` to match`controller_pg_database` exactly.**Example:**`controller_pg_database=my_custom_awx` requires`automationmetrics_controller_db=my_custom_awx`. Default for`automationmetrics_controller_db` is`awx`, which causes mismatch if controller uses different database name. |
-| Container exits immediately                                                                       | Database connection failure                                                                                                                                                                                                                               | Verify database credentials and connectivity                                                                                                                                                                                                                                                                      |
-| Port conflict error (ports 8087 or 8450)                                                          | Nginx port already in use                                                                                                                                                                                                                                 | Identify conflicting process:`ss -tulpn | grep 8087`                                                                                                                                                                                                                                                              |
-| Permission denied errors                                                                          | SELinux blocking container                                                                                                                                                                                                                                | Check SELinux denials:`ausearch -m avc`                                                                                                                                                                                                                                                                           |
-| Connection timeout to Red Hat Data Ingress                                                        | Firewall blocking HTTPS or proxy misconfiguration                                                                                                                                                                                                         | Allow outbound port 443; verify proxy configuration if used                                                                                                                                                                                                                                                       |
-| Task appears "stuck" or won't run                                                                 | PostgreSQL advisory lock left held after process crash                                                                                                                                                                                                    | metrics service uses PostgreSQL advisory locks for task concurrency control. If a process crashes (segfault, OOM-kill), the lock may remain held.**Solution:** Restart PostgreSQL or wait for lock timeout. Check for held locks:`SELECT * FROM pg_locks WHERE locktype = 'advisory';`                            |
+| Symptom                                                                                           | Possible Cause                                                                                                                                                                                           | Solution                                                                                                                                                                                                 |
+| ------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Installation fails with:**`unable to connect to database: FATAL: database "awx" does not exist` | Separate database host topology issue. metrics service and controller databases on different hosts,`DATABASES__awx__HOST` set incorrectly. OR`controller_pg_database` set to non-default value but`automationmetrics_controller_db` not updated to match. | **Step 1:** Verify`automationmetrics_controller_read_pg_host` points to controller database host.**Step 2:** Verify`automationmetrics_controller_db` matches`controller_pg_database`.**Example fix:** If`controller_pg_database=custom_awx_db`, set`automationmetrics_controller_db=custom_awx_db`. |
+| **Installation fails:**`controller_pg_database` mismatch                                          | `controller_pg_database` set to custom value,`automationmetrics_controller_db` not set to same value                                                                                                     | Set`automationmetrics_controller_db` to match`controller_pg_database` exactly.**Example:**`controller_pg_database=my_custom_awx` requires`automationmetrics_controller_db=my_custom_awx`. Default for`automationmetrics_controller_db` is`awx`, which causes mismatch if controller uses different database name. |
+| Container exits immediately                                                                       | Database connection failure                                                                                                                                                                              | Verify database credentials and connectivity                                                                                                                                                             |
+| Port conflict error (ports 8087 or 8450)                                                          | Nginx port already in use                                                                                                                                                                                | Identify conflicting process:`ss -tulpn | grep 8087`                                                                                                                                                     |
+| Permission denied errors                                                                          | SELinux blocking container                                                                                                                                                                               | Check SELinux denials:`ausearch -m avc`                                                                                                                                                                  |
+| Connection timeout to Red Hat Data Ingress                                                        | Firewall blocking HTTPS or proxy misconfiguration                                                                                                                                                        | Allow outbound port 443; verify proxy configuration if used                                                                                                                                              |
+| Task appears "stuck" or won't run                                                                 | PostgreSQL advisory lock left held after process crash                                                                                                                                                   | metrics service uses PostgreSQL advisory locks for task concurrency control. If a process crashes (segfault, OOM-kill), the lock may remain held.**Solution:** Restart PostgreSQL or wait for lock timeout. Check for held locks:`SELECT * FROM pg_locks WHERE locktype = 'advisory';` |
 
 ## Service containers fail to start with validation errors
 
@@ -107,6 +107,7 @@ psql -h localhost -U metrics_service -d metrics_service -c \
 WHERE name LIKE 'collect_hourly_metrics%'
 ORDER BY started DESC LIMIT 24;"
 ```
+
 Expected output: All hourly tasks should show `status = 'success'` for the past 24 hours.
 
 2. Check scheduler logs for task execution order:
@@ -153,6 +154,7 @@ ORDER BY started DESC LIMIT 7;"
 ```
 podman exec automation-metrics-web env | grep RETENTION
 ```
+
 Expected: Hourly data retained for 7 days (default), giving rollup sufficient time to process even if delayed.
 
 **Scenario 3: Stuck task auto-detection and reset (NEW GA feature)**
@@ -165,7 +167,6 @@ Expected: Hourly data retained for 7 days (default), giving rollup sufficient ti
 - Automatically resets stuck tasks to allow retry on next schedule
 - Logs stuck task detection and reset actions in `automation-metrics-scheduler` container logs
 
-
 **How to monitor automatic stuck task recovery:**
 
 1. Check scheduler logs for stuck task detection:
@@ -173,6 +174,7 @@ Expected: Hourly data retained for 7 days (default), giving rollup sufficient ti
 ```
 podman logs automation-metrics-scheduler | grep -i "stuck\|timeout\|reset"
 ```
+
 Expected output: Log messages indicating stuck task detection and automatic reset.
 
 2. Query task execution history to see reset tasks:
@@ -194,7 +196,6 @@ Automatic recovery handles transient issues (network timeouts, temporary databas
 - Task execution observability metrics show declining success rates
 - Database queries from metrics service are slow (check controller database performance)
 
-
 **Scenario 4: Task execution observability**
 
 **New in Ansible Automation Platform 2.7:** `collect_daily_metrics` task with `task_executions` service provides pipeline health metrics.
@@ -207,7 +208,6 @@ Automatic recovery handles transient issues (network timeouts, temporary databas
 - Task execution timing and duration
 - Task error counts and types
 - Collection throughput metrics
-
 
 **How to access pipeline health metrics:**
 
@@ -233,6 +233,7 @@ WHERE started > NOW() - INTERVAL '7 days'
 GROUP BY name
 ORDER BY success_rate ASC;"
 ```
+
 Expected: Success rates >95% for all tasks. Rates <90% indicate infrastructure issues requiring investigation.
 
 3. Monitor task duration trends:

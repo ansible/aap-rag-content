@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_helm_install"
-template = "docs/aem-title.html"
 title = "Install the Ansible automation portal Helm chart - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_helm_install"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_about/", "Install Ansible automation portal (OpenShift Container Platform only)"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_helm_install/aem-page/install-assembly_self_service_helm_install.html"
 last_crumb = "Install the Ansible automation portal Helm chart"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Install the Ansible automation portal Helm chart"
 oversized = "false"
@@ -41,10 +41,11 @@ Deploy the Helm chart from the OpenShift catalog by configuring the base URL and
 - You have completed one of the plug-in delivery methods:
   * For OCI delivery: You have created the `<release-name>-dynamic-plugins-registry-auth` secret.
   * For HTTP plug-in registry (deprecated): You have deployed the plug-in registry and plan to set `pluginMode` to `tarball`.
+- Helm charts are enabled in the OpenShift Container Platform developer catalog. If the Automation Portal chart does not appear in the catalog, verify that the `HelmChartRepository` custom resources are not disabled. For more information, see [Working with Helm charts](https://docs.redhat.com/en/documentation/openshift_container_platform/4.17/html/building_applications/working-with-helm-charts) in the OpenShift Container Platform documentation.
 
 ### Procedure
 
-1.  In the OpenShift Container Platform web console, select the Developer view.
+1.  In the OpenShift Container Platform web console, select the Developer perspective.
 2.  Select your project and click the Helm option in the OpenShift sidebar.
 3.  Click Create and select Helm Release.
 4.  Search for `Portal` in the Helm Charts filter, and select the Automation Portal chart.
@@ -109,7 +110,7 @@ Verify the Helm chart installation from the OpenShift Container Platform web con
 ### Procedure
 
 1.  In a browser, log in to your OpenShift instance.
-2.  In the Developer view, navigate to the Topology view for the namespace where you deployed the Helm chart.
+2.  In the Developer perspective, navigate to the Topology view for the namespace where you deployed the Helm chart.
       The deployment appears with the label `D` on the icon. The name of the deployment is `<installation-name>-backstage`, for example `<my-self-service-automation-portal-backstage>`.
 
     While it is deploying, the icon is light blue. The color changes to dark blue when deployment is complete.

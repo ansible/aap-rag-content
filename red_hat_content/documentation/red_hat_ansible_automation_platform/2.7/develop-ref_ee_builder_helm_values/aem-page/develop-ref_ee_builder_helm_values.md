@@ -4,13 +4,13 @@ template = "docs/aem-title.html"
 title = "Complete Helm chart values reference for execution environment builder - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_app_ee_builder/", "Configure a GitHub App for content discovery"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-build_execution_environments_with_the_automation_portal/", "Build execution environments with automation portal"]]
 category = "Develop"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-ref_ee_builder_helm_values/aem-page/develop-ref_ee_builder_helm_values.html"
 last_crumb = "Complete Helm chart values reference for execution environment builder"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Complete Helm chart values reference for execution environment builder"
 oversized = "false"
@@ -64,15 +64,15 @@ upstream:
         catalog:
           locations:
             - type: url
-              target: https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.0/templates/ee-start-from-scratch.yaml
+              target: https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.1/templates/ee-start-from-scratch.yaml
               rules:
                 - allow: [Template]
             - type: url
-              target: https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.0/templates/ee-cloud-automation.yaml
+              target: https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.1/templates/ee-cloud-automation.yaml
               rules:
                 - allow: [Template]
             - type: url
-              target: https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.0/templates/ee-network-automation.yaml
+              target: https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.1/templates/ee-network-automation.yaml
               rules:
                 - allow: [Template]
 
@@ -122,7 +122,6 @@ upstream:
             token: ${AAP_API_TOKEN}
 ```
 
-
 Note:
 
 Replace placeholder values (`${...}`, `<your_github_org>`, `aap.example.com`) with your actual environment values. Secrets referenced with `${...}` are resolved from the `secrets-scm` OpenShift secret at runtime.
@@ -157,6 +156,19 @@ integrations:
           clientSecret: ${GITHUB_OAUTH_CLIENT_SECRET}
 
   catalog:
+    locations:
+      - type: url
+        target: https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.1/templates/ee-start-from-scratch.yaml
+        rules:
+          - allow: [Template]
+      - type: url
+        target: https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.1/templates/ee-cloud-automation.yaml
+        rules:
+          - allow: [Template]
+      - type: url
+        target: https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.1/templates/ee-network-automation.yaml
+        rules:
+          - allow: [Template]
     providers:
       rhaap:
         production:
@@ -198,15 +210,14 @@ integrations:
       token: ${AAP_API_TOKEN}
 ```
 
-
 Note:
 
-The `${...}` references are resolved from Podman secrets through the Quadlet drop-in file (`ee-builder-secrets.conf`). PAT-based secrets (`portal_github_token`, `portal_gitlab_token`) are managed by the base portal infrastructure and do not require a drop-in entry.
+On RHEL appliances, the `${...}` references are resolved from Podman secrets. The portal automatically injects any `portal_`-prefixed Podman secret into the container as an environment variable.
 
 ## Key configuration sections
 
 `integrations.github`
-Git provider authentication. Configure either a PAT (`token`) or a GitHub App (`apps`), not both. See [Configure a GitHub App for content discovery](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_app_ee_builder "Create and install a GitHub App so that execution environment builder can scan your organization's repositories for Ansible collections.") or [Configure a Personal Access Token for GitHub](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_pat_ee_builder "Create and store a GitHub Personal Access Token (PAT) so that execution environment builder can scan repositories for Ansible collections.").
+Git provider authentication. A GitHub App is recommended. You do not need both, but having both configured does not break the install. See [Configure a GitHub App for content discovery](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_app_ee_builder "Create and install a GitHub App so that execution environment builder can scan your organization's repositories for Ansible collections.") or [Configure a Personal Access Token for GitHub](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_pat_ee_builder "Create and store a GitHub Personal Access Token (PAT) so that execution environment builder can scan repositories for Ansible collections.").
 
 `backend.cors.origin`
 CORS allowed origins. Add self-hosted Git provider URLs if not using `github.com` or `gitlab.com`.

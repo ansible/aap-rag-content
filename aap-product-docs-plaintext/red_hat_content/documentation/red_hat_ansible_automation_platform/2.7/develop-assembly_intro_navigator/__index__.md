@@ -5,7 +5,6 @@ As a content creator, you can use automation content navigator to develop Ansibl
 - Local development machines
 - Automation execution environments
 
-
 Automation content navigator also produces an artifact file you can use to help you develop your playbooks and troubleshoot problem areas.
 
 Note:

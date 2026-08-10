@@ -13,14 +13,12 @@ The order of preference in determining which instance group to submit the job to
 2. Inventory
 3. Organization (by way of project)
 
-
 If you associate instance groups with the job template, and all of these are at capacity, then the job is submitted to instance groups specified on the inventory, and then the organization. Jobs must run in those groups in preferential order as resources are available.
 
 You can still associate the global `default` group with a resource, such as any of the custom instance groups defined in the playbook. You can use this to specify a preferred instance group on the job template or inventory, but still enable the job to be submitted to any instance if those are out of capacity.
 
 - If you associate `group_a` with a job template and also associate the `default` group with its inventory, you enable the `default` group to be used as a fallback in case `group_a` gets out of capacity.
 - In addition, it is possible to not associate an instance group with one resource but choose another resource as the fallback. For example, not associating an instance group with a job template and having it fall back to the inventory or the organization’s instance group.
-
 
 This presents the following possibilities:
 
@@ -34,9 +32,7 @@ An administrator can assign multiple groups to each organization, similar to the
 - The administrator assigns group *A* to *Org1*, group *B* to *Org2* and then assigns group *C* to both *Org1* and *Org2* as an overflow for any extra capacity that might be needed.
 - The organization administrators are then free to assign inventory or job templates to whichever group they want, or let them inherit the default order from the organization.
 
-
 ![Instance groups scenarios](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ag-instance-groups-scenarios.png)
-
 
 Arranging resources this way offers you flexibility. You can also create instance groups with only one instance, enabling you to direct work towards a very specific Host in the automation controller cluster.
 

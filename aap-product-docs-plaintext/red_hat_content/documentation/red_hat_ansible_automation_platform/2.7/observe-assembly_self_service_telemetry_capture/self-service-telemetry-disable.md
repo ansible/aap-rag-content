@@ -23,6 +23,7 @@ plugins:
 package: >-
 ./dynamic-plugins/dist/backstage-community-plugin-analytics-provider-segment
 ```
+
 To re-enable telemetry data collection, delete these lines.
 
 7.  Click Upgrade to apply the changes to the Helm chart and restart the pod.

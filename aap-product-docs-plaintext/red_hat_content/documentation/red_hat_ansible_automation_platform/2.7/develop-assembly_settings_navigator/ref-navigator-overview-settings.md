@@ -9,7 +9,6 @@ Automation content navigator checks for a settings file in the following order a
 - `./ansible-navigator.<ext>` - The settings file within the current project directory, with no dot in the file name.
 - `\~/.ansible-navigator.<ext>` - Your home directory, with a dot in the file name.
 
-
 Consider the following when you create an automation content navigator settings file:
 
 - The settings file can be in `JSON` or `YAML` format.
@@ -17,7 +16,6 @@ Consider the following when you create an automation content navigator settings 
 - For settings in `YAML` format, the extension must be `.yml` or `.yaml`.
 - The project and home directories can only contain one settings file each.
 - If automation content navigator finds more than one settings file in either directory, it results in an error.
-
 
 You can copy the example settings file below into one of those paths to start your `ansible-navigator` settings file.
 

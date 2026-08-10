@@ -1,4 +1,4 @@
-# Prepare the OpenShift Container Platform target environment and import migration content
+# Import migration content to OCP manually
 ## Reconcile the target environment post-import
 
 After importing your migration artifact, perform the following steps to reconcile your target environment.

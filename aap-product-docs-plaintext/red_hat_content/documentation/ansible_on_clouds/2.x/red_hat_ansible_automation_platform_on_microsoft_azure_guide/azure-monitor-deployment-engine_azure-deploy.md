@@ -11,13 +11,11 @@ When you begin deploying Ansible Automation Platform on Microsoft Azure, the Azu
 
 2. Click **Parameters and Outputs** in the **Settings** menu for the deployed managed application.
 
-
 - **Note:** Approximately 10 minutes into the deployment process, the **Outputs** section of the **Parameters and Outputs** page displays a link to the **`deploymentEngineUrl`**.
 
 3. Copy the link and paste it in another browser tab to open the login page for the deployment engine.
 
 4. Log in to the deployment using the following credentials:
-
 
 - **Username**: *admin*
 - **Password**: Use the *Administrator Password* that you chose when configuring your deployment.
@@ -25,7 +23,6 @@ When you begin deploying Ansible Automation Platform on Microsoft Azure, the Azu
 5. The deployment driver displays a message indicating that your deployment is underway. Click Log in with Red Hat account. The **Red Hat login** page opens.
 
 6. In the **Red Hat login** page, enter your credentials if you already have a Red Hat account.
-
 
 1. If you do not have a Red Hat account, click Register for a Red Hat account to create one.
 

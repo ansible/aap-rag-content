@@ -17,9 +17,7 @@ When you link your accounts you can provision and configure your cluster through
 
 3. In the search field search for "Red Hat Ansible Automation Platform Service on AWS".
 
-
 - Depending on your region select one of the following:
-
 
 * For EMEA, select **Red Hat Limited**.
 * For the rest of the world, select **Red Hat**.
@@ -38,12 +36,10 @@ When you link your accounts you can provision and configure your cluster through
 
 10. Select Click here to set up your account. This redirects you to Red Hat Single Sign-On where you must:
 
-
 1. Create or sign into your Red Hat account.
 2. Connect your AWS account to the Red Hat account. This redirects you to the **Provision environment** page on the Red Hat Hybrid Cloud Console. Here you can start configuring your environment.
 
 11. Enter your AWS account ID and click Verify.
-
 
 - This account ID must be the account ID that purchased the offer from the AWS Marketplace. The system does not recognize associated or nested accounts.
 

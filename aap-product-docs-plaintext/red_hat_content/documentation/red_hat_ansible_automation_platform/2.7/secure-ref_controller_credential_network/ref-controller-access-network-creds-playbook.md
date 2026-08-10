@@ -6,7 +6,6 @@ When using the **Controller Access Network Credentials** credential type, you ca
 -  `ANSIBLE_NET_USERNAME`
 -  `ANSIBLE_NET_PASSWORD`
 
-
 You can get the username and password parameters from a job runtime environment:
 
 ```

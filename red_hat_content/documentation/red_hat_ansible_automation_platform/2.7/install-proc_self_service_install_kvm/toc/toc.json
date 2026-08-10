@@ -2,7 +2,7 @@
   "version": "1.1",
   "sections": [
     {
-      "title": "Install Ansible automation portal on RHEL with KVM",
+      "title": "Install Ansible automation portal on Red Hat Enterprise Linux KVM/QEMU",
       "visible": true,
       "weight": 1,
       "urlFragment": "index",

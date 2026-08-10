@@ -8,5 +8,6 @@ spec:
 pulp_settings:
 ansible_collect_download_count: true
 ```
+
 When `ansible_collect_download_count` is enabled, automation hub will display a download count by the collection.
 

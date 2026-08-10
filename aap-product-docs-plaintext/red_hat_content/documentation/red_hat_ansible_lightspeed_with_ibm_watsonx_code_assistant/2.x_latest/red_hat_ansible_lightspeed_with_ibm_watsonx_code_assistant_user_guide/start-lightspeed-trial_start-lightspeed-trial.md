@@ -33,7 +33,6 @@ You can also select to receive notifications about Red Hat products, services, a
 
 9. View the time remaining on your trial account:
 
-
 1. From the VS Code activity bar, click the **Ansible** icon.
 2. In the **Ansible Lightspeed** view, verify that you are logged in using your trial account and view the expiration date of your trial account.
 

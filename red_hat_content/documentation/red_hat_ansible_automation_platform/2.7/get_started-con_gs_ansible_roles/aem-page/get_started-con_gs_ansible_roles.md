@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-con_gs_ansible_roles"
 title = "Package and reuse content with roles - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-con_gs_ansible_roles"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-assembly_gs_auto_dev/", "Get started as an automation developer"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/get_started-con_gs_ansible_roles/aem-page/get_started-con_gs_ansible_roles.html"
 last_crumb = "Package and reuse content with roles"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Package and reuse content with roles"
 oversized = "false"
@@ -42,6 +42,7 @@ The Ansible Automation Platform bundle includes the Ansible Galaxy CLI tool. Acc
 ```bash
 ansible-galaxy role init <role_name>
 ```
+
 Standalone roles outside of Collections are supported. Create new roles inside a Collection to take advantage of the features Ansible Automation Platform has to offer.
 
 ### Procedure
@@ -53,6 +54,7 @@ Standalone roles outside of Collections are supported. Create new roles inside a
 ```
 $ ansible-galaxy role init my_role
 ```
+
     The collection now includes a role named `my_role` inside the `roles` directory, as you can see in this example:
 
 ```
@@ -84,4 +86,5 @@ $ ansible-galaxy role init my_role
 ```
 $ ansible-galaxy role init my_role --role-skeleton ~/role_skeleton
 ```
+
     This creates a role named `my_role` by copying the contents of `~/role_skeleton` into `my_role`. The contents of `role_skeleton` can be any files or folders that are valid inside a role directory.

@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_customize_aap"
 title = "Customize your Red Hat Ansible Automation Platform Operator - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_customize_aap"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator/", "Install on OpenShift Container Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_operator_customize_aap/aem-page/install-assembly_operator_customize_aap.html"
 last_crumb = "Customize your Red Hat Ansible Automation Platform Operator"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Customize your Red Hat Ansible Automation Platform Operator"
 oversized = "false"
@@ -77,6 +77,7 @@ oc explain ansibleautomationplatform.spec.controller --recursive
 oc explain ansibleautomationplatform.spec.hub --recursive
 oc explain ansibleautomationplatform.spec.eda --recursive
 ```
+
   
   Note:
   You can also query individual component CRs directly if needed:
@@ -86,6 +87,7 @@ oc explain automationcontroller.spec
 oc explain automationhub.spec
 oc explain eda.spec
 ```
+
     However, when configuring components through the Ansible Automation Platform CR (recommended approach), use the nested paths shown above.
 
 ## Configure component parameters
@@ -134,7 +136,6 @@ The following section provides a complete code block with the default resource r
 - To comply with a `ResourceQuota` enforced by the cluster admin.
 - Resource Constrained Environments: Decrease resource requests to conserve cluster resources in development or test environments.
 - Environment Specifics: Align the resource allocation with the capacity of your OpenShift or Kubernetes cluster nodes.
-
 
 You can use this reference as a starting point. Copy the full code block for your Ansible Automation Platform instance and modify the values for the components you want to change. This method helps ensure all default settings are applied correctly, reducing the risk of deployment errors.
 
@@ -351,7 +352,6 @@ spec:
         limits:
           cpu: 300m
           memory: 400Mi
-
 
   # lightspeed:
   #   disabled: true

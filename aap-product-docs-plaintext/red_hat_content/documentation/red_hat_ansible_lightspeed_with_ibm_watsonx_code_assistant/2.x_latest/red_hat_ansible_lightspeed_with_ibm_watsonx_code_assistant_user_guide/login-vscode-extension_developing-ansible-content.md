@@ -30,16 +30,13 @@ This option uses a device code flow to successfully complete the sign-in process
 
 2. Sign in using either the **Connect** button in the Ansible Lightspeed view or the Accounts menu.
 
-
 - **Sign in using the Connect button**:
-
 
 1. From the VS Code activity bar, click the **Ansible** icon.
 2. In the **Ansible Lightspeed** view, click **Connect**.
 3. Follow the on-screen prompts to sign in to Ansible Lightspeed.
 
 - **Sign in using the Accounts menu**:
-
 
 1. From the VS Code activity bar, click the Accounts menu.
 

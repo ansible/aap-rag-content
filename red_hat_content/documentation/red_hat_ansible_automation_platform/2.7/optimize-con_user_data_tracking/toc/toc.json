@@ -18,7 +18,7 @@
           "singlePageAnchor": "ref-controller-automation-analytics"
         },
         {
-          "title": "Configure Automation Analytics",
+          "title": "Configure Automation Analytics (Optional)",
           "visible": true,
           "weight": 2,
           "urlFragment": "proc-controller-configure-analytics",

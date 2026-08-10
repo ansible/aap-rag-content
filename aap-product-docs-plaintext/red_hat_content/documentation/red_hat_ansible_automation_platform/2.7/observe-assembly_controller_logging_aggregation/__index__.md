@@ -9,7 +9,6 @@ The version of `rsyslog` that is installed by automation controller does not inc
 - rsyslog-udpspoof.x86_64
 - rsyslog-libdbi.x86_64
 
-
 After installing automation controller, you must only use the automation controller provided `rsyslog` package for any logging outside of automation controller that might have previously been done with the RHEL provided `rsyslog` package.
 
 If you already use `rsyslog` for logging system logs on the automation controller instances, you can continue to use `rsyslog` to handle logs from outside of automation controller by running a separate `rsyslog` process (using the same version of rsyslog that automation controller uses), and pointing it to a separate `/etc/rsyslog.conf` file.
@@ -27,6 +26,5 @@ Equivalent to the `rsyslogd queue.size` setting on the action.
 It stores files in the directory specified by `LOG_AGGREGATOR_MAX_DISK_USAGE_PATH`.
 
 - `LOG_AGGREGATOR_MAX_DISK_USAGE_PATH`: Specifies the location to store logs that should be retried after an outage of the external log aggregator (defaults to `/var/lib/awx`). Equivalent to the `rsyslogd queue.spoolDirectory` setting.
-
 
 For example, if `Splunk` goes offline, `rsyslogd` stores a queue on the disk until `Splunk` comes back online. By default, it stores up to 1GB of events (while Splunk is offline) but you can increase that to more than 1GB if necessary, or change the path where you save the queue.

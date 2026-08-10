@@ -19,4 +19,3 @@ Local user passwords are not automatically synchronized between automation contr
 - On successful authentication, platform gateway updates the user’s password in its database.
 - The user is authenticated directly by platform gateway on subsequent logins.
 
-

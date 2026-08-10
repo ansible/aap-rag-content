@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_workflow_visualizer"
 title = "Build a graphical workflow representation with workflow visualizer - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_workflow_visualizer"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_workflow_job_templates/", "Orchestrate complex automation with workflow job templates"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-con_controller_workflow_visualizer/aem-page/develop-con_controller_workflow_visualizer.html"
 last_crumb = "Build a graphical workflow representation with workflow visualizer"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Build a graphical workflow representation with workflow visualizer"
 oversized = "false"
@@ -90,14 +90,12 @@ You can set up any combination of two or more of the following node types to bui
 
     When the node is created, it is labeled with its job type. A template that is associated with each workflow node runs based on the selected run scenario as it proceeds. Click Legend to display the legend for each run scenario and their job types.
 
-
 ![Workflow dropdown list](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-wf-dropdown-list.png)  
 
 8.  Hover over a node to edit the node, add step and link, or delete the selected node:
   
    Note:
       If you hover over a step when adding a link and a red border is displayed, this means that you cannot connect those two steps together. This is a preventive measure to avoid users creating "circular dependencies", which can result in a workflow that ends up in an infinite loop and never finishes.
-
 
 ![Node options](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-wf-add-template.png)  
 

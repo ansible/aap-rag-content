@@ -7,7 +7,6 @@ Ansible Automation Platform stores a variety of secrets in the database that are
 - Secret tokens and passwords for external services defined in automation controller settings.
 - “password” type survey field entries.
 
-
 You can grant users and teams the ability to use these credentials without actually exposing the credential to the user. This means that if a user moves to a different team or leaves the organization, you do not have to re-key all of your systems.
 
 Ansible Automation Platform uses SSH (or the Windows equivalent) to connect to remote hosts. To pass the key from automation controller to SSH, the key must be decrypted before it can be written to a named pipe. Automation controller then uses that pipe to send the key to SSH (so that it is never written to disk). If passwords are used, automation controller handles those by responding directly to the password prompt and decrypting the password before writing it to the prompt.

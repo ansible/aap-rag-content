@@ -49,6 +49,7 @@ source: redhat-operators
 sourceNamespace: openshift-marketplace
 ---
 ```
+
 This file creates a `Subscription` object called `ansible-automation-platform` that subscribes the `ansible-automation-platform` namespace to the `ansible-automation-platform-operator` operator.
 
 4.  Run the oc apply command to create the objects specified in the sub.yaml file:

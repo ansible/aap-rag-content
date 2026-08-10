@@ -14,7 +14,6 @@ You can implement limits in two ways:
 - Reactively: the system intervenes once it sees a violation.
 - By enforcement: the system prevents the container from ever exceeding the limit.
 
-
 Different runtimes can have different ways to implement the same restrictions.
 
 Note:

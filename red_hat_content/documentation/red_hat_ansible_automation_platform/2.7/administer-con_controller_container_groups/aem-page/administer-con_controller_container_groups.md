@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
 title = "Control where automation runs with container groups - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_controller_container_groups"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-define_where_automation_runs_with_host_and_node_groupings/", "Define where automation runs with host and node groupings"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-con_controller_container_groups/aem-page/administer-con_controller_container_groups.html"
 last_crumb = "Control where automation runs with container groups"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Control where automation runs with container groups"
 oversized = "false"
@@ -181,7 +181,6 @@ This field uses any custom fields such as `ImagePullSecrets`, that can be "seria
 
 6.  When you have created the container group successfully, the **Details** tab of the newly created container group remains, which enables you to review and edit your container group information. This is the same menu that is opened if you click the ![Edit](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png) icon from the **Instance Groups** list view. You can also edit **Instances** and review **Jobs** associated with this instance group.
 
-
 ![Instance group successfully created](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ag-instance-group-successfully-created.png)  
     Container groups and instance groups are labeled accordingly.
 
@@ -219,7 +218,6 @@ Capacity limits and quotas for containers are defined by objects in the Kubernet
 
 - To set limits on all pods within a given namespace, use the `LimitRange` object. For more information see the [Quotas and Limit Ranges](https://docs.openshift.com/online/pro/dev_guide/compute_resources.html#overview) section of the OpenShift documentation.
 - To set limits directly on the pod definition launched by automation controller, see [Customizing the pod specification](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_controller_container_groups#controller-customize-pod-spec "Ansible Automation Platform provides a simple default pod specification, however, you can provide a custom YAML or JSON document that overrides the default pod specification.") and the [Compute Resources](https://docs.openshift.com/online/pro/dev_guide/compute_resources.html#dev-compute-resources) section of the OpenShift documentation.
-
 
  Note:
 

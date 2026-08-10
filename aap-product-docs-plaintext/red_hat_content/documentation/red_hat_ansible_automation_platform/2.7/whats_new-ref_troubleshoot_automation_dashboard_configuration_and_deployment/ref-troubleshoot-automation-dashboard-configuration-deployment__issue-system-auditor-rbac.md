@@ -7,7 +7,6 @@
 - Attempting to access dashboard URL directly shows access denied or 404
 - Only Administrator role users can access dashboard
 
-
 **Expected behavior:** System Auditor should have read-only access to dashboard
 
 **Actual behavior:** Dashboard completely unavailable to System Auditor role
@@ -20,12 +19,11 @@ Dashboard RBAC permissions not correctly registered for System Auditor role. The
 
 1.      Verify user role:
 
-
-
 ```
 # Check user's role assignments in AAP
 # Navigate to: Access → Users → [username] → Roles
 ```
+
 Confirm user has System Auditor role.
 
 2.      Check dashboard visibility in UI:

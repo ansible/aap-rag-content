@@ -56,6 +56,7 @@ file_storage_size: 10Gi
 
 ## uncomment if using Azure storage
 ```
+
 1.  For new components, if you do not specify a name, a default name is generated.
 
 8.  Click Create.

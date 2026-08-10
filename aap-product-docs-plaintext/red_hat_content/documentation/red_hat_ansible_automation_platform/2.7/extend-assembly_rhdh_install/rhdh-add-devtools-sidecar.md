@@ -14,6 +14,7 @@ $ oc create secret docker-registry rhdh-registry-pull-secret \
 --from-file=.dockerconfigjson=auth.json \
 -n <your_rhdh_namespace>
 ```
+
 Then add the `imagePullSecrets` field to the deployment patch as shown in the examples below.
 
 ### Procedure
@@ -40,12 +41,13 @@ containers:
 - command:
 - adt
 - server
-image: registry.redhat.io/ansible-automation-platform-2.7/ansible-dev-tools-rhel9:latest
+image: registry.redhat.io/ansible-automation-platform-27/ansible-dev-tools-rhel9:latest
 imagePullPolicy: Always
 ports:
 - containerPort: 8000
 protocol: TCP
 ```
+
 **Helm chart installation**
 
 Update the `extraContainers` section in the Helm chart YAML:
@@ -59,15 +61,25 @@ extraContainers:
 - adt
 - server
 image: >-
-registry.redhat.io/ansible-automation-platform-2.7/ansible-dev-tools-rhel9:latest
+registry.redhat.io/ansible-automation-platform-27/ansible-dev-tools-rhel9:latest
 imagePullPolicy: IfNotPresent
 name: ansible-devtools-server
 ports:
 - containerPort: 8000
+resources:
+requests:
+cpu: 1
+memory: 1Gi
+limits:
+cpu: 2500m
+memory: 2.5Gi
 # ...
 ```
+
 Note:
 The image pull policy is `imagePullPolicy: IfNotPresent`. The image is pulled only if it does not already exist on the node. Update it to `imagePullPolicy: Always` if you always want to use the latest image.
+
+The default resource requests and limits are shown in the Helm chart example. To customize these values, for example if your namespace enforces a `LimitRange`, see [Customize Ansible Developer Tools server resources](/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_ocp_configure_optional#customize-devtools-server-resources "Ansible Developer Tools sidecar container ships with default CPU and memory resource requests and limits. Customize these values if your namespace enforces a LimitRange with lower values or if you want to tune resources for your workload.").
 
 2.  Apply the changes. For Operator deployments, click **Save**. For Helm deployments, click **Upgrade**.
 

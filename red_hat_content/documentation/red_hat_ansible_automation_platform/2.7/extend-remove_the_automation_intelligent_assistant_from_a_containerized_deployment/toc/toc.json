@@ -1,0 +1,39 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Remove the automation intelligent assistant from a containerized deployment",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Before you begin",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-fcdb8c17-9e34-40a1-aaec-faf17d84cba1__prereq_1",
+          "anchor": null,
+          "singlePageAnchor": "GUID-fcdb8c17-9e34-40a1-aaec-faf17d84cba1__prereq_1"
+        },
+        {
+          "title": "About this task",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "GUID-fcdb8c17-9e34-40a1-aaec-faf17d84cba1__context_1",
+          "anchor": null,
+          "singlePageAnchor": "GUID-fcdb8c17-9e34-40a1-aaec-faf17d84cba1__context_1"
+        },
+        {
+          "title": "What to do next",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "GUID-fcdb8c17-9e34-40a1-aaec-faf17d84cba1__postreq_1",
+          "anchor": null,
+          "singlePageAnchor": "GUID-fcdb8c17-9e34-40a1-aaec-faf17d84cba1__postreq_1"
+        }
+      ]
+    }
+  ]
+}

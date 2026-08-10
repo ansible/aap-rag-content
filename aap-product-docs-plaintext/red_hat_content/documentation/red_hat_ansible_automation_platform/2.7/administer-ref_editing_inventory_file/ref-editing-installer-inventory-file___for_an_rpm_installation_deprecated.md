@@ -8,11 +8,13 @@
 ```
 $ cd /opt/ansible-automation-platform/installer/
 ```
+
 **Bundled installer (deprecated)**
 
 ```
 $ cd ansible-automation-platform-setup-bundle-<latest-version>
 ```
+
 **Online installer (deprecated)**
 
 ```

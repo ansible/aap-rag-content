@@ -7,7 +7,6 @@ You can configure Ansible Automation Platform from the **Settings** menu by usin
 -  **User Preferences**
 -  **Troubleshooting**
 
-
 Note:
 
 The other selections available from the **Settings** menu are specific to automation execution.

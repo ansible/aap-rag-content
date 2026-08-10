@@ -10,9 +10,11 @@ Just as the `mem_capacity` algorithm adjusts the amount of memory required per f
 ```
 cpus * fork_per_cpu
 ```
+
 For example, a 4-core system looks like the following:
 
 ```
 4 * 4 == 16
 ```
+
 You can control the value of `fork_per_cpu` by setting the value of `SYSTEM_TASK_FORKS_CPU` which defaults to 4.

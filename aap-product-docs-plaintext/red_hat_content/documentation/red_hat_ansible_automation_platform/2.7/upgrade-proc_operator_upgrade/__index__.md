@@ -12,13 +12,11 @@ See Upgrading Red Hat Ansible Automation Platform Operator in the version 2.6 do
 
 - Read the [Release notes](/documentation/en-us/red_hat_ansible_automation_platform/2.7/platform_intro "Ansible Automation Platform unifies comprehensive automation capabilities, a robust ecosystem, and flexible deployment options into one strategic solution. It enables customers to automate and orchestrate workflows across domains for efficient, resilient, and consistent IT operations at scale.") for your target version.
 
-
 1. For existing deployments only: You must deploy your automation controller and automation hub instances to the same, single namespace before upgrading. For more information see, [Migrating from one namespace to another](https://access.redhat.com/solutions/7092056).
 2. Review the [Backup and restore in an OpenShift environment](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_aap_backup_recovery "To safeguard against unexpected data loss and application errors, it is critical that you perform periodic backups of your Red Hat Ansible Automation Platform deployment. In addition to data loss prevention, backups allow you to fall back to a different deployment state.") section and backup your services:
 - AutomationControllerBackup
 - AutomationHubBackup
 - EDABackup
-
 
 Important:
 

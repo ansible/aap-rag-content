@@ -22,6 +22,7 @@ eda_pg_password: <secure_password>
 
 registry_password: <secure_cdn_password>
 ```
+
 To use the new Ansible vault with the installation program, use the following procedure:
 
 ### Procedure

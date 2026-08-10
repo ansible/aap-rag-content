@@ -11,5 +11,6 @@ Imported hosts have a description of *imported* by default. This can be overridd
 127.0.0.1 _awx_description="my host 1"
 127.0.0.2 _awx_description="my host 2"
 ```
+
 Similarly, group descriptions also default to *imported*, but can also be overridden by `_awx_description`.
 

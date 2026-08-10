@@ -10,6 +10,7 @@ After you have built a suitable execution environment, you can ask the assistant
 ```
 Generate a command that runs this playbook in the execution environment <your-file-name>
 ```
+
 The assistant then generates an appropriate `ansible-navigator` command, ensuring the `--execution-environment-image` flag points to your newly built tag.
 
 A generated command might look like the following:

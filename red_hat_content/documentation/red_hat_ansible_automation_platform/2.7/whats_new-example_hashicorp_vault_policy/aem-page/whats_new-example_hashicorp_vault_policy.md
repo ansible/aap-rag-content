@@ -1,7 +1,7 @@
 +++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-example_hashicorp_vault_policy"
 template = "docs/aem-title.html"
 title = "Example HashiCorp Vault Policy - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-example_hashicorp_vault_policy"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-technology_preview/", "Technology Preview"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/whats_new-example_hashicorp_vault_policy/aem-page/whats_new-example_hashicorp_vault_policy.html"
 last_crumb = "Example HashiCorp Vault Policy"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Example HashiCorp Vault Policy"
 oversized = "false"
@@ -80,6 +80,7 @@ vault write auth/jwt/role/aap-production-role - <<EOF
 }
 EOF
 ```
+
 When configuring Credentials, use the `aap-development-role` in the `Development` organization and the `aap-production-role` in the `Production` organization. The JWT Role configured in Vault enforces that Jobs can only use the role and access the policy-controlled secrets if their organization claim matches. Jobs in the `Development` organization will be able to access secrets under `secret/data/development/*` but not `secret/data/production/*`. Even if a credential is configured with the `aap-production-role`, the platform authoritatively populates the `aap_controller_organization_name` at launch time, and Vault will only allow the role to be used if the organization is `Production`.
 
 Mapping JWT roles to simple Vault policies is a great way to integrate with existing Vault deployments. This simple approach provides secure, granular control, regardless of how the data is structured in Vault.
@@ -124,6 +125,7 @@ vault write auth/jwt/role/aap-dynamic-role - <<EOF
 }
 EOF
 ```
+
 When configuring credentials, use the `aap-dynamic-role` in all organizations. The `bound_claims` limits authentication to these allowed organizations. The `claim_mappings` define JWT claims to be available for policy templating (`org` and `job_template`).
 
 For example, only a job executing in the `Production` organization from the `configure_firewall` job template can read Vault secrets beneath `aap/Production/configure_firewall/*`.

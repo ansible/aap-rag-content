@@ -7,6 +7,6 @@
 - The Ansible automation portal disk image in QCOW2 format.
 - The `virtctl` CLI tool installed. You can download it from the OpenShift web console under **Virtualization** > **Overview** > **Download virtctl**.
 - Access to the OpenShift web console or `oc` CLI tool.
-- Your cloud-init user-data file prepared with Ansible Automation Platform credentials and SSH keys.
+- Your `cloud-init` user-data file prepared with Ansible Automation Platform credentials and SSH keys. See Prerequisites for deploying Ansible automation portal on RHEL in the related links below. The meta-data file is not required for this platform.
 - Sufficient cluster resources: minimum 16 GiB allocatable memory for the virtual machine.
 

@@ -8,6 +8,7 @@ If this file is found, the following command automatically runs:
 ```
 ansible-galaxy role install -r roles/requirements.yml -p <project-specific cache location>/requirements_roles -vvv
 ```
+
 This file enables you to reference Ansible Galaxy roles or roles within other repositories which can be checked out in conjunction with your own project. The addition of Ansible Galaxy access eliminates the need to create git submodules to achieve this result. Given that SCM projects, along with roles or collections, are pulled into and executed from a private job environment, a `<private job directory>` specific to the project within `/tmp` is created by default.
 
 The cache directory is a subdirectory inside the global projects folder. You can copy the content from the cache location to `<job private directory>/requirements_roles`.
@@ -33,7 +34,6 @@ If there are any directories that must be specifically exposed, you can specify 
 ```
 AWX_ISOLATION_SHOW_PATHS = ['/list/of/', '/paths']
 ```
-
 
 Note:
 

@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_configure_haproxy_load_balancer"
 title = "Configure a HAProxy load balancer - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_configure_haproxy_load_balancer"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_aap_containerized_installation_intro/", "Install containerized Ansible Automation Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_configure_haproxy_load_balancer/aem-page/install-proc_configure_haproxy_load_balancer.html"
 last_crumb = "Configure a HAProxy load balancer"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure a HAProxy load balancer"
 oversized = "false"
@@ -37,7 +37,6 @@ Configure a HAProxy load balancer in front of platform gateway with a custom CA 
 custom_ca_cert=<path_to_cert_crt>
 gateway_main_url=<https://load_balancer_url>
 ```
-
 
 Important:
 

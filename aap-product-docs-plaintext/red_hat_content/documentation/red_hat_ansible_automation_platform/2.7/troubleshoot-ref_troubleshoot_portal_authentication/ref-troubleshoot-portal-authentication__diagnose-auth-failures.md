@@ -16,6 +16,7 @@ $ oc exec -n *namespace* deployment/*portal-deployment-name* -c backstage-backen
 curl -k -s -o /dev/null -w "HTTP_CODE: %{http_code}\nSSL_VERIFY: %{ssl_verify_result}\n" \
 https://*aap-host*/
 ```
+
 - `HTTP_CODE: 200` confirms Ansible Automation Platform is reachable.
 - `SSL_VERIFY: 0` means the certificate is trusted. `SSL_VERIFY: 20` means the issuer certificate is not in the trust store (self-signed CA).
 
@@ -24,6 +25,7 @@ https://*aap-host*/
 ```terminal
 $ curl -k -s -u *admin-user*:*password* https://*aap-host*/api/gateway/v1/me/ | python3 -m json.tool
 ```
+
 A successful response confirms Ansible Automation Platform credentials are valid and the API is accessible.
 
 For a complete list of common log messages and their meanings, see [View Ansible automation portal logs for execution environment builder](/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-proc_view_ee_builder_logs "View Ansible automation portal logs to diagnose authentication failures, sync errors, catalog registration issues, and SCM connectivity problems.").

@@ -38,6 +38,7 @@ Inventory sources are not associated with groups. Spawned groups are top-level a
 "ip_address": "192.168.2.1"
 }
 ```
+
 If `power_state` is any value other than `powered_on`, then the host is disabled when imported into automation controller. If the key is not found, then the host is enabled.
 
 11.  All cloud inventory sources have the following update options:

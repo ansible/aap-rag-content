@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-ref_metrics_service_configuration_variables/aem-page/install-ref_metrics_service_configuration_variables.html"
 last_crumb = "Metrics service configuration variables"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Metrics service configuration variables"
 oversized = "false"
@@ -42,7 +42,6 @@ The following variables must be defined when deploying metrics service with the 
 | `automationmetrics_controller_read_pg_host`     | (none)  | **Required**\*    | PostgreSQL host for the controller database                                                                            |
 | `automationmetrics_controller_read_pg_password` | (none)  | **Required**\*    | Password for the read-only controller database user. \*Not required when`automationmetrics_pg_cert_auth: true` is set. |
 
-
 **Optional variables with defaults**
 
 | Variable                             | Default           | Description                                         |
@@ -55,15 +54,14 @@ The following variables must be defined when deploying metrics service with the 
 | `automationmetrics_nginx_https_port` | `8450`            | nginx HTTPS port                                    |
 | `automationmetrics_pg_cert_auth`     | `false`           | Use certificate authentication instead of passwords |
 
-
 Note:
 
 **Note on certificate authentication:** When `automationmetrics_pg_cert_auth: true`, password variables (`automationmetrics_pg_password` and `automationmetrics_controller_read_pg_password`) are not required. The service uses PostgreSQL certificate-based authentication instead.
 
 **Dashboard and feature flags**
 
-| Variable                               | Default | Required/Optional | Description                                                                                                                                                                                                                                                                                          |
-| -------------------------------------- | ------- | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Variable                               | Default | Required/Optional | Description                                                                                                                                                                                              |
+| -------------------------------------- | ------- | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `FEATURE_DASHBOARD_COLLECTION_ENABLED` | `false` | Optional          | Enable automation dashboard data collection. When`true`, metrics service collects dashboard-specific metrics (cost data, ROI calculations, and pricing information) in addition to standard anonymized metrics. Maps to environment variable`METRICS_SERVICE_FEATURE_ENABLED__DASHBOARD_COLLECTION`. |
 
 ## Dashboard feature flag

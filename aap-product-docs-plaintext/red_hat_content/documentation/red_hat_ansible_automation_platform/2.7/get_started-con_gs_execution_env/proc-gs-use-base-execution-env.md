@@ -14,7 +14,6 @@ Ansible Automation Platform includes the following execution environments:
 - `Minimal` - Includes the latest Ansible-core 2.15 release along with Ansible Runner, but does not include collections or other content
 - `EE Supported` - Minimal, plus all Red Hat-supported collections and dependencies
 
-
 Base images included with Ansible Automation Platform are hosted on the Red Hat Ecosystem Catalog (`registry.redhat.io`).
 
 ### Procedure

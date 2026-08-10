@@ -1,7 +1,7 @@
 +++
-title = "Configure your Ansible Automation Platform deployment - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-configure_your_ansible_automation_platform_deployment"
+template = "docs/aem-title.html"
+title = "Configure your Ansible Automation Platform deployment - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator/", "Install on OpenShift Container Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-configure_your_ansible_automation_platform_deployment/aem-page/install-configure_your_ansible_automation_platform_deployment.html"
 last_crumb = "Configure your Ansible Automation Platform deployment"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure your Ansible Automation Platform deployment"
 oversized = "false"
@@ -107,10 +107,9 @@ spec:
 
 Red Hat OpenShift Container Platform creates the pods. This may take a few minutes. You can view the progress by navigating to Workloads> (and then)Pods and locating the newly created instance. Verify that the following operator pods provided by the Red Hat Ansible Automation Platform Operator installation from platform gateway are running:
 
-| Operator manager controllers pods                                                                                                                                                                                                                                                                                                                         | Automation controller pods                                                                                                                                                                  | Automation hub pods                                                                                                                                                 | Event-Driven Ansible pods                                                                                                          | Platform gateway pods                                                                                                           |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Operator manager controllers pods                                                                                                                                                                        | Automation controller pods                                                                                                                                                                  | Automation hub pods                                                                                                                                                 | Event-Driven Ansible pods                                                                                                          | Platform gateway pods                                                                                                           |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | <br>The operator manager controllers for each of the four operators, include the following:<br>automation-controller-operator-controller-managerautomation-hub-operator-controller-managerresource-operator-controller-manageraap-gateway-operator-controller-manageransible-lightspeed-operator-controller-managereda-server-operator-controller-manager | <br>After deploying automation controller, you can see the addition of the following pods:<br>Automation controller webAutomation controller taskMesh ingressAutomation controller postgres | <br>After deploying automation hub, you can see the addition of the following pods:<br>Automation hub webAutomation hub taskAutomation hub APIAutomation hub worker | <br>After deploying EDA, you can see the addition of the following pods:<br>EDA APIEDA ActivationEDA workerEDA streamEDA Scheduler | <br>After deploying platform gateway, you can see the addition of the following pods:<br>platform gatewayplatform gateway redis |
-
 
 Note:
 

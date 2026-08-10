@@ -46,6 +46,7 @@ sslmode: "prefer"
 type: "unmanaged"
 type: Opaque
 ```
+
 When configuring the secret:
 
 - `namespace`: Specify the namespace to create the secret in. This should be the same namespace you want to deploy to.
@@ -73,6 +74,7 @@ controller:
 name: controller-dev  # Optional: specify existing instance or custom name
 postgres_configuration_secret: external-postgres-configuration
 ```
+
 
 Note:
 If you have an existing automation controller instance, specify its name under `controller.name` to apply these settings to the existing instance. If you omit the `name` field, the operator will create a new instance with the default name pattern `<aap-instance-name>-controller`.

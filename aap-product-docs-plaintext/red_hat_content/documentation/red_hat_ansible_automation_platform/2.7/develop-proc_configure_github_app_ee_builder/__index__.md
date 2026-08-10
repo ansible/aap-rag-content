@@ -8,7 +8,7 @@ Create and install a GitHub App so that execution environment builder can scan y
 
 ## About this task
 
-GitHub Apps provide organization-scoped permissions that do not depend on individual user accounts. Choose this option or a Personal Access Token (PAT) for content discovery. GitHub App and PAT are mutually exclusive.
+GitHub Apps provide organization-scoped permissions that do not depend on individual user accounts. A GitHub App is the recommended option for content discovery. You can also use a Personal Access Token (PAT). You do not need both.
 
 ## Procedure
 
@@ -22,13 +22,15 @@ GitHub Apps provide organization-scoped permissions that do not depend on indivi
 - **Homepage URL:** The URL of your automation portal deployment.
 - **Webhook:** Clear the **Active** checkbox if you do not require webhook events.
 - **Authorization callback URL:** `https://<my_portal_domain>/api/auth/github/handler/frame`
+Note:
+GitHub limits the Authorization callback URL to 100 characters. If your OpenShift route URL exceeds this limit, configure a shorter route hostname for the portal before creating the OAuth App.
 
 6.  In the **Permissions** section, set the following repository permissions:
 
 - **Contents:** Read-only
 - **Actions:** Read-only
 
-7.  In the **Where can this GitHub App be installed?** section, select **Only on this account**.
+7.  In the **Where can this GitHub App be installed?** section, select **Any account**.
 8.  Click **Create GitHub App**.
 9.  Note the **App ID** from the GitHub App settings page.
 10.  In the **Private keys** section, click **Generate a private key**. Store the downloaded `.pem` file securely.
@@ -59,12 +61,12 @@ $ oc create secret generic secrets-scm \
 --from-literal=github-app-private-key="$(cat <path_to_private_key>.pem)" \
 -n <namespace>
 ```
+
 **OpenShift — web console:**
 
 1. Navigate to **Workloads > Secrets > Create > Key/value secret**.
 2. Set the name to `secrets-scm`.
 3. Add keys: `github-app-id`, `github-app-client-id`, `github-app-client-secret`, `github-app-private-key` (paste the `.pem` file contents as the value).
-
 
 **RHEL appliance:**
 
@@ -74,26 +76,10 @@ $ echo -n '<client_id>' | sudo podman secret create portal_github_app_client_id 
 $ echo -n '<client_secret>' | sudo podman secret create portal_github_app_client_secret -
 $ sudo podman secret create portal_github_app_private_key <path_to_private_key>.pem
 ```
-Create (or update) the Quadlet drop-in file so the portal container can read these secrets as environment variables:
-
-```
-$ sudo tee /etc/containers/systemd/portal.container.d/ee-builder-secrets.conf << 'EOF'
-[Container]
-Secret=portal_github_app_id,type=env,target=GITHUB_APP_ID
-Secret=portal_github_app_client_id,type=env,target=GITHUB_APP_CLIENT_ID
-Secret=portal_github_app_client_secret,type=env,target=GITHUB_APP_CLIENT_SECRET
-Secret=portal_github_app_private_key,type=env,target=GITHUB_APP_PRIVATE_KEY
-EOF
-```
-
-
-Note:
-
-All EE Builder secrets use a single drop-in file (`ee-builder-secrets.conf`). If you configure additional SCM integrations later (for example, GitHub OAuth or GitLab OAuth), append the new `Secret=` lines to this file.
 
 **Update the Helm chart configuration**
 
-In your Helm chart configuration, update the `integrations.github` section. The PAT and GitHub App configurations are mutually exclusive:
+In your Helm chart configuration, update the `integrations.github` section. Configure either a PAT or GitHub App:
 
 ```
 upstream:
@@ -116,10 +102,11 @@ token: ${GITHUB_TOKEN}
 #       privateKey: ${GITHUB_APP_PRIVATE_KEY}
 ```
 
+The configuration shows two options. Option A uses a Personal Access Token (see [Configure a Personal Access Token for GitHub content discovery](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_pat_ee_builder "Create and store a GitHub Personal Access Token (PAT) so that execution environment builder can scan repositories for Ansible collections.")). Option B uses a GitHub App (recommended).
 
 Important:
 
-Configure either a PAT or a GitHub App, not both. If using a GitHub App, comment out the `token` line and uncomment the `apps` block.
+A GitHub App is the recommended option. If using a GitHub App, comment out the `token` line and uncomment the `apps` block.
 
 **RHEL appliance:** Add the equivalent `integrations.github` block to `/etc/portal/configs/app-config/app-config.production.yaml` (without the `upstream.backstage.appConfig` nesting):
 
@@ -133,23 +120,13 @@ clientId: ${GITHUB_APP_CLIENT_ID}
 clientSecret: ${GITHUB_APP_CLIENT_SECRET}
 privateKey: ${GITHUB_APP_PRIVATE_KEY}
 ```
-The `${...}` references are resolved from the Podman secrets you created above, through the Quadlet drop-in.
+
+The `${...}` references are resolved from the Podman secrets you created above. The portal automatically injects `portal_`-prefixed secrets as environment variables.
 
 Important:
 
-Adding an `integrations:` section to `app-config.production.yaml` replaces the auto-generated PAT-based integration from cloud-init. If you are switching from a PAT to a GitHub App, the PAT is no longer used for content discovery. To keep both, include the PAT configuration alongside the GitHub App in your `integrations:` block:
+Adding an `integrations:` section to `app-config.production.yaml` replaces the auto-generated PAT-based integration from cloud-init. If you are switching from a PAT to a GitHub App, the PAT is no longer used for content discovery. Having both a PAT and a GitHub App in the same `integrations:` block does not break the install, but the PAT is unnecessary when a GitHub App is configured.
 
-```
-integrations:
-github:
-- host: github.com
-token: ${GITHUB_TOKEN}
-apps:
-- appId: ${GITHUB_APP_ID}
-clientId: ${GITHUB_APP_CLIENT_ID}
-clientSecret: ${GITHUB_APP_CLIENT_SECRET}
-privateKey: ${GITHUB_APP_PRIVATE_KEY}
-```
 **Configure CORS for self-hosted GitHub Enterprise**
 
 If the `host` is a self-hosted GitHub Enterprise instance (not `github.com`), add its URL to the CORS allowed origins so that OAuth redirects are accepted.
@@ -166,6 +143,7 @@ origin:
 - ${BASE_URL}
 - https://github.internal.example.com
 ```
+
 **RHEL appliance** — add to the existing `backend:` block in `app-config.production.yaml`:
 
 ```
@@ -176,7 +154,6 @@ origin:
 - "https://github.internal.example.com"
 ```
 
-
 Important:
 
 On RHEL appliances, `app.baseUrl`, `backend.baseUrl`, and `backend.cors.origin` must all use the same portal URL. If any of these values are inconsistent, OAuth callbacks and API requests fail. Do not create a duplicate `backend:` block — add `cors` to the existing one.
@@ -186,3 +163,5 @@ Note:
 If you only use `github.com`, no CORS changes are needed.
 
 For a complete working example of all settings in context, see [Complete Helm chart values reference](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_ee_builder_helm_values "A complete Helm chart values configuration for execution environment builder with GitHub App authentication, content discovery, and private automation hub enabled.").
+
+After updating the configuration, apply your changes. See [Apply configuration changes](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_apply_configuration_changes "Apply configuration changes after modifying your Helm chart values or RHEL appliance configuration file for execution environment builder.").

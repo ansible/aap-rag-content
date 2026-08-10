@@ -16,7 +16,6 @@ Complete the form to provision Red Hat Ansible Automation Platform infrastructur
 
 1. Click the **Basics** tab and enter values for your deployment in the following fields in the form:
 
-
 - **Subscription**: Select **Ansible on Clouds**.
 
 - **Resource Group**: Create or select a resource group where you want to deploy the managed application.
@@ -55,7 +54,6 @@ Keep this resource group isolated from other resource groups, including the *Res
 
 10. Note the following requirements in the description:
 
-
 - You must have a Red Hat account.
 - To use Ansible Automation Platform, you must have a valid subscription linked to your Red Hat account.
 - You must use the Deployment Driver during deployment.
@@ -78,5 +76,5 @@ You can use the deployment engine to view the progress of your deployment a few 
 
 It may take 30 minutes or longer for the infrastructure and software to fully provision.
 
-After provisioning is complete, you can access and log in to your new Ansible Automation Platform instance. For help with configuring your automation controller and automation hub instances see [Configuring automation execution](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/index) and [Managing automation content](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/managing_automation_content) respectively.
+After provisioning is complete, you can access and log in to your new Ansible Automation Platform instance. For help with configuring your automation controller and automation hub instances see [Configuring automation execution](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/index) and [Managing automation content](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_automation_content) respectively.
 

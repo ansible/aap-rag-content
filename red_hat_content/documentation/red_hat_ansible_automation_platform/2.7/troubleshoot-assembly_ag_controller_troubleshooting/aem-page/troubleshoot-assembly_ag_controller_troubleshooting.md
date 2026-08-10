@@ -1,7 +1,7 @@
 +++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-assembly_ag_controller_troubleshooting"
 template = "docs/aem-title.html"
 title = "Troubleshoot automation controller - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-assembly_ag_controller_troubleshooting"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-assembly_ag_controller_troubleshooting/", "Troubleshoot automation controller"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/troubleshoot-assembly_ag_controller_troubleshooting/aem-page/troubleshoot-assembly_ag_controller_troubleshooting.html"
 last_crumb = "Troubleshoot automation controller"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Troubleshoot automation controller"
 oversized = "false"
@@ -39,6 +39,7 @@ In cases where your configuration is set up to run an automation controller node
 SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
 ```
+
 If you change these settings to `false` it enables automation controller to manage cookies and login sessions when using the HTTP protocol. You must do this on every node of a cluster installation.
 
 To apply the changes, run:
@@ -69,7 +70,6 @@ If you are attempting to run a playbook job and it stays in the `Pending` state 
 - Ensure that all supervisor services are running through `supervisorctl status`.
 - Ensure that the `/var/ partition` has more than 1 GB of space available. Jobs do not complete with insufficient space on the `/var/` partition.
 - Run `automation-controller-service restart` on the automation controller server.
-
 
 If you continue to have issues, run `sosreport` as root on the automation controller server, then file a [support request](http://support.ansible.com/) with the result.
 

@@ -1,7 +1,7 @@
 +++
-title = "Create a custom resource for Resource Operator - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_create_crs_resource_operator"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_create_crs_resource_operator"
+title = "Create a custom resource for Resource Operator - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator/", "Install on OpenShift Container Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-con_create_crs_resource_operator/aem-page/install-con_create_crs_resource_operator.html"
 last_crumb = "Create a custom resource for Resource Operator"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Create a custom resource for Resource Operator"
 oversized = "false"
@@ -64,6 +64,7 @@ spec:
   job_tags: "provision,install,configuration"  # Specify tags to run
   skip_tags: "configuration,restart"           # Skip tasks with a given tag
 ```
+
   Note:
       You must enable prompt on launch for inventories and extra variables if you are configuring those. To enable **Prompt on launch**, within the automation controller UI: From the Resources> (and then)Templates page, select your template and select the **Prompt on launch** checkbox next to **Inventory** and **Variables** sections.
 

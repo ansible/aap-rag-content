@@ -90,6 +90,7 @@ automationmetrics_tls_key=/home/user/certs/metrics.example.com.key
 postgresql_tls_cert=/home/user/certs/postgresql.example.com.crt
 postgresql_tls_key=/home/user/certs/postgresql.example.com.key
 ```
+
 Note:
 For enterprise topology with dedicated metrics service host, use metrics.example.com FQDN.
 
