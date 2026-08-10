@@ -498,9 +498,98 @@ registered_resources:
         )
         return str(vector_store.id)
 
-    async def _upload_and_process_files(  # noqa: C901  # pylint: disable=R0912,R0914
-        self, client: Any, index: str
-    ) -> str:
+    async def _wait_for_file_processing(
+        self, client: Any, vector_store_id: str, file_id: str, max_wait: int = 5 * 60
+    ) -> Any:
+        """Poll a vector store file until it reaches a terminal status.
+
+        Returns:
+            The last-retrieved file object (its .status may still be non-terminal
+            if max_wait was exceeded).
+        """
+        vs_file = await client.vector_stores.files.retrieve(
+            vector_store_id=vector_store_id,
+            file_id=file_id,
+        )
+        start_time = time.time()
+        while (time.time() - start_time) < max_wait:
+            if vs_file.status in ("completed", "failed", "cancelled"):
+                break
+            await asyncio.sleep(0.5)
+            vs_file = await client.vector_stores.files.retrieve(
+                vector_store_id=vector_store_id,
+                file_id=file_id,
+            )
+        return vs_file
+
+    async def _upload_single_file_with_retry(
+        self,
+        client: Any,
+        vector_store: Any,
+        rag_doc: Any,
+        chunking_strategy: dict[str, Any],
+        max_retries: int = 3,
+    ) -> tuple[bool, Optional[str]]:
+        """Upload one file (auto-chunking mode), retrying on failure.
+
+        Returns:
+            (success, error) — error is None when success is True.
+        """
+        doc_uuid = rag_doc.document_id  # type: ignore[union-attr]
+        error: Optional[str] = None
+
+        for attempt in range(max_retries):
+            try:
+                file_obj = BytesIO(rag_doc.content.encode("utf-8"))  # type: ignore[union-attr]
+                file_obj.name = f"{doc_uuid}.txt"
+
+                uploaded_file = await client.files.create(
+                    file=file_obj,
+                    purpose="assistants",
+                )
+
+                attributes = {
+                    **rag_doc.metadata,  # type: ignore[union-attr]
+                    "document_id": doc_uuid,
+                }
+                await client.vector_stores.files.create(
+                    vector_store_id=vector_store.id,
+                    file_id=uploaded_file.id,
+                    attributes=attributes,
+                    chunking_strategy=chunking_strategy,
+                )
+
+                vs_file = await self._wait_for_file_processing(
+                    client, vector_store.id, uploaded_file.id
+                )
+
+                if vs_file.status == "completed":
+                    return True, None
+
+                error = getattr(vs_file, "last_error", "unknown error")
+                LOG.warning(
+                    "File %s attempt %d/%d failed: %s",
+                    doc_uuid,
+                    attempt + 1,
+                    max_retries,
+                    error,
+                )
+
+            except Exception as e:  # pylint: disable=broad-exception-caught
+                error = str(e)
+                LOG.warning(
+                    "File %s attempt %d/%d error: %s",
+                    doc_uuid,
+                    attempt + 1,
+                    max_retries,
+                    e,
+                )
+                if attempt < max_retries - 1:
+                    await asyncio.sleep(1)
+
+        return False, error
+
+    async def _upload_and_process_files(self, client: Any, index: str) -> str:
         """Auto chunking: Upload and process files one at a time.
 
         Called when --auto-chunking flag enabled.
@@ -534,77 +623,17 @@ registered_resources:
         LOG.info("Processing %d files...", total_docs)
 
         for idx, rag_doc in enumerate(self.documents):
-            doc_uuid = rag_doc.document_id  # type: ignore[union-attr]
-            max_retries = 3
-
-            for attempt in range(max_retries):
-                try:
-                    # Upload file (rag_doc is RAGDocument in auto chunking mode)
-                    file_obj = BytesIO(rag_doc.content.encode("utf-8"))  # type: ignore[union-attr]
-                    file_obj.name = f"{doc_uuid}.txt"
-
-                    uploaded_file = await client.files.create(
-                        file=file_obj,
-                        purpose="assistants",
+            success, error = await self._upload_single_file_with_retry(
+                client, vector_store, rag_doc, chunking_strategy
+            )
+            if success:
+                successful += 1
+                if (idx + 1) % 10 == 0 or (idx + 1) == total_docs:
+                    LOG.info(
+                        "Progress: %d/%d files processed", idx + 1, total_docs
                     )
-
-                    # Attach file to vector store and wait for processing
-                    attributes = {
-                        **rag_doc.metadata,  # type: ignore[union-attr]
-                        "document_id": doc_uuid,
-                    }
-                    vs_file = await client.vector_stores.files.create(
-                        vector_store_id=vector_store.id,
-                        file_id=uploaded_file.id,
-                        attributes=attributes,
-                        chunking_strategy=chunking_strategy,
-                    )
-
-                    # Wait for this file to be processed
-                    max_wait = 5 * 60
-                    start_time = time.time()
-                    while (time.time() - start_time) < max_wait:
-                        vs_file = await client.vector_stores.files.retrieve(
-                            vector_store_id=vector_store.id,
-                            file_id=uploaded_file.id,
-                        )
-                        if vs_file.status in ("completed", "failed", "cancelled"):
-                            break
-                        await asyncio.sleep(0.5)
-
-                    if vs_file.status == "completed":
-                        successful += 1
-                        if (idx + 1) % 10 == 0 or (idx + 1) == total_docs:
-                            LOG.info(
-                                "Progress: %d/%d files processed",
-                                idx + 1,
-                                total_docs,
-                            )
-                        break
-
-                    error = getattr(vs_file, "last_error", "unknown error")
-                    LOG.warning(
-                        "File %s attempt %d/%d failed: %s",
-                        doc_uuid,
-                        attempt + 1,
-                        max_retries,
-                        error,
-                    )
-                    if attempt == max_retries - 1:
-                        failed_docs.append((doc_uuid, error))
-
-                except Exception as e:  # pylint: disable=broad-exception-caught
-                    LOG.warning(
-                        "File %s attempt %d/%d error: %s",
-                        doc_uuid,
-                        attempt + 1,
-                        max_retries,
-                        e,
-                    )
-                    if attempt == max_retries - 1:
-                        failed_docs.append((doc_uuid, str(e)))
-                    else:
-                        await asyncio.sleep(1)
+            else:
+                failed_docs.append((rag_doc.document_id, error))  # type: ignore[union-attr]
 
         LOG.info(
             "File processing finished: successful=%d/%d, failed=%d",
@@ -711,6 +740,49 @@ class DocumentProcessor:
             f"Unknown vector store type: {self.config.vector_store_type}"
         )
 
+    @staticmethod
+    def _partition_ignored(
+        docs: list[Any], ignore_list: Optional[list[str]]
+    ) -> tuple[list[Any], list[Any]]:
+        """Split docs into (docs_to_check, ignored_docs) based on title membership."""
+        if not ignore_list:
+            return docs, []
+
+        docs_to_check = []
+        ignored_docs = []
+        for doc in docs:
+            if (doc.metadata or {}).get("title") in ignore_list:
+                ignored_docs.append(doc)
+            else:
+                docs_to_check.append(doc)
+        return docs_to_check, ignored_docs
+
+    @staticmethod
+    def _apply_unreachable_action(
+        docs: list[Any],
+        docs_to_check: list[Any],
+        ignored_docs: list[Any],
+        unreachable_action: Optional[str],
+    ) -> list[Any]:
+        """Apply the unreachable_action policy, returning the docs to persist."""
+        # The `or {}` only guards metadata being None (S2259); a missing
+        # url_reachable key still raises KeyError so a broken metadata
+        # pipeline fails loudly instead of silently dropping docs.
+        reachable_docs = [
+            doc
+            for doc in docs_to_check
+            if (doc.metadata or {})["url_reachable"] is True
+        ]
+
+        if len(docs_to_check) == len(reachable_docs):
+            return docs
+
+        if unreachable_action == "fail":
+            raise RuntimeError("Some documents have unreachable URLs. ")
+        if unreachable_action == "drop":
+            return reachable_docs + ignored_docs
+        return docs
+
     def process(
         self,
         docs_dir: Path,
@@ -746,36 +818,10 @@ class DocumentProcessor:
 
         # Check for unreachable URLs if we are not ignoring them
         if unreachable_action != "warn":
-            # Separate docs into those we should check and those in ignore_list
-            if ignore_list:
-                docs_to_check = []
-                ignored_docs = []
-                for doc in docs:
-                    if (doc.metadata or {}).get("title") in ignore_list:
-                        ignored_docs.append(doc)
-                    else:
-                        docs_to_check.append(doc)
-            else:
-                docs_to_check = docs
-                ignored_docs = []
-
-            # Find reachable docs among those we're checking. The `or {}`
-            # only guards metadata being None (S2259); a missing
-            # url_reachable key still raises KeyError so a broken metadata
-            # pipeline fails loudly instead of silently dropping docs.
-            reachable_docs = [
-                doc
-                for doc in docs_to_check
-                if (doc.metadata or {})["url_reachable"] is True
-            ]
-
-            if len(docs_to_check) != len(reachable_docs):
-                # Optionally fail on unreachable URLs
-                if unreachable_action == "fail":
-                    raise RuntimeError("Some documents have unreachable URLs. ")
-                # Optionally drop unreachable URLs (but keep ignored docs)
-                if unreachable_action == "drop":
-                    docs = reachable_docs + ignored_docs
+            docs_to_check, ignored_docs = self._partition_ignored(docs, ignore_list)
+            docs = self._apply_unreachable_action(
+                docs, docs_to_check, ignored_docs, unreachable_action
+            )
 
         self.db.add_docs(docs)
 
