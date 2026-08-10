@@ -10,7 +10,6 @@ COPY additional_docs ./additional_docs
 COPY solution-guides-plaintext ./solution-guides-plaintext
 
 COPY scripts/custom_processor_aap.py .
-COPY src/aap_rag_content ./aap_rag_content
 
 RUN microdnf install -y gzip
 
