@@ -246,15 +246,21 @@ def _decrypt_and_extract_archive(in_file, out_file):  # pragma: no cover
     if not secret:
         print("Envvar MIMIR_ENC_SECRET is not defined.")
         sys.exit(1)
-    openssl_cmd = (
-        f"openssl enc -aes-256-cbc -d -pbkdf2"
-        f" -pass pass:{secret}"
-        f" -in {in_file} -out {out_file}"
+    subprocess.run(
+        [
+            "openssl", "enc", "-aes-256-cbc", "-d", "-pbkdf2",
+            "-pass", f"pass:{secret}",
+            "-in", in_file, "-out", out_file,
+        ],
+        capture_output=True,
+        text=True,
+        check=True,
     )
-    subprocess.run(openssl_cmd.split(" "), capture_output=True, text=True, check=True)
-    dirs = " ".join(SOURCE_DIRS)
     output = subprocess.run(
-        f"tar xvzf {out_file} {dirs}".split(" "), capture_output=True, text=True, check=True
+        ["tar", "xvzf", out_file, *SOURCE_DIRS],
+        capture_output=True,
+        text=True,
+        check=True,
     )
     print(output)
 
@@ -290,7 +296,7 @@ def _extract_kb_articles(out_file):  # pragma: no cover
     """Extract knowledge base articles from the archive."""
     print("Extracting knowledge base articles...")
     output = subprocess.run(
-        f"tar xzf {out_file} {KNOWLEDGE_BASE_ARTICLES_DIR}".split(" "),
+        ["tar", "xzf", out_file, KNOWLEDGE_BASE_ARTICLES_DIR],
         capture_output=True,
         text=True,
         check=True,
@@ -304,7 +310,7 @@ def _cleanup_html_files():  # pragma: no cover
     """Delete extracted HTML files, now that TOC/plaintext generation is done."""
     print("Delete html files")
     output = subprocess.run(
-        "find red_hat_content -name *.html -type f -delete".split(" "),
+        ["find", "red_hat_content", "-name", "*.html", "-type", "f", "-delete"],
         capture_output=True,
         text=True,
         check=True,
