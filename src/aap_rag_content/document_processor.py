@@ -31,6 +31,7 @@ from aap_rag_content.llama_index.core import (
     SimpleDirectoryReader,
 )
 from aap_rag_content.metadata_processor import MetadataProcessor
+from aap_rag_content.utils import normalize_cli_path
 
 LOG = logging.getLogger(__name__)
 
@@ -640,14 +641,9 @@ registered_resources:
         with open(cfg_file, "w", encoding="utf-8") as f:
             f.write(config_content)
 
-    def save(
-        self,
-        index: str,
-        output_dir: str,
-        embedded_files: Optional[int] = None,  # pylint: disable=W0613
-        exec_time: Optional[int] = None,  # pylint: disable=W0613
-    ) -> None:
+    def save(self, index: str, output_dir: str) -> None:
         """Save in the vector database all the documents we added."""
+        output_dir = normalize_cli_path(output_dir)
         os.makedirs(output_dir, exist_ok=True)
         db_file = os.path.realpath(os.path.join(output_dir, self.db_filename))
         files_metadata_db_file = os.path.realpath(
@@ -659,8 +655,8 @@ registered_resources:
         try:
             vector_store_id = asyncio.run(self._run_llama_stack(cfg_file, index))
             self._update_yaml_config(cfg_file, index, vector_store_id)
-        except Exception as exc:
-            LOG.error("Failed to insert document: %s", exc)
+        except Exception:
+            LOG.exception("Failed to insert document")
             raise
 
 
@@ -746,7 +742,7 @@ class DocumentProcessor:
         )
 
         # Create chunks/nodes
-        docs = reader.load_data(num_workers=self.config.num_workers)
+        docs = reader.load_data(num_workers=self.config.num_workers) or []
 
         # Check for unreachable URLs if we are not ignoring them
         if unreachable_action != "warn":
@@ -755,7 +751,7 @@ class DocumentProcessor:
                 docs_to_check = []
                 ignored_docs = []
                 for doc in docs:
-                    if doc.metadata.get("title") in ignore_list:
+                    if (doc.metadata or {}).get("title") in ignore_list:
                         ignored_docs.append(doc)
                     else:
                         docs_to_check.append(doc)
@@ -763,9 +759,14 @@ class DocumentProcessor:
                 docs_to_check = docs
                 ignored_docs = []
 
-            # Find reachable docs among those we're checking
+            # Find reachable docs among those we're checking. The `or {}`
+            # only guards metadata being None (S2259); a missing
+            # url_reachable key still raises KeyError so a broken metadata
+            # pipeline fails loudly instead of silently dropping docs.
             reachable_docs = [
-                doc for doc in docs_to_check if doc.metadata["url_reachable"] is True
+                doc
+                for doc in docs_to_check
+                if (doc.metadata or {})["url_reachable"] is True
             ]
 
             if len(docs_to_check) != len(reachable_docs):
@@ -783,5 +784,4 @@ class DocumentProcessor:
 
     def save(self, index: str, output_dir: str) -> None:
         """Save all the documents we've added to the vector database."""
-        exec_time = int(time.time() - self._start_time)
-        self.db.save(index, output_dir, self._num_embedded_files, exec_time)
+        self.db.save(index, output_dir)

@@ -16,6 +16,7 @@
 
 import argparse
 import logging
+import os
 from collections.abc import Callable
 from pathlib import Path
 
@@ -153,3 +154,45 @@ def get_common_arg_parser() -> argparse.ArgumentParser:
         help="Skip URL reachability check and assume all URLs are reachable.",
     )
     return parser
+
+
+def normalize_cli_path(path: str) -> str:
+    """Cosmetically normalize a CLI-supplied path.
+
+    Collapses ``..``/``.`` segments and redundant separators via
+    ``os.path.normpath``. This is normalization only — it does NOT restrict
+    traversal (``../../etc/passwd`` passes through unchanged). Callers are CLI
+    tools operated by trusted local users; when actual containment is
+    required, use :func:`resolve_within_cwd` instead.
+
+    Args:
+        path: A path provided via a CLI argument.
+
+    Returns:
+        The normalized path.
+    """
+    return os.path.normpath(path)
+
+
+def resolve_within_cwd(path: str) -> str:
+    """Resolve a CLI-supplied path and reject it if it escapes the working directory.
+
+    Unlike normalize_cli_path(), this asserts containment rather than merely
+    normalizing: the returned path is guaranteed to be the current directory
+    itself or a descendant of it.
+
+    Args:
+        path: A path provided via a CLI argument.
+
+    Returns:
+        The resolved absolute path.
+
+    Raises:
+        ValueError: If the resolved path is not the current directory or a
+            descendant of it.
+    """
+    base = Path.cwd().resolve()
+    resolved = (base / path).resolve()
+    if resolved != base and base not in resolved.parents:
+        raise ValueError(f"Path escapes the working directory: {path}")
+    return str(resolved)

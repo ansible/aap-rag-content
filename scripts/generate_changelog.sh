@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$#" -ne 4 ]
+if [[ "$#" -ne 4 ]]
 then
   echo "Usage: generate_changelog.sh <name> <gh_api_base_url> <gh_base_url> <changelogs_file>"
   exit 1
@@ -11,8 +11,8 @@ REPO_API_BASE_URL=$2
 REPO_BASE_URL=$3
 CHANGELOGS_FILE=$4
 
-METADATA_DIR=`echo ${CHANGELOGS_FILE}|sed 's/\(.*\)\/\(.*\)txt/\1\/.metadata/'`
-METADATA_FILE=`echo ${CHANGELOGS_FILE}|sed 's/\(.*\)\/\(.*\)txt/\1\/.metadata\/\2json/'`
+METADATA_DIR=$(echo ${CHANGELOGS_FILE}|sed 's/\(.*\)\/\(.*\)txt/\1\/.metadata/')
+METADATA_FILE=$(echo ${CHANGELOGS_FILE}|sed 's/\(.*\)\/\(.*\)txt/\1\/.metadata\/\2json/')
 
 echo ${METADATA_DIR}
 echo ${METADATA_FILE}
@@ -27,7 +27,7 @@ REPO_PUBLISHED_DATE="$(date -d "${REPO_PUBLISHED}"  '+%A, %B %d, %Y')"
 echo -e "# ${REPO_NAME} Versions\n\nHere is the most recent update for ${REPO_NAME}:\n" > ${CHANGELOGS_FILE}
 echo "- ${REPO_NAME} Version ${REPO_TAG_NAME} Released on ${REPO_PUBLISHED_DATE}">> ${CHANGELOGS_FILE}
 
-if [ ! -d "${METADATA_DIR}" ]; then
+if [[ ! -d "${METADATA_DIR}" ]]; then
   mkdir -p ${METADATA_DIR}
 fi
 echo "{ \"url\":\"${REPO_BASE_URL}\" }"> ${METADATA_FILE}

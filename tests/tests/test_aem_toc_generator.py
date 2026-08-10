@@ -280,6 +280,24 @@ class TestAEMHTMLParser:
         assert root is not None
         assert root.title == "Fallback Title"
 
+    def test_root_title_fallback_ignores_topictitle_in_body_text(self):
+        """An h1 whose body mentions 'topictitle' but whose class doesn't is skipped."""
+        html = """\
+<html>
+<body id="fallback-doc">
+<article role="article">
+  <h1 class="other">See the topictitle docs</h1>
+  <h1 class="title topictitle1" id="ariaid-title1">Real Title</h1>
+</article>
+</body>
+</html>
+"""
+        parser = AEMHTMLParser()
+        root = parser.parse(html)
+
+        assert root is not None
+        assert root.title == "Real Title"
+
     def test_no_root_returns_none(self):
         """HTML with no nested articles and no body id returns None."""
         parser = AEMHTMLParser()
