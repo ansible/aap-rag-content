@@ -759,11 +759,14 @@ class DocumentProcessor:
                 docs_to_check = docs
                 ignored_docs = []
 
-            # Find reachable docs among those we're checking
+            # Find reachable docs among those we're checking. The `or {}`
+            # only guards metadata being None (S2259); a missing
+            # url_reachable key still raises KeyError so a broken metadata
+            # pipeline fails loudly instead of silently dropping docs.
             reachable_docs = [
                 doc
                 for doc in docs_to_check
-                if (doc.metadata or {}).get("url_reachable") is True
+                if (doc.metadata or {})["url_reachable"] is True
             ]
 
             if len(docs_to_check) != len(reachable_docs):

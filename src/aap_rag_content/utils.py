@@ -157,20 +157,19 @@ def get_common_arg_parser() -> argparse.ArgumentParser:
 
 
 def normalize_cli_path(path: str) -> str:
-    """Normalize a CLI-supplied path before it is used for filesystem access.
+    """Cosmetically normalize a CLI-supplied path.
 
-    Collapses ``..``/``.`` segments and redundant separators so a path such as
-    ``../../etc/passwd`` becomes a literal, inspectable relative path instead
-    of being resolved implicitly by the OS call that consumes it. Callers are
-    CLI tools operated by trusted local users, not services accepting
-    untrusted input, so this normalizes rather than sandboxes to a base
-    directory.
+    Collapses ``..``/``.`` segments and redundant separators via
+    ``os.path.normpath``. This is normalization only — it does NOT restrict
+    traversal (``../../etc/passwd`` passes through unchanged). Callers are CLI
+    tools operated by trusted local users; when actual containment is
+    required, use :func:`resolve_within_cwd` instead.
 
     Args:
         path: A path provided via a CLI argument.
 
     Returns:
-        The normalized path, safe to pass to filesystem calls.
+        The normalized path.
     """
     return os.path.normpath(path)
 
