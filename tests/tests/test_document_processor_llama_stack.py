@@ -596,18 +596,20 @@ registered_resources:
 
         doc.save(mock.sentinel.index, "out_dir")
 
-        makedirs.assert_called_once_with("out_dir", exist_ok=True)
+        # save() lexically resolves the relative output dir under cwd
+        resolved_out = os.path.join(os.getcwd(), "out_dir")
+        makedirs.assert_called_once_with(resolved_out, exist_ok=True)
         assert realpath.call_count == 2
-        realpath.assert_any_call("out_dir/faiss_store.db")
-        realpath.assert_any_call("out_dir/files_metadata.db")
+        realpath.assert_any_call(os.path.join(resolved_out, "faiss_store.db"))
+        realpath.assert_any_call(os.path.join(resolved_out, "files_metadata.db"))
         write_cfg.assert_called_once_with(
             mock.sentinel.index,
-            "out_dir/llama-stack.yaml",
+            os.path.join(resolved_out, "llama-stack.yaml"),
             "/cwd/out_dir/faiss_store.db",
             "/cwd/out_dir/files_metadata.db",
         )
         update_yaml.assert_called_once_with(
-            "out_dir/llama-stack.yaml",
+            os.path.join(resolved_out, "llama-stack.yaml"),
             mock.sentinel.index,
             "vs_123",
         )

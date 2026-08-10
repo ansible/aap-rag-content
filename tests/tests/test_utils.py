@@ -124,25 +124,45 @@ class TestUtils:
         assert args.suppress_ping_url is True
 
 
-class TestNormalizeCliPath:
-    """Test cases for normalize_cli_path()."""
+class TestResolveOutputPath:
+    """Test cases for resolve_output_path()."""
 
-    def test_collapses_dot_dot_segments(self):
-        """A '..'-escaping path is collapsed to its literal normalized form."""
-        assert utils.normalize_cli_path("../../etc/passwd") == "../../etc/passwd"
-        assert utils.normalize_cli_path("a/b/../c") == "a/c"
+    def test_relative_path_resolves_under_cwd(self):
+        """A simple relative path resolves to a descendant of cwd."""
+        import os
 
-    def test_collapses_redundant_separators(self):
-        """Redundant slashes and './' segments are removed."""
-        assert utils.normalize_cli_path("a//b/./c/") == "a/b/c"
+        resolved = utils.resolve_output_path("some/output/dir")
+        assert resolved == os.path.join(os.getcwd(), "some/output/dir")
 
-    def test_leaves_simple_relative_path_unchanged(self):
-        """A simple relative path is returned as-is."""
-        assert utils.normalize_cli_path("output_dir") == "output_dir"
+    def test_absolute_path_is_honored(self, tmp_path):
+        """An absolute path outside cwd is accepted as explicit intent."""
+        from pathlib import Path
 
-    def test_leaves_absolute_path_unchanged(self):
-        """A clean absolute path is returned as-is."""
-        assert utils.normalize_cli_path("/tmp/output") == "/tmp/output"
+        resolved = utils.resolve_output_path(str(tmp_path / "out"))
+        assert Path(resolved) == tmp_path / "out"
+
+    def test_relative_escape_raises(self):
+        """A relative path that escapes the working directory is rejected."""
+        with pytest.raises(ValueError, match="escapes the working directory"):
+            utils.resolve_output_path("../../etc/passwd")
+
+    def test_symlinked_relative_dir_is_allowed(self, tmp_path, monkeypatch):
+        """A lexically in-tree symlink to an outside directory is NOT rejected.
+
+        The check is deliberately lexical: developers may symlink their
+        output dir to a scratch disk, and that must keep working.
+        """
+        import os
+
+        target = tmp_path / "scratch-disk"
+        target.mkdir()
+        workdir = tmp_path / "repo"
+        workdir.mkdir()
+        (workdir / "output").symlink_to(target)
+        monkeypatch.chdir(workdir)
+
+        resolved = utils.resolve_output_path("output")
+        assert resolved == os.path.join(str(workdir), "output")
 
 
 class TestResolveWithinCwd:

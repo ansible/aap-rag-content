@@ -156,30 +156,12 @@ def get_common_arg_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def normalize_cli_path(path: str) -> str:
-    """Cosmetically normalize a CLI-supplied path.
-
-    Collapses ``..``/``.`` segments and redundant separators via
-    ``os.path.normpath``. This is normalization only — it does NOT restrict
-    traversal (``../../etc/passwd`` passes through unchanged). Callers are CLI
-    tools operated by trusted local users; when actual containment is
-    required, use :func:`resolve_within_cwd` instead.
-
-    Args:
-        path: A path provided via a CLI argument.
-
-    Returns:
-        The normalized path.
-    """
-    return os.path.normpath(path)
-
-
 def resolve_within_cwd(path: str) -> str:
     """Resolve a CLI-supplied path and reject it if it escapes the working directory.
 
-    Unlike normalize_cli_path(), this asserts containment rather than merely
-    normalizing: the returned path is guaranteed to be the current directory
-    itself or a descendant of it.
+    This asserts containment rather than merely normalizing: the returned
+    path is guaranteed to be the current directory itself or a descendant
+    of it.
 
     Args:
         path: A path provided via a CLI argument.
@@ -196,3 +178,34 @@ def resolve_within_cwd(path: str) -> str:
     if resolved != base and base not in resolved.parents:
         raise ValueError(f"Path escapes the working directory: {path}")
     return str(resolved)
+
+
+def resolve_output_path(path: str) -> str:
+    """Validate a CLI-supplied output path, rejecting relative ``..`` escapes.
+
+    An absolute path is honored as explicit operator intent and only
+    lexically normalized — it is NOT contained. A relative path is
+    anchored at the current working directory and must stay within it
+    *lexically*: ``../`` escapes are rejected, while symlinks inside the
+    tree are deliberately not resolved, so a symlinked output directory
+    (e.g. ``./output`` pointing at a scratch disk) keeps working. For
+    strict, symlink-resolving containment of input paths, use
+    :func:`resolve_within_cwd` instead.
+
+    Args:
+        path: A path provided via a CLI argument or config value.
+
+    Returns:
+        The absolute, lexically normalized path.
+
+    Raises:
+        ValueError: If a relative path lexically escapes the working
+            directory.
+    """
+    if os.path.isabs(path):
+        return os.path.normpath(path)
+    base = os.getcwd()
+    resolved = os.path.normpath(os.path.join(base, path))
+    if resolved != base and not resolved.startswith(base + os.sep):
+        raise ValueError(f"Path escapes the working directory: {path}")
+    return resolved
