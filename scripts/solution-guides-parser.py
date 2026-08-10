@@ -30,7 +30,9 @@ class SolutionGuidesParser:
     """Parse solution guide markdown files and generate metadata for RAG."""
 
     def __init__(self, repo_dir, out_dir):
-        self.repo_dir = resolve_output_path(repo_dir)
+        # repo_dir is a read-only source location and may legitimately live
+        # outside the working directory; only the output dir is contained.
+        self.repo_dir = repo_dir
         self.out_dir = resolve_output_path(out_dir)
         self.metadata_dir = os.path.join(self.out_dir, ".metadata")
 

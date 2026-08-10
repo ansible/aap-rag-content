@@ -129,10 +129,10 @@ class TestResolveOutputPath:
 
     def test_relative_path_resolves_under_cwd(self):
         """A simple relative path resolves to a descendant of cwd."""
-        from pathlib import Path
+        import os
 
         resolved = utils.resolve_output_path("some/output/dir")
-        assert Path(resolved) == Path.cwd() / "some/output/dir"
+        assert resolved == os.path.join(os.getcwd(), "some/output/dir")
 
     def test_absolute_path_is_honored(self, tmp_path):
         """An absolute path outside cwd is accepted as explicit intent."""
@@ -145,6 +145,24 @@ class TestResolveOutputPath:
         """A relative path that escapes the working directory is rejected."""
         with pytest.raises(ValueError, match="escapes the working directory"):
             utils.resolve_output_path("../../etc/passwd")
+
+    def test_symlinked_relative_dir_is_allowed(self, tmp_path, monkeypatch):
+        """A lexically in-tree symlink to an outside directory is NOT rejected.
+
+        The check is deliberately lexical: developers may symlink their
+        output dir to a scratch disk, and that must keep working.
+        """
+        import os
+
+        target = tmp_path / "scratch-disk"
+        target.mkdir()
+        workdir = tmp_path / "repo"
+        workdir.mkdir()
+        (workdir / "output").symlink_to(target)
+        monkeypatch.chdir(workdir)
+
+        resolved = utils.resolve_output_path("output")
+        assert resolved == os.path.join(str(workdir), "output")
 
 
 class TestResolveWithinCwd:

@@ -16,6 +16,7 @@
 
 import argparse
 import logging
+import os
 from collections.abc import Callable
 from pathlib import Path
 
@@ -180,24 +181,31 @@ def resolve_within_cwd(path: str) -> str:
 
 
 def resolve_output_path(path: str) -> str:
-    """Resolve a CLI-supplied output path, validating relative paths.
+    """Validate a CLI-supplied output path, rejecting relative ``..`` escapes.
 
     An absolute path is honored as explicit operator intent and only
-    resolved. A relative path must stay within the current working
-    directory once resolved — ``../../etc`` style escapes are rejected —
-    so a script that joins user input onto its workspace can never
-    silently write outside of it.
+    lexically normalized — it is NOT contained. A relative path is
+    anchored at the current working directory and must stay within it
+    *lexically*: ``../`` escapes are rejected, while symlinks inside the
+    tree are deliberately not resolved, so a symlinked output directory
+    (e.g. ``./output`` pointing at a scratch disk) keeps working. For
+    strict, symlink-resolving containment of input paths, use
+    :func:`resolve_within_cwd` instead.
 
     Args:
         path: A path provided via a CLI argument or config value.
 
     Returns:
-        The resolved absolute path.
+        The absolute, lexically normalized path.
 
     Raises:
-        ValueError: If a relative path escapes the working directory.
+        ValueError: If a relative path lexically escapes the working
+            directory.
     """
-    p = Path(path)
-    if p.is_absolute():
-        return str(p.resolve())
-    return resolve_within_cwd(path)
+    if os.path.isabs(path):
+        return os.path.normpath(path)
+    base = os.getcwd()
+    resolved = os.path.normpath(os.path.join(base, path))
+    if resolved != base and not resolved.startswith(base + os.sep):
+        raise ValueError(f"Path escapes the working directory: {path}")
+    return resolved
