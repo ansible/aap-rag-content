@@ -160,7 +160,9 @@ class MimirParser:  # pylint: disable=too-many-instance-attributes
 
                         json.dump(metadata, meta, indent=2)
                 else:
-                    line = re.sub(r'^([^=]+)\s*=\s*"(.+)"', r"\1 = \2", line)
+                    # [^=\s]+ cannot overlap the following \s*, avoiding the
+                    # superlinear backtracking Sonar flags (S8786)
+                    line = re.sub(r'^([^=\s]+)\s*=\s*"(.+)"', r"\1 = \2", line)
                     config += line + "\n"
                 continue
             if line == "+++":

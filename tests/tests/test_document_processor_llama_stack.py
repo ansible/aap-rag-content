@@ -594,8 +594,16 @@ registered_resources:
             return_value=vs_file_mock
         )
 
+        # Pass output_dir through unchanged: resolve_output_path internally
+        # uses Path.resolve()/os.path.realpath, which this test mocks with a
+        # fixed side_effect list for the two db files.
+        resolve_mock = mocker.patch.object(
+            document_processor, "resolve_output_path", side_effect=lambda p: p
+        )
+
         doc.save(mock.sentinel.index, "out_dir")
 
+        resolve_mock.assert_called_once_with("out_dir")
         makedirs.assert_called_once_with("out_dir", exist_ok=True)
         assert realpath.call_count == 2
         realpath.assert_any_call("out_dir/faiss_store.db")

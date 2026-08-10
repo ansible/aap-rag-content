@@ -16,7 +16,6 @@
 
 import argparse
 import logging
-import os
 from collections.abc import Callable
 from pathlib import Path
 
@@ -156,30 +155,12 @@ def get_common_arg_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def normalize_cli_path(path: str) -> str:
-    """Cosmetically normalize a CLI-supplied path.
-
-    Collapses ``..``/``.`` segments and redundant separators via
-    ``os.path.normpath``. This is normalization only — it does NOT restrict
-    traversal (``../../etc/passwd`` passes through unchanged). Callers are CLI
-    tools operated by trusted local users; when actual containment is
-    required, use :func:`resolve_within_cwd` instead.
-
-    Args:
-        path: A path provided via a CLI argument.
-
-    Returns:
-        The normalized path.
-    """
-    return os.path.normpath(path)
-
-
 def resolve_within_cwd(path: str) -> str:
     """Resolve a CLI-supplied path and reject it if it escapes the working directory.
 
-    Unlike normalize_cli_path(), this asserts containment rather than merely
-    normalizing: the returned path is guaranteed to be the current directory
-    itself or a descendant of it.
+    This asserts containment rather than merely normalizing: the returned
+    path is guaranteed to be the current directory itself or a descendant
+    of it.
 
     Args:
         path: A path provided via a CLI argument.
@@ -196,3 +177,27 @@ def resolve_within_cwd(path: str) -> str:
     if resolved != base and base not in resolved.parents:
         raise ValueError(f"Path escapes the working directory: {path}")
     return str(resolved)
+
+
+def resolve_output_path(path: str) -> str:
+    """Resolve a CLI-supplied output path, validating relative paths.
+
+    An absolute path is honored as explicit operator intent and only
+    resolved. A relative path must stay within the current working
+    directory once resolved — ``../../etc`` style escapes are rejected —
+    so a script that joins user input onto its workspace can never
+    silently write outside of it.
+
+    Args:
+        path: A path provided via a CLI argument or config value.
+
+    Returns:
+        The resolved absolute path.
+
+    Raises:
+        ValueError: If a relative path escapes the working directory.
+    """
+    p = Path(path)
+    if p.is_absolute():
+        return str(p.resolve())
+    return resolve_within_cwd(path)

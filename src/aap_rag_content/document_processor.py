@@ -31,7 +31,7 @@ from aap_rag_content.llama_index.core import (
     SimpleDirectoryReader,
 )
 from aap_rag_content.metadata_processor import MetadataProcessor
-from aap_rag_content.utils import normalize_cli_path
+from aap_rag_content.utils import resolve_output_path
 
 LOG = logging.getLogger(__name__)
 
@@ -672,7 +672,7 @@ registered_resources:
 
     def save(self, index: str, output_dir: str) -> None:
         """Save in the vector database all the documents we added."""
-        output_dir = normalize_cli_path(output_dir)
+        output_dir = resolve_output_path(output_dir)
         os.makedirs(output_dir, exist_ok=True)
         db_file = os.path.realpath(os.path.join(output_dir, self.db_filename))
         files_metadata_db_file = os.path.realpath(

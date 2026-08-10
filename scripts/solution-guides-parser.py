@@ -10,7 +10,7 @@ import time
 import urllib.error
 import urllib.request
 
-from aap_rag_content.utils import normalize_cli_path
+from aap_rag_content.utils import resolve_output_path
 
 SOLUTION_GUIDES_REPO_URL = "https://github.com/ansible-tmm/solution-guides/"
 SOLUTION_GUIDES_WEB_PAGE = "https://ansible-tmm.github.io/solution-guides/"
@@ -30,8 +30,8 @@ class SolutionGuidesParser:
     """Parse solution guide markdown files and generate metadata for RAG."""
 
     def __init__(self, repo_dir, out_dir):
-        self.repo_dir = normalize_cli_path(repo_dir)
-        self.out_dir = normalize_cli_path(out_dir)
+        self.repo_dir = resolve_output_path(repo_dir)
+        self.out_dir = resolve_output_path(out_dir)
         self.metadata_dir = os.path.join(self.out_dir, ".metadata")
 
         if not os.path.isdir(self.out_dir):
