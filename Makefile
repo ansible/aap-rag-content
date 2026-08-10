@@ -39,9 +39,6 @@ download-embeddings-model:
 	gzip -d ./llama_stack_vector_db/faiss_store.db.gz
 	podman kill rag-content
 
-export-deps: ## Check pyproject.toml for changes, update the lock file if needed, then sync.
-	uv pip compile pyproject.toml --generate-hashes --python-version=3.12 --python-platform=linux --torch-backend=cpu --output-file=requirements.txt
-
 check-types: ## Checks type hints in sources
 	uv run mypy --explicit-package-bases --disallow-untyped-calls --disallow-untyped-defs --disallow-incomplete-defs scripts
 
