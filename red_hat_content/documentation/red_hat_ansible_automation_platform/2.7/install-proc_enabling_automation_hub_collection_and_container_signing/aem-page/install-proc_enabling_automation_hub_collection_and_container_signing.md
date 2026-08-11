@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_enabling_automation_hub_collection_and_container_signing"
-template = "docs/aem-title.html"
 title = "Enable automation content collection and container signing - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_enabling_automation_hub_collection_and_container_signing"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_aap_containerized_installation_intro/", "Install containerized Ansible Automation Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_enabling_automation_hub_collection_and_container_signing/aem-page/install-proc_enabling_automation_hub_collection_and_container_signing.html"
 last_crumb = "Enable automation content collection and container signing"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Enable automation content collection and container signing"
 oversized = "false"
@@ -40,6 +40,7 @@ hub_collection_signing_key=<full_path_to_collection_gpg_key>
 hub_container_signing=true
 hub_container_signing_key=<full_path_to_container_gpg_key>
 ```
+
 The following variables are required if the keys are protected by a passphrase:
 
 ```
@@ -49,6 +50,7 @@ hub_collection_signing_pass=<gpg_key_passphrase>
 # Container signing
 hub_container_signing_pass=<gpg_key_passphrase>
 ```
+
 The `hub_collection_signing_key` and `hub_container_signing_key` variables require the set up of keys before running an installation.
 
 Automation content signing currently only supports GnuPG (GPG) based signature keys. For more information about GPG, see the [GnuPG man page](https://www.gnupg.org/documentation/manpage.html).
@@ -86,6 +88,7 @@ You selected this USER-ID:
 
     Change (N)ame, (E)mail, or (O)kay/(Q)uit? O
 ```
+
   - If this fails, your environment does not have the necessary prerequisite packages installed for GPG. Install the necessary packages to proceed.
   - A dialog box will appear and ask you for a passphrase. This is optional but recommended.
   - The keys are then generated, and produce output similar to the following:
@@ -127,6 +130,7 @@ gpg --export -a --output collection-signing-key.pub <email_address_used_to_gener
 ```
 gpg -a --export-secret-keys <email_address_used_to_generate_key> > collection-signing-key.priv
 ```
+
   - Enter the passphrase if prompted.
 
 6.  To view the private key file contents, run the following command:
@@ -135,6 +139,7 @@ gpg -a --export-secret-keys <email_address_used_to_generate_key> > collection-si
 ```
 cat collection-signing-key.priv
 ```
+
     Example output:
 
 ```

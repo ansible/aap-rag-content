@@ -1,6 +1,6 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_managing_admin_dashboard_telemetry"
 title = "View and manage Admin dashboard telemetry - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_managing_admin_dashboard_telemetry"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_managing_admin_dashboard_telemetry/aem-page/develop-assembly_managing_admin_dashboard_telemetry.html"
 last_crumb = "View and manage Admin dashboard telemetry"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "View and manage Admin dashboard telemetry"
 oversized = "false"
@@ -54,7 +54,6 @@ To view and manage the Admin dashboard telemetry data, ensure that you have the 
 
 - You have organization administrator privileges to a Red Hat Customer Portal organization with a valid Red Hat Ansible Automation Platform subscription.
 - You have installed the Ansible VS Code extension v2.13.148 that is required to collect Admin dashboard telemetry.
-
 
 Important:
 

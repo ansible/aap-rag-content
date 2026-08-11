@@ -8,8 +8,7 @@ You can also deploy the appliance from the OpenShift web console without using t
 - Red Hat OpenShift Container Platform with the Red Hat OpenShift Virtualization operator installed and configured.
 - Cluster administrator or equivalent permissions.
 - The Ansible automation portal QCOW2 disk image available on your local machine.
-- Your cloud-init user-data file prepared with Ansible Automation Platform credentials and SSH keys.
-
+- Your `cloud-init` user-data file prepared with Ansible Automation Platform credentials and SSH keys. See Prerequisites for deploying Ansible automation portal on RHEL in the related links below. The meta-data file is not required for this platform
 
 **Procedure**
 
@@ -36,6 +35,5 @@ $ sudo ansible-portal status
 ```
 
 - Access the portal URL from your browser.
-
 
 If you encounter upload, boot, or scheduling failures, see Troubleshooting RHEL appliances.

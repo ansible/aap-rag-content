@@ -35,4 +35,5 @@ minLength: 10
 errorMessage:
 minLength: 'Provide a more detailed reason (at least 10 characters).'
 ```
+
 Each key under `dependencies` corresponds to a property name in the same parameter step. When the user changes a field value, only the matching `if`/`then` branch is displayed.

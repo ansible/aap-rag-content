@@ -10,7 +10,6 @@ Metrics service requires access to two databases:
 - **`metrics_service` database (read/write):** Stores collected metrics data
 - **`automationcontroller` database (read-only):** Used to correlate metrics with automation activity
 
-
 This dual-database architecture ensures metrics service can collect data while maintaining security isolation from the automation controller's operational database.
 
 ### Procedure
@@ -73,6 +72,7 @@ automationmetrics_controller_read_pg_database=<automationcontroller_database_nam
 automationmetrics_controller_read_pg_username=ms_awx_readonly
 automationmetrics_controller_read_pg_password=<secure_password>
 ```
+
 
 Important:
 The `ms_awx_readonly` user must be created with SELECT privileges on the automation controller database before running the Ansible Automation Platform installer. The installer does not create this user automatically.

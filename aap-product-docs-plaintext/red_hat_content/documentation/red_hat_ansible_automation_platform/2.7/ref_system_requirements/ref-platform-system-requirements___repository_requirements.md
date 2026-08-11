@@ -6,7 +6,6 @@ Enable the following repositories only when installing Red Hat Ansible Automatio
 - RHEL BaseOS
 - RHEL AppStream
 
-
 Note:
 
 If you enable repositories besides those mentioned above, the Red Hat Ansible Automation Platform installation could fail unexpectedly.

@@ -25,6 +25,7 @@ name: "My Team"
 organization: "My Organization"
 state: present
 ```
+
 You can also use environment variables instead of specifying connection parameters in your playbook. The recommended naming convention is to use `AAP_` prefixed variable names, but `GATEWAY_` prefixed names are also accepted for backward compatibility:
 
 - `AAP_HOSTNAME` or `GATEWAY_HOSTNAME`

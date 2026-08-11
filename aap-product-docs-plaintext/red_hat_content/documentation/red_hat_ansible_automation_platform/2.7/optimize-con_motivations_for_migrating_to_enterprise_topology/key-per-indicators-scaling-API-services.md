@@ -9,4 +9,3 @@ Scale your services when key performance indicators suggest a component is reach
 - High CPU utilization
 - Errors that occur during periods of high traffic
 
-

@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 title = "Configure KV2 modules - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_vault_kv2_modules"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_vault_introduction/", "Integrate with IBM HashiCorp Vault"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/integrate-assembly_vault_kv2_modules/aem-page/integrate-assembly_vault_kv2_modules.html"
 last_crumb = "Configure KV2 modules"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure KV2 modules"
 oversized = "false"
@@ -240,6 +240,7 @@ Before (`community.hashi_vault`):
     data:
       foo: bar
 ```
+
 After (`hashicorp.vault`):
 
 ```
@@ -250,6 +251,7 @@ After (`hashicorp.vault`):
     data:
       foo: bar
 ```
+
  **Example 2: Basic Secret Delete**
 
 Before (`community.hashi_vault`):
@@ -260,6 +262,7 @@ Before (`community.hashi_vault`):
     url: https://vault:8201
     path: secret/mysecret
 ```
+
 After (`hashicorp.vault`):
 
 ```
@@ -269,6 +272,7 @@ After (`hashicorp.vault`):
     path: secret/mysecret
     state: absent
 ```
+
  **Example 3: Secret Delete - specific version**
 
 Before (`community.hashi_vault`):
@@ -280,6 +284,7 @@ Before (`community.hashi_vault`):
     path: secret/mysecret
     versions: [1, 3]
 ```
+
 After (`hashicorp.vault`):
 
 ```
@@ -306,6 +311,7 @@ Before (community.hashi_vault)
     path: myapp/config
   register: response
 ```
+
 After (hashicorp.vault)
 
 ```
@@ -315,6 +321,7 @@ After (hashicorp.vault)
     token: "{{ vault_token }}"
     path: myapp/config
 ```
+
  **Example 2: Read a secret with a specific version**
 
 Before (community.hashi.vault)
@@ -326,6 +333,7 @@ Before (community.hashi.vault)
     path: myapp/config
     version: 5
 ```
+
 After (hashicorp.vault)
 
 ```
@@ -351,6 +359,7 @@ Before (`community.hashi_vault`)
   token=my_vault_token
   url=http://myvault_url:8200') }}"
 ```
+
 After (`hashicorp.vault`)
 
 ```

@@ -8,13 +8,11 @@ To create a Red Hat Lightspeed credential, use the following procedure.
 - To use token-based authentication, you must [create a Red Hat service account](https://docs.redhat.com/en/documentation/red_hat_hybrid_cloud_console/1-latest/html/creating_and_managing_service_accounts/proc-ciam-svc-acct-overview-creating-service-acct#proc-ciam-svc-acct-create-creating-service-acct) to generate a **Client ID** and **Client secret**.
 - Assign this service account to the appropriate **User Access** group with necessary permissions.
 
-
 To enable integration between Ansible Automation Platform and Red Hat Lightspeed, assign the service account the following permissions:
 
 - **inventory:hosts:read** (included in the Inventory Hosts viewer role)
 - **patch:read** (included in the Patch viewer role)
 - **remediations:remediation:read** and **playbook-dispatcher:run:read** (included in the Remediations user role)
-
 
 You might consider associating your service account with an existing user access group that already has the required permissions, or creating a new user access group.
 
@@ -44,7 +42,6 @@ Use the **Username** and **Password** fields for Basic authentication. You can l
 4.  Click Create credential. You can now use this credential in an [Source an inventory from Red Hat Lightspeed](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-inv-source-rhlightspeed "You can create an inventory source that uses Red Hat Lightspeed as the source of hosts.") and [Red Hat Lightspeed project](/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_ug_controller_setting_up_insights#controller-create-insights-project "Create an automation controller project linked to Red Hat Lightspeed and retrieve remediation playbooks. This streamlines your efforts to address vulnerabilities and keep system configurations.").
 
 - If you receive a project sync failure, see the steps in [Remediating a Red Hat Lightspeed inventory](/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_ug_controller_setting_up_insights#controller-remediate-insights-inventory "Remediation of a Red Hat Lightspeed inventory enables automation controller to run Red Hat Lightspeed playbooks with a single click.") and check your analytics logs.
-
 
 Important:
 

@@ -1,4 +1,4 @@
-# Red Hat Ansible Lightspeed Overview
+# Understand Red Hat Ansible Lightspeed with IBM watsonx Code Assistant
 ## Benefits of using Red Hat Ansible Lightspeed
 
 Red Hat Ansible Lightspeed with IBM watsonx Code Assistant offers the following benefits:

@@ -6,7 +6,6 @@ Use this example to customize the default definition file to include a CA certif
 
 - A custom CA certificate, for example `rootCA.crt`.
 
-
 Note:
 
 Customizing the CA certificate using `prepend_base` means that the resulting CA configuration is displayed in all other build stages and the final image, because all other build stages inherit from the base image.

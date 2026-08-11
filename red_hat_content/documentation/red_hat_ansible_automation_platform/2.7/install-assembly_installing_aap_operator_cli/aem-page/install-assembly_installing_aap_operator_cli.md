@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 title = "Install Ansible Automation Platform Operator from the CLI - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_installing_aap_operator_cli"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator/", "Install on OpenShift Container Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_installing_aap_operator_cli/aem-page/install-assembly_installing_aap_operator_cli.html"
 last_crumb = "Install Ansible Automation Platform Operator from the CLI"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Install Ansible Automation Platform Operator from the CLI"
 oversized = "false"
@@ -79,6 +79,7 @@ spec:
   sourceNamespace: openshift-marketplace
 ---
 ```
+
     This file creates a `Subscription` object called `ansible-automation-platform` that subscribes the `ansible-automation-platform` namespace to the `ansible-automation-platform-operator` operator.
 
 4.  Run the oc apply command to create the objects specified in the sub.yaml file:

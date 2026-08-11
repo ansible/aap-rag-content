@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_provision_ocp_storage_amazon_s3/aem-page/install-proc_provision_ocp_storage_amazon_s3.html"
 last_crumb = "Configure object storage on Amazon S3"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure object storage on Amazon S3"
 oversized = "false"
@@ -68,6 +68,7 @@ spec:
     storage_type: S3
     object_storage_s3_secret: test-s3
 ```
+
   
   Note:
       If you have an existing automation hub instance, specify its name using `hub.name: existing-hub-name` to apply these settings to the existing instance.

@@ -37,6 +37,7 @@ The following message appears in the **Logs** pane of the **Create Ansible colle
 
 Note: collection company_namespace.myapp_network created at /path/to/collections/directory
 ```
+
 The following directories and files are created in your `collections/` directory:
 
 ```

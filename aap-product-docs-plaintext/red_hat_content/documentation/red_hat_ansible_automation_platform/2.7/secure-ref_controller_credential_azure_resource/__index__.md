@@ -12,7 +12,6 @@ Microsoft Azure Resource Manager credentials require the following inputs:
 - **Tenant ID**: The Tenant ID for the Microsoft Azure account.
 - **Azure Cloud Environment**: The variable associated with Azure cloud or Azure stack environments.
 
-
 These fields are equivalent to the variables in the API.
 
 To pass service principal credentials, define the following variables:
@@ -24,6 +23,7 @@ AZURE_SUBSCRIPTION_ID
 AZURE_TENANT
 AZURE_CLOUD_ENVIRONMENT
 ```
+
 To pass an Active Directory username and password pair, define the following variables:
 
 ```
@@ -31,6 +31,7 @@ AZURE_AD_USER
 AZURE_PASSWORD
 AZURE_SUBSCRIPTION_ID
 ```
+
 You can also pass credentials as parameters to a task within a playbook. The order of precedence is parameters, then environment variables, and finally a file found in your home directory.
 
 To pass credentials as parameters to a task, use the following parameters for service principal credentials:
@@ -42,6 +43,7 @@ subscription_id
 tenant
 azure_cloud_environment
 ```
+
 Alternatively, pass the following parameters for Active Directory username and password:
 
 ```

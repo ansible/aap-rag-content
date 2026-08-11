@@ -26,17 +26,9 @@
           "singlePageAnchor": "deploying-alia___integration_with_mcp_server"
         },
         {
-          "title": "Deployment models",
-          "visible": true,
-          "weight": 3,
-          "urlFragment": "deploying-alia___deployment_models",
-          "anchor": null,
-          "singlePageAnchor": "deploying-alia___deployment_models"
-        },
-        {
           "title": "Ansible Automation Platform requirements",
           "visible": true,
-          "weight": 4,
+          "weight": 3,
           "urlFragment": "deploying-alia___ansible_automation_platform_requirements",
           "anchor": null,
           "singlePageAnchor": "deploying-alia___ansible_automation_platform_requirements"
@@ -44,84 +36,10 @@
         {
           "title": "Large Language Model (LLM) provider requirements",
           "visible": true,
-          "weight": 5,
+          "weight": 4,
           "urlFragment": "deploying-alia___large_language_model_llm_provider_requirements",
           "anchor": null,
           "singlePageAnchor": "deploying-alia___large_language_model_llm_provider_requirements"
-        },
-        {
-          "title": "Deploy the automation intelligent assistant on OpenShift Container Platform",
-          "visible": true,
-          "weight": 6,
-          "urlFragment": "deploying-chatbot-operator",
-          "anchor": null,
-          "singlePageAnchor": "deploying-chatbot-operator"
-        },
-        {
-          "title": "Overview",
-          "visible": true,
-          "weight": 7,
-          "urlFragment": "con-about-lightspeed-intelligent-assistant",
-          "anchor": null,
-          "singlePageAnchor": "con-about-lightspeed-intelligent-assistant",
-          "sections": [
-            {
-              "title": "Integration with MCP server",
-              "visible": true,
-              "weight": 1,
-              "urlFragment": "con-about-lightspeed-intelligent-assistant",
-              "anchor": "con-about-lightspeed-intelligent-assistant___integration_with_mcp_server",
-              "singlePageAnchor": "con-about-lightspeed-intelligent-assistant___integration_with_mcp_server"
-            },
-            {
-              "title": "Ansible Automation Platform requirements",
-              "visible": true,
-              "weight": 2,
-              "urlFragment": "con-about-lightspeed-intelligent-assistant",
-              "anchor": "con-about-lightspeed-intelligent-assistant___ansible_automation_platform_2_6_requirements",
-              "singlePageAnchor": "con-about-lightspeed-intelligent-assistant___ansible_automation_platform_2_6_requirements"
-            },
-            {
-              "title": "Large Language Model (LLM) provider requirements",
-              "visible": true,
-              "weight": 3,
-              "urlFragment": "con-about-lightspeed-intelligent-assistant",
-              "anchor": "con-about-lightspeed-intelligent-assistant__LLMproviders",
-              "singlePageAnchor": "con-about-lightspeed-intelligent-assistant__LLMproviders"
-            },
-            {
-              "title": "Process for configuring and using the automation intelligent assistant",
-              "visible": true,
-              "weight": 4,
-              "urlFragment": "con-about-lightspeed-intelligent-assistant",
-              "anchor": "con-about-lightspeed-intelligent-assistant___process_for_configuring_and_using_the_ansible_lightspeed_intelligent_assistant",
-              "singlePageAnchor": "con-about-lightspeed-intelligent-assistant___process_for_configuring_and_using_the_ansible_lightspeed_intelligent_assistant"
-            }
-          ]
-        },
-        {
-          "title": "Create a chatbot configuration secret",
-          "visible": true,
-          "weight": 8,
-          "urlFragment": "proc-create-chatbot-config-secret",
-          "anchor": null,
-          "singlePageAnchor": "proc-create-chatbot-config-secret"
-        },
-        {
-          "title": "Update the YAML file of the Ansible Automation Platform operator",
-          "visible": true,
-          "weight": 9,
-          "urlFragment": "proc-update-aap-operator-chatbot",
-          "anchor": null,
-          "singlePageAnchor": "proc-update-aap-operator-chatbot"
-        },
-        {
-          "title": "Change your LLM model",
-          "visible": true,
-          "weight": 10,
-          "urlFragment": "proc-change-llm-model",
-          "anchor": null,
-          "singlePageAnchor": "proc-change-llm-model"
         }
       ]
     }

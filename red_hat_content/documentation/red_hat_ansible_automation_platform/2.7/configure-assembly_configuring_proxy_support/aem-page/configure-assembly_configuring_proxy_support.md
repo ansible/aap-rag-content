@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/configure-assembly_configuring_proxy_support/aem-page/configure-assembly_configuring_proxy_support.html"
 last_crumb = "Configure proxy support to manage network configuration"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure proxy support to manage network configuration"
 oversized = "false"
@@ -96,6 +96,7 @@ Learn how to configure a list of known proxies for your automation controller, a
   "example2.proxy.com:8080"
 ]
 ```
+
   Important:
 
   - **Proxy IP Allowed List** requires proxies in the list are properly sanitizing header input and correctly setting an `X-Forwarded-For` value equal to the real source IP of the client. Automation controller can rely on the IP addresses and hostnames in **Proxy IP Allowed List** to provide non-spoofed values for `X-Forwarded-For`.

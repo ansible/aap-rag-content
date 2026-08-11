@@ -1,6 +1,6 @@
 +++
-title = "Increase capacity through cloud bursting by provisioning callbacks - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_provisioning_callbacks"
+title = "Increase capacity through cloud bursting by provisioning callbacks - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-con_controller_provisioning_callbacks/aem-page/develop-con_controller_provisioning_callbacks.html"
 last_crumb = "Increase capacity through cloud bursting by provisioning callbacks"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Increase capacity through cloud bursting by provisioning callbacks"
 oversized = "false"
@@ -37,7 +37,6 @@ New instances with a need for client to server communication for configuration, 
 
 - A system after it has been provisioned by another system (such as AWS auto-scaling, or an operating system provisioning system such as Kickstart or preseed).
 - Launching a job programmatically without invoking the automation controller API directly.
-
 
 The job template launched only runs against the host requesting the provisioning.
 
@@ -84,16 +83,13 @@ Successful requests result in an entry on the **Jobs** tab, where you can view t
 - `/usr/share/awx/request_tower_configuration.sh` (Linux/UNIX)
 - `/usr/share/awx/request_tower_configuration.ps1` (Windows)
 
-
 Their usage is described in the source code of the file by passing the `-h` flag, as the following shows:
 
 ```
 ./request_tower_configuration.sh -h
 Usage: ./request_tower_configuration.sh <options>
 
-
 Request server configuration from Ansible Tower.
-
 
 OPTIONS:
  -h      Show this message
@@ -103,6 +99,7 @@ OPTIONS:
  -t      Job template ID (required)
  -e      Extra variables
 ```
+
 This script can retry commands and is therefore a more robust way to use callbacks than a simple `curl` request. The script retries once per minute for up to ten minutes.
 
 Note:

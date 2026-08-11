@@ -8,7 +8,6 @@ Prerequisites:
 - The CA certificate or self-signed certificate in PEM format.
 - SSH access to the appliance.
 
-
 Procedure:
 
 1. Copy the CA certificate or self-signed certificate to the appliance:
@@ -16,6 +15,7 @@ Procedure:
 ```terminal
 $ sudo cp *ca-certificate-file*.pem /etc/portal/ssl/ca-bundle.crt
 ```
+
 If you have multiple CA certificates to trust, concatenate them into a single bundle file before copying it to the appliance.
 
 2. Create a Quadlet drop-in to set the `NODE_EXTRA_CA_CERTS` environment variable:
@@ -40,4 +40,5 @@ Verification:
 ```terminal
 $ sudo podman exec portal env | grep NODE_EXTRA_CA_CERTS
 ```
+
 The output displays `NODE_EXTRA_CA_CERTS=/etc/portal/ssl/ca-bundle.crt`.

@@ -13,14 +13,12 @@ Use this credential type to connect to OpenStack clouds. Automation controller u
 - **Project domain name** (optional): The project domain name to use when connecting to the OpenStack cloud.
 - **Validate SSL certificate**: Select this option to validate the SSL/TLS certificate presented by the OpenStack cloud. Clear this option to disable SSL/TLS certificate validation.
 
-
 The following sample playbook invokes the `nova_compute` Ansible OpenStack cloud module and requires credentials:
 
 -  `auth_url`
 -  `username`
 -  `password`
 -  `project name`
-
 
 These fields are made available to the playbook through the environmental variable `OS_CLIENT_CONFIG_FILE`, which points to a YAML file written by the controller based on the contents of the cloud credential. The following sample playbooks load the YAML file into the Ansible variable space:
 
@@ -36,7 +34,6 @@ password: your_password_here
 project_name: demo
 ```
 
-
 - Playbook example:
 
 ```
@@ -50,7 +47,6 @@ nova_instance_name: autobot
 nova_instance_state: 'present'
 nova_flavor_name: m1.nano
 
-
 nova_group:
 group_name: antarctica
 instance_name: deceptacon
@@ -62,10 +58,8 @@ register: st
 - include_vars: "{{ config_file }}"
 when: st.stat.exists and st.stat.isreg
 
-
 - name: "Print out clouds variable"
 debug: msg="{{ clouds|default('No clouds found') }}"
-
 
 - name: "Setting nova instance state to: {{ nova_instance_state }}"
 local_action:

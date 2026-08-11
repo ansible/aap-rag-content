@@ -7,13 +7,11 @@ If your network restricts inbound connections, using a hop node peered to the co
 
 - Create node instances within the remote networks for execution nodes in the automation mesh.
 
-
 Use the following procedure to set up mesh nodes.
 
 ### About this task
 
 When you instantiate mesh ingress you set up a pod, or receptor hop node inside the kubernetes control cluster, registered to the database through the operator. It also creates a service, and a route URL that is used by the control plane to connect to the hop node, and automation controller.
-
 
 ![mesh ingress architecture](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/meshIngress.png)
 
@@ -30,6 +28,7 @@ namespace:
 spec:
 deployment_name: aap-controller
 ```
+
 Where:
 
 - **apiVersion**: defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and might reject unrecognized values. This value is static.
@@ -50,6 +49,7 @@ Where:
 ```
 oc apply -f oc_meshingress.yml
 ```
+
 Run this playbook to creates the `AutomationControllerMeshIngress` resource. The operator creates a hop node in automation controller with the `name` you supplied.
 
 3.  When the MeshIngress instance has been created, it appears in the Instances page.  Important:

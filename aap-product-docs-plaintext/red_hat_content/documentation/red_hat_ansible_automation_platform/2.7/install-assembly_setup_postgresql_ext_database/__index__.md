@@ -7,7 +7,6 @@ There are two possible scenarios for setting up an external database:
 1. An external database with PostgreSQL admin credentials
 2. An external database without PostgreSQL admin credentials
 
-
 Important:
 
 - When using an external database with Ansible Automation Platform, you must create and support that database. Ensure that you clear your external database when uninstalling Ansible Automation Platform.

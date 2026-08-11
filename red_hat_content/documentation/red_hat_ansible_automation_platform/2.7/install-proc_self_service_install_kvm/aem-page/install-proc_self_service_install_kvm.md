@@ -1,5 +1,5 @@
 +++
-title = "Install Ansible automation portal on RHEL with KVM - Red Hat Ansible Automation Platform 2.7"
+title = "Install Ansible automation portal on Red Hat Enterprise Linux KVM/QEMU - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_install_kvm"
 template = "docs/aem-title.html"
 
@@ -9,10 +9,10 @@ category = "Install"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_self_service_install_kvm/aem-page/install-proc_self_service_install_kvm.html"
-last_crumb = "Install Ansible automation portal on RHEL with KVM"
-modified = "2026-06-05T07:48:10.594Z"
+last_crumb = "Install Ansible automation portal on Red Hat Enterprise Linux KVM/QEMU"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
-name = "Install Ansible automation portal on RHEL with KVM"
+name = "Install Ansible automation portal on Red Hat Enterprise Linux KVM/QEMU"
 oversized = "false"
 page_slug = "install-proc_self_service_install_kvm"
 portal_content_subtype = "title"
@@ -25,7 +25,7 @@ toc = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc
 type = "aem-page"
 +++
 
-# Install Ansible automation portal on RHEL with KVM
+# Install Ansible automation portal on Red Hat Enterprise Linux KVM/QEMU
 
 Deploy the Ansible automation portal appliance on a RHEL 9 host with KVM using `virt-install`.
 
@@ -89,6 +89,9 @@ $ echo "instance-id: ${VM_NAME}" > meta-data
 $ genisoimage -output cloud-init.iso -volid cidata -joliet -rock user-data meta-data
 ```
 
+  Note:
+  Cloud-init runs only once per instance ID. If you need to re-apply cloud-init configuration to an existing VM, change the `instance-id` value in the `meta-data` file to a new unique value, regenerate the ISO, and reattach it before rebooting.
+
 7.  Copy the disk image and create the VM.
   
 
@@ -119,8 +122,9 @@ SSH into the Ansible automation portal RHEL appliance and confirm that all servi
 
 ```terminal
 $ ssh -i <private-key> <username>@<vm-ip>
-$ sudo systemctl status portal postgres devtools
+$ sudo ansible-portal status
 ```
+
 Example output for a healthy Ansible automation portal RHEL appliance:
 
 ```terminal
@@ -131,6 +135,7 @@ postgres.service - PostgreSQL database
 devtools.service - Ansible development tools
      Active: active (running) since ...
 ```
+
 All three services should show `active (running)`.
 
 ## What to do next

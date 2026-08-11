@@ -33,6 +33,7 @@ spec:
 hub:
 route_tls_secret: hub-certs-2024-03-24
 ```
+
 Note:
 The name of the TLS secret is arbitrary. In this example, it is timestamped with the date that the secret is created, to differentiate it from other TLS secrets applied to the automation hub instance.
 

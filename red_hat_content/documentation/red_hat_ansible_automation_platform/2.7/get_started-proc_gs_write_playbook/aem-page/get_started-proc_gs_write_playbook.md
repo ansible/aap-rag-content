@@ -1,6 +1,6 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-proc_gs_write_playbook"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-proc_gs_write_playbook"
 title = "Write a playbook - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/get_started-proc_gs_write_playbook/aem-page/get_started-proc_gs_write_playbook.html"
 last_crumb = "Write a playbook"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Write a playbook"
 oversized = "false"

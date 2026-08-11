@@ -104,7 +104,6 @@ variables:
 environment: prod
 ```
 
-
 -  **After (`hashicorp.terraform.*`):**
 * The `configuration_version` module:
 

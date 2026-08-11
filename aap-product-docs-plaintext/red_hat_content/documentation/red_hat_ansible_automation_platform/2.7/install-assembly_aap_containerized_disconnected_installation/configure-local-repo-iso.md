@@ -23,6 +23,7 @@ $ sudo mkdir /media/rhel
 ```
 $ sudo mount -o loop rhel-<version_number>-<arch_name>-dvd.iso /media/rhel
 ```
+
 Note:
 The ISO is mounted in a read-only state.
 

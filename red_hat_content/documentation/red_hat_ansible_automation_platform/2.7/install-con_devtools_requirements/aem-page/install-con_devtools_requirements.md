@@ -1,7 +1,7 @@
 +++
+title = "Requirements - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_devtools_requirements"
 template = "docs/aem-title.html"
-title = "Requirements - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_devtools_install/", "Install Ansible development tools"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-con_devtools_requirements/aem-page/install-con_devtools_requirements.html"
 last_crumb = "Requirements"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Requirements"
 oversized = "false"
@@ -86,6 +86,7 @@ $ podman run hello
 @echo off
 podman %*
 ```
+
     This avoids having to install Docker as required by the VS Code `Dev Container` extension.
 
 7.  Add the `%USERPROFILE%\bin` directory to the `PATH`:
@@ -117,6 +118,7 @@ If you are running Ansible development tools on a container inside VS Code and y
 ```
 $ podman login --get-login registry.redhat.io
 ```
+
     The command output displays your Red Hat login if you are logged in to `registry.redhat.io`.
 
 2.  If you are not logged in to `registry.redhat.io`, use the `podman login` command with your credentials to access content on the registry.

@@ -1,0 +1,23 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Back up the platform using automation installer",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Results",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-4df8407e-ca4a-43ea-9d72-4bc154398a3c__result_1",
+          "anchor": null,
+          "singlePageAnchor": "GUID-4df8407e-ca4a-43ea-9d72-4bc154398a3c__result_1"
+        }
+      ]
+    }
+  ]
+}

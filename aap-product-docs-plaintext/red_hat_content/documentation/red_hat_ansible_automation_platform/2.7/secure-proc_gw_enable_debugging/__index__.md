@@ -11,4 +11,5 @@ To further diagnose authentication issues, enable debug logging in platform gate
 ```
 LOGGING['loggers']['ansible_base']['level'] = 'DEBUG'
 ```
+
 After this change, detailed `AuthTokenError` messages are displayed in the logs, providing specific information about the cause of the failure.

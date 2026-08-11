@@ -13,24 +13,24 @@ When Team mapping is positively evaluated, a specified team and its organization
 
 Important:
 
-When configuring team mappings with an Attribute trigger, use the `or` operation. The `and` operation requires every single value in a list to match the comparison criteria for the trigger to be successful. This is rarely the intended behavior, as you typically want a match on at least one value in the list.
+When configuring team mappings with a **Based on attributes** trigger, set the **Condition type**to **At least one**. The **All** condition type requires every single value in a list to match the comparison criteria for the trigger to be successful. This is rarely the intended behavior, as you typically want a match on at least one value in the list.
 
 ### Procedure
 
 1.  After configuring the authentication details for your authentication method, select the **Mapping** tab.
 2.  Select **Team** from the **Add authentication mapping** list.
-3.  Enter a unique rule **Name** to identify the rule.
-4.  Select a **Trigger** from the list. See [Authenticator map triggers](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-authenticator-map-triggers "Each map has a trigger that defines when the map should be evaluated as true. Trigger types include the following:") for more information about map triggers.
-5.  Select **Revoke** to remove the user’s access to the selected organization role and deny user access to the system when the trigger conditions are not matched.
+3.  Enter a unique rule name in the **Rule name** field to identify the rule.
+4.  Select a trigger from the **When to apply the rule** list. See [Authenticator map triggers](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-authenticator-map-triggers "Each map has a trigger that defines when the map should be evaluated as true. Select a trigger from the When to apply the rule field.") for more information about map triggers.
+5.  Select **Block non-matching users** to remove the user’s access to the selected organization role and deny user access to the system when the trigger conditions are not matched.
 6.  Select the **Team** and **Organization** to which matching users are added or blocked.
 7.  Select a **Role** to be applied or removed for matching users (for example, **Team Admin** or **Team Member**).
-8.  Click Next.
+8.  Click **Next**.
 
 ### What to do next
 
-1. You can manage the authentication mappings order by clicking Manage mappings.
-2. Drag and drop the mapping up or down in the list.  Note:
+1. You can manage the authentication mappings order by clicking **Manage mappings**.
+2. Drag and drop the mapping up or down in the list. Note:
 The mapping precedence is determined by the order in which the mappings are listed.
 
-3. Click Apply.
+3. Click **Apply**.
 

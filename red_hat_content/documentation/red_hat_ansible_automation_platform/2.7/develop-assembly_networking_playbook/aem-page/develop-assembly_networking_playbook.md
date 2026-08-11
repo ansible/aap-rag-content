@@ -1,7 +1,7 @@
 +++
-title = "Gather and display network device info with a playbook - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_networking_playbook"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_networking_playbook"
+title = "Gather and display network device info with a playbook - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-assembly_intro_to_playbooks_1/", "Get started automating with playbooks"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_networking_playbook/aem-page/develop-assembly_networking_playbook.html"
 last_crumb = "Gather and display network device info with a playbook"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Gather and display network device info with a playbook"
 oversized = "false"
@@ -48,6 +48,7 @@ ansible all -i vyos.example.net, -c ansible.netcommon.network_cli -u \
 my_vyos_user -k -m vyos.vyos.vyos_facts -e \
 ansible_network_os=vyos.vyos.vyos
 ```
+
 The flags in this command set seven values:
 
 - the host group(s) to which the command should apply (in this case, `all`)
@@ -57,7 +58,6 @@ The flags in this command set seven values:
 - the SSH connection method (-`k`, prompt for the password)
 - the module (`-m`, the Ansible module to run, using the fully qualified collection name (FQCN))
 - an extra variable ( `-e`, in this case, setting the network operating system value)
-
 
 Note:
 
@@ -93,17 +93,15 @@ The playbook looks like this:
         msg: "The hostname is {{ ansible_net_hostname }} and the OS is {{ ansible_net_version }}"
 ```
 
-| Label               | Description                                                                                                                                                                                                            |
-| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Label               | Description                                                                                                                                                                                              |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | <br> `gather_facts` | <br>Ansible’s native fact gathering (`ansible.builtin.setup`) is disabled here because the playbook relies on the facts provided by a platform-specific module (`vyos.vyos.vyos_facts`) in this networking collection. |
-
 
 The playbook sets three of the seven values from the command line above:
 
 - the group (`hosts: all`)
 - the connection method (`connection: ansible.netcommon.network_cli`) and
 - the module (in each task).
-
 
 With those values set in the playbook, you can omit them on the command line. The playbook also adds a second task to show the configuration output.
 
@@ -235,6 +233,7 @@ You can also use the `gather_network_resources` parameter with the network `*_fa
     arista.eos.eos_facts:
       gather_network_resources: interfaces
 ```
+
 The playbook returns the following interface facts:
 
 ```
@@ -270,7 +269,6 @@ The playbook returns the following interface facts:
       ]
   }
 ```
-
 
 Note:
 

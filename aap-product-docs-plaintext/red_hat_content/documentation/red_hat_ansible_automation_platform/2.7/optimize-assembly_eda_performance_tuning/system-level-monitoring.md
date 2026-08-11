@@ -12,7 +12,6 @@ System level monitoring includes the following information:
 - CPU utilization
 - Network traffic
 
-
 Higher CPU, RAM, or Disk utilization can affect the overall performance of Event-Driven Ansible controller.
 
 For example, a high utilization of any of these system level resources indicates that either the Event-Driven Ansible controller is running too many rulebook activations, or some of the individual rulebook activations are using a high volume of resources. In this case, you must increase your system level resources to support your workload.

@@ -42,17 +42,9 @@
           "singlePageAnchor": "proc-sensitive-variables-install-inventory"
         },
         {
-          "title": "Use an external vault file with an RPM-based Ansible Automation Platform deployment",
-          "visible": true,
-          "weight": 5,
-          "urlFragment": "proc-install-rpm-deployment",
-          "anchor": null,
-          "singlePageAnchor": "proc-install-rpm-deployment"
-        },
-        {
           "title": "Use an external vault file with a containerized installation",
           "visible": true,
-          "weight": 6,
+          "weight": 5,
           "urlFragment": "proc-install-containerized-deployment",
           "anchor": null,
           "singlePageAnchor": "proc-install-containerized-deployment"

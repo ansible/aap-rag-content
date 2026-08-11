@@ -10,6 +10,7 @@ Verify that you created a vector database of your documentation.
 ```
 ls -lR output
 ```
+
 The tool generates an image archive (.tar), which contains the vector database files and metadata. The following shows the structure of the output directory:
 
 ```
@@ -19,6 +20,7 @@ output
 ├── faiss_store.db
 └── llama-stack.yaml
 ```
+
 In the example above:
 - `rag-content-output-latest.tar`is the generated image archive.
 - `faiss_store.db`is the vector database file.
@@ -38,6 +40,7 @@ registry.redhat.io/lightspeed-core/rag-tool-rhel9:v0.5-latest
 -k 5 \
 -q "Prerequisites for installation"
 ```
+
 In the example above:
 - `-k` tells the AI tool to find the five most relevant matches from your documentation.
 - `-q` is your prompt; change the string according to your requirements.

@@ -14,7 +14,6 @@ Filter options include:
 - Inventory
 - Template
 
-
 You can sort results by any of the parameters from each column by using the directional arrows.
 
 ### Procedure

@@ -1,16 +1,16 @@
 +++
-template = "docs/aem-title.html"
 title = "Host execution environment wizard templates in a private Git repository - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_host_templates_private_repo"
+template = "docs/aem-title.html"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_app_ee_builder/", "Configure a GitHub App for content discovery"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-build_execution_environments_with_the_automation_portal/", "Build execution environments with automation portal"]]
 category = "Develop"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_host_templates_private_repo/aem-page/develop-proc_host_templates_private_repo.html"
 last_crumb = "Host execution environment wizard templates in a private Git repository"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Host execution environment wizard templates in a private Git repository"
 oversized = "false"
@@ -45,9 +45,9 @@ After updating the catalog locations, import the templates into automation porta
 
 1.  From a connected system, download the template YAML files:
 
-  - [ee-start-from-scratch.yaml](https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.0/templates/ee-start-from-scratch.yaml)
-  - [ee-cloud-automation.yaml](https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.0/templates/ee-cloud-automation.yaml)
-  - [ee-network-automation.yaml](https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.0/templates/ee-network-automation.yaml)
+  - [ee-start-from-scratch.yaml](https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.1/templates/ee-start-from-scratch.yaml)
+  - [ee-cloud-automation.yaml](https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.1/templates/ee-cloud-automation.yaml)
+  - [ee-network-automation.yaml](https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.1/templates/ee-network-automation.yaml)
 
 2.  Push the template files to a private Git repository accessible from your deployment environment.
 3.  In your Helm chart configuration, replace the public GitHub URLs with your private repository URLs:
@@ -90,7 +90,7 @@ catalog:
 
 - **EE image destination:** Private automation hub is the target registry for pushing built EE images. Configure the build registry in the execution environment builder wizard or template defaults to point to your private automation hub instance.
 
-- **Dynamic plugins:** Automation portal dynamic plugins are installed from GitHub Container Registry. In air-gapped environments, mirror the required plugin images to an internal container registry. See [Install in an air-gapped environment](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_deploy_rhel_appliance_disconnected "Deploy the Ansible automation portal RHEL appliance in a disconnected or air-gapped environment where the appliance has no access to external registries or the internet.") in the Installing Ansible automation portal on OpenShift Container Platform guide.
+- **Dynamic plugins:** Ansible automation portal dynamic plugins are installed from GitHub Container Registry. In air-gapped environments, mirror the required plugin images to an internal container registry. See [Install in an air-gapped environment](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_deploy_rhel_appliance_disconnected "Deploy the Ansible automation portal RHEL appliance in a disconnected or air-gapped environment where the appliance has no access to external registries or the internet.") in the Installing Ansible automation portal on OpenShift Container Platform guide.
 
 - Mirror content sources (private automation hub, internal Git) for collection discovery.
 
@@ -101,8 +101,6 @@ catalog:
   * `skipTlsVerifyForHosts` — applies to the CI activities page and other catalog interactions with Git hosts. Controls TLS verification when fetching workflow run data and repository metadata.
 
      These settings serve different purposes. You may need to configure both if your internal hosts use self-signed certificates:
-
-
 
 ```
 catalog:

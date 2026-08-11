@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_workflows"
-template = "docs/aem-title.html"
 title = "Understand how to configure workflows - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_workflows"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_workflow_job_templates/", "Orchestrate complex automation with workflow job templates"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_workflows/aem-page/develop-assembly_ug_controller_workflows.html"
 last_crumb = "Understand how to configure workflows"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Understand how to configure workflows"
 oversized = "false"
@@ -35,9 +35,7 @@ Job or workflow templates are linked together using a graph-like structure calle
 
 The following example shows a workflow that has all three, and a workflow job template:
 
-
 ![Node in workflow](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-node-all-scenarios-wf.png)  
-
 
 As the workflow runs, jobs are spawned from the node’s linked template. Nodes linking to a job template which has prompt-driven fields (job_type, job_tags, skip_tags, limit) can contain those fields, and is not prompted on launch. Job templates that prompt for a credential or inventory, without defaults, are not available for inclusion in a workflow.
 
@@ -51,16 +49,13 @@ When building workflows, consider the following:
 
 ![Node always](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-wf-root-node-always.png)  
 
-
 - A node can have multiple parents, and children can be linked to any of the states of success, failure, or always. If always, then the state is neither success nor failure. States apply at the node level, not at the workflow job template level. A workflow job is marked as successful unless it is canceled or encounters an error.
 
 ![Sibling nodes all edge types](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-wf-sibling-nodes-all-edge-types.png)  
 
-
 - If you remove a job or workflow template within the workflow, the nodes previously connected to those deleted, automatically get connected upstream and retain the edge type as in the following example:
 
 ![Node delete scenario](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-wf-node-delete-scenario.png)  
-
 
 - You can have a convergent workflow, where multiple jobs converge into one. In this scenario, any of the jobs or all of them must complete before the next one runs, as shown in the following example:  
 ![Node convergence](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-wf-node-convergence.png)  
@@ -70,9 +65,7 @@ When building workflows, consider the following:
 
 ![Workflow diagram](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-workflow-diagram.png)  
 
-
 - It is possible to launch several workflows simultaneously, and set a schedule for when to launch them. You can set notifications on workflows, such as when a job completes, similar to that of job templates.
-
 
  Note:
 
@@ -100,7 +93,6 @@ Workflows use the same behavior (hierarchy) of variable precedence as job templa
 - Workflow job template survey (defaults)
 - Workflow job launch extra variables
 
-
 Workflows included in a workflow follow the same variable precedence, they only inherit variables if they are specifically prompted for, or defined as part of a survey.
 
 In addition to the workflow `extra_vars`, jobs and workflows run as part of a workflow can inherit variables in the artifacts dictionary of a parent job in the workflow (also combining with ancestors further upstream in its branch).
@@ -119,13 +111,11 @@ If you use the `set_stats` module in your playbook, you can produce results that
       local_action: 'shell curl -F "file=@integration_results.txt" https://file.io'
       register: result
 
-
     - name: "Artifact URL of test results to Workflows"
       set_stats:
         data:
           integration_results_url:  "{{ (result.stdout|from_json).link }}"
 ```
-
 
 - use_set_stats.yml: second playbook in the workflow:
 
@@ -139,17 +129,16 @@ If you use the `set_stats` module in your playbook, you can produce results that
         return_content: true
       register: results
 
-
     - name: "Output test results"
       debug:
         msg: "{{ results.content }}"
 ```
+
 The `set_stats` module processes this workflow as follows:
 
 1. The contents of an integration result is uploaded to the web.
 2. Through the `invoke_set_stats` playbook, `set_stats` is then invoked to artifact the URL of the uploaded `integration_results.txt` into the Ansible variable `integration_results_url`.
 3. The second playbook in the workflow consumes the Ansible extra variable `integration_results_url`. It calls out to the web by using the URI module to get the contents of the file uploaded by the previous job template job. Then, it prints out the contents of the obtained file.
-
 
  Note:
 

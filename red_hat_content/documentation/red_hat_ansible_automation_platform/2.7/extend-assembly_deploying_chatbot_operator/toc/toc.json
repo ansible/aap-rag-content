@@ -1,0 +1,13 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Deploy the automation intelligent assistant on OpenShift Container Platform",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null
+    }
+  ]
+}

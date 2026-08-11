@@ -1,7 +1,7 @@
 +++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-ref_editing_inventory_file"
 title = "Edit the inventory file - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-ref_editing_inventory_file"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_install_mesh/", "Scale with automation mesh in a containerized or VM environment"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-ref_editing_inventory_file/aem-page/administer-ref_editing_inventory_file.html"
 last_crumb = "Edit the inventory file"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Edit the inventory file"
 oversized = "false"
@@ -36,12 +36,12 @@ You can use the Ansible Automation Platform installer inventory file to specify 
 ```
 cd <path-to-source-file>/ansible-automation-platform-containerized-setup-<version_number>
 ```
+
  **For offline or bundled installations**
 
 ```
 cd <path-to-source-file/ansible-automation-platform-containerized-setup-bundle-<version_number>-<arch_name>
 ```
-
 
 1. Open the `inventory` file with a text editor.
 
@@ -56,11 +56,13 @@ cd <path-to-source-file/ansible-automation-platform-containerized-setup-bundle-<
 ```
 $ cd /opt/ansible-automation-platform/installer/
 ```
+
  **Bundled installer (deprecated)**
 
 ```
 $ cd ansible-automation-platform-setup-bundle-<latest-version>
 ```
+
  **Online installer (deprecated)**
 
 ```
@@ -82,7 +84,6 @@ Run the installation program setup script after updating the inventory file with
 ```
 $ sudo ./setup.sh
 ```
-
 
 Note:
 

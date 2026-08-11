@@ -25,6 +25,7 @@ $ export DYNAMIC_PLUGIN_ROOT_DIR=/path/to/<ansible-backstage-plugins-local-dir-c
 ```
 $ tar --exclude='*code*' -xzf ansible-rhdh-plugins-x.y.z.tar.gz -C $DYNAMIC_PLUGIN_ROOT_DIR
 ```
+
 Substitute the Ansible plug-ins release version, for example `2.0.0`, for `x.y.z`.
 
 ### Results
@@ -38,5 +39,6 @@ ansible-plugin-backstage-rhaap-dynamic-x.y.z.tgz.integrity
 ansible-plugin-scaffolder-backend-module-backstage-rhaap-dynamic-x.y.z.tgz
 ansible-plugin-scaffolder-backend-module-backstage-rhaap-dynamic-x.y.z.tgz.integrity
 ```
+
 The files with the `.integrity` file type contain the plugin SHA value. The SHA value is used during the plug-in configuration.
 

@@ -9,6 +9,5 @@ The following permissions control execution environment builder sidebar items. G
 | `ansible.collections.view`            | **Collections** sidebar item — collection catalog for EE definitions     |
 | `ansible.git-repositories.view`       | **Git Repositories** sidebar item — saving and syncing EE definitions    |
 
-
 Each permission can be assigned individually for granular control.
 

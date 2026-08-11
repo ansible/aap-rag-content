@@ -18,17 +18,53 @@
           "singlePageAnchor": "backing-up-containerized-ansible-automation-platform"
         },
         {
-          "title": "Restore containerized Ansible Automation Platform",
+          "title": "Skip database backup when using an external database",
           "visible": true,
           "weight": 2,
+          "urlFragment": "GUID-a87b5d84-2151-48d6-ba91-37c6826d45b7",
+          "anchor": null,
+          "singlePageAnchor": "GUID-a87b5d84-2151-48d6-ba91-37c6826d45b7",
+          "sections": [
+            {
+              "title": "About this task",
+              "visible": true,
+              "weight": 1,
+              "urlFragment": "GUID-a87b5d84-2151-48d6-ba91-37c6826d45b7",
+              "anchor": "GUID-a87b5d84-2151-48d6-ba91-37c6826d45b7__context_1",
+              "singlePageAnchor": "GUID-a87b5d84-2151-48d6-ba91-37c6826d45b7__context_1"
+            }
+          ]
+        },
+        {
+          "title": "Restore containerized Ansible Automation Platform",
+          "visible": true,
+          "weight": 3,
           "urlFragment": "proc-restore-aap-container",
           "anchor": null,
           "singlePageAnchor": "proc-restore-aap-container"
         },
         {
+          "title": "Skip database restore when using an external database",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "GUID-b9a280fb-2fc4-4264-bcbd-f10b022bac20",
+          "anchor": null,
+          "singlePageAnchor": "GUID-b9a280fb-2fc4-4264-bcbd-f10b022bac20",
+          "sections": [
+            {
+              "title": "About this task",
+              "visible": true,
+              "weight": 1,
+              "urlFragment": "GUID-b9a280fb-2fc4-4264-bcbd-f10b022bac20",
+              "anchor": "GUID-b9a280fb-2fc4-4264-bcbd-f10b022bac20__context_1",
+              "singlePageAnchor": "GUID-b9a280fb-2fc4-4264-bcbd-f10b022bac20__context_1"
+            }
+          ]
+        },
+        {
           "title": "Back up and restore metrics service",
           "visible": true,
-          "weight": 3,
+          "weight": 5,
           "urlFragment": "task-backup-restore-metrics-service",
           "anchor": null,
           "singlePageAnchor": "task-backup-restore-metrics-service"

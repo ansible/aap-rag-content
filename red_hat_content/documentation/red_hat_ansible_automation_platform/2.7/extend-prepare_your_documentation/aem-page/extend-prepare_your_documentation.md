@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-prepare_your_documentation/aem-page/extend-prepare_your_documentation.html"
 last_crumb = "Prepare your documentation"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Prepare your documentation"
 oversized = "false"
@@ -45,6 +45,7 @@ Before creating a BYOK RAG image, collect and prepare your organization's docume
 ```
 mkdir -p knowledge-sources/staging
 ```
+
   1.  Copy or download all source documents to the staging directory.
 
 2.  If you have content that is not in Markdown (.md) and plain text (.txt) file format, convert them to Markdown or plain text format before uploading them to the BYOK RAG image:

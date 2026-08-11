@@ -9,6 +9,7 @@ text:
 content: |
 Your request has been submitted.
 ```
+
 You can include multiple text blocks:
 
 ```

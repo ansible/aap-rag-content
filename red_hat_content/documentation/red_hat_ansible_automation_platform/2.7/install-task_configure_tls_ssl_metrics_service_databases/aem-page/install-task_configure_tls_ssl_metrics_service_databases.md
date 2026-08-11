@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 title = "Configure TLS/SSL for metrics service databases - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_configure_tls_ssl_metrics_service_databases"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_understand_metrics_service_architecture/", "Understand metrics service architecture"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-task_configure_tls_ssl_metrics_service_databases/aem-page/install-task_configure_tls_ssl_metrics_service_databases.html"
 last_crumb = "Configure TLS/SSL for metrics service databases"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure TLS/SSL for metrics service databases"
 oversized = "false"
@@ -54,6 +54,7 @@ automationmetrics_pg_sslmode=require
 automationmetrics_pg_cert_auth=true
 ca_trust_bundle=/path/to/ca-bundle.crt
 ```
+
   Note:
       When `automationmetrics_pg_cert_auth` is set to `true`, the installer automatically generates TLS certificates for database connections. For custom certificates, use the tasks/tls_postgresql.yml task.
 

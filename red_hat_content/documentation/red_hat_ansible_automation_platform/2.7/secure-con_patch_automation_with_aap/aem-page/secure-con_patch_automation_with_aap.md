@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_patch_automation_with_aap"
 template = "docs/aem-title.html"
 title = "Automate software patching - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_patch_automation_with_aap"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_aap_security_use_cases/", "Security automation use cases"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_patch_automation_with_aap/aem-page/secure-con_patch_automation_with_aap.html"
 last_crumb = "Automate software patching"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Automate software patching"
 oversized = "false"
@@ -115,7 +115,6 @@ The following example playbook installs a specific version of the `httpd` RPM an
       - ansible_distribution_major_version == "9"
 ```
 
-
  Note:
 
 By setting `allow_downgrade: true`, if a newer version of any defined package is installed on the system, it is downgraded to the specified version instead.
@@ -130,7 +129,6 @@ The following example complex patching scenario demonstrates taking virtual mach
 2. Take a snapshot of each target host.   1. If the snapshot task fails, submit a ticket with the relevant information.
 3. Patch each of the target hosts.   1. If the patching task fails, restore the snapshot and submit a ticket with the relevant information.
 4. Delete each snapshot where the patching task was successful.
-
 
 The following workflow visualization shows how the components of the example complex patching scenario are executed:
 

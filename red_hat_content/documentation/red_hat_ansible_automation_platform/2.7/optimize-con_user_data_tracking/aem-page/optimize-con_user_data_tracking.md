@@ -1,7 +1,7 @@
 +++
+title = "Get insights on automation across your environment with Automation Analytics - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_user_data_tracking"
 template = "docs/aem-title.html"
-title = "Get insights on automation across your environment with Automation Analytics - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_user_data_tracking/", "Get insights on automation across your environment with Automation Analytics"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-con_user_data_tracking/aem-page/optimize-con_user_data_tracking.html"
 last_crumb = "Get insights on automation across your environment with Automation Analytics"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Get insights on automation across your environment with Automation Analytics"
 oversized = "false"
@@ -41,7 +41,7 @@ For opt-in of Automation Analytics to have any effect, your instance of automati
 
 As with Red Hat Lightspeed, Automation Analytics is built to collect the minimum amount of data needed. No credential secrets, personal data, automation variables, or task output is gathered.
 
-When you imported your license for the first time, you were automatically opted in to Automation Analytics. To configure or disable this feature, see [Configuring Automation Analytics](/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_user_data_tracking#proc-controller-configure-analytics "When you imported your license for the first time, you were automatically opted in for the collection of data that powers Automation Analytics, a cloud service that is part of the Ansible Automation Platform subscription.").
+When you imported your license for the first time, you were automatically opted in to Automation Analytics. To configure or disable this feature, see [Configuring Automation Analytics](/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_user_data_tracking#proc-controller-configure-analytics "Ansible Automation Platform automatically authenticates analytics transmission using your platform subscription certificate. If you prefer to use explicit credential management, you can optionally configure a service account.").
 
 By default, the data is collected every four hours. When you enable this feature, data is collected up to a month in arrears (or until the previous collection). You can turn off this data collection at any time in the **Miscellaneous System settings** of the System configuration window.
 
@@ -49,7 +49,6 @@ This setting can also be enabled through the API by specifying `INSIGHTS_TRACKIN
 
 -  `api/v2/settings/all`
 -  `api/v2/settings/system`
-
 
 The Automation Analytics generated from this data collection can be found on the [Red Hat Cloud Services](https://cloud.redhat.com) portal.
 
@@ -67,31 +66,34 @@ On the clouds navigation panel, select Organization Statistics to view informati
 - Job runs by organization
 - Organization status
 
-
  Note:
 
 The organization statistics page will be deprecated in a future release.
 
-## Configure Automation Analytics
+## Configure Automation Analytics (Optional)
 
-When you imported your license for the first time, you were automatically opted in for the collection of data that powers Automation Analytics, a cloud service that is part of the Ansible Automation Platform subscription.
+Ansible Automation Platform automatically authenticates analytics transmission using your platform subscription certificate. If you prefer to use explicit credential management, you can optionally configure a service account.
 
 ### Before you begin
 
 - A service account created with the **Automation Analytics Viewer** role in console.redhat.com. For more information, see [Creating a service account](https://docs.redhat.com/en/documentation/red_hat_hybrid_cloud_console/1-latest/html/creating_and_managing_service_accounts/proc-ciam-svc-acct-overview-creating-service-acct#proc-ciam-svc-acct-create-creating-service-acct).
 
+### About this task
+
+Use this procedure if you want to configure a service account for analytics instead of using automatic certificate-based authentication.
+
 ### Procedure
 
 1.  From the navigation panel, select Settings> (and then)Automation Execution> (and then)System.
 2.  Click Edit.
-3.  In the field labeled **Red Hat Client ID for Analytics**, enter the client ID you received when you created your service account to retrieve subscription and content information.
-4.  In the field labeled **Red Hat Client Secret for Analytics**, enter the client secret you received when you created your service account to send data to Automation Analytics.
+3. **Optional:** In the field labeled **Red Hat Client ID for Analytics**, enter the client ID you received when you created your service account to retrieve subscription and content information.
+4. **Optional:** In the field labeled **Red Hat Client Secret for Analytics**, enter the client secret you received when you created your service account to send data to Automation Analytics.
 5.  In the **Options** list select the checkbox to **Gather data for Automation Analytics**.
 6.  Click Save.
 
 ### Results
 
-After configuring the service account, run a test job to ensure everything is set up correctly.
+Analytics data is transmitted to Red Hat automatically. If you configured a service account, run a test job to verify the configuration.
 
 1. From the navigation panel, select Automation Execution> (and then)Jobs to launch a job.
 2. Check [analytics at console.redhat.com](https://console.redhat.com/ansible/automation-analytics/reports) to confirm that the data is being posted.

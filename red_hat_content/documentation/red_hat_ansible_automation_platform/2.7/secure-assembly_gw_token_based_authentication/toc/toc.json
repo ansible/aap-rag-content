@@ -34,28 +34,12 @@
               "singlePageAnchor": "ref-gw-application-functions"
             },
             {
-              "title": "Request an access token after expiration",
+              "title": "Refresh an access token after expiration",
               "visible": true,
               "weight": 2,
               "urlFragment": "ref-controller-applications-getting-started",
               "anchor": "gw-request-token-after-expiration",
               "singlePageAnchor": "gw-request-token-after-expiration"
-            },
-            {
-              "title": "OAuth2 application and token migration (2.4 to 2.6)",
-              "visible": true,
-              "weight": 3,
-              "urlFragment": "ref-controller-applications-getting-started",
-              "anchor": "gw-oauth2-app-and-token-migration",
-              "singlePageAnchor": "gw-oauth2-app-and-token-migration"
-            },
-            {
-              "title": "Manage OAUTH2_PROVIDER settings",
-              "visible": true,
-              "weight": 4,
-              "urlFragment": "ref-controller-applications-getting-started",
-              "anchor": "gw-manage-oauth2-provider",
-              "singlePageAnchor": "gw-manage-oauth2-provider"
             }
           ]
         }

@@ -1,6 +1,6 @@
 +++
-title = "Extend the automation intelligent assistant with custom knowledge - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-extend_the_intelligent_assistant_with_custom_knowledge"
+title = "Extend the automation intelligent assistant with custom knowledge - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-extend_the_intelligent_assistant_with_custom_knowledge/aem-page/extend-extend_the_intelligent_assistant_with_custom_knowledge.html"
 last_crumb = "Extend the automation intelligent assistant with custom knowledge"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Extend the automation intelligent assistant with custom knowledge"
 oversized = "false"
@@ -66,10 +66,10 @@ Before you begin your BYOK implementation workflow, you will need:
 
 *Table 1. BYOK Implementation Workflow*
 
-| Step | Task                                                             | Description                                                                                                                                                                                                |
-| ---- | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1    | Prepare your documentation                                       | An **administrator** collects and converts the organization's documents to Markdown or plain-text formats.                                                                                                 |
-| 2    | Build a searchable knowledge base image from your documentation  | The **administrator** uses the rag-content tool to generate a vector database from the docs and packages it as a container image.                                                                          |
+| Step | Task                                                             | Description                                                                                                                                                                                              |
+| ---- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1    | Prepare your documentation                                       | An **administrator** collects and converts the organization's documents to Markdown or plain-text formats.                                                                                               |
+| 2    | Build a searchable knowledge base image from your documentation  | The **administrator** uses the rag-content tool to generate a vector database from the docs and packages it as a container image.                                                                        |
 | 3    | Deploy your custom image                                         | The **administrator** imports the BYOK RAG image into your containerized or operator-based Ansible Automation Platform installation and configures the Ansible Lightspeed intelligent assistant to use it. |
-| 4    | Get organization-specific answers from the intelligent assistant | <br>**Ansible Automation Platform users** ask the intelligent assistant questions and receive answers informed by their organization's custom documentation.                                               |
-| 5    | Optional: Keep your custom knowledge current                     | <br>The **administrator** updates or replaces the BYOK image as the organization’s documentation evolves, or removes the image entirely if no longer needed.                                               |
+| 4    | Get organization-specific answers from the intelligent assistant | <br>**Ansible Automation Platform users** ask the intelligent assistant questions and receive answers informed by their organization's custom documentation.                                             |
+| 5    | Optional: Keep your custom knowledge current                     | <br>The **administrator** updates or replaces the BYOK image as the organization’s documentation evolves, or removes the image entirely if no longer needed.                                             |

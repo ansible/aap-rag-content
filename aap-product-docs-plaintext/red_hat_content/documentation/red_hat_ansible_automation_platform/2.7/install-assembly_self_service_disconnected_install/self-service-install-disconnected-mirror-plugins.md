@@ -26,6 +26,7 @@ Use the `mirror-plugins.sh` script from the Red Hat Developer Hub operator repos
 $ curl -LO https://raw.githubusercontent.com/redhat-developer/rhdh-operator/release-<rhdh_version>/.rhdh/scripts/mirror-plugins.sh
 $ chmod +x mirror-plugins.sh
 ```
+
 Replace `<rhdh_version>` with the Red Hat Developer Hub version bundled with your Helm chart. See the [Ansible Automation Portal Lifecycle](https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-lifecycle) page for version mappings.
 
 2.  Mirror the plug-in catalog index and all referenced plug-in artifacts to your disconnected registry:
@@ -36,6 +37,7 @@ $ ./mirror-plugins.sh \
 --plugin-index oci://registry.redhat.io/rhdh/rhdh-plugin-catalog-index-rhel9:<rhdh_version> \
 --to-registry <disconnected_registry_url>
 ```
+
 The script copies all OCI plug-in artifacts, rewrites the catalog index with your mirror registry URLs, and pushes the updated index to your disconnected registry.
 
 3.  If your disconnected environment has no direct network path to the connected bastion host, use the export-then-import workflow.

@@ -8,7 +8,6 @@ You might have to specify the content or type on `POST` or `PUT` requests:
 - `PUT`: Update a specific resource (by an identifier) or a collection of resources. You can also use `PUT` to create a specific resource if you know the resource identifier before-hand.
 - `POST`: Create a new resource. Also acts as a catch-all verb for operations that do not fit into the other categories.
 
-
 All URIs not ending with "/" receive a 301 redirect.
 
 Note:

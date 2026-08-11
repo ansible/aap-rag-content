@@ -58,14 +58,12 @@ You must also click SELECT when the prompt wizard closes, to apply the changes a
 
 When the node is created, it is labeled with its job type. A template that is associated with each workflow node runs based on the selected run scenario as it proceeds. Click Legend to display the legend for each run scenario and their job types.
 
-
 ![Workflow dropdown list](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-wf-dropdown-list.png)
 
 8.  Hover over a node to edit the node, add step and link, or delete the selected node:
 
 Note:
 If you hover over a step when adding a link and a red border is displayed, this means that you cannot connect those two steps together. This is a preventive measure to avoid users creating "circular dependencies", which can result in a workflow that ends up in an infinite loop and never finishes.
-
 
 ![Node options](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-wf-add-template.png)
 

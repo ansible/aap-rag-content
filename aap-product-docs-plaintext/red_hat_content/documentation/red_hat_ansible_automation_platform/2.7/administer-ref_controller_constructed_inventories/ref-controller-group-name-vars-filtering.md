@@ -29,11 +29,10 @@ account_alias=product_dev
 [account_4321:vars]
 account_alias=sustaining
 ```
+
 The goal here is to return only shutdown hosts that are present in the group with the `account_alias` variable equal to `product_dev`. There are two approaches to this, both shown in YAML format. The first one suggested is recommended.
 
 1. **Construct 2 groups, limit to intersection**:     `source_vars`:
-
-
 
 ```
 plugin: constructed
@@ -42,6 +41,7 @@ groups:
 is_shutdown: state | default("running") == "shutdown"
 product_dev: account_alias == "product_dev"
 ```
+
 `limit`: `is_shutdown:&product_dev`
 
 This constructed inventory input creates a group for both categories and uses the `limit` (host pattern) to only return hosts that are in the intersection of those two groups.
@@ -50,14 +50,13 @@ When a variable is or is not defined (depending on the host), you can give a def
 
 2. **Construct 1 group, limit to group**:     `source_vars`:
 
-
-
 ```
 plugin: constructed
 strict: true
 groups:
 shutdown_in_product_dev: state | default("running") == "shutdown" and account_alias == "product_dev"
 ```
+
 `limit`: `shutdown_in_product_dev`
 
 This input creates one group that only includes hosts that match both criteria. The limit is then just the group name by itself, returning **host2**. The same as the earlier approach.

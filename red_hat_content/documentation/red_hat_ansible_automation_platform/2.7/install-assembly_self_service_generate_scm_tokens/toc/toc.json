@@ -1,0 +1,31 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Generate Git personal access tokens",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Create a personal access token on GitHub",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "self-service-create-gh-pat",
+          "anchor": null,
+          "singlePageAnchor": "self-service-create-gh-pat"
+        },
+        {
+          "title": "Create a personal access token on GitLab",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "self-service-create-gl-pat",
+          "anchor": null,
+          "singlePageAnchor": "self-service-create-gl-pat"
+        }
+      ]
+    }
+  ]
+}

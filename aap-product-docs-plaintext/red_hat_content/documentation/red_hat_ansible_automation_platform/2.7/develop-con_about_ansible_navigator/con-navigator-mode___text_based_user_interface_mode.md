@@ -4,9 +4,7 @@
 
 The text-based user interface mode provides enhanced interaction with automation execution environments, collections, playbooks, and inventory. This mode is compatible with integrated development environments (IDE), such as Visual Studio Code.
 
-
 ![Text-based user interface mode](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-welcome.png)
-
 
 This mode includes a number of helpful user interface options:
 

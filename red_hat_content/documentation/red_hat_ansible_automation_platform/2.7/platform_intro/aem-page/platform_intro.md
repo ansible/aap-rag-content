@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/platform_intro/aem-page/platform_intro.html"
 last_crumb = "Release notes"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Release notes"
 oversized = "false"
@@ -36,7 +36,6 @@ From the introduction of Ansible Automation Platform 2, our promise has been to 
 - **Unlock more value** with the new automation dashboard, which allows you to securely measure automation ROI, with customized tracking and reporting.
 - **Operate more efficiently** with the new Ansible Lightspeed intelligent assistant, which harnesses generative AI to provide on-demand support, for a more intuitive platform experience.
 - **Achieve new levels of scale** with the Ansible automation portal, which enables platform admins to quickly and easily scale automation service delivery to new users and teams.
-
 
 Because your team is not just preparing for the future, you are automating for it.
 

@@ -1,5 +1,6 @@
 # Respond to events from external systems
-## HTTP headers
+## Event streams
+### HTTP headers
 
 In the context of Event-Driven Ansible and event streams, HTTP headers play a significant role because they carry the necessary context and security information about the incoming event from a third-party source (for example, GitHub, a monitoring tool, or a proprietary webhook).
 

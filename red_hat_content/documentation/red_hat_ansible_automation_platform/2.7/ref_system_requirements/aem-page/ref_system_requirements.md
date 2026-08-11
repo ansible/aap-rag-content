@@ -1,6 +1,6 @@
 +++
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/ref_system_requirements"
+template = "docs/aem-title.html"
 title = "Red Hat Ansible Automation Platform system requirements - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/ref_system_requirements/aem-page/ref_system_requirements.html"
 last_crumb = "Red Hat Ansible Automation Platform system requirements"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Red Hat Ansible Automation Platform system requirements"
 oversized = "false"
@@ -33,15 +33,15 @@ A resilient deployment requires 10 virtual machines with a minimum of 16 gigabyt
 
 *Table 1. Base system*
 
-| Type                 | Description                                                                                                                            | Notes                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br>Subscription     | <br>Valid Red Hat Ansible Automation Platform subscription                                                                             |                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| Type                 | Description                                                                                                                            | Notes                                                                                                                                                                                                    |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <br>Subscription     | <br>Valid Red Hat Ansible Automation Platform subscription                                                                             |                                                                                                                                                                                                          |
 | <br>Operating system | Red Hat Enterprise Linux 9.6 or later minor versions of Red Hat Enterprise Linux 9                                                     | <br>Red Hat Ansible Automation Platform are also supported on OpenShift, see [Installing on OpenShift Container Platform](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator "As a system administrator, you can use Ansible Automation Platform Operator to deploy new Ansible Automation Platform instances in your OpenShift environment.") for more information. |
-| <br>CPU architecture | <br>x86\_64, AArch64, s390x (IBM Z), ppc64le (IBM Power)                                                                               |                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| <br>Ansible-core     | <br>Ansible-core version 2.16 or later                                                                                                 | <br>Ansible Automation Platform uses the system-wide ansible-core package to install the platform, but uses ansible-core 2.16 for both its control plane and built-in execution environments.                                                                                                                                                                                                                             |
-| <br>Browser          | <br>A currently supported version of Mozilla Firefox or Google Chrome.                                                                 |                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| <br>Database         | For Ansible Automation Platform managed databases: PostgreSQL 15.For customer provided (external) databases: PostgreSQL 15, 16, or 17. | External (customer supported) databases require International Components for Unicode (ICU) support.External databases using PostgreSQL 16 or 17 must rely on external backup and restore processes. Backup and restore functionality is dependent on utilities provided with PostgreSQL 15.                                                                                                                               |
-| <br>IP version       | <br>IPv4, IPv6 (single-stack and dual-stack)                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| <br>CPU architecture | <br>x86\_64, AArch64                                                                                                                   | <br>IBM Z (s390x) and IBM Power (ppc64le) are not supported in Ansible Automation Platform 2.7. For IBM architecture support, use Ansible Automation Platform 2.6.                                       |
+| <br>Ansible-core     | <br>Ansible-core version 2.16 or later                                                                                                 | <br>Ansible Automation Platform uses the system-wide ansible-core package to install the platform, but uses ansible-core 2.16 for both its control plane and built-in execution environments.            |
+| <br>Browser          | <br>A currently supported version of Mozilla Firefox or Google Chrome.                                                                 |                                                                                                                                                                                                          |
+| <br>Database         | For Ansible Automation Platform managed databases: PostgreSQL 15.For customer provided (external) databases: PostgreSQL 15, 16, or 17. | External (customer supported) databases require International Components for Unicode (ICU) support.External databases using PostgreSQL 16 or 17 must rely on external backup and restore processes. Backup and restore functionality is dependent on utilities provided with PostgreSQL 15. |
+| <br>IP version       | <br>IPv4, IPv6 (single-stack and dual-stack)                                                                                           |                                                                                                                                                                                                          |
 
 *Table 2. Virtual machine requirements*
 
@@ -55,7 +55,6 @@ A resilient deployment requires 10 virtual machines with a minimum of 16 gigabyt
 | <br>Database                        | <br>16GB | <br>4 | <br>3000  | <br>100GB minimum allocated to `/var/lib/pgsql`                    |
 | <br>Event-Driven Ansible controller | <br>16GB | <br>4 | <br>3000  | <br>60GB minimum                                                   |
 
-
 Note:
 
 These are minimum requirements and can be increased for larger workloads in increments of 2x (for example 16GB becomes 32GB and 4 vCPU becomes 8vCPU). See [Horizontally scale tested deployment models to improve performance](/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_horizontal_scaling_for_performance "Horizontal scaling involves increasing the number of replicas (pods or virtual machines) for a given service. Similar to vertical scaling, this approach is useful for high resource utilization or workload scaling.") for more information.
@@ -66,7 +65,6 @@ Enable the following repositories only when installing Red Hat Ansible Automatio
 
 - RHEL BaseOS
 - RHEL AppStream
-
 
 Note:
 
@@ -81,7 +79,6 @@ The following are necessary for you to work with project updates and collections
 - The Ansible Automation Platform database backups are staged on each node at `/var/backups/automation-platform` through the variable `backup_dir`. You might need to mount a new volume to `/var/backups` or change the staging location with the variable `backup_dir` to prevent issues with disk space before running the `./setup.sh -b` script.
 - If performing a bundled Ansible Automation Platform installation, the installation setup.sh script attempts to install ansible-core (and its dependencies) from the bundle for you.
 - If you have installed Ansible-core manually, the Ansible Automation Platform installation setup.sh script detects that Ansible has been installed and does not attempt to reinstall it.
-
 
 Note:
 

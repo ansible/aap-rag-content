@@ -1,6 +1,6 @@
 +++
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_eda_react_to_security_events"
+template = "docs/aem-title.html"
 title = "Configure automatic security reactions with Event-Driven Ansible - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-assembly_eda_react_to_security_events/aem-page/secure-assembly_eda_react_to_security_events.html"
 last_crumb = "Configure automatic security reactions with Event-Driven Ansible"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure automatic security reactions with Event-Driven Ansible"
 oversized = "false"
@@ -47,7 +47,6 @@ Event-Driven Ansible can automate the following common security use cases:
 - *Zero Trust Network Access* (ZTNA)
 - Compliance and hardening
 - Phishing mitigation
-
 
 The following is an example workflow scenario using Event-Driven Ansible for detection of and response to unauthorized SSH access:
 

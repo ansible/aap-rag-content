@@ -36,7 +36,6 @@ satellites:
 - satcom
 ```
 
-
 - The configuration in JSON format:
 
 ```
@@ -45,6 +44,7 @@ satellites:
 "satellites": ["sputnik", "explorer", "satcom"]
 }
 ```
+
 The following table notes the behavior (hierarchy) of variable precedence in automation controller as it compares to variable precedence in Ansible.
 
 **Automation controller Variable Precedence Hierarchy (last listed wins)**

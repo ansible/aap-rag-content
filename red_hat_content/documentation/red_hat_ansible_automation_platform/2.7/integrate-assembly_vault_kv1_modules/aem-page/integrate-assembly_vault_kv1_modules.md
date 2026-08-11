@@ -1,7 +1,7 @@
 +++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_vault_kv1_modules"
 template = "docs/aem-title.html"
 title = "Configure KV1 modules - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_vault_kv1_modules"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_vault_introduction/", "Integrate with IBM HashiCorp Vault"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/integrate-assembly_vault_kv1_modules/aem-page/integrate-assembly_vault_kv1_modules.html"
 last_crumb = "Configure KV1 modules"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure KV1 modules"
 oversized = "false"
@@ -133,6 +133,7 @@ Before (community.hashi_vault)
     path: hello
   register: response
 ```
+
 After (hashicorp.vault)
 
 ```
@@ -156,6 +157,7 @@ Before (community.hashi_vault)
   ansible.builtin.debug:
     msg: "{{ lookup('community.hashi_vault.vault_kv1_get', 'hello', url='https://vault:8201') }}"
 ```
+
 After (hashicorp.vault)
 
 ```

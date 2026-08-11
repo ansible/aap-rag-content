@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-ref_troubleshoot_automation_dashboard_configuration_and_deployment"
-template = "docs/aem-title.html"
 title = "Troubleshoot automation dashboard configuration and deployment - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-ref_troubleshoot_automation_dashboard_configuration_and_deployment"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-technology_preview/", "Technology Preview"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/whats_new-ref_troubleshoot_automation_dashboard_configuration_and_deployment/aem-page/whats_new-ref_troubleshoot_automation_dashboard_configuration_and_deployment.html"
 last_crumb = "Troubleshoot automation dashboard configuration and deployment"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Troubleshoot automation dashboard configuration and deployment"
 oversized = "false"
@@ -38,13 +38,11 @@ Diagnose automation dashboard issues including Gateway integration failures, RBA
 - Browser console shows: `HTTP 403 Forbidden: {"detail":"Authentication credentials were not provided."}`
 - Metrics service API endpoints return "no healthy upstream" errors
 
-
 After enabling `FEATURE_DASHBOARD_COLLECTION_ENABLED: true` on the Ansible Automation Platform CR (operator deployment), the Gateway did NOT automatically register the metrics service. The dashboard UI navigation appeared, but accessing it resulted in 403 Forbidden errors because:
 
 - No metrics service type/cluster/node/service route created in Gateway
 - JWT authentication chain (`ANSIBLE_BASE_JWT_KEY`, resource server URL, `service_id`) not configured between Gateway and metrics service
 - MetricsService operator did not set `METRICS_SERVICE_FEATURE_DASHBOARD_COLLECTION_ENABLED` env var from the CR
-
 
 **Root cause**
 
@@ -54,8 +52,6 @@ Gateway has not registered metrics service for routing and authentication. The d
 
 1.      Check if metrics service is running:
 
-
-
 ```
 # Operator deployment
 kubectl get pods -n ansible-automation-platform | grep metrics
@@ -63,11 +59,10 @@ kubectl get pods -n ansible-automation-platform | grep metrics
     # Containerized deployment
 podman ps | grep automation-metrics
 ```
+
      Expected: 3 metrics service pods/containers running (web, tasks, scheduler)
 
 2.      Check metrics service logs for JWT authentication errors:
-
-
 
 ```
 # Operator deployment
@@ -76,9 +71,8 @@ kubectl logs -n ansible-automation-platform <metrics-web-pod> | grep -i "ANSIBLE
     # Containerized deployment
 podman logs automation-metrics-web | grep -i "ANSIBLE_BASE_JWT_KEY"
 ```
+
      Error indicating Gateway not configured:
-
-
 
 ```
 ansible_base.jwt_consumer.common.cert Failed to get the setting ANSIBLE_BASE_JWT_KEY
@@ -86,25 +80,20 @@ ansible_base.jwt_consumer.common.cert Failed to get the setting ANSIBLE_BASE_JWT
 
 3.      Check Gateway logs for routing errors:
 
-
-
 ```
 # Operator deployment
 kubectl logs -n ansible-automation-platform <gateway-pod> | grep -i metrics
 
     # Look for errors accessing /api/metrics/v1/dashboard_reports/
 ```
+
      Error indicating no upstream registered:
-
-
 
 ```
 no healthy upstream
 ```
 
 4.      Check metrics service environment variables:
-
-
 
 ```
 # Operator deployment  
@@ -113,9 +102,8 @@ kubectl exec <metrics-web-pod> -n ansible-automation-platform -- env | grep -A2 
 # Containerized deployment
 cat /etc/ansible-automation-platform/metrics_service/settings.yaml | grep DASHBOARD
 ```
+
      Expected output:
-
-
 
 ```
 # Operator deployment
@@ -124,6 +112,7 @@ METRICS_SERVICE_FEATURE_DASHBOARD_COLLECTION_ENABLED=true
     # Containerized deployment
 FEATURE_ENABLED: {'DASHBOARD_COLLECTION': True}
 ```
+
      If missing or set to `false`:
 
      The MetricsService operator did not properly propagate the `FEATURE_DASHBOARD_COLLECTION_ENABLED: true` setting from the Ansible Automation Platform CR to the metrics service container environment.
@@ -140,23 +129,19 @@ FEATURE_ENABLED: {'DASHBOARD_COLLECTION': True}
 
 1.      Verify operator version supports Gateway integration:
 
-
-
 ```
 kubectl get pods -n ansible-automation-platform | grep aap-operator
 ```
+
      Ensure operator version is `aap-operator.v2.7.0-0.1776445599` or later.
 
 2.      Check Ansible Automation Platform CR feature flag:
 
-
-
 ```
 kubectl get AnsibleAutomationPlatform aap -n aap -o yaml | grep -A5 feature_flags
 ```
+
      Verify:
-
-
 
 ```
 feature_flags:
@@ -165,11 +150,10 @@ feature_flags:
 
 3.      Verify Gateway pod restarted after feature flag enabled:
 
-
-
 ```
 kubectl get pods -n ansible-automation-platform | grep gateway
 ```
+
      Check pod AGE. This should restart after the CR update.
 
 4.      If Gateway registration still failing:
@@ -188,7 +172,6 @@ Gateway registration should be automatic. If you encounter this issue:
 - Check Gateway configuration includes metrics service routes
 - Contact Red Hat Support - this issue primarily affects operator deployments
 
-
 **Verification after fix**
 
 - **Access dashboard UI:** Navigate to Ansible Automation Platform UI → Automation dashboard
@@ -197,12 +180,11 @@ Gateway registration should be automatic. If you encounter this issue:
 
 -      **Check metrics service API accessible:**
 
-
-
 ```
 # From a machine with access to AAP
 curl -k -u admin:<password> https://<AAP-FQDN>/api/metrics/v1/dashboard_reports/collection_status/
 ```
+
      Expected: JSON response (not 403 error)
 
 ## Issue 2: System Auditor cannot access dashboard (RBAC broken)
@@ -212,7 +194,6 @@ curl -k -u admin:<password> https://<AAP-FQDN>/api/metrics/v1/dashboard_reports/
 - System Auditor role users cannot see dashboard navigation item in Ansible Automation Platform UI
 - Attempting to access dashboard URL directly shows access denied or 404
 - Only Administrator role users can access dashboard
-
 
 **Expected behavior:** System Auditor should have read-only access to dashboard
 
@@ -226,12 +207,11 @@ Dashboard RBAC permissions not correctly registered for System Auditor role. The
 
 1.      Verify user role:
 
-
-
 ```
 # Check user's role assignments in AAP
 # Navigate to: Access → Users → [username] → Roles
 ```
+
      Confirm user has System Auditor role.
 
 2.      Check dashboard visibility in UI:
@@ -290,7 +270,6 @@ Important:
 - Cannot change currency in dashboard settings
 - All cost values display in USD only
 
-
 **Root cause**
 
 Custom date range selection and currency selector features are not implemented in Ansible Automation Platform 2.7 Technology Preview dashboard UI.
@@ -301,7 +280,6 @@ Custom date range selection and currency selector features are not implemented i
 
 - **Date filtering:** Users can only use predefined date range options (Last 7 days, Last 30 days, Last 90 days, etc.)
 - **Currency:** All cost values display in USD. Multi-currency support not available.
-
 
 **Solution**
 
@@ -319,7 +297,6 @@ In Ansible Automation Platform 2.7 Technology Preview, dashboard supports the fo
 - Last 30 days
 - Last 90 days
 
-
 Custom date range selection (choosing specific start and end dates) is not available in Technology Preview.
 
 Important:
@@ -336,7 +313,6 @@ In Ansible Automation Platform 2.7 Technology Preview, all dashboard cost values
 - No warning or error message displayed
 - No overwrite confirmation dialog
 - Results in two different reports with identical names in the list
-
 
 **Root cause**
 
@@ -357,7 +333,6 @@ Use unique, descriptive names for all saved reports. Include identifying informa
 - **Good:** "Q1-2026-Production-Org", "Weekly-Template-Usage", "EMEA-Region-ROI"
 - **Avoid:** "Test Report", "My Report", "Dashboard" (too generic, likely to duplicate)
 
-
 **Recommended naming convention:**
 
 ```
@@ -368,6 +343,7 @@ Examples:
 - Executive-Summary-Q1-2026
 - Development-Org-Weekly-Usage
 ```
+
 **Managing duplicate names**
 
 If you have multiple reports with the same name:
@@ -426,7 +402,6 @@ Diagnostic steps:
 - Check metrics service logs for errors
 - Verify user has appropriate role
 - Test API access directly (bypass UI)
-
 
 **Dashboard performance is slow**
 

@@ -6,10 +6,12 @@ The following example shows how you can set up an inventory file for horizontal 
 
 ```
 [automationeda]
-
 3.88.116.111 routable_hostname=automationeda-api.example.com eda_type=api
 
+# event-stream node
+3.88.116.112 routable_hostname=automationeda-event-stream.example.com eda_type=event-stream
+
 # worker node
-3.88.116.112 routable_hostname=automationeda-api.example.com eda_type=worker
+3.88.116.113 routable_hostname=automationeda-worker.example.com eda_type=worker
 ```
 

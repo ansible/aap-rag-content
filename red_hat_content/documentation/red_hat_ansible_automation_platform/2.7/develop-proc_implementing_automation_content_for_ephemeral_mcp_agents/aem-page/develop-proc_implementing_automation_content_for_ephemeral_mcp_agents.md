@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_implementing_automation_content_for_ephemeral_mcp_agents/aem-page/develop-proc_implementing_automation_content_for_ephemeral_mcp_agents.html"
 last_crumb = "Implement automation content for ephemeral MCP agents"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Implement automation content for ephemeral MCP agents"
 oversized = "false"
@@ -42,6 +42,8 @@ You can safely use AI as an operational assistant, which can take assigned actio
 
 1.  Create the `execution-environment.yml` definition file, which specifies a step to install the MCP server components:
   
+   Note:
+      Replace `<platform-version>` with the namespace for your version of Ansible Automation Platform. Replace `<rhel-version>` with your Red Hat Enterprise Linux version
 
 ```yaml
 ---
@@ -49,7 +51,7 @@ version: 3
 
     images:
   base_image:
-    name: ansible-automation-platform-26/ee-minimal-rhel9:latest
+    name: <platform-version>/ee-minimal-rhel<rhel-version>:latest
 dependencies:
   galaxy: requirements.yml
 
@@ -60,6 +62,7 @@ dependencies:
   append_final: |
     RUN ansible-playbook ansible.mcp_builder.install_mcp -e mcp_servers=github_mcp -e github_mcp_mode=remote
 ```
+
     The example definition file specifies the required MCP server, so that the necessary dependencies are pulled into the file.
 
     During the EE build process the MCP server software is installed into the EE.
@@ -82,6 +85,7 @@ dependencies:
           name: my-github-repository
           autoInit: true
 ```
+
     The playbook syntax for invoking MCP plugins is intuitive and aligns with existing Ansible module patterns.
 
    Important:

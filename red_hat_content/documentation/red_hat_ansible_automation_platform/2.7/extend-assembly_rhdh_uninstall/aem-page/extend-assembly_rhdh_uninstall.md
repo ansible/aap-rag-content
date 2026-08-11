@@ -1,6 +1,6 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_uninstall"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_uninstall"
 title = "Uninstall the Ansible plug-ins - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_uninstall/aem-page/extend-assembly_rhdh_uninstall.html"
 last_crumb = "Uninstall the Ansible plug-ins"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Uninstall the Ansible plug-ins"
 oversized = "false"
@@ -54,7 +54,7 @@ upstream:
           - adt
           - server
         image: >-
-          registry.redhat.io/ansible-automation-platform-2.7/ansible-dev-tools-rhel9:latest
+          registry.redhat.io/ansible-automation-platform-27/ansible-dev-tools-rhel9:latest
         imagePullPolicy: IfNotPresent
         name: ansible-devtools-server
         ports:

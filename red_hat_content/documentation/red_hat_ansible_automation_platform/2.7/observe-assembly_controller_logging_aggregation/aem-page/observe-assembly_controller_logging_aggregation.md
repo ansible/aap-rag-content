@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
 title = "Send log files to third-party aggregation services - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_controller_logging_aggregation"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_controller_logging_aggregation/", "Send log files to third-party aggregation services"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/observe-assembly_controller_logging_aggregation/aem-page/observe-assembly_controller_logging_aggregation.html"
 last_crumb = "Send log files to third-party aggregation services"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Send log files to third-party aggregation services"
 oversized = "false"
@@ -36,7 +36,6 @@ The version of `rsyslog` that is installed by automation controller does not inc
 - rsyslog-udpspoof.x86_64
 - rsyslog-libdbi.x86_64
 
-
 After installing automation controller, you must only use the automation controller provided `rsyslog` package for any logging outside of automation controller that might have previously been done with the RHEL provided `rsyslog` package.
 
 If you already use `rsyslog` for logging system logs on the automation controller instances, you can continue to use `rsyslog` to handle logs from outside of automation controller by running a separate `rsyslog` process (using the same version of rsyslog that automation controller uses), and pointing it to a separate `/etc/rsyslog.conf` file.
@@ -54,6 +53,5 @@ Use the `/api/v2/settings/logging/` endpoint to configure how the automation con
 It stores files in the directory specified by `LOG_AGGREGATOR_MAX_DISK_USAGE_PATH`.
 
 - `LOG_AGGREGATOR_MAX_DISK_USAGE_PATH`: Specifies the location to store logs that should be retried after an outage of the external log aggregator (defaults to `/var/lib/awx`). Equivalent to the `rsyslogd queue.spoolDirectory` setting.
-
 
 For example, if `Splunk` goes offline, `rsyslogd` stores a queue on the disk until `Splunk` comes back online. By default, it stores up to 1GB of events (while Splunk is offline) but you can increase that to more than 1GB if necessary, or change the path where you save the queue.

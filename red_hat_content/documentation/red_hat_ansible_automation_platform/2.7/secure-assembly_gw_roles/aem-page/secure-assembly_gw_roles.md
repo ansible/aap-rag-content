@@ -1,6 +1,6 @@
 +++
-title = "View, create, and assign roles to grant user access to resources - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_roles"
+title = "View, create, and assign roles to grant user access to resources - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_roles/aem-page/secure-assembly_gw_roles.html"
 last_crumb = "View, create, and assign roles to grant user access to resources"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "View, create, and assign roles to grant user access to resources"
 oversized = "false"
@@ -44,7 +44,6 @@ Roles are labeled with their associated Ansible Automation Platform component an
 - **Automation Execution** refers to automation controller
 - **Automation Decisions** refers to Event-Driven Ansible
 - **Automation Content** refers to automation hub
-
 
 Roles created at the level of the organization can be associated with multiple components because they group together permissions from automation controller (Automation Execution) and Event-Driven Ansible (Automation Decisions). Only organization roles can span multiple components.
 

@@ -1,5 +1,5 @@
 # New features and enhancements
-## The MCP server for Red Hat Ansible Automation Platform
+## General availability of the MCP server for Red Hat Ansible Automation Platform
 
 - The MCP server has moved from technical preview to general availability.
 - Extending Red Hat maintained content use cases via the MCP plugin.

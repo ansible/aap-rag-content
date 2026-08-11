@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_network/aem-page/secure-ref_controller_credential_network.html"
 last_crumb = "Network credential type"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Network credential type"
 oversized = "false"
@@ -43,8 +43,6 @@ If you assign both a Machine credential and a Network credential to the same job
 
      Automation controller uses the following environment variables for Network credentials:
 
-
-
 ```
 ANSIBLE_NET_USERNAME
 ANSIBLE_NET_PASSWORD
@@ -64,7 +62,6 @@ When using the **Controller Access Network Credentials** credential type, you ca
 
 -  `ANSIBLE_NET_USERNAME`
 -  `ANSIBLE_NET_PASSWORD`
-
 
 You can get the username and password parameters from a job runtime environment:
 
@@ -90,7 +87,6 @@ The most common protocol is CLI over SSH. You set the communication protocol wit
 | <br> `ansible.netcommon.httpapi`     | <br>API over HTTP/HTTPS | <br>network\_os setting | <br>yes     |
 | <br> `local`                         | <br>depends on provider | <br>provider setting    | <br>no      |
 
-
 The `ansible_connection: local` is deprecated. Use one of the persistent connection types listed above instead. With persistent connections, you can define the hosts and credentials only once, rather than in every task. You must also set the `network_os` variable for the specific network platform you are communicating with.
 
 ## Using Machine and Network credentials together
@@ -103,7 +99,6 @@ When you assign multiple credential types to a job template, {ControllerName} in
 
 - **Machine credentials** set the SSH username, password, and key used by Ansible Automation Platform to connect to hosts. These values are passed through the `ansible -u` flag and SSH authentication.
 - **Network credentials** set the `ANSIBLE_NET_USERNAME` and `ANSIBLE_NET_PASSWORD` environment variables, which Ansible Automation Platform networking modules use to authenticate to network devices.
-
 
  Note:
 

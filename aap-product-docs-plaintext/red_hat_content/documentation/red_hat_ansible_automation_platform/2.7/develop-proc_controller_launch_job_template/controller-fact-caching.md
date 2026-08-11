@@ -17,7 +17,6 @@ New and changed facts are logged through automation controller’s logging facil
 -  `inventory_id`
 -  `ansible_facts`
 
-
 `ansible facts` is a dictionary of all Ansible facts for `host_name` in the automation controller inventory, `inventory_id`.
 
 Note:

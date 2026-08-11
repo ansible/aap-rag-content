@@ -7,7 +7,6 @@ You can specify how your Ansible Automation Platform instance interacts with OPA
 
 - To configure policy enforcement, you must have administrative privileges.
 
-
 Note:
 
 If you do not configure the OPA server in your policy settings, policy evaluation will not occur when you run the job.

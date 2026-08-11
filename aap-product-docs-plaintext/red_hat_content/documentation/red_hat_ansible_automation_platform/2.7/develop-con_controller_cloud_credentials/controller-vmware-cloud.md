@@ -9,7 +9,6 @@ VMware cloud credentials are exposed as the following environment variables duri
 -  `VMWARE_PASSWORD`
 -  `VMWARE_HOST`
 
-
 The following sample playbook demonstrates the usage of these credentials:
 
 ```

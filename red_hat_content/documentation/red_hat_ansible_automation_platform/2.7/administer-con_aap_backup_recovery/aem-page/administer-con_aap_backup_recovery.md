@@ -1,7 +1,7 @@
 +++
-title = "About backup and recovery - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_aap_backup_recovery"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_aap_backup_recovery"
+title = "About backup and recovery - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_aap_backup_recovery/", "Back up and restore in an OpenShift environment"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-con_aap_backup_recovery/aem-page/administer-con_aap_backup_recovery.html"
 last_crumb = "About backup and recovery"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "About backup and recovery"
 oversized = "false"
@@ -35,7 +35,6 @@ A backup resource of your Red Hat Ansible Automation Platform deployment include
 - Back up of the `postgresql` database.
 - `secret_key`, `admin_password`, and `broadcast_websocket` secrets.
 - Database configuration.
-
 
 Note:
 

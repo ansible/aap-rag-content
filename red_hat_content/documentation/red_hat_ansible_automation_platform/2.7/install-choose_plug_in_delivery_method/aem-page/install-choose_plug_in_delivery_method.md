@@ -1,7 +1,7 @@
 +++
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-choose_plug_in_delivery_method"
 title = "Plug-in delivery method - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-choose_plug_in_delivery_method"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_about/", "Install Ansible automation portal (OpenShift Container Platform only)"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-choose_plug_in_delivery_method/aem-page/install-choose_plug_in_delivery_method.html"
 last_crumb = "Plug-in delivery method"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Plug-in delivery method"
 oversized = "false"
@@ -33,7 +33,6 @@ Ansible automation portal supports two plug-in delivery methods:
 
 - **OCI container delivery (recommended)**: Ansible automation portal automatically pulls an Open Container Initiative (OCI) container from `registry.redhat.io` that contains the plug-ins. Use this method for new installations.
 - **HTTP plug-in registry (deprecated)**: Manually create an HTTP plug-in registry that hosts plug-in tarball files. This method is deprecated and will be removed in a future release of Ansible Automation Platform. Existing installations that use this method should migrate to OCI container delivery.
-
 
 Note:
 

@@ -1,7 +1,7 @@
 # Set up initial RBAC rules in Ansible automation portal
 ## Configure conditional access
 
-Optionally, you can configure conditional Ansible automation portal RBAC policies to filter role access to specific Ansible Automation Platform job templates by tag for specific Ansible Automation Platform teams or users.
+You can configure conditional Ansible automation portal RBAC policies to filter role access to specific Ansible Automation Platform job templates by tag for specific Ansible Automation Platform teams or users.
 
 ### Before you begin
 
@@ -37,18 +37,18 @@ You can only select Ansible Automation Platform teams and users from the Ansible
 
 7.  In the condition builder, configure a rule to filter by tag:
 
-- **Rule:** Select `HAS_METADATA` from the dropdown menu
-- **Key:** Enter `tags`
-- **Value:** Enter the tag value to filter by (for example, `network-automation`)
+- **Rule:** Select `HAS_METADATA` from the dropdown menu.
+- **Key:** Enter `tags`.
+- **Value:** Enter the tag value to filter by (for example, `network-automation`).
 
 8.  Select the **Scaffolder** plugin and enable all scaffolder permissions:
 
--  `scaffolder.template.parameter.read`
--  `scaffolder.template.step.read`
--  `scaffolder.action.execute`
--  `scaffolder.task.cancel`
--  `scaffolder.task.create`
--  `scaffolder.task.read`
+- `scaffolder.template.parameter.read`
+- `scaffolder.template.step.read`
+- `scaffolder.action.execute`
+- `scaffolder.task.cancel`
+- `scaffolder.task.create`
+- `scaffolder.task.read`
 
 9.  Click Next to review your settings, then click Create to create the new role.
 
@@ -61,4 +61,40 @@ On successful completion, your new role is included in the **All roles** list wh
 - If you did not configure conditional access, the user should see all Ansible Automation Platform job templates for which they have job template **Execute** permissions in Ansible Automation Platform.
 3. To verify execution permissions work correctly, attempt to execute a template:
 1. If the user has job template **Execute** permissions in Ansible Automation Platform for the template, the user can view the template, and the job launches successfully.
+
+### What to do next
+
+**Restrict visibility of custom templates**
+
+Auto-generated templates inherit visibility from Ansible Automation Platform permissions. Custom templates require a different approach because they are visible to all users by default. Use tag-based conditional policies to restrict which users can see specific custom templates.
+
+1. Add a tag to the custom template YAML file in the `metadata.tags` field:
+
+```yaml
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+name: deploy-to-prod
+title: Deploy to Production
+tags:
+- restricted
+```
+
+2. Log in to Ansible automation portal as an administrator.
+3. Navigate to Administration> (and then)RBAC.
+4. Create a role for users who should see the restricted template (for example, `template-admins`). Assign the role to the appropriate teams or users. Grant `catalog.entity.read` and all scaffolder permissions without conditions.
+5. Edit the default authenticated user role to add a conditional policy that hides templates tagged `restricted`:
+- Select the **Catalog** plugin and enable `catalog.entity.read`.
+- Click **Conditional** to configure a condition-based policy.
+- **Rule:** Select `HAS_METADATA`.
+- **Key:** Enter `tags`.
+- **Value:** Enter `restricted`.
+- Set the condition to **NOT** so that users in this role can see all templates *except* those tagged `restricted`.
+6. Click **Next** to review your settings, then click **Create** or **Save**.
+
+Users assigned to the `template-admins` role see all templates. Users in the default role see all templates except those tagged `restricted`.
+
+Tip:
+
+To verify which conditional rules are available in your portal instance, query the `GET /api/plugins/condition-rules` API endpoint. Use `HAS_METADATA` with `key: tags` for catalog-level visibility filtering.
 

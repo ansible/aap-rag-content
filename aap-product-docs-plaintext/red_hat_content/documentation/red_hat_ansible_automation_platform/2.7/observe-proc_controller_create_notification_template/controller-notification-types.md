@@ -15,6 +15,5 @@ The following notification types are supported with automation controller:
 - Twilio
 - Webhook
 
-
 Each notification type has its own configuration and behavioral semantics. You might need to test them in different ways. Additionally, you can customize each type of notification down to a specific detail or a set of criteria to trigger a notification.
 

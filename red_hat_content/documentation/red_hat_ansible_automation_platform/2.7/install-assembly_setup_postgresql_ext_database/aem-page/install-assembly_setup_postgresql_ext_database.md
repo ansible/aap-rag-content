@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_setup_postgresql_ext_database/aem-page/install-assembly_setup_postgresql_ext_database.html"
 last_crumb = "Configure an external (customer provided) PostgreSQL database"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure an external (customer provided) PostgreSQL database"
 oversized = "false"
@@ -33,7 +33,6 @@ There are two possible scenarios for setting up an external database:
 
 1. An external database with PostgreSQL admin credentials
 2. An external database without PostgreSQL admin credentials
-
 
 Important:
 
@@ -67,13 +66,14 @@ If you do not have PostgreSQL admin credentials, then PostgreSQL users and datab
 ```bash
 # psql -h <hostname> -U <username> -p <port_number>
 ```
+
     For example:
 
 ```bash
 # psql -h db.example.com -U superuser -p 5432
 ```
 
-2.  Create the user with a password and ensure the `CREATEDB` role is assigned to the user. For more information, see [Database Roles](https://www.postgresql.org/docs/13/user-manag.html).
+2.  Create the user with a password and ensure the `CREATEDB` role is assigned to the user. For more information, see [Database Roles](https://www.postgresql.org/docs/15/user-manag.html).
 
 ```sql
 CREATE USER <username> WITH PASSWORD <password> CREATEDB;
@@ -135,7 +135,6 @@ Metrics service requires access to two databases:
 
 - **`metrics_service` database (read/write):** Stores collected metrics data
 - **`automationcontroller` database (read-only):** Used to correlate metrics with automation activity
-
 
 This dual-database architecture ensures metrics service can collect data while maintaining security isolation from the automation controller's operational database.
 
@@ -199,6 +198,7 @@ automationmetrics_controller_read_pg_database=<automationcontroller_database_nam
 automationmetrics_controller_read_pg_username=ms_awx_readonly
 automationmetrics_controller_read_pg_password=<secure_password>
 ```
+
   
   Important:
   The `ms_awx_readonly` user must be created with SELECT privileges on the automation controller database before running the Ansible Automation Platform installer. The installer does not create this user automatically.
@@ -231,6 +231,7 @@ name  | default_version | installed_version |comment
  hstore | 1.7           |                   | data type for storing sets of (key, value) pairs
 (1 row)
 ```
+
     **Example output with `hstore` not available**:
 
 ```
@@ -251,6 +252,7 @@ dnf install postgresql-contrib
 ```
 $ psql -d <automation hub database> -c "CREATE EXTENSION hstore;"
 ```
+
     In the following output, the `installed_version` field lists the `hstore` extension used, indicating that `hstore` is enabled.
 
 ```

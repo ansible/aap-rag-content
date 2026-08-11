@@ -9,7 +9,6 @@ The Pulp worker and content services manage all operations related to content sy
 - Disk I/O bottlenecks: Performance issues related to read/write operations on the underlying content storage (`/var/lib/pulp`), often shown as high disk I/O wait times.
 - Pulp worker saturation: High CPU utilization or queuing within pulp processes, indicating an inability to keep up with content processing and serving.
 
-
 To scale your Pulp worker and content services, consider the following scaling strategies:
 
 - In OpenShift Container Platform: Scale the deployment of these services by increasing the `hub.content.replicas` and `hub.worker.replicas` attributes on the `AnsibleAutomationPlatform` Custom Resource.

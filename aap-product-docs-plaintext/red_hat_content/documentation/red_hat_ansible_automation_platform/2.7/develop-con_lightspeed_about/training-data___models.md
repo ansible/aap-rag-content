@@ -1,4 +1,4 @@
-# Red Hat Ansible Lightspeed Overview
+# Understand Red Hat Ansible Lightspeed with IBM watsonx Code Assistant
 ## Data gathered to train the IBM watsonx Code Assistant models
 ### Models
 

@@ -9,6 +9,7 @@ OVIRT_URL
 OVIRT_USERNAME
 OVIRT_PASSWORD
 ```
+
 Provide the following information for Red Hat Virtualization credentials:
 
 - **Host (Authentication URL)**: The host URL or IP address to connect to. To sync with the inventory, the credential URL needs to include the `ovirt-engine/api` path.

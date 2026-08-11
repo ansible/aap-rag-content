@@ -12,6 +12,7 @@ To discover other automation tasks the assistant can perform with the MCP server
 ```
 What Ansible tools are available through MCP?
 ```
+
 The assistant then triggers the `list_available_tools` function.
 
 2.  The assistant returns a list of tools, including:

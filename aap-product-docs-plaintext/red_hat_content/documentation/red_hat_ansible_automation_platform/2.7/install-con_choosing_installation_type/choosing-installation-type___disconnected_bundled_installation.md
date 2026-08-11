@@ -9,5 +9,4 @@ A disconnected installation uses a pre-packaged bundle that includes all contain
 - No internet connection required during installation
 - Red Hat registry credentials are not required
 
-
 For disconnected installation instructions, see *Install in a disconnected environment* in the related information section.

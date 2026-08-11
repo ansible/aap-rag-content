@@ -11,6 +11,6 @@ Adjust the execution environment build configuration when targeting a private or
 ### Procedure
 
 1.  In the wizard, select **Custom Registry** instead of private automation hub and enter your internal registry URL.
-2.  Clear the **Verify TLS certificates** checkbox if your internal registry uses self-signed certificates.
+2.  Clear the **Verify TLS certificates** checkbox if your internal registry uses self-signed certificates that are not trusted by the GitHub Actions runner or GitLab Runner executing the build.
 3.  Select a base image from your internal registry instead of the default `registry.redhat.io` images.
 

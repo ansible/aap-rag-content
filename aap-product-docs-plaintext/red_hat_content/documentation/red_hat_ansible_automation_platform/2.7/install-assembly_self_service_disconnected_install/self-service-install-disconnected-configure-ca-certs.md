@@ -38,6 +38,7 @@ volumeMounts:
 mountPath: /etc/containers/certs.d/*registry-host*
 readOnly: true
 ```
+
 Note:
 The `mountPath` for the CA certificate must be the registry hostname only (for example, `/etc/containers/certs.d/mirror.example.com`). Do not include repository paths. If the registry uses a non-standard port, include it in the path (for example, `/etc/containers/certs.d/mirror.example.com:5000`).
 
@@ -48,5 +49,6 @@ After the deployment restarts, check the `install-dynamic-plugins` init containe
 ```terminal
 $ oc logs *pod-name* -c install-dynamic-plugins -n *namespace* | grep -i "x509\|certificate"
 ```
+
 If the CA certificate is mounted correctly, there are no `x509: certificate signed by unknown authority` errors.
 

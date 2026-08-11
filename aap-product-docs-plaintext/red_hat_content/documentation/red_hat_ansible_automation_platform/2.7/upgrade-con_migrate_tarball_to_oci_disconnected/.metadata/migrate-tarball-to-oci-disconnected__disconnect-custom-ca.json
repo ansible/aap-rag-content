@@ -1,0 +1,5 @@
+{
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/upgrade-con_migrate_tarball_to_oci_disconnected#migrate-tarball-to-oci-disconnected__disconnect-custom-ca",
+  "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-con_migrate_tarball_to_oci_disconnected",
+  "title": "Using custom CA certificates for private registries"
+}

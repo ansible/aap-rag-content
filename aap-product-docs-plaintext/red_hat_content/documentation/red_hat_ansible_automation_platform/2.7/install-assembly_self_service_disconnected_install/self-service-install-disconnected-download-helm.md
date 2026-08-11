@@ -19,6 +19,7 @@ helm repo update
 ```
 helm pull openshift-helm-charts/redhat-rhaap-portal --version x.y.z
 ```
+
 The chart is saved as a `.tgz` file (for example, `redhat-rhaap-portal-1.0.1.tgz`).
 
 3.  Extract the chart files:
@@ -27,6 +28,7 @@ The chart is saved as a `.tgz` file (for example, `redhat-rhaap-portal-1.0.1.tgz
 ```
 tar -xvf redhat-rhaap-portal-x.y.z.tgz
 ```
+
 This creates a directory with a name similar to `redhat-rhaap-portal-1.0.1/`.
 
 4.  In the `redhat-rhaap-portal/values.yaml` file, replace all `image:` references with the full path to the images in your disconnected registry.
@@ -36,5 +38,6 @@ This creates a directory with a name similar to `redhat-rhaap-portal-1.0.1/`.
 ```
 helm package redhat-rhaap-portal-x.y.z
 ```
+
 A new `.tgz` file is created containing your changes.
 

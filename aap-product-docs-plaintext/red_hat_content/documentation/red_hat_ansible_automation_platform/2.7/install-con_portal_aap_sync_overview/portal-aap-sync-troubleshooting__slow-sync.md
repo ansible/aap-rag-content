@@ -1,5 +1,5 @@
 # Understanding Ansible Automation Platform synchronization
-## Troubleshooting Ansible Automation Platform synchronization
+## Troubleshoot Ansible Automation Platform synchronization
 ### Slow synchronization
 
 **Issue:** Synchronization takes too long to complete or times out.
@@ -8,7 +8,6 @@
 
 - Timeouts during synchronization.
 - Timeout errors appear in the logs.
-
 
 **Solutions:**
 

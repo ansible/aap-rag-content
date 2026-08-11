@@ -8,7 +8,6 @@ As a platform administrator, you can enable or disable authenticators. However, 
 - You have at least one other authenticator method configured.
 - You have at least one administrator account that can authenticate using your alternate authenticator.
 
-
 CAUTION:
 
 Disabling the local authenticator without an alternative authentication in place can result in a locked environment.
@@ -44,5 +43,6 @@ aap-gateway-api authenticators --list
 ```
 aap-gateway-manage authenticators --enable :id
 ```
+
 where: `:id` is the ID of the local authenticator obtained from the previous step.
 

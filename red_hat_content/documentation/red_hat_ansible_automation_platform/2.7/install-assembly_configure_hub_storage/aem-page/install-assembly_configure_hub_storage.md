@@ -1,7 +1,7 @@
 +++
 template = "docs/aem-title.html"
-title = "Configure storage for automation hub - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_configure_hub_storage"
+title = "Configure storage for automation hub - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_aap_containerized_installation_intro/", "Install containerized Ansible Automation Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_configure_hub_storage/aem-page/install-assembly_configure_hub_storage.html"
 last_crumb = "Configure storage for automation hub"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure storage for automation hub"
 oversized = "false"
@@ -91,6 +91,7 @@ NFS is a type of shared storage that is supported in containerized installations
 ```yaml
 hub_shared_data_path=<path_to_nfs_share>
 ```
+
     The value must match the format `host:dir`, for example `nfs-server.example.com:/exports/hub`.
 
 2.  (Optional) To change the mount options for your NFS share, use the `hub_shared_data_mount_opts` variable. The default value is `rw,sync,hard`.

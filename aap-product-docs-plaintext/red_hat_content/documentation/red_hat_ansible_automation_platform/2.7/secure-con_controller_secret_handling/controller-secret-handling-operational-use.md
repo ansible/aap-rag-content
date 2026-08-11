@@ -9,7 +9,6 @@ The operational secrets found in automation controller are as follows:
 - `/etc/tower/tower.{cert,key}`: An SSL/TLS certificate and key for the automation controller web service. The system installs self-signed certificate or key by default; you can give a locally appropriate certificate and key.
 - A database password in `/etc/tower/conf.d/postgres.py` and a message bus password in `/etc/tower/conf.d/channels.py`.
 
-
 The system stores these secrets unencrypted on the automation controller server, because they must be read by the automation controller service at startup in an automated fashion. UNIX permissions protect all secrets, restricting them to root and the automation controller awx service user.
 
 If you need to hide these secrets, the files that these secrets are read from are interpreted by Python. You can adjust these files to retrieve these secrets by some other mechanism anytime a service restarts. This is a customer provided modification that might need to be reapplied after every upgrade. Red Hat Support and Red Hat Consulting have examples of such modifications.

@@ -29,6 +29,7 @@ oc create secret generic ee-pull-secret \
 ```
 oc edit automationcontrollers aap-controller-o yaml
 ```
+
 and add the following:
 
 ```

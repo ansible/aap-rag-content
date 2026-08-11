@@ -19,7 +19,6 @@ Roles are labeled with their associated Ansible Automation Platform component an
 - **Automation Decisions** refers to Event-Driven Ansible
 - **Automation Content** refers to automation hub
 
-
 When assigning roles, ensure that you are selecting the required resource in the correct component context, because resources such as projects and credentials can be associated with both Automation Execution and Automation Decisions.
 
 ### Procedure

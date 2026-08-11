@@ -11,5 +11,4 @@ Red Hat collects and analyzes the following data to improve your experience with
 - Anonymized username hashes, which are unique identifiers used solely to identify the number of unique users of the RHDH application.
 - Feedback and sentiment submitted through the Ansible plug-ins for Red Hat Developer Hub feedback form, including a 1-5 star rating and feedback text. Users must acknowledge that they share the feedback with Red Hat before submitting. The feedback form is disabled by default.
 
-
 With Red Hat Developer Hub, you can disable or customize the telemetry data collection feature. For more information, refer to *Telemetry data collection and analysis* .

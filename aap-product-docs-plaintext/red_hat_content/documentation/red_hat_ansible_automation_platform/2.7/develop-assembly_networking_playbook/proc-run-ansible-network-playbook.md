@@ -27,17 +27,15 @@ debug:
 msg: "The hostname is {{ ansible_net_hostname }} and the OS is {{ ansible_net_version }}"
 ```
 
-| Label               | Description                                                                                                                                                                                                            |
-| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Label               | Description                                                                                                                                                                                              |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | <br> `gather_facts` | <br>Ansible’s native fact gathering (`ansible.builtin.setup`) is disabled here because the playbook relies on the facts provided by a platform-specific module (`vyos.vyos.vyos_facts`) in this networking collection. |
-
 
 The playbook sets three of the seven values from the command line above:
 
 - the group (`hosts: all`)
 - the connection method (`connection: ansible.netcommon.network_cli`) and
 - the module (in each task).
-
 
 With those values set in the playbook, you can omit them on the command line. The playbook also adds a second task to show the configuration output.
 

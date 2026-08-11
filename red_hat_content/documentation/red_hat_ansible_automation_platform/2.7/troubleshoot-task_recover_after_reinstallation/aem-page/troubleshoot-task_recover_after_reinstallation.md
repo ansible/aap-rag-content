@@ -1,7 +1,7 @@
 +++
-title = "Recover metrics service after reinstallation - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-task_recover_after_reinstallation"
+template = "docs/aem-title.html"
+title = "Recover metrics service after reinstallation - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-ref_troubleshoot_metrics_service/", "Troubleshoot metrics service"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/troubleshoot-task_recover_after_reinstallation/aem-page/troubleshoot-task_recover_after_reinstallation.html"
 last_crumb = "Recover metrics service after reinstallation"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Recover metrics service after reinstallation"
 oversized = "false"
@@ -60,6 +60,7 @@ Choose one of the following options.
 ```
 oc get secret <aap-name>-metrics-read-token -n <namespace>
 ```
+
          If the command returns `Error from server (NotFound)`, proceed to the next step.
 
   2. Retrieve the automation controller database host from the existing postgres configuration secret:
@@ -89,6 +90,7 @@ oc create secret generic <aap-name>-metrics-read-token \
   --from-literal=port=5432 \
   -n <namespace>
 ```
+
          Replace `<password>` with a secure password for the `ms_awx_readonly` database user. If you are restoring the same database, use the original password to avoid a credential mismatch. If you are reinstalling with a fresh database, any secure password is acceptable.
 
   5. Trigger a reconcile by annotating the `AnsibleAutomationPlatform` CR:

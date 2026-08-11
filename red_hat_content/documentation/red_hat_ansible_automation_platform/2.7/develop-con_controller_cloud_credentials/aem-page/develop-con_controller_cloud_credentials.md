@@ -1,6 +1,6 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_cloud_credentials"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_cloud_credentials"
 title = "Associate cloud credentials with a job template - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-con_controller_cloud_credentials/aem-page/develop-con_controller_cloud_credentials.html"
 last_crumb = "Associate cloud credentials with a job template"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Associate cloud credentials with a job template"
 oversized = "false"
@@ -51,14 +51,12 @@ Use this credential type to connect to OpenStack clouds. Automation controller u
 - **Project domain name** (optional): The project domain name to use when connecting to the OpenStack cloud.
 - **Validate SSL certificate**: Select this option to validate the SSL/TLS certificate presented by the OpenStack cloud. Clear this option to disable SSL/TLS certificate validation.
 
-
 The following sample playbook invokes the `nova_compute` Ansible OpenStack cloud module and requires credentials:
 
 -  `auth_url`
 -  `username`
 -  `password`
 -  `project name`
-
 
 These fields are made available to the playbook through the environmental variable `OS_CLIENT_CONFIG_FILE`, which points to a YAML file written by the controller based on the contents of the cloud credential. The following sample playbooks load the YAML file into the Ansible variable space:
 
@@ -74,7 +72,6 @@ clouds:
       project_name: demo
 ```
 
-
 - Playbook example:
 
 ```
@@ -88,7 +85,6 @@ clouds:
     nova_instance_state: 'present'
     nova_flavor_name: m1.nano
 
-
     nova_group:
       group_name: antarctica
       instance_name: deceptacon
@@ -100,10 +96,8 @@ clouds:
     - include_vars: "{{ config_file }}"
       when: st.stat.exists and st.stat.isreg
 
-
     - name: "Print out clouds variable"
       debug: msg="{{ clouds|default('No clouds found') }}"
-
 
     - name: "Setting nova instance state to: {{ nova_instance_state }}"
       local_action:
@@ -119,7 +113,6 @@ Amazon Web Services (AWS) cloud credentials are exposed as the following environ
 -  `AWS_ACCESS_KEY_ID`
 -  `AWS-SECRET_ACCESS_KEY`
 
-
 Each AWS module implicitly uses these credentials when run through the controller without having to set the `aws_access_key_id` or `aws_secret_access_key` module options.
 
 ## Google
@@ -132,7 +125,6 @@ Google cloud credentials are exposed as the following environment variables duri
 -  `GCE_PROJECT`
 -  `GCE_CREDENTIALS_FILE_PATH`
 
-
 Each Google module implicitly uses these credentials when run through the controller without having to set the `service_account_email`, `project_id`, or `pem_file` module options.
 
 ## Azure
@@ -143,7 +135,6 @@ Azure cloud credentials exist as the following environment variables during play
 
 -  `AZURE_SUBSCRIPTION_ID`
 -  `AZURE_CERT_PATH`
-
 
 Each Azure module uses these credentials when run using automation controller without having to set the `subscription_id` or `management_cert_path` module options.
 
@@ -156,7 +147,6 @@ VMware cloud credentials are exposed as the following environment variables duri
 -  `VMWARE_USER`
 -  `VMWARE_PASSWORD`
 -  `VMWARE_HOST`
-
 
 The following sample playbook demonstrates the usage of these credentials:
 

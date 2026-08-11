@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-con_controller_configure_hostname_notifications"
-template = "docs/aem-title.html"
 title = "Advanced notification settings - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-con_controller_configure_hostname_notifications"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_ug_controller_notifications/", "Understand and configure notifications"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/observe-con_controller_configure_hostname_notifications/aem-page/observe-con_controller_configure_hostname_notifications.html"
 last_crumb = "Advanced notification settings"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Advanced notification settings"
 oversized = "false"
@@ -78,6 +78,7 @@ You can [customize the text content](/documentation/en-us/red_hat_ansible_automa
 ```
 {{ job_friendly_name }} #{{ job.id }} had status {{ job.status }}, view details at {{ url }} {{ job_metadata }}
 ```
+
             You can edit this text leaving `{{ job_metadata }}` in, or drop `{{ job_metadata }}`. Since the body is a block of text, it can be any string you want. `{{ job_metadata }}` is rendered as a dictionary containing fields that describe the job being executed. In all cases, `{{ job_metadata }}` includes the following fields:
 
       + `id`
@@ -109,6 +110,7 @@ You can [customize the text content](/documentation/en-us/red_hat_ansible_automa
  "traceback": ""
 }
 ```
+
                 If `{{ job_metadata }}` is rendered in a job, it includes the following additional fields:
 
       + `inventory`
@@ -143,6 +145,7 @@ You can [customize the text content](/documentation/en-us/red_hat_ansible_automa
  "hosts": {}
 }
 ```
+
                 If `{{ job_metadata }}` is rendered in a workflow job, it includes the following additional field:
 
       + `body` (This enumerates the nodes in the workflow job and includes a description of the job associated with each node)                 The resulting dictionary is similar to the following:
@@ -163,6 +166,7 @@ You can [customize the text content](/documentation/en-us/red_hat_ansible_automa
          node #3 spawns job #17, \"Deploy Fleet\", which finished with status successful."
 }
 ```
+
                 If you create a notification template that uses invalid syntax or references unusable fields, an error message displays indicating the nature of the error. If you delete a notification’s custom message, the default message is shown in its place.
 
          Important:
@@ -177,13 +181,11 @@ You can set up notifications to notify you when a specific job starts, and on th
 - You can enable notifications to run on a sliced job template start and each slice generates a notification.
 - When you enable a notification to run on job start, and that notification gets deleted, the job template continues to run, but results in an error message.
 
-
 You can enable notifications on job start, job success, and job failure, or a combination of these, from the **Notifications** tab of the **Details** page for the following resources:
 
 - Job Templates
 - Workflow Templates
 - Projects
-
 
 For workflow templates that have approval nodes, in addition to **Start**, **Success**, and **Failure**, you can enable or disable certain approval-related events:
 
@@ -214,6 +216,7 @@ Use the `started`, `success`, or `error` endpoints:
 /api/v2/organizations/N/notification_templates_success/
 /api/v2/organizations/N/notification_templates_error/
 ```
+
 Additionally, the `../../../N/notification_templates_started` endpoints have `GET` and `POST` actions for:
 
 - Organizations

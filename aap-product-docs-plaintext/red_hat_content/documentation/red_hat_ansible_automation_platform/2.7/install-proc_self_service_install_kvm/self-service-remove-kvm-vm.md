@@ -1,4 +1,4 @@
-# Install Ansible automation portal on RHEL with KVM
+# Install Ansible automation portal on Red Hat Enterprise Linux KVM/QEMU
 ## Remove the VM
 
 Delete the VM and its storage after an evaluation.

@@ -14,7 +14,7 @@ execution-[1:5].example.com
 # connection is established *from* the execution nodes *to* the automationcontroller
 peers=automationcontroller
 ```
-The following image displays the topology of this mesh network.
 
+The following image displays the topology of this mesh network.
 
 ![The topology map consists of an automation controller group, and local execution group. The automation controller group consists of two control nodes: aap_c_1, and aap_c_2. The local execution nodes are aap-e-1, aap-e-2, aap-e-3, aap-e-4, and aap-e-5. Every execution node is peered to every control node in an outgoing connection.](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/mesh-one-way-communication.png)

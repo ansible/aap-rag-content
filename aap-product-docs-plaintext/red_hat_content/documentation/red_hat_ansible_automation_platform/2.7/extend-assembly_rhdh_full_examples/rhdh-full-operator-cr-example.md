@@ -41,7 +41,7 @@ containers:
 command:
 - adt
 - server
-image: registry.redhat.io/ansible-automation-platform-2.7/ansible-dev-tools-rhel9:latest
+image: registry.redhat.io/ansible-automation-platform-27/ansible-dev-tools-rhel9:latest
 imagePullPolicy: Always
 ports:
 - containerPort: 8000

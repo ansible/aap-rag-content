@@ -1,7 +1,7 @@
 +++
-title = "Understand secret handling - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_controller_secret_handling"
+title = "Understand secret handling - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_controller_secret_handling/", "Understand secret handling"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_controller_secret_handling/aem-page/secure-con_controller_secret_handling.html"
 last_crumb = "Understand secret handling"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Understand secret handling"
 oversized = "false"
@@ -32,7 +32,6 @@ Automation controller manages three sets of secrets:
 - User passwords for local automation controller users.
 - Secrets for automation controller operational use, such as database password or message bus password.
 - Secrets for automation use, such as SSH keys, cloud credentials, or external password vault credentials.
-
 
 Note:
 
@@ -57,7 +56,6 @@ The operational secrets found in automation controller are as follows:
 - `/etc/tower/SECRET_KEY`: A secret key used for encrypting automation secrets in the database. If the `SECRET_KEY` changes or is unknown, you cannot access encrypted fields in the database.
 - `/etc/tower/tower.{cert,key}`: An SSL/TLS certificate and key for the automation controller web service. The system installs self-signed certificate or key by default; you can give a locally appropriate certificate and key.
 - A database password in `/etc/tower/conf.d/postgres.py` and a message bus password in `/etc/tower/conf.d/channels.py`.
-
 
 The system stores these secrets unencrypted on the automation controller server, because they must be read by the automation controller service at startup in an automated fashion. UNIX permissions protect all secrets, restricting them to root and the automation controller awx service user.
 
@@ -94,7 +92,6 @@ These secrets include the following:
 - Secret tokens and passwords for external services defined automation controller settings.
 - "password" type survey field entries.
 
-
 To encrypt secret fields, automation controller uses AES in CBC mode with a 256-bit key for encryption, PKCS7 padding, and HMAC by using SHA256 for authentication.
 
 The encryption or decryption process derives the AES-256 bit encryption key from the `SECRET_KEY`, the field name of the model field and the database assigned auto-incremented record ID. Therefore, if any attribute used in the key generation process changes, the automation controller fails to correctly decrypt the secret.
@@ -104,7 +101,6 @@ Automation controller is designed so that:
 - The `SECRET_KEY` is never readable in playbooks that automation controller launches.
 - These secrets are never readable by automation controller users.
 - No secret field values are ever made available by the automation controller REST API.
-
 
 If a secret value is used in a playbook, it is recommended that you use `no_log` on the task so that it is not accidentally logged.
 

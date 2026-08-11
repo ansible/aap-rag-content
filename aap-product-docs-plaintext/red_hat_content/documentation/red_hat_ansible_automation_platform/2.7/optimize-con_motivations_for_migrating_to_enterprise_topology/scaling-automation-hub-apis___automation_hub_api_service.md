@@ -8,7 +8,6 @@ The automation hub API service handles metadata-driven requests for the applicat
 - High CPU utilization on the API pods or nodes
 - Platform gateway returning `503` errors because the service is too busy to respond to health checks
 
-
 Consider the following strategies to scale the automaton automation hub API service:
 
 - OpenShift Container Platform: Horizontally scale the API pods by increasing the `hub.api.replicas` attribute on the `AnsibleAutomationPlatform` Custom Resource (CR).

@@ -10,7 +10,6 @@ Activation and output management uses the following:
 - The WebSocket server in each API node or pod
 - The database for audit event storage
 
-
 Activations process discrete payloads called events. The activation’s resource usage is affected by the event arrival rate and the complexity of the rulebook’s rules.
 
 When events match rules, they trigger actions, which launch jobs in automation controller. Event auditing stores audit events in the database and is enabled by default.

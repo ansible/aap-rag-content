@@ -10,6 +10,5 @@ You can configure four types of nodes in an automation controller deployment:
 - Execution nodes
 - Hop nodes
 
-
 However, for an operator-based environment, there are no hybrid or control nodes. There are container groups, which make up containers running on the Kubernetes cluster. That comprises the control plane. That control plane is local to the Kubernetes cluster in which Red Hat Ansible Automation Platform is deployed.
 

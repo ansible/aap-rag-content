@@ -1,7 +1,7 @@
 +++
+title = "Integrate third-party secret management systems - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-integrate_third_party_secret_management_systems"
-title = "Integrate third-party secret management systems - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_managing_access/", "Manage access with role-based access control"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-integrate_third_party_secret_management_systems/aem-page/secure-integrate_third_party_secret_management_systems.html"
 last_crumb = "Integrate third-party secret management systems"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Integrate third-party secret management systems"
 oversized = "false"
@@ -105,7 +105,6 @@ When you select **HashiCorp Vault Secret Lookup** for **Credential Type**, give 
 - **Password**: enter the password associated with the user to be used to authenticate this service.
 - **Path to Auth**: specify a path if other than the default path of `/approle`.
 - **API Version** (required): select v1 for static lookups and v2 for versioned lookups.
-
 
 LDAP authentication requires LDAP to be configured in HashiCorp’s Vault UI and a policy added to the user. Cubbyhole is the name of the default secret mount. If you have proper permissions, you can create other mounts and write key values to those.
 

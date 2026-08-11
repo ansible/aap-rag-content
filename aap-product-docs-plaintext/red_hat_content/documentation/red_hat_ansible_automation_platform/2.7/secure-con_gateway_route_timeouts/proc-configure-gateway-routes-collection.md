@@ -23,6 +23,7 @@ name: "hub container registry"
 request_timeout_seconds: 600
 idle_timeout_seconds: 600
 ```
+
 For containerized deployments:
 
 ```
@@ -48,5 +49,6 @@ Upload a large container image to automation hub:
 ```
 $ podman push <large-image> <gateway-host>/automation-hub/<repository>/<image>:<tag>
 ```
+
 Confirm that the upload completes without timeout errors.
 

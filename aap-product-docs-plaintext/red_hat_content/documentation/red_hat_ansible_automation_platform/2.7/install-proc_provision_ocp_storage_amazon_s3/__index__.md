@@ -42,6 +42,7 @@ storage_type: S3
 object_storage_s3_secret: test-s3
 ```
 
+
 Note:
 If you have an existing automation hub instance, specify its name using `hub.name: existing-hub-name` to apply these settings to the existing instance.
 

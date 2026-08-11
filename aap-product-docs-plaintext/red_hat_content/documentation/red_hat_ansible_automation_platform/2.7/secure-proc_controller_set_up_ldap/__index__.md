@@ -50,6 +50,7 @@ The group types that are supported by Ansible Automation Platform use the underl
 ```
 uid=%(user)s,cn=users,cn=accounts,dc=example,dc=com
 ```
+
 where: `uid` is the user identifier, `cn` is the common name and `dc` is the domain component.
 
 Note:
@@ -66,6 +67,7 @@ Values defined in this field override the dedicated fields provided in the UI. A
 OPT_REFERRALS: 0
 OPT_NETWORK_TIMEOUT: 30
 ```
+
 See the [python-LDAP Reference](https://www.python-ldap.org/en/python-ldap-3.4.3/reference/ldap.html#options) for possible options and values that can be set.
 
 13.  Depending on the selected **LDAP Group Type**, different parameters are available in the **LDAP Group Type Parameters** field to account for this. `LDAP_GROUP_TYPE_PARAMS` is a dictionary, which is converted to `kwargs` and passed to the **LDAP Group Type** class selected. There are two common parameters used by group types: `name_attr` and `member_attr`. Where `name_attr` defaults to `cn` and `member_attr` defaults to `member`:
@@ -74,6 +76,7 @@ See the [python-LDAP Reference](https://www.python-ldap.org/en/python-ldap-3.4.3
 ```
 {"name_attr": "cn", "member_attr": "member"}
 ```
+
 To determine the parameters that a specific **LDAP Group Type** requires, refer to the [django_auth_ldap documentation](https://django-auth-ldap.readthedocs.io/en/latest/reference.html#django_auth_ldap.config.LDAPGroupType) on the classes `init` parameters.
 
 14.  In the **LDAP Group Search** field, specify which groups should be searched and how to search them as shown in the following example:
@@ -108,6 +111,7 @@ To determine the parameters that a specific **LDAP Group Type** requires, refer 
 "(cn=%(user)s)"
 ]
 ```
+
 If the **LDAP User DN Template** is not set, the Ansible Automation Platform authenticates to LDAP using the **Bind DN Template** and **LDAP Bind Password**. After authentication, an LDAP search is performed to locate the user specified by this field. If the user is found, Ansible Automation Platform validates the provided password against the user found by the LDAP search. Multiple search queries are supported for users with `LDAPUnion` by entering multiple search terms as shown in the following example:
 
 ```
@@ -124,6 +128,7 @@ If the **LDAP User DN Template** is not set, the Ansible Automation Platform aut
 ]
 ]
 ```
+
 If non-unique users are found during multiple searches, those users will not be able to log in to Ansible Automation Platform. Based on the example provided, if a user with `uid=jdoe` was found in both the `ou=users,dc=example,dc=com` and `ou=employees,dc=subdivision,dc=com`, neither `jdoe` user would be able to log in. All other unique users that are found in either branch would still be able to log in.
 
 Note:

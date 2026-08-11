@@ -31,7 +31,6 @@ Diagnostic steps:
 - Verify user has appropriate role
 - Test API access directly (bypass UI)
 
-
 **Dashboard performance is slow**
 
 **Possible causes:**

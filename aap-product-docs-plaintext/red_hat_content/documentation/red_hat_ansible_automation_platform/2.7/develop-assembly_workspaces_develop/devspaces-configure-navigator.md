@@ -22,6 +22,7 @@ level: critical
 playbook-artifact:
 enable: false
 ```
+
 The Ansible dev spaces image includes a default execution environment. You only need to add additional settings such as `environment-variables`, `volume-mounts`, or `container-options` if your project requires them.
 
 3. **Optional:** To override the default execution environment image, add the `image` setting under the `execution-environment` section:

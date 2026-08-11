@@ -37,6 +37,7 @@ $ curl -k -X PATCH \
 }' \
 https://<gateway_host>/api/gateway/v1/routes/$ROUTE_ID/
 ```
+
 For containerized deployments:
 
 ```
@@ -59,5 +60,6 @@ $ curl -k -X GET \
 -H "Authorization: Bearer <token>" \
 https://<gateway_host>/api/gateway/v1/routes/
 ```
+
 Upload a large container image to automation hub and verify completion without errors.
 

@@ -6,9 +6,7 @@ Use the **On** or **Off** toggle to stop an active schedule or activate a stoppe
 
 Click the Edit ![Edit](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png) icon to edit a schedule.
 
-
 ![Schedules sample list](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-schedules-sample-list.png)
-
 
 If you are setting up a template, a project, or an inventory source, click the **Schedules** tab on the **Details** page for that resource, to configure schedules for these resources. When you create a schedule, it has the following parameters:
 

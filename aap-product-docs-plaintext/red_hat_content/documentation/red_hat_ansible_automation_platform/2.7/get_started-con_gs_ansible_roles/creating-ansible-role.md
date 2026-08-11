@@ -10,6 +10,7 @@ The Ansible Automation Platform bundle includes the Ansible Galaxy CLI tool. Acc
 ```bash
 ansible-galaxy role init <role_name>
 ```
+
 Standalone roles outside of Collections are supported. Create new roles inside a Collection to take advantage of the features Ansible Automation Platform has to offer.
 
 ### Procedure
@@ -21,6 +22,7 @@ Standalone roles outside of Collections are supported. Create new roles inside a
 ```
 $ ansible-galaxy role init my_role
 ```
+
 The collection now includes a role named `my_role` inside the `roles` directory, as you can see in this example:
 
 ```
@@ -52,4 +54,5 @@ The collection now includes a role named `my_role` inside the `roles` directory,
 ```
 $ ansible-galaxy role init my_role --role-skeleton ~/role_skeleton
 ```
+
 This creates a role named `my_role` by copying the contents of `~/role_skeleton` into `my_role`. The contents of `role_skeleton` can be any files or folders that are valid inside a role directory.

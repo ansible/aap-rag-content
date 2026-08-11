@@ -22,6 +22,7 @@ receptor --version
 ```
 sudo dnf update ansible-runner receptor -y
 ```
+
 Note:
 To upgrade all packages (not just the receptor), use `dnf update`, then reboot with `reboot`.
 

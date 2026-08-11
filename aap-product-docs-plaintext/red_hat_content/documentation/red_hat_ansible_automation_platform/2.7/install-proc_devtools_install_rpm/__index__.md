@@ -16,11 +16,13 @@ Ansible development tools are available as an RPM package for Red Hat Enterprise
 ```shell
 $ sudo subscription-manager status
 ```
+
 If Simple Content Access is enabled, the output contains the following message:
 
 ```
 Content Access Mode is set to Simple Content Access.
 ```
+
 1.  If Simple Content Access is not enabled, attach the Red Hat Ansible Automation Platform SKU:
 
 
@@ -35,6 +37,7 @@ $ sudo subscription-manager attach --pool=<sku-pool-id>
 $ sudo dnf install
 --enablerepo=ansible-automation-platform-*aap-version*-for-rhel-*rhel-version*-x86_64-rpms ansible-dev-tools
 ```
+
 Replace *aap-version* with your Ansible Automation Platform version and *rhel-version* with your Red Hat Enterprise Linux major version.
 
 ## Results
@@ -44,9 +47,8 @@ Replace *aap-version* with your Ansible Automation Platform version and *rhel-ve
 ```shell
 $ rpm -aq | grep ansible-dev-tools
 ```
+
 If the installation was successful, the output shows the `ansible-dev-tools` package and its version number, for example:
-
-
 
 ```
 ansible-dev-tools-25.8.3-1.el9ap.noarch

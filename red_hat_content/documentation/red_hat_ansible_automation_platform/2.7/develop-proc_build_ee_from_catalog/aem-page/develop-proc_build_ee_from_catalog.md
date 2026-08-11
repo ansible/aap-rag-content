@@ -1,16 +1,16 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_build_ee_from_catalog"
-title = "Build an execution environment image from the catalog - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Build an execution environment image from the catalog - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_ee_catalog_overview/", "Discover and manage execution environments and collections"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-build_execution_environments_with_the_automation_portal/", "Build execution environments with automation portal"]]
 category = "Develop"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_build_ee_from_catalog/aem-page/develop-proc_build_ee_from_catalog.html"
 last_crumb = "Build an execution environment image from the catalog"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Build an execution environment image from the catalog"
 oversized = "false"
@@ -31,9 +31,9 @@ Trigger a container image build on an existing execution environment definition 
 
 ## Before you begin
 
-- The execution environment definition was saved to a GitHub repository.
-- You can authenticate with GitHub through OAuth.
-- Your AAP administrator has configured GitHub repository secrets for builds.
+- The execution environment definition was saved to a GitHub or GitLab repository.
+- You can authenticate with your Git provider (GitHub or GitLab) through OAuth.
+- Your AAP administrator has configured GitHub repository secrets or GitLab CI/CD variables for builds.
 
 ## Procedure
 
@@ -41,9 +41,12 @@ Trigger a container image build on an existing execution environment definition 
 2.  In the build dialog, configure the following settings:
 
   - **Registry** -- private automation hub or a custom registry URL.
+
   - **Image Name** -- in `namespace/name` format.
+
   - **Image Tag**.
-  - **Verify TLS certificates**.
+
+  - **Verify TLS certificates**. Clear this checkbox if the target registry's TLS certificates are not trusted by the CI runner executing the build.
 
 3.  Click **Build**.
-4.  Monitor the build from the **Actions** tab on the GitHub repository where the definition was saved.
+4.  Monitor the build from the **Actions** tab (GitHub) or the CI/CD Pipelines page (GitLab) on the repository where the definition was saved.

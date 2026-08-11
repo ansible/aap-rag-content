@@ -1,0 +1,47 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Connect securely to Windows hosts",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "PowerShell Remoting Protocol (PSRP)",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-11d3ed61-7982-4370-a1c2-3594c0445471",
+          "anchor": null,
+          "singlePageAnchor": "GUID-11d3ed61-7982-4370-a1c2-3594c0445471"
+        },
+        {
+          "title": "OpenSSH for Windows",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "GUID-cee9463c-dd9e-4dfd-97e8-6615558e22e8",
+          "anchor": null,
+          "singlePageAnchor": "GUID-cee9463c-dd9e-4dfd-97e8-6615558e22e8"
+        },
+        {
+          "title": "Legacy WinRM",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "GUID-78ff5f10-880b-47be-9d07-b720135d3b8b",
+          "anchor": null,
+          "singlePageAnchor": "GUID-78ff5f10-880b-47be-9d07-b720135d3b8b"
+        },
+        {
+          "title": "Configure Kerberos for domain-joined environment",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "GUID-7b6f541b-8846-47a3-8a26-c6b344f73b18",
+          "anchor": null,
+          "singlePageAnchor": "GUID-7b6f541b-8846-47a3-8a26-c6b344f73b18"
+        }
+      ]
+    }
+  ]
+}

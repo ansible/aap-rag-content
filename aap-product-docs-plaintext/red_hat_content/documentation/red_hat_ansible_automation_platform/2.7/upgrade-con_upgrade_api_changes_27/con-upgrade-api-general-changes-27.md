@@ -14,7 +14,6 @@ Service-specific API endpoints have been removed in Ansible Automation Platform 
 | Platform gateway      | Not applicable                          | `/api/gateway/v1/`                  | `/api/gateway/v1/`                               |
 | Event-Driven Ansible  | Not applicable                          | `/api/eda/v1/`                      | Must use platform gateway: `/api/eda/v1/`        |
 
-
 In Red Hat Ansible Automation Platform 2.7, these API endpoints are only accessible through the platform gateway hostname. Direct access to component hostnames (such as `controller.example.com` or `hub.example.com`) returns an HTTP 401 Unauthorized error.
 
 **Example:**

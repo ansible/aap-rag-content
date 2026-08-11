@@ -10,13 +10,14 @@ If you do not have PostgreSQL admin credentials, then PostgreSQL users and datab
 ```bash
 # psql -h <hostname> -U <username> -p <port_number>
 ```
+
 For example:
 
 ```bash
 # psql -h db.example.com -U superuser -p 5432
 ```
 
-2.  Create the user with a password and ensure the `CREATEDB` role is assigned to the user. For more information, see [Database Roles](https://www.postgresql.org/docs/13/user-manag.html).
+2.  Create the user with a password and ensure the `CREATEDB` role is assigned to the user. For more information, see [Database Roles](https://www.postgresql.org/docs/15/user-manag.html).
 
 ```sql
 CREATE USER <username> WITH PASSWORD <password> CREATEDB;

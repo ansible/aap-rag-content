@@ -14,6 +14,7 @@ allowed := {
 "violations": []
 }
 ```
+
 The key components of the rule’s structure are:
 
 Package declaration

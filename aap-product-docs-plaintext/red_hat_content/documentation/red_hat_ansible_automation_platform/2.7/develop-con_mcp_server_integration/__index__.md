@@ -11,4 +11,3 @@ You can configure MCP servers in two ways:
 - **For embedded (local) MCP servers**: The EE image must explicitly include the MCP server binaries or libraries installed on the image path. This setup enables the execution environment to discover and start the specific embedded server required for the job.
 - **For remote (external) MCP servers**: The EE build process facilitates defining remote connection details in a manifest file contained within the EE. This manifest informs the core MCP collection plugin on how to connect, typically pointing to a specific remote URL using an HTTP connection.
 
-

@@ -9,6 +9,7 @@ GCE_EMAIL
 GCE_PROJECT
 GCE_CREDENTIALS_FILE_PATH
 ```
+
 These are fields prompted in the user interface:
 
 GCE credentials require the following information:

@@ -24,6 +24,14 @@
           "urlFragment": "rhdh-configure-pah-url",
           "anchor": null,
           "singlePageAnchor": "rhdh-configure-pah-url"
+        },
+        {
+          "title": "Customize Ansible Developer Tools server resources",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "customize-devtools-server-resources",
+          "anchor": null,
+          "singlePageAnchor": "customize-devtools-server-resources"
         }
       ]
     }

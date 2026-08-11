@@ -1,9 +1,10 @@
 # Respond to events from external systems
-## Replace sources and attach event streams to activations
+## Event streams
+### Replace sources and attach event streams to activations
 
 Replace complex source mappings with pre-configured event streams to simplify rulebook activation design and centralize incoming event routing.
 
-### About this task
+#### About this task
 
 There are several key points to keep in mind regarding source mapping:
 
@@ -12,7 +13,7 @@ There are several key points to keep in mind regarding source mapping:
 3. The source mapping is valid only if the rulebook doesn’t get modified. If the rulebook gets modified during the source mapping process, the source mapping would fail and it would have to be repeated.
 4. If the rulebook is modified after the source mapping has been created and a **Restart** happens, the rulebook activation fails.
 
-### Procedure
+#### Procedure
 
 1.  Log in to Ansible Automation Platform.
 2.  From the navigation panel, select Automation Decisions> (and then)Rulebook Activations.
@@ -110,6 +111,7 @@ Check the **Skip audit events** option if you do not want to see your events in 
 
 5.  Click Create rulebook activation.
 
-### Results
+#### Results
 
 After you create your rulebook activation, the **Details** page is displayed. You can navigate to the **Event streams** page to confirm your events have been received.
+

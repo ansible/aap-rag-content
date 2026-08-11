@@ -8,7 +8,7 @@ Create and store a GitHub Personal Access Token (PAT) so that execution environm
 
 ## About this task
 
-PATs provide a simpler setup with user-scoped access. If you are already using PATs for automation portal, you can continue using them. Choose this option or a GitHub App for content discovery. GitHub App and PAT are mutually exclusive.
+PATs provide a simpler setup with user-scoped access. If you are already using PATs for automation portal, you can continue using them. A GitHub App is the recommended option for content discovery. You do not need both, but having both does not break the install.
 
 ## Procedure
 
@@ -26,6 +26,7 @@ $ oc create secret generic secrets-scm \
 --from-literal=github-token=<your_github_pat> \
 -n <namespace>
 ```
+
 **OpenShift — web console:**
 
 1. Navigate to **Workloads > Secrets > Create > Key/value secret**.
@@ -36,6 +37,7 @@ $ oc create secret generic secrets-scm \
 ```
 $ echo -n '<your_github_pat>' | sudo podman secret create portal_github_token -
 ```
+
 Note:
 If you configured a GitHub personal access token during RHEL appliance installation (via cloud-init), the `portal_github_token` secret already exists and is active for content discovery. Running the command above updates the existing secret with a new value.
 

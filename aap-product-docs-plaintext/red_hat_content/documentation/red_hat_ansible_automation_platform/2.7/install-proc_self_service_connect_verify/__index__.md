@@ -11,7 +11,7 @@ Complete these post-installation steps after deploying the Ansible automation po
 Update the OAuth redirect URI
 
 1.  Log in to Ansible Automation Platform as an administrator.
-2.  Navigate to Access Management> (and then)OAuth Applications> (and then)automation-portal.
+2.  Navigate to Access Management> (and then)OAuth Applications and select the OAuth application you created for Ansible automation portal.
 3.  Update Redirect URIs to `https://<portal-address>/api/auth/rhaap/handler/frame`.
 
 - For RHEL with KVM: use the VM IP address.
@@ -19,7 +19,6 @@ Update the OAuth redirect URI
 - For VMware `vSphere`: use the VM IP address or hostname.
 
 4.  Click Save.
-
 
 Verify service health
 
@@ -29,6 +28,7 @@ Verify service health
 ```terminal
 $ sudo systemctl status portal postgres devtools
 ```
+
 Example output for a healthy Ansible automation portal RHEL appliance:
 
 ```terminal
@@ -39,6 +39,7 @@ Active: active (running) since ...
 devtools.service - Ansible development tools
 Active: active (running) since ...
 ```
+
 All three services should show `active (running)`.
 
 To view detailed logs for a specific service:
@@ -56,3 +57,5 @@ Sign in to Ansible automation portal
 ## Results
 
 A successful login confirms that the OAuth integration with Ansible Automation Platform is working. The Ansible automation portal catalog displays synchronized job templates from Ansible Automation Platform. If no templates appear, verify that the API token has access to job templates in Ansible Automation Platform.
+
+To configure collection discovery sources for the execution environment builder, see [Configure collection discovery sources](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_collection_discovery "Configure Git content discovery and private automation hub collection discovery so that Ansible collections are available in execution environment builder and the collection catalog.").

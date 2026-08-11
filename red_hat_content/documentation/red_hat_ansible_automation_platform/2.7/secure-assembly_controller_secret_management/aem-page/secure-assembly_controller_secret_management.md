@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 title = "Configure an external secret management system for automation - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_secret_management"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_managing_access/", "Manage access with role-based access control"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_secret_management/aem-page/secure-assembly_controller_secret_management.html"
 last_crumb = "Configure an external secret management system for automation"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure an external secret management system for automation"
 oversized = "false"
@@ -43,6 +43,5 @@ Automation controller provides a secret management system that include integrati
 - Thycotic DevOps Secrets Vault
 - Thycotic Secret Server
 - GitHub app token lookup
-
 
 These external secret values are fetched before running a playbook that needs them.

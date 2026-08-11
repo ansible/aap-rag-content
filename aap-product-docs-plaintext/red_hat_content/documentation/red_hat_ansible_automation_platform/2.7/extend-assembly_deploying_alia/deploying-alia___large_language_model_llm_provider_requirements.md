@@ -29,4 +29,3 @@ The automation intelligent assistant supports vLLM Server when self-hosting an L
 *  **OpenAI** To use OpenAI with the automation intelligent assistant, you need access to the OpenAI API platform.
 
 *  **Microsoft Azure OpenAI** To use Microsoft Azure with the automation intelligent assistant, you need access to Microsoft Azure OpenAI.
-

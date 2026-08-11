@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_configure/aem-page/extend-assembly_rhdh_configure.html"
 last_crumb = "Configure the Ansible plug-ins"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure the Ansible plug-ins"
 oversized = "false"
@@ -86,6 +86,7 @@ data:
         token: '<AAP Personal Access Token>'
         checkSSL: true
 ```
+
     Note:
             You are responsible for protecting your Red Hat Developer Hub installation from external and unauthorized access. Manage the backend authentication key like any other secret. Meet strong password requirements, do not expose it in any configuration files, and only inject it into configuration files as an environment variable.
 
@@ -111,9 +112,9 @@ data:
             - allow: [Template]
 ```
 
-## Configure Role Based Access Control
+## Configure role-based access control
 
-Red Hat Developer Hub offers Role-based Access Control (RBAC) functionality. RBAC can then be applied to the Ansible plug-ins content.
+Red Hat Developer Hub offers role-based access control (RBAC) functionality. RBAC can then be applied to the Ansible plug-ins content.
 
 ### Procedure
 
@@ -122,8 +123,6 @@ Red Hat Developer Hub offers Role-based Access Control (RBAC) functionality. RBA
 - Members of the `admin:superUsers` group can select templates in the **Create** tab of the Ansible plug-ins to create playbook and collection projects.
 
 - Members of the `admin:users` group can view templates in the **Create** tab of the Ansible plug-ins. The following example adds RBAC to Red Hat Developer Hub.
-
-
 
 ```
 data:
@@ -139,4 +138,5 @@ data:
           superUsers:
             - name: user:default/<user-admin-idb>
 ```
+
      For more information about permission policies and managing RBAC, refer to the [*Authorization in Red Hat Developer Hub*](https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.9/html-single/authorization_in_red_hat_developer_hub/index) guide.

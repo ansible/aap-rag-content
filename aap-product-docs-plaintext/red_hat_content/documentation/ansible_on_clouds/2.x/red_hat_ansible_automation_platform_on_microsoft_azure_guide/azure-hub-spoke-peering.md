@@ -22,7 +22,6 @@ Understand the necessary preparation and three core steps for enabling private n
 
 - You have identified the following:
 
-
 * The CIDR blocks of your existing VNets (including VPNs and direct connects) that need access to Ansible Automation Platform on Microsoft Azure UIs.
 * The CIDR blocks of your existing VNets (including VPNs and direct connects) that contain hosts or endpoints for Ansible Automation Platform on Microsoft Azure.
 * The CIDR blocks of the Ansible Automation Platform on Microsoft Azure VNet from the managed resource group of the application. Refer to [Finding the CIDR Block of the managed resource group](https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#proc-azure-find-cluster-cidr_azure-hub-spoke-peering) for instructions.
@@ -36,7 +35,6 @@ Before peering any networks, ensure that there is no network address space overl
 2. Configure Network Peering with the Ansible Automation Platform Subnet. See [Configuring Network Peering with the Ansible Automation Platform Subnet](https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#proc-azure-nw-peering-aap-subnet_azure-hub-spoke-peering).
 
 3. Update the route tables:
-
 
 1. Configure route tables from your existing networks to send traffic to the managed application CIDR. You must add routes to the routing tables of every network requesting Ansible Automation Platform user interfaces and of every network that will have automation performed against its resources. See [Routing to Ansible Automation Platform on Microsoft Azure](https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#proc-azure-route-to-azure_azure-hub-spoke-peering).
 2. Configure routing to your VNets for each spoke network that you would like Ansible Automation Platform to communicate with, for automation or for accessing the user interfaces. See [Routing to your VNets](https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#proc-azure-route-to-vnets_azure-hub-spoke-peering).
@@ -69,28 +67,22 @@ In the **Virtual Networks** page in the Azure portal, use the following settings
 
 1. Under **Remote virtual network**, select the settings for the virtual network that you want to peer with Azure:
 
-
 - **Summary**:
-
 
 * **Peering link name**: *<aap_to_hub_peering_link_name>*
 
 * **Peering settings**:
-
 
 + **Traffic to remote virtual network**: *Allow*
 + **Traffic forwarded from remote virtual network**: *Allow*
 
 2. Under **Local virtual network**, select **Settings** the Ansible Automation Platform on Microsoft Azure virtual network:
 
-
 - **Summary**:
-
 
 * **Peering link name**: *<hub_to_aap_peering_link_name>*
 
 * **Peering settings**:
-
 
 + **Traffic to remote virtual network**: *Allow*
 + **Traffic forwarded from remote virtual network**: *Allow*
@@ -122,7 +114,6 @@ Use the **Route Tables** page in the Azure portal to route traffic to Ansible Au
 
 4. Configure routes from your existing networks to send traffic to Ansible Automation Platform. You must configure routes for any network requesting Ansible Automation Platform user interfaces and for any network that will have automation performed against its resources. For each route that you add, enter the following information:
 
-
 - **Route name**: Enter a route name for the Ansible Automation Platform managed application network
 - **Address Prefix**: The CIDR block of the managed application kubernetes cluster
 - **Next Hop Type**: *Virtual network gateway*
@@ -153,7 +144,6 @@ aks-agentpool-<numbers>-routetable
 
 5. For each route that you add, enter the following information:
 
-
 - **Route name**: Enter a route name for the spoke network that you want Ansible Automation Platform to route to
 - **Address Prefix**: The CIDR block of the spoke network
 - **Next Hop Type**: *Virtual network gateway*
@@ -175,7 +165,6 @@ If you choose not to allow all outbound traffic from port 443, you must configur
 **Procedure**
 
 1. For Red Hat to manage and upgrade Ansible Automation Platform on Microsoft Azure and execute security patching, any machine in the Azure Kubernetes service (AKS) cluster must be allowed to submit a request to pull updates for containers used by Ansible Automation Platform.
-
 
 1. Add routes in the Ansible Automation Platform route table for outbound traffic from the full CIDR range of the Ansible Automation Platform on Microsoft Azure managed application to the domains listed in the [Azure Virtual Appliance Routing with Ansible Automation Platform on Azure](https://access.redhat.com/articles/6972355) article on the Red Hat Customer Portal.
 

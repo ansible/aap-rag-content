@@ -9,9 +9,7 @@ Instance group policies are controlled by the following three optional fields on
 - `policy_instance_minimum`: This policy attempts to keep at least this many instances in the instance group. If the number of available instances is lower than this minimum, then all instances are placed in this instance group.
 - `policy_instance_list`: This is a fixed list of instance names to always include in this instance group.
 
-
 The **Instance Groups** list view from the automation controller user interface (UI) provides a summary of the capacity levels for each instance group according to instance group policies:
-
 
 ![Instance Groups list view](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-instance-groups-list-view.png)
 

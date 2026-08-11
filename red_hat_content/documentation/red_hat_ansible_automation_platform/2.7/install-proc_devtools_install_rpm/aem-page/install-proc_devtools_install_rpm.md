@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_devtools_install_rpm"
 template = "docs/aem-title.html"
 title = "Install Ansible development tools from an RPM package - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_devtools_install_rpm"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_devtools_install/", "Install Ansible development tools"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_devtools_install_rpm/aem-page/install-proc_devtools_install_rpm.html"
 last_crumb = "Install Ansible development tools from an RPM package"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Install Ansible development tools from an RPM package"
 oversized = "false"
@@ -43,11 +43,13 @@ Ansible development tools are available as an RPM package for Red Hat Enterprise
 ```shell
 $ sudo subscription-manager status
 ```
+
     If Simple Content Access is enabled, the output contains the following message:
 
 ```
 Content Access Mode is set to Simple Content Access.
 ```
+
   1.  If Simple Content Access is not enabled, attach the Red Hat Ansible Automation Platform SKU:
   
 
@@ -62,6 +64,7 @@ $ sudo subscription-manager attach --pool=<sku-pool-id>
 $ sudo dnf install
   --enablerepo=ansible-automation-platform-*aap-version*-for-rhel-*rhel-version*-x86_64-rpms ansible-dev-tools
 ```
+
     Replace *aap-version* with your Ansible Automation Platform version and *rhel-version* with your Red Hat Enterprise Linux major version.
 
 ## Results
@@ -71,9 +74,8 @@ $ sudo dnf install
 ```shell
 $ rpm -aq | grep ansible-dev-tools
 ```
+
      If the installation was successful, the output shows the `ansible-dev-tools` package and its version number, for example:
-
-
 
 ```
 ansible-dev-tools-25.8.3-1.el9ap.noarch

@@ -1,6 +1,6 @@
 +++
-template = "docs/aem-title.html"
 title = "View automation job metrics with automation dashboard - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-view_automation_job_metrics_with_automation_dashboard"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-view_automation_job_metrics_with_automation_dashboard/aem-page/optimize-view_automation_job_metrics_with_automation_dashboard.html"
 last_crumb = "View automation job metrics with automation dashboard"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "View automation job metrics with automation dashboard"
 oversized = "false"

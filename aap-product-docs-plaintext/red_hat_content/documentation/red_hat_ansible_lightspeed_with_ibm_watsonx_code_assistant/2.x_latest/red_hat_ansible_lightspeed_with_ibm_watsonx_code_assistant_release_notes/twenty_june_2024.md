@@ -11,7 +11,6 @@ Red Hat Ansible Lightspeed is now available for on-premise deployments. This cap
 Note
 The following capabilities are not yet available on Red Hat Ansible Lightspeed on-premise deployments:
 
-
 * Viewing telemetry data on the Admin dashboard
 * Generating playbooks and viewing playbook explanations
 

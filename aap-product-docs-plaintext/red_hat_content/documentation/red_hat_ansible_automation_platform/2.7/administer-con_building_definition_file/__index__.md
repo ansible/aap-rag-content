@@ -6,6 +6,10 @@ After you install Ansible Builder, you can create a definition file that Ansible
 
 The following is an example of a version 3 definition file. Each definition file must specify the major version number of the Ansible Builder feature set it uses. If not specified, Ansible Builder defaults to version 1, making most new features and definition keywords unavailable.
 
+Note:
+
+Replace `<platform-version>` with the namespace for your version of Ansible Automation Platform. Replace `<rhel-version>` with your Red Hat Enterprise Linux version
+
 ```
 version: 3
 
@@ -21,7 +25,7 @@ system: bindep.txt
 
 images:
 base_image:
-name: registry.redhat.io/ansible-automation-platform-26/ee-minimal-rhel9:latest
+name: registry.redhat.io/ansible-automation-platform-27/ee-minimal-rhel9:2.16
 
 # Custom package manager path for the RHEL based images
 options:
@@ -47,7 +51,6 @@ append_final:
 - RUN echo This is a post-install command!
 - RUN ls -la /etc
 ```
-
 
 - `build_arg_defaults`: Lists default values for build arguments.
 - `dependencies`: Specifies the location of various requirements files.

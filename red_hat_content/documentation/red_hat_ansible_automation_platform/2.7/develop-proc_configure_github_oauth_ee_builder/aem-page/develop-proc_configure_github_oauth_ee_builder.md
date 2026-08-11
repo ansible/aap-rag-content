@@ -1,18 +1,18 @@
 +++
-title = "Save definition files to a GitHub repository - Red Hat Ansible Automation Platform 2.7"
+title = "Configure a GitHub OAuth App for saving definitions - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_oauth_ee_builder"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_app_ee_builder/", "Configure a GitHub App for content discovery"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-build_execution_environments_with_the_automation_portal/", "Build execution environments with automation portal"]]
 category = "Develop"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_oauth_ee_builder/aem-page/develop-proc_configure_github_oauth_ee_builder.html"
-last_crumb = "Save definition files to a GitHub repository"
-modified = "2026-06-05T07:48:10.594Z"
+last_crumb = "Configure a GitHub OAuth App for saving definitions"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
-name = "Save definition files to a GitHub repository"
+name = "Configure a GitHub OAuth App for saving definitions"
 oversized = "false"
 page_slug = "develop-proc_configure_github_oauth_ee_builder"
 portal_content_subtype = "title"
@@ -25,7 +25,7 @@ toc = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc
 type = "aem-page"
 +++
 
-# Save definition files to a GitHub repository
+# Configure a GitHub OAuth App for saving definitions
 
 Configure a GitHub OAuth App so that users can save execution environment definition files to a GitHub repository and trigger automated image builds.
 
@@ -43,14 +43,12 @@ When users complete the EE Builder wizard, they can save the generated definitio
 - `ansible.cfg` — Galaxy server configuration (auto-generated from configured collection sources).
 - `ee-build.yml` — GitHub Actions workflow for automated builds.
 
-
-Users authenticate via OAuth when saving. The following OAuth scopes are required:
+Users authenticate via OAuth when saving. The wizard template defines the following OAuth scopes, which are requested automatically during the OAuth flow:
 
 | OAuth scope | Purpose                                                                                                    | When used                                                                        |
 | ----------- | ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | `repo`      | Create repositories, push EE definition files, and open pull requests on behalf of the authenticated user. | Every save operation (new repository or pull request to an existing repository). |
-| `workflow`  | Dispatch the `ee-build.yml` GitHub Actions workflow to build and push the container image.                 | When the user selects **Build Execution Environment** during the save flow.      |
-
+| `workflow`  | Dispatch the`ee-build.yml` GitHub Actions workflow to build and push the container image.                  | When the user selects**Build Execution Environment** during the save flow.       |
 
 Important:
 
@@ -63,6 +61,8 @@ If your GitHub organization uses OAuth App access restrictions, an organization 
   - **Application name:** A descriptive name, for example `ansible-portal-ee-builder`.
   - **Homepage URL:** The URL of your automation portal deployment.
   - **Authorization callback URL:** `https://<my_portal_domain>/api/auth/github/handler/frame`
+  Note:
+      GitHub limits the Authorization callback URL to 100 characters. If your OpenShift route URL exceeds this limit, configure a shorter route hostname for the portal before creating the OAuth App.
 
 2.  Note the **Client ID** and generate a **Client secret**. Save the client secret value immediately — you cannot view it again.
 3.  If your organization restricts OAuth App access, navigate to **Organization settings > Third-party access** and approve the OAuth App.
@@ -87,6 +87,7 @@ auth:
 $ oc patch secret secrets-scm -n <namespace> --type merge -p \
   '{"stringData":{"github-oauth-client-id":"<your_client_id>","github-oauth-client-secret":"<your_client_secret>"}}'
 ```
+
     If `secrets-scm` does not exist yet, include `--from-literal=github-oauth-client-id=<id>` and `--from-literal=github-oauth-client-secret=<secret>` in the `oc create secret generic` command from the content discovery section.
 
     **OpenShift — web console:**
@@ -98,14 +99,6 @@ $ oc patch secret secrets-scm -n <namespace> --type merge -p \
 ```
 $ echo -n '<your_client_id>' | sudo podman secret create portal_github_oauth_client_id -
 $ echo -n '<your_client_secret>' | sudo podman secret create portal_github_oauth_client_secret -
-```
-    Append to the Quadlet drop-in file:
-
-```
-$ sudo tee -a /etc/containers/systemd/portal.container.d/ee-builder-secrets.conf << 'EOF'
-Secret=portal_github_oauth_client_id,type=env,target=GITHUB_OAUTH_CLIENT_ID
-Secret=portal_github_oauth_client_secret,type=env,target=GITHUB_OAUTH_CLIENT_SECRET
-EOF
 ```
 
 6.  If you use a self-hosted GitHub Enterprise instance (not `github.com`), add its URL to the CORS allowed origins so that OAuth redirects are accepted.
@@ -121,6 +114,7 @@ upstream:
             - ${BASE_URL}
             - https://github.internal.example.com
 ```
+
     **RHEL appliance** — add to the existing `backend:` block in `app-config.production.yaml`:
 
 ```
@@ -130,6 +124,7 @@ backend:
       - "https://portal.example.com"
       - "https://github.internal.example.com"
 ```
+
   Important:
       On RHEL appliances, `app.baseUrl`, `backend.baseUrl`, and `backend.cors.origin` must all use the same portal URL. If any of these values are inconsistent, OAuth callbacks and API requests fail. Do not create a duplicate `backend:` block — add `cors` to the existing one.
 
@@ -138,29 +133,31 @@ backend:
 
 ## What to do next
 
-To enable automated image builds with GitHub Actions, configure repository secrets and variables. See Configure automated image builds below.
+To enable automated image builds with GitHub Actions, configure organization secrets and variables. See Configure automated image builds below.
+
+After updating the configuration, apply your changes. See [Apply configuration changes](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_apply_configuration_changes "Apply configuration changes after modifying your Helm chart values or RHEL appliance configuration file for execution environment builder.").
 
 **Configure automated image builds (GitHub Actions)**
 
-When a user saves an EE definition to a GitHub repository and selects **Build Execution Environment**, the generated `ee-build.yml` GitHub Actions workflow builds a container image and pushes it to a registry. Configure repository secrets and variables before users can run successful builds.
+When a user saves an EE definition to a GitHub repository and selects **Build Execution Environment**, the generated `ee-build.yml` GitHub Actions workflow builds a container image and pushes it to a registry. Configure organization secrets and variables before users can run successful builds.
 
-You need a GitHub organization or repositories where EE definitions are saved, destination registry credentials (for example, private automation hub), and source registry credentials for base images (for example, `registry.redhat.io`).
+You need a GitHub organization where EE definitions are saved, destination registry credentials (for example, private automation hub), and source registry credentials for base images (for example, `registry.redhat.io`).
 
-1. In GitHub, navigate to the repository where the EE definition was saved.
+1. In GitHub, navigate to your organization settings.
 2. Go to **Settings > Secrets and variables > Actions**.
-3. Under **Secrets**, click **New repository secret** and add each required secret:
-    | Secret                                              | Purpose                                                                                                                                                            | When required                                                               |
-    | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
-    | `REGISTRY_PASSWORD`                                 | Password for the destination container registry where built EE images are pushed (for example, private automation hub).                                            | Not required if pushing to GitHub Container Registry.                       |
-    | `REDHAT_REGISTRY_PASSWORD`                          | Password for the source registry used to pull base images (for example, `registry.redhat.io`).                                                                     | Not required if the base image is publicly available.                       |
-    | `ANSIBLE_GALAXY_SERVER_<NAME>_TOKEN`                | Galaxy server tokens matching `[galaxy_server.<name>]` entries in `ansible.cfg`. One secret per configured server.                                                 | Required for authenticated collection sources.                              |
-    | `AAP_EE_BUILDER_<PROVIDER>_<CANONICAL>_<ORG>_TOKEN` | Git collection tokens. EE Builder generates these token placeholders automatically based on the collection source. One secret per Git-sourced collection provider. | Required when the EE definition includes collections from Git repositories. |
+3. Under **Secrets**, click **New organization secret** and add each required secret:
+    | Secret                                              | Purpose                                                                                                                                                              | When required                                                                                  |
+    | --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+    | `REGISTRY_PASSWORD`                                 | Password for the destination container registry where built EE images are pushed (for example, private automation hub).                                              | Not required if pushing to GitHub Container Registry.                                          |
+    | `REDHAT_REGISTRY_PASSWORD`                          | Password for the source registry used to pull base images (for example,`registry.redhat.io`).                                                                        | Not required if the base image is publicly available.                                          |
+    | `ANSIBLE_GALAXY_SERVER_<NAME>_TOKEN`                | Galaxy server tokens matching`[galaxy_server.<name>]` entries in`ansible.cfg`.`<NAME>` is the server id converted to ALL CAPS. One secret per configured repository. | Required when the EE definition includes collections from Private Automation Hub repositories. |
+    | `AAP_EE_BUILDER_<PROVIDER>_<CANONICAL>_<ORG>_TOKEN` | Git collection tokens. EE Builder generates these token placeholders automatically based on the collection source. One secret per Git-sourced collection provider.   | Required when the EE definition includes collections from Git repositories.                    |
 
-4. Under **Variables**, click **New repository variable** and add each required variable:
+4. Under **Variables**, click **New organization variable** and add each required variable:
     | Variable                   | Purpose                                                                                | When required                                         |
     | -------------------------- | -------------------------------------------------------------------------------------- | ----------------------------------------------------- |
     | `REGISTRY_USERNAME`        | Username for the destination container registry (for example, private automation hub). | Not required if pushing to GitHub Container Registry. |
-    | `REDHAT_REGISTRY_USERNAME` | Username for the source registry (for example, `registry.redhat.io`).                  | Not required if the base image is publicly available. |
+    | `REDHAT_REGISTRY_USERNAME` | Username for the source registry (for example,`registry.redhat.io`).                   | Not required if the base image is publicly available. |
 
 Note:
 
@@ -168,6 +165,10 @@ When using GitHub Container Registry as the destination registry, the workflow u
 
 Tip:
 
-Configure these as GitHub organization secrets and organization variables instead of repository-level settings. New repositories created in the organization inherit organization secrets automatically, so users do not need to configure secrets each time they save an EE definition to a new repository.
+Organization secrets and variables are the recommended configuration. New repositories created in the organization inherit organization secrets automatically, so users do not need to configure secrets each time they save an EE definition to a new repository. Repository-level secrets also work but require manual setup on each repository before the first build can succeed.
+
+To pre-configure Git collection token secrets at the organization level before users create EE definitions, derive the secret name from your `app-config` entry: `<PROVIDER>` is the SCM provider (`GITHUB` or `GITLAB`), `<CANONICAL>` is the canonical name of the Git host (the `name` field under `catalog.providers.rhaap.*.sync.ansibleGitContents.providers.<provider>` in `app-config`), and `<ORG>` is the Git organization name. All segments are uppercased and non-alphanumeric characters are replaced with underscores. For example, a GitHub provider with canonical name `github-public` and organization `test-rhaap-portal` requires the secret `AAP_EE_BUILDER_GITHUB_GITHUB_PUBLIC_TEST_RHAAP_PORTAL_TOKEN`.
+
+The generated `NEXT_STEPS.md` file in each EE project also lists the exact variable names required for your configuration. Use it as a checklist.
 
 Trigger a build from Ansible automation portal or manually dispatch the `ee-build.yml` workflow from GitHub Actions. Verify that all validation steps pass and the image is pushed to the configured registry.

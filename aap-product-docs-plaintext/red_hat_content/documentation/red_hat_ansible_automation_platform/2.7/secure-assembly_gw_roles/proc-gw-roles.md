@@ -11,7 +11,6 @@ Roles are labeled with their associated Ansible Automation Platform component an
 - **Automation Decisions** refers to Event-Driven Ansible
 - **Automation Content** refers to automation hub
 
-
 Roles created at the level of the organization can be associated with multiple components because they group together permissions from automation controller (Automation Execution) and Event-Driven Ansible (Automation Decisions). Only organization roles can span multiple components.
 
 A similar role entity for Automation Content is a "system" role, which gives access to all of the specified resource types in Automation Content.

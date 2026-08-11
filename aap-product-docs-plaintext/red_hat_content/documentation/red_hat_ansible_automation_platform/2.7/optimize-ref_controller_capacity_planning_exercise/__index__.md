@@ -10,6 +10,5 @@ For this example, the cluster must support the following capacity:
 - Forks set to 5 on playbooks. This is the default.
 - Average event size is 1 Mb
 
-
 The virtual machines have 4 CPU and 16 GB RAM, and disks that have 3000 IOPS.
 

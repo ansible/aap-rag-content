@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 title = "Portal CLI commands reference - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_self_service_portal_cli_commands"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_self_service_rhel_appliances/", "Deploy Ansible automation portal RHEL appliance"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-ref_self_service_portal_cli_commands/aem-page/install-ref_self_service_portal_cli_commands.html"
 last_crumb = "Portal CLI commands reference"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Portal CLI commands reference"
 oversized = "false"
@@ -36,6 +36,7 @@ You can access the appliance using SSH with the key you provided during initial 
 ```terminal
 ssh -i /path/to/ssh-key/id_ed25519 -p *port_number* admin@*VM_IP*
 ```
+
 Replace the following placeholders:
 
 - `/path/to/ssh-key/id_ed25519` with the path to your SSH private key.
@@ -52,13 +53,12 @@ ansible-portal <command> [options]
 
 *Table 1. Available commands*
 
-| Command          | Description                                                  |
-| ---------------- | ------------------------------------------------------------ |
-| `status`         | Show portal service status and diagnostics.                  |
-| `backup`         | Create portal backup. Use `--list` to list backups.          |
-| `restore *file*` | Restore from backup archive. Use `--latest` for most recent. |
-| `registry-login` | Log in to container registry for image upgrades.             |
-
+| Command          | Description                                                 |
+| ---------------- | ----------------------------------------------------------- |
+| `status`         | Show portal service status and diagnostics.                 |
+| `backup`         | Create portal backup. Use`--list` to list backups.          |
+| `restore *file*` | Restore from backup archive. Use`--latest` for most recent. |
+| `registry-login` | Log in to container registry for image upgrades.            |
 
 Run `ansible-portal *command* --help` for command-specific options.
 
@@ -72,6 +72,7 @@ Displays the current status of all Ansible automation portal services.
 sudo ansible-portal status            # One-shot status display
 sudo ansible-portal status --watch    # Refresh status every 5 seconds
 ```
+
 **Description:**
 
 Displays the current status of all Ansible automation portal services, including:
@@ -82,7 +83,6 @@ Displays the current status of all Ansible automation portal services, including
 - Portal service state and plug-in installation status
 - Scheduled backup status
 - Disk and memory resource usage
-
 
 Use this command to verify that all services are running correctly after installation or troubleshooting. Use `--watch` to continuously monitor service status.
 
@@ -99,6 +99,7 @@ sudo ansible-portal backup --minimal                # Required items only
 sudo ansible-portal backup --list                   # List existing backups
 sudo ansible-portal backup --export /path/to/dir/   # Copy latest backup to a directory
 ```
+
 **Description:**
 
 Creates a backup archive containing the portal configuration, Podman secrets, and data. Use this command before making significant configuration changes or for disaster recovery planning.
@@ -108,7 +109,6 @@ Creates a backup archive containing the portal configuration, Podman secrets, an
 - `--minimal` backs up only the required configuration items.
 - `--list` lists existing backups.
 - `--export` copies the latest backup to the specified directory. If no backup exists, one is created first.
-
 
 Important:
 
@@ -189,6 +189,7 @@ sudo ansible-portal restore --latest                # Restore the newest backup
 sudo ansible-portal restore --latest --dry-run      # Preview restore without changes
 sudo ansible-portal restore /path/to/backup.tar.gz  # Restore a specific backup file
 ```
+
 **Description:**
 
 Restores the portal configuration, Podman secrets, Quadlet drop-in files, and data from a backup created by `ansible-portal backup`.
@@ -197,7 +198,6 @@ Restores the portal configuration, Podman secrets, Quadlet drop-in files, and da
 - `--latest` restores from the most recent backup.
 - `--dry-run` previews what would be restored without making changes.
 - Specify a file path to restore from a specific backup archive.
-
 
 Note:
 
@@ -228,8 +228,9 @@ Restoring a backup overwrites the current portal configuration. Use `--dry-run` 
 [OK] Restore complete.
 
 Services have been restarted.
-Check status with: portal-status
+Check status with: ansible-portal status
 ```
+
 Services stop during restore and restart automatically.
 
 ## ansible-portal registry-login
@@ -244,6 +245,7 @@ sudo ansible-portal registry-login *registry_host* # Log in to a specific regist
 sudo ansible-portal registry-login --test          # Test stored credentials
 sudo ansible-portal registry-login --logout        # Remove stored credentials
 ```
+
 **Description:**
 
 Manages authentication to container registries used for pulling Ansible automation portal images and updates.
@@ -252,7 +254,6 @@ Manages authentication to container registries used for pulling Ansible automati
 - Specify a registry hostname to authenticate to a different registry, such as a private mirror.
 - `--test` verifies that stored credentials are valid by inspecting the registry without downloading images.
 - `--logout` clears stored credentials for the registry.
-
 
 Use this command to configure registry authentication for `bootc upgrade` operations. In disconnected environments, use this command to authenticate to your private registry mirror.
 
@@ -314,20 +315,12 @@ The portal stores sensitive values as Podman secrets, separate from the configur
 | `portal_gitlab_oauth_client_id`     | `GITLAB_OAUTH_CLIENT_ID`     | User-provided (EE Builder, GitLab OAuth) |
 | `portal_gitlab_oauth_client_secret` | `GITLAB_OAUTH_CLIENT_SECRET` | User-provided (EE Builder, GitLab OAuth) |
 
-
-Note:
-
-EE Builder secrets (prefixed with `portal_github_app_`, `portal_github_oauth_`, or `portal_gitlab_oauth_`) require a Quadlet drop-in file (`ee-builder-secrets.conf`) to map Podman secrets to container environment variables. See the Configuring execution environment builder guide for instructions.
-
-Important:
-
-The `portal-backup` utility does not capture EE Builder secrets or custom Quadlet drop-in files. Store secret values and the contents of `ee-builder-secrets.conf` in a secure external location.
-
 **Listing secrets**
 
 ```terminal
 sudo podman secret ls
 ```
+
 **Updating a secret**
 
 To update a secret value, write the new value to a temporary file on tmpfs to avoid exposing it in the process list, then replace the secret:

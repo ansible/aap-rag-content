@@ -33,6 +33,7 @@ name: 'lightspeed api'
 request_timeout_seconds: 3600
 idle_timeout_seconds: 60
 ```
+
 - `request_timeout_seconds` - Maximum total duration in seconds for streaming requests. Replaces the former `max_stream_duration` setting.
 - `idle_timeout_seconds` - Idle timeout in seconds. The connection closes if no data is transmitted within this period. Replaces the former `stream_idle_timeout` setting.
 
@@ -53,5 +54,6 @@ $ curl -s -k \
 https://<gateway-host>/api/gateway/v1/routes/ \
 | python3 -m json.tool
 ```
+
 Locate the Lightspeed route and confirm that `effective_timeout_seconds` and `effective_idle_timeout_seconds` reflect the expected values.
 

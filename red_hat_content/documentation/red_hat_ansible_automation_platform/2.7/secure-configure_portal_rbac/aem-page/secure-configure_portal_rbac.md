@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-configure_portal_rbac/aem-page/secure-configure_portal_rbac.html"
 last_crumb = "Configure role-based access control for Ansible automation portal"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure role-based access control for Ansible automation portal"
 oversized = "false"
@@ -36,7 +36,6 @@ Ansible automation portal uses two categories of permissions:
 - **Catalog and scaffolder permissions** control whether users can view templates, execute actions, and manage tasks.
 - **Navigation permissions** control which sidebar items and pages are visible to users. Without the required navigation permission, a sidebar item and its associated pages are hidden.
 
-
 Important:
 
 RBAC differs by template type:
@@ -46,7 +45,7 @@ RBAC differs by template type:
 
 ## Understand the permission model
 
-Ansible automation portal and Ansible Automation Platform use separate but related permission systems. Ansible Automation Platform RBAC is the source of truth for synchronization scope and execution permissions.
+Ansible automation portal and Ansible Automation Platform use separate but related permission systems.
 
 **Ansible automation portal RBAC:**
 
@@ -54,13 +53,11 @@ Ansible automation portal and Ansible Automation Platform use separate but relat
 - Controls which users can access portal templates and submit jobs.
 - Controls which navigation items are visible in the sidebar.
 
-
 **Ansible Automation Platform RBAC:**
 
 - **Controls synchronization scope:** Only Ansible Automation Platform job templates accessible by the configured API token (`ansible.rhaap.token`) are synchronized to Ansible automation portal.
-- **Controls job template visibility and execution:** Ansible Automation Platform permissions determine whether authenticated users can view and execute job templates in Ansible automation portal.
-- **Validates execution permissions:** When a user executes a template, Ansible Automation Platform checks that user's execute permissions before launching the job.
-
+- **Controls auto-generated template visibility:** Ansible Automation Platform permissions determine whether authenticated users can view and execute auto-generated templates in Ansible automation portal. Custom templates are not filtered by Ansible Automation Platform permissions.
+- **Validates execution permissions:** When a user executes any template, Ansible Automation Platform checks that user's execute permissions on the underlying job template before launching the job. This applies to both auto-generated and custom templates.
 
 If a user can see a template in the catalog but lacks Ansible Automation Platform execute permissions for the associated job template, the user cannot run the job.
 
@@ -74,7 +71,6 @@ Before you begin:
 - Synchronization of Ansible Automation Platform organization information from Ansible Automation Platform is complete.
 - Users who execute job templates through Ansible automation portal must have job template execute permissions assigned in Ansible Automation Platform.
 - The **Allow external users to create OAuth2 tokens** setting is enabled in Settings> (and then)Platform gateway settings in Ansible Automation Platform.
-
 
 Procedure:
 
@@ -131,7 +127,6 @@ The following permissions control execution environment builder sidebar items. G
 | `ansible.collections.view`            | **Collections** sidebar item — collection catalog for EE definitions     |
 | `ansible.git-repositories.view`       | **Git Repositories** sidebar item — saving and syncing EE definitions    |
 
-
 Each permission can be assigned individually for granular control.
 
 ## Grant navigation permissions to a role
@@ -140,7 +135,6 @@ Before you begin:
 
 - You have configured base RBAC roles as described in the [Configure RBAC for synchronization](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-configure_portal_rbac#configure-portal-rbac__configure-rbac-for-synchronization) section.
 - You have the AAP Administrator role and access to Administration> (and then)RBAC in Ansible automation portal.
-
 
 Procedure:
 
@@ -151,7 +145,6 @@ Procedure:
   - For execution environment builder users: `ansible.execution-environments.view`, `ansible.collections.view`, and `ansible.git-repositories.view`.
 4. If creating a new role, assign the role to the appropriate users or groups.
 5. Click **Save**.
-
 
 To hide specific sidebar items from a user group, remove the corresponding permissions from their assigned roles.
 
@@ -178,7 +171,6 @@ Before you begin:
 - Ansible Automation Platform job templates must have Ansible Automation Platform labels applied and synchronized with Ansible automation portal.
 - Users who execute job templates through Ansible automation portal must have job template execute permissions assigned in Ansible Automation Platform.
 
-
 Procedure:
 
 1. Log in to Ansible automation portal as an administrator.
@@ -193,12 +185,45 @@ Procedure:
 7. Select the **Scaffolder** plugin and enable all scaffolder permissions listed in the previous procedure.
 8. Click **Next** to review your settings, then click **Create**.
 
-
 Verification:
 
 - If you configured conditional access by tag, the user should see only templates with the specified tags.
 - If you did not configure conditional access, the user should see all Ansible Automation Platform job templates for which they have execute permissions in Ansible Automation Platform.
 - To verify execution permissions, attempt to execute a template. If the user has execute permissions in Ansible Automation Platform for the template, the job launches successfully.
+
+**Restrict visibility of custom templates**
+
+Auto-generated templates inherit visibility from Ansible Automation Platform permissions. Custom templates require a different approach because they are visible to all users by default. Use tag-based conditional policies to restrict which users can see specific custom templates.
+
+1. Add a tag to the custom template YAML file in the `metadata.tags` field:
+
+```yaml
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: deploy-to-prod
+  title: Deploy to Production
+  tags:
+    - restricted
+```
+
+2. Log in to Ansible automation portal as an administrator.
+3. Navigate to Administration> (and then)RBAC.
+4. Create a role for users who should see the restricted template (for example, `template-admins`). Assign the role to the appropriate teams or users. Grant `catalog.entity.read` and all scaffolder permissions without conditions.
+5. Edit the default authenticated user role to add a conditional policy that hides templates tagged `restricted`:
+  - Select the **Catalog** plugin and enable `catalog.entity.read`.
+  - Click **Conditional** to configure a condition-based policy.
+  - **Rule:** Select `HAS_METADATA`.
+  - **Key:** Enter `tags`.
+  - **Value:** Enter `restricted`.
+  - Set the condition to **NOT** so that users in this role can see all templates *except* those tagged `restricted`.
+6. Click **Next** to review your settings, then click **Create** or **Save**.
+
+Users assigned to the `template-admins` role see all templates. Users in the default role see all templates except those tagged `restricted`.
+
+Tip:
+
+To verify which conditional rules are available in your portal instance, query the `GET /api/plugins/condition-rules` API endpoint. Use `HAS_METADATA` with `key: tags` for catalog-level visibility filtering.
 
 ## Permissions reference
 
@@ -209,13 +234,13 @@ Verification:
 | `scaffolder.template.step.read`       | scaffolder-template | read   | Read template steps in the launch wizard.                                     |
 | `scaffolder.action.execute`           | scaffolder-action   | use    | Execute actions through templates.                                            |
 | `scaffolder.task.create`              | scaffolder-task     | create | Trigger the execution of job templates.                                       |
-| `scaffolder.task.read`                | scaffolder-task     | read   | View task execution history and logs on the **History** page.                 |
+| `scaffolder.task.read`                | scaffolder-task     | read   | View task execution history and logs on the**History** page.                  |
 | `scaffolder.task.cancel`              | scaffolder-task     | use    | Cancel running templates.                                                     |
-| `ansible.templates.view`              | —                   | —      | Show the **Templates** sidebar item and pages. Required for all portal users. |
-| `ansible.history.view`                | —                   | —      | Show the **History** sidebar item and pages. Required for all portal users.   |
-| `ansible.execution-environments.view` | —                   | —      | Show the **Execution Environments** sidebar item and pages.                   |
-| `ansible.collections.view`            | —                   | —      | Show the **Collections** sidebar item and pages.                              |
-| `ansible.git-repositories.view`       | —                   | —      | Show the **Git Repositories** sidebar item and pages.                         |
+| `ansible.templates.view`              | —                   | —      | Show the**Templates** sidebar item and pages. Required for all portal users.  |
+| `ansible.history.view`                | —                   | —      | Show the**History** sidebar item and pages. Required for all portal users.    |
+| `ansible.execution-environments.view` | —                   | —      | Show the**Execution Environments** sidebar item and pages.                    |
+| `ansible.collections.view`            | —                   | —      | Show the**Collections** sidebar item and pages.                               |
+| `ansible.git-repositories.view`       | —                   | —      | Show the**Git Repositories** sidebar item and pages.                          |
 
 ## Adjust synchronization frequency
 

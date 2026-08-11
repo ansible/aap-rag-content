@@ -1,6 +1,6 @@
 +++
-title = "Create custom credentials for Event-Driven Ansible - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Create custom credentials for Event-Driven Ansible - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_custom_credential_types"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_custom_credential_types/aem-page/secure-con_custom_credential_types.html"
 last_crumb = "Create custom credentials for Event-Driven Ansible"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Create custom credentials for Event-Driven Ansible"
 oversized = "false"
@@ -52,7 +52,6 @@ The Input configuration has two attributes:
 - fields - a collection of properties for a credential type.
 - required - a list of required fields.
 
-
 Fields can have multiple properties, depending on the credential type you select.
 
 *Table 1. Input Configuration Field Properties*
@@ -75,7 +74,6 @@ Event-Driven Ansible supports the following types of injectors:
 - Environment variables (`env`) - Used in source plugins for the underlying package or shared library.
 - Ansible extra variables (`extra_vars`) - Used for substitution in the rulebook conditions, actions or source plugin parameters.
 - File-based templating (`file`) - Used to create file contents from the credential inputs such as certificates and keys, which might be required by source plugins. File injectors provide a way to deliver these certificates and keys to ansible-rulebook at runtime without having to store them in decision environments. As a result, ansible-rulebook creates temporary files and the file names can be accessed using `eda.filename` variables, which are automatically created for you after the files have been created (for instance, "{{eda.filename.my_cert}}”).
-
 
  Important:
 
@@ -110,6 +108,7 @@ required:
   - username
   - password
 ```
+
     View more YAML examples at the [YAML page](https://yaml.org/spec/1.2.2/).
 
      **JSON**
@@ -132,6 +131,7 @@ required:
  "required": ["username", "password"]
 }
 ```
+
     View more JSON examples at [The JSON website](https://www.json.org/json-en.html).
 
     The following configuration in JSON format shows each field and how they are used:
@@ -165,6 +165,7 @@ required:
     "required": ["api_token"]   # optional; one or more fields can be marked as required
 },
 ```
+
     When `type=string`, fields can optionally specify multiple choice options:
 
 ```
@@ -193,6 +194,7 @@ required:
   }
 }
 ```
+
     Credential Types can also generate temporary files to support `.ini` files or certificate or key data:
 
 ```
@@ -205,11 +207,13 @@ required:
   }
 }
 ```
+
     In this example, automation controller writes a temporary file that has:
 
 ```
 [mycloud]\ntoken=SOME_TOKEN_VALUE
 ```
+
     The absolute file path to the generated file is stored in an environment variable named `MY_CLOUD_INI_FILE`.
 
     The following is an example of referencing many files in a custom credential template:
@@ -229,6 +233,7 @@ required:
   }]
 }
 ```
+
      **Injectors**
 
 ```
@@ -254,7 +259,6 @@ required:
 ### Results
 
 - Verify that the newly created credential type can be selected from the **Credential Type** selection window when creating a new credential:
-
 
  ![Verify new credential type](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/credential-types-new-listed-verify.png)
 

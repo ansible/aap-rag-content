@@ -3,6 +3,10 @@
 
 Use the example inventory file to perform an online installation for the containerized enterprise topology:
 
+Note:
+
+The enterprise topology requires metrics service to have a dedicated host, consistent with the deployment pattern for automation controller, automation hub, and Event-Driven Ansible controller.
+
 ```yaml
 # This is the Ansible Automation Platform enterprise installer inventory file
 # Consult the docs if you are unsure what to add
@@ -102,7 +106,6 @@ automationmetrics_pg_password=<set your own>
 automationmetrics_controller_read_pg_host=externaldb.example.org
 automationmetrics_controller_read_pg_password=<set your own>
 ```
-
 
 Note:
 

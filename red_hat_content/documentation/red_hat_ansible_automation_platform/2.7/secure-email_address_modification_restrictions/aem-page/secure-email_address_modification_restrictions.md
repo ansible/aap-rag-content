@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-email_address_modification_restrictions"
 title = "Email address modification restrictions - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-email_address_modification_restrictions"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_configure_authentication/", "Configure central authentication for Ansible Automation Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-email_address_modification_restrictions/aem-page/secure-email_address_modification_restrictions.html"
 last_crumb = "Email address modification restrictions"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Email address modification restrictions"
 oversized = "false"
@@ -35,6 +35,5 @@ The following users can modify email addresses:
 
 - Platform administrators (superusers)
 - Organization administrators, on deployments where Organization admins can manage users and teams is enabled
-
 
 If a user's email address requires updating, contact a platform administrator to make the change.

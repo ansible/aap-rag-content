@@ -1,0 +1,39 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Authenticate the Windows user",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "WinRM authentication methods",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-e22f967c-be30-49f2-8d3f-f80ff06c418c",
+          "anchor": null,
+          "singlePageAnchor": "GUID-e22f967c-be30-49f2-8d3f-f80ff06c418c"
+        },
+        {
+          "title": "Protect Windows credentials in automated workflows",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "GUID-e34d6ad2-8b5a-4817-af8f-fad540f7c870",
+          "anchor": null,
+          "singlePageAnchor": "GUID-e34d6ad2-8b5a-4817-af8f-fad540f7c870"
+        },
+        {
+          "title": "Validate Windows security baselines and verify readiness",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "GUID-a9ae7add-46fe-4ce9-8217-117d944a0188",
+          "anchor": null,
+          "singlePageAnchor": "GUID-a9ae7add-46fe-4ce9-8217-117d944a0188"
+        }
+      ]
+    }
+  ]
+}

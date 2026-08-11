@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-override_email_modification_restrictions"
 title = "Override email modification restrictions - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_configure_authentication/", "Configure central authentication for Ansible Automation Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-override_email_modification_restrictions/aem-page/secure-override_email_modification_restrictions.html"
 last_crumb = "Override email modification restrictions"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Override email modification restrictions"
 oversized = "false"
@@ -57,8 +57,6 @@ Each component manages its own settings independently. Apply the setting to each
 
      Use the following format:
 
-
-
 ```
 controller_extra_settings:
   - setting: ALLOW_USER_EMAIL_SELF_EDIT
@@ -73,4 +71,5 @@ spec:
     - setting: ALLOW_USER_EMAIL_SELF_EDIT
       value: "true"
 ```
+
      The operator writes these settings into a ConfigMap and mounts it as a settings file inside the pod. The platform applies changes automatically after you update the custom resource.

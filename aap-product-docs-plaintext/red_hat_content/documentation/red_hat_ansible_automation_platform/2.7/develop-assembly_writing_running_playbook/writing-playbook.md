@@ -22,8 +22,8 @@ tasks:
 - name: Ping my hosts
 ansible.builtin.ping:
 ```
-`Ansible-lint` runs in the background and displays errors in the **Problems** tab of the terminal. There are no errors in this playbook:
 
+`Ansible-lint` runs in the background and displays errors in the **Problems** tab of the terminal. There are no errors in this playbook:
 
 ![Ansible-lint showing no errors in a playbook](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ansible-lint-no-errors.png)
 

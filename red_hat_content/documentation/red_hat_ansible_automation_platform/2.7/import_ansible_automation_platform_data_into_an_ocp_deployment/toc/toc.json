@@ -1,0 +1,23 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Import Ansible Automation Platform data into an OCP deployment",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Procedure",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-8a276dbb-6872-4bed-8ce7-737a1630a0de__steps-unordered_1",
+          "anchor": null,
+          "singlePageAnchor": "GUID-8a276dbb-6872-4bed-8ce7-737a1630a0de__steps-unordered_1"
+        }
+      ]
+    }
+  ]
+}

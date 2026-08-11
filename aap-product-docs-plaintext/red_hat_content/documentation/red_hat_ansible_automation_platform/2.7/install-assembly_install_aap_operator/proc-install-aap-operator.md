@@ -51,5 +51,4 @@ The installation process begins. When installation finishes, a modal appears not
 | ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | -------------------------- | -------------------------- |
 | Automation ControllerAutomation Controller BackupAutomation Controller RestoreAutomation Controller Mesh Ingress | Automation HubAutomation Hub BackupAutomation Hub Restore | EDAEDA BackupEDA Restore   | Ansible Lightspeed         |
 
-
 - Verify that the Ansible Automation Platform operator displays a **Succeeded** status.

@@ -10,17 +10,9 @@
       "singlePageAnchor": null,
       "sections": [
         {
-          "title": "RPM-based installation secrets",
-          "visible": true,
-          "weight": 1,
-          "urlFragment": "ref-aap-operational-secrets___rpm_based_installation_secrets",
-          "anchor": null,
-          "singlePageAnchor": "ref-aap-operational-secrets___rpm_based_installation_secrets"
-        },
-        {
           "title": "Container-based installation secrets",
           "visible": true,
-          "weight": 2,
+          "weight": 1,
           "urlFragment": "ref-aap-operational-secrets___container_based_installation_secrets",
           "anchor": null,
           "singlePageAnchor": "ref-aap-operational-secrets___container_based_installation_secrets"
@@ -28,7 +20,7 @@
         {
           "title": "Automation use secrets",
           "visible": true,
-          "weight": 3,
+          "weight": 2,
           "urlFragment": "con-automation-use-secrets",
           "anchor": null,
           "singlePageAnchor": "con-automation-use-secrets"
@@ -36,7 +28,7 @@
         {
           "title": "Protect sensitive data with no_log",
           "visible": true,
-          "weight": 4,
+          "weight": 3,
           "urlFragment": "con-protect-sensitive-data-no-log",
           "anchor": null,
           "singlePageAnchor": "con-protect-sensitive-data-no-log"

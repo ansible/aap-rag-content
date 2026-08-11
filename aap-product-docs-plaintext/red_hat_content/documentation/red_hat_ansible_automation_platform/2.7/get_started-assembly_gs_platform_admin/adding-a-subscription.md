@@ -9,7 +9,6 @@ To add your subscription by uploading a subscription manifest, you must first:
 
 - Obtain your manifest file. See [Obtaining a manifest file](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_activate_1#assembly-aap-obtain-manifest-files "You can obtain a subscription manifest in the Subscription Allocations section of Red Hat Subscription Management.") for more information.
 
-
 To add your subscription using your service account credentials, you must first:
 
 - Have [created a service account](https://docs.redhat.com/en/documentation/red_hat_hybrid_cloud_console/1-latest/html/creating_and_managing_service_accounts/proc-ciam-svc-acct-overview-creating-service-acct#proc-ciam-svc-acct-create-creating-service-acct) and saved the client ID and client secret.

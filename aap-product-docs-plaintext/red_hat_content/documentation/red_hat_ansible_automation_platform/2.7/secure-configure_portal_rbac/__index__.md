@@ -9,7 +9,6 @@ Ansible automation portal uses two categories of permissions:
 - **Catalog and scaffolder permissions** control whether users can view templates, execute actions, and manage tasks.
 - **Navigation permissions** control which sidebar items and pages are visible to users. Without the required navigation permission, a sidebar item and its associated pages are hidden.
 
-
 Important:
 
 RBAC differs by template type:

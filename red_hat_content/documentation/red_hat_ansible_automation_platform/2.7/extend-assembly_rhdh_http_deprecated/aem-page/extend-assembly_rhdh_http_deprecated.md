@@ -1,6 +1,6 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_http_deprecated"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_http_deprecated"
 title = "Install Ansible plug-ins using an HTTP plug-in registry (deprecated) - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_http_deprecated/aem-page/extend-assembly_rhdh_http_deprecated.html"
 last_crumb = "Install Ansible plug-ins using an HTTP plug-in registry (deprecated)"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Install Ansible plug-ins using an HTTP plug-in registry (deprecated)"
 oversized = "false"
@@ -65,6 +65,7 @@ $ export DYNAMIC_PLUGIN_ROOT_DIR=/path/to/<ansible-backstage-plugins-local-dir-c
 ```
 $ tar --exclude='*code*' -xzf ansible-rhdh-plugins-x.y.z.tar.gz -C $DYNAMIC_PLUGIN_ROOT_DIR
 ```
+
     Substitute the Ansible plug-ins release version, for example `2.0.0`, for `x.y.z`.
 
 ### Results
@@ -78,6 +79,7 @@ ansible-plugin-backstage-rhaap-dynamic-x.y.z.tgz.integrity
 ansible-plugin-scaffolder-backend-module-backstage-rhaap-dynamic-x.y.z.tgz
 ansible-plugin-scaffolder-backend-module-backstage-rhaap-dynamic-x.y.z.tgz.integrity
 ```
+
 The files with the `.integrity` file type contain the plugin SHA value. The SHA value is used during the plug-in configuration.
 
 ## Create a registry for the Ansible plug-ins
@@ -119,6 +121,7 @@ To verify that the plugin-registry was deployed successfully, open the **Topolog
 ansible-plugin-backstage-rhaap-dynamic-x.y.z.tgz
 ansible-plugin-scaffolder-backend-module-backstage-rhaap-dynamic-x.y.z.tgz
 ```
+
      The version numbers and file names can differ.
 
 ## Install the plug-ins from the HTTP registry
@@ -170,6 +173,7 @@ data:
             backend:
               ansible.plugin-scaffolder-backend-module-backstage-rhaap: null
 ```
+
     Reference this ConfigMap in your `Backstage` CR under `spec.application.dynamicPluginsConfigMapName`.
 
     **Helm chart installation**

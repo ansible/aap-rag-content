@@ -26,16 +26,13 @@ Successful requests result in an entry on the **Jobs** tab, where you can view t
 - `/usr/share/awx/request_tower_configuration.sh` (Linux/UNIX)
 - `/usr/share/awx/request_tower_configuration.ps1` (Windows)
 
-
 Their usage is described in the source code of the file by passing the `-h` flag, as the following shows:
 
 ```
 ./request_tower_configuration.sh -h
 Usage: ./request_tower_configuration.sh <options>
 
-
 Request server configuration from Ansible Tower.
-
 
 OPTIONS:
 -h      Show this message
@@ -45,6 +42,7 @@ OPTIONS:
 -t      Job template ID (required)
 -e      Extra variables
 ```
+
 This script can retry commands and is therefore a more robust way to use callbacks than a simple `curl` request. The script retries once per minute for up to ten minutes.
 
 Note:

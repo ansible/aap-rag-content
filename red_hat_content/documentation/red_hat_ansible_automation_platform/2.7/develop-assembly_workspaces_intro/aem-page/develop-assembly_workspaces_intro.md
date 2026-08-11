@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_workspaces_intro"
 template = "docs/aem-title.html"
 title = "Access preconfigured development tools with Ansible development workspaces - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_workspaces_intro"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_workspaces_intro/", "Access preconfigured development tools with Ansible development workspaces"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_workspaces_intro/aem-page/develop-assembly_workspaces_intro.html"
 last_crumb = "Access preconfigured development tools with Ansible development workspaces"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Access preconfigured development tools with Ansible development workspaces"
 oversized = "false"
@@ -67,6 +67,5 @@ Red Hat OpenShift Dev Spaces is a containerized cloud development environment (C
 The Ansible dev spaces image is the container image for Ansible development workspaces. It is fully supported by Red Hat as part of your Ansible Automation Platform subscription.
 
 The following diagram illustrates the relationship between OpenShift Container Platform, OpenShift Dev Spaces, and Ansible development workspaces.
-
 
 ![Ansible development workspaces topology](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/devtools-workspaces-architecture.png)  

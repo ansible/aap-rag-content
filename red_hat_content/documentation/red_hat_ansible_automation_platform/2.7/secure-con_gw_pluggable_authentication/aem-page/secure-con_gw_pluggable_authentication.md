@@ -1,7 +1,7 @@
 +++
-title = "Pluggable authentication - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gw_pluggable_authentication"
+title = "Pluggable authentication - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_configure_authentication/", "Configure central authentication for Ansible Automation Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_gw_pluggable_authentication/aem-page/secure-con_gw_pluggable_authentication.html"
 last_crumb = "Pluggable authentication"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Pluggable authentication"
 oversized = "false"
@@ -65,7 +65,6 @@ As a platform administrator, you can enable or disable authenticators. However, 
 - You have at least one other authenticator method configured.
 - You have at least one administrator account that can authenticate using your alternate authenticator.
 
-
 CAUTION:
 
 Disabling the local authenticator without an alternative authentication in place can result in a locked environment.
@@ -101,6 +100,7 @@ aap-gateway-api authenticators --list
 ```
 aap-gateway-manage authenticators --enable :id
 ```
+
     where: `:id` is the ID of the local authenticator obtained from the previous step.
 
 ## Adjust the mapping order
@@ -119,7 +119,6 @@ For example:
 
 - Authenticator map A denies all users access to the system
 - Authenticator map B allows the user `john` access to the system
-
 
 When the mapping order is set to A, B; the first map denies access for all users, including `john`. The second map subsequently allows `john` access to the system and the result is that `john` is granted access and is able to log in to the platform.
 
@@ -155,7 +154,7 @@ Authentication map types can be used with any type of authenticator. Each map ha
   -  [Is Superuser](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-superuser-mapping "Superuser mapping is the mapping of a user to the superuser role, such as System Administrator.")
 
 6.  Enter a unique rule **Name** to identify the rule.
-7.  Select a **Trigger** from the list. See [Authenticator map triggers](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-authenticator-map-triggers "Each map has a trigger that defines when the map should be evaluated as true. Trigger types include the following:") for more details. Choices include:
+7.  Select a **Trigger** from the list. See [Authenticator map triggers](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-authenticator-map-triggers "Each map has a trigger that defines when the map should be evaluated as true. Select a trigger from the When to apply the rule field.") for more details. Choices include:
 
   -  **Always**
   -  **Never**
@@ -209,6 +208,5 @@ When you select an identity provider:
 - Confirm that the provider verifies email addresses during user registration.
 - Confirm that the provider requires administrator approval for email changes, or that email changes trigger re-verification.
 - If the provider does not meet these requirements, use a different provider or implement compensating controls.
-
 
 For more information about how the platform links external identities to accounts, see [User association and attribute synchronization](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gw_user_association_and_attr_sync "Ansible Automation Platform manages user accounts and synchronizes attributes by centralizing user identification around a matching email address. You can sign in with existing accounts from different sources while maintaining a consistent user profile and access permissions.").

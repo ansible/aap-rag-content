@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 title = "OAuth 2 token authentication - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_controller_api_oauth2_token"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_api_auth_methods/", "Authenticate through the API"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_controller_api_oauth2_token/aem-page/secure-con_controller_api_oauth2_token.html"
 last_crumb = "OAuth 2 token authentication"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "OAuth 2 token authentication"
 oversized = "false"
@@ -38,7 +38,6 @@ The different methods for obtaining OAuth 2 access tokens in automation controll
 - Application token: Implicit grant type
 - Application token: Authorization Code grant type
 
-
 You can create an OAuth 2 token in the API or in the Access Management> (and then)OAuth Applications tab of the platform gateway UI.
 
 For the purpose of this example, use the PAT method for creating a token in the API. After you create it, you can set the scope.
@@ -56,11 +55,10 @@ Create a token through the platform gateway tokens endpoint:
 ```
 curl -u user:password -k -X POST https://<gateway server name>/api/gateway/v1/tokens/
 ```
+
 This call returns JSON data with the following:
 
-
 ![API OAuth2 JSON](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/api-oauth2-json-returned-token-value.png)  
-
 
 You can use the value of the `token` property to perform a `GET` request for a resource, such as Hosts:
 
@@ -70,6 +68,7 @@ curl -k -X GET \
   -H “Authorization: Bearer <oauth2-token-value>” \
   https://<platform-host>/api/controller/v2/hosts/
 ```
+
 You can also run a job by making a `POST` to the job template that you want to start:
 
 ```

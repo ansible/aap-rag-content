@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_disaster_recovery_operations"
 title = "Disaster recovery and operational continuity - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_disaster_recovery_operations"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_hardening_aap/", "Harden the platform security posture"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-proc_disaster_recovery_operations/aem-page/secure-proc_disaster_recovery_operations.html"
 last_crumb = "Disaster recovery and operational continuity"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Disaster recovery and operational continuity"
 oversized = "false"
@@ -37,7 +37,6 @@ The two main reasons an Ansible Automation Platform administrator needs to back 
 
 - To save a copy of the data from your Ansible Automation Platform environment, so you can restore it if needed.
 - To use the backup to restore the environment into a different set of servers if you’re creating a new Ansible Automation Platform cluster or preparing for an upgrade.
-
 
 In all cases, the recommended and safest process is to always use the same versions of PostgreSQL and Ansible Automation Platform to back up and restore the environment.
 

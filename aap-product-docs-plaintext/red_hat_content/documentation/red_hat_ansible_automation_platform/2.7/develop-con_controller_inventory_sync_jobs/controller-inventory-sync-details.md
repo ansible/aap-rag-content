@@ -3,9 +3,7 @@
 
 Access the **Details** tab to view details about the job execution:
 
-
 ![Show job details for inventory sync](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/sync.png)
-
 
 You can view the following details for an executed job:
 
@@ -23,7 +21,6 @@ You can view the following details for an executed job:
 - **Execution Environment**: The execution environment used.
 - **Execution node**: The node used to run the job.
 - **Instance Group**: The name of the instance group used with this job (automation controller is the default instance group).
-
 
 Selecting these items enables you to view the corresponding job templates, projects, and other objects.
 

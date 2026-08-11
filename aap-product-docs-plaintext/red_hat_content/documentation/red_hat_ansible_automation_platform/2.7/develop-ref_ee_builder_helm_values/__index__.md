@@ -37,15 +37,15 @@ clientSecret: ${GITHUB_OAUTH_CLIENT_SECRET}
 catalog:
 locations:
 - type: url
-target: https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.0/templates/ee-start-from-scratch.yaml
+target: https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.1/templates/ee-start-from-scratch.yaml
 rules:
 - allow: [Template]
 - type: url
-target: https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.0/templates/ee-cloud-automation.yaml
+target: https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.1/templates/ee-cloud-automation.yaml
 rules:
 - allow: [Template]
 - type: url
-target: https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.0/templates/ee-network-automation.yaml
+target: https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.1/templates/ee-network-automation.yaml
 rules:
 - allow: [Template]
 
@@ -95,7 +95,6 @@ baseUrl: https://aap.example.com
 token: ${AAP_API_TOKEN}
 ```
 
-
 Note:
 
 Replace placeholder values (`${...}`, `<your_github_org>`, `aap.example.com`) with your actual environment values. Secrets referenced with `${...}` are resolved from the `secrets-scm` OpenShift secret at runtime.
@@ -130,6 +129,19 @@ clientId: ${GITHUB_OAUTH_CLIENT_ID}
 clientSecret: ${GITHUB_OAUTH_CLIENT_SECRET}
 
 catalog:
+locations:
+- type: url
+target: https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.1/templates/ee-start-from-scratch.yaml
+rules:
+- allow: [Template]
+- type: url
+target: https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.1/templates/ee-cloud-automation.yaml
+rules:
+- allow: [Template]
+- type: url
+target: https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.1/templates/ee-network-automation.yaml
+rules:
+- allow: [Template]
 providers:
 rhaap:
 production:
@@ -171,15 +183,14 @@ baseUrl: https://aap.example.com
 token: ${AAP_API_TOKEN}
 ```
 
-
 Note:
 
-The `${...}` references are resolved from Podman secrets through the Quadlet drop-in file (`ee-builder-secrets.conf`). PAT-based secrets (`portal_github_token`, `portal_gitlab_token`) are managed by the base portal infrastructure and do not require a drop-in entry.
+On RHEL appliances, the `${...}` references are resolved from Podman secrets. The portal automatically injects any `portal_`-prefixed Podman secret into the container as an environment variable.
 
 ## Key configuration sections
 
 `integrations.github`
-Git provider authentication. Configure either a PAT (`token`) or a GitHub App (`apps`), not both. See [Configure a GitHub App for content discovery](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_app_ee_builder "Create and install a GitHub App so that execution environment builder can scan your organization's repositories for Ansible collections.") or [Configure a Personal Access Token for GitHub](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_pat_ee_builder "Create and store a GitHub Personal Access Token (PAT) so that execution environment builder can scan repositories for Ansible collections.").
+Git provider authentication. A GitHub App is recommended. You do not need both, but having both configured does not break the install. See [Configure a GitHub App for content discovery](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_app_ee_builder "Create and install a GitHub App so that execution environment builder can scan your organization's repositories for Ansible collections.") or [Configure a Personal Access Token for GitHub](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_pat_ee_builder "Create and store a GitHub Personal Access Token (PAT) so that execution environment builder can scan repositories for Ansible collections.").
 
 `backend.cors.origin`
 CORS allowed origins. Add self-hosted Git provider URLs if not using `github.com` or `gitlab.com`.

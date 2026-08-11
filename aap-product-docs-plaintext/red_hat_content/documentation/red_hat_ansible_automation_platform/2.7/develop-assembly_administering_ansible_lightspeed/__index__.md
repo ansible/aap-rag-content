@@ -7,7 +7,6 @@ This chapter provides information about how to get set up as an organization adm
 - Access the Ansible Lightspeed portal as an organization administrator
 - View and manage the Admin dashboard telemetry data
 
-
 Note:
 
 If you are using a free 90-day trial account, you need a trial or paid subscription to the Red Hat Ansible Automation Platform, but you do not need a trial or paid subscription to IBM watsonx Code Assistant. This means that you do not need to configure the API key or model ID when setting up or using a trial account.

@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_self_service_architecture_licensing"
 template = "docs/aem-title.html"
 title = "Architecture and licensing - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_self_service_architecture_licensing"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_about/", "Install Ansible automation portal (OpenShift Container Platform only)"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-con_self_service_architecture_licensing/aem-page/install-con_self_service_architecture_licensing.html"
 last_crumb = "Architecture and licensing"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Architecture and licensing"
 oversized = "false"
@@ -35,7 +35,6 @@ RHDH provides the foundational features for the self-service portal, including:
 - Plugin architecture for custom integrations
 - Web interface components and navigation
 - Template and catalog management
-
 
 The self-service portal extends RHDH with Ansible Automation Platform-specific plugins that enable automation job execution, template synchronization, and integration with Ansible Automation Platform organizations and job templates.
 

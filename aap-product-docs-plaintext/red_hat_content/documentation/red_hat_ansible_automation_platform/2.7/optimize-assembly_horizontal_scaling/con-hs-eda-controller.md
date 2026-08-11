@@ -14,3 +14,6 @@ Runs an Event-Driven Ansible worker, which is the component of Event-Driven Ansi
 Hybrid node type
 Is a combination of the API node and the worker node.
 
+Event-stream node type
+Receives incoming event stream connections from external sources.
+

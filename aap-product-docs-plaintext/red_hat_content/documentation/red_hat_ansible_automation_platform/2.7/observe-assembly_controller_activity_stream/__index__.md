@@ -5,7 +5,6 @@ Track all changes made to any object in automation controller by reviewing the *
 - From the navigation panel, select Automation Execution> (and then)Administration> (and then)Activity Stream.
 ![Activity stream page](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/activity_stream_page.png)
 
-
 An Activity Stream shows all changes for a particular object. For each change, the Activity Stream shows the time of the event, the user that initiated the event, and the action. The information displayed varies depending on the type of event.
 
 - Click the ![Examine](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/examine.png) icon to display the event log for the change. ![Activity stream details](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/activity_stream_details.png)

@@ -12,7 +12,6 @@ To access the on-premise deployment of Red Hat Ansible Lightspeed, all Ansible u
 
 1. Obtain the URL of your Ansible Lightspeed instance:
 
-
 1. In Red Hat OpenShift Container Platform, select Networking → Routes and locate the Red Hat Ansible Lightspeed instance that was created.
 
 2. From the **Location** column, copy the URL of your Ansible Lightspeed instance.
@@ -28,7 +27,6 @@ The URL will be in the following format: `https://<lightspeed_route>/complete/aa
 5. From the **Ansible** extension page, click the **Settings** icon ( ![Settings icon](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant-2.x_latest-Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant_User_Guide-en-US/images/a965b5f084413665a18b604849646b2a/settings-icon-ansible-vscode-extension.png) ) and select **Extension Settings**.
 
 6. Select **Ansible Lightspeed** settings and specify the following information:
-
 
 - In the **URL for Ansible Lightspeed** field, enter the **Route URL** of the Red Hat Ansible Lightspeed on-premise deployment. Ansible users must have Ansible Automation Platform controller credentials.
 

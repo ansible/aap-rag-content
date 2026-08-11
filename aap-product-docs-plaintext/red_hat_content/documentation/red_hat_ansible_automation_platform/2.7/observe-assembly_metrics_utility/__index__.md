@@ -12,7 +12,6 @@ The configuration data includes the following information:
 - Subscription information
 - The base URL
 
-
 The reporting data includes the following information:
 
 - Job name and ID
@@ -22,6 +21,5 @@ The reporting data includes the following information:
 - Project name
 - Success or failure information
 - Report date and time
-
 
 To ensure that `metrics-utility` continues to work as configured, clear your report directories of outdated reports regularly.

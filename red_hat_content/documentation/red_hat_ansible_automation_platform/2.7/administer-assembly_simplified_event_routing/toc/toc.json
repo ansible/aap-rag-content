@@ -15,79 +15,199 @@
           "weight": 1,
           "urlFragment": "event-streams",
           "anchor": null,
-          "singlePageAnchor": "event-streams"
-        },
-        {
-          "title": "Create an event stream credential",
-          "visible": true,
-          "weight": 2,
-          "urlFragment": "eda-create-event-stream-credential",
-          "anchor": null,
-          "singlePageAnchor": "eda-create-event-stream-credential"
-        },
-        {
-          "title": "Create an event stream",
-          "visible": true,
-          "weight": 3,
-          "urlFragment": "eda-create-event-stream",
-          "anchor": null,
-          "singlePageAnchor": "eda-create-event-stream"
-        },
-        {
-          "title": "HTTP headers",
-          "visible": true,
-          "weight": 4,
-          "urlFragment": "eda-http-headers",
-          "anchor": null,
-          "singlePageAnchor": "eda-http-headers"
-        },
-        {
-          "title": "Configuring HTTP headers securely for event streams",
-          "visible": true,
-          "weight": 5,
-          "urlFragment": "eda-configure-http-headers",
-          "anchor": null,
-          "singlePageAnchor": "eda-configure-http-headers"
-        },
-        {
-          "title": "Static Unique Universal Identifiers (UUIDs) for event streams",
-          "visible": true,
-          "weight": 6,
-          "urlFragment": "eda-static-uuids",
-          "anchor": null,
-          "singlePageAnchor": "eda-static-uuids"
-        },
-        {
-          "title": "Update an event stream with a static UUID (API Method)",
-          "visible": true,
-          "weight": 7,
-          "urlFragment": "eda-update-static-UUID-API",
-          "anchor": null,
-          "singlePageAnchor": "eda-update-static-UUID-API"
-        },
-        {
-          "title": "Configure your remote system to send events",
-          "visible": true,
-          "weight": 8,
-          "urlFragment": "eda-config-remote-sys-to-events",
-          "anchor": null,
-          "singlePageAnchor": "eda-config-remote-sys-to-events"
-        },
-        {
-          "title": "Verify your event streams work",
-          "visible": true,
-          "weight": 9,
-          "urlFragment": "eda-verify-event-streams",
-          "anchor": null,
-          "singlePageAnchor": "eda-verify-event-streams"
-        },
-        {
-          "title": "Replace sources and attach event streams to activations",
-          "visible": true,
-          "weight": 10,
-          "urlFragment": "eda-replace-sources-with-event-streams",
-          "anchor": null,
-          "singlePageAnchor": "eda-replace-sources-with-event-streams"
+          "singlePageAnchor": "event-streams",
+          "sections": [
+            {
+              "title": "Create an event stream credential",
+              "visible": true,
+              "weight": 1,
+              "urlFragment": "event-streams",
+              "anchor": "eda-create-event-stream-credential",
+              "singlePageAnchor": "eda-create-event-stream-credential"
+            },
+            {
+              "title": "Create an event stream",
+              "visible": true,
+              "weight": 2,
+              "urlFragment": "event-streams",
+              "anchor": "eda-create-event-stream",
+              "singlePageAnchor": "eda-create-event-stream"
+            },
+            {
+              "title": "HTTP headers",
+              "visible": true,
+              "weight": 3,
+              "urlFragment": "event-streams",
+              "anchor": "eda-http-headers",
+              "singlePageAnchor": "eda-http-headers"
+            },
+            {
+              "title": "Configuring HTTP headers securely for event streams",
+              "visible": true,
+              "weight": 4,
+              "urlFragment": "event-streams",
+              "anchor": "eda-configure-http-headers",
+              "singlePageAnchor": "eda-configure-http-headers"
+            },
+            {
+              "title": "Static Unique Universal Identifiers (UUIDs) for event streams",
+              "visible": true,
+              "weight": 5,
+              "urlFragment": "event-streams",
+              "anchor": "eda-static-uuids",
+              "singlePageAnchor": "eda-static-uuids"
+            },
+            {
+              "title": "Update an event stream with a static UUID (API Method)",
+              "visible": true,
+              "weight": 6,
+              "urlFragment": "event-streams",
+              "anchor": "eda-update-static-UUID-API",
+              "singlePageAnchor": "eda-update-static-UUID-API"
+            },
+            {
+              "title": "Configure your remote system to send events",
+              "visible": true,
+              "weight": 7,
+              "urlFragment": "event-streams",
+              "anchor": "eda-config-remote-sys-to-events",
+              "singlePageAnchor": "eda-config-remote-sys-to-events"
+            },
+            {
+              "title": "Verify your event streams work",
+              "visible": true,
+              "weight": 8,
+              "urlFragment": "event-streams",
+              "anchor": "eda-verify-event-streams",
+              "singlePageAnchor": "eda-verify-event-streams"
+            },
+            {
+              "title": "Replace sources and attach event streams to activations",
+              "visible": true,
+              "weight": 9,
+              "urlFragment": "event-streams",
+              "anchor": "eda-replace-sources-with-event-streams",
+              "singlePageAnchor": "eda-replace-sources-with-event-streams"
+            },
+            {
+              "title": "Event buses",
+              "visible": true,
+              "weight": 10,
+              "urlFragment": "event-streams",
+              "anchor": "GUID-dd4d7a8d-7a17-4c8e-839d-81c7037b6eb5",
+              "singlePageAnchor": "GUID-dd4d7a8d-7a17-4c8e-839d-81c7037b6eb5",
+              "sections": [
+                {
+                  "title": "AVRO support for Kafka event sources configuration",
+                  "visible": true,
+                  "weight": 1,
+                  "urlFragment": "event-streams",
+                  "anchor": "GUID-dd4d7a8d-7a17-4c8e-839d-81c7037b6eb5__section_1",
+                  "singlePageAnchor": "GUID-dd4d7a8d-7a17-4c8e-839d-81c7037b6eb5__section_1"
+                },
+                {
+                  "title": "Create a Kafka-Avro custom credential type",
+                  "visible": true,
+                  "weight": 2,
+                  "urlFragment": "event-streams",
+                  "anchor": "GUID-07e12b4e-84af-442e-8c47-c24301933128",
+                  "singlePageAnchor": "GUID-07e12b4e-84af-442e-8c47-c24301933128",
+                  "sections": [
+                    {
+                      "title": "Before you begin",
+                      "visible": false,
+                      "weight": 1,
+                      "urlFragment": "event-streams",
+                      "anchor": "GUID-07e12b4e-84af-442e-8c47-c24301933128__prereq_1",
+                      "singlePageAnchor": "GUID-07e12b4e-84af-442e-8c47-c24301933128__prereq_1"
+                    },
+                    {
+                      "title": "About this task",
+                      "visible": false,
+                      "weight": 2,
+                      "urlFragment": "event-streams",
+                      "anchor": "GUID-07e12b4e-84af-442e-8c47-c24301933128__context_1",
+                      "singlePageAnchor": "GUID-07e12b4e-84af-442e-8c47-c24301933128__context_1"
+                    },
+                    {
+                      "title": "Results",
+                      "visible": false,
+                      "weight": 3,
+                      "urlFragment": "event-streams",
+                      "anchor": "GUID-07e12b4e-84af-442e-8c47-c24301933128__result_1",
+                      "singlePageAnchor": "GUID-07e12b4e-84af-442e-8c47-c24301933128__result_1"
+                    },
+                    {
+                      "title": "What to do next",
+                      "visible": false,
+                      "weight": 4,
+                      "urlFragment": "event-streams",
+                      "anchor": "GUID-07e12b4e-84af-442e-8c47-c24301933128__postreq_1",
+                      "singlePageAnchor": "GUID-07e12b4e-84af-442e-8c47-c24301933128__postreq_1"
+                    }
+                  ]
+                },
+                {
+                  "title": "Configure AVRO support for Kafka event sources",
+                  "visible": true,
+                  "weight": 3,
+                  "urlFragment": "event-streams",
+                  "anchor": "GUID-32323d35-7588-4574-9434-51d595198765",
+                  "singlePageAnchor": "GUID-32323d35-7588-4574-9434-51d595198765",
+                  "sections": [
+                    {
+                      "title": "Before you begin",
+                      "visible": false,
+                      "weight": 1,
+                      "urlFragment": "event-streams",
+                      "anchor": "GUID-32323d35-7588-4574-9434-51d595198765__prereq_1",
+                      "singlePageAnchor": "GUID-32323d35-7588-4574-9434-51d595198765__prereq_1"
+                    },
+                    {
+                      "title": "About this task",
+                      "visible": false,
+                      "weight": 2,
+                      "urlFragment": "event-streams",
+                      "anchor": "GUID-32323d35-7588-4574-9434-51d595198765__context_1",
+                      "singlePageAnchor": "GUID-32323d35-7588-4574-9434-51d595198765__context_1"
+                    }
+                  ]
+                },
+                {
+                  "title": "Configure Schema Registry authentication",
+                  "visible": true,
+                  "weight": 4,
+                  "urlFragment": "event-streams",
+                  "anchor": "GUID-6987ef7e-4684-48aa-a835-755487163945",
+                  "singlePageAnchor": "GUID-6987ef7e-4684-48aa-a835-755487163945"
+                },
+                {
+                  "title": "Configure SSL/TLS for Schema Registry",
+                  "visible": true,
+                  "weight": 5,
+                  "urlFragment": "event-streams",
+                  "anchor": "GUID-e33635c0-e3e6-4e06-82b7-540c0b52ad22",
+                  "singlePageAnchor": "GUID-e33635c0-e3e6-4e06-82b7-540c0b52ad22"
+                },
+                {
+                  "title": "Configuration parameters",
+                  "visible": true,
+                  "weight": 6,
+                  "urlFragment": "event-streams",
+                  "anchor": "GUID-1d405aee-cc43-4b02-bd82-99ccf3d9d34b",
+                  "singlePageAnchor": "GUID-1d405aee-cc43-4b02-bd82-99ccf3d9d34b"
+                },
+                {
+                  "title": "Rulebook examples",
+                  "visible": true,
+                  "weight": 7,
+                  "urlFragment": "event-streams",
+                  "anchor": "GUID-5c4873ca-3a13-4b67-a9d6-a9cec2cfa834",
+                  "singlePageAnchor": "GUID-5c4873ca-3a13-4b67-a9d6-a9cec2cfa834"
+                }
+              ]
+            }
+          ]
         }
       ]
     }

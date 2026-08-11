@@ -18,14 +18,12 @@ For information about how to obtain an API key and model ID from IBM watsonx Cod
 
 3. Specify the API key of your IBM watsonx Code Assistant instance:
 
-
 1. Under **IBM Cloud API Key**, click **Add API key**. A screen to enter the **API Key** is displayed.
 2. Enter the API Key.
 3. Optional: Click **Test** to validate the API key.
 4. Click **Save**.
 
 4. Specify the model ID of the model that you want to use:
-
 
 1. Click **Model Settings**.
 

@@ -8,7 +8,6 @@ Ansible Automation Platform should be used to fulfill security policy requiremen
 - Monitoring for drift that violates the policy.
 - Automating correction of any policy violation.
 
-
 This can be done through 5 steps of the cybersecurity framework:
 
 IDENTIFY

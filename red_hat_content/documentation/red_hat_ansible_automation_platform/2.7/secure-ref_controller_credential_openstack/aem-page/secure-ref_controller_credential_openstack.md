@@ -1,6 +1,6 @@
 +++
-title = "OpenStack credential type - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "OpenStack credential type - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_openstack"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_openstack/aem-page/secure-ref_controller_credential_openstack.html"
 last_crumb = "OpenStack credential type"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "OpenStack credential type"
 oversized = "false"
@@ -38,6 +38,5 @@ Enter the following information for OpenStack credentials:
 - Optional: **Project (Domain Name)**: Give the project name associated with your domain.
 - Optional: **Domain Name**: Give the FQDN to be used to connect to OpenStack.
 - Optional: **Region Name**: Give the region name. For some cloud providers, such as OVH, the region must be specified.
-
 
 If you are interested in using OpenStack Cloud Credentials, see [Associate cloud credentials with a job template](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_cloud_credentials#controller-cloud-credentials "Automation controller can use Cloud Credentials to authenticate to cloud providers."), which includes a sample playbook.

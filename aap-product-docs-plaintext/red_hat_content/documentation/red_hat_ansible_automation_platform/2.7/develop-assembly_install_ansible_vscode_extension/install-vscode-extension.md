@@ -7,7 +7,6 @@ Use the following procedure to install the Ansible Lightspeed extension in VS Co
 
 - VS Code version 1.70.1 or later.
 
-
 Note:
 
 You can also install VScode derivatives, such as VScode Insider or VS Codium.

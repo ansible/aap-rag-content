@@ -24,32 +24,6 @@
           "urlFragment": "quick-start-developers_lightspeed-intro___develop_ansible_content",
           "anchor": null,
           "singlePageAnchor": "quick-start-developers_lightspeed-intro___develop_ansible_content"
-        },
-        {
-          "title": "Quick start for developers",
-          "visible": true,
-          "weight": 3,
-          "urlFragment": "ref-gs-developers",
-          "anchor": null,
-          "singlePageAnchor": "ref-gs-developers",
-          "sections": [
-            {
-              "title": "Installing and configuring Ansible VS Code extension",
-              "visible": true,
-              "weight": 1,
-              "urlFragment": "ref-gs-developers",
-              "anchor": "ref-gs-developers___installing_and_configuring_ansible_vs_code_extension",
-              "singlePageAnchor": "ref-gs-developers___installing_and_configuring_ansible_vs_code_extension"
-            },
-            {
-              "title": "Developing Ansible content",
-              "visible": true,
-              "weight": 2,
-              "urlFragment": "ref-gs-developers",
-              "anchor": "ref-gs-developers___developing_ansible_content",
-              "singlePageAnchor": "ref-gs-developers___developing_ansible_content"
-            }
-          ]
         }
       ]
     }

@@ -10,7 +10,6 @@ Vertically scaling a control node by deploying a larger virtual machine with mor
 - The number of jobs that a control node can perform control tasks for, which requires both more CPU and memory.
 - The number of job events a control node can process concurrently.
 
-
 Scaling CPU and memory in the same proportion is recommended, for example, 1 CPU: 4 GB RAM. Even when memory consumption is high, increasing the CPU of an instance can often relieve pressure. The majority of the memory that control nodes consume is from unprocessed events that are stored in a memory-based queue.
 
 Note:

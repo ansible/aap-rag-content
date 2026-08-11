@@ -1,6 +1,6 @@
 +++
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_referencing_step_output"
+template = "docs/aem-title.html"
 title = "Reference step output in output - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-ref_referencing_step_output/aem-page/develop-ref_referencing_step_output.html"
 last_crumb = "Reference step output in output"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Reference step output in output"
 oversized = "false"

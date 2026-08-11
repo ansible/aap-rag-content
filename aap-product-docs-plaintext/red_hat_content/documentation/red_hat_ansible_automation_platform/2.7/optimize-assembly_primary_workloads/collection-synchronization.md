@@ -11,7 +11,6 @@ The performance of collection synchronization is impacted by the following:
 - The number of versions synced
 - The number of versions retained
 
-
 Synchronization uses memory in direct proportion to the number of collections and versions synchronized. Using a targeted `requirements.yml` with specific versions can limit this impact.
 
 Hosting collections uses storage space. Manage the storage space that collections use by specifying the retained number of versions on the repository.

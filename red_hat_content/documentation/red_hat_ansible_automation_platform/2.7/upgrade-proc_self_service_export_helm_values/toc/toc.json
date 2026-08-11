@@ -1,0 +1,13 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Export and preserve your Helm values",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null
+    }
+  ]
+}

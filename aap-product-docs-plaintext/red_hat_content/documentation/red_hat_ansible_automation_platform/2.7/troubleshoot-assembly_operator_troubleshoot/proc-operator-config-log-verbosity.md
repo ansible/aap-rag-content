@@ -32,6 +32,7 @@ spec:
 hub:
 no_log: false
 ```
+
 For Event-Driven Ansible
 
 ```
@@ -43,6 +44,7 @@ spec:
 eda:
 no_log: false
 ```
+
 
 Note:
 This might expose sensitive data in the logs. On production clusters, this value must generally be set to `true` unless you are actively debugging an issue.

@@ -1,13 +1,14 @@
 # Respond to events from external systems
-## Create an event stream credential
+## Event streams
+### Create an event stream credential
 
 Create a credential to establish the authentication mechanism (like basic auth or HMAC) required for external systems to securely send events to an event stream.
 
-### Before you begin
+#### Before you begin
 
 - Each event stream must have exactly one credential.
 
-### Procedure
+#### Procedure
 
 1.  Log in to the Ansible Automation Platform Dashboard.
 2.  From the navigation panel, select Automation Decisions> (and then)Infrastructure> (and then)Credentials.
@@ -35,7 +36,7 @@ Add the requested information for the credential type you selected. For example,
 
 5.  Click Create credential.
 
-### Results
+#### Results
 
 The Details page is displayed. From there or the **Credentials** list view, you can edit or delete it.
 

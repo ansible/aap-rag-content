@@ -1,7 +1,7 @@
 +++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_deploying_ansible_mcp_server"
 title = "Deploy the MCP server on Ansible Automation Platform - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_deploying_ansible_mcp_server"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_deploying_ansible_mcp_server/", "Deploy the MCP server on Ansible Automation Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-assembly_deploying_ansible_mcp_server/aem-page/extend-assembly_deploying_ansible_mcp_server.html"
 last_crumb = "Deploy the MCP server on Ansible Automation Platform"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Deploy the MCP server on Ansible Automation Platform"
 oversized = "false"
@@ -35,6 +35,10 @@ Model Context Protocol (MCP) is an open standard enabling AI models to use exter
 
 The AI tools can access key information about your Ansible Automation Platform environment and perform tasks. Ansible users can query information, execute workflows, and perform automation tasks using natural language prompts directly within their preferred AI tool.
 
+Note:
+
+As of the June 3, 2026 release, the MCP server for Red Hat Ansible Automation Platform is generally available and fully supported in Ansible Automation Platform 2.6 and later versions. You can deploy the MCP server in production environments with full Red Hat support coverage.
+
 ### Benefits
 
 The following are the benefits of the MCP server:
@@ -44,11 +48,9 @@ The following are the benefits of the MCP server:
 - Provides a standardized interface for securely querying infrastructure data and executing automation workflows within the Ansible Automation Platform.
 - Enables agentic workflows to interact with the Ansible Automation Platform.
 
-
 **For Ansible users**:
 
 - Provides the ability to use the chatbot interface of their preferred external AI tool to get information about their Ansible Automation Platform environment, and run automation jobs directly through that tool.
-
 
 **For developers**:
 
@@ -67,7 +69,6 @@ The following describes the workflow:
 4. Ansible controller (The executor): The automation controller accepts the validated command from the MCP server and triggers the appropriate automation job.
 5. Response loop: The automation result is returned to the MCP server, standardized into a format the AI agent can process, and displayed to the user via the AI client.
 
-
 Important:
 
 Both the MCP server and the Ansible Automation Platform UI access the Ansible Automation Platform API. However, because the AI tool processes the API output before displaying it in its chat interface, you might observe different results when comparing the output from the AI tool with the Ansible Automation Platform UI.
@@ -78,14 +79,14 @@ The MCP server provides a pre-configured suite of toolsets that effectively act 
 
 The MCP server turns your AI agent from a passive assistant into an active operator that can interact with your Ansible Automation Platform infrastructure and execute workflows or automate tasks based on the permissions you define.
 
-| Toolset                    | Description                                                                                                                                                     | Usage examples                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br>Job management         | <br>Tools to list available job templates, launch automation jobs, and monitor their real-time status.                                                          | <br>Operators can:<br>Launch job templates and workflows to execute automation tasks for their projects and services.View job output and logs to troubleshoot failed automation tasks and understand what went wrong.Relaunch failed jobs to recover from temporary failures and complete necessary automation tasks.                                                                                                                                                                                                     |
-| <br>Inventory management   | <br>Tools to query your inventory for host details, check group membership, and verify system facts.                                                            | <br>Operators can:<br>View and browse inventories across environments to understand which systems they are managing with automation.Manage group assignments to target automation to specific sets of systems.View hosts that are configured for automation.                                                                                                                                                                                                                                                              |
-| <br>System monitoring      | <br>Tools to retrieve job logs, troubleshoot failed tasks, and check the health of your automation environment.                                                 | <br>Administrators can:<br>Perform platform status and health checks across all services to identify issues and ensure the automation platform is running correctly.Monitor service health through the platform gateway to ensure all platform components are functioning correctly.Audit user activity and generate reports to ensure compliance and identify potential security issues.                                                                                                                                 |
+| Toolset                    | Description                                                                                                                                                     | Usage examples                                                                                                                                                                                           |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <br>Job management         | <br>Tools to list available job templates, launch automation jobs, and monitor their real-time status.                                                          | <br>Operators can:<br>Launch job templates and workflows to execute automation tasks for their projects and services.View job output and logs to troubleshoot failed automation tasks and understand what went wrong.Relaunch failed jobs to recover from temporary failures and complete necessary automation tasks. |
+| <br>Inventory management   | <br>Tools to query your inventory for host details, check group membership, and verify system facts.                                                            | <br>Operators can:<br>View and browse inventories across environments to understand which systems they are managing with automation.Manage group assignments to target automation to specific sets of systems.View hosts that are configured for automation. |
+| <br>System monitoring      | <br>Tools to retrieve job logs, troubleshoot failed tasks, and check the health of your automation environment.                                                 | <br>Administrators can:<br>Perform platform status and health checks across all services to identify issues and ensure the automation platform is running correctly.Monitor service health through the platform gateway to ensure all platform components are functioning correctly.Audit user activity and generate reports to ensure compliance and identify potential security issues. |
 | <br>User management        | <br>Tools to allow the AI agent to administer access and organizational structure within the Ansible Automation Platform.                                       | <br>Administrators can:<br>Use natural-language prompts to provision users and enforce hierarchy, rather than manually navigating the UI.Create, modify, and delete users and teams to manage access to the Ansible Automation Platform and support organizational changes.Configure role-based access control to ensure users have the appropriate permissions for their responsibilities while maintaining security.View team memberships and structure to see who else in their organization is working on automation. |
-| <br>Security/compliance    | <br>Tools that enable the AI agent to act as a security operator, managing sensitive credentials and verifying platform integrity without exposing raw secrets. | <br>Operators can:<br>View available credentials to understand what authentication options are available for their automation jobs.<br>Administrators can:<br>Manage credentials and security policies to ensure secure access to external systems while maintaining proper governance.Manage custom credential types for seamless integration with third-party applications.                                                                                                                                             |
-| <br>Platform configuration | <br>Tools that enable organization administrators and developers to inspect and tune the Ansible Automation Platform infrastructure itself.                     | <br>Administrators can:<br>Manage system settings across all components to configure the platform in line with the organizational requirements and policies.Manage and track licenses to ensure compliance with licensing terms and optimize license utilization.<br>Developers can:<br>Tune execution environments to optimize the runtime performance of their automation content.                                                                                                                                      |
+| <br>Security/compliance    | <br>Tools that enable the AI agent to act as a security operator, managing sensitive credentials and verifying platform integrity without exposing raw secrets. | <br>Operators can:<br>View available credentials to understand what authentication options are available for their automation jobs.<br>Administrators can:<br>Manage credentials and security policies to ensure secure access to external systems while maintaining proper governance.Manage custom credential types for seamless integration with third-party applications. |
+| <br>Platform configuration | <br>Tools that enable organization administrators and developers to inspect and tune the Ansible Automation Platform infrastructure itself.                     | <br>Administrators can:<br>Manage system settings across all components to configure the platform in line with the organizational requirements and policies.Manage and track licenses to ensure compliance with licensing terms and optimize license utilization.<br>Developers can:<br>Tune execution environments to optimize the runtime performance of their automation content. |
 
 ### Server-level and user-level permissions
 
@@ -99,10 +100,81 @@ You can grant the following access types to the MCP server:
 - **User-level permissions**: The AI agent’s specific capabilities are inherited from the user account that generated the authentication API token.   * Inherited permissions: The AI tool inherits the user’s permissions and performs only the actions the user is authorized to perform. For example, if the user’s token only has permissions to view the "network" inventory, the AI tool cannot access or modify the "database" inventory even if the user requests it.
   * Rejection of unauthorized actions: If the AI tool attempts an action (like launching a job) that the user’s token is not authorized to perform, the Ansible Automation Platform API rejects the request.
 
-
 Warning:
 
 Enabling read-write access for the MCP server grants the AI agent autonomy to directly make changes in your Ansible Automation Platform environment, for example, executing automation jobs. The AI agent can directly make changes in your Ansible Automation Platform environment only if the user has write permissions. Large Language Models (LLMs) can occasionally misinterpret prompts or hallucinate commands. Therefore, enabling read-write access may introduce a risk of unintended changes to your environment.
+
+### Data visibility and sensitive data handling
+
+When you connect an MCP client to the MCP server for Red Hat Ansible Automation Platform and use it with an external LLM provider (such as Claude, ChatGPT, or others), **all tool call results are sent to that LLM provider** and included in the AI model's conversation context. This includes operational data such as job details, inventory contents, host variables, IP addresses, DNS names, and configuration settings.
+
+The MCP server does not add its own data filtering — it returns the same Ansible Automation Platform API responses the authenticated user could retrieve directly, subject to that user's RBAC permissions and the Ansible API's existing sensitive-data handling.
+
+Before enabling this integration, evaluate:
+
+- What data exists in your AAP environment
+- Which MCP tools you will enable
+- Whether your MCP client sends context to an external LLM provider
+
+The MCP server's data handling falls into two categories: always protected and context-dependent.
+
+**Always protected: secrets and credentials**
+
+Passwords, secret keys, API tokens, and other secret credential input fields are **always** masked by the Ansible API before the MCP server receives them. These values never appear in plaintext in tool responses.
+
+What is protected:
+
+- Credential passwords
+- Secret keys
+- Vault credentials
+- SSH private keys
+- API tokens stored in the credential system
+
+What is NOT protected:
+
+- Credential names
+- Credential types
+- Usernames
+Non-secret credential metadata (credential names, types, usernames) is still returned by the Ansible API and will be visible to the LLM provider.
+
+**Context-dependent: Operational infrastructure data**
+
+IP addresses, DNS names, hostnames, and network configuration are **not filtered** by default. This is expected behavior for infrastructure management tools like Ansible Automation Platform.
+
+What may be exposed:
+
+- IP addresses
+- DNS names
+- Hostnames
+- Network configuration details
+- Job execution details
+- Inventory structure and variables
+- Project and template configurations
+
+If your organization's security policies restrict sharing infrastructure details with external services, you should evaluate the available MCP toolsets and tools, the RBAC permissions of the tokens used to connect, and the potential data returned by the AAP APIs before enabling integration with an external LLM provider.
+
+The MCP server relies on the data filtering that the Ansible Automation Platform API already provides. The MCP server is a pass-through layer: it does not apply additional redaction, truncation, or access controls beyond what the AAP API enforces.
+
+**Credential secrets:** Passwords, secret keys, and other secret credential input fields are masked by the AAP API before the MCP server receives them. These values are not returned in plaintext in credential tool responses.
+
+**Role-based access control (RBAC):** RBAC restricts which resources a user can access through the MCP server. The MCP server inherits the permissions of the authenticated user's API token, so the AI tool can only retrieve data that the user is authorized to view. If a user lacks permission for a resource, the AAP API rejects the request and the MCP server passes that rejection back to the client.
+
+**API parity:** Data returned through MCP tool calls is the same data the authenticated user can access through the AAP API directly. The MCP server does not expose additional data beyond what RBAC allows, and does not apply redaction beyond what the AAP API already provides.
+
+The AAP API's credential masking **only applies to the AAP credential system**. If your organization stores secrets in other AAP-managed fields, those values are **not automatically protected** and can reach the MCP client and, depending on your client configuration, the configured LLM provider.
+
+Fields that are NOT automatically protected:
+
+- Inventory variables (host vars, group vars)
+- Job template extra variables
+- Job output and logs
+- Workflow variable prompts
+- Survey answers
+- Custom inventory scripts
+
+**Recommendation:** Use the AAP credential system for all secrets. Avoid storing passwords, tokens, API keys, or other sensitive values in inventory variables, extra vars, or job outputs. If you must store sensitive data outside the credential system, ensure your RBAC policies restrict access appropriately and understand that this data may be visible to LLM providers when using the MCP server.
+
+Organizations should understand that when using the MCP server with an external LLM provider, this operational infrastructure data becomes part of the AI model's context and is processed by the LLM provider's systems.
 
 ### Telemetry data collection for the MCP server
 
@@ -114,7 +186,7 @@ Important:
 
 Telemetry data collection cannot be disabled, but strict user privacy is maintained. Red Hat does not collect users' personal information, such as usernames or passwords. If any personal information is inadvertently received, the data is deleted. For more information, see the Red Hat Privacy Statement under Related Links below.
 
-### Prerequisites
+### Requirements to deploy the MCP server
 
 - Platform version: An instance of Ansible Automation Platform 2.6 or later.
 - Deployment environment:
@@ -126,11 +198,11 @@ Telemetry data collection cannot be disabled, but strict user privacy is maintai
 
 Perform the following tasks to deploy and configure an MCP server and integrate it with your preferred AI tool:
 
-| Step number | Task                                                                   | Description                                                                                                                                                                                                                         |
-| ----------- | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br>1       | <br>Deploy and configure an MCP server on container-based installation | <br>An organization administrator deploys and configures the MCP server on a container-based installation of Ansible Automation Platform 2.6 or later.                                                                              |
+| Step number | Task                                                                   | Description                                                                                                                                                                                              |
+| ----------- | ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <br>1       | <br>Deploy and configure an MCP server on container-based installation | <br>An organization administrator deploys and configures the MCP server on a container-based installation of Ansible Automation Platform 2.6 or later.                                                   |
 | <br>2       | <br>Create an API token for the MCP server                             | <br>An Ansible user creates an API token for their Ansible Automation Platform instance and uses it to connect to their preferred AI tool. The AI tools will inherit the user’s permissions for authentication using the API token. |
-| <br>3       | <br>Connect an external AI agent to the MCP server                     | <br>The Ansible user then configures an external AI tool with the MCP server’s API token, enabling the AI tool to connect to the MCP server and execute workflows and automate tasks.                                               |
+| <br>3       | <br>Connect an external AI agent to the MCP server                     | <br>The Ansible user then configures an external AI tool with the MCP server’s API token, enabling the AI tool to connect to the MCP server and execute workflows and automate tasks.                    |
 
 ## Deploy the MCP server for Red Hat Ansible Automation Platform on a container-based installation
 
@@ -155,8 +227,6 @@ As an organization administrator, you can deploy and configure the MCP server on
   - `mcp_tls_cert`: Path to TLS certificate
 
   - `mcp_tls_key`: Path to TLS key         For information about using your own TLS certificates and keys, see [Configuring custom TLS certificates](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_advanced_configuration_containerized "Configure external databases, custom TLS certificates, execution nodes, HAProxy load balancers, and hub storage for complex containerized Ansible Automation Platform deployments."). For information about required and optional variables, see [MCP server variables](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-mcp_server_variables "Inventory file variables for the MCP server for Red Hat Ansible Automation Platform.").
-
-
 
 ```
 # This is the list of inventory file variables required to deploy an Ansible MCP server on a container-based installation.
@@ -317,8 +387,6 @@ Use the API token of the Ansible MCP server to connect it with your preferred AI
 
   - **Token** = The API token of the Ansible MCP server. Use the following format to add details about your Ansible MCP server in the the `mcp.json` file:
 
-
-
 ```
 {
   "mcpServers": {
@@ -367,6 +435,7 @@ Use the API token of the Ansible MCP server to connect it with your preferred AI
   }
 }
 ```
+
     Important:
             Use a concise MCP server name, ideally limited to 20 characters. This is because AI agents combine the MCP server name with the tool name to create a unique identifier, and most AI agents enforce a 64-character limit on this combined identifier.
 
@@ -381,6 +450,42 @@ Use the API token of the Ansible MCP server to connect it with your preferred AI
 ### Troubleshoot MCP server errors
 
 This section contains information to help you diagnose and resolve issues with deploying the MCP server for Red Hat Ansible Automation Platform and connecting it to an external AI agent.
+
+#### SSL certificate validation fails when the MCP server connects to Ansible Automation Platform
+
+**Issue**: When your OpenShift Container Platform deployment uses a custom certificate authority (CA) or self-signed certificates, the MCP server cannot validate the ingress certificate. This results in `SELF_SIGNED_CERT_IN_CHAIN `errors that prevent the server from connecting to Ansible Automation Platform.
+
+To resolve this issue, create a secret that contains your CA certificate and reference it in the AnsibleMCPServer custom resource. The operator then mounts the certificate, adds it to the combined CA bundle, and redeploys the server pods.
+
+**Workaround**:
+
+To implement this solution you must have a custom CA certificate file that signed the OpenShift Container Platform ingress certificate. You must also have `oc`CLI access to the namespace where the MCP server is deployed. 1. Create a secret that contains your CA certificate in the namespace where the Ansible MCP server is deployed:
+
+```
+$ oc create secret generic <secret_name> \
+ --from-file=bundle-ca.crt=<ca_cert_file> \
+ -n <namespace>
+```
+
+Replace the following values:
+  1. `secret_name`: a name for the secret.
+  2. `ca_cert_file`: The path to your CA certificate file.
+  3. `namespace`: The namespace of the MCP server deployment.
+
+2. Edit the AnsibleMCPServer custom resource to reference the secret:
+
+```
+spec:
+  bundle_cacert_secret: <secret_name>
+```
+
+Replace `secret_name` with the name of the secret you created.
+
+3. Save the custom resource. The operator detects the configuration change, mounts the CA certificate, adds it to the combined CA bundle, and redeploys the MCP server pods.
+ **Verification**:
+
+1. Check the pod logs for the MCP server and verify that no SSL errors are present.
+2. Verify that the init container logs contain the message “Added customer CA bundle”.
 
 #### API output format rejected with 406 Status Code
 
@@ -397,8 +502,6 @@ This section contains information to help you diagnose and resolve issues with d
 - For container-based installation: Set the value of variable `mcp_ignore_certificate_errors` to `true`.
 
 - For operator-based installation:     Add the `IGNORE_CERTIFICATE_ERRORS` setting to the `mcp:` section of **AnsibleAutomationPlatform** custom resource in the following format:
-
-
 
 ```none
 spec:

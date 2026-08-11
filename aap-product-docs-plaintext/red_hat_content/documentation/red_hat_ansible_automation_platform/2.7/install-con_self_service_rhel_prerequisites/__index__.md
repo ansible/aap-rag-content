@@ -14,7 +14,6 @@ Before you deploy an Ansible automation portal RHEL appliance, verify that your 
 | Architecture     | AMD64/x86\_64                             | --          |
 | Operating system | RHEL 9.6 or later (included in appliance) | RHEL 9.7    |
 
-
 The recommended values include headroom for the built-in database. For production deployments, use an external PostgreSQL database. The built-in database is suitable for evaluation and small environments.
 
 ## Network requirements
@@ -23,13 +22,12 @@ The following table lists the default ports used by the Ansible automation porta
 
 *Table 2. Default ports for Ansible automation portal RHEL appliances*
 
-| Direction | Port          | Protocol | Purpose                                                                                    |
-| --------- | ------------- | -------- | ------------------------------------------------------------------------------------------ |
-| Inbound   | 443 (default) | HTTPS    | User access to Ansible automation portal                                                   |
-| Inbound   | 22            | SSH      | Administrator access to the appliance                                                      |
-| Outbound  | 443           | HTTPS    | Communication with the Ansible Automation Platform instance                                |
-| Outbound  | 443           | HTTPS    | Image pulls from `registry.redhat.io` (upgrades only, not required with a mirror registry) |
-
+| Direction | Port          | Protocol | Purpose                                                                                   |
+| --------- | ------------- | -------- | ----------------------------------------------------------------------------------------- |
+| Inbound   | 443 (default) | HTTPS    | User access to Ansible automation portal                                                  |
+| Inbound   | 22            | SSH      | Administrator access to the appliance                                                     |
+| Outbound  | 443           | HTTPS    | Communication with the Ansible Automation Platform instance                               |
+| Outbound  | 443           | HTTPS    | Image pulls from`registry.redhat.io` (upgrades only, not required with a mirror registry) |
 
 Port 5432 (PostgreSQL) is used internally between containers and is not exposed to the network.
 
@@ -48,12 +46,12 @@ Before deploying the appliance, create an OAuth 2.0 application in Ansible Autom
 1. Log in to Ansible Automation Platform as an administrator.
 2. Navigate to **Access Management** > **OAuth Applications**.
 3. Click **Create OAuth Application** and set the following values:
-| Field                        | Value                                                                     |
-| ---------------------------- | ------------------------------------------------------------------------- |
-| **Name**                     | `automation-portal`                                                       |
-| **Authorization grant type** | Authorization code                                                        |
-| **Redirect URIs**            | `https://placeholder.example.com` (you will update this after deployment) |
-| **Client type**              | Confidential                                                              |
+| Field                        | Value                                                                         |
+| ---------------------------- | ----------------------------------------------------------------------------- |
+| **Name**                     | A descriptive name for your OAuth application, for example`automation-portal` |
+| **Authorization grant type** | Authorization code                                                            |
+| **Redirect URIs**            | `https://placeholder.example.com` (you will update this after deployment)     |
+| **Client type**              | Confidential                                                                  |
 
 4. Click **Save**.
 5. Note the **Client ID** and **Client Secret** values. You need these for the cloud-init configuration.
@@ -67,67 +65,40 @@ Generate a personal access token for an Ansible Automation Platform administrato
 3. Set the **Scope** to **Write**.
 4. Click **Save** and note the token value. You need this for the cloud-init configuration.
 
-
 Optional: If you want to import custom templates from private GitHub or GitLab repositories, create a personal access token for each service before you begin. You provide these tokens in the cloud-init configuration.
 
 ## Prepare the cloud-init configuration
 
-The appliance uses cloud-init to apply your configuration at first boot. Cloud-init is a standard tool for automating the initial setup of virtual machines. It creates user accounts, injects SSH keys, and runs custom configuration scripts. The appliance extends cloud-init with custom fields for Ansible Automation Platform credentials and database settings.
+The appliance uses cloud-init to apply your configuration at first boot. Cloud-init creates user accounts, injects SSH keys, and runs custom configuration scripts. The appliance extends cloud-init with custom fields for Ansible Automation Platform credentials.
 
-Create a cloud-init user-data file with your SSH keys and Ansible Automation Platform credentials.
+Create two files before you install the appliance:
 
-The following four Ansible Automation Platform fields are required. Without them, Ansible automation portal services do not start:
+- `user-data` -- SSH access and Ansible Automation Platform registration
+- `meta-data` -- instance identity for cloud-init
+
+The following four Ansible Automation Platform fields are required in `user-data`. Without them, Ansible automation portal services do not start:
 
 - `aap.host_url`
 - `aap.token`
 - `aap.oauth.client_id`
 - `aap.oauth.client_secret`
 
-
 SSH keys are required for access. The appliance has no default password.
 
-All other fields are optional. The Ansible automation portal RHEL appliance auto-generates passwords for the default built-in database deployed during initial installation, backend secrets, and a user-accessible URL if you omit them.
+The Ansible automation portal RHEL appliance auto-generates passwords for the built-in database, backend secrets, and user-accessible URL when you omit those fields.
 
 Tip:
 
-Keep quotation marks around SSH public keys in the cloud-init user-data file.
+Keep quotation marks around SSH public keys in the `user-data` file.
 
-## Minimal cloud-init template
+## Create the user-data file
 
-Replace the placeholder values in angle brackets. All other values auto-generate at first boot.
-
-```yaml
-#cloud-config
-
-users:
-- name: <username>
-sudo: ALL=(ALL) NOPASSWD:ALL
-ssh_authorized_keys:
-- "<your-ssh-public-key>"
-
-aap:
-host_url: "https://<aap-host>"
-token: "<aap-api-token>"
-oauth:
-client_id: "<oauth-client-id>"
-client_secret: "<oauth-client-secret>"
-
-database:
-type: builtin
-builtin:
-password: "auto"
-admin_password: "auto"
-```
-
-## Full cloud-init template
-
-This template includes all supported fields. Replace values marked with angle brackets. Remove or leave optional sections as-is.
+Replace the placeholder values in angle brackets.
 
 ```yaml
 #cloud-config
-
 users:
-- name: <username>
+- name: admin
 sudo: ALL=(ALL) NOPASSWD:ALL
 ssh_authorized_keys:
 - "<your-ssh-public-key>"
@@ -139,50 +110,50 @@ check_ssl: true
 oauth:
 client_id: "<oauth-client-id>"
 client_secret: "<oauth-client-secret>"
-
-database:
-type: builtin
-builtin:
-password: "auto"
-admin_password: "auto"
-
-security:
-backend_secret: "auto"
-
-network:
-port: 443
-base_url: "https://portal.example.com"
-
-integrations:
-github:
-url: "github.com"
-token: "<github-personal-access-token>"
-gitlab:
-url: "gitlab.com"
-token: "<gitlab-personal-access-token>"
 ```
 
+- Set `aap.check_ssl` to `false` if your Ansible Automation Platform instance uses a self-signed certificate.
+- To enable execution environment builder at first boot, add an `integrations` section to `user-data`. See the Cloud-init reference and Understand execution environment builder topics in the related links below.
 
-- **`aap.check_ssl`** -- Set to `false` if your Ansible Automation Platform instance uses a self-signed certificate.
-- **`network.base_url`** -- Set this when users access the Ansible automation portal RHEL appliance through a hostname, route, or load balancer. If omitted, the user-accessible URL is auto-detected from the VM IP address.
-- **`network.port`** -- The HTTPS listen port. Default is `443`. If you are using the standard port 443, you do not need to specify the port. If you set a custom port, you must also open that port on any firewall and, for Red Hat OpenShift Virtualization deployments, update the Red Hat OpenShift Container Platform route to use the custom port.
-- **`integrations`** -- Optional. Only required if you need to import custom templates from private GitHub or GitLab repositories. Public repository access does not require a token.
+## Create the meta-data file
 
-## External database cloud-init template
-
-To connect to an existing PostgreSQL database instead of the built-in one, use the following `database` section:
+Create a file named `meta-data` in the same directory as `user-data`:
 
 ```yaml
-database:
-type: external
-external:
-host: "<database-host>"
-port: 5432
-name: "portal_db"
-user: "<database-user>"
-password: "<database-password>"
-ssl: true
+instance-id: portal-01
+local-hostname: portal
 ```
-The database user requires the `CREATEDB` privilege.
 
-Save the cloud-init user-data file. You will use it during the platform-specific installation procedure.
+- Set `instance-id` to a unique value for each deployment.
+- Set `local-hostname` to the hostname for the appliance.
+- To reapply cloud-init configuration on an existing virtual machine, change `instance-id` to a new unique value (for example, increment `portal-01` to `portal-02`) before redeploying. See the Cloud-init reference topic in the related links below for optional fields and re-run behavior.
+
+## Validate configuration files
+
+After you create `user-data` and `meta-data`, validate syntax before you continue to an install guide.
+
+**Option A -- Python:**
+
+```terminal
+$ python3 -c "import yaml; yaml.safe_load(open('user-data')); print('Valid YAML')"
+$ python3 -c "import yaml; yaml.safe_load(open('meta-data')); print('Valid YAML')"
+```
+
+**Option B -- yamllint:**
+
+```terminal
+$ yamllint user-data
+$ yamllint meta-data
+```
+
+Expected: `Valid YAML` (Python) or no errors (yamllint). Fix invalid YAML before you build an ISO or encode files for delivery.
+
+For **Install Ansible automation portal on Red Hat OpenShift Virtualization**, validate `user-data` only.
+
+## Next steps
+
+Save `user-data` and `meta-data`. Continue in the install guide for your platform. See the related links below for the three platform install guides.
+
+Each install guide includes steps to deliver configuration to the virtual machine.
+
+If you deploy without configuration, redeploy the virtual machine with cloud-init from this page and your platform install guide. Do not configure the appliance manually after boot.

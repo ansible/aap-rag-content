@@ -12,6 +12,5 @@ Execution environment (EE) builder in Ansible automation portal is now generally
 * **Portable definitions**: Download a `.tar` without committing to Git, or import a template from a URL for reuse.
 * **Catalogs**: Search and filter EE definitions and collections with parsed content, metadata, dependencies, and source links.
 
-
 For more information, see *Using execution environment builder* in the Ansible automation portal documentation.
 

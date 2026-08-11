@@ -6,7 +6,6 @@ Prerequisites:
 - A TLS certificate and private key in PEM format, issued by a certificate authority trusted by your organization.
 - SSH access to the appliance.
 
-
 Procedure:
 
 1. Copy your certificates to the appliance:
@@ -31,5 +30,6 @@ Verification:
 ```terminal
 $ curl -vk https://localhost 2>&1 | grep -i "issuer"
 ```
+
 The output displays the issuer from your certificate, not the self-signed issuer.
 

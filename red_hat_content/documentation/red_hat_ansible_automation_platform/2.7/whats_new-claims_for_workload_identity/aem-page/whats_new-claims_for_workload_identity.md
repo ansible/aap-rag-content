@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/whats_new-claims_for_workload_identity/aem-page/whats_new-claims_for_workload_identity.html"
 last_crumb = "Claims for workload identity"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Claims for workload identity"
 oversized = "false"
@@ -70,14 +70,14 @@ The example shows a JWT payload including standard and custom claim definitions 
 
 The following table shows the standard JWT claims.
 
-| Claim                | Value                                                                                                                                                                                                                               |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **j**(J**ti** WT ID) | A unique identifier for each JWT.                                                                                                                                                                                                   |
-| **iss** (issuer)     | The URL of the Ansible Automation Platform OIDC provider (for example, `https://aap.example.com/o`).                                                                                                                                |
-| **iat** (issued at)  | UNIX timestamp when the JWT was issued.                                                                                                                                                                                             |
-| **aud** (audience)   | The intended recipient of the JWT, such as a HashiCorp Vault instance. This is set to the value of the Vault Server URL.                                                                                                            |
+| Claim                | Value                                                                                                                                                                                                    |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **j**(J**ti** WT ID) | A unique identifier for each JWT.                                                                                                                                                                        |
+| **iss** (issuer)     | The URL of the Ansible Automation Platform OIDC provider (for example, `https://aap.example.com/o`).                                                                                                     |
+| **iat** (issued at)  | UNIX timestamp when the JWT was issued.                                                                                                                                                                  |
+| **aud** (audience)   | The intended recipient of the JWT, such as a HashiCorp Vault instance. This is set to the value of the Vault Server URL.                                                                                 |
 | **exp** (expiration) | UNIX timestamp that determines when the token expires. This is calculated based on the job’s configured timeout. The platform fallback defaults to 5 minutes (plus 1 minute for clock skew), and is configurable by administrators. |
-| **sub** (subject)    | Uniquely identifies the automation workload. It follows the format: `workload_type:aap_controller_automation_job:organization:<org>:job_template:<template>`.                                                                       |
+| **sub** (subject)    | Uniquely identifies the automation workload. It follows the format: `workload_type:aap_controller_automation_job:organization:<org>:job_template:<template>`.                                            |
 
 ## Custom claims
 

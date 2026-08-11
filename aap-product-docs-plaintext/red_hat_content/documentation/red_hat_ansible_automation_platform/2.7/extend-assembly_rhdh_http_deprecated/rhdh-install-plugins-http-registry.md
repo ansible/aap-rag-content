@@ -48,6 +48,7 @@ dynamicPlugins:
 backend:
 ansible.plugin-scaffolder-backend-module-backstage-rhaap: null
 ```
+
 Reference this ConfigMap in your `Backstage` CR under `spec.application.dynamicPluginsConfigMapName`.
 
 **Helm chart installation**

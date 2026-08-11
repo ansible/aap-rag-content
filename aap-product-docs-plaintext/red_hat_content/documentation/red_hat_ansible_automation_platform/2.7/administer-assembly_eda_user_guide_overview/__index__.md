@@ -10,7 +10,6 @@ Learn how to configure and manage the end-to-end lifecycle of event-driven autom
 - Create event streams for centralized routing
 - Manage rulebook activations to main persistent, scalable listeners that monitor infrastructure and trigger automated workflows in real time
 
-
 Note:
 
 - API documentation for Event-Driven Ansible controller is available through the platform gateway (for example, `https://<gateway-host>/api/eda/v1/docs`)

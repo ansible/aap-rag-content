@@ -8,6 +8,7 @@
 ```
 Create a new Ansible playbook project called 'webserver-deployment'.
 ```
+
 This triggers the `create_ansible_projects`tool.
 
 The extension executes `ansible-creator init playbook`and generates the content.

@@ -27,6 +27,7 @@ automationmetrics_pg_sslmode=require
 automationmetrics_pg_cert_auth=true
 ca_trust_bundle=/path/to/ca-bundle.crt
 ```
+
 Note:
 When `automationmetrics_pg_cert_auth` is set to `true`, the installer automatically generates TLS certificates for database connections. For custom certificates, use the tasks/tls_postgresql.yml task.
 

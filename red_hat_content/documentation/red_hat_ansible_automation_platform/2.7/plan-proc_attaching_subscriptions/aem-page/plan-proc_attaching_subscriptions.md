@@ -1,7 +1,7 @@
 +++
-title = "Attach your Ansible Automation Platform subscription - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-proc_attaching_subscriptions"
 template = "docs/aem-title.html"
+title = "Attach your Ansible Automation Platform subscription - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-proc_attaching_subscriptions/", "Attach your Ansible Automation Platform subscription"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/plan-proc_attaching_subscriptions/aem-page/plan-proc_attaching_subscriptions.html"
 last_crumb = "Attach your Ansible Automation Platform subscription"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Attach your Ansible Automation Platform subscription"
 oversized = "false"
@@ -42,6 +42,7 @@ Simple Content Access (SCA) is now the default subscription method for all Red H
 ```
 $ sudo subscription-manager register --username <$INSERT_USERNAME_HERE> --password <$INSERT_PASSWORD_HERE>
 ```
+
 With Simple Content Access (SCA), registration is the only step required to access Ansible Automation Platform content.
 
 Note:
@@ -61,6 +62,7 @@ $ sudo subscription-manager refresh
 ```
 $ sudo subscription-manager identity
 ```
+
      This command displays your system identity, name, organization name, and organization ID, confirming successful registration.
 
 - For legacy accounts not using SCA, you might have to manually attach subscriptions:
@@ -68,15 +70,15 @@ $ sudo subscription-manager identity
 ```
 $ sudo subscription-manager list --available --all | grep -A 30 "Ansible Automation Platform"
 ```
+
      This command displays the subscription details including the Pool ID. Look for the `Pool ID:` line in the output.
 
      Once you have identified the correct Pool ID, attach the subscription:
 
-
-
 ```
 $ sudo subscription-manager attach --pool=<pool_id>
 ```
+
   Note:
       Do not use MCT4022 as a `pool_id` as it can cause subscription attachment to fail.
 

@@ -8,7 +8,6 @@ To scale automation controller’s web service, follow these best practices:
 - Deploy multiple control nodes and use a load balancer to spread web requests over multiple servers.
 - Set max connections per automation controller to 100.
 
-
 To optimize automation controller’s web service on the client side, follow these guidelines:
 
 - Direct user to use dynamic inventory sources instead of individually creating inventory hosts by using the API.

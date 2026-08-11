@@ -18,7 +18,7 @@ Authentication map types can be used with any type of authenticator. Each map ha
 -  [Is Superuser](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-superuser-mapping "Superuser mapping is the mapping of a user to the superuser role, such as System Administrator.")
 
 6.  Enter a unique rule **Name** to identify the rule.
-7.  Select a **Trigger** from the list. See [Authenticator map triggers](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-authenticator-map-triggers "Each map has a trigger that defines when the map should be evaluated as true. Trigger types include the following:") for more details. Choices include:
+7.  Select a **Trigger** from the list. See [Authenticator map triggers](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-authenticator-map-triggers "Each map has a trigger that defines when the map should be evaluated as true. Select a trigger from the When to apply the rule field.") for more details. Choices include:
 
 -  **Always**
 -  **Never**

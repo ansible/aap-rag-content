@@ -10,7 +10,6 @@ Creates an instance group on the automation controller for organizing and managi
 | `name`               | String | Display name for the instance group.                                                        | -              |
 | `runner_pull_policy` | String | Image pull policy for the runner pod.                                                       | `IfNotPresent` |
 
-
 **Example:**
 
 ```

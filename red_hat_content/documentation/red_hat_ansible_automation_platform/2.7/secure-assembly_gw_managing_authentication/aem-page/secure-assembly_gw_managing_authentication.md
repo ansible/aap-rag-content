@@ -1,7 +1,7 @@
 +++
-title = "Locate and manage authentication configurations - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_managing_authentication"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_managing_authentication"
+title = "Locate and manage authentication configurations - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_configure_authentication/", "Configure central authentication for Ansible Automation Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_managing_authentication/aem-page/secure-assembly_gw_managing_authentication.html"
 last_crumb = "Locate and manage authentication configurations"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Locate and manage authentication configurations"
 oversized = "false"

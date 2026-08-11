@@ -12,7 +12,6 @@ Creates a job template on the automation controller.
 | `job_template_playbook`  | String | Name of the playbook file to run.                                                           | -       |
 | `job_template_inventory` | String | Name of the inventory to associate with the job template.                                   | -       |
 
-
 **Example:**
 
 ```

@@ -46,6 +46,7 @@ Additional attributes might be available through your SAML IdP. Those values mus
 ```
 GET_ALL_EXTRA_DATA: true
 ```
+
 Alternatively, you can include a list of SAML IdP attributes in the **SAML IDP to extra_data attribute mapping** field.
 
 Note:
@@ -89,6 +90,7 @@ Values defined in this field override the dedicated fields provided in the UI. A
 "sign_request": True,
 }
 ```
+
 This field is the equivalent to the `SOCIAL_AUTH_SAML_SP_EXTRA` in the API. For more information, see [OneLogin’s SAML Python Toolkit](https://github.com/SAML-Toolkits/python-saml#settings) to learn about the valid service provider extra (SP_EXTRA) parameters.
 
 Note:
@@ -112,6 +114,7 @@ References to the OneLogin SAML Python Toolkit are for formatting examples only.
 // Set an array with the possible auth context values: array ('urn:oasis:names:tc:SAML:2.0:ac:classes:Password', 'urn:oasis:names:tc:SAML:2.0:ac:classes:X509'),
 "requestedAuthnContext": true,
 ```
+
 For more information and additional options, see [OneLogin’s SAML Python Toolkit](https://github.com/SAML-Toolkits/python-saml#settings).
 
 20.  Optional: In the **SAML IDP to extra_data attribute mapping** field, enter values to map IDP attributes to extra_data attributes. These values will include additional user information beyond standard attributes such as Email or Username to be mapped. For example:
@@ -122,6 +125,7 @@ For more information and additional options, see [OneLogin’s SAML Python Toolk
 - UserType
 - Organization
 ```
+
 For more information on the values you can include, see [advanced SAML settings](https://python-social-auth.readthedocs.io/en/latest/backends/saml.html#advanced-settings).
 
 Important:

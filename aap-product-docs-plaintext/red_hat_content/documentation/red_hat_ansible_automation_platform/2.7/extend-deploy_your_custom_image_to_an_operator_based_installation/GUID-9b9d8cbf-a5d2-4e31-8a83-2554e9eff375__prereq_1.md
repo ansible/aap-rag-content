@@ -21,16 +21,16 @@ spec:
 lightspeed:
 ...
 chatbot_extra_settings:
-chatbot_byok_image: 'quay.io/<repository>/rag-content-output'                                                          chatbot_byok_image_version: latest chatbot_byok_storage_size: '500Mi'                        chatbot_byok_score_multiplier: 1.2
+chatbot_byok_image: 'quay.io/<repository>/rag-content-output'                                                          chatbot_byok_image_version: latest chatbot_byok_storage_size: '500Mi'
 ```
+
 The parameters above correspond to the values in the following table.
 
-| Parameter                       | Description                                                                                                                                                                                                                       | Default value |
-| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| `chatbot_byok_image`            | The full registry path to your RAG image.                                                                                                                                                                                         | n/a           |
-| `chatbot_byok_image_version`    | The specific version tag (for example,`1.0`) of the image to pull.                                                                                                                                                                | `latest`      |
-| `chatbot_byok_storage_size`     | <br>The amount of persistent storage allocated for the BYOK volume.<br>Keep the BYOK data between 1 Mi and 999 Mi for best performance. While the system supports larger allocations up to 2 Gi, smaller volumes are recommended. | `2 Gi`        |
-| `chatbot_byok_score_multiplier` | The score multiplier for BYOK content priority. It adjusts how heavily the AI weighs your custom data versus base knowledge.                                                                                                      | `1.2`         |
+| Parameter                    | Description                                                                                                                                                                                              | Default value |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `chatbot_byok_image`         | The full registry path to your RAG image.                                                                                                                                                                | n/a           |
+| `chatbot_byok_image_version` | The specific version tag (for example,`1.0`) of the image to pull.                                                                                                                                       | `latest`      |
+| `chatbot_byok_storage_size`  | <br>The amount of persistent storage allocated for the BYOK volume.<br>Keep the BYOK data between 1 Mi and 999 Mi for best performance. While the system supports larger allocations up to 2 Gi, smaller volumes are recommended. | `2 Gi`        |
 
 6.  If the BYOK image is in a private registry, you must create an image pull secret, and set the following values in the `chatbot_extra_settings` parameters under the `spec: `section:
 

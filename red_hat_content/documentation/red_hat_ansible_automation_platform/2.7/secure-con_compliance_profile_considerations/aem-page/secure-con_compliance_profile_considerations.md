@@ -1,6 +1,6 @@
 +++
-title = "Ensure compliance with host-level security controls - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Ensure compliance with host-level security controls - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_compliance_profile_considerations"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_compliance_profile_considerations/aem-page/secure-con_compliance_profile_considerations.html"
 last_crumb = "Ensure compliance with host-level security controls"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Ensure compliance with host-level security controls"
 oversized = "false"
@@ -98,10 +98,6 @@ This change only needs to be made on the installation host, or if an installatio
 ## Sudo and NOPASSWD
 
 A compliance profile might require that all users with sudo privileges must provide a password (the `NOPASSWD` directive must not be used in a sudoers file). The installation program runs many tasks as a privileged user, and by default expects to be able to elevate privileges without a password.
-
-To provide a password to the installation program for elevating privileges, append the following options when launching the RPM installer script:
-
-`./setup.sh <setup options> --ask-become-pass`.
 
 For the container-based installation program:
 

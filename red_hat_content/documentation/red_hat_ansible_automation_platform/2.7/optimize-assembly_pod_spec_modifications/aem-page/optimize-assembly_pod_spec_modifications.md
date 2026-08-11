@@ -1,7 +1,7 @@
 +++
+title = "Performance tuning for operator environments - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_pod_spec_modifications"
 template = "docs/aem-title.html"
-title = "Performance tuning for operator environments - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_pod_spec_modifications/", "Performance tuning for operator environments"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-assembly_pod_spec_modifications/aem-page/optimize-assembly_pod_spec_modifications.html"
 last_crumb = "Performance tuning for operator environments"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Performance tuning for operator environments"
 oversized = "false"

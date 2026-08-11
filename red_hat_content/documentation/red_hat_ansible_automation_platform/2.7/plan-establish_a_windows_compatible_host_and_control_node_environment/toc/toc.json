@@ -1,0 +1,13 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Establish a Windows compatible host and control node environment",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null
+    }
+  ]
+}

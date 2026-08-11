@@ -1,7 +1,7 @@
 +++
-title = "Configure automation controller - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_installing_controller_operator"
+title = "Configure automation controller - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator/", "Install on OpenShift Container Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_installing_controller_operator/aem-page/install-assembly_installing_controller_operator.html"
 last_crumb = "Configure automation controller"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure automation controller"
 oversized = "false"
@@ -135,6 +135,7 @@ You can configure your LDAP SSL configuration for automation controller through 
 ```
 $ oc create secret -n aap generic bundle-ca-secret --from-file=bundle-ca.crt
 ```
+
   Note:
       The target filename for this operation must be `bundle-ca.crt` and the secret name should be `bundle-ca-secret`.
 
@@ -155,6 +156,7 @@ You can verify the expected certificate by running:
 ```
 oc get deployments -l 'app.kubernetes.io/component=aap-gateway'
 ```
+
 Followed by:
 
 ```
@@ -241,10 +243,9 @@ You can view the progress by navigating to Workloads> (and then)Pods and locatin
 
 Verify that the following operator pods provided by the Ansible Automation Platform Operator installation from automation controller are running:
 
-| Operator manager controllers                                                                                                                                                                                                                                                                                                                               | Automation controller                                                                                                                                    | Automation hub                                                                                                                           | Event-Driven Ansible (EDA)                                                                                                                             |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Operator manager controllers                                                                                                                                                                             | Automation controller                                                                                                                                    | Automation hub                                                                                                                           | Event-Driven Ansible (EDA)                                                                                                                             |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | <br>The operator manager controllers for each of the three operators, include the following:<br>automation-controller-operator-controller-managerautomation-hub-operator-controller-managerresource-operator-controller-manageraap-gateway-operator-controller-manageransible-lightspeed-operator-controller-managereda-server-operator-controller-manager | <br>After deploying automation controller, you can see the addition of the following pods:<br>controllercontroller-postgrescontroller-webcontroller-task | <br>After deploying automation hub, you can see the addition of the following pods:<br>hub-apihub-contenthub-postgreshub-redishub-worker | <br>After deploying EDA, you can see the addition of the following pods:<br>eda-activation-workerda-apieda-default-workereda-event-streameda-scheduler |
-
 
 Note:
 

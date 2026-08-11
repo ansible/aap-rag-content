@@ -1,4 +1,4 @@
-# Prepare the OpenShift Container Platform target environment and import migration content
+# Import migration content to OCP manually
 ## Validate the target environment
 
 Verify that all Ansible Automation Platform services are running, credentials work correctly, and migrated content like projects, inventories, and job templates are accessible on OpenShift Container Platform.

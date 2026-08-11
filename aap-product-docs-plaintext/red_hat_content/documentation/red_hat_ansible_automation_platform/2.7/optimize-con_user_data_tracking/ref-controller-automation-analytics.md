@@ -9,7 +9,7 @@ For opt-in of Automation Analytics to have any effect, your instance of automati
 
 As with Red Hat Lightspeed, Automation Analytics is built to collect the minimum amount of data needed. No credential secrets, personal data, automation variables, or task output is gathered.
 
-When you imported your license for the first time, you were automatically opted in to Automation Analytics. To configure or disable this feature, see [Configuring Automation Analytics](/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_user_data_tracking#proc-controller-configure-analytics "When you imported your license for the first time, you were automatically opted in for the collection of data that powers Automation Analytics, a cloud service that is part of the Ansible Automation Platform subscription.").
+When you imported your license for the first time, you were automatically opted in to Automation Analytics. To configure or disable this feature, see [Configuring Automation Analytics](/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_user_data_tracking#proc-controller-configure-analytics "Ansible Automation Platform automatically authenticates analytics transmission using your platform subscription certificate. If you prefer to use explicit credential management, you can optionally configure a service account.").
 
 By default, the data is collected every four hours. When you enable this feature, data is collected up to a month in arrears (or until the previous collection). You can turn off this data collection at any time in the **Miscellaneous System settings** of the System configuration window.
 
@@ -17,7 +17,6 @@ This setting can also be enabled through the API by specifying `INSIGHTS_TRACKIN
 
 -  `api/v2/settings/all`
 -  `api/v2/settings/system`
-
 
 The Automation Analytics generated from this data collection can be found on the [Red Hat Cloud Services](https://cloud.redhat.com) portal.
 
@@ -34,7 +33,6 @@ On the clouds navigation panel, select Organization Statistics to view informati
 - Use by organization
 - Job runs by organization
 - Organization status
-
 
 Note:
 

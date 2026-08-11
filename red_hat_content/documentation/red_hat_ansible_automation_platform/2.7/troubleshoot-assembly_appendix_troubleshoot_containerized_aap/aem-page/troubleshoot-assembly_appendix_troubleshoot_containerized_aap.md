@@ -1,7 +1,7 @@
 +++
-title = "Troubleshoot your containerized deployment - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-assembly_appendix_troubleshoot_containerized_aap"
+title = "Troubleshoot your containerized deployment - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-assembly_appendix_troubleshoot_containerized_aap/", "Troubleshoot your containerized deployment"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/troubleshoot-assembly_appendix_troubleshoot_containerized_aap/aem-page/troubleshoot-assembly_appendix_troubleshoot_containerized_aap.html"
 last_crumb = "Troubleshoot your containerized deployment"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Troubleshoot your containerized deployment"
 oversized = "false"
@@ -52,6 +52,7 @@ $ ansible-playbook -i <path_to_inventory_file> ansible.containerized_installer.l
 ```
 $ sudo sos report -e aap_containerized -k aap_containerized.username=*<username>*
 ```
+
     where *<username>* is the service account or user running the containerized installation.
 
 4.  Optional: To define additional parameters, specify them with the `-e` option. For example:
@@ -60,6 +61,7 @@ $ sudo sos report -e aap_containerized -k aap_containerized.username=*<username>
 ```
 $ ansible-playbook -i <path_to_inventory_file> ansible.containerized_installer.log_gathering -e 'target_sos_directory=<path_to_files>' -e 'case_number=0000000' -e 'clean=true' -e 'upload=true' -s
 ```
+
   1.  You can use the `-s` option to step through each task in the playbook and confirm its execution. This is optional but can be helpful for debugging.
   2.  The following is a list of the parameters you can use with the `log_gathering` playbook:
     *Table 1. Parameter reference*
@@ -109,7 +111,6 @@ $ podman ps --all --format "{{.Names}}"
 | <br>Receptor              | <br> `receptor`                                  | <br>Facilitates secure and reliable communication within Ansible Automation Platform.                                                                                    |
 | <br>Redis                 | <br> `redis-<suffix>`                            | <br>Responsible for caching, real-time analytics and fast data retrieval.                                                                                                |
 
-
  **Inspecting the logs**
 
 Containerized Ansible Automation Platform uses `journald` for Podman logging. To inspect any running container logs, run the `journalctl` command:
@@ -117,6 +118,7 @@ Containerized Ansible Automation Platform uses `journald` for Podman logging. To
 ```
 $ journalctl CONTAINER_NAME=<container_name>
 ```
+
 Example command with output:
 
 ```
@@ -126,11 +128,13 @@ Oct 08 01:40:12 aap.example.org automation-gateway-proxy[1919]: [2024-10-08 00:4
 Oct 08 01:40:12 aap.example.org automation-gateway-proxy[1919]: [2024-10-08 00:40:12.885][2][info][upstream] [external/envoy/source/common/upstream/cds_ap>
 Oct 08 01:40:19 aap.example.org automation-gateway-proxy[1919]: [2024-10-08T00:40:16.753Z] "GET /up HTTP/1.1" 200 - 0 1138 10 0 "192.0.2.1" "python->
 ```
+
 To view the logs of a running container in real-time, run the `podman logs -f` command:
 
 ```
 $ podman logs -f <container_name>
 ```
+
  **Controlling container operations**
 
 You can control operations for a container by running the `systemctl` command:
@@ -138,6 +142,7 @@ You can control operations for a container by running the `systemctl` command:
 ```
 $ systemctl --user status <container_name>
 ```
+
 Example command with output:
 
 ```
@@ -164,6 +169,7 @@ Oct 08 11:44:10 aap.example.org automation-gateway-proxy[1919]: [2024-10-08T10:4
 Oct 08 11:44:13 aap.example.org automation-gateway-proxy[1919]: [2024-10-08 10:44:13.856][2][info][upstream] [external/envoy/source/common/upstream/cds_ap>
 Oct 08 11:44:13 aap.example.org automation-gateway-proxy[1919]: [2024-10-08 10:44:13.856][2][info][upstream] [external/envoy/source/common/upstream/cds_ap
 ```
+
  **Getting container information about the execution plane**
 
 To get container information about automation controller, Event-Driven Ansible, and `execution_nodes` nodes, prefix any Podman commands with either:
@@ -171,11 +177,13 @@ To get container information about automation controller, Event-Driven Ansible, 
 ```
 CONTAINER_HOST=unix://run/user/<user_id>/podman/podman.sock
 ```
+
 or
 
 ```
 CONTAINERS_STORAGE_CONF=<user_home_directory>/aap/containers/storage.conf
 ```
+
 Example with output:
 
 ```
@@ -209,6 +217,7 @@ This error occurs when `manifest.zip` license files that are larger than the `co
 ```
 controller_nginx_client_max_body_size=5m
 ```
+
 The default setting of `5m` should prevent this issue, but you can increase the value as needed.
 
  **When attempting to install containerized Ansible Automation Platform in Amazon Web Services you receive output that there is no space left on device**
@@ -217,6 +226,7 @@ The default setting of `5m` should prevent this issue, but you can increase the 
 TASK [ansible.containerized_installer.automationcontroller : Create the receptor container] ***************************************************
 fatal: [ec2-13-48-25-168.eu-north-1.compute.amazonaws.com]: FAILED! => {"changed": false, "msg": "Can't create container receptor", "stderr": "Error: creating container storage: creating an ID-mapped copy of layer \"98955f43cc908bd50ff43585fec2c7dd9445eaf05eecd1e3144f93ffc00ed4ba\": error during chown: storage-chown-by-maps: lchown usr/local/lib/python3.9/site-packages/azure/mgmt/network/v2019_11_01/operations/__pycache__/_available_service_aliases_operations.cpython-39.pyc: no space left on device: exit status 1\n", "stderr_lines": ["Error: creating container storage: creating an ID-mapped copy of layer \"98955f43cc908bd50ff43585fec2c7dd9445eaf05eecd1e3144f93ffc00ed4ba\": error during chown: storage-chown-by-maps: lchown usr/local/lib/python3.9/site-packages/azure/mgmt/network/v2019_11_01/operations/__pycache__/_available_service_aliases_operations.cpython-39.pyc: no space left on device: exit status 1"], "stdout": "", "stdout_lines": []}
 ```
+
 If you are installing a `/home` filesystem into a default Amazon Web Services marketplace RHEL instance, it might be too small since `/home` is part of the root `/` filesystem. To resolve this issue you must make more space available. For more information about the system requirements, see [System requirements](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_cont_aap_system_requirements "Use this information when planning your installation of containerized Ansible Automation Platform.").
 
  **"Install container tools" task fails due to unavailable packages**
@@ -231,6 +241,7 @@ fatal: [192.0.2.3]: FAILED! => {"changed": false, "failures": ["No package crun 
 fatal: [192.0.2.4]: FAILED! => {"changed": false, "failures": ["No package crun available.", "No package podman available.", "No package slirp4netns available.", "No package fuse-overlayfs available."], "msg": "Failed to install some of the specified packages", "rc": 1, "results": []}
 fatal: [192.0.2.5]: FAILED! => {"changed": false, "failures": ["No package crun available.", "No package podman available.", "No package slirp4netns available.", "No package fuse-overlayfs available."], "msg": "Failed to install some of the specified packages", "rc": 1, "results": []}
 ```
+
 To fix this error, run the following command on the target hosts:
 
 ```
@@ -251,6 +262,7 @@ Friday 29 September 2023  11:02:32 +0100 (0:00:00.443)       0:00:53.521 ******
 FAILED - RETRYING: [daap1.lan]: Configure Controller Projects | Wait for finish the projects creation (1 retries left).
 failed: [daap1.lan] (item={'failed': 0, 'started': 1, 'finished': 0, 'ansible_job_id': '536962174348.33944', 'results_file': '/home/aap/.ansible_async/536962174348.33944', 'changed': False, '__controller_project_item': {'name': 'AAP Config-As-Code Examples', 'organization': 'Default', 'scm_branch': 'main', 'scm_clean': 'no', 'scm_delete_on_update': 'no', 'scm_type': 'git', 'scm_update_on_launch': 'no', 'scm_url': 'https://github.com/user/repo.git'}, 'ansible_loop_var': '__controller_project_item'}) => {"__projects_job_async_results_item": {"__controller_project_item": {"name": "AAP Config-As-Code Examples", "organization": "Default", "scm_branch": "main", "scm_clean": "no", "scm_delete_on_update": "no", "scm_type": "git", "scm_update_on_launch": "no", "scm_url": "https://github.com/user/repo.git"}, "ansible_job_id": "536962174348.33944", "ansible_loop_var": "__controller_project_item", "changed": false, "failed": 0, "finished": 0, "results_file": "/home/aap/.ansible_async/536962174348.33944", "started": 1}, "ansible_job_id": "536962174348.33944", "ansible_loop_var": "__projects_job_async_results_item", "attempts": 30, "changed": false, "finished": 0, "results_file": "/home/aap/.ansible_async/536962174348.33944", "started": 1, "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
 ```
+
 The `infra.controller_configuration.dispatch` role uses an asynchronous loop with 30 retries to apply each configuration type, and the default delay between retries is 1 second. If the configuration is large, this might not be enough time to apply everything before the last retry occurs.
 
 Increase the retry delay by setting the `controller_configuration_async_delay` variable to 2 seconds for example. You can set this variable in the `[all:vars]` section of the installation program inventory file.
@@ -289,6 +301,7 @@ $ tree -L 1
     ├── requirements.yml
     ├── roles
 ```
+
 The installation root directory includes other containerized services that make use of Podman volumes.
 
 Here are some examples for further reference:
@@ -310,6 +323,7 @@ containers/
 │   └── userns.lock
 └── storage.conf
 ```
+
 The `controller` directory has some of the installed configuration and runtime data points:
 
 ```
@@ -331,6 +345,7 @@ controller/
 └── supervisor
     └── run
 ```
+
 The `receptor` directory has the automation mesh configuration:
 
 ```
@@ -341,6 +356,7 @@ receptor/
     ├── receptor.sock
     └── receptor.sock.lock
 ```
+
 After installation, you will also find other files in the local user’s `/home` directory such as the `.cache` directory:
 
 ```
@@ -350,6 +366,7 @@ After installation, you will also find other files in the local user’s `/home`
 └── rhsm
     └── rhsm.log
 ```
+
 As services are run using rootless Podman by default, you can use other services such as running `systemd` as non-privileged users. Under `systemd` you can see some of the component service controls available:
 
 The `.config` directory:
@@ -374,6 +391,7 @@ The `.config` directory:
         ├── redis.service
         └── sockets.target.wants
 ```
+
 This is specific to Podman and conforms to the Open Container Initiative (OCI) specifications. When you run Podman as the root user `/var/lib/containers` is used by default. For standard users the hierarchy under `$HOME/.local` is used.
 
 The `.local` directory:
@@ -386,6 +404,7 @@ The `.local` directory:
         ├── podman
         └── storage
 ```
+
 As an example `.local/storage/volumes` contains what the output from `podman volume ls` provides:
 
 ```
@@ -398,6 +417,7 @@ local       redis_data
 local       redis_etc
 local       redis_run
 ```
+
 The execution plane is isolated from the control plane main services to ensure it does not affect the main services.
 
 Control plane services run with the standard Podman configuration and can be found in: `~/.local/share/containers/storage`.
@@ -413,6 +433,7 @@ CONTAINERS_STORAGE_CONF=~/aap/containers/storage.conf podman <subcommand>
 ```
 CONTAINER_HOST=unix://run/user/<user uid>/podman/podman.sock podman <subcommand>
 ```
+
  **How can I see host resource utilization statistics?**
 
 Run the following command to display host resource utilization statistics:
@@ -420,6 +441,7 @@ Run the following command to display host resource utilization statistics:
 ```
 $ podman container stats -a
 ```
+
 Example output based on a Dell sold and offered containerized Ansible Automation Platform solution (DAAP) install that utilizes ~1.8 GB RAM:
 
 ```
@@ -431,6 +453,7 @@ ID            NAME                           CPU %       MEM USAGE / LIMIT  MEM 
 c1458367ca9c  redis                          0.48%       10.52MB / 3.761GB  0.28%       0B / 0B     0B / 0B     5           9.074042s   0.47%
 ef712cc2dc89  postgresql                     0.09%       21.88MB / 3.761GB  0.58%       0B / 0B     0B / 0B     21          15.571059s  0.80%
 ```
+
  **How much storage is used and where?**
 
 The container volume storage is under the local user at `$HOME/.local/share/containers/storage/volumes`.
@@ -452,6 +475,7 @@ For example:
 ```
 $ podman volume inspect postgresql
 ```
+
 Example output:
 
 ```
@@ -469,6 +493,7 @@ Example output:
     }
 ]
 ```
+
 Several files created by the installation program are located in `$HOME/aap/` and bind-mounted into various running containers.
 
 1. To view the mounts associated with a container run the following command:
@@ -476,6 +501,7 @@ Several files created by the installation program are located in `$HOME/aap/` an
 ```
 $ podman ps --format "{{.ID}}\t{{.Command}}\t{{.Names}}"
 ```
+
     Example output:
 
 ```
@@ -505,6 +531,7 @@ a3ba05136446	pulpcore-worker	automation-hub-worker-2
 ```
 $ podman inspect <container_name> | jq -r .[].Mounts[].Source
 ```
+
     Example output:
 
 ```

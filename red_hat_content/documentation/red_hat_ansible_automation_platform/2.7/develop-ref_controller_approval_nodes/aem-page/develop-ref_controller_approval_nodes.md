@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_controller_approval_nodes"
 title = "Configure nodes in workflow visualizer - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_controller_approval_nodes"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_workflow_job_templates/", "Orchestrate complex automation with workflow job templates"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-ref_controller_approval_nodes/aem-page/develop-ref_controller_approval_nodes.html"
 last_crumb = "Configure nodes in workflow visualizer"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure nodes in workflow visualizer"
 oversized = "false"
@@ -31,9 +31,7 @@ Use an Approval node to manually pause a workflow between playbooks. This allows
 
 The default for the timeout is none, but you can specify the length of time before the request expires and is automatically denied. After you select and supply the information for the approval node, it displays on the graphical view with a pause icon beside it.
 
-
 ![Approval node](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-wf-approval-node.png)  
-
 
 The approver is anyone who meets the following criteria:
 
@@ -41,11 +39,9 @@ The approver is anyone who meets the following criteria:
 - A user who has organization administrator or above privileges (for the organization associated with that workflow job template).
 - A user who has the **Approve** permission explicitly assigned to them within that specific workflow job template.
 
-
 If pending approval nodes are not approved within the specified time limit (if an expiration was assigned) or they are denied, then they are marked as "timed out" or "failed", and move on to the next "on fail node" or "always node". If approved, the "on success" path is taken. If you try to `POST` in the API to a node that has already been approved, denied or timed out, an error message notifies you that this action is redundant, and no further steps are taken.
 
 The following table shows the various levels of permissions allowed on approval workflows:
-
 
 ![Node approval rbac](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-wf-node-approval-rbac.png)  
 

@@ -1,92 +1,35 @@
-# Set up GitLab integration for execution environment builder
+# Configure a GitLab OAuth App for saving definitions
 
-Configure GitLab content discovery and OAuth so that execution environment builder can scan GitLab groups for Ansible collections and save definition files.
+Configure a GitLab OAuth App so that users can save execution environment definition files to a GitLab repository.
 
 ## Before you begin
 
-- You have a GitLab account with access to the groups automation portal needs to scan.
 - You have admin access to your GitLab instance or group settings.
+- You have configured a GitLab PAT for content discovery.
 
 ## About this task
 
-Complete this section if your organization uses GitLab for content discovery or saving definition files. If you use GitHub only, skip to [Configure collection discovery sources](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_collection_discovery "Configure Git content discovery and private automation hub collection discovery so that Ansible collections are available in execution environment builder and the collection catalog.").
-
-GitLab uses a Personal Access Token for content discovery.
+Automated image builds authenticate through the signed-in user's GitLab OAuth session. No additional admin-level tokens or app-config changes are needed beyond the OAuth application scopes configured below.
 
 ## Procedure
 
-Content discovery (scanning repositories for collections)
-
-1.  Create a GitLab PAT with the following scopes:
-
-- `read_repository`
-- `api`
-
-2.  Store the PAT.
-**OpenShift — CLI:**
-
-```
-$ oc create secret generic secrets-scm \
---from-literal=gitlab-token=<your_gitlab_pat> \
--n <namespace>
-```
-If you already have a `secrets-scm` secret (for example, with GitHub credentials), patch it instead:
-
-```
-$ oc patch secret secrets-scm -n <namespace> --type merge -p \
-'{"stringData":{"gitlab-token":"<your_gitlab_pat>"}}'
-```
-**OpenShift — web console:**
-
-1. Navigate to **Workloads > Secrets**.
-2. Edit or create the `secrets-scm` secret and add key `gitlab-token`.
-**RHEL appliance:**
-
-```
-$ echo -n '<your_gitlab_pat>' | sudo podman secret create portal_gitlab_token -
-```
-Note:
-If you configured a GitLab personal access token during RHEL appliance installation (via cloud-init), the `portal_gitlab_token` secret already exists and is active for content discovery. Running the command above updates the existing secret with a new value.
-
-3.  If you use a self-hosted GitLab instance (not `gitlab.com`), add its URL to the CORS allowed origins.
-**OpenShift:**
-
-```
-upstream:
-backstage:
-appConfig:
-backend:
-cors:
-origin:
-- ${BASE_URL}
-- https://gitlab.internal.example.com
-```
-**RHEL appliance** — add to the existing `backend:` block in `app-config.production.yaml`:
-
-```
-backend:
-cors:
-origin:
-- "https://portal.example.com"
-- "https://gitlab.internal.example.com"
-```
-Important:
-On RHEL appliances, `app.baseUrl`, `backend.baseUrl`, and `backend.cors.origin` must all use the same portal URL. If any of these values are inconsistent, OAuth callbacks and API requests fail. Do not create a duplicate `backend:` block — add `cors` to the existing one.
-
-Note:
-If you only use `gitlab.com`, no CORS changes are needed.
-
-Save definition files to a GitLab repository (OAuth)
-
-4.  Create a GitLab OAuth application in your GitLab instance under **Admin Area > Applications** (or group-level settings). Enter the following details:
+1.  Create a GitLab OAuth application in your GitLab instance under **Admin Area > Applications** (or group-level settings). Enter the following details:
 
 - **Name:** A descriptive name, for example `ansible-portal-ee-builder`.
 - **Redirect URI:** `https://<my_portal_domain>/api/auth/gitlab/handler/frame`
-- **Scopes:** Select `write_repository`.
-The `write_repository` scope lets automation portal push EE definition files and open merge requests on behalf of the authenticated user. It is used for every save operation (new repository or merge request to an existing repository).
+- **Scopes:** Select `api`, `read_api`, `read_user`, `read_repository`, and `write_repository`.
+| OAuth scope        | Purpose                                                                               | When used                                                                         |
+| ------------------ | ------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `api`              | Access the GitLab API on behalf of the authenticated user.                            | Every save and build operation.                                                   |
+| `read_api`         | Read-only API access.                                                                 | Content discovery and pipeline status checks.                                     |
+| `read_user`        | Read the authenticated user's profile information.                                    | User identification during OAuth flow.                                            |
+| `read_repository`  | Read-only access to repositories.                                                     | Content discovery (scanning for collections).                                     |
+| `write_repository` | Push EE definition files and open merge requests on behalf of the authenticated user. | Every save operation (new repository or merge request to an existing repository). |
+Note:
+If you previously configured a GitLab OAuth application for content discovery or saving definition files, verify that the existing application includes the `api`, `read_api`, `read_user`, `read_repository`, and `write_repository` scopes. Open your OAuth application in **Admin Area > Applications**, select any missing scopes, and save. No other changes are required.
 
-5.  Note the **Application ID** and **Secret**. Save the secret value immediately — you cannot view it again.
-6.  Enable the GitLab auth provider in your configuration.
+2.  Note the **Application ID** and **Secret**. Save the secret value immediately — you cannot view it again.
+3.  Enable the GitLab auth provider in your configuration.
 **OpenShift:** Uncomment the `auth.providers.gitlab` block in your Helm chart configuration.
 
 **RHEL appliance:** Add the following `auth.providers` block to `/etc/portal/configs/app-config/app-config.production.yaml`. If an `auth:` section already exists, add the `providers:` section inside it:
@@ -100,13 +43,14 @@ clientId: ${GITLAB_OAUTH_CLIENT_ID}
 clientSecret: ${GITLAB_OAUTH_CLIENT_SECRET}
 ```
 
-7.  Add the OAuth client credentials to your `secrets-scm` secret.
+4.  Add the OAuth client credentials to your `secrets-scm` secret.
 **OpenShift — CLI:**
 
 ```
 $ oc patch secret secrets-scm -n <namespace> --type merge -p \
 '{"stringData":{"gitlab-oauth-client-id":"<your_client_id>","gitlab-oauth-client-secret":"<your_client_secret>"}}'
 ```
+
 **OpenShift — web console:**
 
 1. Navigate to **Workloads > Secrets**.
@@ -117,11 +61,7 @@ $ oc patch secret secrets-scm -n <namespace> --type merge -p \
 $ echo -n '<your_client_id>' | sudo podman secret create portal_gitlab_oauth_client_id -
 $ echo -n '<your_client_secret>' | sudo podman secret create portal_gitlab_oauth_client_secret -
 ```
-Append to the Quadlet drop-in file:
 
-```
-$ sudo tee -a /etc/containers/systemd/portal.container.d/ee-builder-secrets.conf << 'EOF'
-Secret=portal_gitlab_oauth_client_id,type=env,target=GITLAB_OAUTH_CLIENT_ID
-Secret=portal_gitlab_oauth_client_secret,type=env,target=GITLAB_OAUTH_CLIENT_SECRET
-EOF
-```
+## What to do next
+
+After updating the configuration, apply your changes. See [Apply configuration changes](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_apply_configuration_changes "Apply configuration changes after modifying your Helm chart values or RHEL appliance configuration file for execution environment builder.").

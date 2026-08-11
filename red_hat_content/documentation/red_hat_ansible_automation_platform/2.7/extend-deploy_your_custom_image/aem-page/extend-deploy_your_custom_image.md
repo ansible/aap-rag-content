@@ -1,7 +1,7 @@
 +++
-title = "Deploy your custom image to a container-based installation - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-deploy_your_custom_image"
+template = "docs/aem-title.html"
+title = "Deploy your custom image to a container-based installation - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-extend_the_intelligent_assistant_with_custom_knowledge/", "Extend the automation intelligent assistant with custom knowledge"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-deploy_your_custom_image/aem-page/extend-deploy_your_custom_image.html"
 last_crumb = "Deploy your custom image to a container-based installation"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Deploy your custom image to a container-based installation"
 oversized = "false"
@@ -62,7 +62,6 @@ lightspeed_chatbot_model_extra_settings={}
 # This section is to configure Ansible Lightspeed intelligent assistant with BYOK RAG image
 # -----------------------------------------------------------------------------------------
 lightspeed_chatbot_byok_image=<your registry><repository>/<image>:<label>
-lightspeed_chatbot_byok_score_multiplier=1.2
 ```
 
 ## What to do next

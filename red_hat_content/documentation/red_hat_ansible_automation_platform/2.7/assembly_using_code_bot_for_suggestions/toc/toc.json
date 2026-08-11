@@ -1,0 +1,13 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Install and configure the Ansible code bot",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null
+    }
+  ]
+}

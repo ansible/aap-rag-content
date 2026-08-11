@@ -18,6 +18,7 @@ oc describe -n <namespace> <resource> <resource-name>
 ```
 oc get -n <namespace> <resource> <resource-name> -o yaml
 ```
+
 - For example, to get the YAML for the `automationcontroller` custom resource, run:
 
 ```

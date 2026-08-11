@@ -13,6 +13,7 @@ module_defaults:
 arista.eos.eos_facts:
 gather_network_resources: interfaces
 ```
+
 The playbook returns the following interface facts:
 
 ```
@@ -48,7 +49,6 @@ The playbook returns the following interface facts:
 ]
 }
 ```
-
 
 Note:
 

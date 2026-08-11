@@ -31,6 +31,7 @@ sync_schedules:
 rrule: DTSTART;TZID=Europe/Ljubljana:20250630T070000 FREQ=MINUTELY;INTERVAL=5
 enabled: true
 ```
+
 Note:
 Displaying the encrypted `access_token` and `refresh_token` in plain text for debugging requires the `--decrypt` flag. Do not use this command on unsecured systems.
 
@@ -40,12 +41,12 @@ You can write output produced by `./manage.py getclusters --decrypt` to a file `
 
 If you come across error messages during installation, consult the following table:
 
-| Issue         | Possible Cause                                                                                                               | Solution                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| <br>401 error | <br>This is an unauthorized access message indicating authentication errors such as wrong credentials or tokens.             | <br>Verify that your access token is correct in `clusters.yaml`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| <br>401 error | <br>A temporary 401 error is expected behavior when the token expires, followed immediately by trying to refresh.            | <br>If the automatic token refresh fails (for example, due to invalid `client_secret` or `refresh_token`), use the `getclusters``--decrypt` command to manually verify that the credentials stored in the database match those in your source `clusters.yaml` file. If they do not match, re-run the `setclusters` command with the correct configuration. You can only use the refresh token once. If you need to execute `setclusters` because of invalid access token, create new access and refresh tokens, and use them in your source `clusters.yaml`. |
-| <br>404 error | <br>This is a “not found” message indicating that something is not configured correctly or pointing to the correct endpoint. | <br>Verify that your Ansible Automation Platform instance URLs used in `clusters.yaml` are correct.                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-
+| Issue                                                             | Possible Cause                                                                                                                                                                                           | Solution                                                                                                                                                                                                 |
+| ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <br>401 error                                                     | <br>This is an unauthorized access message indicating authentication errors such as wrong credentials or tokens.                                                                                         | <br>Verify that your access token is correct in `clusters.yaml`                                                                                                                                          |
+| <br>401 error                                                     | <br>A temporary 401 error is expected behavior when the token expires, followed immediately by trying to refresh.                                                                                        | <br>If the automatic token refresh fails (for example, due to invalid `client_secret` or `refresh_token`), use the `getclusters``--decrypt` command to manually verify that the credentials stored in the database match those in your source `clusters.yaml` file. If they do not match, re-run the `setclusters` command with the correct configuration. You can only use the refresh token once. If you need to execute `setclusters` because of invalid access token, create new access and refresh tokens, and use them in your source `clusters.yaml`. |
+| <br>404 error                                                     | <br>This is a “not found” message indicating that something is not configured correctly or pointing to the correct endpoint.                                                                             | <br>Verify that your Ansible Automation Platform instance URLs used in `clusters.yaml` are correct.                                                                                                      |
+| <br>OAuth login fails with "Something wrong during authorization" | <br>When using a private CA, Python's requests library does not use the system CA trust store by default. It uses the bundled certificate CA store unless `REQUESTS_CA_BUNDLE` or `SSL_CERT_FILE` is set. If `custom_ca_cert` is not configured in the inventory, the dashboard containers ignore the mounted CA bundle entirely. | <br>Set `custom_ca_cert=/path/to/organizational-ca.pem` in your inventory file and reinstall. Do not set `aap_auth_provider_check_ssl=false` as a workaround. After reinstall, verify the fix by running: `podman exec automation-dashboard-web printenv REQUESTS_CA_BUNDLE`. Expected output: `/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem`. |
 
 A successful installation should be running the following three container services:
 
@@ -56,6 +57,7 @@ postgresql
 automation-dashboard-task
 automation-dashboard-web
 ```
+
 You can check your container logs by running the following:
 
 ```bash
@@ -79,6 +81,7 @@ May 22 13:02:13 automation-dashboard automation-dashboard-task[1607]: INFO 2025-
 May 22 13:02:13 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:13,821 connector 2 140568371550016 Executing GET request to >
 May 22 13:02:16 automation-dashboard automation-dashboard-task[1607]: ERROR 2025-05-22 13:02:16,892 connector 2 140568371550016 GET request failed with ...
 ```
+
 The following log snippet shows a successful token refresh:
 
 Note:
@@ -99,6 +102,7 @@ ERROR GET after reauth response.status_code=200
 INFO Executing GET request to https://app.example.com:443/api/controller/v2/job_templates/?page_size=200&page=1
 Executing GET request to https://app.example.com:443/api/controller/v2/jobs/?page_size=100&page=1&order_by=finished&finished__gt=2025-10-23T13:01:09.768681Z
 ```
+
 Check how the services are running by using `systemd`:
 
 ```bash

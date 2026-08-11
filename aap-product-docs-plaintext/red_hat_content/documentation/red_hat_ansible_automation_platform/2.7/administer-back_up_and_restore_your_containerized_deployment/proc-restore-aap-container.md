@@ -28,6 +28,7 @@ Restore functionality only works with the PostgreSQL versions supported by your 
 ```
 $ ansible-playbook -i <path_to_inventory> ansible.containerized_installer.restore
 ```
+
 This restores the important data deployed by the containerized installer such as:
 
 * PostgreSQL databases
@@ -41,12 +42,9 @@ Important:
 Restoring to a different environment with different hostnames is not recommended and is intended only as a workaround.
 1. For each component, identify the backup file from the source environment that contains the PostgreSQL dump file. For example:
 
-
-
 ```
 $ cd ansible-automation-platform-containerized-setup-<version_number>/backups
 ```
-
 
 ```
 $ tar tvf gateway_env1-gateway-node1.tar.gz | grep db
@@ -58,12 +56,9 @@ $ tar tvf gateway_env1-gateway-node1.tar.gz | grep db
 
 3. Rename the backup files on the target environment to reflect the new node names. For example:
 
-
-
 ```
 $ cd ansible-automation-platform-containerized-setup-<version_number>/backups
 ```
-
 
 ```
 $ mv gateway_env1-gateway-node1.tar.gz gateway_env2-gateway-node1.tar.gz
@@ -71,12 +66,9 @@ $ mv gateway_env1-gateway-node1.tar.gz gateway_env2-gateway-node1.tar.gz
 
 4. For enterprise topologies, ensure that the component backup file containing the `component.db` file is listed first in its group within the inventory file. For example:
 
-
-
 ```
 $ cd ansible-automation-platform-containerized-setup-<version_number>
 ```
-
 
 ```
 $ ls backups/gateway*
@@ -85,18 +77,15 @@ gateway_env2-gateway-node1.tar.gz
 gateway_env2-gateway-node2.tar.gz
 ```
 
-
 ```
 $ tar tvf backups/gateway_env2-gateway-node1.tar.gz | grep db
 
 -rw-r--r-- ansible/ansible 416687 2025-06-30 11:05 aap/backups/gateway.db
 ```
 
-
 ```
 $ tar tvf backups/gateway_env2-gateway-node2.tar.gz | grep db
 ```
-
 
 ```
 $ vi inventory

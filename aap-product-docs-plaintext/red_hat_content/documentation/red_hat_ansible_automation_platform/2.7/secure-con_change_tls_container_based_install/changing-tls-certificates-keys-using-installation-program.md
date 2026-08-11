@@ -58,11 +58,9 @@ receptor_tls_key=<path_to_tls_key>
 | <br>Redis                 | <br>`~/aap/redis/server.crt`          | <br>`~/aap/redis/server.key`          |
 
 2.  After preparing your certificates, run the `install` playbook from your installation directory:
+`ansible-playbook -i <inventory_file_name>`
 
-
-```
-ansible-playbook -i <inventory_file_name> ansible.containerized_installer.install
-```
+`ansible.containerized_installer.install`
 
 ### Results
 
@@ -71,6 +69,7 @@ Verify that the new TLS certificates are in use by checking that the services ar
 ```
 $ curl -vk https://<hostname_or_ip>:<port_number>/api/v2/
 ```
+
 The output of this command gives details about the TLS handshake. Look for the following output to confirm the correct certificate is being used:
 
 ```

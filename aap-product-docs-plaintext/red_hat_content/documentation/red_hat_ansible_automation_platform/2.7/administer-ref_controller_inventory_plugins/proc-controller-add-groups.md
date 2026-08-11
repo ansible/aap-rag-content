@@ -16,7 +16,6 @@ The following actions are available for standard inventories:
 - View activity streams for Groups and Hosts
 - Obtain help building your Inventory
 
-
 Note:
 
 Inventory sources are not associated with groups. Spawned groups are top-level and can still have child groups. All of these spawned groups can have hosts.

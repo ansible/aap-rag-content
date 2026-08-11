@@ -1,16 +1,16 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-run_playbooks_with_ansible_navigator_using_the_assistant"
 title = "Run playbooks with ansible-navigator using the assistant - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-run_playbooks_with_ansible_navigator_using_the_assistant"
 template = "docs/aem-title.html"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-enable_ai_in_the_ansible_vs_code_extension_with_the_mcp_server/", "Enable AI in the Ansible VS Code extension with the MCP server"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-enable_the_vs_code_extension_ai_assistant/", "Enable the VS Code extension AI assistant"]]
 category = "Extend"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-run_playbooks_with_ansible_navigator_using_the_assistant/aem-page/extend-run_playbooks_with_ansible_navigator_using_the_assistant.html"
 last_crumb = "Run playbooks with ansible-navigator using the assistant"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Run playbooks with ansible-navigator using the assistant"
 oversized = "false"
@@ -37,6 +37,7 @@ After you have built a suitable execution environment, you can ask the assistant
 ```
 Generate a command that runs this playbook in the execution environment <your-file-name>
 ```
+
     The assistant then generates an appropriate `ansible-navigator` command, ensuring the `--execution-environment-image` flag points to your newly built tag.
 
   A generated command might look like the following:

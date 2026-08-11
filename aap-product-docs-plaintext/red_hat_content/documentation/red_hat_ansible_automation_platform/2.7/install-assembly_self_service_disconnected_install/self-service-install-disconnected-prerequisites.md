@@ -18,7 +18,6 @@ Fulfilling these prerequisites helps ensure a successful deployment.
 * For HTTP plug-in registry: The ability to host the plug-in tarball files.
 - You have registry credentials for the registry endpoint used by the dynamic plug-in installer.
 
-
 Important:
 
 The image versions and compatibility requirements vary between Helm chart releases. Before you begin, consult the [Ansible Automation Portal Lifecycle](https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-lifecycle) page for version mappings between the Helm chart, Red Hat Developer Hub, and PostgreSQL.

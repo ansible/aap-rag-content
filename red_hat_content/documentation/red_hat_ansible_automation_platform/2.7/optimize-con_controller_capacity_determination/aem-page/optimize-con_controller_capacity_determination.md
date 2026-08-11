@@ -1,7 +1,7 @@
 +++
 template = "docs/aem-title.html"
-title = "How job capacity is determined and impacts job runs - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_controller_capacity_determination"
+title = "How job capacity is determined and impacts job runs - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_pod_spec_modifications/", "Performance tuning for operator environments"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-con_controller_capacity_determination/aem-page/optimize-con_controller_capacity_determination.html"
 last_crumb = "How job capacity is determined and impacts job runs"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "How job capacity is determined and impacts job runs"
 oversized = "false"
@@ -31,7 +31,6 @@ The automation controller capacity system determines how many jobs can run on an
 
 - How much memory is available to the system (`mem_capacity`)
 - How much processing capacity is available to the system (`cpu_capacity`)
-
 
 Capacity also impacts instance groups. Since groups are made up of instances, instances can also be assigned to multiple groups. This means that impact to one instance can affect the overall capacity of other groups.
 
@@ -58,11 +57,13 @@ The memory relative capacity option allows you to set the maximum number of conc
 ```
 (mem - 2048) / mem_per_fork
 ```
+
 The following is an example:
 
 ```
 (4096 - 2048) / 100 == ~20
 ```
+
 A system with 4GB of memory is capable of running 20 forks. The value `mem_per_fork` is controlled by setting the value of `SYSTEM_TASK_FORKS_MEM`, which defaults to 100.
 
 ## CPU relative capacity
@@ -76,9 +77,11 @@ Just as the `mem_capacity` algorithm adjusts the amount of memory required per f
 ```
 cpus * fork_per_cpu
 ```
+
 For example, a 4-core system looks like the following:
 
 ```
 4 * 4 == 16
 ```
+
 You can control the value of `fork_per_cpu` by setting the value of `SYSTEM_TASK_FORKS_CPU` which defaults to 4.

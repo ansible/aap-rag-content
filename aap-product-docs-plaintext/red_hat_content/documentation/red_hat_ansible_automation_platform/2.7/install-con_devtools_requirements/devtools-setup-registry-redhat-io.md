@@ -23,6 +23,7 @@ If you are running Ansible development tools on a container inside VS Code and y
 ```
 $ podman login --get-login registry.redhat.io
 ```
+
 The command output displays your Red Hat login if you are logged in to `registry.redhat.io`.
 
 2.  If you are not logged in to `registry.redhat.io`, use the `podman login` command with your credentials to access content on the registry.

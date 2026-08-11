@@ -12,4 +12,3 @@ You can perform the following tasks:
 - Create Ansible playbooks and view playbook explanations     You can create Ansible playbooks and view explanations for new or existing playbooks by using the Ansible VS Code extension.
 
 - Create roles within a collection and view role explanations     You can generate roles within collections using the Ansible VS Code extension and view explanations for existing roles.
-

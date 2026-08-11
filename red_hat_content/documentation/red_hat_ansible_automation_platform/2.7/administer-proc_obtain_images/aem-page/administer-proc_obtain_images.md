@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-proc_obtain_images/aem-page/administer-proc_obtain_images.html"
 last_crumb = "Pull execution environments for use in automation hub"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Pull execution environments for use in automation hub"
 oversized = "false"
@@ -109,6 +109,7 @@ You can push tagged execution environments to private automation hub to create n
 ```
 $ podman login -u=<username> -p=<password> <aap_url>
 ```
+
   Warning:
       Let Podman prompt you for your password when you log in. Entering your password at the same time as your username can expose your password to the shell history.
 
@@ -206,4 +207,5 @@ When the "Default Execution Environment" is not used for a job, double-check the
 ```
 # echo "select id, name, created from main_executionenvironment where organization_id is null and managed = False order by created desc;" | awx-manage dbshell
 ```
+
      To ensure that the Default Execution Environment is used regardless of the `GLOBAL_JOB_EXECUTION_ENVIRONMENTS` setting and database order, set the Global default execution environment in Settings> (and then)Automation execution> (and then)System to Default Execution Environment.

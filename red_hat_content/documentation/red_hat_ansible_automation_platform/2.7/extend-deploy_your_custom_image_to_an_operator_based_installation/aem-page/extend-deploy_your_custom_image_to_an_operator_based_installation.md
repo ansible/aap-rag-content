@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-deploy_your_custom_image_to_an_operator_based_installation"
 title = "Deploy your custom image to an operator-based installation - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-deploy_your_custom_image_to_an_operator_based_installation"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-extend_the_intelligent_assistant_with_custom_knowledge/", "Extend the automation intelligent assistant with custom knowledge"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-deploy_your_custom_image_to_an_operator_based_installation/aem-page/extend-deploy_your_custom_image_to_an_operator_based_installation.html"
 last_crumb = "Deploy your custom image to an operator-based installation"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Deploy your custom image to an operator-based installation"
 oversized = "false"
@@ -51,16 +51,16 @@ Deploy the BYOK RAG image to the intelligent assistant for operator-based Ansibl
      lightspeed:
        ...
        chatbot_extra_settings:
-       chatbot_byok_image: 'quay.io/<repository>/rag-content-output'                                                          chatbot_byok_image_version: latest chatbot_byok_storage_size: '500Mi'                        chatbot_byok_score_multiplier: 1.2
+       chatbot_byok_image: 'quay.io/<repository>/rag-content-output'                                                          chatbot_byok_image_version: latest chatbot_byok_storage_size: '500Mi'  
 ```
+
     The parameters above correspond to the values in the following table.
 
-    | Parameter                       | Description                                                                                                                                                                                                                       | Default value |
-    | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-    | `chatbot_byok_image`            | The full registry path to your RAG image.                                                                                                                                                                                         | n/a           |
-    | `chatbot_byok_image_version`    | The specific version tag (for example,`1.0`) of the image to pull.                                                                                                                                                                | `latest`      |
-    | `chatbot_byok_storage_size`     | <br>The amount of persistent storage allocated for the BYOK volume.<br>Keep the BYOK data between 1 Mi and 999 Mi for best performance. While the system supports larger allocations up to 2 Gi, smaller volumes are recommended. | `2 Gi`        |
-    | `chatbot_byok_score_multiplier` | The score multiplier for BYOK content priority. It adjusts how heavily the AI weighs your custom data versus base knowledge.                                                                                                      | `1.2`         |
+    | Parameter                    | Description                                                                                                                                                                                              | Default value |
+    | ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+    | `chatbot_byok_image`         | The full registry path to your RAG image.                                                                                                                                                                | n/a           |
+    | `chatbot_byok_image_version` | The specific version tag (for example,`1.0`) of the image to pull.                                                                                                                                       | `latest`      |
+    | `chatbot_byok_storage_size`  | <br>The amount of persistent storage allocated for the BYOK volume.<br>Keep the BYOK data between 1 Mi and 999 Mi for best performance. While the system supports larger allocations up to 2 Gi, smaller volumes are recommended. | `2 Gi`        |
 
 6.  If the BYOK image is in a private registry, you must create an image pull secret, and set the following values in the `chatbot_extra_settings` parameters under the `spec: `section:
   

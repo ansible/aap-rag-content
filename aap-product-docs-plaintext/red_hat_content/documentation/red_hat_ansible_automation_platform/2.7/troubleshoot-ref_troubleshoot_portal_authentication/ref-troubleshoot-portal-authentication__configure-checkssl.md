@@ -27,32 +27,38 @@ checkSSL: false  # OAuth authentication calls to AAP
 clientId: ${OAUTH_CLIENT_ID}
 clientSecret: ${OAUTH_CLIENT_SECRET}
 ```
+
 If you deployed with Helm, upgrade the release:
 
 ```terminal
 $ helm upgrade *release-name* *chart* -f values.yaml -n *namespace*
 ```
+
 If you edited the ConfigMap directly, restart the deployment:
 
 ```terminal
 $ oc rollout restart deployment/*portal-deployment-name* -n *namespace*
 ```
+
 Wait for the new pod to become ready:
 
 ```terminal
 $ oc rollout status deployment/*portal-deployment-name* -n *namespace*
 ```
+
 Verify the configuration took effect by checking the pod logs for successful Ansible Automation Platform connectivity:
 
 ```terminal
 $ oc logs -n *namespace* deployment/*portal-deployment-name* -c backstage-backend | grep -i "rhaap\|AAP\|error"
 ```
+
 Successful catalog sync logs look like:
 
 ```
 [catalog] info  Fetching job templates from RH AAP.
 [catalog] info  [backstage-rhaap-common]: Executing get request to https://*aap-host*/api/controller/v2/job_templates...
 ```
+
 If you still see `fetch failed` errors, verify that the correct ConfigMap was updated and the pod restarted with the new configuration.
 
 **Accept the Ansible Automation Platform certificate in your browser**
@@ -62,7 +68,6 @@ Setting `checkSSL` to `false` fixes backend communication but does not affect yo
 1. Open a new tab and navigate directly to your Ansible Automation Platform URL (for example, `https://*aap-host*/`).
 2. Accept the browser certificate warning (click **Advanced**, then **Proceed**).
 3. Return to Ansible automation portal and click **Sign In**.
-
 
 Note:
 

@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/migrate-con_out_of_scope/aem-page/migrate-con_out_of_scope.html"
 last_crumb = "Out of scope"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Out of scope"
 oversized = "false"
@@ -37,6 +37,5 @@ Migration covers core Ansible Automation Platform components. Some components an
 - Custom Certificate Authority (CA) for receptor mesh: Manually reconfigure custom CA configurations for receptor mesh.
 - Disconnected environments: The migration process does not cover disconnected environments.
 - Execution environments (other than the default one): Manually rebuild or re-import custom execution environments.
-
 
 Manually re-create, import, or configure these items in the target environment.

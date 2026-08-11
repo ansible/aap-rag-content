@@ -24,6 +24,7 @@ The script prints out a JSON structure with the following format.
 ```
 {"file": "filename", "signature": "filename.asc"}
 ```
+
 All the file names are relative paths inside the current working directory. The file name must remain the same for the detached signature.
 
 **Example:** The following script produces signatures for content:
@@ -90,6 +91,7 @@ gpg --export --armor <your-gpg-key-id> > signing_service.gpg
 
 oc create secret generic signing-galaxy --from-file=signing_service.gpg
 ```
+
 The secret must have a key named `signing_service.gpg`.
 
 3.  Configure the AnsibleAutomationPlatform CR.

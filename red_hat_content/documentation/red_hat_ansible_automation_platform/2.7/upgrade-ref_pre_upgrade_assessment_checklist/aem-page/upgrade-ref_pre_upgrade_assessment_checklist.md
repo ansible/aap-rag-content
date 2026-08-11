@@ -1,16 +1,16 @@
 +++
+title = "Pre-upgrade migration checklist - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-ref_pre_upgrade_assessment_checklist"
 template = "docs/aem-title.html"
-title = "Pre-upgrade migration checklist - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-ref_pre_upgrade_assessment_checklist/", "Pre-upgrade migration checklist"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-con_auth_changes_27/", "Authentication changes in Ansible Automation Platform 2.7"]]
 category = "Upgrade"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/upgrade-ref_pre_upgrade_assessment_checklist/aem-page/upgrade-ref_pre_upgrade_assessment_checklist.html"
 last_crumb = "Pre-upgrade migration checklist"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Pre-upgrade migration checklist"
 oversized = "false"
@@ -52,7 +52,6 @@ You can run the tool directly from the GitHub repository using `uvx`.
   * Containerized deployments: An SOSReport.
   * OpenShift Container Platform deployments: A must-gather or ocp-inspect output.
 
-
 Note:
 
 The tool requires NGINX log format updates introduced in the Ansible Automation Platform 2.6 patch released March 25, 2026. If you are running an earlier 2.6.x patch and your logs do not contain the required fields, apply the provided patch script or upgrade to the latest 2.6.x release.
@@ -62,11 +61,13 @@ The tool requires NGINX log format updates introduced in the Ansible Automation 
 ```
 $ uvx --from "git+https://github.com/ansible/aap-detect-direct-component-access" aap-detect-direct-component-access /path/to/sosreport/
 ```
+
 **Scan an OpenShift must-gather tarball:**
 
 ```
 $ uvx --from "git+https://github.com/ansible/aap-detect-direct-component-access" aap-detect-direct-component-access /path/to/must-gather/
 ```
+
 **Scan an OpenShift Container Platform inspect output:**
 
 ```

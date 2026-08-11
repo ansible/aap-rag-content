@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-con_api_auth_methods/aem-page/develop-con_api_auth_methods.html"
 last_crumb = "Authenticate through the API"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Authenticate through the API"
 oversized = "false"
@@ -43,9 +43,7 @@ With this method, you can remain logged in for a prolonged period of time, not j
 
 The following image represents the communication that occurs between the client and server in a session:
 
-
 ![Session authentication architecture](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/session-auth-architecture.png)  
-
 
 Use the curl tool to see the activity that occurs when you log in through platform gateway.
 
@@ -81,7 +79,7 @@ curl -X POST -H 'Content-Type: application/x-www-form-urlencoded' \
 4.  Access and test the APIs that need authentication, for example `/api/controller/v2/settings/all/`:
   
    Note:
-      latform gateway performs all of these steps when you olog into the UI or API in the browser. You must use this procedure only when authenticating in the browser. For programmatic integration with platform gateway, see [OAuth2 token authentication](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_controller_api_oauth2_token#controller-api-oauth2-token "OAuth (Open Authorization) is an open standard for token-based authentication and authorization. OAuth 2 authentication is commonly used when interacting with the platform gateway API programmatically.").
+      Platform gateway performs all of these steps when you log into the UI or API in the browser. You must use this procedure only when authenticating in the browser. For programmatic integration with platform gateway, see [OAuth2 token authentication](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_controller_api_oauth2_token#controller-api-oauth2-token "OAuth (Open Authorization) is an open standard for token-based authentication and authorization. OAuth 2 authentication is commonly used when interacting with the platform gateway API programmatically.").
 
 ```
 $ curl -X GET -H 'Cookie: <cookieID>;' https://<gateway server name>/api/controller/v2/settings/all/ -k
@@ -113,6 +111,7 @@ Set-Cookie: csrftoken=<csrftoken>; Path=/; SameSite=Lax
 Set-Cookie: awx_sessionid=<your session id>; expires=<date>; HttpOnly; Max-Age=1800; Path=/; SameSite=Lax
 Strict-Transport-Security: max-age=15768000
 ```
+
 When a user is successfully authenticated with this method, the server responds with a header called `X-API-Session-Cookie-Name`, indicating the configured name of the session cookie. The default value is `awx_session_id` which you can see later in the `Set-Cookie` headers.
 
  Note:
@@ -156,7 +155,6 @@ The different methods for obtaining OAuth 2 access tokens in automation controll
 - Application token: Implicit grant type
 - Application token: Authorization Code grant type
 
-
 You can create an OAuth 2 token in the API or in the Access Management> (and then)OAuth Applications tab of the platform gateway UI.
 
 For the purpose of this example, use the PAT method for creating a token in the API. After you create it, you can set the scope.
@@ -174,11 +172,10 @@ Create a token through the platform gateway tokens endpoint:
 ```
 curl -u user:password -k -X POST https://<gateway server name>/api/gateway/v1/tokens/
 ```
+
 This call returns JSON data with the following:
 
-
 ![API OAuth2 JSON](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/api-oauth2-json-returned-token-value.png)  
-
 
 You can use the value of the `token` property to perform a `GET` request for a resource, such as Hosts:
 
@@ -188,6 +185,7 @@ curl -k -X GET \
   -H “Authorization: Bearer <oauth2-token-value>” \
   https://<platform-host>/api/controller/v2/hosts/
 ```
+
 You can also run a job by making a `POST` to the job template that you want to start:
 
 ```

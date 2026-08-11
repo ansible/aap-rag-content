@@ -17,6 +17,7 @@ touch collections/ansible_collections/myorg/mcp_cfn/README.md
 touch collections/ansible_collections/myorg/mcp_cfn/LICENSE
 touch collections/ansible_collections/myorg/mcp_cfn/roles/cfn_mcp/meta/main.yml
 ```
+
 The directory structure will look like this:
 
 ```
@@ -59,6 +60,7 @@ dependencies:
 ansible.mcp_builder: ">=1.0.3"
 
 ```
+
 The dependencies field ensures that the `ansible.mcp_builder` collection is installed alongside your collection.
 
 3.  Define the role registry metadata by creating `roles/cfn_mcp/defaults/main.yml ` with the registry definition for your MCP server:
@@ -78,6 +80,7 @@ cfn_mcp_version: "1.0.19"
 
 
 ```
+
 The registry variable must follow the naming convention `<role_name>_registry`. The fields are:
 
 | Field       | Required | Description                                                       |
@@ -136,6 +139,7 @@ when:
 - cfn_mcp_verify_result.rc is defined
 - cfn_mcp_verify_result.rc != 0
 ```
+
 The two `include_role` tasks are the minimum required. The `install_manager` task reads your registry metadata and installs the MCP server by using the appropriate method. The generate_manifest task adds the server to the `mcpservers.json` manifest.
 
 The verification step is optional but recommended. It confirms the installed server is callable.
@@ -194,6 +198,7 @@ recurse: true
 owner: "{{ common_runtime_user }}"
 group: "{{ common_runtime_user }}"
 ```
+
 Important:
 The first task must include `ansible.mcp_builder.common` with `public: true`. This initializes the framework and makes shared variables (such as `common_mcp_base_path`) available to later tasks. The ownership fix at the end ensures the MCP server files are accessible by the non-root runtime user inside the execution environment.
 Note:

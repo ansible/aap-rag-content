@@ -1,6 +1,6 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_configure_external_database_operator"
 title = "Configure external PostgreSQL database for metrics service with OpenShift operator - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_configure_external_database_operator"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-task_configure_external_database_operator/aem-page/install-task_configure_external_database_operator.html"
 last_crumb = "Configure external PostgreSQL database for metrics service with OpenShift operator"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure external PostgreSQL database for metrics service with OpenShift operator"
 oversized = "false"
@@ -64,6 +64,7 @@ psql -h <EXTERNAL_DB_HOST> -U postgres
        LC_CTYPE='en_US.UTF-8'
        TEMPLATE=template0;
 ```
+
     **Create database users:**
 
 ```
@@ -80,6 +81,7 @@ CREATE USER ms_awx_readonly WITH PASSWORD '<READONLY_PASSWORD>';
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO ms_awx_readonly;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO ms_awx_readonly;
 ```
+
   Important:
       Change `awx` to match your actual database name for automation controller. Common alternative names: `automationcontroller`, `tower`, `awx_production`.
 
@@ -92,6 +94,7 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO ms_awx_reado
 host    metrics_service    metrics_service    10.128.0.0/14    scram-sha-256
 host    awx               ms_awx_readonly    10.128.0.0/14    scram-sha-256
 ```
+
   Note:
       Replace `10.128.0.0/14` with your OpenShift cluster's pod network CIDR. Find it with: `oc get network.config cluster -o jsonpath='{.status.clusterNetwork[0].cidr}'`
 
@@ -126,6 +129,7 @@ stringData:
   sslmode: prefer
   type: unmanaged
 ```
+
     **Secret 2: Automation controller database read-only credentials**
 
 ```
@@ -144,6 +148,7 @@ stringData:
   sslmode: prefer
   type: unmanaged
 ```
+
     **Apply the secrets:**
 
 ```
@@ -153,6 +158,7 @@ oc create -f automation-controller-read-postgres-configuration.yaml
     # Verify secrets created
 oc get secret -n <your-namespace> | grep postgres-configuration
 ```
+
     **Secret field reference:**
 
     | Field      | Required | Description                                                                         |
@@ -187,6 +193,7 @@ spec:
     - redhat-operators-pull-secret
   ingress_type: None
 ```
+
     **Key configuration fields:**
 
     | Field                                             | Value                                                | Description                                                          |
@@ -266,7 +273,6 @@ External database is successfully configured when:
 - Pods can query automation controller database by using the `ms_awx_readonly` user
 - No `FailedScheduling` events related to database pods or kubevirt devices
 - Health endpoint returns 200 status: `oc exec deployment/metrics-service-web -- curl -s http://localhost:8087/health/`
-
 
 **Common verification failures:**
 

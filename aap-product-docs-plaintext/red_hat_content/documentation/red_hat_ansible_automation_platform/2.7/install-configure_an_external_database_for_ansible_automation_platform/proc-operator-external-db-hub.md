@@ -46,6 +46,7 @@ sslmode: "prefer" ⑤
 type: "unmanaged"
 type: Opaque
 ```
+
 1.  Namespace to create the secret in. This should be the same namespace you want to deploy to.
 2.  The resolvable hostname for your database node.
 3.  External port defaults to `5432`.
@@ -74,6 +75,7 @@ storage_type: file
 file_storage_storage_class: <your-read-write-many-storage-class>
 file_storage_size: 10Gi
 ```
+
 
 Note:
 If you have an existing automation hub instance, specify its name under `hub.name` to apply these settings to the existing instance. If you omit the `name` field, the operator will create a new instance with the default name pattern `<aap-instance-name>-hub`.

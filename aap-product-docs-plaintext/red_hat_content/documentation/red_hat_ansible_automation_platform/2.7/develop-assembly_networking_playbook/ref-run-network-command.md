@@ -8,6 +8,7 @@ ansible all -i vyos.example.net, -c ansible.netcommon.network_cli -u \
 my_vyos_user -k -m vyos.vyos.vyos_facts -e \
 ansible_network_os=vyos.vyos.vyos
 ```
+
 The flags in this command set seven values:
 
 - the host group(s) to which the command should apply (in this case, `all`)
@@ -17,7 +18,6 @@ The flags in this command set seven values:
 - the SSH connection method (-`k`, prompt for the password)
 - the module (`-m`, the Ansible module to run, using the fully qualified collection name (FQCN))
 - an extra variable ( `-e`, in this case, setting the network operating system value)
-
 
 Note:
 

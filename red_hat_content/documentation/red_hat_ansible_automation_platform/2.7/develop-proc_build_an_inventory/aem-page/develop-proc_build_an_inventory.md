@@ -1,6 +1,6 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_build_an_inventory"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_build_an_inventory"
 title = "Define which hosts to manage in an inventory file - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_build_an_inventory/aem-page/develop-proc_build_an_inventory.html"
 last_crumb = "Define which hosts to manage in an inventory file"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Define which hosts to manage in an inventory file"
 oversized = "false"
@@ -77,6 +77,7 @@ Inventories organize managed nodes in centralized files that provide Ansible wit
     "ping": "pong"
 }
 ```
+
     You have successfully built an inventory.
 
 ## Inventories in INI or YAML format
@@ -107,7 +108,12 @@ When building inventories for Ansible automation, consider the following best pr
   * What: Group hosts according to the topology, for example: db, web, leaf, spine, metrics.
   * Where: Group hosts by geographic location, for example: data center, region, floor, building.
   * When: Group hosts by stage, for example: development, test, staging, production.
-- Metrics service must be included when automation controller is present. In containerized deployments, use a dedicated host for metrics service (separate from controller, hub, gateway, and EDA).
+
+Note:
+
+Metrics service deployment requirements:
+
+- Metrics service must be included when automation controller is present. The `[automationmetrics]` inventory group is required in all deployments with `[automationcontroller]`.
 
 ## Use metagroups
 
@@ -119,6 +125,7 @@ Create a metagroup that organizes multiple groups in your inventory with the fol
 metagroupname:
   children:
 ```
+
 The following inventory illustrates a basic structure for a data center. This example inventory has a network metagroup that includes all network devices and a data center metagroup that includes the network group and all webservers.
 
 ```
@@ -170,6 +177,7 @@ webservers:
       ansible_host: 192.0.2.150
       http_port: 443
 ```
+
 Variables can also apply to all hosts in a group.
 
 ```
@@ -184,4 +192,5 @@ webservers:
   vars:
     ansible_user: my_server_user
 ```
+
 For more information about inventories and Ansible inventory variables, see [About the Installer Inventory file](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/planning_your_installation/about_the_installer_inventory_file) and [Inventory file variables](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars).

@@ -57,6 +57,7 @@ use_db_compression=true
 ```
 $ ansible-playbook -i <path_to_inventory> ansible.containerized_installer.backup
 ```
+
 The backup process creates archives of the following data:
 
 - PostgreSQL databases
@@ -71,32 +72,27 @@ To customize the backup process, you can use the following variables in your inv
 
 -      Exclude paths that contain duplicated data, such as snapshot subdirectories, by using the `hub_data_path_exclude` variable.
 
-For example, to exclude a `.snapshots` subdirectory from the backup, add the following to your inventory file:
-
-
+For example, to exclude a `.snapshot` subdirectory from the backup, add the following to your inventory file:
 
 ```
-hub_data_path_exclude=["*/.snapshots", "*/.snapshots/*"]
+hub_data_path_exclude=["*/.snapshot", "*/.snapshot/*"]
 ```
+
 Alternatively, you can pass this variable at runtime by using the `-e` flag:
 
-
-
 ```
-$ ansible-playbook -i inventory ansible.containerized_installer.backup -e hub_data_path_exclude="['*/.snapshots', '*/.snapshots/*']"
+$ ansible-playbook -i inventory ansible.containerized_installer.backup -e hub_data_path_exclude="['*/.snapshot', '*/.snapshot/*']"
 ```
+
 You can also define the exclusion patterns in a YAML extra variables file and pass it at runtime:
 
 **exclude_vars.yml**
 
-
-
 ```
 hub_data_path_exclude:
-- "*/.snapshots/*"
-- "*/.snapshots"
+- "*/.snapshot/*"
+- "*/.snapshot"
 ```
-
 
 ```
 $ ansible-playbook -i inventory ansible.containerized_installer.backup -e @exclude_vars.yml

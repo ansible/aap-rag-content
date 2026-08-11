@@ -18,8 +18,6 @@ Terraform backend configuration requires the following inputs:
 
 - **Backend configuration**: Drag a file here or browse to upload. Example configuration for an S3 backend:
 
-
-
 ```
 bucket = "my-terraform-state-bucket"
 key = "path/to/terraform-state-file"

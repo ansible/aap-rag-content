@@ -33,7 +33,6 @@ ansible_network_os: checkpoint
 3.  Run the playbook:
 `$ ansible-navigator run --ee false <playbook.yml>`:
 
-
 ![Playbook with deleted firewall rule](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/security-delete-rule.png)
 
 4.  You have deleted the firewall rule. Access the MGMT server and verify that the new security policy has been removed.

@@ -2,7 +2,7 @@
   "version": "1.1",
   "sections": [
     {
-      "title": "Restore your Ansible Automation Platform deplopyment",
+      "title": "Restore your Ansible Automation Platform deployment",
       "visible": true,
       "weight": 1,
       "urlFragment": "index",

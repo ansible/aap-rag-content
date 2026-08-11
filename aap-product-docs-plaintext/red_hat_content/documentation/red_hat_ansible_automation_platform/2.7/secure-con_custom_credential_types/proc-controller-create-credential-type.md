@@ -26,6 +26,7 @@ required:
 - username
 - password
 ```
+
 View more YAML examples at the [YAML page](https://yaml.org/spec/1.2.2/).
 
 **JSON**
@@ -48,6 +49,7 @@ View more YAML examples at the [YAML page](https://yaml.org/spec/1.2.2/).
 "required": ["username", "password"]
 }
 ```
+
 View more JSON examples at [The JSON website](https://www.json.org/json-en.html).
 
 The following configuration in JSON format shows each field and how they are used:
@@ -81,6 +83,7 @@ for SSH private key data (only applicable to `type=string`)
 "required": ["api_token"]   # optional; one or more fields can be marked as required
 },
 ```
+
 When `type=string`, fields can optionally specify multiple choice options:
 
 ```
@@ -109,6 +112,7 @@ When `type=string`, fields can optionally specify multiple choice options:
 }
 }
 ```
+
 Credential Types can also generate temporary files to support `.ini` files or certificate or key data:
 
 ```
@@ -121,11 +125,13 @@ Credential Types can also generate temporary files to support `.ini` files or ce
 }
 }
 ```
+
 In this example, automation controller writes a temporary file that has:
 
 ```
 [mycloud]\ntoken=SOME_TOKEN_VALUE
 ```
+
 The absolute file path to the generated file is stored in an environment variable named `MY_CLOUD_INI_FILE`.
 
 The following is an example of referencing many files in a custom credential template:
@@ -145,6 +151,7 @@ The following is an example of referencing many files in a custom credential tem
 }]
 }
 ```
+
 **Injectors**
 
 ```
@@ -170,7 +177,6 @@ In the **Edit** screen, you can modify the details or delete the credential. If 
 ### Results
 
 - Verify that the newly created credential type can be selected from the **Credential Type** selection window when creating a new credential:
-
 
 ![Verify new credential type](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/credential-types-new-listed-verify.png)
 

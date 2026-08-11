@@ -9,7 +9,6 @@ In Red Hat Ansible Automation Platform 2.7, all API access must go through the p
 | `https://hub.example.com/api/automation-hub/*` | `https://gateway.example.com/api/galaxy/*`        | Required |
 | `https://eda.example.com/api/eda/v1/*`         | `https://gateway.example.com/api/eda/v1/*`        | Required |
 
-
 Note:
 
 Attempting to access component hostnames directly (`controller.example.com`, `hub.example.com`, `eda.example.com`) returns HTTP 401 Unauthorized in Red Hat Ansible Automation Platform 2.7.

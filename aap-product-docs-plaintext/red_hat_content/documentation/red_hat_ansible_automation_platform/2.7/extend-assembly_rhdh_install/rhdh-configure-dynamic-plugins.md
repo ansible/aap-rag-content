@@ -58,6 +58,7 @@ dynamicPlugins:
 backend:
 ansible.plugin-scaffolder-backend-module-backstage-rhaap:
 ```
+
 **Helm chart installation**
 
 Update the Helm chart configuration under the `plugins` section:

@@ -5,7 +5,6 @@
 - If performing a bundled Ansible Automation Platform installation, the installation setup.sh script attempts to install ansible-core (and its dependencies) from the bundle for you.
 - If you have installed Ansible-core manually, the Ansible Automation Platform installation setup.sh script detects that Ansible has been installed and does not attempt to reinstall it.
 
-
 Note:
 
 You must use Ansible-core, which is installed by using DNF. Ansible-core version 2.16 is required for versions 2.6 and later.

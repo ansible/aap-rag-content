@@ -7,13 +7,13 @@ Your subscription has two possible statuses:
 - **Compliant**: Indicates that your subscription is appropriate for the number of hosts that you have automated within your subscription count.
 - **Out of compliance**: Indicates that you have exceeded the number of hosts in your subscription.
 
-
 Compliance is computed as follows:
 
 ```
 managed > manifest_limit    =>  non-compliant
 managed =< manifest_limit   =>  compliant
 ```
+
 Where: `managed` is the number of unique managed hosts without deletions, and `manifest_limit` is the number of managed hosts in the subscription manifest.
 
 Other important information displayed are:
@@ -23,7 +23,6 @@ Other important information displayed are:
 - **Hosts remaining**: The number of hosts minus the number of hosts automated.
 - **Hosts deleted**: The number of hosts that were deleted, freeing the license capacity.
 - **Active hosts previously deleted**: The number of hosts now active that were previously deleted.
-
 
 For example, if you have a subscription capacity of 10 hosts:
 

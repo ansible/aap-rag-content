@@ -114,7 +114,7 @@
           "singlePageAnchor": "self-service-install-disconnected-configure-oci"
         },
         {
-          "title": "Troubleshooting disconnected installations",
+          "title": "Troubleshoot disconnected installations",
           "visible": true,
           "weight": 14,
           "urlFragment": "self-service-install-disconnected-troubleshooting",

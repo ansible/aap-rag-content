@@ -12,7 +12,6 @@ You must upgrade to the latest version of all component collections shipped for 
 | `ansible.eda`        | Event-Driven Ansible API modules through platform gateway.                          |
 | `ansible.platform`   | Platform gateway authentication, tokens, and platform-wide resource management.     |
 
-
 After you upgrade the collections, complete the following tasks:
 
 - Pin or upgrade collections in `requirements.yml` and execution environments to the latest versions available for your release.

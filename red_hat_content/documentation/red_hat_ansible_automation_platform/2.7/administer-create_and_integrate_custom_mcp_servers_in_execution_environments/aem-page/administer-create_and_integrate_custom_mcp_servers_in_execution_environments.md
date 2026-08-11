@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-create_and_integrate_custom_mcp_servers_in_execution_environments/aem-page/administer-create_and_integrate_custom_mcp_servers_in_execution_environments.html"
 last_crumb = "Create and integrate custom MCP Servers in execution environments"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Create and integrate custom MCP Servers in execution environments"
 oversized = "false"
@@ -117,6 +117,7 @@ All installed MCP servers are registered in `/opt/mcp/mcpservers.json`. This fil
     }
 }
 ```
+
 For remote (HTTP-based) MCP servers, the entry uses url instead of command:
 
 ```
@@ -129,6 +130,7 @@ For remote (HTTP-based) MCP servers, the entry uses url instead of command:
     }
 }
 ```
+
 When multiple playbooks install MCP servers into the same execution environment, the manifest merges automatically. Each subsequent installation appends its entries to the existing manifest without overwriting previous entries.
 
 ## Create a custom MCP server role
@@ -152,6 +154,7 @@ touch collections/ansible_collections/myorg/mcp_cfn/README.md
 touch collections/ansible_collections/myorg/mcp_cfn/LICENSE
 touch collections/ansible_collections/myorg/mcp_cfn/roles/cfn_mcp/meta/main.yml
 ```
+
     The directory structure will look like this:
 
 ```
@@ -194,6 +197,7 @@ dependencies:
   ansible.mcp_builder: ">=1.0.3"
 
 ```
+
     The dependencies field ensures that the `ansible.mcp_builder` collection is installed alongside your collection.
 
 3.  Define the role registry metadata by creating `roles/cfn_mcp/defaults/main.yml ` with the registry definition for your MCP server:
@@ -213,6 +217,7 @@ cfn_mcp_registry:
 
   
 ```
+
     The registry variable must follow the naming convention `<role_name>_registry`. The fields are:
 
     | Field       | Required | Description                                                       |
@@ -271,6 +276,7 @@ myrole_build_path: "example/build"
     - cfn_mcp_verify_result.rc is defined
     - cfn_mcp_verify_result.rc != 0
 ```
+
     The two `include_role` tasks are the minimum required. The `install_manager` task reads your registry metadata and installs the MCP server by using the appropriate method. The generate_manifest task adds the server to the `mcpservers.json` manifest.
 
     The verification step is optional but recommended. It confirms the installed server is callable.
@@ -329,6 +335,7 @@ galaxy_info:
         owner: "{{ common_runtime_user }}"
         group: "{{ common_runtime_user }}"
 ```
+
   Important:
   The first task must include `ansible.mcp_builder.common` with `public: true`. This initializes the framework and makes shared variables (such as `common_mcp_base_path`) available to later tasks. The ownership fix at the end ensures the MCP server files are accessible by the non-root runtime user inside the execution environment.
   Note:
@@ -371,6 +378,7 @@ collections:
   - name: ansible.mcp
 
 ```
+
   Note:
   The `/build/configs/` path prefix is required. During the execution environment container build, ansible-builder copies files specified in additional_build_files into the build context under `_build/<dest>/`, which is then mounted at `/build/ ` inside the container.
     If your collections are published to Ansible Galaxy or automation hub, you can reference them by name instead of local paths:
@@ -386,6 +394,8 @@ collections:
 
 3.  Create `ee-build/execution-environment.yml`:
   
+  Note:
+      Replace `<platform-version>` with the namespace for your version of Ansible Automation Platform. Replace `<rhel-version>` with your Red Hat Enterprise Linux version
 
 ```
 # execution-environment.yml
@@ -394,7 +404,7 @@ version: 3
 
     images:
   base_image:
-    name: registry.redhat.io/ansible-automation-platform-25/ee-minimal-rhel9:latest
+    name: registry.redhat.io/<platform-version>/ee-minimal-rhel<rhel-version>:latest
 
     dependencies:
   galaxy: requirements.yml
@@ -412,6 +422,7 @@ version: 3
   append_final: |
     RUN ansible-playbook myorg.mcp_cfn.install_cfn_mcp
 ```
+
     Where:
 
     `additional_build_files`: Copies your collection tarballs into the container build context so they can be referenced during the build.
@@ -427,6 +438,7 @@ version: 3
 cd ee-build/
 ansible-builder build -t my-cfn-mcp-ee:latest -f execution-environment.yml -v 3
 ```
+
     The build process:
 
   1. Installs the base execution environment image dependencies.
@@ -453,6 +465,7 @@ additional_build_steps:
     RUN ansible-playbook myorg.mcp_cfn.install_cfn_mcp
 
 ```
+
 The manifest file merges automatically. The second playbook appends its entries to the existing `mcpservers.json` created by the first.
 
 ### Test and verify your MCP server
@@ -532,6 +545,7 @@ cfn_mcp_registry:
 
 cfn_mcp_version: "latest"
 ```
+
 When type is http, the framework only registers the server in the manifest with its URL.
 
 **Support both modes**
@@ -560,6 +574,7 @@ The GitHub MCP role in `ansible.mcp_builder` demonstrates a pattern for supporti
     tasks_from: generate_manifest
 
 ```
+
 You can then select the mode when building the execution environment:
 
 ```
@@ -608,6 +623,7 @@ podman tag my-cfn-mcp-ee:latest registry.example.com/ee/my-cfn-mcp-ee:latest
 podman push registry.example.com/ee/my-cfn-mcp-ee:latest
 
 ```
+
 If you are using the Private Automation Hub included with Ansible Automation Platform, push to its registry.
 
 ### Add the execution environment to Ansible Automation Platform
@@ -654,29 +670,26 @@ Diagnose and resolve common issues encountered when building, configuring, and i
 
 **Build failures**
 
-| Error                                    | Reason                                                                                                                                                                                                                                                                                                                                           |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Unable to find collection artifact file. | This error occurs when the collection tarball path in requirements.yml does not match the path inside the container. Ensure:   The tarball is listed in `additional_build_files` with a dest value.The source path in `requirements.yml` uses `/build/configs/<filename>` (not the host filesystem path).                                        |
+| Error                                    | Reason                                                                                                                                                                                                   |
+| ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Unable to find collection artifact file. | This error occurs when the collection tarball path in requirements.yml does not match the path inside the container. Ensure:   The tarball is listed in `additional_build_files` with a dest value.The source path in `requirements.yml` uses `/build/configs/<filename>` (not the host filesystem path). |
 | Package download fails during build      | The execution environment build environment requires network access to download packages from PyPI, npm, or Git repositories. If building behind a proxy, configure proxy settings in your container build environment. If building in an air-gapped environment, you must pre-download packages and include them using`additional_build_files`. |
-| Go build fails with "module not found"   | For Go-based MCP servers, ensure the`build_repo` URL and`build_repo_branch` are correct and accessible. The framework clones the repository and runs go mod download before building.                                                                                                                                                            |
-
+| Go build fails with "module not found"   | For Go-based MCP servers, ensure the`build_repo` URL and`build_repo_branch` are correct and accessible. The framework clones the repository and runs go mod download before building.                    |
 
 **Runtime failures**
 
-| Error                                   | Reason                                                                                                                                                                                                                                                                                                                                                                             |
-| --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `mcp_manage`: command not found         | <br>The `mcp_manage` script is installed at `/opt/mcp/mcp_manage` with a symlink at `/usr/local/bin/mcp_manage`. If it is missing, the common role's `generate_management` task may have been skipped.<br>Ensure your playbook includes `ansible.mcp_builder.common` with `public: true` as the first task                                                                         |
+| Error                                   | Reason                                                                                                                                                                                                   |
+| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `mcp_manage`: command not found         | <br>The `mcp_manage` script is installed at `/opt/mcp/mcp_manage` with a symlink at `/usr/local/bin/mcp_manage`. If it is missing, the common role's `generate_management` task may have been skipped.<br>Ensure your playbook includes `ansible.mcp_builder.common` with `public: true` as the first task |
 | MCP server fails with permission errors | <br>The execution environment runs as user 1000 (non-root). Ensure your playbook includes the ownership fix task:    ``` - name: Fix ownership of all MCP installations for runtime user   ansible.builtin.file:     path: "{{ common_mcp_base_path }}"     state: directory     recurse: true     owner: "{{ common_runtime_user }}"     group: "{{ common_runtime_user }}"   ``` |
-| Server listed but not executing         | <br>If `mcp_manage` list shows your server but `mcp_manage` run fails, check:   <br>The binary exists at the path shown in the manifest.Required runtime dependencies are present (for example, `Node.js` for npm-based servers).Environment variables required by the server are passed at container runtime.                                                                     |
-
+| Server listed but not executing         | <br>If `mcp_manage` list shows your server but `mcp_manage` run fails, check:   <br>The binary exists at the path shown in the manifest.Required runtime dependencies are present (for example, `Node.js` for npm-based servers).Environment variables required by the server are passed at container runtime. |
 
 **Variable validation errors**
 
-| Error                     | Reason                                                                                                                                                                                                                                                                                        |
-| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Missing registry variable | The common role expects a registry variable named`<role_name>_registry`. Ensure your`defaults/main.yml` follows the naming convention. For a role named x`defaults/main.yml`, the variable must be`cfn_mcp_registry`.                                                                         |
+| Error                     | Reason                                                                                                                                                                                                   |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Missing registry variable | The common role expects a registry variable named`<role_name>_registry`. Ensure your`defaults/main.yml` follows the naming convention. For a role named x`defaults/main.yml`, the variable must be`cfn_mcp_registry`. |
 | Invalid language type     | The lang field in the registry must be one of: pypi, npm, or go. Any other value causes the install manager to skip installation. However,`generate_manifest.yml` will fail with`'dict object' has no attribute 'path' (rc=2)` because it expects a variable the skipped installer never set. |
-
 
 **Understanding support boundaries**
 
@@ -686,14 +699,12 @@ Red Hat provides and supports the following components:
 - The ansible-builder tool for creating execution environments.
 - The execution environment runtime within Ansible Automation Platform.
 
-
 The following are the customer's responsibility:
 
 - Individual MCP server implementations. Red Hat does not support any specific MCP server, including the reference examples (AWS, Azure, GitHub) provided in the `ansible.mcp_builder` collection. These examples are Dev Preview.
 - Custom MCP roles and collections. Your organization owns the creation, testing, and maintenance of custom roles.
 - MCP server security. Your organization is responsible for evaluating, auditing, and securing the MCP servers you deploy.
 - MCP server credentials and access controls. Configuring and securing access to external services is your responsibility.
-
 
 If you encounter issues:
 

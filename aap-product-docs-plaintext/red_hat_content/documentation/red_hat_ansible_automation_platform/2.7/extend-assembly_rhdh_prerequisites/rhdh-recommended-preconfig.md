@@ -6,7 +6,6 @@ Red Hat recommends performing the following initial configuration tasks in Red H
 - Authentication in Red Hat Developer Hub
 - Authorization in Red Hat Developer Hub
 
-
 Note:
 
 Red Hat provides a repository of software templates for RHDH that uses the `publish:github` action. To use these software templates, you must install the required GitHub dynamic plugins.

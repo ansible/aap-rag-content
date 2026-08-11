@@ -16,7 +16,6 @@ Use this procedure when:
 - You need to enable anonymized usage data collection for Red Hat analytics
 - You want the operator to automatically provision database access and configuration
 
-
 Important:
 
 The operator handles all configuration automatically, including database access, OAuth integration with the gateway, and traffic routing through Envoy. No manual database passwords, inventory variables, or network configuration is required.
@@ -41,6 +40,7 @@ disabled: false
 metrics:
 disabled: false
 ```
+
 **Example using oc edit:**
 
 ```
@@ -53,6 +53,7 @@ If you edited the CR in a file:
 ```
 oc apply -f aap.yml
 ```
+
 **Result:** The AAP gateway operator reconciles the change and creates the metrics service components.
 
 3.  Verify that the MetricsService custom resource was created
@@ -61,6 +62,7 @@ The gateway operator automatically creates a MetricsService CR named `<aap-name>
 ```
 oc get metricsservice -n <namespace>
 ```
+
 **Example output:**
 
 ```
@@ -74,6 +76,7 @@ myaap-automationmetricsservice         2m
 ```
 oc get pods -l app.kubernetes.io/component=automationmetricsservice -n <namespace>
 ```
+
 **Example output:**
 
 ```
@@ -89,11 +92,13 @@ Port-forward to the metrics service and check the health endpoint:
 ```
 oc port-forward svc/<aap-name>-metrics-api 8080:80 -n <namespace>
 ```
+
 In another terminal:
 
 ```
 curl http://localhost:8080/health/
 ```
+
 **Expected response when healthy:**
 
 ```
@@ -125,17 +130,18 @@ spec:
 metrics:
 disabled: true
 ```
+
 Apply the change:
 
 ```
 oc apply -f aap.yml
 ```
+
 The gateway operator stops reconciling the metrics service on its next cycle. To fully remove the MetricsService CR:
 
 ```
 oc delete metricsservice <aap-name>-automationmetricsservice -n <namespace>
 ```
-
 
 Note:
 
@@ -150,6 +156,7 @@ After the service has been running for at least 24 hours, check pod logs to conf
 ```
 oc logs -l app.kubernetes.io/component=automationmetricsservice-tasks -n <namespace> | grep "Successfully sent metrics"
 ```
+
 Look for log entries like:
 
 ```

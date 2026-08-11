@@ -26,7 +26,7 @@ steps:
 name: Launch AAP Job Template
 action: rhaap:launch-job-templat
 input:
-token: ${{ parameters.token }}
+token: ${{ secrets.aapToken }}
 ...
 ```
 

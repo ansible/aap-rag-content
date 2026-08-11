@@ -11,10 +11,11 @@ Deploy the Helm chart from the OpenShift catalog by configuring the base URL and
 - You have completed one of the plug-in delivery methods:
 * For OCI delivery: You have created the `<release-name>-dynamic-plugins-registry-auth` secret.
 * For HTTP plug-in registry (deprecated): You have deployed the plug-in registry and plan to set `pluginMode` to `tarball`.
+- Helm charts are enabled in the OpenShift Container Platform developer catalog. If the Automation Portal chart does not appear in the catalog, verify that the `HelmChartRepository` custom resources are not disabled. For more information, see [Working with Helm charts](https://docs.redhat.com/en/documentation/openshift_container_platform/4.17/html/building_applications/working-with-helm-charts) in the OpenShift Container Platform documentation.
 
 ### Procedure
 
-1.  In the OpenShift Container Platform web console, select the Developer view.
+1.  In the OpenShift Container Platform web console, select the Developer perspective.
 2.  Select your project and click the Helm option in the OpenShift sidebar.
 3.  Click Create and select Helm Release.
 4.  Search for `Portal` in the Helm Charts filter, and select the Automation Portal chart.

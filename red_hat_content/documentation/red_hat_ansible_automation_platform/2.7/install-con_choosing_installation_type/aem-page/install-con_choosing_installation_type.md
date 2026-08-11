@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_choosing_installation_type"
-template = "docs/aem-title.html"
 title = "Choose an installation type - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_aap_containerized_installation_intro/", "Install containerized Ansible Automation Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-con_choosing_installation_type/aem-page/install-con_choosing_installation_type.html"
 last_crumb = "Choose an installation type"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Choose an installation type"
 oversized = "false"
@@ -39,7 +39,6 @@ An online installation pulls container images directly from Red Hat registries d
 - A Red Hat registry service account with credentials (`registry_username` and `registry_password`)
 - Network access to Red Hat registries (registry.redhat.io)
 
-
 For online installation instructions, see *Prepare the installation* in the related information section.
 
 ## Disconnected (bundled) installation
@@ -51,6 +50,5 @@ A disconnected installation uses a pre-packaged bundle that includes all contain
 - Local RPM repository configured with required dependencies
 - No internet connection required during installation
 - Red Hat registry credentials are not required
-
 
 For disconnected installation instructions, see *Install in a disconnected environment* in the related information section.

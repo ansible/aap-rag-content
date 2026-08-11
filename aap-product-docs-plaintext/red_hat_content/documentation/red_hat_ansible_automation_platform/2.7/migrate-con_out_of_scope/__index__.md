@@ -11,5 +11,4 @@ Migration covers core Ansible Automation Platform components. Some components an
 - Disconnected environments: The migration process does not cover disconnected environments.
 - Execution environments (other than the default one): Manually rebuild or re-import custom execution environments.
 
-
 Manually re-create, import, or configure these items in the target environment.

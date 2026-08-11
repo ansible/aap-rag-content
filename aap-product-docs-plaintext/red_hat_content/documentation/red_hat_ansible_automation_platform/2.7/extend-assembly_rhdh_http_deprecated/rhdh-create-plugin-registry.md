@@ -38,5 +38,6 @@ To verify that the plugin-registry was deployed successfully, open the **Topolog
 ansible-plugin-backstage-rhaap-dynamic-x.y.z.tgz
 ansible-plugin-scaffolder-backend-module-backstage-rhaap-dynamic-x.y.z.tgz
 ```
+
 The version numbers and file names can differ.
 

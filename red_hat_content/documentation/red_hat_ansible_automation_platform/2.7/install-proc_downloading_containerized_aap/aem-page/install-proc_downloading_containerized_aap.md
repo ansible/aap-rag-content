@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_downloading_containerized_aap/aem-page/install-proc_downloading_containerized_aap.html"
 last_crumb = "Download Ansible Automation Platform"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Download Ansible Automation Platform"
 oversized = "false"
@@ -42,6 +42,7 @@ Choose the installation program you need based on your Red Hat Enterprise Linux 
 ```
 scp [options] <path_to_source_file> <path_to_destination>
 ```
+
     For example, use the following `scp` command to copy the installation program `.tar.gz` file to an AWS EC2 instance with a private key (replace the placeholder `<>` values with your actual information):
 
 ```

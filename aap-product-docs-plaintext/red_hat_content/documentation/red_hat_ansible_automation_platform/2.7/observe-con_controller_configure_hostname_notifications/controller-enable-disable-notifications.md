@@ -8,13 +8,11 @@ You can set up notifications to notify you when a specific job starts, and on th
 - You can enable notifications to run on a sliced job template start and each slice generates a notification.
 - When you enable a notification to run on job start, and that notification gets deleted, the job template continues to run, but results in an error message.
 
-
 You can enable notifications on job start, job success, and job failure, or a combination of these, from the **Notifications** tab of the **Details** page for the following resources:
 
 - Job Templates
 - Workflow Templates
 - Projects
-
 
 For workflow templates that have approval nodes, in addition to **Start**, **Success**, and **Failure**, you can enable or disable certain approval-related events:
 

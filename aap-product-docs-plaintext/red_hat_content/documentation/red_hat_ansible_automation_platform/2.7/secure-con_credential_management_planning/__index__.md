@@ -8,7 +8,6 @@ Ansible Automation Platform manages three sets of secrets:
 - Secrets for Ansible Automation Platform **operational use** (database password, message bus password, and so on).
 - Secrets for **automation use** (SSH keys, cloud credentials, external password vault credentials, and so on).
 
-
 Implementing a privileged access or credential management solution to protect credentials from compromise is a highly recommended practice. Organizations should audit the use of, and provide additional programmatic control over, access and privilege escalation.
 
 You can further secure automation credentials by ensuring they are unique and stored only in Ansible Automation Platform or in a supported external secrets management system. Services such as OpenSSH can be configured to allow credentials on connections only from specific addresses. Use different credentials for automation from those used by system administrators to log in to a server. Although direct access should be limited where possible, it can be used for disaster recovery or other ad hoc management purposes, allowing for easier auditing.

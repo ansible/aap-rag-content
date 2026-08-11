@@ -10,7 +10,6 @@ The following section provides a complete code block with the default resource r
 - Resource Constrained Environments: Decrease resource requests to conserve cluster resources in development or test environments.
 - Environment Specifics: Align the resource allocation with the capacity of your OpenShift or Kubernetes cluster nodes.
 
-
 You can use this reference as a starting point. Copy the full code block for your Ansible Automation Platform instance and modify the values for the components you want to change. This method helps ensure all default settings are applied correctly, reducing the risk of deployment errors.
 
 Note:
@@ -226,7 +225,6 @@ memory: 250Mi
 limits:
 cpu: 300m
 memory: 400Mi
-
 
 # lightspeed:
 #   disabled: true

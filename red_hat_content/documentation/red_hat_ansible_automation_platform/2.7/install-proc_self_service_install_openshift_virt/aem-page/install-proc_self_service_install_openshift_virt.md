@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_install_openshift_virt"
 title = "Install Ansible automation portal on Red Hat OpenShift Virtualization - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_self_service_rhel_appliances/", "Deploy Ansible automation portal RHEL appliance"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_self_service_install_openshift_virt/aem-page/install-proc_self_service_install_openshift_virt.html"
 last_crumb = "Install Ansible automation portal on Red Hat OpenShift Virtualization"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Install Ansible automation portal on Red Hat OpenShift Virtualization"
 oversized = "false"
@@ -43,7 +43,7 @@ You can install the appliance using the CLI or the OpenShift web console. Both m
 - The Ansible automation portal disk image in QCOW2 format.
 - The `virtctl` CLI tool installed. You can download it from the OpenShift web console under **Virtualization** > **Overview** > **Download virtctl**.
 - Access to the OpenShift web console or `oc` CLI tool.
-- Your cloud-init user-data file prepared with Ansible Automation Platform credentials and SSH keys.
+- Your `cloud-init` user-data file prepared with Ansible Automation Platform credentials and SSH keys. See Prerequisites for deploying Ansible automation portal on RHEL in the related links below. The meta-data file is not required for this platform.
 - Sufficient cluster resources: minimum 16 GiB allocatable memory for the virtual machine.
 
 ## Install using the CLI
@@ -64,11 +64,12 @@ $ virtctl image-upload dv <disk-datavolume-name> \
   --wait-secs=600 \
   -n <project-name>
 ```
+
     | Option         | Description                                                                                                                                           |
     | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
     | `--size`       | Set to at least 50 Gi. The QCOW2 expands during conversion to raw format and requires additional space.                                               |
     | `--insecure`   | Add this flag if the Containerized Data Importer (CDI) upload proxy uses a self-signed certificate. Omit it when the proxy has a trusted certificate. |
-    | `--force-bind` | Add this flag if the storage class uses `WaitForFirstConsumer` volume binding mode.                                                                   |
+    | `--force-bind` | Add this flag if the storage class uses`WaitForFirstConsumer` volume binding mode.                                                                    |
      Wait for both upload and processing to complete. The "Processing completed successfully" message confirms that CDI converted the image. For more information about CDI, see the Managing data volumes section of the Red Hat OpenShift Virtualization documentation.
 
 3. Create a Secret from the cloud-init file:
@@ -80,8 +81,6 @@ $ oc create secret generic <cloudinit-secret-name> \
 ```
 
 4. Create a VirtualMachine manifest and save it as a YAML file (for example, `portal-vm.yaml`). The following example shows a minimal configuration. Replace the resource names and namespace to match your environment:
-
-
 
 ```yaml
 apiVersion: kubevirt.io/v1
@@ -120,6 +119,7 @@ spec:
             secretRef:
               name: <cloudinit-secret-name>
 ```
+
      The `dataVolume` name must match the DataVolume created by `virtctl image-upload` in step 2. The `secretRef` name must match the Secret created in step 3.
 
 5. Apply the manifest:
@@ -133,6 +133,7 @@ $ oc apply -f <vm-manifest>.yaml
 ```terminal
 $ oc get vmi -n <project-name> -w
 ```
+
      The VM is ready when PHASE shows `Running` and READY shows `True`.
 
 7. Create a Service and Route to expose Ansible automation portal:
@@ -146,21 +147,17 @@ $ echo "Automation portal URL: https://$ROUTE_HOST"
 
 8. Update the Ansible automation portal user-accessible URL to match the route. SSH into the VM:
 
-
-
 ```terminal
 $ virtctl ssh <username>@vmi/<vm-name> -n <project-name>
 ```
+
      Edit the configuration file:
-
-
 
 ```terminal
 $ sudo vi /etc/portal/configs/app-config/app-config.production.yaml
 ```
+
      Set the following three values, replacing `<route-host>` with the route hostname from step 7:
-
-
 
 ```yaml
 app:
@@ -170,9 +167,8 @@ backend:
   cors:
     origin: "https://<route-host>"
 ```
+
      Save the file and restart the Ansible automation portal service. Restarting the `portal` service also restarts `postgres` and `devtools` due to service dependencies:
-
-
 
 ```terminal
 $ sudo systemctl restart portal
@@ -185,6 +181,7 @@ $ sudo systemctl restart portal
 ```terminal
 $ oc get vmi -n <project-name>
 ```
+
      The output shows the virtual machine in `Running` phase with `READY` status set to `True`.
 
 - SSH into the appliance and verify that all services are running:
@@ -204,8 +201,7 @@ You can also deploy the appliance from the OpenShift web console without using t
 - Red Hat OpenShift Container Platform with the Red Hat OpenShift Virtualization operator installed and configured.
 - Cluster administrator or equivalent permissions.
 - The Ansible automation portal QCOW2 disk image available on your local machine.
-- Your cloud-init user-data file prepared with Ansible Automation Platform credentials and SSH keys.
-
+- Your `cloud-init` user-data file prepared with Ansible Automation Platform credentials and SSH keys. See Prerequisites for deploying Ansible automation portal on RHEL in the related links below. The meta-data file is not required for this platform
 
 **Procedure**
 
@@ -232,6 +228,5 @@ $ sudo ansible-portal status
 ```
 
 - Access the portal URL from your browser.
-
 
 If you encounter upload, boot, or scheduling failures, see Troubleshooting RHEL appliances.

@@ -1,7 +1,7 @@
 +++
-title = "Red Hat Ansible Lightspeed Overview - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
+title = "Understand Red Hat Ansible Lightspeed with IBM watsonx Code Assistant - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_lightspeed_about"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_lightspeed_intro/", "Build automation faster with Red Hat Ansible Lightspeed"]]
@@ -9,10 +9,10 @@ category = "Develop"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-con_lightspeed_about/aem-page/develop-con_lightspeed_about.html"
-last_crumb = "Red Hat Ansible Lightspeed Overview"
-modified = "2026-06-05T07:48:10.594Z"
+last_crumb = "Understand Red Hat Ansible Lightspeed with IBM watsonx Code Assistant"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
-name = "Red Hat Ansible Lightspeed Overview"
+name = "Understand Red Hat Ansible Lightspeed with IBM watsonx Code Assistant"
 oversized = "false"
 page_slug = "develop-con_lightspeed_about"
 portal_content_subtype = "title"
@@ -25,9 +25,21 @@ toc = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-con_
 type = "aem-page"
 +++
 
-# Red Hat Ansible Lightspeed Overview
+# Understand Red Hat Ansible Lightspeed with IBM watsonx Code Assistant
 
-Red Hat Ansible Lightspeed with IBM watsonx Code Assistant is a generative AI service that helps automation teams create, adopt, and maintain Ansible content more efficiently. It uses natural language prompts to generate code recommendations for automation tasks based on Ansible best practices.
+Learn about the coding assistant feature of Red Hat Ansible Lightspeed, its benefits, key features, supported model providers, and data gathered to train the IBM watsonx Code Assistant models.
+
+Red Hat Ansible Lightspeed provides two AI-powered features that serve different purposes. Use the following table to identify the feature that meets your needs and find the correct setup guide.
+
+*Table 1. Ansible Lightspeed AI features*
+
+|                           | Coding assistant                                                                              | Intelligent assistant                                                                                          |
+| ------------------------- | --------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Purpose                   | Generates Ansible content, such as tasks, playbooks, and roles, from natural language prompts | Provides conversational answers to Ansible automation questions                                                |
+| Interface                 | IDE (VS Code with the Ansible extension)                                                      | Ansible Automation Platform web interface                                                                      |
+| Supported model providers | IBM watsonx Code Assistant, Google Gemini, Red Hat AI platforms                               | Red Hat Enterprise Linux AI, Red Hat OpenShift AI, Red Hat AI Inference Server, OpenAI, Microsoft Azure OpenAI |
+| Deployment types          | Cloud service or on-premise deployment                                                        | Operator-based (OpenShift) or containerized installation                                                       |
+| Setup guide               | Set up Red Hat Ansible Lightspeed for your organization (this section)                        | Deploy the intelligent assistant (Extend section)                                                              |
 
 Red Hat Ansible Lightspeed is the cloud service that enables integration of generative AI into Ansible Automation Platform. This document specifically describes the integration of Red Hat Ansible Lightspeed with IBM watsonx Code Assistant.
 
@@ -60,34 +72,6 @@ Red Hat Ansible Lightspeed with IBM watsonx Code Assistant offers the following 
 
 -  **Extends trust with AI-generated code recommendations** The AI-generated code recommendations enable you to extend trust, with an automation code base that adheres to accepted Ansible best practices and significant data safeguards.
 
-## Key features of Red Hat Ansible Lightspeed
-
-Red Hat Ansible Lightspeed offers the following key features:
-
--  **Ansible-specific IBM watsonx Code Assistant models** Red Hat Ansible Lightspeed with IBM watsonx Code Assistant uses Ansible-specific IBM watsonx Granite models unique to your organization, which are provided, managed, and maintained by IBM.
-
--  **Red Hat Ansible Lightspeed cloud service and on-premise deployments** Red Hat Ansible Lightspeed is available both as a cloud service and as an on-premise deployment. Red Hat Ansible Lightspeed on-premise deployments provide the Red Hat Ansible Automation Platform customers more control over their data and supports compliance with enterprise security policies. For example, organizations in sensitive industries with data privacy or air-gapped requirements can use on-premise deployments of both Red Hat Ansible Lightspeed and IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data. Red Hat Ansible Lightspeed on-premise deployments are supported on Red Hat Ansible Automation Platform version 2.4 and later.
-
--  **Red Hat Ansible Lightspeed trial** Existing Ansible users can now start a free 90-day Red Hat Ansible Lightspeed cloud service trial. You can create single-task and multitask recommendations, generate playbooks, and view playbook explanations with a trial account.
-
-     To start your Red Hat Ansible Lightspeed trial, you need a trial or paid subscription to the Red Hat Ansible Automation Platform; however, you do not need a trial or paid subscription to IBM watsonx Code Assistant. For more information, see Starting a trial of Red Hat Ansible Lightspeed.
-
--  **Playbook and task generation** This includes the following capabilities:
-
-  *  **Playbook generation and explanations** Using the Ansible VS Code extension, you can create Ansible playbooks using a natural language interface in English. Red Hat Ansible Lightspeed with IBM watsonx Code Assistant reads the natural language prompts and generates an entire playbook recommendation based on your intent. You can also view the explanations for new or existing playbooks. The playbook explanations describe what the playbook or task within the playbook does and contextualize its impact.
-
-  *  **Single and multitask generation** Using natural language prompts, you can generate single task or multiple task recommendations for Ansible task files and playbooks. To request multitask code recommendations, you can enter a sequence of natural language task prompts in a YAML file comment separated by ampersand (**&**) symbols.
-
-         Currently, Red Hat Ansible Lightspeed supports user prompts in English language only. However, there could be instances where the training data that was used to train the IBM watsonx Code Assistant models included non-English language. In such scenarios, the model can generate code recommendations for prompts made in the same non-English language, but the generated code recommendations might or might not be accurate.
-
--  **Content source matching** For each generated code recommendation, Red Hat Ansible Lightspeed lists content source matches, including details such as potential source, content author, and relevant licenses. You can use this data to gain insight into potential training data sources used to generate the code recommendations.
-
--  **Post-processing capabilities** Red Hat Ansible Lightspeed offers post-processing capabilities that augment IBM watsonx Code Assistant and improve the quality and accuracy of code recommendations.
-
--  **Content maintenance and modernization** The Ansible code bot scans existing content collections, roles, and playbooks through Git repositories, and proactively creates pull requests whenever best practices or quality improvement recommendations are available. The bot automatically submits pull requests to the repository, which proactively alerts the repository owner to a recommended change to their content.
-
--  **Telemetry data collection on the Admin dashboard** Red Hat Ansible Lightspeed now collects Admin dashboard telemetry data that provides insight into how your organization users are using the Ansible Lightspeed service, and displays the metrics on the Admin dashboard. If you no longer want to collect and manage the Admin dashboard telemetry, you can disable it for your organization.
-
 ## Prerequisites
 
 Review the following licensing and connectivity requirements for setting up Red Hat Ansible Lightspeed.
@@ -103,12 +87,10 @@ To use an on-premise deployment of Red Hat Ansible Lightspeed, your organization
 - A trial or paid subscription to Red Hat Ansible Automation Platform
 - An installation of IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data
 
-
 You must also install the following components:
 
 - VS Code version 1.70.1 or later
 - The Ansible extension for VS Code version 2.8 or later
-
 
 ### Connectivity requirements
 
@@ -134,7 +116,6 @@ Red Hat Ansible Lightspeed collects the following telemetry data by default:
 
 - Operational telemetry data
 - Admin dashboard telemetry data
-
 
 Note:
 

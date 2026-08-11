@@ -1,7 +1,7 @@
 +++
 title = "Removed features - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-removed_features"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-overview_of_redhat_ansible_intro/", "Ansible Automation Platform release notes"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/whats_new-removed_features/aem-page/whats_new-removed_features.html"
 last_crumb = "Removed features"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Removed features"
 oversized = "false"
@@ -105,3 +105,12 @@ The tool produces a summary of direct-access requests organized by component, so
 ## Removal of RPM installer in Ansible Automation Platform 2.7
 
 In Ansible Automation Platform 2.5 release, the RPM installer was deprecated. Starting with Ansible Automation Platform 2.7, we are no longer providing the installer, and customers who have Ansible Automation Platform installed using RPM must migrate to either the containerised or Openshift Ansible Automation Platform Operator. Follow the guidelines for migrating to a new topology. Customers must first migrate to the new supported topology on the version that they are currently running (that is, Ansible Automation Platform 2.6 RPM to Ansible Automation Platform 2.6 containerised) before upgrading to Ansible Automation Platform 2.7.
+
+## ansible.hub collection
+
+The following modules are removed from the ansible.hub collection in Ansible Automation Platform 2.7. Use the ansible.platform replacements instead.
+
+| Removed module        | Replacement            |
+| --------------------- | ---------------------- |
+| ansible.hub.ah\_user  | ansible.platform.user  |
+| ansible.hub.ah\_token | ansible.platform.token |

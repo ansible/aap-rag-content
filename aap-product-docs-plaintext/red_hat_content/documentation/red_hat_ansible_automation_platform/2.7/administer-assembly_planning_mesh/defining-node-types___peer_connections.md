@@ -21,4 +21,5 @@ node_type=control
 execution-node-1.example.com peers=execution-node-2.example.com
 execution-node-2.example.com
 ```
+
 See the example automation mesh topologies in this section for more examples of how to implement mesh nodes.

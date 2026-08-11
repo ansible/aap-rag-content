@@ -9,7 +9,6 @@ These secrets include the following:
 - Secret tokens and passwords for external services defined automation controller settings.
 - "password" type survey field entries.
 
-
 To encrypt secret fields, automation controller uses AES in CBC mode with a 256-bit key for encryption, PKCS7 padding, and HMAC by using SHA256 for authentication.
 
 The encryption or decryption process derives the AES-256 bit encryption key from the `SECRET_KEY`, the field name of the model field and the database assigned auto-incremented record ID. Therefore, if any attribute used in the key generation process changes, the automation controller fails to correctly decrypt the secret.
@@ -19,7 +18,6 @@ Automation controller is designed so that:
 - The `SECRET_KEY` is never readable in playbooks that automation controller launches.
 - These secrets are never readable by automation controller users.
 - No secret field values are ever made available by the automation controller REST API.
-
 
 If a secret value is used in a playbook, it is recommended that you use `no_log` on the task so that it is not accidentally logged.
 

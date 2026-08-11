@@ -30,8 +30,6 @@ Configure the setting for your deployment type:
 
 Use the following format:
 
-
-
 ```
 controller_extra_settings:
 - setting: ALLOW_USER_EMAIL_SELF_EDIT
@@ -46,4 +44,5 @@ extra_settings:
 - setting: ALLOW_USER_EMAIL_SELF_EDIT
 value: "true"
 ```
+
 The operator writes these settings into a ConfigMap and mounts it as a settings file inside the pod. The platform applies changes automatically after you update the custom resource.

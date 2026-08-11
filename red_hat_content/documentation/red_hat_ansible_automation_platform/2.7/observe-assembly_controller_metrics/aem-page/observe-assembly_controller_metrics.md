@@ -1,6 +1,6 @@
 +++
-template = "docs/aem-title.html"
 title = "Send metrics to system monitoring software - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_controller_metrics"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/observe-assembly_controller_metrics/aem-page/observe-assembly_controller_metrics.html"
 last_crumb = "Send metrics to system monitoring software"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Send metrics to system monitoring software"
 oversized = "false"
@@ -73,6 +73,7 @@ scrape_configs
         - targets:
             - <controller_host>
 ```
+
     For help configuring other aspects of Prometheus, such as alerts and service discovery configurations, see the [Prometheus configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/) documentation.
 
     If Prometheus is already running, you must restart it to apply the configuration changes by making a **POST** to the reload endpoint, or by killing the Prometheus process or service.

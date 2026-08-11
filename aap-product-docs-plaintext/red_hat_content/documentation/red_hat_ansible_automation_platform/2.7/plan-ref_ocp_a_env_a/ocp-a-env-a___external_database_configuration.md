@@ -17,6 +17,7 @@ GRANT ALL PRIVILEGES ON DATABASE metrics_service TO metrics_service;
 \c metrics_service
 GRANT ALL ON SCHEMA public TO metrics_service;
 ```
+
 **Create read-only user for controller database:**
 
 ```
@@ -26,6 +27,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO ms_awx_readonly;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public
 GRANT SELECT ON TABLES TO ms_awx_readonly;
 ```
+
 **Configure external database in CR:**
 
 ```

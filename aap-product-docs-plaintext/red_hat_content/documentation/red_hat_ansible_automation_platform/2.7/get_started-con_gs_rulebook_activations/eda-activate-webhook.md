@@ -7,7 +7,6 @@ In Openshift environments, you can activate webhooks by creating a route to expo
 
 - You have created a rulebook activation.
 
-
 Note:
 
 The following is an example of rulebook with a given webhook:

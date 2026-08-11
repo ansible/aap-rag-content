@@ -1,0 +1,31 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Create secrets in OpenShift for Ansible automation portal",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Create Ansible Automation Platform authentication secrets",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "self-service-create-ocp-auth-secrets",
+          "anchor": null,
+          "singlePageAnchor": "self-service-create-ocp-auth-secrets"
+        },
+        {
+          "title": "Create GitHub and GitLab secrets",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "self-service-create-scm-secrets",
+          "anchor": null,
+          "singlePageAnchor": "self-service-create-scm-secrets"
+        }
+      ]
+    }
+  ]
+}

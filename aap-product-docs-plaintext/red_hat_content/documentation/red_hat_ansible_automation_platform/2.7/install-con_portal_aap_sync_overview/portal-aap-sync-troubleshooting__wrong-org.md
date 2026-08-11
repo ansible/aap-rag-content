@@ -1,5 +1,5 @@
 # Understanding Ansible Automation Platform synchronization
-## Troubleshooting Ansible Automation Platform synchronization
+## Troubleshoot Ansible Automation Platform synchronization
 ### Wrong Ansible Automation Platform organization
 
 **Issue:** The portal displays unexpected Job Templates, users, or teams.
@@ -9,7 +9,6 @@
 - Expected Job Templates do not appear.
 - Incorrect templates appear.
 - Users or teams are missing, or the wrong ones are present.
-
 
 **Solutions:**
 

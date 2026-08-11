@@ -34,7 +34,6 @@ Metrics service serves as the unified backend for automation dashboard, a Techno
 - Automation savings metrics
 - Executive reporting data
 
-
 Dashboard collection is disabled by default and must be enabled separately. Dashboard collection runs on a 6-hourly schedule to minimize database impact.
 
 ## Dashboard collection feature flag
@@ -52,16 +51,15 @@ Automation dashboard data collection is controlled by the `FEATURE_DASHBOARD_COL
 
 **Core components**
 
-| Component                                          | Container Name                 | Purpose                                                                                                                                                                                                                    |
-| -------------------------------------------------- | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Component                                          | Container Name                 | Purpose                                                                                                                                                                                                  |
+| -------------------------------------------------- | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Metrics service (web)**                          | `automation-metrics-web`       | Nginx reverse proxy + Gunicorn serving the Django application. Internal Gunicorn port: 8006. External via nginx: 8087 (HTTP) / 8450 (HTTPS). Health endpoint:/health/ (returns HTTP 2\*\* for healthy, 50\* for unhealthy) |
-| **Metrics service (tasks)**                        | `automation-metrics-tasks`     | Dispatcherd async task worker for background job execution                                                                                                                                                                 |
-| **Metrics service (scheduler)**                    | `automation-metrics-scheduler` | APScheduler process that triggers periodic data collection tasks                                                                                                                                                           |
-| **Init container**                                 | `automation-metrics-init`      | One-shot container that runs Django database migrations and system initialization via/app/scripts/init.sh. Exits on completion.                                                                                            |
-| **metrics\_service database**                      | PostgreSQL database            | Stores processed metrics data and configuration. Created with user`metrics_service` (ALL privileges)                                                                                                                       |
-| **awx/automation controller database (read-only)** | PostgreSQL database            | Source of automation controller usage data. Accessed via user`ms_awx_readonly` (SELECT-only privileges on all tables in schema)                                                                                            |
-| **Red Hat Data Ingress**                           | External endpoint              | Receives anonymized data from customer environments via Segment write key. Data flows through Gateway/api/metrics/ endpoint (no direct customer-facing endpoints in 2.7 GA)                                                |
-
+| **Metrics service (tasks)**                        | `automation-metrics-tasks`     | Dispatcherd async task worker for background job execution                                                                                                                                               |
+| **Metrics service (scheduler)**                    | `automation-metrics-scheduler` | APScheduler process that triggers periodic data collection tasks                                                                                                                                         |
+| **Init container**                                 | `automation-metrics-init`      | One-shot container that runs Django database migrations and system initialization via/app/scripts/init.sh. Exits on completion.                                                                          |
+| **metrics\_service database**                      | PostgreSQL database            | Stores processed metrics data and configuration. Created with user`metrics_service` (ALL privileges)                                                                                                     |
+| **awx/automation controller database (read-only)** | PostgreSQL database            | Source of automation controller usage data. Accessed via user`ms_awx_readonly` (SELECT-only privileges on all tables in schema)                                                                          |
+| **Red Hat Data Ingress**                           | External endpoint              | Receives anonymized data from customer environments via Segment write key. Data flows through Gateway/api/metrics/ endpoint (no direct customer-facing endpoints in 2.7 GA)                              |
 
 **Database architecture**
 
@@ -69,7 +67,6 @@ Automation dashboard data collection is controlled by the `FEATURE_DASHBOARD_COL
 | ----------------------------- | ----------------- | ------------------------------------- | ------------------------------------------------------------------ |
 | `metrics_service`             | `metrics_service` | ALL                                   | Metrics service own data storage, schema migrations, configuration |
 | **awx/automation controller** | `ms_awx_readonly` | SELECT ON ALL TABLES IN SCHEMA public | Read-only access to controller data for metrics collection         |
-
 
 Note:
 
@@ -89,13 +86,11 @@ When `FEATURE_DASHBOARD_COLLECTION_ENABLED: true`, the `metrics_service` databas
 1. Metrics service queries automation controller/`awx` database (read-only connection using `ms_awx_readonly` user)
 2. Raw usage data extracted from the following tables: jobs, job host summaries, credentials, execution environments, controller versions, and feature flags
 
-
 **What is NOT collected:**
 
 - Event data
 - Host inventory data
 - Customer-defined template names, playbook names, or workflow names
-
 
 Important:
 
@@ -126,7 +121,6 @@ Gated by `METRICS_COLLECTION` feature flag (default: `true`). When disabled, all
 | `daily_metrics_rollup`                               | Daily at 2:00 AM    | Aggregates hourly data into daily summaries                 |
 | `cleanup_metrics_data`                               | Daily at 4:00 AM    | Purges expired data based on retention policies             |
 
-
 **ANONYMIZATION group**
 
 Gated by `ANONYMIZED_DATA_COLLECTION` feature flag (default: `true`). When disabled, anonymization and transmission skip execution.
@@ -134,7 +128,6 @@ Gated by `ANONYMIZED_DATA_COLLECTION` feature flag (default: `true`). When disab
 | Task                          | Schedule         | Description                                            |
 | ----------------------------- | ---------------- | ------------------------------------------------------ |
 | `daily_anonymize_and_prepare` | Daily at 3:00 AM | Anonymizes collected data and transmits to Segment.com |
-
 
 **SYSTEM group**
 
@@ -145,7 +138,6 @@ Always enabled regardless of feature flag state. System maintenance tasks contin
 | `cleanup_old_tasks` | Daily at 5:00 AM | Purges old task execution records from database |
 | `hello_world`       | Every hour       | Health check heartbeat for monitoring           |
 
-
 **Task dependencies**
 
 Tasks are scheduled in dependency order:
@@ -155,7 +147,6 @@ Tasks are scheduled in dependency order:
 3. **Daily rollup** (2:00 AM) - aggregates hourly data (depends on hourly collectors completing)
 4. **Anonymization** (3:00 AM) - anonymizes aggregated data (depends on rollup completing)
 5. **Cleanup** (4:00 AM, 5:00 AM) - purges old data (runs after rollup/anonymization to avoid race conditions)
-
 
 Important:
 
@@ -186,7 +177,6 @@ Metrics service transmits only aggregated statistics, counts, and built-in/publi
 - **Warnings and deprecations:** Statistics on deprecation warnings encountered.
 - **Feature flag states:** Boolean status of enabled/disabled feature flags.
 
-
 **What data is NOT sent:**
 
 - **Job template names** (not collected at all)
@@ -199,7 +189,6 @@ Metrics service transmits only aggregated statistics, counts, and built-in/publi
 - **Variable names and values** (customer-defined content)
 - **Workflow template names** (customer-defined content)
 
-
 Important:
 
 Customer-defined object names are never transmitted. Metrics service sends only counts (e.g., "3 custom credentials") and statistics (e.g., "50 jobs executed"). There is no way to identify which specific custom objects belong to which customer, and no individual object names can be recovered from the transmitted data.
@@ -211,7 +200,6 @@ Customer-defined object names are never transmitted. Metrics service sends only 
 3. Data transmitted through the Gateway /api/metrics/ endpoint (no direct customer-facing endpoints in 2.7 GA)
 4. Transmission status logged in `metrics_service` database
 5. HTTP/HTTPS proxy supported for environments without direct internet access
-
 
 Note:
 
@@ -234,10 +222,9 @@ Characteristics:
 - Metrics service, controller, and databases on one node
 - Suitable for development, testing, or small production environments
 
-
 **Enterprise / Multi-Node topology**
 
-Metrics service runs on a dedicated node or alongside Gateway. Key design decision: metrics service is NOT required to be co-located with automation controller. You define which node hosts metrics service by using the `[automationmetrics]` inventory group.
+Metrics service runs on a dedicated node. You define which node hosts metrics service by using the `[automationmetrics]` inventory group. In the growth topology (all-in-one), metrics service shares the single host with all other components. In the enterprise topology, metrics service requires its own dedicated node. Unlike controller, hub, and EDA, metrics service does not support multi-node or high-availability deployment.
 
 Characteristics:
 
@@ -261,7 +248,6 @@ Metrics service supports two deployment methods with different configuration com
 | **Upgrades**                 | Re-run installer with updated inventory                                      | Operator handles upgrades automatically via CR updates                                     |
 | **Backup/restore**           | Manual playbook execution                                                    | Operator-managed backup/restore via AutomationMetricsBackup CR (when available)            |
 
-
 Tip:
 
 For OpenShift deployments, use the operator method for simplified configuration and automatic lifecycle management. For RHEL-based containerized deployments, use the containerized installer method.
@@ -275,7 +261,6 @@ Metrics service is deployed through the `automationmetrics` Ansible role include
 - **Data persistence:** Host volumes mounted from `{{ aap_volumes_dir }}/automationmetrics` into container path /var/lib/ansible-automation-platform/metrics
 - **Secrets management:** Four Podman secrets: `automationmetrics_pg_password`, `automationmetrics_controller_read_pg_password`, `automationmetrics_secret_key`, `automationmetrics_resource_server`
 - **Firewall integration:** Ports 8087/tcp (HTTP) and 8450/tcp (HTTPS) opened in configured firewall zone (default: public)
-
 
 **Configuration requirements:**
 
@@ -295,7 +280,6 @@ Metrics service is deployed through the `automation-metrics-operator` running on
 - **Network integration:** Kubernetes services and Envoy routing through platform gateway
 - **Database provisioning:** Operator automatically creates and configures both `metrics_service` database and read-only controller database user
 
-
 **Configuration simplicity:**
 
 - Single CR field: `spec.metrics.disabled: false` in AnsibleAutomationPlatform CR
@@ -304,15 +288,13 @@ Metrics service is deployed through the `automation-metrics-operator` running on
 - Automatic OAuth integration with platform gateway
 - Operator handles all credential rotation and secret management
 
-
 **Operator-managed resources:**
 
-- **MetricsService CR:** Created as `<aap-name>-automationmetricsservice` in same namespace as AnsibleAutomationPlatform CR
+- **MetricsService CR:** Created as `<aap-name>-metrics` in same namespace as AnsibleAutomationPlatform CR
 - **Database:** PostgreSQL database for metrics service, automatically provisioned with credentials stored in Kubernetes secrets
 - **Read-only user:** Automatically created in controller database with SELECT privileges
 - **Services:** Kubernetes Service resources for metrics API, tasks, and scheduler pods
 - **Routes/Ingress:** Traffic routing through platform gateway Envoy proxy (no direct external endpoints)
-
 
 Important:
 
@@ -334,7 +316,6 @@ In standard operator deployments, database provisioning is fully automatic. The 
 | `automation-metrics-tasks` /`automation-metrics-scheduler` containers | `metrics_service` database         | PostgreSQL (5432) | Read-write metrics storage via`metrics_service` user             |
 | `automation-metrics-tasks` container                                  | Red Hat Data Ingress (via Segment) | HTTPS (443)       | Anonymized data transmission authenticated via Segment write key |
 | Monitoring systems (optional)                                         | `automation-metrics-web` container | HTTP (8087)       | Health check endpoint at/health/ via nginx                       |
-
 
 **Firewall requirements**
 

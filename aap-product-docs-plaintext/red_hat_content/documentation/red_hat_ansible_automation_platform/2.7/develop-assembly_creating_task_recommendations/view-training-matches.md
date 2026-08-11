@@ -6,7 +6,6 @@ The Red Hat Ansible Lightspeed with IBM watsonx Code Assistant machine learning 
 - Existing public or private Git repositories
 - Content from Ansible Galaxy
 
-
 IBM watsonx Code Assistant uses generative AI technology and various types of Ansible content to train the model. Therefore, it is not possible to trace the specific training data that produced a given code recommendation.
 
 For each generated code recommendation, Red Hat Ansible Lightspeed lists the content source matches, including details such as potential source, content author, and relevant licenses. You can use this data to gain insight into potential training data sources used to generate the code recommendations.

@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/con_rpm_to_containerized_prerequisites/aem-page/con_rpm_to_containerized_prerequisites.html"
 last_crumb = "RPM to containerized migration prerequisites"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "RPM to containerized migration prerequisites"
 oversized = "false"
@@ -39,3 +39,7 @@ Completing this migration is a required step if you plan to upgrade to Ansible A
 - You have downloaded the containerized installation program for the latest release of the Ansible Automation Platform version you are on.
 - You have enough storage for database dumps and backups.
 - There is network connectivity between the source and target environments.
+
+Important:
+
+Before completing this migration, see [How do I migrate Ansible Automation Platform 2.6 from an RPM to a containerized installation?](https://access.redhat.com/solutions/7138894) on the Red Hat Customer Portal for the migration procedures.

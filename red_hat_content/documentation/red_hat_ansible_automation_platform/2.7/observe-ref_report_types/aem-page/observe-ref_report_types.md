@@ -1,7 +1,7 @@
 +++
+title = "Configure options for the Certified Cloud and Service Provider report (CCSPv2) - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-ref_report_types"
 template = "docs/aem-title.html"
-title = "Configure options for the Certified Cloud and Service Provider report (CCSPv2) - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_metrics_utility/", "Generate consumption-based billing reports with the metrics-utility"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/observe-ref_report_types/aem-page/observe-ref_report_types.html"
 last_crumb = "Configure options for the Certified Cloud and Service Provider report (CCSPv2)"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure options for the Certified Cloud and Service Provider report (CCSPv2)"
 oversized = "false"
@@ -36,7 +36,6 @@ CCSPv2 is a report which shows the following information:
 - Directly and indirectly managed node usage
 - The content of all inventories
 - Content usage
-
 
 The primary use of this report is for partners under the [CCSP](https://connect.redhat.com/en/programs/certified-cloud-service-provider) program, but all customers can use it to obtain on-premise reporting showing managed nodes, jobs and content usage across their automation controller organizations.
 

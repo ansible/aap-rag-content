@@ -11,7 +11,6 @@ The following are special loggers (except for `awx`, which constitutes generic s
 - `system_tracking`: Provides fact data gathered by Ansible `setup` module, that is, `gather_facts: true` when job templates are run with **Enable Fact Cache** selected.
 - `awx`: Provides generic server logs, which include logs that would normally be written to a file. It contains the standard metadata that all logs have, except it only has the message from the log statement.
 
-
 These loggers only use the log-level of `INFO`, except for the `awx` logger, which can be any given level.
 
 Additionally, the standard automation controller logs are deliverable through this same mechanism. It should be apparent how to enable or disable each of these five sources of data without manipulating a complex dictionary in your local settings file, and how to adjust the log-level consumed from the standard automation controller logs.

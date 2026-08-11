@@ -158,7 +158,7 @@
           "singlePageAnchor": "portal-aap-sync-manual"
         },
         {
-          "title": "Troubleshooting Ansible Automation Platform synchronization",
+          "title": "Troubleshoot Ansible Automation Platform synchronization",
           "visible": true,
           "weight": 6,
           "urlFragment": "portal-aap-sync-troubleshooting",

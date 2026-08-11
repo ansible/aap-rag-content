@@ -44,6 +44,7 @@ Messages and message bodies have different types of content, as the following po
 ```
 {{ job_friendly_name }} #{{ job.id }} had status {{ job.status }}, view details at {{ url }} {{ job_metadata }}
 ```
+
 You can edit this text leaving `{{ job_metadata }}` in, or drop `{{ job_metadata }}`. Since the body is a block of text, it can be any string you want. `{{ job_metadata }}` is rendered as a dictionary containing fields that describe the job being executed. In all cases, `{{ job_metadata }}` includes the following fields:
 
 + `id`
@@ -75,6 +76,7 @@ The resulting dictionary looks like the following:
 "traceback": ""
 }
 ```
+
 If `{{ job_metadata }}` is rendered in a job, it includes the following additional fields:
 
 + `inventory`
@@ -109,6 +111,7 @@ If `{{ job_metadata }}` is rendered in a job, it includes the following addition
 "hosts": {}
 }
 ```
+
 If `{{ job_metadata }}` is rendered in a workflow job, it includes the following additional field:
 
 + `body` (This enumerates the nodes in the workflow job and includes a description of the job associated with each node)                 The resulting dictionary is similar to the following:
@@ -129,6 +132,7 @@ node #2 spawns job #16, \"Mission Start approval node\", which finished with sta
 node #3 spawns job #17, \"Deploy Fleet\", which finished with status successful."
 }
 ```
+
 If you create a notification template that uses invalid syntax or references unusable fields, an error message displays indicating the nature of the error. If you delete a notification’s custom message, the default message is shown in its place.
 
 Important:

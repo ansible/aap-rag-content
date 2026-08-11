@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-con_using_custom_tls_certificates/aem-page/install-con_using_custom_tls_certificates.html"
 last_crumb = "Configure custom TLS certificates"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure custom TLS certificates"
 oversized = "false"
@@ -62,6 +62,7 @@ When you use `ca_tls_cert` and `ca_tls_key`, the installation program automatica
 ca_tls_cert=<path_to_ca_tls_certificate>
 ca_tls_key=<path_to_ca_tls_key>
 ```
+
 Where:
 
 `ca_tls_cert`
@@ -161,6 +162,7 @@ automationmetrics_tls_key=/home/user/certs/metrics.example.com.key
 postgresql_tls_cert=/home/user/certs/postgresql.example.com.crt
 postgresql_tls_key=/home/user/certs/postgresql.example.com.key
 ```
+
   Note:
   For enterprise topology with dedicated metrics service host, use metrics.example.com FQDN.
 
@@ -175,26 +177,110 @@ When providing custom TLS certificates for each individual service, consider the
 
 ## Provide a custom CA certificate
 
-When you manually provide TLS certificates for Ansible Automation Platform services (such as `gateway_tls_cert`, `controller_tls_cert`, or `hub_tls_cert`), those certificates might be signed by a custom CA.
+To ensure proper authentication and trust for manually provided TLS certificates signed by a custom Certificate Authority (CA), specify the path to your single or combined CA certificate using the `custom_ca_cert` variable in your inventory file.
 
 ### About this task
 
-Use the `custom_ca_cert` variable to add your CA certificate to the environment for proper authentication and trust of the manually provided certificates.
+When you manually provide TLS certificates for Ansible Automation Platform services (such as `gateway_tls_cert`, `controller_tls_cert`, `hub_tls_cert`, or `automationmetrics_tls_cert`), those certificates might be signed by a custom CA.
+
+Use the `custom_ca_cert` variable to add your CA certificate to the system-level truststore on all Ansible Automation Platform hosts. This allows the hosts to trust external endpoints that present certificates signed by your organization's CA, such as LDAP servers, Git repositories, and container registries.
+
+The `custom_ca_cert` certificate is added to `mesh-CA.crt` only when `receptor_tls_cert` is also provided. In that scenario, the CA in `custom_ca_cert` must be the CA that signed the custom receptor certificates so that the receptor mesh can validate them. When `receptor_tls_cert` is not set, `custom_ca_cert` is not included in `mesh-CA.crt` and does not affect receptor mesh trust.
 
 ### Procedure
 
  If any of the TLS certificates you manually provided are signed by a custom CA, specify the CA certificate by using the following variable in your inventory file:
 
-```
-custom_ca_cert=<path_to_custom_ca_certificate>
-```
+`custom_ca_cert=<path_to_custom_ca_certificate>`
+
 If you have more than one CA certificate, combine them into a single file and reference the combined certificate with the `custom_ca_cert` variable.
 
+Important:
+
+The receptor mesh has a practical size limit on the CA trust bundle in `mesh-CA.crt`. If you provide `receptor_tls_cert` and the `custom_ca_cert` file contains a large enterprise CA bundle with many intermediate or cross-signed certificates, receptor can fail with `crypto buffer exceeded` errors. When providing custom receptor certificates, use a `custom_ca_cert` file that contains only the CA certificate that signed the receptor certificates. Large CA bundles are safe to use with `custom_ca_cert` when `receptor_tls_cert` is not set, because in that case the bundle is used only for system trust and is not added to `mesh-CA.crt`.
+
 ## Receptor certificate considerations
+
+To ensure successful TLS hostname validation and compatibility for Receptor nodes using custom certificates, specify the host FQDN and the required `otherName` OID in the *Subject Alternative Name* (SAN), as wildcard certificates are unsupported.
 
 When using a custom certificate for Receptor nodes, the certificate requires the `otherName` field specified in the Subject Alternative Name (SAN) of the certificate with the value `1.3.6.1.4.1.2312.19.1`.
 
 Receptor does not support the usage of wildcard certificates. Additionally, each Receptor certificate must have the host FQDN specified in its SAN for TLS hostname validation to be correctly performed.
+
+**Preflight validation for custom receptor certificates**
+
+When `receptor_tls_cert` is provided without `ca_tls_cert`, the installation program validates that `custom_ca_cert` is also set. If `custom_ca_cert` is not defined, the installation fails with the following error:
+
+```
+When receptor_tls_cert is provided without ca_tls_cert, custom_ca_cert must also be set to the CA certificate that signed the receptor certificates.
+```
+
+This validation ensures that the CA that signed the custom receptor certificates is available in `mesh-CA.crt` for receptor mesh trust. To resolve this error, set `custom_ca_cert` to the path of the CA certificate that signed your receptor certificates.
+
+## Understand the receptor mesh CA trust bundle
+
+The receptor mesh uses a CA trust bundle stored in `mesh-CA.crt` to validate TLS connections between mesh nodes. The contents of `mesh-CA.crt` depend on which certificate variables you set in your inventory file.
+
+The following table describes the three scenarios that determine the contents of `mesh-CA.crt`.
+
+| **Variables set**                     | **mesh-CA.crt contains**   | **Approach** |
+| ------------------------------------- | -------------------------- | ------------ |
+| None (default)                        | Installer self-signed CA   | Default      |
+| `ca_tls_cert` +`ca_tls_key`           | Your enterprise CA         | Recommended  |
+| `receptor_tls_cert` +`custom_ca_cert` | Your custom CA certificate | Advanced     |
+
+**Default: No custom certificates**
+
+When you do not set `ca_tls_cert`, `ca_tls_key`, `receptor_tls_cert`, or `custom_ca_cert`, the installation program generates its own self-signed CA and uses it to sign receptor node certificates. The self-signed CA is placed in `mesh-CA.crt`.
+
+**Provide an enterprise CA and key**
+
+When you set `ca_tls_cert` and `ca_tls_key`, the installer uses your CA and key to sign receptor node certificates instead of generating its own. Your CA certificate is placed in `mesh-CA.crt` and becomes the mesh CA for receptor communication.
+
+If you also set `custom_ca_cert`, that certificate is used only for system-level trust (`update-ca-trust`) and is not added to `mesh-CA.crt`.
+
+This is the recommended approach for organizations that want to use their own CA for receptor mesh certificates. Create an Ansible Automation Platform-specific child or intermediate CA and key from your organization's root CA. This lets the installer generate properly formatted receptor node certificates with the required receptor OID while keeping the mesh CA small and purpose-built.
+
+**Provide pre-signed receptor certificates**
+
+When you set `receptor_tls_cert` and `receptor_tls_key` without `ca_tls_cert`, you provide your own receptor certificates that were signed externally. You must also set `custom_ca_cert` to the CA certificate that signed the receptor certificates. The installation program imports the receptor certificates directly and does not generate or sign them.
+
+In this scenario, the CA certificate from `custom_ca_cert` is placed in `mesh-CA.crt` so that receptor nodes can validate each other's certificates.
+
+This approach gives you full control over certificate issuance. You must generate receptor node certificates that include the required receptor OID (`1.3.6.1.4.1.2312.19.1`) in the Subject Alternative Name (SAN) `otherName` field and the host FQDN in the SAN. Wildcard certificates are not supported for receptor.
+
+**Recommended approaches for custom receptor certificates**
+
+If your organization requires custom certificates for receptor mesh communication, there are two approaches. Choose the approach that matches your certificate management requirements.
+
+**Use ca_tls_cert and ca_tls_key**
+
+Create an Ansible Automation Platform-specific child or intermediate CA and key from your organization's root CA. Set `ca_tls_cert` and `ca_tls_key` in your inventory file to point to this CA and key.
+
+The installation program uses your CA to generate properly formatted receptor node certificates with the required receptor OID. This approach keeps the mesh CA small and purpose-built and does not require you to manage individual receptor node certificates.
+
+`ca_tls_cert=/home/user/certs/aap-intermediate-ca.crt`
+
+`ca_tls_key=/home/user/certs/aap-intermediate-ca.key`
+
+If your Ansible Automation Platform hosts also need to trust external endpoints signed by a different CA, set `custom_ca_cert` separately. That certificate is used only for system trust and does not affect `mesh-CA.crt`.
+
+**Use receptor_tls_cert and receptor_tls_key**
+
+Generate your own receptor node certificates and provide them with `receptor_tls_cert` and `receptor_tls_key`. You must also set `custom_ca_cert` to the CA certificate that signed the receptor certificates.
+
+`receptor_tls_cert=/home/user/certs/receptor.example.com.crt`
+
+`receptor_tls_key=/home/user/certs/receptor.example.com.key`
+
+`custom_ca_cert=/home/user/certs/signing-ca.crt`
+
+This approach requires you to manage certificate issuance for each receptor node, including the following requirements:
+
+- Each certificate must include the `otherName` field in the *Subject Alternative Name* (SAN) with the value `1.3.6.1.4.1.2312.19.1`.
+- Each certificate must include the host FQDN in the SAN
+- Wildcard certificates are not supported.
+- The `custom_ca_cert` file should contain only the CA certificate that signed the receptor certificates. Avoid using large enterprise CA bundles, which can cause `crypto buffer exceeded` errors when the `mesh-CA.crt` bundle exceeds the QUIC 16 KB buffer limit.
 
 ## Redis certificate considerations
 

@@ -1,7 +1,7 @@
 +++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_using_job_explorer"
 title = "View data about automation jobs across your organization - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_using_job_explorer"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_user_data_tracking/", "Get insights on automation across your environment with Automation Analytics"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-assembly_using_job_explorer/aem-page/optimize-assembly_using_job_explorer.html"
 last_crumb = "View data about automation jobs across your organization"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "View data about automation jobs across your organization"
 oversized = "false"
@@ -37,7 +37,6 @@ Using the **Job Explorer** you can:
 - View more details for top templates running on a cluster;
 - Filter out nested workflows and jobs.
 
-
 You can review the features and details of the **Job Explorer** in the following sections.
 
 ## Create a filtered and sorted view of jobs
@@ -54,7 +53,6 @@ Filter options include:
 - Organization
 - Inventory
 - Template
-
 
 You can sort results by any of the parameters from each column by using the directional arrows.
 

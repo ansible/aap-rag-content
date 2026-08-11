@@ -1,0 +1,13 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "How Ansible code bot handles duplicate pull requests",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null
+    }
+  ]
+}

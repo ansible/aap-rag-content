@@ -1,16 +1,16 @@
 +++
-template = "docs/aem-title.html"
 title = "MCP server integration - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_mcp_server_integration"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"]]
-category = ""
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_devtools_intro/", "Create, test, and deploy automation content with ansible-dev-tools"]]
+category = "Develop"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-con_mcp_server_integration/aem-page/develop-con_mcp_server_integration.html"
 last_crumb = "MCP server integration"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "MCP server integration"
 oversized = "false"
@@ -37,7 +37,6 @@ You can configure MCP servers in two ways:
 
 - **For embedded (local) MCP servers**: The EE image must explicitly include the MCP server binaries or libraries installed on the image path. This setup enables the execution environment to discover and start the specific embedded server required for the job.
 - **For remote (external) MCP servers**: The EE build process facilitates defining remote connection details in a manifest file contained within the EE. This manifest informs the core MCP collection plugin on how to connect, typically pointing to a specific remote URL using an HTTP connection.
-
 
 ## Supported MCP servers
 

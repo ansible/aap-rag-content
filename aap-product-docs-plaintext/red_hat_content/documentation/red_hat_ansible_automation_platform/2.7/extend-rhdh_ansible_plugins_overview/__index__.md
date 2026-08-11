@@ -9,7 +9,6 @@ The Ansible plug-ins provide:
 - Curated Ansible learning paths to help users new to Ansible.
 - Links to supported development environments and tools with opinionated configurations.
 
-
 The `automation-portal` OCI bundle includes the following plug-ins:
 
 *Table 1. Ansible plug\-ins for Red Hat Developer Hub*

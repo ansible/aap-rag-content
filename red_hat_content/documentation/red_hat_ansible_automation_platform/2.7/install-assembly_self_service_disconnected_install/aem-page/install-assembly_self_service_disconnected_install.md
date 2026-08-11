@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-title = "Install Ansible automation portal in air-gapped OpenShift Container Platform environments - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_disconnected_install"
+title = "Install Ansible automation portal in air-gapped OpenShift Container Platform environments - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_about/", "Install Ansible automation portal (OpenShift Container Platform only)"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_disconnected_install/aem-page/install-assembly_self_service_disconnected_install.html"
 last_crumb = "Install Ansible automation portal in air-gapped OpenShift Container Platform environments"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Install Ansible automation portal in air-gapped OpenShift Container Platform environments"
 oversized = "false"
@@ -47,7 +47,6 @@ Fulfilling these prerequisites helps ensure a successful deployment.
   * For OCI delivery: A method to mirror the OCI artifacts image referenced by `imageTagInfo`.
   * For HTTP plug-in registry: The ability to host the plug-in tarball files.
 - You have registry credentials for the registry endpoint used by the dynamic plug-in installer.
-
 
 Important:
 
@@ -94,7 +93,6 @@ The dynamic plug-in init container does not use cluster-level image mirror confi
 | `ansible-automation-platform/automation-portal:<plugin-version>`                                                                   | `registry.redhat.io` | Ansible plug-in OCI artifacts (OCI delivery only)                                    |
 | `rhdh/rhdh-plugin-catalog-index-rhel9:<rhdh_version>`                                                                              | `registry.redhat.io` | Plug-in catalog index (rebuilt by `mirror-plugins.sh`)                               |
 
-
 Replace version placeholders with the versions bundled with your Helm chart. See the [Ansible Automation Portal Lifecycle](https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-lifecycle) page for version mappings.
 
 ### Procedure
@@ -107,6 +105,7 @@ $ skopeo copy \
     docker://registry.redhat.io/rhdh/rhdh-hub-rhel9:<rhdh_version> \
     docker://<disconnected_registry_url>/rhdh/rhdh-hub-rhel9:<rhdh_version>
 ```
+
     This image is used for both the main application container and the `install-dynamic-plugins` init container. Replace `<rhdh_version>` with the Red Hat Developer Hub version bundled with your Helm chart.
 
 2.  If you use the built-in PostgreSQL database, copy the PostgreSQL image.
@@ -117,6 +116,7 @@ $ skopeo copy \
     docker://registry.redhat.io/rhel9/postgresql-<version>:<tag> \
     docker://<disconnected_registry_url>/rhel9/postgresql-<version>:<tag>
 ```
+
     Replace `<version>` with the PostgreSQL major version and `<tag>` with the image tag bundled with your Helm chart. See the [Ansible Automation Portal Lifecycle](https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-lifecycle) page for version mappings.
 
 3.  Copy the plug-in catalog index image:
@@ -127,6 +127,7 @@ $ skopeo copy \
     docker://registry.redhat.io/rhdh/rhdh-plugin-catalog-index-rhel9:<rhdh_version> \
     docker://<disconnected_registry_url>/rhdh/rhdh-plugin-catalog-index-rhel9:<rhdh_version>
 ```
+
     The Mirror dynamic plug-in artifacts procedure rebuilds this image with updated registry references. You must still mirror the original image because the script uses it as its source.
 
 4.  If you use OCI container delivery, copy the Ansible plug-ins OCI artifacts image:
@@ -146,6 +147,7 @@ $ skopeo copy \
     docker://registry.redhat.io/ansible-automation-platform-25/ansible-dev-tools-rhel8:latest \
     docker://<disconnected_registry_url>/ansible-automation-platform-25/ansible-dev-tools-rhel8:latest
 ```
+
     **Ansible Automation Platform 2.6:**
 
 ```terminal
@@ -161,6 +163,7 @@ Verify that each image is accessible in your disconnected registry. For example:
 ```terminal
 $ skopeo inspect docker://<disconnected_registry_url>/rhdh/rhdh-hub-rhel9:<rhdh_version>
 ```
+
 A successful response returns the image manifest metadata. An error indicates the image was not mirrored correctly.
 
 ## Mirror dynamic plug-in artifacts
@@ -190,6 +193,7 @@ Use the `mirror-plugins.sh` script from the Red Hat Developer Hub operator repos
 $ curl -LO https://raw.githubusercontent.com/redhat-developer/rhdh-operator/release-<rhdh_version>/.rhdh/scripts/mirror-plugins.sh
 $ chmod +x mirror-plugins.sh
 ```
+
     Replace `<rhdh_version>` with the Red Hat Developer Hub version bundled with your Helm chart. See the [Ansible Automation Portal Lifecycle](https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-lifecycle) page for version mappings.
 
 2.  Mirror the plug-in catalog index and all referenced plug-in artifacts to your disconnected registry:
@@ -200,6 +204,7 @@ $ ./mirror-plugins.sh \
   --plugin-index oci://registry.redhat.io/rhdh/rhdh-plugin-catalog-index-rhel9:<rhdh_version> \
   --to-registry <disconnected_registry_url>
 ```
+
     The script copies all OCI plug-in artifacts, rewrites the catalog index with your mirror registry URLs, and pushes the updated index to your disconnected registry.
 
 3.  If your disconnected environment has no direct network path to the connected bastion host, use the export-then-import workflow.
@@ -251,6 +256,7 @@ helm repo update
 ```
 helm pull openshift-helm-charts/redhat-rhaap-portal --version x.y.z
 ```
+
     The chart is saved as a `.tgz` file (for example, `redhat-rhaap-portal-1.0.1.tgz`).
 
 3.  Extract the chart files:
@@ -259,6 +265,7 @@ helm pull openshift-helm-charts/redhat-rhaap-portal --version x.y.z
 ```
 tar -xvf redhat-rhaap-portal-x.y.z.tgz
 ```
+
     This creates a directory with a name similar to `redhat-rhaap-portal-1.0.1/`.
 
 4.  In the `redhat-rhaap-portal/values.yaml` file, replace all `image:` references with the full path to the images in your disconnected registry.
@@ -268,6 +275,7 @@ tar -xvf redhat-rhaap-portal-x.y.z.tgz
 ```
 helm package redhat-rhaap-portal-x.y.z
 ```
+
     A new `.tgz` file is created containing your changes.
 
 ## Transfer assets to the disconnected environment
@@ -301,6 +309,7 @@ Ensure your disconnected OpenShift cluster is configured to trust the private re
 ```
 oc login --token=<your_token> --server=<your_openshift_api_url>
 ```
+
     Use the following command if you have a kubeconfig:
 
 ```
@@ -333,6 +342,7 @@ Create the registry authentication secret so the dynamic plug-in init container 
   }
 }
 ```
+
     Generate the base64-encoded value:
 
 ```
@@ -347,6 +357,7 @@ $ oc create secret generic <release-name>-dynamic-plugins-registry-auth \
   --from-file=auth.json=./auth.json \
   -n <project_name>
 ```
+
     Replace `<release-name>` with your Helm release name. If you use the default release name from the OpenShift catalog, the secret name is `redhat-rhaap-portal-dynamic-plugins-registry-auth`.
 
 ### Results
@@ -428,6 +439,7 @@ redhat-developer-hub:
         repository: rhel9/postgresql-<version>
         tag: "<postgresql_tag>"
 ```
+
   Note:
       The Helm chart pins the PostgreSQL image by SHA256 digest. If your mirroring method does not preserve digests, set `postgresql.image.tag` to the tag you used when mirroring the image.
 
@@ -462,6 +474,7 @@ redhat-developer-hub:
         repository: rhel9/postgresql-<version>
         tag: "<postgresql_tag>"
 ```
+
   Note:
       Replace `<rhdh_version>` and `<version>` with the versions bundled with your Helm chart. See the [Ansible Automation Portal Lifecycle](https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-lifecycle) page for version mappings.
 
@@ -480,6 +493,7 @@ $ helm install redhat-rhaap-portal \
   --namespace "${MY_NAMESPACE}" \
   -f /path/to/values-oci.yaml
 ```
+
     To apply changes after deployment, upgrade the Helm release. If you install from the OpenShift web console, use Developer -> Helm -> select the release -> Actions -> Upgrade -> YAML view.
 
     To upgrade from the command line:
@@ -490,6 +504,7 @@ $ helm upgrade redhat-rhaap-portal \
   --namespace "${MY_NAMESPACE}" \
   -f /path/to/values-oci.yaml
 ```
+
     Alternatively, you can pass values using `--set` flags.
 
     **OCI delivery:**
@@ -502,11 +517,13 @@ $ helm install redhat-rhaap-portal \
   --set redhat-developer-hub.global.imageRegistry="<disconnected_registry_url>" \
   --set redhat-developer-hub.global.pluginMode=oci
 ```
+
     To also set `ociPluginImage` via `--set`:
 
 ```terminal
 --set redhat-developer-hub.global.ociPluginImage="<disconnected_registry_url>/custom-path/automation-portal"
 ```
+
     **HTTP plug-in registry delivery:**
 
 ```terminal
@@ -557,6 +574,7 @@ redhat-developer-hub:
               mountPath: /etc/containers/certs.d/*registry-host*
               readOnly: true
 ```
+
   Note:
       The `mountPath` for the CA certificate must be the registry hostname only (for example, `/etc/containers/certs.d/mirror.example.com`). Do not include repository paths. If the registry uses a non-standard port, include it in the path (for example, `/etc/containers/certs.d/mirror.example.com:5000`).
 
@@ -567,6 +585,7 @@ After the deployment restarts, check the `install-dynamic-plugins` init containe
 ```terminal
 $ oc logs *pod-name* -c install-dynamic-plugins -n *namespace* | grep -i "x509\|certificate"
 ```
+
 If the CA certificate is mounted correctly, there are no `x509: certificate signed by unknown authority` errors.
 
 ## Verify the disconnected installation
@@ -631,7 +650,6 @@ redhat-developer-hub:
         tag: "latest"
 ```
 
-
 Note:
 
 Set `imageRegistry` and `catalogIndex.image.registry` to the registry host only (for example, `mirror.example.com` or `mirror.example.com:5000`). Use a hostname that cluster nodes can resolve and pull from. Do not include a repository path in `imageRegistry`. Setting `imageRegistry` does not override the catalog index registry; you must set `catalogIndex.image.registry` separately.
@@ -644,12 +662,12 @@ If your mirror uses a non-standard path for the Ansible plug-in OCI image, set `
 
  Complete the standard install steps using these values.
 
-## Troubleshooting disconnected installations
+## Troubleshoot disconnected installations
 
 Use this reference to troubleshoot common issues that occur during disconnected Ansible automation portal installations.
 
-| Symptom                                                                                                    | Cause                                                                                                     | Solution                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| ---------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `authentication required` or `unauthorized` in `install-dynamic-plugins` init container logs               | Auth secret missing or malformed. The init container uses `skopeo` and does not use cluster pull secrets. | Create `<release-name>-dynamic-plugins-registry-auth` secret. Use `base64 -w0` to avoid multiline values that corrupt `auth.json`.                                                                                                                                                                                                                                                                                                                                                  |
-| Duplicate path in OCI URL (for example, `.../ansible-automation-platform/ansible-automation-platform/...`) | `imageRegistry` includes a repository path instead of the registry host only.                             | Set `imageRegistry` to the registry host only. If your mirror uses a different repository structure, use `ociPluginImage` to set the full image path.                                                                                                                                                                                                                                                                                                                               |
-| `x509: certificate signed by unknown authority` in init container logs                                     | Private registry uses a self-signed or internal CA certificate.                                           | Mount the CA certificate into the init container. See [Configure CA certificates for private registries](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_disconnected_install#self-service-install-disconnected-configure-ca-certs "If your private registry uses a certificate signed by an internal or self-signed CA, mount the CA certificate into the install-dynamic-plugins init container so that skopeo trusts the registry."). |
+| Symptom                                                                                                   | Cause                                                                                                    | Solution                                                                                                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `authentication required` or`unauthorized` in`install-dynamic-plugins` init container logs                | Auth secret missing or malformed. The init container uses`skopeo` and does not use cluster pull secrets. | Create`<release-name>-dynamic-plugins-registry-auth` secret. Use`base64 -w0` to avoid multiline values that corrupt`auth.json`.                                                                          |
+| Duplicate path in OCI URL (for example,`.../ansible-automation-platform/ansible-automation-platform/...`) | `imageRegistry` includes a repository path instead of the registry host only.                            | Set`imageRegistry` to the registry host only. If your mirror uses a different repository structure, use`ociPluginImage` to set the full image path.                                                      |
+| `x509: certificate signed by unknown authority` in init container logs                                    | Private registry uses a self-signed or internal CA certificate.                                          | Mount the CA certificate into the init container. See[Configure CA certificates for private registries](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_disconnected_install#self-service-install-disconnected-configure-ca-certs "If your private registry uses a certificate signed by an internal or self-signed CA, mount the CA certificate into the install-dynamic-plugins init container so that skopeo trusts the registry."). |

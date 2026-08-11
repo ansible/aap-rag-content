@@ -12,7 +12,6 @@ Configure the webhook notification with the following:
 - The body of the outgoing request.
 - Configure authentication, using Basic authentication.
 
-
 Provide the following details to set up a webhook notification:
 
 - Optional: **Username**: Enter a username.
@@ -23,7 +22,6 @@ Provide the following details to set up a webhook notification:
 ```
 {"Authentication": "988881adc9fc3655077dc2d4d757d480b5ea0e11", "MessageType": "Test"}`.
 ```
-
 
 - **Disable SSL Verification**: SSL/TLS verification is on by default, but you can choose to turn off verification of the authenticity of the target’s certificate. Select this option to disable verification for environments that use internal or private CA’s.
 - **HTTP Method**: Select the method for your webhook:

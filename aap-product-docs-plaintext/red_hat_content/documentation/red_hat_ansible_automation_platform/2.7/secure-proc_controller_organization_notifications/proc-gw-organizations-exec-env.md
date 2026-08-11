@@ -5,7 +5,7 @@ When automation controller is enabled on the platform, you can review any execut
 
 ### About this task
 
-For more information about execution environments, see [Define, create, and build execution environments](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-define__create__and_build_execution_environments "Run automation consistently across nodes with execution environments, which are container images that contain everything you need to run your automation.").
+For more information about execution environments, see [Define, create, and build execution environments](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-define__create__and_build_execution_environments#GUID-9ff94bd4-fddf-4320-833a-295d20920a1c "Run automation consistently across nodes with execution environments, which are container images that contain everything you need to run your automation.").
 
 ### Procedure
 

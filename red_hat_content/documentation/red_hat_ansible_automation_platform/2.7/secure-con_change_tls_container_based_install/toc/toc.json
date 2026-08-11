@@ -10,9 +10,35 @@
       "singlePageAnchor": null,
       "sections": [
         {
-          "title": "Change TLS certificates and keys using the installation program",
+          "title": "Renew self-signed TLS certificates using the installation program",
           "visible": true,
           "weight": 1,
+          "urlFragment": "GUID-5b89f4cc-ea2f-4a43-a047-c137264aa2fe",
+          "anchor": null,
+          "singlePageAnchor": "GUID-5b89f4cc-ea2f-4a43-a047-c137264aa2fe",
+          "sections": [
+            {
+              "title": "Before you begin",
+              "visible": true,
+              "weight": 1,
+              "urlFragment": "GUID-5b89f4cc-ea2f-4a43-a047-c137264aa2fe",
+              "anchor": "GUID-5b89f4cc-ea2f-4a43-a047-c137264aa2fe__prereq_1",
+              "singlePageAnchor": "GUID-5b89f4cc-ea2f-4a43-a047-c137264aa2fe__prereq_1"
+            },
+            {
+              "title": "Results",
+              "visible": true,
+              "weight": 2,
+              "urlFragment": "GUID-5b89f4cc-ea2f-4a43-a047-c137264aa2fe",
+              "anchor": "GUID-5b89f4cc-ea2f-4a43-a047-c137264aa2fe__result_1",
+              "singlePageAnchor": "GUID-5b89f4cc-ea2f-4a43-a047-c137264aa2fe__result_1"
+            }
+          ]
+        },
+        {
+          "title": "Change TLS certificates and keys using the installation program",
+          "visible": true,
+          "weight": 2,
           "urlFragment": "changing-tls-certificates-keys-using-installation-program",
           "anchor": null,
           "singlePageAnchor": "changing-tls-certificates-keys-using-installation-program"

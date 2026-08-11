@@ -11,6 +11,7 @@ Red Hat Developer Hub pulls the Ansible plug-ins directly from `registry.redhat.
 ```terminal
 $ podman login --authfile auth.json registry.redhat.io
 ```
+
 To authenticate to multiple registries, run `podman login` for each registry. The `auth.json` file accumulates credentials for all registries you log in to.
 
 2.  Create a secret from the `auth.json` file in the same OpenShift Container Platform project as your Red Hat Developer Hub deployment.
@@ -21,6 +22,7 @@ $ oc create secret generic dynamic-plugins-registry-auth \
 --from-file=auth.json=auth.json \
 -n <your_rhdh_namespace>
 ```
+
 For a Helm-based deployment:
 
 ```terminal
@@ -28,6 +30,7 @@ $ oc create secret generic <release_name>-dynamic-plugins-registry-auth \
 --from-file=auth.json=auth.json \
 -n <your_rhdh_namespace>
 ```
+
 Replace `<release_name>` with your Helm release name.
 
 Important:
@@ -51,6 +54,7 @@ For an Operator-based deployment:
 ```terminal
 $ oc get secret dynamic-plugins-registry-auth -n <your_rhdh_namespace>
 ```
+
 For a Helm-based deployment:
 
 ```terminal

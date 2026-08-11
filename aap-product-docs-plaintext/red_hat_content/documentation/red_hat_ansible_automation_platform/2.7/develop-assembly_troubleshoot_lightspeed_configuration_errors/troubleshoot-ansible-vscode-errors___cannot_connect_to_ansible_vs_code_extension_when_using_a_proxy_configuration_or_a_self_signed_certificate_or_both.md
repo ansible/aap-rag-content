@@ -19,6 +19,5 @@ To modify the proxy settings in VS code, perform the following tasks:
 - **Electron Fetch**
 - **System Certificates V2** if you are using your own Certificate Authority (CA).
 
-
 For information about how to set up proxy support in VS Code, see the Related Links section below.
 

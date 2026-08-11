@@ -7,5 +7,6 @@ After installing the open source Ansible project or Red Hat Ansible Automation P
 ```
 $ sudo dnf install ansible
 ```
+
 in the Red Hat Enterprise Linux CLI, you can use the `ansible-playbook` command to run Ansible Playbooks.
 

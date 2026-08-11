@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_rulebook_troubleshooting/aem-page/administer-assembly_eda_rulebook_troubleshooting.html"
 last_crumb = "Troubleshoot failed event-driven automation triggers"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Troubleshoot failed event-driven automation triggers"
 oversized = "false"
@@ -44,7 +44,6 @@ Event-Driven Ansible includes tracking identifiers in all log output to signific
 | <br>X-REQUEST-ID           | <br> `rid`   | <br>Tracks HTTP requests from the platform gateway through the entire Event-Driven Ansible request lifecycle. Use this to correlate UI actions or API calls with backend processing. | <br>Included in the HTTP response headers and Event-Driven Ansible log entries.                                       |
 | <br>Log Tracking ID        | <br> `tid`   | <br>Tracks the **activation lifecycle** from creation through completion, persisting across restarts and multiple log files.                                                         | <br>Included in all activation-related log entries. It can be obtained from the activation **History** tab in the UI. |
 | <br>Activation Instance ID | <br> `aiid`  | <br>Identifies the logs specific to a single execution instance of a rulebook activation, allowing you to view `ansible-rulebook` output for that run.                               | <br>Included in activation logs.                                                                                      |
-
 
 Note:
 

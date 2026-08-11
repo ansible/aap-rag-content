@@ -12,5 +12,4 @@ Ansible automation portal adds the following Ansible Automation Platform-specifi
 | `resource` + `ui:field: AAPResourcePicker`    | Ansible Automation Platform resource picker (single-select) | Select one Ansible Automation Platform resource by name.              | Inventory, organization.                    |
 | `type: array` + `ui:field: AAPResourcePicker` | Ansible Automation Platform resource picker (multi-select)  | Select multiple Ansible Automation Platform resources by name.        | Credentials.                                |
 
-
 These Ansible Automation Platform-specific fields are documented in detail in [AAP resource picker fields](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_aap_resource_picker_fields "Use ui:field: AAPResourcePicker to let users select Ansible Automation Platform resources by name. Ansible automation portal queries the Ansible Automation Platform API and displays available resources in a picker.").

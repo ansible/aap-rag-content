@@ -213,6 +213,7 @@ path: hello
 data:
 foo: bar
 ```
+
 After (`hashicorp.vault`):
 
 ```
@@ -223,6 +224,7 @@ path: hello
 data:
 foo: bar
 ```
+
 **Example 2: Basic Secret Delete**
 
 Before (`community.hashi_vault`):
@@ -233,6 +235,7 @@ community.hashi_vault.vault_kv2_delete:
 url: https://vault:8201
 path: secret/mysecret
 ```
+
 After (`hashicorp.vault`):
 
 ```
@@ -242,6 +245,7 @@ url: https://vault:8201
 path: secret/mysecret
 state: absent
 ```
+
 **Example 3: Secret Delete - specific version**
 
 Before (`community.hashi_vault`):
@@ -253,6 +257,7 @@ url: https://vault:8201
 path: secret/mysecret
 versions: [1, 3]
 ```
+
 After (`hashicorp.vault`):
 
 ```
@@ -279,6 +284,7 @@ token: "{{ vault_token }}"
 path: myapp/config
 register: response
 ```
+
 After (hashicorp.vault)
 
 ```
@@ -288,6 +294,7 @@ url: https://vault.example.com:8200
 token: "{{ vault_token }}"
 path: myapp/config
 ```
+
 **Example 2: Read a secret with a specific version**
 
 Before (community.hashi.vault)
@@ -299,6 +306,7 @@ url: https://vault.example.com:8200
 path: myapp/config
 version: 5
 ```
+
 After (hashicorp.vault)
 
 ```
@@ -324,6 +332,7 @@ msg: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=secret/data/hello
 token=my_vault_token
 url=http://myvault_url:8200') }}"
 ```
+
 After (`hashicorp.vault`)
 
 ```

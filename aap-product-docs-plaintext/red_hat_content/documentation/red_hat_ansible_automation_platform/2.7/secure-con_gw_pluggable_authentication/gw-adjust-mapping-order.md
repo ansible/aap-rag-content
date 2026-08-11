@@ -16,7 +16,6 @@ For example:
 - Authenticator map A denies all users access to the system
 - Authenticator map B allows the user `john` access to the system
 
-
 When the mapping order is set to A, B; the first map denies access for all users, including `john`. The second map subsequently allows `john` access to the system and the result is that `john` is granted access and is able to log in to the platform.
 
 However, when the mapping order is changed to B, A; the first map allows `john` access to the system. The second map subsequently denies all users access to the system (including `john`) and the result is that `john` is denied access and is unable to log in to the platform.

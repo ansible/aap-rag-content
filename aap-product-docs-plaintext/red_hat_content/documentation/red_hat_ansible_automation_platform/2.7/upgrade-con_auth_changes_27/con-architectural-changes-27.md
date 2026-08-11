@@ -11,7 +11,6 @@ The following features and access methods are removed in this release:
 - Third-party authentication provider configuration (LDAP, SAML, RADIUS, TACACS+) within automation controller.
 - Direct external routes or ingress to automation controller and automation hub.
 
-
 Important:
 
 If you use Red Hat Ansible Lightspeed and have automation or scripts that change the `max_stream_duration` or `stream_idle_timeout` global proxy settings, you must update your scripts. These global settings have been removed, and you should now use the per-route service timeouts that are configurable on any route.

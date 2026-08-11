@@ -1,0 +1,5 @@
+# Plan infrastructure requirements for event persistence
+
+If you want to use event persistence in your rulebook activations, you must plan for the required infrastructure before installing Ansible Automation Platform. Event persistence requires a dedicated database and a Rule Engine credential that you configure during the planning and installation phases.
+
+By default, events processed by rulebook activations are not persisted. When you enable event persistence, Event-Driven Ansible stores event data in a dedicated database so you can review and audit the events that triggered your automation rules. Because the event persistence database is deployed during installation, you must decide whether to use this feature before you begin the installation process. If you enable event persistence after installation, additional configuration steps are required. The following topics describe what event persistence provides, and the credential setup it requires so that you can factor these requirements into your deployment planning.

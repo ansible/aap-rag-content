@@ -1,7 +1,7 @@
 +++
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-verify_the_vector_database"
 title = "Verify the vector database - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-verify_the_vector_database"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-extend_the_intelligent_assistant_with_custom_knowledge/", "Extend the automation intelligent assistant with custom knowledge"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-verify_the_vector_database/aem-page/extend-verify_the_vector_database.html"
 last_crumb = "Verify the vector database"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Verify the vector database"
 oversized = "false"
@@ -37,6 +37,7 @@ Verify that you created a vector database of your documentation.
 ```
 ls -lR output
 ```
+
   The tool generates an image archive (.tar), which contains the vector database files and metadata. The following shows the structure of the output directory:
 
 ```
@@ -46,6 +47,7 @@ output
     ├── faiss_store.db
     └── llama-stack.yaml
 ```
+
 In the example above:
   - `rag-content-output-latest.tar`is the generated image archive.
   - `faiss_store.db`is the vector database file.
@@ -65,6 +67,7 @@ registry.redhat.io/lightspeed-core/rag-tool-rhel9:v0.5-latest
    -k 5 \
    -q "Prerequisites for installation"
 ```
+
   In the example above:
   - `-k` tells the AI tool to find the five most relevant matches from your documentation.
   - `-q` is your prompt; change the string according to your requirements.

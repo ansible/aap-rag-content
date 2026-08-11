@@ -23,6 +23,4 @@ Currently, Red Hat Ansible Lightspeed supports user prompts in English language 
 
 -  **Post-processing capabilities** Red Hat Ansible Lightspeed offers post-processing capabilities that augment IBM watsonx Code Assistant and improve the quality and accuracy of code recommendations.
 
--  **Content maintenance and modernization** The Ansible code bot scans existing content collections, roles, and playbooks through Git repositories, and proactively creates pull requests whenever best practices or quality improvement recommendations are available. The bot automatically submits pull requests to the repository, which proactively alerts the repository owner to a recommended change to their content.
-
 -  **Telemetry data collection on the Admin dashboard** Red Hat Ansible Lightspeed now collects Admin dashboard telemetry data that provides insight into how your organization users are using the Ansible Lightspeed service, and displays the metrics on the Admin dashboard. If you no longer want to collect and manage the Admin dashboard telemetry, you can disable it for your organization.

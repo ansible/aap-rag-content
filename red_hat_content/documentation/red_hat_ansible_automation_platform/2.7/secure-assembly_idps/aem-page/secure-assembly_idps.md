@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_idps"
 title = "Automate network intrusion detection and prevention systems - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_idps/", "Automate network intrusion detection and prevention systems"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-assembly_idps/aem-page/secure-assembly_idps.html"
 last_crumb = "Automate network intrusion detection and prevention systems"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Automate network intrusion detection and prevention systems"
 oversized = "false"
@@ -85,7 +85,6 @@ The following lab environment demonstrates what an Ansible security automation i
 
 Keep in mind that a real world setup will feature other vendors and technologies.
 
-
 ![Sample Ansible security automation integration](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/security-ids-sample-demo.png)  
 
 ## Create a new IDPS rule
@@ -157,6 +156,7 @@ Currently, the `ids_rule` role only supports Snort IDPS.
          ids_rules_file: '/etc/snort/rules/local.rules'
          ids_rule_state: present
 ```
+
     Tasks are components that make changes on the target machine. Since you are using a role that defines these tasks, the `include_role` is the only entry you need.
 
     The `ids_rules_file` variable specifies a defined location for the `local.rules` file, while the `ids_rule_state` variable indicates that the rule should be created if it does not already exist.

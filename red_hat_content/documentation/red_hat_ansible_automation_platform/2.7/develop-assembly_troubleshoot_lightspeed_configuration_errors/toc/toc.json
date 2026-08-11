@@ -116,40 +116,6 @@
               "singlePageAnchor": "troubleshoot-ansible-vscode-errors___cannot_connect_to_ansible_vs_code_extension_due_to_network_issues"
             }
           ]
-        },
-        {
-          "title": "Troubleshoot Ansible code bot errors",
-          "visible": true,
-          "weight": 7,
-          "urlFragment": "troubleshoot-ansible-code-bot-errors",
-          "anchor": null,
-          "singlePageAnchor": "troubleshoot-ansible-code-bot-errors",
-          "sections": [
-            {
-              "title": "Cannot access Ansible code bot",
-              "visible": true,
-              "weight": 1,
-              "urlFragment": "troubleshoot-ansible-code-bot-errors",
-              "anchor": "troubleshoot-ansible-code-bot-errors___cannot_access_ansible_code_bot",
-              "singlePageAnchor": "troubleshoot-ansible-code-bot-errors___cannot_access_ansible_code_bot"
-            },
-            {
-              "title": "Cannot scan your Git repository using Ansible code bot",
-              "visible": true,
-              "weight": 2,
-              "urlFragment": "troubleshoot-ansible-code-bot-errors",
-              "anchor": "troubleshoot-ansible-code-bot-errors___cannot_scan_your_git_repository_using_ansible_code_bot",
-              "singlePageAnchor": "troubleshoot-ansible-code-bot-errors___cannot_scan_your_git_repository_using_ansible_code_bot"
-            },
-            {
-              "title": "Cannot create pull requests",
-              "visible": true,
-              "weight": 3,
-              "urlFragment": "troubleshoot-ansible-code-bot-errors",
-              "anchor": "troubleshoot-ansible-code-bot-errors___cannot_create_pull_requests",
-              "singlePageAnchor": "troubleshoot-ansible-code-bot-errors___cannot_create_pull_requests"
-            }
-          ]
         }
       ]
     }

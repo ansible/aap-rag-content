@@ -8,7 +8,6 @@ The Input configuration has two attributes:
 - fields - a collection of properties for a credential type.
 - required - a list of required fields.
 
-
 Fields can have multiple properties, depending on the credential type you select.
 
 *Table 1. Input Configuration Field Properties*

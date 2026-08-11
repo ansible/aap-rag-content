@@ -8,13 +8,11 @@
 - Browser console shows: `HTTP 403 Forbidden: {"detail":"Authentication credentials were not provided."}`
 - Metrics service API endpoints return "no healthy upstream" errors
 
-
 After enabling `FEATURE_DASHBOARD_COLLECTION_ENABLED: true` on the Ansible Automation Platform CR (operator deployment), the Gateway did NOT automatically register the metrics service. The dashboard UI navigation appeared, but accessing it resulted in 403 Forbidden errors because:
 
 - No metrics service type/cluster/node/service route created in Gateway
 - JWT authentication chain (`ANSIBLE_BASE_JWT_KEY`, resource server URL, `service_id`) not configured between Gateway and metrics service
 - MetricsService operator did not set `METRICS_SERVICE_FEATURE_DASHBOARD_COLLECTION_ENABLED` env var from the CR
-
 
 **Root cause**
 
@@ -24,8 +22,6 @@ Gateway has not registered metrics service for routing and authentication. The d
 
 1.      Check if metrics service is running:
 
-
-
 ```
 # Operator deployment
 kubectl get pods -n ansible-automation-platform | grep metrics
@@ -33,11 +29,10 @@ kubectl get pods -n ansible-automation-platform | grep metrics
 # Containerized deployment
 podman ps | grep automation-metrics
 ```
+
 Expected: 3 metrics service pods/containers running (web, tasks, scheduler)
 
 2.      Check metrics service logs for JWT authentication errors:
-
-
 
 ```
 # Operator deployment
@@ -46,9 +41,8 @@ kubectl logs -n ansible-automation-platform <metrics-web-pod> | grep -i "ANSIBLE
 # Containerized deployment
 podman logs automation-metrics-web | grep -i "ANSIBLE_BASE_JWT_KEY"
 ```
+
 Error indicating Gateway not configured:
-
-
 
 ```
 ansible_base.jwt_consumer.common.cert Failed to get the setting ANSIBLE_BASE_JWT_KEY
@@ -56,25 +50,20 @@ ansible_base.jwt_consumer.common.cert Failed to get the setting ANSIBLE_BASE_JWT
 
 3.      Check Gateway logs for routing errors:
 
-
-
 ```
 # Operator deployment
 kubectl logs -n ansible-automation-platform <gateway-pod> | grep -i metrics
 
 # Look for errors accessing /api/metrics/v1/dashboard_reports/
 ```
+
 Error indicating no upstream registered:
-
-
 
 ```
 no healthy upstream
 ```
 
 4.      Check metrics service environment variables:
-
-
 
 ```
 # Operator deployment
@@ -83,9 +72,8 @@ kubectl exec <metrics-web-pod> -n ansible-automation-platform -- env | grep -A2 
 # Containerized deployment
 cat /etc/ansible-automation-platform/metrics_service/settings.yaml | grep DASHBOARD
 ```
+
 Expected output:
-
-
 
 ```
 # Operator deployment
@@ -94,6 +82,7 @@ METRICS_SERVICE_FEATURE_DASHBOARD_COLLECTION_ENABLED=true
 # Containerized deployment
 FEATURE_ENABLED: {'DASHBOARD_COLLECTION': True}
 ```
+
 If missing or set to `false`:
 
 The MetricsService operator did not properly propagate the `FEATURE_DASHBOARD_COLLECTION_ENABLED: true` setting from the Ansible Automation Platform CR to the metrics service container environment.
@@ -110,23 +99,19 @@ This indicates:
 
 1.      Verify operator version supports Gateway integration:
 
-
-
 ```
 kubectl get pods -n ansible-automation-platform | grep aap-operator
 ```
+
 Ensure operator version is `aap-operator.v2.7.0-0.1776445599` or later.
 
 2.      Check Ansible Automation Platform CR feature flag:
 
-
-
 ```
 kubectl get AnsibleAutomationPlatform aap -n aap -o yaml | grep -A5 feature_flags
 ```
+
 Verify:
-
-
 
 ```
 feature_flags:
@@ -135,11 +120,10 @@ FEATURE_DASHBOARD_COLLECTION_ENABLED: true
 
 3.      Verify Gateway pod restarted after feature flag enabled:
 
-
-
 ```
 kubectl get pods -n ansible-automation-platform | grep gateway
 ```
+
 Check pod AGE. This should restart after the CR update.
 
 4.      If Gateway registration still failing:
@@ -158,7 +142,6 @@ Gateway registration should be automatic. If you encounter this issue:
 - Check Gateway configuration includes metrics service routes
 - Contact Red Hat Support - this issue primarily affects operator deployments
 
-
 **Verification after fix**
 
 - **Access dashboard UI:** Navigate to Ansible Automation Platform UI → Automation dashboard
@@ -167,11 +150,10 @@ Gateway registration should be automatic. If you encounter this issue:
 
 -      **Check metrics service API accessible:**
 
-
-
 ```
 # From a machine with access to AAP
 curl -k -u admin:<password> https://<AAP-FQDN>/api/metrics/v1/dashboard_reports/collection_status/
 ```
+
 Expected: JSON response (not 403 error)
 

@@ -1,0 +1,89 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Upgrade the Ansible automation portal RHEL appliance",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Authenticate to the container registry",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "self-service-rhel-upgrade__authenticate-to-the-container-registry",
+          "anchor": null,
+          "singlePageAnchor": "self-service-rhel-upgrade__authenticate-to-the-container-registry"
+        },
+        {
+          "title": "Upgrade the appliance",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "self-service-rhel-upgrade__upgrade-the-appliance",
+          "anchor": null,
+          "singlePageAnchor": "self-service-rhel-upgrade__upgrade-the-appliance"
+        },
+        {
+          "title": "Roll back an upgrade",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "self-service-rhel-upgrade__roll-back-an-upgrade",
+          "anchor": null,
+          "singlePageAnchor": "self-service-rhel-upgrade__roll-back-an-upgrade"
+        },
+        {
+          "title": "What survives an upgrade",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "self-service-rhel-upgrade-survival",
+          "anchor": null,
+          "singlePageAnchor": "self-service-rhel-upgrade-survival",
+          "sections": [
+            {
+              "title": "Post-upgrade reconciliation",
+              "visible": true,
+              "weight": 1,
+              "urlFragment": "self-service-rhel-upgrade-survival",
+              "anchor": "self-service-rhel-upgrade-survival__post-upgrade-reconciliation",
+              "singlePageAnchor": "self-service-rhel-upgrade-survival__post-upgrade-reconciliation"
+            }
+          ]
+        },
+        {
+          "title": "Upgrade the Ansible automation portal RHEL appliance in a disconnected environment",
+          "visible": true,
+          "weight": 5,
+          "urlFragment": "proc-self-service-rhel-upgrade-disconnected",
+          "anchor": null,
+          "singlePageAnchor": "proc-self-service-rhel-upgrade-disconnected"
+        },
+        {
+          "title": "Update the Ansible Automation Platform connection",
+          "visible": true,
+          "weight": 6,
+          "urlFragment": "self-service-rhel-update-aap-connection",
+          "anchor": null,
+          "singlePageAnchor": "self-service-rhel-update-aap-connection"
+        },
+        {
+          "title": "Troubleshooting RHEL appliances",
+          "visible": true,
+          "weight": 7,
+          "urlFragment": "ref-self-service-rhel-troubleshooting",
+          "anchor": null,
+          "singlePageAnchor": "ref-self-service-rhel-troubleshooting"
+        },
+        {
+          "title": "Back up and restore data",
+          "visible": true,
+          "weight": 8,
+          "urlFragment": "self-service-rhel-backup-restore",
+          "anchor": null,
+          "singlePageAnchor": "self-service-rhel-backup-restore"
+        }
+      ]
+    }
+  ]
+}

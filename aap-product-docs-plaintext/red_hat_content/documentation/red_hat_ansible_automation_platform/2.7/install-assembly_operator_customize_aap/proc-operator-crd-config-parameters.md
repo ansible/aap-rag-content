@@ -33,6 +33,7 @@ oc explain ansibleautomationplatform.spec.hub --recursive
 oc explain ansibleautomationplatform.spec.eda --recursive
 ```
 
+
 Note:
 You can also query individual component CRs directly if needed:
 
@@ -41,5 +42,6 @@ oc explain automationcontroller.spec
 oc explain automationhub.spec
 oc explain eda.spec
 ```
+
 However, when configuring components through the Ansible Automation Platform CR (recommended approach), use the nested paths shown above.
 

@@ -2,7 +2,7 @@
   "version": "1.1",
   "sections": [
     {
-      "title": "Ansible Automation Platform 2.7 patch release June 17, 2026",
+      "title": "Ansible Automation Platform patch release June 17, 2026",
       "visible": true,
       "weight": 1,
       "urlFragment": "index",
@@ -50,7 +50,7 @@
           "singlePageAnchor": "aap-26-20260617___enhancements"
         },
         {
-          "title": "Aap-gateway",
+          "title": "Platform-gateway",
           "visible": true,
           "weight": 6,
           "urlFragment": "aap-26-20260617___aap_gateway",

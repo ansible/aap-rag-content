@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-title = "Install and configure the Ansible VS Code extension - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_install_ansible_vscode_extension"
+title = "Install and configure the Ansible VS Code extension - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_lightspeed_intro/", "Build automation faster with Red Hat Ansible Lightspeed"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_install_ansible_vscode_extension/aem-page/develop-assembly_install_ansible_vscode_extension.html"
 last_crumb = "Install and configure the Ansible VS Code extension"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Install and configure the Ansible VS Code extension"
 oversized = "false"
@@ -61,7 +61,6 @@ Use the following procedure to install the Ansible Lightspeed extension in VS Co
 
 - VS Code version 1.70.1 or later.
 
-
  Note:
 
 You can also install VScode derivatives, such as VScode Insider or VS Codium.
@@ -94,15 +93,15 @@ Configure third-party LLM providers, such as IBM watsonx Code Assistant or Googl
 3.  From the Installed Extensions list, select **Ansible**.
 4.  From the **Ansible** extension page, click the **Settings** icon and select **Extension Settings**.
 5.  Select **Ansible Lightspeed** settings, and specify the following information:
-    | UI field                                    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-    | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    | <br>Ansible Lightspeed: Enabled             | <br>Select this checkbox to enable the Red Hat Ansible Lightspeed service.                                                                                                                                                                                                                                                                                                                                                                                                                           |
-    | <br>Ansible Lightspeed: Provider            | <br>Select the active AI service for code generation.<br>Choose the AI provider from the following options:<br>  `wca`: (Default setting) Uses IBM watsonx Code Assistant as the AI provider.  `google`: Uses Google Gemini as the AI provider.                                                                                                                                                                                                                                                      |
-    | <br>Ansible Lightspeed: Model Name          | <br>Specify the specific AI model version to use for code generation:<br>  For IBM watsonx Code Assistant: (Required) The IBM watsonx Code Assistant model name or ID that you want to use for code generation.  For Google Gemini: (Optional) The system applies a recommended default model if left blank.                                                                                                                                                                                         |
-    | <br>Ansible Lightspeed: Api Key             | <br>Specify the secret credential required to authenticate requests with third-party model providers.<br>  For IBM watsonx Code Assistant: (Optional) This field is not used for the IBM WCA provider. IBM watsonx Code Assistant relies on a separate OAuth2 login flow via the Red Hat portal.  For Google Gemini: (Required) Paste your active Google Gemini API key into this field. This token authorizes the extension to send prompts to Google’s servers.                                    |
+    | UI field                                    | Description                                                                                                                                                                                              |
+    | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | <br>Ansible Lightspeed: Enabled             | <br>Select this checkbox to enable the Red Hat Ansible Lightspeed service.                                                                                                                               |
+    | <br>Ansible Lightspeed: Provider            | <br>Select the active AI service for code generation.<br>Choose the AI provider from the following options:<br>  `wca`: (Default setting) Uses IBM watsonx Code Assistant as the AI provider.  `google`: Uses Google Gemini as the AI provider. |
+    | <br>Ansible Lightspeed: Model Name          | <br>Specify the specific AI model version to use for code generation:<br>  For IBM watsonx Code Assistant: (Required) The IBM watsonx Code Assistant model name or ID that you want to use for code generation.  For Google Gemini: (Optional) The system applies a recommended default model if left blank. |
+    | <br>Ansible Lightspeed: Api Key             | <br>Specify the secret credential required to authenticate requests with third-party model providers.<br>  For IBM watsonx Code Assistant: (Optional) This field is not used for the IBM WCA provider. IBM watsonx Code Assistant relies on a separate OAuth2 login flow via the Red Hat portal.  For Google Gemini: (Required) Paste your active Google Gemini API key into this field. This token authorizes the extension to send prompts to Google’s servers. |
     | <br>Ansible Lightspeed: Api Endpoint        | <br>Specify the destination URL for network requests sent by the Ansible VS Code extension.<br>  For IBM watsonx Code Assistant: (Required) This field allows modification of the service URL for IBM watsonx Code Assistant connections. The default URL is `https://c.ai.ansible.redhat.com`.  For Google Gemini: (Not configurable) This setting is not configurable when using the Google provider. The extension automatically manages the correct endpoint URL for Google services internally. |
-    | <br>Ansible Lightspeed Suggestions: Enabled | <br>Toggle the automatic display of inline code completions within the Ansible VS Code editor. Inline suggestions are currently available for the IBM watsonx Code Assistant provider only.                                                                                                                                                                                                                                                                                                          |
-    | <br>Ansible Lightspeed: Timeout             | <br>Define the maximum duration the Ansible VS Code extension waits for a server response. The default timeout for API calls is 3000 milliseconds.                                                                                                                                                                                                                                                                                                                                                   |
+    | <br>Ansible Lightspeed Suggestions: Enabled | <br>Toggle the automatic display of inline code completions within the Ansible VS Code editor. Inline suggestions are currently available for the IBM watsonx Code Assistant provider only.              |
+    | <br>Ansible Lightspeed: Timeout             | <br>Define the maximum duration the Ansible VS Code extension waits for a server response. The default timeout for API calls is 3000 milliseconds.                                                       |
 
 ### Results
 

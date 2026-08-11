@@ -1,4 +1,4 @@
-# Restore your Ansible Automation Platform deplopyment
+# Restore your Ansible Automation Platform deployment
 ## Restore from a persistent volume claim (PVC)
 
 A persistent volume claim (PVC) is a storage volume that stores data for automation hub and automation controller applications.

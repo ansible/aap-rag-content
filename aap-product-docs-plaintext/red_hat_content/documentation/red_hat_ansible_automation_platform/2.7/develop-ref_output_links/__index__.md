@@ -9,6 +9,7 @@ links:
 url: https://portal.example.com/requests/status
 icon: help
 ```
+
 You can reference step output data in link URLs:
 
 ```
@@ -17,6 +18,7 @@ links:
 - title: View job in Ansible Automation Platform
 url: ${{ steps['launch-job'].output.data.url }}
 ```
+
 You can include multiple links:
 
 ```

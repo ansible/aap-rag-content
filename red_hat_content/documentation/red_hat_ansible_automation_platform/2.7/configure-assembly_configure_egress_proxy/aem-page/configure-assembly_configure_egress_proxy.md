@@ -1,7 +1,7 @@
 +++
-title = "Configure proxy servers for egress traffic - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-assembly_configure_egress_proxy"
+template = "docs/aem-title.html"
+title = "Configure proxy servers for egress traffic - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-configure_a_proxy_to_communicate_with_external_systems/", "Configure a proxy to communicate with external systems"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/configure-assembly_configure_egress_proxy/aem-page/configure-assembly_configure_egress_proxy.html"
 last_crumb = "Configure proxy servers for egress traffic"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure proxy servers for egress traffic"
 oversized = "false"
@@ -53,6 +53,7 @@ acl Safe_ports port 444
 acl Safe_ports port 445
 acl SSL_ports port 22
 ```
+
 The following ports are for containerized installations:
 
 ```
@@ -82,6 +83,7 @@ http_proxy=“http://external-proxy_0:3128”
 https_proxy=“http://external-proxy_0:3128”
 no_proxy=“localhost,127.0.0.0/8,10.0.0.0/8”
 ```
+
 You can also add those variables to the '/etc/environment' file to make them permanent.
 
 The installation program ensures that all external communication during the installation goes through the proxy. For containerized installation, those variables ensure that Podman uses the egress proxy.
@@ -137,12 +139,14 @@ $ cd builder/newee
 
 3.  Create an `execution-environment.yml` file with the following content:
   
+  Note:
+      Replace `<platform-version>` with the namespace for your version of Ansible Automation Platform. Replace `<rhel-version>` with your Red Hat Enterprise Linux version
 
 ```
 version: 1
 
     build_arg_defaults:
-  EE_BASE_IMAGE: 'registry.redhat.io/ansible-automation-platform-24/ee-supported-rhel8:latest'
+  EE_BASE_IMAGE: 'registry.redhat.io/<platform-version>/ee-supported-rhel<rhel-version>:latest'
 
     additional_build_steps:
   prepend:
@@ -226,6 +230,7 @@ https_proxy:<value>
 proxy_username:<value>
 Proxy_password:<value>
 ```
+
     Or
 
 2. To do this through the UI use the following procedure:

@@ -16,6 +16,7 @@ Learn how to configure a list of known proxies for your automation controller, a
 "example2.proxy.com:8080"
 ]
 ```
+
 Important:
 
 - **Proxy IP Allowed List** requires proxies in the list are properly sanitizing header input and correctly setting an `X-Forwarded-For` value equal to the real source IP of the client. Automation controller can rely on the IP addresses and hostnames in **Proxy IP Allowed List** to provide non-spoofed values for `X-Forwarded-For`.

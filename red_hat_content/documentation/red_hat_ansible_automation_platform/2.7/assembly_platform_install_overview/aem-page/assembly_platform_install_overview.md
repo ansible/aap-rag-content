@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/assembly_platform_install_overview"
-title = "Install RPM-based Ansible Automation Platform - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Install RPM-based Ansible Automation Platform - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/assembly_platform_install_overview"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/assembly_platform_install_overview/aem-page/assembly_platform_install_overview.html"
 last_crumb = "Install RPM-based Ansible Automation Platform"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Install RPM-based Ansible Automation Platform"
 oversized = "false"

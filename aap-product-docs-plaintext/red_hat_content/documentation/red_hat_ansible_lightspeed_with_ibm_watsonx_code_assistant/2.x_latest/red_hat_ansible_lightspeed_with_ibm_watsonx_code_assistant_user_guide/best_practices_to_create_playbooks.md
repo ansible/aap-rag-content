@@ -16,7 +16,6 @@ You might have to repeat the details in the goal statement to produce the best r
 
 - Ensure the following when you edit the outline:
 
-
 * Do not restate the goal of the playbook.
 * Verify that the steps considered capture the key steps in the playbook. The steps need not reflect each and every task that is expected in the playbook.
 * Keep the step description in one sentence without adding new lines to the outline.

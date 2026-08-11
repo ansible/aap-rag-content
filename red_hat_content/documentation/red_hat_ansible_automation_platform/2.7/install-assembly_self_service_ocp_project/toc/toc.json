@@ -1,0 +1,31 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Set up a project for Ansible automation portal in OpenShift",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Set up an OpenShift project using the web console",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "self-service-ocp-project-setup-ui",
+          "anchor": null,
+          "singlePageAnchor": "self-service-ocp-project-setup-ui"
+        },
+        {
+          "title": "Set up an OpenShift project using the CLI",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "self-service-ocp-project-setup",
+          "anchor": null,
+          "singlePageAnchor": "self-service-ocp-project-setup"
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 +++
-template = "docs/aem-title.html"
 title = "Access Ansible Automation Platform through the UI - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_operator_access_aap"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_operator_access_aap/aem-page/install-proc_operator_access_aap.html"
 last_crumb = "Access Ansible Automation Platform through the UI"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Access Ansible Automation Platform through the UI"
 oversized = "false"

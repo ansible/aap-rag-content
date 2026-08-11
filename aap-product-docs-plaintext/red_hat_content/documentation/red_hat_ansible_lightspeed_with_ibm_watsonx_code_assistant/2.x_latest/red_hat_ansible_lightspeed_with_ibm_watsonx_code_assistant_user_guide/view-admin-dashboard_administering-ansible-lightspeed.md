@@ -28,7 +28,6 @@ The Admin dashboard displays a graphical representation of analytics telemetry d
 
 3. Use the following filters to refine your telemetry data:
 
-
 - To view the telemetry data for a specific time period or for a custom date range, select the date range from the **Quick Date Range** list.
 - To view the telemetry data for a specific IBM watsonx Code Assistant model only, select the model ID from the **Model Name** list. By default, the Admin dashboard displays telemetry data for all models.
 

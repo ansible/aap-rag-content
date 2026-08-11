@@ -18,6 +18,7 @@ oc get pods | grep operator
 ```
 oc logs <operator-pod-name> -f
 ```
+
 1.  Alternatively, to view the logs without first getting the pod name, run:
 
 

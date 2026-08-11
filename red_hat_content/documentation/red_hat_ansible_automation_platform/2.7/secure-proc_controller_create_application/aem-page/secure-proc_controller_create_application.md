@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 title = "Create a new application - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_create_application"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_configure_authentication/", "Configure central authentication for Ansible Automation Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-proc_controller_create_application/aem-page/secure-proc_controller_create_application.html"
 last_crumb = "Create a new application"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Create a new application"
 oversized = "false"
@@ -143,6 +143,7 @@ The following example shows an existing access token with a refresh token provid
     "scope": "read write"
 }
 ```
+
 The `/o/token/` endpoint is used for refreshing the access token:
 
 ```
@@ -151,6 +152,7 @@ curl -X POST \
     -u "gwSPoasWSdNkMDtBN3Hu2WYQpPWCO9SwUEsKK22l:fI6ZpfocHYBGfm1tP92r0yIgCyfRdDQt0Tos9L8a4fNsJjQQMwp9569eIaUBsaVDgt2eiwOGe0bg5m5vCSstClZmtdy359RVx2rQK5YlIWyPlrolpt2LEpVeKXWaiybo" \
     http://<gateway>/o/token/ -i
 ```
+
 Where `refresh_token` is provided by `refresh_token` field of the preceding access token.
 
 The authentication information is of format `<client_id>:<client_secret>`, where `client_id` and `client_secret` are the corresponding fields of the underlying related application of the access token.
@@ -176,6 +178,7 @@ Strict-Transport-Security: max-age=15768000
 
 {"access_token": "NDInWxGJI4iZgqpsreujjbvzCfJqgR", "token_type": "Bearer", "expires_in": 315360000000, "refresh_token": "DqOrmz8bx3srlHkZNKmDpqA86bnQkT", "scope": "read write"}
 ```
+
 The refresh operation replaces the existing token by deleting the original and then immediately creating a new token with the same scope and related application as the original one.
 
 Verify that the new token is present and the old one is deleted in the `api/gateway/v1/tokens/` endpoint.
@@ -191,7 +194,6 @@ curl -X POST -d "token=rQONsve372fQwuc2pn76k3IHDCYpi7" \
 -u "gwSPoasWSdNkMDtBN3Hu2WYQpPWCO9SwUEsKK22l:fI6ZpfocHYBGfm1tP92r0yIgCyfRdDQt0Tos9L8a4fNsJjQQMwp9569eIaUBsaVDgt2eiwOGe0bg5m5vCSstClZmtdy359RVx2rQK5YlIWyPlrolpt2LEpVeKXWaiybo" \
 http://<gateway>/o/revoke_token/ -i
 ```
-
 
 Note:
 

@@ -17,7 +17,6 @@ Launches a job or workflow job template on the automation controller instance sp
 | `runner_version`         | String  | Version of the runner image to use.                                                                      | -       |
 | `job_ttl`                | Integer | Time to live in seconds for the job resource after completion.                                           | -       |
 
-
 **Example:**
 
 ```

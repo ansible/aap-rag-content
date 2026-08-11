@@ -2,7 +2,7 @@
   "version": "1.1",
   "sections": [
     {
-      "title": "Enable AI in the Ansible VS Code extension with the MCP server",
+      "title": "Enable the MCP server through the VS Code command palette",
       "visible": true,
       "weight": 1,
       "urlFragment": "index",
@@ -16,50 +16,6 @@
           "urlFragment": "GUID-f00e524b-b295-4b67-9d46-a80ce419d584__prereq_1",
           "anchor": null,
           "singlePageAnchor": "GUID-f00e524b-b295-4b67-9d46-a80ce419d584__prereq_1"
-        },
-        {
-          "title": "About this task",
-          "visible": true,
-          "weight": 2,
-          "urlFragment": "GUID-f00e524b-b295-4b67-9d46-a80ce419d584__context_1",
-          "anchor": null,
-          "singlePageAnchor": "GUID-f00e524b-b295-4b67-9d46-a80ce419d584__context_1"
-        },
-        {
-          "title": "Enable the MCP server through the settings menu",
-          "visible": true,
-          "weight": 3,
-          "urlFragment": "task_1",
-          "anchor": null,
-          "singlePageAnchor": "task_1",
-          "sections": [
-            {
-              "title": "Procedure",
-              "visible": true,
-              "weight": 1,
-              "urlFragment": "task_1",
-              "anchor": "task_1__steps_1",
-              "singlePageAnchor": "task_1__steps_1"
-            },
-            {
-              "title": "Disable the server",
-              "visible": true,
-              "weight": 2,
-              "urlFragment": "task_1",
-              "anchor": "task_2",
-              "singlePageAnchor": "task_2",
-              "sections": [
-                {
-                  "title": "Procedure",
-                  "visible": true,
-                  "weight": 1,
-                  "urlFragment": "task_1",
-                  "anchor": "task_2__steps-unordered_1",
-                  "singlePageAnchor": "task_2__steps-unordered_1"
-                }
-              ]
-            }
-          ]
         }
       ]
     }

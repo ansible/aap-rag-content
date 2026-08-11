@@ -5,7 +5,6 @@ The automation controller capacity system determines how many jobs can run on an
 - How much memory is available to the system (`mem_capacity`)
 - How much processing capacity is available to the system (`cpu_capacity`)
 
-
 Capacity also impacts instance groups. Since groups are made up of instances, instances can also be assigned to multiple groups. This means that impact to one instance can affect the overall capacity of other groups.
 
 Instance groups, not instances themselves, can be assigned to be used by jobs at various levels.

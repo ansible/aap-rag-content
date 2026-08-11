@@ -1,7 +1,7 @@
 +++
 title = "Manage resources for pods and containers - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-ref_resource_management_pods_containers"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-ref_resource_management_pods_containers"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_pod_spec_modifications/", "Performance tuning for operator environments"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-ref_resource_management_pods_containers/aem-page/optimize-ref_resource_management_pods_containers.html"
 last_crumb = "Manage resources for pods and containers"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Manage resources for pods and containers"
 oversized = "false"
@@ -48,7 +48,6 @@ You can implement limits in two ways:
 - Reactively: the system intervenes once it sees a violation.
 - By enforcement: the system prevents the container from ever exceeding the limit.
 
-
 Different runtimes can have different ways to implement the same restrictions.
 
 Note:
@@ -71,6 +70,7 @@ spec.containers[].resources.limits.memory
 spec.containers[].resources.requests.cpu
 spec.containers[].resources.requests.memory
 ```
+
 Although you can only specify requests and limits for individual containers, it is also useful to think about the overall resource requests and limits for a pod. For a particular resource, a pod resource request or limit is the sum of the resource requests or limits of that type for each container in the pod.
 
 ### Resource units in Kubernetes
@@ -88,6 +88,7 @@ To specify CPU units less than 1.0 or 1000m you must use the milliCPU form. For 
 ```
 128974848, 129e6, 129M,  128974848000m, 123Mi
 ```
+
 Pay attention to the case of the suffixes. If you request 400m of memory, this is a request for 0.4 bytes, not 400 mebibytes (400Mi) or 400 megabytes (400M).
 
 **Example CPU and memory specification** The following cluster has enough free resources to schedule a task pod with a dedicated 100m CPU and 250Mi. The cluster can also withstand bursts over that dedicated usage up to 2000m CPU and 2Gi memory.
@@ -102,6 +103,7 @@ spec:
       cpu: 2000m
       memory: 2Gi
 ```
+
 Automation controller will not schedule jobs that use more resources than the limit set. If the task pod does use more resources than the limit set, the container is OOMKilled by Kubernetes and restarted.
 
 ### Size recommendations for resource requests

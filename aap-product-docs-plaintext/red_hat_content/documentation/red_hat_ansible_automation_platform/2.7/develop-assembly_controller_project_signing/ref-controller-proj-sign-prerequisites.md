@@ -19,5 +19,6 @@ Verify that you have a valid GPG keypair in your default GnuPG keyring, with the
 ```
 gpg --list-secret-keys
 ```
+
 If this command produces no output, or one line of output that states, `trustdb was created`, then you do not have a secret key in your default keyring. In this case, see [How to create GPG keypairs](https://www.redhat.com/sysadmin/creating-gpg-keypairs) to learn how to create a new keypair before proceeding. If it produces any other output, you have a valid secret key and are ready to use `ansible-sign`.
 

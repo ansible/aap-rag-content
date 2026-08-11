@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_troubleshoot_lightspeed_configuration_errors/aem-page/develop-assembly_troubleshoot_lightspeed_configuration_errors.html"
 last_crumb = "Troubleshoot Red Hat Ansible Lightspeed configuration errors"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Troubleshoot Red Hat Ansible Lightspeed configuration errors"
 oversized = "false"
@@ -113,15 +113,14 @@ If you are using self-signed certificates on the model server, you might encount
 Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED]
 certificate verify failed: self signed certificate in certificate chain (_ssl.c:1006)'))
 ```
+
 To resolve this error, use one of the following workarounds based on your Ansible Automation Platform version:
 
 - For Red Hat Ansible Automation Platform 2.5 and later:
 
-
 Specify the optional key/value pair as `model_verify_ssl=true` in the model secret to connect to an IBM watsonx Code Assistant model. For details about the procedure, see Creating connection secrets.
 
 - For Red Hat Ansible Automation Platform 2.4:
-
 
 You can disable the SSL protection between the model server and the Ansible Lightspeed service. For example, you can disable the SSL protection when you are on a testing environment. To disable the SSL protection, you must add the following extra setting in the Red Hat Ansible Lightspeed Custom Resource Definition (CRD) YAML file under the `spec:` section:
 
@@ -130,7 +129,6 @@ extra_settings:
     - setting: ANSIBLE_AI_MODEL_MESH_API_VERIFY_SSL
       value: false
 ```
-
 
  Important:
 
@@ -143,7 +141,6 @@ extra_settings:
     - setting: ANSIBLE_AI_MODEL_MESH_API_VERIFY_SSL
       value: false
 ```
-
 
 1. Click **Save**.
 2. Restart the automation controller pods to apply the revised YAML:
@@ -207,7 +204,6 @@ To modify the proxy settings in VS code, perform the following tasks:
   - **Electron Fetch**
   - **System Certificates V2** if you are using your own Certificate Authority (CA).
 
-
 For information about how to set up proxy support in VS Code, see the Related Links section below.
 
 ### Cannot connect to Ansible VS code extension due to network issues
@@ -219,48 +215,3 @@ If you encounter network issues, use the **Network Proxy Test** extension to tes
 2. Use the **Network Proxy Test: Test Connection** action to target the server and the endpoint using the parameter `/check/status end-point`. For example:
 
      `https://c.ai.ansible.redhat.com/check/status/` to test the connection to Red Hat Ansible Lightspeed cloud service.
-
-## Troubleshoot Ansible code bot errors
-
-This section provides information about errors when using the Ansible code bot and their workarounds.
-
-### Cannot access Ansible code bot
-
-After you install Ansible code bot and attempt to log in, you receive the following error message:
-
- `Your organization does not have a valid Red Hat Ansible Lightspeed subscription`
-
-After you install Ansible code bot, you are redirected to a page that shows an active subscription status, as shown in the following image:
-
-*Figure 1. Ansible code bot login screen with an active subscription*
-
-![Ansible code bot login screen with an active subscription](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/code-bot-login-screen.png)
-
-If the login screen displays an inactive subscription status, Ansible code bot does not scan your Git repositories. The error occurs because your organization does not have a valid Ansible Automation Platform subscription. To resolve this error, ensure that you are part of an organization that has a valid Red Hat Ansible Automation Platform subscription.
-
-### Cannot scan your Git repository using Ansible code bot
-
-If the Ansible code bot is not configured correctly, it does not scan your Git repositories or does not create pull requests.
-
-To resolve Ansible code bot errors, ensure that:
-
-- You have selected all the Git repositories that you want to scan.
-- You have a `.yml` configuration file named `ansible-code-bot.yml` in your repository `.github` folder. For example, `.github/ansible-code-bot.yml`.
-
-
-Run a manual scan on your git repositories by adding the **ansible-code-bot-scan** topic to your repository. For more information, see Manually scan your Git repositories.
-
-If the Ansible code bot still cannot scan your Git repository, the following scenarios are possible:
-
-- The Ansible code bot did not identify any ansible-lint violations in the Git repository.
-- The Ansible code bot does not have permission to scan the Git repository.
-- Your organization does not have a valid Red Hat Ansible Automation Platform subscription.
-
-### Cannot create pull requests
-
-You might encounter an error where the Ansible code bot cannot create pull requests after scanning your Git repositories.
-
-To resolve this error, ensure that:
-
-- You have verified that there are are no duplicate pull requests. For more information, see How Ansible code bot handles duplicate pull requests.
-- You have deleted the branches after closing the pull requests created by the Ansible code bot. For more information, see Deleting a branch used for a pull request.

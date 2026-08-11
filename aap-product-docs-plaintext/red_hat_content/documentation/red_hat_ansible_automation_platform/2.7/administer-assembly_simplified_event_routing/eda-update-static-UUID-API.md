@@ -1,13 +1,14 @@
 # Respond to events from external systems
-## Update an event stream with a static UUID (API Method)
+## Event streams
+### Update an event stream with a static UUID (API Method)
 
 Access the API to set a static UUID, a feature critical for maintaining webhook URL consistency across service recreations, such as in disaster recovery scenarios.
 
-### Before you begin
+#### Before you begin
 
 - Ansible Automation Platform 2.6-next
 
-### Procedure
+#### Procedure
 
 1.  Log in to Ansible Automation Platform.
 2.  From the navigation panel, select Overview.
@@ -63,7 +64,7 @@ Access the API to set a static UUID, a feature critical for maintaining webhook 
 7.  In the form at the end of the **Event Stream Instance** page, update the value of the `“uuid”` field to a unique static string of your choice.
 8.  Click **Patch**.
 
-### Results
+#### Results
 
 - Confirm that the UUID of your event stream has been updated to the new static string.
 

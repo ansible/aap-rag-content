@@ -44,7 +44,6 @@ Red Hat tests a Single Node OpenShift (SNO) cluster with these requirements:
 | <br>1 | <br>Database pod                               |
 | <br>1 | <br>Redis pod                                  |
 
-
 Note:
 
 Metrics service is deployed automatically when the AnsibleAutomationPlatform Custom Resource (CR) includes metrics configuration. The operator creates a MetricsService CR (named `<aap-name>`-metrics) and manages three pods:
@@ -52,7 +51,6 @@ Metrics service is deployed automatically when the AnsibleAutomationPlatform Cus
 - `<aap-name>`- **metrics-web** - REST API for metrics and dashboard data
 - `<aap-name>`- **metrics-tasks** - dispatcherd worker for background data collection
 - `<aap-name>`- **metrics-scheduler** - APScheduler for periodic collection tasks (6-hourly schedule)
-
 
 All database provisioning, secrets management, and routing configuration is handled automatically by the operators.
 

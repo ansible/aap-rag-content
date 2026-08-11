@@ -68,6 +68,7 @@ ids_rule: 'alert tcp any any -> any any (msg:"Attempted /etc/passwd Attack"; uri
 ids_rules_file: '/etc/snort/rules/local.rules'
 ids_rule_state: present
 ```
+
 Tasks are components that make changes on the target machine. Since you are using a role that defines these tasks, the `include_role` is the only entry you need.
 
 The `ids_rules_file` variable specifies a defined location for the `local.rules` file, while the `ids_rule_state` variable indicates that the rule should be created if it does not already exist.

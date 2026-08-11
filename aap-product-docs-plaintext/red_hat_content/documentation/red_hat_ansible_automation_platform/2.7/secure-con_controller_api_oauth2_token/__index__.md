@@ -11,7 +11,6 @@ The different methods for obtaining OAuth 2 access tokens in automation controll
 - Application token: Implicit grant type
 - Application token: Authorization Code grant type
 
-
 You can create an OAuth 2 token in the API or in the Access Management> (and then)OAuth Applications tab of the platform gateway UI.
 
 For the purpose of this example, use the PAT method for creating a token in the API. After you create it, you can set the scope.
@@ -29,11 +28,10 @@ Create a token through the platform gateway tokens endpoint:
 ```
 curl -u user:password -k -X POST https://<gateway server name>/api/gateway/v1/tokens/
 ```
+
 This call returns JSON data with the following:
 
-
 ![API OAuth2 JSON](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/api-oauth2-json-returned-token-value.png)
-
 
 You can use the value of the `token` property to perform a `GET` request for a resource, such as Hosts:
 
@@ -43,6 +41,7 @@ curl -k -X GET \
 -H “Authorization: Bearer <oauth2-token-value>” \
 https://<platform-host>/api/controller/v2/hosts/
 ```
+
 You can also run a job by making a `POST` to the job template that you want to start:
 
 ```

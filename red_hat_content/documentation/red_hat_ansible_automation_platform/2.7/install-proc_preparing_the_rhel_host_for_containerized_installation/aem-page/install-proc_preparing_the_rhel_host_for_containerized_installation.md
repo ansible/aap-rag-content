@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
 title = "Prepare the Red Hat Enterprise Linux host - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_preparing_the_rhel_host_for_containerized_installation"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_aap_containerized_installation_intro/", "Install containerized Ansible Automation Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_preparing_the_rhel_host_for_containerized_installation/aem-page/install-proc_preparing_the_rhel_host_for_containerized_installation.html"
 last_crumb = "Prepare the Red Hat Enterprise Linux host"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Prepare the Red Hat Enterprise Linux host"
 oversized = "false"
@@ -38,6 +38,7 @@ Containerized Ansible Automation Platform runs the component services as Podman 
 ```
 hostname -f
 ```
+
         Example output:
 
 ```
@@ -64,6 +65,7 @@ $ sudo subscription-manager register
 ```
 $ sudo dnf repolist
 ```
+
     Example output for RHEL 9:
 
 ```
@@ -72,6 +74,7 @@ repo id                                                    repo name
 rhel-9-for-x86_64-appstream-rpms                           Red Hat Enterprise Linux 9 for x86_64 - AppStream (RPMs)
 rhel-9-for-x86_64-baseos-rpms                              Red Hat Enterprise Linux 9 for x86_64 - BaseOS (RPMs)
 ```
+
     Example output for RHEL 10:
 
 ```
@@ -80,6 +83,7 @@ repo id                                                    repo name
 rhel-10-for-x86_64-appstream-rpms                          Red Hat Enterprise Linux 10 for x86_64 - AppStream (RPMs)
 rhel-10-for-x86_64-baseos-rpms                             Red Hat Enterprise Linux 10 for x86_64 - BaseOS (RPMs)
 ```
+
   - For disconnected installations, follow the steps in [Obtain and configure RPM source dependencies](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_containerized_disconnected_installation#obtaining-and-configuring-rpm-dependencies "The Ansible Automation Platform containerized setup bundle installation program does not include RPM source dependencies from the BaseOS and AppStream repositories. It relies on the host system’s package manager to resolve these dependencies.") to access these repositories.
 
 5.  Ensure the host can resolve host names and IP addresses using DNS. This is essential to ensure services can talk to one another.

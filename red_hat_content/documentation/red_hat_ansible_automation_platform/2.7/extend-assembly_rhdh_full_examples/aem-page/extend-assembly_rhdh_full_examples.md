@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_full_examples"
-template = "docs/aem-title.html"
 title = "Full configuration examples - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_intro/", "Ansible plug-ins for Red Hat Developer Hub"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_full_examples/aem-page/extend-assembly_rhdh_full_examples.html"
 last_crumb = "Full configuration examples"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Full configuration examples"
 oversized = "false"
@@ -107,7 +107,7 @@ spec:
                 command:
                   - adt
                   - server
-                image: registry.redhat.io/ansible-automation-platform-2.7/ansible-dev-tools-rhel9:latest
+                image: registry.redhat.io/ansible-automation-platform-27/ansible-dev-tools-rhel9:latest
                 imagePullPolicy: Always
                 ports:
                   - containerPort: 8000
@@ -172,9 +172,16 @@ upstream:
           - adt
           - server
         image: >-
-          registry.redhat.io/ansible-automation-platform-2.7/ansible-dev-tools-rhel9:latest
+          registry.redhat.io/ansible-automation-platform-27/ansible-dev-tools-rhel9:latest
         imagePullPolicy: IfNotPresent
         name: ansible-devtools-server
         ports:
           - containerPort: 8000
+        resources:
+          requests:
+            cpu: 1
+            memory: 1Gi
+          limits:
+            cpu: 2500m
+            memory: 2.5Gi
 ```

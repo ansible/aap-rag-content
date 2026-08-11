@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-ref_ocp_b_env_a"
 title = "Operator enterprise topology - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-ref_ocp_b_env_a"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-assembly_overview_tested_deployment_models/", "Choose a deployment method and topology"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/plan-ref_ocp_b_env_a/aem-page/plan-ref_ocp_b_env_a.html"
 last_crumb = "Operator enterprise topology"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Operator enterprise topology"
 oversized = "false"
@@ -92,18 +92,17 @@ Red Hat has tested these configurations to install and run Red Hat Ansible Autom
 
 *Table 3. Tested system configurations*
 
-| Type                             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br>Subscription                 | <br>Valid Red Hat Ansible Automation Platform subscription                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| <br>Red Hat OpenShift            | Red Hat OpenShift on AWS Hosted Control Planes 4.15.16     2 worker nodes in different availability zones (AZs) at t3.xlarge                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| <br>Ansible-core                 | <br>Ansible-core version 2.16 or later                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| <br>Browser                      | <br>A currently supported version of Mozilla Firefox or Google Chrome.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Type                             | Description                                                                                                                                                                                              |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <br>Subscription                 | <br>Valid Red Hat Ansible Automation Platform subscription                                                                                                                                               |
+| <br>Red Hat OpenShift            | Red Hat OpenShift on AWS Hosted Control Planes 4.15.16     2 worker nodes in different availability zones (AZs) at t3.xlarge                                                                             |
+| <br>Ansible-core                 | <br>Ansible-core version 2.16 or later                                                                                                                                                                   |
+| <br>Browser                      | <br>A currently supported version of Mozilla Firefox or Google Chrome.                                                                                                                                   |
 | <br>AWS RDS PostgreSQL service   | engine: "postgres"engine\_version: 15"parameter\_group\_name: "default.postgres15"allocated\_storage: 20max\_allocated\_storage: 1000storage\_type: "gp2"storage\_encrypted: trueinstance\_class: "db.t4g.small"multi\_az: truebackup\_retention\_period: 5database: must have International Components for Unicode (ICU) supportdatabases required: `automationcontroller`, `automationhub`, `automationeda`, `metrics_service`       Note:   <br>Minimum external database requirements<br>The external database must meet these minimum requirements:<br>4 vCPUs16 GB RAMmax\_connections: 1024 (minimum). You might need more connections when scaling replicas.200 GB storage on a volume capable of at least 3000 IOPS.<br>Database storage consumption depends on your workload, including job frequency, playbook task count, output verbosity, and the number of managed hosts per job. Start with a 200 GB baseline and monitor actual usage after deployment. Configure automated cleanup jobs to prevent unbounded database growth.<br>These requirements ensure adequate database performance for the enterprise topology workload profile. |
-| <br>**Metrics service database** | Database: `metrics_service`User: metrics database user with CREATEDB roleStorage: 40 GB minimum (plan for 100 GB with data growth)Connections: 100 connections minimum<br>Read-only access to `automationcontroller` database:<br>User: `ms_awx_readonly` with SELECT on all tables in public schemaRequires ALTER DEFAULT PRIVILEGES for future tables                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| <br>AWS Memcached Service        | engine: "redis"engine\_version: "6.2"auto\_minor\_version\_upgrade: "false"node\_type: "cache.t3.micro"parameter\_group\_name: "default.redis6.x.cluster.on"transit\_encryption\_enabled: "true"num\_node\_groups: 2replicas\_per\_node\_group: 1automatic\_failover\_enabled: true                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| <br>s3 storage                   | <br>HTTPS only accessible through AWS Role assigned to automation hub SA at runtime by using AWS Pod Identity                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| <br>IP version                   | <br>IPv4, IPv6 (single-stack and dual-stack)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-
+| <br>**Metrics service database** | Database: `metrics_service`User: metrics database user with CREATEDB roleStorage: 40 GB minimum (plan for 100 GB with data growth)Connections: 100 connections minimum<br>Read-only access to `automationcontroller` database:<br>User: `ms_awx_readonly` with SELECT on all tables in public schemaRequires ALTER DEFAULT PRIVILEGES for future tables |
+| <br>AWS Memcached Service        | engine: "redis"engine\_version: "6.2"auto\_minor\_version\_upgrade: "false"node\_type: "cache.t3.micro"parameter\_group\_name: "default.redis6.x.cluster.on"transit\_encryption\_enabled: "true"num\_node\_groups: 2replicas\_per\_node\_group: 1automatic\_failover\_enabled: true |
+| <br>s3 storage                   | <br>HTTPS only accessible through AWS Role assigned to automation hub SA at runtime by using AWS Pod Identity                                                                                            |
+| <br>IP version                   | <br>IPv4, IPv6 (single-stack and dual-stack)                                                                                                                                                             |
 
  Note:
 
@@ -184,13 +183,11 @@ In enterprise topology, metrics service runs as 3 pods with the following resour
 | metrics-tasks     | 500m        | 2 Gi           | 1000m     | 4 Gi         | 1                  |
 | metrics-scheduler | 500m        | 2 Gi           | 1000m     | 4 Gi         | 1 (must not scale) |
 
-
 **Scaling considerations:**
 
 - **metrics-web pod:** Can be scaled to 2 replicas for high availability and load distribution
 - **metrics-tasks pod:** Can not be scaled past 1 replica
 - **metrics-scheduler pod:** Must remain at 1 replica to prevent duplicate scheduled tasks
-
 
 Configure pod resource requests and limits in the AnsibleAutomationPlatform CR:
 
@@ -227,7 +224,6 @@ spec:
           memory: 1Gi
 ```
 
-
  Note:
 
 For enterprise deployments, configure pod anti-affinity to spread metrics service pods across different worker nodes:
@@ -252,7 +248,6 @@ When you create an AnsibleAutomationPlatform custom resource with metrics servic
 - Configures database connection secrets
 - Sets resource limits and replicas
 
-
 **2. Database configuration**
 
 - Reads customer-provided database secrets (external database scenario) or creates managed database credentials
@@ -261,17 +256,14 @@ When you create an AnsibleAutomationPlatform custom resource with metrics servic
   * `<instance>`-automationmetricsservice-awx-postgres-configuration - automation controller read-only credentials
 - Database connectivity is verified at pod start time by an init container in the web pod, which polls until `manage.py check --database default` succeeds. The AWX read-only connection is validated at application runtime, not during operator reconciliation.
 
-
 **3. Service routing**
 
 - Creates a Kubernetes Service (`<instance>`-automationmetricsservice-service) on port 8000, targeting the web pod on port 8080
 - Registers the metrics service with the platform gateway (Envoy) at `/api/metrics/`, making the API accessible through the standard Ansible Automation Platform gateway URL
 
-
 **4. Backup integration**
 
 - Backup resources are not created automatically during provisioning. They are created on-demand when you trigger a backup by applying an AnsibleAutomationPlatformBackup custom resource. The operator then creates a MetricsServiceBackup CR, which provisions a PersistentVolumeClaim for backup staging and runs a `pg_dump` of the metrics database.
-
 
 **Validation**
 
@@ -284,6 +276,7 @@ oc get metricsservice -n <namespace>
 # Verify all 3 pods are running
 oc get pods -n <namespace> | grep automationmetricsservice
 ```
+
 Expected output:
 
 ```
@@ -319,7 +312,6 @@ Red Hat Ansible Automation Platform uses several ports to communicate with its s
 | <br>6379    | <br>TCP        | <br>Redis          | <br>OpenShift Container Platform cluster | <br>External Redis service                                                                      |
 | <br>27199   | <br>TCP        | <br>Receptor       | <br>OpenShift Container Platform cluster | <br>Execution node                                                                              |
 | <br>27199   | <br>TCP        | <br>Receptor       | <br>OpenShift Container Platform cluster | <br>Hop node                                                                                    |
-
 
  Note:
 

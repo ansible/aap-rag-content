@@ -54,6 +54,7 @@ PLAY RECAP *********************************************************************
 192.0.2.51: ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 192.0.2.52: ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
+
 In this output you can see:
 
 - The names that you give the play and each task. Always use descriptive names that make it easy to verify and troubleshoot playbooks.

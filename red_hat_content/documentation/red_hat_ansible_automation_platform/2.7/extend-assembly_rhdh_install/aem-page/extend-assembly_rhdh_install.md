@@ -1,7 +1,7 @@
 +++
 title = "Install the Ansible plug-ins - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_install"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_intro/", "Ansible plug-ins for Red Hat Developer Hub"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_install/aem-page/extend-assembly_rhdh_install.html"
 last_crumb = "Install the Ansible plug-ins"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Install the Ansible plug-ins"
 oversized = "false"
@@ -41,6 +41,7 @@ Red Hat Developer Hub pulls the Ansible plug-ins directly from `registry.redhat.
 ```terminal
 $ podman login --authfile auth.json registry.redhat.io
 ```
+
     To authenticate to multiple registries, run `podman login` for each registry. The `auth.json` file accumulates credentials for all registries you log in to.
 
 2.  Create a secret from the `auth.json` file in the same OpenShift Container Platform project as your Red Hat Developer Hub deployment.
@@ -51,6 +52,7 @@ $ oc create secret generic dynamic-plugins-registry-auth \
   --from-file=auth.json=auth.json \
   -n <your_rhdh_namespace>
 ```
+
     For a Helm-based deployment:
 
 ```terminal
@@ -58,6 +60,7 @@ $ oc create secret generic <release_name>-dynamic-plugins-registry-auth \
   --from-file=auth.json=auth.json \
   -n <your_rhdh_namespace>
 ```
+
     Replace `<release_name>` with your Helm release name.
 
   Important:
@@ -81,6 +84,7 @@ For an Operator-based deployment:
 ```terminal
 $ oc get secret dynamic-plugins-registry-auth -n <your_rhdh_namespace>
 ```
+
 For a Helm-based deployment:
 
 ```terminal
@@ -146,6 +150,7 @@ data:
             backend:
               ansible.plugin-scaffolder-backend-module-backstage-rhaap:
 ```
+
     **Helm chart installation**
 
     Update the Helm chart configuration under the `plugins` section:
@@ -213,6 +218,7 @@ $ oc create secret docker-registry rhdh-registry-pull-secret \
     --from-file=.dockerconfigjson=auth.json \
     -n <your_rhdh_namespace>
 ```
+
 Then add the `imagePullSecrets` field to the deployment patch as shown in the examples below.
 
 ### Procedure
@@ -239,12 +245,13 @@ spec:
               - command:
                   - adt
                   - server
-                image: registry.redhat.io/ansible-automation-platform-2.7/ansible-dev-tools-rhel9:latest
+                image: registry.redhat.io/ansible-automation-platform-27/ansible-dev-tools-rhel9:latest
                 imagePullPolicy: Always
                 ports:
                   - containerPort: 8000
                     protocol: TCP
 ```
+
     **Helm chart installation**
 
     Update the `extraContainers` section in the Helm chart YAML:
@@ -258,15 +265,25 @@ upstream:
           - adt
           - server
         image: >-
-          registry.redhat.io/ansible-automation-platform-2.7/ansible-dev-tools-rhel9:latest
+          registry.redhat.io/ansible-automation-platform-27/ansible-dev-tools-rhel9:latest
         imagePullPolicy: IfNotPresent
         name: ansible-devtools-server
         ports:
           - containerPort: 8000
+        resources:
+          requests:
+            cpu: 1
+            memory: 1Gi
+          limits:
+            cpu: 2500m
+            memory: 2.5Gi
     # ...
 ```
+
   Note:
       The image pull policy is `imagePullPolicy: IfNotPresent`. The image is pulled only if it does not already exist on the node. Update it to `imagePullPolicy: Always` if you always want to use the latest image.
+
+    The default resource requests and limits are shown in the Helm chart example. To customize these values, for example if your namespace enforces a `LimitRange`, see [Customize Ansible Developer Tools server resources](/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_ocp_configure_optional#customize-devtools-server-resources "Ansible Developer Tools sidecar container ships with default CPU and memory resource requests and limits. Customize these values if your namespace enforces a LimitRange with lower values or if you want to tune resources for your workload.").
 
 2.  Apply the changes. For Operator deployments, click **Save**. For Helm deployments, click **Upgrade**.
 

@@ -8,6 +8,7 @@ If you are using self-signed certificates on the model server, you might encount
 Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED]
 certificate verify failed: self signed certificate in certificate chain (_ssl.c:1006)'))
 ```
+
 To resolve this error, use one of the following workarounds based on your Ansible Automation Platform version:
 
 - For Red Hat Ansible Automation Platform 2.5 and later:
@@ -24,7 +25,6 @@ extra_settings:
 value: false
 ```
 
-
 Important
 
 **Reenabling the SSL protection** You must re-enable the SSL protection when deploying on a production environment. To re-enable the SSL protection, simply remove the extra setting from the YAML file.
@@ -37,11 +37,9 @@ extra_settings:
 value: false
 ```
 
-
 1. Click **Save**.
 
 2. Restart the automation controller pods to apply the revised YAML:
-
 
 1. From the Red Hat OpenShift Container Platform, select Workloads → Pods.
 

@@ -23,8 +23,6 @@ Configure MCP server variables in the inventory file:
 
 - `mcp_tls_key`: Path to TLS key         For information about using your own TLS certificates and keys, see [Configuring custom TLS certificates](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_advanced_configuration_containerized "Configure external databases, custom TLS certificates, execution nodes, HAProxy load balancers, and hub storage for complex containerized Ansible Automation Platform deployments."). For information about required and optional variables, see [MCP server variables](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-mcp_server_variables "Inventory file variables for the MCP server for Red Hat Ansible Automation Platform.").
 
-
-
 ```
 # This is the list of inventory file variables required to deploy an Ansible MCP server on a container-based installation.
 

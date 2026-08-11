@@ -6,6 +6,5 @@ Amazon Web Services (AWS) cloud credentials are exposed as the following environ
 -  `AWS_ACCESS_KEY_ID`
 -  `AWS-SECRET_ACCESS_KEY`
 
-
 Each AWS module implicitly uses these credentials when run through the controller without having to set the `aws_access_key_id` or `aws_secret_access_key` module options.
 

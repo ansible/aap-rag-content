@@ -10,6 +10,7 @@ You can filter credentials the v2 API:
 ```
 curl "https://controller.example.org/api/v2/credentials/?credential_type__namespace=aws"
 ```
+
 In the V2 Credential Type model, the relationships are defined as follows:
 
 | Machine      | SSH                                                                 |

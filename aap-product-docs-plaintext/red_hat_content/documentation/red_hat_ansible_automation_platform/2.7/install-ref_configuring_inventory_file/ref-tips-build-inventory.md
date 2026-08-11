@@ -10,4 +10,9 @@ When building inventories for Ansible automation, consider the following best pr
 * What: Group hosts according to the topology, for example: db, web, leaf, spine, metrics.
 * Where: Group hosts by geographic location, for example: data center, region, floor, building.
 * When: Group hosts by stage, for example: development, test, staging, production.
-- Metrics service must be included when automation controller is present. In containerized deployments, use a dedicated host for metrics service (separate from controller, hub, gateway, and EDA).
+
+Note:
+
+Metrics service deployment requirements:
+
+- Metrics service must be included when automation controller is present. The `[automationmetrics]` inventory group is required in all deployments with `[automationcontroller]`.

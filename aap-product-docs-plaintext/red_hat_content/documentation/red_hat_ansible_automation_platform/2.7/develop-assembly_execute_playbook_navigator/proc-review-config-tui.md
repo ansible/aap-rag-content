@@ -16,6 +16,7 @@ Use the automation content navigator interactive interface to review Ansible set
 ```
 $ ansible-navigator
 ```
+
 Optional: type `ansible-navigator config` from the command line to access the Ansible configuration settings.
 
 2.  Review the Ansible configuration.
@@ -42,6 +43,7 @@ ANSIBLE COW ACCEPTLIST (current: ['bud-frogs', 'bunny', 'cheese']) (default:
 8│- cheese
 9│- daemon
 ```
+
 The output shows the current `setting` as well as the `default`. Note the `source` in this example is `env` since the setting comes from the automation execution environments.
 
 #### Results

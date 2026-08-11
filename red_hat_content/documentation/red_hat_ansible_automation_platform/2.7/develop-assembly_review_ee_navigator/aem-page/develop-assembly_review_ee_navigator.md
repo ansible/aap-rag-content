@@ -1,6 +1,6 @@
 +++
-title = "Run a playbook to display execution environment contents - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_review_ee_navigator"
+title = "Run a playbook to display execution environment contents - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_review_ee_navigator/aem-page/develop-assembly_review_ee_navigator.html"
 last_crumb = "Run a playbook to display execution environment contents"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Run a playbook to display execution environment contents"
 oversized = "false"

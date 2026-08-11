@@ -8,7 +8,6 @@ You can request explanations for a newly created playbook as well as an existing
 
 - You meet **one** of the following requirements:
 
-
 * Your organization has a trial or paid subscription to both the Red Hat Ansible Automation Platform and IBM watsonx Code Assistant.
 * Your organization has a trial or paid subscription to the Red Hat Ansible Automation Platform, and you have a Red Hat Ansible Lightspeed trial account.
 
@@ -24,15 +23,12 @@ You can request explanations for a newly created playbook as well as an existing
 
 3. Use one of the following methods to view the playbook explanation:
 
-
 - **From an active playbook YAML file**:
-
 
 1. Place your cursor anywhere within the playbook file.
 2. Right-click and select **Explain the playbook with Ansible Lightspeed**.
 
 - **From the Ansible panel**:
-
 
 1. From the navigation menu, click the **Ansible** icon.
 

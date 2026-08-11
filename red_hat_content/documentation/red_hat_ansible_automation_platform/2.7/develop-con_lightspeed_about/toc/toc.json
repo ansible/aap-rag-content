@@ -2,7 +2,7 @@
   "version": "1.1",
   "sections": [
     {
-      "title": "Red Hat Ansible Lightspeed Overview",
+      "title": "Understand Red Hat Ansible Lightspeed with IBM watsonx Code Assistant",
       "visible": true,
       "weight": 1,
       "urlFragment": "index",
@@ -26,17 +26,9 @@
           "singlePageAnchor": "lightspeed-about___benefits_of_using_red_hat_ansible_lightspeed"
         },
         {
-          "title": "Key features of Red Hat Ansible Lightspeed",
-          "visible": true,
-          "weight": 3,
-          "urlFragment": "lightspeed-key-features",
-          "anchor": null,
-          "singlePageAnchor": "lightspeed-key-features"
-        },
-        {
           "title": "Prerequisites",
           "visible": true,
-          "weight": 4,
+          "weight": 3,
           "urlFragment": "lightspeed-process",
           "anchor": null,
           "singlePageAnchor": "lightspeed-process",
@@ -54,7 +46,7 @@
         {
           "title": "Data gathered to train the IBM watsonx Code Assistant models",
           "visible": true,
-          "weight": 5,
+          "weight": 4,
           "urlFragment": "training-data",
           "anchor": null,
           "singlePageAnchor": "training-data",
@@ -88,7 +80,7 @@
         {
           "title": "Telemetry data collection notice for the Admin dashboard",
           "visible": true,
-          "weight": 6,
+          "weight": 5,
           "urlFragment": "telemetry-data-collection-notice",
           "anchor": null,
           "singlePageAnchor": "telemetry-data-collection-notice",

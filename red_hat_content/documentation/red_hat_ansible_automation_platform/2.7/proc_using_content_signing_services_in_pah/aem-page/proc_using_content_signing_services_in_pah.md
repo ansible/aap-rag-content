@@ -1,6 +1,6 @@
 +++
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/proc_using_content_signing_services_in_pah"
+template = "docs/aem-title.html"
 title = "Secure your automation content with signatures - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/proc_using_content_signing_services_in_pah/aem-page/proc_using_content_signing_services_in_pah.html"
 last_crumb = "Secure your automation content with signatures"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Secure your automation content with signatures"
 oversized = "false"

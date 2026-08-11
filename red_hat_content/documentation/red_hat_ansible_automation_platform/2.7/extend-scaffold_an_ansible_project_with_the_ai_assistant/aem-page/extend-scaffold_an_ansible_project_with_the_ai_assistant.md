@@ -1,16 +1,16 @@
 +++
-template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-scaffold_an_ansible_project_with_the_ai_assistant"
 title = "Scaffold an Ansible project with the AI assistant - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-scaffold_an_ansible_project_with_the_ai_assistant"
+template = "docs/aem-title.html"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-enable_ai_in_the_ansible_vs_code_extension_with_the_mcp_server/", "Enable AI in the Ansible VS Code extension with the MCP server"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-enable_the_vs_code_extension_ai_assistant/", "Enable the VS Code extension AI assistant"]]
 category = "Extend"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-scaffold_an_ansible_project_with_the_ai_assistant/aem-page/extend-scaffold_an_ansible_project_with_the_ai_assistant.html"
 last_crumb = "Scaffold an Ansible project with the AI assistant"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Scaffold an Ansible project with the AI assistant"
 oversized = "false"
@@ -48,6 +48,7 @@ Use the AI assistant to ensure that your project aligns with best practices and 
 ```
 Show me Ansible best practices and coding guidelines so that I can write high-quality playbooks.
 ```
+
 This triggers the `ansible_content_best_practices `tool, which will display the guidelines for you to read within the editor.
 
 3.  Enter a prompt requesting The Zen of Ansible. For example:
@@ -56,6 +57,7 @@ This triggers the `ansible_content_best_practices `tool, which will display the 
 ```
 Show me The Zen of Ansible.
 ```
+
 This triggers the `zen_of_ansible` tool, which will list Zen of Ansible principles for you to read within the editor.
 
 ## Create the project structure
@@ -70,6 +72,7 @@ Enter a prompt in natural language to trigger the project creation tool. When pr
 ```
 Create a new Ansible playbook project called 'webserver-deployment'.
 ```
+
     This triggers the `create_ansible_projects`tool.
 
     The extension executes `ansible-creator init playbook`and generates the content.

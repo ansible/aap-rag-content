@@ -8,10 +8,12 @@ The memory relative capacity option allows you to set the maximum number of conc
 ```
 (mem - 2048) / mem_per_fork
 ```
+
 The following is an example:
 
 ```
 (4096 - 2048) / 100 == ~20
 ```
+
 A system with 4GB of memory is capable of running 20 forks. The value `mem_per_fork` is controlled by setting the value of `SYSTEM_TASK_FORKS_MEM`, which defaults to 100.
 

@@ -5,7 +5,7 @@ Remote automation mesh nodes can access Ansible Automation Platform using a 'pol
 
 The pull model initiates a WebSocket from the remote execution node to the control plane hop node secured with mTLS for authentication and encryption. This model eliminates the need to deploy hop nodes into your demilitarized zone (DMZ) to establish connectivity to private networks if private networks have outbound internet connectivity. Proxy servers that terminate TLS are not supported and will disrupt automation mesh connectivity.
 
-For help with configuring your automation mesh see [defining automation mesh node types](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/automation_mesh_for_managed_cloud_or_operator_environments/assembly-automation-mesh-operator-aap#proc-define-mesh-node-types).
+For help with configuring your automation mesh see [Defining automation mesh node types](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/automation_mesh_for_managed_cloud_or_operator_environments/assembly-automation-mesh-operator-aap#proc-define-mesh-node-types).
 
 **Pull model**
 

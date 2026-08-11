@@ -1,7 +1,7 @@
 +++
-title = "Specify where to store consumption-based reports - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-ref_supported_storage"
 template = "docs/aem-title.html"
+title = "Specify where to store consumption-based reports - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_metrics_utility/", "Generate consumption-based billing reports with the metrics-utility"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/observe-ref_supported_storage/aem-page/observe-ref_supported_storage.html"
 last_crumb = "Specify where to store consumption-based reports"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Specify where to store consumption-based reports"
 oversized = "false"

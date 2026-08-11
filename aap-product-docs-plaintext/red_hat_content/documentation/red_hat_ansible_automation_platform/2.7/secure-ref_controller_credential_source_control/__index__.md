@@ -9,7 +9,6 @@ Source Control credentials require the following inputs:
 - **SCM Private Key**: Copy or drag-and-drop the actual SSH Private Key to be used to authenticate the user to the source control system through SSH.
 - **Private Key Passphrase**: If the SSH Private Key used is protected by a passphrase, you can configure a Key Passphrase for the private key.
 
-
 Note:
 
 You cannot configure Source Control credentials as **Prompt on launch**.

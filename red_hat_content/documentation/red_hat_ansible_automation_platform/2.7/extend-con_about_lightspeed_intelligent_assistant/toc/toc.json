@@ -1,0 +1,47 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Overview",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Integration with MCP server",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "con-about-lightspeed-intelligent-assistant___integration_with_mcp_server",
+          "anchor": null,
+          "singlePageAnchor": "con-about-lightspeed-intelligent-assistant___integration_with_mcp_server"
+        },
+        {
+          "title": "Ansible Automation Platform requirements",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "con-about-lightspeed-intelligent-assistant___ansible_automation_platform_2_6_requirements",
+          "anchor": null,
+          "singlePageAnchor": "con-about-lightspeed-intelligent-assistant___ansible_automation_platform_2_6_requirements"
+        },
+        {
+          "title": "Large Language Model (LLM) provider requirements",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "con-about-lightspeed-intelligent-assistant__LLMproviders",
+          "anchor": null,
+          "singlePageAnchor": "con-about-lightspeed-intelligent-assistant__LLMproviders"
+        },
+        {
+          "title": "Process for configuring and using the automation intelligent assistant",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "con-about-lightspeed-intelligent-assistant___process_for_configuring_and_using_the_ansible_lightspeed_intelligent_assistant",
+          "anchor": null,
+          "singlePageAnchor": "con-about-lightspeed-intelligent-assistant___process_for_configuring_and_using_the_ansible_lightspeed_intelligent_assistant"
+        }
+      ]
+    }
+  ]
+}

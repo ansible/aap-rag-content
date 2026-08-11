@@ -1,16 +1,16 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-validating_and_debugging_with_the_ai_assistant"
 template = "docs/aem-title.html"
 title = "Validate and debug with the AI assistant - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-validating_and_debugging_with_the_ai_assistant"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-enable_ai_in_the_ansible_vs_code_extension_with_the_mcp_server/", "Enable AI in the Ansible VS Code extension with the MCP server"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-enable_the_vs_code_extension_ai_assistant/", "Enable the VS Code extension AI assistant"]]
 category = "Extend"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-validating_and_debugging_with_the_ai_assistant/aem-page/extend-validating_and_debugging_with_the_ai_assistant.html"
 last_crumb = "Validate and debug with the AI assistant"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Validate and debug with the AI assistant"
 oversized = "false"
@@ -50,6 +50,7 @@ If errors are found, `ansible_lint` has autofix functionality, enabling it to su
 ```
 Validate my webserver playbook to check for any issues.
 ```
+
     The assistant triggers the `ansible_lint`tool in check-only mode.
 
     The assistant displays a list of the issues it found, including Rule IDs, line numbers, and descriptions of the errors (for example, missing FQCN, or YAML formatting issues).
@@ -74,6 +75,7 @@ You can prompt the AI assistant to auto-fix errors that `ansible_lint`finds.
 ```
 Run ansible_lint on my webserver playbook and apply automatic fixes.
 ```
+
 The assistant triggers the `ansible_lint`tool wiht the `fix:true` parameter.
 
 2.  The tool then processes the file and applies corrections for issues such as:

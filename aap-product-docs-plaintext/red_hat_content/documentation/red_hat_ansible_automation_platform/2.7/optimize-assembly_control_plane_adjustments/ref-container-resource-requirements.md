@@ -16,7 +16,6 @@ See also [Jobs scheduled on the worker nodes](/documentation/en-us/red_hat_ansib
 | <br> `ee_resource_requirements`    | <br>EE control plane container resource requirements    | <br>requests: {CPU: 100m, memory: 128Mi} |
 | <br> `redis_resource_requirements` | <br>Redis control plane container resource requirements | <br>requests: {CPU:100m, memory: 128Mi}  |
 
-
 The use of `topology_spread_constraints` to maximally spread control nodes onto separate underlying Kubernetes worker nodes is recommended. A reasonable set of requests and limits would be limits whose sum is equal to the actual resources on the node. If only `limits` are set, then the request is automatically set to be equal to the limit. But because some variability of resource usage between the containers in the control pod is permitted, you can set `requests` to a lower amount, for example to 25% of the resources available on the node. An example of container customization for a cluster where the worker nodes have 4 CPUs and 16 GB of RAM could be:
 
 ```

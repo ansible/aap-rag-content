@@ -9,5 +9,4 @@ The following users can modify email addresses:
 - Platform administrators (superusers)
 - Organization administrators, on deployments where Organization admins can manage users and teams is enabled
 
-
 If a user's email address requires updating, contact a platform administrator to make the change.

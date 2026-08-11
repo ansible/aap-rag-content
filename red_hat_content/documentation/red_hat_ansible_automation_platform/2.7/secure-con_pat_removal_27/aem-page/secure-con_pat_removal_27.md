@@ -1,6 +1,6 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_pat_removal_27"
 title = "Personal Access Token removal in Ansible Automation Platform 2.7 - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_pat_removal_27"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_pat_removal_27/aem-page/secure-con_pat_removal_27.html"
 last_crumb = "Personal Access Token removal in Ansible Automation Platform 2.7"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Personal Access Token removal in Ansible Automation Platform 2.7"
 oversized = "false"
@@ -36,6 +36,10 @@ All tokens must now be created and managed through platform gateway.
 - **Ansible Automation Platform 2.5:** Platform gateway introduced; component-level PATs deprecated.
 - **Ansible Automation Platform 2.6:** PAT migration from components to platform gateway supported; component-level PATs still functional.
 - **Ansible Automation Platform 2.7:** Component-level PATs removed; only platform gateway tokens supported.
+
+Important:
+
+The Automation Hub API token is intended only for authenticating with the `ansible-galaxy` CLI for collection operations (sync, install, publish). It is not supported for container registry operations such as `podman login` or `podman pull` of Execution Environment images. For execution environment image operations, use your username and password.
 
 ## Create new tokens after upgrade
 

@@ -27,7 +27,6 @@ repository: rhel9/postgresql-15
 tag: "latest"
 ```
 
-
 Note:
 
 Set `imageRegistry` and `catalogIndex.image.registry` to the registry host only (for example, `mirror.example.com` or `mirror.example.com:5000`). Use a hostname that cluster nodes can resolve and pull from. Do not include a repository path in `imageRegistry`. Setting `imageRegistry` does not override the catalog index registry; you must set `catalogIndex.image.registry` separately.

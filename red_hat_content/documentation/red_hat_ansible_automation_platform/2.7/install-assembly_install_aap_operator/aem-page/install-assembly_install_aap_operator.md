@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_install_aap_operator"
-title = "Install the Ansible Automation Platform Operator through OperatorHub - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Install the Ansible Automation Platform Operator through OperatorHub - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator/", "Install on OpenShift Container Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_install_aap_operator/aem-page/install-assembly_install_aap_operator.html"
 last_crumb = "Install the Ansible Automation Platform Operator through OperatorHub"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Install the Ansible Automation Platform Operator through OperatorHub"
 oversized = "false"
@@ -80,6 +80,5 @@ The installation process begins. When installation finishes, a modal appears not
 | Automation controller                                                                                            | Automation hub                                            | Event-Driven Ansible (EDA) | Red Hat Ansible Lightspeed |
 | ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | -------------------------- | -------------------------- |
 | Automation ControllerAutomation Controller BackupAutomation Controller RestoreAutomation Controller Mesh Ingress | Automation HubAutomation Hub BackupAutomation Hub Restore | EDAEDA BackupEDA Restore   | Ansible Lightspeed         |
-
 
 - Verify that the Ansible Automation Platform operator displays a **Succeeded** status.

@@ -17,7 +17,6 @@ Red Hat Ansible Automation Platform uses several ports to communicate with its s
 | <br>27199   | <br>TCP        | <br>Receptor       | <br>OpenShift Container Platform cluster | <br>Execution node                                                                              |
 | <br>27199   | <br>TCP        | <br>Receptor       | <br>OpenShift Container Platform cluster | <br>Hop node                                                                                    |
 
-
 Note:
 
 Metrics service pods communicate internally within the OpenShift cluster via the platform gateway. The `/api/metrics/` path is routed through the standard Ansible Automation Platform gateway and does not require a separate external ingress. Metrics service requires outbound connectivity on port 5432 to both the `metrics_service` database and the `automationcontroller` database (read-only).

@@ -13,6 +13,7 @@ organizations:
 - "Demo-Organization"
 is_platform_auditor: true
 ```
+
 **After (2.7)**
 
 ```yaml

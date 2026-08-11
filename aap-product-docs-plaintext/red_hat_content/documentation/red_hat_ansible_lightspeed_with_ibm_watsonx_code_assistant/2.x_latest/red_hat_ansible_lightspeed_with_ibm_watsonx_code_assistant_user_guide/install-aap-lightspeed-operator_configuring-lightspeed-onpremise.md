@@ -14,14 +14,12 @@ Use this procedure to install the Ansible Automation Platform operator on the Re
 
 2. Create a namespace:
 
-
 1. Go to Administration → Namespaces.
 2. Click **Create Namespace**.
 3. Enter a unique name for the namespace.
 4. Click **Create**.
 
 3. Install the operator:
-
 
 1. Go to Operators → OperatorHub.
 2. Select the namespace where you want to install the Red Hat Ansible Automation Platform operator.

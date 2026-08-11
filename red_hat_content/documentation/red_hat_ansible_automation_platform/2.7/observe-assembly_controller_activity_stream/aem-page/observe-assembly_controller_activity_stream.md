@@ -1,6 +1,6 @@
 +++
-title = "View activity streams for all resources - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_controller_activity_stream"
+title = "View activity streams for all resources - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/observe-assembly_controller_activity_stream/aem-page/observe-assembly_controller_activity_stream.html"
 last_crumb = "View activity streams for all resources"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "View activity streams for all resources"
 oversized = "false"
@@ -31,7 +31,6 @@ Track all changes made to any object in automation controller by reviewing the *
 
 - From the navigation panel, select Automation Execution> (and then)Administration> (and then)Activity Stream.  
 ![Activity stream page](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/activity_stream_page.png)  
-
 
 An Activity Stream shows all changes for a particular object. For each change, the Activity Stream shows the time of the event, the user that initiated the event, and the action. The information displayed varies depending on the type of event.
 

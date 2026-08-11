@@ -23,6 +23,7 @@ $ podman secret list
 ```
 $ podman secret inspect --showsecret <secret_key_variable> | jq -r .[].SecretData
 ```
+
 For example:
 
 ```
@@ -35,6 +36,7 @@ $ podman secret inspect --showsecret controller_secret_key | jq -r .[].SecretDat
 ```
 $ ansible-playbook -i inventory ansible.containerized_installer.uninstall
 ```
+
 - This stops all systemd units and containers and then deletes all resources used by the containerized installer such as:
 * configuration and data directories and files
 * systemd unit files

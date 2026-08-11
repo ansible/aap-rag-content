@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_configuring_lightspeed_onpremise/aem-page/develop-assembly_configuring_lightspeed_onpremise.html"
 last_crumb = "Set up Red Hat Ansible Lightspeed on-premise deployment"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Set up Red Hat Ansible Lightspeed on-premise deployment"
 oversized = "false"
@@ -36,7 +36,6 @@ As an administrator, you can deploy Ansible Lightspeed on-premise and connect it
   * Dallas (`us-south`)
   * Frankfurt (`eu-de`)
   * Sydney (`au-syd`) (Essentials plan only)
-
 
 Ansible Lightspeed cloud deployments are configured to connect exclusively to the US (Dallas) IBM data center. Attempts to connect from non-US data centers will result in connection failure. If you want to use a non-Dallas IBM data center, then you must set up Ansible Lightspeed in hybrid deployment model. For more information about IBM’s supported data centers, see the topic Setting up your watsonx Code Assistant for Red Hat Ansible Lightspeed service in *IBM watsonx Code Assistant* documentation.
 
@@ -68,7 +67,6 @@ Your system must meet the following minimum system requirements to install and r
 | <br>RAM        | <br>5 GB            |
 | <br>CPU        | <br>1               |
 | <br>Local disk | <br>40 GB           |
-
 
 To see the rest of the Red Hat Ansible Automation Platform system requirements, see the System requirements section of *Planning your installation*.
 

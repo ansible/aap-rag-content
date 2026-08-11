@@ -1,7 +1,7 @@
 +++
-title = "Migrate from existing deployment topologies - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_introduction_and_objectives"
 template = "docs/aem-title.html"
+title = "Migrate from existing deployment topologies - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/con_introduction_and_objectives/aem-page/con_introduction_and_objectives.html"
 last_crumb = "Migrate from existing deployment topologies"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Migrate from existing deployment topologies"
 oversized = "false"
@@ -41,11 +41,4 @@ The supported migration paths include:
 | <br>Container-based Ansible Automation Platform | <br>OpenShift Container Platform                         |
 | <br>Container-based Ansible Automation Platform | <br>Managed Ansible Automation Platform                  |
 
-
 Migrations outside of those listed are not supported at this time.
-
-Supported migration workflows:
-
-- Document all components and configurations that require migration between Ansible Automation Platform platforms
-- Provide step-by-step migration workflows for different deployment scenarios
-- Identify potential challenges and unknowns that require further investigation

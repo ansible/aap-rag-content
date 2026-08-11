@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-ref_controller_database_settings/aem-page/optimize-ref_controller_database_settings.html"
 last_crumb = "Tune the PostgreSQL database for optimal performance"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Tune the PostgreSQL database for optimal performance"
 oversized = "false"
@@ -53,6 +53,7 @@ To improve the performance of the PostgreSQL server, configure the following *Gr
 ```
 Total RAM * 0.25 / max_connections
 ```
+
     Note:
     Setting a large `work_mem` can cause the PostgreSQL server to go out of memory (OOM) if there are too many open connections to the database.
 
@@ -62,6 +63,7 @@ Total RAM * 0.25 / max_connections
 ```
 Total RAM * 0.05
 ```
+
   Note:
       Set `maintenance_work_mem` higher than `work_mem` to improve performance for vacuuming.
 
@@ -102,6 +104,7 @@ from awx.main.utils import decrypt_value, get_encryption_key
 ```
 decrypt_value(get_encryption_key('value'),'$encrypted$AESCBC$Z0FBQUFBQmNONU9BbGQ1VjJyNDJRVTRKaFRIR09Ib2U5TGdaYVRfcXFXRjlmdmpZNjdoZVpEZ21QRWViMmNDOGJaM0dPeHN2b194NUxvQ1M5X3dSc1gxQ29TdDBKRkljWHc9PQ=='),
 ```
+
   Note:
       The hash value in this step is the output value of `postgres_secret`.
 

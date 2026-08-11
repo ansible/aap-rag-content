@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-con_about_ansible_navigator/aem-page/develop-con_about_ansible_navigator.html"
 last_crumb = "What is automation content navigator?"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "What is automation content navigator?"
 oversized = "false"
@@ -62,9 +62,7 @@ Accessible from the subcommand, for example `ansible-navigator config --help-con
 
 The text-based user interface mode provides enhanced interaction with automation execution environments, collections, playbooks, and inventory. This mode is compatible with integrated development environments (IDE), such as Visual Studio Code.
 
-
 ![Text-based user interface mode](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-welcome.png)  
-
 
 This mode includes a number of helpful user interface options:
 
@@ -113,9 +111,7 @@ Accessible from the subcommand, for example `ansible-navigator config --help-con
 
 The text-based user interface mode provides enhanced interaction with automation execution environments, collections, playbooks, and inventory. This mode is compatible with integrated development environments (IDE), such as Visual Studio Code.
 
-
 ![Text-based user interface mode](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-welcome.png)  
-
 
 This mode includes a number of helpful user interface options:
 
@@ -164,9 +160,7 @@ Accessible from the subcommand, for example `ansible-navigator config --help-con
 
 The text-based user interface mode provides enhanced interaction with automation execution environments, collections, playbooks, and inventory. This mode is compatible with integrated development environments (IDE), such as Visual Studio Code.
 
-
 ![Text-based user interface mode](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-welcome.png)  
-
 
 This mode includes a number of helpful user interface options:
 

@@ -1,16 +1,16 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-assembly_rhdh_upgrade_ocp_helm"
 title = "Upgrade the Ansible plug-ins with Helm - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-assembly_rhdh_upgrade_ocp_helm"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-upgrade_additional_services_for_ansible_automation_platform/", "Upgrade additional services for Ansible Automation Platform"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-upgrade_plug_ins_for_rhdh/", "Upgrade Ansible plug-ins for Red Hat Developer Hub"]]
 category = "Upgrade"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/upgrade-assembly_rhdh_upgrade_ocp_helm/aem-page/upgrade-assembly_rhdh_upgrade_ocp_helm.html"
 last_crumb = "Upgrade the Ansible plug-ins with Helm"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Upgrade the Ansible plug-ins with Helm"
 oversized = "false"
@@ -61,6 +61,7 @@ $ export DYNAMIC_PLUGIN_ROOT_DIR=/path/to/<ansible-backstage-plugins-local-dir-c
 ```
 $ tar --exclude='*code*' -xzf ansible-rhdh-plugins-x.y.z.tar.gz -C $DYNAMIC_PLUGIN_ROOT_DIR
 ```
+
     Substitute the Ansible plug-ins release version, for example `2.0.0`, for `x.y.z`.
 
 ### Results
@@ -74,6 +75,7 @@ ansible-plugin-backstage-rhaap-dynamic-x.y.z.tgz.integrity
 ansible-plugin-scaffolder-backend-module-backstage-rhaap-dynamic-x.y.z.tgz
 ansible-plugin-scaffolder-backend-module-backstage-rhaap-dynamic-x.y.z.tgz.integrity
 ```
+
 The files with the `.integrity` file type contain the plugin SHA value. The SHA value is used during the plug-in configuration.
 
 ## Update the plug-in registry

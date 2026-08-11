@@ -18,6 +18,7 @@ oc get secret/<your instance name>-<admin_user>-password -o yaml
 ```
 oc get secret/example-admin-password -o yaml
 ```
+
 The base64 encoded password for the platform gateway instance is listed in the `metadata` field in the output:
 
 ```

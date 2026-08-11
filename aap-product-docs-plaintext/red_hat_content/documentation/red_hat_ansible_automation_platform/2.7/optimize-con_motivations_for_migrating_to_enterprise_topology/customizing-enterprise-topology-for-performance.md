@@ -13,7 +13,6 @@ Motivations for customizing the documented enterprise deployment models include 
 - Enabling independent scaling of components, such as automation controller API compared to execution capacity
 - Supporting workload growth or specific SLAs
 
-
 This requires custom resource allocation and performance tuning based on identified needs, rather than adherence to a general pattern.
 
 Before customizing and scaling, you must identify specific bottlenecks within your Ansible Automation Platform environment, such as:
@@ -22,7 +21,6 @@ Before customizing and scaling, you must identify specific bottlenecks within yo
 - Job processing
 - Database performance
 - Event-Driven Ansible event handling.
-
 
 Use platform monitoring tools and analytics to identify bottlenecks. After bottlenecks are identified, you can approach scaling each component vertically or horizontally.
 

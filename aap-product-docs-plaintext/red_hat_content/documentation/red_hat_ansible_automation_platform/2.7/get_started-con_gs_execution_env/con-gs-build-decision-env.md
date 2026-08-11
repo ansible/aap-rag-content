@@ -10,6 +10,5 @@ In decision environments, sources, which are typically Python code, are distribu
 - ansible-rulebook python package
 - ansible.eda collection
 
-
 You can use the base decision environment and build your own customized Decision Environments with additional collections and collection dependencies. You can build a decision environment using a Dockerfile or optionally you can deploy your CA certificate into the image.
 

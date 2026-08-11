@@ -1,6 +1,6 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_set_up_azure"
 title = "Configure Microsoft Entra ID authentication - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_set_up_azure"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-proc_controller_set_up_azure/aem-page/secure-proc_controller_set_up_azure.html"
 last_crumb = "Configure Microsoft Entra ID authentication"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure Microsoft Entra ID authentication"
 oversized = "false"
@@ -35,7 +35,6 @@ To set up enterprise authentication for Microsoft Entra ID, formerly known as Mi
 2. **Register Ansible Automation Platform** in Microsoft Entra ID by following the [Quickstart: Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app). This process provides you with an Application (client) ID and Application secret.
 3. **Add the redirect URL in Microsoft Entra ID**. After completing the configuration wizard for Microsoft Entra ID authentication in your platform, copy the URL displayed in the **Azure AD OAuth2 Callback URL** field. Then, go to your registered enterprise application in Azure and add this URL as a **Redirect URL** (also referred to as a **Callback URL** in Ansible Automation Platform) as described in [How to add a redirect URI to your application](https://learn.microsoft.com/en-us/entra/identity-platform/how-to-add-redirect-uri). This step is required for the login flow to work correctly.
 
-
 The attributes provided by Microsoft Entra ID are not set in the Ansible Automation Platform configuration for this authentication type. Instead, the [social_core azuread backend](https://github.com/python-social-auth/social-core/blob/master/social_core/backends/azuread.py#L85-L98) provides the translation of claims provided by Microsoft Entra ID. The user attributes that allow Ansible Automation Platform to correctly identify the user and assign the proper attributes such as given name, surname, email, and username include the following:
 
 | Ansible Automation Platform attribute | Microsoft Entra ID parameter    |
@@ -45,7 +44,6 @@ The attributes provided by Microsoft Entra ID are not set in the Ansible Automat
 | <br>First Name                        | <br>given\_name                 |
 | <br>Last Name                         | <br>family\_name                |
 | <br>Email                             | <br>email (falling back to upn) |
-
 
 To set up enterprise authentication for Microsoft Azure Active Directory (AD), you need to obtain an OAuth2 key and secret by registering your organization-owned application from Azure at: [Quickstart: Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app).
 

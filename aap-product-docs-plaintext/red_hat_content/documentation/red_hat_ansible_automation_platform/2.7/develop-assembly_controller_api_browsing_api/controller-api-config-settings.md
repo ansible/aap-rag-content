@@ -28,6 +28,7 @@ There are two named-URL-related configuration settings available under `/api/con
 "instances": "<hostname>"
 }
 ```
+
 For each item in `NAMED_URL_FORMATS`, the key is the API name of the resource to have named URL. The value is a string indicating how to form a human-readable unique identifier for that resource. `NAMED_URL_FORMATS` only lists the resources that can have named URL, any resource not listed there has no named URL. If a resource can have named URL, its objects must have a `named_url` field that represents the object-specific named URL. That field is only visible under detail view, not list view. You can access specified resource objects by using accurately generated named URL. This the object and its related URLs. For example, if `/api/controller/v2/res_name/obj_slug/` is valid, `/api/controller/v2/res_name/obj_slug/related_res_name/` is also valid.
 
 `NAMED_URL_FORMATS` are instructive enough to compose human-readable unique identifiers and named URLs themselves. For ease-of-use, every object of a resource that can have named URL has a related field `named_url` that displays that object’s named URL. You can copy and paste that field for your own custom use. For more information, see the help text of the API browser if a resource object has named URL.

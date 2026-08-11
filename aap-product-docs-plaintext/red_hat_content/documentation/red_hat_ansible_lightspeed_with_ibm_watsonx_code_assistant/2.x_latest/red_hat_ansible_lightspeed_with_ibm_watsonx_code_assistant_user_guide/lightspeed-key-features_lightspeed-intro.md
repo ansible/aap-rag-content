@@ -21,7 +21,6 @@ To start your Red Hat Ansible Lightspeed trial, you need a trial or paid subscri
 
 This includes the following capabilities:
 
-
 * **Playbook generation and explanations**
 
 Using the Ansible VS Code extension, you can create Ansible playbooks using a natural language interface in English. Red Hat Ansible Lightspeed with IBM watsonx Code Assistant reads the natural language prompts and generates an entire playbook recommendation based on your intent. You can also view the explanations for new or existing playbooks. The playbook explanations describe what the playbook or task within the playbook does and contextualize its impact.

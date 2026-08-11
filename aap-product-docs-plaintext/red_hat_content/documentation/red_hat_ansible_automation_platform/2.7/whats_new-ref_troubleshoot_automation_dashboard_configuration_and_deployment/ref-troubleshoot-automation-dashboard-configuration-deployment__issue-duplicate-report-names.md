@@ -8,7 +8,6 @@
 - No overwrite confirmation dialog
 - Results in two different reports with identical names in the list
 
-
 **Root cause**
 
 Dashboard does not validate saved report names for uniqueness. The system allows multiple reports with the same name, relying on internal IDs to differentiate them.
@@ -28,7 +27,6 @@ Use unique, descriptive names for all saved reports. Include identifying informa
 - **Good:** "Q1-2026-Production-Org", "Weekly-Template-Usage", "EMEA-Region-ROI"
 - **Avoid:** "Test Report", "My Report", "Dashboard" (too generic, likely to duplicate)
 
-
 **Recommended naming convention:**
 
 ```
@@ -39,6 +37,7 @@ Examples:
 - Executive-Summary-Q1-2026
 - Development-Org-Weekly-Usage
 ```
+
 **Managing duplicate names**
 
 If you have multiple reports with the same name:

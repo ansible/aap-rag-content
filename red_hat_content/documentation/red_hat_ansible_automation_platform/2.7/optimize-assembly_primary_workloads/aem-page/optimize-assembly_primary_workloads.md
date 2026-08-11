@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_primary_workloads"
-title = "Understand primary workloads for automation controller - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Understand primary workloads for automation controller - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_primary_workloads"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_controller_improving_performance/", "Tune automation controller to improve performance"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-assembly_primary_workloads/aem-page/optimize-assembly_primary_workloads.html"
 last_crumb = "Understand primary workloads for automation controller"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Understand primary workloads for automation controller"
 oversized = "false"
@@ -50,7 +50,6 @@ Jobs are the primary workload for automation controller and run on the execution
 - Workflow, sliced, and bulk jobs
 - System jobs
 
-
 ### Standard jobs
 
 Standard jobs involve the execution of an Ansible Playbook from a Project against a set of hosts from an Inventory. Jobs are initiated by a control node, which then streams, processes, and stores job results.
@@ -60,7 +59,6 @@ A performance sensitive part of this is the processing of the playbook output. T
 - Task start
 - Host-specific details
 - Task completion
-
 
 Event volume varies significantly with the playbook’s configured verbosity level. For example, a simple debug task that prints `Hello World` on one host might produce 6 job events at verbosity 1, increasing to 34 job events at verbosity 3.
 
@@ -73,7 +71,6 @@ To enable complex automation and orchestration, use the following job types to e
 - Sliced jobs: Split jobs to run against slices of the inventory in parallel
 - Bulk jobs: Launch multiple jobs in a single request
 - Workflow jobs: Coordinate multiple job templates
-
 
 These job types coordinate the launch and management of multiple underlying standard jobs. They impact job scheduling, which occurs in the control plane, but otherwise do not have significant impact on their services.
 
@@ -93,7 +90,6 @@ Activation and output management uses the following:
 - Platform gateway for event stream handling
 - The WebSocket server in each API node or pod
 - The database for audit event storage
-
 
 Activations process discrete payloads called events. The activation’s resource usage is affected by the event arrival rate and the complexity of the rulebook’s rules.
 
@@ -115,7 +111,6 @@ The performance of collection synchronization is impacted by the following:
 - The number of versions synced
 - The number of versions retained
 
-
 Synchronization uses memory in direct proportion to the number of collections and versions synchronized. Using a targeted `requirements.yml` with specific versions can limit this impact.
 
 Hosting collections uses storage space. Manage the storage space that collections use by specifying the retained number of versions on the repository.
@@ -126,7 +121,6 @@ Private automation hub hosts container images for automation execution and decis
 
 - The frequency of job starts
 - The pull policy configured for the automation execution environments and decision environments
-
 
 The performance of pushing and pulling container images from automation hub depends on the disk performance of the underlying storage. This is because Pulp content workers store and fetch the layers of the container image from disk.
 

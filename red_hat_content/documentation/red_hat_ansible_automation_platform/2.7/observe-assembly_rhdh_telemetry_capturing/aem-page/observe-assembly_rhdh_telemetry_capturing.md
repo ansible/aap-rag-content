@@ -1,7 +1,7 @@
 +++
-title = "Capture telemetry data for Ansible plug-ins for Red Hat Developer Hub - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_rhdh_telemetry_capturing"
+template = "docs/aem-title.html"
+title = "Capture telemetry data for Ansible plug-ins for Red Hat Developer Hub - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_rhdh_telemetry_capturing/", "Capture telemetry data for Ansible plug-ins for Red Hat Developer Hub"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/observe-assembly_rhdh_telemetry_capturing/aem-page/observe-assembly_rhdh_telemetry_capturing.html"
 last_crumb = "Capture telemetry data for Ansible plug-ins for Red Hat Developer Hub"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Capture telemetry data for Ansible plug-ins for Red Hat Developer Hub"
 oversized = "false"
@@ -37,6 +37,5 @@ Red Hat collects and analyzes the following data to improve your experience with
 - Anonymized IP addresses, recorded as 0.0.0.0.
 - Anonymized username hashes, which are unique identifiers used solely to identify the number of unique users of the RHDH application.
 - Feedback and sentiment submitted through the Ansible plug-ins for Red Hat Developer Hub feedback form, including a 1-5 star rating and feedback text. Users must acknowledge that they share the feedback with Red Hat before submitting. The feedback form is disabled by default.
-
 
 With Red Hat Developer Hub, you can disable or customize the telemetry data collection feature. For more information, refer to *Telemetry data collection and analysis* .

@@ -9,7 +9,6 @@ Examples include the following:
 - `refs/pull/:refs/remotes/origin/pull/` (GitHub-specific): This fetches all refs for all pull requests
 - `refs/pull/62/head:refs/remotes/origin/pull/62/head`: This fetches the ref for one GitHub pull request
 
-
 For large projects, consider performance impact when using the first or second examples.
 
 The **Source control refspec** parameter affects the availability of the project branch, and can enable access to references not otherwise available. Use the earlier examples to supply a pull request from the **Source control branch**, which is not possible without the **Source control refspec** field.

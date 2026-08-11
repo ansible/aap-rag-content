@@ -16,14 +16,12 @@ To modify the proxy settings in VS code, perform the following tasks:
 
 4. In the **Http: Proxy** field, add the following URLs to the proxy:
 
-
 - `https://c.ai.ansible.redhat.com/`
 - `https://sso.redhat.com`, if you are using RH-SSO to authenticate users.
 
 5. In the **http: Proxy Support** drop down list, select **Override**.
 
 6. Search for and select the following configuration keys:
-
 
 - **Electron Fetch**
 - **System Certificates V2** if you are using your own Certificate Authority (CA).

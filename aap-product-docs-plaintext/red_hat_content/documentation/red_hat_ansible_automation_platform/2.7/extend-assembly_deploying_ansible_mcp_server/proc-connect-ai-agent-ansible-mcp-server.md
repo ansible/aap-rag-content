@@ -25,8 +25,6 @@ Key:
 
 - **Token** = The API token of the Ansible MCP server. Use the following format to add details about your Ansible MCP server in the the `mcp.json` file:
 
-
-
 ```
 {
 "mcpServers": {
@@ -75,6 +73,7 @@ Key:
 }
 }
 ```
+
 Important:
 Use a concise MCP server name, ideally limited to 20 characters. This is because AI agents combine the MCP server name with the tool name to create a unique identifier, and most AI agents enforce a 64-character limit on this combined identifier.
 

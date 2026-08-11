@@ -14,7 +14,6 @@ Before peering, you must connect a hub network, and at least one spoke network, 
 
 - One or more of the following connections to the VWAN:
 
-
 * A DMZ network that contains Azure virtual machines that users can remotely log into to access Ansible Automation Platform on Microsoft Azure.
 * A DMZ network that contains an Azure virtual machine that local machines can connect to with SSH tunneling to access Ansible Automation Platform on Microsoft Azure.
 * A VPN or Direct Connect service to your local network that routes traffic from local machines to Ansible Automation Platform on Microsoft Azure.
@@ -24,7 +23,6 @@ Before peering, you must connect a hub network, and at least one spoke network, 
 1. Navigate to the **Virtual Network Connections** page for the VWAN that you want to peer with your Ansible Automation Platform instance.
 
 2. To create a connection between the VWAN hub and your Ansible Automation Platform instance, use the following settings:
-
 
 - **Connection Name**: *<Ansible_Automation_Platform_connection_name>*
 - **Hubs**: Select one or more VWAN hub networks that the managed application VNet peers with.

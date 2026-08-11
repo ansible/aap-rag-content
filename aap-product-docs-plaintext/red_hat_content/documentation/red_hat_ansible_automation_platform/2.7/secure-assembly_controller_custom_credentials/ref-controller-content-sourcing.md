@@ -10,6 +10,7 @@ An endpoint in the API reflects an ordered list of these credentials at the Orga
 ```
 /api/v2/organizations/N/galaxy_credentials/
 ```
+
 When installations of automation controller migrate existing Galaxy-oriented setting values, post-upgrade proper credentials are created and attached to every Organization. After upgrading to the latest version, every organization that existed before upgrade now has a list of one or more "Galaxy" credentials associated with it.
 
 Additionally, post-upgrade, these settings are not visible (or editable) from the `/api/v2/settings/jobs/` endpoint.

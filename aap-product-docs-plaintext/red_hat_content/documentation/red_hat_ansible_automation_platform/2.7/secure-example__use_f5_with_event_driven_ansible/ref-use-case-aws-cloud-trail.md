@@ -14,13 +14,11 @@ Encrypting AWS CloudTrail logs is important for several reasons:
 - Prevent tampering: CloudTrail’s log encryption helps prevent logs from being tampered with. This helps maintain log integrity and an accurate record of all API calls made to your AWS account.
 - Secure data: CloudTrail log’s encryption provides an additional layer of security for data. In the event that your S3 bucket is compromised, the encrypted logs cannot be accessed without the encryption key.
 
-
 The Event-Driven Ansible rulebook is comprised of the following components to assist in actions on the log files:
 
 - **Sources**: define which event source will be used
 - **Rules**: define which conditionals will be matched from the event source
 - **Actions**: trigger events when conditions are met
-
 
 In the following example, the rulebook implements a ruleset with three rules as follows:
 

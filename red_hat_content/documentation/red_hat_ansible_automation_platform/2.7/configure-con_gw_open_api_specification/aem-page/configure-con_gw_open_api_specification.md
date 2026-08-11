@@ -1,7 +1,7 @@
 +++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-con_gw_open_api_specification"
 title = "Understanding the platform gateway OpenAPI specification - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-con_gw_open_api_specification"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-assembly_gw_settings/", "Configure Ansible Automation Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/configure-con_gw_open_api_specification/aem-page/configure-con_gw_open_api_specification.html"
 last_crumb = "Understanding the platform gateway OpenAPI specification"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Understanding the platform gateway OpenAPI specification"
 oversized = "false"
@@ -68,5 +68,6 @@ curl -o "gateway_openapi_spec.yaml" "https://$AAP_INSTANCE/api/gateway/v1/docs/s
 ```
 curl -o "gateway_openapi_spec.json" "https://$AAP_INSTANCE/api/gateway/v1/docs/schema/?format=json"
 ```
+
   Important:
       Replace `$AAP_INSTANCE` with your Ansible Automation Platform hostname in the commands.

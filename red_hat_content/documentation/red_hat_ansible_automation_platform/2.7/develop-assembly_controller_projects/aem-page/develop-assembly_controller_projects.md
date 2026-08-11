@@ -1,7 +1,7 @@
 +++
 title = "Logically group playbooks with projects - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_controller_projects"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_controller_projects/", "Logically group playbooks with projects"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_controller_projects/aem-page/develop-assembly_controller_projects.html"
 last_crumb = "Logically group playbooks with projects"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Logically group playbooks with projects"
 oversized = "false"
@@ -33,7 +33,6 @@ You can manage playbooks and playbook directories different ways:
 
 - By placing them manually under the Project Base Path on your automation controller server.
 - By placing your playbooks into a source code management (SCM) system supported by the automation controller.
-
 
 These include Git, Subversion, Mercurial and Red Hat Lightspeed.
 
@@ -69,7 +68,6 @@ In cases where you have a large project (around 10 GB), disk space on `/tmp` may
 - **Never updated** - The project is configured for source control, but has never been updated.
 - **OK** - The project is not configured for source control, and is correctly in place.
 - **Missing** - Projects are absent from the project base path of `/var/lib/awx/projects`. This is applicable for manual or source control managed projects.
-
 
  Note:
 

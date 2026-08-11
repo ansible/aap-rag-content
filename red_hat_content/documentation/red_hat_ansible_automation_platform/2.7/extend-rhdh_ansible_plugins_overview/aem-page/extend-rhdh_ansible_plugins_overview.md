@@ -1,7 +1,7 @@
 +++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-rhdh_ansible_plugins_overview"
 template = "docs/aem-title.html"
 title = "Ansible plug-ins for Red Hat Developer Hub - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-rhdh_ansible_plugins_overview"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_intro/", "Ansible plug-ins for Red Hat Developer Hub"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-rhdh_ansible_plugins_overview/aem-page/extend-rhdh_ansible_plugins_overview.html"
 last_crumb = "Ansible plug-ins for Red Hat Developer Hub"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Ansible plug-ins for Red Hat Developer Hub"
 oversized = "false"
@@ -35,7 +35,6 @@ The Ansible plug-ins provide:
 - Software templates for creating Ansible playbook and collection projects that follow best practices.
 - Curated Ansible learning paths to help users new to Ansible.
 - Links to supported development environments and tools with opinionated configurations.
-
 
 The `automation-portal` OCI bundle includes the following plug-ins:
 

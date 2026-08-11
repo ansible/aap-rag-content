@@ -9,11 +9,13 @@ Post-installation enablement on the operator uses the same CR edit as during-ins
 ```
 kubectl edit AnsibleAutomationPlatform <aap-cr-name> -n <namespace>
 ```
+
 Or with OpenShift:
 
 ```
 oc edit AnsibleAutomationPlatform <aap-cr-name> -n <namespace>
 ```
+
 Add `spec.feature_flags.FEATURE_DASHBOARD_COLLECTION_ENABLED: true`:
 
 ```
@@ -25,6 +27,7 @@ disabled: false
 name: <aap-cr-name>-metrics
 # ... rest of your existing spec unchanged
 ```
+
 Save and exit. The Ansible Automation Platform operator and automationmetricsservice operator begin reconciliation automatically.
 
 Note:
@@ -37,6 +40,7 @@ After reconciliation (typically 1–2 minutes), confirm the feature flag appears
 kubectl get cm <aap-cr-name>-metrics-env-properties \
 -n <namespace> -o yaml | grep DASHBOARD
 ```
+
 Expected output:
 
 ```
@@ -49,6 +53,7 @@ After the ConfigMap is updated, the operator restarts the metrics service pods. 
 ```
 kubectl get pods -n <namespace> -l app.kubernetes.io/name=<aap-cr-name>-metrics
 ```
+
 Expected: Three pods running (metrics-web, metrics-tasks, metrics-scheduler), age matching the time since reconciliation.
 
 4.  Monitor historical data backfill progress
@@ -63,12 +68,14 @@ TASKS_POD=$(kubectl get pods -n <namespace> \
 
 kubectl logs -n <namespace> $TASKS_POD | grep -i initial_dashboard
 ```
+
 Or stream logs in real time:
 
 ```
 kubectl logs -n <namespace> -l app.kubernetes.io/name=<aap-cr-name>-metrics \
 -c metrics-tasks -f | grep -i dashboard
 ```
+
 Example scheduler log output:
 
 ```
@@ -76,6 +83,7 @@ Example scheduler log output:
 {"timestamp": "2026-05-12T10:39:42.309Z", "level": "INFO", "logger": "apps.tasks.cron_scheduler", "message": "Executing database task: initial_dashboard_collection (ID: 52)"}
 {"timestamp": "2026-05-12T10:39:42.310Z", "level": "INFO", "logger": "apps.tasks.tasks_system", "message": "Submitted task initial_dashboard_collection (ID: 52) to dispatcher queue dashboard"}
 ```
+
 Example tasks worker log output:
 
 ```
@@ -84,6 +92,7 @@ Example tasks worker log output:
 {"timestamp": "2026-05-12T10:39:45.720Z", "level": "INFO", "logger": "apps.tasks.utils", "message": "Task 'collect_dashboard_reports_initial_data' processing: Synced batch of 1000 jobs (total so far: 1000, cursor id: 12500)"}
 {"timestamp": "2026-05-12T10:39:52.034Z", "level": "INFO", "logger": "apps.tasks.utils", "message": "Task 'initial_dashboard_collection' completed: Task execution finished with status: completed"}
 ```
+
 Note:
 Backfill collects in cursor-paginated batches. Each batch log line shows progress. For large datasets, many batch lines appear before the completion message.
 
@@ -99,6 +108,7 @@ kubectl exec -n <namespace> $DB_POD -- \
 psql -U metricsservice -d metricsservice \
 -c "SELECT COUNT(*), MIN(finished), MAX(finished) FROM dashboard_job_data;"
 ```
+
 Expected output for successful collection:
 
 - `COUNT > 0` — data has been collected

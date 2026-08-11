@@ -22,6 +22,7 @@ Create the registry authentication secret so the dynamic plug-in init container 
 }
 }
 ```
+
 Generate the base64-encoded value:
 
 ```
@@ -36,6 +37,7 @@ $ oc create secret generic <release-name>-dynamic-plugins-registry-auth \
 --from-file=auth.json=./auth.json \
 -n <project_name>
 ```
+
 Replace `<release-name>` with your Helm release name. If you use the default release name from the OpenShift catalog, the secret name is `redhat-rhaap-portal-dynamic-plugins-registry-auth`.
 
 ### Results

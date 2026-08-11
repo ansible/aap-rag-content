@@ -1,0 +1,39 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Migrate in air-gapped and disconnected environments",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Mirroring Ansible plug-in images",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "migrate-tarball-to-oci-disconnected__disconnect-image-mirroring",
+          "anchor": null,
+          "singlePageAnchor": "migrate-tarball-to-oci-disconnected__disconnect-image-mirroring"
+        },
+        {
+          "title": "Configuring Helm values for mirror registry",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "migrate-tarball-to-oci-disconnected__disconnect-helm-values",
+          "anchor": null,
+          "singlePageAnchor": "migrate-tarball-to-oci-disconnected__disconnect-helm-values"
+        },
+        {
+          "title": "Using custom CA certificates for private registries",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "migrate-tarball-to-oci-disconnected__disconnect-custom-ca",
+          "anchor": null,
+          "singlePageAnchor": "migrate-tarball-to-oci-disconnected__disconnect-custom-ca"
+        }
+      ]
+    }
+  ]
+}

@@ -7,8 +7,7 @@ It is possible to install Ansible Automation Platform on different infrastructur
 The following diagram is a tested container enterprise architecture:
 
 *Figure 1. Reference architecture overview*
-
-![Infrastructure reference architecture that Red Hat has tested that customers can use when self-managing Ansible Automation Platform](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/cont-b-env-a.png)
+![Infrastructure reference architecture that Red Hat has tested that customers can use when self-managing Ansible Automation Platform](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/cont-b-env-a-2_7.png)
 
 When planning firewall or cloud network security group configurations related to Ansible Automation Platform, see the Network Ports section of your chosen topology in [Installation and deployment models](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/plan-ref_installation_deployment_models) to understand what network ports need to be opened on a firewall or security group.
 

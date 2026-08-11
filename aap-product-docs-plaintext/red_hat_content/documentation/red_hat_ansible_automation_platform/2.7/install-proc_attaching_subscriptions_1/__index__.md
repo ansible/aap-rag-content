@@ -15,6 +15,7 @@ Register your system with Red Hat Subscription Management:
 ```
 $ sudo subscription-manager register --username <$INSERT_USERNAME_HERE> --password <$INSERT_PASSWORD_HERE>
 ```
+
 With Simple Content Access (SCA), registration is the only step required to access Ansible Automation Platform content.
 
 Note:
@@ -34,6 +35,7 @@ $ sudo subscription-manager refresh
 ```
 $ sudo subscription-manager identity
 ```
+
 This command displays your system identity, name, organization name, and organization ID, confirming successful registration.
 
 - For legacy accounts not using SCA, you might have to manually attach subscriptions:
@@ -41,15 +43,15 @@ This command displays your system identity, name, organization name, and organiz
 ```
 $ sudo subscription-manager list --available --all | grep -A 30 "Ansible Automation Platform"
 ```
+
 This command displays the subscription details including the Pool ID. Look for the `Pool ID:` line in the output.
 
 Once you have identified the correct Pool ID, attach the subscription:
 
-
-
 ```
 $ sudo subscription-manager attach --pool=<pool_id>
 ```
+
 Note:
 Do not use MCT4022 as a `pool_id` as it can cause subscription attachment to fail.
 

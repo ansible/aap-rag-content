@@ -10,12 +10,14 @@ $ awx-manage export_custom_scripts --filename=my_scripts.tar
 
 Dump of old custom inventory scripts at my_scripts.tar
 ```
+
 Making use of the output:
 
 ```
 $ mkdir my_scripts
 $ tar -xf my_scripts.tar -C my_scripts
 ```
+
 The name of the scripts has the form: `<pk>_<name>`. This is the naming scheme used for project folders.
 
 ```
@@ -30,6 +32,7 @@ _15inventory_script_wallisland          _26inventory_script_lifesport           
 _17inventory_script_bidstory            _28inventory_script_boxchild
 _18p                                    _29__inventory_script_wearstress
 ```
+
 Each file contains a script. Scripts can be `bash/python/ruby/more`, so the extension is not included. They are all directly executable. Executing the script dumps the inventory data.
 
 ```
@@ -42,11 +45,13 @@ $ ./my_scripts/11__inventory_script_upperorder
 "host_\u18a1\u9d6f\u08ac\u74c2\u54e2\u740e\u5f02\ud81d\uddee\ufbd6\u4506"], "vars": {"ansible_host": "127.0.0.1", "ansible_connection":
 "local"}}}
 ```
+
 You can verify functionality with `ansible-inventory`. This gives the same data, but reformatted.
 
 ```
 $ ansible-inventory -i ./my_scripts/_11__inventory_script_upperorder --list --export
 ```
+
 In the preceding example, you can `cd` into `my_scripts` and then issue a `git init` command, add the scripts you want, push it to source control, and then create an SCM inventory source in the user interface.
 
 For more information about syncing or using custom inventory scripts, see[Import your inventory file from source control](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_inventory_file_importing#assembly-inventory-file-importing "With automation controller you can select an inventory file from source control, rather than creating one from scratch.") in *Configuring automation execution*.

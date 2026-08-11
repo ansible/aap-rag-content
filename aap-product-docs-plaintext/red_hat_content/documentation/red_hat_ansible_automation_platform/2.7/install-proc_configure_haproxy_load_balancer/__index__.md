@@ -11,7 +11,6 @@ custom_ca_cert=<path_to_cert_crt>
 gateway_main_url=<https://load_balancer_url>
 ```
 
-
 Important:
 
 - Ensure your load balancer is configured to use HTTP/1.1 when communicating with platform gateway. HTTP/2 is not supported.

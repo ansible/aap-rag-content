@@ -7,7 +7,41 @@
       "weight": 1,
       "urlFragment": "index",
       "anchor": null,
-      "singlePageAnchor": null
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Choose an ansible-core version for your execution environment",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-60c57eb2-60ae-4701-95f0-b58d7124339a",
+          "anchor": null,
+          "singlePageAnchor": "GUID-60c57eb2-60ae-4701-95f0-b58d7124339a"
+        },
+        {
+          "title": "Execution environment image index",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "GUID-532997dd-b138-4cfc-a40c-520673302ce8",
+          "anchor": null,
+          "singlePageAnchor": "GUID-532997dd-b138-4cfc-a40c-520673302ce8"
+        },
+        {
+          "title": "Using certified collections with ansible-core 2.18 and 2.20",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "GUID-72dd8d15-0f94-4aba-b852-dd2635435c93",
+          "anchor": null,
+          "singlePageAnchor": "GUID-72dd8d15-0f94-4aba-b852-dd2635435c93"
+        },
+        {
+          "title": "Disconnected environment customizations",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "building-an-execution-environment-in-a-disconnected-environment",
+          "anchor": null,
+          "singlePageAnchor": "building-an-execution-environment-in-a-disconnected-environment"
+        }
+      ]
     }
   ]
 }

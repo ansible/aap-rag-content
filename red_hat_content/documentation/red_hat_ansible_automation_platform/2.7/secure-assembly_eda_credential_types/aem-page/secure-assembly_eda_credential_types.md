@@ -1,7 +1,7 @@
 +++
-title = "Connect to external secret management systems with built-in credentials - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_eda_credential_types"
 template = "docs/aem-title.html"
+title = "Connect to external secret management systems with built-in credentials - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_eda_credentials/", "Configure credentials for Event-Driven Ansible"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-assembly_eda_credential_types/aem-page/secure-assembly_eda_credential_types.html"
 last_crumb = "Connect to external secret management systems with built-in credentials"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Connect to external secret management systems with built-in credentials"
 oversized = "false"
@@ -49,6 +49,5 @@ The following external credential types are available for use in Event-Driven An
 - Thycotic DevOps Secrets Vault
 - Thycotic Secret Server
 - GitHub App Installation Access Token
-
 
 The process for using these credentials in a rulebook activation is consistent with how they are used in automation controller.

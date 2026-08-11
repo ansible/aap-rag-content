@@ -23,6 +23,7 @@ ungrouped:
 hosts:
 host2: {}
 ```
+
 Because `host1` is in `groupB`, it is also in `groupA`.
 
 **Filter on nested group names**
@@ -36,6 +37,7 @@ plugin: constructed
 
 `limit`: `groupA`
 ```
+
 **Filter on nested group property**
 
 Use the following YAML format to filter on a group variable, even if the host is indirectly a member of that group.

@@ -30,6 +30,5 @@ When you have successfully created the instance group the **Details** tab of the
 
 You can also edit **Instances** and review **Jobs** associated with this instance group:
 
-
 ![Instance group successfully created](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-instance-group-created.png)
 

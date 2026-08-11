@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
 title = "Configure external database for metrics service - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-configure_external_database_metrics_service_operator"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-assembly_overview_tested_deployment_models/", "Choose a deployment method and topology"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/plan-configure_external_database_metrics_service_operator/aem-page/plan-configure_external_database_metrics_service_operator.html"
 last_crumb = "Configure external database for metrics service"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure external database for metrics service"
 oversized = "false"
@@ -38,7 +38,6 @@ Before you configure metrics service with an external database, ensure:
   * `metrics_service` database with a user that has CREATEDB role
   * `automationcontroller` database (same database used by automation controller)
 - Read-only user `ms_awx_readonly` exists in PostgreSQL with SELECT privileges on all tables in the `automationcontroller` database's public schema
-
 
 **Create the read-only user:**
 
@@ -84,6 +83,7 @@ stringData:
   type: unmanaged
 type: Opaque
 ```
+
   
   Important:
   `type: unmanaged` tells the operator this is an external database. Without this field, the operator attempts to initialize the database as a managed instance and fails.
@@ -120,6 +120,7 @@ $ oc apply -f aap-metrics-read-token.yaml -n aap
 ```
 $ oc get secret -n aap | grep metrics
 ```
+
       Expected output shows both secrets:
 
 ```
@@ -145,6 +146,7 @@ spec:
     ms_awx_readonly_user:
       externally_managed: true
 ```
+
       Where:
 
   - `database.database_secret`: References the `metrics_service` database secret
@@ -167,9 +169,8 @@ $ oc get metricsservice -n aap
 ```
 $ oc get pods -n aap | grep metrics
 ```
+
      Expected output:
-
-
 
 ```
 aap-metrics-web-xxxxx        1/1  Running
@@ -182,4 +183,5 @@ aap-metrics-scheduler-xxxxx  1/1  Running
 ```
 $ oc logs <instance>-metrics-web-xxxxx -n aap | grep "Database connection"
 ```
+
      This should show a successful connection to both databases.

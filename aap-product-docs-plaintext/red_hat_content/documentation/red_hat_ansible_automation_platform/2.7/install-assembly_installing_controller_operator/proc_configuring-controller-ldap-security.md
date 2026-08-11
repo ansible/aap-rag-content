@@ -17,6 +17,7 @@ You can configure your LDAP SSL configuration for automation controller through 
 ```
 $ oc create secret -n aap generic bundle-ca-secret --from-file=bundle-ca.crt
 ```
+
 Note:
 The target filename for this operation must be `bundle-ca.crt` and the secret name should be `bundle-ca-secret`.
 
@@ -37,6 +38,7 @@ You can verify the expected certificate by running:
 ```
 oc get deployments -l 'app.kubernetes.io/component=aap-gateway'
 ```
+
 Followed by:
 
 ```

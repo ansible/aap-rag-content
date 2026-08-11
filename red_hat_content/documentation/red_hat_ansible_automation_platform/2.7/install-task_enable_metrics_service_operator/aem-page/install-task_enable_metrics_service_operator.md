@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-task_enable_metrics_service_operator/aem-page/install-task_enable_metrics_service_operator.html"
 last_crumb = "Enable metrics service in operator deployments"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Enable metrics service in operator deployments"
 oversized = "false"
@@ -43,7 +43,6 @@ Use this procedure when:
 - You need to enable anonymized usage data collection for Red Hat analytics
 - You want the operator to automatically provision database access and configuration
 
-
 Important:
 
 The operator handles all configuration automatically, including database access, OAuth integration with the gateway, and traffic routing through Envoy. No manual database passwords, inventory variables, or network configuration is required.
@@ -68,6 +67,7 @@ spec:
   metrics:
     disabled: false
 ```
+
     **Example using oc edit:**
 
 ```
@@ -80,6 +80,7 @@ oc edit ansibleautomationplatform myaap -n ansible-automation-platform
 ```
 oc apply -f aap.yml
 ```
+
     **Result:** The AAP gateway operator reconciles the change and creates the metrics service components.
 
 3.  Verify that the MetricsService custom resource was created
@@ -88,6 +89,7 @@ oc apply -f aap.yml
 ```
 oc get metricsservice -n <namespace>
 ```
+
     **Example output:**
 
 ```
@@ -101,6 +103,7 @@ myaap-automationmetricsservice         2m
 ```
 oc get pods -l app.kubernetes.io/component=automationmetricsservice -n <namespace>
 ```
+
     **Example output:**
 
 ```
@@ -116,11 +119,13 @@ myaap-metrics-scheduler-5c9d7f8b6d-m3n7k    1/1     Running   0          2m
 ```
 oc port-forward svc/<aap-name>-metrics-api 8080:80 -n <namespace>
 ```
+
     In another terminal:
 
 ```
 curl http://localhost:8080/health/
 ```
+
     **Expected response when healthy:**
 
 ```
@@ -152,17 +157,18 @@ spec:
   metrics:
     disabled: true
 ```
+
 Apply the change:
 
 ```
 oc apply -f aap.yml
 ```
+
 The gateway operator stops reconciling the metrics service on its next cycle. To fully remove the MetricsService CR:
 
 ```
 oc delete metricsservice <aap-name>-automationmetricsservice -n <namespace>
 ```
-
 
 Note:
 
@@ -177,6 +183,7 @@ After the service has been running for at least 24 hours, check pod logs to conf
 ```
 oc logs -l app.kubernetes.io/component=automationmetricsservice-tasks -n <namespace> | grep "Successfully sent metrics"
 ```
+
 Look for log entries like:
 
 ```

@@ -1,7 +1,7 @@
 +++
-title = "Install in a disconnected environment - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_containerized_disconnected_installation"
+template = "docs/aem-title.html"
+title = "Install in a disconnected environment - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_aap_containerized_installation_intro/", "Install containerized Ansible Automation Platform"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_aap_containerized_disconnected_installation/aem-page/install-assembly_aap_containerized_disconnected_installation.html"
 last_crumb = "Install in a disconnected environment"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Install in a disconnected environment"
 oversized = "false"
@@ -28,6 +28,61 @@ type = "aem-page"
 # Install in a disconnected environment
 
 You can install containerized Ansible Automation Platform in an environment that does not have an active internet connection. To do this you need to obtain and configure the RPM source dependencies before performing the disconnected installation.
+
+## Disconnected installation inventory requirements
+
+Disconnected (bundled) installations require different inventory variables from online installations. The following table shows the key differences:
+
+*Table 1. Online vs disconnected inventory comparison*
+
+| Variable            | Online Installation                 | Disconnected Installation           |
+| ------------------- | ----------------------------------- | ----------------------------------- |
+| `registry_username` | Required (when`registry_auth=true`) | Not used (do not set)               |
+| `registry_password` | Required (when`registry_auth=true`) | Not used (do not set)               |
+| `bundle_install`    | Not used (defaults to`false`)       | Required (set to`true`)             |
+| `bundle_dir`        | Not used                            | Required (path to bundle directory) |
+
+**Disconnected inventory example**
+
+The following example shows a minimal disconnected installation inventory configuration:
+
+```
+[all:vars]
+# Disconnected installation settings
+bundle_install=true
+bundle_dir=<path_to_bundle_directory>
+
+# Database credentials (required)
+postgresql_admin_username=postgres
+postgresql_admin_password=<password>
+
+# Do NOT set registry credentials for disconnected installations
+# Setting registry_username or registry_password causes the installer
+# to attempt registry connections, which will fail in disconnected environments
+```
+
+## Verify bundle structure
+
+Before running the installer, verify that your bundle directory contains the required subdirectories:
+
+```
+ls -la <path_to_bundle_directory>/
+```
+
+Expected output:
+
+```
+drwxr-xr-x  4 root root 4096 date time .
+drwxr-xr-x  3 root root 4096 date time ..
+drwxr-xr-x  2 root root 4096 date time collections
+drwxr-xr-x  2 root root 4096 date time images
+```
+
+The collections/ directory contains Ansible collections. The images/ directory contains container image tar files.
+
+Important:
+
+If you include `registry_username` or `registry_password` in a disconnected installation inventory file, the installer attempts to connect to the registry, which fails in disconnected environments. Always verify that these variables are not set for disconnected installations.
 
 ## Obtain and configure RPM source dependencies
 
@@ -73,12 +128,14 @@ $ sudo dnf install yum-utils
 $ sudo reposync -m --download-metadata --gpgcheck \
     -p <path_to_download>
 ```
+
     For example:
 
 ```
 $ sudo reposync -m --download-metadata --gpgcheck \
     -p rhel-repos
 ```
+
   - Use reposync with the `--download-metadata` option and without the `--newest-only` option for optimal download time.
 
 4.  After the `reposync` operation is complete, compress the directory:
@@ -159,6 +216,7 @@ $ sudo mkdir /media/rhel
 ```
 $ sudo mount -o loop rhel-<version_number>-<arch_name>-dvd.iso /media/rhel
 ```
+
   Note:
   The ISO is mounted in a read-only state.
 
@@ -203,7 +261,7 @@ A disconnected installation installs containerized Ansible Automation Platform w
 
 - You have prepared the Red Hat Enterprise Linux host
 - You have obtained and configured the RPM source dependencies. The installation program uses your host system’s `dnf` package manager to resolve these dependencies.
-- You have prepared the managed nodes
+- You have created the installation user
 - You have downloaded the containerized Ansible Automation Platform setup bundle from the [Ansible Automation Platform download page](https://access.redhat.com/downloads/content/480/ver=2.6/rhel---9/2.6/x86_64/product-software).
 - You understand that metrics service is a required component in Ansible Automation Platform 2.7 and will be installed automatically. Metrics service operates fully in disconnected environments without requiring internet access.
 
@@ -239,7 +297,6 @@ In disconnected environments, metrics service operates as follows:
 - Users can access metrics dashboards and reports through the automation dashboard (when enabled)
 - No internet connection is required for metrics collection or local analysis
 
-
 **Optional data transmission to Red Hat:**
 
 - By default, metrics service attempts to transmit anonymized usage data to Red Hat at `api.segment.io:443`
@@ -261,6 +318,7 @@ UPDATE dynamic_settings_setting
 SET current_value = 'false'
 WHERE setting_key = 'ANONYMIZED_DATA_COLLECTION';
 ```
+
 This change takes effect immediately. No restart is required.
 
 **What happens when data transmission is disabled**
@@ -275,14 +333,13 @@ This change takes effect immediately. No restart is required.
 
 In disconnected environments, metrics service does not require outbound internet access. Ensure the following internal connectivity:
 
-*Table 1. Metrics service network connectivity requirements*
+*Table 2. Metrics service network connectivity requirements*
 
 | Source                | Destination                                | Port | Protocol | Purpose                             |
 | --------------------- | ------------------------------------------ | ---- | -------- | ----------------------------------- |
 | Metrics service       | PostgreSQL (metrics\_service database)     | 5432 | TCP      | Read/write metrics data             |
 | Metrics service       | PostgreSQL (automationcontroller database) | 5432 | TCP      | Read-only access to automation data |
 | Automation controller | Metrics service                            | 443  | TCP      | Internal metrics collection API     |
-
 
 Note:
 

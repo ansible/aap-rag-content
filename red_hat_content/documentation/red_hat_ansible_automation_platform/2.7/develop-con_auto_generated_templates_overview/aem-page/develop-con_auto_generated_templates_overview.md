@@ -1,7 +1,7 @@
 +++
 template = "docs/aem-title.html"
-title = "Understanding auto-generated templates - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_auto_generated_templates_overview"
+title = "Understanding auto-generated templates - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_self_service_login/", "Launch automation templates from Ansible automation portal"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-con_auto_generated_templates_overview/aem-page/develop-con_auto_generated_templates_overview.html"
 last_crumb = "Understanding auto-generated templates"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Understanding auto-generated templates"
 oversized = "false"
@@ -39,6 +39,5 @@ Auto-generated templates include:
 - Metadata (name, description, labels) mapped from Ansible Automation Platform Job Template properties.
 - A single step that launches the Ansible Automation Platform Job Template using the `rhaap:launch-job-template` action.
 - Output that displays the job execution results to the user.
-
 
 Users only see and execute templates for Ansible Automation Platform Job Templates they have Job Template Execute permission in Ansible Automation Platform.

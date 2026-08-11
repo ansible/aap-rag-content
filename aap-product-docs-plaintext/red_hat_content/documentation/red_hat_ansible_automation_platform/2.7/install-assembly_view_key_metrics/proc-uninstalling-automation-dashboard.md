@@ -13,7 +13,6 @@ ansible-playbook -i inventory
 ansible.containerized_installer.dashboard_uninstall
 ```
 
-
 Note:
 
 Uninstalling automation dashboard permanently deletes all collected metrics data, saved reports, and the PostgreSQL database.

@@ -1,7 +1,7 @@
 +++
-title = "Add a source to an inventory - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source"
 template = "docs/aem-title.html"
+title = "Add a source to an inventory - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_inventories/", "Define automation target hosts in your inventory files"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source/aem-page/administer-proc_controller_add_source.html"
 last_crumb = "Add a source to an inventory"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Add a source to an inventory"
 oversized = "false"
@@ -65,6 +65,7 @@ Inventory sources are not associated with groups. Spawned groups are top-level a
 "ip_address": "192.168.2.1"
 }
 ```
+
     If `power_state` is any value other than `powered_on`, then the host is disabled when imported into automation controller. If the key is not found, then the host is enabled.
 
 11.  All cloud inventory sources have the following update options:
@@ -401,6 +402,7 @@ keyed_groups:
 - key: os
   prefix: os
 ```
+
    Note:
       Refer to the official [Ansible documentation](https://console.redhat.com/ansible/automation-hub/repo/published/servicenow/itsm/content/inventory/now/) for detailed guidance on using and configuring the `servicenow.itsm.now` plugin.
 
@@ -418,12 +420,14 @@ $ awx-manage export_custom_scripts --filename=my_scripts.tar
 
 Dump of old custom inventory scripts at my_scripts.tar
 ```
+
 Making use of the output:
 
 ```
 $ mkdir my_scripts
 $ tar -xf my_scripts.tar -C my_scripts
 ```
+
 The name of the scripts has the form: `<pk>_<name>`. This is the naming scheme used for project folders.
 
 ```
@@ -438,6 +442,7 @@ _15inventory_script_wallisland          _26inventory_script_lifesport           
 _17inventory_script_bidstory            _28inventory_script_boxchild
 _18p                                    _29__inventory_script_wearstress
 ```
+
 Each file contains a script. Scripts can be `bash/python/ruby/more`, so the extension is not included. They are all directly executable. Executing the script dumps the inventory data.
 
 ```
@@ -450,11 +455,13 @@ $ ./my_scripts/11__inventory_script_upperorder
 "host_\u18a1\u9d6f\u08ac\u74c2\u54e2\u740e\u5f02\ud81d\uddee\ufbd6\u4506"], "vars": {"ansible_host": "127.0.0.1", "ansible_connection":
 "local"}}}
 ```
+
 You can verify functionality with `ansible-inventory`. This gives the same data, but reformatted.
 
 ```
 $ ansible-inventory -i ./my_scripts/_11__inventory_script_upperorder --list --export
 ```
+
 In the preceding example, you can `cd` into `my_scripts` and then issue a `git init` command, add the scripts you want, push it to source control, and then create an SCM inventory source in the user interface.
 
 For more information about syncing or using custom inventory scripts, see[Import your inventory file from source control](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_inventory_file_importing#assembly-inventory-file-importing "With automation controller you can select an inventory file from source control, rather than creating one from scratch.") in *Configuring automation execution*.

@@ -13,6 +13,7 @@ If you do not have Ansible Development Tools installed, you can instruct the ass
 
 
 ```
+
 The assistant then triggers the `adt_check_env` tool.
 The system:
 - Checks if ADT is already installed. If so, it will report: "ADT (`ansible-dev-tools`) is already installed".

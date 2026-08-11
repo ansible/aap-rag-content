@@ -9,7 +9,6 @@ Note
 
 - The IBM Cloud service instance of IBM watsonx Code Assistant is available in the following data centers:
 
-
 * Dallas (`us-south`)
 * Frankfurt (`eu-de`)
 * Sydney (`au-syd`) (Essentials plan only)

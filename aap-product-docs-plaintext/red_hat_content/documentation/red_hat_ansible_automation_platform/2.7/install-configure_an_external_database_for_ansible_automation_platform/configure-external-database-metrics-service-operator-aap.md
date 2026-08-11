@@ -18,7 +18,6 @@ Metrics service requires access to two databases:
 - **`metrics_service` database (read/write):** Stores collected metrics data
 - **`automationcontroller` database (read-only):** Used to correlate metrics with automation activity
 
-
 By default, the Ansible Automation Platform Operator automatically creates and configures a managed PostgreSQL pod in the same namespace as your Ansible Automation Platform deployment. You can deploy metrics service with an external database instead of the managed PostgreSQL pod that the Ansible Automation Platform Operator automatically creates.
 
 Using an external database lets you share and reuse resources and manually manage backups, upgrades, and performance optimizations.
@@ -50,6 +49,7 @@ sslmode: "prefer"
 type: "unmanaged"
 type: Opaque
 ```
+
 When configuring the secret:
 
 - **namespace:** Specify the namespace to create the secret in. This should be the same namespace you want to deploy to.
@@ -79,6 +79,7 @@ type: "unmanaged"
 type: Opaque
 ```
 
+
 Important:
 The `ms_awx_readonly` user must be created in your external database with SELECT privileges on the automation controller database before deployment. For instructions on creating this user, see Configure an external database for Ansible Automation Platform (containerized).
 
@@ -101,9 +102,14 @@ name: myaap
 spec:
 metrics:
 disabled: false
-postgres_configuration_secret: metrics-postgres-configuration
-awx_postgres_configuration_secret: metrics-controller-readonly-configuration
+database:
+database_secret: automation-platform-metrics-postgres-configuration
+externally_managed: true
+ms_awx_readonly_user:
+externally_managed: true
+ms_awx_readonly_user_secret: metrics-controller-readonly-configuration
 ```
+
 
 Note:
 If you have an existing metrics service instance, specify its name under `metrics.name` to apply these settings to the existing instance. If you omit the name field, the operator will create a new instance with the default name pattern `<aap-instance-name>`-metrics.
@@ -117,4 +123,5 @@ For more examples of Ansible Automation Platform custom resources, see Red Hat A
 - **Cross-database permissions:** The `ms_awx_readonly` user must have SELECT privileges on all tables in the automation controller database's public schema, including future tables (use ALTER DEFAULT PRIVILEGES).
 - **Storage sizing:** Plan for approximately 20-40 GB of database storage for the `metrics_service` database, depending on automation scale and retention policies.
 - **Connection pooling:** For high-scale deployments, consider using connection pooling (such as PgBouncer) between metrics service and the external database.
+- **Externally managed flag:** You must set `externally_managed: true` in your custom resource when using an external database. Without this flag, the operator attempts to create and manage the database, which fails against an externally provisioned PostgreSQL instance.
 

@@ -33,6 +33,7 @@ Use this option to restore normal operation without changing your metrics servic
 ```
 oc get secret <aap-name>-metrics-read-token -n <namespace>
 ```
+
 If the command returns `Error from server (NotFound)`, proceed to the next step.
 
 2. Retrieve the automation controller database host from the existing postgres configuration secret:
@@ -62,6 +63,7 @@ oc create secret generic <aap-name>-metrics-read-token \
 --from-literal=port=5432 \
 -n <namespace>
 ```
+
 Replace `<password>` with a secure password for the `ms_awx_readonly` database user. If you are restoring the same database, use the original password to avoid a credential mismatch. If you are reinstalling with a fresh database, any secure password is acceptable.
 
 5. Trigger a reconcile by annotating the `AnsibleAutomationPlatform` CR:

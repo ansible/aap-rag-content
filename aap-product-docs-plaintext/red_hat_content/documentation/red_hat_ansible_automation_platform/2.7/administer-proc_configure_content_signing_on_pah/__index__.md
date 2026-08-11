@@ -19,6 +19,7 @@ The script prints out a JSON structure with the following format.
 ```
 {"file": "filename", "signature": "filename.asc"}
 ```
+
 All the file names are relative paths inside the current working directory. The file name must remain the same for the detached signature.
 
 **Example:** The following script produces signatures for content:
@@ -45,6 +46,7 @@ else
 exit $STATUS
 fi
 ```
+
 After you deploy a private automation hub with signing enabled to your Ansible Automation Platform cluster, new UI additions are displayed in collections.
 
 2.  Review the Ansible Automation Platform installer inventory file for options that begin with `automationhub_*`.
@@ -60,5 +62,6 @@ automationhub_require_content_approval = True
 automationhub_collection_signing_service_key = /abs/path/to/galaxy_signing_service.gpg
 automationhub_collection_signing_service_script = /abs/path/to/collection_signing.sh
 ```
+
 The two new keys (**automationhub_auto_sign_collections** and **automationhub_require_content_approval**) indicate that the collections must be signed and approved after they are uploaded to private automation hub.
 

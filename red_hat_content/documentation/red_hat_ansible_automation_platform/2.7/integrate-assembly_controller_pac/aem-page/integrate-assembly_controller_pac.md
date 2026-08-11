@@ -1,6 +1,6 @@
 +++
-title = "Implement policy enforcement - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Implement policy enforcement - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_controller_pac"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/integrate-assembly_controller_pac/aem-page/integrate-assembly_controller_pac.html"
 last_crumb = "Implement policy enforcement"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Implement policy enforcement"
 oversized = "false"
@@ -39,7 +39,6 @@ Before you can implement policy enforcement in your Ansible Automation Platform 
 - Configured Ansible Automation Platform with settings required for authenticating to your OPA server.
 - Some familiarity with OPA and the Rego language, which is the language policies are written in.
 
-
 For policy enforcement to work correctly, you must both configure the OPA server in your policy settings, and associate a specific policy with a particular resource. For example, a particular organization, inventory, or job template.
 
 Note:
@@ -53,7 +52,6 @@ You can specify how your Ansible Automation Platform instance interacts with OPA
 ### Before you begin
 
 - To configure policy enforcement, you must have administrative privileges.
-
 
 Note:
 
@@ -125,6 +123,7 @@ allowed := {
     "violations": []
 }
 ```
+
 The key components of the rule’s structure are:
 
 Package declaration

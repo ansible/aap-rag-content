@@ -30,6 +30,7 @@ LC_COLLATE='en_US.UTF-8'
 LC_CTYPE='en_US.UTF-8'
 TEMPLATE=template0;
 ```
+
 Note:
 **Why UTF-8 encoding:** Django ORM requires UTF-8 encoding for proper handling of internationalized strings and special characters in metric data.
 
@@ -50,6 +51,7 @@ CREATE USER ms_awx_readonly WITH PASSWORD '<READONLY_PASSWORD>';
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO ms_awx_readonly;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO ms_awx_readonly;
 ```
+
 Important:
 Change `awx` to match your actual database name for automation controller. Common alternative names: `automationcontroller`, `tower`, `awx_production`.
 
@@ -67,6 +69,7 @@ Add authentication rules to allow metrics service host to connect to both databa
 host    metrics_service    metrics_service    <METRICS_HOST_IP>/32    scram-sha-256
 host    awx               ms_awx_readonly    <METRICS_HOST_IP>/32    scram-sha-256
 ```
+
 **Replace placeholders:**
 
 - `<METRICS_HOST_IP>`: IP address of the host running metrics service (from `[automationmetrics]` inventory group)
@@ -105,6 +108,7 @@ automationmetrics_controller_read_pg_host=controller-db.example.com
 cd /path/to/aap-containerized-installer
 ansible-playbook -i inventory install.yml
 ```
+
 The installer performs these actions:
 
 1. Skips PostgreSQL process creation for metrics service (uses external database)

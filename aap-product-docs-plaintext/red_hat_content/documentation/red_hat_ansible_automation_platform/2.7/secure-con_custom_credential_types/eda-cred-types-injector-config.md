@@ -9,7 +9,6 @@ Event-Driven Ansible supports the following types of injectors:
 - Ansible extra variables (`extra_vars`) - Used for substitution in the rulebook conditions, actions or source plugin parameters.
 - File-based templating (`file`) - Used to create file contents from the credential inputs such as certificates and keys, which might be required by source plugins. File injectors provide a way to deliver these certificates and keys to ansible-rulebook at runtime without having to store them in decision environments. As a result, ansible-rulebook creates temporary files and the file names can be accessed using `eda.filename` variables, which are automatically created for you after the files have been created (for instance, "{{eda.filename.my_cert}}”).
 
-
 Important:
 
 When creating `extra_vars` in rulebook activations and credential type injectors, avoid using `eda` or `ansible` as key names since that conflicts with internal usage and might cause failure in both rulebook activations and credential type creation.

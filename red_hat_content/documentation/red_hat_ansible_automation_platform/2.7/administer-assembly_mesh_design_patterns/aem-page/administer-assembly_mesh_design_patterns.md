@@ -1,7 +1,7 @@
 +++
-title = "Design patterns for mesh - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_mesh_design_patterns"
+title = "Design patterns for mesh - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_install_mesh/", "Scale with automation mesh in a containerized or VM environment"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_mesh_design_patterns/aem-page/administer-assembly_mesh_design_patterns.html"
 last_crumb = "Design patterns for mesh"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Design patterns for mesh"
 oversized = "false"
@@ -37,13 +37,11 @@ If you are creating a mesh similar to the following in a containerized environme
 - Replace the `peers` variable with `receptor_peers`
 - Replace inventory group names with explicit comma-separated lists of hostnames
 
-
 The value of `receptor_peers` must be a comma-separated list of hostnames. Do not use inventory group names. For more information, see Adding execution nodes below.
 
  **Prerequisites**
 
 - You reviewed conceptual information on node types and relationships.
-
 
  Note:
 
@@ -59,11 +57,10 @@ aap_c_1.example.com
 aap_c_2.example.com
 aap_c_3.example.com
 ```
+
 The following image displays the topology of this mesh network.
 
-
 ![The topology map of the multiple hybrid node mesh configuration consists of an automation controller group. The automation controller group contains three hybrid nodes: aap_c_1, aap_c_2, and aap_c_3. The control nodes are peered to one another as follows: aap_c_3 is peered to aap_c_1 and aap_c_1 is peered to aap_c_2.](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/mesh-multiple-hybrid-nodes.png)  
-
 
 The default `node_type` for nodes in the control plane is `hybrid`. You can explicitly set the `node_type` of individual nodes to `hybrid` in the `[automationcontroller group]`:
 
@@ -73,6 +70,7 @@ aap_c_1.example.com node_type=hybrid
 aap_c_2.example.com node_type=hybrid
 aap_c_3.example.com node_type=hybrid
 ```
+
 Alternatively, you can set the `node_type` of all nodes in the `[automationcontroller]` group. When you add new nodes to the control plane they are automatically set to hybrid nodes.
 
 ```yaml
@@ -84,6 +82,7 @@ aap_c_3.example.com
 [automationcontroller:vars]
 node_type=hybrid
 ```
+
 If you think that you might add control nodes to your control plane in future, it is better to define a separate group for the hybrid nodes, and set the `node_type` for the group:
 
 ```yaml
@@ -116,11 +115,10 @@ peers=execution_nodes
 [execution_nodes]
 aap_e_1.example.com
 ```
+
 The following image displays the topology of this mesh network.
 
-
 ![The topology map shows an automation controller group and an execution node. The automation controller group contains a single control node: aap_c_1. The execution node is aap_e_1. The aap_c_1 node is peered to aap_e_1.](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/mesh-single-control-node.png)  
-
 
 The `[automationcontroller]` stanza defines the control nodes. If you add a new node to the automationcontroller group, it will automatically peer with the `aap_c_1.example.com` node.
 
@@ -129,13 +127,13 @@ The `[automationcontroller:vars]` stanza sets the node type to `control` for all
 - If you add a new node to the `execution_nodes` group, the control plane nodes automatically peer to it.
 - If you add a new node to the `automationcontroller` group, the node type is set to `control`.
 
-
 The `[execution_nodes]` stanza lists all the execution and hop nodes in the inventory. The default node type is `execution`. You can specify the node type for an individual node:
 
 ```yaml
 [execution_nodes]
 aap_e_1.example.com node_type=execution
 ```
+
 Alternatively, you can set the node_type of all execution nodes in the `[execution_nodes]` group. When you add new nodes to the group, they are automatically set to execution nodes.
 
 ```yaml
@@ -145,6 +143,7 @@ aap_e_1.example.com
 [execution_nodes:vars]
 node_type=execution
 ```
+
 If you plan to add hop nodes to your inventory in future, it is better to define a separate group for the execution nodes, and set the `node_type` for the group:
 
 ```yaml
@@ -179,6 +178,7 @@ peers=execution_nodes
 aap_e_1.example.com
 aap_e_2.example.com
 ```
+
 The `[automationcontroller]` stanza defines the control nodes. All nodes in the control plane are peered to one another. If you add a new node to the `automationcontroller` group, it will automatically peer with the original nodes.
 
 The `[automationcontroller:vars]` stanza sets the node type to `control` for all nodes in the control plane and defines how the nodes peer to the execution nodes:
@@ -186,9 +186,7 @@ The `[automationcontroller:vars]` stanza sets the node type to `control` for all
 - If you add a new node to the `execution_nodes` group, the control plane nodes automatically peer to it.
 - If you add a new node to the `automationcontroller` group, the node type is set to `control`.
 
-
 The following image displays the topology of this mesh network.
-
 
 ![The topology map of the minimum resilient mesh configuration consists of an automation controller group and two execution nodes. The automation controller group consists of two control nodes: aap_c_1 and aap_c_2. The execution nodes are aap_e_1 and aap_e_2. The aap_c_1 node is peered to aap_c_2. Every control node is peered to every execution node.](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/mesh-resilient-config.png)  
 
@@ -229,17 +227,15 @@ aap_e_3.example.com
 [instance_group_remote:vars]
 peers=hop
 ```
+
 The following image displays the topology of this mesh network.
 
-
 ![The topology map of the configuration consists of an automation controller group, a local execution group, a hop node group, and a remote execution node group. The automation controller group consists of two control nodes: aap_c_1 and aap_c_2. The local execution nodes are aap_e_1 and aap_e_2. Every control node is peered to every local execution node. The hop node group contains one hop node, aap_h_1. It is peered to the controller group. The remote execution node group contains one execution node, aap_e_3. It is peered to the hop node group.](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/mesh-segegrated-execution.png)  
-
 
 The `[automationcontroller:vars]` stanza sets the node types for all nodes in the control plane and defines how the control nodes peer to the local execution nodes:
 
 - All nodes in the control plane are automatically peered to one another.
 - All nodes in the control plane are peered with all local execution nodes.
-
 
 If the name of a group of nodes begins with `instance_group_`, the installer recognises it as an instance group and adds it to the Ansible Automation Platform user interface.
 
@@ -294,17 +290,15 @@ peers=automationcontroller
 [remote_multi_hop]
 aap_h_3 peers=local_hop
 ```
+
 The following image displays the topology of this mesh network.
 
-
 ![The topology map of the configuration consists of an automation controller group, a local execution group, a hop node group, and a remote execution node group. The automation controller group consists of three control nodes: aap_c_1, aap_c_2, and aap_c_3. The local execution nodes are aap_e_1 and aap_e_2. Every control node is peered to every local execution node. The hop node group contains two hop nodes, aap_h_1 and aap_h_2. It is peered to the controller group. The remote execution node group contains one execution node, aap_e_3. It is peered to the hop node group. A remote hop node group, consisting of node aap_h_3, is peered with the local hop node group. An execution node, aap_e_4, is peered with the remote hop group](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/mesh-multi-hop.png)  
-
 
 The `[automationcontroller:vars]` stanza sets the node types for all nodes in the control plane and defines how the control nodes peer to the local execution nodes:
 
 - All nodes in the control plane are automatically peered to one another.
 - All nodes in the control plane are peered with all local execution nodes.
-
 
 The `[local_hop:vars]` stanza peers all nodes in the `[local_hop]` group with all the control nodes.
 
@@ -325,7 +319,7 @@ execution-[1:5].example.com
 # connection is established *from* the execution nodes *to* the automationcontroller
 peers=automationcontroller
 ```
-The following image displays the topology of this mesh network.
 
+The following image displays the topology of this mesh network.
 
 ![The topology map consists of an automation controller group, and local execution group. The automation controller group consists of two control nodes: aap_c_1, and aap_c_2. The local execution nodes are aap-e-1, aap-e-2, aap-e-3, aap-e-4, and aap-e-5. Every execution node is peered to every control node in an outgoing connection.](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/mesh-one-way-communication.png)  

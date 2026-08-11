@@ -15,6 +15,5 @@ The most performant authentication methods are:
 - Session authentication
 - Basic authentication must not be used for high-frequency API automation because CPU-intensive password hashing introduces significant request latency. If Basic authentication is used in combination with LDAP authentication, reaching out to the LDAP service can introduce significant latency, especially if the LDAP service has limited availability. For this reason, we recommend creating OAuth Tokens to perform automation against the API.
 
-
 Horizontally scaling the platform gateway service pods also increases the number of health checks to each component’s API, because each Envoy tracks this separately. You can observe these in logs with the user agent `Envoy/HC`. Since health checks flow through the same services and queues as user-initiated requests, if overall request times slow due to overload, health checks can also timeout. When this occurs, Envoy stops forwarding requests to these service nodes until they pass their health check again.
 

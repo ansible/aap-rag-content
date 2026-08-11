@@ -33,6 +33,7 @@ value: "/projects/ansible-devspaces/.code-workspace"
 - name: "ADT_CONTAINER_ENGINE"
 value: "podman"
 ```
+
 The environment variables configure the following:
 
 - `HOME`: Sets the home directory for the container.

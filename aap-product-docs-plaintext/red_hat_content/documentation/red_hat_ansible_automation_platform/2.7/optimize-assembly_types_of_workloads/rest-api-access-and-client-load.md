@@ -12,7 +12,6 @@ You can use the API to automate the following tasks:
 - Automating the upload or publication of collections in automation hub
 - Managing automation execution environments in the automation hub container registry using a Podman client that connects to automation hub over its registry API
 
-
 API clients apply load to the platform gateway proxy, the gRPC service for authentication, the web server of the targeted component, and the database, because most API client queries interact with the database.
 
 To access the API, you can use the following common authentication methods: Basic authentication (using a username and password) and Token authentication (your chosen authentication method). Token authentication is recommended for better performance.

@@ -1,0 +1,4 @@
+# Known issues
+## The MCP server for Red Hat Ansible Automation Platform
+
+- When the MCP server is deployed on an operator-based installation that uses a custom certificate authority (CA) or self-signed certificates, the MCP server fails to validate SSL certificates with `SELF_SIGNED_CERT_IN_CHAIN` errors. The operator does not propagate the custom CA bundle configuration to the MCP server deployment. To work around this issue, manually configure the CA certificate on the AnsibleMCPServer custom resource. For more information and remediation steps, see [Troubleshoot MCP server errors](/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_deploying_ansible_mcp_server#troubleshoot-ansible-mcp-server-errors "This section contains information to help you diagnose and resolve issues with deploying the MCP server for Red Hat Ansible Automation Platform and connecting it to an external AI agent."). (AAP-62763)

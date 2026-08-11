@@ -1,0 +1,31 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Back up and restore an RPM deployment from RHEL 8 to new RHEL 9 hosts",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Before you begin",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-97f90df6-ee76-41cc-b2f5-da82711c2079__prereq",
+          "anchor": null,
+          "singlePageAnchor": "GUID-97f90df6-ee76-41cc-b2f5-da82711c2079__prereq"
+        },
+        {
+          "title": "What to do next",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "GUID-97f90df6-ee76-41cc-b2f5-da82711c2079__postreq",
+          "anchor": null,
+          "singlePageAnchor": "GUID-97f90df6-ee76-41cc-b2f5-da82711c2079__postreq"
+        }
+      ]
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 +++
-title = "Determine where automation runs with instance groups - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_ug_controller_instance_groups"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_ug_controller_instance_groups"
+title = "Determine where automation runs with instance groups - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-define_where_automation_runs_with_host_and_node_groupings/", "Define where automation runs with host and node groupings"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_ug_controller_instance_groups/aem-page/administer-assembly_ug_controller_instance_groups.html"
 last_crumb = "Determine where automation runs with instance groups"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Determine where automation runs with instance groups"
 oversized = "false"
@@ -29,7 +29,6 @@ type = "aem-page"
 
 An Instance Group enables you to group instances in a clustered environment. Policies dictate how instance groups behave and how jobs are executed. The following view displays the capacity levels based on policy algorithms:
 
-
 ![Instance groups list view](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-instance-groups-list-view.png)  
 
 ## Instance groups
@@ -39,7 +38,6 @@ Instances can be grouped into one or more instance groups. Instance groups can b
 - Organizations
 - Inventories
 - Job templates
-
 
 When a job associated with one of the resources executes, it is assigned to the instance group associated with the resource. During the execution process, instance groups associated with job templates are checked before those associated with inventories. Instance groups associated with inventories are checked before those associated with organizations. Therefore, instance group assignments for the three resources form the hierarchy:
 
@@ -88,7 +86,6 @@ When you have successfully created the instance group the **Details** tab of the
 
 You can also edit **Instances** and review **Jobs** associated with this instance group:
 
-
 ![Instance group successfully created](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-instance-group-created.png)  
 
 ## Associate instances to an instance group
@@ -130,14 +127,12 @@ The order of preference in determining which instance group to submit the job to
 2. Inventory
 3. Organization (by way of project)
 
-
 If you associate instance groups with the job template, and all of these are at capacity, then the job is submitted to instance groups specified on the inventory, and then the organization. Jobs must run in those groups in preferential order as resources are available.
 
 You can still associate the global `default` group with a resource, such as any of the custom instance groups defined in the playbook. You can use this to specify a preferred instance group on the job template or inventory, but still enable the job to be submitted to any instance if those are out of capacity.
 
 - If you associate `group_a` with a job template and also associate the `default` group with its inventory, you enable the `default` group to be used as a fallback in case `group_a` gets out of capacity.
 - In addition, it is possible to not associate an instance group with one resource but choose another resource as the fallback. For example, not associating an instance group with a job template and having it fall back to the inventory or the organization’s instance group.
-
 
 This presents the following possibilities:
 
@@ -151,9 +146,7 @@ This presents the following possibilities:
   - The administrator assigns group *A* to *Org1*, group *B* to *Org2* and then assigns group *C* to both *Org1* and *Org2* as an overflow for any extra capacity that might be needed.
   - The organization administrators are then free to assign inventory or job templates to whichever group they want, or let them inherit the default order from the organization.
 
-
 ![Instance groups scenarios](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ag-instance-groups-scenarios.png)  
-
 
 Arranging resources this way offers you flexibility. You can also create instance groups with only one instance, enabling you to direct work towards a very specific Host in the automation controller cluster.
 
@@ -165,7 +158,6 @@ Use the following criteria when defining nodes:
 
 - Nodes in the `automationcontroller` group can define `node_type` hostvar to be `hybrid` (default) or `control`.
 - Nodes in the `execution_nodes group` can define `node_type` hostvar to be `execution` (default) or `hop`.
-
 
 You can define custom groups in the inventory file by naming groups with `instance_group_*` where `*` becomes the name of the group in the API. You can also create custom instance groups in the API after the install has finished.
 
@@ -192,6 +184,7 @@ After you run the installation program, the following error is displayed:
 TASK [ansible.automation_platform_installer.check_config_static : Validate mesh topology] ***
 fatal: [126-addr.tatu.home -> localhost]: FAILED! => {"msg": "The host '110-addr.tatu.home' is not present in either [automationcontroller] or [execution_nodes]"}
 ```
+
 To fix this, move the box `110-addr.tatu.home` to an `execution_node` group, as follows:
 
 ```
@@ -207,10 +200,12 @@ peers=execution_nodes
 [instance_group_test]
 110-addr.tatu.home
 ```
+
 This results in:
 
 ```
 TASK [ansible.automation_platform_installer.check_config_static : Validate mesh topology] ***
 ok: [126-addr.tatu.home -> localhost] => {"changed": false, "mesh": {"110-addr.tatu.home": {"node_type": "execution", "peers": [], "receptor_control_filename": "receptor.sock", "receptor_control_service_name": "control", "receptor_listener": true, "receptor_listener_port": 8928, "receptor_listener_protocol": "tcp", "receptor_log_level": "info"}, "126-addr.tatu.home": {"node_type": "control", "peers": ["110-addr.tatu.home"], "receptor_control_filename": "receptor.sock", "receptor_control_service_name": "control", "receptor_listener": false, "receptor_listener_port": 27199, "receptor_listener_protocol": "tcp", "receptor_log_level": "info"}}}
 ```
+
 After upgrading from automation controller 4.0 or earlier, the legacy `instance_group_` member likely has the awx code installed. This places that node in the `automationcontroller` group.

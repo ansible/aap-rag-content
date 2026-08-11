@@ -1,6 +1,6 @@
 +++
-title = "Container-based installations - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_change_tls_container_based_install"
+title = "Container-based installations - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_change_tls_container_based_install/aem-page/secure-con_change_tls_container_based_install.html"
 last_crumb = "Container-based installations"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Container-based installations"
 oversized = "false"
@@ -27,7 +27,76 @@ type = "aem-page"
 
 # Container-based installations
 
-You can change the TLS certificates and keys for your container-based Ansible Automation Platform installation. This process involves a preparation step, either providing new custom certificates or deleting or moving the old certificates, followed by running the installation program.
+You can change or renew the TLS certificates and keys for your container-based Ansible Automation Platform installation. The process involves a preparation step, either providing new custom certificates or deleting or moving the old certificates, followed by running the installation program.
+
+Important:
+
+Do not manually edit certificate files or restart individual services for container-based installations. Container-based Ansible Automation Platform runs services inside podman containers, so host-level commands such as `systemctl reload nginx.service` do not apply. Always use the installation program to make certificate changes.
+
+## Renew self-signed TLS certificates using the installation program
+
+Regenerate and verify self-signed TLS and root CA certificates across container-based Ansible Automation Platform components to maintain secure internal communication and prevent service disruption.
+
+### Before you begin
+
+- You have root access or equal privileges on the host where the containerized installer is running.
+- You have access to the inventory file used during the initial installation.
+
+### Procedure
+
+1.  Add `aap_service_regen_cert=true` to the inventory file in the `[all:vars]` section:
+  
+
+```
+[all:vars]
+ aap_service_regen_cert=true
+```
+
+    To also regenerate the internal CA certificate, add the following variable:
+
+```
+[all:vars]
+ aap_service_regen_cert=true
+ aap_ca_regenerate=true
+```
+
+2.  Run the install playbook from your installation directory:
+  
+
+```
+ansible-playbook -i <inventory_file_name>
+ansible.containerized_installer.install
+```
+
+### Results
+
+**Verification**
+
+To verify the CA file and certificate file on Event-Driven Ansible controller:
+
+`openssl verify -CAfile ~/aap/eda/etc/eda.cert ~/aap/eda/etc/eda.cert`
+
+`openssl s_client -connect <EDA_FQDN>:443`
+
+To verify the CA file and certificate file on platform gateway:
+
+`openssl verify -CAfile ~/aap/gateway/etc/gateway.cert`
+
+`~/aap/gateway/etc/gateway.cert`
+
+`openssl s_client -connect <GATEWAY_FQDN>:443`
+
+Verify the CA file and certificate file on automation hub:
+
+`openssl verify -CAfile ~/aap/hub/etc/pulp.cert ~/aap/hub/etc/pulp.cert`
+
+`openssl s_client -connect <HUB_FQDN>:443`
+
+To verify the CA file and certificate file on automation controller:
+
+`~/aap/controller/etc/tower.cert`
+
+`openssl s_client -connect <CONTROLLER_FQDN>:443`
 
 ## Change TLS certificates and keys using the installation program
 
@@ -88,11 +157,9 @@ receptor_tls_key=<path_to_tls_key>
       | <br>Redis                 | <br>`~/aap/redis/server.crt`          | <br>`~/aap/redis/server.key`          |
 
 2.  After preparing your certificates, run the `install` playbook from your installation directory:
-  
+      `ansible-playbook -i <inventory_file_name>`
 
-```
-ansible-playbook -i <inventory_file_name> ansible.containerized_installer.install
-```
+    `ansible.containerized_installer.install`
 
 ### Results
 
@@ -101,6 +168,7 @@ Verify that the new TLS certificates are in use by checking that the services ar
 ```
 $ curl -vk https://<hostname_or_ip>:<port_number>/api/v2/
 ```
+
 The output of this command gives details about the TLS handshake. Look for the following output to confirm the correct certificate is being used:
 
 ```

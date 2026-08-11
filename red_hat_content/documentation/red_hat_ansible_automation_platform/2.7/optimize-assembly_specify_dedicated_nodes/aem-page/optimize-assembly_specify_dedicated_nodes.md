@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_specify_dedicated_nodes"
 title = "Specify dedicated nodes for pods and job execution - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_specify_dedicated_nodes"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_pod_spec_modifications/", "Performance tuning for operator environments"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-assembly_specify_dedicated_nodes/aem-page/optimize-assembly_specify_dedicated_nodes.html"
 last_crumb = "Specify dedicated nodes for pods and job execution"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Specify dedicated nodes for pods and job execution"
 oversized = "false"
@@ -40,7 +40,6 @@ You can constrain the automation controller pods created by the operator to run 
 - `node_selector` and `postgres_selector` constrain the automation controller pods to run only on the nodes that match all the specified key, or value, pairs.
 - `tolerations` and `postgres_tolerations` enable the automation controller pods to be scheduled onto nodes with matching taints. See [Taints and Toleration](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) in the Kubernetes documentation for further details.
 
-
 The following table shows the settings and fields that can be set on the automation controller’s specification section of the YAML (or using the OpenShift UI form).
 
 | Name                               | Description                                              | Default      |
@@ -53,7 +52,6 @@ The following table shows the settings and fields that can be set on the automat
 | <br> `annotations`                 | <br>AutomationController pods’ annotations               | <br>“”’’     |
 | <br> `postgres_selector`           | <br>Postgres pods’ nodeSelector                          | <br>“”’’     |
 | <br> `postgres_tolerations`        | <br>Postgres pods’ tolerations                           | <br>“”’’     |
-
 
 `topology_spread_constraints` can help optimize spreading your control plane pods across the compute nodes that match your node selector. For example, with the `maxSkew` parameter of this option set to `100`, this means maximally spread across available nodes. So if there are three matching compute nodes and three pods, one pod will be assigned to each compute node. This parameter helps prevent the control plane pods from competing for resources with each other.
 
@@ -105,6 +103,7 @@ The following procedure adds a label to a node.
 ```
 kubectl get nodes --show-labels
 ```
+
     The output is similar to this (shown here in a table):
 
     | Name           | Status    | Roles      | Age    | Version     | Labels                                   |
@@ -119,11 +118,13 @@ kubectl get nodes --show-labels
 ```
 kubectl label nodes <your-node-name> <aap_node_type>=<execution>
 ```
+
     For example:
 
 ```
 kubectl label nodes <your-node-name> disktype=ssd
 ```
+
     where `<your-node-name>` is the name of your chosen node.
 
 3.  Verify that your chosen node has a `disktype=ssd` label:
@@ -176,7 +177,6 @@ With `extra_settings`, you can pass many custom settings by using the awx-operat
 | --------------------- | ------------------ | ------- |
 | <br> `extra_settings` | <br>Extra settings | <br>‘’  |
 
-
  **Example configuration of `extra_settings` parameter**
 
 ```
@@ -191,6 +191,7 @@ spec:
      - setting: SYSTEM_TASK_ABS_MEM
        value: "500"
 ```
+
  **Custom pod timeouts**
 
 A container group job in automation controller transitions to the `running` state just before you submit the pod to the Kubernetes API. Automation controller then expects the pod to enter the `Running` state before `AWX_CONTAINER_GROUP_POD_PENDING_TIMEOUT` seconds has elapsed. You can set `AWX_CONTAINER_GROUP_POD_PENDING_TIMEOUT` to a higher value if you want automation controller to wait for longer before canceling jobs that fail to enter the `Running` state. `AWX_CONTAINER_GROUP_POD_PENDING_TIMEOUT` is how long automation controller waits from creation of a pod until the Ansible work begins in the pod. You can also extend the time if the pod cannot be scheduled because of resource constraints. You can do this using `extra_settings` on the automation controller specification. The default value is two hours.

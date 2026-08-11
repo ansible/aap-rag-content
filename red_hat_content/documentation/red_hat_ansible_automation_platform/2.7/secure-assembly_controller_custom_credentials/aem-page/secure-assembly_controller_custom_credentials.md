@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_custom_credentials"
 title = "Custom credential types - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_custom_credentials"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_credentials/", "Configure credentials to authenticate remote systems and services"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_custom_credentials/aem-page/secure-assembly_controller_custom_credentials.html"
 last_crumb = "Custom credential types"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Custom credential types"
 oversized = "false"
@@ -37,7 +37,6 @@ Custom credentials support the following ways of injecting their authentication 
 - Ansible extra variables
 - File-based templating, which means generating `.ini` or `.conf` files that contain credential values
 
-
 You can attach one SSH and multiple cloud credentials to a job template. Each cloud credential must be of a different type. Only one of each type of credential is permitted. Vault credentials and machine credentials are separate entities.
 
  Note:
@@ -57,6 +56,7 @@ An endpoint in the API reflects an ordered list of these credentials at the Orga
 ```
 /api/v2/organizations/N/galaxy_credentials/
 ```
+
 When installations of automation controller migrate existing Galaxy-oriented setting values, post-upgrade proper credentials are created and attached to every Organization. After upgrading to the latest version, every organization that existed before upgrade now has a list of one or more "Galaxy" credentials associated with it.
 
 Additionally, post-upgrade, these settings are not visible (or editable) from the `/api/v2/settings/jobs/` endpoint.
@@ -82,6 +82,7 @@ You can filter credentials the v2 API:
 ```
 curl "https://controller.example.org/api/v2/credentials/?credential_type__namespace=aws"
 ```
+
 In the V2 Credential Type model, the relationships are defined as follows:
 
 | Machine      | SSH                                                                 |

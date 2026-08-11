@@ -32,7 +32,6 @@ The following examples are code recommendations that the Ansible code bot can su
 
 - Module version changes and updates, such as:
 
-
 * Adding any new required parameters
 * Flagging deprecated parameters
 * Removing unused parameters

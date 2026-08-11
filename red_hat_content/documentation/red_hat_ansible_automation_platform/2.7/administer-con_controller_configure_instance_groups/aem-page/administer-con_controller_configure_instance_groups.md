@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-con_controller_configure_instance_groups/aem-page/administer-con_controller_configure_instance_groups.html"
 last_crumb = "Configure instance groups from the API"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure instance groups from the API"
 oversized = "false"
@@ -36,6 +36,7 @@ Once created, you can associate instances with an instance group by using:
 ```
 HTTP POST /api/v2/instance_groups/x/instances/ {'id': y}`
 ```
+
 An instance that is added to an instance group automatically reconfigures itself to listen on the group’s work queue. For more information, see Instance group policies.
 
 ## Instance group policies
@@ -48,9 +49,7 @@ Instance group policies are controlled by the following three optional fields on
 - `policy_instance_minimum`: This policy attempts to keep at least this many instances in the instance group. If the number of available instances is lower than this minimum, then all instances are placed in this instance group.
 - `policy_instance_list`: This is a fixed list of instance names to always include in this instance group.
 
-
 The **Instance Groups** list view from the automation controller user interface (UI) provides a summary of the capacity levels for each instance group according to instance group policies:
-
 
 ![Instance Groups list view](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-instance-groups-list-view.png)  
 
@@ -83,7 +82,6 @@ When you run a job associated with an instance group, note the following behavio
 - If you place those instances into instance groups, then they also expand that group’s capacity.
 - If an instance is performing work and it is a member of multiple groups, then capacity is reduced from all groups for which it is a member.
 - De-provisioning an instance removes capacity from the cluster wherever that instance was assigned. For more information, see the [Deprovisioning instance groups](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_controller_configure_instance_groups#controller-deprovision-instance-group "Re-running the setup playbook won't deprovision instances, as clusters can't distinguish between intentional offline status or failure. Instead, shut down all services on the automation controller instance, then run the deprovisioning tool from another instance.") section.
-
 
  Note:
 
@@ -123,6 +121,7 @@ Another parameter available is `max_forks`. This provides additional flexibility
 max_concurrent_jobs: 10
 max_forks: 50
 ```
+
 If 10 jobs that use 5 forks each are run, an eleventh job waits until one of these finishes to run on that group (or be scheduled on a different group with capacity).
 
 If 2 jobs are running with 20 forks each, then a third job with a `task_impact` of 11 or more waits until one of these finishes to run on that group (or be scheduled on a different group with capacity).
@@ -150,6 +149,7 @@ automation-controller-service stop
 ```
 awx-manage deprovision_instance --hostname=<name used in inventory file>
 ```
+
     For example:
 
 ```
@@ -163,6 +163,7 @@ Deprovisioning instance groups in automation controller does not automatically d
 ```
 awx-manage unregister_queue --queuename=<name>
 ```
+
 Removing an instance’s membership from an instance group in the inventory file and re-running the setup playbook does not ensure that the instance is not added back to a group. To be sure that an instance is not added back to a group, remove it through the API and also remove it in your inventory file. You can also stop defining instance groups in the inventory file. You can manage instance group topology through the automation controller UI. For more information about managing instance groups in the UI, see [Managing Instance Groups](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_ug_controller_instance_groups#controller-instance-groups "An Instance Group enables you to group instances in a clustered environment. Policies dictate how instance groups behave and how jobs are executed. The following view displays the capacity levels based on policy algorithms:").
 
  Note:

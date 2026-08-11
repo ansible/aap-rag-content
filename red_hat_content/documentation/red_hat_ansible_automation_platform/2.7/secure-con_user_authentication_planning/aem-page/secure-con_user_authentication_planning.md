@@ -1,6 +1,6 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_user_authentication_planning"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_user_authentication_planning"
 title = "Best practices for securing user accounts - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_user_authentication_planning/aem-page/secure-con_user_authentication_planning.html"
 last_crumb = "Best practices for securing user accounts"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Best practices for securing user accounts"
 oversized = "false"
@@ -52,7 +52,6 @@ Where possible, map all primary user accounts to an external authentication sour
 
 - LDAP
 
-
 1. Radius
 2. Azure Active Directory
 3. Google OAuth
@@ -65,7 +64,6 @@ Where possible, map all primary user accounts to an external authentication sour
 10. GitHub enterprise organization
 11. GitHub enterprise team
 
-
 Select an authentication mechanism compliant with your organization’s policies, and review [Access management and authentication](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_configure_authentication "Configure authentication methods such as LDAP or SAML to simplify the user login experience. Providing the correct connection details for your chosen identity provider helps ensure seamless and secure access to Ansible Automation Platform.") for prerequisite details. The authentication mechanism used must ensure that the authentication-related traffic between Ansible Automation Platform and the authentication back-end is encrypted when the traffic occurs on a public or insecure network (for example, LDAPS or LDAP over TLS, HTTPS for OAuth2 and SAML providers, and so on.).
 
 In the Ansible Automation Platform UI, any “system administrator” account can edit, change, and update any inventory or automation definition. Restrict these account privileges to the minimum set of users possible for low-level automation controller configuration and disaster recovery.
@@ -77,6 +75,5 @@ Ansible Automation Platform 2.6 introduces a new central authentication mechanis
 - Automation controller
 - Private automation hub
 - Event-Driven Ansible controller
-
 
 Before 2.6, each of these components had their own authentication configuration.

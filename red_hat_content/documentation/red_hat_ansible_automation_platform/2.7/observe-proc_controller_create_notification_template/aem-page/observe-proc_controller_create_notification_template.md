@@ -1,7 +1,7 @@
 +++
-title = "Create a notification template - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-proc_controller_create_notification_template"
+template = "docs/aem-title.html"
+title = "Create a notification template - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_ug_controller_notifications/", "Understand and configure notifications"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/observe-proc_controller_create_notification_template/aem-page/observe-proc_controller_create_notification_template.html"
 last_crumb = "Create a notification template"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Create a notification template"
 oversized = "false"
@@ -57,7 +57,6 @@ The following notification types are supported with automation controller:
 - Slack
 - Twilio
 - Webhook
-
 
 Each notification type has its own configuration and behavioral semantics. You might need to test them in different ways. Additionally, you can customize each type of notification down to a specific detail or a set of criteria to trigger a notification.
 
@@ -191,7 +190,6 @@ Configure the webhook notification with the following:
 - The body of the outgoing request.
 - Configure authentication, using Basic authentication.
 
-
 Provide the following details to set up a webhook notification:
 
 - Optional: **Username**: Enter a username.
@@ -202,7 +200,6 @@ Provide the following details to set up a webhook notification:
 ```
 {"Authentication": "988881adc9fc3655077dc2d4d757d480b5ea0e11", "MessageType": "Test"}`.
 ```
-
 
 - **Disable SSL Verification**: SSL/TLS verification is on by default, but you can choose to turn off verification of the authenticity of the target’s certificate. Select this option to disable verification for environments that use internal or private CA’s.
 - **HTTP Method**: Select the method for your webhook:

@@ -45,6 +45,7 @@ $ podman run hello
 @echo off
 podman %*
 ```
+
 This avoids having to install Docker as required by the VS Code `Dev Container` extension.
 
 7.  Add the `%USERPROFILE%\bin` directory to the `PATH`:

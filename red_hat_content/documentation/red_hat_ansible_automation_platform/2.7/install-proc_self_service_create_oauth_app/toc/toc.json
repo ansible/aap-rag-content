@@ -10,7 +10,7 @@
       "singlePageAnchor": null,
       "sections": [
         {
-          "title": "Enable Oauth token creation for external users",
+          "title": "Enable OAuth token creation for external users",
           "visible": true,
           "weight": 1,
           "urlFragment": "self-service-enable-oauth-external",

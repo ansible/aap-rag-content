@@ -34,17 +34,9 @@
           "singlePageAnchor": "gw-authenticator-map-triggers"
         },
         {
-          "title": "Authenticator map examples",
-          "visible": true,
-          "weight": 4,
-          "urlFragment": "gw-authenticator-map-examples",
-          "anchor": null,
-          "singlePageAnchor": "gw-authenticator-map-examples"
-        },
-        {
           "title": "Control user access to the system with allow mapping",
           "visible": true,
-          "weight": 5,
+          "weight": 4,
           "urlFragment": "gw-allow-mapping",
           "anchor": null,
           "singlePageAnchor": "gw-allow-mapping"
@@ -52,7 +44,7 @@
         {
           "title": "Map users to organizations",
           "visible": true,
-          "weight": 6,
+          "weight": 5,
           "urlFragment": "proc-controller-organization-mapping",
           "anchor": null,
           "singlePageAnchor": "proc-controller-organization-mapping"
@@ -60,7 +52,7 @@
         {
           "title": "Map users to teams",
           "visible": true,
-          "weight": 7,
+          "weight": 6,
           "urlFragment": "proc-controller-team-mapping",
           "anchor": null,
           "singlePageAnchor": "proc-controller-team-mapping"
@@ -68,7 +60,7 @@
         {
           "title": "Map users to roles",
           "visible": true,
-          "weight": 8,
+          "weight": 7,
           "urlFragment": "gw-role-mapping",
           "anchor": null,
           "singlePageAnchor": "gw-role-mapping"
@@ -76,7 +68,7 @@
         {
           "title": "Map users to the superuser role",
           "visible": true,
-          "weight": 9,
+          "weight": 8,
           "urlFragment": "gw-superuser-mapping",
           "anchor": null,
           "singlePageAnchor": "gw-superuser-mapping"
@@ -84,7 +76,7 @@
         {
           "title": "Review authenticator map results",
           "visible": true,
-          "weight": 10,
+          "weight": 9,
           "urlFragment": "gw-review-mapping-results",
           "anchor": null,
           "singlePageAnchor": "gw-review-mapping-results"
@@ -92,7 +84,7 @@
         {
           "title": "Use Jinja-like syntax in authenticator maps",
           "visible": true,
-          "weight": 11,
+          "weight": 10,
           "urlFragment": "gw-using-jinja-syntax-auth-maps",
           "anchor": null,
           "singlePageAnchor": "gw-using-jinja-syntax-auth-maps"

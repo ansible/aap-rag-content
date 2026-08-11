@@ -15,6 +15,7 @@ Ensure your disconnected OpenShift cluster is configured to trust the private re
 ```
 oc login --token=<your_token> --server=<your_openshift_api_url>
 ```
+
 Use the following command if you have a kubeconfig:
 
 ```

@@ -1,7 +1,7 @@
 +++
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_openshift"
 title = "OpenShift or Kubernetes API Bearer Token credential type - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_openshift"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_credentials/", "Configure credentials to authenticate remote systems and services"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_openshift/aem-page/secure-ref_controller_credential_openshift.html"
 last_crumb = "OpenShift or Kubernetes API Bearer Token credential type"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "OpenShift or Kubernetes API Bearer Token credential type"
 oversized = "false"
@@ -37,7 +37,6 @@ Provide the following information for container credentials:
 - **API authentication bearer token** (required): The token used to authenticate the connection.
 - Optional: **Verify SSL**: You can check this option to verify the server’s SSL/TLS certificate is valid and trusted. Environments that use internal or private *Certificate Authority* (CA) must leave this option unchecked to disable verification.
 - **Certificate Authority data**: Include the `BEGIN CERTIFICATE` and `END CERTIFICATE` lines when pasting the certificate, if provided.
-
 
 A container group is a type of instance group that has an associated credential that enables connection to an OpenShift cluster. To set up a container group, you must have the following items:
 

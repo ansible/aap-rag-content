@@ -7,6 +7,10 @@ You must specify the version of Ansible Builder in the definition file. The defa
 
 The following definition file is using Ansible Builder version 3:
 
+Note:
+
+Replace `<platform-version>` with the namespace for your version of Ansible Automation Platform. Replace `<rhel-version>` with your Red Hat Enterprise Linux version
+
 ```
 version: 3
 build_arg_defaults:
@@ -19,7 +23,7 @@ python:
 system: bindep.txt
 images:
 base_image:
-name: registry.redhat.io/ansible-automation-platform-24/ee-minimal-rhel8:latest
+name: registry.redhat.io/<platform-version>/ee-minimal-rhel<rhel-version>:latest
 additional_build_files:
 - src: files/ansible.cfg
 dest: configs

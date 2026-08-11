@@ -13,7 +13,6 @@ Red Hat Ansible Automation Platform uses several ports to communicate with its s
 | <br>27199   | <br>TCP        | <br>Receptor | <br>OpenShift Container Platform cluster | <br>Execution node                       |
 | <br>27199   | <br>TCP        | <br>Receptor | <br>OpenShift Container Platform cluster | <br>Hop node                             |
 
-
 Note:
 
 Metrics service communication in operator deployments:

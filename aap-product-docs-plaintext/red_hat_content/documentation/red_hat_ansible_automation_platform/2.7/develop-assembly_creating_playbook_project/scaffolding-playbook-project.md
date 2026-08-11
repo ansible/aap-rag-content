@@ -37,6 +37,7 @@ After the project directory has been created, the following message appears in t
 ------------------ ansible-creator logs ------------------
 Note: ansible project created at /Users/username/test_project
 ```
+
 The following directories and files are created in your project directory:
 
 ```

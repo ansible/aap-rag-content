@@ -1,16 +1,16 @@
 +++
-title = "Configure Ansible DevTools and the development environment - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Configure Ansible DevTools and the development environment - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-configure_ansible_devtools_and_the_development_environment"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-enable_ai_in_the_ansible_vs_code_extension_with_the_mcp_server/", "Enable AI in the Ansible VS Code extension with the MCP server"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-enable_the_vs_code_extension_ai_assistant/", "Enable the VS Code extension AI assistant"]]
 category = "Extend"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-configure_ansible_devtools_and_the_development_environment/aem-page/extend-configure_ansible_devtools_and_the_development_environment.html"
 last_crumb = "Configure Ansible DevTools and the development environment"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure Ansible DevTools and the development environment"
 oversized = "false"
@@ -42,6 +42,7 @@ After installing ADT, use the MCP server for Red Hat Ansible Automation Platform
 ```
 Set up a complete Ansible development environment with Python 3.11, and install the collections amazon.aws and ansible.posix
 ```
+
   The assistant will trigger the `ade_setup_environment`tool. The system will automatically perform the following configuration steps:
   - Create a Virtual Environment: The assistant creates a virtual environment (for example, `venv/`) in your workspace.
   - Install Core Tools: The assistant installs `ansible-core `and `ansible-lint` in the new virtual environment.

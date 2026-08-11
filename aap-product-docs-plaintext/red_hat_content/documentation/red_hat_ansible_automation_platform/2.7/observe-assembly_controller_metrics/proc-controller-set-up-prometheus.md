@@ -33,6 +33,7 @@ static_configs:
 - targets:
 - <controller_host>
 ```
+
 For help configuring other aspects of Prometheus, such as alerts and service discovery configurations, see the [Prometheus configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/) documentation.
 
 If Prometheus is already running, you must restart it to apply the configuration changes by making a **POST** to the reload endpoint, or by killing the Prometheus process or service.

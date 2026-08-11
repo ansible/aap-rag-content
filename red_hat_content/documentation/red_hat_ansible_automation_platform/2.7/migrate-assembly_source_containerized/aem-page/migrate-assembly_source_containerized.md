@@ -1,7 +1,7 @@
 +++
 title = "Prepare and export data from a container-based environment - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/migrate-assembly_source_containerized"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/migrate-assembly_source_environment/", "Prepare and export data from the source environment"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/migrate-assembly_source_containerized/aem-page/migrate-assembly_source_containerized.html"
 last_crumb = "Prepare and export data from a container-based environment"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Prepare and export data from a container-based environment"
 oversized = "false"
@@ -89,6 +89,7 @@ $ podman exec -it automation-gateway bash -c "aap-gateway-manage print_settings 
 ```
 $ podman exec -it postgresql bash -c 'psql -c "\l+"'
 ```
+
     Adjust the filesystem size or mount an external filesystem as needed before performing the next step.
 
   Note:
@@ -117,6 +118,7 @@ $ podman exec -it postgresql bash -c 'psql -c "\l+"'
 ```
 $ podman run -it --rm --name postgresql_restore_temp --network host --volume ~/aap/tls/extracted:/etc/pki/ca-trust/extracted:z --volume ~/aap/postgresql/server.crt:/var/lib/pgsql/server.crt:ro,z --volume ~/aap/postgresql/server.key:/var/lib/pgsql/server.key:ro,z --volume /tmp/backups/artifact:/var/lib/pgsql/backups:ro,z registry.redhat.io/rhel9/postgresql-15:latest bash
 ```
+
   Note:
       This command assumes the image `registry.redhat.io/rhel9/postgresql-15:latest`. If you are missing the image, check the available images for the user with `podman images ls`.
 
@@ -129,6 +131,7 @@ bash-4.4$ pg_dump -h <pg_hostname> -U <component_pg_user> -d <component_pg_name>
 bash-4.4$ ls -ld <component>/<component>.pgc
 bash-4.4$ echo "<component>_pg_database: <database_name>" >> secrets.yml ## Add the DB name for the component to the secrets file
 ```
+
     After collecting this data, exit from this temporary container.
 
 6.  Export the secrets from the containerized environment from one node of each component group. For each step below, use the `root` user to run the commands.
@@ -171,6 +174,7 @@ $ podman secret inspect --showsecret --format "{{.SecretData}}" gateway_secret_k
 # sha256sum --check artifact.tar.sha256
 # tar tvf artifact.tar
 ```
+
     Example output of `tar tvf artifact.tar`:
 
 ```

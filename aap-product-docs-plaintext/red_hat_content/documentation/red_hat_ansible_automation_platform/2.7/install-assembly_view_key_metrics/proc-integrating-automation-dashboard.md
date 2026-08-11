@@ -27,8 +27,12 @@ refresh_token: <refresh_token_string>
 client_id: <client_id_string>
 client_secret: <client_secret_string>
 verify_ssl: false
-name: <unique_cluster_name>
+sync_schedules:
+name: Every 5 minutes sync
+rrule: DTSTART;TZID=Europe/Ljubljana:20250630T070000 FREQ=MINUTELY;Interval=5
+enabled: true
 ```
+
 Note:
 For Red Hat Ansible Automation Platform 2.7 Users: If you only need to monitor a single Red Hat Ansible Automation Platform 2.7 instance, consider using the native Automation Dashboard integrated into Red Hat Ansible Automation Platform 2.7 instead of standalone dashboard. Native dashboard provides an integrated UI experience with Red Hat Ansible Automation Platform Gateway authentication. However, if you need to aggregate data across multiple Red Hat Ansible Automation Platform instances (regardless of version), continue using this standalone dashboard utility.
 
@@ -37,8 +41,8 @@ For Red Hat Ansible Automation Platform 2.7 Users: If you only need to monitor a
 When configuring the `verify_ssl` parameter, choose the setting that matches your Ansible Automation Platform certificate type:
 
 - **Commercial certificates:** Set `verify_ssl: true`.
-- **Self-signed certificates:** Set `verify_ssl: false`. Note:
-The automation dashboard cannot verify self-signed certificates against a custom Certificate Authority (CA).
+- **Self-signed certificates:** Set `verify_ssl: false`.     * **Private or organizational Certificate Authority certificates:** Set `verify_ssl: true` and ensure `custom_ca_cert` is set in your inventory file. The installer configures the `REQUESTS_CA_BUNDLE` and `SSL_CERT_FILE` environment variables in the dashboard containers, enabling Python's requests library to trust certificates signed by your private Certificate Authority (CA). Note:
+Do not set `verify_ssl: false` or `aap_auth_provider_check_ssl=false` to work around TLS certificate errors when using a private CA. Disabling SSL verification removes authentication security and exposes OAuth credentials and sync data to interception. If TLS verification fails with a private CA, set `custom_ca_cert` in your inventory file to provide your CA certificate, then reinstall.
 
 3.  You can add one or more Ansible Automation Platform instances (of the same Ansible Automation Platform version) into the automation dashboard configuration for pulling and combining data by using the following:
 
@@ -73,6 +77,7 @@ sync_schedules:
 rrule: DTSTART;TZID=Europe/Ljubljana:20250630T070000 FREQ=MINUTELY;INTERVAL=5
 enabled: true
 ```
+
 Note:
 The `access_token`, `refresh_token`, and `client_secret` are stored in the automation dashboard database. These values are encrypted for security.
 
@@ -82,6 +87,7 @@ The `access_token`, `refresh_token`, and `client_secret` are stored in the autom
 podman cp clusters.yaml automation-dashboard-web:/tmp
 podman exec -it automation-dashboard-web /venv/bin/python manage.py setclusters /tmp/clusters.yaml
 ```
+
 Note:
 If the system cannot remove the file from the /tmp/ directory, it displays an error message and continues running.
 Note:

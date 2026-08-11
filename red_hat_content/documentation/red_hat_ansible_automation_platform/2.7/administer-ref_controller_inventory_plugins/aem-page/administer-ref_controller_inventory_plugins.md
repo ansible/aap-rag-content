@@ -1,7 +1,7 @@
 +++
+title = "Generate dynamic data from external sources with inventory plugins - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-ref_controller_inventory_plugins"
 template = "docs/aem-title.html"
-title = "Generate dynamic data from external sources with inventory plugins - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_inventories/", "Define automation target hosts in your inventory files"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-ref_controller_inventory_plugins/aem-page/administer-ref_controller_inventory_plugins.html"
 last_crumb = "Generate dynamic data from external sources with inventory plugins"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Generate dynamic data from external sources with inventory plugins"
 oversized = "false"
@@ -43,7 +43,6 @@ Inventory updates use dynamically-generated YAML files which are parsed by their
 -  [Red Hat Ansible Automation Platform](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-inv-source-aap "An inventory that is sourced from Red Hat Ansible Automation Platform uses the Red Hat Ansible Automation Platform inventory plugin to gather inventory data from the Red Hat Ansible Automation Platform platform.")
 -  [Terraform State](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-inv-source-terraform "Use the following procedure to create a Terraform State inventory source.")
 -  [OpenShift Virtualization](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-inv-source-open-shift-virt "Learn how to add an OpenShift Virtualization inventory source to an existing inventory.")
-
 
 Newly created configurations for inventory sources contain the default plugin configuration values. If you want your newly created inventory sources to match the output of a legacy source, you must apply a specific set of configuration values for that source. To ensure backward compatibility, automation controller uses "templates" for each of these sources to force the output of inventory plugins into the legacy format.
 
@@ -93,7 +92,6 @@ The following actions are available for standard inventories:
 - Edit Inventory properties
 - View activity streams for Groups and Hosts
 - Obtain help building your Inventory
-
 
  Note:
 
@@ -181,6 +179,7 @@ You can configure hosts for the inventory and for groups and groups within group
   ansible_become_pass: <password for becoming the root>
 }
 ```
+
         Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two.
 
 8.  Click Create host.

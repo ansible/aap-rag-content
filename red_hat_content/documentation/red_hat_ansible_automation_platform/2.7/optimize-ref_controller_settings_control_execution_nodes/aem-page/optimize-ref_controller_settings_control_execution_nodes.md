@@ -1,6 +1,6 @@
 +++
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-ref_controller_settings_control_execution_nodes"
+template = "docs/aem-title.html"
 title = "Capacity settings for each node type - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-ref_controller_settings_control_execution_nodes/aem-page/optimize-ref_controller_settings_control_execution_nodes.html"
 last_crumb = "Capacity settings for each node type"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Capacity settings for each node type"
 oversized = "false"
@@ -45,6 +45,7 @@ Use the `max_concurrent_jobs` and `max_forks` settings available on instance gro
 ```
 ((number of worker nodes in kubernetes cluster) * (CPU available on each worker)) / (CPU request on pod_spec) = maximum number of concurrent jobs
 ```
+
   * For example, if your `pod_spec` indicates that a pod will request 250 mcpu Kubernetes cluster has 1 worker node with 2 CPU, the maximum number of jobs that you need to start with is 8.
 
 - You can also consider the memory consumption of the forks in the jobs. Calculate the appropriate setting of `max_forks` with the following equation:
@@ -52,6 +53,7 @@ Use the `max_concurrent_jobs` and `max_forks` settings available on instance gro
 ```
 ((number of worker nodes in kubernetes cluster) * (memory available on each worker)) / (memory request on pod_spec) = maximum number of forks
 ```
+
   * For example, given a single worker node with 8 GB of Memory, we determine that the `max forks` we want to run is 81. This way, either 39 jobs with 1 fork can run (task impact is always forks + 1), or 2 jobs with forks set to 39 can run.
 
 - You might have other business requirements that motivate using `max_forks` or `max_concurrent_jobs` to limit the number of jobs launched in a container group.
@@ -65,7 +67,6 @@ The task manager periodically collects tasks that need to be scheduled and deter
 1. Find and assign the control and execution instances.
 2. Update the job’s status to waiting.
 3. Message the control node through `pg_notify` for the dispatcher to pick up the task and start running it.
-
 
 If the scheduling task is not completed within `TASK_MANAGER_TIMEOUT` seconds (default 300 seconds), the task is terminated early. Timeout issues generally arise when there are thousands of pending jobs.
 
@@ -84,7 +85,6 @@ Automation controller cluster hosts communicate across the network within the cl
 controller1 ansible_user=ec2-user ansible_host=10.10.12.11 node_type=hybrid routable_hostname=somehost.somecompany.org
 ```
 
-
 - `controller1` is the inventory hostname for the automation controller host. The inventory hostname is what is shown as the instance hostname in the application. This can be useful when preparing for disaster recovery scenarios where you want to use the backup/restore method to restore the cluster to a new set of hosts that have different IP addresses. In this case you can have entries in `/etc/hosts` that map these inventory hostnames to IP addresses, and you can use internal IP addresses to mitigate any DNS issues when it comes to resolving public DNS names.
 - `ansible_host=10.10.12.11` indicates how the installation program reaches the host, which in this case is an internal IP address. This is not used outside of the installation program.
 - `routable_hostname=somehost.somecompany.org` indicates the hostname that is resolvable for the peers that connect to this node on the receptor mesh. Since it can cross many networks, we are using a hostname that maps to an IP address resolvable for the receptor peers.
@@ -97,7 +97,6 @@ To scale automation controller’s web service, follow these best practices:
 
 - Deploy multiple control nodes and use a load balancer to spread web requests over multiple servers.
 - Set max connections per automation controller to 100.
-
 
 To optimize automation controller’s web service on the client side, follow these guidelines:
 

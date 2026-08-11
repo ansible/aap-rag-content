@@ -1,7 +1,9 @@
 # Map external authenticators to Ansible Automation Platform
 ## Authenticator map triggers
 
-Each map has a trigger that defines when the map should be evaluated as true. Trigger types include the following:
+Each map has a trigger that defines when the map should be evaluated as true. Select a trigger from the **When to apply the rule** field.
+
+Trigger types include the following:
 
 Always
 The trigger should always be fired.
@@ -9,26 +11,26 @@ The trigger should always be fired.
 Never
 The trigger should never be fired.
 
-Group
+Based on groups
 The map is true or false based on a user having, not having, or having multiple groups in the source system.
 
-When defining a group trigger, the authentication mapping expands to include the following selections:
+When you select the **Based on groups** trigger, the authentication mapping expands to include the following fields:
 
-- **Operation:** This field includes conditional settings that trigger the handling of the rule based on the specified **Groups** criteria. The choices include **and** and **or**. For example, if you select **and** the user logging in must be a member of all of the groups specified in the **Groups** field for this trigger to be true. Alternatively, if you select **or** the user logging in must be a member of any of the specified **Groups** in order for the trigger to fire.  Note:
-If you are only keying off one group it does not matter if you select **"and"** or **"or"**.
+- **Condition type:** This field defines how the platform evaluates the specified **Groups** criteria. The choices include **All** and **At least one**. For example, if you select **All** the user logging in must be a member of all of the groups specified in the **Groups** field for this trigger to be true. Alternatively, if you select **At least one** the user logging in must be a member of any of the specified **Groups** in order for the trigger to fire. Note:
+If you are only keying off one group it does not matter if you select **All** or **At least one**.
 
-- **Groups:** This is a list of one or more groups coming from the authentication system that the user must be a member of. The first time you create a **Groups** entry, you must manually enter the values. Once entered, that selection will be available from the **Groups** list. See the **Operation** field to determine the behavior of the trigger if more than one group is specified in the trigger.
+- **Groups:** This is a list of one or more groups coming from the authentication system that the user must be a member of. The first time you create a **Groups** entry, you must manually enter the values. Once entered, that selection will be available from the **Groups** list. See the **Condition type** field to determine the behavior of the trigger if more than one group is specified in the trigger.
 
 Note:
 You must enter group identifiers in lowercase. For example, `cn=johnsmith,dc=example,dc=com` instead of `CN=JohnSmith,DC=Example,DC=COM`.
 
-Attribute
+Based on attributes
 The map is true or false based on a users attributes coming from the source system.
 
-When defining an attribute trigger, the authentication mapping expands to include the following selections:
+When you select the **Based on attributes** trigger, the authentication mapping expands to include the following fields:
 
-- **Operation:** This field includes conditional settings that trigger the handling of the rule based on the specified **Attribute** criteria. In version 2.6 this field indicates what will happen if the source system returns a list of attributes instead of a single value. For example, if the source system returns multiple emails for a user and **Operation** was set to **and**, all of the given emails must match the **Comparison** for the trigger to be *True*. If **Operation** was set to **or**, any of the returned emails will set the trigger to *True* if they match the **Comparison** in the trigger.  Note:
-If you want to experiment with multiple attribute maps you can do that through the API but the UI form will remove multi-attribute maps if the authenticator is saved through the UI. When adding multiple attributes to a map, the **Operation** will also apply to the attributes.
+- **Condition type:** This field defines how the platform evaluates the specified **Attribute** criteria. This field indicates what will happen if the source system returns a list of attributes instead of a single value. For example, if the source system returns multiple emails for a user and **Condition type** was set to **All**, all of the given emails must match the **Comparison** for the trigger to be *True*. If **Condition type** was set to **At least one**, any of the returned emails will set the trigger to *True* if they match the **Comparison** in the trigger. Note:
+If you want to experiment with multiple attribute maps you can do that through the API but the UI form will remove multi-attribute maps if the authenticator is saved through the UI. When adding multiple attributes to a map, the **Condition type** will also apply to the attributes.
 
 - **Attribute:** The name of the attribute coming from the source system this trigger will be evaluated against. For example, if you wanted the trigger to fire based on the user’s surname and the last name field in the source system was called `users_last_name` you would enter the value "users_last_name" in this field.
 - **Comparison:** Tells the trigger how to evaluate the value of the users. **Attribute** in the source system compared to the **Value** specified on the trigger. Available options are: **contains**, **matches**, **ends with**, **in**, or **equals**. Below is a breakdown of each **Comparison** type:
@@ -37,6 +39,6 @@ If you want to experiment with multiple attribute maps you can do that through t
 * **ends with**: The trigger will see if the value provided by the source ends with the specified **Value** of the trigger. For example, if the source provided a value of "John" the trigger would be *True* if its **Value** was set to "n" or "on". The trigger would be *False* if its **Value** was set to "z" because the value "John" coming from the source does not end with the value "z" specified by the trigger.
 * **equal**: The trigger will see if the value provided by the source is equal to (in its entirety) the specified **Value** of the trigger. For example, if the source returned the value "John", the trigger would be *True* if its **Value** was set to "John". Any value other than "John" returned from the source would set this trigger to *False*.
 * **in**: The **in** condition checks if the value matches one of several values. When **in** is specified as the **Comparison**, the **Value** field can be a comma-separated list. For example, if a trigger had a **Value** of "John,Donna" the trigger would be *True* if the attribute coming from the source had either the value "John" or "Donna". Otherwise, the trigger would be *False*.
-* **Value**: The value that a users attribute will be matched against based on the **Comparison** field. See examples in the **Comparison** definition.  Note:
+* **Value**: The value that a users attribute will be matched against based on the **Comparison** field. See examples in the **Comparison** definition. Note:
 If the **Comparison** type is **in**, this field can be a comma-separated list (without spaces).
 

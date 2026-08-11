@@ -10,7 +10,6 @@ The following example complex patching scenario demonstrates taking virtual mach
 3. Patch each of the target hosts.   1. If the patching task fails, restore the snapshot and submit a ticket with the relevant information.
 4. Delete each snapshot where the patching task was successful.
 
-
 The following workflow visualization shows how the components of the example complex patching scenario are executed:
 
 ![Workflow representation](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/workflow.png)

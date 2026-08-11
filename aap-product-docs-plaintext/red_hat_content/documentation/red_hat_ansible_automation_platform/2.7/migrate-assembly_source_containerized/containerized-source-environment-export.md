@@ -35,6 +35,7 @@ $ podman exec -it automation-gateway bash -c "aap-gateway-manage print_settings 
 ```
 $ podman exec -it postgresql bash -c 'psql -c "\l+"'
 ```
+
 Adjust the filesystem size or mount an external filesystem as needed before performing the next step.
 
 Note:
@@ -63,6 +64,7 @@ These commands send all target files to the `/tmp` filesystem. Adjust the comman
 ```
 $ podman run -it --rm --name postgresql_restore_temp --network host --volume ~/aap/tls/extracted:/etc/pki/ca-trust/extracted:z --volume ~/aap/postgresql/server.crt:/var/lib/pgsql/server.crt:ro,z --volume ~/aap/postgresql/server.key:/var/lib/pgsql/server.key:ro,z --volume /tmp/backups/artifact:/var/lib/pgsql/backups:ro,z registry.redhat.io/rhel9/postgresql-15:latest bash
 ```
+
 Note:
 This command assumes the image `registry.redhat.io/rhel9/postgresql-15:latest`. If you are missing the image, check the available images for the user with `podman images ls`.
 
@@ -75,6 +77,7 @@ bash-4.4$ pg_dump -h <pg_hostname> -U <component_pg_user> -d <component_pg_name>
 bash-4.4$ ls -ld <component>/<component>.pgc
 bash-4.4$ echo "<component>_pg_database: <database_name>" >> secrets.yml ## Add the DB name for the component to the secrets file
 ```
+
 After collecting this data, exit from this temporary container.
 
 6.  Export the secrets from the containerized environment from one node of each component group. For each step below, use the `root` user to run the commands.
@@ -117,6 +120,7 @@ $ podman secret inspect --showsecret --format "{{.SecretData}}" gateway_secret_k
 # sha256sum --check artifact.tar.sha256
 # tar tvf artifact.tar
 ```
+
 Example output of `tar tvf artifact.tar`:
 
 ```

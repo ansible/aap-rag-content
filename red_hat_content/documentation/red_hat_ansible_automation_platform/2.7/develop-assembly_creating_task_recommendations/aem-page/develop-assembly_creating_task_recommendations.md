@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
 title = "Create task recommendations - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_creating_task_recommendations"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_lightspeed_intro/", "Build automation faster with Red Hat Ansible Lightspeed"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_creating_task_recommendations/aem-page/develop-assembly_creating_task_recommendations.html"
 last_crumb = "Create task recommendations"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Create task recommendations"
 oversized = "false"
@@ -145,6 +145,7 @@ You can request multitask code recommendations by entering a sequence of natural
 ```
 # Install postgresql-server & run postgresql-setup command
 ```
+
 For better readability, you can split your multitask inline prompts over multiple lines. To achieve this, end your current line with an ampersand symbol (&) and start the next line with the hash symbol (#).
 
  **Example of a multitask prompt split over multiple lines**
@@ -154,6 +155,7 @@ For better readability, you can split your multitask inline prompts over multipl
 # create a security group that allows SSH & create subnet with 10.0.1.0/24 cidr &
 # create an internet gateway & create a route table
 ```
+
 The Ansible Lightspeed service reads the text, interacts with the IBM watsonx Code Assistant model, and generates the code recommendations.
 
  Note:
@@ -195,6 +197,7 @@ While entering a multitask prompt, the Ansible VS Code extension might display a
 ```
 # Install postgresql-server & run postgresql-setup command
 ```
+
         For better readability, split your multitask inline prompts over multiple lines. To achieve this, end your current line with an ampersand symbol (&) and start the next line with the hash symbol (#).
 
          **Example of a multitask prompt split over multiple lines**
@@ -236,7 +239,6 @@ The Red Hat Ansible Lightspeed with IBM watsonx Code Assistant machine learning 
 
 - Existing public or private Git repositories
 - Content from Ansible Galaxy
-
 
 IBM watsonx Code Assistant uses generative AI technology and various types of Ansible content to train the model. Therefore, it is not possible to trace the specific training data that produced a given code recommendation.
 

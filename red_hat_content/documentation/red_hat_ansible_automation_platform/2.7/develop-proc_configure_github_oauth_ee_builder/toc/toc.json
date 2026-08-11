@@ -2,7 +2,7 @@
   "version": "1.1",
   "sections": [
     {
-      "title": "Save definition files to a GitHub repository",
+      "title": "Configure a GitHub OAuth App for saving definitions",
       "visible": true,
       "weight": 1,
       "urlFragment": "index",

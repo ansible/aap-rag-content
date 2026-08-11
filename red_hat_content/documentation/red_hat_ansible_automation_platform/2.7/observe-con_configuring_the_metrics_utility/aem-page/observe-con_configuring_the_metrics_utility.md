@@ -1,7 +1,7 @@
 +++
 title = "Configure the metrics-utility - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-con_configuring_the_metrics_utility"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-con_configuring_the_metrics_utility"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_metrics_utility/", "Generate consumption-based billing reports with the metrics-utility"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/observe-con_configuring_the_metrics_utility/aem-page/observe-con_configuring_the_metrics_utility.html"
 last_crumb = "Configure the metrics-utility"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure the metrics-utility"
 oversized = "false"
@@ -38,7 +38,6 @@ You can configure the `metrics-utility` on a Red Hat Enterprise Linux system to 
 - **Subscription:** An active Ansible Automation Platform subscription.
 - **Installation:** The `metrics-utility` tool is included by default with the Ansible Automation Platform installation on the automation controller node. No separate installation is required.
 - **User privileges:** You must be logged in as the `root` user or the `awx` user to run the `metrics-utility` tool.
-
 
 Important:
 
@@ -115,9 +114,8 @@ crontab -l
 ```
 cat /var/log/cron
 ```
+
      For reference, see the following example output:
-
-
 
 ```
 May  8 09:45:03 ip-10-0-6-23 CROND[51623]: (root) CMDOUT (No billing data for month: 2024-04)
@@ -129,6 +127,7 @@ May  8 09:46:03 ip-10-0-6-23 CROND[51669]: (root) CMDOUT (/tmp/9e3f86ee-c92e-4b0
 May  8 09:46:03 ip-10-0-6-23 CROND[51669]: (root) CMDEND (metrics-utility gather_automation_controller_billing_data --ship --until=10m)
 May  8 09:46:26 ip-10-0-6-23 crontab[51659]: (root) END EDIT (root)
 ```
+
      The generated report will have the default name `CCSP-<YEAR>-<MONTH>.xlsx` and is saved in the ship path that you specified in step 1a.
 
 Note:
@@ -151,7 +150,6 @@ Learn how to create a ConfigMap in the OpenShift UI YAML view to inject configur
 
 - A running OpenShift cluster
 - An operator-based installation of Ansible Automation Platform on OpenShift Container Platform.
-
 
 Note:
 
@@ -235,7 +233,6 @@ Use the following steps to configure `metrics-utility` on a manual containerized
 4. Verify the data collection.
 5. Locate the generated reports.
 
-
 Note:
 
 You must have an active Ansible Automation Platform subscription
@@ -267,6 +264,7 @@ Modify your Ansible Automation Platform inventory file to enable and configure `
 ```
 metrics_utility_enabled=true
 ```
+
     This setting instructs the installation program to create and configure two dedicated `automation-controller-metrics-utility` containers as part of your Ansible Automation Platform deployment. One of these containers is used to collect the data, and the other is used to build the report. If your Ansible Automation Platform deployment has already been configured, re-run the installation script to activate the container.
 
 2.  Configure the reporting parameters by adding the `metrics_utility_extra_settings` variable. This variable controls where reports are saved, what they contain, and other metadata.
@@ -315,6 +313,7 @@ If you are applying your `metrics-utility` configuration to an existing deployme
 ```
 systemctl --user list-timers --no-pager | grep metrics-utility
 ```
+
     **Example output:**
 
 ```
@@ -327,6 +326,7 @@ Wed 2025-08-13 10:45:00 IST 8min left Wed 2025-08-13 10:30:04 IST 6min ago   met
 ```
 systemctl --user status metrics-utility-gather.service
 ```
+
     **Example output:**
 
 ```

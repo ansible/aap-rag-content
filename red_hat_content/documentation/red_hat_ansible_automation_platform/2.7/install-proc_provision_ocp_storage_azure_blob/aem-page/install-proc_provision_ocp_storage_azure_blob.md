@@ -1,6 +1,6 @@
 +++
-title = "Configure object storage on Azure Blob - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Configure object storage on Azure Blob - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_provision_ocp_storage_azure_blob"
 
 [extra]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_provision_ocp_storage_azure_blob/aem-page/install-proc_provision_ocp_storage_azure_blob.html"
 last_crumb = "Configure object storage on Azure Blob"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure object storage on Azure Blob"
 oversized = "false"
@@ -69,6 +69,7 @@ spec:
     storage_type: azure
     object_storage_azure_secret: test-azure
 ```
+
   
   Note:
       If you have an existing automation hub instance, specify its name using `hub.name: existing-hub-name` to apply these settings to the existing instance.

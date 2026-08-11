@@ -30,7 +30,7 @@ Do not install automation dashboard on the same host(s) as Ansible Automation Pl
 - Open firewall access to allow for bidirectional communication between Ansible Automation Platform instances and the automation dashboard.   * This includes HTTPS/443 (or your Ansible Automation Platform configured port) from the dashboard to the Ansible Automation Platform instance(s).
 * Port 8447 is the default ingress port for the automation dashboard. This port can be configured during installation.
 * RHEL firewall ports that might block 5432 to PostgreSQL.
-- A supported version of `ansible-core` installed on supported RHEL versions.
+- A supported version of `ansible-core` installed on supported RHEL versions.   * Optional: If your Ansible Automation Platform endpoint uses a TLS certificate signed by a private or organizational CA, have the CA certificate file (`.pem`) available on the installer host.
 
 ### Procedure
 
@@ -83,6 +83,7 @@ The values for **Name**, **Organization**, and HTTPS port number for Ansible Aut
 cp -i inventory.example inventory
 vi inventory
 ```
+
 Important:
 
 - This is an example tested inventory containing default values for Ansible Automation Platform 2.4, 2.5, 2.6, and 2.7.
@@ -122,8 +123,8 @@ aap_auth_provider_client_secret=TODO
 initial_sync_days=1
 # initial_sync_since=2025-08-08
 
-# Hide warnings when insecure https request are made.
-# Use this if your AAP uses self-signed TLS certificate.
+# Hide warnings when insecure https requests are made.
+# If your Ansible Automation Platform uses a certificate signed by a private CA, set custom_ca_cert instead of disabling warnings. Only use this setting if you have reviewed and accepted the security implications of unverified TLS connections.
 # show_urllib3_insecure_request_warning=False
 
 # Force clean install-like
@@ -186,14 +187,7 @@ bundle_dir='{{ lookup("ansible.builtin.env", "PWD") }}/bundle'
 # nginx_dashboard_admin_exposed=False
 ```
 
-7.  Install the required Ansible collections. You must complete this step to prevent module resolution errors during the installation.
-
-
-```
-ansible-galaxy collection install -r requirements.yml
-```
-
-8.  Run the installation program.
+7.  Run the installation program.
 
 ```bash
 ansible-playbook -i inventory ansible.containerized_installer.dashboard_install --ask-become-pass
@@ -208,5 +202,6 @@ PLAY RECAP *********************************************************************
 ec2-54-147-26-173.compute-1.amazonaws.com : ok=126  changed=51   unreachable=0    failed=0    skipped=42   rescued=0    ignored=0
 localhost                  : ok=12   changed=0    unreachable=0    failed=0    skipped=9    rescued=0    ignored=0
 ```
+
 Alternative configurations are possible (for example, the database for automation dashboard can be set on a different host). This requires additional changes to variables in the inventory file. Consult the [Inventory variables](/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-inventory_file_variables_for_automation_dashboard#GUID-91739484-5e4b-43a7-a0f2-72ef805f6535 "The inventory variables required by the automation dashboard installation program are described in the following table:") section of this document for available variables.
 

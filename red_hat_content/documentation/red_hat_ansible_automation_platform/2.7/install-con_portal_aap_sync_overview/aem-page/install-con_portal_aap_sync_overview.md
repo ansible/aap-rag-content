@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_portal_aap_sync_overview"
-template = "docs/aem-title.html"
 title = "Understanding Ansible Automation Platform synchronization - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_portal_aap_sync_overview"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_about/", "Install Ansible automation portal (OpenShift Container Platform only)"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-con_portal_aap_sync_overview/aem-page/install-con_portal_aap_sync_overview.html"
 last_crumb = "Understanding Ansible Automation Platform synchronization"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Understanding Ansible Automation Platform synchronization"
 oversized = "false"
@@ -35,7 +35,6 @@ Ansible automation portal synchronizes two types of data from Ansible Automation
 
 - Organization, Users, and Teams: Identity and organizational structure data
 - Job Templates: Executable automation templates
-
 
 Both synchronizations run on a scheduled basis and can be manually triggered by Ansible Automation Platform Administrators in the portal UI.
 
@@ -82,7 +81,6 @@ The `surveyEnabled` filter accepts one of the following values:
 - Omitted: Sync all Job Templates, regardless of their Ansible Automation Platform Survey status.
 - `true`: Sync only Job Templates that have Ansible Automation Platform Surveys enabled.
 - `false`: Sync only Job Templates that do not have Ansible Automation Platform Surveys enabled.
-
 
 The `labels` filter accepts an array of strings:
 
@@ -232,6 +230,7 @@ catalog:
               frequency: { hours: 1 }
               timeout: { minutes: 15 }
 ```
+
 This configuration syncs:
 
 - All Users and Teams from the "Default" organization
@@ -258,6 +257,7 @@ catalog:
               frequency: { minutes: 5 }
               timeout: { seconds: 30 }
 ```
+
 Standard synchronization:
 
 ```yaml
@@ -277,6 +277,7 @@ catalog:
               frequency: { hours: 1 }
               timeout: { minutes: 15 }
 ```
+
 Slow synchronization:
 
 ```yaml
@@ -382,7 +383,7 @@ Ansible Automation Platform administrators can manually trigger synchronization 
 
 The synchronization is listed as Successful on the Synchronization management page.
 
-## Troubleshooting Ansible Automation Platform synchronization
+## Troubleshoot Ansible Automation Platform synchronization
 
 Review common issues, symptoms, and solutions if synchronization between Ansible Automation Platform and Ansible automation portal does not function as expected.
 
@@ -418,7 +419,6 @@ Review common issues, symptoms, and solutions if synchronization between Ansible
 - Timeouts during synchronization.
 - Timeout errors appear in the logs.
 
-
 **Solutions:**
 
 - Increase the `timeout` value in the synchronization schedule.
@@ -435,7 +435,6 @@ Review common issues, symptoms, and solutions if synchronization between Ansible
 - Expected Job Templates do not appear.
 - Incorrect templates appear.
 - Users or teams are missing, or the wrong ones are present.
-
 
 **Solutions:**
 

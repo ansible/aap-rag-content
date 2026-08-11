@@ -40,14 +40,6 @@
           "urlFragment": "proc-import-ee-template",
           "anchor": null,
           "singlePageAnchor": "proc-import-ee-template"
-        },
-        {
-          "title": "Execution environment builder custom UI components",
-          "visible": true,
-          "weight": 5,
-          "urlFragment": "ref-devtools-ee-builder-ui-components",
-          "anchor": null,
-          "singlePageAnchor": "ref-devtools-ee-builder-ui-components"
         }
       ]
     }

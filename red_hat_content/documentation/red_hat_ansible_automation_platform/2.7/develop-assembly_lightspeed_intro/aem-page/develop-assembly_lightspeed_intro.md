@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_lightspeed_intro"
 template = "docs/aem-title.html"
 title = "Build automation faster with Red Hat Ansible Lightspeed - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_lightspeed_intro"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_lightspeed_intro/", "Build automation faster with Red Hat Ansible Lightspeed"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_lightspeed_intro/aem-page/develop-assembly_lightspeed_intro.html"
 last_crumb = "Build automation faster with Red Hat Ansible Lightspeed"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Build automation faster with Red Hat Ansible Lightspeed"
 oversized = "false"
@@ -52,7 +52,5 @@ Red Hat Ansible Lightspeed offers the following key features:
 -  **Content source matching** For each generated code recommendation, Red Hat Ansible Lightspeed lists content source matches, including details such as potential source, content author, and relevant licenses. You can use this data to gain insight into potential training data sources used to generate the code recommendations.
 
 -  **Post-processing capabilities** Red Hat Ansible Lightspeed offers post-processing capabilities that augment IBM watsonx Code Assistant and improve the quality and accuracy of code recommendations.
-
--  **Content maintenance and modernization** The Ansible code bot scans existing content collections, roles, and playbooks through Git repositories, and proactively creates pull requests whenever best practices or quality improvement recommendations are available. The bot automatically submits pull requests to the repository, which proactively alerts the repository owner to a recommended change to their content.
 
 -  **Telemetry data collection on the Admin dashboard** Red Hat Ansible Lightspeed now collects Admin dashboard telemetry data that provides insight into how your organization users are using the Ansible Lightspeed service, and displays the metrics on the Admin dashboard. If you no longer want to collect and manage the Admin dashboard telemetry, you can disable it for your organization.

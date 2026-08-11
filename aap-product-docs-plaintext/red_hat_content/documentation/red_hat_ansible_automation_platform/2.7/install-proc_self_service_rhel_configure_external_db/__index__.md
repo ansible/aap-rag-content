@@ -36,6 +36,7 @@ ssl:
 require: true
 client: pg
 ```
+
 The database user requires the `CREATEDB` privilege.
 
 3.  Store the database password as a Podman secret:
@@ -59,4 +60,5 @@ Check the portal logs to verify the database connection:
 ```terminal
 $ sudo journalctl -u portal --no-pager | grep -i "database"
 ```
+
 The output shows a successful database connection with no errors.

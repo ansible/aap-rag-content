@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_logging_log_capture"
 title = "Best practices for setting up secure logging - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_hardening_aap/", "Harden the platform security posture"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_logging_log_capture/aem-page/secure-con_logging_log_capture.html"
 last_crumb = "Best practices for setting up secure logging"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Best practices for setting up secure logging"
 oversized = "false"
@@ -46,7 +46,6 @@ There are several additional benefits including:
 - Identifying performance bottlenecks and optimizing the Ansible playbooks by analyzing execution times and resource usage from the logs.
 - Centralized logging helps meet compliance mandates by providing a single source of truth for auditing purposes.
 - Third Party integration with a centralized log management platform like Splunk, Logstash, ElasticSearch, or Loggly to collect and analyze logs.
-
 
 The logging aggregator service works with the following monitoring and data analysis systems:
 

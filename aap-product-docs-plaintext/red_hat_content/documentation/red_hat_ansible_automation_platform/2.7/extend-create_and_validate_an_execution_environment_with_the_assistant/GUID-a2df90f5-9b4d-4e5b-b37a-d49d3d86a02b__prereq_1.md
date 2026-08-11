@@ -15,6 +15,7 @@
 ```
 Create an execution environment definition file. Use ee-minimal as the base, include ansible.builtin and the community.general collection, add git as a system package, and tag it as webserver-ee:1.0.
 ```
+
 In response, the assistant triggers the `define_and_build_execution_env` tool to formulate a prompt using your requirements and the internal `ee-rules.md` resource. Note:
 No file is created in this step. The assistant prepares the context for accurate YAML generation.
 
@@ -24,5 +25,6 @@ No file is created in this step. The assistant prepares the context for accurate
 ```
 Now generate the execution-environment.yml content based on the prompt you received.
 ```
+
 The assistant calls the tool again, this time with the `generatedYaml` parameter. The tool validates the generated YAML against the execution environment schema.
 

@@ -38,6 +38,7 @@ tags:
 - execution-environment
 - team-ops
 ```
+
 **Collections** — pre-fill the collections your team needs, with version constraints and source:
 
 ```
@@ -50,6 +51,7 @@ source: rh-certified
 version: ">=1.5.0"
 source: rh-certified
 ```
+
 **Build destination** — set where the built image is pushed:
 
 ```
@@ -64,6 +66,7 @@ default: latest
 registryTlsVerify:
 default: true
 ```
+
 Note:
 Set `registryTlsVerify` to `false` for registries using self-signed certificates. Set `buildRegistry` to `'Custom Registry'` and add a `customRegistryUrl` if you use an internal registry other than private automation hub.
 
@@ -86,7 +89,8 @@ For example, create a role `team-ops-ee-users` with `catalog.entity.read` permis
 3. Verify the team template appears.
 4. Launch the template and verify the wizard pre-populates the expected collections and dependencies.
 
-
 Note:
 
 This pattern works for any team — swap the collections, base image, and registry defaults to match your team's domain and infrastructure.
+
+After updating the configuration, apply your changes. See [Apply configuration changes](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_apply_configuration_changes "Apply configuration changes after modifying your Helm chart values or RHEL appliance configuration file for execution environment builder.").

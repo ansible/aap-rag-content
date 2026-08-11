@@ -1,14 +1,15 @@
 # Respond to events from external systems
-## Create an event stream
+## Event streams
+### Create an event stream
 
 Create a dedicated stream endpoint to simplify how external systems send events, making it easier to route data to multiple rulebook activations.
 
-### Before you begin
+#### Before you begin
 
 - If you will be attaching your event stream to a rulebook activation, ensure that your activation has a decision environment and project already set up.
 - If you plan to connect to automation controller to run your rulebook activation, ensure that you have created a Red Hat Ansible Automation Platform credential type in addition to the decision environment and project. For more information, see [Setting up a Red Hat Ansible Automation Platform credential](/documentation/en-us/red_hat_ansible_automation_platform/2.7/assembly_eda_set_up_rhaap_credential "When Event-Driven Ansible controller is deployed on Ansible Automation Platform, you can create a Red Hat Ansible Automation Platform credential to connect to automation controller through the use of an automation controller URL and a username and password.").
 
-### Procedure
+#### Procedure
 
 1.  Log in to Ansible Automation Platform.
 2.  From the navigation panel, select Automation Decisions> (and then)Event Streams.
@@ -45,7 +46,7 @@ The event stream’s event forwarding can be disabled for testing purposes while
 
 5.  Click Create event stream.
 
-### Results
+#### Results
 
 After creating your event stream, the following outputs occur:
 

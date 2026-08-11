@@ -19,6 +19,7 @@ $ dnf install ansible-sign
 ```
 $ ansible-sign --version
 ```
+
 Output similar to the following indicates that you have successfully installed `ansible-sign`:
 
 ```

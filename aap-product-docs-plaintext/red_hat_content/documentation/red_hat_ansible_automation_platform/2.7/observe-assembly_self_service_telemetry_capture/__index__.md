@@ -13,7 +13,6 @@ Red Hat collects and analyses the following data:
 - Anonymized username hashes, which are unique identifiers used solely to identify the number of unique users of the RHDH application.
 - Feedback and sentiment submitted through the Ansible automation portal feedback form, including a 1-5 star rating and feedback text. Users must acknowledge that they share the feedback with Red Hat before submitting.
 
-
 Note:
 
 The feedback form is optional and disabled by default. You can enable for your users if you choose.

@@ -10,7 +10,6 @@ Automation mesh is useful for:
 - traversing difficult network topologies
 - bringing execution capabilities (the machine running `ansible-playbook`) closer to your target hosts
 
-
 The nodes (control, hop, and execution instances) are interconnected through a receptor mesh, forming a virtual mesh.
 
 Automation mesh uses TLS encryption for communication, so traffic that traverses external networks (the internet or other) is encrypted in transit.

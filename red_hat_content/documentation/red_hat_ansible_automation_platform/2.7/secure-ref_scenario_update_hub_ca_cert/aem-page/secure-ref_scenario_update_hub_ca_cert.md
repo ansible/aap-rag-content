@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_scenario_update_hub_ca_cert"
-template = "docs/aem-title.html"
 title = "Configure a CA file - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_changing_ssl_certs_keys/", "Renew and change SSL/TLS certificates"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-ref_scenario_update_hub_ca_cert/aem-page/secure-ref_scenario_update_hub_ca_cert.html"
 last_crumb = "Configure a CA file"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Configure a CA file"
 oversized = "false"
@@ -32,7 +32,6 @@ Use this example to customize the default definition file to include a CA certif
  **Prerequisites**
 
 - A custom CA certificate, for example `rootCA.crt`.
-
 
 Note:
 

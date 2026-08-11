@@ -32,4 +32,5 @@ type: number
 title: Max sync delay (ms)
 default: 500
 ```
+
 When `showAdvanced` is `true`, the form displays `maxSyncDelay`. When `showAdvanced` is `false`, the field is hidden.

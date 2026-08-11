@@ -1,4 +1,4 @@
-# Red Hat Ansible Lightspeed Overview
+# Understand Red Hat Ansible Lightspeed with IBM watsonx Code Assistant
 ## Access Red Hat Ansible Lightspeed with IBM watsonx Code Assistant
 
 This section contains information about accessing both Red Hat Ansible Lightspeed cloud service and on-premise deployment.

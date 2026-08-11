@@ -7,5 +7,6 @@ It is particularly important that the service is horizontally scaled sufficientl
 ```
 *** uWSGI listen queue of socket ":8000" (fd: 3) full !!! (101/100) ***
 ```
+
 This error occurs due to a limitation of uWSGI tying its backlog length to the kernel parameter `somaxconn`. It is possible to raise this kernel parameter in OpenShift Container Platform, but doing so requires allowing “unsafe sysctls”.
 

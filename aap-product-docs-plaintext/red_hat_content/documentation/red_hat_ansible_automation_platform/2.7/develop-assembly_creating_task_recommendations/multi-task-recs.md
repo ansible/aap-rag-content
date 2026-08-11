@@ -17,6 +17,7 @@ You can request multitask code recommendations by entering a sequence of natural
 ```
 # Install postgresql-server & run postgresql-setup command
 ```
+
 For better readability, you can split your multitask inline prompts over multiple lines. To achieve this, end your current line with an ampersand symbol (&) and start the next line with the hash symbol (#).
 
 **Example of a multitask prompt split over multiple lines**
@@ -26,6 +27,7 @@ For better readability, you can split your multitask inline prompts over multipl
 # create a security group that allows SSH & create subnet with 10.0.1.0/24 cidr &
 # create an internet gateway & create a route table
 ```
+
 The Ansible Lightspeed service reads the text, interacts with the IBM watsonx Code Assistant model, and generates the code recommendations.
 
 Note:
@@ -67,6 +69,7 @@ If you do not see the language mode section in your VS Code editor, from the Com
 ```
 # Install postgresql-server & run postgresql-setup command
 ```
+
 For better readability, split your multitask inline prompts over multiple lines. To achieve this, end your current line with an ampersand symbol (&) and start the next line with the hash symbol (#).
 
 **Example of a multitask prompt split over multiple lines**

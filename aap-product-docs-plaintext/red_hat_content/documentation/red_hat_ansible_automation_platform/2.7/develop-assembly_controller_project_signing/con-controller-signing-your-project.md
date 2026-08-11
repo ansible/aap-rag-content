@@ -18,7 +18,6 @@ $ tree -a .
 1 directory, 3 files
 ```
 
-
 Note:
 
 The commands used assume that your working directory is the root of your project. `ansible-sign project` commands take the project root directory as their last argument.
@@ -37,11 +36,13 @@ In the sample project, two directives are included, resulting in the following `
 include inventory
 recursive-include playbooks *.yml
 ```
+
 With this file in place, generate your checksum manifest file and sign it. Both of these steps are achieved in a single `ansible-sign` command:
 
 ```
 $ ansible-sign project gpg-sign .
 ```
+
 Successful execution displays output similar to the following:
 
 ```
@@ -49,6 +50,7 @@ Successful execution displays output similar to the following:
 [NOTE ] Checksum manifest: ./.ansible-sign/sha256sum.txt
 [NOTE ] GPG summary: signature created
 ```
+
 The project has now been signed.
 
 Note that the `gpg-sign` subcommand is under the `project` subcommand.

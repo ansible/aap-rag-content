@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_dynamic_chained_dependencies"
-template = "docs/aem-title.html"
 title = "Chain multiple dynamic dependencies - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_dynamic_chained_dependencies"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_self_service_login/", "Launch automation templates from Ansible automation portal"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-ref_dynamic_chained_dependencies/aem-page/develop-ref_dynamic_chained_dependencies.html"
 last_crumb = "Chain multiple dynamic dependencies"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Chain multiple dynamic dependencies"
 oversized = "false"
@@ -62,4 +62,5 @@ dependencies:
               errorMessage:
                 minLength: 'Provide a more detailed reason (at least 10 characters).'
 ```
+
 Each key under `dependencies` corresponds to a property name in the same parameter step. When the user changes a field value, only the matching `if`/`then` branch is displayed.

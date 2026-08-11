@@ -14,6 +14,7 @@ You can apply changes at any point — you do not need to complete all configura
 ```
 $ helm upgrade <release_name> <chart_name> -f <values_file> -n <namespace>
 ```
+
 **OpenShift — web console:**
 
 1. Navigate to **Helm > Installed Helm Charts**.
@@ -27,8 +28,9 @@ $ sudo systemctl stop portal.service
 $ sudo podman rm -f portal
 $ sudo systemctl start portal.service
 ```
+
 Note:
-The `daemon-reload` and `stop/rm/start` sequence is required when Quadlet drop-in files have been added or changed (for example, after adding EE Builder secrets). If you only changed `app-config.production.yaml` without modifying drop-in files, `sudo systemctl restart portal` is sufficient.
+The `daemon-reload` and `stop/rm/start` sequence is required when Podman secrets have been added or changed. If you only changed `app-config.production.yaml` without modifying secrets, `sudo systemctl restart portal` is sufficient.
 
 2.  Verify that the service is running.
 **OpenShift — CLI:**
@@ -37,6 +39,7 @@ The `daemon-reload` and `stop/rm/start` sequence is required when Quadlet drop-i
 $ oc rollout status deployment -n <namespace>
 $ oc get pods -n <namespace>
 ```
+
 **OpenShift — web console:**
 
 Navigate to **Workloads > Pods**. Filter by your namespace and verify that all pods show Running status with no restarts.

@@ -31,6 +31,7 @@ $ tree -L 1
 ├── requirements.yml
 ├── roles
 ```
+
 The installation root directory includes other containerized services that make use of Podman volumes.
 
 Here are some examples for further reference:
@@ -52,6 +53,7 @@ containers/
 │   └── userns.lock
 └── storage.conf
 ```
+
 The `controller` directory has some of the installed configuration and runtime data points:
 
 ```
@@ -73,6 +75,7 @@ controller/
 └── supervisor
 └── run
 ```
+
 The `receptor` directory has the automation mesh configuration:
 
 ```
@@ -83,6 +86,7 @@ receptor/
 ├── receptor.sock
 └── receptor.sock.lock
 ```
+
 After installation, you will also find other files in the local user’s `/home` directory such as the `.cache` directory:
 
 ```
@@ -92,6 +96,7 @@ After installation, you will also find other files in the local user’s `/home`
 └── rhsm
 └── rhsm.log
 ```
+
 As services are run using rootless Podman by default, you can use other services such as running `systemd` as non-privileged users. Under `systemd` you can see some of the component service controls available:
 
 The `.config` directory:
@@ -116,6 +121,7 @@ The `.config` directory:
 ├── redis.service
 └── sockets.target.wants
 ```
+
 This is specific to Podman and conforms to the Open Container Initiative (OCI) specifications. When you run Podman as the root user `/var/lib/containers` is used by default. For standard users the hierarchy under `$HOME/.local` is used.
 
 The `.local` directory:
@@ -128,6 +134,7 @@ The `.local` directory:
 ├── podman
 └── storage
 ```
+
 As an example `.local/storage/volumes` contains what the output from `podman volume ls` provides:
 
 ```
@@ -140,6 +147,7 @@ local       redis_data
 local       redis_etc
 local       redis_run
 ```
+
 The execution plane is isolated from the control plane main services to ensure it does not affect the main services.
 
 Control plane services run with the standard Podman configuration and can be found in: `~/.local/share/containers/storage`.
@@ -155,6 +163,7 @@ CONTAINERS_STORAGE_CONF=~/aap/containers/storage.conf podman <subcommand>
 ```
 CONTAINER_HOST=unix://run/user/<user uid>/podman/podman.sock podman <subcommand>
 ```
+
 **How can I see host resource utilization statistics?**
 
 Run the following command to display host resource utilization statistics:
@@ -162,6 +171,7 @@ Run the following command to display host resource utilization statistics:
 ```
 $ podman container stats -a
 ```
+
 Example output based on a Dell sold and offered containerized Ansible Automation Platform solution (DAAP) install that utilizes ~1.8 GB RAM:
 
 ```
@@ -173,6 +183,7 @@ ID            NAME                           CPU %       MEM USAGE / LIMIT  MEM 
 c1458367ca9c  redis                          0.48%       10.52MB / 3.761GB  0.28%       0B / 0B     0B / 0B     5           9.074042s   0.47%
 ef712cc2dc89  postgresql                     0.09%       21.88MB / 3.761GB  0.58%       0B / 0B     0B / 0B     21          15.571059s  0.80%
 ```
+
 **How much storage is used and where?**
 
 The container volume storage is under the local user at `$HOME/.local/share/containers/storage/volumes`.
@@ -194,6 +205,7 @@ For example:
 ```
 $ podman volume inspect postgresql
 ```
+
 Example output:
 
 ```
@@ -211,6 +223,7 @@ Example output:
 }
 ]
 ```
+
 Several files created by the installation program are located in `$HOME/aap/` and bind-mounted into various running containers.
 
 1. To view the mounts associated with a container run the following command:
@@ -218,6 +231,7 @@ Several files created by the installation program are located in `$HOME/aap/` an
 ```
 $ podman ps --format "{{.ID}}\t{{.Command}}\t{{.Names}}"
 ```
+
 Example output:
 
 ```
@@ -247,6 +261,7 @@ a3ba05136446	pulpcore-worker	automation-hub-worker-2
 ```
 $ podman inspect <container_name> | jq -r .[].Mounts[].Source
 ```
+
 Example output:
 
 ```

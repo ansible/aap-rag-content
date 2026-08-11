@@ -77,6 +77,7 @@ ansible_host: localhost # change to the mesh node host name
 ansible_user: <username> # user provided
 ansible_ssh_private_key_file: ~/.ssh/<id_rsa>
 ```
+
 - Ensure `ansible_host` is set to the IP address or DNS of the node.
 - Set `ansible_user` to the username running the installation.
 - Set `ansible_ssh_private_key_file` to contain the filename of the private key used to connect to the instance.
@@ -88,6 +89,7 @@ ansible_ssh_private_key_file: ~/.ssh/<id_rsa>
 ```
 ansible_ssh_common_args: <your ssh ProxyCommand setting>
 ```
+
 This instructs the `install-receptor.yml` playbook to use the proxy command to connect through the local DNS node to the private node.
 
 9.  When the attributes are configured, click Save. The **Details** page of the created instance opens.
@@ -98,11 +100,13 @@ This instructs the `install-receptor.yml` playbook to use the proxy command to c
 ```
 ansible-galaxy collection install ansible.receptor
 ```
+
 or
 
 ```
 ansible-galaxy install -r requirements.yml
 ```
+
 - Installing the receptor collection dependency from the `requirements.yml` file consistently retrieves the receptor version specified there. Additionally, it retrieves any other collection dependencies that might be needed in the future.
 - Install the receptor collection on all nodes where your playbook will run, otherwise an error occurs.
 
@@ -119,19 +123,21 @@ sudo firewall-cmd --permanent --zone=public --add-port=27199/tcp
 ```
 ansible-playbook -i inventory.yml install_receptor.yml
 ```
+
 Note:
 OpenSSL is required for this playbook. You can install it by running the following command:
 
 ```
 openssl -v
 ```
+
 If it returns then a version OpenSSL is installed. Otherwise you need to install OpenSSL with:
 
 ```
 sudo dnf install -y openssl
 ```
-After this playbook runs, your automation mesh is configured.
 
+After this playbook runs, your automation mesh is configured.
 
 ![Instances list view](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/instances_list_view2.png)
 Note:

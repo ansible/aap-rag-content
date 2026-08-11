@@ -20,6 +20,7 @@ If a collection has been signed by automation hub, the server provides ASCII arm
 ```
 gpg --import --no-default-keyring --keyring ~/.ansible/pubring.kbx my-public-key.asc
 ```
+
 Note:
 In addition to any signatures provided by automation hub, signature sources can also be provided in the requirements file and on the command line. Signature sources should be URIs.
 
@@ -31,6 +32,7 @@ ansible-galaxy collection install namespace.collection
 --signature https://examplehost.com/detached_signature.asc
 --signature file:///path/to/local/detached_signature.asc --keyring ~/.ansible/pubring.kbx
 ```
+
 You can use this option multiple times to provide multiple signatures.
 
 3.  Confirm that the collections in a requirements file list any additional signature sources following the collection’s signatures key, as in the following example.
@@ -46,6 +48,7 @@ signatures:
 
 ansible-galaxy collection verify -r requirements.yml --keyring ~/.ansible/pubring.kbx
 ```
+
 When you install a collection from automation hub, the signatures provided by the server are saved along with the installed collections to verify the collection’s authenticity.
 
 4.  (Optional) If you need to verify the internal consistency of your collection again without querying the Ansible Galaxy server, run the same command you used previously using the `--offline` option.

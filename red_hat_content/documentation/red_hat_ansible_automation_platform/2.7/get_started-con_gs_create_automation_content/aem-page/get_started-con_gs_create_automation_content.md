@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/get_started-con_gs_create_automation_content/aem-page/get_started-con_gs_create_automation_content.html"
 last_crumb = "Create automation content with playbooks"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Create automation content with playbooks"
 oversized = "false"
@@ -38,7 +38,6 @@ A playbook contains one or more plays. A basic play contains the following param
 - **Become statements**: this optional statement can be set to `true` or `yes` to enable privilege escalation using a become plugin (such as `sudo`, `su`, `pfexec`, `doas`, `pbrun`, `dzdo`, `ksu`).
 - **Tasks**: this is the list of actions that get executed against each host in the play.
 
-
 Here is an example of a play in a playbook. You can see the name of the play, the host, and the list of tasks included in the play.
 
 ```
@@ -63,6 +62,7 @@ Here is an example of a play in a playbook. You can see the name of the play, th
         job_type: run
         state: present
 ```
+
 For more detailed guidance on authoring playbooks, consult the following documentation:
 
 - Developing automation content

@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_types_of_workloads"
 title = "Workload types and access methods - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_types_of_workloads"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_types_of_workloads/", "Workload types and access methods"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-assembly_types_of_workloads/aem-page/optimize-assembly_types_of_workloads.html"
 last_crumb = "Workload types and access methods"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Workload types and access methods"
 oversized = "false"
@@ -66,7 +66,6 @@ You can use the API to automate the following tasks:
 - Pushing events into an Event Stream for Event-Driven Ansible
 - Automating the upload or publication of collections in automation hub
 - Managing automation execution environments in the automation hub container registry using a Podman client that connects to automation hub over its registry API
-
 
 API clients apply load to the platform gateway proxy, the gRPC service for authentication, the web server of the targeted component, and the database, because most API client queries interact with the database.
 

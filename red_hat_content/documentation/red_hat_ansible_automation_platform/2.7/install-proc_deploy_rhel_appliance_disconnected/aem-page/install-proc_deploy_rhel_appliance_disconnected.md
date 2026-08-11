@@ -1,7 +1,7 @@
 +++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_deploy_rhel_appliance_disconnected"
 template = "docs/aem-title.html"
 title = "Deploy a RHEL appliance in a disconnected environment - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_deploy_rhel_appliance_disconnected"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_self_service_rhel_appliances/", "Deploy Ansible automation portal RHEL appliance"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_deploy_rhel_appliance_disconnected/aem-page/install-proc_deploy_rhel_appliance_disconnected.html"
 last_crumb = "Deploy a RHEL appliance in a disconnected environment"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Deploy a RHEL appliance in a disconnected environment"
 oversized = "false"
@@ -35,7 +35,7 @@ Deploy the Ansible automation portal RHEL appliance in a disconnected or air-gap
 - You have a method to transfer the disk image to the disconnected environment (for example, removable media, secure file transfer, or an internal mirror registry).
 - You have a virtualization platform available in the disconnected environment (Red Hat OpenShift Virtualization, VMware vSphere, or KVM).
 - You have network connectivity from the appliance to your Ansible Automation Platform instance (internal network).
-- You have Ansible Automation Platform credentials: host URL, API token, OAuth client ID, and OAuth client secret. See [Pre-installation configuration](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/html/installing_self-service_automation_portal/self-service-preinstall-config_aap-self-service-install) in the installation guide.
+- You have Ansible Automation Platform credentials: host URL, API token, OAuth client ID, and OAuth client secret. See [Prerequisites for deploying Ansible automation portal on RHEL](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_self_service_rhel_prerequisites "Before you deploy an Ansible automation portal RHEL appliance, verify that your environment meets the system, network, and access requirements.").
 - You have an SSH key pair for appliance access.
 
 ## About this task
@@ -95,12 +95,12 @@ Deploy the appliance
 
   - For RHEL with KVM, see [Install Ansible automation portal on RHEL with KVM](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_install_kvm "Deploy the Ansible automation portal appliance on a RHEL 9 host with KVM using virt-install.").
   - For Red Hat OpenShift Virtualization, see [Install Ansible automation portal on Red Hat OpenShift Virtualization](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_install_openshift_virt "Deploy the Ansible automation portal appliance on Red Hat OpenShift Virtualization to run the portal as a virtual machine alongside container workloads within your Red Hat OpenShift Container Platform cluster.").
-  - For VMware vSphere, see [Install Ansible automation portal on VMware vSphere](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_install_vmware "Deploy the Ansible automation portal appliance on VMware vSphere using the vSphere web client.").
+  - For VMware vSphere, see [Install Ansible automation portal on VMware vSphere](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_install_vmware "Deploy the Ansible automation portal appliance on VMware vSphere.").
 
 Configure the appliance
 
-3.  Provide initial configuration through cloud-init, VMware `guestinfo` properties, or a pre-seeded configuration file.
-      The cloud-init configuration for a disconnected deployment is the same as a connected deployment. Use the templates from [Configure the appliance at first boot](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_initial_config_wizard "Provide initial configuration for the Ansible automation portal appliance so that portal services can start and connect to Ansible Automation Platform.").
+3.  Provide initial configuration through cloud-init (via ISO or VMware `guestinfo`), or a pre-seeded configuration file.
+      The `cloud-init` configuration for a disconnected deployment is the same as a connected deployment. Use the templates from [Prerequisites for deploying Ansible automation portal on RHEL](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_self_service_rhel_prerequisites "Before you deploy an Ansible automation portal RHEL appliance, verify that your environment meets the system, network, and access requirements.").
 
     The following differences apply in a disconnected environment:
 
@@ -131,6 +131,9 @@ Configure the appliance
     admin_password: "auto"
 ```
 
+  Important:
+      Set `users[].name` to `admin`. The appliance first-boot script expects this username. Using a different username prevents the appliance from detecting your SSH keys and configuring portal services.
+
 Verify the installation
 
 4.  SSH into the Ansible automation portal RHEL appliance:
@@ -146,6 +149,7 @@ $ ssh <username>@<appliance-ip>
 ```terminal
 $ sudo systemctl status portal postgres devtools
 ```
+
     All three services (portal, postgres, devtools) should show `active (running)`.
 
     Alternatively, use the portal management CLI for detailed diagnostics:
@@ -167,6 +171,7 @@ $ curl -fk https://<appliance-address>
 ```terminal
 $ sudo podman exec portal ls /opt/app-root/src/dynamic-plugins-root/
 ```
+
     You should see plugin directories listed. These plugins were loaded from the pre-baked files at `/usr/share/portal/plugins/`, not from a registry.
 
 Set up registry credentials for upgrades (optional)
@@ -177,6 +182,7 @@ Set up registry credentials for upgrades (optional)
 ```terminal
 $ sudo podman login --authfile /etc/ostree/auth.json registry.redhat.io
 ```
+
     The `/etc/ostree/auth.json` file is what `bootc upgrade` and `bootc switch` use for registry authentication.
 
     If no registry is available for image upgrades, you can bypass the registry authentication gate:
@@ -184,6 +190,7 @@ $ sudo podman login --authfile /etc/ostree/auth.json registry.redhat.io
 ```terminal
 $ sudo touch /etc/portal/.registry-auth-override
 ```
+
     This override marker allows the appliance to start without registry credentials. It is preserved across backups, restores, and bootc upgrades.
 
 ## Results
@@ -193,4 +200,4 @@ $ sudo touch /etc/portal/.registry-auth-override
 
 ## What to do next
 
-For appliance upgrades in disconnected environments, see [Upgrade the appliance in a disconnected environment](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_rhel_upgrade_disconnected "In disconnected environments, you can upgrade the Ansible automation portal RHEL appliance using a mirror registry. Configure the mirror registry so that bootc upgrade pulls images from your internal registry instead of registry.redhat.io.").
+For appliance upgrades in disconnected environments, see [Upgrade the appliance in a disconnected environment](/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-proc_self_service_rhel_upgrade#proc-self-service-rhel-upgrade-disconnected "In disconnected environments, you can upgrade the Ansible automation portal RHEL appliance using a mirror registry or by transferring OCI archives directly. Configure the mirror registry so that bootc upgrade pulls images from your internal registry instead of registry.redhat.io.").

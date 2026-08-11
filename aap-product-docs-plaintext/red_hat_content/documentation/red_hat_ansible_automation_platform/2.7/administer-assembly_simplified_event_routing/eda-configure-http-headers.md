@@ -1,9 +1,10 @@
 # Respond to events from external systems
-## Configuring HTTP headers securely for event streams
+## Event streams
+### Configuring HTTP headers securely for event streams
 
 To enhance event stream security, you must explicitly define which HTTP headers are passed. These headers carry the critical context and authentication data required for processing.
 
-### Procedure
+#### Procedure
 
 1.  To include all HTTP headers, enter an asterisk (*) in the Headers field. This allows all HTTP headers with the exception of a few headers:
 

@@ -8,7 +8,7 @@ The `AAPTokenField` is a secure authentication field used in backstage scaffolde
 
 **AAPTokenField Properties**
 
-The following table details the field’s properties for use in a template’s properties section.
+The following table details the field's properties for use in a template's properties section.
 
 | Property                        | Type        | Description                                                                                                                               |
 | ------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
@@ -17,28 +17,32 @@ The following table details the field’s properties for use in a template’s p
 | <br> `ui:field`                 | <br>string  | <br>Must be set to `AAPTokenField`. This setting instructs Backstage to render a custom react component instead of a default input field. |
 | <br> `ui:backstage.review.show` | <br>boolean | <br>If `true`, this field appears in the **Review** step before scaffolding executes. The default value is `true`.                        |
 
-
 **Authentication flow and token management**
 
-All `rhaap:*` actions require an OAuth2 token for authenticating with Ansible Automation Platform. The field manages the token through the following process:
+All `rhaap:*` actions require an OAuth2 token for authenticating with Ansible Automation Platform. The token is always stored in the Backstage secrets context as `aapToken` and referenced in template steps as `${{ secrets.aapToken }}`.
 
-- Token Source: The token is automatically obtained from the Ansible Automation Platform OAuth2 authentication provider.
-- Storage: The token is stored securely in Backstage secrets or fetched through the `@ansible/backstage-plugin-auth-backend-module-rhaap-provider`.
-- Usage: The token is passed to each action using the `token` input parameter.
+How the token reaches the secrets context depends on the deployment model:
 
+- **Ansible automation portal (Create Task):** The portal automatically injects the token into `secrets.aapToken` when the user submits the form. You do not need to declare `AAPTokenField` in the template parameters — the token is handled transparently.
+- **Ansible plug-ins for Red Hat Developer Hub:** The standard Backstage scaffolder does not auto-inject the token. You must include `AAPTokenField` in the template parameters to trigger the OAuth popup and populate `secrets.aapToken`.
 
-When the RHAAP auth provider is used, the token is injected automatically and can be referenced in the workflow steps as shown:
+Important:
+
+Starting in Ansible Backstage Plugins v2.2.0, the portal no longer passes the OAuth token in template form values. Do not use `${{ parameters.token }}` in `rhaap:*` action steps — `AAPTokenField` stores a masked display value in form parameters. Always use `${{ secrets.aapToken }}` to access the real OAuth token.
+
+When the RHAAP auth provider is used, the token is referenced in the workflow steps as shown:
 
 ```
 - id: create-project
 action: rhaap:create-project
 input:
-token: ${{ parameters.AAP_TOKEN }}
+token: ${{ secrets.aapToken }}
 # ... other inputs
 ```
+
 **Example**
 
-The following example shows how to declare and reference the AAPTokenField within a backstage template. Note that `ui:widget: hidden` and `ui:backstage: review: show: false` are used to ensure the token is not exposed in the UI.
+The following example shows how to declare `AAPTokenField` for Ansible plug-ins for Red Hat Developer Hub deployments. For Ansible automation portal deployments, the authentication section is optional.
 
 ```
 apiVersion: scaffolder.backstage.io/v1beta3
@@ -64,9 +68,10 @@ steps:
 name: Launch AAP Job Template
 action: rhaap:launch-job-template
 input:
-token: ${{ parameters.token }}
+token: ${{ secrets.aapToken }}
 ...
 ```
+
 **Error and validation handling**
 
 All `rhaap:*` actions include built-in validation and user-friendly error reporting:
@@ -92,7 +97,6 @@ The following table details the essential properties for configuring the resourc
 | <br> `idKey`       | <br>string | <br>The property name used to retrieve the resource ID (default: “id”).                                                                                |
 | <br> `nameKey`     | <br>string | <br>The property name used to display the resource name in the list (default: “name”).                                                                 |
 | <br> `type`        | <br>string | <br>Set to “array” for a multi-select field; omit this property for a single-select field.                                                             |
-
 
 **Example**
 

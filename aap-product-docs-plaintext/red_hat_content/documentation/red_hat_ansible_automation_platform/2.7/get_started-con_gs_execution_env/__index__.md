@@ -15,6 +15,5 @@ Automation execution environments contain:
 - System dependencies
 - Custom user needs
 
-
 You can either use the default base execution environment included in your Ansible Automation Platform subscription, or you can define and create an automation execution environment using Ansible Builder.
 

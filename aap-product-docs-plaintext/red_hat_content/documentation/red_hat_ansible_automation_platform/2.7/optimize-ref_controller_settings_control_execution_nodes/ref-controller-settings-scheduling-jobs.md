@@ -9,7 +9,6 @@ The task manager periodically collects tasks that need to be scheduled and deter
 2. Update the job’s status to waiting.
 3. Message the control node through `pg_notify` for the dispatcher to pick up the task and start running it.
 
-
 If the scheduling task is not completed within `TASK_MANAGER_TIMEOUT` seconds (default 300 seconds), the task is terminated early. Timeout issues generally arise when there are thousands of pending jobs.
 
 One way the task manager limits how much work it can do in a single run is the `START_TASK_LIMIT` setting. This limits how many jobs it can start in a single run. The default is 100 jobs. If more jobs are pending, a new scheduler task is scheduled to run immediately after. Users who are willing to have potentially longer latency between when a job is launched and when it starts, to have greater overall throughput, can consider increasing the `START_TASK_LIMIT`. To see how long individual runs of the task manager take, use the Prometheus metric `task_manager__schedule_seconds`, available in `/api/v2/metrics`.

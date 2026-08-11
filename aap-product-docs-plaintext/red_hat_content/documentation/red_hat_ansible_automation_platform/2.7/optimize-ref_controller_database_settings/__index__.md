@@ -26,6 +26,7 @@ If you update your systems without the OpenSSL patch, you are not impacted, and 
 ```
 Total RAM * 0.25 / max_connections
 ```
+
 Note:
 Setting a large `work_mem` can cause the PostgreSQL server to go out of memory (OOM) if there are too many open connections to the database.
 
@@ -35,6 +36,7 @@ Setting a large `work_mem` can cause the PostgreSQL server to go out of memory (
 ```
 Total RAM * 0.05
 ```
+
 Note:
 Set `maintenance_work_mem` higher than `work_mem` to improve performance for vacuuming.
 

@@ -1,16 +1,16 @@
 +++
+template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_event_filter_plugins"
 title = "Filter events before triggering automation - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_user_guide_overview/", "Trigger automation from events with Event-Driven Ansible"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_event_filter_plugins/", "Filter events before triggering automation"]]
 category = "Administer"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_event_filter_plugins/aem-page/administer-assembly_eda_event_filter_plugins.html"
 last_crumb = "Filter events before triggering automation"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Filter events before triggering automation"
 oversized = "false"
@@ -38,7 +38,6 @@ Events are defined as python code and distributed as collections. The default ED
 | <br>ansible.eda.insert\_hosts\_to\_meta | <br>This filter is used to add host information into the event so that ansible-rulebook can locate it and use it |
 | <br>ansible.eda.normalize\_keys         | <br>This filter is used if you want to change non alpha numeric keys to underscore                               |
 
-
 You can chain event filters one after the other, and the updated data is sent from one filter to the next. Event filters are defined in the rulebook after a source is defined. When the rulebook starts the source plugin it associates the correct filters and transforms the data before putting it into the queue.
 
 ```
@@ -53,6 +52,7 @@ sources:
           exclude_keys: ['*_url', '_links', 'base', 'sender', 'owner', 'user']
       - dashes_to_underscores:
 ```
+
 In this example the data is first passed through the `json_filter` and then through the `dashes_to_underscores` filter. In the event payload, keys can only contain letters, numbers, and underscores. The period (.) is used to access nested keys.
 
 Since every event should record the origin of the event the filter `eda.builtin.insert_meta_info` is added automatically by ansible-rulebook to add the `source name`, `type`, and `received_at`. The `received_at` stores a date time in UTC ISO8601 format and includes the microseconds. The `uuid` stores the unique id for the event. The `meta key` is used to store metadata about the event and its needed to correctly report about the events in the aap-server.
@@ -69,6 +69,7 @@ The basic structure follows:
      # Process event data here
      return event
 ```
+
 You can use this filter in a rulebook by adding it to the filters list in an event source:
 
 ```

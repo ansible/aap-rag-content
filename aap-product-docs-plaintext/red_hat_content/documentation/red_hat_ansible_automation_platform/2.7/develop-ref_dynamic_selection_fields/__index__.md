@@ -38,4 +38,5 @@ enum: ['5.7', '8.0']
 title: MySQL version
 default: '8.0'
 ```
+
 Each `if`/`then` block in the `allOf` array matches one `enum` value. Selecting "PostgreSQL" shows the PostgreSQL version list; selecting "MySQL" replaces it with the MySQL version list.

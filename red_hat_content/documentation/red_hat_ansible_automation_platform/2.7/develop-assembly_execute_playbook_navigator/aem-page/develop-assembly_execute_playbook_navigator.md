@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_execute_playbook_navigator"
 title = "Run playbooks locally with automation content navigator - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_intro_navigator/", "Emulate a platform environment locally with automation content navigator"]]
@@ -10,7 +10,7 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_execute_playbook_navigator/aem-page/develop-assembly_execute_playbook_navigator.html"
 last_crumb = "Run playbooks locally with automation content navigator"
-modified = "2026-06-05T07:48:10.594Z"
+modified = "2026-07-30T17:12:56.473Z"
 multi_page_path = ""
 name = "Run playbooks locally with automation content navigator"
 oversized = "false"
@@ -147,6 +147,7 @@ Use the automation content navigator interactive interface to review Ansible set
 ```
 $ ansible-navigator
 ```
+
     Optional: type `ansible-navigator config` from the command line to access the Ansible configuration settings.
 
 2.  Review the Ansible configuration.
@@ -173,6 +174,7 @@ ANSIBLE COW ACCEPTLIST (current: ['bud-frogs', 'bunny', 'cheese']) (default:
  8│- cheese
  9│- daemon
 ```
+
     The output shows the current `setting` as well as the `default`. Note the `source` in this example is `env` since the setting comes from the automation execution environments.
 
 #### Results
