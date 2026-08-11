@@ -71,7 +71,7 @@ dev = [
     "black",
     "chardet==5.2.0",
     "cryptography>=50.0.0,<51", # Transient dep pinned to handle CVE
-    "faiss-cpu==1.12",
+    "faiss-cpu==1.15.0",
     "filelock==3.32.2",
     "llama-stack-client==0.4.3",
     "llama-stack==0.4.3",
