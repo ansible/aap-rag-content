@@ -76,7 +76,7 @@ dev = [
     "llama-stack-client==0.4.3",
     "llama-stack==0.4.3",
     "llama-stack-api==0.4.4",  # Must match llama-stack version
-    "openai>=2,<3",  # llama-stack 0.4.x is incompatible with openai 3.x (httpx vs httpx2)
+    "openai>=3,<4",  # llama-stack 0.4.x is incompatible with openai 3.x (httpx vs httpx2)
     "mypy",
     "pillow==12.3.0", # Transient dep pinned to handle CVE (CVE-2026-40192, CVE-2026-59197, CVE-2026-54058, CVE-2026-54060, CVE-2026-55380, CVE-2026-55379)
     "pyjwt>=2.13.0",  # Transient dep pinned for CVE-2026-48526
