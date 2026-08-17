@@ -1,4 +1,4 @@
-FROM registry.redhat.io/lightspeed-core/rag-tool-rhel9:v0.5-latest@sha256:3e773c7603606c0615e511f431295b976f8afe3acbc670df52a8e11598de50b8 as builder
+FROM quay.io/lightspeed-core/rag-content-cpu:dev-20260402-09f33f8 as builder
 ARG EMBEDDING_MODEL=sentence-transformers/all-mpnet-base-v2
 ARG AAP_VERSION=2.6
 
