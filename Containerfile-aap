@@ -1,3 +1,5 @@
+# TODO: This tag (dev-20260402-09f33f8) aligns with version 0.5.0.
+#       We will update it once the Lightspeed team provides a more descriptive tag.
 FROM quay.io/lightspeed-core/rag-content-cpu:dev-20260402-09f33f8 as builder
 ARG EMBEDDING_MODEL=sentence-transformers/all-mpnet-base-v2
 ARG AAP_VERSION=2.6
