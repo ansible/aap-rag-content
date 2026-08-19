@@ -1,4 +1,5 @@
-FROM quay.io/lightspeed-core/rag-content-cpu as builder
+# Note: This hash aligns with lightspeed-core/rag-content version 0.5.0.
+FROM quay.io/lightspeed-core/rag-content-cpu@sha256:8816c11286ce4a260e5b7fbf9ee8b305459aab4458cef0ff7983dd6cb4502de7 as builder
 ARG EMBEDDING_MODEL=sentence-transformers/all-mpnet-base-v2
 ARG AAP_VERSION=2.6
 
