@@ -3,5 +3,11 @@
   "lockFileMaintenance": {
     "enabled": true,
     "automerge": false
-  }
+  },
+  "packageRules": [
+    {
+      "matchPackageNames": ["python", "openai"],
+      "enabled": false
+    }
+  ]
 }
