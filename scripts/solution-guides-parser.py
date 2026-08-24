@@ -45,8 +45,8 @@ class SolutionGuidesParser:
         resolved = os.path.realpath(path)
         if resolved != root and os.path.commonpath([resolved, root]) != root:
             raise ValueError(f"Refusing to create directory outside output root: {path}")
-        if not os.path.isdir(path):
-            os.makedirs(path)
+        if not os.path.isdir(resolved):
+            os.makedirs(resolved)
 
     def _build_web_url(self, source_file):
         """Return the GitHub Pages URL for a source file."""
