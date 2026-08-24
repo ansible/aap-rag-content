@@ -36,17 +36,10 @@ class SolutionGuidesParser:
         self.out_dir = resolve_output_path(out_dir)
         self.metadata_dir = os.path.join(self.out_dir, ".metadata")
 
-        self._ensure_dir(self.out_dir)
-        self._ensure_dir(self.metadata_dir)
-
-    def _ensure_dir(self, path):
-        """Create dir, asserting it resolves within out_dir before touching disk."""
-        root = os.path.realpath(self.out_dir)
-        resolved = os.path.realpath(path)
-        if resolved != root and os.path.commonpath([resolved, root]) != root:
-            raise ValueError(f"Refusing to create directory outside output root: {path}")
-        if not os.path.isdir(resolved):
-            os.makedirs(resolved)
+        if not os.path.isdir(self.out_dir):
+            os.makedirs(self.out_dir)
+        if not os.path.isdir(self.metadata_dir):
+            os.makedirs(self.metadata_dir)
 
     def _build_web_url(self, source_file):
         """Return the GitHub Pages URL for a source file."""
