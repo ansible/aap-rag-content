@@ -8,6 +8,10 @@
     {
       "matchPackageNames": ["python", "openai"],
       "enabled": false
+    },
+    {
+      "matchDatasources": ["pypi"],
+      "enabled": false
     }
   ]
 }
