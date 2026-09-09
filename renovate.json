@@ -3,5 +3,22 @@
   "lockFileMaintenance": {
     "enabled": true,
     "automerge": false
-  }
+  },
+  "packageRules": [
+    {
+      "description": "python Docker tag is managed manually; Renovate keeps proposing major version jumps (#455)",
+      "matchPackageNames": ["python"],
+      "enabled": false
+    },
+    {
+      "description": "openai is capped at <3 in pyproject: llama-stack 0.4.x is incompatible with openai 3.x. Cap Renovate to match so it stops proposing v3 (#434); 2.x updates still flow.",
+      "matchPackageNames": ["openai"],
+      "allowedVersions": "<3"
+    },
+    {
+      "description": "sentence-transformers v6 is a breaking major requiring manual validation (#447); 5.x updates still flow.",
+      "matchPackageNames": ["sentence-transformers"],
+      "allowedVersions": "<6"
+    }
+  ]
 }
