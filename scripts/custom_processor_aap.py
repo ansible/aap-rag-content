@@ -82,6 +82,13 @@ class AAPMetadataProcessor(MetadataProcessor):
 def main():
     """Main function to process AAP documentation and generate vector database."""
     parser = utils.get_common_arg_parser()
+    # suppress-ping-url is not yet in the container image's get_common_arg_parser
+    parser.add_argument(
+        "--suppress-ping-url",
+        action="store_true",
+        default=False,
+        help="Skip URL reachability check and assume all URLs are reachable.",
+    )
     args = parser.parse_args()
 
     # Instantiate custom Metadata Processor
