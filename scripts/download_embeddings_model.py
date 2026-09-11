@@ -3,8 +3,16 @@
 import argparse
 import os
 import shutil
+from pathlib import Path
 
-from aap_rag_content.utils import resolve_within_cwd
+
+def resolve_within_cwd(path: str) -> str:
+    """Resolve a CLI-supplied path and reject it if it escapes the working directory."""
+    base = Path.cwd().resolve()
+    resolved = (base / path).resolve()
+    if resolved != base and base not in resolved.parents:
+        raise ValueError(f"Path escapes the working directory: {path}")
+    return str(resolved)
 
 
 def download_model(local_dir: str, hf_repo_id: str) -> str:
