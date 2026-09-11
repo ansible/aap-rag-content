@@ -34,6 +34,22 @@ SOURCE_FILES = _mod.SOURCE_FILES
 _urllib_request = _mod.urllib.request
 
 
+class TestResolveOutputPath:
+    """Test cases for the resolve_output_path helper."""
+
+    def test_relative_path_within_cwd(self, tmp_path, monkeypatch):
+        """A relative path that stays inside cwd is returned as an absolute path."""
+        monkeypatch.chdir(tmp_path)
+        result = _mod.resolve_output_path("subdir/output")
+        assert result == str(tmp_path / "subdir" / "output")
+
+    def test_relative_path_escaping_cwd_raises(self, tmp_path, monkeypatch):
+        """A relative path that escapes cwd raises ValueError."""
+        monkeypatch.chdir(tmp_path)
+        with pytest.raises(ValueError, match="escapes the working directory"):
+            _mod.resolve_output_path("../outside")
+
+
 class TestSolutionGuidesParserInit:
     """Test cases for SolutionGuidesParser initialization."""
 
