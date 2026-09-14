@@ -86,6 +86,11 @@ class SolutionGuidesParser:
         out_file = os.path.join(self.out_dir, source_file)
         with open(out_file, "w", encoding="utf-8") as f:
             for line in lines:
+                # Strip Liquid template tags (Jekyll directives, not content)
+                if line.strip() in ("{%- raw -%}", "{% raw %}", "{%- endraw -%}", "{% endraw %}"):
+                    continue
+                # Strip Arcade embed blocks (interactive demo iframes, not content)
+                line = re.sub(r"<!--ARCADE EMBED START-->.*?<!--ARCADE EMBED END-->", "", line)
                 line = re.sub(r"<img\s[^>]*>", "", line)
                 # Strip linked images ([![...](...)](#...)) before plain images
                 line = re.sub(r"\[!\[[^\]]*\]\([^)]*\)\]\([^)]*\)", "", line)

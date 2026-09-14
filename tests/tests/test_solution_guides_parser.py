@@ -176,6 +176,50 @@ class TestParseFile:
         assert "[![" not in result
         assert "![" not in result
 
+    def test_parse_file_strips_liquid_raw_tags(self, tmp_path):
+        """Test that Liquid {% raw %} / {% endraw %} template tags are removed."""
+        repo_dir = tmp_path / "repo"
+        out_dir = tmp_path / "out"
+        repo_dir.mkdir()
+        source = repo_dir / "test.md"
+        source.write_text(
+            "{% raw %}\n# Title\nContent here.\n{% endraw %}\n",
+            encoding="utf-8",
+        )
+
+        parser = SolutionGuidesParser(str(repo_dir), str(out_dir))
+        parser._parse_file("test.md")
+
+        result = (out_dir / "test.md").read_text(encoding="utf-8")
+        assert "{% raw %}" not in result
+        assert "{% endraw %}" not in result
+        assert "# Title" in result
+        assert "Content here." in result
+
+    def test_parse_file_strips_arcade_embed(self, tmp_path):
+        """Test that Arcade embed iframe blocks are removed."""
+        repo_dir = tmp_path / "repo"
+        out_dir = tmp_path / "out"
+        repo_dir.mkdir()
+        source = repo_dir / "test.md"
+        source.write_text(
+            "# Title\n"
+            "<!--ARCADE EMBED START-->"
+            '<div><iframe src="https://demo.arcade.software/abc" title="Demo">'
+            "</iframe></div>"
+            "<!--ARCADE EMBED END-->\n"
+            "Real content.\n",
+            encoding="utf-8",
+        )
+
+        parser = SolutionGuidesParser(str(repo_dir), str(out_dir))
+        parser._parse_file("test.md")
+
+        result = (out_dir / "test.md").read_text(encoding="utf-8")
+        assert "ARCADE EMBED" not in result
+        assert "<iframe" not in result
+        assert "Real content." in result
+
     def test_parse_file_writes_metadata_json(self, tmp_path):
         """Test that metadata JSON is written with correct title, url, path."""
         repo_dir = tmp_path / "repo"

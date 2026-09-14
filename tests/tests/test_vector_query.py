@@ -61,7 +61,10 @@ SOLUTION_GUIDE_QUERIES = {
         "expected_url": SOLUTION_GUIDE_URL_PREFIX + "README-AIOps-ServiceNow",
     },
     "rhaiis": {
-        "query": "Red Hat AI Inference Server",
+        # "Red Hat AI Inference Server" alone also matches the AIOps and IA guides
+        # (both cover Red Hat AI infrastructure semantically); use the more specific
+        # query that matches the guide's actual title.
+        "query": "configure Ansible Lightspeed with Red Hat AI Inference Server",
         "expected_url": SOLUTION_GUIDE_URL_PREFIX + "README-Intelligent-Assistant-RHAIIS",
     },
 }

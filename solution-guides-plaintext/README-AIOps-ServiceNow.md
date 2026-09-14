@@ -1,4 +1,3 @@
-{% raw %}
 # Unlock AIOps with ServiceNow LEAP and Ansible MCP server - Solution Guide <!-- omit in toc -->
 
 
@@ -442,4 +441,3 @@ ServiceNow LEAP helps operations teams move from “we have incidents” to “w
 ---
 
 
-{% endraw %}
