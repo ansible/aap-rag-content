@@ -96,9 +96,27 @@ def _load_built_vector_db(db_path):
     conn = sqlite3.connect(str(db_path))
     try:
         cursor = conn.cursor()
-        cursor.execute("SELECT value FROM kvstore WHERE key LIKE 'faiss_index:%'")
-        row = cursor.fetchone()
+        # LlamaStack ≥ 0.2 stores the index with key 'faiss_index:v3::<uuid>';
+        # older builds stored it as 'faiss_index:<bank_id>' or with a namespace
+        # prefix.  Search broadly so both formats are handled.
+        try:
+            cursor.execute("SELECT value FROM kvstore WHERE key LIKE '%faiss_index%'")
+            row = cursor.fetchone()
+        except sqlite3.OperationalError:
+            row = None
         if row is None:
+            # Emit the actual table contents so the key format is visible in
+            # the build log when the assertion fails.
+            try:
+                cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
+                tables = [r[0] for r in cursor.fetchall()]
+                print(f"\n[debug] DB tables: {tables}", flush=True)
+                for t in tables:
+                    cursor.execute(f"SELECT key FROM {t}")  # noqa: S608
+                    keys = [r[0] for r in cursor.fetchall()]
+                    print(f"[debug] Table '{t}' keys: {keys}", flush=True)
+            except Exception as exc:  # noqa: BLE001
+                print(f"[debug] Could not list DB contents: {exc}", flush=True)
             return None, None
 
         data = json.loads(row[0])
