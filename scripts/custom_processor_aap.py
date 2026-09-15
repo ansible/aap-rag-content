@@ -9,9 +9,9 @@ import functools
 import json
 from pathlib import Path
 
-from aap_rag_content import utils
-from aap_rag_content.document_processor import DocumentProcessor
-from aap_rag_content.metadata_processor import MetadataProcessor
+from lightspeed_rag_content import utils
+from lightspeed_rag_content.document_processor import DocumentProcessor
+from lightspeed_rag_content.metadata_processor import MetadataProcessor
 
 # Folders where AAP product documentation markdown (.md) files are stored.
 AAP_PRODUCT_DOCS = [
@@ -44,7 +44,8 @@ class AAPMetadataProcessor(MetadataProcessor):
     """
 
     def __init__(self, suppress_ping_url: bool = False):
-        super().__init__(suppress_ping_url=suppress_ping_url)
+        super().__init__()
+        self.suppress_ping_url = suppress_ping_url
 
     @functools.lru_cache(maxsize=None)
     def _load_metadata(self, file_path_str: str) -> dict:
@@ -82,6 +83,13 @@ class AAPMetadataProcessor(MetadataProcessor):
 def main():
     """Main function to process AAP documentation and generate vector database."""
     parser = utils.get_common_arg_parser()
+    # suppress-ping-url is not yet in the container image's get_common_arg_parser
+    parser.add_argument(
+        "--suppress-ping-url",
+        action="store_true",
+        default=False,
+        help="Skip URL reachability check and assume all URLs are reachable.",
+    )
     args = parser.parse_args()
 
     # Instantiate custom Metadata Processor

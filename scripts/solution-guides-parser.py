@@ -10,7 +10,16 @@ import time
 import urllib.error
 import urllib.request
 
-from aap_rag_content.utils import resolve_output_path
+
+def resolve_output_path(path: str) -> str:
+    """Validate a CLI-supplied output path, rejecting relative ``..`` escapes."""
+    if os.path.isabs(path):
+        return os.path.normpath(path)
+    base = os.getcwd()
+    resolved = os.path.normpath(os.path.join(base, path))
+    if resolved != base and not resolved.startswith(base + os.sep):
+        raise ValueError(f"Path escapes the working directory: {path}")
+    return resolved
 
 SOLUTION_GUIDES_REPO_URL = "https://github.com/ansible-tmm/solution-guides/"
 SOLUTION_GUIDES_WEB_PAGE = "https://ansible-tmm.github.io/solution-guides/"
@@ -77,6 +86,11 @@ class SolutionGuidesParser:
         out_file = os.path.join(self.out_dir, source_file)
         with open(out_file, "w", encoding="utf-8") as f:
             for line in lines:
+                # Strip Liquid template tags (Jekyll directives, not content)
+                if line.strip() in ("{%- raw -%}", "{% raw %}", "{%- endraw -%}", "{% endraw %}"):
+                    continue
+                # Strip Arcade embed blocks (interactive demo iframes, not content)
+                line = re.sub(r"<!--ARCADE EMBED START-->.*?<!--ARCADE EMBED END-->", "", line)
                 line = re.sub(r"<img\s[^>]*>", "", line)
                 # Strip linked images ([![...](...)](#...)) before plain images
                 line = re.sub(r"\[!\[[^\]]*\]\([^)]*\)\]\([^)]*\)", "", line)
