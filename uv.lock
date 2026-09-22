@@ -60,7 +60,7 @@ dev = [
     { name = "filelock", specifier = "==3.32.7" },
     { name = "llama-stack", specifier = ">=0.5.2,<0.6" },
     { name = "llama-stack-api", specifier = ">=0.5.2,<0.6" },
-    { name = "llama-stack-client", specifier = ">=0.5.2,<0.6" },
+    { name = "llama-stack-client", specifier = ">=0.7.5,<0.8" },
     { name = "mcp", specifier = ">=1.28.1,<2" },
     { name = "mypy" },
     { name = "openai", specifier = ">=2,<3" },
@@ -833,7 +833,7 @@ wheels = [
 
 [[package]]
 name = "llama-stack-client"
-version = "0.5.4"
+version = "0.7.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anyio" },
@@ -852,9 +852,9 @@ dependencies = [
     { name = "tqdm" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/41/f7/6378ae82adc9baf1f10f6a27279581b0fbb5e34df3be7448a840a2019bb1/llama_stack_client-0.5.4.tar.gz", hash = "sha256:89b274f46804f2e705d50716576dc6e4f63d15ae545b4eb2933f5caa490b4d8c", size = 368609, upload-time = "2026-06-26T22:03:51.514Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/dc/89/141b8b50fc9ec5e99d1cc0fcac096f48f7235d94088694b14298f0b8621f/llama_stack_client-0.7.5.tar.gz", hash = "sha256:80d419bbcb8b1cec2e190536e576576ed2fbbf47882465d72fc6061ef9dcadb2", size = 372960, upload-time = "2026-07-27T14:30:55.176Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/45/2e/4df65aa6b148a2f81409046206ba0fd2dadd8cbe555fe9f4e83b911c750e/llama_stack_client-0.5.4-py3-none-any.whl", hash = "sha256:6d910c51f917a9ab27b1ec5579fb9167184b9a3a5223abe5c34da123609caf7e", size = 391952, upload-time = "2026-06-26T22:03:49.718Z" },
+    { url = "https://files.pythonhosted.org/packages/a6/e1/01a1887689422da1f4e586c5362d2959317d1faee9cfee6e46d9b9ee772a/llama_stack_client-0.7.5-py3-none-any.whl", hash = "sha256:fd3fefff6c8edf18d3e6e3a951dae350b0f28a2b9ec6c9faa368d03f72a16db4", size = 375337, upload-time = "2026-07-27T14:30:53.62Z" },
 ]
 
 [[package]]
