@@ -1,4 +1,3 @@
-{% raw %}
 # Automated Incident Remediation with IBM Instana and Ansible Automation Platform - Solution Guide <!-- omit in toc -->
 
 <style>
@@ -915,4 +914,3 @@ Start capturing these metrics before enabling automated remediation -- having a 
 ---
 
 
-{% endraw %}

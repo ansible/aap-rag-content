@@ -1,4 +1,3 @@
-{% raw %}
 # AIOps automation with Ansible - Solution Guide <!-- omit in toc -->
 
 <style>
@@ -879,4 +878,3 @@ With this workflow in place, your team moves from manually triaging every alert 
 ---
 
 
-{% endraw %}

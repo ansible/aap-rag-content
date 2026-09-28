@@ -1,7 +1,6 @@
-{% raw %}
 # Configuring Ansible Lightspeed intelligent assistant with Red Hat AI Inference Server on RHEL <!-- omit in toc -->
 
-<!--ARCADE EMBED START--><div style="position: relative; padding-bottom: calc(56.4263% + 41px); height: 0px; width: 100%;"><iframe src="https://demo.arcade.software/VIH1fhi64QjLKTnOc9ri?embed&embed_mobile=tab&embed_desktop=inline&show_copy_link=true" title="Plugging Red Hat AI Inference Server into Ansible Lightspeed intelligent assistant" frameborder="0" loading="lazy" webkitallowfullscreen mozallowfullscreen allowfullscreen allow="clipboard-write" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; color-scheme: light;" ></iframe></div><!--ARCADE EMBED END-->
+
 
 The Ansible Lightspeed intelligent assistant is a generative AI service embedded directly into the Ansible Automation Platform UI. It offers on-demand expertise to help you administer and manage your automation, while removing some of the friction associated with onboarding, troubleshooting, and maintaining the platform. It provides direct access to trusted documentation and insights, helping you get up to speed with the platform faster, simplify administration, and resolve issues faster.
 
@@ -186,4 +185,3 @@ The Ansible Lightspeed intelligent assistant should now be ready for prompting i
 ---
 
 
-{% endraw %}

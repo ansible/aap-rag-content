@@ -13,15 +13,40 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
+import sys
+from types import ModuleType
+from unittest.mock import MagicMock
 
-class RagMockEmbedding:
-    """Mock class for HuggingFaceEmbedding."""
+try:
+    import lightspeed_rag_content  # noqa: F401
+except ImportError:
+    # lightspeed_rag_content is only available inside the container image.
+    # Install minimal stubs so tests can import custom_processor_aap.
 
-    def __init__(self, model_name="ABC", embed_dim=768):
-        """Initialize the mock class."""
-        self.model_name = model_name
-        self.embed_dim = embed_dim
+    class _MetadataProcessor:
+        def __init__(self, suppress_ping_url=False):
+            self.suppress_ping_url = suppress_ping_url
 
-    def get_text_embedding(self, text):
-        """Simulate the text embedding with the right size."""
-        return "A" * self.embed_dim
+        def ping_url(self, url):
+            return True
+
+        def populate(self, file_path):
+            url = self.url_function(file_path)
+            title = self.get_file_title(file_path)
+            url_reachable = True if self.suppress_ping_url else self.ping_url(url)
+            return {"docs_url": url, "title": title, "url_reachable": url_reachable}
+
+    _utils_mod = MagicMock()
+    _doc_proc_mod = MagicMock()
+    _meta_proc_mod = ModuleType("lightspeed_rag_content.metadata_processor")
+    _meta_proc_mod.MetadataProcessor = _MetadataProcessor  # type: ignore[attr-defined]
+
+    _pkg = ModuleType("lightspeed_rag_content")
+    _pkg.utils = _utils_mod  # type: ignore[attr-defined]
+    _pkg.document_processor = _doc_proc_mod  # type: ignore[attr-defined]
+    _pkg.metadata_processor = _meta_proc_mod  # type: ignore[attr-defined]
+
+    sys.modules["lightspeed_rag_content"] = _pkg
+    sys.modules["lightspeed_rag_content.utils"] = _utils_mod
+    sys.modules["lightspeed_rag_content.document_processor"] = _doc_proc_mod
+    sys.modules["lightspeed_rag_content.metadata_processor"] = _meta_proc_mod

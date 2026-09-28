@@ -1,4 +1,3 @@
-{% raw %}
 # AIOps with Splunk and Event-Driven Ansible - Solution Guide <!-- omit in toc -->
 
 <style>
@@ -1062,4 +1061,3 @@ The same pipeline applies across all three: Splunk detects, EDA triggers, AI enr
 ---
 
 
-{% endraw %}
