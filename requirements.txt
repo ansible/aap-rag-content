@@ -714,9 +714,9 @@ faiss-cpu==1.12.0 \
     --hash=sha256:fc98084076d0ceffcc3e306fd77ee22f91cc6143953e471c31c84cf2ddf68bb2 \
     --hash=sha256:ff7db774968210d08cd0331287f3f66a6ffef955a7aa9a7fcd3eb4432a4ce5f5
     # via aap-rag-content (pyproject.toml)
-fastapi==0.142.3 \
-    --hash=sha256:519ca478f8acacc2062f204cde0bc233119c413c78477ddce299db8c0d5792d1 \
-    --hash=sha256:5a27878d54a17627a849fc26096b9f37191106cab4b063ca60b0c7770ab39f9d
+fastapi==0.142.4 \
+    --hash=sha256:7fe2e254a0a948b88f432b02b8f627463285248233bba0998ed9640191e2ff57 \
+    --hash=sha256:8a651aa071a9f92c8217cca1d0b044bf9c326f336578be0a728a1a1f22ec52d2
     # via
     #   llama-stack
     #   llama-stack-api
