@@ -2,7 +2,7 @@
   "version": "1.1",
   "sections": [
     {
-      "title": "Authentication changes in Ansible Automation Platform 2.7",
+      "title": "Authentication and access management changes when upgrading to 2.7",
       "visible": true,
       "weight": 1,
       "urlFragment": "index",
@@ -32,14 +32,6 @@
           "urlFragment": "proc-prepare-gateway-accounts-upgrade",
           "anchor": null,
           "singlePageAnchor": "proc-prepare-gateway-accounts-upgrade"
-        },
-        {
-          "title": "Post-upgrade requirements",
-          "visible": true,
-          "weight": 4,
-          "urlFragment": "ref-post-upgrade-requirements",
-          "anchor": null,
-          "singlePageAnchor": "ref-post-upgrade-requirements"
         }
       ]
     }

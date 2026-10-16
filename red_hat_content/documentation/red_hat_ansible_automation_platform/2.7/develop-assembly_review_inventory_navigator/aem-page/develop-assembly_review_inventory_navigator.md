@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_review_inventory_navigator"
-template = "docs/aem-title.html"
 title = "View groups and hosts in your inventory - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_intro_navigator/", "Emulate a platform environment locally with automation content navigator"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_review_inventory_navigator/aem-page/develop-assembly_review_inventory_navigator.html"
 last_crumb = "View groups and hosts in your inventory"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "View groups and hosts in your inventory"
 oversized = "false"
@@ -39,7 +40,7 @@ You can review Ansible inventories with the automation content navigator text-ba
 
 ### Procedure
 
-1.  Start automation content navigator.
+1. Start automation content navigator.
 
 ```
 $ ansible-navigator
@@ -47,7 +48,7 @@ $ ansible-navigator
 
     Optional: type `ansible-navigator inventory -i simple_inventory.yml` from the command line to view the inventory.
 
-2.  Review the inventory.
+2. Review the inventory.
 
 ```
 :inventory -i simple_inventory.yml
@@ -57,7 +58,7 @@ $ ansible-navigator
 1│Browse hosts     Explore the inventory with a list of all hosts
 ```
 
-3.  Type `0` to brows the groups.
+3. Type `0` to brows the groups.
 
 ```
   NAME               TAXONOMY                      TYPE
@@ -68,7 +69,7 @@ $ ansible-navigator
 
     The `TAXONOMY` field details the hierarchy of groups the selected group or node belongs to.
 
-4.  Type the number corresponding to the group you want to delve into.
+4. Type the number corresponding to the group you want to delve into.
 
 ```
   NAME              TAXONOMY                        TYPE
@@ -77,7 +78,7 @@ $ ansible-navigator
 2│node-2            all▸nodes                       host
 ```
 
-5.  Type the number corresponding to the host you want to delve into, or type `:<number>` for numbers greater than 9.
+5. Type the number corresponding to the host you want to delve into, or type `:<number>` for numbers greater than 9.
 
 ```
 [node-1]

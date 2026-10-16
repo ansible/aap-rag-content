@@ -9,7 +9,7 @@ The corresponding community.hashi_vault modules are:
 
 ## Procedure
 
-1.  Map the parameters from your existing `community.hashi_vault` modules to the corresponding `hashicorp.vault.database_connection` parameters.
+1. Map the parameters from your existing `community.hashi_vault` modules to the corresponding `hashicorp.vault.database_connection` parameters.
 
 
 ```
@@ -100,9 +100,9 @@ extends_documentation_fragment:
 - hashicorp.vault.vault_auth.modules
 ```
 
-2.  Configure the following parameters:
+2. Configure the following parameters:
 
 - **Name**: The name of the database connection configuration. Alias: connection_name
 - **plugin_name**: If 0 (state=present) you must include the name of the plugin to use for this connection.
 
-3.  Configure the [Parameters](https://console.redhat.com/ansible/automation-hub/collections/published/hashicorp/vault/documentation/module/database_connection?version=) for your `hashicorp.vault.database_connection` module.
+3. Configure the [Parameters](https://console.redhat.com/ansible/automation-hub/collections/published/hashicorp/vault/documentation/module/database_connection?version=) for your `hashicorp.vault.database_connection` module.

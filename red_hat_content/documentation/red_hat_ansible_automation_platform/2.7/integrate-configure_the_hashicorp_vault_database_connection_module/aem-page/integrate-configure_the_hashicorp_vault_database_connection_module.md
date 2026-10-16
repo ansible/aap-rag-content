@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-configure_the_hashicorp_vault_database_connection_module"
-template = "docs/aem-title.html"
 title = "Configure the hashicorp.vault.database_connection module - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_vault_introduction/", "Integrate with IBM HashiCorp Vault"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/integrate-configure_the_hashicorp_vault_database_connection_module/aem-page/integrate-configure_the_hashicorp_vault_database_connection_module.html"
 last_crumb = "Configure the hashicorp.vault.database_connection module"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure the hashicorp.vault.database_connection module"
 oversized = "false"
@@ -39,7 +40,7 @@ The corresponding community.hashi_vault modules are:
 
 ## Procedure
 
-1.  Map the parameters from your existing `community.hashi_vault` modules to the corresponding `hashicorp.vault.database_connection` parameters.
+1. Map the parameters from your existing `community.hashi_vault` modules to the corresponding `hashicorp.vault.database_connection` parameters.
   
 
 ```
@@ -130,9 +131,9 @@ extends_documentation_fragment:
  - hashicorp.vault.vault_auth.modules
 ```
 
-2.  Configure the following parameters:
+2. Configure the following parameters:
 
   - **Name**: The name of the database connection configuration. Alias: connection_name
   - **plugin_name**: If 0 (state=present) you must include the name of the plugin to use for this connection.
 
-3.  Configure the [Parameters](https://console.redhat.com/ansible/automation-hub/collections/published/hashicorp/vault/documentation/module/database_connection?version=) for your `hashicorp.vault.database_connection` module.
+3. Configure the [Parameters](https://console.redhat.com/ansible/automation-hub/collections/published/hashicorp/vault/documentation/module/database_connection?version=) for your `hashicorp.vault.database_connection` module.

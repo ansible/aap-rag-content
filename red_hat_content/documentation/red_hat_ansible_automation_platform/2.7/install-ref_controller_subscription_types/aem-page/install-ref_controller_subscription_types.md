@@ -1,16 +1,17 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_controller_subscription_types"
-template = "docs/aem-title.html"
 title = "Subscription Types - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"]]
-category = ""
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator/", "Install on OpenShift Container Platform"]]
+category = "Install"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-ref_controller_subscription_types/aem-page/install-ref_controller_subscription_types.html"
 last_crumb = "Subscription Types"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Subscription Types"
 oversized = "false"
@@ -29,13 +30,13 @@ type = "aem-page"
 
 Red Hat Ansible Automation Platform is provided at various levels of support and number of machines as an annual subscription.
 
--  **Standard:**
+- **Standard:**
   * Manage any size environment
   * Enterprise 8x5 support and SLA
   * Maintenance and upgrades included
   * Review the SLA at [Product Support Terms of Service](https://access.redhat.com/support/offerings/production/sla)
   * Review the [Red Hat Support Severity Level Definitions](https://access.redhat.com/support/policy/severity)
--  **Premium:**
+- **Premium:**
   * Manage any size environment, including mission-critical environments
   * Premium 24x7 support and SLA
   * Maintenance and upgrades included

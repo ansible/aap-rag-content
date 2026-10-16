@@ -5,7 +5,7 @@ Use the following procedure to verify that Snort has been configured successfull
 
 ### Procedure
 
-1.  Call snort using `sudo` and ask for the version:
+1. Call snort using `sudo` and ask for the version:
 
 
 ```
@@ -21,7 +21,7 @@ Using PCRE version: 8.32 2012-11-30
 Using ZLIB version: 1.2.7
 ```
 
-2.  Verify that the service is actively running using the following command:
+2. Verify that the service is actively running using the following command:
 `sudo systemctl`:
 
 ```
@@ -35,6 +35,6 @@ CGroup: /system.slice/snort.service
 [...]
 ```
 
-3.  If the Snort service is not actively running, restart it with `systemctl restart snort` and recheck the status.
-4.  When you confirm that the service is actively running, exit the Snort server by simultaneously pressing `CTRL` and `D`, or by typing `exit` on the command line. All further interaction will be done through Ansible Automation Platform from the Ansible control host.
+3. If the Snort service is not actively running, restart it with `systemctl restart snort` and recheck the status.
+4. When you confirm that the service is actively running, exit the Snort server by simultaneously pressing `CTRL` and `D`, or by typing `exit` on the command line. All further interaction will be done through Ansible Automation Platform from the Ansible control host.
 

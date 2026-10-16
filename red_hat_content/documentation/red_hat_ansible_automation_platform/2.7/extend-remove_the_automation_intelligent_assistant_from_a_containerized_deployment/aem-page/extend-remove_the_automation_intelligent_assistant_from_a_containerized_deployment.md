@@ -1,7 +1,7 @@
 +++
+title = "Remove the automation intelligent assistant from a containerized deployment - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-remove_the_automation_intelligent_assistant_from_a_containerized_deployment"
-title = "Remove the automation intelligent assistant from a containerized deployment - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-disable_or_remove_the_automation_intelligent_assistant/", "Disable or remove the automation intelligent assistant"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-remove_the_automation_intelligent_assistant_from_a_containerized_deployment/aem-page/extend-remove_the_automation_intelligent_assistant_from_a_containerized_deployment.html"
 last_crumb = "Remove the automation intelligent assistant from a containerized deployment"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Remove the automation intelligent assistant from a containerized deployment"
 oversized = "false"
@@ -46,7 +47,7 @@ Re-running the installer with the chatbot configuration removed disconnects the 
 
 ## Procedure
 
-1.  Stop the chatbot services on the host to immediately prevent the assistant from responding to queries:
+1. Stop the chatbot services on the host to immediately prevent the assistant from responding to queries:
   
 
 ```
@@ -54,7 +55,7 @@ sudo systemctl stop ansible-lightspeed-chatbot.service
 sudo systemctl stop ansible-lightspeed.service
 ```
 
-2.  Disable the chatbot services to prevent them from restarting on reboot:
+2. Disable the chatbot services to prevent them from restarting on reboot:
   
 
 ```
@@ -62,8 +63,8 @@ sudo systemctl disable ansible-lightspeed-chatbot.service
 sudo systemctl disable ansible-lightspeed.service
 ```
 
-3.  Open the inventory file that you used to install Ansible Automation Platform.
-4.  Remove or comment out all chatbot variables from the inventory file. These are the variables that begin with `lightspeed_chatbot_`:
+3. Open the inventory file that you used to install Ansible Automation Platform.
+4. Remove or comment out all chatbot variables from the inventory file. These are the variables that begin with `lightspeed_chatbot_`:
 
   - `lightspeed_chatbot_model_url`
   - `lightspeed_chatbot_model_api_key`
@@ -72,9 +73,9 @@ sudo systemctl disable ansible-lightspeed.service
   - `lightspeed_chatbot_model_extra_settings`
   - `lightspeed_chatbot_agent_extra_settings`
 
-5.  Remove or comment out the Ansible Lightspeed host entry from the `[ansiblelightspeed] `group, if no other Lightspeed components are in use. Leave the group header in the inventory file.
-6.  Save the inventory file.
-7.  Re-run the Ansible Automation Platform installer with the updated inventory file:
+5. Remove or comment out the Ansible Lightspeed host entry from the `[ansiblelightspeed] `group, if no other Lightspeed components are in use. Leave the group header in the inventory file.
+6. Save the inventory file.
+7. Re-run the Ansible Automation Platform installer with the updated inventory file:
   
 
 ```
@@ -84,7 +85,7 @@ ansible.containerized_installer.install
 
 The installer reconfigures the platform gateway to remove the chatbot proxy routes. The chatbot API endpoints return a 503 error and the chat interface is no longer accessible to users.
 
-8.  Remove the stopped chatbot containers from the host:
+8. Remove the stopped chatbot containers from the host:
   
 
 ```

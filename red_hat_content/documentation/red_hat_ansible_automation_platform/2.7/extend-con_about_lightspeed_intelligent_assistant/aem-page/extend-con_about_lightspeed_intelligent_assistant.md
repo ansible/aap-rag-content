@@ -1,7 +1,7 @@
 +++
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-con_about_lightspeed_intelligent_assistant"
 title = "Overview - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-con_about_lightspeed_intelligent_assistant"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_deploying_chatbot_operator/", "Deploy the automation intelligent assistant on OpenShift Container Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-con_about_lightspeed_intelligent_assistant/aem-page/extend-con_about_lightspeed_intelligent_assistant.html"
 last_crumb = "Overview"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Overview"
 oversized = "false"
@@ -61,33 +62,33 @@ An LLM is a type of machine learning model that can interpret and generate human
 The automation intelligent assistant can rely on the following LLM providers:
 
 -  **Red Hat LLM providers:**
-  *  **Red Hat Enterprise Linux AI** You can configure Red Hat Enterprise Linux AI as the LLM provider. As the Red Hat Enterprise Linux is in a different environment than the Ansible Lightspeed deployment, the model deployment must allow access using a secure connection.
+  *  **Red Hat Enterprise Linux AI**         You can configure Red Hat Enterprise Linux AI as the LLM provider. As the Red Hat Enterprise Linux is in a different environment than the Ansible Lightspeed deployment, the model deployment must allow access using a secure connection.
 
-         The automation intelligent assistant supports vLLM Server. When self-hosting an LLM with Red Hat Enterprise Linux AI, you can use vLLM Server as the inference engine.
+        The automation intelligent assistant supports vLLM Server. When self-hosting an LLM with Red Hat Enterprise Linux AI, you can use vLLM Server as the inference engine.
 
-  *  **Red Hat OpenShift AI** You must deploy an LLM on the Red Hat OpenShift AI single-model serving platform that uses the Virtual Large Language Model (vLLM) runtime. If the model deployment resides in a different OpenShift environment than the Ansible Lightspeed deployment, include a route to expose the model deployment outside the cluster.
+  *  **Red Hat OpenShift AI**         You must deploy an LLM on the Red Hat OpenShift AI single-model serving platform that uses the Virtual Large Language Model (vLLM) runtime. If the model deployment resides in a different OpenShift environment than the Ansible Lightspeed deployment, include a route to expose the model deployment outside the cluster.
 
-         The automation intelligent assistant supports vLLM Server. When self-hosting an LLM with Red Hat OpenShift AI, you can use vLLM Server as the inference engine.
+        The automation intelligent assistant supports vLLM Server. When self-hosting an LLM with Red Hat OpenShift AI, you can use vLLM Server as the inference engine.
 
     Note:
             For configurations with Red Hat Enterprise Linux AI or Red Hat OpenShift AI, you must host your own LLM provider instead of using a SaaS LLM provider.
 
-  *  **Red Hat AI Inference Server** You can deploy an LLM using Red Hat AI Inference Server as your inference runtime. Red Hat AI Inference Server supports vLLM runtimes for efficient model serving and can be configured to work with automation intelligent assistant.
+  *  **Red Hat AI Inference Server**         You can deploy an LLM using Red Hat AI Inference Server as your inference runtime. Red Hat AI Inference Server supports vLLM runtimes for efficient model serving and can be configured to work with automation intelligent assistant.
 
-         If the Red Hat AI Inference Server deployment is in a different environment than the Ansible Lightspeed deployment, ensure the model deployment allows access using a secure connection and configure appropriate network routing.
+        If the Red Hat AI Inference Server deployment is in a different environment than the Ansible Lightspeed deployment, ensure the model deployment allows access using a secure connection and configure appropriate network routing.
 
-         The automation intelligent assistant supports vLLM Server when self-hosting an LLM with Red Hat AI Inference Server as the inference engine.
+        The automation intelligent assistant supports vLLM Server when self-hosting an LLM with Red Hat AI Inference Server as the inference engine.
 
 -  **Third-party LLM providers:**
-  *  **OpenAI** To use OpenAI with the automation intelligent assistant, you need access to the OpenAI API platform.
+  *  **OpenAI**         To use OpenAI with the automation intelligent assistant, you need access to the OpenAI API platform.
 
-  *  **Microsoft Azure OpenAI** To use Microsoft Azure with the automation intelligent assistant, you need access to Microsoft Azure OpenAI.
+  *  **Microsoft Azure OpenAI**         To use Microsoft Azure with the automation intelligent assistant, you need access to Microsoft Azure OpenAI.
 
 ## Process for configuring and using the automation intelligent assistant
 
 Perform the following tasks to set up and use the automation intelligent assistant in your Ansible Automation Platform instance on the OpenShift Container Platform environment:
 
-| Task                                                                            | Description                                                                                                                                                                                              |
-| ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br>Deploy the automation intelligent assistant on OpenShift Container Platform | <br>An Ansible Automation Platform administrator who wants to deploy the automation intelligent assistant for all Ansible users in the organization.<br>Perform the following tasks:<br>Create a chatbot configuration secret.Update the YAML file of the Ansible Automation Platform to use the chatbot connection secret.Optional: Change your LLM model if you want to use a different LLM provider after deploying Red Hat Ansible Lightspeed. |
-| <br>Access and use the automation intelligent assistant                         | <br>All Ansible users who want to use the intelligent assistant to get answers to their questions about the Ansible Automation Platform.                                                                 |
+| Task                                                                        | Description                                                                                                                                                                                              |
+| --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Deploy the automation intelligent assistant on OpenShift Container Platform | An Ansible Automation Platform administrator who wants to deploy the automation intelligent assistant for all Ansible users in the organization.<br>Perform the following tasks:<br>Create a chatbot configuration secret.Update the YAML file of the Ansible Automation Platform to use the chatbot connection secret.Optional: Change your LLM model if you want to use a different LLM provider after deploying Red Hat Ansible Lightspeed. |
+| Access and use the automation intelligent assistant                         | All Ansible users who want to use the intelligent assistant to get answers to their questions about the Ansible Automation Platform.                                                                     |

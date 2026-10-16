@@ -11,16 +11,19 @@ When OpenShift Dev Spaces is configured for the Ansible plug-ins, users can clic
 
 Note:
 
-OpenShift Dev Spaces is a separate product and it is optional. The plug-ins will function without it.
+OpenShift Dev Spaces is a separate product and it is optional.
+The plug-ins will function without it.
 
 It is a separate Red Hat product and is not included in the Ansible Automation Platform or Red Hat Developer Hub subscription.
 
-If the OpenShift Dev Spaces link is not configured in the Ansible plug-ins, the **Go to OpenShift Dev Spaces dashboard** link in the **DEVELOP** section of the Ansible plug-ins landing page redirects users to the [Ansible development tools home page](https://www.redhat.com/en/technologies/management/ansible/development-tools).
+If the OpenShift Dev Spaces link is not configured in the Ansible plug-ins,
+the **Go to OpenShift Dev Spaces dashboard** link in the **DEVELOP** section of the Ansible plug-ins landing page redirects users to the [Ansible development tools home page](https://www.redhat.com/en/technologies/management/ansible/development-tools).
 
 ### Procedure
 
-1.  Edit your custom Red Hat Developer Hub config map, for example `app-config-rhdh`.
-2.  Add the following code to your Red Hat Developer Hub `app-config-rhdh.yaml` file.
+1. Edit your custom Red Hat Developer Hub config map, for example `app-config-rhdh`.
+2. Add the following code to your Red Hat Developer Hub `app-config-rhdh.yaml` file.
+
 
 ```
 data:
@@ -31,8 +34,8 @@ baseUrl: >-
 https://<Your OpenShift Dev Spaces URL>
 ```
 
-3.  Replace `<Your OpenShft Dev Spaces URL>` with your OpenShift Dev Spaces URL.
-4.  In the OpenShift Developer UI, select the `Red Hat Developer Hub` pod.
-5.  Open **Actions**.
-6.  Click **Restart rollout**.
+3. Replace `<Your OpenShft Dev Spaces URL>` with your OpenShift Dev Spaces URL.
+4. In the OpenShift Developer UI, select the `Red Hat Developer Hub` pod.
+5. Open **Actions**.
+6. Click **Restart rollout**.
 

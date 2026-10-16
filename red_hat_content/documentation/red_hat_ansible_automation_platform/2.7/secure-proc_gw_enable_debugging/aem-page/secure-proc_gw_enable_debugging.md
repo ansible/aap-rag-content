@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-proc_gw_enable_debugging/aem-page/secure-proc_gw_enable_debugging.html"
 last_crumb = "Enable debugging for enterprise authentication"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Enable debugging for enterprise authentication"
 oversized = "false"
@@ -31,8 +32,8 @@ To further diagnose authentication issues, enable debug logging in platform gate
 
 ## Procedure
 
-1.  Change the logging configuration in the platform gateway’s `settings.py` file.
-2.  Set the logging level for the `ansible_base` logger to `DEBUG`:
+1. Change the logging configuration in the platform gateway’s `settings.py` file.
+2. Set the logging level for the `ansible_base` logger to `DEBUG`:
   
 
 ```

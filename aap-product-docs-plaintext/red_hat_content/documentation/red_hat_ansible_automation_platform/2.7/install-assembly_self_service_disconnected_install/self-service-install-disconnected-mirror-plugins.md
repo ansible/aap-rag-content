@@ -19,7 +19,7 @@ Use the `mirror-plugins.sh` script from the Red Hat Developer Hub operator repos
 
 ### Procedure
 
-1.  Download the `mirror-plugins.sh` script from the Red Hat Developer Hub operator repository:
+1. Download the `mirror-plugins.sh` script from the Red Hat Developer Hub operator repository:
 
 
 ```terminal
@@ -29,7 +29,7 @@ $ chmod +x mirror-plugins.sh
 
 Replace `<rhdh_version>` with the Red Hat Developer Hub version bundled with your Helm chart. See the [Ansible Automation Portal Lifecycle](https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-lifecycle) page for version mappings.
 
-2.  Mirror the plug-in catalog index and all referenced plug-in artifacts to your disconnected registry:
+2. Mirror the plug-in catalog index and all referenced plug-in artifacts to your disconnected registry:
 
 
 ```terminal
@@ -40,8 +40,8 @@ $ ./mirror-plugins.sh \
 
 The script copies all OCI plug-in artifacts, rewrites the catalog index with your mirror registry URLs, and pushes the updated index to your disconnected registry.
 
-3.  If your disconnected environment has no direct network path to the connected bastion host, use the export-then-import workflow.
-1.  On the connected bastion host, export the plug-in artifacts to a directory:
+3. If your disconnected environment has no direct network path to the connected bastion host, use the export-then-import workflow.
+1. On the connected bastion host, export the plug-in artifacts to a directory:
 
 
 ```terminal
@@ -50,8 +50,8 @@ $ ./mirror-plugins.sh \
 --to-dir /path/to/plugin-export
 ```
 
-2.  Transfer the export directory to a host in the disconnected environment.
-3.  On the disconnected host, import the artifacts into your mirror registry:
+2. Transfer the export directory to a host in the disconnected environment.
+3. On the disconnected host, import the artifacts into your mirror registry:
 
 
 ```terminal

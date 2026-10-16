@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/observe-ensure_system_health_and_efficiency_through_monitoring/aem-page/observe-ensure_system_health_and_efficiency_through_monitoring.html"
 last_crumb = "Ensure system health and efficiency through monitoring"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Ensure system health and efficiency through monitoring"
 oversized = "false"
@@ -29,7 +30,7 @@ type = "aem-page"
 
 Monitor your deployment to maintain system health and identify performance issues before they affect operations. Track application metrics and system resources to understand workload patterns and optimize capacity allocation.
 
- Monitoring your deployment helps you to:
+Monitoring your deployment helps you to:
 
 - **Track application performance**: Monitor job status, system performance, and event processing to identify bottlenecks and understand how jobs impact your deployment.
 - **Manage system resources**: Monitor CPU, memory, and disk performance to prevent resource exhaustion and maintain optimal system responsiveness.
@@ -41,7 +42,7 @@ Ansible Automation Platform provides metrics endpoints for job status and subsys
 
 ## Metrics for monitoring automation controller application
 
-For application level monitoring, automation controller provides Prometheus-style metrics on an API endpoint `/api/v2/metrics`. Use these metrics to check data about job status and subsystem performance, such as for job output processing or job scheduling.
+For application level monitoring, automation controller provides Prometheus-style metrics on an API endpoint `/api/controller/v2/metrics/`. Use these metrics to check data about job status and subsystem performance, such as for job output processing or job scheduling.
 
 The metrics endpoint includes descriptions of each metric. Metrics of particular interest for performance include:
 

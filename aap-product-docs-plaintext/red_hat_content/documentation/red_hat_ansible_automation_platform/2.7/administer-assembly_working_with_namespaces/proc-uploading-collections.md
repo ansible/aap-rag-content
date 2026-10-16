@@ -29,18 +29,18 @@ Format your collection file name as follows: <my_namespace-my_collection-1.0.0.t
 
 ### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Automation Content> (and then)Namespaces and select a namespace.
-3.  Select the **Collections** tab.
-4.  Click Upload collection.
-5.  Click Browse next to the **Collection file** field.
-6.  Select the collection to upload.
-7.  Select one of the following options:
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Automation Content> (and then)Namespaces and select a namespace.
+3. Select the **Collections** tab.
+4. Click Upload collection.
+5. Click Browse next to the **Collection file** field.
+6. Select the collection to upload.
+7. Select one of the following options:
 
 -  **Staging repos**
 -  **Repositories without pipeline**
 
-8.  Click Upload collection.
+8. Click Upload collection.
 
 ### Results
 

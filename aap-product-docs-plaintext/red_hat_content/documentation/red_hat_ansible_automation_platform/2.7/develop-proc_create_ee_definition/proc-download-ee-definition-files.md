@@ -5,9 +5,9 @@ Create an execution environment definition and download the generated files as a
 
 ### Procedure
 
-1.  In the wizard, clear the **Publish to a Git repository** checkbox.
-2.  Complete the remaining steps and click **Create**.
-3.  After creation, click **Download EE files** to download a `.tar` archive containing all generated files.
+1. In the wizard, clear the **Publish to a Git repository** checkbox.
+2. Complete the remaining steps and click **Create**.
+3. After creation, click **Download EE files** to download a `.tar` archive containing all generated files.
 
 ### Results
 

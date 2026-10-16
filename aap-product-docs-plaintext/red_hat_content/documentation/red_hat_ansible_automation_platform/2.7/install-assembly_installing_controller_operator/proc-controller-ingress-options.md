@@ -7,13 +7,13 @@ The Ansible Automation Platform Operator installation form allows you to further
 
 ### Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  Navigate to Operators> (and then)Installed Operators.
-3.  Select your Ansible Automation Platform Operator deployment.
-4.  Select the **Ansible Automation Platform** tab.
-5.  Click the ⋮ icon next to your Ansible Automation Platform instance and select **Edit AnsibleAutomationPlatform** .
-6.  Click **YAML view** and locate the `spec.controller:` section..
-7.  Configure the route options under the `controller:` section:
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to Operators> (and then)Installed Operators.
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select the **Ansible Automation Platform** tab.
+5. Click the ⋮ icon next to your Ansible Automation Platform instance and select **Edit AnsibleAutomationPlatform** .
+6. Click **YAML view** and locate the `spec.controller:` section..
+7. Configure the route options under the `controller:` section:
 
 
 ```
@@ -26,7 +26,7 @@ nginx.ingress.kubernetes.io/proxy-connect-timeout: "600"
 ingress_tls_secret: controller-ingress-tls-secret
 ```
 
-8.  Click **Save**.
+8. Click **Save**.
 
 Note:
 These settings apply to the automation controller component managed by this Ansible Automation Platform instance. The operator automatically updates the ingress configuration for the controller.
@@ -41,9 +41,9 @@ You can view the progress by navigating to Workloads> (and then)Pods and locatin
 
 Verify that the following operator pods provided by the Ansible Automation Platform Operator installation from automation controller are running:
 
-| Operator manager controllers                                                                                                                                                                             | Automation controller                                                                                                                                    | Automation hub                                                                                                                           | Event-Driven Ansible (EDA)                                                                                                                             |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| <br>The operator manager controllers for each of the three operators, include the following:<br>automation-controller-operator-controller-managerautomation-hub-operator-controller-managerresource-operator-controller-manageraap-gateway-operator-controller-manageransible-lightspeed-operator-controller-managereda-server-operator-controller-manager | <br>After deploying automation controller, you can see the addition of the following pods:<br>controllercontroller-postgrescontroller-webcontroller-task | <br>After deploying automation hub, you can see the addition of the following pods:<br>hub-apihub-contenthub-postgreshub-redishub-worker | <br>After deploying EDA, you can see the addition of the following pods:<br>eda-activation-workerda-apieda-default-workereda-event-streameda-scheduler |
+| Operator manager controllers                                                                                                                                                                             | Automation controller                                                                                                                                | Automation hub                                                                                                                       | Event-Driven Ansible (EDA)                                                                                                                         |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The operator manager controllers for each of the three operators, include the following:<br>automation-controller-operator-controller-managerautomation-hub-operator-controller-managerresource-operator-controller-manageraap-gateway-operator-controller-manageransible-lightspeed-operator-controller-managereda-server-operator-controller-manager | After deploying automation controller, you can see the addition of the following pods:<br>controllercontroller-postgrescontroller-webcontroller-task | After deploying automation hub, you can see the addition of the following pods:<br>hub-apihub-contenthub-postgreshub-redishub-worker | After deploying EDA, you can see the addition of the following pods:<br>eda-activation-workerda-apieda-default-workereda-event-streameda-scheduler |
 
 Note:
 

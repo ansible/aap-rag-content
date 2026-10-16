@@ -4,9 +4,9 @@ Ansible Automation Platform supports OIDC credential types for HashiCorp Vault t
 
 You can configure credentials using one of the following OIDC credential types:
 
--      **HashiCorp Vault Secret Lookup (OIDC):**Fetches arbitrary Key/Value (KV) secrets from HashiCorp Vault that are needed for Ansible automation, such as passwords, private keys, and API keys.
+- **HashiCorp Vault Secret Lookup (OIDC):**Fetches arbitrary Key/Value (KV) secrets from HashiCorp Vault that are needed for Ansible automation, such as passwords, private keys, and API keys.
 
--      **HashiCorp Vault Signed SSH (OIDC):**HashiCorp Vault digitally signs a certificate that Ansible Automation Platform uses to authenticate to a remote host and run automation.
+- **HashiCorp Vault Signed SSH (OIDC):**HashiCorp Vault digitally signs a certificate that Ansible Automation Platform uses to authenticate to a remote host and run automation.
 
 Instead of relying on long-lived credentials that must be stored, rotated, and protected, OIDC credential types use short-lived JSON Web Tokens (JWTs) that are issued per job and expire automatically. This reduces the risk of credential exposure and removes the operational burden of manual credential rotation.
 

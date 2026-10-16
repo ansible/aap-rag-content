@@ -1,6 +1,6 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_credential_management_planning"
 title = "Manage platform credentials - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_credential_management_planning"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_credential_management_planning/aem-page/secure-con_credential_management_planning.html"
 last_crumb = "Manage platform credentials"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Manage platform credentials"
 oversized = "false"

@@ -1,6 +1,6 @@
 +++
-title = "Create an execution environment definition using the UI wizard - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Create an execution environment definition using the UI wizard - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_create_ee_definition"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_create_ee_definition/aem-page/develop-proc_create_ee_definition.html"
 last_crumb = "Create an execution environment definition using the UI wizard"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Create an execution environment definition using the UI wizard"
 oversized = "false"
@@ -48,16 +49,16 @@ Custom templates created by your AAP administrator also appear on this page. See
 
 ## Procedure
 
-1.  Navigate to **Execution Environments > Create**.
-2.  Select a template.
-3.  Choose a base image appropriate for your environment.
-4.  In the collections picker, select the Ansible collections your execution environment requires.
-5.  Optional: Add Python requirements and system packages.
-6.  Optional: Add custom build steps at specific phases (prepend or append to base, galaxy, builder, or final stages).
-7.  Name the definition and add a descriptive tag.
+1. Navigate to **Execution Environments > Create**.
+2. Select a template.
+3. Choose a base image appropriate for your environment.
+4. In the collections picker, select the Ansible collections your execution environment requires.
+5. Optional: Add Python requirements and system packages.
+6. Optional: Add custom build steps at specific phases (prepend or append to base, galaxy, builder, or final stages).
+7. Name the definition and add a descriptive tag.
       The wizard uses `spec.type: execution-environment` to tag the definition. This tag is optional but recommended to make definitions searchable and filterable in the catalog.
 
-8.  Choose to select **Publish to a Git repository** to save definition files to a repository, or leave the checkbox cleared to register in the catalog and download files locally.
+8. Choose to select **Publish to a Git repository** to save definition files to a repository, or leave the checkbox cleared to register in the catalog and download files locally.
 
 ## Results
 
@@ -88,12 +89,12 @@ When you select **Publish to a Git repository** in the wizard, the definition fi
 
 ### Procedure
 
-1.  In the final step of the wizard, select **Publish to a Git repository**.
-2.  Authenticate with your Git provider through OAuth when prompted.
-3.  Select the target repository or allow the wizard to create a new one.
-4.  Optional: Select **Build Execution Environment** to trigger an automated image build after saving.
-5.  Configure the target registry (private automation hub or custom), image name, tag, and TLS settings.
-6.  Click **Create**.
+1. In the final step of the wizard, select **Publish to a Git repository**.
+2. Authenticate with your Git provider through OAuth when prompted.
+3. Select the target repository or allow the wizard to create a new one.
+4. Optional: Select **Build Execution Environment** to trigger an automated image build after saving.
+5. Configure the target registry (private automation hub or custom), image name, tag, and TLS settings.
+6. Click **Create**.
 
 ### Results
 
@@ -121,9 +122,9 @@ Adjust the execution environment build configuration when targeting a private or
 
 ### Procedure
 
-1.  In the wizard, select **Custom Registry** instead of private automation hub and enter your internal registry URL.
-2.  Clear the **Verify TLS certificates** checkbox if your internal registry uses self-signed certificates that are not trusted by the GitHub Actions runner or GitLab Runner executing the build.
-3.  Select a base image from your internal registry instead of the default `registry.redhat.io` images.
+1. In the wizard, select **Custom Registry** instead of private automation hub and enter your internal registry URL.
+2. Clear the **Verify TLS certificates** checkbox if your internal registry uses self-signed certificates that are not trusted by the GitHub Actions runner or GitLab Runner executing the build.
+3. Select a base image from your internal registry instead of the default `registry.redhat.io` images.
 
 ## Download definition files without saving to a repository
 
@@ -131,9 +132,9 @@ Create an execution environment definition and download the generated files as a
 
 ### Procedure
 
-1.  In the wizard, clear the **Publish to a Git repository** checkbox.
-2.  Complete the remaining steps and click **Create**.
-3.  After creation, click **Download EE files** to download a `.tar` archive containing all generated files.
+1. In the wizard, clear the **Publish to a Git repository** checkbox.
+2. Complete the remaining steps and click **Create**.
+3. After creation, click **Download EE files** to download a `.tar` archive containing all generated files.
 
 ### Results
 
@@ -156,10 +157,10 @@ Importing templates requires AAP administrator access. Only users with the AAP A
 
 ### Procedure
 
-1.  Navigate to **Execution Environments > Create**.
-2.  Open the kebab menu and select **Import Template**.
-3.  Paste the template URL and click **Analyze**.
-4.  Click **Import**.
+1. Navigate to **Execution Environments > Create**.
+2. Open the kebab menu and select **Import Template**.
+3. Paste the template URL and click **Analyze**.
+4. Click **Import**.
 
 ### Results
 

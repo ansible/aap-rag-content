@@ -1,6 +1,6 @@
 +++
-title = "GPG Public Key credential type - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "GPG Public Key credential type - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_gpg_public_key"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_gpg_public_key/aem-page/secure-ref_controller_credential_gpg_public_key.html"
 last_crumb = "GPG Public Key credential type"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "GPG Public Key credential type"
 oversized = "false"
@@ -29,4 +30,5 @@ type = "aem-page"
 
 Select this credential type to enable automation controller to verify the integrity of the project when synchronizing from source control.
 
-For more information about how to generate a valid keypair, use the CLI tool to sign content, and how to add the public key to the controller, see [Project Signing and Verification](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_controller_project_signing#assembly-controller-project-signing "Use project signing and verification in your project directory to sign files. You can then verify whether or not that content has changed in any way, or files have been added to, or removed from the project unexpectedly.").
+For more information about how to generate a valid keypair, use the CLI tool to sign content, and how to add the
+public key to the controller, see [Project Signing and Verification](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_controller_project_signing#assembly-controller-project-signing "Use project signing and verification in your project directory to sign files. You can then verify whether or not that content has changed in any way, or files have been added to, or removed from the project unexpectedly.").

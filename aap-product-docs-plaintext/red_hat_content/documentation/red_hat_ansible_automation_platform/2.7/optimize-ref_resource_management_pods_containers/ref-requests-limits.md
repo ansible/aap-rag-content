@@ -1,11 +1,13 @@
 # Manage resources for pods and containers
 ## Requests and limits
 
-If the node where a pod is running has enough resources available, it is possible for a container to use more resources than its request for that resource specifies. However, a container is not allowed to use more than its resource limit.
+If the node where a pod is running has enough resources available, it is possible for a container to use more resources than its request for that resource specifies.
+However, a container is not allowed to use more than its resource limit.
 
 For example, if you set a memory request of 256 MiB for a container, and that container is in a pod scheduled to a Node with 8GiB of memory and no other pods, then the container can try to use more RAM.
 
-If you set a memory limit of 4GiB for that container, the kubelet and container runtime enforce the limit. The runtime prevents the container from using more than the configured resource limit.
+If you set a memory limit of 4GiB for that container, the kubelet and container runtime enforce the limit.
+The runtime prevents the container from using more than the configured resource limit.
 
 If a process in the container tries to consume more than the allowed amount of memory, the system kernel terminates the process that attempted the allocation, with an *Out Of Memory* (OOM) error.
 

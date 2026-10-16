@@ -3,12 +3,14 @@
 
 Access the **Details** tab to view details about the job execution:
 
-![Show job details for inventory sync](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/sync.png)
+![Show job details for inventory sync](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-show-job-details-for-inv-sync.png)
 
 You can view the following details for an executed job:
 
 - **Status**: It can be any of the following:
-* **Pending**: The inventory sync has been created, but not queued or started yet. Any job, not just inventory source syncs, stays in pending until it is ready to be run by the system. Reasons for inventory source syncs not being ready include:
+* **Pending**: The inventory sync has been created, but not queued or started yet.
+Any job, not just inventory source syncs, stays in pending until it is ready to be run by the system.
+Reasons for inventory source syncs not being ready include:
 + Dependencies that are currently running (all dependencies must be completed before the next step can run).
 + Insufficient capacity to run in the locations it is configured for.
 * **Waiting**: The inventory sync is in the queue waiting to be executed.

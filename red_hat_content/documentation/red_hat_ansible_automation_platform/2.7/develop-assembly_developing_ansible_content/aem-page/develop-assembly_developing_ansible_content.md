@@ -1,16 +1,17 @@
 +++
+title = "Develop Ansible content - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_developing_ansible_content"
 template = "docs/aem-title.html"
-title = "Develop Ansible content - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_lightspeed_intro/", "Build automation faster with Red Hat Ansible Lightspeed"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_lightspeed_intro/", "Build automation faster with Red Hat Ansible Lightspeed code assistant"]]
 category = "Develop"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_developing_ansible_content/aem-page/develop-assembly_developing_ansible_content.html"
 last_crumb = "Develop Ansible content"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Develop Ansible content"
 oversized = "false"
@@ -43,10 +44,10 @@ You can access the Red Hat Ansible Lightspeed portal by authenticating through y
 
 *Table 1. User login scenarios*
 
-| **Scenario**                                                                                                                                             | **Result**                                                                                                                                                                          |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br>You are a RH-SSO user. This is the typical scenario for accessing Red Hat Ansible Lightspeed as an Ansible user.                                     | <br>You are routed to the Red Hat Ansible Lightspeed paid commercial offering.                                                                                                      |
-| <br>You are a RH-SSO user, but your organization administrator has not configured Red Hat Ansible Lightspeed to connect with IBM watsonx Code Assistant. | <br>You are routed to the Red Hat Ansible Lightspeed paid commercial offering with a message that your organization administrator has not configured a model for your organization. |
+| **Scenario**                                                                                                                                         | **Result**                                                                                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| You are a RH-SSO user. This is the typical scenario for accessing Red Hat Ansible Lightspeed as an Ansible user.                                     | You are routed to the Red Hat Ansible Lightspeed paid commercial offering.                                                                                                      |
+| You are a RH-SSO user, but your organization administrator has not configured Red Hat Ansible Lightspeed to connect with IBM watsonx Code Assistant. | You are routed to the Red Hat Ansible Lightspeed paid commercial offering with a message that your organization administrator has not configured a model for your organization. |
 
 ## Log in to the Ansible Lightspeed portal as an automation developer
 
@@ -54,6 +55,6 @@ Use the following procedure to log into the Ansible Lightspeed portal with your 
 
 ### Procedure
 
-1.  Go to the [Ansible Lightspeed portal login page](https://c.ai.ansible.redhat.com/).
-2.  Click Log in> (and then)Log in with Red Hat.
-3.  Enter your Red Hat account username and password. On successful authentication, the login screen is displayed along with your username and your assigned user role.
+1. Go to the [Ansible Lightspeed portal login page](https://c.ai.ansible.redhat.com/).
+2. Click Log in> (and then)Log in with Red Hat.
+3. Enter your Red Hat account username and password. On successful authentication, the login screen is displayed along with your username and your assigned user role.

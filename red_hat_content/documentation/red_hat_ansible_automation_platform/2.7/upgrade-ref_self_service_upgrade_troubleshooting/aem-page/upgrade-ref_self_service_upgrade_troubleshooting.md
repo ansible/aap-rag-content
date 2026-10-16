@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-ref_self_service_upgrade_troubleshooting"
-title = "Troubleshoot Ansible automation portal upgrades - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Troubleshoot Ansible automation portal upgrades - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-assembly_self_service_upgrading/", "Upgrade Ansible automation portal"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/upgrade-ref_self_service_upgrade_troubleshooting/aem-page/upgrade-ref_self_service_upgrade_troubleshooting.html"
 last_crumb = "Troubleshoot Ansible automation portal upgrades"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Troubleshoot Ansible automation portal upgrades"
 oversized = "false"
@@ -43,7 +44,7 @@ You might encounter issues during Ansible automation portal upgrades. The follow
 helm get values <release_name> -n <namespace>
 ```
 
-     To include defaults, add the `--all` flag.
+    To include defaults, add the `--all` flag.
 
 2. Edit backup-values.yaml: set `pluginMode: oci` and set `imageTagInfo` to the plug-in tag from the [Ansible automation portal lifecycle](https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-lifecycle) page.
 
@@ -74,7 +75,7 @@ helm upgrade <release_name> openshift-helm-charts/redhat-rhaap-portal \
 oc get secret <release_name>-dynamic-plugins-registry-auth -n <namespace>
 ```
 
-     A secret named `redhat-rhaap-portal-dynamic-plugins-registry-auth` is incorrect if your release name is not `redhat-rhaap-portal`. Recreate the secret by following the OCI container delivery procedure in the upgrade guide.
+    A secret named `redhat-rhaap-portal-dynamic-plugins-registry-auth` is incorrect if your release name is not `redhat-rhaap-portal`. Recreate the secret by following the OCI container delivery procedure in the upgrade guide.
 
 3. Inspect init container logs on the `<release_name>-rhaap-portal` pod:
 
@@ -152,4 +153,4 @@ helm upgrade <release_name> openshift-helm-charts/redhat-rhaap-portal \
 helm get values <release_name> -n <namespace> > recovered-values.yaml
 ```
 
-     Review recovered-values.yaml, restore any missing settings, and upgrade again with `-f recovered-values.yaml`.
+    Review recovered-values.yaml, restore any missing settings, and upgrade again with `-f recovered-values.yaml`.

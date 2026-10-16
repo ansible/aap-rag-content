@@ -11,7 +11,7 @@ You can configure your LDAP SSL configuration for automation controller through 
 
 ### Procedure
 
-1.  Create a secret in your Ansible Automation Platform namespace for the `bundle-ca.crt` file (the filename must be `bundle-ca.crt`):
+1. Create a secret in your Ansible Automation Platform namespace for the `bundle-ca.crt` file (the filename must be `bundle-ca.crt`):
 
 
 ```
@@ -21,7 +21,7 @@ $ oc create secret -n aap generic bundle-ca-secret --from-file=bundle-ca.crt
 Note:
 The target filename for this operation must be `bundle-ca.crt` and the secret name should be `bundle-ca-secret`.
 
-2.  Add the `bundle_cacert_secret` to the Ansible Automation Platform customer resource:
+2. Add the `bundle_cacert_secret` to the Ansible Automation Platform customer resource:
 
 
 ```

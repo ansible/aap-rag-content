@@ -2,11 +2,11 @@
 
 Ansible Automation Platform supports the following commands for OAuth2 token management:
 
--  [`create_oauth2_token`](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_token_session_management#ref-controller-create-oauth2-token "Use the following command to create OAuth2 tokens (specify the username for example_user):")
--  [`revoke_oauth2_tokens`](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_token_session_management#ref-controller-revoke-oauth2-token "Use this command to revoke OAuth2 tokens, both application tokens and personal access tokens (PAT). It revokes all application tokens (but not their associated refresh tokens), and revokes all personal access tokens. However, you can also specify a user for whom to revoke all tokens.")
--  [`cleartokens`](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_token_session_management#ref-controller-clear-sessions "Use the cleartokens command to delete all sessions that have expired.")
+- [`create_oauth2_token`](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_token_session_management#ref-controller-create-oauth2-token "Use the following command to create OAuth2 tokens (specify the username for example_user):")
+- [`revoke_oauth2_tokens`](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_token_session_management#ref-controller-revoke-oauth2-token "Use this command to revoke OAuth2 tokens, both application tokens and personal access tokens (PAT). It revokes all application tokens (but not their associated refresh tokens), and revokes all personal access tokens. However, you can also specify a user for whom to revoke all tokens.")
+- [`cleartokens`](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_token_session_management#ref-controller-clear-sessions "Use the cleartokens command to delete all sessions that have expired.")
 
--  [`clearsessions`](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_token_session_management#ref-controller-clear-sessions "Use the cleartokens command to delete all sessions that have expired.")
+- [`clearsessions`](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_token_session_management#ref-controller-clear-sessions "Use the cleartokens command to delete all sessions that have expired.")
 
 ## `create_oauth2_token`
 
@@ -26,7 +26,10 @@ Ensure that you give a valid user when creating tokens. Otherwise, an error mess
 
 ## `revoke_oauth2_tokens`
 
-Use this command to revoke OAuth2 tokens, both application tokens and personal access tokens (PAT). It revokes all application tokens (but not their associated refresh tokens), and revokes all personal access tokens. However, you can also specify a user for whom to revoke all tokens.
+Use this command to revoke OAuth2 tokens, both application tokens and personal access tokens (PAT).
+It revokes all application tokens (but not their associated refresh tokens), and revokes all
+personal access tokens. However, you can also specify a user for whom to
+revoke all tokens.
 
 To revoke all existing OAuth2 tokens use the following command:
 

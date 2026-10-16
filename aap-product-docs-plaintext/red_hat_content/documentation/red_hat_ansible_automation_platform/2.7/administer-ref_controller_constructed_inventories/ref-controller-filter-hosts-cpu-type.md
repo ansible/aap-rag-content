@@ -18,11 +18,13 @@ limit: intel_hosts
 
 Note:
 
-Hosts in constructed inventories are not counted against your license allotment because they are referencing the original inventory host. Additionally, hosts that are disabled in the original inventories are not included in the constructed inventory.
+Hosts in constructed inventories are not counted against your license allotment because they are referencing the original inventory host.
+Additionally, hosts that are disabled in the original inventories are not included in the constructed inventory.
 
 An inventory update run using `ansible-inventory` creates the constructed inventory contents.
 
 This is always configured to update-on-launch before a job, but you can still select a cache timeout value in case this takes too long.
 
-When creating a constructed inventory, the API ensures that it always has one inventory source associated with it. All inventory updates have an associated inventory source, and the fields needed for constructed inventory (`source_vars` and `limit`) are fields already present on the inventory source model.
+When creating a constructed inventory, the API ensures that it always has one inventory source associated with it.
+All inventory updates have an associated inventory source, and the fields needed for constructed inventory (`source_vars` and `limit`) are fields already present on the inventory source model.
 

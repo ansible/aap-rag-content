@@ -1,7 +1,7 @@
 +++
-title = "Automate nodes that comply with security profiles - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_more_compliance_profile_considerations"
 template = "docs/aem-title.html"
+title = "Automate nodes that comply with security profiles - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_hardening_aap/", "Harden the platform security posture"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_more_compliance_profile_considerations/aem-page/secure-con_more_compliance_profile_considerations.html"
 last_crumb = "Automate nodes that comply with security profiles"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Automate nodes that comply with security profiles"
 oversized = "false"
@@ -48,9 +49,9 @@ To configure permissive mode for fapolicyd, use the following procedure:
 
 ### Procedure
 
-1.  Edit the file `/etc/fapolicyd/fapolicyd.conf`, and set "permissive = 1".
-2.  Restart the `fapolicy` service by running `systemctl restart fapolicyd.service`.
-3.  In environments where this configuration might not meet a required compliance profile or local policy, discuss waiving the relevant security control with your security auditor.
+1. Edit the file `/etc/fapolicyd/fapolicyd.conf`, and set "permissive = 1".
+2. Restart the `fapolicy` service by running `systemctl restart fapolicyd.service`.
+3. In environments where this configuration might not meet a required compliance profile or local policy, discuss waiving the relevant security control with your security auditor.
 
 ## Option 2: Create custom fapolicyd rules
 
@@ -62,10 +63,10 @@ The following example procedure treats the "ansible" service account as a truste
 
 ### Procedure
 
-1.  Create the file `/etc/fapolicy/rules.d/50-ansible.rules` with the following content:
-       `allow perm=any uid=ansible trust=1 : dir=/home/ansible/.ansible/tmp/`
+1. Create the file `/etc/fapolicy/rules.d/50-ansible.rules` with the following content:
+      `allow perm=any uid=ansible trust=1 : dir=/home/ansible/.ansible/tmp/`
 
-2.  Restart the fapolicyd service:
-       `sudo systemctl restart fapolicyd.service`
+2. Restart the fapolicyd service:
+      `sudo systemctl restart fapolicyd.service`
 
     This example rule might require modification to work with any other `fapolicyd` rules that exist on the managed RHEL nodes, and must be thoroughly tested and approved by your security auditor before being put into production.

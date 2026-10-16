@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_controller_resource_operator"
 title = "Ansible Automation Platform Resource Operator - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_controller_resource_operator"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator/", "Install on OpenShift Container Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_controller_resource_operator/aem-page/install-assembly_controller_resource_operator.html"
 last_crumb = "Ansible Automation Platform Resource Operator"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Ansible Automation Platform Resource Operator"
 oversized = "false"
@@ -61,8 +62,8 @@ The Resource Operator itself does not do anything until the user creates an obje
 
 ### Procedure
 
-1.  After installing the `automation-controller-resource-operator` in your cluster, you must create a Kubernetes (k8s) secret with the connection information for your Ansible Automation Platform instance.
-2.  Then you can use Resource Operator to create a k8s resource to manage your Ansible Automation Platform instance.
+1. After installing the `automation-controller-resource-operator` in your cluster, you must create a Kubernetes (k8s) secret with the connection information for your Ansible Automation Platform instance.
+2. Then you can use Resource Operator to create a k8s resource to manage your Ansible Automation Platform instance.
 
 ## Connect Resource Operator to Ansible Automation Platform
 
@@ -78,12 +79,12 @@ You can only create OAuth 2 Tokens for your own user through the API or UI, whic
 
 ### Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  In the navigation panel, select Access Management> (and then)Users.
-3.  Select the username you want to create a token for.
-4.  Select Tokens> (and then)Automation Execution
-5.  Click Create Token.
-6.  You can leave **Applications** empty. Add a description and select **Read** or **Write** for the **Scope**. Note:
+1. Log in to Red Hat OpenShift Container Platform.
+2. In the navigation panel, select Access Management> (and then)Users.
+3. Select the username you want to create a token for.
+4. Select Tokens> (and then)Automation Execution
+5. Click Create Token.
+6. You can leave **Applications** empty. Add a description and select **Read** or **Write** for the **Scope**. Note:
       Make sure you provide a valid user when creating tokens. Otherwise, you get an error message that you tried to issue the command without either specifying a user, or supplying a username that does not exist.
 
 ## Create an Ansible Automation Platform connection secret for Resource Operator
@@ -94,7 +95,7 @@ To make your connection information available to the Resource Operator, create a
 
 ### Procedure
 
-1.  The following is an example of the YAML for the connection secret. Save the following example to a file, for example, `aap-connection-secret.yml`.
+1. The following is an example of the YAML for the connection secret. Save the following example to a file, for example, `aap-connection-secret.yml`.
 
 ```
 apiVersion: v1
@@ -107,8 +108,8 @@ stringData:
   host: https://aap-host.example.com/
 ```
 
-2.  Edit the file with your host and token value.
-3.  Apply it to your cluster by running the `kubectl create` command:
+2. Edit the file with your host and token value.
+3. Apply it to your cluster by running the `kubectl create` command:
   
 
 ```

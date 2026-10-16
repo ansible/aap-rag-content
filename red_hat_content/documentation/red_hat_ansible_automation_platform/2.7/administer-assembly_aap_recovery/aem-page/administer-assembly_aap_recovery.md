@@ -1,7 +1,7 @@
 +++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_aap_recovery"
 template = "docs/aem-title.html"
 title = "Restore your Ansible Automation Platform deployment - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_aap_recovery"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_aap_backup_recovery/", "Back up and restore in an OpenShift environment"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_aap_recovery/aem-page/administer-assembly_aap_recovery.html"
 last_crumb = "Restore your Ansible Automation Platform deployment"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Restore your Ansible Automation Platform deployment"
 oversized = "false"
@@ -49,16 +50,16 @@ To restore Ansible Automation Platform Operator, create a single **AnsibleAutoma
 
 ### Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  Navigate to Operators> (and then)Installed Operators.
-3.  Select your Ansible Automation Platform Operator deployment.
-4.  Go to your **All Instances** tab, and click Create New.
-5.  Select **Ansible Automation Platform Restore** from the list.
-6.  For **Name** enter the name for the recovery deployment.
-7.  For **New Ansible Automation Platform Name** enter the new name for your Ansible Automation Platform instance.
-8.  **Backup Source** defaults to **CR**.
-9.  For **Backup name** enter the name you chose when creating the backup.
-10.  Click Create.
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to Operators> (and then)Installed Operators.
+3. Select your Ansible Automation Platform Operator deployment.
+4. Go to your **All Instances** tab, and click Create New.
+5. Select **Ansible Automation Platform Restore** from the list.
+6. For **Name** enter the name for the recovery deployment.
+7. For **New Ansible Automation Platform Name** enter the new name for your Ansible Automation Platform instance.
+8. **Backup Source** defaults to **CR**.
+9. For **Backup name** enter the name you chose when creating the backup.
+10. Click Create.
 
 ### Results
 
@@ -90,17 +91,17 @@ For more information see the [Finding and deleting PVCs](/documentation/en-us/re
 
 ### Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  Navigate to Operators> (and then)Installed Operators.
-3.  Select your Ansible Automation Platform Operator deployment.
-4.  Go to your **All Instances** tab, and click Create New.
-5.  Select **Ansible Automation Platform Restore** from the list.
-6.  For **Name** enter the name for the recovery deployment.
-7.  For **New Ansible Automation Platform Name** enter the new name for your Ansible Automation Platform instance.
-8.  For **Backup Source** select **PVC**.   1.  **Backup PVC:** Enter the name of your PVC.
-  2.  **Backup Directory:** Enter the path to your backup directory on your PVC.
-9.  For **Backup name** enter the name you chose when creating the backup.
-10.  Under **YAML view** paste in the following example:
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to Operators> (and then)Installed Operators.
+3. Select your Ansible Automation Platform Operator deployment.
+4. Go to your **All Instances** tab, and click Create New.
+5. Select **Ansible Automation Platform Restore** from the list.
+6. For **Name** enter the name for the recovery deployment.
+7. For **New Ansible Automation Platform Name** enter the new name for your Ansible Automation Platform instance.
+8. For **Backup Source** select **PVC**.   1. **Backup PVC:** Enter the name of your PVC.
+  2. **Backup Directory:** Enter the path to your backup directory on your PVC.
+9. For **Backup name** enter the name you chose when creating the backup.
+10. Under **YAML view** paste in the following example:
   
 
 ```
@@ -132,7 +133,7 @@ spec:
     backup_dir: '/backups/eda-openshift-backup-2025-06-23-18:29:11'
 ```
 
-11.  Click Create.
+11. Click Create.
 
 ### Results
 
@@ -162,16 +163,16 @@ Restoring from an external database force drops the database, which overrides yo
 
 ### Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  Navigate to Operators> (and then)Installed Operators.
-3.  Select your Ansible Automation Platform Operator deployment.
-4.  Go to your **All Instances** tab, and click Create New.
-5.  Select **Ansible Automation Platform Restore** from the list.
-6.  For **Name** enter the name for the recovery deployment.
-7.  For **New Ansible Automation Platform Name** enter the new name for your Ansible Automation Platform instance.   - If restoring to the same name Ansible Automation Platform then you must add `force_drop_db: true` to drop the database on restore.
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to Operators> (and then)Installed Operators.
+3. Select your Ansible Automation Platform Operator deployment.
+4. Go to your **All Instances** tab, and click Create New.
+5. Select **Ansible Automation Platform Restore** from the list.
+6. For **Name** enter the name for the recovery deployment.
+7. For **New Ansible Automation Platform Name** enter the new name for your Ansible Automation Platform instance.   - If restoring to the same name Ansible Automation Platform then you must add `force_drop_db: true` to drop the database on restore.
 
-8.  **Backup Source** defaults to **CR**.
-9.  For **Backup name** enter the name you chose when creating the backup. Under **YAML view** paste in the following example:
+8. **Backup Source** defaults to **CR**.
+9. For **Backup name** enter the name you chose when creating the backup. Under **YAML view** paste in the following example:
   
 
 ```
@@ -187,7 +188,7 @@ spec:
     force_drop_db: true
 ```
 
-10.  Click Create.
+10. Click Create.
 
 ### Results
 

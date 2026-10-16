@@ -10,7 +10,9 @@ Access the **Details** tab to view details about the job execution:
 You can view the following details for an executed job:
 
 - **Status**: It can be any of the following:
-* **Pending**: The playbook run has been created, but not queued or started yet. Any job, not just playbook runs, stay in pending until it is ready to be run by the system. Reasons for playbook runs not being ready include dependencies that are currently running (all dependencies must be completed before the next step can run), or there is not enough capacity to run in the locations it is configured to.
+* **Pending**: The playbook run has been created, but not queued or started yet.
+Any job, not just playbook runs, stay in pending until it is ready to be run by the system.
+Reasons for playbook runs not being ready include dependencies that are currently running (all dependencies must be completed before the next step can run), or there is not enough capacity to run in the locations it is configured to.
 * **Waiting**: The playbook run is in the queue waiting to be executed.
 * **Running**: The playbook run is currently in progress.
 * **Successful**: The last playbook run succeeded.

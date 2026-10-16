@@ -10,17 +10,41 @@
       "singlePageAnchor": null,
       "sections": [
         {
-          "title": "The Configuration as Code with the ansible.platform collection",
+          "title": "General availability of the Automation Dashboard for Red Hat Ansible Automation Platform",
           "visible": true,
           "weight": 1,
+          "urlFragment": "aap-27-20260603__section_4",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260603__section_4"
+        },
+        {
+          "title": "Automation orchestrator release",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "aap-27-20260603__section_3",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260603__section_3"
+        },
+        {
+          "title": "Action plugin architecture",
+          "visible": true,
+          "weight": 3,
           "urlFragment": "aap-27-20260603___automation_portal_red_hat_enterprise_linux_appliance",
           "anchor": null,
           "singlePageAnchor": "aap-27-20260603___automation_portal_red_hat_enterprise_linux_appliance"
         },
         {
+          "title": "Automation portal Red Hat Enterprise Linux appliance",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "aap-27-20260603__section_2",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260603__section_2"
+        },
+        {
           "title": "Automation portal self-service enhancements",
           "visible": true,
-          "weight": 2,
+          "weight": 5,
           "urlFragment": "aap-27-20260603___automation_portal_self_service_enhancements",
           "anchor": null,
           "singlePageAnchor": "aap-27-20260603___automation_portal_self_service_enhancements"
@@ -28,7 +52,7 @@
         {
           "title": "General availability of execution environment builder",
           "visible": true,
-          "weight": 3,
+          "weight": 6,
           "urlFragment": "aap-27-20260603___general_availability_of_execution_environment_builder",
           "anchor": null,
           "singlePageAnchor": "aap-27-20260603___general_availability_of_execution_environment_builder"
@@ -36,7 +60,7 @@
         {
           "title": "Installation and Upgrades",
           "visible": true,
-          "weight": 4,
+          "weight": 7,
           "urlFragment": "aap-27-20260603___installation_and_upgrades",
           "anchor": null,
           "singlePageAnchor": "aap-27-20260603___installation_and_upgrades"
@@ -44,7 +68,7 @@
         {
           "title": "General availability of the MCP server for Red Hat Ansible Automation Platform",
           "visible": true,
-          "weight": 5,
+          "weight": 8,
           "urlFragment": "aap-27-20260603___mcp_tech_preview",
           "anchor": null,
           "singlePageAnchor": "aap-27-20260603___mcp_tech_preview"
@@ -52,7 +76,7 @@
         {
           "title": "AIOps integrations",
           "visible": true,
-          "weight": 6,
+          "weight": 9,
           "urlFragment": "aap-27-20260603___aiops_integrations",
           "anchor": null,
           "singlePageAnchor": "aap-27-20260603___aiops_integrations"
@@ -60,7 +84,7 @@
         {
           "title": "Automation coding assistant",
           "visible": true,
-          "weight": 7,
+          "weight": 10,
           "urlFragment": "aap-27-20260603___automation_coding_assistant",
           "anchor": null,
           "singlePageAnchor": "aap-27-20260603___automation_coding_assistant"
@@ -68,7 +92,7 @@
         {
           "title": "Automation intelligent assistant",
           "visible": true,
-          "weight": 8,
+          "weight": 11,
           "urlFragment": "aap-27-20260603___automation_intelligent_assistant",
           "anchor": null,
           "singlePageAnchor": "aap-27-20260603___automation_intelligent_assistant"
@@ -76,7 +100,7 @@
         {
           "title": "Security and Compliance",
           "visible": true,
-          "weight": 9,
+          "weight": 12,
           "urlFragment": "aap-27-20260603___security_and_compliance",
           "anchor": null,
           "singlePageAnchor": "aap-27-20260603___security_and_compliance"
@@ -84,7 +108,7 @@
         {
           "title": "Removal of direct API access to platform components",
           "visible": true,
-          "weight": 10,
+          "weight": 13,
           "urlFragment": "aap-27-20260603___removal_of_direct_api_access_to_platform_components",
           "anchor": null,
           "singlePageAnchor": "aap-27-20260603___removal_of_direct_api_access_to_platform_components"
@@ -92,7 +116,7 @@
         {
           "title": "Accessibility",
           "visible": true,
-          "weight": 11,
+          "weight": 14,
           "urlFragment": "aap-27-20260603___accessibility",
           "anchor": null,
           "singlePageAnchor": "aap-27-20260603___accessibility"
@@ -100,7 +124,7 @@
         {
           "title": "Usability Enhancements",
           "visible": true,
-          "weight": 12,
+          "weight": 15,
           "urlFragment": "aap-27-20260603___usability_enhancements",
           "anchor": null,
           "singlePageAnchor": "aap-27-20260603___usability_enhancements"
@@ -108,7 +132,7 @@
         {
           "title": "Developer Experience",
           "visible": true,
-          "weight": 13,
+          "weight": 16,
           "urlFragment": "aap-27-20260603___developer_experience",
           "anchor": null,
           "singlePageAnchor": "aap-27-20260603___developer_experience"
@@ -116,7 +140,7 @@
         {
           "title": "Ansible plug-ins for Red Hat Developer Hub",
           "visible": true,
-          "weight": 14,
+          "weight": 17,
           "urlFragment": "aap-27-20260603__section_1",
           "anchor": null,
           "singlePageAnchor": "aap-27-20260603__section_1"
@@ -124,7 +148,7 @@
         {
           "title": "Ansible Automation Dashboard (Tech Preview)",
           "visible": true,
-          "weight": 15,
+          "weight": 18,
           "urlFragment": "aap-27-20260603___general_availability_of_ansible_automation_dashboard",
           "anchor": null,
           "singlePageAnchor": "aap-27-20260603___general_availability_of_ansible_automation_dashboard"
@@ -132,7 +156,7 @@
         {
           "title": "Self-service automation",
           "visible": true,
-          "weight": 16,
+          "weight": 19,
           "urlFragment": "aap-27-20260603___self_service_automation",
           "anchor": null,
           "singlePageAnchor": "aap-27-20260603___self_service_automation"
@@ -140,7 +164,7 @@
         {
           "title": "Scalability, Reliability, and Resilience",
           "visible": true,
-          "weight": 17,
+          "weight": 20,
           "urlFragment": "aap-27-20260603___scalability_reliability_and_resilience",
           "anchor": null,
           "singlePageAnchor": "aap-27-20260603___scalability_reliability_and_resilience"
@@ -148,7 +172,7 @@
         {
           "title": "Event-Driven Ansible (Automation decisions)",
           "visible": true,
-          "weight": 18,
+          "weight": 21,
           "urlFragment": "aap-27-20260603___event_driven_ansible_automation_decisions",
           "anchor": null,
           "singlePageAnchor": "aap-27-20260603___event_driven_ansible_automation_decisions"
@@ -156,7 +180,7 @@
         {
           "title": "Highlighted Content Collections",
           "visible": true,
-          "weight": 19,
+          "weight": 22,
           "urlFragment": "aap-27-20260603___highlighted_content_collections",
           "anchor": null,
           "singlePageAnchor": "aap-27-20260603___highlighted_content_collections"
@@ -164,7 +188,7 @@
         {
           "title": "Execution environment updates",
           "visible": true,
-          "weight": 20,
+          "weight": 23,
           "urlFragment": "aap-27-20260603___execution_environment_updates",
           "anchor": null,
           "singlePageAnchor": "aap-27-20260603___execution_environment_updates"
@@ -172,7 +196,7 @@
         {
           "title": "Event-Driven Ansible ansible.eda and ansible-rulebook changes",
           "visible": true,
-          "weight": 21,
+          "weight": 24,
           "urlFragment": "aap-27-20260603___event_driven_ansible_ansible_eda_and_ansible_rulebook_changes",
           "anchor": null,
           "singlePageAnchor": "aap-27-20260603___event_driven_ansible_ansible_eda_and_ansible_rulebook_changes"
@@ -180,7 +204,7 @@
         {
           "title": "Event sources transitioning from ansible.eda to community.eda",
           "visible": true,
-          "weight": 22,
+          "weight": 25,
           "urlFragment": "aap-27-20260603___event_sources_transitioning_from_ansible_eda_to_community_eda",
           "anchor": null,
           "singlePageAnchor": "aap-27-20260603___event_sources_transitioning_from_ansible_eda_to_community_eda"
@@ -188,7 +212,7 @@
         {
           "title": "Bring-Your-Own-Knowledge with the Ansible Lightspeed intelligent assistant",
           "visible": true,
-          "weight": 23,
+          "weight": 26,
           "urlFragment": "aap-27-20260603___bring_your_own_knowledge_with_the_ansible_lightspeed_intelligent_assistant",
           "anchor": null,
           "singlePageAnchor": "aap-27-20260603___bring_your_own_knowledge_with_the_ansible_lightspeed_intelligent_assistant"

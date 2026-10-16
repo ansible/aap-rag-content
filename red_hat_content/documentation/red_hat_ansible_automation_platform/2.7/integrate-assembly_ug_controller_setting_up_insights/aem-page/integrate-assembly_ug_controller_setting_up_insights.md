@@ -1,18 +1,19 @@
 +++
-template = "docs/aem-title.html"
+title = "Integrate with Red Hat Lightspeed for vulnerability management - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_ug_controller_setting_up_insights"
-title = "Integrate with Red Hat Lightspeed (formerly Insights) - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_ug_controller_setting_up_insights/", "Integrate with Red Hat Lightspeed (formerly Insights)"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_ug_controller_setting_up_insights/", "Integrate with Red Hat Lightspeed for vulnerability management"]]
 category = "Integrate"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/integrate-assembly_ug_controller_setting_up_insights/aem-page/integrate-assembly_ug_controller_setting_up_insights.html"
-last_crumb = "Integrate with Red Hat Lightspeed (formerly Insights)"
-modified = "2026-07-30T17:12:56.473Z"
+last_crumb = "Integrate with Red Hat Lightspeed for vulnerability management"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
-name = "Integrate with Red Hat Lightspeed (formerly Insights)"
+name = "Integrate with Red Hat Lightspeed for vulnerability management"
 oversized = "false"
 page_slug = "integrate-assembly_ug_controller_setting_up_insights"
 portal_content_subtype = "title"
@@ -25,9 +26,13 @@ toc = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/integrate-as
 type = "aem-page"
 +++
 
-# Integrate with Red Hat Lightspeed (formerly Insights)
+# Integrate with Red Hat Lightspeed for vulnerability management
 
 Automation controller supports integration with Red Hat Lightspeed.
+
+Note:
+
+Red Hat Lightspeed (formerly Red Hat Insights) provides vulnerability scanning and patch management. This is separate from the Ansible Lightspeed coding assistant, which provides AI-powered code suggestions in IDEs. For information about the coding assistant, see Build automation content faster with the Ansible Lightspeed coding assistant in the Develop section.
 
 When a host is registered with Red Hat Lightspeed, it is scanned continually for vulnerabilities and known configuration conflicts. Each problem identified can have an associated fix in the form of an Ansible Playbook.
 
@@ -54,7 +59,7 @@ To enable integration between Ansible Automation Platform and Red Hat Lightspeed
 
 You might consider associating your service account with an existing user access group that already has the required permissions, or creating a new user access group.
 
- Note:
+Note:
 
 In adherence to security guidelines, service accounts are not automatically included in the default access group. To grant access, you must manually add them to the appropriate user access groups.
 
@@ -64,24 +69,24 @@ After you have created a service account and assigned it the appropriate permiss
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Credentials.
-2.  Click Create credential.
-3.  Enter the appropriate details in the following fields:
+1. From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Credentials.
+2. Click Create credential.
+3. Enter the appropriate details in the following fields:
 
   - **Name**: Enter the name of the credential.
   - Optional: **Description**: Enter a description for the credential.
   - Optional: **Organization**: Enter the name of the organization with which the credential is associated, or click the search ![Search](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/search.png) icon and select it from the **Select organization** window.
-  - **Credential type**: Enter **Red Hat Lightspeed** or select it from the list.  Note:
+  - **Credential type**: Enter **Red Hat Lightspeed** or select it from the list. Note:
             Use the **Username** and **Password** fields for Basic authentication. You can leave these blank if using **Client ID** and **Client secret**.
 
   - **Client ID**: Enter the client ID you received when you created your service account.
   - **Client secret**: Enter the client secret you received when you created your service account.
 
-4.  Click Create credential. You can now use this credential in an [Source an inventory from Red Hat Lightspeed](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-inv-source-rhlightspeed "You can create an inventory source that uses Red Hat Lightspeed as the source of hosts.") and [Red Hat Lightspeed project](/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_ug_controller_setting_up_insights#controller-create-insights-project "Create an automation controller project linked to Red Hat Lightspeed and retrieve remediation playbooks. This streamlines your efforts to address vulnerabilities and keep system configurations.").
+4. Click Create credential. You can now use this credential in an [Source an inventory from Red Hat Lightspeed](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-inv-source-rhlightspeed "You can create an inventory source that uses Red Hat Lightspeed as the source of hosts.") and [Red Hat Lightspeed project](/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_ug_controller_setting_up_insights#controller-create-insights-project "Create an automation controller project linked to Red Hat Lightspeed and retrieve remediation playbooks. This streamlines your efforts to address vulnerabilities and keep system configurations.").
 
 - If you receive a project sync failure, see the steps in [Remediating a Red Hat Lightspeed inventory](/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_ug_controller_setting_up_insights#controller-remediate-insights-inventory "Remediation of a Red Hat Lightspeed inventory enables automation controller to run Red Hat Lightspeed playbooks with a single click.") and check your analytics logs.
 
- Important:
+Important:
 
 You must recreate existing credentials and reassociate them with existing projects and inventory sources to support token-based authentication.
 
@@ -91,9 +96,9 @@ Create an automation controller project linked to Red Hat Lightspeed and retriev
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Projects.
-2.  Click Create project.
-3.  Enter the appropriate details in the following fields. Note that the following fields require specific Red Hat Lightspeed related entries:
+1. From the navigation panel, select Automation Execution> (and then)Projects.
+2. Click Create project.
+3. Enter the appropriate details in the following fields. Note that the following fields require specific Red Hat Lightspeed related entries:
 
   - **Name**: Enter the name for your Red Hat Lightspeed project.
   - Optional: **Description**: Enter a description for the project.
@@ -103,9 +108,9 @@ Create an automation controller project linked to Red Hat Lightspeed and retriev
   - Optional: **Content signature validation credential**: Enable content signing to verify that the content has remained secure when a project is synced.
   - **Red Hat Lightspeed credential**: This is pre-populated with the Red Hat Lightspeed credential you created before. If not, enter the credential, or click the search ![Search](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/search.png) icon and select it from the **Select Red Hat Lightspeed Credential** window.
 
-4.  Select the update options for this project from the **Options** field and provide any additional values, if applicable. For more information about each option click the tooltip ![tooltip](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/question-circle.png) icon next to each one.  
+4. Select the update options for this project from the **Options** field and provide any additional values, if applicable. For more information about each option click the tooltip ![tooltip](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/question-circle.png) icon next to each one.  
 ![Red Hat Lightspeed create project](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-insights-create-project-insights-form.png)  
-5.  Click Create project. All SCM and project synchronizations occur automatically the first time you save a new project.
+5. Click Create project. All SCM and project synchronizations occur automatically the first time you save a new project.
 
 ### What to do next
 
@@ -127,9 +132,10 @@ You can do this by creating a job template to run the Red Hat Lightspeed remedia
 
 ### Procedure
 
-1.  From the navigation menu, select Automation Execution> (and then)Templates.
-2.  On the **Templates** list view, click Create template and select from the list.
-3.  Enter the appropriate details in the following fields. Note that the following fields require specific Red Hat Lightspeed related entries:
+1. From the navigation menu, select Automation Execution> (and then)Templates.
+2. On the **Templates** list view, click Create template and select from the list.
+3. Enter the appropriate details in the following fields.
+Note that the following fields require specific Red Hat Lightspeed related entries:
 
   - **Name**: Enter the name of your Maintenance Plan.
   - Optional: **Description**: Enter a description for the job template.
@@ -138,12 +144,14 @@ You can do this by creating a job template to run the Red Hat Lightspeed remedia
   - **Project**: Select the Red Hat Lightspeed project that you previously created.
   - Optional: **Execution Environment**: The container image to be used for execution.
   - **Playbook**: Select a playbook associated with the Maintenance Plan that you want to run from the playbook list.
-  - Optional: **Credentials**: Enter the credential to use for this project or click the search (![Search](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/magnify.png)) icon and select it from the pop-up window. The credential does not have to be a Red Hat Lightspeed credential.
-  - **Verbosity**: Keep the default setting, or select the required verbosity from the list.  
+  - Optional: **Credentials**: Enter the credential to use for this project or click the search (![Search](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/magnify.png)) icon and select it from the pop-up window.
+The credential does not have to be a Red Hat Lightspeed credential.
+  - **Verbosity**: Keep the default setting, or select the required verbosity from the list.
+
 ![Red Hat Lightspeed job template](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-insights-create-job-template.png)  
 
-4.  Click Create job template.
-5.  Click the launch ![Launch](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/rightrocket.png) icon to launch the job template.
+4. Click Create job template.
+5. Click the launch ![Launch](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/rightrocket.png) icon to launch the job template.
 
 ### Results
 

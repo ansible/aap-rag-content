@@ -19,7 +19,7 @@ The corresponding `community.hashi_vault` modules are:
 
 ### Procedure
 
-1.  Replicate your automation tasks from both of the `community.hashi_vault` modules to the following `hashicorp.vault.kv2_secret` parameters. The `hashicorp.vault.kv2_secret` parameters are similar to `community.hashi_vault`.
+1. Replicate your automation tasks from both of the `community.hashi_vault` modules to the following `hashicorp.vault.kv2_secret` parameters. The `hashicorp.vault.kv2_secret` parameters are similar to `community.hashi_vault`.
 
 ```
 auth_method:
@@ -76,7 +76,7 @@ choices: [present, absent]
 default: present
 ```
 
-2.  You must add the `state` parameter to the `hashicorp.vault.kv2_secret` module, as shown above. Valid options are:
+2. You must add the `state` parameter to the `hashicorp.vault.kv2_secret` module, as shown above. Valid options are:
 
 - **`present`:** This is the equivalent of `create` or `update` in the `community.hashi_vault.vault_kv2` modules.
 - **`absent`:** This is the equivalent of `delete secret` in the `community.hashi_vault.vault_kv2` modules.
@@ -97,7 +97,7 @@ The corresponding `community.hashi_vault` module is:
 
 ### Procedure
 
-1.  Replicate the `community.hashi_vault` modules to the following `hashicorp.vault.kv2_secret_info` parameters.
+1. Replicate the `community.hashi_vault` modules to the following `hashicorp.vault.kv2_secret_info` parameters.
 
 ```
 engine_mount_point:
@@ -117,12 +117,12 @@ extends_documentation_fragment:
 - hashicorp.vault.vault_auth.modules
 ```
 
-2.  Configure the required parameters:
+2. Configure the required parameters:
 
 - **`path`:** The path where the secret is located in the community.`hashi_vault.hashi_vault` modules. **Alias:**`secret_path`
 - **`url`:** Maps to `url` in the `community.hashi_vault.hashi_vault` modules. Uses the same aliases as `vault_address`.
 
-3.  If needed, configure the optional parameters.
+3. If needed, configure the optional parameters.
 
 ### What to do next
 
@@ -141,7 +141,7 @@ The corresponding `community.hashi_vault` modules are:
 
 ### Procedure
 
-1.  Replicate the `community.hashi_vault` modules to the following `hashicorp.vault.kv2_secret_get` parameters.
+1. Replicate the `community.hashi_vault` modules to the following `hashicorp.vault.kv2_secret_get` parameters.
 
 ```
 auth_method:
@@ -180,7 +180,7 @@ type: int
 required: false
 ```
 
-2.  Use the following guidance to configure the `hashicorp.vault.kv2_secret_get` parameters:
+2. Use the following guidance to configure the `hashicorp.vault.kv2_secret_get` parameters:
 
 - **`auth_method`:** Maps identically to `auth_method` in the `community.hashi_vault.hashi_vault` modules.
 - **`mount_point`:** Maps to `mount_point` in the `community.hashi_vault.hashi_vault` modules. **Alias:**`secret_mount_path`.

@@ -1,16 +1,17 @@
 +++
-template = "docs/aem-title.html"
 title = "View the audit logs - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-view_the_audit_logs"
+template = "docs/aem-title.html"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_lightspeed_intro/", "Build automation faster with Red Hat Ansible Lightspeed"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_lightspeed_intro/", "Build automation faster with Red Hat Ansible Lightspeed code assistant"]]
 category = "Develop"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-view_the_audit_logs/aem-page/develop-view_the_audit_logs.html"
 last_crumb = "View the audit logs"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "View the audit logs"
 oversized = "false"
@@ -35,7 +36,7 @@ The logs are displayed in the Ansible Lightspeed Output Channel of the VS Code e
 
 ## Procedure
 
-1.  Open VS Code.
-2.  Open the Command Palette of the VS Code editor.
-3.  Click Output> (and then)Show Output Channels, and then select **Ansible Lightspeed**.
+1. Open VS Code.
+2. Open the Command Palette of the VS Code editor.
+3. Click Output> (and then)Show Output Channels, and then select **Ansible Lightspeed**.
   An **Output** panel displays at the bottom of the VS Code editor with a log of all user actions.

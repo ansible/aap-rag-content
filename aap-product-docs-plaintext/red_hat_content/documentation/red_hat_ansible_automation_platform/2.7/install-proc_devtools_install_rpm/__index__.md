@@ -10,7 +10,7 @@ Ansible development tools are available as an RPM package for Red Hat Enterprise
 
 ## Procedure
 
-1.  Run the following command to check whether Simple Content Access (SCA) is enabled:
+1. Run the following command to check whether Simple Content Access (SCA) is enabled:
 
 
 ```shell
@@ -23,14 +23,14 @@ If Simple Content Access is enabled, the output contains the following message:
 Content Access Mode is set to Simple Content Access.
 ```
 
-1.  If Simple Content Access is not enabled, attach the Red Hat Ansible Automation Platform SKU:
+1. If Simple Content Access is not enabled, attach the Red Hat Ansible Automation Platform SKU:
 
 
 ```shell
 $ sudo subscription-manager attach --pool=<sku-pool-id>
 ```
 
-2.  Install Ansible development tools with the following command:
+2. Install Ansible development tools with the following command:
 
 
 ```shell

@@ -1,7 +1,8 @@
 # Design patterns for mesh
 ## Segregated local and remote execution configuration
 
-This configuration adds a hop node and a remote execution node to the resilient configuration. The remote execution node is reachable from the hop node.
+This configuration adds a hop node and a remote execution node to the resilient configuration.
+The remote execution node is reachable from the hop node.
 
 You can use this setup if you are setting up execution nodes in a remote location, or if you need to run automation in a DMZ network.
 

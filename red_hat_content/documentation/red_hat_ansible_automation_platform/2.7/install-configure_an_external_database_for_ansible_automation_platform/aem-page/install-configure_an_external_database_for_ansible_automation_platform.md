@@ -1,7 +1,7 @@
 +++
-title = "Configure an external database for Ansible Automation Platform - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-configure_an_external_database_for_ansible_automation_platform"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-configure_an_external_database_for_ansible_automation_platform"
+title = "Configure an external database for Ansible Automation Platform - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator/", "Install on OpenShift Container Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-configure_an_external_database_for_ansible_automation_platform/aem-page/install-configure_an_external_database_for_ansible_automation_platform.html"
 last_crumb = "Configure an external database for Ansible Automation Platform"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure an external database for Ansible Automation Platform"
 oversized = "false"
@@ -53,10 +54,10 @@ If you choose to use an externally managed database with version 16 or 17 you mu
 
 ### About this task
 
-| Scenario                              | Action required                                                                                                                                                                                          |
-| ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br>Fresh install                     | <br>You must specify a single external database instance for the platform to use for the following:<br>Platform gatewayAutomation controllerAutomation hubEvent-Driven AnsibleMetrics serviceRed Hat Ansible Lightspeed (If enabled)<br>See the *aap-configuring-external-db-all-default-components.yml* example in the [Custom resources](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_operator_crs#unique_741654949 "Refer to the following custom resources you can use for various Ansible Automation Platform deployment scenarios.") section for help with this.<br>If using Red Hat Ansible Lightspeed, use the *aap-configuring-external-db-with-lightspeed-enabled.yml* example. |
-| <br>Existing external database in 2.4 | <br>Your existing external database remains the same after upgrading but you must specify the `external-postgres-configuration-gateway` (spec.database.database\_secret) on the Ansible Automation Platform custom resource.<br>For detailed steps, see [Upgrading an external database for platform gateway on on Ansible Automation Platform](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-configure_an_external_database_for_ansible_automation_platform#GUID-b94a38e1-9266-4338-a29a-1fd21ee08f5a "To upgrade from Ansible Automation Platform 2.4 to 2.6 with an external database, you must scale down your Operator deployment, upgrade your PostgreSQL, then scale your deployment back up.") |
+| Scenario                          | Action required                                                                                                                                                                                          |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Fresh install                     | You must specify a single external database instance for the platform to use for the following:<br>Platform gatewayAutomation controllerAutomation hubEvent-Driven AnsibleMetrics serviceRed Hat Ansible Lightspeed (If enabled)<br>See the *aap-configuring-external-db-all-default-components.yml* example in the [Custom resources](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_operator_crs#operator-crs "Refer to the following custom resources you can use for various Ansible Automation Platform deployment scenarios.") section for help with this.<br>If using Red Hat Ansible Lightspeed, use the *aap-configuring-external-db-with-lightspeed-enabled.yml* example. |
+| Existing external database in 2.4 | Your existing external database remains the same after upgrading but you must specify the `external-postgres-configuration-gateway` (spec.database.database\_secret) on the Ansible Automation Platform custom resource.<br>For detailed steps, see [Upgrading an external database for platform gateway on on Ansible Automation Platform](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-configure_an_external_database_for_ansible_automation_platform#GUID-b94a38e1-9266-4338-a29a-1fd21ee08f5a "To upgrade from Ansible Automation Platform 2.4 to 2.6 with an external database, you must scale down your Operator deployment, upgrade your PostgreSQL, then scale your deployment back up.") |
 
 To deploy Ansible Automation Platform with an external database, you must first create a Kubernetes secret with credentials for connecting to the database.
 
@@ -72,7 +73,7 @@ The following section outlines the steps to configure an external database for y
 
 ### Procedure
 
-1.  Create a `postgres_configuration_secret` YAML file, following the template below:
+1. Create a `postgres_configuration_secret` YAML file, following the template below:
   
 
 ```
@@ -105,16 +106,16 @@ External port defaults to `5432`.
 <password_to_connect_with>
 Value for variable `password` should not contain single or double quotes (', ") or backslashes (\) to avoid any issues during deployment, backup or restoration.
 
-2.  Apply `external-postgres-configuration-secret.yml` to your cluster using the `oc create` command.
+2. Apply `external-postgres-configuration-secret.yml` to your cluster using the `oc create` command.
 
 ```
 $ oc create -f external-postgres-configuration-secret.yml
 ```
 
   Note:
-      The following example is for a platform gateway deployment. To configure an external database for all components, use the *aap-configuring-external-db-all-default-components.yml* example in the [Custom resources](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_operator_crs#unique_741654949 "Refer to the following custom resources you can use for various Ansible Automation Platform deployment scenarios.") section.
+      The following example is for a platform gateway deployment. To configure an external database for all components, use the *aap-configuring-external-db-all-default-components.yml* example in the [Custom resources](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_operator_crs#operator-crs "Refer to the following custom resources you can use for various Ansible Automation Platform deployment scenarios.") section.
 
-3.  When creating your `AnsibleAutomationPlatform` custom resource object, specify the secret on your spec, following the example below:
+3. When creating your `AnsibleAutomationPlatform` custom resource object, specify the secret on your spec, following the example below:
   
 
 ```
@@ -156,7 +157,7 @@ The following section outlines the steps to configure an external database for y
 
 ### Procedure
 
-1.  Create a `postgres_configuration_secret` YAML file, following the template below:
+1. Create a `postgres_configuration_secret` YAML file, following the template below:
   
 
 ```
@@ -184,13 +185,13 @@ type: Opaque
   - `password`: Ensure the password does not contain single or double quotes (', ") or backslashes (\) to avoid any issues during deployment, backup or restoration.
   - `sslmode`: This variable is valid for external databases only. The allowed values are: `prefer`, `disable`, `allow`, `require`, `verify-ca`, and `verify-full`.
 
-2.  Apply `external-postgres-configuration-secret.yml` to your cluster using the `oc create` command.
+2. Apply `external-postgres-configuration-secret.yml` to your cluster using the `oc create` command.
 
 ```
 $ oc create -f external-postgres-configuration-secret.yml
 ```
 
-3.  When creating your `AnsibleAutomationPlatform` custom resource object, specify the secret under the `controller` section in your spec, following the example below:
+3. When creating your `AnsibleAutomationPlatform` custom resource object, specify the secret under the `controller` section in your spec, following the example below:
   
 
 ```
@@ -238,7 +239,7 @@ The following section outlines the steps to configure an external database for y
 
 ### Procedure
 
-1.  Create a `postgres_configuration_secret` YAML file, following the template below:
+1. Create a `postgres_configuration_secret` YAML file, following the template below:
   
 
 ```
@@ -258,19 +259,19 @@ stringData:
 type: Opaque
 ```
 
-  1.  Namespace to create the secret in. This should be the same namespace you want to deploy to.
-  2.  The resolvable hostname for your database node.
-  3.  External port defaults to `5432`.
-  4.  Value for variable `password` should not contain single or double quotes (', ") or backslashes (\) to avoid any issues during deployment, backup or restoration.
-  5.  The variable `sslmode` is valid for `external` databases only. The allowed values are: `prefer`, `disable`, `allow`, `require`, `verify-ca`, and `verify-full`.
+  1. Namespace to create the secret in. This should be the same namespace you want to deploy to.
+  2. The resolvable hostname for your database node.
+  3. External port defaults to `5432`.
+  4. Value for variable `password` should not contain single or double quotes (', ") or backslashes (\) to avoid any issues during deployment, backup or restoration.
+  5. The variable `sslmode` is valid for `external` databases only. The allowed values are: `prefer`, `disable`, `allow`, `require`, `verify-ca`, and `verify-full`.
 
-2.  Apply `external-postgres-configuration-secret.yml` to your cluster using the `oc create` command.
+2. Apply `external-postgres-configuration-secret.yml` to your cluster using the `oc create` command.
 
 ```
 $ oc create -f external-postgres-configuration-secret.yml
 ```
 
-3.  When creating your `AnsibleAutomationPlatform` custom resource object, specify the secret under the `hub` section in your spec, following the example below:
+3. When creating your `AnsibleAutomationPlatform` custom resource object, specify the secret under the `hub` section in your spec, following the example below:
   
 
 ```
@@ -324,7 +325,7 @@ The following section outlines the steps to configure an external database for m
 
 ### Procedure
 
-1.  Create a `postgres_configuration_secret` YAML file for the `metrics_service` database, following the template below:
+1. Create a `postgres_configuration_secret` YAML file for the `metrics_service` database, following the template below:
   
 
 ```
@@ -353,7 +354,7 @@ type: Opaque
   - **password:** Ensure the password does not contain single or double quotes (`'`, `"`) or backslashes (`\`) to avoid any issues during deployment, backup or restoration.
   - **sslmode:** This variable is valid for external databases only. The allowed values are: `prefer`, `disable`, `allow`, `require`, `verify-ca`, and `verify-full`.
 
-2.  Create a second secret for read-only access to the automation controller database:
+2. Create a second secret for read-only access to the automation controller database:
   
 
 ```
@@ -377,7 +378,7 @@ type: Opaque
   Important:
   The `ms_awx_readonly` user must be created in your external database with SELECT privileges on the automation controller database before deployment. For instructions on creating this user, see Configure an external database for Ansible Automation Platform (containerized).
 
-3.  Apply both secrets to your cluster using the `oc create` command:
+3. Apply both secrets to your cluster using the `oc create` command:
   
 
 ```
@@ -385,7 +386,7 @@ $ oc create -f metrics-postgres-configuration.yml
 $ oc create -f metrics-controller-readonly-configuration.yml
 ```
 
-4.  When creating your AnsibleAutomationPlatform custom resource object, specify both secrets under the metrics section in your spec, following the example below:
+4. When creating your AnsibleAutomationPlatform custom resource object, specify both secrets under the metrics section in your spec, following the example below:
   
 
 ```
@@ -394,17 +395,18 @@ kind: AnsibleAutomationPlatform
 metadata:
   name: myaap
 spec:
- metrics:
-   disabled: false
-   database:
-   database_secret: automation-platform-metrics-postgres-configuration
-   externally_managed: true
- ms_awx_readonly_user:
-   externally_managed: true
- ms_awx_readonly_user_secret: metrics-controller-readonly-configuration
+  metrics:
+    database:
+      database_secret: automation-platform-metrics-postgres-configuration
+      externally_managed: true
+      ms_awx_readonly_user_secret: metrics-controller-readonly-configuration
+    ms_awx_readonly_user:
+      externally_managed: true
 ```
 
   
+  Important:
+  The `ms_awx_readonly_user_secret` field must be nested under `database`, while the `ms_awx_readonly_user.externally_managed` flag is a sibling of `database` at the `metrics` level. These two fields are intentionally at different nesting levels in the custom resource.
   Note:
   If you have an existing metrics service instance, specify its name under `metrics.name` to apply these settings to the existing instance. If you omit the name field, the operator will create a new instance with the default name pattern `<aap-instance-name>`-metrics.
     For more examples of Ansible Automation Platform custom resources, see Red Hat Ansible Automation Platform custom resources
@@ -430,7 +432,7 @@ To upgrade from Ansible Automation Platform 2.4 to 2.6 with an external database
 
 ### Procedure
 
-1.  Create a secret `postgres-config-gateway` with PostgreSQL 15 credentials for the platform gatewaycomponent. For example:
+1. Create a secret `postgres-config-gateway` with PostgreSQL 15 credentials for the platform gatewaycomponent. For example:
   
 
 ```
@@ -450,7 +452,7 @@ stringData:
 type: Opaque
 ```
 
-2.  Add your newly created secret to your Ansible Automation Platform instance:
+2. Add your newly created secret to your Ansible Automation Platform instance:
   
 
 ```
@@ -458,41 +460,41 @@ spec:
   postgres_configuration_secret: postgres-config-gateway
 ```
 
-3.  Scale down your deployments in their respective namespaces using:
+3. Scale down your deployments in their respective namespaces using:
   
 
 ```
 oc scale deployment --replicas=0 -n <component-namespace> <component-deployment>
 ```
 
-4.  Automation contoller:
-  1.  `automation-controller-operator-controller-manager`
-  2.  `<controller-name>-controller-task`
-  3.  `<controller-name>-controller-web`
-5.  Automation hub:
-  1.  `automation-hub-operator-controller-manager`
-  2.  `<hub-name>-hub-api`
-  3.  `<hub-name>-hub-content `
-  4.  `<hub-name>-hub-redis`
-  5.  `<hub-name>-hub-worker`
-6.  The remaining operators:t
-  1.  `ansible-lightspeed-operator-controller-manager`
-  2.  `eda-server-operator-controller-manager`
-  3.  `resource-operator-controller-manager`
-7.  Upgrade your PostgreSQL 13 to PostgreSQL 15.
-8.  Scale your deployments back up using:
+4. Automation contoller:
+  1. `automation-controller-operator-controller-manager`
+  2. `<controller-name>-controller-task`
+  3. `<controller-name>-controller-web`
+5. Automation hub:
+  1. `automation-hub-operator-controller-manager`
+  2. `<hub-name>-hub-api`
+  3. `<hub-name>-hub-content `
+  4. `<hub-name>-hub-redis`
+  5. `<hub-name>-hub-worker`
+6. The remaining operators:t
+  1. `ansible-lightspeed-operator-controller-manager`
+  2. `eda-server-operator-controller-manager`
+  3. `resource-operator-controller-manager`
+7. Upgrade your PostgreSQL 13 to PostgreSQL 15.
+8. Scale your deployments back up using:
   
 
 ```
 oc scale deployment --replicas=1 -n <component-namespace> <component-deployment>
 ```
 
-9.  Log into OpenShift Container Platform.
-10.  Go to **Operators > Installed Operators**.
-11.  Click the ⋮ icon next to your deployment and then click **Edit Subscription**
-12.  From the **Details** tab, select **Update Channel**.
-13.  Select **stable-2.6** as the channel and click **Save**.
-14.  Deploy Ansible Automation Platform 2.6 using the following custom resource (CR):
+9. Log into OpenShift Container Platform.
+10. Go to **Operators > Installed Operators**.
+11. Click the ⋮ icon next to your deployment and then click **Edit Subscription**
+12. From the **Details** tab, select **Update Channel**.
+13. Select **stable-2.6** as the channel and click **Save**.
+14. Deploy Ansible Automation Platform 2.6 using the following custom resource (CR):
   
 
 ```
@@ -572,13 +574,15 @@ If the `hstore` extension is not enabled before installation, a failure raises d
 
 ### Procedure
 
-1.  Check if the extension is available on the PostgreSQL server (automation hub database).
+1. Check if the extension is available on the PostgreSQL server (automation hub database).
+  
 
 ```
 $ psql -d <automation hub database> -c "SELECT * FROM pg_available_extensions WHERE name='hstore'"
 ```
 
-2.  Where the default value for `<automation hub database>` is `automationhub`. **Example output with `hstore` available**:
+2. Where the default value for `<automation hub database>` is `automationhub`.
+      **Example output with `hstore` available**:
 
 ```
 name  | default_version | installed_version |comment
@@ -595,13 +599,14 @@ name  | default_version | installed_version |comment
 (0 rows)
 ```
 
-3.  On a RHEL based server, the `hstore` extension is included in the `postgresql-contrib` RPM package, which is not installed automatically when installing the PostgreSQL server RPM package. To install the RPM package, use the following command:
+3. On a RHEL based server, the `hstore` extension is included in the `postgresql-contrib` RPM package, which is not installed automatically when installing the PostgreSQL server RPM package.
+      To install the RPM package, use the following command:
 
 ```
 dnf install postgresql-contrib
 ```
 
-4.  Load the `hstore` PostgreSQL extension into the automation hub database with the following command:
+4. Load the `hstore` PostgreSQL extension into the automation hub database with the following command:
   
 
 ```
@@ -627,33 +632,34 @@ When upgrading the Ansible Automation Platform Operator you may encounter an err
 NotImplementedError: can't parse timestamptz with DateStyle 'Redwood, SHOW_TIME': '18-MAY-23 20:33:55.765755 +00:00'
 ```
 
-Errors like this occur when you have an external database with an unexpected DateStyle set. You can refer to the following steps to resolve this issue.
+Errors like this occur when you have an external database with an unexpected DateStyle set.
+You can refer to the following steps to resolve this issue.
 
 ### Procedure
 
-1.  Edit the `/var/lib/pgsql/data/postgres.conf` file on the database server:
+1. Edit the `/var/lib/pgsql/data/postgres.conf` file on the database server:
   
 
 ```
 # vi /var/lib/pgsql/data/postgres.conf
 ```
 
-2.  Find and comment out the line:
+2. Find and comment out the line:
   
 
 ```
 #datestyle = 'Redwood, SHOW_TIME'
 ```
 
-3.  Add the following setting immediately below the newly-commented line:
+3. Add the following setting immediately below the newly-commented line:
   
 
 ```
 datestyle = 'iso, mdy'
 ```
 
-4.  Save and close the `postgres.conf` file.
-5.  Reload the database configuration:
+4. Save and close the `postgres.conf` file.
+5. Reload the database configuration:
   
 
 ```

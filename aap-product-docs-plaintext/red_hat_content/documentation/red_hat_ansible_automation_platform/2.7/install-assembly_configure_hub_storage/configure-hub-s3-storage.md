@@ -5,8 +5,8 @@ Amazon S3 storage is a type of object storage that is supported in containerized
 
 ### Procedure
 
-1.  Ensure your AWS S3 bucket exists before proceeding with the installation.
-2.  Add the following variables to your inventory file under the `[all:vars]` group to configure S3 storage:
+1. Ensure your AWS S3 bucket exists before proceeding with the installation.
+2. Add the following variables to your inventory file under the `[all:vars]` group to configure S3 storage:
 
 
 ```
@@ -17,7 +17,7 @@ hub_s3_secret_key=<secret_key>
 hub_s3_bucket_name=<bucket_name>
 ```
 
-3.  Optional: You can pass extra parameters to the AWS S3 storage backend by using the `hub_s3_extra_settings` variable. For example:
+3. Optional: You can pass extra parameters to the AWS S3 storage backend by using the `hub_s3_extra_settings` variable. For example:
 
 
 ```

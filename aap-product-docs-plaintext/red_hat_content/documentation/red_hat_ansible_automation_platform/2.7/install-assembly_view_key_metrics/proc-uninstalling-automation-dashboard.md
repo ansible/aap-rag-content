@@ -1,12 +1,12 @@
-# Install automation dashboard to calculate savings (RHEL only)
-## Install automation dashboard
-### Uninstall automation dashboard
+# Install the standalone automation dashboard utility to calculate savings (RHEL only)
+## Install the standalone automation dashboard utility
+### Uninstall the standalone automation dashboard utility
 
-Uninstall automation dashboard and its dependencies by using a single command, ensuring a clean removal from your host.
+Uninstall the standalone automation dashboard utility and its dependencies by using a single command, ensuring a clean removal from your host.
 
 #### Procedure
 
-Run the following command to uninstall automation dashboard and its dependencies, including the PostgreSQL database container:
+Run the following command to uninstall the standalone automation dashboard and its dependencies, including the PostgreSQL database container:
 
 ```bash
 ansible-playbook -i inventory

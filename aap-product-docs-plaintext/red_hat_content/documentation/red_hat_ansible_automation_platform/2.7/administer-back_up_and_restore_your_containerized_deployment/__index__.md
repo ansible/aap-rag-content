@@ -8,3 +8,7 @@ Implementing backup and restore procedures helps you to:
 - **Enable disaster recovery**: Restore your environment quickly after hardware failures or other unexpected events to maintain business continuity.
 - **Support testing and development**: Create copies of your environment for testing upgrades or configuration changes without affecting production systems.
 
+Note:
+
+For the lowest-risk restore outcome, upgrade the source environment to the same async release as the target before taking a backup. Restoring a backup from an earlier async release onto a later async release is possible but may encounter unexpected behavior if schema or configuration changes were introduced in the intervening releases.
+

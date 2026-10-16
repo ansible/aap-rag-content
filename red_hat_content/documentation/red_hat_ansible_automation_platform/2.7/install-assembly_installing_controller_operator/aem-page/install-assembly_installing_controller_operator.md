@@ -1,7 +1,7 @@
 +++
+title = "Configure automation controller - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_installing_controller_operator"
-title = "Configure automation controller - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator/", "Install on OpenShift Container Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_installing_controller_operator/aem-page/install-assembly_installing_controller_operator.html"
 last_crumb = "Configure automation controller"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure automation controller"
 oversized = "false"
@@ -49,14 +50,14 @@ Use this procedure to configure the image pull policy on your automation control
 
 ### Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  Go to Operators> (and then)Installed Operators.
-3.  Select your Ansible Automation Platform Operator deployment.
-4.  Select the **Ansible Automation Platform** tab.
-5.  Click the ⋮ icon next to your Ansible Automation Platform instance and select **Edit AnsibleAutomationPlatform**.
-6.  Click **YAML view** and locate the `spec.controller:` section.
+1. Log in to Red Hat OpenShift Container Platform.
+2. Go to Operators> (and then)Installed Operators.
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select the **Ansible Automation Platform** tab.
+5. Click the ⋮ icon next to your Ansible Automation Platform instance and select **Edit AnsibleAutomationPlatform**.
+6. Click **YAML view** and locate the `spec.controller:` section.
 
-7.  Configure the image pull policy and resource requirements under the `controller:` section:
+7. Configure the image pull policy and resource requirements under the `controller:` section:
   
 
 ```
@@ -110,7 +111,7 @@ spec:
     create_preload_data: true
 ```
 
-8.  Click **Save**.
+8. Click **Save**.
   
   Note:
       These settings apply to the automation controller component managed by this Ansible Automation Platform instance. If you specified an existing controller under `controller.name`, these settings will update that instance.
@@ -129,7 +130,7 @@ You can configure your LDAP SSL configuration for automation controller through 
 
 ### Procedure
 
-1.  Create a secret in your Ansible Automation Platform namespace for the `bundle-ca.crt` file (the filename must be `bundle-ca.crt`):
+1. Create a secret in your Ansible Automation Platform namespace for the `bundle-ca.crt` file (the filename must be `bundle-ca.crt`):
   
 
 ```
@@ -139,7 +140,7 @@ $ oc create secret -n aap generic bundle-ca-secret --from-file=bundle-ca.crt
   Note:
       The target filename for this operation must be `bundle-ca.crt` and the secret name should be `bundle-ca-secret`.
 
-2.  Add the `bundle_cacert_secret` to the Ansible Automation Platform customer resource:
+2. Add the `bundle_cacert_secret` to the Ansible Automation Platform customer resource:
   
 
 ```
@@ -175,13 +176,13 @@ You must assign a unique metadata.name to each custom resource (CR) in your name
 
 ### Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  Navigate to Operators> (and then)Installed Operators.
-3.  Select your Ansible Automation Platform Operator deployment.
-4.  Select the **Ansible Automation Platform** tab.
-5.  Click the ⋮ icon next to your Ansible Automation Platform instance and select **Edit AnsibleAutomationPlatform** .
-6.  Click **YAML view** and locate the `spec.controller:` section..
-7.  Configure the route options under the `controller:` section:
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to Operators> (and then)Installed Operators.
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select the **Ansible Automation Platform** tab.
+5. Click the ⋮ icon next to your Ansible Automation Platform instance and select **Edit AnsibleAutomationPlatform** .
+6. Click **YAML view** and locate the `spec.controller:` section..
+7. Configure the route options under the `controller:` section:
   
 
 ```
@@ -194,7 +195,7 @@ spec:
     projects_persistence: false  # Enable/disable persistence for /var/lib/projects
 ```
 
-8.  Click **Save.**
+8. Click **Save.**
   
   Note:
       Edge termination is recommended for most instances. After configuring your route, you can customize additional route settings by adding them to the `controller:` section in the Ansible Automation Platform custom resource.
@@ -209,13 +210,13 @@ The Ansible Automation Platform Operator installation form allows you to further
 
 ### Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  Navigate to Operators> (and then)Installed Operators.
-3.  Select your Ansible Automation Platform Operator deployment.
-4.  Select the **Ansible Automation Platform** tab.
-5.  Click the ⋮ icon next to your Ansible Automation Platform instance and select **Edit AnsibleAutomationPlatform** .
-6.  Click **YAML view** and locate the `spec.controller:` section..
-7.  Configure the route options under the `controller:` section:
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to Operators> (and then)Installed Operators.
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select the **Ansible Automation Platform** tab.
+5. Click the ⋮ icon next to your Ansible Automation Platform instance and select **Edit AnsibleAutomationPlatform** .
+6. Click **YAML view** and locate the `spec.controller:` section..
+7. Configure the route options under the `controller:` section:
   
 
 ```
@@ -228,7 +229,7 @@ spec:
     ingress_tls_secret: controller-ingress-tls-secret
 ```
 
-8.  Click **Save**.
+8. Click **Save**.
   
   Note:
       These settings apply to the automation controller component managed by this Ansible Automation Platform instance. The operator automatically updates the ingress configuration for the controller.
@@ -243,9 +244,9 @@ You can view the progress by navigating to Workloads> (and then)Pods and locatin
 
 Verify that the following operator pods provided by the Ansible Automation Platform Operator installation from automation controller are running:
 
-| Operator manager controllers                                                                                                                                                                             | Automation controller                                                                                                                                    | Automation hub                                                                                                                           | Event-Driven Ansible (EDA)                                                                                                                             |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| <br>The operator manager controllers for each of the three operators, include the following:<br>automation-controller-operator-controller-managerautomation-hub-operator-controller-managerresource-operator-controller-manageraap-gateway-operator-controller-manageransible-lightspeed-operator-controller-managereda-server-operator-controller-manager | <br>After deploying automation controller, you can see the addition of the following pods:<br>controllercontroller-postgrescontroller-webcontroller-task | <br>After deploying automation hub, you can see the addition of the following pods:<br>hub-apihub-contenthub-postgreshub-redishub-worker | <br>After deploying EDA, you can see the addition of the following pods:<br>eda-activation-workerda-apieda-default-workereda-event-streameda-scheduler |
+| Operator manager controllers                                                                                                                                                                             | Automation controller                                                                                                                                | Automation hub                                                                                                                       | Event-Driven Ansible (EDA)                                                                                                                         |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The operator manager controllers for each of the three operators, include the following:<br>automation-controller-operator-controller-managerautomation-hub-operator-controller-managerresource-operator-controller-manageraap-gateway-operator-controller-manageransible-lightspeed-operator-controller-managereda-server-operator-controller-manager | After deploying automation controller, you can see the addition of the following pods:<br>controllercontroller-postgrescontroller-webcontroller-task | After deploying automation hub, you can see the addition of the following pods:<br>hub-apihub-contenthub-postgreshub-redishub-worker | After deploying EDA, you can see the addition of the following pods:<br>eda-activation-workerda-apieda-default-workereda-event-streameda-scheduler |
 
 Note:
 

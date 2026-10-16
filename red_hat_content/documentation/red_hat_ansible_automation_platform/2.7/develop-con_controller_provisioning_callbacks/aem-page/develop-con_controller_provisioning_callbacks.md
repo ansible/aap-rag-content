@@ -1,6 +1,6 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_provisioning_callbacks"
 title = "Increase capacity through cloud bursting by provisioning callbacks - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_provisioning_callbacks"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-con_controller_provisioning_callbacks/aem-page/develop-con_controller_provisioning_callbacks.html"
 last_crumb = "Increase capacity through cloud bursting by provisioning callbacks"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Increase capacity through cloud bursting by provisioning callbacks"
 oversized = "false"
@@ -29,11 +30,13 @@ type = "aem-page"
 
 Provisioning Callbacks are a feature of automation controller that enable a host to start a playbook run against itself, rather than waiting for a user to launch a job to manage the host from the automation controller console.
 
-Provisioning Callbacks are only used to run playbooks on the calling host and are meant for cloud bursting. Cloud bursting is a cloud computing configuration that enables a private cloud to access public cloud resources by "bursting" into a public cloud when computing demand spikes.
+Provisioning Callbacks are only used to run playbooks on the calling host and are meant for cloud bursting.
+Cloud bursting is a cloud computing configuration that enables a private cloud to access public cloud resources by "bursting" into a public cloud when computing demand spikes.
 
- **Example**
+**Example**
 
-New instances with a need for client to server communication for configuration, such as transmitting an authorization key, not to run a job against another host. This provides for automatically configuring the following:
+New instances with a need for client to server communication for configuration, such as transmitting an authorization key, not to run a job against another host.
+This provides for automatically configuring the following:
 
 - A system after it has been provisioned by another system (such as AWS auto-scaling, or an operating system provisioning system such as Kickstart or preseed).
 - Launching a job programmatically without invoking the automation controller API directly.
@@ -48,7 +51,7 @@ Use the following procedure to enable provisioning callbacks for a job template.
 
 ### Procedure
 
- To enable callbacks, check the **Provisioning callback** option in the job template. This displays **Provisioning callback details** for the job template.
+To enable callbacks, check the **Provisioning callback** option in the job template. This displays **Provisioning callback details** for the job template.
 
 Note:
 
@@ -62,11 +65,11 @@ You can use the REST API to trigger automation controller callbacks manually.
 
 ### Procedure
 
-1.  Examine the callback URL in the UI, in the form: https://<CONTROLLER_SERVER_NAME>/api/v2/job_templates/7/callback/
+1. Examine the callback URL in the UI, in the form: https://<CONTROLLER_SERVER_NAME>/api/v2/job_templates/7/callback/
 
   - The "7" in the sample URL is the job template ID in automation controller.
 
-2.  Ensure that the request from the host is a POST. The following is an example using `curl` (all on a single line):
+2. Ensure that the request from the host is a POST. The following is an example using `curl` (all on a single line):
   
 
 ```
@@ -74,7 +77,7 @@ curl -k -i -H 'Content-Type:application/json' -XPOST -d '{"host_config_key": "re
                   https://<CONTROLLER_SERVER_NAME>/api/v2/job_templates/7/callback/
 ```
 
-3.  Ensure that the requesting host is defined in your inventory for the callback to succeed.
+3. Ensure that the requesting host is defined in your inventory for the callback to succeed.
 
 ### Results
 
@@ -120,7 +123,7 @@ You can pass `extra_vars` in Provisioning Callbacks the same way you can in a re
 
 ### Procedure
 
- Pass extra variables by using one of these methods:
+Pass extra variables by using one of these methods:
 
 - Use the following JSON format as an example when adding your own `extra_vars` to be passed:
 

@@ -1,6 +1,6 @@
 +++
-title = "Configure external PostgreSQL database for metrics service with OpenShift operator - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_configure_external_database_operator"
+title = "Configure external PostgreSQL database for metrics service with OpenShift operator - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-task_configure_external_database_operator/aem-page/install-task_configure_external_database_operator.html"
 last_crumb = "Configure external PostgreSQL database for metrics service with OpenShift operator"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure external PostgreSQL database for metrics service with OpenShift operator"
 oversized = "false"
@@ -50,7 +51,7 @@ The operator supports externally managed databases for both the metrics service 
 
 ## Procedure
 
-1.  Create external databases and users
+1. Create external databases and users
       On the external PostgreSQL server, create the `metrics_service` database and required users:
 
     **Create the metrics_service database:**
@@ -108,7 +109,7 @@ sudo systemctl reload postgresql
 podman exec postgres-container pg_ctl reload
 ```
 
-2.  Create Kubernetes secrets for database credentials
+2. Create Kubernetes secrets for database credentials
       Create two secrets in the same namespace where you deploy the `metricsService` CR. These secrets store database connection parameters that the operator uses to configure metrics service.
 
     **Secret 1: Metrics service database credentials**
@@ -126,8 +127,6 @@ stringData:
   database: metrics_service
   username: metrics_service
   password: <SECURE_PASSWORD>
-  sslmode: prefer
-  type: unmanaged
 ```
 
     **Secret 2: Automation controller database read-only credentials**
@@ -145,8 +144,6 @@ stringData:
   database: awx
   username: ms_awx_readonly
   password: <READONLY_PASSWORD>
-  sslmode: prefer
-  type: unmanaged
 ```
 
     **Apply the secrets:**
@@ -161,19 +158,22 @@ oc get secret -n <your-namespace> | grep postgres-configuration
 
     **Secret field reference:**
 
-    | Field      | Required | Description                                                                         |
-    | ---------- | -------- | ----------------------------------------------------------------------------------- |
-    | `host`     | Yes      | Database server hostname or IP address                                              |
-    | `port`     | Yes      | Database port (5432 default)                                                        |
-    | `database` | Yes      | Database name                                                                       |
-    | `username` | Yes      | Database user                                                                       |
-    | `password` | Yes      | Database password                                                                   |
-    | `sslmode`  | No       | SSL mode: disable, allow, prefer, require, verify-ca, verify-full (default: prefer) |
-    | `type`     | Yes      | Must be`managed` for operator-managed configuration                                 |
+    | Field      | Required | Description                            |
+    | ---------- | -------- | -------------------------------------- |
+    | `host`     | Yes      | Database server hostname or IP address |
+    | `port`     | Yes      | Database port (5432 default)           |
+    | `database` | Yes      | Database name                          |
+    | `username` | Yes      | Database user                          |
+    | `password` | Yes      | Database password                      |
+  Important:
+      The SSL connection mode for the metrics service database is not configured in this secret. The operator sets the SSL mode through the `metricsService` CR spec, which renders it into the `METRICS_SERVICE_DB_SSLMODE` and `METRICS_SERVICE_AWX_DB_SSLMODE` environment variables in the pod configmap. The effective default is `prefer`, which falls back to an unencrypted connection if the server does not support TLS. To require encrypted connections, set the SSL mode in the CR spec.
+
+    The `verify-ca` and `verify-full` SSL modes are not currently supported because the operator does not provide a mechanism to supply a CA certificate (`sslrootcert`) to the metrics service pods.
+
   Note:
       Replace `<your-namespace>` with the namespace where you deploy metrics service (for example, `aap-27-metrics`).
 
-3.  Create metricsService custom resource with external database configuration
+3. Create metricsService custom resource with external database configuration
       Create a `metricsService` CR that references the external database secrets. This configuration directs the operator to use external databases instead of provisioning PostgreSQL pods.
 
 ```
@@ -196,19 +196,21 @@ spec:
 
     **Key configuration fields:**
 
-    | Field                                             | Value                                                | Description                                                          |
-    | ------------------------------------------------- | ---------------------------------------------------- | -------------------------------------------------------------------- |
-    | `metrics.database.database_secret`                | `automation-platform-metrics-postgres-configuration` | Name of secret containing metrics service database credentials       |
-    | `metrics.database.externally_managed`             | `true`                                               | Tells operator NOT to provision a PostgreSQL pod for metrics service |
-    | `metrics.ms_awx_readonly_user.externally_managed` | `true`                                               | Tells operator NOT to create`ms_awx_readonly` user automatically     |
-    | `metrics.ms_awx_readonly_user_secret`             | `automation-controller-read-postgres-configuration`  | Name of secret containing read-only controller database credentials  |
+    | Field                                     | Value                                                | Description                                                          |
+    | ----------------------------------------- | ---------------------------------------------------- | -------------------------------------------------------------------- |
+    | `database.database_secret`                | `automation-platform-metrics-postgres-configuration` | Name of secret containing metrics service database credentials       |
+    | `database.externally_managed`             | `true`                                               | Tells operator NOT to provision a PostgreSQL pod for metrics service |
+    | `ms_awx_readonly_user.externally_managed` | `true`                                               | Tells operator NOT to create`ms_awx_readonly` user automatically     |
+    | `database.ms_awx_readonly_user_secret`    | `automation-controller-read-postgres-configuration`  | Name of secret containing read-only controller database credentials  |
   Important:
-      Both `metrics.database.externally_managed: true` AND `metrics.ms_awx_readonly_user.externally_managed: true` must be set. If only one is set, the operator attempts to provision database resources, causing pod scheduling failures with errors like `Insufficient devices.kubevirt.io/kvm` or `Insufficient memory`.
+      Both `database.externally_managed: true` AND `ms_awx_readonly_user.externally_managed: true` must be set. If only one is set, the operator attempts to provision database resources, causing pod scheduling failures with errors like `Insufficient devices.kubevirt.io/kvm` or `Insufficient memory`.
 
+  Important:
+  The `ms_awx_readonly_user_secret` field must be nested under `database`, while the `ms_awx_readonly_user.externally_managed` flag is a sibling of `database` at the spec root. These two fields are intentionally at different nesting levels in the custom resource.
     **Why both fields are required:**
 
-  - `metrics.database.externally_managed: true` — Prevents operator from creating PostgreSQL pod for metrics service database
-  - `metrics.ms_awx_readonly_user.externally_managed: true` — Prevents operator from attempting to create `ms_awx_readonly` user (assumes you created it manually)
+  - `database.externally_managed: true` -- Prevents operator from creating PostgreSQL pod for metrics service database
+  - `ms_awx_readonly_user.externally_managed: true` -- Prevents operator from attempting to create `ms_awx_readonly` user (assumes you created it manually)
   - Missing either field triggers operator's default behavior: provision database using KubeVirt virtual machines (VMs)
     **Apply the CR:**
 
@@ -219,7 +221,7 @@ oc create -f metricsservice-external-db.yaml
 oc get metricsservice metrics-service -n <your-namespace> -w
 ```
 
-4.  Verify deployment
+4. Verify deployment
   
 
 ```
@@ -293,13 +295,13 @@ External database is successfully configured when:
 
 **Solution:**
 
-1. Verify `metrics.database.externally_managed: true` is set in the metricsService CR:
+1. Verify `database.externally_managed: true` is set in the metricsService CR:
 
 ```
 oc get metricsservice metrics-service -o yaml | grep externally_managed
 ```
 
-2. Verify `metrics.ms_awx_readonly_user.externally_managed: true` is also set. BOTH fields are required:
+2. Verify `ms_awx_readonly_user.externally_managed: true` is also set. BOTH fields are required:
 
 ```
 oc get metricsservice metrics-service -o yaml | grep -A 2 ms_awx_readonly_user
@@ -397,7 +399,7 @@ WHERE grantee='ms_awx_readonly';
 **Database security best practices**
 
 - **Use strong, unique passwords** for `metrics_service` and `ms_awx_readonly` users (minimum 16 characters, alphanumeric and special characters)
-- **Enable TLS/SSL** for database connections
+- **Enable TLS/SSL** for database connections by configuring the SSL mode in the `metricsService` CR spec
 - **Restrict database network access** to only metrics service pods
 - **Use Kubernetes secrets** for credential storage (never hard-code credentials in CR specs or ConfigMaps)
 - **Apply RBAC** to restrict secret access to necessary service accounts only

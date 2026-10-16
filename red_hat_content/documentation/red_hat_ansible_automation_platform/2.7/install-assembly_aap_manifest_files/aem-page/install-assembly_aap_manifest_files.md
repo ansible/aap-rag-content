@@ -1,7 +1,7 @@
 +++
 title = "Obtain a manifest file - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_manifest_files"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_manifest_files"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator/", "Install on OpenShift Container Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_aap_manifest_files/aem-page/install-assembly_aap_manifest_files.html"
 last_crumb = "Obtain a manifest file"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Obtain a manifest file"
 oversized = "false"
@@ -41,10 +42,10 @@ With a new subscription allocation you can set aside subscriptions and entitleme
 
 ### Procedure
 
-1.  From the [Subscription Allocations](https://access.redhat.com/management/subscription_allocations/) page, click New Subscription Allocation.
-2.  Enter a name for the allocation so that you can find it later.
-3.  Select **Type: Satellite 6.16** as the management application.
-4.  Click Create.
+1. From the [Subscription Allocations](https://access.redhat.com/management/subscription_allocations/) page, click New Subscription Allocation.
+2. Enter a name for the allocation so that you can find it later.
+3. Select **Type: Satellite 6.16** as the management application.
+4. Click Create.
 
 ## Add subscriptions to a subscription allocation
 
@@ -54,11 +55,11 @@ After you create an allocation, you can add the subscriptions you need for Ansib
 
 ### Procedure
 
-1.  From the [Subscription Allocations](https://access.redhat.com/management/subscription_allocations/) page, click the name of the **Subscription Allocation** to which you want to add a subscription.
-2.  Click the **Subscriptions** tab.
-3.  Click Add Subscriptions.
-4.  Enter the number of Ansible Automation Platform Entitlements you plan to add.
-5.  Click Submit.
+1. From the [Subscription Allocations](https://access.redhat.com/management/subscription_allocations/) page, click the name of the **Subscription Allocation** to which you want to add a subscription.
+2. Click the **Subscriptions** tab.
+3. Click Add Subscriptions.
+4. Enter the number of Ansible Automation Platform Entitlements you plan to add.
+5. Click Submit.
 
 ## Download a manifest file
 
@@ -68,9 +69,9 @@ After you create an allocation with the appropriate subscriptions on it, you can
 
 ### Procedure
 
-1.  From the [Subscription Allocations](https://access.redhat.com/management/subscription_allocations/) page, click the name of the **Subscription Allocation** to which you want to generate a manifest.
-2.  Click the **Subscriptions** tab.
-3.  Click Export Manifest to download the manifest file.
+1. From the [Subscription Allocations](https://access.redhat.com/management/subscription_allocations/) page, click the name of the **Subscription Allocation** to which you want to generate a manifest.
+2. Click the **Subscriptions** tab.
+3. Click Export Manifest to download the manifest file.
 
 ### Results
 

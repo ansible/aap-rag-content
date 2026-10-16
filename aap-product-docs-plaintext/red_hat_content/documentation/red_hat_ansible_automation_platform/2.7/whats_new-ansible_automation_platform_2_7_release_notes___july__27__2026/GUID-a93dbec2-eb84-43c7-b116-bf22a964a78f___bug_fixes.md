@@ -1,0 +1,3 @@
+# Ansible Automation Platform 2.7 Release Notes - July 27, 2026 (2.7-3)
+## Bug fixes
+

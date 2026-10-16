@@ -13,11 +13,11 @@ You can only create OAuth 2 Tokens for your own user through the API or UI, whic
 
 ### Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  In the navigation panel, select Access Management> (and then)Users.
-3.  Select the username you want to create a token for.
-4.  Select Tokens> (and then)Automation Execution
-5.  Click Create Token.
-6.  You can leave **Applications** empty. Add a description and select **Read** or **Write** for the **Scope**. Note:
+1. Log in to Red Hat OpenShift Container Platform.
+2. In the navigation panel, select Access Management> (and then)Users.
+3. Select the username you want to create a token for.
+4. Select Tokens> (and then)Automation Execution
+5. Click Create Token.
+6. You can leave **Applications** empty. Add a description and select **Read** or **Write** for the **Scope**. Note:
 Make sure you provide a valid user when creating tokens. Otherwise, you get an error message that you tried to issue the command without either specifying a user, or supplying a username that does not exist.
 

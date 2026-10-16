@@ -1,7 +1,7 @@
 +++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-con_controller_configure_hostname_notifications"
 title = "Advanced notification settings - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-con_controller_configure_hostname_notifications"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_ug_controller_notifications/", "Understand and configure notifications"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/observe-con_controller_configure_hostname_notifications/aem-page/observe-con_controller_configure_hostname_notifications.html"
 last_crumb = "Advanced notification settings"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Advanced notification settings"
 oversized = "false"
@@ -41,37 +42,45 @@ You can [customize the text content](/documentation/en-us/red_hat_ansible_automa
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Administration> (and then)Notifiers.
-2.  Click Create notifier.
-3.  Choose a notification type from the **Type** list.
-4.  Enable **Customize messages** by using the toggle.  
+1. From the navigation panel, select Automation Execution> (and then)Administration> (and then)Notifiers.
+2. Click Create notifier.
+3. Choose a notification type from the **Type** list.
+4. Enable **Customize messages** by using the toggle.
+
 ![Customize notification](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-notification-template-customize.png)  
-5.  You can provide a custom message for various job events, such as the following:
+5. You can provide a custom message for various job events, such as the following:
 
-  -  **Start message body**
+  - **Start message body**
 
-  -  **success message body**
+  - **success message body**
 
-  -  **Error message body**
+  - **Error message body**
 
-  -  **Workflow approved body**
+  - **Workflow approved body**
 
-  -  **Workflow denied message body**
+  - **Workflow denied message body**
 
-  -  **Workflow pending message body**
+  - **Workflow pending message body**
 
-  -  **Workflow timed out message body** The message forms vary depending on the type of notification that you are configuring. For example, messages for Email and PagerDuty notifications appear to be a typical email, with a body and a subject, in which case, automation controller displays the fields as **Message** and **Message Body**. Other notification types only expect a **Message** for each type of event.
+  - **Workflow timed out message body**         The message forms vary depending on the type of notification that you are configuring.
+For example, messages for Email and PagerDuty notifications appear to be a typical email, with a body and a subject, in which case, automation controller displays the fields as **Message** and **Message Body**.
+Other notification types only expect a **Message** for each type of event.
 
-         The **Message** fields are pre-populated with a template containing a top-level variable, `job` coupled with an attribute, such as `id` or `name`. Templates are enclosed in curly brackets and can draw from a fixed set of fields provided by automation controller, shown in the pre-populated message fields:
+        The **Message** fields are pre-populated with a template containing a top-level variable, `job` coupled with an attribute, such as `id` or `name`.
+Templates are enclosed in curly brackets and can draw from a fixed set of fields provided by automation controller, shown in the pre-populated message fields:
 
-         This pre-populated field suggests commonly displayed messages to a recipient who is notified of an event. You can customize these messages with different criteria by adding your own attributes for the job as needed. Custom notification messages are rendered using Jinja; the same templating engine used by Ansible playbooks.
+        This pre-populated field suggests commonly displayed messages to a recipient who is notified of an event.
+You can customize these messages with different criteria by adding your own attributes for the job as needed.
+Custom notification messages are rendered using Jinja; the same templating engine used by Ansible playbooks.
 
-         Messages and message bodies have different types of content, as the following points outline:
+        Messages and message bodies have different types of content, as the following points outline:
 
-  - Messages are always just strings, one-liners only. New lines are not supported.
+  - Messages are always just strings, one-liners only.
+New lines are not supported.
 
   - Message bodies are either a dictionary or a block of text:
-    * The message body for Webhooks and PagerDuty uses dictionary definitions. The default message body for these is `{{ job_metadata }}`, you can either leave that as it is or provide your own dictionary.
+    * The message body for Webhooks and PagerDuty uses dictionary definitions.
+The default message body for these is `{{ job_metadata }}`, you can either leave that as it is or provide your own dictionary.
 
     * The message body for email uses a block of text or a multi-line string. The default message body is:
 
@@ -79,7 +88,9 @@ You can [customize the text content](/documentation/en-us/red_hat_ansible_automa
 {{ job_friendly_name }} #{{ job.id }} had status {{ job.status }}, view details at {{ url }} {{ job_metadata }}
 ```
 
-            You can edit this text leaving `{{ job_metadata }}` in, or drop `{{ job_metadata }}`. Since the body is a block of text, it can be any string you want. `{{ job_metadata }}` is rendered as a dictionary containing fields that describe the job being executed. In all cases, `{{ job_metadata }}` includes the following fields:
+            You can edit this text leaving `{{ job_metadata }}` in, or drop `{{ job_metadata }}`.
+Since the body is a block of text, it can be any string you want. `{{ job_metadata }}` is rendered as a dictionary containing fields that describe the job being executed.
+In all cases, `{{ job_metadata }}` includes the following fields:
 
       + `id`
 
@@ -95,7 +106,8 @@ You can [customize the text content](/documentation/en-us/red_hat_ansible_automa
 
       + `status`
 
-      + `traceback`                 You cannot query individual fields within `{{ job_metadata }}`. When you use `{{ job_metadata }}` in a notification template, all data is returned.
+      + `traceback`                 You cannot query individual fields within `{{ job_metadata }}`.
+When you use `{{ job_metadata }}` in a notification template, all data is returned.
 
                 The resulting dictionary looks like the following:
 
@@ -148,7 +160,8 @@ You can [customize the text content](/documentation/en-us/red_hat_ansible_automa
 
                 If `{{ job_metadata }}` is rendered in a workflow job, it includes the following additional field:
 
-      + `body` (This enumerates the nodes in the workflow job and includes a description of the job associated with each node)                 The resulting dictionary is similar to the following:
+      + `body` (This enumerates the nodes in the workflow job and includes a description of the job associated with each node)
+                The resulting dictionary is similar to the following:
 
 ```
 {"id": 14,
@@ -167,14 +180,16 @@ You can [customize the text content](/documentation/en-us/red_hat_ansible_automa
 }
 ```
 
-                If you create a notification template that uses invalid syntax or references unusable fields, an error message displays indicating the nature of the error. If you delete a notification’s custom message, the default message is shown in its place.
+                If you create a notification template that uses invalid syntax or references unusable fields, an error message displays indicating the nature of the error.
+If you delete a notification’s custom message, the default message is shown in its place.
 
-         Important:
+        Important:
                         If you save the notifications template without editing the custom message (or edit and revert back to the default values), the **Details** screen assumes the defaults and does not display the custom message tables. If you edit and save any of the values, the entire table displays in the **Details** screen.
 
 ## Enable and disable notifications
 
-You can set up notifications to notify you when a specific job starts, and on the success or failure at the end of the job run. Note the following behaviors:
+You can set up notifications to notify you when a specific job starts, and on the success or failure at the end of the job run.
+Note the following behaviors:
 
 - If a workflow job template has notification on start enabled, and a job template within that workflow also has notification on start enabled, you receive notifications for both.
 - You can enable notifications to run on many job templates within a workflow job template.
@@ -195,19 +210,22 @@ Automation controller determines how the base URL (`TOWER_URL_BASE`) is defined 
 
 ### About this task
 
-Automation controller takes settings values from the database first. If no settings values are found, it uses the values from the settings files. If you post a license by navigating to the automation controller host’s IP address, the posted license is written to the settings entry in the database.
+Automation controller takes settings values from the database first.
+If no settings values are found, it uses the values from the settings files.
+If you post a license by navigating to the automation controller host’s IP address, the posted license is written to the settings entry in the database.
 
 Use the following procedure to reset `TOWER_URL_BASE` if the wrong address has been picked up:
 
 ### Procedure
 
-1.  From the navigation panel, select Settings> (and then)System.
-2.  Click Edit.
-3.  Enter the address in the **Base URL of the service** field for the DNS entry you want to appear in notifications.
+1. From the navigation panel, select Settings> (and then)System.
+2. Click Edit.
+3. Enter the address in the **Base URL of the service** field for the DNS entry you want to appear in notifications.
 
 ## Notifications API
 
-The Notifications API enables you to trigger notifications for various events in Automation controller. The Notifications API provides endpoints to trigger notifications for job events, such as when a job starts, succeeds, or fails.
+The Notifications API enables you to trigger notifications for various events in Automation controller.
+The Notifications API provides endpoints to trigger notifications for job events, such as when a job starts, succeeds, or fails.
 
 Use the `started`, `success`, or `error` endpoints:
 

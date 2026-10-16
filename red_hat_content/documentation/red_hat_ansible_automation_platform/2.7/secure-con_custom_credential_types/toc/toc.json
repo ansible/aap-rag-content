@@ -26,12 +26,22 @@
           "singlePageAnchor": "eda-cred-types-injector-config"
         },
         {
-          "title": "Creating a new credential type",
+          "title": "Create a new credential type",
           "visible": true,
           "weight": 3,
-          "urlFragment": "proc-controller-create-credential-type",
+          "urlFragment": "GUID-b06c29fb-bdb1-4ea6-aa04-840dfd7dad19",
           "anchor": null,
-          "singlePageAnchor": "proc-controller-create-credential-type"
+          "singlePageAnchor": "GUID-b06c29fb-bdb1-4ea6-aa04-840dfd7dad19",
+          "sections": [
+            {
+              "title": "What to do next",
+              "visible": true,
+              "weight": 1,
+              "urlFragment": "GUID-b06c29fb-bdb1-4ea6-aa04-840dfd7dad19",
+              "anchor": "GUID-b06c29fb-bdb1-4ea6-aa04-840dfd7dad19__postreq_1",
+              "singlePageAnchor": "GUID-b06c29fb-bdb1-4ea6-aa04-840dfd7dad19__postreq_1"
+            }
+          ]
         },
         {
           "title": "Event-Driven Ansible Rule Engine credential type",

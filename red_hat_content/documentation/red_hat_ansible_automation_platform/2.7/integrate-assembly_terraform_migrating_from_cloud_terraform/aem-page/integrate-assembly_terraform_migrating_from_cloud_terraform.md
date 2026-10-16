@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 title = "Migrate from cloud.terraform to hashicorp.terraform - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_terraform_migrating_from_cloud_terraform"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_terraform_introduction/", "Integrate with IBM HashiCorp Terraform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/integrate-assembly_terraform_migrating_from_cloud_terraform/aem-page/integrate-assembly_terraform_migrating_from_cloud_terraform.html"
 last_crumb = "Migrate from cloud.terraform to hashicorp.terraform"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Migrate from cloud.terraform to hashicorp.terraform"
 oversized = "false"
@@ -40,7 +41,7 @@ To migrate to the `hashicorp.terraform` collection, you must configure the `hash
 
 ### Procedure
 
-1.  Replicate your automation tasks from the `cloud.terraform` modules.  **Example**
+1. Replicate your automation tasks from the `cloud.terraform` modules.  **Example**
 
 ```
 - name: Create configuration version with auto_queue_runs to false
@@ -54,7 +55,7 @@ To migrate to the `hashicorp.terraform` collection, you must configure the `hash
    state: present
 ```
 
-2.  Configure the following required parameters:
+2. Configure the following required parameters:
 
   - **`workspace_id` or `workspace` + `organization`:** The workspace ID or the workspace name and organization where the configuration version will be created and the file will be uploaded (for `state: present`).
   - **`configuration_files_path`:** The path where the required Terraform Enterprise or HCP Terraform files will be uploaded to create a configuration version (for `state: present`). The module accepts two file types for `configuration_files_path`:
@@ -65,7 +66,7 @@ To migrate to the `hashicorp.terraform` collection, you must configure the `hash
     * When the `configuration_version_id` is unspecified, Terraform Enterprise or HCP Terraform selects the latest approved `configuration_version_id` in the workspace.
   - **auto_queue_runs:** Determines if Terraform Enterprise or HCP Terraform automatically starts a run after the configuration upload (`true` by default) or requires manual initiation (`false`).
 
-3.  Set additional optional parameters as needed.
+3. Set additional optional parameters as needed.
 
 ## Configure the `hashicorp.terraform.run` module
 
@@ -78,7 +79,7 @@ The `hashicorp.terraform.run` module lets you manage Terraform Enterprise or HCP
 
 ### Procedure
 
-1.  Create a run module.  **Example**
+1. Create a run module.  **Example**
 
 ```
 - name: Create a destroy run with auto_apply
@@ -97,18 +98,18 @@ The `hashicorp.terraform.run` module lets you manage Terraform Enterprise or HCP
   poll_timeout: 30
 ```
 
-2.  Configure the following required parameters:
+2. Configure the following required parameters:
 
   - **`workspace_id` or `workspace` + `organization`:** The workspace ID or the workspace name and organization where the configuration version will be created and the file will be uploaded (for `state: present`).
   - **`run_id`:** The unique identifier of the run to apply, cancel, or discard operations.
   - **`tf_token`:** The Terraform API authentication token. If this value is not set, the `TF_TOKEN` environment variable is used.
 
-3.  (Optional) Configure the built-in polling options that determine the wait period for Terraform Enterprise or HCP Terraform operations to complete:
+3. (Optional) Configure the built-in polling options that determine the wait period for Terraform Enterprise or HCP Terraform operations to complete:
 
   - **`poll: true`:** (Default) Checks the run status every `poll_interval` seconds (default: 5s) until completion or `poll_timeout` (default: 25s) is reached, returning the final status.
   - **`poll: false`:** Returns immediately after initiating the run without waiting.
 
-4.  Set additional optional parameters as needed.
+4. Set additional optional parameters as needed.
 
 ## Examples for `hashicorp.terraform` modules
 

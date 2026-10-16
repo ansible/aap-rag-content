@@ -1,6 +1,6 @@
 +++
-title = "Enable cloud automation and network automation execution environment templates - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Enable cloud automation and network automation execution environment templates - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-enable_cloud_automation_and_network_automation_execution_environment_templates"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-enable_cloud_automation_and_network_automation_execution_environment_templates/aem-page/develop-enable_cloud_automation_and_network_automation_execution_environment_templates.html"
 last_crumb = "Enable cloud automation and network automation execution environment templates"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Enable cloud automation and network automation execution environment templates"
 oversized = "false"
@@ -48,7 +49,7 @@ On current installations, all three templates are enabled by default. On older i
 
 ## Procedure
 
-1.  Open your configuration file for editing.
+1. Open your configuration file for editing.
       **OpenShift — CLI:**
 
 ```
@@ -66,7 +67,7 @@ $ helm get values <release_name> -n <namespace> -o yaml > current-values.yaml
 $ sudo vi /etc/portal/configs/app-config/app-config.production.yaml
 ```
 
-2.  Locate the `catalog.locations` section and verify that the Cloud Automation and Network Automation template entries are present and uncommented.
+2. Locate the `catalog.locations` section and verify that the Cloud Automation and Network Automation template entries are present and uncommented.
       All three templates should appear as active entries:
 
 ```
@@ -88,12 +89,12 @@ catalog:
 
     If the Cloud Automation or Network Automation entries are commented out (prefixed with `#`), remove the comment markers to enable them. You can enable one or both templates depending on your requirements.
 
-3.  Verify that collection discovery is configured so that the domain-specific collections referenced by these templates are available to users.
+3. Verify that collection discovery is configured so that the domain-specific collections referenced by these templates are available to users.
       The Cloud Automation and Network Automation templates reference collections from community and certified repositories. Without collection discovery enabled, users must manually specify collection sources when building execution environments.
 
     To configure collection discovery, see [Configure collection discovery sources](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_collection_discovery "Configure Git content discovery and private automation hub collection discovery so that Ansible collections are available in execution environment builder and the collection catalog.").
 
-4.  Apply the configuration changes. See [Apply configuration changes](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_apply_configuration_changes "Apply configuration changes after modifying your Helm chart values or RHEL appliance configuration file for execution environment builder.").
+4. Apply the configuration changes. See [Apply configuration changes](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_apply_configuration_changes "Apply configuration changes after modifying your Helm chart values or RHEL appliance configuration file for execution environment builder.").
 
 ## Results
 

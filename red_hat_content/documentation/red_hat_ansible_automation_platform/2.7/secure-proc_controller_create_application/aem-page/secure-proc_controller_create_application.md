@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
 title = "Create a new application - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_create_application"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_configure_authentication/", "Configure central authentication for Ansible Automation Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-proc_controller_create_application/aem-page/secure-proc_controller_create_application.html"
 last_crumb = "Create a new application"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Create a new application"
 oversized = "false"
@@ -38,9 +39,9 @@ Creating an application with the Authorization Code grant type is the preferred 
 
 ## Procedure
 
-1.  From the navigation panel, select Access Management> (and then)OAuth Applications.
-2.  Click Create OAuth application. The **Create Application** page opens.
-3.  Enter the following details:
+1. From the navigation panel, select Access Management> (and then)OAuth Applications.
+2. Click Create OAuth application. The **Create Application** page opens.
+3. Enter the following details:
   
 
 Name
@@ -56,20 +57,23 @@ Organization
 (required) Select an organization with which this application is associated.
 
 Authorization grant type
-(required) Select one of the grant types to use for the user to get tokens for this application. For more information, see [Application functions](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_token_based_authentication#ref-gw-application-functions "Several OAuth 2 utilities are available for authorization, token refresh, and revoke. You can specify the following grant types when creating an application:") for more information about grant types.
+(required) Select one of the grant types to use for the user to get tokens for this application. For more information, see [Application functions](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_applications_getting_started#ref-gw-application-functions "Several OAuth 2 utilities are available for authorization, token refresh, and revoke. You can specify the following grant types when creating an application:") for more information about grant types.
 
 Client Type
 (required) Select the level of security of the client device.
 
-Redirect URIS
+Redirect URIs
 Provide a list of allowed URIs, separated by spaces. You need this if you specified the grant type to be **Authorization code**.
 
-4.  Click Create OAuth application, or click Cancel to abandon your changes. The **Client ID** and **Client Secret** display in a window. This will be the only time the client secret will be shown.
+Post Logout Redirect URIs
+(optional) Provide a list of allowed URIs to redirect users to after they log out, separated by spaces. The OpenID Connect (OIDC) provider redirects the user only if it advertises RP-initiated logout on its discovery endpoint.
+
+4. Click Create OAuth application, or click Cancel to abandon your changes. The **Client ID** and **Client Secret** display in a window. This will be the only time the client secret will be shown.
 
   Note:
       The **Client Secret** is only created when the **Client type** is set to **Confidential**.
 
-5.  Click the copy icon and save the client ID and client secret to integrate an external application with Ansible Automation Platform.
+5. Click the copy icon and save the client ID and client secret to integrate an external application with Ansible Automation Platform.
 
 ## Associate tokens with applications
 
@@ -85,12 +89,13 @@ When authentication tokens have been configured, you can select the application 
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Users.
-2.  Select the username for your user profile to configure OAuth 2 tokens.
-3.  Select the **Tokens** tab. When no tokens are present, the **Tokens** screen prompts you to add them.
+1. From the navigation panel, select Access Management> (and then)Users.
+2. Select the username for your user profile to configure OAuth 2 tokens.
+3. Select the **Tokens** tab.
+      When no tokens are present, the **Tokens** screen prompts you to add them.
 
-4.  Click Create token to open the **Create Token** window.
-5.  Enter the following details:
+4. Click Create token to open the **Create Token** window.
+5. Enter the following details:
   
 
 Application
@@ -108,9 +113,10 @@ Scope
   - **Write**: Allows requests sent with this token to add, edit and delete resources in the system.
   - **Read**: Limits actions to read only. Note that the write scope includes read scope.
 
-6.  Click Create token, or click Cancel to abandon your changes. The Token information is displayed with **Token** and **Refresh Token** information, and the expiration date of the token. This will be the only time the token and refresh token will be shown. You can view the token association and token information from the list view.
+6. Click Create token, or click Cancel to abandon your changes.
+      The Token information is displayed with **Token** and **Refresh Token** information, and the expiration date of the token. This will be the only time the token and refresh token will be shown. You can view the token association and token information from the list view.
 
-7.  Click the copy icon and save the token and refresh token for future use.
+7. Click the copy icon and save the token and refresh token for future use.
 
 ### Results
 
@@ -120,7 +126,8 @@ You can verify that the application now shows the user with the appropriate toke
 
 2. Select the application you want to verify from the **Applications** list view.
 
-3. Select the **Tokens** tab. Your token should be displayed in the list of tokens associated with the application you chose.
+3. Select the **Tokens** tab.
+    Your token should be displayed in the list of tokens associated with the application you chose.
 
 ## Application token functions
 
@@ -197,9 +204,15 @@ http://<gateway>/o/revoke_token/ -i
 
 Note:
 
-- The special OAuth 2 endpoints only support using the `x-www-form-urlencoded`**Content-type**, so as a result, none of the `/o/*` endpoints accept `application/json`.
-- The **Allow External Users to Create Oauth2 Tokens** (`ALLOW_OAUTH2_FOR_EXTERNAL_USERS` in the API) setting is disabled by default. External users refer to users authenticated externally with a service such as LDAP, or any of the other SSO services. This setting ensures external users cannot create their own tokens. If you enable then disable it, any tokens created by external users in the meantime will still exist, and are not automatically revoked. This setting can be configured from the Settings> (and then)Platform gateway menu.
+- The special OAuth 2 endpoints only support using the `x-www-form-urlencoded`**Content-type**, so as a result, none of the
+`/o/*` endpoints accept `application/json`.
+- The **Allow External Users to Create Oauth2 Tokens** (`ALLOW_OAUTH2_FOR_EXTERNAL_USERS` in the API) setting is disabled by default.
+External users refer to users authenticated externally with a service such as LDAP, or any of the other SSO services.
+This setting ensures external users cannot create their own tokens.
+If you enable then disable it, any tokens created by external users in the meantime will still exist, and are not automatically revoked.
+This setting can be configured from the Settings> (and then)Platform gateway menu.
 
 You can also revoke OAuth2 tokens by using the `manage` utility, see [Revoke oauth2 tokens](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_token_session_management#ref-controller-revoke-oauth2-token "Use this command to revoke OAuth2 tokens, both application tokens and personal access tokens (PAT). It revokes all application tokens (but not their associated refresh tokens), and revokes all personal access tokens. However, you can also specify a user for whom to revoke all tokens.").
 
-On success, a response of `200 OK` is displayed. Verify the deletion by checking whether the token is present in the `api/gateway/v1/tokens/` endpoint.
+On success, a response of `200 OK` is displayed.
+Verify the deletion by checking whether the token is present in the `api/gateway/v1/tokens/` endpoint.

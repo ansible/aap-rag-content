@@ -20,26 +20,26 @@ The `cloud.terraform` collection only supports the CLI-driven workflow in HCP Te
 
 ## Procedure
 
-1.  To prevent errors when running playbooks against TFE or HCP Terraform, do the following actions before running a playbook:
-1.  Confirm that the Terraform version in the execution environment is the same as the version stated in TFE or HCP Terraform.
-2.  Perform an initialization in TFE or HCP Terraform:
+1. To prevent errors when running playbooks against TFE or HCP Terraform, do the following actions before running a playbook:
+1. Confirm that the Terraform version in the execution environment is the same as the version stated in TFE or HCP Terraform.
+2. Perform an initialization in TFE or HCP Terraform:
 
 
 ```
 terraform init
 ```
 
-3.  If you have a local state file in your execution environment, delete the local state file.
-4.  Get a token from HCP Terraform or Terraform Enterprise, which you will use to create the credential in a later step. Ensure the token has the necessary permissions based on the team or user token to execute the desired capabilities in the playbook.
-5.  Remove the backend config and files from your playbook definition.
-6.  Add the workspace within the default setting in your TF config or an environment variable if you want to define the workspace outside updating the playbook itself. Note:
+3. If you have a local state file in your execution environment, delete the local state file.
+4. Get a token from HCP Terraform or Terraform Enterprise, which you will use to create the credential in a later step. Ensure the token has the necessary permissions based on the team or user token to execute the desired capabilities in the playbook.
+5. Remove the backend config and files from your playbook definition.
+6. Add the workspace within the default setting in your TF config or an environment variable if you want to define the workspace outside updating the playbook itself. Note:
 You can add the workspace to your playbook to scale your workspace utilization.
 
-2.  From the Ansible Automation Platform user interface, complete the integration with `cloud.terraform`:
-1.  Create a credential.
-2.  Build an execution environment in Ansible Automation Platform.
-3.  Create and launch a job template.
-3.  (Optional) After the migration is completed and verified, you can run the additional modules and plugins from the collection in your execution environment:
+2. From the Ansible Automation Platform user interface, complete the integration with `cloud.terraform`:
+1. Create a credential.
+2. Build an execution environment in Ansible Automation Platform.
+3. Create and launch a job template.
+3. (Optional) After the migration is completed and verified, you can run the additional modules and plugins from the collection in your execution environment:
 
 - Plan Stash module
 - Terraform module

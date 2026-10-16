@@ -7,7 +7,8 @@ Instances have been reported where reusing the external database during subseque
 
 **Example**
 
-You perform a clustered installation. Then, you need to do this again and perform a second clustered installation reusing the same external database, only this subsequent installation failed.
+You perform a clustered installation.
+Then, you need to do this again and perform a second clustered installation reusing the same external database, only this subsequent installation failed.
 
 When setting up an external database that has been used in a prior installation, you must manually clear the database used for the clustered node before any additional installations can succeed.
 

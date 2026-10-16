@@ -1,7 +1,7 @@
 +++
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-con_using_chatbot"
 title = "Use the automation intelligent assistant - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-con_using_chatbot"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-con_using_chatbot/", "Use the automation intelligent assistant"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-con_using_chatbot/aem-page/extend-con_using_chatbot.html"
 last_crumb = "Use the automation intelligent assistant"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Use the automation intelligent assistant"
 oversized = "false"
@@ -35,14 +36,14 @@ After you deploy the automation intelligent assistant, all Ansible users within 
 
 2. Click the automation intelligent assistant icon ![automation intelligent assistant icon](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/chatbot-icon.png) that is displayed at the top right corner of the taskbar. The automation intelligent assistant window opens with a welcome message, as shown in the following image:
 
-     ![automation intelligent assistant](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/aap-ansible-lightspeed-intelligent-assistant.png)
+    ![automation intelligent assistant](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/aap-ansible-lightspeed-intelligent-assistant.png)
 
 ## Use the automation intelligent assistant
 
 You can perform the following tasks:
 
 - Ask questions in the prompt field and get answers about the Ansible Automation Platform
-   Note:
+  Note:
       If you are using an IBM Granite 3.3 series AI model, you might experience a delay of about one minute when waiting for a chat response. To resolve this error, restart the chat session.
 
 - View the chat history of all conversations in a chat session.

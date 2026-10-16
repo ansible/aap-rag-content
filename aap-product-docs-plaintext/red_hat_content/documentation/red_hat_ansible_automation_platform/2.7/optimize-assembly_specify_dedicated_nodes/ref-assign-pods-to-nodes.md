@@ -8,16 +8,16 @@ You can constrain the automation controller pods created by the operator to run 
 
 The following table shows the settings and fields that can be set on the automation controller’s specification section of the YAML (or using the OpenShift UI form).
 
-| Name                               | Description                                              | Default      |
-| ---------------------------------- | -------------------------------------------------------- | ------------ |
-| <br> `postgres_image`              | <br>Path of the image to pull                            | <br>postgres |
-| <br> `postgres_image_version`      | <br>Image version to pull                                | <br>15       |
-| <br> `node_selector`               | <br>AutomationController pods’ nodeSelector              | <br>“”’’     |
-| <br> `topology_spread_constraints` | <br>AutomationController pods’ topologySpreadConstraints | <br>“”’’     |
-| <br> `tolerations`                 | <br>AutomationController pods’ tolerations               | <br>“”’’     |
-| <br> `annotations`                 | <br>AutomationController pods’ annotations               | <br>“”’’     |
-| <br> `postgres_selector`           | <br>Postgres pods’ nodeSelector                          | <br>“”’’     |
-| <br> `postgres_tolerations`        | <br>Postgres pods’ tolerations                           | <br>“”’’     |
+| Name                          | Description                                          | Default  |
+| ----------------------------- | ---------------------------------------------------- | -------- |
+| `postgres_image`              | Path of the image to pull                            | postgres |
+| `postgres_image_version`      | Image version to pull                                | 15       |
+| `node_selector`               | AutomationController pods’ nodeSelector              | “”’’     |
+| `topology_spread_constraints` | AutomationController pods’ topologySpreadConstraints | “”’’     |
+| `tolerations`                 | AutomationController pods’ tolerations               | “”’’     |
+| `annotations`                 | AutomationController pods’ annotations               | “”’’     |
+| `postgres_selector`           | Postgres pods’ nodeSelector                          | “”’’     |
+| `postgres_tolerations`        | Postgres pods’ tolerations                           | “”’’     |
 
 `topology_spread_constraints` can help optimize spreading your control plane pods across the compute nodes that match your node selector. For example, with the `maxSkew` parameter of this option set to `100`, this means maximally spread across available nodes. So if there are three matching compute nodes and three pods, one pod will be assigned to each compute node. This parameter helps prevent the control plane pods from competing for resources with each other.
 

@@ -1,6 +1,6 @@
 +++
-title = "Create automation content with playbooks - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-con_gs_create_automation_content"
+title = "Create automation content with playbooks - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/get_started-con_gs_create_automation_content/aem-page/get_started-con_gs_create_automation_content.html"
 last_crumb = "Create automation content with playbooks"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Create automation content with playbooks"
 oversized = "false"

@@ -12,21 +12,21 @@
 
 For containerized installations:
 
-1.  Restart the chatbot service:
+1. Restart the chatbot service:
 
 
 ```
 systemctl --user restart ansible-lightspeed-chatbot.service
 ```
 
-2.  Verify that the service has restarted:
+2. Verify that the service has restarted:
 
 
 ```
 systemctl --user status ansible-lightspeed-chatbot.service
 ```
 
-3.  Review the chatbot container logs to confirm that the BYOK image loaded:
+3. Review the chatbot container logs to confirm that the BYOK image loaded:
 
 
 ```
@@ -35,21 +35,21 @@ podman logs ansible-lightspeed-chatbot 2>&1 | grep -i "byok"
 
 For operator-based installations:
 
-4.  Roll out a restart of the chatbot deployment:
+4. Roll out a restart of the chatbot deployment:
 
 
 ```
 oc rollout restart deployment/<aap-instance>-lightspeed-chatbot-api -n <aap_namespace>
 ```
 
-5.  Wait for the rollout to complete. You can run the following command to check on the status:
+5. Wait for the rollout to complete. You can run the following command to check on the status:
 
 
 ```
 oc rollout status deployment/<aap-instance>-lightspeed-chatbot-api -n <aap_namespace>
 ```
 
-6.  Review the chatbot pod logs to confirm that the BYOK image loaded:
+6. Review the chatbot pod logs to confirm that the BYOK image loaded:
 
 
 ```

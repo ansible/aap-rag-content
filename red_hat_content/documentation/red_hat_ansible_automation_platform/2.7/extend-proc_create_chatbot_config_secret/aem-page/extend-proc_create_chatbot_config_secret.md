@@ -1,6 +1,6 @@
 +++
-template = "docs/aem-title.html"
 title = "Create a chatbot configuration secret - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-proc_create_chatbot_config_secret"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-proc_create_chatbot_config_secret/aem-page/extend-proc_create_chatbot_config_secret.html"
 last_crumb = "Create a chatbot configuration secret"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Create a chatbot configuration secret"
 oversized = "false"
@@ -35,25 +36,25 @@ Create a configuration secret for the intelligent assistant so that you can conn
 
 ## Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform as an administrator.
-2.  Navigate to Workloads> (and then)Secrets.
-3.  From the **Projects** list, select the namespace that you created when you installed the Ansible Automation Platform operator.
-4.  Click Create> (and then)Key/value secret.
-5.  In the **Secret name** field, enter a unique name for the secret. For example, `chatbot-configuration-secret`.
-6.  Add the following keys and their associated values individually:
-    | Key                                                       | Value                                                                                                                                                                                                    |
-    | --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    | <br> **Settings for all LLM setups**                      | |
-    | <br> `chatbot_model`                                      | <br>Enter the LLM model name that is configured on your LLM setup.                                                                                                                                       |
-    | <br> `chatbot_url`                                        | <br>Enter the inference API base URL on your LLM setup. For example, `https://your_inference_api/v1`. If you are using Microsoft Azure OpenAI, then set the base URL to `https://your_inference_api/openai/v1`. |
-    | <br> `chatbot_token`                                      | <br>Enter the API token or the API key. This token is sent along with the authorization header when an inference API is called.                                                                          |
-    | <br> `chatbot_llm_provider_type`                          | <br> *Optional*<br>Enter the value as per the provider type of your LLM setup:<br>  Red Hat Enterprise Linux AI: `rhelai_vllm`  Red Hat OpenShift AI: `rhoai_vllm`  OpenAI: `openai`  Microsoft Azure OpenAI: `azure_openai` |
-    | <br> `chatbot_model_config_extras`                        | <br> *Optional*<br>Use this field to pass a JSON dictionary of extra parameters to pass directly to the model provider, for settings not covered by other standard fields.<br>For example, you can specify a parameter `api_version` for Microsoft Azure OpenAI in the JSON format `'{"api_version": "<your API version>"}'`. |
-    | `chatbot_agent_config_extras`                             | <br>*Optional*<br>Use this parameter to customize agent behavior, such as controlling the temperature of the LLM. For example, `'{"chatbot_temperature_override": 1}`.                                   |
-    | <br> **Additional settings for MCP server configuration** | |
-    | `aap_gateway_url`   `aap_controller_url`                  | <br>Configure a Model Context Protocol (MCP) server that interfaces with the intelligent assistant.<br>The values `aap_gateway_url` and `aap_controller_url` are internal URLs accessible to the platform gateway and automation controller services on the OpenShift cluster. For example, if the name of your Ansible Automation Platform custom resource is `myaap`, these URLs will be:<br>  `aap_gateway_url`: `http://myaap`  `aap_controller_url`: `http://myaap-controller-service` <br>For MCP server configuration:<br>  If none of these values are configured, no MCP server is provisioned or registered with the underlying LLM’s tool at runtime.  If you configure the `aap_gateway_url` value only, the Ansible Lightspeed Service MCP server is provisioned. Authentication attempts to use the JSON Web Token (JWT) token associated with the user’s authenticated context.  If you configure both values `aap_gateway_url` and `aap_controller_url`, the Ansible Lightspeed Service MCP server and Ansible Automation Platform Controller Service MCP server are both configured. Authentication attempts to use the JWT token associated with the user’s authenticated context. |
+1. Log in to Red Hat OpenShift Container Platform as an administrator.
+2. Navigate to Workloads> (and then)Secrets.
+3. From the **Projects** list, select the namespace that you created when you installed the Ansible Automation Platform operator.
+4. Click Create> (and then)Key/value secret.
+5. In the **Secret name** field, enter a unique name for the secret. For example, `chatbot-configuration-secret`.
+6. Add the following keys and their associated values individually:
+    | Key                                                  | Value                                                                                                                                                                                                    |
+    | ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | **Settings for all LLM setups**                      | |
+    | `chatbot_model`                                      | Enter the LLM model name that is configured on your LLM setup.                                                                                                                                           |
+    | `chatbot_url`                                        | Enter the inference API base URL on your LLM setup. For example, `https://your_inference_api/v1`. If you are using Microsoft Azure OpenAI, then set the base URL to `https://your_inference_api/openai/v1`. |
+    | `chatbot_token`                                      | Enter the API token or the API key. This token is sent along with the authorization header when an inference API is called.                                                                              |
+    | `chatbot_llm_provider_type`                          | *Optional*<br>Enter the value as per the provider type of your LLM setup:<br>  Red Hat Enterprise Linux AI: `rhelai_vllm`  Red Hat OpenShift AI: `rhoai_vllm`  OpenAI: `openai`  Microsoft Azure OpenAI: `azure_openai` |
+    | `chatbot_model_config_extras`                        | *Optional*<br>Use this field to pass a JSON dictionary of extra parameters to pass directly to the model provider, for settings not covered by other standard fields.<br>For example, you can specify a parameter `api_version` for Microsoft Azure OpenAI in the JSON format `'{"api_version": "<your API version>"}'`. |
+    | `chatbot_agent_config_extras`                        | *Optional*<br>Use this parameter to customize agent behavior, such as controlling the temperature of the LLM. For example, `'{"chatbot_temperature_override": 1}`.                                       |
+    | **Additional settings for MCP server configuration** | |
+    | `aap_gateway_url`   `aap_controller_url`             | Configure a Model Context Protocol (MCP) server that interfaces with the intelligent assistant.<br>The values `aap_gateway_url` and `aap_controller_url` are internal URLs accessible to the platform gateway and automation controller services on the OpenShift cluster. For example, if the name of your Ansible Automation Platform custom resource is `myaap`, these URLs will be:<br>  `aap_gateway_url`: `http://myaap`  `aap_controller_url`: `http://myaap-controller-service` <br>For MCP server configuration:<br>  If none of these values are configured, no MCP server is provisioned or registered with the underlying LLM’s tool at runtime.  If you configure the `aap_gateway_url` value only, the Ansible Lightspeed Service MCP server is provisioned. Authentication attempts to use the JSON Web Token (JWT) token associated with the user’s authenticated context.  If you configure both values `aap_gateway_url` and `aap_controller_url`, the Ansible Lightspeed Service MCP server and Ansible Automation Platform Controller Service MCP server are both configured. Authentication attempts to use the JWT token associated with the user’s authenticated context. |
 
-7.  Click **Create**. The chatbot authorization secret is successfully created.
+7. Click **Create**. The chatbot authorization secret is successfully created.
 
 ## Examples of chatbot configuration secrets
 

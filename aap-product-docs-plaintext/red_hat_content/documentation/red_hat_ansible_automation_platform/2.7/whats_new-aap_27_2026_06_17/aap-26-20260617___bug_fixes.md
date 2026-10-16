@@ -1,3 +1,3 @@
-# Ansible Automation Platform patch release June 17, 2026
+# Ansible Automation Platform patch release June 17, 2026 (2.7-1)
 ## Bug fixes
 

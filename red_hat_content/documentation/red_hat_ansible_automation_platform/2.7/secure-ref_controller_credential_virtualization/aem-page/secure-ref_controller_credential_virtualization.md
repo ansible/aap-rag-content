@@ -1,6 +1,6 @@
 +++
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_virtualization"
+template = "docs/aem-title.html"
 title = "Red Hat Virtualization credential type - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_virtualization/aem-page/secure-ref_controller_credential_virtualization.html"
 last_crumb = "Red Hat Virtualization credential type"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Red Hat Virtualization credential type"
 oversized = "false"
@@ -29,7 +30,8 @@ type = "aem-page"
 
 Select this credential to enable automation controller to access Ansible’s `oVirt4.py` dynamic inventory plugin, which is managed by *Red Hat Virtualization*.
 
-Automation controller uses the following environment variables for Red Hat Virtualization credentials. These are fields in the user interface:
+Automation controller uses the following environment variables for Red Hat Virtualization credentials.
+These are fields in the user interface:
 
 ```
 OVIRT_URL
@@ -39,7 +41,9 @@ OVIRT_PASSWORD
 
 Provide the following information for Red Hat Virtualization credentials:
 
-- **Host (Authentication URL)**: The host URL or IP address to connect to. To sync with the inventory, the credential URL needs to include the `ovirt-engine/api` path.
-- **Username**: The username to use to connect to oVirt4. This must include the domain profile to succeed, for example `username@ovirt.host.com`.
+- **Host (Authentication URL)**: The host URL or IP address to connect to.
+To sync with the inventory, the credential URL needs to include the `ovirt-engine/api` path.
+- **Username**: The username to use to connect to oVirt4. This must include the domain profile to succeed, for example
+`username@ovirt.host.com`.
 - **Password**: The password to use to connect to it.
 - Optional: **CA File**: Provide an absolute path to the oVirt certificate file (it might end in `.pem`, `.cer` and `.crt` extensions, but preferably `.pem` for consistency)

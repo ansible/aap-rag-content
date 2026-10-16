@@ -5,35 +5,32 @@ The following tables provide information about configuring firewalls for Red Hat
 
 **Red Hat Insights for Red Hat Ansible Automation Platform**
 
-| URL                                                                               | Required for                                        |
-| --------------------------------------------------------------------------------- | --------------------------------------------------- |
-| <br> [https://api.access.redhat.com:443](https://api.access.redhat.com)           | <br>General account services, subscriptions         |
-| <br> [https://cert-api.access.redhat.com:443](https://cert-api.access.redhat.com) | <br>Insights data upload                            |
-| <br> [https://cert.console.redhat.com:443](https://cert.console.redhat.com)       | <br>Inventory upload and Cloud Connector connection |
-| <br> [https://console.redhat.com:443](https://console.redhat.com)                 | <br>Access to Insights dashboard                    |
+| URL                                                                          | Required for                                    |
+| ---------------------------------------------------------------------------- | ----------------------------------------------- |
+| [https://api.access.redhat.com:443](https://api.access.redhat.com)           | General account services, subscriptions         |
+| [https://cert-api.access.redhat.com:443](https://cert-api.access.redhat.com) | Insights data upload                            |
+| [https://cert.console.redhat.com:443](https://cert.console.redhat.com)       | Inventory upload and Cloud Connector connection |
+| [https://console.redhat.com:443](https://console.redhat.com)                 | Access to Insights dashboard                    |
 
 **Automation Hub**
 
-| URL                                                                                                    | Required for                                                                  |
-| ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------- |
-| <br> [https://console.redhat.com:443](https://console.redhat.com)                                      | <br>General account services, subscriptions                                   |
-| <br> [https://catalog.redhat.com:443](https://catalog.redhat.com)                                      | <br>Indexing execution environments                                           |
-| <br> [https://sso.redhat.com:443](https://sso.redhat.com)                                              | <br>TCP                                                                       |
-| <br>https://automation-hub-prd.s3.amazonaws.com, https://automation-hub-prd.s3.us-east-2.amazonaws.com | <br>Firewall access                                                           |
-| <br> [https://galaxy.ansible.com:443](https://galaxy.ansible.com)                                      | <br>Ansible Community curated Ansible content                                 |
-| <br>https://ansible-galaxy-ng.s3.dualstack.us-east-1.amazonaws.com                                     | <br>Dual Stack IPv6 endpoint for Community curated Ansible content repository |
-| <br> [https://registry.redhat.io:443](https://registry.redhat.io)                                      | <br>Access to container images provided by Red Hat and partners               |
-| <br> [https://cert.console.redhat.com:443](https://cert.console.redhat.com)                            | <br>Red Hat and partner curated Ansible Collections                           |
+| URL                                                            | Required for                                                              |
+| -------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| [https://console.redhat.com:443](https://console.redhat.com)   | General account services, subscriptions                                   |
+| [https://sso.redhat.com:443](https://sso.redhat.com)           | TCP                                                                       |
+| https://automation-hub-prd.s3.us-east-2.amazonaws.com          | Firewall access                                                           |
+| [https://galaxy.ansible.com:443](https://galaxy.ansible.com)   | Ansible Community curated Ansible content                                 |
+| https://ansible-galaxy-ng.s3.dualstack.us-east-1.amazonaws.com | Dual Stack IPv6 endpoint for Community curated Ansible content repository |
 
 **Execution Environments (EE)**
 
-| URL                                                               | Required for                                                    |
-| ----------------------------------------------------------------- | --------------------------------------------------------------- |
-| <br> [https://registry.redhat.io:443](https://registry.redhat.io) | <br>Access to container images provided by Red Hat and partners |
-| <br> `cdn.quay.io:443`                                            | <br>Access to container images provided by Red Hat and partners |
-| <br> `cdn01.quay.io:443`                                          | <br>Access to container images provided by Red Hat and partners |
-| <br> `cdn02.quay.io:443`                                          | <br>Access to container images provided by Red Hat and partners |
-| <br> `cdn03.quay.io:443`                                          | <br>Access to container images provided by Red Hat and partners |
+| URL                                                          | Required for                                                |
+| ------------------------------------------------------------ | ----------------------------------------------------------- |
+| [https://registry.redhat.io:443](https://registry.redhat.io) | Access to container images provided by Red Hat and partners |
+| `cdn.quay.io:443`                                            | Access to container images provided by Red Hat and partners |
+| `cdn01.quay.io:443`                                          | Access to container images provided by Red Hat and partners |
+| `cdn02.quay.io:443`                                          | Access to container images provided by Red Hat and partners |
+| `cdn03.quay.io:443`                                          | Access to container images provided by Red Hat and partners |
 
 Important:
 

@@ -2,7 +2,8 @@
 
 Select this credential type to enable synchronization of inventory with VMware vCenter.
 
-Automation controller uses the following environment variables for VMware vCenter credentials:
+Automation controller uses the following environment variables for VMware vCenter
+credentials:
 
 ```
 VMWARE_HOST

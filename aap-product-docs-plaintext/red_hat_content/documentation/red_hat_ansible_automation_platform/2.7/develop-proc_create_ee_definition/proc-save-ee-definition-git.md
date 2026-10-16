@@ -14,12 +14,12 @@ When you select **Publish to a Git repository** in the wizard, the definition fi
 
 ### Procedure
 
-1.  In the final step of the wizard, select **Publish to a Git repository**.
-2.  Authenticate with your Git provider through OAuth when prompted.
-3.  Select the target repository or allow the wizard to create a new one.
-4.  Optional: Select **Build Execution Environment** to trigger an automated image build after saving.
-5.  Configure the target registry (private automation hub or custom), image name, tag, and TLS settings.
-6.  Click **Create**.
+1. In the final step of the wizard, select **Publish to a Git repository**.
+2. Authenticate with your Git provider through OAuth when prompted.
+3. Select the target repository or allow the wizard to create a new one.
+4. Optional: Select **Build Execution Environment** to trigger an automated image build after saving.
+5. Configure the target registry (private automation hub or custom), image name, tag, and TLS settings.
+6. Click **Create**.
 
 ### Results
 

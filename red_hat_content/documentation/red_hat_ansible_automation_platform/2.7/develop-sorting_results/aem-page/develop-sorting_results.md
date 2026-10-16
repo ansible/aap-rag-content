@@ -1,6 +1,6 @@
 +++
-template = "docs/aem-title.html"
 title = "Sorting results - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-sorting_results"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-sorting_results/aem-page/develop-sorting_results.html"
 last_crumb = "Sorting results"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Sorting results"
 oversized = "false"
@@ -31,6 +32,6 @@ You can sort lists and tables in the Ansible Automation Platform UI by clicking 
 
 ## Procedure
 
-1.  Click a column header to sort the list in ascending order.
-2.  Click the same column header again to sort in descending order.
+1. Click a column header to sort the list in ascending order.
+2. Click the same column header again to sort in descending order.
       An arrow on the column header indicates the current sort direction.

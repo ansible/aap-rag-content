@@ -1,0 +1,55 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Automation dashboard deployment options",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Integrated automation dashboard",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-0e61594f-1c8d-48ac-937a-36e2c29f19d5__integrated-dashboard",
+          "anchor": null,
+          "singlePageAnchor": "GUID-0e61594f-1c8d-48ac-937a-36e2c29f19d5__integrated-dashboard"
+        },
+        {
+          "title": "Standalone automation dashboard utility (RHEL only)",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "GUID-0e61594f-1c8d-48ac-937a-36e2c29f19d5__standalone-dashboard",
+          "anchor": null,
+          "singlePageAnchor": "GUID-0e61594f-1c8d-48ac-937a-36e2c29f19d5__standalone-dashboard"
+        },
+        {
+          "title": "Running both together",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "GUID-0e61594f-1c8d-48ac-937a-36e2c29f19d5__running-both-together",
+          "anchor": null,
+          "singlePageAnchor": "GUID-0e61594f-1c8d-48ac-937a-36e2c29f19d5__running-both-together"
+        },
+        {
+          "title": "Comparison",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "GUID-0e61594f-1c8d-48ac-937a-36e2c29f19d5__comparison",
+          "anchor": null,
+          "singlePageAnchor": "GUID-0e61594f-1c8d-48ac-937a-36e2c29f19d5__comparison"
+        },
+        {
+          "title": "When to use each option",
+          "visible": true,
+          "weight": 5,
+          "urlFragment": "GUID-0e61594f-1c8d-48ac-937a-36e2c29f19d5__recommendations",
+          "anchor": null,
+          "singlePageAnchor": "GUID-0e61594f-1c8d-48ac-937a-36e2c29f19d5__recommendations"
+        }
+      ]
+    }
+  ]
+}

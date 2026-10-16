@@ -4,7 +4,7 @@ Learn how to create a playbook that pings your hosts and prints a “Hello world
 
 ## Procedure
 
-1.  Create a file named `playbook.yaml` in your `ansible_quickstart` directory, with the following content:
+1. Create a file named `playbook.yaml` in your `ansible_quickstart` directory, with the following content:
 
 
 ```
@@ -19,10 +19,10 @@ ansible.builtin.debug:
 msg: Hello world
 ```
 
-2.  Run your playbook, using the following command:
+2. Run your playbook, using the following command:
 `ansible-playbook -i inventory.ini playbook.yaml`
 
-3.  Ansible returns the following output:
+3. Ansible returns the following output:
 
 
 ```

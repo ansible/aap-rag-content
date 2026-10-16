@@ -15,7 +15,8 @@ For Job templates, see Job templates.
 
 The **Automation Templates** page shows the workflow and job templates that are currently available.
 
-Select the template name to display more information about the template, including when it last ran. This list is sorted alphabetically by name, but you can sort by other criteria, or search by various fields and attributes of a template.
+Select the template name to display more information about the template, including when it last ran.
+This list is sorted alphabetically by name, but you can sort by other criteria, or search by various fields and attributes of a template.
 
 From this screen you can launch ![Launch icon](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/rightrocket.png) , edit ![Edit icon](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png), and duplicate ![Duplicate icon](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/copy.png) a workflow job template.
 
@@ -25,4 +26,7 @@ Only workflow templates have the workflow visualizer ![Workflow visualizer](/web
 
 Note:
 
-Workflow templates can be used as building blocks for another workflow template. You can enable **Prompt on Launch** by setting up several settings in a workflow template, which you can edit at the workflow job template level. These do not affect the values assigned at the individual workflow template level. For further instructions, see the Workflow visualizer section.
+Workflow templates can be used as building blocks for another workflow template.
+You can enable **Prompt on Launch** by setting up several settings in a workflow template, which you can edit at the workflow job template level.
+These do not affect the values assigned at the individual workflow template level.
+For further instructions, see the Workflow visualizer section.

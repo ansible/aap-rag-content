@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-proc_terraform_provider_using_tf_actions_direct_job"
-template = "docs/aem-title.html"
 title = "Use TF Actions as a direct job - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-proc_terraform_provider_using_tf_actions_direct_job"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_terraform_introduction/", "Integrate with IBM HashiCorp Terraform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/integrate-proc_terraform_provider_using_tf_actions_direct_job/aem-page/integrate-proc_terraform_provider_using_tf_actions_direct_job.html"
 last_crumb = "Use TF Actions as a direct job"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Use TF Actions as a direct job"
 oversized = "false"
@@ -47,8 +48,8 @@ This method can be useful when you want to execute Ansible automation against ne
 
 ## Procedure
 
-1.  Define the `aap_job_launch` action in your `*.tf` file.
-2.  Add a lifecycle job block to define which action will be invoked during the proper lifecycle event trigger.  **Example**
+1. Define the `aap_job_launch` action in your `*.tf` file.
+2. Add a lifecycle job block to define which action will be invoked during the proper lifecycle event trigger.  **Example**
 
 ```
 terraform {
@@ -157,8 +158,8 @@ terraform {
 }
 ```
 
-3.  (Required) Change the job template name and the inventory name in this example to your corresponding variables.
-4.  (Optional) You can set `owners` to the Red Hat RHEL image ID so that the latest image is used each time the job runs.
-5.  (Optional) Set additional parameters as needed. For example, you can set `wait_for_completion` to `true`, then Terraform will wait until this job is created and reaches any final state before continuing. You can also set `wait_for_completion_timeout_seconds` to control the timeout limit.
-6.  Update and commit the Terraform code.
-7.  Execute the Terraform plan and apply it.
+3. (Required) Change the job template name and the inventory name in this example to your corresponding variables.
+4. (Optional) You can set `owners` to the Red Hat RHEL image ID so that the latest image is used each time the job runs.
+5. (Optional) Set additional parameters as needed. For example, you can set `wait_for_completion` to `true`, then Terraform will wait until this job is created and reaches any final state before continuing. You can also set `wait_for_completion_timeout_seconds` to control the timeout limit.
+6. Update and commit the Terraform code.
+7. Execute the Terraform plan and apply it.

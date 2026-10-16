@@ -1,16 +1,17 @@
 +++
-title = "Keep subscriptions for managed hosts in compliance - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Keep subscriptions for managed hosts in compliance - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_controller_keep_subscription_in_compliance"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_activate/", "Activate your subscription"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_activate_2/", "Activate your subscription"]]
 category = "Install"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-con_controller_keep_subscription_in_compliance/aem-page/install-con_controller_keep_subscription_in_compliance.html"
 last_crumb = "Keep subscriptions for managed hosts in compliance"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Keep subscriptions for managed hosts in compliance"
 oversized = "false"
@@ -63,12 +64,12 @@ Learn how to view and manage the hosts that have been automated in automation co
 
 ### Procedure
 
-1.  In the navigation panel, select Automation Analytics> (and then)Host Metrics to view the activity associated with hosts, such as those that have been automated and deleted. Each unique hostname is listed and sorted by the user’s preference. ![Host metrics](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-host-metrics.png)
+1. In the navigation panel, select Automation Analytics> (and then)Host Metrics to view the activity associated with hosts, such as those that have been automated and deleted. Each unique hostname is listed and sorted by the user’s preference. ![Host metrics](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-host-metrics.png)
 
-   Note:
+  Note:
       A scheduled task automatically updates these values on a weekly basis and deletes jobs with hosts that were last automated more than a year ago.
 
-2.  Delete unnecessary hosts directly from the Host Metrics view by selecting the required hosts and clicking Delete. These are soft-deleted, meaning their records are not removed, but are not being used and thereby not counted towards your subscription.
+2. Delete unnecessary hosts directly from the Host Metrics view by selecting the required hosts and clicking Delete. These are soft-deleted, meaning their records are not removed, but are not being used and thereby not counted towards your subscription.
 
 ## View hosts automated in the CLI
 
@@ -80,29 +81,29 @@ To collect and manage host metric data and related cluster information in Ansibl
 
 ### Procedure
 
-1.  The `awx-manage` utility supports the following options:
+1. The `awx-manage` utility supports the following options:
   
 
 ```
 awx-manage host_metric --csv
 ```
 
-2.  This command produces host metric data in CSV format, a host metrics summary file, and a cluster info file.
-3.  To package all the files into a single tar file for distribution and sharing, use:
+2. This command produces host metric data in CSV format, a host metrics summary file, and a cluster info file.
+3. To package all the files into a single tar file for distribution and sharing, use:
   
 
 ```
 awx-manage host_metric --tarball
 ```
 
-4.  To specify the number of rows (`<n>`) to output to each file:
+4. To specify the number of rows (`<n>`) to output to each file:
   
 
 ```
 awx-manage host_metric --tarball --rows_per_file <n>
 ```
 
-5.  Automation Analytics then receives and uses the JSON file.
+5. Automation Analytics then receives and uses the JSON file.
 
 ## Deleting Hosts automated using API endpoint
 
@@ -112,6 +113,6 @@ The API lists only non-deleted records and are sortable by last_automation and u
 
 To soft delete hosts, use:
 
- `api/v2/host_metric <n> DELETE`
+`api/v2/host_metric <n> DELETE`
 
 A monthly scheduled task automatically deletes jobs that uses hosts from the Host Metric table that were last automated more than a year ago.

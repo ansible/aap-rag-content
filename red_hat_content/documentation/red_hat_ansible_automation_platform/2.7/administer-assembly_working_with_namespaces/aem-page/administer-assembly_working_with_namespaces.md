@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 title = "Manage collection access and permissions with namespaces - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_working_with_namespaces"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_working_with_namespaces/", "Manage collection access and permissions with namespaces"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_working_with_namespaces/aem-page/administer-assembly_working_with_namespaces.html"
 last_crumb = "Manage collection access and permissions with namespaces"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Manage collection access and permissions with namespaces"
 oversized = "false"
@@ -49,18 +50,18 @@ To help content developers create a namespace and upload their internally develo
 
 ### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Access Management> (and then)Teams and click Create team.
-3.  Enter **Content Engineering** as a **Name** for the team.
-4.  Select an **Organization** for the team.
-5.  Click Create team. The team Details page opens.
-6.  Select the **Roles** tab and then select the **Automation Content** tab.
-7.  Click Add roles.
-8.  Select **Namespace** from the **Resource type** list and click Next.
-9.  Select the namespaces that will receive the new roles and click Next.
-10.  Select the roles to apply to the selected namespaces and click Next.
-11.  Review your selections and click Finish.
-12.  Click Close to complete the process.
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Access Management> (and then)Teams and click Create team.
+3. Enter **Content Engineering** as a **Name** for the team.
+4. Select an **Organization** for the team.
+5. Click Create team. The team Details page opens.
+6. Select the **Roles** tab and then select the **Automation Content** tab.
+7. Click Add roles.
+8. Select **Namespace** from the **Resource type** list and click Next.
+9. Select the namespaces that will receive the new roles and click Next.
+10. Select the roles to apply to the selected namespaces and click Next.
+11. Review your selections and click Finish.
+12. Click Close to complete the process.
 
 ### What to do next
 
@@ -84,16 +85,16 @@ By default, namespaces used on Ansible Galaxy are also used on automation hub by
 
 ### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Automation Content> (and then)Namespaces.
-3.  Click Create namespace and enter a **Name** for your namespace.
-4.  Optional: enter a description, company, logo URL, resources, or useful links in the appropriate fields.
-5.  Click Create namespace.
-6.  Select the **Team Access** tab and click Add roles to assign roles to your namespace.
-7.  Select the team to which you want to grant a role, then click Next.
-8.  Select the roles you want to apply to the selected team, and then click Next.
-9.  Review your selections and click Finish.
-10.  Click Close to complete the process.
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Automation Content> (and then)Namespaces.
+3. Click Create namespace and enter a **Name** for your namespace.
+4. Optional: enter a description, company, logo URL, resources, or useful links in the appropriate fields.
+5. Click Create namespace.
+6. Select the **Team Access** tab and click Add roles to assign roles to your namespace.
+7. Select the team to which you want to grant a role, then click Next.
+8. Select the roles you want to apply to the selected team, and then click Next.
+9. Review your selections and click Finish.
+10. Click Close to complete the process.
 
 ### What to do next
 
@@ -113,13 +114,13 @@ Customize your namespace by adding a logo and a description, and link users to y
 
 ### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Automation Content> (and then)Namespaces.
-3.  Select the namespace you want to edit.
-4.  Click the Edit namespace.
-5.  Enter the relevant information in the fields.
-6.  Optional: enter markdown information in the **Resources** field.
-7.  Click Save namespace.
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Automation Content> (and then)Namespaces.
+3. Select the namespace you want to edit.
+4. Click the Edit namespace.
+5. Enter the relevant information in the fields.
+6. Optional: enter markdown information in the **Resources** field.
+7. Click Save namespace.
 
 ## Upload collections to a namespace
 
@@ -151,18 +152,18 @@ Format your collection file name as follows: <my_namespace-my_collection-1.0.0.t
 
 ### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Automation Content> (and then)Namespaces and select a namespace.
-3.  Select the **Collections** tab.
-4.  Click Upload collection.
-5.  Click Browse next to the **Collection file** field.
-6.  Select the collection to upload.
-7.  Select one of the following options:
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Automation Content> (and then)Namespaces and select a namespace.
+3. Select the **Collections** tab.
+4. Click Upload collection.
+5. Click Browse next to the **Collection file** field.
+6. Select the collection to upload.
+7. Select one of the following options:
 
   -  **Staging repos**
   -  **Repositories without pipeline**
 
-8.  Click Upload collection.
+8. Click Upload collection.
 
 ### Results
 
@@ -194,13 +195,13 @@ activities executed during the collection import
 
 ### Procedure
 
-1.  Log in to your Ansible Automation Platform.
-2.  From the navigation panel, select Automation Content> (and then)Namespaces.
-3.  Select a namespace.
-4.  Click the More Actions icon **⋮** and select **Imports**.
-5.  Use the search field or locate an imported collection from the list.
-6.  Click the imported collection.
-7.  Review collection import details to determine the status of the collection in your namespace.
+1. Log in to your Ansible Automation Platform.
+2. From the navigation panel, select Automation Content> (and then)Namespaces.
+3. Select a namespace.
+4. Click the More Actions icon **⋮** and select **Imports**.
+5. Use the search field or locate an imported collection from the list.
+6. Click the imported collection.
+7. Review collection import details to determine the status of the collection in your namespace.
 
 ## Delete a collection
 
@@ -217,19 +218,19 @@ The **Dependencies** tab on a collection displays a list of other collections th
 
 ### Procedure
 
-1.  Log in to your Ansible Automation Platform.
-2.  From the navigation panel, select Automation Content> (and then)Collections.
-3.  Before deleting the collection, check to see if it has collections that are dependent on it:
+1. Log in to your Ansible Automation Platform.
+2. From the navigation panel, select Automation Content> (and then)Collections.
+3. Before deleting the collection, check to see if it has collections that are dependent on it:
 
   - Click the **Dependencies** tab for that collection. If it is blank, you will be able to delete the collection. If the **Dependencies** tab is not blank, you must delete these dependencies before you can delete the collection.
 
-4.  Click the collection to delete.
-5.  Click the More Actions icon **⋮**, and then select an option:
-  1.  **Delete version from system** removes the specific version of the collection from the entire instance, including all repositories and namespaces.
-  2.  **Delete version from repository** removes the specific version of the collection from the repository where it was uploaded. This does not affect the collection in other repositories or namespaces.
-  3.  **Delete entire collection from repository** removes all versions of the entire collection from the repository where it was uploaded, but does not affect other repositories or namespaces.
-  4.  **Delete entire collection from system** removes all versions of the entire collection from the instance, including all repositories and namespaces.
-6.  When the confirmation window opens, verify that the collection or version number is correct, and then select **Delete**.
+4. Click the collection to delete.
+5. Click the More Actions icon **⋮**, and then select an option:
+  1. **Delete version from system** removes the specific version of the collection from the entire instance, including all repositories and namespaces.
+  2. **Delete version from repository** removes the specific version of the collection from the repository where it was uploaded. This does not affect the collection in other repositories or namespaces.
+  3. **Delete entire collection from repository** removes all versions of the entire collection from the repository where it was uploaded, but does not affect other repositories or namespaces.
+  4. **Delete entire collection from system** removes all versions of the entire collection from the instance, including all repositories and namespaces.
+6. When the confirmation window opens, verify that the collection or version number is correct, and then select **Delete**.
 
 ## Delete a namespace
 
@@ -246,10 +247,10 @@ First, ensure that the namespace you want to delete does not contain a collectio
 
 ### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Automation Content> (and then)Namespaces.
-3.  Click the namespace to be deleted.
-4.  Click the More Actions icon **⋮**, then click Delete namespace. Note:
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Automation Content> (and then)Namespaces.
+3. Click the namespace to be deleted.
+4. Click the More Actions icon **⋮**, then click Delete namespace. Note:
       If the Delete namespace button is disabled, the namespace contains a collection with dependencies. Review the collections in this namespace, and delete any dependencies.
 
 ### Results
@@ -266,19 +267,19 @@ In automation hub, you can create a remote configuration to an external collecti
 
 ### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Automation Content> (and then)Remotes.
-3.  Click Create Remote.
-4.  Enter a **Name** for the remote configuration.
-5.  Enter the **URL** for the remote server, including the path for the specific repository. Note:
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Automation Content> (and then)Remotes.
+3. Click Create Remote.
+4. Enter a **Name** for the remote configuration.
+5. Enter the **URL** for the remote server, including the path for the specific repository. Note:
       To find the remote server URL and repository path, navigate to Automation Content> (and then)Repositories, select the More Actions icon **⋮**, and select Copy CLI configuration.
 
-6.  To sync signed collections only, check the box labeled **Signed collections only**.
-7.  To sync dependencies, check the box labeled **Sync all dependencies**. To turn off dependency syncing, leave this box unchecked.
-8.  Configure the credentials to the remote server by entering a **Token** or **Username** and **Password** required to access the external collection.
+6. To sync signed collections only, check the box labeled **Signed collections only**.
+7. To sync dependencies, check the box labeled **Sync all dependencies**. To turn off dependency syncing, leave this box unchecked.
+8. Configure the credentials to the remote server by entering a **Token** or **Username** and **Password** required to access the external collection.
 
-9.  To access collections from console.redhat.com, enter the **SSO URL** to sign in to the identity provider (IdP).
-10.  Select or create a **Requirements file** to identify the collections and version ranges to synchronize with your custom repository. For example, to download only the kubernetes and AWS collection versions 5.0.0 or later the requirements file would look like this:
+9. To access collections from console.redhat.com, enter the **SSO URL** to sign in to the identity provider (IdP).
+10. Select or create a **Requirements file** to identify the collections and version ranges to synchronize with your custom repository. For example, to download only the kubernetes and AWS collection versions 5.0.0 or later the requirements file would look like this:
   
 
 ```
@@ -288,13 +289,13 @@ Collections:
          version:”>=5.0.0”
 ```
 
-11.  Optional: To configure your remote further, use the options available under **Show advanced options**:
-  1.  If there is a corporate proxy in place for your organization, enter a **Proxy URL**, **Proxy Username** and **Proxy Password**.
-  2.  Enable or disable transport layer security using the **TLS validation** checkbox.
-  3.  If digital certificates are required for authentication, enter a **Client key** and **Client certificate**.
-  4.  If you are using a self-signed SSL certificate for your server, enter the PEM encoded client certificate used for authentication in the **CA certificate** field.
-  5.  To accelerate the speed at which collections in this remote can be downloaded, specify the number of collections that can be downloaded in tandem in the **Download concurrency** field.
-  6.  To limit the number of queries per second on this remote, specify a **Rate Limit**. Note:
+11. Optional: To configure your remote further, use the options available under **Show advanced options**:
+  1. If there is a corporate proxy in place for your organization, enter a **Proxy URL**, **Proxy Username** and **Proxy Password**.
+  2. Enable or disable transport layer security using the **TLS validation** checkbox.
+  3. If digital certificates are required for authentication, enter a **Client key** and **Client certificate**.
+  4. If you are using a self-signed SSL certificate for your server, enter the PEM encoded client certificate used for authentication in the **CA certificate** field.
+  5. To accelerate the speed at which collections in this remote can be downloaded, specify the number of collections that can be downloaded in tandem in the **Download concurrency** field.
+  6. To limit the number of queries per second on this remote, specify a **Rate Limit**. Note:
             Some servers can have a specific rate limit set, and if exceeded, synchronization fails.
 
 ### Assign access to a remote configuration
@@ -303,11 +304,11 @@ After you create a remote configuration, you must provide access to it before an
 
 #### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Automation Content> (and then)Remotes.
-3.  Click into your repository in the list, and then select the **Team Access** tab.
-4.  Click Add roles.
-5.  Select the team to which you want to grant a role, then click Next.
-6.  Select the roles you want to apply to the selected team, and then click Next.
-7.  Review your selections and click Finish.
-8.  Click Close to complete the process.
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Automation Content> (and then)Remotes.
+3. Click into your repository in the list, and then select the **Team Access** tab.
+4. Click Add roles.
+5. Select the team to which you want to grant a role, then click Next.
+6. Select the roles you want to apply to the selected team, and then click Next.
+7. Review your selections and click Finish.
+8. Click Close to complete the process.

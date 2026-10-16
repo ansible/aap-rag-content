@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_configure_content_signing_on_pah"
-title = "Configure content signing on private automation hub - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Configure content signing on private automation hub - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-manage_your_organization_s_automation_content/", "Manage your organization's automation content"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-proc_configure_content_signing_on_pah/aem-page/administer-proc_configure_content_signing_on_pah.html"
 last_crumb = "Configure content signing on private automation hub"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure content signing on private automation hub"
 oversized = "false"
@@ -38,7 +39,9 @@ To successfully sign and publish Ansible Certified Content Collections, you must
 
 ## Procedure
 
-1.  Create a signing script that accepts only a filename. Note:
+1. Create a signing script that accepts only a filename.
+  
+  Note:
       This script acts as the signing service and must generate an ascii-armored detached `gpg` signature for that file using the key specified through the `PULP_SIGNING_KEY_FINGERPRINT` environment variable.
 
     The script prints out a JSON structure with the following format.
@@ -47,7 +50,8 @@ To successfully sign and publish Ansible Certified Content Collections, you must
 {"file": "filename", "signature": "filename.asc"}
 ```
 
-    All the file names are relative paths inside the current working directory. The file name must remain the same for the detached signature.
+    All the file names are relative paths inside the current working directory.
+The file name must remain the same for the detached signature.
 
     **Example:** The following script produces signatures for content:
 
@@ -76,7 +80,8 @@ fi
 
     After you deploy a private automation hub with signing enabled to your Ansible Automation Platform cluster, new UI additions are displayed in collections.
 
-2.  Review the Ansible Automation Platform installer inventory file for options that begin with `automationhub_*`.
+2. Review the Ansible Automation Platform installer inventory file for options that begin with `automationhub_*`.
+  
 
 ```
 [all:vars]
@@ -98,11 +103,11 @@ After you sign and approve collections, download the signature public keys from 
 
 ### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Automation Content> (and then)Signature Keys. The Signature Keys dashboard displays a list of multiple keys: collections and container images.   - To verify collections, download the key prefixed with `collections-`.
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Automation Content> (and then)Signature Keys. The Signature Keys dashboard displays a list of multiple keys: collections and container images.   - To verify collections, download the key prefixed with `collections-`.
   - To verify container images, download the key prefixed with `container-`.
 
-3.  Choose one of the following methods to download your public key:
+3. Choose one of the following methods to download your public key:
 
   - Click the Download Key icon to download the public key.
   - Click the Copy to clipboard next to the public key you want to copy.
@@ -113,7 +118,8 @@ Use the public key that you copied to verify the content collection that you are
 
 ## Configure Ansible-Galaxy CLI to verify collections
 
-You can configure Ansible-Galaxy CLI to verify collections. This ensures that downloaded collections are approved by your organization and have not been changed after they were uploaded to automation hub.
+You can configure Ansible-Galaxy CLI to verify collections.
+This ensures that downloaded collections are approved by your organization and have not been changed after they were uploaded to automation hub.
 
 ### Before you begin
 
@@ -123,20 +129,23 @@ You can configure Ansible-Galaxy CLI to verify collections. This ensures that do
 
 ### About this task
 
-If a collection has been signed by automation hub, the server provides ASCII armored, GPG-detached signatures to verify the authenticity of `MANIFEST.json` before using it to verify the collection’s contents. First you must opt into signature verification by configuring a keyring for `ansible-galaxy` or providing the path with the `--keyring` option.
+If a collection has been signed by automation hub, the server provides ASCII armored, GPG-detached signatures to verify the authenticity of `MANIFEST.json` before using it to verify the collection’s contents.
+First you must opt into signature verification by configuring a keyring for `ansible-galaxy` or providing the path with the `--keyring` option.
 
 ### Procedure
 
-1.  To import a public key into a non-default keyring for use with `ansible-galaxy`, run the following command.
+1. To import a public key into a non-default keyring for use with `ansible-galaxy`, run the following command.
+  
 
 ```
 gpg --import --no-default-keyring --keyring ~/.ansible/pubring.kbx my-public-key.asc
 ```
 
   Note:
-      In addition to any signatures provided by automation hub, signature sources can also be provided in the requirements file and on the command line. Signature sources should be URIs.
+      In addition to any signatures provided by automation hub, signature sources can also be provided in the requirements file and on the command line.
+Signature sources should be URIs.
 
-2.  To verify the collection name provided on the CLI with an additional signature, run the following command:
+2. To verify the collection name provided on the CLI with an additional signature, run the following command:
   
 
 ```
@@ -147,7 +156,8 @@ ansible-galaxy collection install namespace.collection
 
     You can use this option multiple times to provide multiple signatures.
 
-3.  Confirm that the collections in a requirements file list any additional signature sources following the collection’s signatures key, as in the following example.
+3. Confirm that the collections in a requirements file list any additional signature sources following the collection’s signatures key, as in the following example.
+  
 
 ```yaml
 # requirements.yml
@@ -163,4 +173,4 @@ collections:
 
     When you install a collection from automation hub, the signatures provided by the server are saved along with the installed collections to verify the collection’s authenticity.
 
-4.  (Optional) If you need to verify the internal consistency of your collection again without querying the Ansible Galaxy server, run the same command you used previously using the `--offline` option.
+4. (Optional) If you need to verify the internal consistency of your collection again without querying the Ansible Galaxy server, run the same command you used previously using the `--offline` option.

@@ -15,7 +15,7 @@ Once the mirror registry is configured, `bootc upgrade` checks the mirror automa
 
 ### Procedure
 
-1.  On a connected machine, copy the new appliance image to your internal registry:
+1. On a connected machine, copy the new appliance image to your internal registry:
 
 
 ```terminal
@@ -24,7 +24,7 @@ docker://registry.redhat.io/ansible-automation-platform/bootc-automation-portal-
 docker://mirror.internal.example.com:5000/ansible-automation-platform/bootc-automation-portal-rhel9:*version*
 ```
 
-2.  On the Ansible automation portal RHEL appliance, create a registry mirror configuration:
+2. On the Ansible automation portal RHEL appliance, create a registry mirror configuration:
 
 
 ```terminal
@@ -41,7 +41,7 @@ EOF
 
 Replace `mirror.internal.example.com:5000` with your mirror registry address.
 
-3.  If your mirror registry uses a self-signed certificate, add the CA certificate to the system trust store:
+3. If your mirror registry uses a self-signed certificate, add the CA certificate to the system trust store:
 
 
 ```terminal
@@ -51,21 +51,21 @@ $ sudo update-ca-trust
 
 Alternatively, set `insecure = true` in the mirror block. This is not recommended for production environments.
 
-4.  Authenticate to the mirror registry:
+4. Authenticate to the mirror registry:
 
 
 ```terminal
 $ sudo podman login --authfile /etc/ostree/auth.json mirror.internal.example.com:5000
 ```
 
-5.  Verify the mirror configuration:
+5. Verify the mirror configuration:
 
 
 ```terminal
 $ sudo podman info | grep -A5 registries
 ```
 
-6.  Run the upgrade:
+6. Run the upgrade:
 
 
 ```terminal
@@ -74,7 +74,7 @@ $ sudo bootc upgrade
 
 If your mirror does not carry Red Hat GPG signatures, add `--no-signature-verification` to the `bootc switch` command when switching image sources. This flag is not needed for `bootc upgrade` when the image source is already configured.
 
-7.  Reboot to activate the new image:
+7. Reboot to activate the new image:
 
 
 ```terminal

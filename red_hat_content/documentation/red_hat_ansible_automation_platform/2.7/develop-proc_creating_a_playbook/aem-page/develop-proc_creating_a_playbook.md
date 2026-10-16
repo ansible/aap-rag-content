@@ -1,16 +1,17 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_creating_a_playbook"
-title = "Create a simple playbook to connect to managed hosts - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Create a simple playbook to connect to managed hosts - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_creating_a_playbook"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-assembly_intro_to_playbooks_1/", "Get started automating with playbooks"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-assembly_intro_to_playbooks/", "Get started automating with playbooks"]]
 category = "Develop"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_creating_a_playbook/aem-page/develop-proc_creating_a_playbook.html"
 last_crumb = "Create a simple playbook to connect to managed hosts"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Create a simple playbook to connect to managed hosts"
 oversized = "false"
@@ -31,7 +32,7 @@ Learn how to create a playbook that pings your hosts and prints a “Hello world
 
 ## Procedure
 
-1.  Create a file named `playbook.yaml` in your `ansible_quickstart` directory, with the following content:
+1. Create a file named `playbook.yaml` in your `ansible_quickstart` directory, with the following content:
   
 
 ```
@@ -46,10 +47,10 @@ Learn how to create a playbook that pings your hosts and prints a “Hello world
       msg: Hello world
 ```
 
-2.  Run your playbook, using the following command:
+2. Run your playbook, using the following command:
        `ansible-playbook -i inventory.ini playbook.yaml`
 
-3.  Ansible returns the following output:
+3. Ansible returns the following output:
   
 
 ```

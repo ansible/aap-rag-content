@@ -1,6 +1,6 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-configure_remote_repositories_to_sync_automation_content_"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-configure_remote_repositories_to_sync_automation_content_"
 title = "Sync automation content from remote repositories - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-configure_remote_repositories_to_sync_automation_content_/aem-page/administer-configure_remote_repositories_to_sync_automation_content_.html"
 last_crumb = "Sync automation content from remote repositories"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Sync automation content from remote repositories"
 oversized = "false"

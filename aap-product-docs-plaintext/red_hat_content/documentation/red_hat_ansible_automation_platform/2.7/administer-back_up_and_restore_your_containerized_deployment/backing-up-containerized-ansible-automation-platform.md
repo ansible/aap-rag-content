@@ -9,6 +9,10 @@ Perform a backup of your container-based installation of Ansible Automation Plat
 
 ### About this task
 
+Important:
+
+If you take a backup from an environment that is broken or degraded, that backup might not restore correctly. File system issues such as incorrect SELinux contexts, broken symbolic links, or NFS mount failures can be captured in the backup and reproduced on restore. Where possible, repair your environment before taking a backup.
+
 Note:
 
 - When backing up Ansible Automation Platform, use the installation program that matches your currently installed version of Ansible Automation Platform.
@@ -17,9 +21,9 @@ Note:
 
 ### Procedure
 
-1.  Go to the Red Hat Ansible Automation Platform installation directory on your Red Hat Enterprise Linux host.
-2.  To control compression of the backup artifacts before they are sent to the host running the backup operation, you can use the following variables in your inventory file:
-1.  For control of compression for filesystem related backup files:
+1. Go to the Red Hat Ansible Automation Platform installation directory on your Red Hat Enterprise Linux host.
+2. To control compression of the backup artifacts before they are sent to the host running the backup operation, you can use the following variables in your inventory file:
+1. For control of compression for filesystem related backup files:
 
 
 ```
@@ -37,7 +41,7 @@ use_archive_compression=true
 #redis_use_archive_compression=true
 ```
 
-2.  For control of compression for database related backup files:
+2. For control of compression for database related backup files:
 
 
 ```
@@ -51,7 +55,7 @@ use_db_compression=true
 #gateway_use_db_compression=true
 ```
 
-3.  Run the `backup` playbook:
+3. Run the `backup` playbook:
 
 
 ```
@@ -70,7 +74,7 @@ To customize the backup process, you can use the following variables in your inv
 
 - Change the backup destination directory from the default `./backups` by using the `backup_dir` variable.
 
--      Exclude paths that contain duplicated data, such as snapshot subdirectories, by using the `hub_data_path_exclude` variable.
+- Exclude paths that contain duplicated data, such as snapshot subdirectories, by using the `hub_data_path_exclude` variable.
 
 For example, to exclude a `.snapshot` subdirectory from the backup, add the following to your inventory file:
 

@@ -5,7 +5,7 @@ After you create a schedule, you can define rules for when the schedule runs.
 
 ### Procedure
 
-1.  Enter the following information:
+1. Enter the following information:
 
 - **Frequency**: Enter how often the schedule runs.
 
@@ -31,7 +31,7 @@ After you create a schedule, you can define rules for when the schedule runs.
 
 - **Schedule ending type**: Use this field to select when the schedule is set to end. For more information, see the [link](https://datatracker.ietf.org/doc/html/rfc5545) to the `iCalendar RFC for bysetpos` field in the iCalendar documentation when you have set the rules for the schedule.
 
-2.  Click Save rule. The **Schedule Rules** summary page is displayed.
-3.  Click Add rule to add additional rules.
-4.  Click Next. The **Schedule Exceptions** page is displayed.
+2. Click Save rule. The **Schedule Rules** summary page is displayed.
+3. Click Add rule to add additional rules.
+4. Click Next. The **Schedule Exceptions** page is displayed.
 

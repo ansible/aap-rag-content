@@ -1,7 +1,7 @@
 +++
-title = "Configure external database for metrics service - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-configure_external_database_metrics_service_operator"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-configure_external_database_metrics_service_operator"
+title = "Configure external database for metrics service - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-assembly_overview_tested_deployment_models/", "Choose a deployment method and topology"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/plan-configure_external_database_metrics_service_operator/aem-page/plan-configure_external_database_metrics_service_operator.html"
 last_crumb = "Configure external database for metrics service"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure external database for metrics service"
 oversized = "false"
@@ -65,7 +66,7 @@ Metrics service requires two database connections: a `metrics_service` database 
 
 ## Procedure
 
-1.  Create a secret for the `metrics_service` database connection:
+1. Create a secret for the `metrics_service` database connection:
   
 
 ```
@@ -88,7 +89,7 @@ type: Opaque
   Important:
   `type: unmanaged` tells the operator this is an external database. Without this field, the operator attempts to initialize the database as a managed instance and fails.
 
-2.  Create a secret for read-only access to the `automationcontroller` database:
+2. Create a secret for read-only access to the `automationcontroller` database:
   
 
 ```
@@ -106,7 +107,7 @@ stringData:
 type: Opaque
 ```
 
-3.  Apply both secrets to your OpenShift cluster:
+3. Apply both secrets to your OpenShift cluster:
   
 
 ```
@@ -114,7 +115,7 @@ $ oc apply -f aap-metrics-postgres-configuration.yaml -n aap
 $ oc apply -f aap-metrics-read-token.yaml -n aap
 ```
 
-4.  Verify the secrets were created:
+4. Verify the secrets were created:
   
 
 ```
@@ -128,7 +129,7 @@ aap-metrics-postgres-configuration
 aap-metrics-read-token
 ```
 
-5.  Reference the secrets in your AnsibleAutomationPlatform custom resource:
+5. Reference the secrets in your AnsibleAutomationPlatform custom resource:
   
 
 ```
@@ -142,7 +143,7 @@ spec:
     database:
       database_secret: aap-metrics-postgres-configuration
       externally_managed: true
-    ms_awx_readonly_user_secret: aap-metrics-read-token
+      ms_awx_readonly_user_secret: aap-metrics-read-token
     ms_awx_readonly_user:
       externally_managed: true
 ```
@@ -151,8 +152,10 @@ spec:
 
   - `database.database_secret`: References the `metrics_service` database secret
   - `database.externally_managed: true`: Skips operator-managed PostgreSQL pod creation
-  - `ms_awx_readonly_user_secret`: References the read-only user secret
+  - `database.ms_awx_readonly_user_secret`: References the read-only user secret
   - `ms_awx_readonly_user.externally_managed: true`: Uses customer-provided read-only user instead of operator creating it
+  Important:
+  The `ms_awx_readonly_user_secret` field must be nested under `database`, while the `ms_awx_readonly_user.externally_managed` flag is a sibling of `database` at the `metrics` level. These two fields are intentionally at different nesting levels in the custom resource.
 
 ## Results
 
@@ -170,7 +173,7 @@ $ oc get metricsservice -n aap
 $ oc get pods -n aap | grep metrics
 ```
 
-     Expected output:
+    Expected output:
 
 ```
 aap-metrics-web-xxxxx        1/1  Running
@@ -184,4 +187,4 @@ aap-metrics-scheduler-xxxxx  1/1  Running
 $ oc logs <instance>-metrics-web-xxxxx -n aap | grep "Database connection"
 ```
 
-     This should show a successful connection to both databases.
+    This should show a successful connection to both databases.

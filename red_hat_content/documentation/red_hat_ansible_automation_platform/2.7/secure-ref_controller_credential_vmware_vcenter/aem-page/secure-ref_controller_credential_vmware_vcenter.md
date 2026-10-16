@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_vmware_vcenter/aem-page/secure-ref_controller_credential_vmware_vcenter.html"
 last_crumb = "VMware vCenter credential type"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "VMware vCenter credential type"
 oversized = "false"
@@ -29,7 +30,8 @@ type = "aem-page"
 
 Select this credential type to enable synchronization of inventory with VMware vCenter.
 
-Automation controller uses the following environment variables for VMware vCenter credentials:
+Automation controller uses the following environment variables for VMware vCenter
+credentials:
 
 ```
 VMWARE_HOST

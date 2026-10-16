@@ -13,13 +13,15 @@ If the `hstore` extension is not enabled before installation, a failure raises d
 
 ### Procedure
 
-1.  Check if the extension is available on the PostgreSQL server (automation hub database).
+1. Check if the extension is available on the PostgreSQL server (automation hub database).
+
 
 ```
 $ psql -d <automation hub database> -c "SELECT * FROM pg_available_extensions WHERE name='hstore'"
 ```
 
-2.  Where the default value for `<automation hub database>` is `automationhub`. **Example output with `hstore` available**:
+2. Where the default value for `<automation hub database>` is `automationhub`.
+**Example output with `hstore` available**:
 
 ```
 name  | default_version | installed_version |comment
@@ -36,13 +38,14 @@ name | default_version | installed_version | comment
 (0 rows)
 ```
 
-3.  On a RHEL based server, the `hstore` extension is included in the `postgresql-contrib` RPM package, which is not installed automatically when installing the PostgreSQL server RPM package. To install the RPM package, use the following command:
+3. On a RHEL based server, the `hstore` extension is included in the `postgresql-contrib` RPM package, which is not installed automatically when installing the PostgreSQL server RPM package.
+To install the RPM package, use the following command:
 
 ```
 dnf install postgresql-contrib
 ```
 
-4.  Load the `hstore` PostgreSQL extension into the automation hub database with the following command:
+4. Load the `hstore` PostgreSQL extension into the automation hub database with the following command:
 
 
 ```

@@ -1,7 +1,7 @@
 +++
-title = "Delete or unregister an execution environment definition - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_delete_ee_definition"
 template = "docs/aem-title.html"
+title = "Delete or unregister an execution environment definition - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-build_execution_environments_with_the_automation_portal/", "Build execution environments with automation portal"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_delete_ee_definition/aem-page/develop-proc_delete_ee_definition.html"
 last_crumb = "Delete or unregister an execution environment definition"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Delete or unregister an execution environment definition"
 oversized = "false"
@@ -35,6 +36,6 @@ Remove an execution environment definition from the catalog in Ansible automatio
 
 ## Procedure
 
-1.  Open the execution environment definition detail page.
-2.  Click the actions menu and select **Delete** (or **Unregister entity**).
-3.  Confirm the deletion.
+1. Open the execution environment definition detail page.
+2. Click the actions menu and select **Delete** (or **Unregister entity**).
+3. Confirm the deletion.

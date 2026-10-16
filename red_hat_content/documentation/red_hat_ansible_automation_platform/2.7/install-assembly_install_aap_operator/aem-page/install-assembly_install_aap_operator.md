@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_install_aap_operator"
-template = "docs/aem-title.html"
 title = "Install the Ansible Automation Platform Operator through OperatorHub - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator/", "Install on OpenShift Container Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_install_aap_operator/aem-page/install-assembly_install_aap_operator.html"
 last_crumb = "Install the Ansible Automation Platform Operator through OperatorHub"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Install the Ansible Automation Platform Operator through OperatorHub"
 oversized = "false"
@@ -60,16 +61,16 @@ You cannot deploy Ansible Automation Platform in the default namespace on your O
 
 ### Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  Navigate to Operators> (and then)OperatorHub.
-3.  Search for Ansible Automation Platform and click Install.
-4.  Select an **Update Channel**:
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to Operators> (and then)OperatorHub.
+3. Search for Ansible Automation Platform and click Install.
+4. Select an **Update Channel**:
 
   - **stable-2.x**: installs a namespace-scoped operator, which limits deployments of automation hub and automation controller instances to the namespace the operator is installed in, this is suitable for most cases. The stable-2.x channel does not require administrator privileges and utilizes fewer resources because it only monitors a single namespace.
   - **stable-2.x-cluster-scoped**: installs the Ansible Automation Platform Operator in a single namespace that manages Ansible Automation Platform custom resources and deployments in all namespaces. The Ansible Automation Platform Operator requires administrator privileges for all namespaces in the cluster.
 
-5.  Select **Installation Mode**, **Installed Namespace**, and **Approval Strategy**.
-6.  Click Install.
+5. Select **Installation Mode**, **Installed Namespace**, and **Approval Strategy**.
+6. Click Install.
 
 ### Results
 

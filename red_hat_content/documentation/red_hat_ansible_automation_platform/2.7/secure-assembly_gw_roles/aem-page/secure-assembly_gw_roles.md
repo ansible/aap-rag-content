@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_roles"
-title = "View, create, and assign roles to grant user access to resources - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "View, create, and assign roles to grant user access to resources - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_managing_access/", "Manage access with role-based access control"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_roles/aem-page/secure-assembly_gw_roles.html"
 last_crumb = "View, create, and assign roles to grant user access to resources"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "View, create, and assign roles to grant user access to resources"
 oversized = "false"
@@ -51,9 +52,9 @@ A similar role entity for Automation Content is a "system" role, which gives acc
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Roles.
-2.  From the table header, you can sort the list of roles by using the arrows for **Name**, **Description**, **Component**, **Resource Type**, and **Role Creation**, or by making sort selections in the **Sort** list.
-3.  You can filter the list of roles by selecting **Name**, **Editable**, or **Component** from the filter list and clicking the arrow.
+1. From the navigation panel, select Access Management> (and then)Roles.
+2. From the table header, you can sort the list of roles by using the arrows for **Name**, **Description**, **Component**, **Resource Type**, and **Role Creation**, or by making sort selections in the **Sort** list.
+3. You can filter the list of roles by selecting **Name**, **Editable**, or **Component** from the filter list and clicking the arrow.
 
 ## Create a role
 
@@ -61,16 +62,17 @@ Ansible Automation Platform services provide a set of predefined roles with perm
 
 ### About this task
 
-If the default predefined roles for a resource type do not give the necessary permissions, you can create custom roles for an organization. Creating a custom role reduces complexity by consolidating all required permissions into a single assignment per resource or resource type, eliminating the need to assign multiple roles to a user or team.
+If the default predefined roles for a resource type do not give the necessary permissions, you can create custom roles for an organization.
+Creating a custom role reduces complexity by consolidating all required permissions into a single assignment per resource or resource type, eliminating the need to assign multiple roles to a user or team.
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Roles.
-2.  Click Create role.
-3.  Provide a **Name** and a short **Description** for the role. The name and description should be unique and specific to the role’s intended use and permissions to give context when assigning the role.
-4.  Select a **Resource Type**. Ensure that you are selecting the required resource in the correct component context, because resources such as projects and credentials can be associated with both Automation Execution and Automation Decisions.
-5.  Select the **Permissions** you want assigned to this role from the drop-down menu.
-6.  Click Create role to create your new role.
+1. From the navigation panel, select Access Management> (and then)Roles.
+2. Click Create role.
+3. Provide a **Name** and a short **Description** for the role. The name and description should be unique and specific to the role’s intended use and permissions to give context when assigning the role.
+4. Select a **Resource Type**. Ensure that you are selecting the required resource in the correct component context, because resources such as projects and credentials can be associated with both Automation Execution and Automation Decisions.
+5. Select the **Permissions** you want assigned to this role from the drop-down menu.
+6. Click Create role to create your new role.
 
 ## Edit a role
 
@@ -78,9 +80,9 @@ Default roles are predefined in the platform and cannot be changed; however, you
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Roles.
-2.  Click the **Edit role** icon ![Edit](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png) next to the role you want and modify the role settings as needed.
-3.  Click Save role to save your changes.
+1. From the navigation panel, select Access Management> (and then)Roles.
+2. Click the **Edit role** icon ![Edit](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png) next to the role you want and modify the role settings as needed.
+3. Click Save role to save your changes.
 
 ## Delete a role
 
@@ -88,6 +90,6 @@ You cannot delete default roles; however, you can delete custom roles from the *
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Roles.
-2.  Click the More Actions icon **⋮** next to the role you want and select **Delete role**.
-3.  To delete roles in bulk, select the roles you want to delete from the **Roles** list view, click the More Actions icon **⋮**, and select **Delete roles**.
+1. From the navigation panel, select Access Management> (and then)Roles.
+2. Click the More Actions icon **⋮** next to the role you want and select **Delete role**.
+3. To delete roles in bulk, select the roles you want to delete from the **Roles** list view, click the More Actions icon **⋮**, and select **Delete roles**.

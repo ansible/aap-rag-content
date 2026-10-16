@@ -4,13 +4,14 @@ template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-con_gw_manage_oauth2_external_users"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_configure_authentication/", "Configure central authentication for Ansible Automation Platform"]]
-category = "Secure"
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-assembly_gw_settings/", "Configure Ansible Automation Platform"]]
+category = "Configure"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/configure-con_gw_manage_oauth2_external_users/aem-page/configure-con_gw_manage_oauth2_external_users.html"
 last_crumb = "Security settings for OAuth2 tokens and external users"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Security settings for OAuth2 tokens and external users"
 oversized = "false"
@@ -39,10 +40,10 @@ To enable external users to create OAuth2 tokens, change the appropriate setting
 
 ### Procedure
 
-1.  From the navigation panel, go to Settings> (and then)Platform gateway.
-2.  Click Edit platform gateway settings.
-3.  Change the **Allow external users to create OAuth2 tokens** setting to **Enabled**.
-4.  Click Save platform gateway settings.
+1. From the navigation panel, go to Settings> (and then)Platform gateway.
+2. Click Edit platform gateway settings.
+3. Change the **Allow external users to create OAuth2 tokens** setting to **Enabled**.
+4. Click Save platform gateway settings.
 
 ### What to do next
 
@@ -54,9 +55,13 @@ After enabling OAuth2 token creation for external users, implement the following
 
 ### Procedure
 
--  **Limit token lifetime**: Configure a shorter duration for OAuth2 tokens to reduce the window of exposure.   * In your Ansible Automation Platform settings, adjust the `OAUTH2_ACCESS_TOKEN_EXPIRE_SECONDS value`. A value of 28800 (8 hours) is recommended, limiting token validity to a standard workday.
+- **Limit token lifetime**: Configure a shorter duration for OAuth2 tokens to reduce the window of exposure. Adjust the OAuth2 access token expiration setting to limit token validity. A value of 28800 seconds (8 hours) is recommended, limiting token validity to a standard workday.
 
--  **Enforce strict role-based access control (RBAC)**: Grant users only the minimum necessary permissions.   * Assign users who create tokens to **Teams** with highly restrictive roles. Avoid granting broad permissions that could lead to privilege escalation.
+  * For manual `settings.py` configuration, see [Configure access to external applications with tokens](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_token_based_authentication#gw-token-based-authentication "Token-based authentication permits authentication of third-party tools and services with the platform through integrated OAuth 2 token support. Ansible Automation Platform utilizes both OAuth Tokens and Personal Access Tokens (PATs).").
+  * For RPM or containerized installations, see the `gateway_extra_settings` example in [Platform gateway variables](/documentation/en-us/red_hat_ansible_automation_platform/2.7/../install/ref-gateway-variables.html "Reference information for the inventory file variables used to configure platform gateway.").
+  * For operator-based installations on OpenShift Container Platform, see [Configure the OAuth access token lifetime on OpenShift Container Platform](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_applications_getting_started#proc-gw-configure-oauth-token-lifetime-operator "On an operator-based installation, set the OAuth access token lifetime in the AnsibleAutomationPlatform custom resource so platform gateway applies it across reconciliations.").
 
--  **Establish a clear offboarding process**: Integrate token revocation into your organizational offboarding procedures. Your HR and IT offboarding processes must include a step for an Ansible Automation Platform administrator to revoke all active tokens for a departing user. Tokens can be manually revoked from the user’s profile under the **Tokens** tab.
--  **Audit and monitor**: Regularly review token-related activities for legitimacy in the **Activity Stream**.
+- **Enforce strict role-based access control (RBAC)**: Grant users only the minimum necessary permissions.   * Assign users who create tokens to **Teams** with highly restrictive roles. Avoid granting broad permissions that could lead to privilege escalation.
+
+- **Establish a clear offboarding process**: Integrate token revocation into your organizational offboarding procedures. Your HR and IT offboarding processes must include a step for an Ansible Automation Platform administrator to revoke all active tokens for a departing user. Tokens can be manually revoked from the user’s profile under the **Tokens** tab.
+- **Audit and monitor**: Regularly review token-related activities for legitimacy in the **Activity Stream**.

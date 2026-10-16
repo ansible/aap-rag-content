@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-troubleshooting_byok_for_the_intelligent_assistant"
-template = "docs/aem-title.html"
 title = "Troubleshooting BYOK for the intelligent assistant - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-extend_the_intelligent_assistant_with_custom_knowledge/", "Extend the automation intelligent assistant with custom knowledge"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-troubleshooting_byok_for_the_intelligent_assistant/aem-page/extend-troubleshooting_byok_for_the_intelligent_assistant.html"
 last_crumb = "Troubleshooting BYOK for the intelligent assistant"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Troubleshooting BYOK for the intelligent assistant"
 oversized = "false"
@@ -31,7 +32,7 @@ Resolve common issues when deploying or using BYOK with the intelligent assistan
 
 ## Procedure
 
- Begin by retrieving and reviewing the chatbot container logs.
+Begin by retrieving and reviewing the chatbot container logs.
 
 For operator-based installations, run the following command to view the chatbot pod logs:
 
@@ -56,28 +57,28 @@ In the log output, look for the following entries:
 
 ### Procedure
 
-1.  Connect to the Lightspeed node through SSH:
+1. Connect to the Lightspeed node through SSH:
   
 
 ```
 ssh ansible@<lightspeed_node>
 ```
 
-2.  Pull the BYOK image from your registry:
+2. Pull the BYOK image from your registry:
   
 
 ```
 podman pull <your_registry>/<repository>/<image>:<label>
 ```
 
-3.  Verify that the image is available locally:
+3. Verify that the image is available locally:
   
 
 ```
 podman images | grep <your-byok-image-name>
 ```
 
-4.  Run the installer again.
+4. Run the installer again.
 
 ### The intelligent assistant does not return BYOK-enhanced responses after deployment
 
@@ -91,21 +92,21 @@ podman images | grep <your-byok-image-name>
 
 For containerized installations:
 
-1.  Restart the chatbot service:
+1. Restart the chatbot service:
   
 
 ```
 systemctl --user restart ansible-lightspeed-chatbot.service
 ```
 
-2.  Verify that the service has restarted:
+2. Verify that the service has restarted:
   
 
 ```
 systemctl --user status ansible-lightspeed-chatbot.service
 ```
 
-3.  Review the chatbot container logs to confirm that the BYOK image loaded:
+3. Review the chatbot container logs to confirm that the BYOK image loaded:
   
 
 ```
@@ -114,21 +115,21 @@ podman logs ansible-lightspeed-chatbot 2>&1 | grep -i "byok"
 
 For operator-based installations:
 
-4.  Roll out a restart of the chatbot deployment:
+4. Roll out a restart of the chatbot deployment:
   
 
 ```
 oc rollout restart deployment/<aap-instance>-lightspeed-chatbot-api -n <aap_namespace>
 ```
 
-5.  Wait for the rollout to complete. You can run the following command to check on the status:
+5. Wait for the rollout to complete. You can run the following command to check on the status:
   
 
 ```
 oc rollout status deployment/<aap-instance>-lightspeed-chatbot-api -n <aap_namespace>
 ```
 
-6.  Review the chatbot pod logs to confirm that the BYOK image loaded:
+6. Review the chatbot pod logs to confirm that the BYOK image loaded:
   
 
 ```

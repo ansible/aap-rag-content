@@ -11,11 +11,11 @@ Direct team access cannot be granted to Automation Content> (and then)Remote Reg
 
 ### Procedure
 
-1.  From the navigation panel, click the name of the resource that you want to give a team access to. For example, Automation Execution> (and then)Templates.
-2.  On the details page, select the **Team Access** tab.
-3.  Click Assign Teams.
-4.  Click the checkbox beside the team to assign that team access to your chosen resource and click Next.
-5.  Select the roles you want applied to the team for the chosen resource and click Next.
-6.  Review the settings and click Finish. The Assign Teams dialog displays indicating whether the role assignments were successfully applied.
-7.  You can remove resource access for a team by selecting the **Remove team** icon next to the team. This launches a confirmation dialog, asking you to confirm the removal.
+1. From the navigation panel, click the name of the resource that you want to give a team access to. For example, Automation Execution> (and then)Templates.
+2. On the details page, select the **Team Access** tab.
+3. Click Assign Teams.
+4. Click the checkbox beside the team to assign that team access to your chosen resource and click Next.
+5. Select the roles you want applied to the team for the chosen resource and click Next.
+6. Review the settings and click Finish. The Assign Teams dialog displays indicating whether the role assignments were successfully applied.
+7. You can remove resource access for a team by selecting the **Remove team** icon next to the team. This launches a confirmation dialog, asking you to confirm the removal.
 

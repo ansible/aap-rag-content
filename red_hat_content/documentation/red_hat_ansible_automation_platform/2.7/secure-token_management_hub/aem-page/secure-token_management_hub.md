@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-token_management_hub"
 template = "docs/aem-title.html"
 title = "Configure automation hub tokens - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-token_management_hub"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-token_management_hub/", "Configure automation hub tokens"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-token_management_hub/aem-page/secure-token_management_hub.html"
 last_crumb = "Configure automation hub tokens"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure automation hub tokens"
 oversized = "false"
@@ -49,11 +50,11 @@ Your offline token expires after 30 days of inactivity.
 
 ### Procedure
 
-1.  Navigate to [Ansible Automation Platform on the Red Hat Hybrid Cloud Console](https://console.redhat.com/ansible/automation-hub/token/).
-2.  From the navigation panel, select Automation Hub> (and then)Connect to Hub.
-3.  Under **Offline token**, click Load Token.
-4.  Click the Copy to clipboard icon to copy the offline token.
-5.  Paste the token into a file and store in a secure location.
+1. Navigate to [Ansible Automation Platform on the Red Hat Hybrid Cloud Console](https://console.redhat.com/ansible/automation-hub/token/).
+2. From the navigation panel, select Automation Hub> (and then)Connect to Hub.
+3. Under **Offline token**, click Load Token.
+4. Click the Copy to clipboard icon to copy the offline token.
+5. Paste the token into a file and store in a secure location.
 
 ### What to do next
 

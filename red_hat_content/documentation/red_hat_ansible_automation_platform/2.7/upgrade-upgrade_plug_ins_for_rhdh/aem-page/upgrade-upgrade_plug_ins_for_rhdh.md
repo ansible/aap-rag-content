@@ -1,7 +1,7 @@
 +++
+title = "Upgrade Ansible plug-ins for Red Hat Developer Hub - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-upgrade_plug_ins_for_rhdh"
 template = "docs/aem-title.html"
-title = "Upgrade Ansible plug-ins for Red Hat Developer Hub - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-upgrade_plug_ins_for_rhdh/", "Upgrade Ansible plug-ins for Red Hat Developer Hub"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/upgrade-upgrade_plug_ins_for_rhdh/aem-page/upgrade-upgrade_plug_ins_for_rhdh.html"
 last_crumb = "Upgrade Ansible plug-ins for Red Hat Developer Hub"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Upgrade Ansible plug-ins for Red Hat Developer Hub"
 oversized = "false"

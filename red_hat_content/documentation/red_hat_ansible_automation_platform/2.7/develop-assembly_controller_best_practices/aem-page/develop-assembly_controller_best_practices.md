@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_controller_best_practices/aem-page/develop-assembly_controller_best_practices.html"
 last_crumb = "Best practices for automation execution"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Best practices for automation execution"
 oversized = "false"
@@ -27,13 +28,16 @@ type = "aem-page"
 
 # Best practices for automation execution
 
-Adopt these best practices to help ensure scalable, maintainable, and highly efficient automation. This guidance focuses on using source control, dynamic inventories, and robust file structures within automation controller.
+Adopt these best practices to help ensure scalable, maintainable, and highly efficient automation.
+This guidance focuses on using source control, dynamic inventories, and robust file structures within automation controller.
 
 ## Use source control
 
-Automation controller supports playbooks stored directly on the server. Therefore, you must store your playbooks, roles, and any associated details in source control.
+Automation controller supports playbooks stored directly on the server.
+Therefore, you must store your playbooks, roles, and any associated details in source control.
 
-This way you have an audit trail describing when and why you changed the rules that are automating your infrastructure. Additionally, it permits sharing of playbooks with other parts of your infrastructure or team.
+This way you have an audit trail describing when and why you changed the rules that are automating your infrastructure.
+Additionally, it permits sharing of playbooks with other parts of your infrastructure or team.
 
 ## Ansible file and directory structure
 
@@ -65,7 +69,8 @@ Edits and additions to Inventory host variables persist beyond an inventory sync
 
 Variables associated with hosts and groups in an inventory can be managed in several ways in automation controller.
 
-Keep variable data with the hosts and groups definitions (see the inventory editor), rather than using `group_vars/` and `host_vars/`. If you use dynamic inventory sources, automation controller can synchronize such variables with the database while the **Overwrite Variables** option is not set.
+Keep variable data with the hosts and groups definitions (see the inventory editor), rather than using `group_vars/` and `host_vars/`.
+If you use dynamic inventory sources, automation controller can synchronize such variables with the database while the **Overwrite Variables** option is not set.
 
 ## Autoscale
 
@@ -79,8 +84,11 @@ Set "forks" on a job template to larger values to increase parallelism of execut
 
 Continuous Integration (CI) and Continuous Deployment (CD) are development practices that require developers to integrate code into a shared repository several times a day.
 
-Each integration can then be verified by an automated build and automated tests. CI/CD is a method to deliver applications to customers by introducing automation into the stages of app development.
+Each integration can then be verified by an automated build and automated tests.
+CI/CD is a method to deliver applications to customers by introducing automation into the stages of app development.
 
-The main concepts attributed to CI/CD are continuous integration, continuous delivery, and continuous deployment. Automation controller can be integrated with CI/CD systems to enable automated provisioning, configuration management, application deployment, and other IT tasks as part of the CI/CD pipeline.
+The main concepts attributed to CI/CD are continuous integration, continuous delivery, and continuous deployment.
+Automation controller can be integrated with CI/CD systems to enable automated provisioning, configuration management, application deployment, and other IT tasks as part of the CI/CD pipeline.
 
-For a Continuous Integration system, such as Jenkins, to create a job, it must make a `curl` request to a job template. The credentials to the job template must not require prompting for any particular passwords.
+For a Continuous Integration system, such as Jenkins, to create a job, it must make a `curl` request to a job template.
+The credentials to the job template must not require prompting for any particular passwords.

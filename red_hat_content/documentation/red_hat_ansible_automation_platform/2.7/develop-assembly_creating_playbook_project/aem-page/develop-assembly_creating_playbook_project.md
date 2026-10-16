@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
 title = "Auto-generate the structure and files for your automation project - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_creating_playbook_project"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_devtools_intro/", "Create, test, and deploy automation content with ansible-dev-tools"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_creating_playbook_project/aem-page/develop-assembly_creating_playbook_project.html"
 last_crumb = "Auto-generate the structure and files for your automation project"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Auto-generate the structure and files for your automation project"
 oversized = "false"
@@ -41,13 +42,13 @@ The following steps describe the process for scaffolding a new playbook project 
 
 ### Procedure
 
-1.  Open VS Code.
-2.  Click the Ansible icon in the VS Code activity bar to open the Ansible extension.
-3.  Select **Get started** in the **Ansible content creator** section. The **Ansible content creator** tab opens.
+1. Open VS Code.
+2. Click the Ansible icon in the VS Code activity bar to open the Ansible extension.
+3. Select **Get started** in the **Ansible content creator** section. The **Ansible content creator** tab opens.
 
-4.  In the **Create** section, click **Ansible playbook project**. The **Create Ansible project** tab opens.
+4. In the **Create** section, click **Ansible playbook project**. The **Create Ansible project** tab opens.
 
-5.  In the form in the **Create Ansible project** tab, enter the following:
+5. In the form in the **Create Ansible project** tab, enter the following:
 
   - **Destination directory**: Enter the path to the directory where you want to scaffold your new playbook project. Note:
             If you enter an existing directory name, the scaffolding process overwrites the contents of that directory. The scaffold process only allows you to use an existing directory if you enable the `Force` option.
@@ -57,7 +58,7 @@ The following steps describe the process for scaffolding a new playbook project 
 
   - **SCM organization and SCM project**: Enter a name for the directory and subdirectory where you can store roles that you create for your playbooks.
 
-6.  Enter a name for the directory where you want to scaffold your new playbook project.
+6. Enter a name for the directory where you want to scaffold your new playbook project.
 
 ### Results
 

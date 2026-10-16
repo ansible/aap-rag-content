@@ -13,11 +13,11 @@ To test the credential to test for functionally and operation, use the following
 
 ### Procedure
 
-1.  Before clicking on **Create Credential**, click Test.
-2.  In the pop-up box, enter the **Path to Secret** and the **Key Name**.  Note:
+1. Before clicking on **Create Credential**, click Test.
+2. In the pop-up box, enter the **Path to Secret** and the **Key Name**. Note:
 The **Path to Secret** will be prefixed by `kv` if storing a key-value pair, for example, `kv/key_name`.
 
-3.  Click Run.
-4.  When the test is successful, click Create Credential.
-5.  When complete, Ansible Automation Platform is properly configured to use HashiCorp Vault as an external secret source.
+3. Click Run.
+4. When the test is successful, click Create Credential.
+5. When complete, Ansible Automation Platform is properly configured to use HashiCorp Vault as an external secret source.
 

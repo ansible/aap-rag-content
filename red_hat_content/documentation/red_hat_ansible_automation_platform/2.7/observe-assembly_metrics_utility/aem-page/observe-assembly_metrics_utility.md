@@ -1,7 +1,7 @@
 +++
-title = "Generate consumption-based billing reports with the metrics-utility - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_metrics_utility"
 template = "docs/aem-title.html"
+title = "Generate consumption-based billing reports with the metrics-utility - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_metrics_utility/", "Generate consumption-based billing reports with the metrics-utility"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/observe-assembly_metrics_utility/aem-page/observe-assembly_metrics_utility.html"
 last_crumb = "Generate consumption-based billing reports with the metrics-utility"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Generate consumption-based billing reports with the metrics-utility"
 oversized = "false"
@@ -29,7 +30,8 @@ type = "aem-page"
 
 The Ansible Automation Platform metrics utility tool (`metrics-utility`) is a command-line utility that is installed on a system containing an instance of automation controller.
 
-When installed and configured, `metrics-utility` gathers billing-related metrics from your system and creates a consumption-based billing report. The `metrics-utility` tool is especially suited for users who have multiple managed hosts and want to use consumption-based billing. After a report is generated, it is deposited in a target location that you specify in the configuration file.
+When installed and configured, `metrics-utility` gathers billing-related metrics from your system and creates a consumption-based billing report. The `metrics-utility` tool is especially suited for users who have multiple managed hosts and want to use consumption-based billing.
+After a report is generated, it is deposited in a target location that you specify in the configuration file.
 
 `metrics-utility` collects two types of data from your system: configuration data and reporting data.
 

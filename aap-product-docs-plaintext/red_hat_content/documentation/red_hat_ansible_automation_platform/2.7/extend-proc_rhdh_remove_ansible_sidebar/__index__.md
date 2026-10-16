@@ -10,8 +10,8 @@ The `/ansible` route remains accessible by URL. Only the sidebar navigation item
 
 ## Procedure
 
-1.  In your dynamic plug-ins configuration, locate the `ansible.plugin-backstage-rhaap` frontend plug-in entry.
-2.  Remove the `menuItem` block from the `dynamicRoutes` section.
+1. In your dynamic plug-ins configuration, locate the `ansible.plugin-backstage-rhaap` frontend plug-in entry.
+2. Remove the `menuItem` block from the `dynamicRoutes` section.
 **Before (sidebar item enabled):**
 
 ```yaml
@@ -45,4 +45,4 @@ dynamicRoutes:
 path: /ansible
 ```
 
-3.  Apply the changes. For Helm deployments, click **Upgrade**. For Operator deployments, the deployment auto-reloads when the ConfigMap is updated.
+3. Apply the changes. For Helm deployments, click **Upgrade**. For Operator deployments, the deployment auto-reloads when the ConfigMap is updated.

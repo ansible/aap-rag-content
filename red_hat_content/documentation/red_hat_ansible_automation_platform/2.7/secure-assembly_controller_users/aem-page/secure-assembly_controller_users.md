@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_users/aem-page/secure-assembly_controller_users.html"
 last_crumb = "View, create, or assign roles to users"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "View, create, or assign roles to users"
 oversized = "false"
@@ -29,7 +30,7 @@ type = "aem-page"
 
 A user is an individual or entity that can log in to the platform and perform tasks. Users are fundamental units to which roles can be assigned, either directly by an administrator or indirectly through a team.
 
- Warning:
+Warning:
 
 Ansible Automation Platform automatically creates a default system administrator user so they can log in and set up Ansible Automation Platformfor their organization. Do not delete this user.
 
@@ -49,10 +50,10 @@ When user accounts have been migrated to Ansible Automation Platform 2.6 during 
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Users.
-2.  In the **Search** bar, enter an appropriate keyword for the user you want to search for and click the arrow icon.
-3.  From the menu bar, you can sort the list of users by using the arrows for **Username**, **Email**, **First name**, **Last name** or **Last login** to toggle your sorting preference.
-4.  You can view user details by selecting a **Username** from the **Users** list view.
+1. From the navigation panel, select Access Management> (and then)Users.
+2. In the **Search** bar, enter an appropriate keyword for the user you want to search for and click the arrow icon.
+3. From the menu bar, you can sort the list of users by using the arrows for **Username**, **Email**, **First name**, **Last name** or **Last login** to toggle your sorting preference.
+4. You can view user details by selecting a **Username** from the **Users** list view.
 
 ## Create a user
 
@@ -71,16 +72,16 @@ Auditors have read-only capability for all objects within the environment.
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Users.
-2.  Click Create user.
-3.  Enter the details about your new user in the fields on the **Create user** page. Fields marked with an asterisk (*) are required.
-4.  Normal users are the default when no **User type** is specified. To define a user as an administrator or auditor, select a **User type** from the drop-down menu.  Note:
+1. From the navigation panel, select Access Management> (and then)Users.
+2. Click Create user.
+3. Enter the details about your new user in the fields on the **Create user** page. Fields marked with an asterisk (*) are required.
+4. Normal users are the default when no **User type** is specified. To define a user as an administrator or auditor, select a **User type** from the drop-down menu. Note:
       If you are modifying your own password, log out and log back in for the change to take effect.
 
-5.  Select the **Organization** to be assigned for this user. For information about creating a new organization, see [Creating an organization](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_create_organization#proc-controller-create-organization "Ansible Automation Platform automatically creates a default organization. If you have a self-support level license, you have only the default organization available and cannot delete it.").
-6.  Click Create user. When the user is successfully created, the **User** details screen opens. From here, you can review and change the user’s teams, roles, tokens and other membership details.
+5. Select the **Organization** to be assigned for this user. For information about creating a new organization, see [Creating an organization](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_create_organization#proc-controller-create-organization "Ansible Automation Platform automatically creates a default organization. If you have a self-support level license, you have only the default organization available and cannot delete it.").
+6. Click Create user. When the user is successfully created, the **User** details screen opens. From here, you can review and change the user’s teams, roles, tokens and other membership details.
 
-   Note:
+  Note:
       If the user is not newly-created, the details screen displays the user’s last login activity.
 
 ### What to do next
@@ -95,16 +96,16 @@ You can change user account properties after creation, including password, user 
 
 To see whether a user had service level auditor privileges, you must refer to the API.
 
- Note:
+Note:
 
 After upgrading to 2.6, users previously designated as automation controller administrators are labeled as platform administrators in the **User type** column in the [Users list view](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_users#proc-gw-users-list-view "The Users page displays the existing users for your installation. From here, you can search for a specific user, filter the list of users, or change the sort order for the list."). Automation hub administrators are labeled as **Normal** in the **User Type** column.
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Users.
-2.  Click the **Pencil**![Edit page](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png) icon next to the user you want to edit and select **Edit user**.
-3.  The **Edit** user page is displayed where you can change user details such as **Password**, **Email**, **User type**, and **Organization**.
-4.  After your changes are complete, click **Save user**.
+1. From the navigation panel, select Access Management> (and then)Users.
+2. Click the **Pencil**![Edit page](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png) icon next to the user you want to edit and select **Edit user**.
+3. The **Edit** user page is displayed where you can change user details such as **Password**, **Email**, **User type**, and **Organization**.
+4. After your changes are complete, click **Save user**.
 
 ## Create a platform gateway account for an existing user
 
@@ -117,16 +118,16 @@ By creating platform gateway accounts for existing users, you ensure they can co
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Users.
-2.  Click Create user.
-3.  Enter the following user information:
+1. From the navigation panel, select Access Management> (and then)Users.
+2. Click Create user.
+3. Enter the following user information:
 
   - **Username**: Enter the username that matches the automation controller username.
   - **Email**: Enter the user's email address.
   - **Password**: Set an initial password for the user.
 
-4.  Click Create user.
-5.  Notify the user of the new gateway credentials using your organization's secure communication method.
+4. Click Create user.
+5. Notify the user of the new gateway credentials using your organization's secure communication method.
 
 ### Results
 
@@ -142,11 +143,11 @@ As a platform administrator, you can reset local user passwords in platform gate
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Users.
-2.  Click the Edit icon next to the user you want to edit and select Edit user.
-3.  In the **Password** field, enter a new password.
-4.  Click Save user.
-5.  Securely notify the user of the new password.
+1. From the navigation panel, select Access Management> (and then)Users.
+2. Click the Edit icon next to the user you want to edit and select Edit user.
+3. In the **Password** field, enter a new password.
+4. Click Save user.
+5. Securely notify the user of the new password.
 
 ### Results
 
@@ -158,9 +159,9 @@ Before you can delete a user, you must have normal user or system administrator 
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Users.
-2.  To delete a single user, select the More Actions**⋮** icon next to the user you want to remove and select **Delete user**.
-3.  To bulk delete users, select the checkbox next to each user you want to remove, and then from the More Actions**⋮** list, click **Delete users**.
+1. From the navigation panel, select Access Management> (and then)Users.
+2. To delete a single user, select the More Actions**⋮** icon next to the user you want to remove and select **Delete user**.
+3. To bulk delete users, select the checkbox next to each user you want to remove, and then from the More Actions**⋮** list, click **Delete users**.
 
 ## Assign roles to a user
 
@@ -172,7 +173,7 @@ You can view and manage roles that were assigned directly to a user by an admini
 
 You can view roles that a user inherited from a team assignment in the **View indirectly assigned roles** link in the page banner. You cannot directly manage an indirectly-assigned role. You can only manage indirectly-assigned roles by [editing the team’s role assignments](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_teams#proc-controller-user-permissions "You can grant a team granular access to specific resources such as inventories, projects, and job templates by assigning the team roles associated with those particular resources. You can also set permissions at the level of the organization from the Organizations view."), or by [removing the user from the team](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_teams#proc-gw-team-remove-user "You can remove a user from a team from the Team list view.").
 
- Note:
+Note:
 
 Users cannot be assigned to an organization through role assignment, nor can you assign users organization roles from this screen. Refer to the steps provided in [Adding a user to an organization](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_controller_access_organizations#proc-controller-add-organization-user "You can give a user with access to an organization, and therefore the resources within the organization, by assigning them to the organization and managing the organization roles associated with the user.") for detailed instructions on assigning a user to an organization.
 
@@ -186,18 +187,18 @@ When assigning roles, ensure that you are selecting the required resource in the
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Users.
-2.  From the **Users** list view, click the user to which you want to add roles.
-3.  Select the **Roles** tab to display the set of roles assigned to this user. These provide the ability to read, change, and administer resources.
-4.  To add new roles, click Add roles.  Note:
+1. From the navigation panel, select Access Management> (and then)Users.
+2. From the **Users** list view, click the user to which you want to add roles.
+3. Select the **Roles** tab to display the set of roles assigned to this user. These provide the ability to read, change, and administer resources.
+4. To add new roles, click Add roles. Note:
       Ensure that you are selecting the desired role within the correct component context, because resources like projects and credentials can be associated with both Automation Execution (automation controller) and Automation Decisions (Event-Driven Ansible).
 
-5.  Select a Resource type and click Next.
-6.  Select the resources that you want to give role-based access to and click Next.
-7.  Select the roles that will be applied to the resources and click Next.  Tip:
+5. Select a Resource type and click Next.
+6. Select the resources that you want to give role-based access to and click Next.
+7. Select the roles that will be applied to the resources and click Next. Tip:
       If you are selecting more than one role, consider [creating a custom role](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_roles#proc-gw-create-roles "Ansible Automation Platform services provide a set of predefined roles with permissions enough for standard automation tasks. It is also possible to configure custom roles that define access permissions to a resource.") that includes all the permissions for this resource type so you can give your users the appropriate level of access.
 
-8.  Review the settings and click Finish. The **Add roles** dialog displays indicating whether the role assignments were successfully applied. Click Close to close the dialog.
+8. Review the settings and click Finish. The **Add roles** dialog displays indicating whether the role assignments were successfully applied. Click Close to close the dialog.
 
 ## Remove roles from a user
 
@@ -205,10 +206,10 @@ You can remove a user’s roles by editing the user information in the **Roles**
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Users.
-2.  Select the user name whose role access you want to remove.
-3.  Select the **Roles** tab.  Note:
+1. From the navigation panel, select Access Management> (and then)Users.
+2. Select the user name whose role access you want to remove.
+3. Select the **Roles** tab. Note:
       Ensure that you are selecting the desired role within the correct component context, because resources like projects and credentials can be associated with both Automation Execution (automation controller) and Automation Decisions (Event-Driven Ansible).
 
-4.  To remove a single role, click the **-** icon next to the role and confirm removal on the dialog that is displayed.
-5.  To remove multiple roles, select the checkbox next to each role you want to remove and click **Remove selected roles** from the **More actions ⋮** list on the menu bar. On the dialog that is displayed, confirm removal of the selected roles and click Remove role.
+4. To remove a single role, click the **-** icon next to the role and confirm removal on the dialog that is displayed.
+5. To remove multiple roles, select the checkbox next to each role you want to remove and click **Remove selected roles** from the **More actions ⋮** list on the menu bar. On the dialog that is displayed, confirm removal of the selected roles and click Remove role.

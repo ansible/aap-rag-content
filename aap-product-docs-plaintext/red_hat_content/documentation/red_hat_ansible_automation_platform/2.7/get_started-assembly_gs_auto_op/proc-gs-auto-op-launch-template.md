@@ -5,9 +5,9 @@ Ansible Automation Platform provides push-button deployment with job templates. 
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Templates.
-2.  Select a template to view its details. A default job template is created during your initial setup to help you get started, but you can also create your own.
-3.  From the **Templates** page, click the launch icon to run your job template.
+1. From the navigation panel, select Automation Execution> (and then)Templates.
+2. Select a template to view its details. A default job template is created during your initial setup to help you get started, but you can also create your own.
+3. From the **Templates** page, click the launch icon to run your job template.
 
 ### Results
 

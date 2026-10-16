@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_install_metrics_service_with_containerized_installer"
 title = "Install metrics service with containerized installer - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_understand_metrics_service_architecture/", "Understand metrics service architecture"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-task_install_metrics_service_with_containerized_installer/aem-page/install-task_install_metrics_service_with_containerized_installer.html"
 last_crumb = "Install metrics service with containerized installer"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Install metrics service with containerized installer"
 oversized = "false"
@@ -47,13 +48,13 @@ This procedure configures metrics service during the initial containerized insta
 
 ## Procedure
 
-1.  Define metrics service inventory group
+1. Define metrics service inventory group
       Edit the inventory file and add the `[automationmetrics]` group:
 
   Note:
       Metrics service is NOT required to be co-located with automation controller. Place it on any node based on your deployment topology.
 
-2.  Run the containerized installer
+2. Run the containerized installer
   
 
 ```
@@ -74,7 +75,7 @@ ansible-playbook -i inventory install.yml
   5. **Systemd integration:** Generates three user-scope systemd units: `automation-metrics-web.service`, `automation-metrics-tasks.service`, `automation-metrics-scheduler.service`
   6. **Firewall configuration:** Opens ports 8087/tcp (HTTP) and 8450/tcp (HTTPS)
 
-3.  Verify installation
+3. Verify installation
   
 
 ```
@@ -116,6 +117,6 @@ Metrics service is successfully installed when:
 After installation, metrics service automatically:
 
 - Begins collecting usage data from automation controller database
-- Anonymizes data. Any private object names are marked as Custom.
+- Anonymizes data. Any private object names are marked as *Custom*. When indirect node collection is enabled, indirect node counts grouped by Ansible collection and module are included in the anonymized payload. Host names are stripped entirely from the payload.
 - Transmits anonymized data to Red Hat Data Ingress via Gateway /api/metrics/ endpoint
 - Provides health monitoring at http://localhost:8087/health/ (via nginx)

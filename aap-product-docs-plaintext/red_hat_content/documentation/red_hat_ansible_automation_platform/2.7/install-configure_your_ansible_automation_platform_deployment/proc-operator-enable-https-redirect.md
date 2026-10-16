@@ -11,12 +11,12 @@ HTTPS redirect for SAML, allows you to log in once and access all of the platfor
 
 ### Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  Go to Operators> (and then)Installed Operators.
-3.  Select your Ansible Automation Platform Operator deployment.
-4.  Select **All Instances** and go to your **AnsibleAutomationPlatform** instance.
-5.  Click the ⋮ icon and then select Edit AnsibleAutomationPlatform.
-6.  In the **YAML view** paste the following YAML code under the `spec:` section:
+1. Log in to Red Hat OpenShift Container Platform.
+2. Go to Operators> (and then)Installed Operators.
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select **All Instances** and go to your **AnsibleAutomationPlatform** instance.
+5. Click the ⋮ icon and then select Edit AnsibleAutomationPlatform.
+6. In the **YAML view** paste the following YAML code under the `spec:` section:
 
 
 ```
@@ -26,7 +26,7 @@ extra_settings:
 value: '"True"'
 ```
 
-7.  Click Save.
+7. Click Save.
 
 ### Results
 

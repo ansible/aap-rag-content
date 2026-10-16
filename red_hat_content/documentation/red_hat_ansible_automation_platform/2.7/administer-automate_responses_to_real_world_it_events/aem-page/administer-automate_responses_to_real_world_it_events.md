@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-automate_responses_to_real_world_it_events"
 title = "Automate actions by routing external event streams: User scenarios - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-automate_responses_to_real_world_it_events"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-automate_responses_to_real_world_it_events/", "Automate actions by routing external event streams: User scenarios"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-automate_responses_to_real_world_it_events/aem-page/administer-automate_responses_to_real_world_it_events.html"
 last_crumb = "Automate actions by routing external event streams: User scenarios"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Automate actions by routing external event streams: User scenarios"
 oversized = "false"
@@ -95,10 +96,10 @@ Creating a GitHub event stream credential establishes the necessary authenticati
 
 #### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  Select Automation Decisions> (and then)Infrastructure> (and then)Credentials.
-3.  Click Create credential.
-4.  Insert the following:
+1. Log in to Ansible Automation Platform.
+2. Select Automation Decisions> (and then)Infrastructure> (and then)Credentials.
+3. Click Create credential.
+4. Insert the following:
   
 
 Name
@@ -116,7 +117,7 @@ From the list, select GitHub Event Stream.
 Type Details / HMAC Secret
 Enter a secret value and store for future use when you [configure a GitHub webhook](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_simplified_event_routing#eda-config-remote-sys-to-events "After you have created your event stream, you must configure your remote system to send events to Event-Driven Ansible controller. The method used for this configuration varies, depending on the vendor for the event stream credential type you select.").
 
-5.  Click Create credential to save your credential.
+5. Click Create credential to save your credential.
 
 ### Create a GitHub event stream
 
@@ -124,9 +125,9 @@ Creating an event stream and linking it to a pre-configured credential generates
 
 #### Procedure
 
-1.  From the Ansible Automation Platform navigation, click Automation Decisions> (and then)Event Streams
-2.  Click Create event stream.
-3.  Insert the following:
+1. From the Ansible Automation Platform navigation, click Automation Decisions> (and then)Event Streams
+2. Click Create event stream.
+3. Insert the following:
   
 
 Name
@@ -141,12 +142,12 @@ This URL is created for the event stream. Copy it and save for use in the webhoo
 Forward events to rulebook activations
 Toggle this button to disable your event stream for now. Disabling this option allows you to test the allows you to configure your webhook in GitHub first and test the connection with your remote system.
 
-4.  Click Create event stream.
+4. Click Create event stream.
   
   Note:
   Your new event stream is displayed with a banner (warning) “This event stream is disabled.” This ensures that events will not be forwarded to rulebook activations causing rules and conditions to be triggered inadvertently while you are in test mode.
 
-5.  View the Details page of your new event stream, click Copy, and paste the URL to use when you configure your webhook.
+5. View the Details page of your new event stream, click Copy, and paste the URL to use when you configure your webhook.
 
 ### Configure your remote system to send events through GitHub webhooks
 
@@ -154,12 +155,12 @@ Configuring a GitHub webhook establishes the outbound connection from your repos
 
 #### Procedure
 
-1.  Go to your GitHub account to configure your event source.
-2.  In the top right of the GitHub page, clickYour profile name> (and then)Your repositories and select the repository you want to configure.
-3.  Navigate to Settings in the tool bar.
-4.  In the left navigation, select Webhooks.
-5.  On the top right, click Add webhook to create a webhook in your GitHub repository that will send events to your event stream.
-6.  Complete the following fields:
+1. Go to your GitHub account to configure your event source.
+2. In the top right of the GitHub page, clickYour profile name> (and then)Your repositories and select the repository you want to configure.
+3. Navigate to Settings in the tool bar.
+4. In the left navigation, select Webhooks.
+5. On the top right, click Add webhook to create a webhook in your GitHub repository that will send events to your event stream.
+6. Complete the following fields:
   
 
 Payload URL
@@ -174,7 +175,7 @@ Add your secret from your event stream credential you created earlier.
 SSL verification
 If you’re using self-signed SSL certificates, select Disable under SSL verification to ensure a successful webhook connection. Otherwise, you can keep the Enable SSL verification toggled on.
 
-7.  Click Add webhook to save your configuration.
+7. Click Add webhook to save your configuration.
 
 #### Results
 
@@ -186,13 +187,13 @@ Verifying the event stream connection confirms that the Red Hat Ansible Automati
 
 #### Procedure
 
-1.  From the navigation panel in Ansible Automation Platform, select Automation Decisions> (and then)Event Streams.
-2.  Select the event stream you created (for example, `<_Your_Event_Stream_Name_>`.
-3.  Toggle the Forward events to rulebook activation option in the top right to disable event forwarding. The Disable forwarding of events message is displayed.
-4.  In the Disable forwarding of events message window, click the Yes, I confirm I want to disable the forwarding of events checkbox.
-5.  Click Disable forwarding of events. A banner is displayed notifying you that events will not be forwarded to the rulebook activation where they are configured.
-6.  Verify that you received the most recent event and its associated payload.
-7.  In the Repo Event Stream that you just created, re-enable the event-forwarding capability by toggling the Forward events to rulebook activation option on.
+1. From the navigation panel in Ansible Automation Platform, select Automation Decisions> (and then)Event Streams.
+2. Select the event stream you created (for example, `<_Your_Event_Stream_Name_>`.
+3. Toggle the Forward events to rulebook activation option in the top right to disable event forwarding. The Disable forwarding of events message is displayed.
+4. In the Disable forwarding of events message window, click the Yes, I confirm I want to disable the forwarding of events checkbox.
+5. Click Disable forwarding of events. A banner is displayed notifying you that events will not be forwarded to the rulebook activation where they are configured.
+6. Verify that you received the most recent event and its associated payload.
+7. In the Repo Event Stream that you just created, re-enable the event-forwarding capability by toggling the Forward events to rulebook activation option on.
 
 ### Replace sources and attach GitHub event streams to activations
 
@@ -204,25 +205,25 @@ Ensure that your projects have been set up properly. For more information, see [
 
 #### Procedure
 
-1.  From the Ansible Automation Platform navigation panel, select Automation Decisions> (and then)Rulebook Activations.
-2.  Click Create rulebook activation to create a rulebook for events on an application repository for Linux servers.
-3.  In the Name field, enter the name of your rulebook (for example, `<_Your_rulebook_activation_>`).
-4.  For your Organization, select Default from the list.
-5.  From the Project list, select the project with access to your rulebooks.
-6.  In the Rulebook field, select the )rulebook associated with your project (for example, `<_Your-rulebook.yml_>`).
-7.  In the Event streams field, click the gear icon to select which event stream the rulebook needs to subscribe to. The Event streams window is displayed.
-8.  In the required Rulebook source field, replace an `ansible.builtin.webhook` or compatible custom source with the desired event stream. This modifies the activation only, while leaving your filters intact.
-9.  Select <_Your_event_stream_> from the list of event streams that you created.
-10.  Click Save to save your event stream.
-11.  Next to the Credential field, click the Search icon to access automation controller and connect with job templates and workflows. The **Select credential** message is displayed.
-12.  Select the Red Hat AAP credential and click Confirm.
-13.  Select the appropriate Decision Environment from the list.
-14.  Click Create rulebook activation. The activation status is displayed (if successful, the Running status displays).
-15.  Repeat the following steps to create an additional rulebook activation using the same process as your first activation:
-  1.  In the Event streams field, click the gear icon to select which event stream the rulebook needs to subscribe to.
-  2.  Select the Repo Event Stream from the list of event streams that you created.
-  3.  Click Save to save your event stream.
-  4.  Click Create rulebook activation to save the configuration and start the rulebook.
+1. From the Ansible Automation Platform navigation panel, select Automation Decisions> (and then)Rulebook Activations.
+2. Click Create rulebook activation to create a rulebook for events on an application repository for Linux servers.
+3. In the Name field, enter the name of your rulebook (for example, `<_Your_rulebook_activation_>`).
+4. For your Organization, select Default from the list.
+5. From the Project list, select the project with access to your rulebooks.
+6. In the Rulebook field, select the )rulebook associated with your project (for example, `<_Your-rulebook.yml_>`).
+7. In the Event streams field, click the gear icon to select which event stream the rulebook needs to subscribe to. The Event streams window is displayed.
+8. In the required Rulebook source field, replace an `ansible.builtin.webhook` or compatible custom source with the desired event stream. This modifies the activation only, while leaving your filters intact.
+9. Select <_Your_event_stream_> from the list of event streams that you created.
+10. Click Save to save your event stream.
+11. Next to the Credential field, click the Search icon to access automation controller and connect with job templates and workflows. The **Select credential** message is displayed.
+12. Select the Red Hat AAP credential and click Confirm.
+13. Select the appropriate Decision Environment from the list.
+14. Click Create rulebook activation. The activation status is displayed (if successful, the Running status displays).
+15. Repeat the following steps to create an additional rulebook activation using the same process as your first activation:
+  1. In the Event streams field, click the gear icon to select which event stream the rulebook needs to subscribe to.
+  2. Select the Repo Event Stream from the list of event streams that you created.
+  3. Click Save to save your event stream.
+  4. Click Create rulebook activation to save the configuration and start the rulebook.
 
 #### Results
 
@@ -234,12 +235,12 @@ Resending webhook data allows for efficient testing of new event routing configu
 
 #### Procedure
 
-1.  Go back to the GitHub Webhook / Manage webhook page.
-2.  Click the Recent Deliveries tab.
-3.  Click the ellipsis.
-4.  Click Redeliver. A Redeliver payload window is displayed with a delivery message.
-5.  Click Yes, redeliver this payload.
-6.  Return to the Ansible Automation Platform to check your rule audit.
+1. Go back to the GitHub Webhook / Manage webhook page.
+2. Click the Recent Deliveries tab.
+3. Click the ellipsis.
+4. Click Redeliver. A Redeliver payload window is displayed with a delivery message.
+5. Click Yes, redeliver this payload.
+6. Return to the Ansible Automation Platform to check your rule audit.
 
 ### Check the Rule Audit for events on your new event stream
 
@@ -247,11 +248,11 @@ Checking the Rule Audit provides a detailed record of events associated with a s
 
 #### Procedure
 
-1.  From the Ansible Automation Platform navigation panel, select Automation Decisions> (and then)Rule Audit  to see the event and actions.
-2.  Select the name of the event in the list that is associated with the rulebook activation you created. The Details tab is displayed.
-3.  Click the Events tab to view the event details.
-4.  Click the Actions tab to see what action took place.
-5.  If desired, click the Name of the action and view the Details tab to check the status.
+1. From the Ansible Automation Platform navigation panel, select Automation Decisions> (and then)Rule Audit  to see the event and actions.
+2. Select the name of the event in the list that is associated with the rulebook activation you created. The Details tab is displayed.
+3. Click the Events tab to view the event details.
+4. Click the Actions tab to see what action took place.
+5. If desired, click the Name of the action and view the Details tab to check the status.
 
 #### Results
 

@@ -9,7 +9,7 @@ You can review Ansible inventories with the automation content navigator text-ba
 
 ### Procedure
 
-1.  Start automation content navigator.
+1. Start automation content navigator.
 
 ```
 $ ansible-navigator
@@ -17,7 +17,7 @@ $ ansible-navigator
 
 Optional: type `ansible-navigator inventory -i simple_inventory.yml` from the command line to view the inventory.
 
-2.  Review the inventory.
+2. Review the inventory.
 
 ```
 :inventory -i simple_inventory.yml
@@ -27,7 +27,7 @@ TITLE            DESCRIPTION
 1│Browse hosts     Explore the inventory with a list of all hosts
 ```
 
-3.  Type `0` to brows the groups.
+3. Type `0` to brows the groups.
 
 ```
 NAME               TAXONOMY                      TYPE
@@ -38,7 +38,7 @@ NAME               TAXONOMY                      TYPE
 
 The `TAXONOMY` field details the hierarchy of groups the selected group or node belongs to.
 
-4.  Type the number corresponding to the group you want to delve into.
+4. Type the number corresponding to the group you want to delve into.
 
 ```
 NAME              TAXONOMY                        TYPE
@@ -47,7 +47,7 @@ NAME              TAXONOMY                        TYPE
 2│node-2            all▸nodes                       host
 ```
 
-5.  Type the number corresponding to the host you want to delve into, or type `:<number>` for numbers greater than 9.
+5. Type the number corresponding to the host you want to delve into, or type `:<number>` for numbers greater than 9.
 
 ```
 [node-1]

@@ -1,6 +1,6 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-resource_operator_custom_resources"
 title = "Resource Operator custom resources - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-resource_operator_custom_resources"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/reference-resource_operator_custom_resources/aem-page/reference-resource_operator_custom_resources.html"
 last_crumb = "Resource Operator custom resources"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Resource Operator custom resources"
 oversized = "false"
@@ -59,12 +60,12 @@ Launches a job or workflow job template on the automation controller instance sp
 | Field                    | Type    | Description                                                                                              | Default |
 | ------------------------ | ------- | -------------------------------------------------------------------------------------------------------- | ------- |
 | `connection_secret`      | String  | Name of the Kubernetes secret containing the platform gateway connection details. Required.              | -       |
-| `job_template_name`      | String  | Name of the job template to launch. Specify either this or `workflow_template_name`.                     | -       |
-| `workflow_template_name` | String  | Name of the workflow job template to launch. Specify either this or `job_template_name`.                 | -       |
+| `job_template_name`      | String  | Name of the job template to launch. Specify either this or`workflow_template_name`.                      | -       |
+| `workflow_template_name` | String  | Name of the workflow job template to launch. Specify either this or`job_template_name`.                  | -       |
 | `inventory`              | String  | Name of the inventory to use. Prompt on launch must be enabled on the template.                          | -       |
 | `extra_vars`             | Object  | Extra variables to pass to the job as key-value pairs. Prompt on launch must be enabled on the template. | -       |
-| `job_tags`               | String  | Comma-separated list of tags to run, for example `"provision,install,configuration"`.                    | -       |
-| `skip_tags`              | String  | Comma-separated list of tags to skip, for example `"configuration,restart"`.                             | -       |
+| `job_tags`               | String  | Comma-separated list of tags to run, for example`"provision,install,configuration"`.                     | -       |
+| `skip_tags`              | String  | Comma-separated list of tags to skip, for example`"configuration,restart"`.                              | -       |
 | `runner_image`           | String  | Container image for the runner pod.                                                                      | -       |
 | `runner_version`         | String  | Version of the runner image to use.                                                                      | -       |
 | `job_ttl`                | Integer | Time to live in seconds for the job resource after completion.                                           | -       |
@@ -122,10 +123,10 @@ Creates a project (a logical collection of Ansible playbooks) on the automation 
 | `repo`               | String | URL of the source control repository.                                                       | -              |
 | `branch`             | String | Branch of the source control repository to use.                                             | -              |
 | `name`               | String | Display name for the project in the automation controller.                                  | -              |
-| `scm_type`           | String | Source control type, for example `git`.                                                     | -              |
+| `scm_type`           | String | Source control type, for example`git`.                                                      | -              |
 | `organization`       | String | Organization the project belongs to.                                                        | -              |
 | `description`        | String | Description of the project.                                                                 | -              |
-| `runner_pull_policy` | String | Image pull policy for the runner pod. Options: `Always`, `Never`, `IfNotPresent`.           | `IfNotPresent` |
+| `runner_pull_policy` | String | Image pull policy for the runner pod. Options:`Always`,`Never`,`IfNotPresent`.              | `IfNotPresent` |
 
 **Example:**
 
@@ -153,7 +154,7 @@ Creates an inventory on the automation controller.
 | `name`              | String | Display name for the inventory.                                                                         | -         |
 | `description`       | String | Description of the inventory.                                                                           | -         |
 | `organization`      | String | Organization the inventory belongs to.                                                                  | -         |
-| `state`             | String | Desired state of the inventory. Options: `present`, `absent`.                                           | `present` |
+| `state`             | String | Desired state of the inventory. Options:`present`,`absent`.                                             | `present` |
 | `instance_groups`   | Array  | List of instance groups to associate with the inventory.                                                | -         |
 | `variables`         | Object | Inventory variables as key-value pairs. Supports strings, booleans, numbers, lists, and nested objects. | -         |
 
@@ -184,7 +185,7 @@ Creates a credential on the automation controller for authenticating with extern
 | `name`               | String | Display name for the credential.                                                            | -              |
 | `organization`       | String | Organization the credential belongs to.                                                     | -              |
 | `description`        | String | Description of the credential.                                                              | -              |
-| `type`               | String | Credential type, for example `Machine`, `Amazon Web Services`.                              | -              |
+| `type`               | String | Credential type, for example`Machine`,`Amazon Web Services`.                                | -              |
 | `ssh_username`       | String | SSH username for Machine type credentials.                                                  | -              |
 | `ssh_secret`         | String | Name of a Kubernetes secret containing the SSH private key for Machine type credentials.    | -              |
 | `username_secret`    | String | Name of a Kubernetes secret containing the username for cloud credentials.                  | -              |
@@ -211,13 +212,13 @@ spec:
 
 Creates a schedule on the automation controller to run a job template at specified intervals.
 
-| Field                  | Type   | Description                                                                                                                                  | Default        |
-| ---------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
-| `connection_secret`    | String | Name of the Kubernetes secret containing the platform gateway connection details. Required.                                                  | -              |
-| `name`                 | String | Display name for the schedule.                                                                                                               | -              |
-| `rrule`                | String | Recurrence rule in iCalendar RRULE format defining the schedule, for example `DTSTART:20210101T000000Z RRULE:FREQ=DAILY;INTERVAL=1;COUNT=1`. | -              |
-| `unified_job_template` | String | Name of the job template or workflow to schedule.                                                                                            | -              |
-| `runner_pull_policy`   | String | Image pull policy for the runner pod.                                                                                                        | `IfNotPresent` |
+| Field                  | Type   | Description                                                                                                                                 | Default        |
+| ---------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| `connection_secret`    | String | Name of the Kubernetes secret containing the platform gateway connection details. Required.                                                 | -              |
+| `name`                 | String | Display name for the schedule.                                                                                                              | -              |
+| `rrule`                | String | Recurrence rule in iCalendar RRULE format defining the schedule, for example`DTSTART:20210101T000000Z RRULE:FREQ=DAILY;INTERVAL=1;COUNT=1`. | -              |
+| `unified_job_template` | String | Name of the job template or workflow to schedule.                                                                                           | -              |
+| `runner_pull_policy`   | String | Image pull policy for the runner pod.                                                                                                       | `IfNotPresent` |
 
 **Example:**
 
@@ -253,7 +254,7 @@ metadata:
   name: workflow
 spec:
   connection_secret: aap-access
-  workflow_template_name: Demo Job Template
+  workflow_template_name: ExampleTowerWorkflow
   inventory: Demo Inventory
 ```
 
@@ -261,14 +262,14 @@ spec:
 
 Creates a workflow job template that links together a sequence of job templates on the automation controller.
 
-| Field               | Type   | Description                                                                                                                                                               | Default |
-| ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `connection_secret` | String | Name of the Kubernetes secret containing the platform gateway connection details. Required.                                                                               | -       |
-| `name`              | String | Display name for the workflow template.                                                                                                                                   | -       |
-| `description`       | String | Description of the workflow template.                                                                                                                                     | -       |
-| `organization`      | String | Organization the workflow template belongs to.                                                                                                                            | -       |
-| `inventory`         | String | Default inventory for the workflow template.                                                                                                                              | -       |
-| `workflow_nodes`    | Array  | List of workflow nodes defining the sequence of jobs. Each node contains an `identifier` and a `unified_job_template` object with `name`, `type`, and `inventory` fields. | -       |
+| Field               | Type   | Description                                                                                                                                                          | Default |
+| ------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `connection_secret` | String | Name of the Kubernetes secret containing the platform gateway connection details. Required.                                                                          | -       |
+| `name`              | String | Display name for the workflow template.                                                                                                                              | -       |
+| `description`       | String | Description of the workflow template.                                                                                                                                | -       |
+| `organization`      | String | Organization the workflow template belongs to.                                                                                                                       | -       |
+| `inventory`         | String | Default inventory for the workflow template.                                                                                                                         | -       |
+| `workflow_nodes`    | Array  | List of workflow nodes defining the sequence of jobs. Each node contains an`identifier` and a`unified_job_template` object with`name`,`type`, and`inventory` fields. | -       |
 
 **Example:**
 

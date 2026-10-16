@@ -9,14 +9,14 @@ Red Hat recommends performing updates to the receptor after any Ansible Automati
 
 ### Procedure
 
-1.  Check the current receptor version:
+1. Check the current receptor version:
 
 
 ```
 receptor --version
 ```
 
-2.  Update the receptor:
+2. Update the receptor:
 
 
 ```
@@ -26,18 +26,18 @@ sudo dnf update ansible-runner receptor -y
 Note:
 To upgrade all packages (not just the receptor), use `dnf update`, then reboot with `reboot`.
 
-3.  Verify the installation. After the update is complete, check the receptor version again to verify the update:
+3. Verify the installation. After the update is complete, check the receptor version again to verify the update:
 
 
 ```
 receptor --version
 ```
 
-4.  Restart the receptor service:
+4. Restart the receptor service:
 
 
 ```
 sudo systemctl restart receptor
 ```
 
-5.  Ensure the receptor is working correctly and is properly connected to the controller or other nodes in the system.
+5. Ensure the receptor is working correctly and is properly connected to the controller or other nodes in the system.

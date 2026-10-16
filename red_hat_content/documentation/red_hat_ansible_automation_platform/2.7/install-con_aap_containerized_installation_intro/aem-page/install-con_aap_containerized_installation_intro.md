@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 title = "Install containerized Ansible Automation Platform - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_aap_containerized_installation_intro"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_aap_containerized_installation_intro/", "Install containerized Ansible Automation Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-con_aap_containerized_installation_intro/aem-page/install-con_aap_containerized_installation_intro.html"
 last_crumb = "Install containerized Ansible Automation Platform"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Install containerized Ansible Automation Platform"
 oversized = "false"
@@ -27,6 +28,8 @@ type = "aem-page"
 
 # Install containerized Ansible Automation Platform
 
-Containerized Ansible Automation Platform uses Podman to run the platform in containers on Red Hat Enterprise Linux host machines. With this installation method, you manage both the product and infrastructure lifecycle while taking advantage of containerized architecture.
+Containerized Ansible Automation Platform uses Podman to run the platform in containers on Red Hat Enterprise Linux host machines.
+With this installation method, you manage both the product and infrastructure lifecycle while taking advantage of containerized architecture.
 
-Containerized Ansible Automation Platform runs as rootless containers for enhanced security by default. You can install and operate Ansible Automation Platform with a non-root user account.
+Containerized Ansible Automation Platform runs as rootless containers for enhanced security by default.
+You can install and operate Ansible Automation Platform with a non-root user account.

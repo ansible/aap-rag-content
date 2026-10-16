@@ -1,7 +1,7 @@
 +++
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_cloud_credentials"
 title = "Associate cloud credentials with a job template - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_cloud_credentials"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_job_templates/", "Standardize and streamline automation with automation job templates"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-con_controller_cloud_credentials/aem-page/develop-con_controller_cloud_credentials.html"
 last_crumb = "Associate cloud credentials with a job template"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Associate cloud credentials with a job template"
 oversized = "false"
@@ -39,7 +40,9 @@ Cloud Credentials can be used when syncing a cloud inventory. They can also be a
 
 ## OpenStack
 
-Use this credential type to connect to OpenStack clouds. Automation controller uses the OpenStack SDK to interact with OpenStack clouds. When you create an OpenStack cloud credential, the controller prompts you for the following information:
+Use this credential type to connect to OpenStack clouds.
+Automation controller uses the OpenStack SDK to interact with OpenStack clouds.
+When you create an OpenStack cloud credential, the controller prompts you for the following information:
 
 - **Username**: The username to authenticate to the OpenStack cloud.
 - **Password**: The password to authenticate to the OpenStack cloud.
@@ -49,16 +52,18 @@ Use this credential type to connect to OpenStack clouds. Automation controller u
 - **Region name** (optional): The region name to use when connecting to the OpenStack cloud.
 - **Domain name** (optional): The domain name to use when connecting to the OpenStack cloud.
 - **Project domain name** (optional): The project domain name to use when connecting to the OpenStack cloud.
-- **Validate SSL certificate**: Select this option to validate the SSL/TLS certificate presented by the OpenStack cloud. Clear this option to disable SSL/TLS certificate validation.
+- **Validate SSL certificate**: Select this option to validate the SSL/TLS certificate presented by the OpenStack cloud.
+Clear this option to disable SSL/TLS certificate validation.
 
 The following sample playbook invokes the `nova_compute` Ansible OpenStack cloud module and requires credentials:
 
--  `auth_url`
--  `username`
--  `password`
--  `project name`
+- `auth_url`
+- `username`
+- `password`
+- `project name`
 
-These fields are made available to the playbook through the environmental variable `OS_CLIENT_CONFIG_FILE`, which points to a YAML file written by the controller based on the contents of the cloud credential. The following sample playbooks load the YAML file into the Ansible variable space:
+These fields are made available to the playbook through the environmental variable `OS_CLIENT_CONFIG_FILE`, which points to a YAML file written by the controller based on the contents of the cloud credential.
+The following sample playbooks load the YAML file into the Ansible variable space:
 
 - OS_CLIENT_CONFIG_FILE example:
 
@@ -110,20 +115,21 @@ clouds:
 
 Amazon Web Services (AWS) cloud credentials are exposed as the following environment variables during playbook execution (in the job template, choose the cloud credential needed for your setup):
 
--  `AWS_ACCESS_KEY_ID`
--  `AWS-SECRET_ACCESS_KEY`
+- `AWS_ACCESS_KEY_ID`
+- `AWS-SECRET_ACCESS_KEY`
 
 Each AWS module implicitly uses these credentials when run through the controller without having to set the `aws_access_key_id` or `aws_secret_access_key` module options.
 
 ## Google
 
-Use this credential type to authenticate to Google Cloud Platform services. Automation controller supports Google Cloud credentials for use with Ansible modules that manage Google Cloud resources.
+Use this credential type to authenticate to Google Cloud Platform services.
+Automation controller supports Google Cloud credentials for use with Ansible modules that manage Google Cloud resources.
 
 Google cloud credentials are exposed as the following environment variables during playbook execution (in the job template, choose the cloud credential needed for your setup):
 
--  `GCE_EMAIL`
--  `GCE_PROJECT`
--  `GCE_CREDENTIALS_FILE_PATH`
+- `GCE_EMAIL`
+- `GCE_PROJECT`
+- `GCE_CREDENTIALS_FILE_PATH`
 
 Each Google module implicitly uses these credentials when run through the controller without having to set the `service_account_email`, `project_id`, or `pem_file` module options.
 
@@ -133,8 +139,8 @@ Automation controller includes built-in support for managing Microsoft Azure clo
 
 Azure cloud credentials exist as the following environment variables during playbook execution (in the job template, select the cloud credential needed for your setup):
 
--  `AZURE_SUBSCRIPTION_ID`
--  `AZURE_CERT_PATH`
+- `AZURE_SUBSCRIPTION_ID`
+- `AZURE_CERT_PATH`
 
 Each Azure module uses these credentials when run using automation controller without having to set the `subscription_id` or `management_cert_path` module options.
 
@@ -144,9 +150,9 @@ Automation controller integrates with VMware vSphere to manage virtual machines 
 
 VMware cloud credentials are exposed as the following environment variables during playbook execution (in the job template, choose the cloud credential needed for your setup):
 
--  `VMWARE_USER`
--  `VMWARE_PASSWORD`
--  `VMWARE_HOST`
+- `VMWARE_USER`
+- `VMWARE_PASSWORD`
+- `VMWARE_HOST`
 
 The following sample playbook demonstrates the usage of these credentials:
 

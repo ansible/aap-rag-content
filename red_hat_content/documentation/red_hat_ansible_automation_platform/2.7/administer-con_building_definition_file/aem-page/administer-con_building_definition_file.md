@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 title = "Build a definition file - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_building_definition_file"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-define__create__and_build_execution_environments/", "Define, create, and build execution environments"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-con_building_definition_file/aem-page/administer-con_building_definition_file.html"
 last_crumb = "Build a definition file"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Build a definition file"
 oversized = "false"
@@ -109,7 +110,8 @@ collections:
 
 The `python` entry in the definition file points to a valid requirements file or to an inline list of Python requirements in PEP508 format for the `pip install -r …​` command.
 
-The entry `requirements.txt` is a file that installs extra Python requirements on top of what the Collections already list as their Python dependencies. It might be listed as a relative path from the directory of the automation execution environment definition’s folder, or an absolute path. The contents of a `requirements.txt` file should be formatted as the following example, similar to the standard output from a `pip freeze` command.
+The entry `requirements.txt` is a file that installs extra Python requirements on top of what the Collections already list as their Python dependencies.
+It might be listed as a relative path from the directory of the automation execution environment definition’s folder, or an absolute path. The contents of a `requirements.txt` file should be formatted as the following example, similar to the standard output from a `pip freeze` command.
 
 The content might look like the following:
 
@@ -152,6 +154,6 @@ The `images` section of the definition file identifies the base image. Verificat
 
 The following table shows a list of values that you can use in `images`:
 
-| Value             | Description                                                                                                                                                                                              |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br> `base_image` | <br>Specifies the parent image for the automation execution environment which enables a new image to be built that is based on an existing image. This is typically a supported execution environment base image such as *ee-minimal* or *ee-supported*, but it can also be an execution environment image that you have created and want to customize further.<br>A `name` key is required for the container image to use. Specify the `signature _original_name` key if the image is mirrored within your repository, but is signed with the image’s original signature key. Image names must contain a tag, such as `:latest`.<br>Red Hat provides `ee-minimal` and `ee-supported` base images on `registry.redhat.io`. See the [Red Hat ecosystem catalog](https://catalog.redhat.com/en/search?searchType=Containers&build_categories_list=Automation+execution+environment) for available images for your version of Ansible Automation Platform. |
+| Value        | Description                                                                                                                                                                                              |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `base_image` | Specifies the parent image for the automation execution environment which enables a new image to be built that is based on an existing image. This is typically a supported execution environment base image such as *ee-minimal* or *ee-supported*, but it can also be an execution environment image that you have created and want to customize further.<br>A `name` key is required for the container image to use. Specify the `signature _original_name` key if the image is mirrored within your repository, but is signed with the image’s original signature key. Image names must contain a tag, such as `:latest`.<br>Red Hat provides `ee-minimal` and `ee-supported` base images on `registry.redhat.io`. See the [Red Hat ecosystem catalog](https://catalog.redhat.com/en/search?searchType=Containers&build_categories_list=Automation+execution+environment) for available images for your version of Ansible Automation Platform. |

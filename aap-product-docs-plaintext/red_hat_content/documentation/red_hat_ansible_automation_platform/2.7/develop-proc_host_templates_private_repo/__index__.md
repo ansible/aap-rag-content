@@ -16,14 +16,14 @@ After updating the catalog locations, import the templates into automation porta
 
 ## Procedure
 
-1.  From a connected system, download the template YAML files:
+1. From a connected system, download the template YAML files:
 
 - [ee-start-from-scratch.yaml](https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.1/templates/ee-start-from-scratch.yaml)
 - [ee-cloud-automation.yaml](https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.1/templates/ee-cloud-automation.yaml)
 - [ee-network-automation.yaml](https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.1/templates/ee-network-automation.yaml)
 
-2.  Push the template files to a private Git repository accessible from your deployment environment.
-3.  In your Helm chart configuration, replace the public GitHub URLs with your private repository URLs:
+2. Push the template files to a private Git repository accessible from your deployment environment.
+3. In your Helm chart configuration, replace the public GitHub URLs with your private repository URLs:
 
 
 ```
@@ -43,13 +43,13 @@ rules:
 - allow: [Template]
 ```
 
-4.  For Networking Automation and Cloud Automation templates: ensure the domain-specific collections they reference are available from a configured content source (private automation hub or internal Git repository).
-5.  Apply the configuration. See [Apply configuration changes](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_apply_configuration_changes "Apply configuration changes after modifying your Helm chart values or RHEL appliance configuration file for execution environment builder.").
-6.  Import the templates into automation portal:
-1.  Navigate to **Execution Environments > Create**.
-2.  Open the kebab menu and select **Import Template**.
-3.  Paste the URL to the template file in your private Git repository.
-4.  Click **Analyze**, then **Import**.
+4. For Networking Automation and Cloud Automation templates: ensure the domain-specific collections they reference are available from a configured content source (private automation hub or internal Git repository).
+5. Apply the configuration. See [Apply configuration changes](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_apply_configuration_changes "Apply configuration changes after modifying your Helm chart values or RHEL appliance configuration file for execution environment builder.").
+6. Import the templates into automation portal:
+1. Navigate to **Execution Environments > Create**.
+2. Open the kebab menu and select **Import Template**.
+3. Paste the URL to the template file in your private Git repository.
+4. Click **Analyze**, then **Import**.
 Alternatively, templates added to `catalog.locations` in the Helm chart load automatically without manual import.
 
 ## Results

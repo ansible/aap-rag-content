@@ -1,4 +1,4 @@
-# Pull execution environments for use in automation hub
+# Pull execution environments for use in Ansible Automation Platform
 ## Tag execution environments
 
 After you pull execution environments from a registry, tag them for use in your private automation hub remote registry.

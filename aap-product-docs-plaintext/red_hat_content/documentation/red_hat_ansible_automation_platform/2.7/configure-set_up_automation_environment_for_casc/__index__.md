@@ -27,8 +27,8 @@ As an Ansible content developer, you can use the Configuration as Code approach 
 
 ## Procedure
 
-1.  Create a new Git repository.
-2.  On your local machine, encrypt your password for platform gateway:
+1. Create a new Git repository.
+2. On your local machine, encrypt your password for platform gateway:
 
 
 ```
@@ -47,7 +47,7 @@ $ANSIBLE_VAULT;1.1;AES256
 
 You encrypted the value of the `aap_password` variable, which you will use in the next step.
 
-3.  Create the /my_ansible_project/vars/all.yml file with variables for connecting to your Ansible Automation Platform and variables for creating Role-Based Access Control (RBAC) objects:
+3. Create the /my_ansible_project/vars/all.yml file with variables for connecting to your Ansible Automation Platform and variables for creating Role-Based Access Control (RBAC) objects:
 
 
 ```yaml
@@ -93,7 +93,7 @@ aap_validate_certs: false
 
 For more information about creating tokens, see [Adding tokens](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/html/access_management_and_authentication/gw-token-based-authentication#proc-controller-apps-create-tokens) in *Access management and authentication*.
 
-4.  Compose the /my_ansible_project/RBAC_settings.yml playbook, which creates RBAC objects and assigns roles to those objects:
+4. Compose the /my_ansible_project/RBAC_settings.yml playbook, which creates RBAC objects and assigns roles to those objects:
 
 
 ```yaml
@@ -180,7 +180,7 @@ Many values in this playbook are provided in the form of variables, such as obje
 
 Refer to the all.yml file to see the expanded values of those variables. For details about the module parameters, default values, and further examples how to use the modules, see the resources on Automation hub for the `ansible.platform` collection.
 
-5.  Push the variables and the playbook to your Git repository so that automation controller can later read in the correct data.
+5. Push the variables and the playbook to your Git repository so that automation controller can later read in the correct data.
 
 
 ```
@@ -189,7 +189,7 @@ git commit -m "Provide variables and RBAC_settings.yml playbook resources for An
 git push origin *relevant_branch_name*
 ```
 
-6.  Using the platform gateway UI, create a new project with the following values:
+6. Using the platform gateway UI, create a new project with the following values:
 
 - Name: Platform collection testing
 - Description: Automation resources to test the CaC capability of RBAC modules from the `ansible.platform` collection
@@ -200,7 +200,7 @@ git push origin *relevant_branch_name*
 
 ![Create project dialog with Configuration as Code settings](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/cac-create-project.png)
 
-7.  Create a credential for your Ansible Vault password of your encrypted `aap_password` variable:
+7. Create a credential for your Ansible Vault password of your encrypted `aap_password` variable:
 
 - Name: aap_password_vault
 - Description: Holds vault password for decrypting the value of the `aap_password` variable
@@ -209,7 +209,7 @@ git push origin *relevant_branch_name*
 
 ![Create credential dialog with Vault password settings](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/cac-create-vault-credential.png)
 
-8.  Create a job template with the following values:
+8. Create a job template with the following values:
 
 - Name: RBAC_settings
 - Description: Create organization, team, user, and custom role RBAC objects. Assign a pre-existing role to the created team and assign a pre-existing role to the created user.
@@ -222,7 +222,7 @@ git push origin *relevant_branch_name*
 
 ![Create job template dialog with RBAC settings configuration](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/cac-create-job-template.png)
 
-9.  Launch the `RBAC_settings` job template.
+9. Launch the `RBAC_settings` job template.
 After the template job successfully finishes, the output should be similar to the following:
 
 ```
@@ -263,22 +263,18 @@ The output message shows that you ran the job template against 1 target (your lo
 
 Verify that the resources were created correctly:
 
--      In the navigation panel, check that you see your created organization:
-
+- In the navigation panel, check that you see your created organization:
 
 ![Organization list showing the created Demo-Organization](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/cac-organization-exists.png)
 
--      Check that you see your created team, which belongs to the organization and is assigned the correct pre-existing role:
-
+- Check that you see your created team, which belongs to the organization and is assigned the correct pre-existing role:
 
 ![Team list showing the created Demo-Team with assigned role](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/cac-team-exists.png)
 
--      Check that you see your created user, which belongs to the organization and is assigned the correct pre-existing role:
-
+- Check that you see your created user, which belongs to the organization and is assigned the correct pre-existing role:
 
 ![User list showing the created Demo-User with assigned role](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/cac-user-exists.png)
 
--      Check that you see your created custom role, which was assigned the permissions as specified in your RBAC_settings.yml playbook:
-
+- Check that you see your created custom role, which was assigned the permissions as specified in your RBAC_settings.yml playbook:
 
 ![Custom role showing NetOps ReadOnly with assigned permissions](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/cac-custom-role-exists.png)

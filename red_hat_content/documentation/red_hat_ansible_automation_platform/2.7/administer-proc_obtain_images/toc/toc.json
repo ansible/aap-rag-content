@@ -2,7 +2,7 @@
   "version": "1.1",
   "sections": [
     {
-      "title": "Pull execution environments for use in automation hub",
+      "title": "Pull execution environments for use in Ansible Automation Platform",
       "visible": true,
       "weight": 1,
       "urlFragment": "index",
@@ -18,7 +18,7 @@
           "singlePageAnchor": "tag-pulled-images"
         },
         {
-          "title": "Push an execution environment to private automation hub",
+          "title": "Push an execution environment to Ansible Automation Platform",
           "visible": true,
           "weight": 2,
           "urlFragment": "push-containers",

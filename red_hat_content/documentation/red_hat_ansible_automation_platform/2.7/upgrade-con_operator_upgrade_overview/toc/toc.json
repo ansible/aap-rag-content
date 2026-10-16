@@ -7,7 +7,49 @@
       "weight": 1,
       "urlFragment": "index",
       "anchor": null,
-      "singlePageAnchor": null
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "How operator upgrades work",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "operator-upgrade-overview__how-operator-upgrades-work",
+          "anchor": null,
+          "singlePageAnchor": "operator-upgrade-overview__how-operator-upgrades-work"
+        },
+        {
+          "title": "Expected behavior during upgrade",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "operator-upgrade-overview__expected-behavior-during-upgrade",
+          "anchor": null,
+          "singlePageAnchor": "operator-upgrade-overview__expected-behavior-during-upgrade"
+        },
+        {
+          "title": "What the operator does not handle",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "operator-upgrade-overview__what-operator-does-not-handle",
+          "anchor": null,
+          "singlePageAnchor": "operator-upgrade-overview__what-operator-does-not-handle"
+        },
+        {
+          "title": "Patch updates compared with version upgrades",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "operator-upgrade-overview__upgrade-types",
+          "anchor": null,
+          "singlePageAnchor": "operator-upgrade-overview__upgrade-types"
+        },
+        {
+          "title": "Subscription channel in the OpenShift console",
+          "visible": true,
+          "weight": 5,
+          "urlFragment": "operator-upgrade-overview__subscription-channel",
+          "anchor": null,
+          "singlePageAnchor": "operator-upgrade-overview__subscription-channel"
+        }
+      ]
     }
   ]
 }

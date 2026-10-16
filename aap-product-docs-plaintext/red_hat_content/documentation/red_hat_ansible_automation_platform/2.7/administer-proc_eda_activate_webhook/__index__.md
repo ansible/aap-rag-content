@@ -32,7 +32,7 @@ sleep: 1
 
 ## Procedure
 
-1.  Create a Route (on OpenShift Container Platform) to expose the service. The following is an example Route for an ansible-rulebook source that expects POST’s on port 5000 on the decision environment pod:
+1. Create a Route (on OpenShift Container Platform) to expose the service. The following is an example Route for an ansible-rulebook source that expects POST’s on port 5000 on the decision environment pod:
 
 
 ```
@@ -58,7 +58,7 @@ insecureEdgeTerminationPolicy: Redirect
 wildcardPolicy: None
 ```
 
-2.  When you create the Route, test it with a **Post to the Route URL**:
+2. When you create the Route, test it with a **Post to the Route URL**:
 
 Note:
 You do not need the port as it is specified on the Route (targetPort).

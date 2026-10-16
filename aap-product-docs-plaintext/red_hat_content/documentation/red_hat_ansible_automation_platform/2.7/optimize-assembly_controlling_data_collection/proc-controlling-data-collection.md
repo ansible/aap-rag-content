@@ -5,6 +5,6 @@ You can control how automation controller collects data from the Settings> (and 
 
 ### Procedure
 
-1.  Log in to your automation controller.
-2.  From the navigation panel, select Settings> (and then)Automation Execution> (and then)System.
-3.  Select **Gather data for Automation Analytics** to enable automation controller to gather data on automation and send it to Automation Analytics.
+1. Log in to your automation controller.
+2. From the navigation panel, select Settings> (and then)Automation Execution> (and then)System.
+3. Select **Gather data for Automation Analytics** to enable automation controller to gather data on automation and send it to Automation Analytics.

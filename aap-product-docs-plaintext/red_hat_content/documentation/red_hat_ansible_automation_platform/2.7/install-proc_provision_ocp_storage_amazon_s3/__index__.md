@@ -11,7 +11,7 @@ Red Hat supports Amazon Simple Storage Service (S3) for automation hub. You can 
 
 ## Procedure
 
-1.  Create a Kubernetes secret containing the AWS credentials and connection details, and the name of your Amazon S3 bucket. The following example creates a secret called `test-s3`:
+1. Create a Kubernetes secret containing the AWS credentials and connection details, and the name of your Amazon S3 bucket. The following example creates a secret called `test-s3`:
 
 
 ```yaml
@@ -28,7 +28,7 @@ s3-region: $S3_REGION
 EOF
 ```
 
-2.  Add the secret to the Ansible Automation Platform custom resource (CR) under the `hub` section in the `spec`:
+2. Add the secret to the Ansible Automation Platform custom resource (CR) under the `hub` section in the `spec`:
 
 
 ```yaml
@@ -48,7 +48,7 @@ If you have an existing automation hub instance, specify its name using `hub.nam
 
 For more examples of Ansible Automation Platform custom resources, see [Red Hat Ansible Automation Platform custom resources](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_operator_crs#appendix-operator-crs_appendix-operator-crs "This appendix provides a reference for the Ansible Automation Platform custom resources for various deployment scenarios.")
 
-3.  If you are applying this secret to an existing instance, restart the API pods for the change to take effect. `<hub-name>` is the name of your hub instance.
+3. If you are applying this secret to an existing instance, restart the API pods for the change to take effect. `<hub-name>` is the name of your hub instance.
 
 ```bash
 $ oc -n $HUB_NAMESPACE delete pod -l app.kubernetes.io/name=<hub-name>-api

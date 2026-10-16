@@ -9,6 +9,6 @@ To ensure an execution environment is signed by specific signatures, the signatu
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Content> (and then)Signature Keys.
-2.  Click the Download key icon next to the signature that you are using. A new window should open to indicate you have downloaded the key.
+1. From the navigation panel, select Automation Content> (and then)Signature Keys.
+2. Click the Download key icon next to the signature that you are using. A new window should open to indicate you have downloaded the key.
 

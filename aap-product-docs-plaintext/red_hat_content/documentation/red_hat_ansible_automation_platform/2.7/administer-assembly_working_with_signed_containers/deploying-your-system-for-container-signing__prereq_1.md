@@ -10,7 +10,7 @@ Note that installer looks for the script and key on the same server where instal
 
 ### Procedure
 
-1.  From a terminal, create a signing script, and pass the script path as an installer parameter. **Example**:
+1. From a terminal, create a signing script, and pass the script path as an installer parameter. **Example**:
 
 ```
 #!/usr/bin/env bash
@@ -40,7 +40,7 @@ exit $STATUS
 fi
 ```
 
-2.  Review the Ansible Automation Platform installer inventory file for options for container signing that begin with `automationhub_*`.
+2. Review the Ansible Automation Platform installer inventory file for options for container signing that begin with `automationhub_*`.
 
 ```
 [all:vars]
@@ -53,7 +53,7 @@ automationhub_container_signing_service_key = /absolute/path/to/key/to/sign
 automationhub_container_signing_service_script = /absolute/path/to/script/that/signs
 ```
 
-3.  Once installation is complete, log in to Ansible Automation Platform and navigate to Automation Content> (and then)Signature Keys. Note:
+3. Once installation is complete, log in to Ansible Automation Platform and navigate to Automation Content> (and then)Signature Keys. Note:
 The `container-default` service is created by the Ansible Automation Platform installer.
 
 ### Results

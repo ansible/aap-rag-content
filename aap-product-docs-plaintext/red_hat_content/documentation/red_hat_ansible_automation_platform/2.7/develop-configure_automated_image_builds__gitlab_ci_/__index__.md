@@ -14,14 +14,14 @@ When a user saves an EE definition to a GitLab repository and triggers **Build E
 
 ## Procedure
 
-1.  In GitLab, navigate to your group or subgroup and go to **Settings > CI/CD > Variables**.
-2.  Click **Add variable** and add each required CI/CD variable. For each variable:
+1. In GitLab, navigate to your group or subgroup and go to **Settings > CI/CD > Variables**.
+2. Click **Add variable** and add each required CI/CD variable. For each variable:
 
 - Set **Role** to **Developer** so that developers who push to this group can run pipelines with these variables.
 - **Unselect** the **Protected variable** checkbox. Protected variables are enabled by default. EE build pipelines run on non-protected branches (for example, feature branches created by the portal). If protected is selected, the pipeline cannot access the variable on those branches.
 - Select **Mask variable** for sensitive values (passwords, tokens) to prevent them from appearing in job logs.
 
-3.  Add the following registry and token variables:
+3. Add the following registry and token variables:
 | Variable                                                   | Purpose                                                                                                                                                           | When required                                                                                  |
 | ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | `REGISTRY_USERNAME`                                        | Username for the destination container registry where built EE images are pushed (for example, private automation hub).                                           | Not required if pushing to GitLab Container Registry.                                          |

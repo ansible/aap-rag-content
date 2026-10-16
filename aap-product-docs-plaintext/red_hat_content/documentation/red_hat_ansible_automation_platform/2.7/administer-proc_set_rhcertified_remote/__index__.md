@@ -18,12 +18,12 @@ If you have collections `A`, `B`, and `C` in your requirements file, and a new c
 
 ## Procedure
 
-1.  Log in to your Ansible Automation Platform.
-2.  From the navigation panel, select Automation Content> (and then)Remotes.
-3.  In the **rh-certified** remote repository, click Edit remote.
-4.  In the **URL** field, paste the **Sync URL**.
-5.  In the **Token** field, paste the token you acquired from console.redhat.com.
-6.  Click Save remote.
+1. Log in to your Ansible Automation Platform.
+2. From the navigation panel, select Automation Content> (and then)Remotes.
+3. In the **rh-certified** remote repository, click Edit remote.
+4. In the **URL** field, paste the **Sync URL**.
+5. In the **Token** field, paste the token you acquired from console.redhat.com.
+6. Click Save remote.
 
 ## Results
 
@@ -31,4 +31,4 @@ You can now synchronize collections from console.redhat.com to your private auto
 
 ## What to do next
 
-See [Synchronizing Ansible content collections in automation hub](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_create_synclist "You can sync certified and validated collections in Ansible automation hub from console.redhat.com.") for syncing steps.
+See [Synchronizing Ansible content collections in automation hub](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_create_synclist "You can sync certified and validated collections in Ansible Automation Platform from console.redhat.com.") for syncing steps.

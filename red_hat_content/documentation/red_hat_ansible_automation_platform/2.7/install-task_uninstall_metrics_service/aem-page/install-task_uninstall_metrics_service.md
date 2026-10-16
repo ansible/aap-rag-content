@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_uninstall_metrics_service"
 title = "Uninstall metrics service - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_uninstall_metrics_service"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_understand_metrics_service_architecture/", "Understand metrics service architecture"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-task_uninstall_metrics_service/aem-page/install-task_uninstall_metrics_service.html"
 last_crumb = "Uninstall metrics service"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Uninstall metrics service"
 oversized = "false"
@@ -37,7 +38,7 @@ Uninstallation is destructive and irreversible. Back up the `metrics_service` da
 
 ## Procedure
 
-1.  Method 1: Use installer playbook (recommended)
+1. Method 1: Use installer playbook (recommended)
   
 
 ```
@@ -56,7 +57,7 @@ ansible-playbook -i inventory uninstall.yml
   Note:
       **Optional:** To also drop the database, add database cleanup tasks to your inventory configuration.
 
-2.  Method 2: Manual uninstall
+2. Method 2: Manual uninstall
       Use this method if you need granular control over uninstall steps.
 
     **Step 1: Stop and disable systemd services**

@@ -1,0 +1,109 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Create and validate an execution environment with the assistant",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Before you begin",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-a2df90f5-9b4d-4e5b-b37a-d49d3d86a02b__prereq_1",
+          "anchor": null,
+          "singlePageAnchor": "GUID-a2df90f5-9b4d-4e5b-b37a-d49d3d86a02b__prereq_1"
+        },
+        {
+          "title": "What to do next",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "GUID-a2df90f5-9b4d-4e5b-b37a-d49d3d86a02b__postreq_1",
+          "anchor": null,
+          "singlePageAnchor": "GUID-a2df90f5-9b4d-4e5b-b37a-d49d3d86a02b__postreq_1"
+        },
+        {
+          "title": "Generate an execution environment definition from an existing playbook",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "task_1",
+          "anchor": null,
+          "singlePageAnchor": "task_1",
+          "sections": [
+            {
+              "title": "Procedure",
+              "visible": true,
+              "weight": 1,
+              "urlFragment": "task_1",
+              "anchor": "task_1__steps_1",
+              "singlePageAnchor": "task_1__steps_1"
+            },
+            {
+              "title": "What to do next",
+              "visible": true,
+              "weight": 2,
+              "urlFragment": "task_1",
+              "anchor": "task_1__postreq_2",
+              "singlePageAnchor": "task_1__postreq_2"
+            },
+            {
+              "title": "Validate an execution environment file",
+              "visible": true,
+              "weight": 3,
+              "urlFragment": "task_1",
+              "anchor": "task_2",
+              "singlePageAnchor": "task_2",
+              "sections": [
+                {
+                  "title": "Before you begin",
+                  "visible": true,
+                  "weight": 1,
+                  "urlFragment": "task_1",
+                  "anchor": "task_2__prereq_2",
+                  "singlePageAnchor": "task_2__prereq_2"
+                },
+                {
+                  "title": "Procedure",
+                  "visible": true,
+                  "weight": 2,
+                  "urlFragment": "task_1",
+                  "anchor": "task_2__steps_2",
+                  "singlePageAnchor": "task_2__steps_2"
+                },
+                {
+                  "title": "Build the execution environment with the assistant",
+                  "visible": true,
+                  "weight": 3,
+                  "urlFragment": "task_1",
+                  "anchor": "task_3",
+                  "singlePageAnchor": "task_3",
+                  "sections": [
+                    {
+                      "title": "Before you begin",
+                      "visible": false,
+                      "weight": 1,
+                      "urlFragment": "task_1",
+                      "anchor": "task_3__prereq_3",
+                      "singlePageAnchor": "task_3__prereq_3"
+                    },
+                    {
+                      "title": "Procedure",
+                      "visible": false,
+                      "weight": 2,
+                      "urlFragment": "task_1",
+                      "anchor": "task_3__steps_3",
+                      "singlePageAnchor": "task_3__steps_3"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

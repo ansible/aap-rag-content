@@ -1,7 +1,7 @@
 +++
+title = "Create a custom resource for Resource Operator - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_create_crs_resource_operator"
-title = "Create a custom resource for Resource Operator - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator/", "Install on OpenShift Container Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-con_create_crs_resource_operator/aem-page/install-con_create_crs_resource_operator.html"
 last_crumb = "Create a custom resource for Resource Operator"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Create a custom resource for Resource Operator"
 oversized = "false"
@@ -37,7 +38,7 @@ An AnsibleJob custom resource launches a job in the Ansible Automation Platform 
 
 ### Procedure
 
-1.  Specify the connection secret and job template you want to launch.
+1. Specify the connection secret and job template you want to launch.
 
 ```
 apiVersion: tower.ansible.com/v1alpha1
@@ -49,7 +50,7 @@ spec:
   job_template_name: Demo Job Template
 ```
 
-2.  Configure features such as, inventory, extra variables, and time to live for the job.
+2. Configure features such as, inventory, extra variables, and time to live for the job.
 
 ```
 spec:
@@ -68,7 +69,7 @@ spec:
   Note:
       You must enable prompt on launch for inventories and extra variables if you are configuring those. To enable **Prompt on launch**, within the automation controller UI: From the Resources> (and then)Templates page, select your template and select the **Prompt on launch** checkbox next to **Inventory** and **Variables** sections.
 
-3.  Launch a workflow job template with an AnsibleJob object by specifying the `workflow_template_name` instead of `job_template_name`:
+3. Launch a workflow job template with an AnsibleJob object by specifying the `workflow_template_name` instead of `job_template_name`:
   
 
 ```
@@ -78,18 +79,18 @@ metadata:
   generateName: demo-job-1 # generate a unique suffix per 'kubectl create'
 spec:
   connection_secret: aap-access
-  workflow_template_name: Demo Workflow Template
+  workflow_template_name: ExampleTowerWorkflow
 ```
 
 ## Create a JobTemplate custom resource
 
-A job template is a definition and set of parameters for running an Ansible job. For more information see [Standardize and streamline automation with automation job templates](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_job_templates "You can create both Job templates and Workflow job templates from Automation Execution > Templates .").
+A job template is a definition and set of parameters for running an Ansible job. For more information see [Standardize and streamline automation with automation job templates](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_job_templates "You can create both Job templates and Workflow job templates from Automation Execution &gt; Templates .").
 
 ### About this task
 
 ### Procedure
 
- Create a job template on automation controller by creating a JobTemplate custom resource:
+Create a job template on automation controller by creating a JobTemplate custom resource:
 
 ```
 apiVersion: tower.ansible.com/v1alpha1
@@ -112,7 +113,7 @@ A Project is a logical collection of Ansible playbooks, represented in automatio
 
 ### Procedure
 
- Create a project on automation controller by creating an automation controller project custom resource:
+Create a project on automation controller by creating an automation controller project custom resource:
 
 ```
 apiVersion: tower.ansible.com/v1alpha1
@@ -138,7 +139,7 @@ Define an `AnsibleSchedule` custom resource to create a schedule on the automati
 
 ### Procedure
 
- Create a schedule on automation controller by creating an automation controller schedule custom resource:
+Create a schedule on automation controller by creating an automation controller schedule custom resource:
 
 ```
 apiVersion: tower.ansible.com/v1alpha1
@@ -161,7 +162,7 @@ Workflows enable you to configure a sequence of disparate job templates (or work
 
 ### Procedure
 
- Create a workflow on automation controller by creating a workflow custom resource:
+Create a workflow on automation controller by creating a workflow custom resource:
 
 ```
 apiVersion: tower.ansible.com/v1alpha1
@@ -170,7 +171,7 @@ metadata:
   name: workflow
 spec:
   inventory: Demo Inventory
-  workflow_template_name: Demo Job Template
+  workflow_template_name: ExampleTowerWorkflow
   connection_secret: aap-access
   runner_pull_policy: IfNotPresent
 ```
@@ -185,7 +186,7 @@ For more information see [Workflow job templates](/documentation/en-us/red_hat_a
 
 ### Procedure
 
- Create a workflow template on automation controller by creating a workflow template custom resource:
+Create a workflow template on automation controller by creating a workflow template custom resource:
 
 ```
 apiVersion: tower.ansible.com/v1alpha1
@@ -225,7 +226,7 @@ Inventories also help you use Ansible Automation Platform more efficiently by re
 
 ### Procedure
 
- Create an inventory on automation controller by creating an inventory custom resource:
+Create an inventory on automation controller by creating an inventory custom resource:
 
 ```
 metadata:
@@ -273,7 +274,7 @@ curl -s -H "Authorization: Bearer $AAP_TOKEN" "$AAP_URL/api/controller/v2/creden
 
 ### Procedure
 
- Create an AWS or SSH credential on automation controller by creating a credential custom resource:
+Create an AWS or SSH credential on automation controller by creating a credential custom resource:
 
 - SSH credential:
 

@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-title = "Install Ansible Automation Platform Operator from the CLI - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_installing_aap_operator_cli"
+title = "Install Ansible Automation Platform Operator from the CLI - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator/", "Install on OpenShift Container Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_installing_aap_operator_cli/aem-page/install-assembly_installing_aap_operator_cli.html"
 last_crumb = "Install Ansible Automation Platform Operator from the CLI"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Install Ansible Automation Platform Operator from the CLI"
 oversized = "false"
@@ -46,14 +47,14 @@ You cannot deploy Ansible Automation Platform in the default namespace on your O
 
 ### Procedure
 
-1.  Create a project for the operator.
+1. Create a project for the operator.
 
 ```
 oc new-project ansible-automation-platform
 ```
 
-2.  Create a file called sub.yaml.
-3.  Add the following YAML code to the sub.yaml file.
+2. Create a file called sub.yaml.
+3. Add the following YAML code to the sub.yaml file.
 
 ```
 ---
@@ -82,14 +83,14 @@ spec:
 
     This file creates a `Subscription` object called `ansible-automation-platform` that subscribes the `ansible-automation-platform` namespace to the `ansible-automation-platform-operator` operator.
 
-4.  Run the oc apply command to create the objects specified in the sub.yaml file:
+4. Run the oc apply command to create the objects specified in the sub.yaml file:
   
 
 ```
 oc apply -f sub.yaml
 ```
 
-5.  Verify the CSV PHASE reports "Succeeded" before proceeding using the oc get csv -n ansible-automation-platform command:
+5. Verify the CSV PHASE reports "Succeeded" before proceeding using the oc get csv -n ansible-automation-platform command:
   
 
 ```
@@ -99,7 +100,7 @@ oc get csv -n ansible-automation-platform
 aap-operator.v2.7.0-0.1728520175   Ansible Automation Platform   2.7.0+0.1728520175   aap-operator.v2.7.0-0.1727875185   Succeeded
 ```
 
-6.  Create an `AnsibleAutomationPlatform` object called `example` in the `ansible-automation-platform` namespace. To change the Ansible Automation Platform and its components from `example`, edit the *name* field in the `metadata:` section and replace example with the name you want to use:
+6. Create an `AnsibleAutomationPlatform` object called `example` in the `ansible-automation-platform` namespace. To change the Ansible Automation Platform and its components from `example`, edit the *name* field in the `metadata:` section and replace example with the name you want to use:
 
 ```
 oc apply -f - <<EOF

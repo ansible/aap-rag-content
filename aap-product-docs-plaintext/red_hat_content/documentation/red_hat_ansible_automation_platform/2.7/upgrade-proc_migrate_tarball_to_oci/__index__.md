@@ -24,7 +24,7 @@ Back up your current Helm values before you upgrade. Upgrades without `-f backup
 
 ## Procedure
 
-1.  Export your current Helm release values:
+1. Export your current Helm release values:
 
 
 ```
@@ -33,7 +33,7 @@ $ helm get values <release-name> -n <namespace> > backup-values.yaml
 
 Replace `<release-name>` with your Helm release name (for example, `redhat-rhaap-portal`) and `<namespace>` with your OpenShift namespace (for example, `default`).
 
-2.  Create the `auth.json` file and the OCI registry authentication secret.
+2. Create the `auth.json` file and the OCI registry authentication secret.
 The `install-dynamic-plugins` init container uses the authentication secret directly and does not use cluster pull secrets or `imagePullSecrets`. Follow these steps:
 
 1. Create the base64-encoded credentials. Use the `-w0` flag to produce single-line output (required):
@@ -78,7 +78,7 @@ $ oc get secret <release-name>-dynamic-plugins-registry-auth \
 
 The output should display valid JSON with your credentials intact.
 
-3.  Edit `backup-values.yaml` to enable OCI delivery.
+3. Edit `backup-values.yaml` to enable OCI delivery.
 Keep all existing custom configuration (OAuth, RBAC, certificate settings, etc.). Add or modify only the plug-in delivery settings:
 
 ```yaml
@@ -94,7 +94,7 @@ Replace `<plugin-version>` with the version from your current Helm release (for 
 $ helm get values <release-name> -n <namespace> | grep imageTagInfo
 ```
 
-4.  Upgrade the Helm release:
+4. Upgrade the Helm release:
 
 
 ```
@@ -104,7 +104,7 @@ $ helm upgrade <release-name> openshift-helm-charts/redhat-rhaap-portal \
 
 If you also need to specify a chart version, add `--version <chart-version>`.
 
-5.  Verify the OCI plug-in installation by checking the init container logs.
+5. Verify the OCI plug-in installation by checking the init container logs.
 After the Helm upgrade completes, the pod will restart. Check the `install-dynamic-plugins` init container logs to confirm successful OCI pulls:
 
 ```

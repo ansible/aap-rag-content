@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-proc_controller_api_session_auth/aem-page/secure-proc_controller_api_session_auth.html"
 last_crumb = "Use session authentication"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Use session authentication"
 oversized = "false"
@@ -41,7 +42,7 @@ Use the curl tool to see the activity that occurs when you log in through platfo
 
 ## Procedure
 
-1.  Use `GET` to go to the `/api/login/` endpoint to get the `csrftoken` cookie:
+1. Use `GET` to go to the `/api/login/` endpoint to get the `csrftoken` cookie:
   
 
 ```
@@ -50,8 +51,8 @@ $ curl -k -c - https://<gateway server name>/api/gateway/v1/login/
     $YOUR_AAP_URL FALSE / TRUE 1780539778 csrftoken GODXonA5LyV1uAs8zvcD2k12DQJC74oB
 ```
 
-2.  Extract the `csrftoken` value from the cookie returned in the first step.
-3.  `POST` to the `/api/login/` endpoint with username, password, and `X-CSRFToken=<token-value>`:
+2. Extract the `csrftoken` value from the cookie returned in the first step.
+3. `POST` to the `/api/login/` endpoint with username, password, and `X-CSRFToken=<token-value>`:
   
 
 ```
@@ -68,9 +69,9 @@ curl -X POST -H 'Content-Type: application/x-www-form-urlencoded' \
     https://<gateway server name>/api/gateway/v1/login/ -k -D - -o /dev/null
 ```
 
-4.  Access and test the APIs that need authentication, for example `/api/controller/v2/settings/all/`:
+4. Access and test the APIs that need authentication, for example `/api/controller/v2/settings/all/`:
   
-   Note:
+  Note:
       Platform gateway performs all of these steps when you log into the UI or API in the browser. You must use this procedure only when authenticating in the browser. For programmatic integration with platform gateway, see [OAuth2 token authentication](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_controller_api_oauth2_token#controller-api-oauth2-token "OAuth (Open Authorization) is an open standard for token-based authentication and authorization. OAuth 2 authentication is commonly used when interacting with the platform gateway API programmatically.").
 
 ```
@@ -106,6 +107,6 @@ Strict-Transport-Security: max-age=15768000
 
 When a user is successfully authenticated with this method, the server responds with a header called `X-API-Session-Cookie-Name`, indicating the configured name of the session cookie. The default value is `awx_session_id` which you can see later in the `Set-Cookie` headers.
 
- Note:
+Note:
 
 You can change the session expiration time by specifying it in the `SESSION_COOKIE_AGE` parameter.

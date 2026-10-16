@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_working_with_signed_containers"
-template = "docs/aem-title.html"
 title = "Secure your automation with container signing - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-define__create__and_build_execution_environments/", "Define, create, and build execution environments"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_working_with_signed_containers/aem-page/administer-assembly_working_with_signed_containers.html"
 last_crumb = "Secure your automation with container signing"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Secure your automation with container signing"
 oversized = "false"
@@ -43,7 +44,7 @@ Note that installer looks for the script and key on the same server where instal
 
 ### Procedure
 
-1.  From a terminal, create a signing script, and pass the script path as an installer parameter. **Example**:
+1. From a terminal, create a signing script, and pass the script path as an installer parameter. **Example**:
 
 ```
 #!/usr/bin/env bash
@@ -73,7 +74,7 @@ else
 fi
 ```
 
-2.  Review the Ansible Automation Platform installer inventory file for options for container signing that begin with `automationhub_*`.
+2. Review the Ansible Automation Platform installer inventory file for options for container signing that begin with `automationhub_*`.
 
 ```
 [all:vars]
@@ -86,7 +87,7 @@ automationhub_container_signing_service_key = /absolute/path/to/key/to/sign
 automationhub_container_signing_service_script = /absolute/path/to/script/that/signs
 ```
 
-3.  Once installation is complete, log in to Ansible Automation Platform and navigate to Automation Content> (and then)Signature Keys. Note:
+3. Once installation is complete, log in to Ansible Automation Platform and navigate to Automation Content> (and then)Signature Keys. Note:
       The `container-default` service is created by the Ansible Automation Platform installer.
 
 ### Results
@@ -99,16 +100,16 @@ Push a signed execution environment to your private automation hub for added sec
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Content> (and then)Execution Environments.
-2.  Click Create execution environment and enter the relevant information in the fields that appear.   1.  The **Name** field displays the name of the execution environment on your local registry.
-  2.  The **Upstream name** field is the name of the image on the remote server.
-  3.  Under **Registry**, select the name of the registry from the drop-down menu.
-  4.  Optional: Enter tags in the **Add tag(s) to include** field. If the field is blank, all the tags are passed. You must specify which repository-specific tags to pass.
-  5.  Optional: Enter tags to exclude in the **Add tag(s) to exclude** field.
-3.  Click Create execution environment. You should see your new execution environment in the list that appears.
-4.  Sync and sign your new automation execution environment.   1.  Click the More Actions icon **⋮** and select **Sync execution environment**.
-  2.  Click the More Actions icon **⋮** and select **Sign execution environment**.
-5.  Click on your new execution environment. On the Details page, find the **Signed** label to determine that your execution environment has been signed.
+1. From the navigation panel, select Automation Content> (and then)Execution Environments.
+2. Click Create execution environment and enter the relevant information in the fields that appear.   1. The **Name** field displays the name of the execution environment on your local registry.
+  2. The **Upstream name** field is the name of the image on the remote server.
+  3. Under **Registry**, select the name of the registry from the drop-down menu.
+  4. Optional: Enter tags in the **Add tag(s) to include** field. If the field is blank, all the tags are passed. You must specify which repository-specific tags to pass.
+  5. Optional: Enter tags to exclude in the **Add tag(s) to exclude** field.
+3. Click Create execution environment. You should see your new execution environment in the list that appears.
+4. Sync and sign your new automation execution environment.   1. Click the More Actions icon **⋮** and select **Sync execution environment**.
+  2. Click the More Actions icon **⋮** and select **Sign execution environment**.
+5. Click on your new execution environment. On the Details page, find the **Signed** label to determine that your execution environment has been signed.
 
 ## Push a signed execution environment from your local system
 
@@ -116,20 +117,20 @@ Sign an automation execution environment on a local system and push the signed e
 
 ### Procedure
 
-1.  From a terminal, log in to Podman, or any container client currently in use, and pull the execution environment you want to sign.
+1. From a terminal, log in to Podman, or any container client currently in use, and pull the execution environment you want to sign.
 
 ```
 podman pull <container-name>
 ```
 
-2.  After the execution environment is pulled, add tags (for example: `latest`, `rc`, `beta`, or version numbers, such as `1.0`, `2.3`, and so on):
+2. After the execution environment is pulled, add tags (for example: `latest`, `rc`, `beta`, or version numbers, such as `1.0`, `2.3`, and so on):
   
 
 ```
 podman tag <container-name> <server-address>/<container-name>:<tag name>
 ```
 
-3.  Sign the execution environment after changes have been made, and push it back up to the automation hub registry:
+3. Sign the execution environment after changes have been made, and push it back up to the automation hub registry:
   
 
 ```
@@ -142,9 +143,9 @@ podman push <server-address>/<container-name>:<tag name> --tls-verify=false --si
 podman push <server-address>/<container-name>:<tag name> --tls-verify=false
 ```
 
-4.  After the execution environment has been pushed, navigate to Automation Content> (and then)Execution Environments.
-5.  To display the new execution environment, click the **Refresh** icon.
-6.  Click the name of the image to view your pushed image.
+4. After the execution environment has been pushed, navigate to Automation Content> (and then)Execution Environments.
+5. To display the new execution environment, click the **Refresh** icon.
+6. Click the name of the image to view your pushed image.
 
 ### Results
 
@@ -169,8 +170,8 @@ To ensure an execution environment is signed by specific signatures, the signatu
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Content> (and then)Signature Keys.
-2.  Click the Download key icon next to the signature that you are using. A new window should open to indicate you have downloaded the key.
+1. From the navigation panel, select Automation Content> (and then)Signature Keys.
+2. Click the Download key icon next to the signature that you are using. A new window should open to indicate you have downloaded the key.
 
 ## Configure a client to verify signatures
 
@@ -182,7 +183,7 @@ To ensure an execution environment pulled from the remote registry is properly s
 
 ### Procedure
 
-1.  Open your terminal and use the following command:
+1. Open your terminal and use the following command:
   
 
 ```
@@ -214,7 +215,7 @@ sudo <name of editor> /etc/containers/policy.json
   Note:
       The only `keyType` currently supported is GPG keys.
 
-2.  Under the `<server-address>` entry, modify the `keyPath` <1> to include the name of your key file.
+2. Under the `<server-address>` entry, modify the `keyPath` <1> to include the name of your key file.
 
 ```
 {
@@ -236,7 +237,7 @@ sudo <name of editor> /etc/containers/policy.json
 }
 ```
 
-3.  Save and close the file.
+3. Save and close the file.
 
 ### Results
 

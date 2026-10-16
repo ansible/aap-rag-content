@@ -10,7 +10,7 @@ You can run commands from your terminal to create a project in your cluster for 
 
 ### Procedure
 
-1.  In a terminal, log in to OpenShift Container Platform using your credentials:
+1. In a terminal, log in to OpenShift Container Platform using your credentials:
 
 
 ```
@@ -34,7 +34,7 @@ You have access to 22 projects, the list has been suppressed. You can list all p
 Using project "default".
 ```
 
-2.  Create a new project. Use a unique project name.
+2. Create a new project. Use a unique project name.
 
 
 ```
@@ -52,7 +52,7 @@ $ oc new-project my-project
 Now using project "my-project" on server "https://openshift.example.com:6443".
 ```
 
-3.  Open your new project:
+3. Open your new project:
 
 
 ```

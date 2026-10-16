@@ -17,7 +17,7 @@ When you instantiate mesh ingress you set up a pod, or receptor hop node inside 
 
 ### Procedure
 
-1.  Create a YAML file (in this case named `oc_meshingress.yml`) to set up the mesh ingress node. Your file should resemble the following:
+1. Create a YAML file (in this case named `oc_meshingress.yml`) to set up the mesh ingress node. Your file should resemble the following:
 
 ```
 apiVersion: automationcontroller.ansible.com/v1alpha1
@@ -43,7 +43,7 @@ Where:
 
 - **deployment_name**: is the automation controller instance that this mesh ingress is attached to. Provide the name of your automation controller instance.
 
-2.  Apply this YAML file using:
+2. Apply this YAML file using:
 
 
 ```
@@ -52,7 +52,7 @@ oc apply -f oc_meshingress.yml
 
 Run this playbook to creates the `AutomationControllerMeshIngress` resource. The operator creates a hop node in automation controller with the `name` you supplied.
 
-3.  When the MeshIngress instance has been created, it appears in the Instances page.  Important:
+3. When the MeshIngress instance has been created, it appears in the Instances page. Important:
 Any instance that is to function as a remote execution node in "pull" mode need to be created after this procedure and must be configured as follows:
 
 ```
@@ -64,7 +64,7 @@ Managed by Policy: as needed
 Peers from control nodes: unchecked (this one is important)
 ```
 
-4.  Associate this new instance with the hop node you created using the procedure in this paragraph
-5.  Download the tarball.  Note:
+4. Associate this new instance with the hop node you created using the procedure in this paragraph
+5. Download the tarball. Note:
 Association with the hop node must be done before creating the tarball.
 

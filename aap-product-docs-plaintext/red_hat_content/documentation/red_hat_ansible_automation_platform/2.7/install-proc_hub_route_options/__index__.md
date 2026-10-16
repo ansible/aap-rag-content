@@ -6,13 +6,13 @@ The Red Hat Ansible Automation Platform operator installation form allows you to
 
 ## Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  Navigate to Operators> (and then)Installed Operators.
-3.  Select your Ansible Automation Platform Operator deployment.
-4.  Select the **Ansible Automation Platform** tab.
-5.  Click the ⋮ icon next to your Ansible Automation Platform instance and select **Edit AnsibleAutomationPlatform** .
-6.  Click **YAML view** and locate the `spec.hub:` section..
-7.  Configure the route options under the `hub:` section:
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to Operators> (and then)Installed Operators.
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select the **Ansible Automation Platform** tab.
+5. Click the ⋮ icon next to your Ansible Automation Platform instance and select **Edit AnsibleAutomationPlatform** .
+6. Click **YAML view** and locate the `spec.hub:` section..
+7. Configure the route options under the `hub:` section:
 
 
 ```
@@ -24,7 +24,7 @@ route_tls_termination_mechanism: Edge  # Options: Edge, Passthrough
 route_tls_secret: hub-tls-secret  # Optional: TLS credential secret
 ```
 
-8.  Click **Save.**
+8. Click **Save.**
 
 Note:
 Edge termination is recommended for most instances. After configuring your route, you can customize additional route settings by adding them to the `hub:` section in the Ansible Automation Platform custom resource.

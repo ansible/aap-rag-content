@@ -1,16 +1,17 @@
 +++
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_networking_playbook"
 title = "Gather and display network device info with a playbook - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-assembly_intro_to_playbooks_1/", "Get started automating with playbooks"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-assembly_intro_to_playbooks/", "Get started automating with playbooks"]]
 category = "Develop"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_networking_playbook/aem-page/develop-assembly_networking_playbook.html"
 last_crumb = "Gather and display network device info with a playbook"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Gather and display network device info with a playbook"
 oversized = "false"
@@ -61,7 +62,8 @@ The flags in this command set seven values:
 
 Note:
 
-If you use `ssh-agent` with SSH keys, Ansible loads them automatically. You can omit the `-k` flag.
+If you use `ssh-agent` with SSH keys, Ansible loads them automatically.
+You can omit the `-k` flag.
 
 If you are running Ansible in a virtual environment, you must also add the variable `ansible_python_interpreter=/path/to/venv/bin/python`.
 
@@ -93,9 +95,9 @@ The playbook looks like this:
         msg: "The hostname is {{ ansible_net_hostname }} and the OS is {{ ansible_net_version }}"
 ```
 
-| Label               | Description                                                                                                                                                                                              |
-| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br> `gather_facts` | <br>Ansible’s native fact gathering (`ansible.builtin.setup`) is disabled here because the playbook relies on the facts provided by a platform-specific module (`vyos.vyos.vyos_facts`) in this networking collection. |
+| Label          | Description                                                                                                                                                                                              |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `gather_facts` | Ansible’s native fact gathering (`ansible.builtin.setup`) is disabled here because the playbook relies on the facts provided by a platform-specific module (`vyos.vyos.vyos_facts`) in this networking collection. |
 
 The playbook sets three of the seven values from the command line above:
 
@@ -103,7 +105,8 @@ The playbook sets three of the seven values from the command line above:
 - the connection method (`connection: ansible.netcommon.network_cli`) and
 - the module (in each task).
 
-With those values set in the playbook, you can omit them on the command line. The playbook also adds a second task to show the configuration output.
+With those values set in the playbook, you can omit them on the command line.
+The playbook also adds a second task to show the configuration output.
 
 When facts are gathered from a system, either through a collection-specific fact module such as `vyos.vyos.vyos_facts` or `ansible.builtin.setup`, the gathered data is held in memory for use by future tasks instead of being written to the console.
 
@@ -113,11 +116,13 @@ The following debug task lets you see the results in your shell.
 
 ### About this task
 
-The playbook can store many of the parameters you provided with flags at the command line, leaving less to type at the command line. You need two files for this, a playbook and an inventory file.
+The playbook can store many of the parameters you provided with flags at the command line, leaving less to type at the command line.
+You need two files for this, a playbook and an inventory file.
 
 ### Procedure
 
-1.  Run the playbook with the following command.  `ansible-playbook -i vyos.example.net, -u ansible -k -e ansible_network_os=vyos.vyos.vyos first_playbook.yml`
+1. Run the playbook with the following command.
+      `ansible-playbook -i vyos.example.net, -u ansible -k -e ansible_network_os=vyos.vyos.vyos first_playbook.yml`
 
     The playbook contains one play with two tasks, and generates output similar to the following:
 
@@ -138,8 +143,8 @@ ok: [vyos.example.net] => {
 }
 ```
 
-2.  Now that you can retrieve the device configuration, you can try updating it with Ansible.
-3.  Download `first_playbook_ext.yml` from [here](https://docs.ansible.com/projects/ansible/latest/_downloads/47cc11a5d29fe635cb56cb6e1cd74e0f/first_playbook_ext.yml), which is an extended version of the first playbook:
+2. Now that you can retrieve the device configuration, you can try updating it with Ansible.
+3. Download `first_playbook_ext.yml` from [here](https://docs.ansible.com/projects/ansible/latest/_downloads/47cc11a5d29fe635cb56cb6e1cd74e0f/first_playbook_ext.yml), which is an extended version of the first playbook:
       The playbook looks like this:
 
 ```
@@ -174,14 +179,15 @@ ok: [vyos.example.net] => {
         msg: "The new hostname is {{ ansible_net_hostname }} and the OS is {{ ansible_net_version }}"
 ```
 
-4.  The extended first playbook has five tasks in a single play.
-5.  Run the playbook with the following command.
+4. The extended first playbook has five tasks in a single play.
+5. Run the playbook with the following command.
+  
 
 ```
 $ ansible-playbook -i vyos.example.net, -u ansible -k -e ansible_network_os=vyos.vyos.vyos first_playbook_ext.yml
 ```
 
-6.  The output shows you the change Ansible made to the configuration:
+6. The output shows you the change Ansible made to the configuration:
   
 
 ```
@@ -221,7 +227,8 @@ vyos.example.net           : ok=5    changed=1    unreachable=0    failed=0
 
 ## Gather facts from network devices
 
-The `gather_facts` keyword supports gathering network device facts in standardized key/value pairs. You can feed these network facts into further tasks to manage the network device.
+The `gather_facts` keyword supports gathering network device facts in standardized key/value pairs.
+You can feed these network facts into further tasks to manage the network device.
 
 You can also use the `gather_network_resources` parameter with the network `*_facts` modules (such as `arista.eos.eos_facts`) to return a subset of the device configuration, as the following example shows:
 

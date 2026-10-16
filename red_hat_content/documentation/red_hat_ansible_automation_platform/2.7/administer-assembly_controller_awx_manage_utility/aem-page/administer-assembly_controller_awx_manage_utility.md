@@ -1,7 +1,7 @@
 +++
 title = "Use awx-manage to access automation controller information - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_awx_manage_utility"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_awx_manage_utility/", "Use awx-manage to access automation controller information"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_awx_manage_utility/aem-page/administer-assembly_controller_awx_manage_utility.html"
 last_crumb = "Use awx-manage to access automation controller information"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Use awx-manage to access automation controller information"
 oversized = "false"
@@ -37,13 +38,13 @@ To use `awx-manage` properly, you must first create an inventory in automation c
 
 For help with `awx-manage`, run the following command:
 
- `awx-manage inventory_import [--help]`
+`awx-manage inventory_import [--help]`
 
 The `inventory_import` command synchronizes an automation controller inventory object with a text-based inventory file, dynamic inventory script, or a directory of one or more, as supported by core Ansible.
 
 When running this command, specify either an `--inventory-id` or `--inventory-name`, and the path to the Ansible inventory source (`--source`).
 
- `awx-manage inventory_import --source=/ansible/inventory/ --inventory-id=1`
+`awx-manage inventory_import --source=/ansible/inventory/ --inventory-id=1`
 
 By default, inventory data already stored in automation controller blends with data from the external source.
 
@@ -53,7 +54,7 @@ To specify that any existing hosts get variable data exclusively from the `--sou
 
 The default behavior adds any new variables from the external source, overwriting keys that already exist, but preserving any variables that were not sourced from the external data source.
 
- `awx-manage inventory_import --source=/ansible/inventory/ --inventory-id=1 --overwrite`
+`awx-manage inventory_import --source=/ansible/inventory/ --inventory-id=1 --overwrite`
 
 Note:
 
@@ -65,13 +66,14 @@ Edits and additions to Inventory host variables persist beyond an inventory sync
 
 Automation controller administrators can use the automation controller **Management Jobs** interface for access or use the command line.
 
--  `awx-manage cleanup_jobs [--help]`     This permanently deletes the job details and job output for jobs older than a specified number of days.
+- `awx-manage cleanup_jobs [--help]`     This permanently deletes the job details and job output for jobs older than a specified number of days.
 
--  `awx-manage cleanup_activitystream [--help]`     This permanently deletes any activity stream data older than a specific number of days.
+- `awx-manage cleanup_activitystream [--help]`     This permanently deletes any activity stream data older than a specific number of days.
 
 ## Cluster management
 
-This section describes how to manage a automation controller cluster by provisioning and deprovisioning cluster instances. Automation controller uses the `awx-manage` command-line tool to manage cluster instances.
+This section describes how to manage a automation controller cluster by provisioning and deprovisioning cluster instances.
+Automation controller uses the `awx-manage` command-line tool to manage cluster instances.
 
 For more information about the `awx-manage provision_instance` and `awx-manage deprovision_instance` commands, see [Clustering](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-clustering).
 
@@ -83,11 +85,11 @@ Do not run other `awx-manage` commands unless instructed by Ansible Support.
 
 Use this command to gather analytics on-demand outside of the predefined window (the default is 4 hours):
 
- `$ awx-manage gather_analytics --ship`
+`$ awx-manage gather_analytics --ship`
 
 For customers with disconnected environments who want to collect usage information about unique hosts automated across a time period, use this command:
 
- `awx-manage host_metric --since YYYY-MM-DD --json`
+`awx-manage host_metric --since YYYY-MM-DD --json`
 
 The `--since` parameter is optional.
 

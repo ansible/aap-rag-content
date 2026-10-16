@@ -16,16 +16,16 @@ Restoring from an external database force drops the database, which overrides yo
 
 ### Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  Navigate to Operators> (and then)Installed Operators.
-3.  Select your Ansible Automation Platform Operator deployment.
-4.  Go to your **All Instances** tab, and click Create New.
-5.  Select **Ansible Automation Platform Restore** from the list.
-6.  For **Name** enter the name for the recovery deployment.
-7.  For **New Ansible Automation Platform Name** enter the new name for your Ansible Automation Platform instance.   - If restoring to the same name Ansible Automation Platform then you must add `force_drop_db: true` to drop the database on restore.
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to Operators> (and then)Installed Operators.
+3. Select your Ansible Automation Platform Operator deployment.
+4. Go to your **All Instances** tab, and click Create New.
+5. Select **Ansible Automation Platform Restore** from the list.
+6. For **Name** enter the name for the recovery deployment.
+7. For **New Ansible Automation Platform Name** enter the new name for your Ansible Automation Platform instance.   - If restoring to the same name Ansible Automation Platform then you must add `force_drop_db: true` to drop the database on restore.
 
-8.  **Backup Source** defaults to **CR**.
-9.  For **Backup name** enter the name you chose when creating the backup. Under **YAML view** paste in the following example:
+8. **Backup Source** defaults to **CR**.
+9. For **Backup name** enter the name you chose when creating the backup. Under **YAML view** paste in the following example:
 
 
 ```
@@ -41,7 +41,7 @@ controller:
 force_drop_db: true
 ```
 
-10.  Click Create.
+10. Click Create.
 
 ### Results
 

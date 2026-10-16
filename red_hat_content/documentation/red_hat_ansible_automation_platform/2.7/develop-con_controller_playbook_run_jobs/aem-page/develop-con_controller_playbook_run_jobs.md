@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_playbook_run_jobs"
 title = "View output for your playbook job runs - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_jobs/", "Use jobs to run playbooks against an inventory of hosts"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-con_controller_playbook_run_jobs/aem-page/develop-con_controller_playbook_run_jobs.html"
 last_crumb = "View output for your playbook job runs"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "View output for your playbook job runs"
 oversized = "false"
@@ -29,9 +30,13 @@ type = "aem-page"
 
 You can run playbook jobs to run Ansible playbooks on one or more managed nodes directly from the automation controller interface without creating a job template.
 
-Use playbook run jobs to perform tasks that are more complex than those that can be accomplished with remote command execution. Any task that you can describe as an Ansible Playbook can be run on a host or group of hosts in your inventory. You can manage your systems quickly and easily. Because of an RBAC engine and detailed audit logging, you know which user has completed a specific task.
+Use playbook run jobs to perform tasks that are more complex than those that can be accomplished with remote command execution.
+Any task that you can describe as an Ansible Playbook can be run on a host or group of hosts in your inventory.
+You can manage your systems quickly and easily.
+Because of an RBAC engine and detailed audit logging, you know which user has completed a specific task.
 
-When a playbook is run, the results display in the **Output** tab. If used, the Ansible CLI displays the same information. This can be useful for debugging.
+When a playbook is run, the results display in the **Output** tab.
+If used, the Ansible CLI displays the same information. This can be useful for debugging.
 
 The events summary displays the following events that are run as part of this playbook:
 
@@ -46,7 +51,8 @@ You can Relaunch job, Cancel job, download ![Download](/webassets/aem/red_hat_an
 
 Hover over a section of the host status bar in the **Output** view and the number of hosts associated with that status displays.
 
-The output for a playbook job is also available after launching a job from the **Jobs** tab of its **Jobs Templates** page. View its host details by clicking the line item tasks in the output.
+The output for a playbook job is also available after launching a job from the **Jobs** tab of its **Jobs Templates** page.
+View its host details by clicking the line item tasks in the output.
 
 ## Search
 
@@ -83,7 +89,7 @@ The standard output view displays the events that occur on a particular job.
 
 Click a line of an event from the **Stdout** pane and a **Host Events** window displays in a separate window. This window shows the host that was affected by that particular event.
 
- Note:
+Note:
 
 Upgrading to the latest versions of Ansible Automation Platform involves progressively migrating all historical playbook output and events. This migration process is gradual, and happens automatically in the background after installation is complete. Installations with very large amounts of historical job output (tens or hundreds of GB of output) can have missing job output until migration is complete. The most recent data shows up at the top of the output, followed by older events.
 
@@ -98,7 +104,9 @@ Access the **Details** tab to view details about the job execution:
 You can view the following details for an executed job:
 
 - **Status**: It can be any of the following:
-  * **Pending**: The playbook run has been created, but not queued or started yet. Any job, not just playbook runs, stay in pending until it is ready to be run by the system. Reasons for playbook runs not being ready include dependencies that are currently running (all dependencies must be completed before the next step can run), or there is not enough capacity to run in the locations it is configured to.
+  * **Pending**: The playbook run has been created, but not queued or started yet.
+Any job, not just playbook runs, stay in pending until it is ready to be run by the system.
+Reasons for playbook runs not being ready include dependencies that are currently running (all dependencies must be completed before the next step can run), or there is not enough capacity to run in the locations it is configured to.
   * **Waiting**: The playbook run is in the queue waiting to be executed.
   * **Running**: The playbook run is currently in progress.
   * **Successful**: The last playbook run succeeded.
@@ -124,11 +132,14 @@ You can customize this in the Job Settings and expose additional directories fro
 
 ## Isolation functionality and variables
 
-Automation controller uses container technology to isolate jobs from each other. By default, only the current project is exposed to the container running a job template.
+Automation controller uses container technology to isolate jobs from each other.
+By default, only the current project is exposed to the container running a job template.
 
-If you need to expose additional directories, you must customize your playbook runs. To configure job isolation, you can set variables.
+If you need to expose additional directories, you must customize your playbook runs.
+To configure job isolation, you can set variables.
 
-By default, automation controller uses the system’s `tmp` directory (`/tmp` by default) as its staging area. You can change this in the **Job Execution Path** field of the **Jobs settings** page, or in the REST API at `/api/v2/settings/jobs`:
+By default, automation controller uses the system’s `tmp` directory (`/tmp` by default) as its staging area.
+You can change this in the **Job Execution Path** field of the **Jobs settings** page, or in the REST API at `/api/v2/settings/jobs`:
 
 ```
 AWX_ISOLATION_BASE_PATH = "/opt/tmp"
@@ -140,7 +151,7 @@ If there are any additional directories that should specifically be exposed from
 AWX_ISOLATION_SHOW_PATHS = ['/list/of/', '/paths']
 ```
 
- Note:
+Note:
 
 - If a path to a specific file is entered, then the entire directory containing that file will be mounted inside the execution environment.
 - If your playbooks need to use keys or settings defined in `AWX_ISOLATION_SHOW_PATHS`, then add this file to `/var/lib/awx/.ssh`.

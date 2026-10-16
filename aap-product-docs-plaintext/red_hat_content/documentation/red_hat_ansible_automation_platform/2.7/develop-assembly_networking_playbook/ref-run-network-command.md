@@ -21,7 +21,8 @@ The flags in this command set seven values:
 
 Note:
 
-If you use `ssh-agent` with SSH keys, Ansible loads them automatically. You can omit the `-k` flag.
+If you use `ssh-agent` with SSH keys, Ansible loads them automatically.
+You can omit the `-k` flag.
 
 If you are running Ansible in a virtual environment, you must also add the variable `ansible_python_interpreter=/path/to/venv/bin/python`.
 

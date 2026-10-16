@@ -23,7 +23,7 @@ The corresponding community.hashi_vault modules are:
 
 ### Procedure
 
-1.  Replicate the `community.hashi_vault modules` to the following `hashicorp.vault.kv1_secret_secret_info` parameters.
+1. Replicate the `community.hashi_vault modules` to the following `hashicorp.vault.kv1_secret_secret_info` parameters.
 
 ```
 engine_mount_point:
@@ -41,8 +41,8 @@ extends_documentation_fragment:
 - hashicorp.vault.vault_auth.modules
 ```
 
-2.  (Required) Configure the `path` parameter. This is the path to the secret in the `community.hashi_vault.hashi_vault` modules. **Alias:**`secret_path`
-3.  If needed, configure the optional parameters.
+2. (Required) Configure the `path` parameter. This is the path to the secret in the `community.hashi_vault.hashi_vault` modules. **Alias:**`secret_path`
+3. If needed, configure the optional parameters.
 
 ### What to do next
 
@@ -61,7 +61,7 @@ The corresponding `community.hashi_vault` modules are:
 
 ### Procedure
 
-1.  Replicate `the community.hashi_vault` modules to the following `hashicorp.vault.kv1_secret_get` parameters.
+1. Replicate `the community.hashi_vault` modules to the following `hashicorp.vault.kv1_secret_get` parameters.
 
 ```
 auth_method:
@@ -83,8 +83,8 @@ type: str
 aliases: ['secret_path']
 ```
 
-2.  (Required) Configure the secret parameter. This maps to secret in the `community.hashi_vault.hashi_vault` modules. **Alias:**`secret_path`
-3.  If needed, configure the optional parameters.
+2. (Required) Configure the secret parameter. This maps to secret in the `community.hashi_vault.hashi_vault` modules. **Alias:**`secret_path`
+3. If needed, configure the optional parameters.
 
 ### What to do next
 

@@ -3,19 +3,27 @@
 
 Create a GitHub personal access token (classic) to authenticate Ansible automation portal with your GitHub SCM.
 
+### About this task
+
+A GitHub personal access token provides read access for discovering templates and collections from GitHub repositories.
+
+Important:
+
+Personal access tokens cannot be used to push or save execution environment definitions to GitHub in newer portal versions. To enable pushing definitions, configure a GitHub OAuth App or GitHub App.
+
 ### Procedure
 
-1.  In a browser, log in to GitHub.
-2.  Click your profile picture and select Settings.
-3.  Select Developer settings.
-4.  Select Personal access tokens.
-5.  Click Generate new token> (and then)Generate new token (classic).
-6.  In the Select scopes section, enable the following:
+1. In a browser, log in to GitHub.
+2. Click your profile picture and select Settings.
+3. Select Developer settings.
+4. Select Personal access tokens.
+5. Click Generate new token> (and then)Generate new token (classic).
+6. In the Select scopes section, enable the following:
 
 - `repo`
 - `read:org`
 - `workflow` (as needed)
 
-7.  Click Generate token.
-8.  Save the personal access token.
+7. Click Generate token.
+8. Save the personal access token.
 

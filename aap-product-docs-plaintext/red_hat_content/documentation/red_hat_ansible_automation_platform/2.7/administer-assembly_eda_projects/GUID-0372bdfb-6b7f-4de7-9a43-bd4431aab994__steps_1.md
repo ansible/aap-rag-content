@@ -2,10 +2,10 @@
 ## Set up a new project
 ### Procedure
 
-1.  Log in to the Ansible Automation Platform Dashboard.
-2.  Navigate to **Automation Decisions> (and then)Projects**.
-3.  Click Create project.
-4.  Insert the following:
+1. Log in to the Ansible Automation Platform Dashboard.
+2. Navigate to **Automation Decisions> (and then)Projects**.
+3. Click Create project.
+4. Insert the following:
 
 
 Name
@@ -47,5 +47,5 @@ Options
 - **Verify SSL** - The Verify SSL option is enabled by default. Enabling this option verifies the SSL with HTTPS when the project is imported. Note:
 You can disable this option if you have a local repository that uses self-signed certificates.
 
-5.  Select Create project.
+5. Select Create project.
 

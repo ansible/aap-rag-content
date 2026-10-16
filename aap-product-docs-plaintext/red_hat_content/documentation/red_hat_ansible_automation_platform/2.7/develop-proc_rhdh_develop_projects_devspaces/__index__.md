@@ -8,7 +8,7 @@ The OpenShift Dev Spaces instance provides a default configuration that installs
 
 ## Procedure
 
-Activate Ansible Lightspeed in the Ansible VS Code extension. For more information, refer to the [Red Hat Ansible Lightspeed with IBM watsonx Code Assistant User Guide](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index).
+Activate Ansible Lightspeed in the Ansible VS Code extension. For more information, refer to the[Red Hat Ansible Lightspeed with IBM watsonx Code Assistant User Guide](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index).
 
 Important:
 

@@ -1,7 +1,7 @@
 +++
 title = "Upgrade the Ansible plug-ins with Helm - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-assembly_rhdh_upgrade_ocp_helm"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-upgrade_plug_ins_for_rhdh/", "Upgrade Ansible plug-ins for Red Hat Developer Hub"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/upgrade-assembly_rhdh_upgrade_ocp_helm/aem-page/upgrade-assembly_rhdh_upgrade_ocp_helm.html"
 last_crumb = "Upgrade the Ansible plug-ins with Helm"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Upgrade the Ansible plug-ins with Helm"
 oversized = "false"
@@ -41,22 +42,22 @@ The HTTP plug-in registry method is deprecated and will be removed in a future r
 
 ### Procedure
 
-1.  In a browser, navigate to the [Red Hat Ansible Automation Platform Product Software downloads page](https://access.redhat.com/downloads/content/480/ver=2.6/rhel---9/2.6/x86_64/product-software) and select the **Product Software** tab.
-2.  Click **Download now** next to **Ansible plug-ins for Red Hat Developer Hub Setup Bundle** to download the latest version of the plug-ins. The format of the filename is `ansible-rhdh-plugins-x.y.z.tar.gz`. Substitute the Ansible plug-ins release version, for example `2.0.0`, for `x.y.z`.
+1. In a browser, navigate to the [Red Hat Ansible Automation Platform Product Software downloads page](https://access.redhat.com/downloads/content/480/ver=2.6/rhel---9/2.6/x86_64/product-software) and select the **Product Software** tab.
+2. Click **Download now** next to **Ansible plug-ins for Red Hat Developer Hub Setup Bundle** to download the latest version of the plug-ins. The format of the filename is `ansible-rhdh-plugins-x.y.z.tar.gz`. Substitute the Ansible plug-ins release version, for example `2.0.0`, for `x.y.z`.
 
-3.  Create a directory on your local machine to store the `.tar` files.
+3. Create a directory on your local machine to store the `.tar` files.
 
 ```
 $ mkdir /path/to/<ansible-backstage-plugins-local-dir-changeme>
 ```
 
-4.  Set an environment variable (`$DYNAMIC_PLUGIN_ROOT_DIR`) to represent the directory path.
+4. Set an environment variable (`$DYNAMIC_PLUGIN_ROOT_DIR`) to represent the directory path.
 
 ```
 $ export DYNAMIC_PLUGIN_ROOT_DIR=/path/to/<ansible-backstage-plugins-local-dir-changeme>
 ```
 
-5.  Extract the `ansible-rhdh-plugins-<version-number>.tar.gz` contents to `$DYNAMIC_PLUGIN_ROOT_DIR`.
+5. Extract the `ansible-rhdh-plugins-<version-number>.tar.gz` contents to `$DYNAMIC_PLUGIN_ROOT_DIR`.
 
 ```
 $ tar --exclude='*code*' -xzf ansible-rhdh-plugins-x.y.z.tar.gz -C $DYNAMIC_PLUGIN_ROOT_DIR
@@ -89,20 +90,20 @@ Rebuild your plug-in registry application in your OpenShift cluster with the lat
 
 ### Procedure
 
-1.  Log in to your OpenShift Container Platform instance with credentials to create a new application.
-2.  Open your Red Hat Developer Hub OpenShift project.
+1. Log in to your OpenShift Container Platform instance with credentials to create a new application.
+2. Open your Red Hat Developer Hub OpenShift project.
 
 ```
 $ oc project <YOUR_DEVELOPER_HUB_PROJECT>
 ```
 
-3.  Run the following commands to update your plug-in registry build in the OpenShift cluster. The commands assume that `$DYNAMIC_PLUGIN_ROOT_DIR` represents the directory for your `.tar` files. Replace this in the command if you have chosen a different environment variable name.
+3. Run the following commands to update your plug-in registry build in the OpenShift cluster. The commands assume that `$DYNAMIC_PLUGIN_ROOT_DIR` represents the directory for your `.tar` files. Replace this in the command if you have chosen a different environment variable name.
 
 ```
 $ oc start-build plugin-registry --from-dir=$DYNAMIC_PLUGIN_ROOT_DIR --wait
 ```
 
-4.  When the registry has started, the output displays the following message:
+4. When the registry has started, the output displays the following message:
   
 
 ```
@@ -127,9 +128,9 @@ To upgrade the Ansible plug-ins, you must update the `imageTagInfo` parameter in
 
 ### Procedure
 
-1.  Log in to your Red Hat OpenShift Container Platform instance.
-2.  In the OpenShift Developer UI, navigate to Helm> (and then)developer-hub> (and then)Actions> (and then)Upgrade> (and then)Yaml view.
-3.  Locate the `global` section.
+1. Log in to your Red Hat OpenShift Container Platform instance.
+2. In the OpenShift Developer UI, navigate to Helm> (and then)developer-hub> (and then)Actions> (and then)Upgrade> (and then)Yaml view.
+3. Locate the `global` section.
   
 
 ```yaml
@@ -147,7 +148,7 @@ global:
     plugins: []
 ```
 
-4.  Click Upgrade.
+4. Click Upgrade.
       The Red Hat Developer Hub pods restart and pull the new plug-in versions.
 
 ### Results

@@ -1,7 +1,7 @@
 # Ensure system health and efficiency through monitoring
 ## Metrics for monitoring automation controller application
 
-For application level monitoring, automation controller provides Prometheus-style metrics on an API endpoint `/api/v2/metrics`. Use these metrics to check data about job status and subsystem performance, such as for job output processing or job scheduling.
+For application level monitoring, automation controller provides Prometheus-style metrics on an API endpoint `/api/controller/v2/metrics/`. Use these metrics to check data about job status and subsystem performance, such as for job output processing or job scheduling.
 
 The metrics endpoint includes descriptions of each metric. Metrics of particular interest for performance include:
 

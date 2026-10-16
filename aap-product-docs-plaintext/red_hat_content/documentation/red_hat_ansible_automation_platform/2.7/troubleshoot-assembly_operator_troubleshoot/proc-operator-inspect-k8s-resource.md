@@ -5,14 +5,14 @@ To inspect a OpenShift Container Platform resource, you must use the `oc` comman
 
 ### Procedure
 
-1.  To view a human-readable summary of a resource, run:
+1. To view a human-readable summary of a resource, run:
 
 
 ```
 oc describe -n <namespace> <resource> <resource-name>
 ```
 
-2.  To view the complete YAML definition of a resource, use the `-o yaml` flag:
+2. To view the complete YAML definition of a resource, use the `-o yaml` flag:
 
 
 ```

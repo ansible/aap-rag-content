@@ -1,7 +1,7 @@
 +++
-title = "Access Ansible Automation Platform through the CLI - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_installing_aap_operator_fetch_details"
 template = "docs/aem-title.html"
+title = "Access Ansible Automation Platform through the CLI - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator/", "Install on OpenShift Container Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_installing_aap_operator_fetch_details/aem-page/install-assembly_installing_aap_operator_fetch_details.html"
 last_crumb = "Access Ansible Automation Platform through the CLI"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Access Ansible Automation Platform through the CLI"
 oversized = "false"
@@ -27,17 +28,20 @@ type = "aem-page"
 
 # Access Ansible Automation Platform through the CLI
 
-You can use the OpenShift Container Platform CLI to fetch the web address and the password of the Automation controller that you created. To login to the platform gateway, you need the web address and the password.
+You can use the OpenShift Container Platform CLI to fetch the web address and the password of the Automation controller that you created.
+To login to the platform gateway, you need the web address and the password.
 
 ## Fetch the platform gateway web address
 
-A Red Hat OpenShift Container Platform route exposes a service at a host name, so that external clients can reach it by name. When you created the platform gateway instance, a route was created for it. The route inherits the name that you assigned to the platform gateway object in the YAML file.
+A Red Hat OpenShift Container Platform route exposes a service at a host name, so that external clients can reach it by name.
+When you created the platform gateway instance, a route was created for it.
+The route inherits the name that you assigned to the platform gateway object in the YAML file.
 
 ### About this task
 
 ### Procedure
 
- Use the following command to fetch the routes:
+Use the following command to fetch the routes:
 
 ```
 oc get routes -n <platform_namespace>
@@ -64,13 +68,15 @@ The YAML block for the platform gateway instance in the `AnsibleAutomationPlatfo
 
 ### Procedure
 
-1.  Use these values in the following command to fetch the password for the platform gateway instance.
+1. Use these values in the following command to fetch the password for the platform gateway instance.
+  
 
 ```
 oc get secret/<your instance name>-<admin_user>-password -o yaml
 ```
 
-2.  The default value for *admin_user* is `admin`. Modify the command if you changed the admin username in the `AnsibleAutomationPlatform` object. The following example retrieves the password for a platform gateway object called `example`:
+2. The default value for *admin_user* is `admin`. Modify the command if you changed the admin username in the `AnsibleAutomationPlatform` object.
+      The following example retrieves the password for a platform gateway object called `example`:
 
 ```
 oc get secret/example-admin-password -o yaml
@@ -103,7 +109,7 @@ After you have fetched your gateway password, you must decode it from base64.
 
 ### Procedure
 
- Run the following command to decode your password from base64:
+Run the following command to decode your password from base64:
 
 ```
 oc get secret/example-admin-password -o jsonpath={.data.password} | base64 --decode

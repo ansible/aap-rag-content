@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-configure_radius_authentication/aem-page/secure-configure_radius_authentication.html"
 last_crumb = "Configure RADIUS authentication"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure RADIUS authentication"
 oversized = "false"
@@ -31,19 +32,19 @@ You can configure Ansible Automation Platform to centrally use RADIUS as a sourc
 
 ## Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Authentication Methods .
-2.  Click Create authentication .
-3.  Enter a **Name** for this authentication configuration.
-4.  Select **Radius** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
-5.  Enter the host or IP of the RADIUS server in the **RADIUS Server** field. If you leave this field blank, RADIUS authentication is disabled.
-6.  Enter the **Shared secret** for authenticating to RADIUS server.
-7.  Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. Note:
+1. From the navigation panel, select Access Management> (and then)Authentication Methods .
+2. Click Create authentication .
+3. Enter a **Name** for this authentication configuration.
+4. Select **Radius** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
+5. Enter the host or IP of the RADIUS server in the **RADIUS Server** field. If you leave this field blank, RADIUS authentication is disabled.
+6. Enter the **Shared secret** for authenticating to RADIUS server.
+7. Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. Note:
       Values defined in this field override the dedicated fields provided in the UI. Any values not defined here are not provided to the authenticator.
 
-8.  To automatically create organizations, users, and teams upon successful login, select **Create objects** .
-9.  To enable this authentication method upon creation, select **Enabled** .
-10.  To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users** .
-11.  Click Create Authentication Method .
+8. To automatically create organizations, users, and teams upon successful login, select **Create objects** .
+9. To enable this authentication method upon creation, select **Enabled** .
+10. To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users** .
+11. Click Create Authentication Method .
 
 ## What to do next
 

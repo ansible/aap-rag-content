@@ -6,8 +6,8 @@ View the activation output in the History tab to inspect the execution results, 
 
 #### Procedure
 
-1.  Select the **History** tab to access the list of all the activation instances. An activation instance represents a single execution of the activation.
-2.  Then select the activation instance you want to view. The **Output** for the activation instance is displayed.
+1. Select the **History** tab to access the list of all the activation instances. An activation instance represents a single execution of the activation.
+2. Then select the activation instance you want to view. The **Output** for the activation instance is displayed.
 
 #### What to do next
 

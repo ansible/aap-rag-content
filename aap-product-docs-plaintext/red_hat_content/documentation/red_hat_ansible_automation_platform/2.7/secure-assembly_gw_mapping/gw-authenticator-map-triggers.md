@@ -24,6 +24,12 @@ If you are only keying off one group it does not matter if you select **All** or
 Note:
 You must enter group identifiers in lowercase. For example, `cn=johnsmith,dc=example,dc=com` instead of `CN=JohnSmith,DC=Example,DC=COM`.
 
+If you previously used automation controller-side LDAP group settings, configure the equivalent behavior with authenticator maps:
+
+- `AUTH_LDAP_REQUIRE_GROUP`: Create an **Allow map** with a Based on groups trigger, and select Block non-matching users so that users who are not in the required group are denied access.
+- `AUTH_LDAP_DENY_GROUP`: Create an **Allow map** with a Never trigger for the group whose members you want to deny.
+- `AUTH_LDAP_USER_FLAGS_BY_GROUP`: Create a map for the corresponding flag, for example, an Is Superuser map, with a Based on groups trigger.
+
 Based on attributes
 The map is true or false based on a users attributes coming from the source system.
 

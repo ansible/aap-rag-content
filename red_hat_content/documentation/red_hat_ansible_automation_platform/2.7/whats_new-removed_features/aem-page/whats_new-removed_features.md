@@ -1,6 +1,6 @@
 +++
-title = "Removed features - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-removed_features"
+title = "Removed features - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/whats_new-removed_features/aem-page/whats_new-removed_features.html"
 last_crumb = "Removed features"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Removed features"
 oversized = "false"
@@ -88,17 +89,17 @@ The tool requires NGINX log format updates introduced in the Ansible Automation 
 
 ## Procedure
 
-1.      Scan a containerized or RPM SOSReport:
+1. Scan a containerized or RPM SOSReport:
 
-     `$ uvx --from "git+https://github.com/ansible/aap-detect-direct-component-access" aap-detect-direct-component-access /path/to/sosreport/`
+    `$ uvx --from "git+https://github.com/ansible/aap-detect-direct-component-access" aap-detect-direct-component-access /path/to/sosreport/`
 
-2.      Scan an OpenShift Container Platform must-gather tarball:
+2. Scan an OpenShift Container Platform must-gather tarball:
 
-     `$ uvx --from "git+https://github.com/ansible/aap-detect-direct-component-access" aap-detect-direct-component-access /path/to/must-gather/`
+    `$ uvx --from "git+https://github.com/ansible/aap-detect-direct-component-access" aap-detect-direct-component-access /path/to/must-gather/`
 
-3.      Scan an OpenShift Container Platform inspect output:
+3. Scan an OpenShift Container Platform inspect output:
 
-     `$ uvx --from "git+https://github.com/ansible/aap-detect-direct-component-access" aap-detect-direct-component-access /path/to/ocp-inspect/`
+    `$ uvx --from "git+https://github.com/ansible/aap-detect-direct-component-access" aap-detect-direct-component-access /path/to/ocp-inspect/`
 
 The tool produces a summary of direct-access requests organized by component, source IP, and request path. Internal traffic such as health checks and readiness probes is excluded automatically.
 

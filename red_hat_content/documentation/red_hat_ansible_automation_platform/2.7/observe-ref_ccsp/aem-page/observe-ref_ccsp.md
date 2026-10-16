@@ -1,7 +1,7 @@
 +++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-ref_ccsp"
 template = "docs/aem-title.html"
 title = "Original Certified Cloud and Service Provider (CCSP) report - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-ref_ccsp"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_metrics_utility/", "Generate consumption-based billing reports with the metrics-utility"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/observe-ref_ccsp/aem-page/observe-ref_ccsp.html"
 last_crumb = "Original Certified Cloud and Service Provider (CCSP) report"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Original Certified Cloud and Service Provider (CCSP) report"
 oversized = "false"
@@ -33,13 +34,13 @@ type = "aem-page"
 
 You can use the following optional collectors for the `gather` command:
 
--  `main_jobhostsummary`
+- `main_jobhostsummary`
   * If present by default, this collects the `main_jobhostsummary` table from the automation controller database, and has information about jobs runs and managed nodes automated.
--  `main_host`
+- `main_host`
   * This collects daily snapshots of the `main_host` table from the automation controller database and has managed nodes/hosts present across automation controller inventories,
--  `main_jobevent`
+- `main_jobevent`
   * This collects the `main_jobevent` table from the automation controller database and has information about which modules, roles, and ansible collections are being used.
--  `main_indirectmanagednodeaudit`
+- `main_indirectmanagednodeaudit`
   * This collects the `main_indirectmanagednodeaudit` table from the automation controller database and has information about indirectly managed nodes,
 
 ```
@@ -51,7 +52,7 @@ export METRICS_UTILITY_OPTIONAL_COLLECTORS="main_host,main_jobevent,main_indirec
 
 You can use the following optional sheets for the `build_report` command:
 
--  `ccsp_summary`
+- `ccsp_summary`
   * This is a landing page specifically for partners under the CCSP program. It shows managed node usage by each automation controller organization.
   * This report takes additional parameters to customize the summary page. For more information, see the following example:
 
@@ -67,17 +68,17 @@ export METRICS_UTILITY_REPORT_COMPANY_BUSINESS_LEADER="BUSINESS LEADER"
 export METRICS_UTILITY_REPORT_COMPANY_PROCUREMENT_LEADER="PROCUREMENT LEADER"
 ```
 
--  `managed_nodes`
+- `managed_nodes`
   * This is a deduplicated list of managed nodes automated by automation controller.
--  `indirectly_managed_nodes`
+- `indirectly_managed_nodes`
   * This is a deduplicated list of indirect managed nodes automated by automation controller.
--  `inventory_scope`
+- `inventory_scope`
   * This is a deduplicated list of managed nodes present across all inventories of automation controller.
--  `usage_by_collections`
+- `usage_by_collections`
   * This is a list of Ansible collections used in automation controller job runs.
--  `usage_by_roles`
+- `usage_by_roles`
   * This is a list of roles used in automation controller job runs.
--  `usage_by_modules`
+- `usage_by_modules`
   * This is a list of modules used in automation controller job runs.
 
 ```

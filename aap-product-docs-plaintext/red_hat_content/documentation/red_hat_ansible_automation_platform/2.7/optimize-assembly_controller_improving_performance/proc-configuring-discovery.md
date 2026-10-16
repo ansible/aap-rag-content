@@ -6,7 +6,7 @@ You can configure WebsSocket connections to enable automation controller to auto
 
 #### Procedure
 
-1.  Edit automation controller WebSocket information for port and protocol, and confirm whether to verify certificates with `True` or `False` when establishing the WebSocket connections:
+1. Edit automation controller WebSocket information for port and protocol, and confirm whether to verify certificates with `True` or `False` when establishing the WebSocket connections:
 
 
 ```
@@ -15,7 +15,7 @@ BROADCAST_WEBSOCKET_PORT = 80
 BROADCAST_WEBSOCKET_VERIFY_CERT = False
 ```
 
-2.  Restart automation controller with the following command:
+2. Restart automation controller with the following command:
 
 
 ```

@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-con_gs_about_sources_targets"
 template = "docs/aem-title.html"
 title = "Organize and define automation sources and targets - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-con_gs_about_sources_targets"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-assembly_gs_auto_dev/", "Get started as an automation developer"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/get_started-con_gs_about_sources_targets/aem-page/get_started-con_gs_about_sources_targets.html"
 last_crumb = "Organize and define automation sources and targets"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Organize and define automation sources and targets"
 oversized = "false"
@@ -39,9 +40,9 @@ You can set up an automation execution project in the platform UI.
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Projects.
-2.  On the **Projects** page, click Create project to launch the **Create Project** window.
-3.  Enter the appropriate details into the following required fields:
+1. From the navigation panel, select Automation Execution> (and then)Projects.
+2. On the **Projects** page, click Create project to launch the **Create Project** window.
+3. Enter the appropriate details into the following required fields:
 
   - **Name** (required)
   - Optional: **Description**
@@ -50,7 +51,7 @@ You can set up an automation execution project in the platform UI.
   - **Source Control Type** (required): Select an SCM type associated with this project from the menu. Options in the following sections become available depending on the type chosen. For more information, see [Managing playbooks manually](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_controller_adding_a_project "You can create a logical collection of playbooks, called projects in automation controller.") or [Managing playbooks using source control](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_projects_manage_playbooks_with_source_control#ref-projects-manage-playbooks-with-source-control "Choose one of the following options when managing playbooks by using source control:").
   - Optional: **Content Signature Validation Credential**: Use this field to enable content verification. Specify the GPG key to use for validating content signature during project synchronization. If the content has been tampered with, the job will not run. For more information, see [Project signing and verification](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_controller_project_signing#assembly-controller-project-signing "Use project signing and verification in your project directory to sign files. You can then verify whether or not that content has changed in any way, or files have been added to, or removed from the project unexpectedly.").
 
-4.  Click Create project.
+4. Click Create project.
 
 ## Create an automation decision project
 
@@ -65,9 +66,9 @@ Like automation execution projects, automation decision projects are logical col
 
 ### Procedure
 
-1.  From the navigation panel, select **Automation Decisions> (and then)Projects**.
-2.  Click Create project.
-3.  Enter the following information:
+1. From the navigation panel, select **Automation Decisions> (and then)Projects**.
+2. Click Create project.
+3. Enter the following information:
 
   - **Name**: Enter project name.
   - **Description**: This field is optional.
@@ -80,7 +81,7 @@ Like automation execution projects, automation decision projects are logical col
   - **Content signature validation credential**: Enables content signing to verify that the content has remained secure during project syncing. If the content is tampered with, the job will not run.
   - **Options**: Checking the box next to **Verify SSL** verifies the SSL with HTTPS when the project is imported.
 
-4.  Click Create project.
+4. Click Create project.
 
 ### What to do next
 
@@ -100,9 +101,9 @@ You can find inventories in the UI by navigating to Automation Execution> (and t
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Inventories. The **Inventories** view displays a list of the inventories currently available.
-2.  Click Create inventory, and from the list menu select the type of inventory you want to create.
-3.  Enter the appropriate details into the following fields:
+1. From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Inventories. The **Inventories** view displays a list of the inventories currently available.
+2. Click Create inventory, and from the list menu select the type of inventory you want to create.
+3. Enter the appropriate details into the following fields:
 
   - **Name**: Enter a name for the inventory.
   - Optional: **Description**: Enter a description.
@@ -122,7 +123,7 @@ You can find inventories in the UI by navigating to Automation Execution> (and t
     * **Variables**: Variable definitions and values to apply to all hosts in this inventory. Enter variables using either JSON or YAML syntax. Use the radio button to toggle between the two.
     * **Source variables** for constructed inventories are used to configure the constructed inventory plugin. Source variables create groups under the `groups` data key. The variable accepts Jinja2 template syntax, renders it for every host, makes a `true` or `false` evaluation, and includes the host in the group (from the key of the entry) if the result is `true`.
 
-4.  Click Create inventory.
+4. Click Create inventory.
 
 ### What to do next
 

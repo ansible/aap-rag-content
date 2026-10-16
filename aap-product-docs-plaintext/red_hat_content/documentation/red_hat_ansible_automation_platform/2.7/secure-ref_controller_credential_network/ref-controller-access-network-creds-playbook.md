@@ -3,8 +3,8 @@
 
 When using the **Controller Access Network Credentials** credential type, you can access the username and password parameters in your Ansible Playbook by using the following environment variables:
 
--  `ANSIBLE_NET_USERNAME`
--  `ANSIBLE_NET_PASSWORD`
+- `ANSIBLE_NET_USERNAME`
+- `ANSIBLE_NET_PASSWORD`
 
 You can get the username and password parameters from a job runtime environment:
 

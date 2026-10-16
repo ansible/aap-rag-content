@@ -7,7 +7,17 @@
       "weight": 1,
       "urlFragment": "index",
       "anchor": null,
-      "singlePageAnchor": null
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Event streams database user for external databases",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "operator-upgrade-considerations__section_1",
+          "anchor": null,
+          "singlePageAnchor": "operator-upgrade-considerations__section_1"
+        }
+      ]
     }
   ]
 }

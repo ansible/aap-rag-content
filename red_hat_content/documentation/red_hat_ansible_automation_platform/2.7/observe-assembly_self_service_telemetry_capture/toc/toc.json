@@ -10,9 +10,75 @@
       "singlePageAnchor": null,
       "sections": [
         {
-          "title": "Disable telemetry data collection",
+          "title": "Configure automation dashboard post-installation",
           "visible": true,
           "weight": 1,
+          "urlFragment": "enable-automation-dashboard-post-installation",
+          "anchor": null,
+          "singlePageAnchor": "enable-automation-dashboard-post-installation",
+          "sections": [
+            {
+              "title": "Procedure (containerized installation)",
+              "visible": true,
+              "weight": 1,
+              "urlFragment": "enable-automation-dashboard-post-installation",
+              "anchor": "enable-dashboard-containerized-post-install",
+              "singlePageAnchor": "enable-dashboard-containerized-post-install"
+            },
+            {
+              "title": "Procedure (operator deployment)",
+              "visible": true,
+              "weight": 2,
+              "urlFragment": "enable-automation-dashboard-post-installation",
+              "anchor": "enable-dashboard-operator-post-install",
+              "singlePageAnchor": "enable-dashboard-operator-post-install"
+            },
+            {
+              "title": "Configure data retention for automation dashboard",
+              "visible": true,
+              "weight": 3,
+              "urlFragment": "enable-automation-dashboard-post-installation",
+              "anchor": "task-configure-dashboard-data-retention",
+              "singlePageAnchor": "task-configure-dashboard-data-retention"
+            },
+            {
+              "title": "Monitor data collection status for automation dashboard",
+              "visible": true,
+              "weight": 4,
+              "urlFragment": "enable-automation-dashboard-post-installation",
+              "anchor": "task-monitor-dashboard-collection-status",
+              "singlePageAnchor": "task-monitor-dashboard-collection-status"
+            },
+            {
+              "title": "Export automation dashboard data to CSV",
+              "visible": true,
+              "weight": 5,
+              "urlFragment": "enable-automation-dashboard-post-installation",
+              "anchor": "GUID-7d7f55ce-2701-4de0-ac7a-996378c55fe8",
+              "singlePageAnchor": "GUID-7d7f55ce-2701-4de0-ac7a-996378c55fe8"
+            },
+            {
+              "title": "Filter automation dashboard by date range",
+              "visible": true,
+              "weight": 6,
+              "urlFragment": "enable-automation-dashboard-post-installation",
+              "anchor": "GUID-9839288b-a4e1-4c6a-9434-da893c2367ab",
+              "singlePageAnchor": "GUID-9839288b-a4e1-4c6a-9434-da893c2367ab"
+            },
+            {
+              "title": "Historical data backfill details",
+              "visible": true,
+              "weight": 7,
+              "urlFragment": "enable-automation-dashboard-post-installation",
+              "anchor": "con-historical-data-backfill-details",
+              "singlePageAnchor": "con-historical-data-backfill-details"
+            }
+          ]
+        },
+        {
+          "title": "Disable telemetry data collection",
+          "visible": true,
+          "weight": 2,
           "urlFragment": "self-service-telemetry-disable",
           "anchor": null,
           "singlePageAnchor": "self-service-telemetry-disable"

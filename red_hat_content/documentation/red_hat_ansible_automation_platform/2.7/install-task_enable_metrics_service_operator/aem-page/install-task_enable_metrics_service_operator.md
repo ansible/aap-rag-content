@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_enable_metrics_service_operator"
 title = "Enable metrics service in operator deployments - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_enable_metrics_service_operator"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_understand_metrics_service_architecture/", "Understand metrics service architecture"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-task_enable_metrics_service_operator/aem-page/install-task_enable_metrics_service_operator.html"
 last_crumb = "Enable metrics service in operator deployments"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Enable metrics service in operator deployments"
 oversized = "false"
@@ -49,7 +50,7 @@ The operator handles all configuration automatically, including database access,
 
 ## Procedure
 
-1.  Edit the AnsibleAutomationPlatform custom resource
+1. Edit the AnsibleAutomationPlatform custom resource
       Add or modify the `metrics` section in the CR specification:
 
 ```
@@ -74,7 +75,7 @@ spec:
 oc edit ansibleautomationplatform myaap -n ansible-automation-platform
 ```
 
-2.  Apply the custom resource
+2. Apply the custom resource
       If you edited the CR in a file:
 
 ```
@@ -83,7 +84,7 @@ oc apply -f aap.yml
 
     **Result:** The AAP gateway operator reconciles the change and creates the metrics service components.
 
-3.  Verify that the MetricsService custom resource was created
+3. Verify that the MetricsService custom resource was created
       The gateway operator automatically creates a MetricsService CR named `<aap-name>-automationmetricsservice` in the same namespace:
 
 ```
@@ -97,7 +98,7 @@ NAME                                   AGE
 myaap-automationmetricsservice         2m
 ```
 
-4.  Verify that metrics service pods are running
+4. Verify that metrics service pods are running
   
 
 ```
@@ -113,7 +114,7 @@ myaap-metrics-tasks-7d4c8b6f5d-j2k5h        1/1     Running   0          2m
 myaap-metrics-scheduler-5c9d7f8b6d-m3n7k    1/1     Running   0          2m
 ```
 
-5.  Verify the health endpoint
+5. Verify the health endpoint
       Port-forward to the metrics service and check the health endpoint:
 
 ```

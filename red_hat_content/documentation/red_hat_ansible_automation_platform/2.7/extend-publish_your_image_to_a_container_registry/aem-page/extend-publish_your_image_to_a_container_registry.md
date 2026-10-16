@@ -1,6 +1,6 @@
 +++
-template = "docs/aem-title.html"
 title = "Publish your image to a container registry - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-publish_your_image_to_a_container_registry"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-publish_your_image_to_a_container_registry/aem-page/extend-publish_your_image_to_a_container_registry.html"
 last_crumb = "Publish your image to a container registry"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Publish your image to a container registry"
 oversized = "false"
@@ -40,35 +41,35 @@ After building your custom RAG container image, upload it to a central container
 
 ## Procedure
 
-1.  Load the image archive:
+1. Load the image archive:
   
 
 ```
 $ podman load < output/rag-content-output-latest.tar
 ```
 
-2.  Tag the image for your registry:
+2. Tag the image for your registry:
   
 
 ```
 $ podman tag localhost/rag-content-output:latest registry.example.com/aap/my-org-byok-rag:1.0
 ```
 
-3.  Log in to your container registry:
+3. Log in to your container registry:
   
 
 ```
 $ podman login registry.example.com
 ```
 
-4.  **For containerized Ansible deployments only:** Manually pull the image in the containerized installer Ansible Lightspeed instance VM:
+4. **For containerized Ansible deployments only:** Manually pull the image in the containerized installer Ansible Lightspeed instance VM:
   
 
 ```
 $ podman pull registry.example.com/aap/my-org-byok-rag:1.0
 ```
 
-5.  Push the image:
+5. Push the image:
   
 
 ```

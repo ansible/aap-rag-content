@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-title = "Execution environment setup reference - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_ee_setup_reference"
+title = "Execution environment setup reference - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-define__create__and_build_execution_environments/", "Define, create, and build execution environments"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_ee_setup_reference/aem-page/administer-assembly_controller_ee_setup_reference.html"
 last_crumb = "Execution environment setup reference"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Execution environment setup reference"
 oversized = "false"
@@ -85,43 +86,48 @@ The Ansible Builder 3.x execution environment definition file accepts seven top-
 - [Additional_build_files](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_ee_setup_reference#ref-controller-additional-build-files "Various build steps can require additional files to be present in the build context directory. These files can be specified using the additional_build_files configuration item in the controller_settings section of the controller_configuration.yml file.")
 - [Additional_build_steps](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_ee_setup_reference#ref-controller-additional-build-steps "The build steps specify custom build commands for any build phase. These commands are inserted directly into the build instruction file for the container runtime, for example, Containerfile or Dockerfile. The commands must conform to any rules required by the containerization tool.")
 - [build_arg_defaults](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_ee_setup_reference#ref-controller-build-arg-defaults "This specifies the default values for build arguments as a dictionary.")
-- [Dependencies](/documentation/en-us/red_hat_ansible_automation_platform/2.7/ref_controller_dependencies "Specifies dependencies to install into the final image, including ansible-core, ansible-runner, Python packages, system packages, and collections.")
-- [Images](/documentation/en-us/red_hat_ansible_automation_platform/2.7/ref_controller_images "Use the images dictionary to define container images for your execution environment. Each key represents a unique image name, while the corresponding value is a dictionary defining that image's properties.")
+- [Dependencies](/documentation/en-us/red_hat_ansible_automation_platform/2.7/ref-controller-dependencies.html "Specifies dependencies to install into the final image, including ansible-core, ansible-runner, Python packages, system packages, and collections.")
+- [Images](/documentation/en-us/red_hat_ansible_automation_platform/2.7/ref-controller-images.html "Use the images dictionary to define container images for your execution environment. Each key represents a unique image name, while the corresponding value is a dictionary defining that image's properties.")
   * [Image verification](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_ee_setup_reference#ref-controller-image-verification "You can verify signed container images if you are using the podman container runtime.")
 - [Options](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_ee_setup_reference#ref-controller-config-options "A dictionary of keywords or options that can affect the runtime functionality Ansible Builder.")
 - [Version](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_ee_setup_reference#ref-controller-config-version "An integer value that sets the schema version of the execution environment definition file.")
 
 ## Additional_build_files
 
-Various build steps can require additional files to be present in the build context directory. These files can be specified using the `additional_build_files` configuration item in the `controller_settings` section of the `controller_configuration.yml` file.
+Various build steps can require additional files to be present in the build context directory.
+These files can be specified using the `additional_build_files` configuration item in the `controller_settings` section of the `controller_configuration.yml` file.
 
-The build files specify what are to be added to the build context directory. These can then be referenced or copied by `additional_build_steps` during any build stage.
+The build files specify what are to be added to the build context directory.
+These can then be referenced or copied by `additional_build_steps` during any build stage.
 
 The format is a list of dictionary values, each with a `src` and `dest` key and value.
 
 Each list item must be a dictionary containing the following required keys:
 
-| <br> **src**  | <br>Specifies the source files to copy into the build context directory.<br>This can be an absolute path, for example, `/home/user/.ansible.cfg`, or a path that is relative to the file. Relative paths can be a glob expression matching one or more files, for example, `files/\*.cfg`. Note that an absolute path must not include a regular expression. If `src` is a directory, the entire contents of that directory are copied to `dest`. |
-| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br> **dest** | <br>Specifies a subdirectory path underneath the `_build` subdirectory of the build context directory that contains the source files, for example, `files/configs`.<br>This cannot be an absolute path or contain `..` within the path. This directory is created for you if it does not exist.  Note:   <br>When using an `ansible.cfg` file to pass a token and other settings for a private account to an automation hub server, listing the configuration file path here as a string enables it to be included as a build argument in the initial phase of the build. |
+| **src**  | Specifies the source files to copy into the build context directory.<br>This can be an absolute path, for example, `/home/user/.ansible.cfg`, or a path that is relative to the file. Relative paths can be a glob expression matching one or more files, for example, `files/\*.cfg`. Note that an absolute path must not include a regular expression. If `src` is a directory, the entire contents of that directory are copied to `dest`. |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **dest** | Specifies a subdirectory path underneath the `_build` subdirectory of the build context directory that contains the source files, for example, `files/configs`.<br>This cannot be an absolute path or contain `..` within the path. This directory is created for you if it does not exist.  Note:   <br>When using an `ansible.cfg` file to pass a token and other settings for a private account to an automation hub server, listing the configuration file path here as a string enables it to be included as a build argument in the initial phase of the build. |
 
 ## Additional_build_steps
 
-The build steps specify custom build commands for any build phase. These commands are inserted directly into the build instruction file for the container runtime, for example, Containerfile or Dockerfile. The commands must conform to any rules required by the containerization tool.
+The build steps specify custom build commands for any build phase.
+These commands are inserted directly into the build instruction file for the container runtime, for example, Containerfile or Dockerfile. The commands must conform to any rules required by the containerization tool.
 
-You can add build steps before or after any stage of the image creation process. For example, if you need `git` to be installed before you install your dependencies, you can add a build step at the end of the base build stage.
+You can add build steps before or after any stage of the image creation process.
+For example, if you need `git` to be installed before you install your dependencies, you can add a build step at the end of the base build stage.
 
-The following are the valid keys. Each supports either a multi-line string, or a list of strings.
+The following are the valid keys.
+Each supports either a multi-line string, or a list of strings.
 
-| <br> **append\_base**     | <br>Commands to insert after building of the base image.     |
-| ------------------------- | ------------------------------------------------------------ |
-| <br> **append\_builder**  | <br>Commands to insert after building of the builder image.  |
-| <br> **append\_final**    | <br>Commands to insert after building of the final image.    |
-| <br> **append\_galaxy**   | <br>Commands to insert after building of the galaxy image.   |
-| <br> **prepend\_base**    | <br>Commands to insert before building of the base image.    |
-| <br> **prepend\_builder** | <br>Commands to insert before building of the builder image. |
-| <br> **prepend\_final**   | <br>Commands to insert before building of the final image.   |
-| <br> **prepend\_galaxy**  | <br>Commands to insert before building of the galaxy image.  |
+| **append\_base**     | Commands to insert after building of the base image.     |
+| -------------------- | -------------------------------------------------------- |
+| **append\_builder**  | Commands to insert after building of the builder image.  |
+| **append\_final**    | Commands to insert after building of the final image.    |
+| **append\_galaxy**   | Commands to insert after building of the galaxy image.   |
+| **prepend\_base**    | Commands to insert before building of the base image.    |
+| **prepend\_builder** | Commands to insert before building of the builder image. |
+| **prepend\_final**   | Commands to insert before building of the final image.   |
+| **prepend\_galaxy**  | Commands to insert before building of the galaxy image.  |
 
 ## build_arg_defaults
 
@@ -131,10 +137,10 @@ This is an alternative to using the `--build-arg` CLI flag.
 
 Ansible Builder uses the following build arguments:
 
-| <br> **ANSIBLE\_GALAXY\_CLI\_COLLECTION\_OPTS** | <br>Enables the user to pass the `-pre` flag and other flags to enable the installation of pre-release collections.                                                                                      |
-| ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br> **ANSIBLE\_GALAXY\_CLI\_ROLE\_OPTS**       | <br>This enables the user to pass any flags, such as `--no-deps`, to the role installation.                                                                                                              |
-| <br> **PKGMGR\_PRESERVE\_CACHE**                | <br>This controls how often the package manager cache is cleared during the image build process.<br>If this value is not set, which is the default, the cache is cleared frequently. If the value is `always`, the cache is never cleared. Any other value forces the cache to be cleared only after the system dependencies are installed in the final build stage. |
+| **ANSIBLE\_GALAXY\_CLI\_COLLECTION\_OPTS** | Enables the user to pass the `-pre` flag and other flags to enable the installation of pre-release collections.                                                                                          |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **ANSIBLE\_GALAXY\_CLI\_ROLE\_OPTS**       | This enables the user to pass any flags, such as `--no-deps`, to the role installation.                                                                                                                  |
+| **PKGMGR\_PRESERVE\_CACHE**                | This controls how often the package manager cache is cleared during the image build process.<br>If this value is not set, which is the default, the cache is cleared frequently. If the value is `always`, the cache is never cleared. Any other value forces the cache to be cleared only after the system dependencies are installed in the final build stage. |
 
 Ansible Builder hard-codes values given inside of `build_arg_defaults` into the build instruction file, so they persist if you run your container build manually.
 
@@ -148,7 +154,8 @@ Set the `container-policy` CLI option to control how this data is used in relati
 
 - **`ignore_all`** policy: Generate a `policy.json` file in the build `context directory <context>` where no signature validation is performed.
 - **`system`** policy: Signature validation is performed using pre-existing `policy.json` files in standard system locations. `ansible-builder` assumes no responsibility for the content within these files, and the user has complete control over the content.
-- **`signature_required`** policy: `ansible-builder` uses the container image definitions to generate a `policy.json` file in the build `context directory <context>` that is used during the build to validate the images.
+- **`signature_required`** policy: `ansible-builder` uses the container image definitions to generate a `policy.json` file in the build
+`context directory <context>` that is used during the build to validate the images.
 
 ## Options
 
@@ -156,23 +163,39 @@ A dictionary of keywords or options that can affect the runtime functionality An
 
 Valid keys for this section are:
 
-- **container_init**: A dictionary with keys that allow for customization of the container `ENTRYPOINT` and `CMD` directives (and related behaviors). Customizing these behaviors is an advanced task, and can result failures that are difficult to debug. Because the provided defaults control several intertwined behaviors, overriding any value skips all remaining defaults in this dictionary. Valid keys are:
+- **container_init**: A dictionary with keys that allow for customization of the container `ENTRYPOINT` and `CMD` directives (and related behaviors).
+Customizing these behaviors is an advanced task, and can result failures that are difficult to debug.
+Because the provided defaults control several intertwined behaviors, overriding any value skips all remaining defaults in this dictionary.
+    Valid keys are:
 
   * **cmd**: Literal value for the `CMD` Containerfile directive. The default value is `["bash"]`.
-  * **entrypoint**: Literal value for the `ENTRYPOINT` Containerfile directive. The default entrypoint behavior handles signal propagation to subprocesses, and attempting to ensure at runtime that the container user has a proper environment with a valid writeable home directory, represented in `/etc/passwd`, with the `HOME` environment variable set to match. The default entrypoint script can emit warnings to `stderr` in cases where it is unable to suitably adjust the user runtime environment. This behavior can be ignored or elevated to an unrecoverable error; consult the source for the `entrypoint` target script for more details.
-  * **package_pip**: Package to install with pip for entrypoint support. This package is installed in the final build image.
+  * **entrypoint**: Literal value for the `ENTRYPOINT` Containerfile directive.
+The default entrypoint behavior handles signal propagation to subprocesses, and attempting to ensure at runtime that the container user has a proper environment with a valid writeable home directory, represented in `/etc/passwd`, with the `HOME` environment
+variable set to match.
+The default entrypoint script can emit warnings to `stderr` in cases where it is unable to suitably adjust the user runtime environment. This behavior can be ignored or elevated to an unrecoverable error; consult the source for the `entrypoint` target script for more details.
+  * **package_pip**: Package to install with pip for entrypoint support.
+This package is installed in the final build image.
 
-- **package_manager_path**: string with the path to the package manager (dnf or microdnf) to use. This value is used to install packages.
+- **package_manager_path**: string with the path to the package manager (dnf or microdnf) to use.
+This value is used to install packages.
 
-- **skip_ansible_check**: This boolean value controls whether or not the check for an installation of Ansible and Ansible Runner is performed on the final image. Set this value to `True` to not perform this check.
+- **skip_ansible_check**: This boolean value controls whether or not the check for an installation of Ansible and Ansible Runner is performed on the final image.
+    Set this value to `True` to not perform this check.
 
     The default is `False`.
 
-- **relax_passwd_permissions**: This boolean value controls whether the `root` group (GID 0) is explicitly granted write permission to `/etc/passwd` in the final container image. The default entrypoint script can attempt to update `/etc/passwd` under some container runtimes with dynamically created users to ensure a fully-functional POSIX user environment and home directory. Disabling this capability can cause failures of software features that require users to be listed in `/etc/passwd` with a valid and writeable home directory, for example, `async` in ansible-core, and the `~username` shell expansion. The default is `True`.
+- **relax_passwd_permissions**: This boolean value controls whether the `root` group (GID 0) is explicitly granted write permission to `/etc/passwd` in the final container image.
+The default entrypoint script can attempt to update `/etc/passwd` under some container runtimes with dynamically created users to ensure a fully-functional POSIX user environment and home directory.
+Disabling this capability can cause failures of software features that require users to be listed in `/etc/passwd` with a valid and writeable home directory, for example, `async` in ansible-core, and the `~username` shell expansion.
+    The default is `True`.
 
-- **workdir**: Default current working directory for new processes started under the final container image. Some container runtimes also use this value as `HOME` for dynamically-created users in the `root` (GID 0) group. When this value is specified, if the directory does not already exist, it is created, set to `root` group ownership, and `rwx` group permissions are recursively applied to it. The default value is `/runner`.
+- **workdir**: Default current working directory for new processes started under the final container image.
+Some container runtimes also use this value as `HOME` for dynamically-created users in the `root` (GID 0) group.
+When this value is specified, if the directory does not already exist, it is created, set to `root` group ownership, and `rwx` group permissions are recursively applied to it.
+    The default value is `/runner`.
 
-- **user**: This sets the username or UID to use as the default user for the final container image. The default value is `1000`.
+- **user**: This sets the username or UID to use as the default user for the final container image.
+    The default value is `1000`.
 
     **Example**
 

@@ -4,7 +4,7 @@ Verify that you created a vector database of your documentation.
 
 ## Procedure
 
-1.  Run the following command:
+1. Run the following command:
 
 
 ```
@@ -26,7 +26,7 @@ In the example above:
 - `faiss_store.db`is the vector database file.
 - `llama-stack.yaml`is the Llama Stack configuration file.
 
-2.  Verify that you get the expected results by querying the generated vector database using the following command:
+2. Verify that you get the expected results by querying the generated vector database using the following command:
 
 
 ```

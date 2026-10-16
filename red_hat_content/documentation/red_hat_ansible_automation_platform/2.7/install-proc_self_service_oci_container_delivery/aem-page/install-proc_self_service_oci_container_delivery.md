@@ -4,13 +4,14 @@ template = "docs/aem-title.html"
 title = "OCI container delivery - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_about/", "Install Ansible automation portal (OpenShift Container Platform only)"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-install_automation_portal_on_openshift_container_platform/", "Install automation portal on OpenShift Container Platform"]]
 category = "Install"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_self_service_oci_container_delivery/aem-page/install-proc_self_service_oci_container_delivery.html"
 last_crumb = "OCI container delivery"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "OCI container delivery"
 oversized = "false"
@@ -27,7 +28,9 @@ type = "aem-page"
 
 # OCI container delivery
 
-Use OCI container delivery to pull plug-in artifacts from `registry.redhat.io/ansible-automation-platform/automation-portal`. The plug-in version must match the `imageTagInfo` value in your Helm chart configuration. This is the recommended method for new installations.
+Use OCI container delivery to pull plug-in artifacts from `registry.redhat.io/ansible-automation-platform/automation-portal`. The
+ plug-in version must match the `imageTagInfo` value in your Helm chart configuration. This is the recommended method for new
+ installations.
 
 ## Before you begin
 
@@ -39,8 +42,8 @@ Use OCI container delivery to pull plug-in artifacts from `registry.redhat.io/an
 
 ## Procedure
 
-1.  Create an auth.json file on your local machine.
-2.  Add registry credentials for `registry.redhat.io` to the auth.json file:
+1. Create an auth.json file on your local machine.
+2. Add registry credentials for `registry.redhat.io` to the auth.json file:
   
 
 ```
@@ -68,17 +71,19 @@ Use OCI container delivery to pull plug-in artifacts from `registry.redhat.io/an
   }
 ```
 
-    For full mirror registry configuration including `imageRegistry`, `ociPluginImage`, and image mirroring procedures, see the disconnected installation chapter.
+    For full mirror registry configuration including `imageRegistry`, `ociPluginImage`, and image mirroring procedures, see
+ the disconnected installation chapter.
 
-3.  Generate the base64-encoded authentication value for each registry:
+3. Generate the base64-encoded authentication value for each registry:
   
 
 ```
 printf '%s' '<username>:<password>' | base64 -w0
 ```
 
-4.  Replace the `<base64-encoded-username-password>` and `<base64-encoded-registry-credentials>` placeholders in the auth.json file with the output from the previous step.
-5.  Create the authentication secret in the target OpenShift project. The secret name must match your Helm release name.
+4. Replace the `<base64-encoded-username-password>` and `<base64-encoded-registry-credentials>` placeholders in
+ the auth.json file with the output from the previous step.
+5. Create the authentication secret in the target OpenShift project. The secret name must match your Helm release name.
       If you install from the OpenShift catalog and you use the default release name `redhat-rhaap-portal`:
 
 ```
@@ -104,7 +109,8 @@ oc get secret <release-name>-dynamic-plugins-registry-auth
   Important:
       Create this secret in the same OpenShift project as the Helm release, and create it before you install or upgrade the Helm release.
 
-    The dynamic plug-in init container uses `skopeo` to pull OCI artifacts directly. It does not use Kubernetes `imagePullSecrets`, cluster-level `ImageDigestMirrorSet` or `ImageTagMirrorSet`, or OpenShift Container Platform global pull secrets. You must provide registry credentials in the `auth.json` secret even if your cluster is configured with image mirrors.
+    The dynamic plug-in init container uses `skopeo` to pull OCI artifacts directly. It does not use Kubernetes `imagePullSecrets`, cluster-level `ImageDigestMirrorSet` or `ImageTagMirrorSet`, or OpenShift Container Platform global
+ pull secrets. You must provide registry credentials in the `auth.json` secret even if your cluster is configured with image mirrors.
 
 **OpenShift web console steps**
 
@@ -130,7 +136,8 @@ If you need to change `pluginMode` after installing the Helm release, upgrade th
 1. In the OpenShift web console, click Helm.
 2. Select the Helm release.
 3. Click Actions> (and then)Upgrade.
-4. In the YAML view, set `redhat-developer-hub.global.pluginMode` to `oci` (OCI container delivery).
+4. In the YAML view, set `redhat-developer-hub.global.pluginMode` to `oci` (OCI container
+ delivery).
 5. Click Upgrade.
 
 **Command line:**

@@ -10,7 +10,7 @@ Creates a credential on the automation controller for authenticating with extern
 | `name`               | String | Display name for the credential.                                                            | -              |
 | `organization`       | String | Organization the credential belongs to.                                                     | -              |
 | `description`        | String | Description of the credential.                                                              | -              |
-| `type`               | String | Credential type, for example `Machine`, `Amazon Web Services`.                              | -              |
+| `type`               | String | Credential type, for example`Machine`,`Amazon Web Services`.                                | -              |
 | `ssh_username`       | String | SSH username for Machine type credentials.                                                  | -              |
 | `ssh_secret`         | String | Name of a Kubernetes secret containing the SSH private key for Machine type credentials.    | -              |
 | `username_secret`    | String | Name of a Kubernetes secret containing the username for cloud credentials.                  | -              |

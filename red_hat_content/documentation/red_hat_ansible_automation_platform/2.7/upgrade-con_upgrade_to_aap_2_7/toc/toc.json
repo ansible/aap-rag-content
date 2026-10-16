@@ -1,0 +1,39 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Upgrade to Ansible Automation Platform 2.7",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Supported source versions",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-40edc4c6-2302-4d06-ae14-ed0ae73826b6__supported-source-versions",
+          "anchor": null,
+          "singlePageAnchor": "GUID-40edc4c6-2302-4d06-ae14-ed0ae73826b6__supported-source-versions"
+        },
+        {
+          "title": "Before you upgrade",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "GUID-40edc4c6-2302-4d06-ae14-ed0ae73826b6__before-you-upgrade",
+          "anchor": null,
+          "singlePageAnchor": "GUID-40edc4c6-2302-4d06-ae14-ed0ae73826b6__before-you-upgrade"
+        },
+        {
+          "title": "Upgrade your deployment",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "GUID-40edc4c6-2302-4d06-ae14-ed0ae73826b6__upgrade-your-deployment",
+          "anchor": null,
+          "singlePageAnchor": "GUID-40edc4c6-2302-4d06-ae14-ed0ae73826b6__upgrade-your-deployment"
+        }
+      ]
+    }
+  ]
+}

@@ -11,7 +11,7 @@ You can adjust route timeouts on existing deployments to support large file uplo
 
 ### Procedure
 
-1.  Obtain an administrative OAuth2 token:
+1. Obtain an administrative OAuth2 token:
 
 
 ```
@@ -21,7 +21,7 @@ $ curl -k -X POST \
 https://<gateway-host>/api/gateway/v1/tokens/
 ```
 
-2.  Update the route timeout settings.
+2. Update the route timeout settings.
 For OpenShift Container Platform deployments:
 
 ```

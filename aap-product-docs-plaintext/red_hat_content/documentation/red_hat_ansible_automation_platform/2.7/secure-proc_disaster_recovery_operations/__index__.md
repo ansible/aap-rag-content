@@ -19,8 +19,8 @@ To generate a new secret key, perform the following steps:
 
 ## Procedure
 
-1.  Backup your Ansible Automation Platform database before you do anything else! See the [Back up and restore](/documentation/en-us/red_hat_ansible_automation_platform/2.7/assembly_ag_controller_backup_and_restore "You can backup and restore your system by using the Ansible Automation Platform setup playbook.") section of the Configuring automation execution guide,
-2.  Using the inventory from your install (same inventory with which you run backups/restores), run `setup.sh -k`.
+1. Backup your Ansible Automation Platform database before you do anything else! See the [Back up and restore](/documentation/en-us/red_hat_ansible_automation_platform/2.7/../administer/assembly-ag-controller-backup-and-restore.html "You can backup and restore your system by using the Ansible Automation Platform setup playbook.") section of the Configuring automation execution guide,
+2. Using the inventory from your install (same inventory with which you run backups/restores), run `setup.sh -k`.
 
 ## Results
 

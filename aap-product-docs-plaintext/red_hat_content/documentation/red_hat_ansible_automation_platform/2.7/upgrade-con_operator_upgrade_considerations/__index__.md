@@ -7,3 +7,4 @@ If your OpenShift Container Platform version is not supported by the Red Hat Ans
 Refer to the **Red Hat Ansible Automation Platform Life Cycle** to determine the OpenShift Container Platform version needed.
 
 For information about upgrading your cluster, refer to **Updating clusters**.
+

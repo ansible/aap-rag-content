@@ -1,0 +1,23 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Administer the Ansible Lightspeed Service",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Log in to the Ansible Lightspeed administrator portal",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "log-in-administrator-portal",
+          "anchor": null,
+          "singlePageAnchor": "log-in-administrator-portal"
+        }
+      ]
+    }
+  ]
+}

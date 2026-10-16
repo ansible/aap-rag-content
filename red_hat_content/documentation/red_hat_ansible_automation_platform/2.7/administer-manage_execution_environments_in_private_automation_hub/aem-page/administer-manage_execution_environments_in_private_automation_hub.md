@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-manage_execution_environments_in_private_automation_hub"
-template = "docs/aem-title.html"
 title = "Set up your container repository - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-manage_execution_environments_in_private_automation_hub"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-define__create__and_build_execution_environments/", "Define, create, and build execution environments"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-manage_execution_environments_in_private_automation_hub/aem-page/administer-manage_execution_environments_in_private_automation_hub.html"
 last_crumb = "Set up your container repository"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Set up your container repository"
 oversized = "false"
@@ -41,12 +42,12 @@ Add a README to your container repository to provide instructions to your users 
 
 ### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Automation Content> (and then)Execution Environments.
-3.  Select your execution environment.
-4.  On the **Detail** tab, click Add.
-5.  In the **Raw Markdown** text field, enter your README text in Markdown.
-6.  Click Save when you are finished.
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Automation Content> (and then)Execution Environments.
+3. Select your execution environment.
+4. On the **Detail** tab, click Add.
+5. In the **Raw Markdown** text field, enter your README text in Markdown.
+6. Click Save when you are finished.
 
 ### What to do next
 
@@ -62,13 +63,13 @@ Provide users with access to your automation execution environments by adding th
 
 ### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Automation Content> (and then)Execution Environments.
-3.  Select your automation execution environment.
-4.  From the **Team Access** tab, click Add roles.
-5.  Select the team or teams to which you want to grant access and click Next.
-6.  Select the roles that you want to add to this execution environment and click Next.
-7.  Click Finish.
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Automation Content> (and then)Execution Environments.
+3. Select your automation execution environment.
+4. From the **Team Access** tab, click Add roles.
+5. Select the team or teams to which you want to grant access and click Next.
+6. Select the roles that you want to add to this execution environment and click Next.
+7. Click Finish.
 
 ## Tag container images
 
@@ -80,12 +81,12 @@ Tag automation execution environments to add an additional name to automation ex
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Content> (and then)Execution Environments.
-2.  Select your automation execution environments.
-3.  Click the **Images** tab.
-4.  Click the More Actions icon **⋮**, and click Manage tags.
-5.  Add a new tag in the text field and click Add.
-6.  Optional: Remove **current tags** by clicking x on any of the tags for that image.
+1. From the navigation panel, select Automation Content> (and then)Execution Environments.
+2. Select your automation execution environments.
+3. Click the **Images** tab.
+4. Click the More Actions icon **⋮**, and click Manage tags.
+5. Add a new tag in the text field and click Add.
+6. Optional: Remove **current tags** by clicking x on any of the tags for that image.
 
 ### Results
 
@@ -97,16 +98,18 @@ To pull automation execution environments images from a password or token-protec
 
 ### About this task
 
-In earlier versions of Ansible Automation Platform, you were required to deploy a registry to store execution environment images. On Ansible Automation Platform 2.0 and later, the system operates as if you already have a remote registry up and running. To store execution environment images, add the credentials of only your selected remote registries.
+In earlier versions of Ansible Automation Platform, you were required to deploy a registry to store execution environment images.
+On Ansible Automation Platform 2.0 and later, the system operates as if you already have a remote registry up and running.
+To store execution environment images, add the credentials of only your selected remote registries.
 
 ### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Credentials.
-3.  Click Create credential to create a new credential.
-4.  Enter an authorization **Name**, **Description**, and **Organization**.
-5.  In the **Credential Type** drop-down, select **Container Registry**.
-6.  Enter the **Authentication URL**. This is the remote registry address.
-7.  Enter the **Username** and **Password or Token** required to log in to the remote registry.
-8.  Optional: To enable SSL verification, select **Verify SSL**.
-9.  Click Create credential.
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Credentials.
+3. Click Create credential to create a new credential.
+4. Enter an authorization **Name**, **Description**, and **Organization**.
+5. In the **Credential Type** drop-down, select **Container Registry**.
+6. Enter the **Authentication URL**. This is the remote registry address.
+7. Enter the **Username** and **Password or Token** required to log in to the remote registry.
+8. Optional: To enable SSL verification, select **Verify SSL**.
+9. Click Create credential.

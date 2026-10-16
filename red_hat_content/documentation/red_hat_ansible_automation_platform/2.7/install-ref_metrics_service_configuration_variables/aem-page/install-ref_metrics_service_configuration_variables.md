@@ -1,7 +1,7 @@
 +++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_metrics_service_configuration_variables"
 title = "Metrics service configuration variables - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_metrics_service_configuration_variables"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_understand_metrics_service_architecture/", "Understand metrics service architecture"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-ref_metrics_service_configuration_variables/aem-page/install-ref_metrics_service_configuration_variables.html"
 last_crumb = "Metrics service configuration variables"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Metrics service configuration variables"
 oversized = "false"
@@ -58,21 +59,41 @@ Note:
 
 **Note on certificate authentication:** When `automationmetrics_pg_cert_auth: true`, password variables (`automationmetrics_pg_password` and `automationmetrics_controller_read_pg_password`) are not required. The service uses PostgreSQL certificate-based authentication instead.
 
-**Dashboard and feature flags**
-
-| Variable                               | Default | Required/Optional | Description                                                                                                                                                                                              |
-| -------------------------------------- | ------- | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `FEATURE_DASHBOARD_COLLECTION_ENABLED` | `false` | Optional          | Enable automation dashboard data collection. When`true`, metrics service collects dashboard-specific metrics (cost data, ROI calculations, and pricing information) in addition to standard anonymized metrics. Maps to environment variable`METRICS_SERVICE_FEATURE_ENABLED__DASHBOARD_COLLECTION`. |
-
-## Dashboard feature flag
-
-**Inventory Variable:** `FEATURE_DASHBOARD_COLLECTION_ENABLED`
+**Flag:** `FEATURE_INDIRECT_NODE_COLLECTION_ENABLED`
 
 **Default:** `false`
 
-**Purpose:** Enable automation dashboard data collection
+**Level:** Gateway AAPFlag (platform-level)
 
-When enabled (`FEATURE_DASHBOARD_COLLECTION_ENABLED: true`):
+**Restart required:** No
 
-- Collects dashboard-specific data (cost, ROI, pricing information)
-- Runs on 6-hourly schedule to minimize database impact
+**Purpose:** Enable daily collection of indirect node audit data from the controller database
+
+When enabled (`FEATURE_INDIRECT_NODE_COLLECTION_ENABLED: true`):
+
+- Collects daily snapshots of API-managed indirect nodes (for example, network devices managed through Ansible collections)
+- Includes indirect node counts grouped by Ansible collection and module in the anonymized payload sent to Red Hat
+- Host names and organization names are stripped from the payload before transmission
+
+This flag is set at the Gateway level, not through `automationmetrics_*` inventory variables. No additional inventory configuration is required.
+
+Feature flags resolve through the following priority chain (highest to lowest):
+
+1. DB Setting (`dynamic_settings` table)
+2. Dynaconf / environment variable
+3. Direct settings attribute
+4. DAB AAPFlag (Gateway-level)
+5. Default value
+
+## Events collector settings
+
+The events collector (main_jobevent_service) processes job event data to extract collection, module, and role usage statistics. These variables are configurable as Django settings or environment variables without a code change. Use them to control collection volume on large deployments.
+
+| Variable             | Default | Description                                                                                                      |
+| -------------------- | ------- | ---------------------------------------------------------------------------------------------------------------- |
+| `JOBEVENT_ROW_LIMIT` | 200,000 | Maximum number of job event rows to process per hourly collection cycle. Set to 0 for unlimited processing.      |
+| `JOBEVENT_JOB_LIMIT` | 1,000   | Maximum number of jobs to process for event data per hourly collection cycle. Set to 0 for unlimited processing. |
+
+Warning:
+
+Setting `JOBEVENT_ROW_LIMIT` or `JOBEVENT_JOB_LIMIT` to 0 removes the limit entirely, causing the collector to process all available events. On large deployments with high job volumes, this can significantly increase collection time and database load. To effectively disable event collection for performance reasons, set both values to 1.

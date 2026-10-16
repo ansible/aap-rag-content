@@ -12,13 +12,13 @@ PATs provide a simpler setup with user-scoped access. If you are already using P
 
 ## Procedure
 
-1.  Create a GitHub PAT with the following scopes:
+1. Create a GitHub PAT with the following scopes:
 
 - `repo`
 - `read:org`
 - `workflow` (required for the CI activity tab to display workflow run status)
 
-2.  Store the PAT.
+2. Store the PAT.
 **OpenShift — CLI:**
 
 ```

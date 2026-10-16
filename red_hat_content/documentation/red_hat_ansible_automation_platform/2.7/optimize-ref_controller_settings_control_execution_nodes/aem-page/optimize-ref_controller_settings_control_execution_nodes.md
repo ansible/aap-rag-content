@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-ref_controller_settings_control_execution_nodes"
 template = "docs/aem-title.html"
 title = "Capacity settings for each node type - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-ref_controller_settings_control_execution_nodes"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_controller_improving_performance/", "Tune automation controller to improve performance"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-ref_controller_settings_control_execution_nodes/aem-page/optimize-ref_controller_settings_control_execution_nodes.html"
 last_crumb = "Capacity settings for each node type"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Capacity settings for each node type"
 oversized = "false"

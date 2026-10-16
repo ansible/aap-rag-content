@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-proc_self_service_update_helm"
-title = "Upgrade the Helm release - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Upgrade the Helm release - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-proc_self_service_update_helm"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-assembly_self_service_upgrading/", "Upgrade Ansible automation portal"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/upgrade-proc_self_service_update_helm/aem-page/upgrade-proc_self_service_update_helm.html"
 last_crumb = "Upgrade the Helm release"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Upgrade the Helm release"
 oversized = "false"
@@ -50,23 +51,23 @@ For detailed instructions on this process, see [Installing the Ansible automatio
 
 ## Procedure
 
--  **Upgrade from the command line:**
-  1.  Log in to OpenShift Container Platform and select your project.
-  2.  Update the Helm repository:
+- **Upgrade from the command line:**
+  1. Log in to OpenShift Container Platform and select your project.
+  2. Update the Helm repository:
   
 
 ```
 $ helm repo update openshift-helm-charts
 ```
 
-  3.  Find the target chart version:
+  3. Find the target chart version:
   
 
 ```
 $ helm search repo openshift-helm-charts/redhat-rhaap-portal
 ```
 
-  4.  Upgrade with your values file:
+  4. Upgrade with your values file:
   
 
 ```
@@ -78,14 +79,14 @@ $ helm upgrade <release_name> openshift-helm-charts/redhat-rhaap-portal \
 
         Replace `<release_name>` with the name of your Helm release and `<chart_version>` with the target Helm chart version.
 
--  **Upgrade from the OpenShift web console:**
-  1.  Log in to the OpenShift web console and switch to the **Developer** perspective.
-  2.  Open the project for your Helm release.
-  3.  Select **Helm**, then select your release.
-  4.  Select Actions> (and then)Upgrade.
-  5.  Select the target chart version.
-  6.  In the **YAML** view, confirm `pluginMode`, `imageTagInfo`, and other custom values match `backup-values.yaml`.
-  7.  Click Upgrade.
+- **Upgrade from the OpenShift web console:**
+  1. Log in to the OpenShift web console and switch to the **Developer** perspective.
+  2. Open the project for your Helm release.
+  3. Select **Helm**, then select your release.
+  4. Select Actions> (and then)Upgrade.
+  5. Select the target chart version.
+  6. In the **YAML** view, confirm `pluginMode`, `imageTagInfo`, and other custom values match `backup-values.yaml`.
+  7. Click Upgrade.
 
 ## Results
 

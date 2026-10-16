@@ -7,9 +7,10 @@ The following procedure describes how to manually assign the Ansible language to
 
 ### Procedure
 
-1.  Open or create a YAML file in VS Code.
-2.  Hover the cursor over the language identified in the status bar at the bottom of the VS Code window to open the **Select Language Mode** list.
-3.  Select **Ansible** in the list. The language shown in the status bar at the bottom of the VS Code window for the file is changed to Ansible.
+1. Open or create a YAML file in VS Code.
+2. Hover the cursor over the language identified in the status bar at the bottom of the VS Code window to open the **Select Language Mode** list.
+3. Select **Ansible** in the list.
+The language shown in the status bar at the bottom of the VS Code window for the file is changed to Ansible.
 
 ## Add the persistent file association for the Ansible language to `settings.json`
 
@@ -19,10 +20,11 @@ Instead of manually associating the Ansible language to YAML files, you can add 
 
 ### Procedure
 
-1.  Open the `settings.json` file:
-1.  Click View> (and then)Command Palette to open the command palette.
-2.  Enter `Workspace settings` in the search box and select **Open Workspace Settings (JSON)**.
-2.  Add the following code to `settings.json`.
+1. Open the `settings.json` file:
+1. Click View> (and then)Command Palette to open the command palette.
+2. Enter `Workspace settings` in the search box and select **Open Workspace Settings (JSON)**.
+2. Add the following code to `settings.json`.
+
 
 ```
 {

@@ -6,13 +6,13 @@ The Ansible Automation Platform Operator installation form allows you to further
 
 ## Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  Navigate to Operators> (and then)Installed Operators.
-3.  Select your Ansible Automation Platform Operator deployment.
-4.  Select the **Ansible Automation Platform** tab.
-5.  Click the ⋮ icon next to your Ansible Automation Platform instance and select **Edit AnsibleAutomationPlatform** .
-6.  Click **YAML view** and locate the `spec.hub:` section..
-7.  Configure the route options under the `hub:` section:
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to Operators> (and then)Installed Operators.
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select the **Ansible Automation Platform** tab.
+5. Click the ⋮ icon next to your Ansible Automation Platform instance and select **Edit AnsibleAutomationPlatform** .
+6. Click **YAML view** and locate the `spec.hub:` section..
+7. Configure the route options under the `hub:` section:
 
 
 ```
@@ -25,7 +25,7 @@ nginx.ingress.kubernetes.io/proxy-connect-timeout: "600"
 ingress_tls_secret: hub-ingress-tls-secret
 ```
 
-8.  Click **Save**.
+8. Click **Save**.
 
 Note:
 These settings apply to the automation hub component managed by this Ansible Automation Platform instance. The operator automatically updates the ingress configuration for the hub.
@@ -42,9 +42,9 @@ You can view the progress by navigating to Workloads> (and then)Pods and locatin
 
 Verify that the following operator pods provided by the Ansible Automation Platform Operator installation from automation hub are running:
 
-| Operator manager controllers                                                                                                                                                                             | Automation controller                                                                                                | Automation hub                                                                                                                    |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| <br>The operator manager controllers for each of the 3 operators, include the following:<br>automation-controller-operator-controller-managerautomation-hub-operator-controller-managerresource-operator-controller-manager | <br>After deploying automation controller, you will see the addition of these pods:<br>controllercontroller-postgres | <br>After deploying automation hub, you will see the addition of these pods:<br>hub-apihub-contenthub-postgreshub-redishub-worker |
+| Operator manager controllers                                                                                                                                                                             | Automation controller                                                                                            | Automation hub                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| The operator manager controllers for each of the 3 operators, include the following:<br>automation-controller-operator-controller-managerautomation-hub-operator-controller-managerresource-operator-controller-manager | After deploying automation controller, you will see the addition of these pods:<br>controllercontroller-postgres | After deploying automation hub, you will see the addition of these pods:<br>hub-apihub-contenthub-postgreshub-redishub-worker |
 
 Note:
 

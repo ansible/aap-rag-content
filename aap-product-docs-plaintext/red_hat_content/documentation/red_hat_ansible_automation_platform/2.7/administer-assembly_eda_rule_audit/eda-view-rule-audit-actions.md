@@ -5,8 +5,8 @@ Review the output of executed actions within a triggered rule to confirm that th
 
 ### Procedure
 
-1.  From the navigation panel select **Automation Decisions> (and then)Rule Audit**.
-2.  Select the desired rule, then select the **Actions** tab.
+1. From the navigation panel select **Automation Decisions> (and then)Rule Audit**.
+2. Select the desired rule, then select the **Actions** tab.
 
 ### Results
 

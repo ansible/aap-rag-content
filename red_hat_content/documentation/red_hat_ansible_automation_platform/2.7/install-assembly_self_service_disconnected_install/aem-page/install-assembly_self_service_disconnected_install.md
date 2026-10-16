@@ -1,16 +1,17 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_disconnected_install"
 title = "Install Ansible automation portal in air-gapped OpenShift Container Platform environments - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_disconnected_install"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_about/", "Install Ansible automation portal (OpenShift Container Platform only)"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-install_automation_portal_on_openshift_container_platform/", "Install automation portal on OpenShift Container Platform"]]
 category = "Install"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_disconnected_install/aem-page/install-assembly_self_service_disconnected_install.html"
 last_crumb = "Install Ansible automation portal in air-gapped OpenShift Container Platform environments"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Install Ansible automation portal in air-gapped OpenShift Container Platform environments"
 oversized = "false"
@@ -50,7 +51,7 @@ Fulfilling these prerequisites helps ensure a successful deployment.
 
 Important:
 
-The image versions and compatibility requirements vary between Helm chart releases. Before you begin, consult the [Ansible Automation Portal Lifecycle](https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-lifecycle) page for version mappings between the Helm chart, Red Hat Developer Hub, and PostgreSQL.
+The image versions and compatibility requirements vary between Helm chart releases. Before you begin, consult the Ansible Automation Platform Self-Service Automation Portal Lifecycle page (see the following Related information) for version mappings between the Helm chart, Red Hat Developer Hub, and PostgreSQL.
 
 ## Prepare for air-gapped installation
 
@@ -97,7 +98,7 @@ Replace version placeholders with the versions bundled with your Helm chart. See
 
 ### Procedure
 
-1.  Copy the Red Hat Developer Hub hub image to your disconnected registry:
+1. Copy the Red Hat Developer Hub hub image to your disconnected registry:
   
 
 ```terminal
@@ -108,7 +109,7 @@ $ skopeo copy \
 
     This image is used for both the main application container and the `install-dynamic-plugins` init container. Replace `<rhdh_version>` with the Red Hat Developer Hub version bundled with your Helm chart.
 
-2.  If you use the built-in PostgreSQL database, copy the PostgreSQL image.
+2. If you use the built-in PostgreSQL database, copy the PostgreSQL image.
       An external database is the supported production architecture and does not require this step.
 
 ```terminal
@@ -119,7 +120,7 @@ $ skopeo copy \
 
     Replace `<version>` with the PostgreSQL major version and `<tag>` with the image tag bundled with your Helm chart. See the [Ansible Automation Portal Lifecycle](https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-lifecycle) page for version mappings.
 
-3.  Copy the plug-in catalog index image:
+3. Copy the plug-in catalog index image:
   
 
 ```terminal
@@ -130,7 +131,7 @@ $ skopeo copy \
 
     The Mirror dynamic plug-in artifacts procedure rebuilds this image with updated registry references. You must still mirror the original image because the script uses it as its source.
 
-4.  If you use OCI container delivery, copy the Ansible plug-ins OCI artifacts image:
+4. If you use OCI container delivery, copy the Ansible plug-ins OCI artifacts image:
   
 
 ```terminal
@@ -139,7 +140,7 @@ $ skopeo copy \
     docker://<disconnected_registry_url>/ansible-automation-platform/automation-portal:<plugin-version>
 ```
 
-5.  Copy the Ansible Dev Tools sidecar image, using the path that matches your Ansible Automation Platform version.
+5. Copy the Ansible Dev Tools sidecar image, using the path that matches your Ansible Automation Platform version.
       **Ansible Automation Platform 2.5:**
 
 ```terminal
@@ -186,7 +187,7 @@ Use the `mirror-plugins.sh` script from the Red Hat Developer Hub operator repos
 
 ### Procedure
 
-1.  Download the `mirror-plugins.sh` script from the Red Hat Developer Hub operator repository:
+1. Download the `mirror-plugins.sh` script from the Red Hat Developer Hub operator repository:
   
 
 ```terminal
@@ -196,7 +197,7 @@ $ chmod +x mirror-plugins.sh
 
     Replace `<rhdh_version>` with the Red Hat Developer Hub version bundled with your Helm chart. See the [Ansible Automation Portal Lifecycle](https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-lifecycle) page for version mappings.
 
-2.  Mirror the plug-in catalog index and all referenced plug-in artifacts to your disconnected registry:
+2. Mirror the plug-in catalog index and all referenced plug-in artifacts to your disconnected registry:
   
 
 ```terminal
@@ -207,8 +208,8 @@ $ ./mirror-plugins.sh \
 
     The script copies all OCI plug-in artifacts, rewrites the catalog index with your mirror registry URLs, and pushes the updated index to your disconnected registry.
 
-3.  If your disconnected environment has no direct network path to the connected bastion host, use the export-then-import workflow.
-  1.  On the connected bastion host, export the plug-in artifacts to a directory:
+3. If your disconnected environment has no direct network path to the connected bastion host, use the export-then-import workflow.
+  1. On the connected bastion host, export the plug-in artifacts to a directory:
   
 
 ```terminal
@@ -217,8 +218,8 @@ $ ./mirror-plugins.sh \
   --to-dir /path/to/plugin-export
 ```
 
-  2.  Transfer the export directory to a host in the disconnected environment.
-  3.  On the disconnected host, import the artifacts into your mirror registry:
+  2. Transfer the export directory to a host in the disconnected environment.
+  3. On the disconnected host, import the artifacts into your mirror registry:
   
 
 ```terminal
@@ -242,7 +243,7 @@ Download the Helm chart package and modify the internal image references to poin
 
 ### Procedure
 
-1.  Add the OpenShift Helm charts repository and update your local cache:
+1. Add the OpenShift Helm charts repository and update your local cache:
   
 
 ```
@@ -250,7 +251,7 @@ helm repo add openshift-helm-charts https://charts.openshift.io/
 helm repo update
 ```
 
-2.  Pull the required version of the chart:
+2. Pull the required version of the chart:
   
 
 ```
@@ -259,7 +260,7 @@ helm pull openshift-helm-charts/redhat-rhaap-portal --version x.y.z
 
     The chart is saved as a `.tgz` file (for example, `redhat-rhaap-portal-1.0.1.tgz`).
 
-3.  Extract the chart files:
+3. Extract the chart files:
   
 
 ```
@@ -268,8 +269,8 @@ tar -xvf redhat-rhaap-portal-x.y.z.tgz
 
     This creates a directory with a name similar to `redhat-rhaap-portal-1.0.1/`.
 
-4.  In the `redhat-rhaap-portal/values.yaml` file, replace all `image:` references with the full path to the images in your disconnected registry.
-5.  Repack the chart with your modifications:
+4. In the `redhat-rhaap-portal/values.yaml` file, replace all `image:` references with the full path to the images in your disconnected registry.
+5. Repack the chart with your modifications:
   
 
 ```
@@ -284,8 +285,8 @@ Transfer the modified Helm chart package from the connected bastion host to a ma
 
 ### Procedure
 
-1.  Copy the modified Helm chart `.tgz` file or files (for example, `redhat-rhaap-portal-1.0.1.tgz`) from your connected bastion host to a machine or jump box within your disconnected OpenShift network.
-2.  If you use the HTTP plug-in registry method, transfer the plug-in tarball files to the disconnected environment.
+1. Copy the modified Helm chart `.tgz` file or files (for example, `redhat-rhaap-portal-1.0.1.tgz`) from your connected bastion host to a machine or jump box within your disconnected OpenShift network.
+2. If you use the HTTP plug-in registry method, transfer the plug-in tarball files to the disconnected environment.
 
 ## Install the Helm chart in the disconnected OpenShift environment
 
@@ -303,7 +304,7 @@ Ensure your disconnected OpenShift cluster is configured to trust the private re
 
 ### Procedure
 
-1.  In a terminal, log in to your disconnected OpenShift cluster using the `oc` CLI.
+1. In a terminal, log in to your disconnected OpenShift cluster using the `oc` CLI.
   
 
 ```
@@ -317,7 +318,7 @@ export KUBECONFIG=/path/to/your/kubeconfig
 oc login
 ```
 
-2.  Ensure that your OpenShift cluster is configured to trust your disconnected registry.
+2. Ensure that your OpenShift cluster is configured to trust your disconnected registry.
 
 ## Configure plug-in delivery for disconnected environments
 
@@ -330,7 +331,7 @@ Create the registry authentication secret so the dynamic plug-in init container 
 
 ### Procedure
 
-1.  Create an auth.json file with credentials for your disconnected registry:
+1. Create an auth.json file with credentials for your disconnected registry:
   
 
 ```
@@ -349,7 +350,7 @@ Create the registry authentication secret so the dynamic plug-in init container 
 $ printf '%s' '<registry_username>:<registry_password>' | base64 -w0
 ```
 
-2.  Create the registry authentication secret:
+2. Create the registry authentication secret:
   
 
 ```
@@ -374,14 +375,14 @@ Install the Ansible automation portal by using the `helm install` command, refer
 
 ### Procedure
 
-1.  On the machine within your disconnected environment, navigate to the directory where you placed the transferred Helm chart `.tgz` file:
+1. On the machine within your disconnected environment, navigate to the directory where you placed the transferred Helm chart `.tgz` file:
   
 
 ```terminal
 $ cd /path/to/your/transferred/charts/
 ```
 
-2.  Define your namespace and cluster router base as environment variables:
+2. Define your namespace and cluster router base as environment variables:
   
 
 ```terminal
@@ -389,14 +390,14 @@ $ export MY_NAMESPACE="<your_namespace_name>"
 $ export MY_CLUSTER_ROUTER_BASE="<your_cluster_router_base>"
 ```
 
-3.  If the namespace does not exist, create it:
+3. If the namespace does not exist, create it:
   
 
 ```terminal
 $ oc new-project "${MY_NAMESPACE}"
 ```
 
-4.  Create a custom values file and reuse it for install and upgrade.
+4. Create a custom values file and reuse it for install and upgrade.
       Choose the example that matches your plug-in delivery method.
 
     **OCI delivery** (`values-oci.yaml`):
@@ -484,7 +485,7 @@ redhat-developer-hub:
   Note:
       The `secrets-scm` secret is only required if you use private SCM repositories for importing catalog entities or running software templates that access SCM. If you do not use SCM integration, you can skip creating this secret.
 
-5.  Install the chart using the `helm install` command:
+5. Install the chart using the `helm install` command:
   
 
 ```terminal
@@ -541,14 +542,14 @@ If your private registry uses a certificate signed by an internal or self-signed
 
 ### Procedure
 
-1.  Obtain the CA certificate chain that signed your mirror registry's TLS certificate.
+1. Obtain the CA certificate chain that signed your mirror registry's TLS certificate.
       If the registry uses a certificate chain, include the full chain:
 
 ```terminal
 $ cat registry.crt intermediate.crt root.crt > ca-bundle.crt
 ```
 
-2.  Create a ConfigMap from the CA certificate:
+2. Create a ConfigMap from the CA certificate:
   
 
 ```terminal
@@ -556,7 +557,7 @@ $ oc create configmap registry-ca-crt \
   --from-file=ca.crt=ca-bundle.crt -n *namespace*
 ```
 
-3.  Add the volume and mount to your values file.
+3. Add the volume and mount to your values file.
       Add the `registry-ca-crt` volume to `extraVolumes`, and add the CA certificate volume mount to the `install-dynamic-plugins` init container:
 
 ```yaml
@@ -594,28 +595,28 @@ Verify the successful installation of the Helm chart in the disconnected environ
 
 ### Procedure
 
-1.  Check the Helm release status:
+1. Check the Helm release status:
   
 
 ```
 $ helm list -n ${MY_NAMESPACE}
 ```
 
-2.  Monitor the pods in your namespace to ensure they are running:
+2. Monitor the pods in your namespace to ensure they are running:
   
 
 ```
 $ oc get pods -n ${MY_NAMESPACE}
 ```
 
-3.  Check for `ImagePullBackOff` or other errors in pod events:
+3. Check for `ImagePullBackOff` or other errors in pod events:
   
 
 ```
 $ oc describe pod <pod_name> -n ${MY_NAMESPACE}
 ```
 
-4.  If the chart uses routes to expose services, verify that the routes are created and accessible:
+4. If the chart uses routes to expose services, verify that the routes are created and accessible:
   
 
 ```
@@ -660,7 +661,7 @@ If your mirror uses a non-standard path for the Ansible plug-in OCI image, set `
 
 ### Procedure
 
- Complete the standard install steps using these values.
+Complete the standard install steps using these values.
 
 ## Troubleshoot disconnected installations
 

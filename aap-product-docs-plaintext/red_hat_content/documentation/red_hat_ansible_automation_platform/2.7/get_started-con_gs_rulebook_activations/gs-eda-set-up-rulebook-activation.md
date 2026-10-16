@@ -10,9 +10,9 @@ Follow the steps in this procedure to set up a rulebook activation.
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Decisions> (and then)Rulebook Activations.
-2.  Click Create rulebook activation.
-3.  Enter the following information:
+1. From the navigation panel, select Automation Decisions> (and then)Rulebook Activations.
+2. Click Create rulebook activation.
+3. Enter the following information:
 
 - **Name**: Insert the name.
 - **Description**: This field is optional.
@@ -38,7 +38,7 @@ In Event-Driven Ansible controller, you cannot customize the pull policy of the 
 - **Variables**: The variables for the rulebook are in JSON or YAML format. The content would be equivalent to the file passed through the `--vars` flag of ansible-rulebook command.
 - **Options**: Check the **Skip audit events** option if you do not want to see your events in the Rule Audit.
 
-4.  Click Create rulebook activation.
+4. Click Create rulebook activation.
 
 ### Results
 

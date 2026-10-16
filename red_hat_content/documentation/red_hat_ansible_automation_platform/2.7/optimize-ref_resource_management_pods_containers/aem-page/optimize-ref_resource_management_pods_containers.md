@@ -1,7 +1,7 @@
 +++
 title = "Manage resources for pods and containers - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-ref_resource_management_pods_containers"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_pod_spec_modifications/", "Performance tuning for operator environments"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-ref_resource_management_pods_containers/aem-page/optimize-ref_resource_management_pods_containers.html"
 last_crumb = "Manage resources for pods and containers"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Manage resources for pods and containers"
 oversized = "false"
@@ -27,19 +28,23 @@ type = "aem-page"
 
 # Manage resources for pods and containers
 
-When you specify a pod, you can specify how much of each resource a container needs. The most common resources to specify are CPU and memory (RAM).
+When you specify a pod, you can specify how much of each resource a container needs.
+The most common resources to specify are CPU and memory (RAM).
 
 When you specify the resource request for containers in a Pod, the Kubernetes-scheduler uses this information to allocate the node to place the Pod on.
 
-When you specify a resource limit for a container, the *kubelet*, or node agent, enforces those limits so that the running container is not permitted to use more of that resource than the limit you set. The kubelet also reserves at least the requested amount of that system resource specifically for that container to use.
+When you specify a resource limit for a container, the *kubelet*, or node agent, enforces those limits so that the running container is not permitted to use more of that resource than the limit you set.
+The kubelet also reserves at least the requested amount of that system resource specifically for that container to use.
 
 ## Requests and limits
 
-If the node where a pod is running has enough resources available, it is possible for a container to use more resources than its request for that resource specifies. However, a container is not allowed to use more than its resource limit.
+If the node where a pod is running has enough resources available, it is possible for a container to use more resources than its request for that resource specifies.
+However, a container is not allowed to use more than its resource limit.
 
 For example, if you set a memory request of 256 MiB for a container, and that container is in a pod scheduled to a Node with 8GiB of memory and no other pods, then the container can try to use more RAM.
 
-If you set a memory limit of 4GiB for that container, the kubelet and container runtime enforce the limit. The runtime prevents the container from using more than the configured resource limit.
+If you set a memory limit of 4GiB for that container, the kubelet and container runtime enforce the limit.
+The runtime prevents the container from using more than the configured resource limit.
 
 If a process in the container tries to consume more than the allowed amount of memory, the system kernel terminates the process that attempted the allocation, with an *Out Of Memory* (OOM) error.
 
@@ -56,9 +61,15 @@ If you specify a limit for a resource, but do not specify any request, and no ad
 
 ## Resource types
 
-CPU and memory are both resource types. A resource type has a base unit. CPU represents compute processing and is specified in units of Kubernetes CPUs. Memory is specified in units of bytes.
+CPU and memory are both resource types.
+A resource type has a base unit.
+CPU represents compute processing and is specified in units of Kubernetes CPUs.
+Memory is specified in units of bytes.
 
-CPU and memory are collectively referred to as compute resources, or resources. Compute resources are measurable quantities that can be requested, allocated, and consumed. They are distinct from API resources. API resources, such as pods and services, are objects that can be read and modified through the Kubernetes API server.
+CPU and memory are collectively referred to as compute resources, or resources.
+Compute resources are measurable quantities that can be requested, allocated, and consumed.
+They are distinct from API resources.
+API resources, such as pods and services, are objects that can be read and modified through the Kubernetes API server.
 
 ### Specify resource requests and limits for pods and containers
 
@@ -71,27 +82,40 @@ spec.containers[].resources.requests.cpu
 spec.containers[].resources.requests.memory
 ```
 
-Although you can only specify requests and limits for individual containers, it is also useful to think about the overall resource requests and limits for a pod. For a particular resource, a pod resource request or limit is the sum of the resource requests or limits of that type for each container in the pod.
+Although you can only specify requests and limits for individual containers, it is also useful to think about the overall resource requests and limits for a pod.
+For a particular resource, a pod resource request or limit is the sum of the resource requests or limits of that type for each container in the pod.
 
 ### Resource units in Kubernetes
 
-**CPU resource units** Limits and requests for CPU resources are measured in CPU units. In Kubernetes, one CPU unit is equal to one physical processor core, or one virtual core, depending on whether the node is a physical host or a virtual machine running inside a physical machine.
+**CPU resource units** Limits and requests for CPU resources are measured in CPU units.
+In Kubernetes, one CPU unit is equal to one physical processor core, or one virtual core, depending on whether the node is a physical host or a virtual machine running inside a physical machine.
 
-Fractional requests are allowed. When you define a container with `spec.containers[].resources.requests.cpu` set to `0.5`, you are requesting half as much CPU time compared to if you asked for 1.0 CPU. For CPU resource units, the quantity expression 0.1 is equivalent to the expression 100m, which can be read as one hundred millicpu or one hundred millicores. millicpu and millicores mean the same thing. CPU resource is always specified as an absolute amount of resource, never as a relative amount. For example, 500m CPU represents the same amount of computing power whether that container runs on a single-core, dual-core, or 48-core machine.
+Fractional requests are allowed.
+When you define a container with `spec.containers[].resources.requests.cpu` set to `0.5`, you are requesting half as much CPU time compared to if you asked for 1.0 CPU.
+For CPU resource units, the quantity expression 0.1 is equivalent to the expression 100m, which can be read as one hundred millicpu or one hundred millicores.
+millicpu and millicores mean the same thing.
+CPU resource is always specified as an absolute amount of resource, never as a relative amount.
+For example, 500m CPU represents the same amount of computing power whether that container runs on a single-core, dual-core, or 48-core machine.
 
 Note:
 
-To specify CPU units less than 1.0 or 1000m you must use the milliCPU form. For example, use 5m, not 0.005 CPU.
+To specify CPU units less than 1.0 or 1000m you must use the milliCPU form.
+For example, use 5m, not 0.005 CPU.
 
-**Memory resource units** Limits and requests for memory are measured in bytes. You can express memory as a plain integer or as a fixed-point number using one of these quantity suffixes: E, P, T, G, M, k. You can also use the power-of-two equivalents: Ei, Pi, Ti, Gi, Mi, Ki. For example, the following represent roughly the same value:
+**Memory resource units** Limits and requests for memory are measured in bytes.
+You can express memory as a plain integer or as a fixed-point number using one of these quantity suffixes: E, P, T, G, M, k.
+You can also use the power-of-two equivalents: Ei, Pi, Ti, Gi, Mi, Ki.
+For example, the following represent roughly the same value:
 
 ```
 128974848, 129e6, 129M,  128974848000m, 123Mi
 ```
 
-Pay attention to the case of the suffixes. If you request 400m of memory, this is a request for 0.4 bytes, not 400 mebibytes (400Mi) or 400 megabytes (400M).
+Pay attention to the case of the suffixes.
+If you request 400m of memory, this is a request for 0.4 bytes, not 400 mebibytes (400Mi) or 400 megabytes (400M).
 
-**Example CPU and memory specification** The following cluster has enough free resources to schedule a task pod with a dedicated 100m CPU and 250Mi. The cluster can also withstand bursts over that dedicated usage up to 2000m CPU and 2Gi memory.
+**Example CPU and memory specification** The following cluster has enough free resources to schedule a task pod with a dedicated 100m CPU and 250Mi.
+The cluster can also withstand bursts over that dedicated usage up to 2000m CPU and 2Gi memory.
 
 ```
 spec:
@@ -104,14 +128,23 @@ spec:
       memory: 2Gi
 ```
 
-Automation controller will not schedule jobs that use more resources than the limit set. If the task pod does use more resources than the limit set, the container is OOMKilled by Kubernetes and restarted.
+Automation controller will not schedule jobs that use more resources than the limit set.
+If the task pod does use more resources than the limit set, the container is OOMKilled by Kubernetes and restarted.
 
 ### Size recommendations for resource requests
 
-All jobs that use a container group use the same pod specification. The pod specification includes the resource requests for the pod that runs the job.
+All jobs that use a container group use the same pod specification.
+The pod specification includes the resource requests for the pod that runs the job.
 
-All jobs use the same resource requests. The specified resource requests for your particular job on the pod specification affect how Kubernetes schedules the job pod based on resources available on worker nodes. These are the default values.
+All jobs use the same resource requests.
+The specified resource requests for your particular job on the pod specification affect how Kubernetes schedules the job pod based on resources available on worker nodes.
+These are the default values.
 
-- One fork typically requires 100Mb of memory. This is set by using `system_task_forks_mem`. If your jobs have five forks, the job pod specification must request 500Mb of memory.
-- For job templates that have a particularly high forks value or otherwise need larger resource requests, you should create a separate container group with a different pod spec that indicates larger resource requests. Then you can assign it to the job template. For example, a job template with the forks value of 50 must be paired with a container group that requests 5GB of memory.
-- If the fork value for a job is high enough that no single pod would be able to contain the job, use the job slicing feature. This splits the inventory up such that the individual job “slices” fit in an automation pod provisioned by the container group.
+- One fork typically requires 100Mb of memory.
+This is set by using `system_task_forks_mem`.
+If your jobs have five forks, the job pod specification must request 500Mb of memory.
+- For job templates that have a particularly high forks value or otherwise need larger resource requests, you should create a separate container group with a different pod spec that indicates larger resource requests.
+Then you can assign it to the job template.
+For example, a job template with the forks value of 50 must be paired with a container group that requests 5GB of memory.
+- If the fork value for a job is high enough that no single pod would be able to contain the job, use the job slicing feature.
+This splits the inventory up such that the individual job “slices” fit in an automation pod provisioned by the container group.

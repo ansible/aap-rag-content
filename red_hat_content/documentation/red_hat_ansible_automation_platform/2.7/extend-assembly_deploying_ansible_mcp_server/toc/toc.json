@@ -15,73 +15,7 @@
           "weight": 1,
           "urlFragment": "con-about-ansible-mcp-server",
           "anchor": null,
-          "singlePageAnchor": "con-about-ansible-mcp-server",
-          "sections": [
-            {
-              "title": "Benefits",
-              "visible": true,
-              "weight": 1,
-              "urlFragment": "con-about-ansible-mcp-server",
-              "anchor": "con-about-ansible-mcp-server___benefits",
-              "singlePageAnchor": "con-about-ansible-mcp-server___benefits"
-            },
-            {
-              "title": "Workflow",
-              "visible": true,
-              "weight": 2,
-              "urlFragment": "con-about-ansible-mcp-server",
-              "anchor": "con-about-ansible-mcp-server___workflow",
-              "singlePageAnchor": "con-about-ansible-mcp-server___workflow"
-            },
-            {
-              "title": "MCP server toolsets",
-              "visible": true,
-              "weight": 3,
-              "urlFragment": "con-about-ansible-mcp-server",
-              "anchor": "con-about-ansible-mcp-server___ansible_mcp_server_toolsets",
-              "singlePageAnchor": "con-about-ansible-mcp-server___ansible_mcp_server_toolsets"
-            },
-            {
-              "title": "Server-level and user-level permissions",
-              "visible": true,
-              "weight": 4,
-              "urlFragment": "con-about-ansible-mcp-server",
-              "anchor": "con-about-ansible-mcp-server___server_level_and_user_level_permissions",
-              "singlePageAnchor": "con-about-ansible-mcp-server___server_level_and_user_level_permissions"
-            },
-            {
-              "title": "Data visibility and sensitive data handling",
-              "visible": true,
-              "weight": 5,
-              "urlFragment": "con-about-ansible-mcp-server",
-              "anchor": "con-about-ansible-mcp-server__section_1",
-              "singlePageAnchor": "con-about-ansible-mcp-server__section_1"
-            },
-            {
-              "title": "Telemetry data collection for the MCP server",
-              "visible": true,
-              "weight": 6,
-              "urlFragment": "con-about-ansible-mcp-server",
-              "anchor": "con-about-ansible-mcp-server___telemetry_data_collection_for_ansible_mcp_server",
-              "singlePageAnchor": "con-about-ansible-mcp-server___telemetry_data_collection_for_ansible_mcp_server"
-            },
-            {
-              "title": "Requirements to deploy the MCP server",
-              "visible": true,
-              "weight": 7,
-              "urlFragment": "con-about-ansible-mcp-server",
-              "anchor": "con-about-ansible-mcp-server___prerequisites",
-              "singlePageAnchor": "con-about-ansible-mcp-server___prerequisites"
-            },
-            {
-              "title": "Overview of deploying the MCP server",
-              "visible": true,
-              "weight": 8,
-              "urlFragment": "con-about-ansible-mcp-server",
-              "anchor": "con-about-ansible-mcp-server___overview_of_deploying_the_ansible_mcp_server",
-              "singlePageAnchor": "con-about-ansible-mcp-server___overview_of_deploying_the_ansible_mcp_server"
-            }
-          ]
+          "singlePageAnchor": "con-about-ansible-mcp-server"
         },
         {
           "title": "Deploy the MCP server for Red Hat Ansible Automation Platform on a container-based installation",
@@ -100,26 +34,58 @@
           "singlePageAnchor": "proc-configure-mcp-server-operator-install"
         },
         {
-          "title": "Create an API token for the MCP server",
+          "title": "Authenticate with the MCP server",
           "visible": true,
           "weight": 4,
-          "urlFragment": "proc-create-api-token-ansible-mcp-server",
+          "urlFragment": "con-authenticate-with-mcp-server",
           "anchor": null,
-          "singlePageAnchor": "proc-create-api-token-ansible-mcp-server",
+          "singlePageAnchor": "con-authenticate-with-mcp-server",
           "sections": [
+            {
+              "title": "Authenticate with a personal access token",
+              "visible": true,
+              "weight": 1,
+              "urlFragment": "con-authenticate-with-mcp-server",
+              "anchor": "proc-create-api-token-ansible-mcp-server",
+              "singlePageAnchor": "proc-create-api-token-ansible-mcp-server"
+            },
+            {
+              "title": "Enable OAuth 2.1 on the MCP server",
+              "visible": true,
+              "weight": 2,
+              "urlFragment": "con-authenticate-with-mcp-server",
+              "anchor": "proc-enable-oauth21-mcp-server",
+              "singlePageAnchor": "proc-enable-oauth21-mcp-server"
+            },
+            {
+              "title": "Connect an MCP client with OAuth 2.1",
+              "visible": true,
+              "weight": 3,
+              "urlFragment": "con-authenticate-with-mcp-server",
+              "anchor": "proc-connect-mcp-client-oauth21",
+              "singlePageAnchor": "proc-connect-mcp-client-oauth21"
+            },
+            {
+              "title": "OAuth 2.1 settings for the MCP server",
+              "visible": true,
+              "weight": 4,
+              "urlFragment": "con-authenticate-with-mcp-server",
+              "anchor": "ref-oauth21-mcp-server-settings",
+              "singlePageAnchor": "ref-oauth21-mcp-server-settings"
+            },
             {
               "title": "Connect an AI agent to the MCP server",
               "visible": true,
-              "weight": 1,
-              "urlFragment": "proc-create-api-token-ansible-mcp-server",
+              "weight": 5,
+              "urlFragment": "con-authenticate-with-mcp-server",
               "anchor": "proc-connect-ai-agent-ansible-mcp-server",
               "singlePageAnchor": "proc-connect-ai-agent-ansible-mcp-server"
             },
             {
               "title": "Troubleshoot MCP server errors",
               "visible": true,
-              "weight": 2,
-              "urlFragment": "proc-create-api-token-ansible-mcp-server",
+              "weight": 6,
+              "urlFragment": "con-authenticate-with-mcp-server",
               "anchor": "troubleshoot-ansible-mcp-server-errors",
               "singlePageAnchor": "troubleshoot-ansible-mcp-server-errors",
               "sections": [
@@ -127,7 +93,7 @@
                   "title": "SSL certificate validation fails when the MCP server connects to Ansible Automation Platform",
                   "visible": true,
                   "weight": 1,
-                  "urlFragment": "proc-create-api-token-ansible-mcp-server",
+                  "urlFragment": "con-authenticate-with-mcp-server",
                   "anchor": "troubleshoot-ansible-mcp-server-errors__section_1",
                   "singlePageAnchor": "troubleshoot-ansible-mcp-server-errors__section_1"
                 },
@@ -135,7 +101,7 @@
                   "title": "API output format rejected with 406 Status Code",
                   "visible": true,
                   "weight": 2,
-                  "urlFragment": "proc-create-api-token-ansible-mcp-server",
+                  "urlFragment": "con-authenticate-with-mcp-server",
                   "anchor": "troubleshoot-ansible-mcp-server-errors___api_output_format_rejected_with_406_status_code",
                   "singlePageAnchor": "troubleshoot-ansible-mcp-server-errors___api_output_format_rejected_with_406_status_code"
                 },
@@ -143,7 +109,7 @@
                   "title": "User requests rejected with 400 status code",
                   "visible": true,
                   "weight": 3,
-                  "urlFragment": "proc-create-api-token-ansible-mcp-server",
+                  "urlFragment": "con-authenticate-with-mcp-server",
                   "anchor": "troubleshoot-ansible-mcp-server-errors___user_requests_rejected_with_400_status_code",
                   "singlePageAnchor": "troubleshoot-ansible-mcp-server-errors___user_requests_rejected_with_400_status_code"
                 },
@@ -151,7 +117,7 @@
                   "title": "MCP server permissions are changed post deployment",
                   "visible": true,
                   "weight": 4,
-                  "urlFragment": "proc-create-api-token-ansible-mcp-server",
+                  "urlFragment": "con-authenticate-with-mcp-server",
                   "anchor": "troubleshoot-ansible-mcp-server-errors___ansible_mcp_server_permissions_are_changed_post_deployment",
                   "singlePageAnchor": "troubleshoot-ansible-mcp-server-errors___ansible_mcp_server_permissions_are_changed_post_deployment"
                 }

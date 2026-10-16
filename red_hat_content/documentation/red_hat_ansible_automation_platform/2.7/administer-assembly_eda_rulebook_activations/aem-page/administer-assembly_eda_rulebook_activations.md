@@ -1,6 +1,6 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_rulebook_activations"
 title = "Define rules that trigger automation from events - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_rulebook_activations"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_rulebook_activations/aem-page/administer-assembly_eda_rulebook_activations.html"
 last_crumb = "Define rules that trigger automation from events"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Define rules that trigger automation from events"
 oversized = "false"
@@ -67,10 +68,10 @@ Create a rulebook activation to link a rulebook to a decision environment and ev
 
 ### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  Navigate to the Automation Decisions> (and then)Rulebook Activations.
-3.  Click Create rulebook activation.
-4.  Insert the following:
+1. Log in to Ansible Automation Platform.
+2. Navigate to the Automation Decisions> (and then)Rulebook Activations.
+3. Click Create rulebook activation.
+4. Insert the following:
   
 
 Name
@@ -132,9 +133,9 @@ Includes the following:
   - **Skip audit events** - Check this option if you do not want to see your events in the Rule Audit.
   - **Auto-restart on project update** - Click this option to automatically restart the rulebook activation when its associated project is updated. See [Auto-restart on project update for rulebook activations](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_rulebook_activations#GUID-ee6ca40f-7699-473b-a826-f46d49d6c1e1 "When a project synchronizes and the rulebook content has changed in the source repository, you can configure the system to automatically restart the affected rulebook activation. This ensures that running activations always use the most current rulebook logic without manual intervention.")for further details.
   - **Enable event persistence** - Click to save the event stream state to the database so that processing resumes without data loss after an activation restart . This is particularly critical when Auto-restart on project update is enabled, as it prevents event gaps while the activation applies new project changes. Note:
-    If you deploy the event persistence database during installation, the installer automatically creates a default Rule Engine credential so you do not need to manually select one. For more information about event persistence, see [Event persistence in rulebook activations](/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-event_persistence_in_rulebook_activations "Event persistence stores incoming data from event sources in a dedicated database. After event persistence is enabled for an activation, the system retains matched events until the rule triggers, ensuring no data is lost before an action occurs."). If you prefer to create a custom Rule Engine credential, see [Event-Driven Ansible Rule Engine credential type](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_custom_credential_types#GUID-9acc771b-62bf-4875-8ec1-6beca34013d9 "The Event-Driven Ansible Rule Engine credential type configures database connections for event persistence. If deployed during installation, the installer automatically creates a default credential so event persistence functions immediately.").
+    If you deploy the event persistence database during installation, the installer automatically creates a default Rule Engine credential so you do not need to manually select one. For more information about event persistence, see [Event persistence in rulebook activations](/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-event_persistence_in_rulebook_activations "By default, events processed by rulebook activations are not persisted. When you enable event persistence, Event-Driven Ansible stores matched events in a dedicated database so you can review and audit the events that triggered your automation rules."). If you prefer to create a custom Rule Engine credential, see [Event-Driven Ansible Rule Engine credential type](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_custom_credential_types#GUID-9acc771b-62bf-4875-8ec1-6beca34013d9 "The Event-Driven Ansible Rule Engine credential type configures database connections for event persistence. If deployed during installation, the installer automatically creates a default credential so event persistence functions immediately.").
 
-5.  Click Create rulebook activation.
+5. Click Create rulebook activation.
 
 ### Results
 
@@ -166,8 +167,8 @@ View the activation output in the History tab to inspect the execution results, 
 
 #### Procedure
 
-1.  Select the **History** tab to access the list of all the activation instances. An activation instance represents a single execution of the activation.
-2.  Then select the activation instance you want to view. The **Output** for the activation instance is displayed.
+1. Select the **History** tab to access the list of all the activation instances. An activation instance represents a single execution of the activation.
+2. Then select the activation instance you want to view. The **Output** for the activation instance is displayed.
 
 #### What to do next
 

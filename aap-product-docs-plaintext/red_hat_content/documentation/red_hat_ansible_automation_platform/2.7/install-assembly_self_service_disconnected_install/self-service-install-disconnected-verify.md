@@ -5,28 +5,28 @@ Verify the successful installation of the Helm chart in the disconnected environ
 
 ### Procedure
 
-1.  Check the Helm release status:
+1. Check the Helm release status:
 
 
 ```
 $ helm list -n ${MY_NAMESPACE}
 ```
 
-2.  Monitor the pods in your namespace to ensure they are running:
+2. Monitor the pods in your namespace to ensure they are running:
 
 
 ```
 $ oc get pods -n ${MY_NAMESPACE}
 ```
 
-3.  Check for `ImagePullBackOff` or other errors in pod events:
+3. Check for `ImagePullBackOff` or other errors in pod events:
 
 
 ```
 $ oc describe pod <pod_name> -n ${MY_NAMESPACE}
 ```
 
-4.  If the chart uses routes to expose services, verify that the routes are created and accessible:
+4. If the chart uses routes to expose services, verify that the routes are created and accessible:
 
 
 ```

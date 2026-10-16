@@ -7,5 +7,6 @@ Set the `container-policy` CLI option to control how this data is used in relati
 
 - **`ignore_all`** policy: Generate a `policy.json` file in the build `context directory <context>` where no signature validation is performed.
 - **`system`** policy: Signature validation is performed using pre-existing `policy.json` files in standard system locations. `ansible-builder` assumes no responsibility for the content within these files, and the user has complete control over the content.
-- **`signature_required`** policy: `ansible-builder` uses the container image definitions to generate a `policy.json` file in the build `context directory <context>` that is used during the build to validate the images.
+- **`signature_required`** policy: `ansible-builder` uses the container image definitions to generate a `policy.json` file in the build
+`context directory <context>` that is used during the build to validate the images.
 

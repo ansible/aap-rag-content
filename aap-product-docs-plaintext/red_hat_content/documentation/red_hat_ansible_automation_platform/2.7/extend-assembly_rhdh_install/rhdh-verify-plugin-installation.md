@@ -5,7 +5,7 @@ After configuring the dynamic plug-ins and sidecar container, verify that the An
 
 ### Procedure
 
-1.  In the `install-dynamic-plugin` container logs, search for the Ansible plug-ins.
+1. In the `install-dynamic-plugin` container logs, search for the Ansible plug-ins.
 A successful installation shows:
 
 ```terminal
@@ -15,5 +15,5 @@ A successful installation shows:
 ==> Successfully installed dynamic plugin oci://registry.redhat.io/ansible-automation-platform/automation-portal:<tag>!ansible-plugin-scaffolder-backend-module-backstage-rhaap
 ```
 
-2.  Verify that the Ansible plug-in is present in the navigation pane.
-3.  Select **Administration** to view the installed plug-ins in the **Plugins** tab.
+2. Verify that the Ansible plug-in is present in the navigation pane.
+3. Select **Administration** to view the installed plug-ins in the **Plugins** tab.

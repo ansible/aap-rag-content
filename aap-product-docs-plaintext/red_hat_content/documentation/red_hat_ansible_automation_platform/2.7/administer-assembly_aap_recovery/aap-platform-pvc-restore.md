@@ -16,17 +16,17 @@ For more information see the [Finding and deleting PVCs](/documentation/en-us/re
 
 ### Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  Navigate to Operators> (and then)Installed Operators.
-3.  Select your Ansible Automation Platform Operator deployment.
-4.  Go to your **All Instances** tab, and click Create New.
-5.  Select **Ansible Automation Platform Restore** from the list.
-6.  For **Name** enter the name for the recovery deployment.
-7.  For **New Ansible Automation Platform Name** enter the new name for your Ansible Automation Platform instance.
-8.  For **Backup Source** select **PVC**.   1.  **Backup PVC:** Enter the name of your PVC.
-2.  **Backup Directory:** Enter the path to your backup directory on your PVC.
-9.  For **Backup name** enter the name you chose when creating the backup.
-10.  Under **YAML view** paste in the following example:
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to Operators> (and then)Installed Operators.
+3. Select your Ansible Automation Platform Operator deployment.
+4. Go to your **All Instances** tab, and click Create New.
+5. Select **Ansible Automation Platform Restore** from the list.
+6. For **Name** enter the name for the recovery deployment.
+7. For **New Ansible Automation Platform Name** enter the new name for your Ansible Automation Platform instance.
+8. For **Backup Source** select **PVC**.   1. **Backup PVC:** Enter the name of your PVC.
+2. **Backup Directory:** Enter the path to your backup directory on your PVC.
+9. For **Backup name** enter the name you chose when creating the backup.
+10. Under **YAML view** paste in the following example:
 
 
 ```
@@ -58,7 +58,7 @@ backup_pvc: aap-eda-backup-claim
 backup_dir: '/backups/eda-openshift-backup-2025-06-23-18:29:11'
 ```
 
-11.  Click Create.
+11. Click Create.
 
 ### Results
 

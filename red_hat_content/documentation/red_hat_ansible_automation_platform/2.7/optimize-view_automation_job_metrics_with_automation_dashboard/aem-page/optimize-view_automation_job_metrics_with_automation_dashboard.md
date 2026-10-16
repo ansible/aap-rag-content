@@ -1,7 +1,7 @@
 +++
-title = "View automation job metrics with automation dashboard - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-view_automation_job_metrics_with_automation_dashboard"
+template = "docs/aem-title.html"
+title = "View automation job metrics with automation dashboard - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_user_data_tracking/", "Get insights on automation across your environment with Automation Analytics"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-view_automation_job_metrics_with_automation_dashboard/aem-page/optimize-view_automation_job_metrics_with_automation_dashboard.html"
 last_crumb = "View automation job metrics with automation dashboard"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "View automation job metrics with automation dashboard"
 oversized = "false"
@@ -29,7 +30,7 @@ type = "aem-page"
 
 Track automation job performance and demonstrate automation value with automation dashboard. Analyze job execution metrics and calculate cost savings to communicate the impact of your automation initiatives to stakeholders.
 
- Viewing automation job metrics helps you to:
+Viewing automation job metrics helps you to:
 
 - **Monitor automation execution**: Track successful and failed jobs, unique hosts automated, and total automation hours to understand platform usage patterns.
 - **Analyze automation adoption**: View top projects and users to identify high-value automation workflows and understand which teams drive automation adoption.
@@ -85,7 +86,7 @@ Automation dashboard displays a summary of the top and overview usage for your s
 - **Hosts automated**: Number of hosts that executed at least one automation job in the selected period. Indicates how much of your inventory is actively automated and can help with license or capacity planning.
 - **Hours of automation**: Sum of all job runtimes in the selected period. Reflects total automation workload and can inform capacity planning and resource allocation.
 - **Number of times jobs were run**: Total number of job executions in the selected period, regardless of success or failure. Use this to understand automation volume, trends, and adoption over time.
-- **Number of hosts jobs are running on**: Number of hosts that ran at least one job in the selected period. Complements run count by showing how broadly automation is applied across your inventory.
+- **Number of hosts jobs are running on**: Sum of all hosts that ran at least one job in the selected period. Complements run count by showing how broadly automation is applied across your inventory. For example, if you have 100 hosts and run 2 daily jobs against all of them for 30 days, that is 100 hosts × 2 jobs × 30 days = 6,000 host runs.
 - **Top 5 projects**: Projects ranked by total job count in the selected period. Helps identify which projects are driving the most automation activity.
 - **Top 5 users**: Users ranked by automation runs they triggered or that ran in their context in the selected period. Shows individual adoption and activity. Note:
       Scheduled jobs can affect these results, because they do not represent a real, logged-in user.
@@ -96,9 +97,9 @@ To calculate total savings, the cost and savings analysis compares manual labor 
 
 ### Procedure
 
-1.  In the **Monthly AAP cost** field, enter the monthly cost of running the Ansible Automation Platform. This value includes license, labor, and infrastructure costs to run Ansible Automation Platform. It is used to calculate the automation savings.
-2.  In the **Hourly rate for manually running the job ($)** field, enter the hourly labor cost used to estimate what it would cost to run these jobs manually. This is used to calculate manual cost and savings.
-3.  Optional: Select **Time taken to create automation** to include the estimated time spent creating or authoring the automation (for example, writing playbooks, setting up jobs) before it could be run.
+1. In the **Monthly AAP cost** field, enter the monthly cost of running the Ansible Automation Platform. This value includes license, labor, and infrastructure costs to run Ansible Automation Platform. It is used to calculate the automation savings.
+2. In the **Hourly rate for manually running the job ($)** field, enter the hourly labor cost used to estimate what it would cost to run these jobs manually. This is used to calculate manual cost and savings.
+3. Optional: Select **Time taken to create automation** to include the estimated time spent creating or authoring the automation (for example, writing playbooks, setting up jobs) before it could be run.
       Automation dashboard calculates the following data points based on your inputs:
 
   - **Cost of manual automation**: Total cost if all jobs were run manually.

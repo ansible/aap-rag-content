@@ -1,4 +1,4 @@
-# Ansible Automation Platform patch release June 17, 2026
+# Ansible Automation Platform patch release June 17, 2026 (2.7-1)
 ## Event-Driven Ansible
 
 - [CVE-2026-11807](https://access.redhat.com/security/cve/CVE-2026-11807) – Rollup: Websocket Missing Authorization Allows Credential Theft via activation_id Spoofing in:

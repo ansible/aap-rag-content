@@ -7,7 +7,8 @@ This includes deploying only known versions of operating system software and pat
 
 Note:
 
-The following example playbook installs a specific version of the `httpd` RPM and its dependencies when the target host uses the RHEL 9 operating system. This playbook does not take action if the specified versions are already in place or if a different version of RHEL is installed.
+The following example playbook installs a specific version of the `httpd` RPM and its dependencies when the target host uses the RHEL 9 operating system.
+This playbook does not take action if the specified versions are already in place or if a different version of RHEL is installed.
 
 ```
 - name: Install specific RPM versions
