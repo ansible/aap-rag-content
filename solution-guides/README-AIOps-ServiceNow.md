@@ -1,7 +1,20 @@
 {% raw %}
-# Unlock AIOps with ServiceNow LEAP and Ansible MCP server - Solution Guide <!-- omit in toc -->
+<div class="guide-header">
 
-<img src="assets/images/servicenow-hero.png" alt="Ansible + ServiceNow" style="max-width:400px">
+<h1>Unlock AIOps with ServiceNow LEAP and Ansible MCP server</h1>
+
+<span class="guide-type-badge guide-type-badge--solution"><i class="fas fa-check-circle" aria-hidden="true"></i> Solution Guide</span>
+
+</div>
+
+<div class="guide-hero-callout guide-hero-partner guide-hero-partner--servicenow" role="img" aria-label="Ansible Automation Platform and ServiceNow">
+  <img src="assets/images/logos/aap-ansible-icon.png" alt="" class="guide-hero-callout__icon" width="36" height="36">
+  <span class="guide-hero-partner__plus" aria-hidden="true">+</span>
+  <span class="guide-hero-partner__partner card-partner-logo-set">
+    <img src="assets/images/logos/servicenow-logo.png" alt="ServiceNow" class="card-partner-logo card-partner-logo--light" width="132" height="32">
+    <img src="assets/images/logos/servicenow-logo-dark.png" alt="" class="card-partner-logo card-partner-logo--dark" aria-hidden="true" width="132" height="32">
+  </span>
+</div>
 
 <style>
   div#toc {
@@ -24,33 +37,6 @@ This guide describes a practical AIOps pattern that bridges those teams using **
 > This pattern is closest to **Walk/Run** depending on how you gate execution: LEAP can recommend and launch governed automation from an ITSM context, rather than stopping at ticket commentary alone. For a broader Crawl → Walk → Run framing, see [AIOps automation with Ansible](README-AIOps.md).
 
 **Interactive walkthrough (source narrative for this guide):** [Unlock AIOps with ServiceNow LEAP and Ansible MCP server](https://app.arcade.software/share/UAt0jBV2NHwrV3rgaTQr?ref=share-link)
-
-- [Overview](#overview)
-- [Background](#background)
-- [Solution](#solution)
-  - [Who Benefits](#who-benefits)
-- [Workflow](#workflow)
-  - [Architecture diagram (reference)](#architecture-diagram-reference)
-  - [Operational impact by stage](#operational-impact-by-stage)
-  - [MCP deployment topology and trust boundaries](#mcp-deployment-topology-and-trust-boundaries)
-- [Prerequisites](#prerequisites)
-  - [Ansible Automation Platform](#ansible-automation-platform)
-  - [ServiceNow](#servicenow)
-  - [Featured Ansible Content Collections](#featured-ansible-content-collections)
-- [Solution Walkthrough](#solution-walkthrough)
-  - [1. Create an AAP API token for the MCP integration](#1-create-an-aap-api-token-for-the-mcp-integration)
-  - [2. Connect ServiceNow to the Ansible Automation Platform MCP server](#2-connect-servicenow-to-the-ansible-automation-platform-mcp-server)
-  - [3. Map a LEAP opportunity to an AAP remediation playbook](#3-map-a-leap-opportunity-to-an-aap-remediation-playbook)
-  - [4. Remediate an incident via LEAP (“Execute Ansible playbooks”)](#4-remediate-an-incident-via-leap-execute-ansible-playbooks)
-- [Executable artifacts (YAML examples)](#executable-artifacts-yaml-examples)
-- [Validation](#validation)
-  - [Sample verification artifacts](#sample-verification-artifacts)
-  - [Troubleshooting](#troubleshooting)
-- [Security, Governance, and Operational Risk](#security-governance-and-operational-risk)
-- [Maturity Path](#maturity-path)
-- [Measuring success](#measuring-success)
-- [Related Guides](#related-guides)
-- [Summary](#summary)
 
 <h2 id="background"></h2>
 
@@ -87,6 +73,14 @@ What makes up the solution?
 > **Real-world impact: 50% fewer IT incidents.**
 >
 > Spanish insurance leader <a target="_blank" href="https://www.redhat.com/en/about/press-releases/mutua-madrilena-adopts-red-hat-ansible-automation-platform-manage-its-automation-and-observability-strategy">Mutua Madrileña</a> paired Dynatrace observability with Event-Driven Ansible to automate incident resolution across 60+ platforms -- cutting IT incidents by half while expanding self-healing to new departments. The LEAP + MCP pattern in this guide follows the same architecture: intelligent detection feeds governed, deterministic automation.
+
+### Demos
+
+- Interactive walkthrough: [Try the interactive Arcade demo](https://app.arcade.software/share/UAt0jBV2NHwrV3rgaTQr)
+
+- Demo video: [Watch the demo](https://youtu.be/x5QtEykcrsM)
+
+<iframe src="https://www.youtube.com/embed/x5QtEykcrsM" style="width: 100%; max-width: 400px; aspect-ratio: 16/9; display: block;" frameborder="0" allowfullscreen></iframe>
 
 <h2 id="workflow"></h2>
 
@@ -415,6 +409,12 @@ Quantify adoption the same way top guides anchor business outcomes to observable
 | **Governance coverage** | No unauthorized templates executed via integration | AAP RBAC audits; token scoped user cannot launch non-approved templates |
 | **Audit completeness** | Every remediation ties ITSM ↔ job ID ↔ host change | Work notes from `servicenow.itsm` follow-up; AAP job `id` in notes |
 
+## Summary
+
+ServiceNow LEAP helps operations teams move from “we have incidents” to “we have **repeatable, governed remediation**.” By connecting LEAP to Ansible Automation Platform through an **MCP server**, teams can **surface the right playbook**, **run it with AAP controls**, and **close the loop back in ServiceNow** -- reducing MTTR, removing silos, and making automation operational rather than theoretical.
+
+---
+
 <h2 id="related-guides"></h2>
 
 ## Related Guides
@@ -422,12 +422,6 @@ Quantify adoption the same way top guides anchor business outcomes to observable
 - <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f4cb.png" width="20" style="vertical-align:text-bottom;"> **AIOps reference architecture:** [AIOps automation with Ansible](README-AIOps.md)
 - <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f4e1.png" width="20" style="vertical-align:text-bottom;"> **EDA (alternate trigger pattern):** [Get started with EDA (Ansible Rulebook)](https://access.redhat.com/articles/7136720)
 - <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f4a1.png" width="20" style="vertical-align:text-bottom;"> **ServiceNow enrichment:** [ServiceNow ITSM Ticket Enrichment Automation](README-ServiceNow-ITSM.md)
-
----
-
-## Summary
-
-ServiceNow LEAP helps operations teams move from “we have incidents” to “we have **repeatable, governed remediation**.” By connecting LEAP to Ansible Automation Platform through an **MCP server**, teams can **surface the right playbook**, **run it with AAP controls**, and **close the loop back in ServiceNow** -- reducing MTTR, removing silos, and making automation operational rather than theoretical.
 
 ---
 
@@ -441,5 +435,8 @@ ServiceNow LEAP helps operations teams move from “we have incidents” to “w
 
 ---
 
-<img width="400" src="https://raw.githubusercontent.com/rhpds/showroom-lb2961-ai-driven-ansible-automation/refs/heads/main/solution_images/aap_logo.png">
+<span class="guide-closing-logo-set">
+<img class="guide-closing-logo guide-closing-logo--light" src="assets/images/logos/aap_logo.png" alt="Red Hat Ansible Automation Platform">
+<img class="guide-closing-logo guide-closing-logo--dark" src="assets/images/logos/redhat-ansible-logo.svg" alt="" aria-hidden="true">
+</span>
 {% endraw %}

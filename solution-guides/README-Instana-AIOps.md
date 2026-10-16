@@ -1,5 +1,11 @@
 {% raw %}
-# Automated Incident Remediation with IBM Instana and Ansible Automation Platform - Solution Guide <!-- omit in toc -->
+<div class="guide-header">
+
+<h1>Automated Incident Remediation with IBM Instana and Ansible Automation Platform</h1>
+
+<span class="guide-type-badge guide-type-badge--solution"><i class="fas fa-check-circle" aria-hidden="true"></i> Solution Guide</span>
+
+</div>
 
 <style>
   div#toc {
@@ -7,7 +13,14 @@
   }
 </style>
 
-<img src="assets/images/instana-hero.png" alt="Ansible + Instana" style="max-width:400px">
+<div class="guide-hero-callout guide-hero-partner guide-hero-partner--instana" role="img" aria-label="Ansible Automation Platform and IBM Instana">
+  <img src="assets/images/logos/aap-ansible-icon.png" alt="" class="guide-hero-callout__icon" width="36" height="36">
+  <span class="guide-hero-partner__plus" aria-hidden="true">+</span>
+  <span class="guide-hero-partner__partner card-partner-logo-set">
+    <img src="assets/images/logos/instana-logo.png" alt="IBM Instana" class="card-partner-logo card-partner-logo--light" width="107" height="32">
+    <img src="assets/images/logos/instana-logo-dark.png" alt="" class="card-partner-logo card-partner-logo--dark" aria-hidden="true" width="107" height="32">
+  </span>
+</div>
 
 ## Overview
 
@@ -18,22 +31,6 @@ Most organizations already have proven Ansible automation for service restarts, 
 **Business value:** Reduced MTTR from hours (manual triage and remediation) to minutes (automated response). Reduced alert fatigue through automated triage -- only novel or unresolvable Incidents escalate to humans. Compliance-ready audit trail for every remediation action: who triggered it, what changed, pass or fail. For mission-critical workloads -- payments, trading, customer-facing services -- automated remediation directly reduces downtime impact on revenue and SLA compliance.
 
 **Technical value:** Governed remediation with RBAC-scoped job templates -- only authorized teams can trigger remediation within their scope. Credential isolation -- secrets stored in automation controller and injected at runtime, never exposed in playbooks or logs. Bidirectional observability-automation feedback loop via Host Agent REST API annotations, linking remediation actions to Incidents on the Instana timeline.
-
-- [Background](#background)
-- [Solution](#solution)
-- [Prerequisites](#prerequisites)
-- [Integration Architecture](#integration-architecture)
-- [Solution Walkthrough](#solution-walkthrough)
-  - [Part 1: Shared Setup](#part-1-shared-setup)
-  - [Part 2: Path A -- Event-Driven Ansible Integration](#part-2-path-a--event-driven-ansible-integration)
-  - [Part 3: Path B -- Instana Automation Framework](#part-3-path-b--instana-automation-framework)
-  - [Part 4: Use Case Walkthroughs](#part-4-use-case-walkthroughs)
-  - [Part 5: Optional AI-Assisted Routing](#part-5-optional-ai-assisted-routing)
-- [Validation](#validation)
-- [Maturity Path](#maturity-path)
-- [Related Guides](#related-guides)
-- [ROI Recap](#roi-recap)
-  - [Measuring Success](#measuring-success)
 
 ---
 
@@ -107,6 +104,10 @@ IBM owns both Instana and Red Hat, which means tighter integration than third-pa
 | **IT Manager / Director** | MTTR measured in hours despite having automation in place; no audit trail linking observability events to remediation actions; difficulty connecting automation outcomes to business impact | Existing automation investment delivers more value -- playbooks that were run manually now execute in minutes with the same governance and a complete audit trail. Automated remediation of mission-critical services produces measurable improvements in uptime and SLA compliance that map directly to business outcomes |
 
 ### Demos and Labs
+
+- Demo video: [Watch the demo](https://youtu.be/sjouT0Nnphg)
+
+<iframe src="https://www.youtube.com/embed/sjouT0Nnphg" style="width: 100%; max-width: 400px; aspect-ratio: 16/9; display: block;" frameborder="0" allowfullscreen></iframe>
 
 - [Red Hat TV: From Observability to Action with Event-Driven Ansible and IBM Instana](https://tv.redhat.com/en/detail/6365958260112/from-observability-to-action-with-event-driven-ansible-and-ibm-instana)
 - [IBM Developer: Automation-Powered AIOps using Instana and Red Hat Ansible](https://developer.ibm.com/articles/automation-powered-aiops/)
@@ -823,14 +824,6 @@ app-server-01.example.com : ok=4    changed=1    unreachable=0    failed=0
 
 ---
 
-## Related Guides
-
-- [AIOps automation with Ansible](README-AIOps.md) -- the tool-agnostic AIOps pattern that this guide builds on
-- [AI Infrastructure automation with Ansible](README-IA.md) -- deploy the AI inference backend if using the optional LLM enrichment step
-- [Get started with EDA](https://access.redhat.com/articles/7136720) -- Event-Driven Ansible fundamentals for teams new to event-driven automation
-
----
-
 ## ROI Recap
 
 By connecting IBM Instana to Ansible Automation Platform, you have turned your existing automation library into a governed, event-driven remediation pipeline:
@@ -860,6 +853,14 @@ Start capturing these metrics before enabling automated remediation -- having a 
 > **Tip:** Define a small metric set before you scale automation.
 >
 > Identify 3-5 metrics most relevant to your environment and begin capturing baselines during the Crawl stage. Organizations that define success metrics before enabling automation can demonstrate measurable impact within the first quarter.
+
+---
+
+## Related Guides
+
+- [AIOps automation with Ansible](README-AIOps.md) -- the tool-agnostic AIOps pattern that this guide builds on
+- [AI Infrastructure automation with Ansible](README-IA.md) -- deploy the AI inference backend if using the optional LLM enrichment step
+- [Get started with EDA](https://access.redhat.com/articles/7136720) -- Event-Driven Ansible fundamentals for teams new to event-driven automation
 
 ---
 
@@ -914,5 +915,8 @@ Start capturing these metrics before enabling automated remediation -- having a 
 
 ---
 
-<img width="400" src="https://raw.githubusercontent.com/rhpds/showroom-lb2961-ai-driven-ansible-automation/refs/heads/main/solution_images/aap_logo.png">
+<span class="guide-closing-logo-set">
+<img class="guide-closing-logo guide-closing-logo--light" src="assets/images/logos/aap_logo.png" alt="Red Hat Ansible Automation Platform">
+<img class="guide-closing-logo guide-closing-logo--dark" src="assets/images/logos/redhat-ansible-logo.svg" alt="" aria-hidden="true">
+</span>
 {% endraw %}

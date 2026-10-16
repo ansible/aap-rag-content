@@ -1,9 +1,28 @@
 {% raw %}
-# Configuring Ansible Lightspeed intelligent assistant with Red Hat AI Inference Server on RHEL <!-- omit in toc -->
+<div class="guide-header">
 
-<!--ARCADE EMBED START--><div style="position: relative; padding-bottom: calc(56.4263% + 41px); height: 0px; width: 100%;"><iframe src="https://demo.arcade.software/VIH1fhi64QjLKTnOc9ri?embed&embed_mobile=tab&embed_desktop=inline&show_copy_link=true" title="Plugging Red Hat AI Inference Server into Ansible Lightspeed intelligent assistant" frameborder="0" loading="lazy" webkitallowfullscreen mozallowfullscreen allowfullscreen allow="clipboard-write" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; color-scheme: light;" ></iframe></div><!--ARCADE EMBED END-->
+<h1>Configuring Ansible Lightspeed intelligent assistant with Red Hat AI Inference Server on RHEL</h1>
 
-The Ansible Lightspeed intelligent assistant is a generative AI service embedded directly into the Ansible Automation Platform UI. It offers on-demand expertise to help you administer and manage your automation, while removing some of the friction associated with onboarding, troubleshooting, and maintaining the platform. It provides direct access to trusted documentation and insights, helping you get up to speed with the platform faster, simplify administration, and resolve issues faster.
+<span class="guide-type-badge guide-type-badge--implementation"><i class="fas fa-cogs" aria-hidden="true"></i> Implementation Guide</span>
+
+</div>
+
+<div class="guide-hero-callout guide-hero-partner guide-hero-partner--redhat-ai" role="img" aria-label="Ansible Automation Platform and Red Hat AI">
+  <img src="assets/images/logos/aap-ansible-icon.png" alt="" class="guide-hero-callout__icon" width="36" height="36">
+  <span class="guide-hero-partner__plus" aria-hidden="true">+</span>
+  <span class="guide-hero-partner__partner card-partner-logo-set card-partner-logo-set--redhat-ai">
+    <img src="assets/images/logos/redhat-ai-logo.png" alt="Red Hat AI" class="card-partner-logo card-partner-logo--light" width="106" height="32">
+    <img src="assets/images/logos/redhat-ai-logo-dark.png" alt="" class="card-partner-logo card-partner-logo--dark" aria-hidden="true" width="108" height="22">
+  </span>
+</div>
+
+> **Terminology update -- Lightspeed rebranding.**
+>
+> **Ansible Lightspeed Intelligent Assistant** is now **Automation intelligent assistant** in current Red Hat naming. This guide keeps the legacy title above to match the access.redhat.com article; body text uses **Automation intelligent assistant** unless quoting UI, YAML, or official doc titles.
+
+<!--ARCADE EMBED START--><div style="position: relative; padding-bottom: calc(56.4263% + 41px); height: 0px; width: 100%;"><iframe src="https://demo.arcade.software/VIH1fhi64QjLKTnOc9ri?embed&embed_mobile=tab&embed_desktop=inline&show_copy_link=true" title="Plugging Red Hat AI Inference Server into Automation intelligent assistant" frameborder="0" loading="lazy" webkitallowfullscreen mozallowfullscreen allowfullscreen allow="clipboard-write" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; color-scheme: light;" ></iframe></div><!--ARCADE EMBED END-->
+
+**Automation intelligent assistant** is a generative AI service embedded directly into the Ansible Automation Platform UI. It offers on-demand expertise to help you administer and manage your automation, while removing some of the friction associated with onboarding, troubleshooting, and maintaining the platform. It provides direct access to trusted documentation and insights, helping you get up to speed with the platform faster, simplify administration, and resolve issues faster.
 
 ## Deployment Requirements
 
@@ -102,7 +121,7 @@ The inference server container image will be pulled from Red Hat's registry. Fir
 $ podman login registry.redhat.io
 ~~~
 
-Finally, you're ready to run our inference server container. The following command injects the Hugging Face token and your API key as environment variables and mounts the previously created volume to cache model files for faster loading. It also pulls the LLM that we specified in the --model parameter. For the purposes of this article, we're using a Granite 3.3 (8b) model as backend for the Ansible lightspeed intelligent assistant, but you can [check the documentation](https://docs.redhat.com/en/documentation/red_hat_ai_inference_server/3.2/html/validated_models/index) for the latest updates on other validated models.
+Finally, you're ready to run our inference server container. The following command injects the Hugging Face token and your API key as environment variables and mounts the previously created volume to cache model files for faster loading. It also pulls the LLM that we specified in the --model parameter. For the purposes of this article, we're using a Granite 3.3 (8b) model as backend for **Automation intelligent assistant**, but you can [check the documentation](https://docs.redhat.com/en/documentation/red_hat_ai_inference_server/3.2/html/validated_models/index) for the latest updates on other validated models.
 
 Because this demonstration was run on an AWS g6.2xlarge instance (NVIDIA L4/A10G GPU), we configured the engine with a --max-model-len of 8192 tokens. This parameter help ensure the model runs within the GPU's available memory without hitting allocation errors. Your values may differ depending on GPU size, model choice, and workload, so always adjust accordingly.
 
@@ -119,12 +138,12 @@ $ podman run --rm -it \
 -v ./rhaiis-cache:/opt/app-root/src/.cache \
 registry.redhat.io/rhaiis/vllm-cuda-rhel9:3.0.0 \
 --model RedHatAI/granite-3.3-8b-instruct \
---max-model-len 8192
+--max-model-len 8192 \
 --enable-auto-tool-choice \
 --tool-call-parser granite
 ~~~
 
-**NOTE:** The inference server powering Ansible Lightspeed intelligent assistant requires the `--enable-auto-tool-choice` and `--tool-call-parser` options when starting the container. These flags prepare the model server to handle tool-related requests. While the assistant does not rely on tool calling in its default configuration, these options ensure compatibility with current and future features of Ansible Lightspeed.
+**NOTE:** The inference server powering **Automation intelligent assistant** requires the `--enable-auto-tool-choice` and `--tool-call-parser` options when starting the container. These flags prepare the model server to handle tool-related requests. While the assistant does not rely on tool calling in its default configuration, these options ensure compatibility with current and future features of the in-product assistant.
 
 When the command execution finishes the container will prompt "INFO: Application startup complete" and it will start serving the Granite model. To perform a simple test, open a new terminal session and execute the following query against the endpoint. Remember to specify the API key you created before:
 ~~~
@@ -139,13 +158,13 @@ $ curl -X POST \
 
 Now, look for the text field in the response which should contain something like: "The capital of France is Paris". If you received a similar response, it means the LLM is being served correctly and you can start making queries and experimenting with it. However, let's take it one step further…
 
-## Connecting the AI Inference Server to Ansible Lightspeed intelligent assistant
+## Connecting the AI Inference Server to Automation intelligent assistant
 
-Instead of making requests directly to the API, let's configure Ansible Lightspeed intelligent assistant to connect to the self-hosted inference server. This enables all prompts and completions in the Ansible Automation Platform UI to be powered by the model you're serving.
+Instead of making requests directly to the API, configure **Automation intelligent assistant** to connect to the self-hosted inference server. This enables all prompts and completions in the Ansible Automation Platform UI to be powered by the model you're serving.
 
 First, ensure that the inference server endpoint is reachable from the Ansible Automation Platform cluster or node. In our case, since the inference server was running on an AWS instance, we configured security group rules to allow inbound TCP traffic on port 8000.
 
-**NOTE:** Detailed instructions for configuring Ansible Lightspeed intelligent assistant on OpenShift, including creating the chatbot secret and updating the AAP CR, are available in the Ansible Automation Platform [documentation for Ansible Lightspeed intelligent assistant](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/installing_on_openshift_container_platform/deploying-chatbot-operator).
+**NOTE:** Detailed instructions for configuring **Automation intelligent assistant** on OpenShift, including creating the chatbot secret and updating the AAP CR, are in the Ansible Automation Platform [documentation for Automation intelligent assistant](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/installing_on_openshift_container_platform/deploying-chatbot-operator) (legacy doc title may still say Ansible Lightspeed).
 
 Now it's time to start working from our Ansible Automation Platform(AAP) deployment on OpenShift. Start by creating a key/value secret in the same namespace as your AAP custom resource (the namespace where the operator installed AAP). The secret must include the chatbot_model, chatbot_url, and chatbot_token.
 
@@ -169,9 +188,9 @@ spec:
     disabled: false
     chatbot_config_secret_name: chatbot-configuration-secret
 ~~~
-Save the CR. The operator will reconcile and deploy/update the Ansible Lightspeed service.
+Save the CR. The operator will reconcile and deploy or update the in-product chatbot service (`spec.lightspeed` in the AAP custom resource).
 
-The Ansible Lightspeed intelligent assistant should now be ready for prompting in Ansible Automation Platform UI.
+**Automation intelligent assistant** should now be ready for prompting in the Ansible Automation Platform UI.
 
 ---
 
@@ -185,5 +204,8 @@ The Ansible Lightspeed intelligent assistant should now be ready for prompting i
 
 ---
 
-<img width="400" src="https://raw.githubusercontent.com/rhpds/showroom-lb2961-ai-driven-ansible-automation/refs/heads/main/solution_images/aap_logo.png">
+<span class="guide-closing-logo-set">
+<img class="guide-closing-logo guide-closing-logo--light" src="assets/images/logos/aap_logo.png" alt="Red Hat Ansible Automation Platform">
+<img class="guide-closing-logo guide-closing-logo--dark" src="assets/images/logos/redhat-ansible-logo.svg" alt="" aria-hidden="true">
+</span>
 {% endraw %}
