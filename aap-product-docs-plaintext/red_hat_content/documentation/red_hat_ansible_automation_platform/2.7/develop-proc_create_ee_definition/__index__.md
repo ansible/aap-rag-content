@@ -21,16 +21,16 @@ Custom templates created by your AAP administrator also appear on this page. See
 
 ## Procedure
 
-1.  Navigate to **Execution Environments > Create**.
-2.  Select a template.
-3.  Choose a base image appropriate for your environment.
-4.  In the collections picker, select the Ansible collections your execution environment requires.
-5.  Optional: Add Python requirements and system packages.
-6.  Optional: Add custom build steps at specific phases (prepend or append to base, galaxy, builder, or final stages).
-7.  Name the definition and add a descriptive tag.
+1. Navigate to **Execution Environments > Create**.
+2. Select a template.
+3. Choose a base image appropriate for your environment.
+4. In the collections picker, select the Ansible collections your execution environment requires.
+5. Optional: Add Python requirements and system packages.
+6. Optional: Add custom build steps at specific phases (prepend or append to base, galaxy, builder, or final stages).
+7. Name the definition and add a descriptive tag.
 The wizard uses `spec.type: execution-environment` to tag the definition. This tag is optional but recommended to make definitions searchable and filterable in the catalog.
 
-8.  Choose to select **Publish to a Git repository** to save definition files to a repository, or leave the checkbox cleared to register in the catalog and download files locally.
+8. Choose to select **Publish to a Git repository** to save definition files to a repository, or leave the checkbox cleared to register in the catalog and download files locally.
 
 ## Results
 

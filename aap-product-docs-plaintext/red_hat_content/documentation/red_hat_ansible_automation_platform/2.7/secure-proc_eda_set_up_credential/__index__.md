@@ -4,10 +4,10 @@ Create a credential to securely store sensitive data (like tokens and passwords)
 
 ## Procedure
 
-1.  Log in to the Ansible Automation Platform Dashboard.
-2.  From the navigation panel, select Automation Decisions> (and then)Infrastructure> (and then)Credentials.
-3.  Click Create credential.
-4.  Insert the following:
+1. Log in to the Ansible Automation Platform Dashboard.
+2. From the navigation panel, select Automation Decisions> (and then)Infrastructure> (and then)Credentials.
+3. Click Create credential.
+4. Insert the following:
 
 
 Name
@@ -25,8 +25,8 @@ Click the list to select your Credential type.
 Note:
 When you select the credential type, the **Type Details** section is displayed with fields that are applicable for the credential type you chose.
 
-5.  Complete the fields that are applicable to the credential type you selected.
-6.  Click Create credential.
+5. Complete the fields that are applicable to the credential type you selected.
+6. Click Create credential.
 
 ## What to do next
 

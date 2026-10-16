@@ -1,7 +1,8 @@
 # Integrate third-party secret management systems
 ## HashiCorp Vault Secret Lookup
 
-The HashiCorp Vault secret lookup credential type allows you to retrieve secrets from a HashiCorp Vault server during playbook execution. This integration supports various authentication methods, including Token, AppRole, LDAP, Userpass, Kubernetes, and TLS Certificates.
+The HashiCorp Vault secret lookup credential type allows you to retrieve secrets from a HashiCorp Vault server during playbook execution.
+This integration supports various authentication methods, including Token, AppRole, LDAP, Userpass, Kubernetes, and TLS Certificates.
 
 When you select **HashiCorp Vault Secret Lookup** for **Credential Type**, give the following metadata to configure your lookup:
 
@@ -12,7 +13,8 @@ When you select **HashiCorp Vault Secret Lookup** for **Credential Type**, give 
 - **AppRole secret_id**: specify the corresponding secret ID for AppRole authentication.
 - **Client Certificate**: specify a PEM-encoded client certificate when using the TLS authentication method, including any required intermediate certificates expected by Hashicorp Vault.
 - **Client Certificate Key**: specify a PEM-encoded certificate private key when using the TLS authentication method.
-- **TLS Authentication Role**: specify the role or certificate name in Hashicorp Vault that corresponds to your client certificate when using the TLS authentication method. If it is not provided, Hashicorp Vault attempts to match the certificate automatically.
+- **TLS Authentication Role**: specify the role or certificate name in Hashicorp Vault that corresponds to your client certificate when using the TLS authentication method.
+If it is not provided, Hashicorp Vault attempts to match the certificate automatically.
 - **Namespace name**: specify the Namespace name (Hashicorp Vault enterprise only).
 - **Kubernetes role**: specify the role name when using Kubernetes authentication.
 - **Username**: enter the username of the user to be used to authenticate this service.
@@ -20,7 +22,9 @@ When you select **HashiCorp Vault Secret Lookup** for **Credential Type**, give 
 - **Path to Auth**: specify a path if other than the default path of `/approle`.
 - **API Version** (required): select v1 for static lookups and v2 for versioned lookups.
 
-LDAP authentication requires LDAP to be configured in HashiCorp’s Vault UI and a policy added to the user. Cubbyhole is the name of the default secret mount. If you have proper permissions, you can create other mounts and write key values to those.
+LDAP authentication requires LDAP to be configured in HashiCorp’s Vault UI and a policy added to the user.
+Cubbyhole is the name of the default secret mount.
+If you have proper permissions, you can create other mounts and write key values to those.
 
 To test the lookup, create another credential that uses Hashicorp Vault lookup.
 

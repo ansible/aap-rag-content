@@ -1,7 +1,7 @@
 +++
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-new_features_and_enhancements"
 title = "New features and enhancements - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-new_features_and_enhancements"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-overview_of_redhat_ansible_intro/", "Ansible Automation Platform release notes"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/whats_new-new_features_and_enhancements/aem-page/whats_new-new_features_and_enhancements.html"
 last_crumb = "New features and enhancements"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "New features and enhancements"
 oversized = "false"
@@ -29,11 +30,27 @@ type = "aem-page"
 
 The following release notes detail the new features and enhancements for the Ansible Automation Platform general availability release on June 3, 2026.
 
+## **General availability of the Automation Dashboard for Red Hat Ansible Automation Platform**
+
+Automation dashboard is now generally available as part of Ansible Automation Platform 2.7. Automation dashboard is available within the AAP UI to visualize automation usage data, determine time savings, track ROI, and drive increased visibility into automation strategy, resource allocation, and prioritization of automation projects. Benefits include:
+
+- **Embedded UI Experience:** Native to Ansible Automation Platform 2.7+ (containerized and operator-based installs), the integrated dashboard works within the AAP UI using built-in platform authentication—eliminating the need for external utility setups or manual OAuth tokens.
+- **Automation metrics and telemetry:** Automatically captures and visualizes job telemetry, cost savings, and operational metrics locally to the AAP instance.
+- **Flexible Export & Reporting:** Easily generate, download, and export raw CSV metrics directly from the UI for external BI reporting and custom analysis.
+
+## Automation orchestrator release
+
+Automation orchestrator is a workflow automation platform that combines AI agents, action steps, and human oversight in a visual workflow designer, enabling you to orchestrate complex, multi-step processes across systems. Automation orchestrator lets you design and run automated workflows without writing code. Each workflow is built on a canvas by connecting nodes that represent triggers, AI-powered task agents, action steps that interact with external systems, logic controls, and human approval gates. Automation orchestrator can run standalone or alongside Ansible Automation Platform, extending your existing automation with AI capabilities and cross-system orchestration.
+
+See [Workflow Concepts](https://docs.redhat.com/en/documentation/automation_orchestrator/2026.8/discover-workflow_concepts) in the automation orchestrator documentation for more information.
+
 ## The Configuration as Code with the ansible.platform collection
 
 The ansible.platform collection is the unified Configuration as Code (CaC) interface for Ansible Automation Platform 2.7. It provides 22 modules and 1 lookup plugin for managing platform resources through the platform gateway API, replacing direct access to individual component APIs.
 
 For more information, see Configure your platform with Configuration as Code in the Ansible Automation Platform documentation.
+
+## Action plugin architecture
 
 All ansible.platform modules now run as action plugins on the Ansible controller node instead of on managed nodes. This is a behavioral change that affects all playbooks using this collection.
 
@@ -60,6 +77,8 @@ New features in existing modules
 - **Route timeouts**: The service, route, and `ui_plugin_route` modules support `request_timeout_seconds` and `idle_timeout_seconds` parameters for per-route timeout configuration.
 - **OIDC User Identity**: The authenticator module supports OpenID Connect User Identity configuration for platform gateway, enabling OIDC integration for user authentication and authorization.
 - **Batch role assignments**: The `role_user_assignment` module supports object_ids for assigning a role to a user across multiple resources in a single task.
+
+## Automation portal Red Hat Enterprise Linux appliance
 
 Ansible automation portal is now available as a pre-built RHEL 9 virtual machine appliance. The appliance packages automation portal as a QCOW2 or VMDK disk image that you deploy on your existing virtualization infrastructure.
 
@@ -210,8 +229,7 @@ New features and enhancements
 ## Execution environment updates
 
 - Ee-minimal
-  * Removed `ansible-lint`. If your infrastructure depends on
-  * , migrate to the Ansible Automation Platform Development Tools container.
+  * Removed `ansible-lint`. If your infrastructure depends on `ansible-lint`, migrate to the Ansible Automation Platform Development Tools container.
   * Removed :latest: convention for ee-minimal images. Users now need to identify the specific image and version to download.
 - Ee-supported
   * Removed `ansible-lint`. If your infrastructure depends on `ansible-lint`, migrate to the Ansible Automation Platform Development Tools container.

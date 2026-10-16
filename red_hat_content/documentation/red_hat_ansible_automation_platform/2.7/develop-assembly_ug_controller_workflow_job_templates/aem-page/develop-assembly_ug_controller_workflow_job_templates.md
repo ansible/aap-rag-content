@@ -1,6 +1,6 @@
 +++
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_workflow_job_templates"
+template = "docs/aem-title.html"
 title = "Orchestrate complex automation with workflow job templates - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_workflow_job_templates/aem-page/develop-assembly_ug_controller_workflow_job_templates.html"
 last_crumb = "Orchestrate complex automation with workflow job templates"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Orchestrate complex automation with workflow job templates"
 oversized = "false"
@@ -42,7 +43,8 @@ For Job templates, see Job templates.
 
 The **Automation Templates** page shows the workflow and job templates that are currently available.
 
-Select the template name to display more information about the template, including when it last ran. This list is sorted alphabetically by name, but you can sort by other criteria, or search by various fields and attributes of a template.
+Select the template name to display more information about the template, including when it last ran.
+This list is sorted alphabetically by name, but you can sort by other criteria, or search by various fields and attributes of a template.
 
 From this screen you can launch ![Launch icon](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/rightrocket.png) , edit ![Edit icon](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png), and duplicate ![Duplicate icon](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/copy.png) a workflow job template.
 
@@ -50,6 +52,9 @@ Only workflow templates have the workflow visualizer ![Workflow visualizer](/web
 
 ![Workflow templates home](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-wf-templates-home.png)  
 
- Note:
+Note:
 
-Workflow templates can be used as building blocks for another workflow template. You can enable **Prompt on Launch** by setting up several settings in a workflow template, which you can edit at the workflow job template level. These do not affect the values assigned at the individual workflow template level. For further instructions, see the Workflow visualizer section.
+Workflow templates can be used as building blocks for another workflow template.
+You can enable **Prompt on Launch** by setting up several settings in a workflow template, which you can edit at the workflow job template level.
+These do not affect the values assigned at the individual workflow template level.
+For further instructions, see the Workflow visualizer section.

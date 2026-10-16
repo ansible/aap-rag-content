@@ -1,7 +1,7 @@
-# Install automation dashboard to calculate savings (RHEL only)
-## Install automation dashboard
+# Install the standalone automation dashboard utility to calculate savings (RHEL only)
+## Install the standalone automation dashboard utility
 
-Install automation dashboard to collect and analyze key metrics related to job execution, efficiency, and automation savings across your Ansible Automation Platform deployments.
+Install the standalone automation dashboard utility to collect and analyze key metrics related to job execution, efficiency, and automation savings across your Ansible Automation Platform deployments.
 
 ### Before you begin
 
@@ -34,24 +34,24 @@ Do not install automation dashboard on the same host(s) as Ansible Automation Pl
 
 ### Procedure
 
-1.  Download the latest installer tar file from access.redhat.com. Navigate to Downloads > Red Hat Ansible Automation Platform Product Software.
-2.  Copy the installation source file to your RHEL 9 or RHEL 10 host.
-3.  Extract the installation source. This will require ~500Mb. of disk space. Throughout this example we will use the ec2-user home directory: `/home/<username>`.
+1. Download the latest installer tar file from access.redhat.com. Navigate to Downloads > Red Hat Ansible Automation Platform Product Software.
+2. Copy the installation source file to your RHEL 9 or RHEL 10 host.
+3. Extract the installation source. This will require ~500Mb. of disk space. Throughout this example we will use the ec2-user home directory: `/home/<username>`.
 
 ```bash
 tar -xzvf ansible-automation-dashboard-containerized-setup-bundle-0.1-x86_64.tar.gz
 cd ansible-automation-dashboard-containerized-setup/
 ```
 
-4.  Install the required `ansible-core` package.
+4. Install the required `ansible-core` package.
 
 ```bash
 cd ansible-automation-dashboard-containerized-setup
 sudo dnf install ansible-core
 ```
 
-5.  Create an application `client_id/client_secret` in your Ansible Automation Platform instance:
-1.  Create an OAuth2 application using the following steps :
+5. Create an application `client_id/client_secret` in your Ansible Automation Platform instance:
+1. Create an OAuth2 application using the following steps :
 
 1. **For Ansible 2.4**:
 - Navigate to <https://AAP_CONTROLLER_FQDN/#/applications>
@@ -69,15 +69,15 @@ In Red Hat Ansible Automation Platform 2.5 and later, OAuth2 applications are ma
 Note:
 The values for **Name**, **Organization**, and HTTPS port number for Ansible Automation Platform are configurable. The examples provided in this document assume use of port 443.
 
-2.  Save the `client_id` and `client_secret information` inputs into the inventory file.
-3.  Create an Ansible Automation Platform access token:
+2. Save the `client_id` and `client_secret information` inputs into the inventory file.
+3. Create an Ansible Automation Platform access token:
 
 1. Navigate to `https://AAP_GATEWAY_FQDN/#/users/<id>/tokens`, and create a token using the following information:
 - OAuth application: automation-dashboard-sso
 - Scope: read
 2. Store the access token and refresh token values. `clusters.yaml` uses these tokens.
 
-6.  Copy the example inventory and change it before running the installation program.
+6. Copy the example inventory and change it before running the installation program.
 
 ```bash
 cp -i inventory.example inventory
@@ -91,7 +91,7 @@ Important:
 * Change the RHEL 9 or RHEL 10 host occurrences from `host.example.com` to your FQDN host
 * Change the phrase `TODO` to match your passwords within all `_admin_password` or `_pg_password` values.
 * Change the `dashboard_pg_host` value to the IP address or DNS name of the database server.
-- For more information, see the [Inventory variables](/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-inventory_file_variables_for_automation_dashboard#GUID-91739484-5e4b-43a7-a0f2-72ef805f6535 "The inventory variables required by the automation dashboard installation program are described in the following table:") section of this document.
+- For more information, see the [Inventory variables](/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-inventory_file_variables_for_automation_dashboard#GUID-91739484-5e4b-43a7-a0f2-72ef805f6535 "The inventory variables required by the standalone automation dashboard utility installation program are described in the following table:") section of this document.
 
 ```bash
 # This is our automation dashboard front-end application
@@ -187,7 +187,7 @@ bundle_dir='{{ lookup("ansible.builtin.env", "PWD") }}/bundle'
 # nginx_dashboard_admin_exposed=False
 ```
 
-7.  Run the installation program.
+7. Run the installation program.
 
 ```bash
 ansible-playbook -i inventory ansible.containerized_installer.dashboard_install --ask-become-pass
@@ -203,5 +203,5 @@ ec2-54-147-26-173.compute-1.amazonaws.com : ok=126  changed=51   unreachable=0  
 localhost                  : ok=12   changed=0    unreachable=0    failed=0    skipped=9    rescued=0    ignored=0
 ```
 
-Alternative configurations are possible (for example, the database for automation dashboard can be set on a different host). This requires additional changes to variables in the inventory file. Consult the [Inventory variables](/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-inventory_file_variables_for_automation_dashboard#GUID-91739484-5e4b-43a7-a0f2-72ef805f6535 "The inventory variables required by the automation dashboard installation program are described in the following table:") section of this document for available variables.
+Alternative configurations are possible (for example, the database for automation dashboard can be set on a different host). This requires additional changes to variables in the inventory file. Consult the [Inventory variables](/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-inventory_file_variables_for_automation_dashboard#GUID-91739484-5e4b-43a7-a0f2-72ef805f6535 "The inventory variables required by the standalone automation dashboard utility installation program are described in the following table:") section of this document for available variables.
 

@@ -5,8 +5,8 @@ View the rule audit details to quickly identify the rulebook activation responsi
 
 ### Procedure
 
-1.  From the navigation panel select **Automation Decisions> (and then)Rule Audit**.
-2.  Select the desired rule, this brings you to the **Details** tab.
+1. From the navigation panel select **Automation Decisions> (and then)Rule Audit**.
+2. Select the desired rule, this brings you to the **Details** tab.
 
 ### Results
 

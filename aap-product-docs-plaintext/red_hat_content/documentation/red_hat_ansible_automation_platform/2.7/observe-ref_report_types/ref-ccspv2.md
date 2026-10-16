@@ -15,13 +15,13 @@ Set the report type by using `METRICS_UTILITY_REPORT_TYPE=CCSPv2`.
 
 You can use the following optional collectors for the `gather` command:
 
--  `main_jobhostsummary`
+- `main_jobhostsummary`
 * If present by default, this incrementally collects data from the `main_jobhostsummary` table in the automation controller database, containing information about jobs runs and managed nodes automated.
--  `main_host`
+- `main_host`
 * This collects daily snapshots of the `main_host` table in the automation controller database and has managed nodes and hosts present across automation controller inventories.
--  `main_jobevent`
+- `main_jobevent`
 * This incrementally collects data from the `main_jobevent` table in the automation controller database and contains information about which modules, roles, and Ansible collections are being used.
--  `main_indirectmanagednodeaudit`
+- `main_indirectmanagednodeaudit`
 * This incrementally collects data from the `main_indirectmanagednodeaudit` table in the automation controller database and contains information about indirectly managed nodes.
 
 ```
@@ -98,9 +98,9 @@ To filter your report so that only certain organizations are present, use this e
 
 This renders only the data from these organizations in the built report. This filter currently does not have any effect on the following optional sheets:
 
--  `usage_by_collections`
--  `usage_by_roles`
--  `usage_by_modules`
+- `usage_by_collections`
+- `usage_by_roles`
+- `usage_by_modules`
 
 ### Select a date range for your CCSPv2 report
 

@@ -1,7 +1,8 @@
 # Access preconfigured development tools with Ansible development workspaces
 ## Ansible development workspaces components
 
-Each Ansible development workspace is a project-agnostic full development environment. Dependencies are satisfied for all the tools in the environment.
+Each Ansible development workspace is a project-agnostic full development environment.
+Dependencies are satisfied for all the tools in the environment.
 
 The following applications are pre-installed.
 

@@ -1,7 +1,7 @@
 +++
-title = "Configure the inventory file - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_configuring_inventory_file"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_configuring_inventory_file"
+title = "Configure the inventory file - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_aap_containerized_installation_intro/", "Install containerized Ansible Automation Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-ref_configuring_inventory_file/aem-page/install-ref_configuring_inventory_file.html"
 last_crumb = "Configure the inventory file"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure the inventory file"
 oversized = "false"
@@ -42,6 +43,10 @@ The following inventory file examples are for online installations. For disconne
 
 Important:
 
+For online installations, you must obtain registry credentials before configuring the inventory file. See [Create a registry service account](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_set_registry_username_password "Create a registry service account on the Red Hat Customer Portal to generate a token and username. Use these to set the registry_username and registry_password variables required for online non-bundled installations.") for steps to generate `registry_username` and `registry_password` values. Ensure your host has network access to Red Hat registries; see [Choose an installation type](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_choosing_installation_type "Containerized Ansible Automation Platform supports two installation types: online and disconnected. Review the requirements for each to decide which is appropriate for your environment.") for installation type prerequisites.
+
+Important:
+
 The `[automationmetrics]` inventory group is required in Ansible Automation Platform 2.7 when `[automationcontroller]` is present. The installer will fail preflight checks if this group is missing.
 
 **Metrics services deployment requirements:** Growth topology (all-in-one): Metrics service shares the same host with all other Ansible Automation Platform components. This is the only supported topology where metrics service shares the same host with other components.
@@ -57,7 +62,7 @@ Additionally, growth topology and enterprise topology inventory files are availa
 
 To use the example inventory files, replace the `< >` placeholders with your specific variables, and update the host names.
 
-Refer to the `README.md` file in the installation directory or [Inventory file variables](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_inventory_file_vars "The following tables contain information about the variables used in Ansible Automation Platform’s installation inventory files.") for more information about optional and required variables.
+Refer to the `README.md` file in the installation directory or [Inventory file variables](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_inventory_file_vars#appendix-inventory-files-vars "The following tables contain information about the variables used in Ansible Automation Platform’s installation inventory files.") for more information about optional and required variables.
 
 Important:
 
@@ -280,21 +285,3 @@ Metrics service requires access to two databases:
 - **`metrics_service` database** (read/write): Stores collected metrics data
 - **`automationcontroller` database** (read-only): Correlates metrics with automation activity
 The `ms_awx_readonly` user must be created in the external database with SELECT privileges on the `automationcontroller` database.
-
-## Tips for building inventories
-
-When building inventories for Ansible automation, consider the following best practices to ensure efficient and effective management of your hosts.
-
-- Ensure that group names are meaningful and unique.
-- Group names are also case sensitive.
-- Do not use spaces, hyphens, or preceding numbers (use `floor_19`, not `19th_floor`) in group names.
-- Group hosts in your inventory logically according to their What, Where, and When:
-  * What: Group hosts according to the topology, for example: db, web, leaf, spine, metrics.
-  * Where: Group hosts by geographic location, for example: data center, region, floor, building.
-  * When: Group hosts by stage, for example: development, test, staging, production.
-
-Note:
-
-Metrics service deployment requirements:
-
-- Metrics service must be included when automation controller is present. The `[automationmetrics]` inventory group is required in all deployments with `[automationcontroller]`.

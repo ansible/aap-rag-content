@@ -14,10 +14,10 @@ First, ensure that the namespace you want to delete does not contain a collectio
 
 ### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Automation Content> (and then)Namespaces.
-3.  Click the namespace to be deleted.
-4.  Click the More Actions icon **⋮**, then click Delete namespace. Note:
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Automation Content> (and then)Namespaces.
+3. Click the namespace to be deleted.
+4. Click the More Actions icon **⋮**, then click Delete namespace. Note:
 If the Delete namespace button is disabled, the namespace contains a collection with dependencies. Review the collections in this namespace, and delete any dependencies.
 
 ### Results

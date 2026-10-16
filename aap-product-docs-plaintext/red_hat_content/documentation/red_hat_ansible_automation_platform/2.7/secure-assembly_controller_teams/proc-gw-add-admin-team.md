@@ -5,9 +5,9 @@ Assign existing users as administrators to a team so they can manage its members
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Teams.
-2.  Select the team to which you want to add an administrator.
-3.  Select the **Administrators** tab and click Add administrator(s).
-4.  Select one or more users from the list by clicking the checkbox next to the name to add them as administrators of this team.
-5.  Click Add administrators.
+1. From the navigation panel, select Access Management> (and then)Teams.
+2. Select the team to which you want to add an administrator.
+3. Select the **Administrators** tab and click Add administrator(s).
+4. Select one or more users from the list by clicking the checkbox next to the name to add them as administrators of this team.
+5. Click Add administrators.
 

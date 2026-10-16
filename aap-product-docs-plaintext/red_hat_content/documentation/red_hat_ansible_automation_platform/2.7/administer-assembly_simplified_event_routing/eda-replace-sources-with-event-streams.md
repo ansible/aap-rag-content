@@ -15,10 +15,10 @@ There are several key points to keep in mind regarding source mapping:
 
 #### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Automation Decisions> (and then)Rulebook Activations.
-3.  Click Create rulebook activation.
-4.  Insert the following:
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Automation Decisions> (and then)Rulebook Activations.
+3. Click Create rulebook activation.
+4. Insert the following:
 
 
 Name
@@ -109,7 +109,7 @@ The variables for the rulebook are in a JSON or YAML format. The content would b
 Options
 Check the **Skip audit events** option if you do not want to see your events in the Rule Audit.
 
-5.  Click Create rulebook activation.
+5. Click Create rulebook activation.
 
 #### Results
 

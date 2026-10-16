@@ -7,7 +7,155 @@
       "weight": 1,
       "urlFragment": "index",
       "anchor": null,
-      "singlePageAnchor": null
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Ansible variables",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "ansible-variables",
+          "anchor": null,
+          "singlePageAnchor": "ansible-variables"
+        },
+        {
+          "title": "Automation hub variables",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20",
+          "anchor": null,
+          "singlePageAnchor": "GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20"
+        },
+        {
+          "title": "Automation controller variables",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7",
+          "anchor": null,
+          "singlePageAnchor": "GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7"
+        },
+        {
+          "title": "Event-Driven Ansible controller variables",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209",
+          "anchor": null,
+          "singlePageAnchor": "GUID-1e8fb403-0b81-4a60-a4e4-b82a70385209"
+        },
+        {
+          "title": "Automation metrics variables",
+          "visible": true,
+          "weight": 5,
+          "urlFragment": "GUID-41fdba26-1c52-4db8-b48f-8c1e8b28be7f",
+          "anchor": null,
+          "singlePageAnchor": "GUID-41fdba26-1c52-4db8-b48f-8c1e8b28be7f"
+        },
+        {
+          "title": "Database variables",
+          "visible": true,
+          "weight": 6,
+          "urlFragment": "GUID-d0897360-115d-49d9-8b64-3eeef12c6c82",
+          "anchor": null,
+          "singlePageAnchor": "GUID-d0897360-115d-49d9-8b64-3eeef12c6c82"
+        },
+        {
+          "title": "General variables",
+          "visible": true,
+          "weight": 7,
+          "urlFragment": "GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124",
+          "anchor": null,
+          "singlePageAnchor": "GUID-fc0ce0ee-f4bf-4f85-8007-6958beb1a124"
+        },
+        {
+          "title": "Image variables",
+          "visible": true,
+          "weight": 8,
+          "urlFragment": "GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90",
+          "anchor": null,
+          "singlePageAnchor": "GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90"
+        },
+        {
+          "title": "MCP server variables",
+          "visible": true,
+          "weight": 9,
+          "urlFragment": "GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d",
+          "anchor": null,
+          "singlePageAnchor": "GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d"
+        },
+        {
+          "title": "Platform gateway variables",
+          "visible": true,
+          "weight": 10,
+          "urlFragment": "GUID-900c1705-0952-483e-8740-7ade36a5005c",
+          "anchor": null,
+          "singlePageAnchor": "GUID-900c1705-0952-483e-8740-7ade36a5005c"
+        },
+        {
+          "title": "Receptor variables",
+          "visible": true,
+          "weight": 11,
+          "urlFragment": "GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0",
+          "anchor": null,
+          "singlePageAnchor": "GUID-c3fdd1c0-92ee-41f7-b3e4-7fbf94149fd0"
+        },
+        {
+          "title": "Redis variables",
+          "visible": true,
+          "weight": 12,
+          "urlFragment": "GUID-ffe13418-d298-4072-8533-a1eb87739035",
+          "anchor": null,
+          "singlePageAnchor": "GUID-ffe13418-d298-4072-8533-a1eb87739035"
+        },
+        {
+          "title": "Red Hat Ansible Lightspeed variables",
+          "visible": true,
+          "weight": 13,
+          "urlFragment": "lightspeed-variables",
+          "anchor": null,
+          "singlePageAnchor": "lightspeed-variables",
+          "sections": [
+            {
+              "title": "Red Hat Ansible Lightspeed variables",
+              "visible": true,
+              "weight": 1,
+              "urlFragment": "lightspeed-variables",
+              "anchor": "lightspeed-variables___red_hat_ansible_lightspeed_variables",
+              "singlePageAnchor": "lightspeed-variables___red_hat_ansible_lightspeed_variables"
+            },
+            {
+              "title": "Coding assistant variables",
+              "visible": true,
+              "weight": 2,
+              "urlFragment": "lightspeed-variables",
+              "anchor": "lightspeed-variables___ansible_lightspeed_coding_assistant_variables",
+              "singlePageAnchor": "lightspeed-variables___ansible_lightspeed_coding_assistant_variables"
+            },
+            {
+              "title": "Automation intelligent assistant variables",
+              "visible": true,
+              "weight": 3,
+              "urlFragment": "lightspeed-variables",
+              "anchor": "lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables",
+              "singlePageAnchor": "lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables"
+            },
+            {
+              "title": "Automation intelligent assistant integration with MCP server variables",
+              "visible": true,
+              "weight": 4,
+              "urlFragment": "lightspeed-variables",
+              "anchor": "lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables",
+              "singlePageAnchor": "lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables"
+            },
+            {
+              "title": "Bring your own Knowledge for automation intelligent assistant variables",
+              "visible": true,
+              "weight": 5,
+              "urlFragment": "lightspeed-variables",
+              "anchor": "lightspeed-variables__section_1",
+              "singlePageAnchor": "lightspeed-variables__section_1"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,57 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Post-upgrade requirements",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Validating gateway authentication after the 2.7 upgrade",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "proc-post-upgrade-validation",
+          "anchor": null,
+          "singlePageAnchor": "proc-post-upgrade-validation"
+        },
+        {
+          "title": "Verify your authentication configuration after upgrade",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "proc-verify-auth-providers-27",
+          "anchor": null,
+          "singlePageAnchor": "proc-verify-auth-providers-27",
+          "sections": [
+            {
+              "title": "About this task",
+              "visible": true,
+              "weight": 1,
+              "urlFragment": "proc-verify-auth-providers-27",
+              "anchor": "proc-verify-auth-providers-27__context_1",
+              "singlePageAnchor": "proc-verify-auth-providers-27__context_1"
+            }
+          ]
+        },
+        {
+          "title": "Personal Access Token removal in Ansible Automation Platform 2.7",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "con-pat-removal-27",
+          "anchor": null,
+          "singlePageAnchor": "con-pat-removal-27"
+        },
+        {
+          "title": "Create new tokens after upgrade",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "proc-create-tokens-after-upgrade-27",
+          "anchor": null,
+          "singlePageAnchor": "proc-create-tokens-after-upgrade-27"
+        }
+      ]
+    }
+  ]
+}

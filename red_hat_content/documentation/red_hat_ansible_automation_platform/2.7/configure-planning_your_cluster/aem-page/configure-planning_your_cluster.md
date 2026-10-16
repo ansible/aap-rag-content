@@ -1,7 +1,7 @@
 +++
+title = "Planning your cluster environment - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-planning_your_cluster"
-title = "Planning your cluster environment - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-distribute_workloads_with_clustering/", "Distribute workloads with clustering"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/configure-planning_your_cluster/aem-page/configure-planning_your_cluster.html"
 last_crumb = "Planning your cluster environment"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Planning your cluster environment"
 oversized = "false"
@@ -50,7 +51,7 @@ All instances are responsible for various housekeeping tasks related to task sch
 
 Relevant inventory file examples include the following.
 
- Note:
+Note:
 
 If no groups are selected for a resource, then the `automationcontroller` group is used, but if any other group is selected, then the `automationcontroller` group is not used in any way.
 
@@ -78,7 +79,7 @@ hostC routable_hostname=10.1.0.4
 routable_hostname
 ```
 
- Note:
+Note:
 
 Earlier versions of automation controller used the variable name `rabbitmq_host`. If you are upgrading from an earlier version of the platform, and you specified `rabbitmq_host` in your inventory, rename `rabbitmq_host` to `routable_hostname` before upgrading.
 
@@ -154,10 +155,10 @@ Re-running the setup playbook does not automatically deprovision instances becau
 
 ### Procedure
 
-1.  Shut down the instance or stop the service with the command: `automation-controller-service stop `.
-2.  Run the following deprovision command from another instance to remove it from the automation controller cluster: $ awx-manage deprovision_instance --hostname=<name used in inventory file.
-3.  The following is an example deprovision command:`$ awx-manage deprovision_instance --hostname=hostB`
-4.  Restart the services on the remaining instances with the command:`automation-controller-service start`.
+1. Shut down the instance or stop the service with the command: `automation-controller-service stop `.
+2. Run the following deprovision command from another instance to remove it from the automation controller cluster: $ awx-manage deprovision_instance --hostname=<name used in inventory file.
+3. The following is an example deprovision command:`$ awx-manage deprovision_instance --hostname=hostB`
+4. Restart the services on the remaining instances with the command:`automation-controller-service start`.
 
 ### What to do next
 

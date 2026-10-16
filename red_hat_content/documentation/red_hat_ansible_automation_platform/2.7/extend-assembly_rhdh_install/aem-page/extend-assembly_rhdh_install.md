@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_install/aem-page/extend-assembly_rhdh_install.html"
 last_crumb = "Install the Ansible plug-ins"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Install the Ansible plug-ins"
 oversized = "false"
@@ -35,16 +36,17 @@ Red Hat Developer Hub pulls the Ansible plug-ins directly from `registry.redhat.
 
 ### Procedure
 
-1.  Log in to the container image registry:
+1. Log in to the container image registry:
   
 
 ```terminal
 $ podman login --authfile auth.json registry.redhat.io
 ```
 
-    To authenticate to multiple registries, run `podman login` for each registry. The `auth.json` file accumulates credentials for all registries you log in to.
+    To authenticate to multiple registries, run `podman login` for each registry.
+ The `auth.json` file accumulates credentials for all registries you log in to.
 
-2.  Create a secret from the `auth.json` file in the same OpenShift Container Platform project as your Red Hat Developer Hub deployment.
+2. Create a secret from the `auth.json` file in the same OpenShift Container Platform project as your Red Hat Developer Hub deployment.
       For an Operator-based deployment:
 
 ```terminal
@@ -64,7 +66,9 @@ $ oc create secret generic <release_name>-dynamic-plugins-registry-auth \
     Replace `<release_name>` with your Helm release name.
 
   Important:
-      The secret name is fixed. The Red Hat Developer Hub Operator and Helm chart expect these exact names. You cannot use a custom name.
+      The secret name is fixed.
+ The Red Hat Developer Hub Operator and Helm chart expect these exact names.
+ You cannot use a custom name.
 
 *Table 1. Secret names by deployment method*
 
@@ -97,7 +101,7 @@ After creating the registry authentication secret, add the Ansible plug-ins to y
 
 ### Procedure
 
-1.  Edit your dynamic plug-ins configuration and add the Ansible plug-ins using OCI references.
+1. Edit your dynamic plug-ins configuration and add the Ansible plug-ins using OCI references.
       **Operator installation**
 
     In the `data.dynamic-plugins.yaml.plugins` block, add the Ansible plug-ins:
@@ -200,8 +204,8 @@ global:
               ansible.plugin-scaffolder-backend-module-backstage-rhaap:
 ```
 
-2.  Replace `<tag>` with the Ansible plug-ins image tag for your release (for example, `2.2`).
-3.  Apply the changes. For Operator deployments, click **Save**. For Helm deployments, click **Upgrade**.
+2. Replace `<tag>` with the Ansible plug-ins image tag for your release (for example, `2.2`).
+3. Apply the changes. For Operator deployments, click **Save**. For Helm deployments, click **Upgrade**.
 
 ## Add the Ansible Developer Tools sidecar container
 
@@ -223,7 +227,7 @@ Then add the `imagePullSecrets` field to the deployment patch as shown in the ex
 
 ### Procedure
 
-1.  Add the Ansible Developer Tools sidecar container to your deployment configuration.
+1. Add the Ansible Developer Tools sidecar container to your deployment configuration.
       **Operator installation**
 
     Modify the Backstage custom resource to add a `containers` block in the `spec.deployment.patch.spec.template.spec` block:
@@ -285,7 +289,7 @@ upstream:
 
     The default resource requests and limits are shown in the Helm chart example. To customize these values, for example if your namespace enforces a `LimitRange`, see [Customize Ansible Developer Tools server resources](/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_ocp_configure_optional#customize-devtools-server-resources "Ansible Developer Tools sidecar container ships with default CPU and memory resource requests and limits. Customize these values if your namespace enforces a LimitRange with lower values or if you want to tune resources for your workload.").
 
-2.  Apply the changes. For Operator deployments, click **Save**. For Helm deployments, click **Upgrade**.
+2. Apply the changes. For Operator deployments, click **Save**. For Helm deployments, click **Upgrade**.
 
 ## Verify the plug-in installation
 
@@ -293,7 +297,7 @@ After configuring the dynamic plug-ins and sidecar container, verify that the An
 
 ### Procedure
 
-1.  In the `install-dynamic-plugin` container logs, search for the Ansible plug-ins.
+1. In the `install-dynamic-plugin` container logs, search for the Ansible plug-ins.
       A successful installation shows:
 
 ```terminal
@@ -303,5 +307,5 @@ After configuring the dynamic plug-ins and sidecar container, verify that the An
 ==> Successfully installed dynamic plugin oci://registry.redhat.io/ansible-automation-platform/automation-portal:<tag>!ansible-plugin-scaffolder-backend-module-backstage-rhaap
 ```
 
-2.  Verify that the Ansible plug-in is present in the navigation pane.
-3.  Select **Administration** to view the installed plug-ins in the **Plugins** tab.
+2. Verify that the Ansible plug-in is present in the navigation pane.
+3. Select **Administration** to view the installed plug-ins in the **Plugins** tab.

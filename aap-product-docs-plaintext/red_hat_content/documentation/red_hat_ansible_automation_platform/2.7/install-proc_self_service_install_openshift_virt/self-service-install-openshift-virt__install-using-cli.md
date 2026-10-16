@@ -25,13 +25,38 @@ $ virtctl image-upload dv <disk-datavolume-name> \
 | `--force-bind` | Add this flag if the storage class uses`WaitForFirstConsumer` volume binding mode.                                                                    |
 Wait for both upload and processing to complete. The "Processing completed successfully" message confirms that CDI converted the image. For more information about CDI, see the Managing data volumes section of the Red Hat OpenShift Virtualization documentation.
 
-3. Create a Secret from the cloud-init file:
+3. Create the cloud-init configuration and Secret:     Create a file named cloud-init-user-data.yaml with your SSH key and Ansible Automation Platform credentials:
+
+```yaml
+#cloud-config
+users:
+- name: admin
+sudo: ALL=(ALL) NOPASSWD:ALL
+ssh_authorized_keys:
+- "<your-ssh-public-key>"
+
+aap:
+host_url: "https://<aap-host>"
+token: "<aap-api-token>"
+check_ssl: true
+oauth:
+client_id: "<oauth-client-id>"
+client_secret: "<oauth-client-secret>"
+
+database:
+type: builtin
+```
+
+Create a Secret from the cloud-init configuration file:
 
 ```terminal
 $ oc create secret generic <cloudinit-secret-name> \
 --from-file=userdata=cloud-init-user-data.yaml \
 -n <project-name>
 ```
+
+Note:
+For optional configuration parameters such as external databases, custom ports, or SCM credentials, see Cloud-init reference in the related links below.
 
 4. Create a VirtualMachine manifest and save it as a YAML file (for example, `portal-vm.yaml`). The following example shows a minimal configuration. Replace the resource names and namespace to match your environment:
 

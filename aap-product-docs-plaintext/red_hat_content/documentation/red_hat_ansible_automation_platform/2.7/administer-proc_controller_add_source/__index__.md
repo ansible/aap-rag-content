@@ -8,23 +8,23 @@ Inventory sources are not associated with groups. Spawned groups are top-level a
 
 ## Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Inventories.
-2.  Select the inventory name you want to add a source to.
-3.  In the Inventory **Details** page, select the **Sources** tab.
-4.  Click Create source.
-5.  Enter the appropriate details:
+1. From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Inventories.
+2. Select the inventory name you want to add a source to.
+3. In the Inventory **Details** page, select the **Sources** tab.
+4. Click Create source.
+5. Enter the appropriate details:
 
 - **Name** (required):
 - Optional: **Description**: Enter a description as appropriate.
 - Optional: **Execution Environment**: Click the ![Search](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/search.png) icon or enter the name of the execution environment with which you want to run your inventory imports.
 - **Source**: Choose a source for your inventory.
 
-6.  When the information for your chosen inventory sources is complete, you can optionally specify other common parameters, such as verbosity, host filters, and variables.
-7.  Use the **Verbosity** menu to select the level of output on any inventory source’s update jobs.
-8.  Use the **Host filter** field to specify only matching host names to be imported into automation controller.
-9.  In the **Enabled variable** field, specify that automation controller retrieves the enabled state from the dictionary of host variables. You can specify the enabled variable by using dot notation as 'car.key', in which case the lookup searches nested dictionaries, equal to: `from_dict.get('car', {}).get('key', default)`. The **Enabled value** field is ignored unless you set the **Enabled variable** field. If the enabled variable matches this value, the host is enabled on import.
+6. When the information for your chosen inventory sources is complete, you can optionally specify other common parameters, such as verbosity, host filters, and variables.
+7. Use the **Verbosity** menu to select the level of output on any inventory source’s update jobs.
+8. Use the **Host filter** field to specify only matching host names to be imported into automation controller.
+9. In the **Enabled variable** field, specify that automation controller retrieves the enabled state from the dictionary of host variables. You can specify the enabled variable by using dot notation as 'car.key', in which case the lookup searches nested dictionaries, equal to: `from_dict.get('car', {}).get('key', default)`. The **Enabled value** field is ignored unless you set the **Enabled variable** field. If the enabled variable matches this value, the host is enabled on import.
 
-10.  If you specified a dictionary of host variables in the **Enabled variable** field, you can give a value to enable on import. For example, for `enabled_var='status.power_state'` and `'enabled_value='powered_on'` in the following host variables, the host is marked `enabled`:
+10. If you specified a dictionary of host variables in the **Enabled variable** field, you can give a value to enable on import. For example, for `enabled_var='status.power_state'` and `'enabled_value='powered_on'` in the following host variables, the host is marked `enabled`:
 
 
 ```
@@ -34,14 +34,14 @@ Inventory sources are not associated with groups. Spawned groups are top-level a
 "created": "2020-08-04T18:13:04+00:00",
 "healthy": true
 },
-"name": "foobar",
+"name": "xyxyxy",
 "ip_address": "192.168.2.1"
 }
 ```
 
 If `power_state` is any value other than `powered_on`, then the host is disabled when imported into automation controller. If the key is not found, then the host is enabled.
 
-11.  All cloud inventory sources have the following update options:
+11. All cloud inventory sources have the following update options:
 
 - **Overwrite**: If checked, any hosts and groups that were previously present on the external source but are now removed, are removed from the automation controller inventory. Hosts and groups that were not managed by the inventory source are promoted to the next manually created group, or, if there is no manually created group to promote them into, they are left in the "all" default group for the inventory. When not checked, local child hosts and groups not found on the external source remain untouched by the inventory update process.
 
@@ -59,8 +59,8 @@ If you synchronize an inventory source that uses a project that has **Update On 
 
 You can create a job template that uses an inventory that sources from the same project that the template uses. In such a case, the project updates and then the inventory updates (if updates are not already in progress, or if the cache timeout has not already expired).
 
-12.  Review your entries and selections. This enables you to configure additional details, such as schedules and notifications.
-13.  To configure schedules associated with this inventory source, click the **Schedules** tab:
+12. Review your entries and selections. This enables you to configure additional details, such as schedules and notifications.
+13. To configure schedules associated with this inventory source, click the **Schedules** tab:
 
 - If schedules are already set up, then review, edit, enable or disable your schedule preferences.
 - If schedules have not been set up, you can add a schedule.

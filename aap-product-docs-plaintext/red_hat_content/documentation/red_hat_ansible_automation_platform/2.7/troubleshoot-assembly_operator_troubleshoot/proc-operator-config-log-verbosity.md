@@ -9,7 +9,7 @@ The logs then show output for any failed tasks that originally had `no_log` set 
 
 ### Procedure
 
-1.  Edit the Ansible Automation Platform CR and set the `no_log` field to `false` for the component you want to debug. For automation controller:
+1. Edit the Ansible Automation Platform CR and set the `no_log` field to `false` for the component you want to debug. For automation controller:
 
 ```
 apiVersion: aap.ansible.com/v1alpha1
@@ -49,7 +49,7 @@ no_log: false
 Note:
 This might expose sensitive data in the logs. On production clusters, this value must generally be set to `true` unless you are actively debugging an issue.
 
-2.  To increase the Ansible Playbook verbosity from the operator, set the verbosity level using an annotation on the Ansible Automation Platform CR:
+2. To increase the Ansible Playbook verbosity from the operator, set the verbosity level using an annotation on the Ansible Automation Platform CR:
 
 
 ```

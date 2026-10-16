@@ -1,6 +1,6 @@
 +++
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_configure_external_database_containerized"
+template = "docs/aem-title.html"
 title = "Configure external PostgreSQL database for metrics service with containerized installer - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-task_configure_external_database_containerized/aem-page/install-task_configure_external_database_containerized.html"
 last_crumb = "Configure external PostgreSQL database for metrics service with containerized installer"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure external PostgreSQL database for metrics service with containerized installer"
 oversized = "false"
@@ -45,7 +46,7 @@ This procedure configures metrics service to use an external PostgreSQL database
 
 ## Procedure
 
-1.  Create metrics_service database
+1. Create metrics_service database
       Create the `metrics_service` database with UTF-8 encoding to support internationalization and ensure compatibility with Django migrations.
 
 ```
@@ -61,7 +62,7 @@ psql -h <EXTERNAL_DB_HOST> -U postgres
   Note:
       **Why UTF-8 encoding:** Django ORM requires UTF-8 encoding for proper handling of internationalized strings and special characters in metric data.
 
-2.  Create database users
+2. Create database users
       Create two database users. The `metrics_service` user has full database privileges for schema management. The `ms_awx_readonly` user has SELECT-only privileges for secure data collection from automation controller.
 
 ```
@@ -89,7 +90,7 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO ms_awx_reado
   Note:
       **Security note:** The `ms_awx_readonly` user has only SELECT privileges, preventing any writes to automation controller data. This ensures metrics service cannot modify controller operations.
 
-3.  Configure pg_hba.conf
+3. Configure pg_hba.conf
       Add authentication rules to allow metrics service host to connect to both databases using secure `scram-sha-256` authentication.
 
 ```
@@ -107,7 +108,7 @@ host    awx               ms_awx_readonly    <METRICS_HOST_IP>/32    scram-sha-2
 sudo systemctl reload postgresql
 ```
 
-4.  Configure installer inventory
+4. Configure installer inventory
       Edit the containerized installer inventory file to specify external database connection parameters:
 
 ```
@@ -122,13 +123,16 @@ automationmetrics_pg_username=metrics_service
 automationmetrics_pg_password='<SECURE_PASSWORD>'
 
     # Read-only access to controller database
-automationmetrics_controller_db=awx
-automationmetrics_controller_pg_username=ms_awx_readonly
+automationmetrics_controller_read_pg_database=awx
+automationmetrics_controller_read_pg_username=ms_awx_readonly
 automationmetrics_controller_read_pg_password='<READONLY_PASSWORD>'
 automationmetrics_controller_read_pg_host=controller-db.example.com
 ```
 
-5.  Run the containerized installer
+  Important:
+  The following variables have been deprecated and will be removed from Ansible Automation Platform 2.8: `automationmetrics_controller_db` and `automationmetrics_controller_pg_username`. Use the updated variables provided in the example inventory file.
+
+5. Run the containerized installer
   
 
 ```
@@ -143,7 +147,7 @@ ansible-playbook -i inventory install.yml
   3. Runs database migrations on external `metrics_service` database
   4. Deploys metrics service containers configured to connect to external databases
 
-6.  Verify external database configuration
+6. Verify external database configuration
   
 
 ```

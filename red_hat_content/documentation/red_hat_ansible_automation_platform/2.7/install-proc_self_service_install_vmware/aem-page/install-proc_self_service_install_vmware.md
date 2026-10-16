@@ -1,7 +1,7 @@
 +++
-title = "Install Ansible automation portal on VMware vSphere - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_install_vmware"
+title = "Install Ansible automation portal on VMware vSphere - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_self_service_rhel_appliances/", "Deploy Ansible automation portal RHEL appliance"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_self_service_install_vmware/aem-page/install-proc_self_service_install_vmware.html"
 last_crumb = "Install Ansible automation portal on VMware vSphere"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Install Ansible automation portal on VMware vSphere"
 oversized = "false"
@@ -33,7 +34,7 @@ Deploy the Ansible automation portal appliance on VMware vSphere.
 
 - VMware vSphere/vCenter with permissions to create VMs and upload files to a datastore.
 - The Ansible automation portal disk image in VMDK format, available from the Red Hat Ansible Automation Platform downloads page.
-- Your `cloud-init` user-data and meta-data files prepared with Ansible Automation Platform credentials and SSH keys. See Prerequisites for deploying Ansible automation portal on RHEL in the related links below.
+- Ansible Automation Platform credentials (host URL, OAuth client ID and secret, and API token).
 - An SSH key pair for appliance access.
 - `genisoimage` installed on your local machine (for creating the cloud-init ISO).
 - The `govc` CLI tool installed and configured with your vSphere credentials.
@@ -47,9 +48,36 @@ $ govc import.vmdk disk.vmdk *<folder_name>*
 ```
 
   Note:
-  The Ansible automation portal VMDK uses stream-optimized format and requires format conversion during upload. Do not upload VMDK disk images by using the vSphere web client or `govc datastore.upload` — these methods copy the file without converting it, producing an unusable 0 MB disk. The `govc import.vmdk` command converts the image automatically. This restriction applies to VMDK disk images only, not to ISO files.
+  The Ansible automation portal VMDK uses stream-optimized format and requires format conversion during upload. Do not upload VMDK disk images by using the
+ vSphere web client or `govc datastore.upload` — these methods copy the file without converting it, producing an unusable 0 MB disk. The `govc
+  import.vmdk` command converts the image automatically. This restriction applies to VMDK disk images only, not to ISO files.
 
-2. Save your `cloud-init` user-data file as `cloud-init-user-data.yaml`. Use the template from Prerequisites for deploying Ansible automation portal on RHEL in the related links below.
+2. Create a cloud-init user-data file named cloud-init-user-data.yaml with your SSH key and Ansible Automation Platform credentials:
+
+```yaml
+#cloud-config
+users:
+  - name: admin
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    ssh_authorized_keys:
+      - "<your-ssh-public-key>"
+
+    aap:
+  host_url: "https://<aap-host>"
+  token: "<aap-api-token>"
+  check_ssl: true
+  oauth:
+    client_id: "<oauth-client-id>"
+    client_secret: "<oauth-client-secret>"
+
+    database:
+  type: builtin
+```
+
+    Replace the placeholder values in angle brackets with your SSH public key, Ansible Automation Platform URL, API token, and OAuth credentials.
+
+  Note:
+  For optional configuration parameters such as external databases, custom ports, or SCM credentials, see Cloud-init reference in the related links below.
 
 3. Create a cloud-init ISO from your user-data file. VMware delivers cloud-init configuration to the VM as a small ISO disk image labeled `cidata`. Cloud-init expects two files on the ISO: `user-data` (your configuration) and `meta-data` (instance identity):
 
@@ -127,7 +155,7 @@ guestinfo.metadata = "*<contents-of-meta-data.b64>*"
 guestinfo.metadata.encoding = "base64"
 ```
 
-     Set these properties using the vSphere web client (**Edit Settings** > **VM Options** > **Advanced** > **Configuration Parameters**).
+    Set these properties using the vSphere web client (**Edit Settings** > **VM Options** > **Advanced** > **Configuration Parameters**).
 
 4. Power on the virtual machine. Cloud-init reads the guestinfo properties and applies the configuration on first boot.
 

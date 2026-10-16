@@ -11,8 +11,8 @@ Create your first Ansible playbook within VS Code using the Ansible extension. T
 
 ### Procedure
 
-1.  Create a new .yml file in VS Code for your playbook, for example `example_playbook.yml`. Put it in the same directory level as the example `site.yml` file.
-2.  Add the following example code into the playbook file and save the file. The playbook consists of a single play that executes a `ping` to your local machine.
+1. Create a new .yml file in VS Code for your playbook, for example `example_playbook.yml`. Put it in the same directory level as the example `site.yml` file.
+2. Add the following example code into the playbook file and save the file. The playbook consists of a single play that executes a `ping` to your local machine.
 
 ```
 ---
@@ -27,11 +27,11 @@ ansible.builtin.ping:
 
 ![Ansible-lint showing no errors in a playbook](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ansible-lint-no-errors.png)
 
-3.  If you want to add new content to the playbook, use the following rules:
+3. If you want to add new content to the playbook, use the following rules:
 
 - Every playbook file must finish with a blank line.
 - Trailing spaces at the end of lines are not allowed.
 - Every playbook and every play require an identifier (name).
 
-4.  Save your playbook file.
+4. Save your playbook file.
 

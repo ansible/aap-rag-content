@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/integrate-assembly_vault_kv1_modules/aem-page/integrate-assembly_vault_kv1_modules.html"
 last_crumb = "Configure KV1 modules"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure KV1 modules"
 oversized = "false"
@@ -35,7 +36,7 @@ Configuring this module is not required, but you can configure the defaults if n
 
 ### Procedure
 
- Configuring this module is not required for migration because there are no corresponding modules in `community.hashi_vault`. However, you might want to configure something other than the defaults for `auth_method` and `state` after the migration. You can use the examples on Ansible automation hub for reference.
+Configuring this module is not required for migration because there are no corresponding modules in `community.hashi_vault`. However, you might want to configure something other than the defaults for `auth_method` and `state` after the migration. You can use the examples on Ansible automation hub for reference.
 
 ## Configure the `hashicorp.vault.kv1_secret_info` module
 
@@ -50,7 +51,7 @@ The corresponding community.hashi_vault modules are:
 
 ### Procedure
 
-1.  Replicate the `community.hashi_vault modules` to the following `hashicorp.vault.kv1_secret_secret_info` parameters.
+1. Replicate the `community.hashi_vault modules` to the following `hashicorp.vault.kv1_secret_secret_info` parameters.
 
 ```
   engine_mount_point:
@@ -68,8 +69,8 @@ extends_documentation_fragment:
   - hashicorp.vault.vault_auth.modules
 ```
 
-2.  (Required) Configure the `path` parameter. This is the path to the secret in the `community.hashi_vault.hashi_vault` modules. **Alias:**`secret_path`
-3.  If needed, configure the optional parameters.
+2. (Required) Configure the `path` parameter. This is the path to the secret in the `community.hashi_vault.hashi_vault` modules. **Alias:**`secret_path`
+3. If needed, configure the optional parameters.
 
 ### What to do next
 
@@ -88,7 +89,7 @@ The corresponding `community.hashi_vault` modules are:
 
 ### Procedure
 
-1.  Replicate `the community.hashi_vault` modules to the following `hashicorp.vault.kv1_secret_get` parameters.
+1. Replicate `the community.hashi_vault` modules to the following `hashicorp.vault.kv1_secret_get` parameters.
 
 ```
 auth_method:
@@ -110,8 +111,8 @@ secret:
   aliases: ['secret_path']
 ```
 
-2.  (Required) Configure the secret parameter. This maps to secret in the `community.hashi_vault.hashi_vault` modules. **Alias:**`secret_path`
-3.  If needed, configure the optional parameters.
+2. (Required) Configure the secret parameter. This maps to secret in the `community.hashi_vault.hashi_vault` modules. **Alias:**`secret_path`
+3. If needed, configure the optional parameters.
 
 ### What to do next
 

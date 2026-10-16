@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_using_custom_tls_certificates"
-title = "Configure custom TLS certificates - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Configure custom TLS certificates - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_aap_containerized_installation_intro/", "Install containerized Ansible Automation Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-con_using_custom_tls_certificates/aem-page/install-con_using_custom_tls_certificates.html"
 last_crumb = "Configure custom TLS certificates"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure custom TLS certificates"
 oversized = "false"
@@ -56,7 +57,7 @@ When you use `ca_tls_cert` and `ca_tls_key`, the installation program automatica
 
 ### Procedure
 
- To use a custom Certificate Authority (CA) to generate TLS certificates for all Ansible Automation Platform services, set the following variables in your inventory file:
+To use a custom Certificate Authority (CA) to generate TLS certificates for all Ansible Automation Platform services, set the following variables in your inventory file:
 
 ```
 ca_tls_cert=<path_to_ca_tls_certificate>
@@ -127,7 +128,7 @@ redis_tls_cert=<path_to_tls_certificate>
 redis_tls_key=<path_to_tls_key>
 ```
 
--  If all components share the same fully qualified domain name (FQDN), use the same certificate and key for each service:
+- If all components share the same fully qualified domain name (FQDN), use the same certificate and key for each service:
   
 
 ```yaml
@@ -145,7 +146,7 @@ postgresql_tls_cert=/home/user/certs/myhost.example.com.crt
 postgresql_tls_key=/home/user/certs/myhost.example.com.key
 ```
 
--  If components are deployed on separate hosts with different FQDNs, provide a unique certificate for each service:
+- If components are deployed on separate hosts with different FQDNs, provide a unique certificate for each service:
   
 
 ```yaml
@@ -189,7 +190,7 @@ The `custom_ca_cert` certificate is added to `mesh-CA.crt` only when `receptor_t
 
 ### Procedure
 
- If any of the TLS certificates you manually provided are signed by a custom CA, specify the CA certificate by using the following variable in your inventory file:
+If any of the TLS certificates you manually provided are signed by a custom CA, specify the CA certificate by using the following variable in your inventory file:
 
 `custom_ca_cert=<path_to_custom_ca_certificate>`
 

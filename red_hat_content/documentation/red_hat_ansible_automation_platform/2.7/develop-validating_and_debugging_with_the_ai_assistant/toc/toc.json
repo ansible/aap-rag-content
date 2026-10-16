@@ -1,0 +1,83 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Validate and debug with the AI assistant",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Before you begin",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-08b00071-eafe-4419-8642-9a3f22b6a652__prereq_1",
+          "anchor": null,
+          "singlePageAnchor": "GUID-08b00071-eafe-4419-8642-9a3f22b6a652__prereq_1"
+        },
+        {
+          "title": "About this task",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "GUID-08b00071-eafe-4419-8642-9a3f22b6a652__context_1",
+          "anchor": null,
+          "singlePageAnchor": "GUID-08b00071-eafe-4419-8642-9a3f22b6a652__context_1"
+        },
+        {
+          "title": "Auto-fix errors",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "task_1",
+          "anchor": null,
+          "singlePageAnchor": "task_1",
+          "sections": [
+            {
+              "title": "Procedure",
+              "visible": true,
+              "weight": 1,
+              "urlFragment": "task_1",
+              "anchor": "task_1__steps_1",
+              "singlePageAnchor": "task_1__steps_1"
+            },
+            {
+              "title": "What to do next",
+              "visible": true,
+              "weight": 2,
+              "urlFragment": "task_1",
+              "anchor": "task_1__postreq_1",
+              "singlePageAnchor": "task_1__postreq_1"
+            }
+          ]
+        },
+        {
+          "title": "Implement fixes",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "task_2",
+          "anchor": null,
+          "singlePageAnchor": "task_2",
+          "sections": [
+            {
+              "title": "Procedure",
+              "visible": true,
+              "weight": 1,
+              "urlFragment": "task_2",
+              "anchor": "task_2__steps_2",
+              "singlePageAnchor": "task_2__steps_2"
+            },
+            {
+              "title": "What to do next",
+              "visible": true,
+              "weight": 2,
+              "urlFragment": "task_2",
+              "anchor": "task_2__postreq_2",
+              "singlePageAnchor": "task_2__postreq_2"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

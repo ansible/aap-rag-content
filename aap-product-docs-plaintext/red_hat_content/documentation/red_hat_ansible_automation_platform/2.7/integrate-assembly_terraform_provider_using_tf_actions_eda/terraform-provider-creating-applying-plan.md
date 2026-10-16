@@ -5,15 +5,15 @@ After you configure your Terraform plan to include Event-Driven Ansible events, 
 
 ### Procedure
 
-1.  Run `terraform init` to initialize your working directory.
-2.  Use `terraform plan` to commit to create the plan. The following example also saves the plan to a file named `tfplan.out`, but you can specify any name for the plan. Saving the plan is a best practice for automation because the saved plan is strictly enforced.
+1. Run `terraform init` to initialize your working directory.
+2. Use `terraform plan` to commit to create the plan. The following example also saves the plan to a file named `tfplan.out`, but you can specify any name for the plan. Saving the plan is a best practice for automation because the saved plan is strictly enforced.
 
 ```
 terraform plan -out=tfplan.out
 ```
 
-3.  Review the plan output.
-4.  Apply the saved plan.
+3. Review the plan output.
+4. Apply the saved plan.
 
 ```
 terraform apply tfplan.out

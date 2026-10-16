@@ -1,6 +1,6 @@
 +++
-template = "docs/aem-title.html"
 title = "Show different fields based on a selection - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_dynamic_selection_fields"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-ref_dynamic_selection_fields/aem-page/develop-ref_dynamic_selection_fields.html"
 last_crumb = "Show different fields based on a selection"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Show different fields based on a selection"
 oversized = "false"

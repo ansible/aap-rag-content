@@ -4,14 +4,14 @@
 
 Tools within the software monitor various metrics and this information is transmitted to Red Hat. The following metrics are monitored:
 
--  **Operational telemetry data** This is the data that is required to operate and troubleshoot the Ansible Lightspeed service. For more information, refer the Enterprise Agreement. You cannot disable the collection of operational telemetry data.
+-  **Operational telemetry data**     This is the data that is required to operate and troubleshoot the Ansible Lightspeed service. For more information, refer the Enterprise Agreement. You cannot disable the collection of operational telemetry data.
 
 This includes the following data:
 
 * Organization you are logged into (Organization ID, account number)
 * Large language model (or models) that you are connected to
 
--  **Admin dashboard telemetry data** This is the data that provides insight into how your organization users are using the Ansible Lightspeed service, and the metrics are displayed on the Admin dashboard.
+-  **Admin dashboard telemetry data**     This is the data that provides insight into how your organization users are using the Ansible Lightspeed service, and the metrics are displayed on the Admin dashboard.
 
 This includes the following data:
 

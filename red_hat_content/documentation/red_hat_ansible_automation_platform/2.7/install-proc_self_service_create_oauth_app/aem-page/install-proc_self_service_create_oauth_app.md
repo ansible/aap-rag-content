@@ -4,13 +4,14 @@ title = "Create an OAuth application - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_about/", "Install Ansible automation portal (OpenShift Container Platform only)"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-install_automation_portal_on_openshift_container_platform/", "Install automation portal on OpenShift Container Platform"]]
 category = "Install"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_self_service_create_oauth_app/aem-page/install-proc_self_service_create_oauth_app.html"
 last_crumb = "Create an OAuth application"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Create an OAuth application"
 oversized = "false"
@@ -41,19 +42,22 @@ The steps below describe how to create an OAuth Application in the Ansible Autom
 
 ## Procedure
 
-1.  Open your Ansible Automation Platform instance in a browser and log in.
-2.  Navigate to Access Management> (and then)OAuth Applications.
-3.  Click **Create OAuth Application**.
-4.  Complete the fields in the form.   - **Name**: Add a name for your application.
+1. Open your Ansible Automation Platform instance in a browser and log in.
+2. Navigate to Access Management> (and then)OAuth Applications.
+3. Click **Create OAuth Application**.
+4. Complete the fields in the form.   - **Name**: Add a name for your application.
   - **Organization**: Choose the organization.
   - **Authorization grant type**: Choose `Authorization code`.
   - **Client type**: choose `Confidential`.
-  - **Redirect URIs**: Add placeholder text for the deployment URL (for example `<https://example.com>`).  
-![Create OAuth application](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/self-service-create-oauth-app.png)  
+  - **Redirect URIs**: Add placeholder text for the deployment URL (for example `<https://example.com>`).
+  - **PKCE required**: When selected, this option requires clients to use PKCE during the authorization code flow. PKCE prevents authorization code interception attacks and is required by the OAuth 2.1 specification. Select this for any OAuth application whose clients support OAuth 2.1 or for applications which are needed to enforce this check. For example, select this option when creating an OAuth application to enable the MCP Server for Ansible Automation Platform.
 
-5.  Click **Create OAuth application**. The **Application information** popup displays the `clientId` and `clientSecret` values.
+*Figure 1. Create OAuth application*
+![User interface for Create OAuth application in Ansible Automation Platform](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/create-oauth-application.png)
 
-6.  Copy the `clientId` and `clientSecret` values and save them. These values are used in an OpenShift secret for Ansible Automation Platform authentication.
+5. Click **Create OAuth application**. The **Application information** popup displays the `clientId` and `clientSecret` values.
+
+6. Copy the `clientId` and `clientSecret` values and save them. These values are used in an OpenShift secret for Ansible Automation Platform authentication.
 
 ## Enable OAuth token creation for external users
 
@@ -63,21 +67,21 @@ Ansible automation portal uses Ansible Automation Platform or authentication and
 
 You must enable OAuth token creation in Ansible Automation Platform so that users can authenticate with the platform from Ansible automation portal.
 
- Note:
+Note:
 
 Users who do not have permission to log in to Ansible Automation Platform cannot log in to Self-service portal, because Ansible Automation Platform provides the OAuth tokens. Therefore, a user who is removed from an external IdP (for example LDAP, SAML, Azure) can no longer log into Ansible Automation Platform or Ansible automation portal. This prevents potential external token issues. For more information, refer to the [Manage OAuth2 token creation for external users](/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-con_gw_manage_oauth2_external_users#gw-manage-oauth2-external-users "Configure your platform settings to enable OAuth2 token creation for external users. Allowing users authenticated via LDAP, SAML, or SSO to generate tokens prevents 403 Forbidden errors and helps ensure they maintain programmatic API access.") section of[Configure central authentication for Ansible Automation Platform](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_configure_authentication "Configure authentication methods such as LDAP or SAML to simplify the user login experience. Providing the correct connection details for your chosen identity provider helps ensure seamless and secure access to Ansible Automation Platform.").
 
 ### Procedure
 
-1.  In a browser, log in to your Ansible Automation Platform instance as a user with admin privileges.
-2.  In the navigation pane, select Settings> (and then)Platform gateway.
-3.  Locate the **Allow external users to create OAuth2 tokens** setting.
-4.  Enable **Allow external users to create OAuth2 tokens** if it is not already enabled:
-  1.  Click Edit platform gateway settings.
-  2.  Set **Allow external users to create OAuth2 tokens** to **Enabled**.  
+1. In a browser, log in to your Ansible Automation Platform instance as a user with admin privileges.
+2. In the navigation pane, select Settings> (and then)Platform gateway.
+3. Locate the **Allow external users to create OAuth2 tokens** setting.
+4. Enable **Allow external users to create OAuth2 tokens** if it is not already enabled:
+  1. Click Edit platform gateway settings.
+  2. Set **Allow external users to create OAuth2 tokens** to **Enabled**.  
 ![Allow external users to create OAuth2 tokens setting](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/self-service-enable-external-oauth.png)  
-  3.  Click Save platform gateway settings to save your updates and return to the **Platform gateway settings** page.
-5.  In the **Platform gateway settings** page, verify that the **Allow external users to create OAuth2 tokens** setting is enabled.
+  3. Click Save platform gateway settings to save your updates and return to the **Platform gateway settings** page.
+5. In the **Platform gateway settings** page, verify that the **Allow external users to create OAuth2 tokens** setting is enabled.
 
 ## Generate an API token for Ansible Automation Platform authentication
 
@@ -85,14 +89,14 @@ You must create an API token in Ansible Automation Platform. The token is used i
 
 ### Procedure
 
-1.  Log in to your instance of Ansible Automation Platform as a user with Ansible Automation Platform administrator privileges.
-2.  Navigate to Access Management> (and then)API Tokens to display the API Tokens page.
-3.  Click Create API Token.
-4.  Add a description and select your OAuth application.
-5.  In the Scope menu, select `Write`.
+1. Log in to your instance of Ansible Automation Platform as a user with Ansible Automation Platform administrator privileges.
+2. Navigate to Access Management> (and then)API Tokens to display the API Tokens page.
+3. Click Create API Token.
+4. Add a description and select your OAuth application.
+5. In the Scope menu, select `Write`.
   
 ![Create API Token dialog showing the Scope set to Write](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/self-service-generate-oauth-token.png)  
 
-6.  Click Create Token to generate the token.
-7.  Save the new token.
+6. Click Create Token to generate the token.
+7. Save the new token.
       The token is used in an OpenShift secret that is fetched by the Helm chart.

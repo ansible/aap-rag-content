@@ -4,12 +4,12 @@ Events sometimes have extra data that is unnecessary and might overwhelm the rul
 
 Events are defined as python code and distributed as collections. The default EDA collection has the following filters:
 
-| Name                                    | Description                                                                                                      |
-| --------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| <br>json\_filter                        | <br>This filter includes and excludes keys from the event object                                                 |
-| <br>dashes\_to\_underscores             | <br>This filter changes the dashes in all keys in the payload to be underscore                                   |
-| <br>ansible.eda.insert\_hosts\_to\_meta | <br>This filter is used to add host information into the event so that ansible-rulebook can locate it and use it |
-| <br>ansible.eda.normalize\_keys         | <br>This filter is used if you want to change non alpha numeric keys to underscore                               |
+| Name                                | Description                                                                                                  |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| json\_filter                        | This filter includes and excludes keys from the event object                                                 |
+| dashes\_to\_underscores             | This filter changes the dashes in all keys in the payload to be underscore                                   |
+| ansible.eda.insert\_hosts\_to\_meta | This filter is used to add host information into the event so that ansible-rulebook can locate it and use it |
+| ansible.eda.normalize\_keys         | This filter is used if you want to change non alpha numeric keys to underscore                               |
 
 You can chain event filters one after the other, and the updated data is sent from one filter to the next. Event filters are defined in the rulebook after a source is defined. When the rulebook starts the source plugin it associates the correct filters and transforms the data before putting it into the queue.
 

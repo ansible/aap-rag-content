@@ -8,7 +8,7 @@ Ansible uses the YAML syntax. YAML is a human-readable language that enables you
 
 ## Procedure
 
-1.  Create a file named `playbook.yaml` in your `ansible_quickstart` directory, with the following content:
+1. Create a file named `playbook.yaml` in your `ansible_quickstart` directory, with the following content:
 
 
 ```
@@ -23,7 +23,7 @@ ansible.builtin.debug:
 msg: Hello world
 ```
 
-2.  Run your playbook:
+2. Run your playbook:
 
 
 ```

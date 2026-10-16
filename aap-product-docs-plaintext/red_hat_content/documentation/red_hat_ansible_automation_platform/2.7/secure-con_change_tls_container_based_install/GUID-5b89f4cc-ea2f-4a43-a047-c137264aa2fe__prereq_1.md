@@ -7,7 +7,7 @@
 
 ### Procedure
 
-1.  Add `aap_service_regen_cert=true` to the inventory file in the `[all:vars]` section:
+1. Add `aap_service_regen_cert=true` to the inventory file in the `[all:vars]` section:
 
 
 ```
@@ -23,7 +23,7 @@ aap_service_regen_cert=true
 aap_ca_regenerate=true
 ```
 
-2.  Run the install playbook from your installation directory:
+2. Run the install playbook from your installation directory:
 
 
 ```

@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_bitbucket/aem-page/secure-ref_controller_credential_bitbucket.html"
 last_crumb = "BitBucket data center HTTP access token"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "BitBucket data center HTTP access token"
 oversized = "false"
@@ -27,6 +28,7 @@ type = "aem-page"
 
 # BitBucket data center HTTP access token
 
-Bitbucket Data Center is a self-hosted Git repository for collaboration and management. Select this credential type to enable you to use HTTP access tokens in place of passwords for Git over HTTPS.
+Bitbucket Data Center is a self-hosted Git repository for collaboration and management.
+Select this credential type to enable you to use HTTP access tokens in place of passwords for Git over HTTPS.
 
 For further information, see [HTTP access tokens](https://confluence.atlassian.com/bitbucketserver/http-access-tokens-939515499.html) in the Bitbucket Data Center documentation..

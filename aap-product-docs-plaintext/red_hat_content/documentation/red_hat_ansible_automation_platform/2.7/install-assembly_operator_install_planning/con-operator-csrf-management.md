@@ -11,13 +11,13 @@ In previous versions CSRF was configurable through the automation controller use
 
 The following table helps to clarify which settings are applicable for which component.
 
-| **UI setting**       | **Applicable for**        |
-| -------------------- | ------------------------- |
-| <br>Subscription     | <br>automation controller |
-| <br>platform gateway | <br>platform gateway      |
-| <br>User Preferences | <br>User interface        |
-| <br>System           | <br>Automation controller |
-| <br>Job              | <br>Automation controller |
-| <br>Logging          | <br>Automation controller |
-| <br>Troubleshooting  | <br>Automation controller |
+| **UI setting**   | **Applicable for**    |
+| ---------------- | --------------------- |
+| Subscription     | automation controller |
+| platform gateway | platform gateway      |
+| User Preferences | User interface        |
+| System           | Automation controller |
+| Job              | Automation controller |
+| Logging          | Automation controller |
+| Troubleshooting  | Automation controller |
 

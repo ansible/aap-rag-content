@@ -1,7 +1,7 @@
 +++
-title = "Enable automation content collection and container signing - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_enabling_automation_hub_collection_and_container_signing"
+title = "Enable automation content collection and container signing - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_aap_containerized_installation_intro/", "Install containerized Ansible Automation Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_enabling_automation_hub_collection_and_container_signing/aem-page/install-proc_enabling_automation_hub_collection_and_container_signing.html"
 last_crumb = "Enable automation content collection and container signing"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Enable automation content collection and container signing"
 oversized = "false"
@@ -61,14 +62,14 @@ The algorithm and cipher used is the responsibility of the customer.
 
 ## Procedure
 
-1.  On a RHEL server run the following command to create a new key pair for collection signing:
+1. On a RHEL server run the following command to create a new key pair for collection signing:
   
 
 ```
 gpg --gen-key
 ```
 
-2.  Enter your information for "Real name" and "Email address":
+2. Enter your information for "Real name" and "Email address":
       Example output:
 
 ```
@@ -110,21 +111,21 @@ sub   rsa3072 2024-10-25 [E] [expires: 2026-10-25]
 
   - Note the expiry date that you can set based on company standards and needs.
 
-3.  You can view all of your GPG keys by running the following command:
+3. You can view all of your GPG keys by running the following command:
   
 
 ```
 gpg --list-secret-keys --keyid-format=long
 ```
 
-4.  To export the public key run the following command:
+4. To export the public key run the following command:
   
 
 ```
 gpg --export -a --output collection-signing-key.pub <email_address_used_to_generate_key>
 ```
 
-5.  To export the private key run the following command:
+5. To export the private key run the following command:
   
 
 ```
@@ -133,7 +134,7 @@ gpg -a --export-secret-keys <email_address_used_to_generate_key> > collection-si
 
   - Enter the passphrase if prompted.
 
-6.  To view the private key file contents, run the following command:
+6. To view the private key file contents, run the following command:
   
 
 ```
@@ -155,8 +156,8 @@ sSN6KuKY1TcIwIDCCa/U5Obm46kurpP2Y+vNA1YSEtMJoSeHeamWMDd99f49ItBp
 -----END PGP PRIVATE KEY BLOCK-----
 ```
 
-7.  Repeat steps 1 to 7 to create a key pair for container signing.
-8.  Add the following variables to the inventory file and run the installation to create the signing services:
+7. Repeat steps 1 to 7 to create a key pair for container signing.
+8. Add the following variables to the inventory file and run the installation to create the signing services:
   
 
 ```

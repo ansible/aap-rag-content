@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-configure_feature_flags_for_a_containerized_installation/aem-page/install-configure_feature_flags_for_a_containerized_installation.html"
 last_crumb = "Configure feature flags for a containerized installation"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure feature flags for a containerized installation"
 oversized = "false"
@@ -31,7 +32,7 @@ Turn on the feature flags capability for your containerized installation.
 
 ## Procedure
 
- To enable the feature flags UI page, add the `RUNTIME_FEATURE_FLAGS` setting to `gateway_extra_settings` in your inventory file:
+To enable the feature flags UI page, add the `RUNTIME_FEATURE_FLAGS` setting to `gateway_extra_settings` in your inventory file:
 
 ```
 gateway_extra_settings=[{"setting": "RUNTIME_FEATURE_FLAGS", "value": "@bool True"}]

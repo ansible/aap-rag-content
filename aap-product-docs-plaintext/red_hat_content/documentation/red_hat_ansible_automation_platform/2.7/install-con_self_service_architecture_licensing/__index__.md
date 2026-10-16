@@ -1,4 +1,4 @@
-# Architecture and licensing
+# Ansible automation portal architecture and licensing
 
 Ansible automation portal is built on Red Hat Developer Hub (RHDH), which provides the web interface and plugin framework. Your Ansible Automation Platform subscription includes the use of RHDH for the self-service portal without requiring a separate RHDH subscription.
 

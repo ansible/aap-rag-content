@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
 title = "Example capacity planning exercise - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-ref_controller_capacity_planning_exercise"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_controller_improving_performance/", "Tune automation controller to improve performance"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-ref_controller_capacity_planning_exercise/aem-page/optimize-ref_controller_capacity_planning_exercise.html"
 last_crumb = "Example capacity planning exercise"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Example capacity planning exercise"
 oversized = "false"
@@ -66,11 +67,11 @@ Reference the experimental results in the following table that shows the observe
 
 Using this default, the maximum number of jobs a control node can dispatch to execution nodes makes 5 execution nodes of equal CPU and RAM use 100% of their capacity, arriving to the 1:5 ratio of control to execution capacity mentioned before.
 
-| Node                                                                       | API capacity                     | Default execution capacity | Default control capacity | Mean event processing rate at 100% capacity usage | Mean events processing rate at 50% capacity usage | Mean event processing rate at 40% capacity usage |
-| -------------------------------------------------------------------------- | -------------------------------- | -------------------------- | ------------------------ | ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------ |
-| <br>4 CPU at 2.5Ghz, 16 GB RAM control node, a maximum of 3000 IOPS disk   | <br>about 10 requests per second | <br>n/a                    | <br>137 jobs             | <br>1100 per second                               | <br>1400 per second                               | <br>1630 per second                              |
-| <br>4 CPU at 2.5Ghz, 16 GB RAM execution node, a maximum of 3000 IOPS disk | <br>n/a                          | <br>137                    | <br>n/a                  | <br>n/a                                           | <br>n/a                                           | <br>n/a                                          |
-| <br>4 CPU at 2.5Ghz, 16 GB RAM database node, a maximum of 3000 IOPS disk  | <br>n/a                          | <br>n/a                    | <br>n/a                  | <br>n/a                                           | <br>n/a                                           | <br>n/a                                          |
+| Node                                                                   | API capacity                 | Default execution capacity | Default control capacity | Mean event processing rate at 100% capacity usage | Mean events processing rate at 50% capacity usage | Mean event processing rate at 40% capacity usage |
+| ---------------------------------------------------------------------- | ---------------------------- | -------------------------- | ------------------------ | ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------ |
+| 4 CPU at 2.5Ghz, 16 GB RAM control node, a maximum of 3000 IOPS disk   | about 10 requests per second | n/a                        | 137 jobs                 | 1100 per second                                   | 1400 per second                                   | 1630 per second                                  |
+| 4 CPU at 2.5Ghz, 16 GB RAM execution node, a maximum of 3000 IOPS disk | n/a                          | 137                        | n/a                      | n/a                                               | n/a                                               | n/a                                              |
+| 4 CPU at 2.5Ghz, 16 GB RAM database node, a maximum of 3000 IOPS disk  | n/a                          | n/a                        | n/a                      | n/a                                               | n/a                                               | n/a                                              |
 
 Because controlling jobs competes with job event processing on the control node, over-provisioning control capacity can reduce processing times. When processing times are high, you can experience a delay between when the job runs and when you can view the output in the API or UI.
 
@@ -105,7 +106,7 @@ This section provides guidance on troubleshooting common performance issues with
   * **Waiting for “dependencies” to finish**: this includes project updates and inventory updates when “update on launch” behavior is enabled.
   * **The “allow_simultaneous” setting of the job template**: if multiple jobs of the same job template are in “pending” status, check the “allow_simultaneous” setting of the job template (“Concurrent Jobs” checkbox in the UI). If this is not enabled, only one job from a job template can run at a time.
   * **The “forks” value of your job template**: the default value is 5. The amount of capacity required to run the job is roughly the forks value (some small overhead is accounted for). If the forks value is set to a very large number, this will limit what nodes will be able to run it.
-  * **Lack of either control or execution capacity**: see “awx_instance_remaining_capacity” metric from the application metrics available on /api/v2/metrics. See [Metrics for monitoring automation controller application](/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-ensure_system_health_and_efficiency_through_monitoring#ref-controller-metrics-monitoring "For application level monitoring, automation controller provides Prometheus-style metrics on an API endpoint /api/v2/metrics. Use these metrics to check data about job status and subsystem performance, such as for job output processing or job scheduling.") for more information about how to check metrics. See [Capacity planning for deploying automation controller](/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-ref_controller_capacity_planning#ref-controller-capacity-planning "Capacity planning for automation controller is planning the scale and characteristics of your deployment so that it has the capacity to run the planned workload.") for information about how to plan your deployment to handle the number of jobs you are interested in.
+  * **Lack of either control or execution capacity**: see “awx_instance_remaining_capacity” metric from the application metrics available on /api/v2/metrics. See [Metrics for monitoring automation controller application](/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-ensure_system_health_and_efficiency_through_monitoring#ref-controller-metrics-monitoring "For application level monitoring, automation controller provides Prometheus-style metrics on an API endpoint /api/controller/v2/metrics/. Use these metrics to check data about job status and subsystem performance, such as for job output processing or job scheduling.") for more information about how to check metrics. See [Capacity planning for deploying automation controller](/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-ref_controller_capacity_planning#ref-controller-capacity-planning "Capacity planning for automation controller is planning the scale and characteristics of your deployment so that it has the capacity to run the planned workload.") for information about how to plan your deployment to handle the number of jobs you are interested in.
 
  **Jobs run more slowly on automation controller than on a local machine.**
 
@@ -113,7 +114,7 @@ This section provides guidance on troubleshooting common performance issues with
 - Project update on launch and inventory update on launch behavior can cause additional delays at job start time.
 - Size of projects can impact how long it takes to start the job, as the project is updated on the control node and transferred to the execution node. Internal cluster routing can impact network performance. For more information, see [Internal cluster routing](/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-ref_controller_settings_control_execution_nodes#ref-controller-internal-cluster-routing "Automation controller cluster hosts communicate across the network within the cluster. In the inventory file for the traditional VM installer, you can indicate several routes to the cluster nodes that are used in different ways:").
 - Container pull settings can impact job start time. The execution environment is a container that is used to run jobs within it. Container pull settings can be set to “Always”, “Never” or “If not present”. If the container is always pulled, this can cause delays.
-- Ensure that all cluster nodes, including execution, control, and the database, have been deployed in instances with storage rated to the minimum required IOPS, because the manner in which automation controller runs ansible and caches event data implicates significant disk I/O. For more information, see [System requirements](/documentation/en-us/red_hat_ansible_automation_platform/2.7/assembly_system_requirements "Use this information when planning your Red Hat Ansible Automation Platform installations and designing automation mesh topologies that fit your use case.").
+- Ensure that all cluster nodes, including execution, control, and the database, have been deployed in instances with storage rated to the minimum required IOPS, because the manner in which automation controller runs ansible and caches event data implicates significant disk I/O. For more information, see [System requirements](/documentation/en-us/red_hat_ansible_automation_platform/2.7/../install/assembly-system-requirements.html "Use this information when planning your Red Hat Ansible Automation Platform installations and designing automation mesh topologies that fit your use case.").
 
  **Database storage does not stop growing.**
 

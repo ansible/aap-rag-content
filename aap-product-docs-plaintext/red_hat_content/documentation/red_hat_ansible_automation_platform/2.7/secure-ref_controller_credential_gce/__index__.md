@@ -16,5 +16,7 @@ GCE credentials require the following information:
 
 - **Service Account Email Address**: The email address assigned to the Google Compute Engine **service account**.
 - Optional: **Project**: Provide the GCE assigned identification or the unique project ID that you provided at project creation time.
-- Optional: **Service Account JSON File**: Upload a GCE service account file. Click Browse to browse for the file that has the special account information that can be used by services and applications running on your GCE instance to interact with other Google Cloud APIs. This grants permissions to the service account and virtual machine instances.
+- Optional: **Service Account JSON File**: Upload a GCE service account file.
+Click Browse to browse for the file that has the special account information that can be used by services and applications running on your GCE instance to interact with other Google Cloud APIs.
+This grants permissions to the service account and virtual machine instances.
 - **RSA Private Key**: The PEM file associated with the service account email.

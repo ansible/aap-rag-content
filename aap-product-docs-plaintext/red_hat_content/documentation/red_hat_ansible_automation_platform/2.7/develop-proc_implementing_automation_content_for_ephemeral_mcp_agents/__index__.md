@@ -13,7 +13,7 @@ You can safely use AI as an operational assistant, which can take assigned actio
 
 ## Procedure
 
-1.  Create the `execution-environment.yml` definition file, which specifies a step to install the MCP server components:
+1. Create the `execution-environment.yml` definition file, which specifies a step to install the MCP server components:
 
 Note:
 Replace `<platform-version>` with the namespace for your version of Ansible Automation Platform. Replace `<rhel-version>` with your Red Hat Enterprise Linux version
@@ -43,7 +43,7 @@ During the EE build process the MCP server software is installed into the EE.
 - For embedded servers, include the MCP server binaries or libraries explicitly on the EE image path.
 - For remote servers, define remote connection details in a manifest file within the EE.
 
-2.  Write custom Ansible content:
+2. Write custom Ansible content:
 
 
 ```yaml
@@ -66,23 +66,23 @@ You must configure the `ansible.mcp.mcp` connection plugin to use the `ansible.m
 
 Your playbook might use inventory variables, such as setting the connection plugin to `ansible_connection: ansible.mcp.mcp`, along with required timeout values like `ansible_connect_timeout: 30` and `ansible_command_timeout: 30`.
 
-3.  Create and configure credentials in Ansible Automation Platform:
+3. Create and configure credentials in Ansible Automation Platform:
 The required credentials vary based on which MCP server you are using. For example, the GitHub MCP server requires a GitHub Personal Access Token, which you set in the `MCP_BEARER_TOKEN` environment variable.
 
-1.  Create a custom credential type in Ansible Automation Platform.
+1. Create a custom credential type in Ansible Automation Platform.
 
 ![Creating a custom credential type in Ansible Automation Platform](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/mcp-agents-create-credential-type.png)
 
-2.  Create a new credential and use the custom credential type you created.
+2. Create a new credential and use the custom credential type you created.
 
 ![Creating a credential with the custom credential type](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/mcp-agents-create-credential.png)
 The examples show how to set up the required credential structures in the Ansible Automation Platform credential store. This includes defining the relevant fields and the injector configuration needed to pass the secret as an environment variable (for example, `MCP_BEARER_TOKEN: "{{ token }}"`).
 
-4.  Create a new host and configure the connection variables.
+4. Create a new host and configure the connection variables.
 
 ![Creating a host with MCP connection variables](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/mcp-agents-create-host.png)
 
-5.  Launch the relevant job in the Ansible Automation Platform controller GUI.
+5. Launch the relevant job in the Ansible Automation Platform controller GUI.
 
 ## Results
 

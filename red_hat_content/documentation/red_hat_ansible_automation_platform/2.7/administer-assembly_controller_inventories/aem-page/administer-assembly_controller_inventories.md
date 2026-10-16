@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_inventories"
 title = "Define automation target hosts in your inventory files - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_inventories"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_inventories/", "Define automation target hosts in your inventory files"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_inventories/aem-page/administer-assembly_controller_inventories.html"
 last_crumb = "Define automation target hosts in your inventory files"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Define automation target hosts in your inventory files"
 oversized = "false"
@@ -31,7 +32,7 @@ Ansible Automation Platform works against a list of managed nodes or hosts in yo
 
 An inventory file enables Ansible to manage a large number of hosts with a single command. Inventories also help you automate more efficiently by reducing the number of command line options you have to specify. Inventories are divided into groups and these groups contain the hosts. Groups can be sourced manually, by entering host names into automation controller, or from one of its supported cloud providers.
 
- Note:
+Note:
 
 If you have a custom dynamic inventory script, or a cloud provider that is not yet supported natively in automation controller, you can also import that into automation controller.
 
@@ -41,7 +42,7 @@ The **Inventory details** page includes:
 
 - **Name**: The inventory name.
 
--  **Status** The statuses are:
+-  **Status**     The statuses are:
 
   * **Success**: When the inventory source sync completed successfully
   * **Disabled**: No inventory source added to the inventory

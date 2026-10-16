@@ -7,13 +7,11 @@ You can create a new schedule for a job template, workflow job template, invento
 
 You can create schedules from a template, project, or inventory source, and directly on the main **Schedules** page.
 
-To create a new schedule on the **Schedules** page:
-
 ### Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Schedules.
-2.  Click Create schedule. This opens the **Create schedule** window.
-3.  Select a **Resource type** onto which this schedule is applied. Select from:
+1. From the navigation panel, select Automation Execution> (and then)Schedules.
+2. Click Create schedule. This opens the **Create schedule** window.
+3. Select a **Resource type** onto which this schedule is applied. Select from:
 
 -  **Job template**
 * For **Job template** select a **Job template** from the menu.
@@ -26,7 +24,7 @@ To create a new schedule on the **Schedules** page:
 -  **Management job template**
 * For **Management job template** select a **Workflow job template** from the menu.
 
-4.  For **Job template** and **Project sync** enter the appropriate details into the following fields:
+4. For **Job template** and **Project sync** enter the appropriate details into the following fields:
 
 - **Schedule name**: Enter the name.
 
@@ -39,5 +37,5 @@ To create a new schedule on the **Schedules** page:
 Important:
 Jobs are scheduled in UTC. Repeating jobs that run at a specific time of day can move relative to a local time zone when Daylight Saving Time shifts occur. The system resolves the local time zone based time to UTC when the schedule is saved. To ensure your schedules are correctly created, set your schedules in UTC time.
 
-5.  Click Next. The **Define rules** page is displayed.
+5. Click Next. The **Define rules** page is displayed.
 

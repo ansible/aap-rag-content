@@ -2,7 +2,7 @@
   "version": "1.1",
   "sections": [
     {
-      "title": "Install automation dashboard to calculate savings (RHEL only)",
+      "title": "Install the standalone automation dashboard utility to calculate savings (RHEL only)",
       "visible": true,
       "weight": 1,
       "urlFragment": "index",
@@ -10,7 +10,7 @@
       "singlePageAnchor": null,
       "sections": [
         {
-          "title": "Install automation dashboard",
+          "title": "Install the standalone automation dashboard utility",
           "visible": true,
           "weight": 1,
           "urlFragment": "proc-installing-automation-dashboard",
@@ -18,7 +18,7 @@
           "singlePageAnchor": "proc-installing-automation-dashboard",
           "sections": [
             {
-              "title": "Configure automation dashboard",
+              "title": "Configure the standalone automation dashboard utility",
               "visible": true,
               "weight": 1,
               "urlFragment": "proc-installing-automation-dashboard",
@@ -26,7 +26,7 @@
               "singlePageAnchor": "proc-integrating-automation-dashboard"
             },
             {
-              "title": "Synchronize data to automation dashboard",
+              "title": "Synchronize data to the standalone automation dashboard utility",
               "visible": true,
               "weight": 2,
               "urlFragment": "proc-installing-automation-dashboard",
@@ -42,7 +42,7 @@
               "singlePageAnchor": "verifying-cluster-access-tokens_verifying-tokens"
             },
             {
-              "title": "Uninstall automation dashboard",
+              "title": "Uninstall the standalone automation dashboard utility",
               "visible": true,
               "weight": 4,
               "urlFragment": "proc-installing-automation-dashboard",

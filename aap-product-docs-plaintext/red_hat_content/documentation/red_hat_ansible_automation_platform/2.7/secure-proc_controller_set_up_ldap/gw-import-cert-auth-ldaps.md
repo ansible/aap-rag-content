@@ -1,7 +1,8 @@
 # Configure LDAP authentication
 ## Import a certificate authority in automation controller for LDAPS integration
 
-You can authenticate to the automation controller server by using LDAP. However, if you change to using LDAPS (LDAP over SSL/TLS) to authenticate and the TLS certificate is not trusted by platform gateway, it fails with an error such as:
+You can authenticate to the automation controller server by using LDAP.
+However, if you change to using LDAPS (LDAP over SSL/TLS) to authenticate and the TLS certificate is not trusted by platform gateway, it fails with an error such as:
 
 ### About this task
 
@@ -13,8 +14,8 @@ To get Ansible Automation Platform to trust the certificate coming from LDAP, pe
 
 ### Procedure
 
-1.  Place a copy of the LDAP servers certificate in the directory, `/etc/pki/ca-trust/source/anchors/`.
-2.  Run the command:
+1. Place a copy of the LDAP servers certificate in the directory, `/etc/pki/ca-trust/source/anchors/`.
+2. Run the command:
 
 
 ```

@@ -5,9 +5,9 @@ To calculate total savings, the cost and savings analysis compares manual labor 
 
 ### Procedure
 
-1.  In the **Monthly AAP cost** field, enter the monthly cost of running the Ansible Automation Platform. This value includes license, labor, and infrastructure costs to run Ansible Automation Platform. It is used to calculate the automation savings.
-2.  In the **Hourly rate for manually running the job ($)** field, enter the hourly labor cost used to estimate what it would cost to run these jobs manually. This is used to calculate manual cost and savings.
-3.  Optional: Select **Time taken to create automation** to include the estimated time spent creating or authoring the automation (for example, writing playbooks, setting up jobs) before it could be run.
+1. In the **Monthly AAP cost** field, enter the monthly cost of running the Ansible Automation Platform. This value includes license, labor, and infrastructure costs to run Ansible Automation Platform. It is used to calculate the automation savings.
+2. In the **Hourly rate for manually running the job ($)** field, enter the hourly labor cost used to estimate what it would cost to run these jobs manually. This is used to calculate manual cost and savings.
+3. Optional: Select **Time taken to create automation** to include the estimated time spent creating or authoring the automation (for example, writing playbooks, setting up jobs) before it could be run.
 Automation dashboard calculates the following data points based on your inputs:
 
 - **Cost of manual automation**: Total cost if all jobs were run manually.

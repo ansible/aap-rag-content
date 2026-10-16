@@ -6,10 +6,10 @@ The automation content navigator commands run familiar Ansible CLI commands in `
 
 **Comparison of automation content navigator and Ansible CLI commands**
 
-| automation content navigator command | Ansible CLI command              |
-| ------------------------------------ | -------------------------------- |
-| <br> `ansible-navigator collections` | <br> `ansible-galaxy collection` |
-| <br> `ansible-navigator config`      | <br> `ansible-config`            |
-| <br> `ansible-navigator doc`         | <br> `ansible-doc`               |
-| <br> `ansible-navigator inventory`   | <br> `ansible-inventory`         |
-| <br> `ansible-navigator run`         | <br> `ansible-playbook`          |
+| automation content navigator command | Ansible CLI command         |
+| ------------------------------------ | --------------------------- |
+| `ansible-navigator collections`      | `ansible-galaxy collection` |
+| `ansible-navigator config`           | `ansible-config`            |
+| `ansible-navigator doc`              | `ansible-doc`               |
+| `ansible-navigator inventory`        | `ansible-inventory`         |
+| `ansible-navigator run`              | `ansible-playbook`          |

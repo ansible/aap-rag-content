@@ -15,12 +15,12 @@ For example, you connected to the default IBM watsonx Code Assistant model but n
 
 ### Procedure
 
-1.  Go to the Red Hat OpenShift Container Platform.
-2.  Select Operators> (and then)Installed Operators.
-3.  From the list of installed operators, select the **Ansible Automation Platform** operator.
-4.  Locate and select the **Ansible Automation Platform** custom resource, and then click the required app.
-5.  Select the **YAML** tab.
-6.  Scroll the text to find the `spec` section under `Lightspeed` category. For example:
+1. Go to the Red Hat OpenShift Container Platform.
+2. Select Operators> (and then)Installed Operators.
+3. From the list of installed operators, select the **Ansible Automation Platform** operator.
+4. Locate and select the **Ansible Automation Platform** custom resource, and then click the required app.
+5. Select the **YAML** tab.
+6. Scroll the text to find the `spec` section under `Lightspeed` category. For example:
 
 
 ```
@@ -30,6 +30,7 @@ disabled: false
 model_config_secret_name: <Name of the model configuration secret that you recently created.>
 ```
 
-7.  Replace the `model_config_secret_name` value with the name of the IBM watsonx Code Assistant that you want to connect to.
-8.  Click **Save**. The new Ansible Lightspeed pods are created. After the new pods are running successfully, the old Ansible Lightspeed pods are terminated.
+7. Replace the `model_config_secret_name` value with the name of the IBM watsonx Code Assistant that you want to connect to.
+8. Click **Save**.
+The new Ansible Lightspeed pods are created. After the new pods are running successfully, the old Ansible Lightspeed pods are terminated.
 

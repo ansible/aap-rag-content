@@ -55,7 +55,7 @@ redis_tls_cert=<path_to_tls_certificate>
 redis_tls_key=<path_to_tls_key>
 ```
 
--  If all components share the same fully qualified domain name (FQDN), use the same certificate and key for each service:
+- If all components share the same fully qualified domain name (FQDN), use the same certificate and key for each service:
 
 
 ```yaml
@@ -73,7 +73,7 @@ postgresql_tls_cert=/home/user/certs/myhost.example.com.crt
 postgresql_tls_key=/home/user/certs/myhost.example.com.key
 ```
 
--  If components are deployed on separate hosts with different FQDNs, provide a unique certificate for each service:
+- If components are deployed on separate hosts with different FQDNs, provide a unique certificate for each service:
 
 
 ```yaml

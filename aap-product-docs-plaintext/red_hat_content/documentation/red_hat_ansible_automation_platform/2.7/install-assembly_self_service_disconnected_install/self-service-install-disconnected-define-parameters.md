@@ -10,7 +10,7 @@ Create the registry authentication secret so the dynamic plug-in init container 
 
 ### Procedure
 
-1.  Create an auth.json file with credentials for your disconnected registry:
+1. Create an auth.json file with credentials for your disconnected registry:
 
 
 ```
@@ -29,7 +29,7 @@ Generate the base64-encoded value:
 $ printf '%s' '<registry_username>:<registry_password>' | base64 -w0
 ```
 
-2.  Create the registry authentication secret:
+2. Create the registry authentication secret:
 
 
 ```

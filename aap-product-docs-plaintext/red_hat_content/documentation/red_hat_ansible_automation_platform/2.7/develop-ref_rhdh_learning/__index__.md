@@ -1,8 +1,10 @@
 # Access learning paths, labs, and collections
 
-To learn more about getting started with automation, click **Learn** from the **Overview** page of the plug-in dashboard. The **Learn** page provides the following options for learning:
+To learn more about getting started with automation, click **Learn** from the **Overview** page of the plug-in dashboard.
+The **Learn** page provides the following options for learning:
 
-- **Learning Paths** lists a curated selection of learning tools hosted on developers.redhat.com that guide you through the foundations of working with Ansible, the Ansible VS Code extension, and using YAML. You can select other Ansible learning paths from the **Useful links** section.
+- **Learning Paths** lists a curated selection of learning tools hosted on developers.redhat.com that guide you through the foundations of working with Ansible, the Ansible VS Code extension, and using YAML.
+You can select other Ansible learning paths from the **Useful links** section.
 
 - **Labs** are self-led labs that are designed to give you hands-on experience in writing Ansible content and using Ansible development tools.
 

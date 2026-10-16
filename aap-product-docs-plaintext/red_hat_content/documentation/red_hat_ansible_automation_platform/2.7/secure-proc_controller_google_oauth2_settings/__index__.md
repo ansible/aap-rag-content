@@ -10,15 +10,15 @@ If you have already completed the setup process, you can access those credential
 
 ## Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Authentication Methods.
-2.  Click Create authentication.
-3.  Enter a **Name** for this authentication configuration.
-4.  Select **Google OAuth** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
-5.  The **Google OAuth2 Key** and **Google OAuth2 Secret** fields are pre-populated. If not, use the credentials Google supplied during the web application setup process. Save these settings for use in the following steps.
+1. From the navigation panel, select Access Management> (and then)Authentication Methods.
+2. Click Create authentication.
+3. Enter a **Name** for this authentication configuration.
+4. Select **Google OAuth** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
+5. The **Google OAuth2 Key** and **Google OAuth2 Secret** fields are pre-populated. If not, use the credentials Google supplied during the web application setup process. Save these settings for use in the following steps.
 
-6.  Copy and paste Google’s Client ID into the **Google OAuth2 Key** field.
-7.  Copy and paste Google’s Client secret into the **Google OAuth2 Secret** field.
-8.  Optional: Enter information for the following fields using the tooltip provided for instructions and required format:
+6. Copy and paste Google’s Client ID into the **Google OAuth2 Key** field.
+7. Copy and paste Google’s Client secret into the **Google OAuth2 Secret** field.
+8. Optional: Enter information for the following fields using the tooltip provided for instructions and required format:
 
 -  **Access Token URL**
 -  **Access Token Method**
@@ -28,13 +28,13 @@ If you have already completed the setup process, you can access those credential
 -  **OIDC JWT Algorithm(s)**
 -  **OIDC JWT**
 
-9.  Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. Note:
+9. Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. Note:
 Values defined in this field override the dedicated fields provided in the UI. Any values not defined here are not provided to the authenticator.
 
-10.  To automatically create organizations, users, and teams upon successful login, select **Create objects**.
-11.  To enable this authentication method upon creation, select **Enabled**.
-12.  To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users**.
-13.  Click Create Authentication Method.
+10. To automatically create organizations, users, and teams upon successful login, select **Create objects**.
+11. To enable this authentication method upon creation, select **Enabled**.
+12. To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users**.
+13. Click Create Authentication Method.
 
 ## Results
 

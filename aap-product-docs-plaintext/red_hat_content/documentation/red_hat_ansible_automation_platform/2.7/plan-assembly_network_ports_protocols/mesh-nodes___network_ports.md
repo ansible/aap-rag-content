@@ -6,9 +6,9 @@ Automation mesh uses several ports to communicate with its services. These ports
 
 *Table 1. Network ports and protocols*
 
-| Port number | Protocol       | Service      | Source                                   | Destination                                   |
-| ----------- | -------------- | ------------ | ---------------------------------------- | --------------------------------------------- |
-| <br>80/443  | <br>HTTP/HTTPS | <br>Receptor | <br>Execution node                       | <br>OpenShift Container Platform mesh ingress |
-| <br>80/443  | <br>HTTP/HTTPS | <br>Receptor | <br>Hop node                             | <br>OpenShift Container Platform mesh ingress |
-| <br>27199   | <br>TCP        | <br>Receptor | <br>OpenShift Container Platform cluster | <br>Execution node                            |
-| <br>27199   | <br>TCP        | <br>Receptor | <br>OpenShift Container Platform cluster | <br>Hop node                                  |
+| Port number | Protocol   | Service  | Source                               | Destination                               |
+| ----------- | ---------- | -------- | ------------------------------------ | ----------------------------------------- |
+| 80/443      | HTTP/HTTPS | Receptor | Execution node                       | OpenShift Container Platform mesh ingress |
+| 80/443      | HTTP/HTTPS | Receptor | Hop node                             | OpenShift Container Platform mesh ingress |
+| 27199       | TCP        | Receptor | OpenShift Container Platform cluster | Execution node                            |
+| 27199       | TCP        | Receptor | OpenShift Container Platform cluster | Hop node                                  |

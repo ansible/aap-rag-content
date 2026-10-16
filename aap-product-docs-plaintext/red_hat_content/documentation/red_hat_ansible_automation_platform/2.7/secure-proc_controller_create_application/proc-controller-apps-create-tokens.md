@@ -13,12 +13,13 @@ When authentication tokens have been configured, you can select the application 
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Users.
-2.  Select the username for your user profile to configure OAuth 2 tokens.
-3.  Select the **Tokens** tab. When no tokens are present, the **Tokens** screen prompts you to add them.
+1. From the navigation panel, select Access Management> (and then)Users.
+2. Select the username for your user profile to configure OAuth 2 tokens.
+3. Select the **Tokens** tab.
+When no tokens are present, the **Tokens** screen prompts you to add them.
 
-4.  Click Create token to open the **Create Token** window.
-5.  Enter the following details:
+4. Click Create token to open the **Create Token** window.
+5. Enter the following details:
 
 
 Application
@@ -36,9 +37,10 @@ Scope
 - **Write**: Allows requests sent with this token to add, edit and delete resources in the system.
 - **Read**: Limits actions to read only. Note that the write scope includes read scope.
 
-6.  Click Create token, or click Cancel to abandon your changes. The Token information is displayed with **Token** and **Refresh Token** information, and the expiration date of the token. This will be the only time the token and refresh token will be shown. You can view the token association and token information from the list view.
+6. Click Create token, or click Cancel to abandon your changes.
+The Token information is displayed with **Token** and **Refresh Token** information, and the expiration date of the token. This will be the only time the token and refresh token will be shown. You can view the token association and token information from the list view.
 
-7.  Click the copy icon and save the token and refresh token for future use.
+7. Click the copy icon and save the token and refresh token for future use.
 
 ### Results
 
@@ -48,5 +50,6 @@ You can verify that the application now shows the user with the appropriate toke
 
 2. Select the application you want to verify from the **Applications** list view.
 
-3. Select the **Tokens** tab. Your token should be displayed in the list of tokens associated with the application you chose.
+3. Select the **Tokens** tab.
+Your token should be displayed in the list of tokens associated with the application you chose.
 

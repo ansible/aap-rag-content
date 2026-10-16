@@ -1,0 +1,21 @@
+# Ansible Automation Platform 2.7 patch release September 28, 2026 (portal-2.2.8)
+## Ansible automation portal RHEL appliance
+
+- [CVE-2026-6471](https://access.redhat.com/security/cve/cve-2026-6471) – Arbitrary code execution via logical decoding plugin (PostgreSQL). (AAP-89750)
+- [CVE-2026-6464](https://access.redhat.com/security/cve/cve-2026-6464) – Arbitrary command execution via untrusted data in COPY FROM STDIN (PostgreSQL psql). (AAP-90283)
+- [CVE-2026-5038](https://access.redhat.com/security/cve/cve-2026-5038) – Denial of Service via aborted or malformed multipart uploads (Multer). (AAP-90371)
+- [CVE-2026-14662](https://access.redhat.com/security/cve/cve-2026-14662) – Arbitrary code execution via integer wraparound in tsvector and tsquery functions (PostgreSQL). (AAP-89549)
+- [CVE-2026-14664](https://access.redhat.com/security/cve/cve-2026-14664) – Arbitrary code execution via heap buffer overflow in regexp (PostgreSQL). (AAP-89609)
+- [CVE-2026-14668](https://access.redhat.com/security/cve/cve-2026-14668) – Information disclosure via type confusion in ctid selectivity estimator (PostgreSQL). (AAP-90230)
+- [CVE-2026-14669](https://access.redhat.com/security/cve/cve-2026-14669) – Arbitrary code execution via long POSIX timezone abbreviation (PostgreSQL). (AAP-89304)
+- [CVE-2026-14670](https://access.redhat.com/security/cve/cve-2026-14670) – Arbitrary code execution via plperl tied hash heap buffer overflow (PostgreSQL). (AAP-90231)
+- [CVE-2026-14671](https://access.redhat.com/security/cve/cve-2026-14671) – Arbitrary code execution via type confusion in 'refint' module (PostgreSQL). (AAP-90175)
+- [CVE-2026-14677](https://access.redhat.com/security/cve/cve-2026-14677) – Arbitrary code execution in 32-bit pltcl and plperl (PostgreSQL). (AAP-89894)
+- [CVE-2026-14679](https://access.redhat.com/security/cve/cve-2026-14679) – Stack buffer overflow via OUT parameter count manipulation (PostgreSQL). (AAP-90263)
+- [CVE-2026-14680](https://access.redhat.com/security/cve/cve-2026-14680) – Arbitrary code execution via type confusion with "internal" arguments (PostgreSQL). (AAP-89597)
+- [CVE-2026-15741](https://access.redhat.com/security/cve/cve-2026-15741) – Privilege escalation via SQL injection in EXTRACT() deparse (PostgreSQL). (AAP-90280)
+- [CVE-2026-15742](https://access.redhat.com/security/cve/cve-2026-15742) – Arbitrary code execution via integer wraparound (PostgreSQL fuzzystrmatch). (AAP-89635)
+- [CVE-2026-16239](https://access.redhat.com/security/cve/cve-2026-16239) – Arbitrary code execution via type confusion in cursor lifecycle (PostgreSQL). (AAP-89778)
+- [CVE-2026-18408](https://access.redhat.com/security/cve/cve-2026-18408) – Arbitrary code execution via untrusted data inclusion in pg_dump (PostgreSQL). (AAP-90286)
+- [CVE-2026-19385](https://access.redhat.com/security/cve/cve-2026-19385) – Arbitrary code execution via crafted transform lists (PostgreSQL pg_dump). (AAP-89594)
+

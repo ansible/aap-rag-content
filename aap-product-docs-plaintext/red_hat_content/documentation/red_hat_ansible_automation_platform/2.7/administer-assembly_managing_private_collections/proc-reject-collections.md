@@ -15,9 +15,9 @@ Collections requiring approval have the status **Needs review**.
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Content> (and then)Collection Approvals.
-2.  Find the collection you want to review in the list. You can also filter collections by Namespace, Repository, and Status using the search bar.
-3.  Click the thumbs down icon to reject the collection. Confirm your choice in the modal that appears.
+1. From the navigation panel, select Automation Content> (and then)Collection Approvals.
+2. Find the collection you want to review in the list. You can also filter collections by Namespace, Repository, and Status using the search bar.
+3. Click the thumbs down icon to reject the collection. Confirm your choice in the modal that appears.
 
 ### Results
 

@@ -3,7 +3,8 @@
 
 The `python` entry in the definition file points to a valid requirements file or to an inline list of Python requirements in PEP508 format for the `pip install -r …​` command.
 
-The entry `requirements.txt` is a file that installs extra Python requirements on top of what the Collections already list as their Python dependencies. It might be listed as a relative path from the directory of the automation execution environment definition’s folder, or an absolute path. The contents of a `requirements.txt` file should be formatted as the following example, similar to the standard output from a `pip freeze` command.
+The entry `requirements.txt` is a file that installs extra Python requirements on top of what the Collections already list as their Python dependencies.
+It might be listed as a relative path from the directory of the automation execution environment definition’s folder, or an absolute path. The contents of a `requirements.txt` file should be formatted as the following example, similar to the standard output from a `pip freeze` command.
 
 The content might look like the following:
 

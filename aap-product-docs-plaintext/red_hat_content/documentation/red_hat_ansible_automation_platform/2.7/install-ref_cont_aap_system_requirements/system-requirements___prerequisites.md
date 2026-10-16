@@ -13,3 +13,30 @@ Important:
 
 Podman does not support storing container images on an NFS share. To use an NFS share for the user home directory, set up the Podman storage backend path outside of the NFS share. For more information, see [Rootless Podman and NFS](https://www.redhat.com/en/blog/rootless-podman-nfs).
 
+Warning:
+
+**External security and monitoring tools can impact job stability**
+
+Enterprise endpoint detection software, monitoring agents, and operating system audit logging can interfere with Ansible Automation Platform job execution, resulting in unexpected job delays, stalls, or complete failures.
+
+This interference is not a defect in Ansible Automation Platform, but rather a side effect of how external tools interact with normal Ansible Automation Platform operational behavior (high I/O rates, rapid file access, network communication, and CPU resource usage).
+
+**Common interference sources**:
+
+- Antivirus or Endpoint Detection and Response (EDR) software, for example, Microsoft Defender for Endpoint, Trend Micro Deep Security, Trelix Endpoint Security (formerly McAfee).
+- System monitoring and telemetry agents.
+- Operating system audit logging (`auditd`, `syslog`) configured with granular rules.
+
+**Mitigation**
+
+Work with your security and infrastructure teams to implement the following exclusions on all Ansible Automation Platform execution nodes and control nodes:
+
+1. Add the following paths to antivirus/EDR scanning exclusions:
+- `$HOME/aap/` (where `$HOME ` is the installation user's home directory)
+- `$HOME/.local/share/containers/` (container storage and image cache)
+- `/tmp `(and any other temporary directories configured for Ansible Automation Platform)
+2. Configure monitoring agents to exclude Ansible Automation Platform process monitoring or reduce sampling frequency on Ansible Automation Platform nodes
+3. Review `auditd` rules on Ansible Automation Platform nodes and disable overly granular system call auditing that may create disk I/O contention. Note that `auditd` is configured on RHEL by default. If it is configured on your systems, this step is applicable.
+
+For more information, see Red Hat Knowledge Solution 7144721
+

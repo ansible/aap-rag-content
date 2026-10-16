@@ -1,6 +1,6 @@
 +++
-title = "Configure a HAProxy load balancer - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_configure_haproxy_load_balancer"
+title = "Configure a HAProxy load balancer - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_configure_haproxy_load_balancer/aem-page/install-proc_configure_haproxy_load_balancer.html"
 last_crumb = "Configure a HAProxy load balancer"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure a HAProxy load balancer"
 oversized = "false"
@@ -31,7 +32,7 @@ Configure a HAProxy load balancer in front of platform gateway with a custom CA 
 
 ## Procedure
 
- Set the following inventory file variables under the `[all:vars]` group:
+Set the following inventory file variables under the `[all:vars]` group:
 
 ```
 custom_ca_cert=<path_to_cert_crt>

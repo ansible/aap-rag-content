@@ -11,13 +11,16 @@ All container images available through the Red Hat container catalog are hosted 
 
 Note:
 
-If you are planning to install the Ansible development tools on a container inside VS Code, you must log in to `registry.redhat.io` before launching VS Code so that VS Code can pull the `devtools` container from `registry.redhat.io`.
+If you are planning to install the Ansible development tools on a container inside VS Code,
+you must log in to `registry.redhat.io` before launching VS Code so that VS Code can pull the `devtools` container from `registry.redhat.io`.
 
-If you are running Ansible development tools on a container inside VS Code and you want to pull execution environments or the `devcontainer` to use as an execution environment, you must log in from a terminal prompt within the `devcontainer` from a terminal inside VS Code.
+If you are running Ansible development tools on a container inside VS Code and you want to pull execution environments
+or the `devcontainer` to use as an execution environment,
+you must log in from a terminal prompt within the `devcontainer` from a terminal inside VS Code.
 
 ### Procedure
 
-1.  Check whether you are already logged in to the `registry.redhat.io` registry:
+1. Check whether you are already logged in to the `registry.redhat.io` registry:
 
 
 ```
@@ -26,7 +29,8 @@ $ podman login --get-login registry.redhat.io
 
 The command output displays your Red Hat login if you are logged in to `registry.redhat.io`.
 
-2.  If you are not logged in to `registry.redhat.io`, use the `podman login` command with your credentials to access content on the registry.
+2. If you are not logged in to `registry.redhat.io`, use the `podman login` command with your credentials to access content on the registry.
+
 
 ```
 $ podman login registry.redhat.io

@@ -15,14 +15,14 @@ You are opted in for Automation Analytics by default when you activate the platf
 
 ### Procedure
 
-1.  Log in to Red Hat Ansible Automation Platform.
-2.  Select the **Service Account** tab in the subscription wizard.
-3.  Enter your **Client ID** and **Client secret**.
-4.  Select your subscription from the **Subscription** list. Note:
+1. Log in to Red Hat Ansible Automation Platform.
+2. Select the **Service Account** tab in the subscription wizard.
+3. Enter your **Client ID** and **Client secret**.
+4. Select your subscription from the **Subscription** list. Note:
 You can also enter your Satellite username and password in the **Satellite** tab if your cluster nodes are registered to Satellite through Subscription Manager.
 
-5.  Review the End User License Agreement and select **I agree to the End User License Agreement**.
-6.  Click Finish.
+5. Review the End User License Agreement and select **I agree to the End User License Agreement**.
+6. Click Finish.
 
 ### Results
 

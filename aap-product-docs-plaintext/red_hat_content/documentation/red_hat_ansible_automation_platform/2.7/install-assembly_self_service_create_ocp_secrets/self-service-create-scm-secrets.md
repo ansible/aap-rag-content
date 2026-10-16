@@ -10,7 +10,7 @@ Create an OpenShift secret to hold Personal Access Tokens for your external Sour
 
 ### About this task
 
-This procedure establishes the required `secrets-scm` Key/Value secret within your OpenShift Container Platform project to securely store the GitHub and/or GitLab Personal Access Tokens (PATs).
+This procedure establishes the required `secrets-scm` Key/Value secret within your OpenShift Container Platform project to securely store GitHub, GitLab, or both Personal Access Tokens (PATs) for repository read access and template discovery.
 
 Create the `secrets-scm` secret using the `oc` CLI or the OpenShift web console. If you use only one SCM provider, include only that provider's token.
 
@@ -18,7 +18,9 @@ Note:
 
 The secret must use the exact name `secrets-scm` with the exact key names specified below.
 
-If you plan to use the execution environment builder to save definitions to a Git repository, this secret also holds OAuth App or GitHub App credentials. You add those credentials later when setting up the EE Builder. See [Configure a GitHub OAuth App for saving definitions](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_oauth_ee_builder "Configure a GitHub OAuth App so that users can save execution environment definition files to a GitHub repository and trigger automated image builds.") or [Configure a GitHub App for content discovery](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_app_ee_builder "Create and install a GitHub App so that execution environment builder can scan your organization's repositories for Ansible collections.").
+Important:
+
+Personal access tokens provide read-only access for discovering templates and collections. If you plan to use the execution environment builder to save and push definition files to a Git repository, this secret must hold GitHub OAuth App or GitHub App credentials instead of personal access tokens. For write access, see [Configure a GitHub OAuth App for saving definitions](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_oauth_ee_builder "Configure a GitHub OAuth App so that users can save execution environment definition files to a GitHub repository and trigger automated image builds.") or [Configure a GitHub App for content discovery](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_app_ee_builder "Create and install a GitHub App so that execution environment builder can scan your organization's repositories for Ansible collections.").
 
 ### Procedure
 

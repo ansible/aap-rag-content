@@ -9,20 +9,21 @@ Perform the following steps on each node in the cluster:
 
 ### Procedure
 
-1.  Edit `/etc/tower/conf.d/postgres.py` using:
+1. Edit `/etc/tower/conf.d/postgres.py` using:
 
 
 ```
 $ vim /etc/tower/conf.d/postgres.py
 ```
 
-2.  Add the following line to the top of the file.
+2. Add the following line to the top of the file.
+
 
 ```
 from awx.main.utils import decrypt_value, get_encryption_key
 ```
 
-3.  Remove the password value listed after 'PASSWORD': and replace it with the following line, replacing the supplied value of `$encrytpted..` with your own hash value:
+3. Remove the password value listed after 'PASSWORD': and replace it with the following line, replacing the supplied value of `$encrytpted..` with your own hash value:
 
 
 ```
@@ -32,7 +33,7 @@ decrypt_value(get_encryption_key('value'),'$encrypted$AESCBC$Z0FBQUFBQmNONU9BbGQ
 Note:
 The hash value in this step is the output value of `postgres_secret`.
 
-4.  The full `postgres.py` resembles the following:
+4. The full `postgres.py` resembles the following:
 
 
 ```

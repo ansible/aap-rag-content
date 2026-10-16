@@ -13,9 +13,9 @@
           "title": "Overview",
           "visible": true,
           "weight": 1,
-          "urlFragment": "devtools-backstage-overview",
+          "urlFragment": "con-devtools-backstage-overview",
           "anchor": null,
-          "singlePageAnchor": "devtools-backstage-overview"
+          "singlePageAnchor": "con-devtools-backstage-overview"
         },
         {
           "title": "Ansible backstage plugins",

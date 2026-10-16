@@ -7,7 +7,129 @@
       "weight": 1,
       "urlFragment": "index",
       "anchor": null,
-      "singlePageAnchor": null
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Metrics service overview",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "con-metrics-service-architecture__section_1",
+          "anchor": null,
+          "singlePageAnchor": "con-metrics-service-architecture__section_1"
+        },
+        {
+          "title": "Default behavior in Ansible Automation Platform 2.7",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "con-metrics-service-architecture__section_2",
+          "anchor": null,
+          "singlePageAnchor": "con-metrics-service-architecture__section_2"
+        },
+        {
+          "title": "Key characteristics",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "con-metrics-service-architecture__section_3",
+          "anchor": null,
+          "singlePageAnchor": "con-metrics-service-architecture__section_3"
+        },
+        {
+          "title": "Relationship to automation dashboard",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "con-metrics-service-architecture__section_4",
+          "anchor": null,
+          "singlePageAnchor": "con-metrics-service-architecture__section_4"
+        },
+        {
+          "title": "Architecture components",
+          "visible": true,
+          "weight": 5,
+          "urlFragment": "con-metrics-service-architecture__section_5",
+          "anchor": null,
+          "singlePageAnchor": "con-metrics-service-architecture__section_5"
+        },
+        {
+          "title": "Database schema architecture",
+          "visible": true,
+          "weight": 6,
+          "urlFragment": "con-metrics-service-architecture__section_6",
+          "anchor": null,
+          "singlePageAnchor": "con-metrics-service-architecture__section_6"
+        },
+        {
+          "title": "Complete task schedule",
+          "visible": true,
+          "weight": 7,
+          "urlFragment": "con-metrics-service-architecture__section_7",
+          "anchor": null,
+          "singlePageAnchor": "con-metrics-service-architecture__section_7"
+        },
+        {
+          "title": "Anonymization phase",
+          "visible": true,
+          "weight": 8,
+          "urlFragment": "con-metrics-service-architecture__section_8",
+          "anchor": null,
+          "singlePageAnchor": "con-metrics-service-architecture__section_8"
+        },
+        {
+          "title": "Transmission phase",
+          "visible": true,
+          "weight": 9,
+          "urlFragment": "con-metrics-service-architecture__section_9",
+          "anchor": null,
+          "singlePageAnchor": "con-metrics-service-architecture__section_9"
+        },
+        {
+          "title": "Deployment topology options",
+          "visible": true,
+          "weight": 10,
+          "urlFragment": "con-metrics-service-architecture__section_10",
+          "anchor": null,
+          "singlePageAnchor": "con-metrics-service-architecture__section_10"
+        },
+        {
+          "title": "Deployment method comparison",
+          "visible": true,
+          "weight": 11,
+          "urlFragment": "con-metrics-service-architecture__section_11",
+          "anchor": null,
+          "singlePageAnchor": "con-metrics-service-architecture__section_11"
+        },
+        {
+          "title": "Containerized installer deployment details",
+          "visible": true,
+          "weight": 12,
+          "urlFragment": "con-metrics-service-architecture__section_12",
+          "anchor": null,
+          "singlePageAnchor": "con-metrics-service-architecture__section_12"
+        },
+        {
+          "title": "Operator-based deployment details",
+          "visible": true,
+          "weight": 13,
+          "urlFragment": "con-metrics-service-architecture__section_13",
+          "anchor": null,
+          "singlePageAnchor": "con-metrics-service-architecture__section_13"
+        },
+        {
+          "title": "Network architecture",
+          "visible": true,
+          "weight": 14,
+          "urlFragment": "con-metrics-service-architecture__section_14",
+          "anchor": null,
+          "singlePageAnchor": "con-metrics-service-architecture__section_14"
+        },
+        {
+          "title": "Naming conventions",
+          "visible": true,
+          "weight": 15,
+          "urlFragment": "con-metrics-service-architecture__section_15",
+          "anchor": null,
+          "singlePageAnchor": "con-metrics-service-architecture__section_15"
+        }
+      ]
     }
   ]
 }

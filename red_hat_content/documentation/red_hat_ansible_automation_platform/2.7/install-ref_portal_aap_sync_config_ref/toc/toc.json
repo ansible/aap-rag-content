@@ -1,0 +1,47 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Ansible Automation Platform synchronization configuration reference",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Required synchronization settings",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "portal-aap-sync-config-ref__required-settings",
+          "anchor": null,
+          "singlePageAnchor": "portal-aap-sync-config-ref__required-settings"
+        },
+        {
+          "title": "Optional Job Template synchronization settings",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "portal-aap-sync-config-ref__optional-job-template-settings",
+          "anchor": null,
+          "singlePageAnchor": "portal-aap-sync-config-ref__optional-job-template-settings"
+        },
+        {
+          "title": "Filter options",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "portal-aap-sync-config-ref__filter-options",
+          "anchor": null,
+          "singlePageAnchor": "portal-aap-sync-config-ref__filter-options"
+        },
+        {
+          "title": "Ansible Automation Platform label normalization",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "portal-aap-sync-config-ref__label-normalization",
+          "anchor": null,
+          "singlePageAnchor": "portal-aap-sync-config-ref__label-normalization"
+        }
+      ]
+    }
+  ]
+}

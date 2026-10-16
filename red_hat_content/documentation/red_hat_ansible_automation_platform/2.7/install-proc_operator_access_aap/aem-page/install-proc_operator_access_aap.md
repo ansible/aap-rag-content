@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_operator_access_aap/aem-page/install-proc_operator_access_aap.html"
 last_crumb = "Access Ansible Automation Platform through the UI"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Access Ansible Automation Platform through the UI"
 oversized = "false"
@@ -33,23 +34,23 @@ Use the **Ansible Automation Platform** instance as your default. This instance 
 
 ## Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  Navigate to Networking> (and then)Routes
-3.  Click the link under **Location** for **Ansible Automation Platform**.
-4.  This redirects you to the Ansible Automation Platform login page. Enter "admin" as your username in the **Username** field.
-5.  For the password you must:
-  1.  Go to Workloads> (and then)Secrets.
-  2.  Click <your instance name>-admin-password and copy the password.
-  3.  Paste the password into the **Password** field.
-6.  Click Login.
-7.  Apply your subscription:
-  1.  Click Subscription manifest or Username/password.
-  2.  Upload your manifest or enter your username and password.
-  3.  Select your subscription from the **Subscription** list.
-  4.  Click Next. This redirects you to the **Analytics** page.
-8.  Click Next.
-9.  Select the **I agree to the terms of the license agreement** checkbox.
-10.  Click Next.
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to Networking> (and then)Routes
+3. Click the link under **Location** for **Ansible Automation Platform**.
+4. This redirects you to the Ansible Automation Platform login page. Enter "admin" as your username in the **Username** field.
+5. For the password you must:
+  1. Go to Workloads> (and then)Secrets.
+  2. Click <your instance name>-admin-password and copy the password.
+  3. Paste the password into the **Password** field.
+6. Click Login.
+7. Apply your subscription:
+  1. Click Subscription manifest or Username/password.
+  2. Upload your manifest or enter your username and password.
+  3. Select your subscription from the **Subscription** list.
+  4. Click Next. This redirects you to the **Analytics** page.
+8. Click Next.
+9. Select the **I agree to the terms of the license agreement** checkbox.
+10. Click Next.
 
 ## Results
 

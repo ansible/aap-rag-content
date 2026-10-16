@@ -2,7 +2,8 @@
 
 Select this credential type to enable synchronization of cloud inventory with Red Hat Satellite 6.
 
-Automation controller writes a Satellite configuration file based on fields prompted in the user interface. The absolute path to the file is set in the following environment variable:
+Automation controller writes a Satellite configuration file based on fields prompted in the user interface.
+The absolute path to the file is set in the following environment variable:
 
 `FOREMAN_INI_PATH`
 

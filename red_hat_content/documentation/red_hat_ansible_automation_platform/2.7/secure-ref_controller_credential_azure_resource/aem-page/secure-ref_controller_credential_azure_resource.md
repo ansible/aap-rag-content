@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_azure_resource/aem-page/secure-ref_controller_credential_azure_resource.html"
 last_crumb = "Microsoft Azure Resource Manager credential type"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Microsoft Azure Resource Manager credential type"
 oversized = "false"
@@ -59,7 +60,8 @@ AZURE_PASSWORD
 AZURE_SUBSCRIPTION_ID
 ```
 
-You can also pass credentials as parameters to a task within a playbook. The order of precedence is parameters, then environment variables, and finally a file found in your home directory.
+You can also pass credentials as parameters to a task within a playbook.
+The order of precedence is parameters, then environment variables, and finally a file found in your home directory.
 
 To pass credentials as parameters to a task, use the following parameters for service principal credentials:
 

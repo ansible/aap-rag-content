@@ -1,4 +1,4 @@
-# Integrate with Red Hat Lightspeed (formerly Insights)
+# Integrate with Red Hat Lightspeed for vulnerability management
 ## Create Red Hat Lightspeed credentials
 
 To create a Red Hat Lightspeed credential, use the following procedure.
@@ -26,20 +26,20 @@ After you have created a service account and assigned it the appropriate permiss
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Credentials.
-2.  Click Create credential.
-3.  Enter the appropriate details in the following fields:
+1. From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Credentials.
+2. Click Create credential.
+3. Enter the appropriate details in the following fields:
 
 - **Name**: Enter the name of the credential.
 - Optional: **Description**: Enter a description for the credential.
 - Optional: **Organization**: Enter the name of the organization with which the credential is associated, or click the search ![Search](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/search.png) icon and select it from the **Select organization** window.
-- **Credential type**: Enter **Red Hat Lightspeed** or select it from the list.  Note:
+- **Credential type**: Enter **Red Hat Lightspeed** or select it from the list. Note:
 Use the **Username** and **Password** fields for Basic authentication. You can leave these blank if using **Client ID** and **Client secret**.
 
 - **Client ID**: Enter the client ID you received when you created your service account.
 - **Client secret**: Enter the client secret you received when you created your service account.
 
-4.  Click Create credential. You can now use this credential in an [Source an inventory from Red Hat Lightspeed](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-inv-source-rhlightspeed "You can create an inventory source that uses Red Hat Lightspeed as the source of hosts.") and [Red Hat Lightspeed project](/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_ug_controller_setting_up_insights#controller-create-insights-project "Create an automation controller project linked to Red Hat Lightspeed and retrieve remediation playbooks. This streamlines your efforts to address vulnerabilities and keep system configurations.").
+4. Click Create credential. You can now use this credential in an [Source an inventory from Red Hat Lightspeed](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-inv-source-rhlightspeed "You can create an inventory source that uses Red Hat Lightspeed as the source of hosts.") and [Red Hat Lightspeed project](/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_ug_controller_setting_up_insights#controller-create-insights-project "Create an automation controller project linked to Red Hat Lightspeed and retrieve remediation playbooks. This streamlines your efforts to address vulnerabilities and keep system configurations.").
 
 - If you receive a project sync failure, see the steps in [Remediating a Red Hat Lightspeed inventory](/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_ug_controller_setting_up_insights#controller-remediate-insights-inventory "Remediation of a Red Hat Lightspeed inventory enables automation controller to run Red Hat Lightspeed playbooks with a single click.") and check your analytics logs.
 

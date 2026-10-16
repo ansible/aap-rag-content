@@ -4,13 +4,14 @@ template = "docs/aem-title.html"
 title = "Create playbooks and view playbook explanations - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_lightspeed_intro/", "Build automation faster with Red Hat Ansible Lightspeed"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_lightspeed_intro/", "Build automation faster with Red Hat Ansible Lightspeed code assistant"]]
 category = "Develop"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_creating_viewing_playbooks/aem-page/develop-assembly_creating_viewing_playbooks.html"
 last_crumb = "Create playbooks and view playbook explanations"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Create playbooks and view playbook explanations"
 oversized = "false"
@@ -33,7 +34,7 @@ Red Hat Ansible Lightspeed with IBM watsonx Code Assistant reads the natural lan
 
 These capabilities enable Ansible developers to use natural language prompts to create new Ansible playbooks quickly and more efficiently and also get an explanation for existing Ansible playbook, thereby reducing the overall onboarding learning period.
 
- Note:
+Note:
 
 You can create playbooks and view playbook explanations when connecting to the Red Hat Ansible Lightspeed cloud service and on-premise deployments.
 
@@ -61,32 +62,32 @@ You can use the natural language interface in the Ansible VS Code extension to g
 - You meet **one** of the following requirements:
   * Your organization has a trial or paid subscription to both the Red Hat Ansible Automation Platform and IBM watsonx Code Assistant.
   * Your organization has a trial or paid subscription to the Red Hat Ansible Automation Platform, and you have a Red Hat Ansible Lightspeed trial account.
-- You have [installed and configured the Ansible VS Code extension](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_install_ansible_vscode_extension#installing-ansible-vscode-extension "Red Hat Ansible Lightspeed with IBM watsonx Code Assistant integrates with the Ansible Visual Studio (VS) Code extension. When enabled, the extension automatically collects recommendations, usage telemetry, and Ansible YAML file state through automated events.").
+- You have [installed and configured the Ansible VS Code extension](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_install_ansible_vscode_extension#installing-ansible-vscode-extension "Install and configure the Ansible VS Code extension to use the cloud-hosted coding assistant or a third-party LLM provider (IBM watsonx, Google Gemini). When enabled, the extension automatically collects recommendations, usage telemetry, and Ansible YAML file state through automated events.").
 
 ### Procedure
 
-1.  Log in to VS Code with your Red Hat account.
-2.  From the **Activity** bar, click the **Ansible** icon.
-3.  Under **Ansible Creator**, click **Get started**. The **Ansible Content Creator** page is displayed. The following illustration displays the **Ansible Content Creator** page:
+1. Log in to VS Code with your Red Hat account.
+2. From the **Activity** bar, click the **Ansible** icon.
+3. Under **Ansible Creator**, click **Get started**. The **Ansible Content Creator** page is displayed. The following illustration displays the **Ansible Content Creator** page:
 
 *Figure 1. Settings to create Ansible playbooks*
 
 ![Settings to create Ansible playbooks](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/lightspeed-create-ansible-content.png)
 
-4.  Select the **Playbook with Ansible Lightspeed** tile. The **Create a playbook** page is displayed.
-5.  In the **What do you want the playbook to accomplish?** field, enter the prompts to create a playbook and click **Analyze**. After a few seconds, the recommended steps for your playbook intent are displayed in the **Review the suggested steps for your playbook and modify as needed** field.
+4. Select the **Playbook with Ansible Lightspeed** tile. The **Create a playbook** page is displayed.
+5. In the **What do you want the playbook to accomplish?** field, enter the prompts to create a playbook and click **Analyze**. After a few seconds, the recommended steps for your playbook intent are displayed in the **Review the suggested steps for your playbook and modify as needed** field.
 
-6.  Perform one of the following tasks:
+6. Perform one of the following tasks:
 
   - If the steps match your intent: Click **Generate Playbook**.
   - If any modifications are required: Click the editor and update the tasks or steps to suit your intent.
   - If the task suggestions do not match your intent: Click **Back** to change the original prompt and start over.
   - If you want to restore the original task suggestions: Click **Reset** and proceed to the next step.
 
-7.  After you verify the steps, click **Generate playbook**. It takes a few seconds for the playbook to generate, and **The following playbook was generated for you** field displays the newly generated playbook.
+7. After you verify the steps, click **Generate playbook**. It takes a few seconds for the playbook to generate, and **The following playbook was generated for you** field displays the newly generated playbook.
 
-8.  Click **Open editor**. The generated playbook opens as an untitled YAML file in the VS Code editor.
-9.  Save the untitled YAML file.
+8. Click **Open editor**. The generated playbook opens as an untitled YAML file in the VS Code editor.
+9. Save the untitled YAML file.
 
 ## View the playbook explanations
 
@@ -97,14 +98,14 @@ You can request explanations for a newly created playbook as well as an existing
 - You meet **one** of the following requirements:
   * Your organization has a trial or paid subscription to both the Red Hat Ansible Automation Platform and IBM watsonx Code Assistant.
   * Your organization has a trial or paid subscription to the Red Hat Ansible Automation Platform, and you have a Red Hat Ansible Lightspeed trial account.
-- You have [installed and configured the Ansible VS Code extension](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_install_ansible_vscode_extension#installing-ansible-vscode-extension "Red Hat Ansible Lightspeed with IBM watsonx Code Assistant integrates with the Ansible Visual Studio (VS) Code extension. When enabled, the extension automatically collects recommendations, usage telemetry, and Ansible YAML file state through automated events.").
+- You have [installed and configured the Ansible VS Code extension](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_install_ansible_vscode_extension#installing-ansible-vscode-extension "Install and configure the Ansible VS Code extension to use the cloud-hosted coding assistant or a third-party LLM provider (IBM watsonx, Google Gemini). When enabled, the extension automatically collects recommendations, usage telemetry, and Ansible YAML file state through automated events.").
 - You have opened the playbook whose explanation you want to view.
 
 ### Procedure
 
-1.  Log in to VS Code with your Red Hat account.
-2.  Open an Ansible playbook YAML file in VS Code.
-3.  Use one of the following methods to view the playbook explanation:
+1. Log in to VS Code with your Red Hat account.
+2. Open an Ansible playbook YAML file in VS Code.
+3. Use one of the following methods to view the playbook explanation:
 
   - **From an active playbook YAML file**:
     1. Place your cursor anywhere within the playbook file.
@@ -114,7 +115,7 @@ You can request explanations for a newly created playbook as well as an existing
 
     2. Select **Explain the current playbook**. The playbook explanation is displayed on the right panel of the VS Code screen.
 
-             The following illustration shows an example of a playbook explanation:
+            The following illustration shows an example of a playbook explanation:
 
 *Figure 2. Example of a playbook explanation*
 

@@ -1,4 +1,4 @@
-# Authentication changes in Ansible Automation Platform 2.7
+# Authentication and access management changes when upgrading to 2.7
 ## Architectural changes in Ansible Automation Platform 2.7
 
 Ansible Automation Platform 2.7 removes direct API access and component-level authentication. All external access to platform components must go through platform gateway.

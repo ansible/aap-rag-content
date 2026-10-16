@@ -1,16 +1,17 @@
 +++
-title = "Install Ansible development tools on a container inside VS Code - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_devtools_install_container"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_devtools_install_container"
+title = "Install Ansible development tools on a container inside VS Code - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_devtools_install/", "Install Ansible development tools"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_devtools_install/", "Set up your development environment"]]
 category = "Install"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_devtools_install_container/aem-page/install-proc_devtools_install_container.html"
 last_crumb = "Install Ansible development tools on a container inside VS Code"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Install Ansible development tools on a container inside VS Code"
 oversized = "false"
@@ -32,22 +33,27 @@ The Dev Containers VS Code extension requires a `.devcontainer` file to store se
 ## Before you begin
 
 - You have installed a containerization platform, for example Podman, Podman Desktop, Docker, or Docker Desktop.
+- If you are on Windows, you have installed WSL2 and Podman Desktop as your containerization platform. For setup instructions, see [Requirements for Ansible development tools on Windows](/documentation/en-us/red_hat_ansible_automation_platform/2.7/proc-devtools-install-podman-desktop-wsl.html "If you are installing Ansible development tools on a container in VS Code on Windows, there are extra requirements:").
 - You have a Red Hat login and you have logged in to the Red Hat registry at `registry.redhat.io`. For information about logging in to `registry.redhat.io`, see [Authenticating with the Red Hat container registry](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_devtools_requirements#devtools-setup-registry-redhat-io "All container images available through the Red Hat container catalog are hosted on an image registry, registry.redhat.io. The registry requires authentication for access to images.").
 - You have installed VS Code.
 - You have installed the Ansible extension in VS Code.
 - You have installed the [Microsoft Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension in VS Code.
 - If you are installing Ansible development tools on Windows, launch VS Code and connect to the WSL machine. Click the `Remote`(![Remote](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/vscode-remote-icon.png)) icon. In the dropdown menu that appears, select the option to connect to the WSL machine.
 
+Important:
+
+If your organization's security policy prevents you from installing containerization software on your workstation, you cannot use this installation method. Instead, install Ansible development tools from an RPM package. For more information, see [Install Ansible development tools from an RPM package](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_devtools_install_rpm "Ansible development tools are available as an RPM package for Red Hat Enterprise Linux. Install the tools on your local RHEL system using a package manager.").
+
 ## About this task
 
 ## Procedure
 
-1.  In VS Code, navigate to your project directory.
-2.  Click the Ansible icon in the VS Code activity bar to open the Ansible extension.
-3.  In the **Ansible Development Tools** section of the Ansible extension, scroll down to the **ADD** option and select **Devcontainer**.
-4.  In the **Create a devcontainer** page, select the **Downstream** container image from the **Container image** options. This action adds `devcontainer.json` files for both Podman and Docker in a `.devcontainer` directory.
+1. In VS Code, navigate to your project directory.
+2. Click the Ansible icon in the VS Code activity bar to open the Ansible extension.
+3. In the **Ansible Development Tools** section of the Ansible extension, scroll down to the **ADD** option and select **Devcontainer**.
+4. In the **Create a devcontainer** page, select the **Downstream** container image from the **Container image** options. This action adds `devcontainer.json` files for both Podman and Docker in a `.devcontainer` directory.
 
-5.  Reopen or reload the project directory:
+5. Reopen or reload the project directory:
 
   - If VS Code detects that your directory contains a `devcontainer.json` file, the following notification appears:  
 ![Reopen in container](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/devtools-reopen-in-container.png)  
@@ -55,13 +61,13 @@ The Dev Containers VS Code extension requires a `.devcontainer` file to store se
 
   - If the notification does not appear, click the `Remote` (![Remote](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/vscode-remote-icon.png)) icon. In the dropdown menu that appears, select **Reopen in Container**.
 
-6.  Select the dev container for Podman or Docker according to the containerization platform you are using. The **Remote ()** status in the VS Code Status bar displays `opening Remote` and a notification indicates the progress in opening the container.
+6. Select the dev container for Podman or Docker according to the containerization platform you are using. The **Remote ()** status in the VS Code Status bar displays `opening Remote` and a notification indicates the progress in opening the container.
 
 ## Results
 
 When the directory reopens in a container, the **Remote ()** status displays `Dev Container: ansible-dev-container`.
 
- Note:
+Note:
 
 The base image for the container is a Universal Base Image Minimal (UBI Minimal) image that uses `microdnf` as a package manager. The `dnf` and `yum` package managers are not available in the container.
 

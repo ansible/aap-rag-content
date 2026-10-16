@@ -2,7 +2,7 @@
   "version": "1.1",
   "sections": [
     {
-      "title": "Supported platforms",
+      "title": "Supported platforms for Ansible automation portal",
       "visible": true,
       "weight": 1,
       "urlFragment": "index",
@@ -10,30 +10,20 @@
       "singlePageAnchor": null,
       "sections": [
         {
-          "title": "Interactive demonstration",
+          "title": "Ansible Automation Platform version compatibility",
           "visible": true,
           "weight": 1,
-          "urlFragment": "self-service-interactive-demo",
+          "urlFragment": "self-service-supported-platforms__version-compatibility",
           "anchor": null,
-          "singlePageAnchor": "self-service-interactive-demo",
-          "sections": [
-            {
-              "title": "Prerequisites",
-              "visible": true,
-              "weight": 1,
-              "urlFragment": "self-service-interactive-demo",
-              "anchor": "self-service-installation-prereqs",
-              "singlePageAnchor": "self-service-installation-prereqs"
-            },
-            {
-              "title": "Pre-installation configuration",
-              "visible": true,
-              "weight": 2,
-              "urlFragment": "self-service-interactive-demo",
-              "anchor": "self-service-installation-overview",
-              "singlePageAnchor": "self-service-installation-overview"
-            }
-          ]
+          "singlePageAnchor": "self-service-supported-platforms__version-compatibility"
+        },
+        {
+          "title": "Lifecycle and support policies",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "self-service-supported-platforms__lifecycle-and-support",
+          "anchor": null,
+          "singlePageAnchor": "self-service-supported-platforms__lifecycle-and-support"
         }
       ]
     }

@@ -13,13 +13,13 @@ Users who do not have permission to log in to Ansible Automation Platform cannot
 
 ### Procedure
 
-1.  In a browser, log in to your Ansible Automation Platform instance as a user with admin privileges.
-2.  In the navigation pane, select Settings> (and then)Platform gateway.
-3.  Locate the **Allow external users to create OAuth2 tokens** setting.
-4.  Enable **Allow external users to create OAuth2 tokens** if it is not already enabled:
-1.  Click Edit platform gateway settings.
-2.  Set **Allow external users to create OAuth2 tokens** to **Enabled**.
+1. In a browser, log in to your Ansible Automation Platform instance as a user with admin privileges.
+2. In the navigation pane, select Settings> (and then)Platform gateway.
+3. Locate the **Allow external users to create OAuth2 tokens** setting.
+4. Enable **Allow external users to create OAuth2 tokens** if it is not already enabled:
+1. Click Edit platform gateway settings.
+2. Set **Allow external users to create OAuth2 tokens** to **Enabled**.
 ![Allow external users to create OAuth2 tokens setting](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/self-service-enable-external-oauth.png)
-3.  Click Save platform gateway settings to save your updates and return to the **Platform gateway settings** page.
-5.  In the **Platform gateway settings** page, verify that the **Allow external users to create OAuth2 tokens** setting is enabled.
+3. Click Save platform gateway settings to save your updates and return to the **Platform gateway settings** page.
+5. In the **Platform gateway settings** page, verify that the **Allow external users to create OAuth2 tokens** setting is enabled.
 

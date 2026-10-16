@@ -5,7 +5,7 @@ If you do not have PostgreSQL admin credentials, then PostgreSQL users and datab
 
 ### Procedure
 
-1.  Connect to a PostgreSQL compliant database server with a user that has `SUPERUSER` privileges.
+1. Connect to a PostgreSQL compliant database server with a user that has `SUPERUSER` privileges.
 
 ```bash
 # psql -h <hostname> -U <username> -p <port_number>
@@ -17,19 +17,19 @@ For example:
 # psql -h db.example.com -U superuser -p 5432
 ```
 
-2.  Create the user with a password and ensure the `CREATEDB` role is assigned to the user. For more information, see [Database Roles](https://www.postgresql.org/docs/15/user-manag.html).
+2. Create the user with a password and ensure the `CREATEDB` role is assigned to the user. For more information, see [Database Roles](https://www.postgresql.org/docs/15/user-manag.html).
 
 ```sql
 CREATE USER <username> WITH PASSWORD <password> CREATEDB;
 ```
 
-3.  Create the database and add the user you created as the owner.
+3. Create the database and add the user you created as the owner.
 
 ```sql
 CREATE DATABASE <database_name> OWNER <username>;
 ```
 
-4.  When you have created the PostgreSQL users and databases for each component, you can supply them in the inventory file under the `[all:vars]` group.
+4. When you have created the PostgreSQL users and databases for each component, you can supply them in the inventory file under the `[all:vars]` group.
 
 ```yaml
 # Platform gateway

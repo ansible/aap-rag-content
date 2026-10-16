@@ -1,0 +1,111 @@
++++
+title = "Validate Windows security baselines and verify readiness - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-validate_windows_security_baselines_and_verify_readiness"
+template = "docs/aem-title.html"
+
+[extra]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-automate_microsoft_windows_with_ansible_automation_platform/", "Integrate with Microsoft Windows"]]
+category = "Integrate"
+category_description = ""
+document_kind = "documentation"
+html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/integrate-validate_windows_security_baselines_and_verify_readiness/aem-page/integrate-validate_windows_security_baselines_and_verify_readiness.html"
+last_crumb = "Validate Windows security baselines and verify readiness"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
+multi_page_path = ""
+name = "Validate Windows security baselines and verify readiness"
+oversized = "false"
+page_slug = "integrate-validate_windows_security_baselines_and_verify_readiness"
+portal_content_subtype = "title"
+product = "Red Hat Ansible Automation Platform"
+product_slug = "red_hat_ansible_automation_platform"
+product_version = "2.7"
+reference_url = "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/integrate-validate_windows_security_baselines_and_verify_readiness"
+solr_index = "true"
+toc = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/integrate-validate_windows_security_baselines_and_verify_readiness/toc/toc.json"
+type = "aem-page"
++++
+
+# Validate Windows security baselines and verify readiness
+
+Validate operational parameters and run remote privilege audits during Windows instance provisioning or migration to verify correct configuration and baseline security posture.
+
+**Baseline configuration enforcement**
+
+Ensure target nodes do not drift from their desired cryptographic state by applying a structured configuration role. The following example outlines properties managed by the `winrm_configuration` structural role:
+
+```
+# Compliance State Variables
+winrm_configuration_enable: true
+winrm_configuration_start_mode: auto
+winrm_configuration_http_block: true # Enforce absolute port security isolation
+
+winrm_configuration_service_config:
+  AllowUnencrypted: false
+  Auth:
+    Basic: false
+    Kerberos: true
+    Negotiate: true
+    Certificate: false
+    CredSSP: false
+    CbtHardeningLevel: Relaxed
+  IPv4Filter: '*'
+  IPv6Filter: '*'
+
+winrm_configuration_firewall_profiles:
+  - domain
+  - private
+```
+
+**Validate production connectivity**
+
+Run this playbook against newly provisioned or migrated nodes to confirm PSRP operational compliance, collect environment facts, and verify local security group privileges.
+
+```
+---
+- name: Validate Enterprise Windows Infrastructure Connectivity
+  hosts: windows
+  become: false
+  gather_facts: false
+
+  vars:
+    target_admin_group: Administrators
+
+    # Standardized Enterprise PSRP Variable Set
+    ansible_connection: psrp
+    ansible_pipelining: true
+    ansible_psrp_port: 5986
+    ansible_psrp_protocol: https
+    ansible_psrp_auth: kerberos
+    ansible_psrp_kerberos_delegation: true
+    ansible_psrp_cert_validation: validate
+    ansible_psrp_ca_cert:
+   /etc/pki/ca-trust/source/anchors/internal_corporate_ca.pem
+    ansible_user: <Domain_User>
+    ansible_password: <Password_or_Vault_Variable>
+
+  tasks:
+    - name: Verify Transport Connectivity
+      ansible.windows.win_ping:
+
+    - name: Extract Target Endpoint Infrastructure Facts
+      ansible.windows.setup:
+
+    - name: Audit Administrative Group Access Matrix
+      ansible.windows.win_powershell:
+        script: |
+          $AnsibleResponse = @{
+              HostName = $env:COMPUTERNAME
+              AdministrativeMembers = @()
+          }
+          $Members = Get-LocalGroupMember -Group "{{ target_admin_group }}" -ErrorAction Stop
+          foreach ($Member in $Members) {
+              $AnsibleResponse.AdministrativeMembers += $Member.Name
+          }
+          $AnsibleResponse
+      register: acl_audit_result
+
+    - name: Output Security Posture Summary
+      ansible.builtin.debug:
+        var: acl_audit_result.output
+```

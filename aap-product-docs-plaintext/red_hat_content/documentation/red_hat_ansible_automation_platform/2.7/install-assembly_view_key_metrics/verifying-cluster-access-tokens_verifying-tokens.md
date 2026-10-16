@@ -1,20 +1,20 @@
-# Install automation dashboard to calculate savings (RHEL only)
-## Install automation dashboard
+# Install the standalone automation dashboard utility to calculate savings (RHEL only)
+## Install the standalone automation dashboard utility
 ### Verify cluster access tokens
 
 After you configure and load your cluster data, verify the stored access tokens for debugging purposes.
 
 #### Procedure
 
-1.  Use the `getclusters` management command with the `--decrypt` option to display the stored `access_token` and `refresh_token` in plain text.
-2.  Run the following command inside the `automation-dashboard-web` container:
+1. Use the `getclusters` management command with the `--decrypt` option to display the stored `access_token` and `refresh_token` in plain text.
+2. Run the following command inside the `automation-dashboard-web` container:
 
 
 ```bash
 podman exec -it automation-dashboard-web /venv/bin/python ./manage.py getclusters --decrypt
 ```
 
-3.  Review the output to confirm that the stored tokens are correct and up-to-date.
+3. Review the output to confirm that the stored tokens are correct and up-to-date.
 
 ```bash
 clusters:
@@ -41,12 +41,12 @@ You can write output produced by `./manage.py getclusters --decrypt` to a file `
 
 If you come across error messages during installation, consult the following table:
 
-| Issue                                                             | Possible Cause                                                                                                                                                                                           | Solution                                                                                                                                                                                                 |
-| ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br>401 error                                                     | <br>This is an unauthorized access message indicating authentication errors such as wrong credentials or tokens.                                                                                         | <br>Verify that your access token is correct in `clusters.yaml`                                                                                                                                          |
-| <br>401 error                                                     | <br>A temporary 401 error is expected behavior when the token expires, followed immediately by trying to refresh.                                                                                        | <br>If the automatic token refresh fails (for example, due to invalid `client_secret` or `refresh_token`), use the `getclusters``--decrypt` command to manually verify that the credentials stored in the database match those in your source `clusters.yaml` file. If they do not match, re-run the `setclusters` command with the correct configuration. You can only use the refresh token once. If you need to execute `setclusters` because of invalid access token, create new access and refresh tokens, and use them in your source `clusters.yaml`. |
-| <br>404 error                                                     | <br>This is a “not found” message indicating that something is not configured correctly or pointing to the correct endpoint.                                                                             | <br>Verify that your Ansible Automation Platform instance URLs used in `clusters.yaml` are correct.                                                                                                      |
-| <br>OAuth login fails with "Something wrong during authorization" | <br>When using a private CA, Python's requests library does not use the system CA trust store by default. It uses the bundled certificate CA store unless `REQUESTS_CA_BUNDLE` or `SSL_CERT_FILE` is set. If `custom_ca_cert` is not configured in the inventory, the dashboard containers ignore the mounted CA bundle entirely. | <br>Set `custom_ca_cert=/path/to/organizational-ca.pem` in your inventory file and reinstall. Do not set `aap_auth_provider_check_ssl=false` as a workaround. After reinstall, verify the fix by running: `podman exec automation-dashboard-web printenv REQUESTS_CA_BUNDLE`. Expected output: `/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem`. |
+| Issue                                                         | Possible Cause                                                                                                                                                                                           | Solution                                                                                                                                                                                                 |
+| ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 401 error                                                     | This is an unauthorized access message indicating authentication errors such as wrong credentials or tokens.                                                                                             | Verify that your access token is correct in `clusters.yaml`                                                                                                                                              |
+| 401 error                                                     | A temporary 401 error is expected behavior when the token expires, followed immediately by trying to refresh.                                                                                            | If the automatic token refresh fails (for example, due to invalid `client_secret` or `refresh_token`), use the `getclusters``--decrypt` command to manually verify that the credentials stored in the database match those in your source `clusters.yaml` file. If they do not match, re-run the `setclusters` command with the correct configuration. You can only use the refresh token once. If you need to execute `setclusters` because of invalid access token, create new access and refresh tokens, and use them in your source `clusters.yaml`. |
+| 404 error                                                     | This is a “not found” message indicating that something is not configured correctly or pointing to the correct endpoint.                                                                                 | Verify that your Ansible Automation Platform instance URLs used in `clusters.yaml` are correct.                                                                                                          |
+| OAuth login fails with "Something wrong during authorization" | When using a private CA, Python's requests library does not use the system CA trust store by default. It uses the bundled certificate CA store unless `REQUESTS_CA_BUNDLE` or `SSL_CERT_FILE` is set. If `custom_ca_cert` is not configured in the inventory, the dashboard containers ignore the mounted CA bundle entirely. | Set `custom_ca_cert=/path/to/organizational-ca.pem` in your inventory file and reinstall. Do not set `aap_auth_provider_check_ssl=false` as a workaround. After reinstall, verify the fix by running: `podman exec automation-dashboard-web printenv REQUESTS_CA_BUNDLE`. Expected output: `/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem`. |
 
 A successful installation should be running the following three container services:
 

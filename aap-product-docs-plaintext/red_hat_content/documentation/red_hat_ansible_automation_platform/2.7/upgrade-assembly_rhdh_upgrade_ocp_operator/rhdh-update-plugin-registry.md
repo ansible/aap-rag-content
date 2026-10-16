@@ -10,20 +10,20 @@ Rebuild your plug-in registry application in your OpenShift cluster with the lat
 
 ### Procedure
 
-1.  Log in to your OpenShift Container Platform instance with credentials to create a new application.
-2.  Open your Red Hat Developer Hub OpenShift project.
+1. Log in to your OpenShift Container Platform instance with credentials to create a new application.
+2. Open your Red Hat Developer Hub OpenShift project.
 
 ```
 $ oc project <YOUR_DEVELOPER_HUB_PROJECT>
 ```
 
-3.  Run the following commands to update your plug-in registry build in the OpenShift cluster. The commands assume that `$DYNAMIC_PLUGIN_ROOT_DIR` represents the directory for your `.tar` files. Replace this in the command if you have chosen a different environment variable name.
+3. Run the following commands to update your plug-in registry build in the OpenShift cluster. The commands assume that `$DYNAMIC_PLUGIN_ROOT_DIR` represents the directory for your `.tar` files. Replace this in the command if you have chosen a different environment variable name.
 
 ```
 $ oc start-build plugin-registry --from-dir=$DYNAMIC_PLUGIN_ROOT_DIR --wait
 ```
 
-4.  When the registry has started, the output displays the following message:
+4. When the registry has started, the output displays the following message:
 
 
 ```

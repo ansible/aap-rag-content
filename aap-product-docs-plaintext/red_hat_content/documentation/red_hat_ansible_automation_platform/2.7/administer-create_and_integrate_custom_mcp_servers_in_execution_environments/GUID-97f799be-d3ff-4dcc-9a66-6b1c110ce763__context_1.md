@@ -6,7 +6,7 @@ This procedure uses the AWS CloudFormation MCP Server (`awslabs.cfn-mcp-server`)
 
 ### Procedure
 
-1.  Create the collection directory structure and a new Ansible collection to hold your custom MCP role:
+1. Create the collection directory structure and a new Ansible collection to hold your custom MCP role:
 
 
 ```
@@ -38,7 +38,7 @@ collections/ansible_collections/myorg/mcp_cfn/
 
 ```
 
-2.  Define the collection metadata by creating `galaxy.yml` at the root of your collection:
+2. Define the collection metadata by creating `galaxy.yml` at the root of your collection:
 
 
 ```
@@ -63,7 +63,7 @@ ansible.mcp_builder: ">=1.0.3"
 
 The dependencies field ensures that the `ansible.mcp_builder` collection is installed alongside your collection.
 
-3.  Define the role registry metadata by creating `roles/cfn_mcp/defaults/main.yml ` with the registry definition for your MCP server:
+3. Define the role registry metadata by creating `roles/cfn_mcp/defaults/main.yml ` with the registry definition for your MCP server:
 
 
 ```
@@ -102,7 +102,7 @@ myrole_build_path: "example/build"
 
 ```
 
-4.  Create the role tasks by creating `roles/cfn_mcp/tasks/main.yml`:
+4. Create the role tasks by creating `roles/cfn_mcp/tasks/main.yml`:
 
 
 ```
@@ -144,7 +144,7 @@ The two `include_role` tasks are the minimum required. The `install_manager` tas
 
 The verification step is optional but recommended. It confirms the installed server is callable.
 
-5.  Create the role metadata by creating `roles/cfn_mcp/meta/main.yml`:
+5. Create the role metadata by creating `roles/cfn_mcp/meta/main.yml`:
 
 
 ```
@@ -169,7 +169,7 @@ collections:
 - ansible.mcp_builder
 ```
 
-6.  Create the installation playbook `playbooks/install_cfn_mcp.yml`:
+6. Create the installation playbook `playbooks/install_cfn_mcp.yml`:
 
 
 ```
@@ -204,7 +204,7 @@ The first task must include `ansible.mcp_builder.common` with `public: true`. Th
 Note:
 The dev preview `ansible.mcp_builder.install_mcp` playbook only supports roles within the `ansible.mcp_builder` namespace. Custom roles in your own collection namespace require their own playbook, as shown above.
 
-7.  Build your collection into a distributable tar file:
+7. Build your collection into a distributable tar file:
 `cd collections/ansible_collections/myorg/mcp_cfn`
 `ansible-galaxy collection build --output-path /path/to/output/`
 This produces a file: `myorg-mcp_cfn-1.0.19.tar.gz. `

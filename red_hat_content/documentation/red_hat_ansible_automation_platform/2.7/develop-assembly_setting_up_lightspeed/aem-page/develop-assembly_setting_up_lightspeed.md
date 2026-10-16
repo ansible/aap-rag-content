@@ -1,16 +1,17 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_setting_up_lightspeed"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_setting_up_lightspeed"
 title = "Set up Red Hat Ansible Lightspeed for your organization - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_lightspeed_intro/", "Build automation faster with Red Hat Ansible Lightspeed"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_lightspeed_intro/", "Build automation faster with Red Hat Ansible Lightspeed code assistant"]]
 category = "Develop"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_setting_up_lightspeed/aem-page/develop-assembly_setting_up_lightspeed.html"
 last_crumb = "Set up Red Hat Ansible Lightspeed for your organization"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Set up Red Hat Ansible Lightspeed for your organization"
 oversized = "false"
@@ -35,13 +36,14 @@ Ensure that you meet the licensing and setup requirements specified below before
 
 ### Licensing requirements
 
--  **Red Hat Ansible Lightspeed cloud service** To use the Red Hat Ansible Lightspeed cloud service, you must meet **one** of the following requirements:
+- **Red Hat Ansible Lightspeed cloud service**     To use the Red Hat Ansible Lightspeed cloud service, you must meet **one** of the following requirements:
 
   * Your organization has a trial or paid subscription to both the Red Hat Ansible Automation Platform and IBM watsonx Code Assistant.
-  * Your organization has a trial or paid subscription to the Red Hat Ansible Automation Platform, and you have a Red Hat Ansible Lightspeed trial account. Note:
+  * Your organization has a trial or paid subscription to the Red Hat Ansible Automation Platform, and you have a Red Hat Ansible Lightspeed trial account.
+    Note:
             A Red Hat Ansible Lightspeed trial account does not require an IBM watsonx Code Assistant subscription.
 
--  **Red Hat Ansible Lightspeed on-premise deployment** To use an on-premise deployment of Red Hat Ansible Lightspeed, your organization must have the following subscriptions:
+- **Red Hat Ansible Lightspeed on-premise deployment**     To use an on-premise deployment of Red Hat Ansible Lightspeed, your organization must have the following subscriptions:
 
   * A trial or paid subscription to the Red Hat Ansible Automation Platform
   * An installation of IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data
@@ -50,9 +52,9 @@ Ensure that you meet the licensing and setup requirements specified below before
 
 To set up Red Hat Ansible Lightspeed for your organization, you need the following IBM watsonx Code Assistant information:
 
--  **API key** A unique API key authenticates all requests made from Red Hat Ansible Lightspeed to IBM watsonx Code Assistant. Each Red Hat organization with a valid Ansible Automation Platform subscription must have a configured API key. An authenticated RH-SSO user creating a task in Red Hat Ansible Lightspeed is authenticated to IBM watsonx Code Assistant through the user’s Red Hat organization API key.
+- **API key**     A unique API key authenticates all requests made from Red Hat Ansible Lightspeed to IBM watsonx Code Assistant. Each Red Hat organization with a valid Ansible Automation Platform subscription must have a configured API key. An authenticated RH-SSO user creating a task in Red Hat Ansible Lightspeed is authenticated to IBM watsonx Code Assistant through the user’s Red Hat organization API key.
 
--  **Model ID** A unique model ID identifies an IBM watsonx Code Assistant model in your IBM Cloud account. The model ID that you configure in the Ansible Lightspeed administrator portal is used as the default model, and can be accessed by all Ansible Lightspeed users within your organization.
+- **Model ID**     A unique model ID identifies an IBM watsonx Code Assistant model in your IBM Cloud account. The model ID that you configure in the Ansible Lightspeed administrator portal is used as the default model, and can be accessed by all Ansible Lightspeed users within your organization.
 
 Important:
 

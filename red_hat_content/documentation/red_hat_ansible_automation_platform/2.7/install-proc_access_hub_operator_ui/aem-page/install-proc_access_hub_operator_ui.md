@@ -1,7 +1,7 @@
 +++
-title = "Finding the automation hub route - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_access_hub_operator_ui"
 template = "docs/aem-title.html"
+title = "Finding the automation hub route - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator/", "Install on OpenShift Container Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_access_hub_operator_ui/aem-page/install-proc_access_hub_operator_ui.html"
 last_crumb = "Finding the automation hub route"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Finding the automation hub route"
 oversized = "false"
@@ -33,9 +34,9 @@ You can access the automation hub through the platform gateway or through the fo
 
 ## Procedure
 
-1.  Log into Red Hat OpenShift Container Platform.
-2.  Navigate to Networking> (and then)Routes.
-3.  Under **Location**, click on the URL for your automation hub instance.
+1. Log into Red Hat OpenShift Container Platform.
+2. Navigate to Networking> (and then)Routes.
+3. Under **Location**, click on the URL for your automation hub instance.
 
 ## Results
 
@@ -65,13 +66,13 @@ Before you can deploy a container image in automation hub, you must add the regi
 
 ### Procedure
 
-1.  Log in to **Red Hat OpenShift Container Platform**.
-2.  Navigate to Home> (and then)Search.
-3.  Select the **Resources** drop-down list and type "Image".
-4.  Select **Image (config,openshift.io/v1)**.
-5.  Click Cluster under the **Name** heading.
-6.  Select the YAML tab.
-7.  Paste in the following under spec value:
+1. Log in to **Red Hat OpenShift Container Platform**.
+2. Navigate to Home> (and then)Search.
+3. Select the **Resources** drop-down list and type "Image".
+4. Select **Image (config,openshift.io/v1)**.
+5. Click Cluster under the **Name** heading.
+6. Select the YAML tab.
+7. Paste in the following under spec value:
   
 
 ```
@@ -84,7 +85,7 @@ spec:
     - <OpenShift Container Platform route for your automation hub>
 ```
 
-8.  Click Save.
+8. Click Save.
 
 ## Configure content signing for automation hub
 
@@ -103,7 +104,7 @@ To successfully sign and publish Ansible Certified Content Collections, you must
 
 ### Procedure
 
-1.  Create a ConfigMap for signing scripts. The ConfigMap you create contains the scripts used by the signing service for collections and container images. Note:
+1. Create a ConfigMap for signing scripts. The ConfigMap you create contains the scripts used by the signing service for collections and container images. Note:
       This script is used as part of the signing service and must generate an ascii-armored detached `gpg` signature for that file using the key specified through the `PULP_SIGNING_KEY_FINGERPRINT` environment variable.
 
     The script prints out a JSON structure with the following format.
@@ -171,7 +172,7 @@ data:
     fi
 ```
 
-2.  Create a secret for your GnuPG private key. This secret securely stores the GnuPG private key you use for signing.
+2. Create a secret for your GnuPG private key. This secret securely stores the GnuPG private key you use for signing.
 
 ```shell
 gpg --export --armor <your-gpg-key-id> > signing_service.gpg
@@ -181,7 +182,7 @@ gpg --export --armor <your-gpg-key-id> > signing_service.gpg
 
     The secret must have a key named `signing_service.gpg`.
 
-3.  Configure the AnsibleAutomationPlatform CR.
+3. Configure the AnsibleAutomationPlatform CR.
 
 ```shell
 apiVersion: aap.ansible.com/v1alpha1
@@ -196,4 +197,4 @@ spec:
 
 ### What to do next
 
- [Using content signing services in private automation hub](/documentation/en-us/red_hat_ansible_automation_platform/2.7/proc_using_content_signing_services_in_pah "After you have configured content signing on your private automation hub, you can manually sign a new collection or replace an existing signature with a new one.")
+ [Using content signing services in private automation hub](/documentation/en-us/red_hat_ansible_automation_platform/2.7/../administer/proc-using-content-signing-services-in-pah.html "After you have configured content signing on your private automation hub, you can manually sign a new collection or replace an existing signature with a new one.")

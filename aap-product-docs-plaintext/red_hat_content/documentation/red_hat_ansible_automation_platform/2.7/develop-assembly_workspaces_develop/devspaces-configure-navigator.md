@@ -9,8 +9,8 @@ The `ansible-navigator` tool uses a YAML configuration file to define settings f
 
 ### Procedure
 
-1.  In your Ansible development workspace, create a file named `ansible-navigator.yaml` in the root of your project directory.
-2.  Add the following minimal configuration and modify it to suit your requirements:
+1. In your Ansible development workspace, create a file named `ansible-navigator.yaml` in the root of your project directory.
+2. Add the following minimal configuration and modify it to suit your requirements:
 
 
 ```
@@ -33,6 +33,6 @@ execution-environment:
 image: registry.redhat.io/ansible-automation-platform-27/ee-supported-rhel9:latest
 ```
 
-4.  Save the file. The `ansible-navigator` tool automatically loads the configuration from the current working directory or from the default locations.
+4. Save the file. The `ansible-navigator` tool automatically loads the configuration from the current working directory or from the default locations.
 For more information about `ansible-navigator` settings, see [ansible-navigator settings](https://docs.ansible.com/projects/navigator/settings) in the ansible-navigator documentation.
 

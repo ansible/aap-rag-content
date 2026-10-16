@@ -15,14 +15,14 @@ If your OpenShift environment does not have access to `registry.redhat.io` and y
 
 ### Procedure
 
-1.  Log in to your cluster:
+1. Log in to your cluster:
 
 
 ```
 oc login <openshift_url>
 ```
 
-2.  Run one of the following commands based on your level of access in the cluster:
+2. Run one of the following commands based on your level of access in the cluster:
 
 - Run `must-gather` across the entire cluster:
 
@@ -41,7 +41,7 @@ oc adm must-gather --image=registry.redhat.io/ansible-automation-platform-27/aap
 
 * `-- /usr/bin/ns-gather` limits the `must-gather` data collection to a specified namespace
 
-3.  To attach the `must-gather` archive to your support case, create a compressed file from the `must-gather` directory created before and attach it to your support case.   - For example, on a computer that uses a Linux operating system, run the following command, replacing `<must-gather-local.5421342344627712289/>` with the `must-gather` directory name:
+3. To attach the `must-gather` archive to your support case, create a compressed file from the `must-gather` directory created before and attach it to your support case.   - For example, on a computer that uses a Linux operating system, run the following command, replacing `<must-gather-local.5421342344627712289/>` with the `must-gather` directory name:
 
 ```
 $ tar cvaf must-gather.tar.gz <must-gather.local.5421342344627712289/>

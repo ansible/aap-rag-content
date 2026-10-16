@@ -14,14 +14,14 @@ This dual-database architecture ensures metrics service can collect data while m
 
 ### Procedure
 
-1.  Connect to your PostgreSQL database server with a user that has SUPERUSER privileges.
+1. Connect to your PostgreSQL database server with a user that has SUPERUSER privileges.
 
 
 ```
 $ psql -h <hostname> -U <username> -p <port_number>
 ```
 
-2.  Create the metrics service database and user.
+2. Create the metrics service database and user.
 
 
 ```
@@ -29,14 +29,14 @@ CREATE USER metrics_service WITH PASSWORD '<secure_password>' CREATEDB;
 CREATE DATABASE metrics_service OWNER metrics_service;
 ```
 
-3.  Create a read-only user for accessing the automation controller database.
+3. Create a read-only user for accessing the automation controller database.
 
 
 ```
 CREATE USER ms_awx_readonly WITH PASSWORD '<secure_password>';
 ```
 
-4.  Grant the read-only user access to the automation controller database.
+4. Grant the read-only user access to the automation controller database.
 
 
 ```
@@ -56,7 +56,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO ms_awx_readonly;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO ms_awx_readonly;
 ```
 
-5.  Add the metrics service database configuration to your inventory file under the `[all:vars]` group.
+5. Add the metrics service database configuration to your inventory file under the `[all:vars]` group.
 
 
 ```

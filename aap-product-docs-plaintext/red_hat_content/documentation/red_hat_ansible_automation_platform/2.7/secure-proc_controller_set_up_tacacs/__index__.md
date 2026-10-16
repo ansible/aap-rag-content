@@ -10,24 +10,24 @@ This feature is deprecated and will be removed in a future release.
 
 ## Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Authentication Methods.
-2.  Click Create authentication.
-3.  Enter a **Name** for this authentication configuration.
-4.  Select **TACACS+** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
-5.  Enter the following information:
+1. From the navigation panel, select Access Management> (and then)Authentication Methods.
+2. Click Create authentication.
+3. Enter a **Name** for this authentication configuration.
+4. Select **TACACS+** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
+5. Enter the following information:
 
 - Hostname of TACACS+ Server: Provide the hostname or IP address of the TACACS+ server with which to authenticate. If you leave this field blank, TACACS+ authentication is disabled.
 - TACACS+ Authentication Protocol: The protocol used by the TACACS+ client. The options are ascii or pap.
 - Shared secret for authenticating to TACACS+ server: The secret key for TACACS+ authentication server.
 
-6.  The **TACACS+ client address sending enabled** is disabled by default. To enable client address sending, select the checkbox.
-7.  Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. Note:
+6. The **TACACS+ client address sending enabled** is disabled by default. To enable client address sending, select the checkbox.
+7. Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. Note:
 Values defined in this field override the dedicated fields provided in the UI. Any values not defined here are not provided to the authenticator.
 
-8.  To automatically create organizations, users, and teams upon successful login, select **Create objects**.
-9.  To enable this authentication method upon creation, select **Enabled**.
-10.  To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users**.
-11.  Click Create Authentication Method.
+8. To automatically create organizations, users, and teams upon successful login, select **Create objects**.
+9. To enable this authentication method upon creation, select **Enabled**.
+10. To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users**.
+11. Click Create Authentication Method.
 
 ## What to do next
 

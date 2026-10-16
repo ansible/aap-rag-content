@@ -1,0 +1,263 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Ansible Automation Platform 2.7 patch release August 24, 2026 (2.7-6)",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Overview",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "aap-27-20260824___overview",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___overview"
+        },
+        {
+          "title": "Features",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "aap-27-20260824___features",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___features"
+        },
+        {
+          "title": "Aap Metrics",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "aap-27-20260824___aap_metrics",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___aap_metrics"
+        },
+        {
+          "title": "Enhancements",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "aap-27-20260824___enhancements",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___enhancements"
+        },
+        {
+          "title": "Aap Gateway",
+          "visible": true,
+          "weight": 5,
+          "urlFragment": "aap-27-20260824___aap_gateway",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___aap_gateway"
+        },
+        {
+          "title": "Aap Metrics",
+          "visible": true,
+          "weight": 6,
+          "urlFragment": "aap-27-20260824___aap_metrics_2",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___aap_metrics_2"
+        },
+        {
+          "title": "Aap UI",
+          "visible": true,
+          "weight": 7,
+          "urlFragment": "aap-27-20260824___aap_ui",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___aap_ui"
+        },
+        {
+          "title": "Controller",
+          "visible": true,
+          "weight": 8,
+          "urlFragment": "aap-27-20260824___controller",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___controller"
+        },
+        {
+          "title": "Execution Environments",
+          "visible": true,
+          "weight": 9,
+          "urlFragment": "aap-27-20260824___execution_environments",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___execution_environments"
+        },
+        {
+          "title": "General",
+          "visible": true,
+          "weight": 10,
+          "urlFragment": "aap-27-20260824___general",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___general"
+        },
+        {
+          "title": "MCP Server for Red Hat Ansible Automation Platform",
+          "visible": true,
+          "weight": 11,
+          "urlFragment": "aap-27-20260824___lightspeed",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___lightspeed"
+        },
+        {
+          "title": "CVE",
+          "visible": true,
+          "weight": 12,
+          "urlFragment": "aap-27-20260824___cve",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___cve"
+        },
+        {
+          "title": "Ansible Lightspeed",
+          "visible": true,
+          "weight": 13,
+          "urlFragment": "aap-27-20260824___ansible_lightspeed",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___ansible_lightspeed"
+        },
+        {
+          "title": "Automation controller",
+          "visible": true,
+          "weight": 14,
+          "urlFragment": "aap-27-20260824___automation_controller",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___automation_controller"
+        },
+        {
+          "title": "Automation gateway container",
+          "visible": true,
+          "weight": 15,
+          "urlFragment": "aap-27-20260824___automation_gateway_container",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___automation_gateway_container"
+        },
+        {
+          "title": "Automation platform UI",
+          "visible": true,
+          "weight": 16,
+          "urlFragment": "aap-27-20260824___automation_platform_ui",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___automation_platform_ui"
+        },
+        {
+          "title": "Ansible automation platform",
+          "visible": true,
+          "weight": 17,
+          "urlFragment": "aap-27-20260824___ansible_automation_platform",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___ansible_automation_platform"
+        },
+        {
+          "title": "Event-Driven Ansible controller",
+          "visible": true,
+          "weight": 18,
+          "urlFragment": "aap-27-20260824___event_driven_ansible_controller",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___event_driven_ansible_controller"
+        },
+        {
+          "title": "Execution environments",
+          "visible": true,
+          "weight": 19,
+          "urlFragment": "aap-27-20260824___execution_environments_2",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___execution_environments_2"
+        },
+        {
+          "title": "Bug fixes",
+          "visible": true,
+          "weight": 20,
+          "urlFragment": "aap-27-20260824___bug_fixes",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___bug_fixes"
+        },
+        {
+          "title": "Aap Gateway",
+          "visible": true,
+          "weight": 21,
+          "urlFragment": "aap-27-20260824___aap_gateway_2",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___aap_gateway_2"
+        },
+        {
+          "title": "Containerized Installer",
+          "visible": true,
+          "weight": 22,
+          "urlFragment": "aap-27-20260824___containerized_installer",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___containerized_installer"
+        },
+        {
+          "title": "Controller",
+          "visible": true,
+          "weight": 23,
+          "urlFragment": "aap-27-20260824___controller_2",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___controller_2"
+        },
+        {
+          "title": "Dispatcherd",
+          "visible": true,
+          "weight": 24,
+          "urlFragment": "aap-27-20260824___dispatcherd",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___dispatcherd"
+        },
+        {
+          "title": "Event Driven Ansible",
+          "visible": true,
+          "weight": 25,
+          "urlFragment": "aap-27-20260824___event_driven_ansible",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___event_driven_ansible"
+        },
+        {
+          "title": "General",
+          "visible": true,
+          "weight": 26,
+          "urlFragment": "aap-27-20260824___general_2",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___general_2"
+        },
+        {
+          "title": "Hub",
+          "visible": true,
+          "weight": 27,
+          "urlFragment": "aap-27-20260824___hub",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___hub"
+        },
+        {
+          "title": "Lightspeed",
+          "visible": true,
+          "weight": 28,
+          "urlFragment": "aap-27-20260824___lightspeed_2",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___lightspeed_2"
+        },
+        {
+          "title": "Metrics Dashboard",
+          "visible": true,
+          "weight": 29,
+          "urlFragment": "aap-27-20260824___metrics_dashboard",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___metrics_dashboard"
+        },
+        {
+          "title": "Metrics Service",
+          "visible": true,
+          "weight": 30,
+          "urlFragment": "aap-27-20260824___metrics_service",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___metrics_service"
+        },
+        {
+          "title": "Platform Operator",
+          "visible": true,
+          "weight": 31,
+          "urlFragment": "aap-27-20260824___platform_operator",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260824___platform_operator"
+        }
+      ]
+    }
+  ]
+}

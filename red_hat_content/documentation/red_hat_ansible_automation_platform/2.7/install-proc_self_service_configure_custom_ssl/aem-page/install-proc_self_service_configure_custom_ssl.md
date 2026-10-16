@@ -1,16 +1,17 @@
 +++
+template = "docs/aem-title.html"
 title = "Configure custom SSL certificates for the Ansible automation portal - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_configure_custom_ssl"
-template = "docs/aem-title.html"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_self_service_login/", "Launch automation templates from Ansible automation portal"]]
-category = "Develop"
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-install_automation_portal_on_openshift_container_platform/", "Install automation portal on OpenShift Container Platform"]]
+category = "Install"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_self_service_configure_custom_ssl/aem-page/install-proc_self_service_configure_custom_ssl.html"
 last_crumb = "Configure custom SSL certificates for the Ansible automation portal"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure custom SSL certificates for the Ansible automation portal"
 oversized = "false"
@@ -37,7 +38,7 @@ If your Ansible Automation Platform instance uses custom or self-signed SSL cert
 
 ## Procedure
 
-1.  Obtain the CA certificate file from your Ansible Automation Platform instance.
+1. Obtain the CA certificate file from your Ansible Automation Platform instance.
       If you do not have the CA certificate file, you can extract it from your Ansible Automation Platform server:
 
 ```terminal
@@ -46,8 +47,8 @@ $ openssl s_client -showcerts -connect *aap-hostname*:443 </dev/null 2>/dev/null
 
     Replace *aap-hostname* with your Ansible Automation Platform hostname.
 
-2.  Log in to your Red Hat OpenShift Container Platform cluster with administrator privileges.
-3.  Create a ConfigMap containing your custom CA certificate:
+2. Log in to your Red Hat OpenShift Container Platform cluster with administrator privileges.
+3. Create a ConfigMap containing your custom CA certificate:
   
 
 ```terminal
@@ -58,7 +59,7 @@ $ oc create configmap custom-ca-bundle \
 
     Replace *namespace* with the namespace where the Ansible automation portal is installed.
 
-4.  Update your Ansible automation portal Helm chart values to mount the custom CA certificate.
+4. Update your Ansible automation portal Helm chart values to mount the custom CA certificate.
       Add the `custom-ca` volume and volume mount to your values file:
 
 ```yaml
@@ -74,7 +75,7 @@ upstream:
         readOnly: true
 ```
 
-5.  Apply the updated configuration by upgrading the Ansible automation portal Helm chart:
+5. Apply the updated configuration by upgrading the Ansible automation portal Helm chart:
   
 
 ```terminal
@@ -85,7 +86,7 @@ $ helm upgrade *release-name* *chart-name* \
 
     Replace *release-name* with your Helm release name and *chart-name* with the Ansible automation portal chart name.
 
-6.  Wait for the Ansible automation portal pods to restart with the new configuration.
+6. Wait for the Ansible automation portal pods to restart with the new configuration.
 
 ## Results
 
@@ -95,7 +96,7 @@ $ helm upgrade *release-name* *chart-name* \
 $ oc get pods -n *namespace*
 ```
 
-     All Ansible automation portal pods should show a status of `Running`.
+    All Ansible automation portal pods should show a status of `Running`.
 
 2. Attempt to sign in to the Ansible automation portal using your Ansible Automation Platform credentials. If the SSL certificate configuration is correct, you can authenticate successfully without SSL verification errors.
 
@@ -105,7 +106,7 @@ $ oc get pods -n *namespace*
 $ oc logs -n *namespace* *pod-name* | grep -i ssl
 ```
 
-     If you see no SSL verification errors, the custom CA certificate is trusted correctly.
+    If you see no SSL verification errors, the custom CA certificate is trusted correctly.
 
 If you continue to experience SSL verification errors after following this procedure:
 

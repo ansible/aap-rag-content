@@ -17,14 +17,14 @@ $ gpg --symmetric --cipher-algo AES256 /var/lib/portal/backups/*backup-file*.tar
 
 Create a backup
 
-1.  Run the backup tool:
+1. Run the backup tool:
 
 
 ```terminal
 $ sudo ansible-portal backup
 ```
 
-2.  Select a backup type from the menu. Select option 1 to create a backup with recommended defaults.
+2. Select a backup type from the menu. Select option 1 to create a backup with recommended defaults.
 
 
 ```
@@ -48,7 +48,7 @@ Backups are stored in /var/lib/portal/backups/ as .tar.gz files.
 
 Preview a backup
 
-3.  Preview the contents of the most recent backup without restoring:
+3. Preview the contents of the most recent backup without restoring:
 
 
 ```terminal
@@ -57,7 +57,7 @@ $ sudo ansible-portal restore --latest --dry-run
 
 Restore from backup
 
-4.  Restore the most recent backup:
+4. Restore the most recent backup:
 
 
 ```terminal

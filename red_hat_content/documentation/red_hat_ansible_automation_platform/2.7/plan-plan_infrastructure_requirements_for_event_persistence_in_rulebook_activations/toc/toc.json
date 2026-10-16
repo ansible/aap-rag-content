@@ -2,7 +2,7 @@
   "version": "1.1",
   "sections": [
     {
-      "title": "Plan infrastructure requirements for event persistence",
+      "title": "Plan infrastructure requirements for Event-Driven Ansible",
       "visible": true,
       "weight": 1,
       "urlFragment": "index",

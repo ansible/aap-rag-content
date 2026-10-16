@@ -15,7 +15,7 @@ You must complete two actions to ensure your automation content works with Ansib
 
 ### Procedure
 
-1.  Update collection version pins in your `requirements.yml `file to require the latest versions:
+1. Update collection version pins in your `requirements.yml `file to require the latest versions:
 
 
 ```
@@ -26,14 +26,14 @@ collections:
 - name: ansible.platform version: ">=2.7.0"
 ```
 
-2.  Rebuild your execution environments to include the updated collections.
-3.  Refresh project and collection dependencies in automation controller.
-4.  Verify the installed collection versions:
+2. Rebuild your execution environments to include the updated collections.
+3. Refresh project and collection dependencies in automation controller.
+4. Verify the installed collection versions:
 
 
 ```
 ansible-galaxy collection list | grep -E "ansible\.(controller|hub|eda|platform)"
 ```
 
-5.  Run a test playbook against your upgraded Ansible Automation Platform 2.7 environment to confirm that API calls route through platform gateway.
+5. Run a test playbook against your upgraded Ansible Automation Platform 2.7 environment to confirm that API calls route through platform gateway.
 

@@ -1,7 +1,7 @@
 +++
 title = "Operator enterprise topology - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-ref_ocp_b_env_a"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-assembly_overview_tested_deployment_models/", "Choose a deployment method and topology"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/plan-ref_ocp_b_env_a/aem-page/plan-ref_ocp_b_env_a.html"
 last_crumb = "Operator enterprise topology"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Operator enterprise topology"
 oversized = "false"
@@ -33,7 +34,7 @@ The Ansible Automation Platform Service on AWS is an example of an OpenShift Ope
 
 Included are the tested infrastructure topology, system requirements, network port configurations, and an example custom resource file for installation.
 
- Important:
+Important:
 
 You can only install a single instance of the Ansible Automation Platform Operator into a single namespace. Installing multiple instances in the same namespace can lead to improper operation for both Operator instances.
 
@@ -44,7 +45,7 @@ The Red Hat tested infrastructure topology for this deployment model:
 *Figure 1. Infrastructure topology diagram*
 ![Operator enterprise topology diagram](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ocp-b-env-a-2_7.png)
 
- Important:
+Important:
 
 While Redis and PostgreSQL can be installed as part of the operator-based installation process, the topology diagram represents a Red Hat supported topology where both Redis and PostgreSQL are external to Ansible Automation Platform.
 
@@ -63,28 +64,28 @@ Red Hat tests each OpenShift Worker node with these requirements:
 
 *Table 2. Infrastructure topology components*
 
-| Count   | Component                                                          |
-| ------- | ------------------------------------------------------------------ |
-| <br>1   | <br>Automation controller web pod                                  |
-| <br>1   | <br>Automation controller task pod                                 |
-| <br>1   | <br>Automation hub web pod                                         |
-| <br>1   | <br>Automation hub API pod                                         |
-| <br>2   | <br>Automation hub content pod                                     |
-| <br>2   | <br>Automation hub worker pod                                      |
-| <br>1   | <br>Automation hub Redis pod                                       |
-| <br>1   | <br>Event-Driven Ansible API pod                                   |
-| <br>2   | <br>Event-Driven Ansible activation worker pod                     |
-| <br>2   | <br>Event-Driven Ansible default worker pod                        |
-| <br>2   | <br>Event-Driven Ansible event stream pod                          |
-| <br>1   | <br>Event-Driven Ansible scheduler pod                             |
-| <br>1   | <br>Platform gateway pod                                           |
-| <br>1   | <br>Metrics service web pod                                        |
-| <br>1   | <br>Metrics service tasks pod                                      |
-| <br>1   | <br>Metrics service scheduler pod                                  |
-| <br>2   | <br>Mesh ingress pod                                               |
-| <br>N/A | <br>Externally managed database service                            |
-| <br>N/A | <br>Externally managed Redis                                       |
-| <br>N/A | <br>Externally managed object storage service (for automation hub) |
+| Count | Component                                                      |
+| ----- | -------------------------------------------------------------- |
+| 1     | Automation controller web pod                                  |
+| 1     | Automation controller task pod                                 |
+| 1     | Automation hub web pod                                         |
+| 1     | Automation hub API pod                                         |
+| 2     | Automation hub content pod                                     |
+| 2     | Automation hub worker pod                                      |
+| 1     | Automation hub Redis pod                                       |
+| 1     | Event-Driven Ansible API pod                                   |
+| 2     | Event-Driven Ansible activation worker pod                     |
+| 2     | Event-Driven Ansible default worker pod                        |
+| 2     | Event-Driven Ansible event stream pod                          |
+| 1     | Event-Driven Ansible scheduler pod                             |
+| 1     | Platform gateway pod                                           |
+| 1     | Metrics service web pod                                        |
+| 1     | Metrics service tasks pod                                      |
+| 1     | Metrics service scheduler pod                                  |
+| 2     | Mesh ingress pod                                               |
+| N/A   | Externally managed database service                            |
+| N/A   | Externally managed Redis                                       |
+| N/A   | Externally managed object storage service (for automation hub) |
 
 ## Tested system configurations
 
@@ -92,19 +93,19 @@ Red Hat has tested these configurations to install and run Red Hat Ansible Autom
 
 *Table 3. Tested system configurations*
 
-| Type                             | Description                                                                                                                                                                                              |
-| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br>Subscription                 | <br>Valid Red Hat Ansible Automation Platform subscription                                                                                                                                               |
-| <br>Red Hat OpenShift            | Red Hat OpenShift on AWS Hosted Control Planes 4.15.16     2 worker nodes in different availability zones (AZs) at t3.xlarge                                                                             |
-| <br>Ansible-core                 | <br>Ansible-core version 2.16 or later                                                                                                                                                                   |
-| <br>Browser                      | <br>A currently supported version of Mozilla Firefox or Google Chrome.                                                                                                                                   |
-| <br>AWS RDS PostgreSQL service   | engine: "postgres"engine\_version: 15"parameter\_group\_name: "default.postgres15"allocated\_storage: 20max\_allocated\_storage: 1000storage\_type: "gp2"storage\_encrypted: trueinstance\_class: "db.t4g.small"multi\_az: truebackup\_retention\_period: 5database: must have International Components for Unicode (ICU) supportdatabases required: `automationcontroller`, `automationhub`, `automationeda`, `metrics_service`       Note:   <br>Minimum external database requirements<br>The external database must meet these minimum requirements:<br>4 vCPUs16 GB RAMmax\_connections: 1024 (minimum). You might need more connections when scaling replicas.200 GB storage on a volume capable of at least 3000 IOPS.<br>Database storage consumption depends on your workload, including job frequency, playbook task count, output verbosity, and the number of managed hosts per job. Start with a 200 GB baseline and monitor actual usage after deployment. Configure automated cleanup jobs to prevent unbounded database growth.<br>These requirements ensure adequate database performance for the enterprise topology workload profile. |
-| <br>**Metrics service database** | Database: `metrics_service`User: metrics database user with CREATEDB roleStorage: 40 GB minimum (plan for 100 GB with data growth)Connections: 100 connections minimum<br>Read-only access to `automationcontroller` database:<br>User: `ms_awx_readonly` with SELECT on all tables in public schemaRequires ALTER DEFAULT PRIVILEGES for future tables |
-| <br>AWS Memcached Service        | engine: "redis"engine\_version: "6.2"auto\_minor\_version\_upgrade: "false"node\_type: "cache.t3.micro"parameter\_group\_name: "default.redis6.x.cluster.on"transit\_encryption\_enabled: "true"num\_node\_groups: 2replicas\_per\_node\_group: 1automatic\_failover\_enabled: true |
-| <br>s3 storage                   | <br>HTTPS only accessible through AWS Role assigned to automation hub SA at runtime by using AWS Pod Identity                                                                                            |
-| <br>IP version                   | <br>IPv4, IPv6 (single-stack and dual-stack)                                                                                                                                                             |
+| Type                         | Description                                                                                                                                                                                              |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Subscription                 | Valid Red Hat Ansible Automation Platform subscription                                                                                                                                                   |
+| Red Hat OpenShift            | Red Hat OpenShift on AWS Hosted Control Planes 4.15.16    2 worker nodes in different availability zones (AZs) at t3.xlarge                                                                              |
+| Ansible-core                 | Ansible-core version 2.16 or later                                                                                                                                                                       |
+| Browser                      | A currently supported version of Mozilla Firefox or Google Chrome.                                                                                                                                       |
+| AWS RDS PostgreSQL service   | engine: "postgres"engine\_version: 15"parameter\_group\_name: "default.postgres15"allocated\_storage: 20max\_allocated\_storage: 1000storage\_type: "gp2"storage\_encrypted: trueinstance\_class: "db.t4g.small"multi\_az: truebackup\_retention\_period: 5database: must have International Components for Unicode (ICU) supportdatabases required: `automationcontroller`, `automationhub`, `automationeda`, `metrics_service`     Note:   <br>Minimum external database requirements<br>The external database must meet these minimum requirements:<br>4 vCPUs16 GB RAMmax\_connections: 1024 (minimum). You might need more connections when scaling replicas.200 GB storage on a volume capable of at least 3000 IOPS.<br>Database storage consumption depends on your workload, including job frequency, playbook task count, output verbosity, and the number of managed hosts per job. Start with a 200 GB baseline and monitor actual usage after deployment. Configure automated cleanup jobs to prevent unbounded database growth.<br>These requirements ensure adequate database performance for the enterprise topology workload profile. |
+| **Metrics service database** | Database: `metrics_service`User: metrics database user with CREATEDB roleStorage: 40 GB minimum (plan for 100 GB with data growth)Connections: 100 connections minimum<br>Read-only access to `automationcontroller` database:<br>User: `ms_awx_readonly` with SELECT on all tables in public schemaRequires ALTER DEFAULT PRIVILEGES for future tables |
+| AWS Memcached Service        | engine: "redis"engine\_version: "6.2"auto\_minor\_version\_upgrade: "false"node\_type: "cache.t3.micro"parameter\_group\_name: "default.redis6.x.cluster.on"transit\_encryption\_enabled: "true"num\_node\_groups: 2replicas\_per\_node\_group: 1automatic\_failover\_enabled: true |
+| s3 storage                   | HTTPS only accessible through AWS Role assigned to automation hub SA at runtime by using AWS Pod Identity                                                                                                |
+| IP version                   | IPv4, IPv6 (single-stack and dual-stack)                                                                                                                                                                 |
 
- Note:
+Note:
 
 **Minimum external database requirements**
 
@@ -169,7 +170,7 @@ This topology specifies externally provided Redis, PostgreSQL, and object storag
 
 ## Metrics service resource allocation
 
- Note:
+Note:
 
 Resource allocation can be configured in the AnsibleAutomationPlatform custom resource. If using external databases, configure database secrets before setting resource allocation.
 
@@ -224,7 +225,7 @@ spec:
           memory: 1Gi
 ```
 
- Note:
+Note:
 
 For enterprise deployments, configure pod anti-affinity to spread metrics service pods across different worker nodes:
 
@@ -301,18 +302,20 @@ Red Hat Ansible Automation Platform uses several ports to communicate with its s
 
 *Table 5. Network ports and protocols*
 
-| Port number | Protocol       | Service            | Source                                   | Destination                                                                                     |
-| ----------- | -------------- | ------------------ | ---------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| <br>80/443  | <br>HTTP/HTTPS | <br>Object storage | <br>OpenShift Container Platform cluster | <br>External object storage service                                                             |
-| <br>80/443  | <br>HTTP/HTTPS | <br>Receptor       | <br>Execution node                       | <br>OpenShift Container Platform ingress                                                        |
-| <br>80/443  | <br>HTTP/HTTPS | <br>Receptor       | <br>Hop node                             | <br>OpenShift Container Platform ingress                                                        |
-| <br>5432    | <br>TCP        | <br>PostgreSQL     | <br>OpenShift Container Platform cluster | <br>External database service                                                                   |
-| <br>5432    | <br>TCP        | <br>PostgreSQL     | <br>OpenShift Container Platform cluster | <br>External database service (`metrics_service` database)                                      |
-| <br>5432    | <br>TCP        | <br>PostgreSQL     | <br>OpenShift Container Platform cluster | <br>External database service (`automationcontroller` database - read-only for metrics service) |
-| <br>6379    | <br>TCP        | <br>Redis          | <br>OpenShift Container Platform cluster | <br>External Redis service                                                                      |
-| <br>27199   | <br>TCP        | <br>Receptor       | <br>OpenShift Container Platform cluster | <br>Execution node                                                                              |
-| <br>27199   | <br>TCP        | <br>Receptor       | <br>OpenShift Container Platform cluster | <br>Hop node                                                                                    |
+| Port number | Protocol   | Service        | Source                               | Destination                                                                                 |
+| ----------- | ---------- | -------------- | ------------------------------------ | ------------------------------------------------------------------------------------------- |
+| 80/443      | HTTP/HTTPS | Object storage | OpenShift Container Platform cluster | External object storage service                                                             |
+| 80/443      | HTTP/HTTPS | Receptor       | Execution node                       | OpenShift Container Platform ingress                                                        |
+| 80/443      | HTTP/HTTPS | Receptor       | Hop node                             | OpenShift Container Platform ingress                                                        |
+| 5432        | TCP        | PostgreSQL     | OpenShift Container Platform cluster | External database service                                                                   |
+| 5432        | TCP        | PostgreSQL     | OpenShift Container Platform cluster | External database service (`metrics_service` database)                                      |
+| 5432        | TCP        | PostgreSQL     | OpenShift Container Platform cluster | External database service (`automationcontroller` database - read-only for metrics service) |
+| 6379        | TCP        | Redis          | OpenShift Container Platform cluster | External Redis service                                                                      |
+| 27199       | TCP        | Receptor       | OpenShift Container Platform cluster | Execution node                                                                              |
+| 27199       | TCP        | Receptor       | OpenShift Container Platform cluster | Hop node                                                                                    |
 
- Note:
+Note:
 
 Metrics service pods communicate internally within the OpenShift cluster via the platform gateway. The `/api/metrics/` path is routed through the standard Ansible Automation Platform gateway and does not require a separate external ingress. Metrics service requires outbound connectivity on port 5432 to both the `metrics_service` database and the `automationcontroller` database (read-only).
+
+The Ansible Automation Platform Operator also creates Kubernetes NetworkPolicy resources to control pod-to-pod communication within the namespace. For more information, see [Operator-managed NetworkPolicies](/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-operator_managed_networkpolicies#GUID-1d94c84c-9350-4ae8-a8f9-87da56d0cc86 "When you deploy Ansible Automation Platform on Red Hat OpenShift Container Platform, the Ansible Automation Platform Operator automatically creates and manages Kubernetes NetworkPolicy resources to enforce least-privilege networking within the Ansible Automation Platform namespace.").

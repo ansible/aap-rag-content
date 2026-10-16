@@ -10,7 +10,7 @@ Use the automation content navigator interactive interface to review Ansible set
 
 #### Procedure
 
-1.  Start automation content navigator
+1. Start automation content navigator
 
 
 ```
@@ -19,7 +19,7 @@ $ ansible-navigator
 
 Optional: type `ansible-navigator config` from the command line to access the Ansible configuration settings.
 
-2.  Review the Ansible configuration.
+2. Review the Ansible configuration.
 
 ```
 :config
@@ -28,7 +28,7 @@ Optional: type `ansible-navigator config` from the command line to access the An
 ![Ansible configuration](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-ansible-config.png)
 Some values reflect settings from within the automation execution environments needed for the automation execution environments to function. These display as non-default settings you cannot set in your Ansible configuration file.
 
-3.  Type the number corresponding to the setting you want to delve into, or type `:<number>` for numbers greater than 9.
+3. Type the number corresponding to the setting you want to delve into, or type `:<number>` for numbers greater than 9.
 
 ```
 ANSIBLE COW ACCEPTLIST (current: ['bud-frogs', 'bunny', 'cheese']) (default:

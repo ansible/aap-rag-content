@@ -1,0 +1,39 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Ansible Automation Platform 2.7 Release Notes - July 27, 2026 (2.7-3)",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Overview",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-a93dbec2-eb84-43c7-b116-bf22a964a78f___overview",
+          "anchor": null,
+          "singlePageAnchor": "GUID-a93dbec2-eb84-43c7-b116-bf22a964a78f___overview"
+        },
+        {
+          "title": "Bug fixes",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "GUID-a93dbec2-eb84-43c7-b116-bf22a964a78f___bug_fixes",
+          "anchor": null,
+          "singlePageAnchor": "GUID-a93dbec2-eb84-43c7-b116-bf22a964a78f___bug_fixes"
+        },
+        {
+          "title": "Platform operator",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "GUID-a93dbec2-eb84-43c7-b116-bf22a964a78f___platform_operator_3",
+          "anchor": null,
+          "singlePageAnchor": "GUID-a93dbec2-eb84-43c7-b116-bf22a964a78f___platform_operator_3"
+        }
+      ]
+    }
+  ]
+}

@@ -9,14 +9,14 @@ You can browse Ansible collections with the automation content navigator text-ba
 
 ### Procedure
 
-1.  Start automation content navigator
+1. Start automation content navigator
 
 
 ```
 $ ansible-navigator
 ```
 
-2.  Browse the collection. Alternately, you can type `ansible-navigator collections` to directly browse the collections.
+2. Browse the collection. Alternately, you can type `ansible-navigator collections` to directly browse the collections.
 
 ```
 $ :collections
@@ -24,7 +24,7 @@ $ :collections
 
 ![A list of Ansible collections shown in the automation content navigator](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-collection-list.png)
 
-3.  Type the number of the collection you want to explore.
+3. Type the number of the collection you want to explore.
 
 ```
 :4
@@ -32,7 +32,7 @@ $ :collections
 
 ![A collection shown in the automation content navigator](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-plugin-list.png)
 
-4.  Type the number corresponding to the module you want to delve into.
+4. Type the number corresponding to the module you want to delve into.
 
 ```
 ANSIBLE.UTILS.IP_ADDRESS: Test if something in an IP address
@@ -56,7 +56,7 @@ ANSIBLE.UTILS.IP_ADDRESS: Test if something in an IP address
 <... output truncated...>
 ```
 
-5.  Optional: jump to the documentation examples for this module.
+5. Optional: jump to the documentation examples for this module.
 
 ```
 :{{ examples }}
@@ -79,7 +79,7 @@ ANSIBLE.UTILS.IP_ADDRESS: Test if something in an IP address
 15│
 ```
 
-6.  Optional: open the example in your editor to copy it into a playbook.
+6. Optional: open the example in your editor to copy it into a playbook.
 
 ```
 :open

@@ -1,7 +1,8 @@
 # Specify dedicated nodes for pods and job execution
 ## Specify nodes for job execution
 
-You can add a node selector to the container group pod specification to ensure they only run against certain nodes. First add a label to the nodes you want to run jobs against.
+You can add a node selector to the container group pod specification to ensure they only run against certain nodes.
+First add a label to the nodes you want to run jobs against.
 
 ### About this task
 
@@ -9,7 +10,7 @@ The following procedure adds a label to a node.
 
 ### Procedure
 
-1.  List the nodes in your cluster, along with their labels:
+1. List the nodes in your cluster, along with their labels:
 
 
 ```
@@ -18,13 +19,13 @@ kubectl get nodes --show-labels
 
 The output is similar to this (shown here in a table):
 
-| Name           | Status    | Roles      | Age    | Version     | Labels                                   |
-| -------------- | --------- | ---------- | ------ | ----------- | ---------------------------------------- |
-| <br> `worker0` | <br>Ready | <br><none> | <br>1d | <br>v1.13.0 | <br> `…​,kubernetes.io/hostname=worker0` |
-| <br> `worker1` | <br>Ready | <br><none> | <br>1d | <br>v1.13.0 | <br> `…​,kubernetes.io/hostname=worker1` |
-| <br> `worker2` | <br>Ready | <br><none> | <br>1d | <br>v1.13.0 | <br> `…​,kubernetes.io/hostname=worker2` |
+| Name      | Status | Roles  | Age | Version | Labels                              |
+| --------- | ------ | ------ | --- | ------- | ----------------------------------- |
+| `worker0` | Ready  | <none> | 1d  | v1.13.0 | `…​,kubernetes.io/hostname=worker0` |
+| `worker1` | Ready  | <none> | 1d  | v1.13.0 | `…​,kubernetes.io/hostname=worker1` |
+| `worker2` | Ready  | <none> | 1d  | v1.13.0 | `…​,kubernetes.io/hostname=worker2` |
 
-2.  Choose one of your nodes, and add a label to it by using the following command:
+2. Choose one of your nodes, and add a label to it by using the following command:
 
 
 ```
@@ -39,22 +40,23 @@ kubectl label nodes <your-node-name> disktype=ssd
 
 where `<your-node-name>` is the name of your chosen node.
 
-3.  Verify that your chosen node has a `disktype=ssd` label:
+3. Verify that your chosen node has a `disktype=ssd` label:
 
 
 ```
 kubectl get nodes --show-labels
 ```
 
-4.  The output is similar to this (shown here in a table):
-| Name           | Status    | Roles      | Age    | Version     | Labels                                               |
-| -------------- | --------- | ---------- | ------ | ----------- | ---------------------------------------------------- |
-| <br> `worker0` | <br>Ready | <br><none> | <br>1d | <br>v1.13.0 | <br> `…​disktype=ssd,kubernetes.io/hostname=worker0` |
-| <br> `worker1` | <br>Ready | <br><none> | <br>1d | <br>v1.13.0 | <br> `…​,kubernetes.io/hostname=worker1`             |
-| <br> `worker2` | <br>Ready | <br><none> | <br>1d | <br>v1.13.0 | <br> `…​,kubernetes.io/hostname=worker2`             |
+4. The output is similar to this (shown here in a table):
+| Name      | Status | Roles  | Age | Version | Labels                                          |
+| --------- | ------ | ------ | --- | ------- | ----------------------------------------------- |
+| `worker0` | Ready  | <none> | 1d  | v1.13.0 | `…​disktype=ssd,kubernetes.io/hostname=worker0` |
+| `worker1` | Ready  | <none> | 1d  | v1.13.0 | `…​,kubernetes.io/hostname=worker1`             |
+| `worker2` | Ready  | <none> | 1d  | v1.13.0 | `…​,kubernetes.io/hostname=worker2`             |
 You can see that the `worker0` node now has a `disktype=ssd` label.
 
-5.  In the automation controller UI, specify that label in the metadata section of your customized pod specification in the container group.
+5. In the automation controller UI, specify that label in the metadata section of your customized pod specification in the container group.
+
 
 ```
 apiVersion: v1

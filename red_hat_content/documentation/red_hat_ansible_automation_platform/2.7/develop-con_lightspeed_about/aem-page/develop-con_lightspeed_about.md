@@ -1,16 +1,17 @@
 +++
-title = "Understand Red Hat Ansible Lightspeed with IBM watsonx Code Assistant - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_lightspeed_about"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_lightspeed_about"
+title = "Understand Red Hat Ansible Lightspeed with IBM watsonx Code Assistant - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_lightspeed_intro/", "Build automation faster with Red Hat Ansible Lightspeed"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_lightspeed_intro/", "Build automation faster with Red Hat Ansible Lightspeed code assistant"]]
 category = "Develop"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-con_lightspeed_about/aem-page/develop-con_lightspeed_about.html"
 last_crumb = "Understand Red Hat Ansible Lightspeed with IBM watsonx Code Assistant"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Understand Red Hat Ansible Lightspeed with IBM watsonx Code Assistant"
 oversized = "false"
@@ -49,13 +50,13 @@ Red Hat Ansible Lightspeed uses IBM watsonx Code Assistant models trained on sub
 
 This section contains information about accessing both Red Hat Ansible Lightspeed cloud service and on-premise deployment.
 
--  **Red Hat Ansible Lightspeed cloud service** To use the Red Hat Ansible Lightspeed cloud service, you must meet **one** of the following requirements:
+-  **Red Hat Ansible Lightspeed cloud service**     To use the Red Hat Ansible Lightspeed cloud service, you must meet **one** of the following requirements:
 
   * Your organization has a trial or paid subscription to both the Red Hat Ansible Automation Platform and IBM watsonx Code Assistant.
   * Your organization has a trial or paid subscription to the Red Hat Ansible Automation Platform, and you have a Red Hat Ansible Lightspeed trial account. Note:
             A Red Hat Ansible Lightspeed trial account does not require an IBM watsonx Code Assistant subscription.
 
--  **Red Hat Ansible Lightspeed on-premise deployment** To use an on-premise deployment of Red Hat Ansible Lightspeed, your organization must have the following subscriptions:
+-  **Red Hat Ansible Lightspeed on-premise deployment**     To use an on-premise deployment of Red Hat Ansible Lightspeed, your organization must have the following subscriptions:
 
   * A trial or paid subscription to the Red Hat Ansible Automation Platform
   * An installation of IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data
@@ -64,13 +65,13 @@ This section contains information about accessing both Red Hat Ansible Lightspee
 
 Red Hat Ansible Lightspeed with IBM watsonx Code Assistant offers the following benefits:
 
--  **Reduces the onboarding learning period for Ansible developers** With just a basic understanding of YAML syntax, Ansible developers can use natural language prompts in English language to describe the automation goal. Red Hat Ansible Lightspeed then offers Ansible code recommendations to help achieve the automation goal more efficiently. This combination of content and best practice suggestions reduces the learning curve and offers a smoother onboarding experience for new Ansible users.
+-  **Reduces the onboarding learning period for Ansible developers**     With just a basic understanding of YAML syntax, Ansible developers can use natural language prompts in English language to describe the automation goal. Red Hat Ansible Lightspeed then offers Ansible code recommendations to help achieve the automation goal more efficiently. This combination of content and best practice suggestions reduces the learning curve and offers a smoother onboarding experience for new Ansible users.
 
-     For example, to get a multitask code recommendation, you can enter the prompt `Install postgresql-server & run postgresql-setup command`. The Ansible Lightspeed service reads the text, interacts with IBM watsonx Code Assistant, and generates code recommendations to automate a multitask that installs a PostgreSQL server and sets up a PostgreSQL database. You can then view and accept the code recommendations to create tasks in an Ansible YAML file.
+    For example, to get a multitask code recommendation, you can enter the prompt `Install postgresql-server & run postgresql-setup command`. The Ansible Lightspeed service reads the text, interacts with IBM watsonx Code Assistant, and generates code recommendations to automate a multitask that installs a PostgreSQL server and sets up a PostgreSQL database. You can then view and accept the code recommendations to create tasks in an Ansible YAML file.
 
--  **Increases productivity with quality content creation** Red Hat Ansible Lightspeed offers automation code recommendations that adhere to Ansible best practices, and IBM watsonx Code Assistant provides model fine-tuning features to improve the accuracy of suggested content based on your organization’s existing Ansible content. Therefore, the AI-generated code recommendations are more accurate, more reliable, and integrated with your existing automation development workflows.
+-  **Increases productivity with quality content creation**     Red Hat Ansible Lightspeed offers automation code recommendations that adhere to Ansible best practices, and IBM watsonx Code Assistant provides model fine-tuning features to improve the accuracy of suggested content based on your organization’s existing Ansible content. Therefore, the AI-generated code recommendations are more accurate, more reliable, and integrated with your existing automation development workflows.
 
--  **Extends trust with AI-generated code recommendations** The AI-generated code recommendations enable you to extend trust, with an automation code base that adheres to accepted Ansible best practices and significant data safeguards.
+-  **Extends trust with AI-generated code recommendations**     The AI-generated code recommendations enable you to extend trust, with an automation code base that adheres to accepted Ansible best practices and significant data safeguards.
 
 ## Prerequisites
 
@@ -131,16 +132,16 @@ The telemetry data may also be used to enable you to track your entitlements to 
 
 Tools within the software monitor various metrics and this information is transmitted to Red Hat. The following metrics are monitored:
 
--  **Operational telemetry data** This is the data that is required to operate and troubleshoot the Ansible Lightspeed service. For more information, refer the Enterprise Agreement. You cannot disable the collection of operational telemetry data.
+-  **Operational telemetry data**     This is the data that is required to operate and troubleshoot the Ansible Lightspeed service. For more information, refer the Enterprise Agreement. You cannot disable the collection of operational telemetry data.
 
-     This includes the following data:
+    This includes the following data:
 
   * Organization you are logged into (Organization ID, account number)
   * Large language model (or models) that you are connected to
 
--  **Admin dashboard telemetry data** This is the data that provides insight into how your organization users are using the Ansible Lightspeed service, and the metrics are displayed on the Admin dashboard.
+-  **Admin dashboard telemetry data**     This is the data that provides insight into how your organization users are using the Ansible Lightspeed service, and the metrics are displayed on the Admin dashboard.
 
-     This includes the following data:
+    This includes the following data:
 
   * Prompts and content suggestions, including accept or reject of the content suggestions
 

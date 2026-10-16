@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
 title = "Audit pipeline-triggered automation activity - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_rule_audit"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_user_guide_overview/", "Trigger automation from events with Event-Driven Ansible"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_rule_audit/aem-page/administer-assembly_eda_rule_audit.html"
 last_crumb = "Audit pipeline-triggered automation activity"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Audit pipeline-triggered automation activity"
 oversized = "false"
@@ -29,7 +30,8 @@ type = "aem-page"
 
 Rule audit allows the auditing of rules which have been triggered by all the rules that were activated at some point.
 
-The **Rule Audit** list view shows you a list of every time an event came in that matched a condition within a rulebook and triggered an action. The list shows you rules within your rulebook and each heading matches up to a rule that has been executed.
+The **Rule Audit** list view shows you a list of every time an event came in that matched a condition within a rulebook and triggered an action.
+The list shows you rules within your rulebook and each heading matches up to a rule that has been executed.
 
 ## View rule audit details
 
@@ -37,8 +39,8 @@ View the rule audit details to quickly identify the rulebook activation responsi
 
 ### Procedure
 
-1.  From the navigation panel select **Automation Decisions> (and then)Rule Audit**.
-2.  Select the desired rule, this brings you to the **Details** tab.
+1. From the navigation panel select **Automation Decisions> (and then)Rule Audit**.
+2. Select the desired rule, this brings you to the **Details** tab.
 
 ### Results
 
@@ -50,9 +52,9 @@ Review a rule’s event history to inspect the payload, source type, and timesta
 
 ### Procedure
 
-1.  From the navigation panel, select **Automation Decisions> (and then)Rule Audit**.
-2.  Select the desired rule, this brings you to the **Details** tab. To view all the events that triggered an action, select the **Events** tab. This shows you the event that triggered actions.
-3.  Select an event to view the **Event log**, along with the **Source type** and **Timestamp**.
+1. From the navigation panel, select **Automation Decisions> (and then)Rule Audit**.
+2. Select the desired rule, this brings you to the **Details** tab. To view all the events that triggered an action, select the **Events** tab. This shows you the event that triggered actions.
+3. Select an event to view the **Event log**, along with the **Source type** and **Timestamp**.
 
 ## View rule audit actions
 
@@ -60,8 +62,8 @@ Review the output of executed actions within a triggered rule to confirm that th
 
 ### Procedure
 
-1.  From the navigation panel select **Automation Decisions> (and then)Rule Audit**.
-2.  Select the desired rule, then select the **Actions** tab.
+1. From the navigation panel select **Automation Decisions> (and then)Rule Audit**.
+2. Select the desired rule, then select the **Actions** tab.
 
 ### Results
 

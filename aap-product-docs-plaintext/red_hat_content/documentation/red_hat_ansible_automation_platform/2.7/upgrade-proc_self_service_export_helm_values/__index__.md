@@ -10,14 +10,14 @@ Export and edit your Helm values before you upgrade. Upgrades from the OpenShift
 
 ## Procedure
 
-1.  Identify your Helm release name and namespace:
+1. Identify your Helm release name and namespace:
 
 
 ```
 $ helm list -n <namespace>
 ```
 
-2.  Export the values currently applied to the release:
+2. Export the values currently applied to the release:
 
 
 ```
@@ -27,7 +27,7 @@ $ helm get values <release_name> -n <namespace> > backup-values.yaml
 Note:
 The `helm get values` command returns only values you supplied at install or on a previous upgrade. It does not list chart defaults. If you never set `pluginMode`, the export might not include it even though the cluster is using the default `tarball` mode.
 
-3.  Edit `backup-values.yaml` on your local machine. Keep existing keys such as OAuth, `clusterRouterBase`, database, and RBAC settings. Add or update the plug-in delivery settings using the plug-in tag from the lifecycle page for your chart version:
+3. Edit `backup-values.yaml` on your local machine. Keep existing keys such as OAuth, `clusterRouterBase`, database, and RBAC settings. Add or update the plug-in delivery settings using the plug-in tag from the lifecycle page for your chart version:
 
 
 ```
@@ -39,7 +39,7 @@ imageTagInfo: "<plugin-version>"
 
 Replace `<plugin-version>` with the value from the Ansible automation portal lifecycle page.
 
-4.  Use the file when you upgrade the Helm release:
+4. Use the file when you upgrade the Helm release:
 
 
 ```

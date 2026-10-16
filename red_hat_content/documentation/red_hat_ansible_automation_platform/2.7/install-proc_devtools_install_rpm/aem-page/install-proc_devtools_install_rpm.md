@@ -1,16 +1,17 @@
 +++
 template = "docs/aem-title.html"
-title = "Install Ansible development tools from an RPM package - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_devtools_install_rpm"
+title = "Install Ansible development tools from an RPM package - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_devtools_install/", "Install Ansible development tools"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_devtools_install/", "Set up your development environment"]]
 category = "Install"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_devtools_install_rpm/aem-page/install-proc_devtools_install_rpm.html"
 last_crumb = "Install Ansible development tools from an RPM package"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Install Ansible development tools from an RPM package"
 oversized = "false"
@@ -37,7 +38,7 @@ Ansible development tools are available as an RPM package for Red Hat Enterprise
 
 ## Procedure
 
-1.  Run the following command to check whether Simple Content Access (SCA) is enabled:
+1. Run the following command to check whether Simple Content Access (SCA) is enabled:
   
 
 ```shell
@@ -50,14 +51,14 @@ $ sudo subscription-manager status
 Content Access Mode is set to Simple Content Access.
 ```
 
-  1.  If Simple Content Access is not enabled, attach the Red Hat Ansible Automation Platform SKU:
+  1. If Simple Content Access is not enabled, attach the Red Hat Ansible Automation Platform SKU:
   
 
 ```shell
 $ sudo subscription-manager attach --pool=<sku-pool-id>
 ```
 
-2.  Install Ansible development tools with the following command:
+2. Install Ansible development tools with the following command:
   
 
 ```shell
@@ -75,7 +76,7 @@ $ sudo dnf install
 $ rpm -aq | grep ansible-dev-tools
 ```
 
-     If the installation was successful, the output shows the `ansible-dev-tools` package and its version number, for example:
+    If the installation was successful, the output shows the `ansible-dev-tools` package and its version number, for example:
 
 ```
 ansible-dev-tools-25.8.3-1.el9ap.noarch

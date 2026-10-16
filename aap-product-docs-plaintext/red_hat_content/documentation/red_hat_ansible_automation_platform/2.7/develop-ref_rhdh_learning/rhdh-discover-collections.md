@@ -7,5 +7,6 @@ The links in this pane provide access to the source of reusable automation conte
 
 If you configured private automation hub when installing the plug-in, you can click **Go to Automation Hub** to view the collections and execution environments that your enterprise has curated.
 
-If you did not configure a private automation hub URL when installing the plug-in, the **Discover existing collection** pane provides a link to Red Hat automation hub on console.redhat.com. You can explore certified and validated Ansible content collections on this site.
+If you did not configure a private automation hub URL when installing the plug-in, the **Discover existing collection** pane provides a link to Red Hat automation hub on console.redhat.com.
+You can explore certified and validated Ansible content collections on this site.
 

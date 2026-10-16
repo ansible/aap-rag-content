@@ -7,11 +7,15 @@ To assign a user to a team, the user must already have been created. For more in
 
 New user memberships to a team must be added at the platform level.
 
+Important:
+
+Assigning a user to a team does not make the user a member of the team's organization. To grant organization-level access, you must also add the user to the organization separately. For more information, see [Assign a user to an organization](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_controller_access_organizations#proc-controller-add-organization-user "You can give a user with access to an organization, and therefore the resources within the organization, by assigning them to the organization and managing the organization roles associated with the user.").
+
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Teams.
-2.  Select the team to which you want to add users.
-3.  Select the **Users** tab.
-4.  Select one or more users from the list by clicking the checkbox next to the name to add them as members of this team.
-5.  Click Add users.
+1. From the navigation panel, select Access Management> (and then)Teams.
+2. Select the team to which you want to add users.
+3. Select the **Users** tab.
+4. Select one or more users from the list by clicking the checkbox next to the name to add them as members of this team.
+5. Click Add users.
 

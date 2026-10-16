@@ -1,6 +1,6 @@
-# EE Builder custom UI components
+# Execution environment builder custom UI components
 
-Custom UI components are available for use in Backstage Software Templates to provide specialized form fields for creating and configuring execution environment definitions.
+Custom UI components are available for use in software templates to provide specialized form fields for creating and configuring execution environment definitions in Ansible automation portal.
 
 To use a component in your template, set the `ui:field` property on a parameter:
 
@@ -83,7 +83,7 @@ Provides an interface for adding discovery tags to an execution environment defi
 
 ## ScmSelector
 
-Provides a source control management (SCM) provider selector with built-in authentication. Users select a configured GitHub or GitLab instance, then authenticate through the SCM provider's OAuth flow. The component validates credentials and displays connection status.
+Provides a source control management (SCM) provider selector with built-in authentication. Users select a configured GitHub or GitLab instance, then authenticate through the SCM provider OAuth flow. The component validates credentials and displays connection status.
 
 | Property                                       | Description                                                                                               |
 | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------- |

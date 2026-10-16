@@ -10,10 +10,10 @@ Use the user interface to pull an execution environment from your private automa
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Content> (and then)Execution Environments.
-2.  Select your execution environment.
-3.  In the **Pull this image** entry, click Copy to clipboard.
-4.  Paste and run the command in your terminal.
+1. From the navigation panel, select Automation Content> (and then)Execution Environments.
+2. Select your execution environment.
+3. In the **Pull this image** entry, click Copy to clipboard.
+4. Paste and run the command in your terminal.
 
 ### Results
 

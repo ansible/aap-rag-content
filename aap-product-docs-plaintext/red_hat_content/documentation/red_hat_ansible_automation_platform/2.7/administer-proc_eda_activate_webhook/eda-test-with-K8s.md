@@ -5,14 +5,14 @@ Configure Kubernetes networking (for example, Ingress) to temporarily expose act
 
 ### Procedure
 
-1.  Run the following command to expose the port on the cluster for a given service:
+1. Run the following command to expose the port on the cluster for a given service:
 
 
 ```
 kubectl port-forward svc/<ACTIVATION_SVC_NAME> 5000:5000
 ```
 
-2.  Make the HTTP requests against the `localhost:5000` to trigger the rulebook:
+2. Make the HTTP requests against the `localhost:5000` to trigger the rulebook:
 
 
 ```

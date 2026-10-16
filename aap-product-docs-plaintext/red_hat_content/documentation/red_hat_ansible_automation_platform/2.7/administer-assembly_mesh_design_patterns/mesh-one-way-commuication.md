@@ -1,7 +1,9 @@
 # Design patterns for mesh
 ## Outbound only connections to controller nodes
 
-This example inventory file deploys a control plane consisting of two control nodes, and several execution nodes. Only outbound connections are allowed to the controller nodes All nodes in the 'execution_nodes' group are peered with all nodes in the controller plane.
+This example inventory file deploys a control plane consisting of two control nodes, and several execution nodes.
+Only outbound connections are allowed to the controller nodes
+All nodes in the 'execution_nodes' group are peered with all nodes in the controller plane.
 
 ```yaml
 [automationcontroller]

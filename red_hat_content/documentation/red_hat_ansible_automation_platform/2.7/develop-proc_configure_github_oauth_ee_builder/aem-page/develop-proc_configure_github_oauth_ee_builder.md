@@ -1,7 +1,7 @@
 +++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_oauth_ee_builder"
 title = "Configure a GitHub OAuth App for saving definitions - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_oauth_ee_builder"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-build_execution_environments_with_the_automation_portal/", "Build execution environments with automation portal"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_oauth_ee_builder/aem-page/develop-proc_configure_github_oauth_ee_builder.html"
 last_crumb = "Configure a GitHub OAuth App for saving definitions"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure a GitHub OAuth App for saving definitions"
 oversized = "false"
@@ -56,7 +57,7 @@ If your GitHub organization uses OAuth App access restrictions, an organization 
 
 ## Procedure
 
-1.  Create a GitHub OAuth App in your organization settings under **Developer settings > OAuth Apps**. Enter the following details:
+1. Create a GitHub OAuth App in your organization settings under **Developer settings > OAuth Apps**. Enter the following details:
 
   - **Application name:** A descriptive name, for example `ansible-portal-ee-builder`.
   - **Homepage URL:** The URL of your automation portal deployment.
@@ -64,9 +65,9 @@ If your GitHub organization uses OAuth App access restrictions, an organization 
   Note:
       GitHub limits the Authorization callback URL to 100 characters. If your OpenShift route URL exceeds this limit, configure a shorter route hostname for the portal before creating the OAuth App.
 
-2.  Note the **Client ID** and generate a **Client secret**. Save the client secret value immediately — you cannot view it again.
-3.  If your organization restricts OAuth App access, navigate to **Organization settings > Third-party access** and approve the OAuth App.
-4.  Enable the GitHub auth provider in your configuration.
+2. Note the **Client ID** and generate a **Client secret**. Save the client secret value immediately — you cannot view it again.
+3. If your organization restricts OAuth App access, navigate to **Organization settings > Third-party access** and approve the OAuth App.
+4. Enable the GitHub auth provider in your configuration.
       **OpenShift:** Uncomment the `auth.providers.github` block in your Helm chart configuration.
 
     **RHEL appliance:** Add the following `auth.providers` block to `/etc/portal/configs/app-config/app-config.production.yaml`. If an `auth:` section already exists, add the `providers:` section inside it:
@@ -80,7 +81,7 @@ auth:
         clientSecret: ${GITHUB_OAUTH_CLIENT_SECRET}
 ```
 
-5.  Add the OAuth client credentials to your `secrets-scm` secret.
+5. Add the OAuth client credentials to your `secrets-scm` secret.
       **OpenShift — CLI:**
 
 ```
@@ -101,7 +102,7 @@ $ echo -n '<your_client_id>' | sudo podman secret create portal_github_oauth_cli
 $ echo -n '<your_client_secret>' | sudo podman secret create portal_github_oauth_client_secret -
 ```
 
-6.  If you use a self-hosted GitHub Enterprise instance (not `github.com`), add its URL to the CORS allowed origins so that OAuth redirects are accepted.
+6. If you use a self-hosted GitHub Enterprise instance (not `github.com`), add its URL to the CORS allowed origins so that OAuth redirects are accepted.
       **OpenShift:**
 
 ```

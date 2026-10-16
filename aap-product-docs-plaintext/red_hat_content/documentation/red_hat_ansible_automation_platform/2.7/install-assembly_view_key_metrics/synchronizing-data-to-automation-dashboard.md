@@ -1,24 +1,24 @@
-# Install automation dashboard to calculate savings (RHEL only)
-## Install automation dashboard
-### Synchronize data to automation dashboard
+# Install the standalone automation dashboard utility to calculate savings (RHEL only)
+## Install the standalone automation dashboard utility
+### Synchronize data to the standalone automation dashboard utility
 
-Synchronize data from your connected Ansible Automation Platform clusters to the automation dashboard to view the latest automation metrics.
+Synchronize data from your connected Ansible Automation Platform clusters to the standalone automation dashboard utility to view the latest automation metrics.
 
 #### Before you begin
 
-- You have installed automation dashboard.
+- You have installed the standalone automation dashboard utility.
 - You have configured the `clusters.yaml` file with your platform details.
 
 #### Procedure
 
-1.  Identify the running automation dashboard container:
+1. Identify the running automation dashboard container:
 
 
 ```terminal
 $ podman ps | grep automation-dashboard-web
 ```
 
-2.  Run the synchronization command using one of the following methods:
+2. Run the synchronization command using one of the following methods:
 
 
 - **Interactive mode:** Run `syncdata` without arguments. You must confirm the synchronization request when prompted.

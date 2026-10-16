@@ -9,7 +9,7 @@ Ensure your disconnected OpenShift cluster is configured to trust the private re
 
 ### Procedure
 
-1.  In a terminal, log in to your disconnected OpenShift cluster using the `oc` CLI.
+1. In a terminal, log in to your disconnected OpenShift cluster using the `oc` CLI.
 
 
 ```
@@ -23,5 +23,5 @@ export KUBECONFIG=/path/to/your/kubeconfig
 oc login
 ```
 
-2.  Ensure that your OpenShift cluster is configured to trust your disconnected registry.
+2. Ensure that your OpenShift cluster is configured to trust your disconnected registry.
 

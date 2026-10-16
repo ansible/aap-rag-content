@@ -1,4 +1,4 @@
-# Advanced configuration options
+# Additional configuration options
 
 Configure external databases, custom TLS certificates, execution nodes, HAProxy load balancers, and hub storage for complex containerized Ansible Automation Platform deployments.
 

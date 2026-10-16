@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-proc_settings_troubleshooting"
 template = "docs/aem-title.html"
 title = "Access troubleshooting information in the UI - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-proc_settings_troubleshooting"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-proc_settings_troubleshooting/", "Access troubleshooting information in the UI"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/troubleshoot-proc_settings_troubleshooting/aem-page/troubleshoot-proc_settings_troubleshooting.html"
 last_crumb = "Access troubleshooting information in the UI"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Access troubleshooting information in the UI"
 oversized = "false"
@@ -31,14 +32,14 @@ You can use the **Troubleshooting** page to enable or disable certain flags that
 
 ## Procedure
 
-1.  From the navigation panel, select Settings> (and then)Automation Execution> (and then)Troubleshooting.
-2.  The **Troubleshooting** page is displayed.
-3.  Click Edit.
-4.  You can select the following options:
+1. From the navigation panel, select Settings> (and then)Automation Execution> (and then)Troubleshooting.
+2. The **Troubleshooting** page is displayed.
+3. Click Edit.
+4. You can select the following options:
 
   - **Enable or Disable tmp dir cleanup**: Select this to enable or disable the cleanup of tmp directories generated during execution of a job after job execution completes.
   - **Debug Web Requests**: Select this to enable or disable web request profiling for debugging slow web requests.
   - **Release Receptor Work**: Select this to turn on or off the deletion of job pods after they complete or fail. This can be helpful in debugging why a job failed.
   - **Keep receptor work on error**: Select this to prevent receptor work from being released when an error is detected.
 
-5.  Click Save to save your changes.
+5. Click Save to save your changes.

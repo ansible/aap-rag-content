@@ -9,14 +9,14 @@ You can review Ansible documentation for collections and plugins with the automa
 
 ### Procedure
 
-1.  Start automation content navigator
+1. Start automation content navigator
 
 
 ```
 $ ansible-navigator
 ```
 
-2.  Review the module you are interested in. Alternately, you can type `ansible-navigator doc` to access the documentation.
+2. Review the module you are interested in. Alternately, you can type `ansible-navigator doc` to access the documentation.
 
 ```
 :doc ansible.utils.ip_address
@@ -44,7 +44,7 @@ ANSIBLE.UTILS.IP_ADDRESS: Test if something in an IP address
 <... output truncated...>
 ```
 
-3.  Jump to the documentation examples for this module.
+3. Jump to the documentation examples for this module.
 
 ```
 :{{ examples }}
@@ -67,7 +67,7 @@ ANSIBLE.UTILS.IP_ADDRESS: Test if something in an IP address
 15│
 ```
 
-4.  Optional: open the example in your editor to copy it into a playbook.
+4. Optional: open the example in your editor to copy it into a playbook.
 
 ```
 :open

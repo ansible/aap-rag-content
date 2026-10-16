@@ -1,7 +1,7 @@
 +++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_eda_activate_webhook"
 title = "Activate webhook-based automation in Openshift - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_eda_activate_webhook"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_user_guide_overview/", "Trigger automation from events with Event-Driven Ansible"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-proc_eda_activate_webhook/aem-page/administer-proc_eda_activate_webhook.html"
 last_crumb = "Activate webhook-based automation in Openshift"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Activate webhook-based automation in Openshift"
 oversized = "false"
@@ -59,7 +60,7 @@ The following is an example of rulebook with a given webhook:
 
 ## Procedure
 
-1.  Create a Route (on OpenShift Container Platform) to expose the service. The following is an example Route for an ansible-rulebook source that expects POST’s on port 5000 on the decision environment pod:
+1. Create a Route (on OpenShift Container Platform) to expose the service. The following is an example Route for an ansible-rulebook source that expects POST’s on port 5000 on the decision environment pod:
   
 
 ```
@@ -85,7 +86,7 @@ spec:
   wildcardPolicy: None
 ```
 
-2.  When you create the Route, test it with a **Post to the Route URL**:
+2. When you create the Route, test it with a **Post to the Route URL**:
   
   Note:
       You do not need the port as it is specified on the Route (targetPort).
@@ -102,14 +103,14 @@ Configure Kubernetes networking (for example, Ingress) to temporarily expose act
 
 ### Procedure
 
-1.  Run the following command to expose the port on the cluster for a given service:
+1. Run the following command to expose the port on the cluster for a given service:
   
 
 ```
 kubectl port-forward svc/<ACTIVATION_SVC_NAME> 5000:5000
 ```
 
-2.  Make the HTTP requests against the `localhost:5000` to trigger the rulebook:
+2. Make the HTTP requests against the `localhost:5000` to trigger the rulebook:
   
 
 ```

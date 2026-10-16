@@ -1,7 +1,7 @@
 +++
-title = "Troubleshooting RHEL appliances - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-ref_self_service_rhel_troubleshooting"
 template = "docs/aem-title.html"
+title = "Troubleshooting RHEL appliances - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-ref_self_service_rhel_troubleshooting/", "Troubleshooting RHEL appliances"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/troubleshoot-ref_self_service_rhel_troubleshooting/aem-page/troubleshoot-ref_self_service_rhel_troubleshooting.html"
 last_crumb = "Troubleshooting RHEL appliances"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Troubleshooting RHEL appliances"
 oversized = "false"
@@ -83,7 +84,7 @@ $ sudo journalctl -u portal -b --no-pager
 $ sudo vi /etc/portal/configs/app-config/app-config.production.yaml
 ```
 
-     Update `ansible.rhaap.baseUrl`, `auth.providers.rhaap.production.clientId`, and other required values.
+    Update `ansible.rhaap.baseUrl`, `auth.providers.rhaap.production.clientId`, and other required values.
 
 4. If Ansible Automation Platform credentials need to be updated, use Podman secrets:
 
@@ -179,7 +180,7 @@ $ sudo journalctl -u portal -n 100 --no-pager | grep -i -E 'auth|oauth|401|403|5
 $ sudo podman secret ls | grep -E 'aap_token|oauth'
 ```
 
-     You should see both `portal_aap_token` and `portal_aap_oauth_client_secret` listed. If either is missing or the values need to be updated, recreate them:
+    You should see both `portal_aap_token` and `portal_aap_oauth_client_secret` listed. If either is missing or the values need to be updated, recreate them:
 
 ```terminal
 $ temp_file=$(mktemp -p /dev/shm) && chmod 600 "$temp_file"
@@ -281,7 +282,7 @@ Cannot upload disk image to datastore
 $ curl -v telnet://*database-host*:5432
 ```
 
-     A successful connection confirms network connectivity. If the connection times out or is refused, check firewall rules and security groups.
+    A successful connection confirms network connectivity. If the connection times out or is refused, check firewall rules and security groups.
 
 2. Verify that the Podman secret for the database password exists:
 
@@ -289,7 +290,7 @@ $ curl -v telnet://*database-host*:5432
 $ sudo podman secret ls | grep portal_postgresql_password
 ```
 
-     If the secret is missing, create it. For the procedure, see [Configure an external database](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_rhel_configure_external_db "By default, the Ansible automation portal RHEL appliance runs a built-in PostgreSQL database. For production deployments, connect to an external PostgreSQL database.").
+    If the secret is missing, create it. For the procedure, see [Configure an external database](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_rhel_configure_external_db "By default, the Ansible automation portal RHEL appliance runs a built-in PostgreSQL database. For production deployments, connect to an external PostgreSQL database.").
 
 3. Check the database connection parameters in the configuration file:
 
@@ -297,7 +298,7 @@ $ sudo podman secret ls | grep portal_postgresql_password
 $ grep -A 6 'database:' /etc/portal/configs/app-config/app-config.production.yaml
 ```
 
-     Verify that `host`, `port`, and `user` match your external database server settings.
+    Verify that `host`, `port`, and `user` match your external database server settings.
 
 4. If SSL is enabled, verify that the `ssl.require` setting matches your database server's TLS configuration. Set `ssl.require: false` temporarily to isolate SSL issues from connectivity issues.
 
@@ -327,7 +328,7 @@ $ sudo journalctl -u portal -n 200 --no-pager | grep -i "permission\|CREATE\|dat
 $ psql -h *database-host* -U postgres -c "\du *database-user*"
 ```
 
-     The output should show `Create DB` in the attributes column.
+    The output should show `Create DB` in the attributes column.
 
 3. If the privilege is missing, grant it:
 

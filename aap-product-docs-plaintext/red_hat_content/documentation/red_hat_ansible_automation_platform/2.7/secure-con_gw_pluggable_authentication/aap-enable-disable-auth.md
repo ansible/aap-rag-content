@@ -25,17 +25,17 @@ If the local authenticator is disabled and an issue occurs with the configured e
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Authentication Methods.
-2.  Ensure that at least one other authenticator type is configured and enabled.
-3.  Select your **Local Authenticator**.
-4.  Toggle the **Enabled** switch to the off position to disable the local authenticator.
+1. From the navigation panel, select Access Management> (and then)Authentication Methods.
+2. Ensure that at least one other authenticator type is configured and enabled.
+3. Select your **Local Authenticator**.
+4. Toggle the **Enabled** switch to the off position to disable the local authenticator.
 
 If the local authenticator is disabled without another authentication method configured, or if an issue arises with your configured enterprise authentication provider, making the Ansible Automation Platform inaccessible, you can re-enable the local authenticator from the command line as follows:
 
 1. List the available authenticators and retrieve the ID of your local authenticator by running the following command:
 
 ```
-aap-gateway-api authenticators --list
+aap-gateway-manage authenticators --list
 ```
 
 2. Enable the local authenticator using its ID:

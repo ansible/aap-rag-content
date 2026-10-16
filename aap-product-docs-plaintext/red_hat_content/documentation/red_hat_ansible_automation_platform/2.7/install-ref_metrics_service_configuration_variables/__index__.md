@@ -31,21 +31,41 @@ Note:
 
 **Note on certificate authentication:** When `automationmetrics_pg_cert_auth: true`, password variables (`automationmetrics_pg_password` and `automationmetrics_controller_read_pg_password`) are not required. The service uses PostgreSQL certificate-based authentication instead.
 
-**Dashboard and feature flags**
-
-| Variable                               | Default | Required/Optional | Description                                                                                                                                                                                              |
-| -------------------------------------- | ------- | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `FEATURE_DASHBOARD_COLLECTION_ENABLED` | `false` | Optional          | Enable automation dashboard data collection. When`true`, metrics service collects dashboard-specific metrics (cost data, ROI calculations, and pricing information) in addition to standard anonymized metrics. Maps to environment variable`METRICS_SERVICE_FEATURE_ENABLED__DASHBOARD_COLLECTION`. |
-
-## Dashboard feature flag
-
-**Inventory Variable:** `FEATURE_DASHBOARD_COLLECTION_ENABLED`
+**Flag:** `FEATURE_INDIRECT_NODE_COLLECTION_ENABLED`
 
 **Default:** `false`
 
-**Purpose:** Enable automation dashboard data collection
+**Level:** Gateway AAPFlag (platform-level)
 
-When enabled (`FEATURE_DASHBOARD_COLLECTION_ENABLED: true`):
+**Restart required:** No
 
-- Collects dashboard-specific data (cost, ROI, pricing information)
-- Runs on 6-hourly schedule to minimize database impact
+**Purpose:** Enable daily collection of indirect node audit data from the controller database
+
+When enabled (`FEATURE_INDIRECT_NODE_COLLECTION_ENABLED: true`):
+
+- Collects daily snapshots of API-managed indirect nodes (for example, network devices managed through Ansible collections)
+- Includes indirect node counts grouped by Ansible collection and module in the anonymized payload sent to Red Hat
+- Host names and organization names are stripped from the payload before transmission
+
+This flag is set at the Gateway level, not through `automationmetrics_*` inventory variables. No additional inventory configuration is required.
+
+Feature flags resolve through the following priority chain (highest to lowest):
+
+1. DB Setting (`dynamic_settings` table)
+2. Dynaconf / environment variable
+3. Direct settings attribute
+4. DAB AAPFlag (Gateway-level)
+5. Default value
+
+## Events collector settings
+
+The events collector (main_jobevent_service) processes job event data to extract collection, module, and role usage statistics. These variables are configurable as Django settings or environment variables without a code change. Use them to control collection volume on large deployments.
+
+| Variable             | Default | Description                                                                                                      |
+| -------------------- | ------- | ---------------------------------------------------------------------------------------------------------------- |
+| `JOBEVENT_ROW_LIMIT` | 200,000 | Maximum number of job event rows to process per hourly collection cycle. Set to 0 for unlimited processing.      |
+| `JOBEVENT_JOB_LIMIT` | 1,000   | Maximum number of jobs to process for event data per hourly collection cycle. Set to 0 for unlimited processing. |
+
+Warning:
+
+Setting `JOBEVENT_ROW_LIMIT` or `JOBEVENT_JOB_LIMIT` to 0 removes the limit entirely, causing the collector to process all available events. On large deployments with high job volumes, this can significantly increase collection time and database load. To effectively disable event collection for performance reasons, set both values to 1.

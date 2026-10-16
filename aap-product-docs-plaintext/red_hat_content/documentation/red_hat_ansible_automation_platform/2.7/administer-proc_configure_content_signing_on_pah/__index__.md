@@ -11,7 +11,9 @@ To successfully sign and publish Ansible Certified Content Collections, you must
 
 ## Procedure
 
-1.  Create a signing script that accepts only a filename. Note:
+1. Create a signing script that accepts only a filename.
+
+Note:
 This script acts as the signing service and must generate an ascii-armored detached `gpg` signature for that file using the key specified through the `PULP_SIGNING_KEY_FINGERPRINT` environment variable.
 
 The script prints out a JSON structure with the following format.
@@ -20,7 +22,8 @@ The script prints out a JSON structure with the following format.
 {"file": "filename", "signature": "filename.asc"}
 ```
 
-All the file names are relative paths inside the current working directory. The file name must remain the same for the detached signature.
+All the file names are relative paths inside the current working directory.
+The file name must remain the same for the detached signature.
 
 **Example:** The following script produces signatures for content:
 
@@ -49,7 +52,8 @@ fi
 
 After you deploy a private automation hub with signing enabled to your Ansible Automation Platform cluster, new UI additions are displayed in collections.
 
-2.  Review the Ansible Automation Platform installer inventory file for options that begin with `automationhub_*`.
+2. Review the Ansible Automation Platform installer inventory file for options that begin with `automationhub_*`.
+
 
 ```
 [all:vars]

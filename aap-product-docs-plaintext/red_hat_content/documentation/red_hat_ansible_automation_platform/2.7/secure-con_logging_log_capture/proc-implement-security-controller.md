@@ -9,17 +9,17 @@ To implement the security control, use the following procedure:
 
 ### Procedure
 
-1.  As a system administrator for each automation controller host, set the permissions and owner of the automation controller NGINX log directory:
+1. As a system administrator for each automation controller host, set the permissions and owner of the automation controller NGINX log directory:
 
 -  `chmod 770 /var/log/nginx`
 -  `chown nginx:root /var/log/nginx`
 
-2.  Set the permissions and owner of the automation controller log directory:
+2. Set the permissions and owner of the automation controller log directory:
 
 -  `chmod 770 /var/log/tower`
 -  `chown awx:awx /var/log/tower`
 
-3.  Set the permissions and owner of the automation controller supervisor log directory:
+3. Set the permissions and owner of the automation controller supervisor log directory:
 
 -  `chmod 770 /var/log/supervisor/`
 -  `chown root:root /var/log/supervisor/`

@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_self_service_cloud_init_reference"
 title = "Cloud-init reference - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_self_service_rhel_appliances/", "Deploy Ansible automation portal RHEL appliance"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-ref_self_service_cloud_init_reference/aem-page/install-ref_self_service_cloud_init_reference.html"
 last_crumb = "Cloud-init reference"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Cloud-init reference"
 oversized = "false"
@@ -43,13 +44,15 @@ The following tables describe all cloud-init fields supported by the Ansible aut
 
 *Table 2. Ansible Automation Platform connection fields*
 
-| Field                     | Required | Default | Description                                                              |
-| ------------------------- | -------- | ------- | ------------------------------------------------------------------------ |
-| `aap.host_url`            | Yes      | --      | Ansible Automation Platform URL (for example,`https://aap.example.com`). |
-| `aap.token`               | Yes      | --      | Ansible Automation Platform API token with administrator privileges.     |
-| `aap.check_ssl`           | No       | `true`  | Set`false` for self-signed Ansible Automation Platform certificates.     |
-| `aap.oauth.client_id`     | Yes      | --      | OAuth 2.0 application client ID.                                         |
-| `aap.oauth.client_secret` | Yes      | --      | OAuth 2.0 application client secret.                                     |
+| Field                     | Required | Default   | Description                                                                                                                        |
+| ------------------------- | -------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `aap.host_url`            | Yes      | --        | Ansible Automation Platform URL (for example,`https://aap.example.com`).                                                           |
+| `aap.token`               | Yes      | --        | Ansible Automation Platform API token with administrator privileges.                                                               |
+| `aap.check_ssl`           | No       | `true`    | Set`false` for self-signed Ansible Automation Platform certificates.                                                               |
+| `aap.oauth.client_id`     | Yes      | --        | OAuth 2.0 application client ID.                                                                                                   |
+| `aap.oauth.client_secret` | Yes      | --        | OAuth 2.0 application client secret.                                                                                               |
+| `aap.multiOrgEnabled`     | No       | `false`   | Set to`true` to enable multi-organization namespace scoping. When`false`, only the first organization in the`orgs` list is synced. |
+| `aap.orgs`                | No       | `Default` | YAML list of AAP organization names to synchronize. When omitted, the portal syncs only the Default organization.                  |
 
 ## Database
 
@@ -110,12 +113,12 @@ Cloud-init supports a single GitHub and a single GitLab host. For multiple hosts
 
 *Table 7. GitLab integration fields*
 
-| Field                                     | Required | Default      | Description                                                                          |
-| ----------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------ |
-| `integrations.gitlab.url`                 | No       | `gitlab.com` | GitLab hostname. For self-hosted GitLab, omit`https://`.                             |
-| `integrations.gitlab.token`               | No       | --           | GitLab personal access token for content discovery.                                  |
-| `integrations.gitlab.oauth.client_id`     | No       | --           | GitLab OAuth client ID for saving execution environment definitions to repositories. |
-| `integrations.gitlab.oauth.client_secret` | No       | --           | GitLab OAuth client secret.                                                          |
+| Field                                     | Required | Default      | Description                                                                                                                                                  |
+| ----------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `integrations.gitlab.apiBaseUrl`          | No       | `gitlab.com` | GitLab API base URL. For self-hosted GitLab, use the hostname without`https://` (for example,`gitlab.example.com`). For`gitlab.com`, this field is optional. |
+| `integrations.gitlab.token`               | No       | --           | GitLab personal access token for content discovery.                                                                                                          |
+| `integrations.gitlab.oauth.client_id`     | No       | --           | GitLab OAuth client ID for saving execution environment definitions to repositories.                                                                         |
+| `integrations.gitlab.oauth.client_secret` | No       | --           | GitLab OAuth client secret.                                                                                                                                  |
 
 Note:
 

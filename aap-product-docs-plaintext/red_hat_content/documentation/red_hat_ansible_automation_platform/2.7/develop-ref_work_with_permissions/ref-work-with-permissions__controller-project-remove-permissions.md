@@ -1,7 +1,8 @@
 # Configure project permissions
 ## Remove permissions from a project
 
-Remove existing roles assigned to users and teams within an automation controller project. This action helps ensure that access is restricted only to the necessary functions and data.
+Remove existing roles assigned to users and teams within an automation controller project.
+This action helps ensure that access is restricted only to the necessary functions and data.
 
 **Procedure**
 

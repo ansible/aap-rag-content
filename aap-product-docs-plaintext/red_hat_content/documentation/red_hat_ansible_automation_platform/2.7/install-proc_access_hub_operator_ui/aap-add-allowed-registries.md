@@ -7,13 +7,13 @@ Before you can deploy a container image in automation hub, you must add the regi
 
 ### Procedure
 
-1.  Log in to **Red Hat OpenShift Container Platform**.
-2.  Navigate to Home> (and then)Search.
-3.  Select the **Resources** drop-down list and type "Image".
-4.  Select **Image (config,openshift.io/v1)**.
-5.  Click Cluster under the **Name** heading.
-6.  Select the YAML tab.
-7.  Paste in the following under spec value:
+1. Log in to **Red Hat OpenShift Container Platform**.
+2. Navigate to Home> (and then)Search.
+3. Select the **Resources** drop-down list and type "Image".
+4. Select **Image (config,openshift.io/v1)**.
+5. Click Cluster under the **Name** heading.
+6. Select the YAML tab.
+7. Paste in the following under spec value:
 
 
 ```
@@ -26,5 +26,5 @@ allowedRegistries:
 - <OpenShift Container Platform route for your automation hub>
 ```
 
-8.  Click Save.
+8. Click Save.
 

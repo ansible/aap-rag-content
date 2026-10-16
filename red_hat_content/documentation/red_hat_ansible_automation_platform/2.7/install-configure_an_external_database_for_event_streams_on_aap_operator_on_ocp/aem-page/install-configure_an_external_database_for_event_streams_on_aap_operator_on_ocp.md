@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 title = "Configure an external database for event streams in Operator on OpenShift Container Platform - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-configure_an_external_database_for_event_streams_on_aap_operator_on_ocp"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator/", "Install on OpenShift Container Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-configure_an_external_database_for_event_streams_on_aap_operator_on_ocp/aem-page/install-configure_an_external_database_for_event_streams_on_aap_operator_on_ocp.html"
 last_crumb = "Configure an external database for event streams in Operator on OpenShift Container Platform"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure an external database for event streams in Operator on OpenShift Container Platform"
 oversized = "false"
@@ -32,10 +33,15 @@ The Ansible Automation Platform Operator automatically creates a dedicated Postg
 ## Before you begin
 
 - The external database must run an Ansible Automation Platform-supported version of PostgreSQL: version 15, 16, or 17.
+- If you use an external database, you must create a dedicated `eda_event_stream` database user on your Event-Driven Ansible database before proceeding. The Operator creates this user automatically only for Operator-managed databases.
+
+Note:
+
+Event streams use the Event-Driven Ansible database connection for pub-sub messaging only. No read or write operations are performed on the database for event streams, so `CONNECT`-only permissions for the `eda_event_stream` user are sufficient.
 
 ## Procedure
 
-1.  Create an `event_stream_postgres_configuration_secret` YAML file:
+1. Create an `event_stream_postgres_configuration_secret` YAML file:
   
 
 ```
@@ -57,7 +63,7 @@ stringData:
 ----
 ```
 
-2.  Apply the secret to your cluster:
+2. Apply the secret to your cluster:
   
 
 ```
@@ -66,7 +72,7 @@ $ oc create -f eda-event-stream-postgres-configuration-secret.yml
 ----
 ```
 
-3.  When creating your `AnsibleAutomationPlatform` custom resource, specify the secret under the Event-Driven Ansible spec:
+3. When creating your `AnsibleAutomationPlatform` custom resource, specify the secret under the Event-Driven Ansible spec:
   
 
 ```
@@ -79,6 +85,6 @@ metadata:
 spec:
  eda:
   event_stream:
-   postgres_configuration_secret: eda-event-stream-postgres-configuration
+   database_secret: eda-event-stream-postgres-configuration
 ----
 ```

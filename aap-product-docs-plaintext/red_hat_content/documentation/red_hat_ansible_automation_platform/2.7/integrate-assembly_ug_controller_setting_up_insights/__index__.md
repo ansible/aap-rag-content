@@ -1,6 +1,10 @@
-# Integrate with Red Hat Lightspeed (formerly Insights)
+# Integrate with Red Hat Lightspeed for vulnerability management
 
 Automation controller supports integration with Red Hat Lightspeed.
+
+Note:
+
+Red Hat Lightspeed (formerly Red Hat Insights) provides vulnerability scanning and patch management. This is separate from the Ansible Lightspeed coding assistant, which provides AI-powered code suggestions in IDEs. For information about the coding assistant, see Build automation content faster with the Ansible Lightspeed coding assistant in the Develop section.
 
 When a host is registered with Red Hat Lightspeed, it is scanned continually for vulnerabilities and known configuration conflicts. Each problem identified can have an associated fix in the form of an Ansible Playbook.
 

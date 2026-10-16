@@ -1,0 +1,23 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Enable the MCP server through the VS Code settings menu",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Procedure",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-f1108879-278f-4206-8ac0-2b5fc16fd82a__steps_1",
+          "anchor": null,
+          "singlePageAnchor": "GUID-f1108879-278f-4206-8ac0-2b5fc16fd82a__steps_1"
+        }
+      ]
+    }
+  ]
+}

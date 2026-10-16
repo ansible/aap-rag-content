@@ -10,27 +10,9 @@
       "singlePageAnchor": null,
       "sections": [
         {
-          "title": "Requirements for Ansible development tools on Windows",
-          "visible": true,
-          "weight": 1,
-          "urlFragment": "devtools-install-podman-desktop-wsl",
-          "anchor": null,
-          "singlePageAnchor": "devtools-install-podman-desktop-wsl",
-          "sections": [
-            {
-              "title": "Before you begin",
-              "visible": true,
-              "weight": 1,
-              "urlFragment": "devtools-install-podman-desktop-wsl",
-              "anchor": "devtools-install-podman-desktop-wsl__prereq_1",
-              "singlePageAnchor": "devtools-install-podman-desktop-wsl__prereq_1"
-            }
-          ]
-        },
-        {
           "title": "Authenticate with the Red Hat container registry",
           "visible": true,
-          "weight": 2,
+          "weight": 1,
           "urlFragment": "devtools-setup-registry-redhat-io",
           "anchor": null,
           "singlePageAnchor": "devtools-setup-registry-redhat-io"

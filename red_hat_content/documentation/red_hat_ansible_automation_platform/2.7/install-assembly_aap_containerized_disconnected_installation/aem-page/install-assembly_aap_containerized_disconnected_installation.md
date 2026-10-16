@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_containerized_disconnected_installation"
 template = "docs/aem-title.html"
 title = "Install in a disconnected environment - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_containerized_disconnected_installation"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_aap_containerized_installation_intro/", "Install containerized Ansible Automation Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_aap_containerized_disconnected_installation/aem-page/install-assembly_aap_containerized_disconnected_installation.html"
 last_crumb = "Install in a disconnected environment"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Install in a disconnected environment"
 oversized = "false"
@@ -90,7 +91,7 @@ The Ansible Automation Platform containerized setup bundle installation program 
 
 ### Procedure
 
- Use one of the following methods to access these dependencies in a disconnected environment:
+Use one of the following methods to access these dependencies in a disconnected environment:
 
 - Use [Red Hat Satellite](https://docs.redhat.com/en/documentation/red_hat_satellite/6.16/html/installing_satellite_server_in_a_disconnected_network_environment/index) to synchronize repositories in your disconnected environment.
 - Use a local repository that you create with the `reposync` command on a Red Hat Enterprise Linux host that has an active internet connection.
@@ -106,7 +107,7 @@ With the `reposync` command you can to synchronize the BaseOS and AppStream repo
 
 #### Procedure
 
-1.  Attach the BaseOS and AppStream repositories using `subscription-manager`, replacing `<RHEL_VERSION>` with your RHEL version number:
+1. Attach the BaseOS and AppStream repositories using `subscription-manager`, replacing `<RHEL_VERSION>` with your RHEL version number:
   
 
 ```
@@ -115,14 +116,14 @@ $ sudo subscription-manager repos \
     --enable rhel-<RHEL_VERSION>-appstream-rhui-rpms
 ```
 
-2.  Install the `yum-utils` package:
+2. Install the `yum-utils` package:
   
 
 ```
 $ sudo dnf install yum-utils
 ```
 
-3.  Synchronize the repositories with the `reposync` command. Replace `<path_to_download>` with a suitable value.
+3. Synchronize the repositories with the `reposync` command. Replace `<path_to_download>` with a suitable value.
 
 ```
 $ sudo reposync -m --download-metadata --gpgcheck \
@@ -138,29 +139,29 @@ $ sudo reposync -m --download-metadata --gpgcheck \
 
   - Use reposync with the `--download-metadata` option and without the `--newest-only` option for optimal download time.
 
-4.  After the `reposync` operation is complete, compress the directory:
+4. After the `reposync` operation is complete, compress the directory:
   
 
 ```
 $ tar czvf rhel-repos.tar.gz rhel-repos
 ```
 
-5.  Move the compressed archive to your disconnected environment.
-6.  On the disconnected environment, create a directory to store the repository files:
+5. Move the compressed archive to your disconnected environment.
+6. On the disconnected environment, create a directory to store the repository files:
   
 
 ```
 $ sudo mkdir /opt/rhel-repos
 ```
 
-7.  Extract the archive into the `/opt/rhel-repos` directory. The following command assumes the archive file is in your home directory:
+7. Extract the archive into the `/opt/rhel-repos` directory. The following command assumes the archive file is in your home directory:
   
 
 ```
 $ sudo tar xzvf ~/rhel-repos.tar.gz -C /opt
 ```
 
-8.  Create a Yum repository file at `/etc/yum.repos.d/rhel.repo` with the following content, replacing `<RHEL_VERSION>` with your RHEL version number:
+8. Create a Yum repository file at `/etc/yum.repos.d/rhel.repo` with the following content, replacing `<RHEL_VERSION>` with your RHEL version number:
   
 
 ```
@@ -179,14 +180,14 @@ gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
 ```
 
-9.  Import the gpg key to allow the system to verify the packages, replacing `<RHEL_VERSION>` with your RHEL version number:
+9. Import the gpg key to allow the system to verify the packages, replacing `<RHEL_VERSION>` with your RHEL version number:
   
 
 ```
 $ sudo rpm --import /opt/rhel-repos/rhel-<RHEL_VERSION>-baseos-rhui-rpms/RPM-GPG-KEY-redhat-release
 ```
 
-10.  Verify the repository configuration:
+10. Verify the repository configuration:
   
 
 ```
@@ -203,14 +204,14 @@ You can use a Red Hat Enterprise Linux Binary DVD image to access the necessary 
 
 #### Procedure
 
-1.  In your disconnected environment, create a mount point directory to serve as the location for the ISO file:
+1. In your disconnected environment, create a mount point directory to serve as the location for the ISO file:
   
 
 ```
 $ sudo mkdir /media/rhel
 ```
 
-2.  Mount the ISO image to the mount point. Replace `<version_number>` and `<arch_name>` with suitable values:
+2. Mount the ISO image to the mount point. Replace `<version_number>` and `<arch_name>` with suitable values:
   
 
 ```
@@ -220,7 +221,7 @@ $ sudo mount -o loop rhel-<version_number>-<arch_name>-dvd.iso /media/rhel
   Note:
   The ISO is mounted in a read-only state.
 
-3.  Create a Yum repository file at `/etc/yum.repos.d/rhel.repo` with the following content:
+3. Create a Yum repository file at `/etc/yum.repos.d/rhel.repo` with the following content:
   
 
 ```
@@ -239,14 +240,14 @@ gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
 ```
 
-4.  Import the gpg key to allow the system to verify the packages:
+4. Import the gpg key to allow the system to verify the packages:
   
 
 ```
 $ sudo rpm --import /media/rhel/RPM-GPG-KEY-redhat-release
 ```
 
-5.  Verify the repository configuration:
+5. Verify the repository configuration:
   
 
 ```
@@ -267,11 +268,11 @@ A disconnected installation installs containerized Ansible Automation Platform w
 
 #### Procedure
 
-1.  Log in to the Red Hat Enterprise Linux host as your non-root user.
-2.  Update the inventory file by following the steps in [Configure the inventory file](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_configuring_inventory_file#configuring-inventory-file___inventory_file_for_online_installation_for_containerized_enterprise_topology). Note:
+1. Log in to the Red Hat Enterprise Linux host as your non-root user.
+2. Update the inventory file by following the steps in [Configure the inventory file](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_configuring_inventory_file#configuring-inventory-file___inventory_file_for_online_installation_for_containerized_enterprise_topology). Note:
       Do not include `registry_username` or `registry_password` in your inventory file for disconnected installations. These variables are only required for online installations. All container images are pre-packaged in the setup bundle.
 
-3.  Ensure you include the following variables in your inventory file under the `[all:vars]` group:
+3. Ensure you include the following variables in your inventory file under the `[all:vars]` group:
   
 
 ```
@@ -280,7 +281,7 @@ bundle_install=true
 bundle_dir='{{ lookup("ansible.builtin.env", "PWD") }}/bundle'
 ```
 
-4.  Follow the steps in [Install containerized Ansible Automation Platform](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_installing_containerized_aap#installing-containerized-aap "Run the install playbook to install containerized Ansible Automation Platform after preparing the Red Hat Enterprise Linux host, downloading the installation program, and configuring the inventory file.") to install containerized Ansible Automation Platform and verify your installation.
+4. Follow the steps in [Install containerized Ansible Automation Platform](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_installing_containerized_aap#installing-containerized-aap "Run the install playbook to install containerized Ansible Automation Platform after preparing the Red Hat Enterprise Linux host, downloading the installation program, and configuring the inventory file.") to install containerized Ansible Automation Platform and verify your installation.
 
 #### Metrics service in disconnected environments
 
@@ -343,4 +344,4 @@ In disconnected environments, metrics service does not require outbound internet
 
 Note:
 
-Port 443 outbound to `cert.console.redhat.com` is optional and only required if you want to enable anonymized data transmission to Red Hat (not applicable in disconnected environments).
+Port 443 outbound to `api.segment.io` is optional and only required if you want to enable anonymized data transmission to Red Hat (not applicable in disconnected environments).

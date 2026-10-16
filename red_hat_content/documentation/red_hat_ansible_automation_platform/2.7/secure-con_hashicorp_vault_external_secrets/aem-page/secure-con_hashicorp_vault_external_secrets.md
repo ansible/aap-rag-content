@@ -1,7 +1,7 @@
 +++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_hashicorp_vault_external_secrets"
 title = "Integrate with HashiCorp to secure sensitive data - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_hashicorp_vault_external_secrets"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_hardening_aap/", "Harden the platform security posture"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_hashicorp_vault_external_secrets/aem-page/secure-con_hashicorp_vault_external_secrets.html"
 last_crumb = "Integrate with HashiCorp to secure sensitive data"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Integrate with HashiCorp to secure sensitive data"
 oversized = "false"
@@ -43,17 +44,18 @@ To test the credential to test for functionally and operation, use the following
 
 ### Procedure
 
-1.  Before clicking on **Create Credential**, click Test.
-2.  In the pop-up box, enter the **Path to Secret** and the **Key Name**.  Note:
+1. Before clicking on **Create Credential**, click Test.
+2. In the pop-up box, enter the **Path to Secret** and the **Key Name**. Note:
       The **Path to Secret** will be prefixed by `kv` if storing a key-value pair, for example, `kv/key_name`.
 
-3.  Click Run.
-4.  When the test is successful, click Create Credential.
-5.  When complete, Ansible Automation Platform is properly configured to use HashiCorp Vault as an external secret source.
+3. Click Run.
+4. When the test is successful, click Create Credential.
+5. When complete, Ansible Automation Platform is properly configured to use HashiCorp Vault as an external secret source.
 
 ## Use HashiCorp Vault credentials within Ansible Automation Platform
 
-To use HashiCorp vault credentials within Ansible Automation Platform, create a new credential with the type **Machine Credential**. Enter relevant information such as an identifiable credential name and an organization.
+To use HashiCorp vault credentials within Ansible Automation Platform, create a new credential with the type **Machine Credential**.
+Enter relevant information such as an identifiable credential name and an organization.
 
 ### About this task
 
@@ -61,10 +63,10 @@ To configure the use of HashiCorp Vault credentials, use the following procedure
 
 ### Procedure
 
-1.  To configure the **Username**, click the ![Key](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftkey.png) icon.
-2.  Select the HashiCorp Vault credentials that were created in step 1.
-3.  Populate **Path to Secret** and the **Key Name**.
-4.  Optionally, click Test. Otherwise, click Finish.
+1. To configure the **Username**, click the ![Key](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftkey.png) icon.
+2. Select the HashiCorp Vault credentials that were created in step 1.
+3. Populate **Path to Secret** and the **Key Name**.
+4. Optionally, click Test. Otherwise, click Finish.
 
 ## Configure the machine credential’s SSH private key
 
@@ -72,8 +74,8 @@ Link your machine credential's SSH private key to HashiCorp Vault. Retrieving th
 
 ### Procedure
 
-1.  To configure the **Username**, click the ![Key](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftkey.png) icon.
-2.  Select the HashiCorp Vault credentials that you created.
-3.  Populate the **Path to Secret** and the **Key Name**.
-4.  Select the name of the private key as the **Key Name**.
-5.  Optionally, click Test. Otherwise, click Finish.
+1. To configure the **Username**, click the ![Key](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftkey.png) icon.
+2. Select the HashiCorp Vault credentials that you created.
+3. Populate the **Path to Secret** and the **Key Name**.
+4. Select the name of the private key as the **Key Name**.
+5. Optionally, click Test. Otherwise, click Finish.

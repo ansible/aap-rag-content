@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_sync_content_sources"
-template = "docs/aem-title.html"
 title = "Synchronize content sources - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-build_execution_environments_with_the_automation_portal/", "Build execution environments with automation portal"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_sync_content_sources/aem-page/develop-proc_sync_content_sources.html"
 last_crumb = "Synchronize content sources"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Synchronize content sources"
 oversized = "false"
@@ -42,15 +43,15 @@ After syncing, discovered collections and EE definitions become available for us
 
 ## Procedure
 
-1.  Navigate to the **Collections** page.
-2.  Click **Sync Now** in the top-right corner.
-3.  In the modal, select the content sources you want to sync.
+1. Navigate to the **Collections** page.
+2. Click **Sync Now** in the top-right corner.
+3. In the modal, select the content sources you want to sync.
       You can sync selectively by provider, host, or organization rather than syncing all sources at once.
 
   Note:
       Synchronization time depends on the number of collections and metadata in your configured repositories. Large repositories can take significantly longer. To reduce sync time, configure your private automation hub to sync only the collections your teams need.
 
-4.  Click **Sync Selected**.
+4. Click **Sync Selected**.
   
   Note:
       A toast notification confirms which sources are syncing. The **Sync Now** button is disabled during the operation and re-enabled when all selected sources finish.

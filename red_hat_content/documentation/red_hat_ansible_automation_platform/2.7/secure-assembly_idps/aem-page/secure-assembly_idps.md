@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_idps"
 title = "Automate network intrusion detection and prevention systems - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_idps/", "Automate network intrusion detection and prevention systems"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-assembly_idps/aem-page/secure-assembly_idps.html"
 last_crumb = "Automate network intrusion detection and prevention systems"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Automate network intrusion detection and prevention systems"
 oversized = "false"
@@ -44,7 +45,7 @@ Use the following procedure to verify that Snort has been configured successfull
 
 ### Procedure
 
-1.  Call snort using `sudo` and ask for the version:
+1. Call snort using `sudo` and ask for the version:
   
 
 ```
@@ -60,7 +61,7 @@ $ sudo snort --version
         Using ZLIB version: 1.2.7
 ```
 
-2.  Verify that the service is actively running using the following command:
+2. Verify that the service is actively running using the following command:
       `sudo systemctl`:
 
 ```
@@ -74,14 +75,16 @@ $ sudo systemctl status snort
 [...]
 ```
 
-3.  If the Snort service is not actively running, restart it with `systemctl restart snort` and recheck the status.
-4.  When you confirm that the service is actively running, exit the Snort server by simultaneously pressing `CTRL` and `D`, or by typing `exit` on the command line. All further interaction will be done through Ansible Automation Platform from the Ansible control host.
+3. If the Snort service is not actively running, restart it with `systemctl restart snort` and recheck the status.
+4. When you confirm that the service is actively running, exit the Snort server by simultaneously pressing `CTRL` and `D`, or by typing `exit` on the command line. All further interaction will be done through Ansible Automation Platform from the Ansible control host.
 
 ## Automate your IDPS rules with Ansible Automation Platform
 
-To automate your IDPS, use the `ids_rule` role to create and change Snort rules. Snort uses rule-based language that analyzes your network traffic and compares it against the given rule set.
+To automate your IDPS, use the `ids_rule` role to create and change Snort rules.
+Snort uses rule-based language that analyzes your network traffic and compares it against the given rule set.
 
-The following lab environment demonstrates what an Ansible security automation integration would look like. A machine called “Attacker” simulates a potential attack pattern on the target machine on which the IDPS is running.
+The following lab environment demonstrates what an Ansible security automation integration would look like.
+A machine called “Attacker” simulates a potential attack pattern on the target machine on which the IDPS is running.
 
 Keep in mind that a real world setup will feature other vendors and technologies.
 
@@ -99,16 +102,16 @@ Use the `ids_rule` role to manage your rules and signatures for IDPS.
 
 For example, you can set a new rule that looks for a certain pattern aligning with a previous attack on your firewall.
 
- Note:
+Note:
 
 Currently, the `ids_rule` role only supports Snort IDPS.
 
 ### Procedure
 
-1.  Install the `ids_rule` role using the ansible-galaxy command:
-       `$ ansible-galaxy install ansible_security.ids_rule`
+1. Install the `ids_rule` role using the ansible-galaxy command:
+      `$ ansible-galaxy install ansible_security.ids_rule`
 
-2.  Create a new playbook file titled `add_snort_rule.yml`. Set the following parameters:
+2. Create a new playbook file titled `add_snort_rule.yml`. Set the following parameters:
   
 
 ```
@@ -116,7 +119,8 @@ Currently, the `ids_rule` role only supports Snort IDPS.
   hosts: snort
 ```
 
-3.  Add the `become` flag to ensure that Ansible handles privilege escalation.
+3. Add the `become` flag to ensure that Ansible handles privilege escalation.
+  
 
 ```
 - name: Add Snort rule
@@ -124,7 +128,7 @@ Currently, the `ids_rule` role only supports Snort IDPS.
   become: true
 ```
 
-4.  Specify the name of your IDPS provider by adding the following variables:
+4. Specify the name of your IDPS provider by adding the following variables:
   
 
 ```
@@ -136,7 +140,7 @@ Currently, the `ids_rule` role only supports Snort IDPS.
     ids_provider: snort
 ```
 
-5.  Add the following tasks and task-specific variables, for example, rules, Snort rules file, and the state of the rule - present or absent, to the playbook:
+5. Add the following tasks and task-specific variables, for example, rules, Snort rules file, and the state of the rule - present or absent, to the playbook:
   
 
 ```
@@ -161,8 +165,8 @@ Currently, the `ids_rule` role only supports Snort IDPS.
 
     The `ids_rules_file` variable specifies a defined location for the `local.rules` file, while the `ids_rule_state` variable indicates that the rule should be created if it does not already exist.
 
-6.  Run the playbook by executing the following command:
-       `$ ansible-navigator run add_snort_rule.ym --mode stdout`
+6. Run the playbook by executing the following command:
+      `$ ansible-navigator run add_snort_rule.ym --mode stdout`
 
     When the playbook runs, all of your tasks will be executed in addition to your newly created rules. Your playbook output confirms your PLAY, TASK, RUNNING HANDLER, and PLAY RECAP.
 

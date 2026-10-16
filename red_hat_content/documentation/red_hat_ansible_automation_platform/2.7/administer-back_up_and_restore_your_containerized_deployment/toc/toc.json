@@ -36,9 +36,35 @@
           ]
         },
         {
-          "title": "Restore containerized Ansible Automation Platform",
+          "title": "What the restore playbook restores",
           "visible": true,
           "weight": 3,
+          "urlFragment": "GUID-adbda444-8ecd-4d36-b882-20c491150af4",
+          "anchor": null,
+          "singlePageAnchor": "GUID-adbda444-8ecd-4d36-b882-20c491150af4",
+          "sections": [
+            {
+              "title": "Data restored from backup",
+              "visible": true,
+              "weight": 1,
+              "urlFragment": "GUID-adbda444-8ecd-4d36-b882-20c491150af4",
+              "anchor": "GUID-adbda444-8ecd-4d36-b882-20c491150af4__section-restored",
+              "singlePageAnchor": "GUID-adbda444-8ecd-4d36-b882-20c491150af4__section-restored"
+            },
+            {
+              "title": "Data not restored by the restore playbook",
+              "visible": true,
+              "weight": 2,
+              "urlFragment": "GUID-adbda444-8ecd-4d36-b882-20c491150af4",
+              "anchor": "GUID-adbda444-8ecd-4d36-b882-20c491150af4__section-not-restored",
+              "singlePageAnchor": "GUID-adbda444-8ecd-4d36-b882-20c491150af4__section-not-restored"
+            }
+          ]
+        },
+        {
+          "title": "Restore containerized Ansible Automation Platform",
+          "visible": true,
+          "weight": 4,
           "urlFragment": "proc-restore-aap-container",
           "anchor": null,
           "singlePageAnchor": "proc-restore-aap-container"
@@ -46,7 +72,7 @@
         {
           "title": "Skip database restore when using an external database",
           "visible": true,
-          "weight": 4,
+          "weight": 5,
           "urlFragment": "GUID-b9a280fb-2fc4-4264-bcbd-f10b022bac20",
           "anchor": null,
           "singlePageAnchor": "GUID-b9a280fb-2fc4-4264-bcbd-f10b022bac20",
@@ -62,9 +88,17 @@
           ]
         },
         {
+          "title": "Recover from a broken or degraded environment",
+          "visible": true,
+          "weight": 6,
+          "urlFragment": "GUID-dfe0173d-3afc-4cdf-942f-22baaf51fe0e",
+          "anchor": null,
+          "singlePageAnchor": "GUID-dfe0173d-3afc-4cdf-942f-22baaf51fe0e"
+        },
+        {
           "title": "Back up and restore metrics service",
           "visible": true,
-          "weight": 5,
+          "weight": 7,
           "urlFragment": "task-backup-restore-metrics-service",
           "anchor": null,
           "singlePageAnchor": "task-backup-restore-metrics-service"

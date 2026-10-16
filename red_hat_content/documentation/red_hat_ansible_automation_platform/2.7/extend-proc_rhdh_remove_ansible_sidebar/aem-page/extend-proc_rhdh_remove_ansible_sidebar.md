@@ -1,7 +1,7 @@
 +++
-title = "Remove the Ansible sidebar navigation item - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-proc_rhdh_remove_ansible_sidebar"
+title = "Remove the Ansible sidebar navigation item - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_intro/", "Ansible plug-ins for Red Hat Developer Hub"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-proc_rhdh_remove_ansible_sidebar/aem-page/extend-proc_rhdh_remove_ansible_sidebar.html"
 last_crumb = "Remove the Ansible sidebar navigation item"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Remove the Ansible sidebar navigation item"
 oversized = "false"
@@ -37,8 +38,8 @@ The `/ansible` route remains accessible by URL. Only the sidebar navigation item
 
 ## Procedure
 
-1.  In your dynamic plug-ins configuration, locate the `ansible.plugin-backstage-rhaap` frontend plug-in entry.
-2.  Remove the `menuItem` block from the `dynamicRoutes` section.
+1. In your dynamic plug-ins configuration, locate the `ansible.plugin-backstage-rhaap` frontend plug-in entry.
+2. Remove the `menuItem` block from the `dynamicRoutes` section.
       **Before (sidebar item enabled):**
 
 ```yaml
@@ -72,4 +73,4 @@ pluginConfig:
             path: /ansible
 ```
 
-3.  Apply the changes. For Helm deployments, click **Upgrade**. For Operator deployments, the deployment auto-reloads when the ConfigMap is updated.
+3. Apply the changes. For Helm deployments, click **Upgrade**. For Operator deployments, the deployment auto-reloads when the ConfigMap is updated.

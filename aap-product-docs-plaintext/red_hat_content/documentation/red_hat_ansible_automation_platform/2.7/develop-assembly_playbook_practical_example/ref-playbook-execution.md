@@ -1,7 +1,9 @@
 # Example: automate software updates
 ## Playbook execution
 
-A playbook runs in order from top to bottom. Within each play, tasks also run in order from top to bottom. Playbooks with multiple 'plays' can orchestrate multi-machine deployments, running one play on your webservers, then another play on your database servers, and so on.
+A playbook runs in order from top to bottom.
+Within each play, tasks also run in order from top to bottom.
+Playbooks with multiple 'plays' can orchestrate multi-machine deployments, running one play on your webservers, then another play on your database servers, and so on.
 
 At a minimum, each play defines two things:
 
@@ -53,6 +55,10 @@ The playbook contains two plays:
 
 Your playbook can include more than just a hosts line and tasks.
 
-For example, this example playbook sets a remote_user for each play. This is the user account for the SSH connection. You can add other playbook keywords at the playbook, play, or task level to influence how Ansible behaves. Playbook keywords can control the connection plugin, whether to use privilege escalation, how to handle errors, and more.
+For example, this example playbook sets a remote_user for each play.
+This is the user account for the SSH connection.
+You can add other playbook keywords at the playbook, play, or task level to influence how Ansible behaves.
+Playbook keywords can control the connection plugin, whether to use privilege escalation, how to handle errors, and more.
 
-To support a variety of environments, Ansible enables you to set many of these parameters as command-line flags, in your Ansible configuration, or in your inventory. Learning the precedence rules for these sources of data can help you as you expand your Ansible ecosystem
+To support a variety of environments, Ansible enables you to set many of these parameters as command-line flags, in your Ansible configuration, or in your inventory.
+Learning the precedence rules for these sources of data can help you as you expand your Ansible ecosystem

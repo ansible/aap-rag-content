@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/integrate-proc_terraform_provider_configuring/aem-page/integrate-proc_terraform_provider_configuring.html"
 last_crumb = "Configure the provider"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure the provider"
 oversized = "false"
@@ -44,7 +45,7 @@ The provider configuration belongs in the root module of a Terraform configurati
 
 ## Procedure
 
-1.  Create a Terraform configuration (`.tf`) file. Include a `provider` block. The name given in the block header is the local name of the provider to configure. This provider should already be included in a `required_providers` block.  **Example**
+1. Create a Terraform configuration (`.tf`) file. Include a `provider` block. The name given in the block header is the local name of the provider to configure. This provider should already be included in a `required_providers` block.  **Example**
 
 ```
 # This example creates an inventory named `My new inventory`
@@ -115,12 +116,12 @@ resource "aap_job" "my_job" {
 }
 ```
 
-2.  Add the configuration arguments, as shown in the previous example. You must configure the host and credentials. A full list of supported schema is available on the Terraform registry for your `aap` provider release version.   - **`host`:** (String) AAP server URL. Can also be configured using the `AAP_HOST` environment variable.
+2. Add the configuration arguments, as shown in the previous example. You must configure the host and credentials. A full list of supported schema is available on the Terraform registry for your `aap` provider release version.   - **`host`:** (String) AAP server URL. Can also be configured using the `AAP_HOST` environment variable.
   - **`insecure_skip_verify`:** (Boolean) If `true`, configures the provider to skip TLS certificate verification. Can also be configured by setting the `AAP_INSECURE_SKIP_VERIFY` environment variable.
   - **`password`:** (String, Case Sensitive) Password to use for basic authentication. Ignored if the token is set. Note that hardcoded credentials are not recommended for security reasons. It is a best practice to use the `AAP_PASSWORD` environment variable instead.
   - **`timeout`:** (Number) Timeout specifies a time limit for requests made to the AAP server. Defaults to 5 if not provided. A timeout of zero means no timeout. Can also be configured by setting the `AAP_TIMEOUT` environment variable.
   - **`token`:** (String, Case Sensitive): Token to use for token authentication. Note that hardcoded credentials are not recommended for security reasons. It is a best practice to use the `AAP_TOKEN` environment variable instead.
   - **`username`:** (String) Username to use for basic authentication. Ignored if the token is set. Can also be configured by setting the `AAP_USERNAME` environment variable.
 
-3.  (Optional) You can use expressions in the values of these configuration arguments, but can only reference values that are known before the configuration is applied.
-4.  (Optional) You can also use an `alias` meta-argument that is defined by Terraform and is available for all provider blocks. `alias` lets you use the same provider with different configurations for different resources.
+3. (Optional) You can use expressions in the values of these configuration arguments, but can only reference values that are known before the configuration is applied.
+4. (Optional) You can also use an `alias` meta-argument that is defined by Terraform and is available for all provider blocks. `alias` lets you use the same provider with different configurations for different resources.

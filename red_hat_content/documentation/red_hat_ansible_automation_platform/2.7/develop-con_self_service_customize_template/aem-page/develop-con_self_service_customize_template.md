@@ -1,7 +1,7 @@
 +++
-title = "Add and launch custom self-service templates - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_self_service_customize_template"
 template = "docs/aem-title.html"
+title = "Add and launch custom self-service templates - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_self_service_login/", "Launch automation templates from Ansible automation portal"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-con_self_service_customize_template/aem-page/develop-con_self_service_customize_template.html"
 last_crumb = "Add and launch custom self-service templates"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Add and launch custom self-service templates"
 oversized = "false"
@@ -121,7 +122,7 @@ Important:
 
 Starting in Ansible Backstage Plugins v2.2.0, the portal no longer passes the OAuth token in template form values. Templates that use `${{ parameters.token }}` in `rhaap:*` action steps will fail with a `Could not create entity` error. Always use `${{ secrets.aapToken }}` to access the real OAuth token.
 
-## Add a template to Ansible automation portal
+## Add a custom software template to Ansible automation portal
 
 You can add a custom self-service template to the **Templates** view of your Ansible automation portal instance. Custom self-service templates are stored in git repositories. Ansible automation portal supports GitLab and GitHub Source Control Management (SCM).
 
@@ -145,13 +146,13 @@ Names for custom self-service templates must be unique. Custom self-service temp
 
 ### Procedure
 
-1.  In a browser, navigate to your Ansible automation portal instance and sign in with your Ansible Automation Platform credentials.
-2.  Navigate to the **Templates** Page.
-3.  Click Add template.
-4.  Enter a valid Git SCM URL for the template that you want to add.
-5.  Click Analyze to fetch the template.
-6.  After the template has been fetched, review the list of what will be imported and added to the catalog.
-7.  Click Import.
+1. In a browser, navigate to your Ansible automation portal instance and sign in with your Ansible Automation Platform credentials.
+2. Navigate to the **Templates** Page.
+3. Click Add template.
+4. Enter a valid Git SCM URL for the template that you want to add.
+5. Click Analyze to fetch the template.
+6. After the template has been fetched, review the list of what will be imported and added to the catalog.
+7. Click Import.
 
 ### Results
 
@@ -161,7 +162,7 @@ After the import is complete, return to the **Templates** page to view the newly
 
 - You must configure RBAC for your imported custom templates to allow users to view and run them. To do this, you must be logged into Ansible automation portal as a platform administrator. For more information, see [Setting up RBAC for custom self-service templates](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_self_service_rbac#self-service-set-up-rbac "By default, Ansible Automation Platform administrators can define Ansible automation portal RBAC roles.").
 
-## Launch a template
+## Launch a custom software template
 
 This procedure describes how to launch a template from a tile in the **Templates** view of your Ansible automation portal instance.
 
@@ -171,13 +172,13 @@ This procedure describes how to launch a template from a tile in the **Templates
 
 ### Procedure
 
-1.  In a browser, navigate to your Ansible automation portal instance and sign in with your Ansible Automation Platform credentials.
-2.  Navigate to the **Templates** page. The templates you have set up are displayed as tiles on the page.
-3.  In the template that you want to launch, click **Start**. A description of the template is displayed.
+1. In a browser, navigate to your Ansible automation portal instance and sign in with your Ansible Automation Platform credentials.
+2. Navigate to the **Templates** page. The templates you have set up are displayed as tiles on the page.
+3. In the template that you want to launch, click **Start**. A description of the template is displayed.
 
-4.  Click **Launch** to begin configuring the parameters for running the template.
-5.  Fill out the required fields.
-6.  Click **Next**.
-7.  Review the entered information.
-8.  Click **Create** to launch the template.
-9.  The progress for the template execution is displayed.
+4. Click **Launch** to begin configuring the parameters for running the template.
+5. Fill out the required fields.
+6. Click **Next**.
+7. Review the entered information.
+8. Click **Create** to launch the template.
+9. The progress for the template execution is displayed.

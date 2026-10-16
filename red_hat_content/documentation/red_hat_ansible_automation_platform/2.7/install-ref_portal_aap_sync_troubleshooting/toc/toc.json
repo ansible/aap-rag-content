@@ -1,0 +1,47 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Troubleshoot Ansible Automation Platform synchronization",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "No Job Templates appearing in portal",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "portal-aap-sync-troubleshooting__no-job-templates",
+          "anchor": null,
+          "singlePageAnchor": "portal-aap-sync-troubleshooting__no-job-templates"
+        },
+        {
+          "title": "No Users or Teams appearing in portal",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "portal-aap-sync-troubleshooting__no-users-teams",
+          "anchor": null,
+          "singlePageAnchor": "portal-aap-sync-troubleshooting__no-users-teams"
+        },
+        {
+          "title": "Slow synchronization",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "portal-aap-sync-troubleshooting__slow-sync",
+          "anchor": null,
+          "singlePageAnchor": "portal-aap-sync-troubleshooting__slow-sync"
+        },
+        {
+          "title": "Wrong Ansible Automation Platform organization name",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "portal-aap-sync-troubleshooting__wrong-org",
+          "anchor": null,
+          "singlePageAnchor": "portal-aap-sync-troubleshooting__wrong-org"
+        }
+      ]
+    }
+  ]
+}

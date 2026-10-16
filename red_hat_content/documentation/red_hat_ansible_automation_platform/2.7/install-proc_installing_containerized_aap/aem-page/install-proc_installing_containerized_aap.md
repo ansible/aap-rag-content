@@ -1,7 +1,7 @@
 +++
-title = "Install containerized Ansible Automation Platform - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_installing_containerized_aap"
 template = "docs/aem-title.html"
+title = "Install containerized Ansible Automation Platform - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_aap_containerized_installation_intro/", "Install containerized Ansible Automation Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_installing_containerized_aap/aem-page/install-proc_installing_containerized_aap.html"
 last_crumb = "Install containerized Ansible Automation Platform"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Install containerized Ansible Automation Platform"
 oversized = "false"
@@ -35,12 +36,15 @@ Run the `install` playbook to install containerized Ansible Automation Platform 
 - You have created the installation user
 - You have downloaded Ansible Automation Platform
 - You have configured the inventory file
+- You have set the host `umask` to `022` or `002` for this installation
 - You are logged in to the Red Hat Enterprise Linux host as your non-root user
+
+For guidance on the umask requirement, see [Ensure compliance with host-level security controls](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_compliance_profile_considerations#con-compliance-profile-considerations "You can use Ansible Automation Platform to manage systems where security controls have been applied to managed RHEL nodes to meet the requirements of a compliance profile such as CIS, PCI/DSS, the DISA STIG, or similar.").
 
 ## Procedure
 
-1.  Go to the installation directory on your Red Hat Enterprise Linux host.
-2.  Run the `install` playbook:
+1. Go to the installation directory on your Red Hat Enterprise Linux host.
+2. Run the `install` playbook:
   
 
 ```
@@ -79,15 +83,3 @@ https://<gateway_node>:443
 ```
 
 - Log in as the admin user with the credentials you created for `gateway_admin_username` and `gateway_admin_password`.
-- The default ports and protocols used for Ansible Automation Platform are 80 (HTTP) and 443 (HTTPS). You can customize the ports with the following variables:
-
-```
-envoy_http_port=80
-envoy_https_port=443
-```
-
-- If you want to disable HTTPS, set `envoy_disable_https` to `true`:
-
-```
-envoy_disable_https: true
-```

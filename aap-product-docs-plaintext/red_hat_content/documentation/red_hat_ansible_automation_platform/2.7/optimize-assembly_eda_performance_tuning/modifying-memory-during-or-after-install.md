@@ -13,12 +13,12 @@ To mitigate this status, you can modify the default memory limit for each rulebo
 
 ### Procedure
 
-1.  Perform the following steps to modify your default memory limit for your rulebook activations *during* installation:
-1.  Navigate to the setup inventory file.
-2.  Add `automationedacontroller_podman_mem_limit` in the [all:vars] section. For example, `automationedacontroller_podman_mem_limit='400m'`.
-3.  Run the setup.
-2.  Perform the following steps to modify your default memory limit for your rulebook activations *after* installation:
-1.  Navigate to the environment file at `/etc/ansible-automation-platform/eda/settings.yaml`.
-2.  Modify the default container memory limit. For example, `PODMAN_MEM_LIMIT = '300m'`.
-3.  Restart the Event-Driven Ansible controller services using `automation-eda-controller-service restart`.
+1. Perform the following steps to modify your default memory limit for your rulebook activations *during* installation:
+1. Navigate to the setup inventory file.
+2. Add `automationedacontroller_podman_mem_limit` in the [all:vars] section. For example, `automationedacontroller_podman_mem_limit='400m'`.
+3. Run the setup.
+2. Perform the following steps to modify your default memory limit for your rulebook activations *after* installation:
+1. Navigate to the environment file at `/etc/ansible-automation-platform/eda/settings.yaml`.
+2. Modify the default container memory limit. For example, `PODMAN_MEM_LIMIT = '300m'`.
+3. Restart the Event-Driven Ansible controller services using `automation-eda-controller-service restart`.
 

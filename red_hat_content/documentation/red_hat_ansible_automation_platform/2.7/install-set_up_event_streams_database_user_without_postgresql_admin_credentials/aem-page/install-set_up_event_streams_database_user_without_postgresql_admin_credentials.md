@@ -1,6 +1,6 @@
 +++
-template = "docs/aem-title.html"
 title = "Set up event streams database user without PostgreSQL admin credentials - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-set_up_event_streams_database_user_without_postgresql_admin_credentials"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-set_up_event_streams_database_user_without_postgresql_admin_credentials/aem-page/install-set_up_event_streams_database_user_without_postgresql_admin_credentials.html"
 last_crumb = "Set up event streams database user without PostgreSQL admin credentials"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Set up event streams database user without PostgreSQL admin credentials"
 oversized = "false"
@@ -31,7 +32,7 @@ If you do not have PostgreSQL admin credentials, you must manually create the ed
 
 ## Procedure
 
-1.  Connect to your PostgreSQL database server with a user that has `SUPERUSER` privileges:
+1. Connect to your PostgreSQL database server with a user that has `SUPERUSER` privileges:
   
 
 ```
@@ -49,7 +50,7 @@ If you do not have PostgreSQL admin credentials, you must manually create the ed
 ----
 ```
 
-2.  Create the `eda_event_stream` database user and grant access to your database:
+2. Create the `eda_event_stream` database user and grant access to your database:
   
 
 ```
@@ -60,7 +61,7 @@ GRANT CONNECT ON DATABASE <database_name> TO eda_event_stream;
 ----
 ```
 
-3.  Add the following variables to your inventory file under the `[all:vars]` group, replacing the password with the value used in the previous step:
+3. Add the following variables to your inventory file under the `[all:vars]` group, replacing the password with the value used in the previous step:
   
 
 ```
@@ -69,3 +70,6 @@ eda_event_stream_pg_username=eda_event_stream
 eda_event_stream_pg_password=<eda_event_stream_password>
 ----
 ```
+
+  Note:
+  Event streams use the database connection for pub-sub messaging *only*. No read or write operations are performed on the database for event streams, so `CONNECT`-only permissions for the `eda_event_stream user` are sufficient.

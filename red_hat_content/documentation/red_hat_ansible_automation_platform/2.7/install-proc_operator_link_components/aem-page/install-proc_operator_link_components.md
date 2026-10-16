@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_operator_link_components"
-template = "docs/aem-title.html"
 title = "Deploy a new Ansible Automation Platform instance with components - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_operator_link_components"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator/", "Install on OpenShift Container Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_operator_link_components/aem-page/install-proc_operator_link_components.html"
 last_crumb = "Deploy a new Ansible Automation Platform instance with components"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Deploy a new Ansible Automation Platform instance with components"
 oversized = "false"
@@ -29,17 +30,15 @@ type = "aem-page"
 
 After installing the Ansible Automation Platform Operator in your namespace you can set up your **Ansible Automation Platform** instance. Then link all the platform components to a single user interface.
 
-## About this task
-
 ## Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  Navigate to Operators> (and then)Installed Operators.
-3.  Select your Ansible Automation Platform Operator deployment.
-4.  Select the **Details** tab.
-5.  On the **Ansible Automation Platform** tile click Create instance.
-6.  From the **Create Ansible Automation Platform** page enter a name for your instance in the **Name** field.
-7.  Click YAML view and replace the `spec` section with the following:
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to Operators> (and then)Installed Operators.
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select the **Details** tab.
+5. On the **Ansible Automation Platform** tile click Create instance.
+6. From the **Create Ansible Automation Platform** page enter a name for your instance in the **Name** field.
+7. Click YAML view and replace the `spec` section with the following:
   
 
 ```
@@ -64,10 +63,13 @@ spec:
     storage_type: file
     file_storage_storage_class: <read-write-many-storage-class>
     file_storage_size: 10Gi
+
+    mcp:
+    disabled: false
 ```
 
-8.  You must specify your desired value for the `<read-write-many-storage-class>` placeholder.
-9.  Click Create.
+8. You must specify your desired value for the `<read-write-many-storage-class>` placeholder.
+9. Click Create.
 
 ## Results
 

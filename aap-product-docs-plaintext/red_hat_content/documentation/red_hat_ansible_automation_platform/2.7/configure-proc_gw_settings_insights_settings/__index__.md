@@ -4,10 +4,10 @@ From the platform gateway settings page, you can configure options for Insights,
 
 ## Procedure
 
-1.  From the navigation panel, select Settings> (and then)Platform gateway.
-2.  The **Platform gateway settings** page is displayed.
-3.  To configure the options, click Edit platform gateway settings.
-4.  You can configure the following options:
+1. From the navigation panel, select Settings> (and then)Platform gateway.
+2. The **Platform gateway settings** page is displayed.
+3. To configure the options, click Edit platform gateway settings.
+4. You can configure the following options:
 
 - **Insights tracking state**: Enables the service to gather data on automation and send it to Automation Analytics.
 - **Red Hat console URL**: This setting is used to configure the upload URL for data collection for Automation Analytics.

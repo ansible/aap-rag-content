@@ -1,7 +1,7 @@
 +++
+title = "Enforce project integrity with signing and verification - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_controller_project_signing"
 template = "docs/aem-title.html"
-title = "Enforce project integrity with signing and verification - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_controller_projects/", "Logically group playbooks with projects"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_controller_project_signing/aem-page/develop-assembly_controller_project_signing.html"
 last_crumb = "Enforce project integrity with signing and verification"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Enforce project integrity with signing and verification"
 oversized = "false"
@@ -51,7 +52,7 @@ If the repository has already been configured for signing and verification, the 
 ansible-sign project gpg-sign /path/to/project
 ```
 
-     This command updates a checksum manifest and signs it.
+    This command updates a checksum manifest and signs it.
 
 3. You commit the change, the updated checksum manifest, and the signature to the repository.
 
@@ -63,7 +64,8 @@ Files must be included in, or excluded from, the `MANIFEST.in` file. For more in
 
 ## Sign content in automation projects
 
-Prepare your Red Hat Enterprise Linux systems by enabling the correct repositories and subscriptions needed to install components for project signing. This step helps ensure that your environment is properly configured for content verification.
+Prepare your Red Hat Enterprise Linux systems by enabling the correct repositories and subscriptions needed to install components for project signing.
+This step helps ensure that your environment is properly configured for content verification.
 
 - RHEL nodes must properly be subscribed to:
   * RHEL subscription with **baseos** and **appstream** repositories must be enabled.
@@ -74,7 +76,9 @@ ansible-automation-platform-2.5-for-rhel-8-x86_64-rpms for RHEL 8
 ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms for RHEL 9
 ```
 
-- You require a valid GPG public or private keypair for signing content. For more information, see [How to create GPG keypairs](https://www.redhat.com/sysadmin/creating-gpg-keypairs). For more information about GPG keys, see the [GnuPG documentation](https://www.gnupg.org/documentation/index.html).
+- You require a valid GPG public or private keypair for signing content.
+For more information, see [How to create GPG keypairs](https://www.redhat.com/sysadmin/creating-gpg-keypairs).
+    For more information about GPG keys, see the [GnuPG documentation](https://www.gnupg.org/documentation/index.html).
 
     Verify that you have a valid GPG keypair in your default GnuPG keyring, with the following command:
 
@@ -82,7 +86,10 @@ ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms for RHEL 9
 gpg --list-secret-keys
 ```
 
-    If this command produces no output, or one line of output that states, `trustdb was created`, then you do not have a secret key in your default keyring. In this case, see [How to create GPG keypairs](https://www.redhat.com/sysadmin/creating-gpg-keypairs) to learn how to create a new keypair before proceeding. If it produces any other output, you have a valid secret key and are ready to use `ansible-sign`.
+    If this command produces no output, or one line of output that states, `trustdb was created`, then you do not have a secret key in your
+default keyring.
+In this case, see [How to create GPG keypairs](https://www.redhat.com/sysadmin/creating-gpg-keypairs) to learn how to create a new keypair before proceeding.
+If it produces any other output, you have a valid secret key and are ready to use `ansible-sign`.
 
 ### Add a GPG key to automation controller
 
@@ -99,17 +106,21 @@ $ gpg --export --armour <key fingerprint> > my_public_key.asc
 
 #### Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Credentials.
-2.  Click Create credential.
-3.  Give a meaningful name for the new credential, for example, "Infrastructure team public GPG key".
-4.  In the **Credential type** field, select **GPG Public Key**.
-5.  Click **Browse** to locate and select the public key file, for example, `my_public_key.asc`.
-6.  Click Create credential. You can select this credential in `projects <ug_projects_add>`, and content verification automatically takes place on future project synchronizations.
+1. From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Credentials.
+2. Click Create credential.
+3. Give a meaningful name for the new credential, for example, "Infrastructure team public GPG key".
+4. In the **Credential type** field, select **GPG Public Key**.
+5. Click **Browse** to locate and select the public key file, for example, `my_public_key.asc`.
+6. Click Create credential.
+      You can select this credential in `projects <ug_projects_add>`, and content verification automatically takes place on future project
+synchronizations.
 
-   Note:
-      Use the project cache SCM timeout to control how often you want automation controller to re-validate the signed content. When a project is configured to update on launch (of any job template configured to use that project), you can enable the cache timeout setting, which sets it to update after `N` seconds have passed since the last update. If validation is running too often, you can slow down how often project updates occur by specifying the time in the **Cache Timeout** field of the **Options Details** view of the project.
+  Note:
+      Use the project cache SCM timeout to control how often you want automation controller to re-validate the signed content.
+When a project is configured to update on launch (of any job template configured to use that project), you can enable the cache timeout setting, which sets it to update after `N` seconds have passed since the last update.
+If validation is running too often, you can slow down how often project updates occur by specifying the time in the **Cache Timeout** field of the **Options Details** view of the project.
 
-     ![Project Cache Timeout option](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/project-update-launch-cache-timeout.png)
+    ![Project Cache Timeout option](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/project-update-launch-cache-timeout.png)
 
 ### Install the ansible-sign CLI utility
 
@@ -117,14 +128,14 @@ Use the `ansible-sign` utility to offer options for you to sign and verify wheth
 
 #### Procedure
 
-1.  Run the following command to install `ansible-sign`:
+1. Run the following command to install `ansible-sign`:
   
 
 ```
 $ dnf install ansible-sign
 ```
 
-2.  Verify that `ansible-sign` was successfully installed using the following command:
+2. Verify that `ansible-sign` was successfully installed using the following command:
   
 
 ```
@@ -155,7 +166,7 @@ $ tree -a .
     1 directory, 3 files
 ```
 
- Note:
+Note:
 
 The commands used assume that your working directory is the root of your project. `ansible-sign project` commands take the project root directory as their last argument.
 
@@ -165,7 +176,8 @@ Use `.` to indicate the current working directory.
 
 To sign content, create a `MANIFEST.in` file in the project root directory that tells `ansible-sign` which files to protect.
 
-Internally, `ansible-sign` uses the `distlib.manifest` module of Python’s distlib library, therefore `MANIFEST.in` must follow the syntax that this library specifies. For an explanation of the `MANIFEST.in` file directives, see the Python Packaging User Guide.
+Internally, `ansible-sign` uses the `distlib.manifest` module of Python’s distlib library, therefore `MANIFEST.in` must follow the syntax that this library specifies.
+For an explanation of the `MANIFEST.in` file directives, see the Python Packaging User Guide.
 
 In the sample project, two directives are included, resulting in the following `MANIFEST.in` file:
 
@@ -174,7 +186,8 @@ include inventory
 recursive-include playbooks *.yml
 ```
 
-With this file in place, generate your checksum manifest file and sign it. Both of these steps are achieved in a single `ansible-sign` command:
+With this file in place, generate your checksum manifest file and sign it.
+Both of these steps are achieved in a single `ansible-sign` command:
 
 ```
 $ ansible-sign project gpg-sign .
@@ -196,15 +209,17 @@ For signing project content, every command starts with `ansible-sign project`.
 
 Every `ansible-sign project` command takes the project root directory `.` as its final argument.
 
-`ansible-sign` makes use of your default keyring and looks for the first available secret key that it can find, to sign your project. You can specify a specific secret key to use with the `--fingerprint` option, or even a completely independent GPG home directory with the `--gnupg-home` option.
+`ansible-sign` makes use of your default keyring and looks for the first available secret key that it can find, to sign your project.
+You can specify a specific secret key to use with the `--fingerprint` option, or even a completely independent GPG home directory with the `--gnupg-home` option.
 
- Note:
+Note:
 
 If you are using a desktop environment, GnuPG automatically prompts you for your secret key’s passphrase.
 
 If this functionality does not work, or you are working without a desktop environment, for example, through SSH, you can use the `-p --prompt-passphrase` flag after `gpg-sign` , which causes `ansible-sign` to prompt for the password instead.
 
-Note that an `.ansible-sign` directory was created in the project directory. This directory contains the checksum manifest and a detached GPG signature for it.
+Note that an `.ansible-sign` directory was created in the project directory.
+This directory contains the checksum manifest and a detached GPG signature for it.
 
 ```
 $ tree -a .
@@ -231,13 +246,15 @@ $ ansible-sign project gpg-verify .
 [OK   ] Checksum validation succeeded.
 ```
 
- Note:
+Note:
 
-By default, `ansible-sign` makes use of your default GPG keyring to look for a matching public key. You can specify a keyring file with the `--keyring` option, or a different GPG home with the `--gnugpg-home` option.
+By default, `ansible-sign` makes use of your default GPG keyring to look for a matching public key.
+You can specify a keyring file with the `--keyring` option, or a different GPG home with the `--gnugpg-home` option.
 
-If verification fails for any reason, information is displayed to help you debug the cause. More verbosity can be enabled by passing the global `--debug` flag, immediately after `ansible-sign` in your commands.
+If verification fails for any reason, information is displayed to help you debug the cause.
+More verbosity can be enabled by passing the global `--debug` flag, immediately after `ansible-sign` in your commands.
 
- Note:
+Note:
 
 When a GPG credential is used in a project, content verification automatically takes place on future project synchronizations.
 
@@ -249,14 +266,16 @@ For example, you can store your GPG private key in a CI platform of choice as a 
 
 When signing a project by using GPG, the environment variable `ANSIBLE_SIGN_GPG_PASSPHRASE` can be set to the passphrase of the signing key. This can be injected and masked or secured in a CI pipeline.
 
-Depending on the scenario, `ansible-sign` returns with a different exit-code, during both signing and verification. This can also be useful in the context of CI and automation, as a CI environment can act differently based on the failure. For example, it can send alerts for some errors, but fail silently for others.
+Depending on the scenario, `ansible-sign` returns with a different exit-code, during both signing and verification.
+This can also be useful in the context of CI and automation, as a CI environment can act differently based on the failure.
+For example, it can send alerts for some errors, but fail silently for others.
 
 These are the current exit codes used in `ansible-sign`, which can be considered stable:
 
-| Exit code | Approximate meaning                | Example scenarios                                                                                                                                                                                |
-| --------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| <br>0     | <br>Success                        | Signing was successfulVerification was successful                                                                                                                                                |
-| <br>1     | <br>General failure                | The checksum manifest file contained a syntax error during verificationThe signature file did not exist during verification`MANIFEST.in` did not exist during signing                            |
-| <br>2     | <br>Checksum verification failure  | The checksum hashes calculated during verification differed from what was in the signed checksum manifest, for example, a project file was changed but the signing process was not re-completed. |
-| <br>3     | <br>Signature verification failure | The signer’s public key was not in the user’s GPG keyringThe wrong GnuPG home directory or keyring file was specifiedThe signed checksum manifest file was modified in some way                  |
-| <br>4     | <br>Signing process failure        | The signer’s private key was not found in the GPG keyringThe wrong GnuPG home directory or keyring file was specified                                                                            |
+| Exit code | Approximate meaning            | Example scenarios                                                                                                                                                                                |
+| --------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 0         | Success                        | Signing was successfulVerification was successful                                                                                                                                                |
+| 1         | General failure                | The checksum manifest file contained a syntax error during verificationThe signature file did not exist during verification`MANIFEST.in` did not exist during signing                            |
+| 2         | Checksum verification failure  | The checksum hashes calculated during verification differed from what was in the signed checksum manifest, for example, a project file was changed but the signing process was not re-completed. |
+| 3         | Signature verification failure | The signer’s public key was not in the user’s GPG keyringThe wrong GnuPG home directory or keyring file was specifiedThe signed checksum manifest file was modified in some way                  |
+| 4         | Signing process failure        | The signer’s private key was not found in the GPG keyringThe wrong GnuPG home directory or keyring file was specified                                                                            |

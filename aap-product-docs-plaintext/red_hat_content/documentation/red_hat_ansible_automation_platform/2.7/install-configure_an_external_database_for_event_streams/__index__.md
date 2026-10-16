@@ -1,6 +1,6 @@
 # Configure an external database for event streams
 
-Event-Driven Ansible event streams require a dedicated PostgreSQL database user for security and access control. By default, the platform uses a separate user (`eda_event_stream`) to isolate event stream operations from other processes.
+Event-Driven Ansible event streams require a dedicated PostgreSQL database user (`eda_event_stream`) for security and access control. This user must exist on the Event-Driven Ansible database and requires only `CONNECT` privileges.
 
 If you use the Ansible Automation Platform provisioned database, the installer configures this user automatically. For external databases not managed by Ansible Automation Platform, use one of the following scenarios to set up the event streams database user:
 

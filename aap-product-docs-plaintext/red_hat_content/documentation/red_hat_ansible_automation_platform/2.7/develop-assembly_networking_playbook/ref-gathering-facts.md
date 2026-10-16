@@ -1,7 +1,8 @@
 # Gather and display network device info with a playbook
 ## Gather facts from network devices
 
-The `gather_facts` keyword supports gathering network device facts in standardized key/value pairs. You can feed these network facts into further tasks to manage the network device.
+The `gather_facts` keyword supports gathering network device facts in standardized key/value pairs.
+You can feed these network facts into further tasks to manage the network device.
 
 You can also use the `gather_network_resources` parameter with the network `*_facts` modules (such as `arista.eos.eos_facts`) to return a subset of the device configuration, as the following example shows:
 

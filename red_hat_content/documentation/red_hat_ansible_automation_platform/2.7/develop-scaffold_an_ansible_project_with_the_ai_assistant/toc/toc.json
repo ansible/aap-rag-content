@@ -1,0 +1,67 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Scaffold an Ansible project with the AI assistant",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Before you begin",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-3ddcdcda-f0da-481a-9820-1a83d919bba3__prereq_1",
+          "anchor": null,
+          "singlePageAnchor": "GUID-3ddcdcda-f0da-481a-9820-1a83d919bba3__prereq_1"
+        },
+        {
+          "title": "About this task",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "GUID-3ddcdcda-f0da-481a-9820-1a83d919bba3__context_1",
+          "anchor": null,
+          "singlePageAnchor": "GUID-3ddcdcda-f0da-481a-9820-1a83d919bba3__context_1"
+        },
+        {
+          "title": "Create the project structure",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "task_1",
+          "anchor": null,
+          "singlePageAnchor": "task_1",
+          "sections": [
+            {
+              "title": "Procedure",
+              "visible": true,
+              "weight": 1,
+              "urlFragment": "task_1",
+              "anchor": "task_1__steps_1",
+              "singlePageAnchor": "task_1__steps_1"
+            },
+            {
+              "title": "Scaffold content",
+              "visible": true,
+              "weight": 2,
+              "urlFragment": "task_1",
+              "anchor": "task_2",
+              "singlePageAnchor": "task_2",
+              "sections": [
+                {
+                  "title": "Procedure",
+                  "visible": true,
+                  "weight": 1,
+                  "urlFragment": "task_1",
+                  "anchor": "task_2__steps-unordered_1",
+                  "singlePageAnchor": "task_2__steps-unordered_1"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

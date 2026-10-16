@@ -1,0 +1,127 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Ansible Automation Platform 2.7 patch release September 28, 2026 (portal-2.2.8)",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Overview",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "aap-27-20260923___overview",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260923___overview"
+        },
+        {
+          "title": "Features",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "aap-27-20260923___features",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260923___features"
+        },
+        {
+          "title": "Highlights",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "aap-27-20260923___highlights",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260923___highlights"
+        },
+        {
+          "title": "Enhancements",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "aap-27-20260923___enhancements",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260923___enhancements"
+        },
+        {
+          "title": "Ansible automation portal operator Technology Preview",
+          "visible": true,
+          "weight": 5,
+          "urlFragment": "aap-27-20260923___ansible_automation_portal_operator_technology_preview",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260923___ansible_automation_portal_operator_technology_preview"
+        },
+        {
+          "title": "Bug fixes",
+          "visible": true,
+          "weight": 6,
+          "urlFragment": "aap-27-20260923___bug_fixes",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260923___bug_fixes"
+        },
+        {
+          "title": "Ansible automation portal RHEL appliance",
+          "visible": true,
+          "weight": 7,
+          "urlFragment": "aap-27-20260923___ansible_automation_portal_rhel_appliance",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260923___ansible_automation_portal_rhel_appliance"
+        },
+        {
+          "title": "Ansible automation portal operator Technology Preview",
+          "visible": true,
+          "weight": 8,
+          "urlFragment": "aap-27-20260923___ansible_automation_portal_operator_technology_preview_2",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260923___ansible_automation_portal_operator_technology_preview_2"
+        },
+        {
+          "title": "Changed features",
+          "visible": true,
+          "weight": 9,
+          "urlFragment": "aap-27-20260923___changed_features",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260923___changed_features"
+        },
+        {
+          "title": "Ansible automation portal operator Technology Preview",
+          "visible": true,
+          "weight": 10,
+          "urlFragment": "aap-27-20260923___ansible_automation_portal_operator_technology_preview_3",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260923___ansible_automation_portal_operator_technology_preview_3"
+        },
+        {
+          "title": "CVE",
+          "visible": true,
+          "weight": 11,
+          "urlFragment": "aap-27-20260923___cve",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260923___cve"
+        },
+        {
+          "title": "Ansible automation portal",
+          "visible": true,
+          "weight": 12,
+          "urlFragment": "aap-27-20260923___ansible_automation_portal",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260923___ansible_automation_portal"
+        },
+        {
+          "title": "Ansible automation portal RHEL appliance",
+          "visible": true,
+          "weight": 13,
+          "urlFragment": "aap-27-20260923___ansible_automation_portal_rhel_appliance_2",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260923___ansible_automation_portal_rhel_appliance_2"
+        },
+        {
+          "title": "Ansible automation portal operator Technology Preview",
+          "visible": true,
+          "weight": 14,
+          "urlFragment": "aap-27-20260923___ansible_automation_portal_operator_technology_preview_4",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-20260923___ansible_automation_portal_operator_technology_preview_4"
+        }
+      ]
+    }
+  ]
+}

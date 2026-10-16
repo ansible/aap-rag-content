@@ -15,7 +15,7 @@ Start automation content navigator with the artifact file.
 $ ansible-navigator replay simple_playbook_artifact.json
 ```
 
-1.  Review the playbook results that match when the playbook ran.
+1. Review the playbook results that match when the playbook ran.
 ![Playbook results](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-artifact-replay.png)
 
 ### Results

@@ -5,6 +5,6 @@ You can view additional information about each individual job.
 
 ### Procedure
 
-1.  Navigate to the job **Id/Name** column.
-2.  Click the arrow icon.
+1. Navigate to the job **Id/Name** column.
+2. Click the arrow icon.
 

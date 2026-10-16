@@ -1,7 +1,8 @@
 # OpenShift or Kubernetes API Bearer Token credential type
 ## Creating a service account in an Openshift cluster
 
-Create a service account in an Openshift or Kubernetes cluster to be used to run jobs in a container group through automation controller. After you create the service account, its credentials are provided to automation controller in the form of an Openshift or Kubernetes API bearer token credential.
+Create a service account in an Openshift or Kubernetes cluster to be used to run jobs in a container group through automation controller.
+After you create the service account, its credentials are provided to automation controller in the form of an Openshift or Kubernetes API bearer token credential.
 
 ### About this task
 
@@ -9,7 +10,7 @@ After you create a service account, use the information in the new service accou
 
 ### Procedure
 
-1.  To create a service account, download and use the sample service account, `containergroup sa`, and change it as needed to obtain the credentials:
+1. To create a service account, download and use the sample service account, `containergroup sa`, and change it as needed to obtain the credentials:
 
 
 ```
@@ -51,32 +52,32 @@ name: role-containergroup-service-account
 apiGroup: rbac.authorization.k8s.io
 ```
 
-2.  Apply the configuration from `containergroup-sa.yml`:
+2. Apply the configuration from `containergroup-sa.yml`:
 
 
 ```
 oc apply -f containergroup-sa.yml
 ```
 
-3.  Get the secret name associated with the service account:
+3. Get the secret name associated with the service account:
 
 
 ```
 export SA_SECRET=$(oc get sa containergroup-service-account -o json | jq '.secrets[0].name' | tr -d '"')
 ```
 
-4.  Get the token from the secret:
+4. Get the token from the secret:
 
 
 ```
 oc get secret $(echo ${SA_SECRET}) -o json | jq '.data.token' | xargs | base64 --decode > containergroup-sa.token
 ```
 
-5.  Get the CA cert:
+5. Get the CA cert:
 
 
 ```
 oc get secret $SA_SECRET -o json | jq '.data["ca.crt"]' | xargs | base64 --decode > containergroup-ca.crt
 ```
 
-6.  Use the contents of `containergroup-sa.token` and `containergroup-ca.crt` to provide the information for the [OpenShift or Kubernetes API Bearer Token](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_openshift#ref-controller-credential-openShift "Select this credential type to create instance groups that point to a Kubernetes or OpenShift container.") required for the container group.
+6. Use the contents of `containergroup-sa.token` and `containergroup-ca.crt` to provide the information for the [OpenShift or Kubernetes API Bearer Token](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_openshift#ref-controller-credential-openShift "Select this credential type to create instance groups that point to a Kubernetes or OpenShift container.") required for the container group.

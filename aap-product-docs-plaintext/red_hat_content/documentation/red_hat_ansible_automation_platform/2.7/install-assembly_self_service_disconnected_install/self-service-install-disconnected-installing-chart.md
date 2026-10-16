@@ -5,14 +5,14 @@ Install the Ansible automation portal by using the `helm install` command, refer
 
 ### Procedure
 
-1.  On the machine within your disconnected environment, navigate to the directory where you placed the transferred Helm chart `.tgz` file:
+1. On the machine within your disconnected environment, navigate to the directory where you placed the transferred Helm chart `.tgz` file:
 
 
 ```terminal
 $ cd /path/to/your/transferred/charts/
 ```
 
-2.  Define your namespace and cluster router base as environment variables:
+2. Define your namespace and cluster router base as environment variables:
 
 
 ```terminal
@@ -20,14 +20,14 @@ $ export MY_NAMESPACE="<your_namespace_name>"
 $ export MY_CLUSTER_ROUTER_BASE="<your_cluster_router_base>"
 ```
 
-3.  If the namespace does not exist, create it:
+3. If the namespace does not exist, create it:
 
 
 ```terminal
 $ oc new-project "${MY_NAMESPACE}"
 ```
 
-4.  Create a custom values file and reuse it for install and upgrade.
+4. Create a custom values file and reuse it for install and upgrade.
 Choose the example that matches your plug-in delivery method.
 
 **OCI delivery** (`values-oci.yaml`):
@@ -115,7 +115,7 @@ Set `imageRegistry` to the registry host only (for example, `mirror.example.com`
 Note:
 The `secrets-scm` secret is only required if you use private SCM repositories for importing catalog entities or running software templates that access SCM. If you do not use SCM integration, you can skip creating this secret.
 
-5.  Install the chart using the `helm install` command:
+5. Install the chart using the `helm install` command:
 
 
 ```terminal

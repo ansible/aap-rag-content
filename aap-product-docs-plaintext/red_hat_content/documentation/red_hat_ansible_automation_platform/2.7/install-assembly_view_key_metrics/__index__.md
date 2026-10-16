@@ -1,10 +1,10 @@
-# Install automation dashboard to calculate savings (RHEL only)
+# Install the standalone automation dashboard utility to calculate savings (RHEL only)
 
-By effectively using automation dashboard, you can gain valuable insights into your Ansible Automation Platform usage and drive continuous improvement in your automation practices.
+By effectively using the standalone automation dashboard utility, you can gain valuable insights into your Ansible Automation Platform usage and drive continuous improvement in your automation practices.
 
-## About the automation dashboard
+## About the standalone automation dashboard utility
 
-The automation dashboard utility is a web-based container application that provides key metrics related to job execution, efficiency, and the value derived from automation.
+The the standalone automation dashboard utility is a web-based container application that provides key metrics related to job execution, efficiency, and the value derived from automation.
 
 Automation dashboard uses automation metrics to supply automation usage data from Ansible Automation Platform. This data helps you compare the cost of performing tasks manually to the cost of performing tasks through automation, allowing you to show what savings are achievable through automation.
 

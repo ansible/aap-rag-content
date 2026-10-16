@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-ref_migrate_tarball_to_oci_troubleshoot"
-template = "docs/aem-title.html"
 title = "Troubleshoot the migration - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-assembly_self_service_upgrading/", "Upgrade Ansible automation portal"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/upgrade-ref_migrate_tarball_to_oci_troubleshoot/aem-page/upgrade-ref_migrate_tarball_to_oci_troubleshoot.html"
 last_crumb = "Troubleshoot the migration"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Troubleshoot the migration"
 oversized = "false"
@@ -50,7 +51,7 @@ $ oc get secret <release-name>-dynamic-plugins-registry-auth \
   -o jsonpath='{.data.auth\.json}' -n <namespace> | base64 -d
 ```
 
-     The output should be valid JSON with your credentials.
+    The output should be valid JSON with your credentials.
 
 3. Ensure the secret name matches your Helm release name exactly. For example, if your release is `redhat-rhaap-portal`, the secret must be `redhat-rhaap-portal-dynamic-plugins-registry-auth`.
 

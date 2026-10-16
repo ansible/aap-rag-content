@@ -1,16 +1,17 @@
 +++
-title = "Migrate from HTTP plug-in registry to OCI container delivery - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-migrate_tarball_to_oci"
 template = "docs/aem-title.html"
+title = "Migrate from HTTP plug-in registry to OCI container delivery - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_about/", "Install Ansible automation portal (OpenShift Container Platform only)"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-install_automation_portal_on_openshift_container_platform/", "Install automation portal on OpenShift Container Platform"]]
 category = "Install"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-migrate_tarball_to_oci/aem-page/install-migrate_tarball_to_oci.html"
 last_crumb = "Migrate from HTTP plug-in registry to OCI container delivery"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Migrate from HTTP plug-in registry to OCI container delivery"
 oversized = "false"
@@ -51,7 +52,7 @@ Back up your current Helm values before you upgrade. Upgrades without `-f backup
 
 ## Procedure
 
-1.  Export your current Helm release values:
+1. Export your current Helm release values:
   
 
 ```
@@ -60,7 +61,7 @@ $ helm get values <release-name> -n <namespace> > backup-values.yaml
 
     Replace `<release-name>` with your Helm release name (for example, `redhat-rhaap-portal`) and `<namespace>` with your OpenShift namespace (for example, `default`).
 
-2.  Create the `auth.json` file and the OCI registry authentication secret.
+2. Create the `auth.json` file and the OCI registry authentication secret.
       The `install-dynamic-plugins` init container uses the authentication secret directly and does not use cluster pull secrets or `imagePullSecrets`. Follow these steps:
 
   1. Create the base64-encoded credentials. Use the `-w0` flag to produce single-line output (required):
@@ -69,7 +70,7 @@ $ helm get values <release-name> -n <namespace> > backup-values.yaml
 $ AUTHB64=$(printf '%s' '<username>:<password>' | base64 -w0)
 ```
 
-         Use your Red Hat service account username and password for `registry.redhat.io`, or your mirror registry credentials for air-gapped deployments.
+        Use your Red Hat service account username and password for `registry.redhat.io`, or your mirror registry credentials for air-gapped deployments.
 
   2. Create the `auth.json` file:
 
@@ -85,7 +86,7 @@ $ cat > auth.json <<EOF
 EOF
 ```
 
-         For mirror registries, replace `registry.redhat.io` with your mirror registry host (for example, `yb-artifactory` or `mirror.example.com:5000`).
+        For mirror registries, replace `registry.redhat.io` with your mirror registry host (for example, `yb-artifactory` or `mirror.example.com:5000`).
 
   3. Create the Kubernetes secret. The secret name must include your Helm release name:
 
@@ -94,7 +95,7 @@ $ oc create secret generic <release-name>-dynamic-plugins-registry-auth \
   --from-file=auth.json=./auth.json -n <namespace>
 ```
 
-         For example, if your release is `redhat-rhaap-portal`, the secret name is `redhat-rhaap-portal-dynamic-plugins-registry-auth`.
+        For example, if your release is `redhat-rhaap-portal`, the secret name is `redhat-rhaap-portal-dynamic-plugins-registry-auth`.
 
   4. Verify the secret was created correctly:
 
@@ -103,9 +104,9 @@ $ oc get secret <release-name>-dynamic-plugins-registry-auth \
   -o jsonpath='{.data.auth\.json}' -n <namespace> | base64 -d
 ```
 
-         The output should display valid JSON with your credentials intact.
+        The output should display valid JSON with your credentials intact.
 
-3.  Edit `backup-values.yaml` to enable OCI delivery.
+3. Edit `backup-values.yaml` to enable OCI delivery.
       Keep all existing custom configuration (OAuth, RBAC, certificate settings, etc.). Add or modify only the plug-in delivery settings:
 
 ```yaml
@@ -121,7 +122,7 @@ redhat-developer-hub:
 $ helm get values <release-name> -n <namespace> | grep imageTagInfo
 ```
 
-4.  Upgrade the Helm release:
+4. Upgrade the Helm release:
   
 
 ```
@@ -131,7 +132,7 @@ $ helm upgrade <release-name> openshift-helm-charts/redhat-rhaap-portal \
 
     If you also need to specify a chart version, add `--version <chart-version>`.
 
-5.  Verify the OCI plug-in installation by checking the init container logs.
+5. Verify the OCI plug-in installation by checking the init container logs.
       After the Helm upgrade completes, the pod will restart. Check the `install-dynamic-plugins` init container logs to confirm successful OCI pulls:
 
 ```
@@ -248,7 +249,7 @@ $ oc get secret <release-name>-dynamic-plugins-registry-auth \
   -o jsonpath='{.data.auth\.json}' -n <namespace> | base64 -d
 ```
 
-     The output should be valid JSON with your credentials.
+    The output should be valid JSON with your credentials.
 
 3. Ensure the secret name matches your Helm release name exactly. For example, if your release is `redhat-rhaap-portal`, the secret must be `redhat-rhaap-portal-dynamic-plugins-registry-auth`.
 

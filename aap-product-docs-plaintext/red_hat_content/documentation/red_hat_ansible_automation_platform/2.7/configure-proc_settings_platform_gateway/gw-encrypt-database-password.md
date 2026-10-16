@@ -7,19 +7,20 @@ System administrators can encrypt the database password used by platform gateway
 
 Note:
 
-Platform gateway uses the Django framework, which requires the `SECRET_KEY` to be fully loaded into memory before the decryption function (`ansible_encryption.decrypt_string()`) is called. If the decryption call runs before the key is loaded, the process fails, preventing platform gateway from accessing the database.
+Platform gateway uses the Django framework, which requires the `SECRET_KEY` to be fully loaded into memory before the decryption function (`ansible_encryption.decrypt_string()`) is called.
+If the decryption call runs before the key is loaded, the process fails, preventing platform gateway from accessing the database.
 
 ### Procedure
 
-1.  Access the command line on the platform gateway node.
-2.  Use the `aap-gateway-manage shell_plus` command to open an interactive Django shell:
+1. Access the command line on the platform gateway node.
+2. Use the `aap-gateway-manage shell_plus` command to open an interactive Django shell:
 
 
 ```
 aap-gateway-manage shell_plus
 ```
 
-3.  Inside the shell, run the following commands to import the encryption library, set your password, and generate the encrypted string:
+3. Inside the shell, run the following commands to import the encryption library, set your password, and generate the encrypted string:
 
 
 ```
@@ -29,17 +30,19 @@ aap-gateway-manage shell_plus
 >>> print(encrypted_value)
 ```
 
-4.  Copy the entire output string starting with `$encrypted$`. This is your encrypted password.
-5.  Exit the shell using `quit()`.
-6.  Open the platform gateway configuration file for editing:
+4. Copy the entire output string starting with `$encrypted$`.
+This is your encrypted password.
+5. Exit the shell using `quit()`.
+6. Open the platform gateway configuration file for editing:
 
 
 ```
 vi /etc/ansible-automation-platform/gateway/settings.py
 ```
 
-7.  Locate the section defining the `DATABASES` variable. You must insert the code to load the `SECRET_KEY` before the `DATABASES` dictionary is defined.
-8.  Update the file to include the highlighted code, replacing only the placeholder text for the `PASSWORD` key with your copied encrypted string:
+7. Locate the section defining the `DATABASES` variable.
+You must insert the code to load the `SECRET_KEY` before the `DATABASES` dictionary is defined.
+8. Update the file to include the highlighted code, replacing only the placeholder text for the `PASSWORD` key with your copied encrypted string:
 
 
 ```
@@ -67,8 +70,8 @@ ansible_encryption.decrypt_string('$encrypted$UTF8$AESCBC$Z0FBQUFBQnBBNU...
 }
 ```
 
-9.  Save and close the file.
-10.  Restart platform gateway to load the new encrypted configuration:
+9. Save and close the file.
+10. Restart platform gateway to load the new encrypted configuration:
 
 
 ```

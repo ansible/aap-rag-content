@@ -1,7 +1,9 @@
 # Associate cloud credentials with a job template
 ## OpenStack
 
-Use this credential type to connect to OpenStack clouds. Automation controller uses the OpenStack SDK to interact with OpenStack clouds. When you create an OpenStack cloud credential, the controller prompts you for the following information:
+Use this credential type to connect to OpenStack clouds.
+Automation controller uses the OpenStack SDK to interact with OpenStack clouds.
+When you create an OpenStack cloud credential, the controller prompts you for the following information:
 
 - **Username**: The username to authenticate to the OpenStack cloud.
 - **Password**: The password to authenticate to the OpenStack cloud.
@@ -11,16 +13,18 @@ Use this credential type to connect to OpenStack clouds. Automation controller u
 - **Region name** (optional): The region name to use when connecting to the OpenStack cloud.
 - **Domain name** (optional): The domain name to use when connecting to the OpenStack cloud.
 - **Project domain name** (optional): The project domain name to use when connecting to the OpenStack cloud.
-- **Validate SSL certificate**: Select this option to validate the SSL/TLS certificate presented by the OpenStack cloud. Clear this option to disable SSL/TLS certificate validation.
+- **Validate SSL certificate**: Select this option to validate the SSL/TLS certificate presented by the OpenStack cloud.
+Clear this option to disable SSL/TLS certificate validation.
 
 The following sample playbook invokes the `nova_compute` Ansible OpenStack cloud module and requires credentials:
 
--  `auth_url`
--  `username`
--  `password`
--  `project name`
+- `auth_url`
+- `username`
+- `password`
+- `project name`
 
-These fields are made available to the playbook through the environmental variable `OS_CLIENT_CONFIG_FILE`, which points to a YAML file written by the controller based on the contents of the cloud credential. The following sample playbooks load the YAML file into the Ansible variable space:
+These fields are made available to the playbook through the environmental variable `OS_CLIENT_CONFIG_FILE`, which points to a YAML file written by the controller based on the contents of the cloud credential.
+The following sample playbooks load the YAML file into the Ansible variable space:
 
 - OS_CLIENT_CONFIG_FILE example:
 

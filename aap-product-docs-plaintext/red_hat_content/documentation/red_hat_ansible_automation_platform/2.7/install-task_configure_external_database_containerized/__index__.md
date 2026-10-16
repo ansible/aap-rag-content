@@ -18,7 +18,7 @@ This procedure configures metrics service to use an external PostgreSQL database
 
 ## Procedure
 
-1.  Create metrics_service database
+1. Create metrics_service database
 Create the `metrics_service` database with UTF-8 encoding to support internationalization and ensure compatibility with Django migrations.
 
 ```
@@ -34,7 +34,7 @@ TEMPLATE=template0;
 Note:
 **Why UTF-8 encoding:** Django ORM requires UTF-8 encoding for proper handling of internationalized strings and special characters in metric data.
 
-2.  Create database users
+2. Create database users
 Create two database users. The `metrics_service` user has full database privileges for schema management. The `ms_awx_readonly` user has SELECT-only privileges for secure data collection from automation controller.
 
 ```
@@ -62,7 +62,7 @@ Change `awx` to match your actual database name for automation controller. Commo
 Note:
 **Security note:** The `ms_awx_readonly` user has only SELECT privileges, preventing any writes to automation controller data. This ensures metrics service cannot modify controller operations.
 
-3.  Configure pg_hba.conf
+3. Configure pg_hba.conf
 Add authentication rules to allow metrics service host to connect to both databases using secure `scram-sha-256` authentication.
 
 ```
@@ -80,7 +80,7 @@ host    awx               ms_awx_readonly    <METRICS_HOST_IP>/32    scram-sha-2
 sudo systemctl reload postgresql
 ```
 
-4.  Configure installer inventory
+4. Configure installer inventory
 Edit the containerized installer inventory file to specify external database connection parameters:
 
 ```
@@ -95,13 +95,16 @@ automationmetrics_pg_username=metrics_service
 automationmetrics_pg_password='<SECURE_PASSWORD>'
 
 # Read-only access to controller database
-automationmetrics_controller_db=awx
-automationmetrics_controller_pg_username=ms_awx_readonly
+automationmetrics_controller_read_pg_database=awx
+automationmetrics_controller_read_pg_username=ms_awx_readonly
 automationmetrics_controller_read_pg_password='<READONLY_PASSWORD>'
 automationmetrics_controller_read_pg_host=controller-db.example.com
 ```
 
-5.  Run the containerized installer
+Important:
+The following variables have been deprecated and will be removed from Ansible Automation Platform 2.8: `automationmetrics_controller_db` and `automationmetrics_controller_pg_username`. Use the updated variables provided in the example inventory file.
+
+5. Run the containerized installer
 
 
 ```
@@ -116,7 +119,7 @@ The installer performs these actions:
 3. Runs database migrations on external `metrics_service` database
 4. Deploys metrics service containers configured to connect to external databases
 
-6.  Verify external database configuration
+6. Verify external database configuration
 
 
 ```

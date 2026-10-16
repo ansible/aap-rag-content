@@ -1,7 +1,7 @@
 +++
-title = "Configure TACACS+ authentication - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_set_up_tacacs"
+template = "docs/aem-title.html"
+title = "Configure TACACS+ authentication - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_configure_authentication/", "Configure central authentication for Ansible Automation Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-proc_controller_set_up_tacacs/aem-page/secure-proc_controller_set_up_tacacs.html"
 last_crumb = "Configure TACACS+ authentication"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure TACACS+ authentication"
 oversized = "false"
@@ -37,24 +38,24 @@ This feature is deprecated and will be removed in a future release.
 
 ## Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Authentication Methods.
-2.  Click Create authentication.
-3.  Enter a **Name** for this authentication configuration.
-4.  Select **TACACS+** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
-5.  Enter the following information:
+1. From the navigation panel, select Access Management> (and then)Authentication Methods.
+2. Click Create authentication.
+3. Enter a **Name** for this authentication configuration.
+4. Select **TACACS+** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
+5. Enter the following information:
 
   - Hostname of TACACS+ Server: Provide the hostname or IP address of the TACACS+ server with which to authenticate. If you leave this field blank, TACACS+ authentication is disabled.
   - TACACS+ Authentication Protocol: The protocol used by the TACACS+ client. The options are ascii or pap.
   - Shared secret for authenticating to TACACS+ server: The secret key for TACACS+ authentication server.
 
-6.  The **TACACS+ client address sending enabled** is disabled by default. To enable client address sending, select the checkbox.
-7.  Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. Note:
+6. The **TACACS+ client address sending enabled** is disabled by default. To enable client address sending, select the checkbox.
+7. Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. Note:
       Values defined in this field override the dedicated fields provided in the UI. Any values not defined here are not provided to the authenticator.
 
-8.  To automatically create organizations, users, and teams upon successful login, select **Create objects**.
-9.  To enable this authentication method upon creation, select **Enabled**.
-10.  To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users**.
-11.  Click Create Authentication Method.
+8. To automatically create organizations, users, and teams upon successful login, select **Create objects**.
+9. To enable this authentication method upon creation, select **Enabled**.
+10. To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users**.
+11. Click Create Authentication Method.
 
 ## What to do next
 
