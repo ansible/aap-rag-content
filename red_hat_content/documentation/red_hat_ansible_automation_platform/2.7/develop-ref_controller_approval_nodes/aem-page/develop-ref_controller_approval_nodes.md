@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 title = "Configure nodes in workflow visualizer - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_controller_approval_nodes"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_workflow_job_templates/", "Orchestrate complex automation with workflow job templates"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-ref_controller_approval_nodes/aem-page/develop-ref_controller_approval_nodes.html"
 last_crumb = "Configure nodes in workflow visualizer"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure nodes in workflow visualizer"
 oversized = "false"
@@ -51,11 +52,11 @@ Learn how to manage nodes in the following scenarios.
 
 ### Procedure
 
-1.  Click the (![Plus icon](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/options_menu.png)) icon on the parent node and **Add step and link** to add a sibling node:  
+1. Click the (![Plus icon](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/options_menu.png)) icon on the parent node and **Add step and link** to add a sibling node:  
 ![Create sibling node](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-wf-create-sibling-node.png)  
-2.  Click Add step or Start (![Plus icon](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/options_menu.png)) and **Add step**, to add a root node to depict a split scenario.
-3.  At any node where you want to create a split scenario, hover over the node from which the split scenario begins and click the plus (![Plus icon](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/options_menu.png)) icon on the parent node and **Add step and link**. This adds multiple nodes from the same parent node, creating sibling nodes.
-4.  Refer to the key by clicking Legend to identify the meaning of the symbols and colors associated with the graphical depiction.  Note:
+2. Click Add step or Start (![Plus icon](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/options_menu.png)) and **Add step**, to add a root node to depict a split scenario.
+3. At any node where you want to create a split scenario, hover over the node from which the split scenario begins and click the plus (![Plus icon](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/options_menu.png)) icon on the parent node and **Add step and link**. This adds multiple nodes from the same parent node, creating sibling nodes.
+4. Refer to the key by clicking Legend to identify the meaning of the symbols and colors associated with the graphical depiction. Note:
       If you remove a node that has a follow-on node attached to it in a workflow with a set of sibling nodes that has varying edge types, the attached node automatically joins the set of sibling nodes and retains its edge type:
 
 ## Edit a node
@@ -64,13 +65,13 @@ Learn how to edit a node’s details or link edge type (Run on success/fail/alwa
 
 ### Procedure
 
--  Edit a node by using one of these methods:
+- Edit a node by using one of these methods:
 
   * If you want to edit a node, click the icon of the node. The pane displays the current selections, click Edit to change these. Make your changes and click Finish to apply them to the graphical view.
   * To edit the edge type for an existing link, (**Run on success**, **Run on fail**, **Run always**), click (![Plus icon](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/options_menu.png)) on the existing status.
   * To remove a link, click (![Plus icon](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/options_menu.png)) for the link and click Remove link. This option only appears in the pane if the target or child node has more than one parent. All nodes must be linked to at least one other node at all times so you must create a new link before removing an old one.
 
--  Edit the view of the workflow diagram by using one of these methods:
+- Edit the view of the workflow diagram by using one of these methods:
 
   * Click the examine icon (![Examine icon 15](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/examine.png)) to zoom in, the reduce icon (![Reduce icon 15](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/reduce.png)) to zoom out, the expand icon (![Expand icon 15](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/expand.png)) to fit to screen or the reset icon (![Reset icon 15](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/reset.png)) to reposition the view.
   * Drag the workflow diagram to reposition it on the screen or use the scroll on your mouse to zoom.

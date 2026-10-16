@@ -1,16 +1,17 @@
 +++
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_configure_code_assistant"
 title = "Set up Red Hat Ansible Lightspeed cloud service - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_configure_code_assistant"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_lightspeed_intro/", "Build automation faster with Red Hat Ansible Lightspeed"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_lightspeed_intro/", "Build automation faster with Red Hat Ansible Lightspeed code assistant"]]
 category = "Develop"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_configure_code_assistant/aem-page/develop-assembly_configure_code_assistant.html"
 last_crumb = "Set up Red Hat Ansible Lightspeed cloud service"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Set up Red Hat Ansible Lightspeed cloud service"
 oversized = "false"
@@ -49,11 +50,11 @@ Use the Ansible Lightspeed administrator portal to connect Red Hat Ansible Light
 
 ### Procedure
 
-1.  Log in to the [Ansible Lightspeed portal](https://c.ai.ansible.redhat.com/) as an organization administrator.
-2.  Click Log in> (and then)Log in with Red Hat.
-3.  Enter your Red Hat account username and password. The Ansible Lightspeed Service uses Red Hat Single Sign-On (RH-SSO) for authentication. As part of the authentication process, the Ansible Lightspeed Service checks whether your organization has an active Ansible Automation Platform subscription. On successful authentication, the login screen is displayed along with your username and your assigned user role.
+1. Log in to the [Ansible Lightspeed portal](https://c.ai.ansible.redhat.com/) as an organization administrator.
+2. Click Log in> (and then)Log in with Red Hat.
+3. Enter your Red Hat account username and password. The Ansible Lightspeed Service uses Red Hat Single Sign-On (RH-SSO) for authentication. As part of the authentication process, the Ansible Lightspeed Service checks whether your organization has an active Ansible Automation Platform subscription. On successful authentication, the login screen is displayed along with your username and your assigned user role.
 
-4.  From the login screen, click **Admin Portal**.
+4. From the login screen, click **Admin Portal**.
 
 ### Results
 
@@ -69,16 +70,16 @@ Use this procedure to configure the Red Hat Ansible Lightspeed cloud service.
 
 ### Procedure
 
-1.  Log in to the [Ansible Lightspeed portal](https://c.ai.ansible.redhat.com/) as an organization administrator.
-2.  From the login screen, click **Admin Portal**.
-3.  Specify the API key of your IBM watsonx Code Assistant instance:
-  1.  Under **IBM Cloud API Key**, click **Add API key**. A screen to enter the **API Key** is displayed.
-  2.  Enter the API Key.
-  3.  Optional: Click **Test** to validate the API key.
-  4.  Click **Save**.
-4.  Specify the model ID of the model that you want to use:
-  1.  Click **Model Settings**.
-  2.  Under **Model ID**, click **Add Model ID**. A screen to enter the **Model Id** is displayed.
-  3.  Enter the **Model ID** that you obtained in the previous procedure as the default model for your organization.
-  4.  Optional: Click **Test model ID** to validate the model ID.
-  5.  Click **Save**. When the API key and model ID is successfully validated, Red Hat Ansible Lightspeed is connected to your IBM watsonx Code Assistant instance.
+1. Log in to the [Ansible Lightspeed portal](https://c.ai.ansible.redhat.com/) as an organization administrator.
+2. From the login screen, click **Admin Portal**.
+3. Specify the API key of your IBM watsonx Code Assistant instance:
+  1. Under **IBM Cloud API Key**, click **Add API key**. A screen to enter the **API Key** is displayed.
+  2. Enter the API Key.
+  3. Optional: Click **Test** to validate the API key.
+  4. Click **Save**.
+4. Specify the model ID of the model that you want to use:
+  1. Click **Model Settings**.
+  2. Under **Model ID**, click **Add Model ID**. A screen to enter the **Model Id** is displayed.
+  3. Enter the **Model ID** that you obtained in the previous procedure as the default model for your organization.
+  4. Optional: Click **Test model ID** to validate the model ID.
+  5. Click **Save**. When the API key and model ID is successfully validated, Red Hat Ansible Lightspeed is connected to your IBM watsonx Code Assistant instance.

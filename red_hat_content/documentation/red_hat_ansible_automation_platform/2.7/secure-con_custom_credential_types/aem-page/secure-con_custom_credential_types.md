@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_custom_credential_types/aem-page/secure-con_custom_credential_types.html"
 last_crumb = "Create custom credentials for Event-Driven Ansible"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Create custom credentials for Event-Driven Ansible"
 oversized = "false"
@@ -35,7 +36,7 @@ Custom credentials support Ansible extra variables as a means of injecting their
 
 You can attach one or more cloud, vault, and Red Hat Ansible Automation Platform credential types to a rulebook activation.
 
- Note:
+Note:
 
 - When creating a new credential type, you must avoid collisions in the `extra_vars`.
 - Extra variable names must not start with **EDA_** because they are reserved.
@@ -56,14 +57,14 @@ Fields can have multiple properties, depending on the credential type you select
 
 *Table 1. Input Configuration Field Properties*
 
-| Fields         | Description                                                                    | Mandatory (Y/N)           |
-| -------------- | ------------------------------------------------------------------------------ | ------------------------- |
-| <br>id         | <br>Unique id of the field; must be a string type and stores the variable name | <br>Yes                   |
-| <br>type       | <br>Can be string or boolean type                                              | <br>No, default is string |
-| <br>label      | <br>Used by the UI when rendering the UI element                               | <br>Yes                   |
-| <br>secret     | <br>Will be encrypted                                                          | <br>No, default false     |
-| <br>multiline  | <br>If the field contains data from a file the multiline can be set to True    | <br>No, default false     |
-| <br>help\_text | <br>The help text associated with this field                                   | <br>No                    |
+| Fields     | Description                                                                | Mandatory (Y/N)       |
+| ---------- | -------------------------------------------------------------------------- | --------------------- |
+| id         | Unique id of the field; must be a string type and stores the variable name | Yes                   |
+| type       | Can be string or boolean type                                              | No, default is string |
+| label      | Used by the UI when rendering the UI element                               | Yes                   |
+| secret     | Will be encrypted                                                          | No, default false     |
+| multiline  | If the field contains data from a file the multiline can be set to True    | No, default false     |
+| help\_text | The help text associated with this field                                   | No                    |
 
 ## Injector configuration
 
@@ -75,24 +76,30 @@ Event-Driven Ansible supports the following types of injectors:
 - Ansible extra variables (`extra_vars`) - Used for substitution in the rulebook conditions, actions or source plugin parameters.
 - File-based templating (`file`) - Used to create file contents from the credential inputs such as certificates and keys, which might be required by source plugins. File injectors provide a way to deliver these certificates and keys to ansible-rulebook at runtime without having to store them in decision environments. As a result, ansible-rulebook creates temporary files and the file names can be accessed using `eda.filename` variables, which are automatically created for you after the files have been created (for instance, "{{eda.filename.my_cert}}”).
 
- Important:
+Important:
 
 When creating `extra_vars` in rulebook activations and credential type injectors, avoid using `eda` or `ansible` as key names since that conflicts with internal usage and might cause failure in both rulebook activations and credential type creation.
 
 Injectors enable you to adjust the fields so that they can be injected into a rulebook as one of the above-mentioned injector types, which cannot have duplicate keys at the top level. If you have two sources in a rulebook that both require parameters such as username and password, the injectors, along with the rulebook, help you adapt the arguments for each source.
 
-## Creating a new credential type
+## Create a new credential type
 
-Define a custom credential type by using a YAML or JSON schema. Defining these custom types helps ensure that authentication information is securely injected into automation workflows.
+Build a reusable credential type template to enforce consistent input fields and authentication mechanisms for custom integrations across your organization.placeholder
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Credentials.
-2.  In the **Credential Types** view, click Create credential type.
-3.  Enter the appropriate details in the **Name** and **Description** field.  Note:
-      When creating a new credential type, do not use reserved variable names that start with `ANSIBLE_` for the **INPUT** and **INJECTOR** names and IDs, as they are invalid for custom credential types.
+1. From the navigation panel, select Automation Decisions> (and then)Infrastructure> (and then)Credential Types.
+2. In the Credential Types view, click Create credential type.
+3. Insert the following:
+  
 
-4.  In the **Input configuration** field, specify an input schema that defines a set of ordered fields for that type. The format can be in YAML or JSON:
+Name
+Insert the name of your custom credential.
+
+Description
+This field is optional.
+
+4. In the **Input configuration** field, specify an input schema that defines a set of ordered fields for that type. The format can be in YAML or JSON:
        **YAML**
 
 ```
@@ -134,133 +141,27 @@ required:
 
     View more JSON examples at [The JSON website](https://www.json.org/json-en.html).
 
-    The following configuration in JSON format shows each field and how they are used:
+5. In the **Injector Configuration** field, enter environment variables or extra variables that specify the values a credential type can inject. The format can be in YAML or JSON (see examples in the previous step).
+  
+  The following configuration in JSON format shows each field and how they are used:
 
 ```
 {
-  "fields": [{
-    "id": "api_token",    # required - a unique name used to reference the field value
-
-    "label": "API Token", # required - a unique label for the field
-
-    "help_text": "User-facing short text describing the field.",
-
-    "type": ("string" | "boolean")   # defaults to 'string'
-
-    "choices": ["A", "B", "C"]   # (only applicable to `type=string`)
-
-    "format": "ssh_private_key"  # optional, can be used to enforce data format validity
-                                 for SSH private key data (only applicable to `type=string`)
-
-    "secret": true,       # if true, the field value will be encrypted
-
-    "multiline": false    # if true, the field should be rendered as multi-line for input entry
-                          # (only applicable to `type=string`)
-},{
-    # field 2...
-},{
-    # field 3...
-}],
-
-    "required": ["api_token"]   # optional; one or more fields can be marked as required
-},
-```
-
-    When `type=string`, fields can optionally specify multiple choice options:
-
-```
-{
-  "fields": [{
-      "id": "api_token",    # required - a unique name used to reference the field value
-      "label": "API Token", # required - a unique label for the field
-      "type": "string",
-      "choices": ["A", "B", "C"]
-  }]
-},
-```
-
-5.  In the **Injector configuration** field, enter environment variables or extra variables that specify the values a credential type can inject. The format can be in YAML or JSON (see examples in the previous step). The following configuration in JSON format shows each field and how they are used:
-
-```
-{
-  "file": {
-      "template": "[mycloud]\ntoken={{ api_token }}"
-  },
-  "env": {
-      "THIRD_PARTY_CLOUD_API_TOKEN": "{{ api_token }}"
-  },
-  "extra_vars": {
+    "extra_vars": {
       "some_extra_var": "{{ username }}:{{ password }}"
   }
 }
 ```
 
-    Credential Types can also generate temporary files to support `.ini` files or certificate or key data:
+6. Click Create credential type. Your newly created credential type is displayed in the list of credential types.
 
-```
-{
-  "file": {
-      "template": "[mycloud]\ntoken={{ api_token }}"
-  },
-  "env": {
-      "MY_CLOUD_INI_FILE": "{{ tower.filename }}"
-  }
-}
-```
+7. Click the Edit ![Edit](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png) icon to modify the credential type options.
 
-    In this example, automation controller writes a temporary file that has:
+### What to do next
 
-```
-[mycloud]\ntoken=SOME_TOKEN_VALUE
-```
-
-    The absolute file path to the generated file is stored in an environment variable named `MY_CLOUD_INI_FILE`.
-
-    The following is an example of referencing many files in a custom credential template:
-
-     **Inputs**
-
-```
-{
-  "fields": [{
-    "id": "cert",
-    "label": "Certificate",
-    "type": "string"
-  },{
-    "id": "key",
-    "label": "Key",
-    "type": "string"
-  }]
-}
-```
-
-     **Injectors**
-
-```
-{
-  "file": {
-    "template.cert_file": "[mycert]\n{{ cert }}",
-    "template.key_file": "[mykey]\n{{ key }}"
-},
-"env": {
-    "MY_CERT_INI_FILE": "{{ tower.filename.cert_file }}",
-    "MY_KEY_INI_FILE": "{{ tower.filename.key_file }}"
-}
-}
-```
-
-6.  Click Create credential type. Your newly created credential type is displayed on the list of credential types:
-
-     ![New credential type](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/credential-types-new-listed.png)
-
-7.  Click the Edit ![Edit](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png) icon to modify the credential type options.  Note:
-      In the **Edit** screen, you can modify the details or delete the credential. If the **Delete** option is disabled, this means that the credential type is being used by a credential, and you must delete the credential type from all the credentials that use it before you can delete it.
-
-### Results
-
-- Verify that the newly created credential type can be selected from the **Credential Type** selection window when creating a new credential:
-
- ![Verify new credential type](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/credential-types-new-listed-verify.png)
+- Verify that the newly created credential type can be selected from the **Credential Type** list when creating a new credential.
+- On the Edit page, you can modify the details or delete the credential
+- If the **Delete** option is disabled, this means that the credential type is being used by a credential, and you must delete the credential type from all the credentials that use it before you can delete it.
 
 ## Event-Driven Ansible Rule Engine credential type
 
@@ -293,10 +194,10 @@ Create a custom Event-Driven Ansible Rule Engine credential to connect to extern
 
 #### Procedure
 
-1.  Log in to the Ansible Automation Platform Dashboard.
-2.  From the navigation panel, select Automation Decisions> (and then)Infrastructure> (and then)Credentials.
-3.  Click Create credential.
-4.  Insert the following:
+1. Log in to the Ansible Automation Platform Dashboard.
+2. From the navigation panel, select Automation Decisions> (and then)Infrastructure> (and then)Credentials.
+3. Click Create credential.
+4. Insert the following:
   
 
 Name
@@ -311,7 +212,7 @@ Select an organization from the list. If you have not created custom organizatio
 Credential type
 Select Event-Driven Ansible Rule Engine.
 
-5.  Configure the database connection fields:
+5. Configure the database connection fields:
   
 
 Postgres DB Host
@@ -333,14 +234,14 @@ Enter the database password.
   
 
 Primary Encryption Secret
-Used to derive AES keys for database encryption. For key rotations, enter your new secret here and re-enter your previous secret into the Secondary Encryption Secret field to maintain access to historical events. Must be at least 12 characters.  Important:
+Used to derive AES keys for database encryption. For key rotations, enter your new secret here and re-enter your previous secret into the Secondary Encryption Secret field to maintain access to historical events. Must be at least 12 characters. Important:
   Only the derived key is stored in our system. You must remember your original secret. If lost, an Activation reset is required.
 
 Secondary Encryption Secret
-This field is used during key rotation to maintain access to legacy data. When updating your Primary Encryption Secret, you must manually re-enter your previous secret here. This allows the system to decrypt historical records while using the new string for future events. If left blank, the system assumes no rotation has occurred. Must be at least 12 characters.  Important:
+This field is used during key rotation to maintain access to legacy data. When updating your Primary Encryption Secret, you must manually re-enter your previous secret here. This allows the system to decrypt historical records while using the new string for future events. If left blank, the system assumes no rotation has occurred. Must be at least 12 characters. Important:
   Configure encryption keys if your events contain sensitive information such as passwords, API tokens, or personally identifiable information (PII). The default Rule Engine credential does not support encryption.
 
-7.  Click Save.
+7. Click Save.
 
 ### Assign your new Event-Driven Ansible Rule Engine credential type to rulebook activations
 
@@ -348,11 +249,11 @@ Assign your custom Rule Engine credential to a rulebook activation to enable ext
 
 #### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  Navigate to the Automation Decisions> (and then)Rulebook Activations
-3.  Click Enable event persistence in the activation options.
-4.  In the Rule Engine credential field, select your custom credential.
-5.  Save your rulebook activation.
+1. Log in to Ansible Automation Platform.
+2. Navigate to the Automation Decisions> (and then)Rulebook Activations
+3. Click Enable event persistence in the activation options.
+4. In the Rule Engine credential field, select your custom credential.
+5. Save your rulebook activation.
 
 #### Results
 

@@ -10,7 +10,7 @@ Uninstallation is destructive and irreversible. Back up the `metrics_service` da
 
 ## Procedure
 
-1.  Method 1: Use installer playbook (recommended)
+1. Method 1: Use installer playbook (recommended)
 
 
 ```
@@ -29,7 +29,7 @@ The uninstall.yml playbook automatically removes all metrics service components:
 Note:
 **Optional:** To also drop the database, add database cleanup tasks to your inventory configuration.
 
-2.  Method 2: Manual uninstall
+2. Method 2: Manual uninstall
 Use this method if you need granular control over uninstall steps.
 
 **Step 1: Stop and disable systemd services**

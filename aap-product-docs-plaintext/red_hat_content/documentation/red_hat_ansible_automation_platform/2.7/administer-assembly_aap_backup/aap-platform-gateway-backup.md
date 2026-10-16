@@ -17,16 +17,16 @@ Ansible Automation Platform Operator creates a PersistentVolumeClaim (PVC) for y
 
 ### Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  Navigate to Operators> (and then)Installed Operators.
-3.  Select your Ansible Automation Platform Operator deployment.
-4.  Go to your **All Instances** tab, and click Create New.
-5.  Select **Ansible Automation Platform Backup** from the list. Note:
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to Operators> (and then)Installed Operators.
+3. Select your Ansible Automation Platform Operator deployment.
+4. Go to your **All Instances** tab, and click Create New.
+5. Select **Ansible Automation Platform Backup** from the list. Note:
 When creating the **Ansible Automation Platform Backup** resource it also creates backup resources for each of the nested components that are enabled.
 
-6.  In the **Name** field, enter a name for the backup.
-7.  In the **Deployment name** field, enter the name of the deployed Ansible Automation Platform instance being backed up. For example if your Ansible Automation Platform deployment must be backed up and the deployment name is aap, enter 'aap' in the **Deployment name** field.
-8.  Click Create. This results in an **AnsibleAutomationPlatformBackup** resource similar to the following:
+6. In the **Name** field, enter a name for the backup.
+7. In the **Deployment name** field, enter the name of the deployed Ansible Automation Platform instance being backed up. For example if your Ansible Automation Platform deployment must be backed up and the deployment name is aap, enter 'aap' in the **Deployment name** field.
+8. Click Create. This results in an **AnsibleAutomationPlatformBackup** resource similar to the following:
 
 
 ```

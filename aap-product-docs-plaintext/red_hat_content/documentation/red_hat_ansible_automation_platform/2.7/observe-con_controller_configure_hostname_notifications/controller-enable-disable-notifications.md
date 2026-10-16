@@ -1,7 +1,8 @@
 # Advanced notification settings
 ## Enable and disable notifications
 
-You can set up notifications to notify you when a specific job starts, and on the success or failure at the end of the job run. Note the following behaviors:
+You can set up notifications to notify you when a specific job starts, and on the success or failure at the end of the job run.
+Note the following behaviors:
 
 - If a workflow job template has notification on start enabled, and a job template within that workflow also has notification on start enabled, you receive notifications for both.
 - You can enable notifications to run on many job templates within a workflow job template.

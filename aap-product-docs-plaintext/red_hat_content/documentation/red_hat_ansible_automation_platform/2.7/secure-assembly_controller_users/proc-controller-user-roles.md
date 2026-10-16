@@ -23,16 +23,16 @@ When assigning roles, ensure that you are selecting the required resource in the
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Users.
-2.  From the **Users** list view, click the user to which you want to add roles.
-3.  Select the **Roles** tab to display the set of roles assigned to this user. These provide the ability to read, change, and administer resources.
-4.  To add new roles, click Add roles.  Note:
+1. From the navigation panel, select Access Management> (and then)Users.
+2. From the **Users** list view, click the user to which you want to add roles.
+3. Select the **Roles** tab to display the set of roles assigned to this user. These provide the ability to read, change, and administer resources.
+4. To add new roles, click Add roles. Note:
 Ensure that you are selecting the desired role within the correct component context, because resources like projects and credentials can be associated with both Automation Execution (automation controller) and Automation Decisions (Event-Driven Ansible).
 
-5.  Select a Resource type and click Next.
-6.  Select the resources that you want to give role-based access to and click Next.
-7.  Select the roles that will be applied to the resources and click Next.  Tip:
+5. Select a Resource type and click Next.
+6. Select the resources that you want to give role-based access to and click Next.
+7. Select the roles that will be applied to the resources and click Next. Tip:
 If you are selecting more than one role, consider [creating a custom role](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_roles#proc-gw-create-roles "Ansible Automation Platform services provide a set of predefined roles with permissions enough for standard automation tasks. It is also possible to configure custom roles that define access permissions to a resource.") that includes all the permissions for this resource type so you can give your users the appropriate level of access.
 
-8.  Review the settings and click Finish. The **Add roles** dialog displays indicating whether the role assignments were successfully applied. Click Close to close the dialog.
+8. Review the settings and click Finish. The **Add roles** dialog displays indicating whether the role assignments were successfully applied. Click Close to close the dialog.
 

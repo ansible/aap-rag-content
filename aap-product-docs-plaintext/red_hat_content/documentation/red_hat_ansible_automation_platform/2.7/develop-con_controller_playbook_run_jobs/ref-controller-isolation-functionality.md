@@ -1,11 +1,14 @@
 # View output for your playbook job runs
 ## Isolation functionality and variables
 
-Automation controller uses container technology to isolate jobs from each other. By default, only the current project is exposed to the container running a job template.
+Automation controller uses container technology to isolate jobs from each other.
+By default, only the current project is exposed to the container running a job template.
 
-If you need to expose additional directories, you must customize your playbook runs. To configure job isolation, you can set variables.
+If you need to expose additional directories, you must customize your playbook runs.
+To configure job isolation, you can set variables.
 
-By default, automation controller uses the system’s `tmp` directory (`/tmp` by default) as its staging area. You can change this in the **Job Execution Path** field of the **Jobs settings** page, or in the REST API at `/api/v2/settings/jobs`:
+By default, automation controller uses the system’s `tmp` directory (`/tmp` by default) as its staging area.
+You can change this in the **Job Execution Path** field of the **Jobs settings** page, or in the REST API at `/api/v2/settings/jobs`:
 
 ```
 AWX_ISOLATION_BASE_PATH = "/opt/tmp"

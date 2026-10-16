@@ -2,7 +2,8 @@
 
 Platform gateway serves as the single entry point for Ansible Automation Platform, unifying the user interface and routing all API traffic to services such as automation controller, Event-Driven Ansible, and automation hub.
 
-The OpenAPI specification provides a standardized, machine-readable definition of the unified API endpoints available through platform gateway. It is essential for external developers and automation engineers building reliable custom integrations.
+The OpenAPI specification provides a standardized, machine-readable definition of the unified API endpoints available through platform gateway.
+It is essential for external developers and automation engineers building reliable custom integrations.
 
 **Key roles of the specification**
 

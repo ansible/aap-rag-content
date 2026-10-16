@@ -28,17 +28,17 @@ You can also use this syntax more than once in a single attribute map. For examp
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Authentication Methods.
-2.  Select your authenticator from the list.
-3.  Select the **Mapping** tab and click Create mapping.
-4.  In **Authentication mapping**, choose the appropriate mapping type: **Organization**, **Team**, or **Role**.
-5.  In the **Trigger** field, select **Attributes**.
-6.  In the corresponding field, such as the **Organization** field for an Organization map, enter the Jinja-like syntax to dynamically generate the name.
+1. From the navigation panel, select Access Management> (and then)Authentication Methods.
+2. Select your authenticator from the list.
+3. Select the **Mapping** tab and click Create mapping.
+4. In **Authentication mapping**, choose the appropriate mapping type: **Organization**, **Team**, or **Role**.
+5. In the **Trigger** field, select **Attributes**.
+6. In the corresponding field, such as the **Organization** field for an Organization map, enter the Jinja-like syntax to dynamically generate the name.
 For example, to create an organization name based on an attribute called `users_orgs`, enter `Org {% for_attr_value(users_orgs) %}`.
 
-7.  In the **Attribute** field, specify the name of the attribute from your external provider that has values you want to loop through, such as `users_orgs`.
-8.  Complete any other required fields for the mapping.
-9.  Click Create mapping.
+7. In the **Attribute** field, specify the name of the attribute from your external provider that has values you want to loop through, such as `users_orgs`.
+8. Complete any other required fields for the mapping.
+9. Click Create mapping.
 Platform gateway uses this template to create and manage user assignments based on the values of the specified attribute.
 
 ### Results

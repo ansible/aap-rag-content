@@ -1,7 +1,7 @@
 +++
 title = "Prerequisites and channel upgrades - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-con_operator_upgrade_prereq"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-assembly_operator_upgrade/", "Upgrade your Operator-based deployment of Ansible Automation Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/upgrade-con_operator_upgrade_prereq/aem-page/upgrade-con_operator_upgrade_prereq.html"
 last_crumb = "Prerequisites and channel upgrades"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Prerequisites and channel upgrades"
 oversized = "false"
@@ -47,7 +48,7 @@ Most upgrades occur within a channel as follows:
 
 1. A new update becomes available in the marketplace, through the redhat-operator CatalogSource.
 2. The system automatically creates a new InstallPlan for your Ansible Automation Platform subscription.   - If set to **Manual**, the InstallPlan needs manual approval in the OpenShift UI.
-  - If set to **Automatic**, it upgrades as soon as the new version is available.  Note:
+  - If set to **Automatic**, it upgrades as soon as the new version is available. Note:
             Set a manual install strategy on your Ansible Automation Platform Operator subscription during installation or upgrade. You will be prompted to approve upgrades when available in your chosen update channel. A stable channel is available for each X.Y release, following the naming pattern `stable-*X.Y*`.
 
 3. A new subscription, CSV, and operator containers are created alongside the old ones. The old resources are cleaned up after a successful install.
@@ -58,7 +59,7 @@ Upgrading between X.Y channels is always manual and intentional. Stable channels
 
 If the subscription is set for manual upgrades, you must approve the upgrade in the UI. Then, the system upgrades the Operator to the latest version in that channel.
 
- Note:
+Note:
 
 It is recommended to set a manual install strategy on your Ansible Automation Platform Operator subscription during installation or upgrade. You will be prompted to approve upgrades when they become available in your chosen update channel. Stable channels, such as stable-2.7, are available for each X.Y release.
 
@@ -66,6 +67,6 @@ The containers provided in the latest channel are updated regularly for OS upgra
 
 For each major or minor version channel, there is a corresponding "cluster-scoped" channel available. Cluster-scoped channels deploy operators that can manage all namespaces, while non-cluster-scoped channels can only manage resources in their own namespace.
 
- Important:
+Important:
 
 Cluster-scoped bundles are not compatible with namespace-scoped bundles. Do not switch between namespace-scoped (`stable-*X.Y*`) channels and cluster-scoped (`stable-*X.Y*-cluster-scoped`) channels. This is not supported.

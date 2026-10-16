@@ -1,7 +1,7 @@
 +++
+title = "Uninstall the Ansible plug-ins - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_uninstall"
-title = "Uninstall the Ansible plug-ins - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_intro/", "Ansible plug-ins for Red Hat Developer Hub"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_uninstall/aem-page/extend-assembly_rhdh_uninstall.html"
 last_crumb = "Uninstall the Ansible plug-ins"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Uninstall the Ansible plug-ins"
 oversized = "false"
@@ -35,14 +36,14 @@ To uninstall the Ansible plug-ins from a Helm chart installation, remove the plu
 
 ### Procedure
 
-1.  In Red Hat Developer Hub, remove any software templates that use the `ansible:content:create` action.
-2.  In the OpenShift Developer UI, navigate to **Helm** > **developer-hub** > **Actions** > **Upgrade** > **Yaml view**.
-3.  Remove the Ansible plug-ins configuration under the `plugins` section (all `oci://registry.redhat.io/ansible-automation-platform/automation-portal` entries).
+1. In Red Hat Developer Hub, remove any software templates that use the `ansible:content:create` action.
+2. In the OpenShift Developer UI, navigate to **Helm** > **developer-hub** > **Actions** > **Upgrade** > **Yaml view**.
+3. Remove the Ansible plug-ins configuration under the `plugins` section (all `oci://registry.redhat.io/ansible-automation-platform/automation-portal` entries).
   
   Note:
       If you used the deprecated HTTP plug-in registry method, remove the `http://plugin-registry:8080/...` entries instead.
 
-4.  Remove the `extraContainers` section.
+4. Remove the `extraContainers` section.
   
 
 ```
@@ -61,18 +62,18 @@ upstream:
           - containerPort: 8000
 ```
 
-5.  Click **Upgrade**.
-6.  Edit your custom Red Hat Developer Hub config map, for example `app-config-rhdh`.
-7.  Remove the `ansible` section.
-8.  Restart the Red Hat Developer Hub deployment.
-9.  If you used OCI delivery, delete the registry auth secret:
+5. Click **Upgrade**.
+6. Edit your custom Red Hat Developer Hub config map, for example `app-config-rhdh`.
+7. Remove the `ansible` section.
+8. Restart the Red Hat Developer Hub deployment.
+9. If you used OCI delivery, delete the registry auth secret:
   
 
 ```terminal
 $ oc delete secret <deployment-name>-dynamic-plugins-registry-auth
 ```
 
-10.  If you used the HTTP plug-in registry method, remove the plug-in registry application:
+10. If you used the HTTP plug-in registry method, remove the plug-in registry application:
   
 
 ```terminal
@@ -85,11 +86,11 @@ To uninstall the Ansible plug-ins from an Operator installation, edit the Config
 
 ### Procedure
 
-1.  Remove the Ansible plug-in entries from the `plugins:` block in your dynamic plug-ins ConfigMap.
+1. Remove the Ansible plug-in entries from the `plugins:` block in your dynamic plug-ins ConfigMap.
       Alternatively, set `disabled: true` for each Ansible plug-in entry.
 
-2.  Edit your custom Red Hat Developer Hub ConfigMap (for example, `app-config-rhdh`):
-  1.  Remove the Ansible software templates entry from the `catalog.locations` block.
-  2.  Remove the entire `ansible` block (including `creatorService`, `rhaap`, `devSpaces`, and `automationHub` entries).
-  3.  Click **Save**.
-3.  Modify the Backstage custom resource and remove the `containers` block for the Ansible Developer Tools sidecar from the `spec.deployment.patch.spec.template.spec` block. Click **Save**.
+2. Edit your custom Red Hat Developer Hub ConfigMap (for example, `app-config-rhdh`):
+  1. Remove the Ansible software templates entry from the `catalog.locations` block.
+  2. Remove the entire `ansible` block (including `creatorService`, `rhaap`, `devSpaces`, and `automationHub` entries).
+  3. Click **Save**.
+3. Modify the Backstage custom resource and remove the `containers` block for the Ansible Developer Tools sidecar from the `spec.deployment.patch.spec.template.spec` block. Click **Save**.

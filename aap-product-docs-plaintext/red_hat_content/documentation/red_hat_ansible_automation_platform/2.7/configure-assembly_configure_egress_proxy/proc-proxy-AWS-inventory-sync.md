@@ -20,9 +20,9 @@ Or
 
 ### Procedure
 
-1.  From the navigation panel, select Settings> (and then)Automation Execution> (and then)Job.
-2.  Click Edit.
-3.  Add the variables to the **Extra Environment Variables** field
+1. From the navigation panel, select Settings> (and then)Automation Execution> (and then)Job.
+2. Click Edit.
+3. Add the variables to the **Extra Environment Variables** field
 For example:
 
 ```

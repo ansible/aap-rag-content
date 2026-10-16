@@ -6,9 +6,9 @@ You can access the automation hub through the platform gateway or through the fo
 
 ## Procedure
 
-1.  Log into Red Hat OpenShift Container Platform.
-2.  Navigate to Networking> (and then)Routes.
-3.  Under **Location**, click on the URL for your automation hub instance.
+1. Log into Red Hat OpenShift Container Platform.
+2. Navigate to Networking> (and then)Routes.
+3. Under **Location**, click on the URL for your automation hub instance.
 
 ## Results
 

@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 title = "Activate your subscription - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_activate_1"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_aap_containerized_installation_intro/", "Install containerized Ansible Automation Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_aap_activate_1/aem-page/install-assembly_aap_activate_1.html"
 last_crumb = "Activate your subscription"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Activate your subscription"
 oversized = "false"
@@ -50,14 +51,14 @@ You are opted in for Automation Analytics by default when you activate the platf
 
 ### Procedure
 
-1.  Log in to Red Hat Ansible Automation Platform.
-2.  Select the **Service Account** tab in the subscription wizard.
-3.  Enter your **Client ID** and **Client secret**.
-4.  Select your subscription from the **Subscription** list. Note:
+1. Log in to Red Hat Ansible Automation Platform.
+2. Select the **Service Account** tab in the subscription wizard.
+3. Enter your **Client ID** and **Client secret**.
+4. Select your subscription from the **Subscription** list. Note:
       You can also enter your Satellite username and password in the **Satellite** tab if your cluster nodes are registered to Satellite through Subscription Manager.
 
-5.  Review the End User License Agreement and select **I agree to the End User License Agreement**.
-6.  Click Finish.
+5. Review the End User License Agreement and select **I agree to the End User License Agreement**.
+6. Click Finish.
 
 ### Results
 
@@ -78,7 +79,7 @@ If you have a subscriptions manifest, you can upload the manifest file by using 
 
 ### Before you begin
 
-You must have a Red Hat subscription manifest file exported from the Red Hat Customer Portal. For more information, see [Obtaining a manifest file](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_activate_1#assembly-aap-obtain-manifest-files "You can obtain a subscription manifest in the Subscription Allocations section of Red Hat Subscription Management.").
+You must have a Red Hat subscription manifest file exported from the Red Hat Customer Portal. For more information, see [Obtaining a manifest file](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_manifest_files#assembly-aap-obtain-manifest-files "You can obtain a subscription manifest in the Subscription Allocations section of Red Hat Subscription Management.").
 
 ### About this task
 
@@ -92,11 +93,11 @@ You are opted in for Automation Analytics by default when you activate the platf
 
 ### Procedure
 
-1.  Log in to Red Hat Ansible Automation Platform.   1.  If you are not immediately taken to the subscription wizard, go to Settings> (and then)Subscription.
-2.  Select the **Subscription manifest** tab.
-3.  Click Browse and select your manifest file.
-4.  Review the End User License Agreement and select **I agree to the End User License Agreement**.
-5.  Click Finish. Note:
+1. Log in to Red Hat Ansible Automation Platform.   1. If you are not immediately taken to the subscription wizard, go to Settings> (and then)Subscription.
+2. Select the **Subscription manifest** tab.
+3. Click Browse and select your manifest file.
+4. Review the End User License Agreement and select **I agree to the End User License Agreement**.
+5. Click Finish. Note:
       If the BROWSE button is disabled on the subscription wizard page, clear the **USERNAME** and **PASSWORD** fields.
 
 ### Results
@@ -132,10 +133,10 @@ With a new subscription allocation you can set aside subscriptions and entitleme
 
 ##### Procedure
 
-1.  From the [Subscription Allocations](https://access.redhat.com/management/subscription_allocations/) page, click New Subscription Allocation.
-2.  Enter a name for the allocation so that you can find it later.
-3.  Select **Type: Satellite 6.16** as the management application.
-4.  Click Create.
+1. From the [Subscription Allocations](https://access.redhat.com/management/subscription_allocations/) page, click New Subscription Allocation.
+2. Enter a name for the allocation so that you can find it later.
+3. Select **Type: Satellite 6.16** as the management application.
+4. Click Create.
 
 #### Add subscriptions to a subscription allocation
 
@@ -145,11 +146,11 @@ After you create an allocation, you can add the subscriptions you need for Ansib
 
 ##### Procedure
 
-1.  From the [Subscription Allocations](https://access.redhat.com/management/subscription_allocations/) page, click the name of the **Subscription Allocation** to which you want to add a subscription.
-2.  Click the **Subscriptions** tab.
-3.  Click Add Subscriptions.
-4.  Enter the number of Ansible Automation Platform Entitlements you plan to add.
-5.  Click Submit.
+1. From the [Subscription Allocations](https://access.redhat.com/management/subscription_allocations/) page, click the name of the **Subscription Allocation** to which you want to add a subscription.
+2. Click the **Subscriptions** tab.
+3. Click Add Subscriptions.
+4. Enter the number of Ansible Automation Platform Entitlements you plan to add.
+5. Click Submit.
 
 #### Download a manifest file
 
@@ -159,9 +160,9 @@ After you create an allocation with the appropriate subscriptions on it, you can
 
 ##### Procedure
 
-1.  From the [Subscription Allocations](https://access.redhat.com/management/subscription_allocations/) page, click the name of the **Subscription Allocation** to which you want to generate a manifest.
-2.  Click the **Subscriptions** tab.
-3.  Click Export Manifest to download the manifest file.
+1. From the [Subscription Allocations](https://access.redhat.com/management/subscription_allocations/) page, click the name of the **Subscription Allocation** to which you want to generate a manifest.
+2. Click the **Subscriptions** tab.
+3. Click Export Manifest to download the manifest file.
 
 ##### Results
 

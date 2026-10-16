@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-ref_editing_inventory_file"
-title = "Edit the inventory file - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Edit the inventory file - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_install_mesh/", "Scale with automation mesh in a containerized or VM environment"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-ref_editing_inventory_file/aem-page/administer-ref_editing_inventory_file.html"
 last_crumb = "Edit the inventory file"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Edit the inventory file"
 oversized = "false"
@@ -45,7 +46,7 @@ cd <path-to-source-file/ansible-automation-platform-containerized-setup-bundle-<
 
 1. Open the `inventory` file with a text editor.
 
-2. Edit the `inventory` file parameters to specify your installation scenario. For containerized installation, see [Configuring the inventory file](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_configuring_inventory_file#configuring-inventory-file "You can control the installation of Ansible Automation Platform with inventory files. Inventory files define the host details, certificate details, and component-specific settings needed to customize the installation.")
+2. Edit the `inventory` file parameters to specify your installation scenario. For containerized installation, see [Configuring the inventory file](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_configuring_inventory_file "You can control the installation of Ansible Automation Platform with inventory files. Inventory files define the host details, certificate details, and component-specific settings needed to customize the installation.")
 
 ## For an RPM installation (deprecated)
 
@@ -79,7 +80,7 @@ Run the installation program setup script after updating the inventory file with
 
 ### Procedure
 
- Run the `setup.sh` script
+Run the `setup.sh` script
 
 ```
 $ sudo ./setup.sh
@@ -118,10 +119,11 @@ The Ansible Automation Platform installation program generates a CA if you do no
 
 ### Procedure
 
-1.  Open the `inventory` file for editing.
-2.  Add the `mesh_ca_keyfile` variable and specify the full path to the private RSA key (`.key`).
-3.  Add the `mesh_ca_certfile` variable and specify the full path to the CA certificate file (`.crt`).
-4.  Save the changes to the inventory file.
+1. Open the `inventory` file for editing.
+2. Add the `mesh_ca_keyfile` variable and specify the full path to the private RSA key (`.key`).
+3. Add the `mesh_ca_certfile` variable and specify the full path to the CA certificate file (`.crt`).
+4. Save the changes to the inventory file.
+  
 
 ```
 [all:vars]
@@ -129,7 +131,7 @@ mesh_ca_keyfile=/tmp/<mesh_CA>.key
 mesh_ca_certfile=/tmp/<mesh_CA>.crt
 ```
 
-5.  With the CA files added to the inventory file, run the installation program to apply the CA.
+5. With the CA files added to the inventory file, run the installation program to apply the CA.
 
 ### Results
 

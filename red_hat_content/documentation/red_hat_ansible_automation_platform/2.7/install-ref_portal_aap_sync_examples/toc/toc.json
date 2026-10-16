@@ -1,0 +1,87 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Ansible Automation Platform synchronization configuration examples",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Minimal configuration",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "portal-aap-sync-examples__minimal-config",
+          "anchor": null,
+          "singlePageAnchor": "portal-aap-sync-examples__minimal-config"
+        },
+        {
+          "title": "Filter by survey status",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "portal-aap-sync-examples__filter-by-survey",
+          "anchor": null,
+          "singlePageAnchor": "portal-aap-sync-examples__filter-by-survey"
+        },
+        {
+          "title": "Filter by labels",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "portal-aap-sync-examples__filter-by-labels",
+          "anchor": null,
+          "singlePageAnchor": "portal-aap-sync-examples__filter-by-labels"
+        },
+        {
+          "title": "Exclude by labels",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "portal-aap-sync-examples__exclude-by-labels",
+          "anchor": null,
+          "singlePageAnchor": "portal-aap-sync-examples__exclude-by-labels"
+        },
+        {
+          "title": "Combine filters for production",
+          "visible": true,
+          "weight": 5,
+          "urlFragment": "portal-aap-sync-examples__combine-filters",
+          "anchor": null,
+          "singlePageAnchor": "portal-aap-sync-examples__combine-filters"
+        },
+        {
+          "title": "Custom sync frequencies",
+          "visible": true,
+          "weight": 6,
+          "urlFragment": "portal-aap-sync-examples__custom-frequencies",
+          "anchor": null,
+          "singlePageAnchor": "portal-aap-sync-examples__custom-frequencies"
+        },
+        {
+          "title": "Different frequencies for identity and templates",
+          "visible": true,
+          "weight": 7,
+          "urlFragment": "portal-aap-sync-examples__different-frequencies",
+          "anchor": null,
+          "singlePageAnchor": "portal-aap-sync-examples__different-frequencies"
+        },
+        {
+          "title": "Disable Job Template sync",
+          "visible": true,
+          "weight": 8,
+          "urlFragment": "portal-aap-sync-examples__disable-template-sync",
+          "anchor": null,
+          "singlePageAnchor": "portal-aap-sync-examples__disable-template-sync"
+        },
+        {
+          "title": "Production configuration example",
+          "visible": true,
+          "weight": 9,
+          "urlFragment": "portal-aap-sync-examples__production-example",
+          "anchor": null,
+          "singlePageAnchor": "portal-aap-sync-examples__production-example"
+        }
+      ]
+    }
+  ]
+}

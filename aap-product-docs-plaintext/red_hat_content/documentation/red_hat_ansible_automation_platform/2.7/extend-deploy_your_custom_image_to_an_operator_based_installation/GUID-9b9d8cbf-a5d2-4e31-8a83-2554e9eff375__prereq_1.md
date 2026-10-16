@@ -7,11 +7,11 @@
 
 ## Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform as an administrator.
-2.  Navigate to the namespace where you want to deploy the BYOK RAG image.
-3.  Select Operators> (and then)Installed Operators
-4.  From the list of installed operators, select Ansible Automation Platform.
-5.  In the **AnsibleAutomationPlatform** custom resource, select the YAML view, and set the following values in the `chatbot_extra_settings `parameters under the `spec: `section:
+1. Log in to Red Hat OpenShift Container Platform as an administrator.
+2. Navigate to the namespace where you want to deploy the BYOK RAG image.
+3. Select Operators> (and then)Installed Operators
+4. From the list of installed operators, select Ansible Automation Platform.
+5. In the **AnsibleAutomationPlatform** custom resource, select the YAML view, and set the following values in the `chatbot_extra_settings `parameters under the `spec: `section:
 
 
 ```
@@ -30,9 +30,9 @@ The parameters above correspond to the values in the following table.
 | ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | `chatbot_byok_image`         | The full registry path to your RAG image.                                                                                                                                                                | n/a           |
 | `chatbot_byok_image_version` | The specific version tag (for example,`1.0`) of the image to pull.                                                                                                                                       | `latest`      |
-| `chatbot_byok_storage_size`  | <br>The amount of persistent storage allocated for the BYOK volume.<br>Keep the BYOK data between 1 Mi and 999 Mi for best performance. While the system supports larger allocations up to 2 Gi, smaller volumes are recommended. | `2 Gi`        |
+| `chatbot_byok_storage_size`  | The amount of persistent storage allocated for the BYOK volume.<br>Keep the BYOK data between 1 Mi and 999 Mi for best performance. While the system supports larger allocations up to 2 Gi, smaller volumes are recommended. | `2 Gi`        |
 
-6.  If the BYOK image is in a private registry, you must create an image pull secret, and set the following values in the `chatbot_extra_settings` parameters under the `spec: `section:
+6. If the BYOK image is in a private registry, you must create an image pull secret, and set the following values in the `chatbot_extra_settings` parameters under the `spec: `section:
 
 
 ```
@@ -43,5 +43,5 @@ image_pull_secrets:
 - my-image-pull-secret
 ```
 
-7.  Click **Save**. The operator deployes the BYOK RAG image.
+7. Click **Save**. The operator deployes the BYOK RAG image.
 

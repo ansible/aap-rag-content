@@ -25,26 +25,26 @@ Red Hat tests each OpenShift Worker node with these requirements:
 
 *Table 2. Infrastructure topology components*
 
-| Count   | Component                                                          |
-| ------- | ------------------------------------------------------------------ |
-| <br>1   | <br>Automation controller web pod                                  |
-| <br>1   | <br>Automation controller task pod                                 |
-| <br>1   | <br>Automation hub web pod                                         |
-| <br>1   | <br>Automation hub API pod                                         |
-| <br>2   | <br>Automation hub content pod                                     |
-| <br>2   | <br>Automation hub worker pod                                      |
-| <br>1   | <br>Automation hub Redis pod                                       |
-| <br>1   | <br>Event-Driven Ansible API pod                                   |
-| <br>2   | <br>Event-Driven Ansible activation worker pod                     |
-| <br>2   | <br>Event-Driven Ansible default worker pod                        |
-| <br>2   | <br>Event-Driven Ansible event stream pod                          |
-| <br>1   | <br>Event-Driven Ansible scheduler pod                             |
-| <br>1   | <br>Platform gateway pod                                           |
-| <br>1   | <br>Metrics service web pod                                        |
-| <br>1   | <br>Metrics service tasks pod                                      |
-| <br>1   | <br>Metrics service scheduler pod                                  |
-| <br>2   | <br>Mesh ingress pod                                               |
-| <br>N/A | <br>Externally managed database service                            |
-| <br>N/A | <br>Externally managed Redis                                       |
-| <br>N/A | <br>Externally managed object storage service (for automation hub) |
+| Count | Component                                                      |
+| ----- | -------------------------------------------------------------- |
+| 1     | Automation controller web pod                                  |
+| 1     | Automation controller task pod                                 |
+| 1     | Automation hub web pod                                         |
+| 1     | Automation hub API pod                                         |
+| 2     | Automation hub content pod                                     |
+| 2     | Automation hub worker pod                                      |
+| 1     | Automation hub Redis pod                                       |
+| 1     | Event-Driven Ansible API pod                                   |
+| 2     | Event-Driven Ansible activation worker pod                     |
+| 2     | Event-Driven Ansible default worker pod                        |
+| 2     | Event-Driven Ansible event stream pod                          |
+| 1     | Event-Driven Ansible scheduler pod                             |
+| 1     | Platform gateway pod                                           |
+| 1     | Metrics service web pod                                        |
+| 1     | Metrics service tasks pod                                      |
+| 1     | Metrics service scheduler pod                                  |
+| 2     | Mesh ingress pod                                               |
+| N/A   | Externally managed database service                            |
+| N/A   | Externally managed Redis                                       |
+| N/A   | Externally managed object storage service (for automation hub) |
 

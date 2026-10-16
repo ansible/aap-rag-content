@@ -1,7 +1,7 @@
 +++
+title = "Best practices for setting up secure logging - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_logging_log_capture"
-title = "Best practices for setting up secure logging - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_hardening_aap/", "Harden the platform security posture"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_logging_log_capture/aem-page/secure-con_logging_log_capture.html"
 last_crumb = "Best practices for setting up secure logging"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Best practices for setting up secure logging"
 oversized = "false"
@@ -60,12 +61,12 @@ To set up logging to any of the aggregator types for centralized logging follow 
 
 ### Procedure
 
--  From the navigation panel, select Settings> (and then)Automation Execution> (and then)Logging.
--  On the **Logging settings** page, click Edit.
--  You can configure the following options:
+- From the navigation panel, select Settings> (and then)Automation Execution> (and then)Logging.
+- On the **Logging settings** page, click Edit.
+- You can configure the following options:
 
   * **Logging Aggregator**: Enter the hostname or IP address that you want to send logs to.
-  * **Logging Aggregator Port**: Specify the port for the aggregator if it requires one.  Note:
+  * **Logging Aggregator Port**: Specify the port for the aggregator if it requires one. Note:
             When the connection type is HTTPS, you can enter the hostname as a URL with a port number, after which, you are not required to enter the port again. However, TCP and UDP connections are determined by the hostname and port number combination, rather than URL. Therefore, in the case of a TCP or UDP connection, supply the port in the specified field. If a URL is entered in the **Logging Aggregator** field instead, its hostname portion is extracted as the hostname.
 
   * **Logging Aggregator Type**: Click to select the aggregator service from the list:
@@ -81,15 +82,15 @@ To set up logging to any of the aggregator types for centralized logging follow 
   * **File system location for rsyslogd disk persistence**: Location to persist logs that should be retried after an outage of the external log aggregator (defaults to `/var/lib/awx`). Equivalent to the `rsyslogd queue.spoolDirectory` setting.: Configure a specific error message. When the API encounters an issue with a request, it typically returns an HTTP error code in the 400 range along with an error. When this happens, an error message is generated in the log that follows the following pattern:
   * **Log Format For API 4XX Errors:** When the API encounters an issue with a request, it typically returns an HTTP error code in the 400 range along with an error. When this happens, an error message is generated in the log that follows the following pattern: `' status {status_code} received by user {user_name} attempting to access {url_path} from {remote_addr} '`
 
--  You can set the following options:
+- You can set the following options:
 
   * **Log System Tracking Facts Individually**: Click the tooltip ![Help](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/question-circle.png) icon for additional information, such as whether or not you want to turn it on, or leave it off by default.
 
--  Review your entries for your chosen logging aggregation.   * **Enable External Logging**: Select this checkbox if you want to send logs to an external log aggregator.
+- Review your entries for your chosen logging aggregation.   * **Enable External Logging**: Select this checkbox if you want to send logs to an external log aggregator.
   * **Enable/disable HTTPS certificate verification**: Certificate verification is enabled by default for the HTTPS log protocol. Select this checkbox if you want the log handler to verify the HTTPS certificate sent by the external log aggregator before establishing a connection.
   * **Enable rsyslogd debugging**: Select this checkbox to enable high verbosity debugging for `rsyslogd`. Useful for debugging connection issues for external log aggregation.
 
--  Click Save or Cancel to abandon the changes.
+- Click Save or Cancel to abandon the changes.
 
 ## Configure LDAP logging
 
@@ -97,9 +98,9 @@ Enable debug logging for LDAP in the platform gateway settings to capture detail
 
 ### Procedure
 
-1.  Edit the gateway settings file:
-  1.  On Ansible Automation Platform 2.6 Containerized, the file is `~/aap/gateway/etc/settings.py` (as the user running the platform gateway container).
-  2.  On Ansible Automation Platform 2.6 RPM-based, the file is `/etc/ansible-automation-platform/gateway/settings.py`.
+1. Edit the gateway settings file:
+  1. On Ansible Automation Platform 2.6 Containerized, the file is `~/aap/gateway/etc/settings.py` (as the user running the platform gateway container).
+  2. On Ansible Automation Platform 2.6 RPM-based, the file is `/etc/ansible-automation-platform/gateway/settings.py`.
 
 ```
 (...)
@@ -112,15 +113,15 @@ Enable debug logging for LDAP in the platform gateway settings to capture detail
         (...)
 ```
 
-2.  Restart the platform gateway service or container:
-  1.  On Ansible Automation Platform 2.6 Containerized, restart the platform gateway service so that it restarts the platform gateway container:
+2. Restart the platform gateway service or container:
+  1. On Ansible Automation Platform 2.6 Containerized, restart the platform gateway service so that it restarts the platform gateway container:
   
-     Note:
+    Note:
             Ensure that you run `` systemctl with the `--user` `` flag as follows:
 
         + `$ systemctl --user restart automation-gateway`
 
-  2.  On Ansible Automation Platform 2.6 RPM-based, use the `automation-gateway-service` command:
+  2. On Ansible Automation Platform 2.6 RPM-based, use the `automation-gateway-service` command:
              `# automation-gateway-service restart`
 
 ## Implement security control
@@ -129,16 +130,19 @@ Some of the following examples of meeting compliance requirements come from the 
 
 ### About this task
 
-Automation controller must use external log providers that can collect user activity logs in independent, protected repositories to prevent modification or repudiation. Automation controller must be configured to use external logging to compile log records from multiple components within the server. The events occurring must be time-correlated in order to conduct accurate forensic analysis. In addition, the correlation must meet certain tolerance criteria.
+Automation controller must use external log providers that can collect user activity logs in independent, protected repositories to prevent modification or repudiation.
+Automation controller must be configured to use external logging to compile log records from multiple components within the server.
+The events occurring must be time-correlated in order to conduct accurate forensic analysis.
+In addition, the correlation must meet certain tolerance criteria.
 
 The following steps implement the security control:
 
 ### Procedure
 
-1.  Log in to automation controller as an administrator.
-2.  From the navigation panel, select Settings> (and then)Automation Execution> (and then)Logging.
-3.  On the **Logging settings** page, click Edit.
-4.  Set the following fields:
+1. Log in to automation controller as an administrator.
+2. From the navigation panel, select Settings> (and then)Automation Execution> (and then)Logging.
+3. On the **Logging settings** page, click Edit.
+4. Set the following fields:
 
   - Set **Logging Aggregator** to `Not configured`. This is the default.
   - Set **Enable External Logging** to `On`.
@@ -146,20 +150,27 @@ The following steps implement the security control:
   - Set **TCP Connection Timeout** to 5 (the default) or to the organizational timeout.
   - Set **Enable/disable HTTPS certificate verification** to `On`.
 
-5.  Click Save. Automation controller must allocate log record storage capacity and shut down by default upon log failure (unless availability is an overriding concern). It is critical that when a system is at risk of failing to process logs, it detects and takes action to mitigate the failure. Log processing failures include software/hardware errors, failures in the log capturing mechanisms, and log storage capacity being reached or exceeded. During a failure, the application server must be configured to shut down unless the application server is part of a high availability system. When availability is an overriding concern, other approved actions in response to a log failure are as follows:
+5. Click Save.
+      Automation controller must allocate log record storage capacity and shut down by default upon log failure (unless availability is an overriding concern).
+It is critical that when a system is at risk of failing to process logs, it detects and takes action to mitigate the failure.
+Log processing failures include software/hardware errors, failures in the log capturing mechanisms, and log storage capacity being reached or exceeded.
+During a failure, the application server must be configured to shut down unless the application server is part of a high availability system.
+When availability is an overriding concern, other approved actions in response to a log failure are as follows:
 
-6.  If the failure was caused by the lack of log record storage capacity, the application must continue generating log records if possible (automatically restarting the log service if necessary), overwriting the oldest log records in a first-in-first-out manner.
-7.  If log records are sent to a centralized collection server and communication with this server is lost or the server fails, the application must queue log records locally until communication is restored or until the log records are retrieved manually. Upon restoration of the connection to the centralized collection server, action must be taken to synchronize the local log data with the collection server. The following steps implement the security control:
+6. If the failure was caused by the lack of log record storage capacity, the application must continue generating log records if possible (automatically restarting the log service if necessary), overwriting the oldest log records in a first-in-first-out manner.
+7. If log records are sent to a centralized collection server and communication with this server is lost or the server fails, the application must queue log records locally until communication is restored or until the log records are retrieved manually.
+Upon restoration of the connection to the centralized collection server, action must be taken to synchronize the local log data with the collection server.
+      The following steps implement the security control:
 
-  1.  Open a web browser and navigate to the logging API, `/api/v2/settings/logging/`
+  1. Open a web browser and navigate to the logging API, `/api/v2/settings/logging/`
             Ensure that you are authenticated as an automation controller administrator.
 
-  2.  In the **Content** section, modify the following values:
+  2. In the **Content** section, modify the following values:
 
     - `LOG_AGGREGATOR_ACTION_MAX_DISK_USAGE_GB` = organization-defined requirement for log buffering.
     - `LOG_AGGREGATOR_MAX_DISK_USAGE_PATH` = `/var/lib/awx`
 
-  3.  Click PUT.
+  3. Click PUT.
 
 ## Implement security control for each host
 
@@ -171,17 +182,17 @@ To implement the security control, use the following procedure:
 
 ### Procedure
 
-1.  As a system administrator for each automation controller host, set the permissions and owner of the automation controller NGINX log directory:
+1. As a system administrator for each automation controller host, set the permissions and owner of the automation controller NGINX log directory:
 
   -  `chmod 770 /var/log/nginx`
   -  `chown nginx:root /var/log/nginx`
 
-2.  Set the permissions and owner of the automation controller log directory:
+2. Set the permissions and owner of the automation controller log directory:
 
   -  `chmod 770 /var/log/tower`
   -  `chown awx:awx /var/log/tower`
 
-3.  Set the permissions and owner of the automation controller supervisor log directory:
+3. Set the permissions and owner of the automation controller supervisor log directory:
 
   -  `chmod 770 /var/log/supervisor/`
   -  `chown root:root /var/log/supervisor/`
@@ -197,13 +208,13 @@ Use the following procedure to implement the security control as a System Admini
 
 ### Procedure
 
-1.  From the navigation panel, select Settings> (and then)Automation Execution> (and then)System. The System Settings page is displayed.
-2.  Click Edit.
-3.  Set the following:
+1. From the navigation panel, select Settings> (and then)Automation Execution> (and then)System. The System Settings page is displayed.
+2. Click Edit.
+3. Set the following:
 
   - **Enable Activity Stream** = On
   - **Enable Activity Stream for Inventory Sync** = On
   - **Organization Admins Can Manage Users and Teams** = On
   - **All Users Visible to Organization Admins** = On
 
-4.  Click Save.
+4. Click Save.

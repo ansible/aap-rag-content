@@ -10,7 +10,7 @@ If your Ansible Automation Platform instance uses custom or self-signed SSL cert
 
 ## Procedure
 
-1.  Obtain the CA certificate file from your Ansible Automation Platform instance.
+1. Obtain the CA certificate file from your Ansible Automation Platform instance.
 If you do not have the CA certificate file, you can extract it from your Ansible Automation Platform server:
 
 ```terminal
@@ -19,8 +19,8 @@ $ openssl s_client -showcerts -connect *aap-hostname*:443 </dev/null 2>/dev/null
 
 Replace *aap-hostname* with your Ansible Automation Platform hostname.
 
-2.  Log in to your Red Hat OpenShift Container Platform cluster with administrator privileges.
-3.  Create a ConfigMap containing your custom CA certificate:
+2. Log in to your Red Hat OpenShift Container Platform cluster with administrator privileges.
+3. Create a ConfigMap containing your custom CA certificate:
 
 
 ```terminal
@@ -31,7 +31,7 @@ $ oc create configmap custom-ca-bundle \
 
 Replace *namespace* with the namespace where the Ansible automation portal is installed.
 
-4.  Update your Ansible automation portal Helm chart values to mount the custom CA certificate.
+4. Update your Ansible automation portal Helm chart values to mount the custom CA certificate.
 Add the `custom-ca` volume and volume mount to your values file:
 
 ```yaml
@@ -47,7 +47,7 @@ mountPath: /etc/pki/ca-trust/source/anchors/
 readOnly: true
 ```
 
-5.  Apply the updated configuration by upgrading the Ansible automation portal Helm chart:
+5. Apply the updated configuration by upgrading the Ansible automation portal Helm chart:
 
 
 ```terminal
@@ -58,7 +58,7 @@ $ helm upgrade *release-name* *chart-name* \
 
 Replace *release-name* with your Helm release name and *chart-name* with the Ansible automation portal chart name.
 
-6.  Wait for the Ansible automation portal pods to restart with the new configuration.
+6. Wait for the Ansible automation portal pods to restart with the new configuration.
 
 ## Results
 

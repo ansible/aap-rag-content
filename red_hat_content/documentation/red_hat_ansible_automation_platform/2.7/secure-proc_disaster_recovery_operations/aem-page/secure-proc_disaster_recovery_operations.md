@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-proc_disaster_recovery_operations/aem-page/secure-proc_disaster_recovery_operations.html"
 last_crumb = "Disaster recovery and operational continuity"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Disaster recovery and operational continuity"
 oversized = "false"
@@ -46,8 +47,8 @@ To generate a new secret key, perform the following steps:
 
 ## Procedure
 
-1.  Backup your Ansible Automation Platform database before you do anything else! See the [Back up and restore](/documentation/en-us/red_hat_ansible_automation_platform/2.7/assembly_ag_controller_backup_and_restore "You can backup and restore your system by using the Ansible Automation Platform setup playbook.") section of the Configuring automation execution guide,
-2.  Using the inventory from your install (same inventory with which you run backups/restores), run `setup.sh -k`.
+1. Backup your Ansible Automation Platform database before you do anything else! See the [Back up and restore](/documentation/en-us/red_hat_ansible_automation_platform/2.7/../administer/assembly-ag-controller-backup-and-restore.html "You can backup and restore your system by using the Ansible Automation Platform setup playbook.") section of the Configuring automation execution guide,
+2. Using the inventory from your install (same inventory with which you run backups/restores), run `setup.sh -k`.
 
 ## Results
 

@@ -1,6 +1,7 @@
 # Custom credential types
 
-As a system administrator, you can define a custom credential type in a standard format by using a YAML or JSON-like definition. You can define a custom credential type that works in ways similar to existing credential types.
+As a system administrator, you can define a custom credential type in a standard format by using a YAML or JSON-like definition.
+You can define a custom credential type that works in ways similar to existing credential types.
 
 For example, a custom credential type can inject an API token for a third-party web service into an environment variable, for your playbook or custom inventory script to consume.
 
@@ -10,11 +11,15 @@ Custom credentials support the following ways of injecting their authentication 
 - Ansible extra variables
 - File-based templating, which means generating `.ini` or `.conf` files that contain credential values
 
-You can attach one SSH and multiple cloud credentials to a job template. Each cloud credential must be of a different type. Only one of each type of credential is permitted. Vault credentials and machine credentials are separate entities.
+You can attach one SSH and multiple cloud credentials to a job template.
+Each cloud credential must be of a different type.
+Only one of each type of credential is permitted.
+Vault credentials and machine credentials are separate entities.
 
 Note:
 
 - When creating a new credential type, you must avoid collisions in the `extra_vars`, `env`, and file namespaces.
 - Environment variable or extra variable names must not start with `ANSIBLE_` because they are reserved.
-- You must have System administrator (superuser) permissions to be able to create and edit a credential type (`CredentialType`) and to be able to view the `CredentialType.injection` field.
+- You must have System administrator (superuser) permissions to be able to create and edit a credential type (`CredentialType`) and to be
+able to view the `CredentialType.injection` field.
 

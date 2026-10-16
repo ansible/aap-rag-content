@@ -12,9 +12,9 @@ Like automation execution projects, automation decision projects are logical col
 
 ### Procedure
 
-1.  From the navigation panel, select **Automation Decisions> (and then)Projects**.
-2.  Click Create project.
-3.  Enter the following information:
+1. From the navigation panel, select **Automation Decisions> (and then)Projects**.
+2. Click Create project.
+3. Enter the following information:
 
 - **Name**: Enter project name.
 - **Description**: This field is optional.
@@ -27,7 +27,7 @@ Like automation execution projects, automation decision projects are logical col
 - **Content signature validation credential**: Enables content signing to verify that the content has remained secure during project syncing. If the content is tampered with, the job will not run.
 - **Options**: Checking the box next to **Verify SSL** verifies the SSL with HTTPS when the project is imported.
 
-4.  Click Create project.
+4. Click Create project.
 
 ### What to do next
 

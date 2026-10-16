@@ -4,8 +4,8 @@ To deploy Red Hat Ansible Lightspeed, configure the required installation variab
 
 ## Procedure
 
-1.  Add the required installation variables to your inventory file under the `[all: vars]` group.
-2.  You will also need to add specific variables to enable the coding assistant, the intelligent assistant, and the MCP server integration. Refer to the [Appendix: Red Hat Ansible Lightspeed variables](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_lightspeed_variables "Configure Red Hat Ansible Lightspeed by setting inventory file variables during installation. Use this reference to determine which variables to set for your deployment requirements.") for information about required and optional variables.
+1. Add the required installation variables to your inventory file under the `[all: vars]` group.
+2. You will also need to add specific variables to enable the coding assistant, the intelligent assistant, and the MCP server integration. Refer to the [Appendix: Red Hat Ansible Lightspeed variables](/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-ref_lightspeed_variables "Configure Red Hat Ansible Lightspeed by setting inventory file variables during installation. Use this reference to determine which variables to set for your deployment requirements.") for information about required and optional variables.
 
 ```
 # This is the list of inventory file variables required to deploy Red Hat Ansible Lightspeed on a containerized installation.

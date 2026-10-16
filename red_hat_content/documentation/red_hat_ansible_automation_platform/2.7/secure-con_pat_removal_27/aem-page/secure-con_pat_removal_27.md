@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 title = "Personal Access Token removal in Ansible Automation Platform 2.7 - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_pat_removal_27"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_configure_authentication/", "Configure central authentication for Ansible Automation Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_pat_removal_27/aem-page/secure-con_pat_removal_27.html"
 last_crumb = "Personal Access Token removal in Ansible Automation Platform 2.7"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Personal Access Token removal in Ansible Automation Platform 2.7"
 oversized = "false"
@@ -47,7 +48,7 @@ Component-level tokens from automation controller, automation hub, or Event-Driv
 
 ### Procedure
 
-1.  Log in to the platform gateway UI.
-2.  Navigate to Access Management> (and then)Users> (and then)[your user]> (and then)Tokens.
-3.  Create new tokens as needed.
-4.  Update any scripts or integrations to use the new platform gateway tokens.
+1. Log in to the platform gateway UI.
+2. Navigate to Access Management> (and then)Users> (and then)[your user]> (and then)Tokens.
+3. Create new tokens as needed.
+4. Update any scripts or integrations to use the new platform gateway tokens.

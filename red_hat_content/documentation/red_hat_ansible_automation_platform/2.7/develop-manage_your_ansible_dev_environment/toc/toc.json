@@ -1,0 +1,67 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Manage your Ansible dev environment",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Before you begin",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-a917cf94-2ce4-4a24-9ba2-f53cc3c077a8__prereq_1",
+          "anchor": null,
+          "singlePageAnchor": "GUID-a917cf94-2ce4-4a24-9ba2-f53cc3c077a8__prereq_1"
+        },
+        {
+          "title": "About this task",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "GUID-a917cf94-2ce4-4a24-9ba2-f53cc3c077a8__context_1",
+          "anchor": null,
+          "singlePageAnchor": "GUID-a917cf94-2ce4-4a24-9ba2-f53cc3c077a8__context_1"
+        },
+        {
+          "title": "Understand your automation with the AI assistant",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "task_1",
+          "anchor": null,
+          "singlePageAnchor": "task_1",
+          "sections": [
+            {
+              "title": "Procedure",
+              "visible": true,
+              "weight": 1,
+              "urlFragment": "task_1",
+              "anchor": "task_1__steps_1",
+              "singlePageAnchor": "task_1__steps_1"
+            },
+            {
+              "title": "List available Ansible MCP tools",
+              "visible": true,
+              "weight": 2,
+              "urlFragment": "task_1",
+              "anchor": "task_2",
+              "singlePageAnchor": "task_2",
+              "sections": [
+                {
+                  "title": "Procedure",
+                  "visible": true,
+                  "weight": 1,
+                  "urlFragment": "task_1",
+                  "anchor": "task_2__steps_2",
+                  "singlePageAnchor": "task_2__steps_2"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

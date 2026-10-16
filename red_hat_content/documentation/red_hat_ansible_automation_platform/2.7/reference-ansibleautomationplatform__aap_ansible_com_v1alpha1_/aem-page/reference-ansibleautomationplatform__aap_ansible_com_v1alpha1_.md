@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-title = "AnsibleAutomationPlatform [aap.ansible.com/v1alpha1] - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_"
+title = "AnsibleAutomationPlatform [aap.ansible.com/v1alpha1] - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansible_automation_platform_custom_resources/", "Ansible Automation Platform custom resources"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_/aem-page/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_.html"
 last_crumb = "AnsibleAutomationPlatform [aap.ansible.com/v1alpha1]"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "AnsibleAutomationPlatform [aap.ansible.com/v1alpha1]"
 oversized = "false"
@@ -41,19 +42,28 @@ The `AnsibleAutomationPlatform` custom resource is the top-level resource for de
 
 The top-level `spec` fields for the `AnsibleAutomationPlatform` custom resource.
 
-| Field                  | Type    | Description                                                                                                                                                                                              | Default        |
-| ---------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
-| `no_log`               | Boolean | Development setting to enable additional logging output.                                                                                                                                                 | `false`        |
-| `image_pull_policy`    | String  | Image pull policy for all platform pods. Options:`Always`,`Never`,`IfNotPresent`.                                                                                                                        | `IfNotPresent` |
-| `bundle_cacert_secret` | String  | Name of a Kubernetes secret containing custom CA certificates to trust.                                                                                                                                  | -              |
-| `redis_mode`           | String  | Redis deployment mode. Set to`cluster` to enable Redis cluster mode.                                                                                                                                     | -              |
-| `api`                  | Object  | Configuration for the platform gateway API pods. See[spec.api](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-api). | -              |
-| `redis`                | Object  | Configuration for the platform Redis pods. See[spec.redis](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-redis). | -              |
-| `database`             | Object  | Configuration for the platform database. See[spec.database](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-database). | -              |
-| `controller`           | Object  | Configuration for the automation controller component. See[spec.controller](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-controller). | -              |
-| `eda`                  | Object  | Configuration for the Event-Driven Ansible component. See[spec.eda](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-eda). | -              |
-| `hub`                  | Object  | Configuration for the automation hub component. See[spec.hub](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-hub). | -              |
-| `lightspeed`           | Object  | Configuration for the Ansible Lightspeed component. See[spec.lightspeed](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-lightspeed). | -              |
+| Field                    | Type    | Description                                                                                                                                                                                              | Default        |
+| ------------------------ | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| `no_log`                 | Boolean | Development setting to enable additional logging output.                                                                                                                                                 | `false`        |
+| `image_pull_policy`      | String  | Image pull policy for all platform pods. Options:`Always`,`Never`,`IfNotPresent`.                                                                                                                        | `IfNotPresent` |
+| `image_pull_secrets`     | Array   | List of Kubernetes pull secret names for authenticating to container registries. Applies to all platform pods.                                                                                           | `[]`           |
+| `image`                  | String  | Custom container image for the platform gateway. Use when cluster-level image mirroring is not available. If set,`image_version` must also be set.                                                       | -              |
+| `image_version`          | String  | Tag or digest for the custom platform gateway image. Required when`image` is set.                                                                                                                        | -              |
+| `image_proxy`            | String  | Custom container image for the platform gateway proxy. Use when cluster-level image mirroring is not available. If set,`image_proxy_version` must also be set.                                           | -              |
+| `image_proxy_version`    | String  | Tag or digest for the custom platform gateway proxy image. Required when`image_proxy` is set.                                                                                                            | -              |
+| `postgres_image`         | String  | Custom container image for the operator-managed PostgreSQL database. Use when cluster-level image mirroring is not available. If set,`postgres_image_version` must also be set.                          | -              |
+| `postgres_image_version` | String  | Tag or digest for the custom PostgreSQL image. Required when`postgres_image` is set.                                                                                                                     | -              |
+| `redis_image`            | String  | Custom container image for the operator-managed Redis instance. Use when cluster-level image mirroring is not available. If set,`redis_image_version` must also be set.                                  | -              |
+| `redis_image_version`    | String  | Tag or digest for the custom Redis image. Required when`redis_image` is set.                                                                                                                             | -              |
+| `bundle_cacert_secret`   | String  | Name of a Kubernetes secret containing custom CA certificates to trust.                                                                                                                                  | -              |
+| `redis_mode`             | String  | Redis deployment mode. Set to`cluster` to enable Redis cluster mode.                                                                                                                                     | -              |
+| `api`                    | Object  | Configuration for the platform gateway API pods. See[spec.api](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-api). | -              |
+| `redis`                  | Object  | Configuration for the platform Redis pods. See[spec.redis](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-redis). | -              |
+| `database`               | Object  | Configuration for the platform database. See[spec.database](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-database). | -              |
+| `controller`             | Object  | Configuration for the automation controller component. See[spec.controller](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-controller). | -              |
+| `eda`                    | Object  | Configuration for the Event-Driven Ansible component. See[spec.eda](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-eda). | -              |
+| `hub`                    | Object  | Configuration for the automation hub component. See[spec.hub](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-hub). | -              |
+| `lightspeed`             | Object  | Configuration for the Ansible Lightspeed component. See[spec.lightspeed](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatform__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatform__spec-lightspeed). | -              |
 
 ## spec.api
 

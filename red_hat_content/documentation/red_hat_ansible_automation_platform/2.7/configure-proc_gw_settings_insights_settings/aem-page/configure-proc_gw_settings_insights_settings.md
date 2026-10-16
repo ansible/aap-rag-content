@@ -1,7 +1,7 @@
 +++
+title = "Configure miscellaneous options - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-proc_gw_settings_insights_settings"
-title = "Configure miscellaneous options - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-assembly_gw_settings/", "Configure Ansible Automation Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/configure-proc_gw_settings_insights_settings/aem-page/configure-proc_gw_settings_insights_settings.html"
 last_crumb = "Configure miscellaneous options"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure miscellaneous options"
 oversized = "false"
@@ -31,10 +32,10 @@ From the platform gateway settings page, you can configure options for Insights,
 
 ## Procedure
 
-1.  From the navigation panel, select Settings> (and then)Platform gateway.
-2.  The **Platform gateway settings** page is displayed.
-3.  To configure the options, click Edit platform gateway settings.
-4.  You can configure the following options:
+1. From the navigation panel, select Settings> (and then)Platform gateway.
+2. The **Platform gateway settings** page is displayed.
+3. To configure the options, click Edit platform gateway settings.
+4. You can configure the following options:
 
   - **Insights tracking state**: Enables the service to gather data on automation and send it to Automation Analytics.
   - **Red Hat console URL**: This setting is used to configure the upload URL for data collection for Automation Analytics.

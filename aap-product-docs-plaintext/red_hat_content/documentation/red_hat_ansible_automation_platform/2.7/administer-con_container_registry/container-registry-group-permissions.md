@@ -9,11 +9,11 @@ The following table lists permissions you can grant to teams to ensure they have
 
 *Table 1. Team permissions for managing containers in private automation hub*
 
-| Permission name                            | Description                                                          |
-| ------------------------------------------ | -------------------------------------------------------------------- |
-| <br>Create new containers                  | <br>Users can create new containers                                  |
-| <br>Change container namespace permissions | <br>Users can change permissions on the container repository         |
-| <br>Change container                       | <br>Users can change information on a container                      |
-| <br>Change execution environment tags      | <br>Users can modify execution environment tags                      |
-| <br>Push to existing container             | <br>Users can push an execution environment to an existing container |
+| Permission name                        | Description                                                      |
+| -------------------------------------- | ---------------------------------------------------------------- |
+| Create new containers                  | Users can create new containers                                  |
+| Change container namespace permissions | Users can change permissions on the container repository         |
+| Change container                       | Users can change information on a container                      |
+| Change execution environment tags      | Users can modify execution environment tags                      |
+| Push to existing container             | Users can push an execution environment to an existing container |
 

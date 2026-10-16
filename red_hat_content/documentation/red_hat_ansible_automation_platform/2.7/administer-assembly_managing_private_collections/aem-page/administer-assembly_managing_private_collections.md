@@ -1,7 +1,7 @@
 +++
-title = "Upload, group, and approve your organization?s content collections - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_managing_private_collections"
 template = "docs/aem-title.html"
+title = "Upload, group, and approve your organization’s content collections - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_managing_private_collections"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_working_with_namespaces/", "Manage collection access and permissions with namespaces"]]
@@ -9,10 +9,11 @@ category = "Administer"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_managing_private_collections/aem-page/administer-assembly_managing_private_collections.html"
-last_crumb = "Upload, group, and approve your organization?s content collections"
-modified = "2026-07-30T17:12:56.473Z"
+last_crumb = "Upload, group, and approve your organization’s content collections"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
-name = "Upload, group, and approve your organization?s content collections"
+name = "Upload, group, and approve your organization’s content collections"
 oversized = "false"
 page_slug = "administer-assembly_managing_private_collections"
 portal_content_subtype = "title"
@@ -47,10 +48,11 @@ All collections awaiting review are located in Automation Content> (and then)Col
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Content> (and then)Collection Approvals. Collections requiring approval have the status **Needs review**.
+1. From the navigation panel, select Automation Content> (and then)Collection Approvals.
+      Collections requiring approval have the status **Needs review**.
 
-2.  Find the collection you want to review in the list. You can also filter collections by Namespace, Repository, and Status using the search bar.
-3.  Click the thumbs up icon to approve and sign the collection. Confirm your choice in the modal that appears.
+2. Find the collection you want to review in the list. You can also filter collections by Namespace, Repository, and Status using the search bar.
+3. Click the thumbs up icon to approve and sign the collection. Confirm your choice in the modal that appears.
 
 ### Results
 
@@ -72,9 +74,9 @@ Collections requiring approval have the status **Needs review**.
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Content> (and then)Collection Approvals.
-2.  Find the collection you want to review in the list. You can also filter collections by Namespace, Repository, and Status using the search bar.
-3.  Click the thumbs down icon to reject the collection. Confirm your choice in the modal that appears.
+1. From the navigation panel, select Automation Content> (and then)Collection Approvals.
+2. Find the collection you want to review in the list. You can also filter collections by Namespace, Repository, and Status using the search bar.
+3. Click the thumbs down icon to reject the collection. Confirm your choice in the modal that appears.
 
 ### Results
 

@@ -1,7 +1,7 @@
-# Pull execution environments for use in automation hub
-## Push an execution environment to private automation hub
+# Pull execution environments for use in Ansible Automation Platform
+## Push an execution environment to Ansible Automation Platform
 
-You can push tagged execution environments to private automation hub to create new containers and populate the remote registry.
+You can push tagged execution environments to Ansible Automation Platform to create new containers and populate the remote registry.
 
 ### Before you begin
 
@@ -10,21 +10,21 @@ You can push tagged execution environments to private automation hub to create n
 
 ### Procedure
 
-1.  Log in to Podman using your Ansible Automation Platform location and credentials:
+1. Log in to Podman using your Ansible Automation Platform location and credentials:
 
 
 ```
-$ podman login -u=<username> -p=<password> <aap_url>
+$ podman login -u=<username> -p=<password> <aap_gateway_url>
 ```
 
 Warning:
 Let Podman prompt you for your password when you log in. Entering your password at the same time as your username can expose your password to the shell history.
 
-2.  Push your execution environment to your automation hub remote registry:
+2. Push your execution environment to your Ansible Automation Platform gateway:
 
 
 ```
-$ podman push <automation_hub_url>/<ee_name>
+$ podman push <aap_gateway_url>/<ee_name>
 ```
 
 ### Results

@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_simplified_event_routing/aem-page/administer-assembly_simplified_event_routing.html"
 last_crumb = "Respond to events from external systems"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Respond to events from external systems"
 oversized = "false"
@@ -39,17 +40,17 @@ Event-Driven Ansible controller supports six different event stream types.
 
 *Table 1. Event Stream Types*
 
-| Type                                                   | Description                                                                                                                                                                                              | Vendor examples        |
-| ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
-| <br>Hashed Message Authentication Code (HMAC)          | <br>Uses a shared secret between Event-Driven Ansible controller and the vendors webhook server. This guarantees message integrity.                                                                      | <br>Github             |
-| <br>Basic Authentication                               | <br>Uses HTTP basic authentication.                                                                                                                                                                      | <br>Datadog, Dynatrace |
-| <br>Token Authentication                               | <br>Validates incoming event data using a security token passed in the request header. While the standard HTTP header used is **Authorization**, it can be customized for specific platforms, such as using **X-Gitlab-Token** for GitLab integrations. | <br>Gitlab, ServiceNow |
-| <br>OAuth2                                             | <br>Uses Machine-to-Machine (M2M) mode with a grant type called **client credentials**. The token is opaque.                                                                                             | <br>Dynatrace          |
-| <br>OAuth2 with JWT                                    | <br>Uses M2M mode with a grant type called **client credentials**. The token is JSON Web Token (JWT).                                                                                                    | <br>Datadog            |
-| <br>Elliptic Curve Digital Signature Algorithm (ECDSA) | <br>Verifies message authenticity using a public/private key pair. The sender signs the message with a private key, and the receiver (Event-Driven Ansible controller) validates it with a public key.   | <br>SendGrid, Twilio   |
-| <br>Mutual Transport Layer Security (mTLS)             | <br>Ensures two-way authentication between Event-Driven Ansible controller and the client sending events through an event stream. It has two sub-types:<br>CertificateSubject<br>Needs the vendor’s CA certificate to be present in our servers at startup. This supports non-repudiation. | <br>PagerDuty          |
+| Type                                               | Description                                                                                                                                                                                              | Vendor examples    |
+| -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| Hashed Message Authentication Code (HMAC)          | Uses a shared secret between Event-Driven Ansible controller and the vendors webhook server. This guarantees message integrity.                                                                          | Github             |
+| Basic Authentication                               | Uses HTTP basic authentication.                                                                                                                                                                          | Datadog, Dynatrace |
+| Token Authentication                               | Validates incoming event data using a security token passed in the request header. While the standard HTTP header used is **Authorization**, it can be customized for specific platforms, such as using **X-Gitlab-Token** for GitLab integrations. | Gitlab, ServiceNow |
+| OAuth2                                             | Uses Machine-to-Machine (M2M) mode with a grant type called **client credentials**. The token is opaque.                                                                                                 | Dynatrace          |
+| OAuth2 with JWT                                    | Uses M2M mode with a grant type called **client credentials**. The token is JSON Web Token (JWT).                                                                                                        | Datadog            |
+| Elliptic Curve Digital Signature Algorithm (ECDSA) | Verifies message authenticity using a public/private key pair. The sender signs the message with a private key, and the receiver (Event-Driven Ansible controller) validates it with a public key.       | SendGrid, Twilio   |
+| Mutual Transport Layer Security (mTLS)             | Ensures two-way authentication between Event-Driven Ansible controller and the client sending events through an event stream. It has two sub-types:<br>CertificateSubject<br>Needs the vendor’s CA certificate to be present in our servers at startup. This supports non-repudiation. | PagerDuty          |
 
- Important:
+Important:
 
 If you are using an mTLS event stream with a load balancer, you must enable SSL pass-through (or L4 routing) in your load balancer configuration.
 
@@ -74,10 +75,10 @@ Create a credential to establish the authentication mechanism (like basic auth o
 
 #### Procedure
 
-1.  Log in to the Ansible Automation Platform Dashboard.
-2.  From the navigation panel, select Automation Decisions> (and then)Infrastructure> (and then)Credentials.
-3.  Click Create credential.
-4.  Insert the following:
+1. Log in to the Ansible Automation Platform Dashboard.
+2. From the navigation panel, select Automation Decisions> (and then)Infrastructure> (and then)Credentials.
+3. Click Create credential.
+4. Insert the following:
   
 
 Name
@@ -92,13 +93,13 @@ Click the list to select an organization or select **Default**.
 Credential type
 Click the list to select your Credential type.
 
-   Note:
+  Note:
       When you select the credential type, the **Type Details** section is displayed with fields that are applicable for the credential type you selected.
 
 Type Details
 Add the requested information for the credential type you selected. For example, if you selected the GitHub Event Stream credential type, you are required to add an HMAC Secret (symmetrical shared secret) between Event-Driven Ansible controller and the remote server.
 
-5.  Click Create credential.
+5. Click Create credential.
 
 #### Results
 
@@ -111,14 +112,14 @@ Create a dedicated stream endpoint to simplify how external systems send events,
 #### Before you begin
 
 - If you will be attaching your event stream to a rulebook activation, ensure that your activation has a decision environment and project already set up.
-- If you plan to connect to automation controller to run your rulebook activation, ensure that you have created a Red Hat Ansible Automation Platform credential type in addition to the decision environment and project. For more information, see [Setting up a Red Hat Ansible Automation Platform credential](/documentation/en-us/red_hat_ansible_automation_platform/2.7/assembly_eda_set_up_rhaap_credential "When Event-Driven Ansible controller is deployed on Ansible Automation Platform, you can create a Red Hat Ansible Automation Platform credential to connect to automation controller through the use of an automation controller URL and a username and password.").
+- If you plan to connect to automation controller to run your rulebook activation, ensure that you have created a Red Hat Ansible Automation Platform credential type in addition to the decision environment and project. For more information, see [Setting up a Red Hat Ansible Automation Platform credential](/documentation/en-us/red_hat_ansible_automation_platform/2.7/../secure/assembly-eda-set-up-rhaap-credential.html "When Event-Driven Ansible controller is deployed on Ansible Automation Platform, you can create a Red Hat Ansible Automation Platform credential to connect to automation controller through the use of an automation controller URL and a username and password.").
 
 #### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Automation Decisions> (and then)Event Streams.
-3.  Click Create event stream.
-4.  Insert the following:
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Automation Decisions> (and then)Event Streams.
+3. Click Create event stream.
+4. Insert the following:
   
 
 Name
@@ -130,7 +131,7 @@ Click the list to select an organization or select **Default**.
 Event stream type
 Select the event stream type you prefer.
 
-   Note:
+  Note:
       This list displays at least 10 default event stream types that can be used to authenticate the connection coming from your remote server.
 
 Credentials
@@ -139,23 +140,23 @@ Select a credential from the list, preferably the one you created for your event
 Headers
 Enter HTTP header keys, separated by commas, that you want to include in the event payload.
 
-   Important:
+  Important:
       If your automation relies on HTTP headers being present in the event payload, you must explicitly define them to avoid unintentional exposure of sensitive information. For more information about HTTP headers and how to securely configure them, see [HTTP headers](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_simplified_event_routing#eda-http-headers "In the context of Event-Driven Ansible and event streams, HTTP headers play a significant role because they carry the necessary context and security information about the incoming event from a third-party source (for example, GitHub, a monitoring tool, or a proprietary webhook).") and [Configuring HTTP headers securely for event streams](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_simplified_event_routing#eda-configure-http-headers "To enhance event stream security, you must explicitly define which HTTP headers are passed. These headers carry the critical context and authentication data required for processing.").
 
 Forward events to rulebook activation
 Use this option to enable or disable the capability of forwarding events to rulebook activations.
 
-   Note:
+  Note:
       The event stream’s event forwarding can be disabled for testing purposes while diagnosing connections and evaluating the incoming data. Disabling the **Forward events to rulebook activation** option allows you to test the event stream connection with the remote system, analyze the header and payload, and if necessary, diagnose credential issues. This ensures that events are not be forwarded to rulebook activations causing rules and conditions to be triggered inadvertently while you are in test mode. Some enterprises might have policies to change secrets and passwords at regular cadence. You can enable/disable this option anytime after the event stream is created.
 
-5.  Click Create event stream.
+5. Click Create event stream.
 
 #### Results
 
 After creating your event stream, the following outputs occur:
 
 - The Details page is displayed. From there or the Event Streams list view, you can edit or delete it. Also, the Event Streams page shows all of the event streams you have created and the following columns for each event: **Events received**, **Last event received**, and **Event stream type**. As the first two columns receive external data through the event stream, they are continuously updated to let you know they are receiving events from remote systems.
-- If you disabled the event stream, the Details page is displayed with a warning message, **This event stream is disabled**.  Note:
+- If you disabled the event stream, the Details page is displayed with a warning message, **This event stream is disabled**. Note:
       After an event stream is created, the associated credential cannot be deleted until the event stream it is attached to is deleted.
 
 - Your new event stream generates a URL that is necessary when you configure the webhook on the remote system that sends events.
@@ -186,14 +187,14 @@ To enhance event stream security, you must explicitly define which HTTP headers 
 
 #### Procedure
 
-1.  To include all HTTP headers, enter an asterisk (*) in the Headers field. This allows all HTTP headers with the exception of a few headers:
+1. To include all HTTP headers, enter an asterisk (*) in the Headers field. This allows all HTTP headers with the exception of a few headers:
 
   - **Excluded:** Headers that begin with `X-Envoy`, `X-Trusted-Proxy`, `X-Forwarded-For`, and `X-Real-Id`
   - **Redacted:** Authorization header (for example, `Authorization: Redacted`)
-     Important:
+    Important:
             If the **Headers** field is empty, none of the HTTP headers will be added to the event payload in Production and Test mode.
 
-2.  To include a specific set of HTTP headers, enter the names of the desired headers as a comma-delimited string (for example, `Host,Authorization,X-Request-ID`).
+2. To include a specific set of HTTP headers, enter the names of the desired headers as a comma-delimited string (for example, `Host,Authorization,X-Request-ID`).
 
 ### Static Unique Universal Identifiers (UUIDs) for event streams
 
@@ -222,9 +223,9 @@ Access the API to set a static UUID, a feature critical for maintaining webhook 
 
 #### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Overview.
-3.  In the URL, replaceOverview with the API endpoint, `api/eda/v1/` (for example, `https://<gateway-host>/api/eda/v1/`). The `Api V1 Root` page displays a list of Event-Driven Ansible resource URLs.
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Overview.
+3. In the URL, replaceOverview with the API endpoint, `api/eda/v1/` (for example, `https://<gateway-host>/api/eda/v1/`). The `Api V1 Root` page displays a list of Event-Driven Ansible resource URLs.
 
 ```
 {
@@ -254,8 +255,8 @@ Access the API to set a static UUID, a feature critical for maintaining webhook 
     "eventstream-list": "http://<gateway-host>/api/eda/v1/event-streams/"
 ```
 
-4.  At the end of the list, click the `eventstream-list` URL. This takes you to the Event Stream List page.
-5.  Locate and copy the `“id”` of the event stream UUID that you want to update. This can be found at the end of the event stream data.
+4. At the end of the list, click the `eventstream-list` URL. This takes you to the Event Stream List page.
+5. Locate and copy the `“id”` of the event stream UUID that you want to update. This can be found at the end of the event stream data.
 
 ```
 },
@@ -272,9 +273,9 @@ Access the API to set a static UUID, a feature critical for maintaining webhook 
 "last_event_received_at": null
 ```
 
-6.  Paste the id at the end of the URL (for example, `https://<platformURL>.com/api/eda/v1/<id#>`) and press **Enter**. The **Event Stream Instance** page is displayed, including the current `“uuid”` value.
-7.  In the form at the end of the **Event Stream Instance** page, update the value of the `“uuid”` field to a unique static string of your choice.
-8.  Click **Patch**.
+6. Paste the id at the end of the URL (for example, `https://<platformURL>.com/api/eda/v1/<id#>`) and press **Enter**. The **Event Stream Instance** page is displayed, including the current `“uuid”` value.
+7. In the form at the end of the **Event Stream Instance** page, update the value of the `“uuid”` field to a unique static string of your choice.
+8. Click **Patch**.
 
 #### Results
 
@@ -295,17 +296,19 @@ The following example demonstrates how to configure webhooks in a remote system 
 
 #### Procedure
 
-1.  Log in to your GitHub repository.
-2.  Click **Your profile name → Your repositories**.  Note:
+1. Log in to your GitHub repository.
+2. Click **Your profile name → Your repositories**.
+  
+  Note:
       If you do not have a repository, click **New** to create a new one, select an owner, add a **Repository name**, and click **Create repository**.
 
-3.  Navigate to **Settings** (tool bar).
-4.  In the **General** navigation pane, select **Webhooks**.
-5.  Click **Add webhook**.
-6.  In the **Payload URL** field, paste the URL you saved when you created your event stream.
-7.  Select **application/json** in the **Content type** list.
-8.  Enter your **Secret**.
-9.  Click **Add webhook**.
+3. Navigate to **Settings** (tool bar).
+4. In the **General** navigation pane, select **Webhooks**.
+5. Click **Add webhook**.
+6. In the **Payload URL** field, paste the URL you saved when you created your event stream.
+7. Select **application/json** in the **Content type** list.
+8. Enter your **Secret**.
+9. Click **Add webhook**.
 
 #### Results
 
@@ -317,14 +320,14 @@ Confirm end-to-end event flow by verifying the event stream receives data from t
 
 #### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Automation Decisions> (and then)Event Streams.
-3.  Select the event stream that you created to validate connectivity and ensure that the event stream sends data to the rulebook activation.
-4.  Verify that the events were received. The number of **Events received** is displayed along with a header that contains details about the event. If you scroll down in the UI, you can also see the body of the payload with more information about the webhook.
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Automation Decisions> (and then)Event Streams.
+3. Select the event stream that you created to validate connectivity and ensure that the event stream sends data to the rulebook activation.
+4. Verify that the events were received. The number of **Events received** is displayed along with a header that contains details about the event. If you scroll down in the UI, you can also see the body of the payload with more information about the webhook.
 
     The **Header** and **Body** sections for the event stream are displayed on the Details page. They differ based on the vendor who is sending the event. The header and body can be used to check the attributes in the event payload, which will help you in writing conditions in your rulebook.
 
-5.  Toggle the **Forward events to rulebook activation** option to enable you to push your events to a rulebook activation.
+5. Toggle the **Forward events to rulebook activation** option to enable you to push your events to a rulebook activation.
 
 #### Results
 
@@ -345,10 +348,10 @@ There are several key points to keep in mind regarding source mapping:
 
 #### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Automation Decisions> (and then)Rulebook Activations.
-3.  Click Create rulebook activation.
-4.  Insert the following:
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Automation Decisions> (and then)Rulebook Activations.
+3. Click Create rulebook activation.
+4. Insert the following:
   
 
 Name
@@ -363,13 +366,13 @@ Enter your organization name or select Default from the list.
 Project
 Projects are a logical collection of rulebooks. This field is optional.
 
-   Note:
+  Note:
       Although this field is optional, selecting a project helps refine your list of rulebooks choices.
 
 Rulebook
 Rulebooks are shown according to the project selected. Select a rulebook.
 
-   Note:
+  Note:
       After you have selected a rulebook, the Event streams field is enabled. You can click the gear icon to display the Event streams mapping form.
 
 Event streams
@@ -402,13 +405,13 @@ Select your event stream name from the list.
 Credential
 Select 0 or more credentials for this rulebook activation. This field is optional.
 
-   Note:
+  Note:
       The credentials that display in this field are customized based on your rulebook activation and only include the following credential types: Vault, Red Hat Ansible Automation Platform, or any custom credential types that you have created. For more information on credentials, see [Credentials](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_eda_credentials "You can use credentials to store secrets that can be used for authentication purposes with resources, such as decision environments, rulebook activations and projects for Event-Driven Ansible controller, and projects for automation controller.").
 
 Decision environment
 A decision environment is a container image used to run Ansible rulebooks.
 
-   Note:
+  Note:
       In Event-Driven Ansible controller, you cannot customize the pull policy of the decision environment. By default, it follows the behavior of the always policy. Every time an activation is started, the system tries to pull the most recent version of the image.
 
 Restart policy
@@ -439,7 +442,7 @@ The variables for the rulebook are in a JSON or YAML format. The content would b
 Options
 Check the **Skip audit events** option if you do not want to see your events in the Rule Audit.
 
-5.  Click Create rulebook activation.
+5. Click Create rulebook activation.
 
 #### Results
 
@@ -483,9 +486,9 @@ A sample Event-Driven Ansible credential type for this plugin is included in the
 
 ##### Procedure
 
-1.  From the navigation panel, select Automation Decisions> (and then)Infrastructure> (and then)Credential Types
-2.  Click **Create credential type**.
-3.  Insert the following:
+1. From the navigation panel, select Automation Decisions> (and then)Infrastructure> (and then)Credential Types
+2. Click **Create credential type**.
+3. Insert the following:
   
 
 **Name**
@@ -494,7 +497,7 @@ Insert the name.
 **Description**
 This field is optional.
 
-4.  In the Input Configuration field, specify an input schema that defines a set of ordered fields for that type. The format can be in YAML or JSON as in the following example:
+4. In the Input Configuration field, specify an input schema that defines a set of ordered fields for that type. The format can be in YAML or JSON as in the following example:
   
 
 ```
@@ -696,7 +699,7 @@ fields:
     - topic
 ```
 
-5.  In the Injector Configuration field, enter environment variables or extra variables that specify the values a credential type can inject. The format can be in YAML or JSON as in the following example:
+5. In the Injector Configuration field, enter environment variables or extra variables that specify the values a credential type can inject. The format can be in YAML or JSON as in the following example:
   
 
 ```
@@ -733,7 +736,7 @@ file:
   verify_mode: "{{ verify_mode }}"
 ```
 
-6.  Click Create credential type.
+6. Click Create credential type.
 
 ##### Results
 
@@ -742,7 +745,7 @@ Your newly created credential type is displayed on the list of credential types.
 ##### What to do next
 
 1. Verify that the newly created credential type can be selected from the Credential Type  list when creating a new credential.
-2. Click the Edit icon to modify the details or delete the credential type options.  Note:
+2. Click the Edit icon to modify the details or delete the credential type options. Note:
   If the Delete option is disabled, this means that the credential type is being used by a credential, and you must delete the credential type from all the credentials that use it before you can delete it.
 
 #### Configure AVRO support for Kafka event sources
@@ -762,10 +765,10 @@ The Kafka source plugin uses a deserialization fallback chain to process AVRO-en
 
 ##### Procedure
 
-1.  In your rulebook source configuration, set message_format to `avro` for the `ansible.eda.kafka` source plugin.
-2.  Configure schema resolution for your environment using one of the following options:
+1. In your rulebook source configuration, set message_format to `avro` for the `ansible.eda.kafka` source plugin.
+2. Configure schema resolution for your environment using one of the following options:
   - **Schema Registry:** Set `schema_registry_url` to the URL of your Confluent-compatible Schema Registry.
-  - **Local schema file:** Paste the content of your `.avsc` file into the avro_schema_file field when creating the credential. The schema file must be valid JSON containing an Avro schema definition. See Configuration parameters for a full description and example.  Important:
+  - **Local schema file:** Paste the content of your `.avsc` file into the avro_schema_file field when creating the credential. The schema file must be valid JSON containing an Avro schema definition. See Configuration parameters for a full description and example. Important:
     Do not set `avro_schema_file` when your messages use Avro OCF format. See the deserialization fallback chain in [Event buses](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_simplified_event_routing#GUID-dd4d7a8d-7a17-4c8e-839d-81c7037b6eb5 "An event bus enables Event-Driven Ansible to consume events from a message broker, providing a resilient and scalable integration pattern for high-volume event processing.") for details.
 
   - **Avro OCF (zero configuration):** Set only message_format: avro. No additional schema parameters are needed. Each message carries its own embedded schema.
@@ -776,7 +779,7 @@ If you are using a Schema Registry, you can optionally configure authentication.
 
 ##### Procedure
 
- Configure one of the following mutually exclusive methods:
+Configure one of the following mutually exclusive methods:
 
 - **No authentication (default)**- No additional parameters are required.
 - **Basic Auth** - Set schema_registry_basic_auth to your credentials in `user:password` format.
@@ -789,7 +792,7 @@ If you are using a Schema Registry, you can optionally configure authentication.
 
 The plugin acquires an access token from the token endpoint, caches it, and refreshes it automatically before expiry.
 
- Note:
+Note:
 
 The plugin raises an error if more than one method is configured.
 
@@ -799,14 +802,14 @@ Configure dedicated SSL/TLS certificates when your Schema Registry uses adiffere
 
 ##### Procedure
 
-1.  If your Schema Registry uses HTTPS, the plugin reuses the Kafka broker's SSL settings by default (schema_registry_ssl defaults to true).
-2.  If the Schema Registry uses a different CA than the Kafka broker, provide dedicated certificates:
+1. If your Schema Registry uses HTTPS, the plugin reuses the Kafka broker's SSL settings by default (schema_registry_ssl defaults to true).
+2. If the Schema Registry uses a different CA than the Kafka broker, provide dedicated certificates:
 
   - `schema_ssl_cafile` - CA certificate for registry HTTPS connections
   - `schema_ssl_certfile` - Client certificate for mTLS with the registry
   - `schema_ssl_keyfile` - Client key for mTLS with the registry
   - `schema_ssl_password` - Password for the client key file (if encrypted)
-   Note:
+  Note:
   When using OAuth 2.0 with an identity provider (Keycloak, Okta, Azure AD), the same `schema_ssl_cafile` is used for both the OAuth token endpoint and the Schema Registry API. If they use different CAs, concatenate both CA certificates into a single PEM file.
 
 3.  
@@ -815,7 +818,7 @@ Configure dedicated SSL/TLS certificates when your Schema Registry uses adiffere
 
 Avro and Schema Registry parameters enable message schema validation and deserialization in Event-Driven Ansible. These specialized settings complement the core connection parameters managed by the `ansible.eda.kafka` plugin.
 
- The following parameters are specific to AVRO and Schema Registryconfiguration. For general Kafka source plugin parameters (`host`, `port,` `topic`, `group_id`, `offset`, `security_protocol`, `SSL`, and `SASL` settings), see the ansible.eda.kafka plugin documentation.
+The following parameters are specific to AVRO and Schema Registryconfiguration. For general Kafka source plugin parameters (`host`, `port,` `topic`, `group_id`, `offset`, `security_protocol`, `SSL`, and `SASL` settings), see the ansible.eda.kafka plugin documentation.
 
 | Parameter                             | Type    | Description                                                                                                                                                                                              |
 | ------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

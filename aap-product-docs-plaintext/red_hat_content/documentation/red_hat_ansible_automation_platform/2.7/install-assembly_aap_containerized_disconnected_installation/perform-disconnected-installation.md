@@ -14,11 +14,11 @@ A disconnected installation installs containerized Ansible Automation Platform w
 
 #### Procedure
 
-1.  Log in to the Red Hat Enterprise Linux host as your non-root user.
-2.  Update the inventory file by following the steps in [Configure the inventory file](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_configuring_inventory_file#configuring-inventory-file___inventory_file_for_online_installation_for_containerized_enterprise_topology). Note:
+1. Log in to the Red Hat Enterprise Linux host as your non-root user.
+2. Update the inventory file by following the steps in [Configure the inventory file](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_configuring_inventory_file#configuring-inventory-file___inventory_file_for_online_installation_for_containerized_enterprise_topology). Note:
 Do not include `registry_username` or `registry_password` in your inventory file for disconnected installations. These variables are only required for online installations. All container images are pre-packaged in the setup bundle.
 
-3.  Ensure you include the following variables in your inventory file under the `[all:vars]` group:
+3. Ensure you include the following variables in your inventory file under the `[all:vars]` group:
 
 
 ```
@@ -27,7 +27,7 @@ bundle_install=true
 bundle_dir='{{ lookup("ansible.builtin.env", "PWD") }}/bundle'
 ```
 
-4.  Follow the steps in [Install containerized Ansible Automation Platform](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_installing_containerized_aap#installing-containerized-aap "Run the install playbook to install containerized Ansible Automation Platform after preparing the Red Hat Enterprise Linux host, downloading the installation program, and configuring the inventory file.") to install containerized Ansible Automation Platform and verify your installation.
+4. Follow the steps in [Install containerized Ansible Automation Platform](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_installing_containerized_aap#installing-containerized-aap "Run the install playbook to install containerized Ansible Automation Platform after preparing the Red Hat Enterprise Linux host, downloading the installation program, and configuring the inventory file.") to install containerized Ansible Automation Platform and verify your installation.
 
 #### Metrics service in disconnected environments
 
@@ -90,4 +90,4 @@ In disconnected environments, metrics service does not require outbound internet
 
 Note:
 
-Port 443 outbound to `cert.console.redhat.com` is optional and only required if you want to enable anonymized data transmission to Red Hat (not applicable in disconnected environments).
+Port 443 outbound to `api.segment.io` is optional and only required if you want to enable anonymized data transmission to Red Hat (not applicable in disconnected environments).

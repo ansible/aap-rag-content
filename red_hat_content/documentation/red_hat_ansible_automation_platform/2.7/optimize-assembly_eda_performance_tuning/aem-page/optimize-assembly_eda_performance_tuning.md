@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_eda_performance_tuning"
 title = "Tune performance for Event-Driven Ansible - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_eda_performance_tuning/", "Tune performance for Event-Driven Ansible"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-assembly_eda_performance_tuning/aem-page/optimize-assembly_eda_performance_tuning.html"
 last_crumb = "Tune performance for Event-Driven Ansible"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Tune performance for Event-Driven Ansible"
 oversized = "false"
@@ -27,7 +28,8 @@ type = "aem-page"
 
 # Tune performance for Event-Driven Ansible
 
-Event-Driven Ansible controller provides the interface in which Event-Driven Ansible automation performs. Tune your Event-Driven Ansible controller to optimize performance and scalability through:
+Event-Driven Ansible controller provides the interface in which Event-Driven Ansible automation performs.
+Tune your Event-Driven Ansible controller to optimize performance and scalability through:
 
 - Characterizing your workload
 - Performance troubleshooting
@@ -56,14 +58,14 @@ To mitigate this status, you can modify the default memory limit for each rulebo
 
 ### Procedure
 
-1.  Perform the following steps to modify your default memory limit for your rulebook activations *during* installation:
-  1.  Navigate to the setup inventory file.
-  2.  Add `automationedacontroller_podman_mem_limit` in the [all:vars] section. For example, `automationedacontroller_podman_mem_limit='400m'`.
-  3.  Run the setup.
-2.  Perform the following steps to modify your default memory limit for your rulebook activations *after* installation:
-  1.  Navigate to the environment file at `/etc/ansible-automation-platform/eda/settings.yaml`.
-  2.  Modify the default container memory limit. For example, `PODMAN_MEM_LIMIT = '300m'`.
-  3.  Restart the Event-Driven Ansible controller services using `automation-eda-controller-service restart`.
+1. Perform the following steps to modify your default memory limit for your rulebook activations *during* installation:
+  1. Navigate to the setup inventory file.
+  2. Add `automationedacontroller_podman_mem_limit` in the [all:vars] section. For example, `automationedacontroller_podman_mem_limit='400m'`.
+  3. Run the setup.
+2. Perform the following steps to modify your default memory limit for your rulebook activations *after* installation:
+  1. Navigate to the environment file at `/etc/ansible-automation-platform/eda/settings.yaml`.
+  2. Modify the default container memory limit. For example, `PODMAN_MEM_LIMIT = '300m'`.
+  3. Restart the Event-Driven Ansible controller services using `automation-eda-controller-service restart`.
 
 ## System level monitoring for Event-Driven Ansible controller
 

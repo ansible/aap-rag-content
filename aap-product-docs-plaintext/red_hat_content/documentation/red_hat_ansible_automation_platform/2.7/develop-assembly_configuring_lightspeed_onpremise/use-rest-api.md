@@ -15,19 +15,20 @@ The Ansible Lightspeed REST API is available for Ansible Automation Platform 2.5
 
 ### Procedure
 
-1.  Select the platform user for whom you want to grant REST API access. You can select an existing user or create a platform user in the Red Hat Ansible Automation Platform. For the procedure, see the [Creating a user](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/getting_started_with_ansible_automation_platform/assembly-gs-platform-admin#proc-gs-platform-admin-create-user) section of *Getting started with Ansible Automation Platform*.
+1. Select the platform user for whom you want to grant REST API access.
+You can select an existing user or create a platform user in the Red Hat Ansible Automation Platform. For the procedure, see the [Creating a user](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/getting_started_with_ansible_automation_platform/assembly-gs-platform-admin#proc-gs-platform-admin-create-user) section of *Getting started with Ansible Automation Platform*.
 
-2.  Verify that you can log in to the Ansible Lightspeed portal for on-premise deployment (`https://<lightspeed_route>/`) as the platform user you selected or created, and then log out.
-3.  Create a token for the platform user:
-1.  Log in to the Ansible Lightspeed portal for on-premise deployment (`https://<lightspeed_route>/admin`) as an administrator by using the following credentials:
+2. Verify that you can log in to the Ansible Lightspeed portal for on-premise deployment (`https://<lightspeed_route>/`) as the platform user you selected or created, and then log out.
+3. Create a token for the platform user:
+1. Log in to the Ansible Lightspeed portal for on-premise deployment (`https://<lightspeed_route>/admin`) as an administrator by using the following credentials:
 
 - Username: **admin**
 - Password: The secret that is named as `<lightspeed-custom-resource-name>-admin-password` in the Red Hat OpenShift Container Platform cluster namespace where Red Hat Ansible Lightspeed is deployed.
 
-2.  On the Django administration window, select **Users** from the Users area. A list of users is displayed.
-3.  Verify that the platform user is listed in the **Users** list.
-4.  From the Django Oauth toolkit area, select Access tokens> (and then)Add.
-5.  Provide the following information and click **Save**:
+2. On the Django administration window, select **Users** from the Users area. A list of users is displayed.
+3. Verify that the platform user is listed in the **Users** list.
+4. From the Django Oauth toolkit area, select Access tokens> (and then)Add.
+5. Provide the following information and click **Save**:
 
 - **User**: Use the magnifying glass icon to search and select the newly-created or existing user for whom you want to grant API access.
 
@@ -39,10 +40,11 @@ The Ansible Lightspeed REST API is available for Ansible Automation Platform 2.5
 
 - **Expires**: Select the date and time when you want the token to expire.
 
-- **Scope**: Specify the scope as **read write**. An access token is created for the user.
+- **Scope**: Specify the scope as **read write**.
+An access token is created for the user.
 
-6.  Log out from the Ansible Lightspeed portal for on-premise deployment.
-4.  Make a direct call to the Ansible Lightspeed REST API by specifying the newly-created token in the authorization header:
+6. Log out from the Ansible Lightspeed portal for on-premise deployment.
+4. Make a direct call to the Ansible Lightspeed REST API by specifying the newly-created token in the authorization header:
 
 
 ```

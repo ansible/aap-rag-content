@@ -10,13 +10,13 @@ The `postgres_extra_settings` variable allows you to pass a list of custom *name
 
 ## Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  Go to **Operators → Installed Operators**.
-3.  Select your Ansible Automation Platform Operator deployment.
-4.  Select **All Instances** and go to your **Ansible Automation Platform** instance.
-5.  Click the ⋮ icon and then select **Edit Ansible Automation Platform**.
-6.  In the **YAML** view, locate the `spec:` section
-7.  Add the `database` section and the required settings under `spec:`. The following example configures SSL ciphers and the maximum connections:
+1. Log in to Red Hat OpenShift Container Platform.
+2. Go to **Operators → Installed Operators**.
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select **All Instances** and go to your **Ansible Automation Platform** instance.
+5. Click the ⋮ icon and then select **Edit Ansible Automation Platform**.
+6. In the **YAML** view, locate the `spec:` section
+7. Add the `database` section and the required settings under `spec:`. The following example configures SSL ciphers and the maximum connections:
 
 
 ```bash
@@ -27,7 +27,7 @@ postgres_extra_settings:
 value: '1000'
 ```
 
-8.  Click Save.
+8. Click Save.
 
 ## Results
 

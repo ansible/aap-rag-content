@@ -1,7 +1,7 @@
 +++
-title = "Configure the metrics-utility - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-con_configuring_the_metrics_utility"
+template = "docs/aem-title.html"
+title = "Configure the metrics-utility - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_metrics_utility/", "Generate consumption-based billing reports with the metrics-utility"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/observe-con_configuring_the_metrics_utility/aem-page/observe-con_configuring_the_metrics_utility.html"
 last_crumb = "Configure the metrics-utility"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure the metrics-utility"
 oversized = "false"
@@ -35,9 +36,9 @@ You can configure the `metrics-utility` on a Red Hat Enterprise Linux system to 
 
 ### Before you begin
 
-- **Subscription:** An active Ansible Automation Platform subscription.
-- **Installation:** The `metrics-utility` tool is included by default with the Ansible Automation Platform installation on the automation controller node. No separate installation is required.
-- **User privileges:** You must be logged in as the `root` user or the `awx` user to run the `metrics-utility` tool.
+- You have an active Red Hat Ansible Automation Platform subscription.
+- You have installed Ansible Automation Platform on a Red Hat Enterprise Linux host. The metrics-utility command is included with automation-controller; you do not need to install a separate package.
+- You are logged in to the automation controller node as the root user or the awx user.
 
 Important:
 
@@ -47,7 +48,7 @@ The following procedure gathers the relevant data and generate a [CCSP](https://
 
 ### Procedure
 
-1.  Create two scripts in your user’s home directory to set correct variables to ensure that `metrics-utility` gathers all relevant data.   1.  In `/home/my-user/cron-gather`:
+1. Create two scripts in your user’s home directory to set correct variables to ensure that `metrics-utility` gathers all relevant data.   1. In `/home/my-user/cron-gather`:
   
 
 ```
@@ -61,7 +62,7 @@ export METRICS_UTILITY_SHIP_PATH=/awx_devel/awx-dev/metrics-utility/shipped_data
 metrics-utility gather_automation_controller_billing_data --ship --until=10m
 ```
 
-  2.  In `/home/my-user/cron-report`:
+  2. In `/home/my-user/cron-report`:
   
 
 ```
@@ -87,17 +88,17 @@ export METRICS_UTILITY_REPORT_COMPANY_PROCUREMENT_LEADER="PROCUREMENT LEADER"
 metrics-utility build_report
 ```
 
-2.  To ensure that these files are executable, run:
+2. To ensure that these files are executable, run:
        `chmod a+x /home/my-user/cron-gather /home/my-user/cron-report`
 
-3.  To open the `cron` file for editing, run:
+3. To open the `cron` file for editing, run:
        `crontab -e`
 
-4.  To configure the run schedule, add the following parameters to the end of the file and specify how often you want `metrics-utility` to gather information and build a report using [cron syntax](https://www.redhat.com/sysadmin/linux-cron-command). In the following example, the `gather` command is configured to run every hour at 00 minutes. The `build_report` command is configured to run on the second day of each month at 4:00 AM.  `0 */1 * * * /home/my-user/cron-gather`
+4. To configure the run schedule, add the following parameters to the end of the file and specify how often you want `metrics-utility` to gather information and build a report using [cron syntax](https://www.redhat.com/sysadmin/linux-cron-command). In the following example, the `gather` command is configured to run every hour at 00 minutes. The `build_report` command is configured to run on the second day of each month at 4:00 AM.  `0 */1 * * * /home/my-user/cron-gather`
 
      `0 4 2 * * /home/my-user/cron-report`
 
-5.  Save and close the file.
+5. Save and close the file.
 
 ### Results
 
@@ -115,7 +116,7 @@ crontab -l
 cat /var/log/cron
 ```
 
-     For reference, see the following example output:
+    For reference, see the following example output:
 
 ```
 May  8 09:45:03 ip-10-0-6-23 CROND[51623]: (root) CMDOUT (No billing data for month: 2024-04)
@@ -128,7 +129,7 @@ May  8 09:46:03 ip-10-0-6-23 CROND[51669]: (root) CMDEND (metrics-utility gather
 May  8 09:46:26 ip-10-0-6-23 crontab[51659]: (root) END EDIT (root)
 ```
 
-     The generated report will have the default name `CCSP-<YEAR>-<MONTH>.xlsx` and is saved in the ship path that you specified in step 1a.
+    The generated report will have the default name `CCSP-<YEAR>-<MONTH>.xlsx` and is saved in the ship path that you specified in step 1a.
 
 Note:
 
@@ -138,7 +139,8 @@ Time and date might vary depending on how your configure the run schedule.
 
 The `metrics-utility` is a command-line tool that collects and reports metrics from your OpenShift Container Platform cluster to your automation controller instance.
 
-`metrics-utility` is included in the OpenShift Container Platform image beginning with version 4.12, 4.512, and 4.6. If your system does not have `metrics-utility` installed, update your OpenShift image to the latest version.
+`metrics-utility` is included in the OpenShift Container Platform image beginning with version 4.12, 4.512, and 4.6.
+If your system does not have `metrics-utility` installed, update your OpenShift image to the latest version.
 
 Complete the following steps to configure the run schedule for `metrics-utility` on OpenShift Container Platform using the Ansible Automation Platform operator:
 
@@ -153,7 +155,8 @@ Learn how to create a ConfigMap in the OpenShift UI YAML view to inject configur
 
 Note:
 
-`metrics-utility` runs as indicated by the parameters you set in the configuration file. You cannot run the utility manually on OpenShift Container Platform.
+`metrics-utility` runs as indicated by the parameters you set in the configuration file.
+You cannot run the utility manually on OpenShift Container Platform.
 
 #### About this task
 
@@ -161,10 +164,10 @@ To inject the `metrics-utility` cronjobs with configuration data, and create a C
 
 #### Procedure
 
-1.  From the navigation panel, select ConfigMaps.
-2.  Click Create ConfigMap.
-3.  On the next screen, select the YAML view tab.
-4.  In the YAML field, enter the following parameters with the appropriate variables set:
+1. From the navigation panel, select ConfigMaps.
+2. Click Create ConfigMap.
+3. On the next screen, select the YAML view tab.
+4. In the YAML field, enter the following parameters with the appropriate variables set:
   
 
 ```
@@ -187,7 +190,7 @@ data:
   METRICS_UTILITY_REPORT_COMPANY_PROCUREMENT_LEADER: "PROCUREMENT LEADER"
 ```
 
-5.  Click Create.
+5. Click Create.
 
 #### Results
 
@@ -203,27 +206,30 @@ To deploy automation controller and specify variables for how often `metrics-uti
 
 #### Procedure
 
-1.  From the navigation panel, select **Installed Operators**.
-2.  Select **Ansible Automation Platform**.
-3.  In the Operator details, select the automation controller tab.
-4.  Click Create automation controller.
-5.  Select the YAML view option. The YAML now shows the default parameters for automation controller. The relevant parameters for `metrics-utility` are the following:
-    | **Parameter**                                       | **Variable**                |
-    | --------------------------------------------------- | --------------------------- |
-    | <br>  **`metrics_utility_enabled`**                 | <br>True.                   |
-    | <br>  **`metrics_utility_cronjob_gather_schedule`** | <br>`@hourly` or `@daily`.  |
-    | <br>  **`metrics_utility_cronjob_report_schedule`** | <br>`@daily` or `@monthly`. |
+1. From the navigation panel, select **Installed Operators**.
+2. Select **Ansible Automation Platform**.
+3. In the Operator details, select the automation controller tab.
+4. Click Create automation controller.
+5. Select the YAML view option.
+The YAML now shows the default parameters for automation controller.
+The relevant parameters for `metrics-utility` are the following:
+    | **Parameter**                                 | **Variable**            |
+    | --------------------------------------------- | ----------------------- |
+    | **`metrics_utility_enabled`**                 | True.                   |
+    | **`metrics_utility_cronjob_gather_schedule`** | `@hourly` or `@daily`.  |
+    | **`metrics_utility_cronjob_report_schedule`** | `@daily` or `@monthly`. |
 
-6.  Find the `metrics_utility_enabled` parameter and change the variable to true.
-7.  Find the `metrics_utility_cronjob_gather_schedule` parameter and enter a variable for how often the utility should gather usage information (for example, `@hourly` or `@daily`).
-8.  Find the `metrics_utility_cronjob_report_schedule` parameter and enter a variable for how often the utility generates a report (for example, `@daily` or `@monthly`).
-9.  Click Create.
+6. Find the `metrics_utility_enabled` parameter and change the variable to true.
+7. Find the `metrics_utility_cronjob_gather_schedule` parameter and enter a variable for how often the utility should gather usage information (for example, `@hourly` or `@daily`).
+8. Find the `metrics_utility_cronjob_report_schedule` parameter and enter a variable for how often the utility generates a report (for example, `@daily` or `@monthly`).
+9. Click Create.
 
 ## Configure the `metrics-utility` on a manual containerized installation of Ansible Automation Platform
 
 The `metrics-utility` tool generates performance metrics and reports for Ansible Automation Platform installations.
 
-`metrics-utility` is included in the OpenShift Container Platform image beginning with version 4.12, 4.512, and 4.6. If your system does not have `metrics-utility` installed, update your OpenShift image to the latest version.
+`metrics-utility` is included in the OpenShift Container Platform image beginning with version 4.12, 4.512, and 4.6.
+If your system does not have `metrics-utility` installed, update your OpenShift image to the latest version.
 
 Use the following steps to configure `metrics-utility` on a manual containerized installation Ansible Automation Platform:
 
@@ -237,7 +243,7 @@ Note:
 
 You must have an active Ansible Automation Platform subscription
 
- **Minimum resource requirements**
+**Minimum resource requirements**
 
 Using the `metrics-utility` tool on a containerized installation of Ansible Automation Platform requires the following resources:
 
@@ -258,7 +264,7 @@ Modify your Ansible Automation Platform inventory file to enable and configure `
 
 #### Procedure
 
-1.  Modify your inventory file to enable `metrics-utility` container deployment by adding the following line under the `[automationcontroller]` section:
+1. Modify your inventory file to enable `metrics-utility` container deployment by adding the following line under the `[automationcontroller]` section:
   
 
 ```
@@ -267,7 +273,7 @@ metrics_utility_enabled=true
 
     This setting instructs the installation program to create and configure two dedicated `automation-controller-metrics-utility` containers as part of your Ansible Automation Platform deployment. One of these containers is used to collect the data, and the other is used to build the report. If your Ansible Automation Platform deployment has already been configured, re-run the installation script to activate the container.
 
-2.  Configure the reporting parameters by adding the `metrics_utility_extra_settings` variable. This variable controls where reports are saved, what they contain, and other metadata.
+2. Configure the reporting parameters by adding the `metrics_utility_extra_settings` variable. This variable controls where reports are saved, what they contain, and other metadata.
 
 ```
 metrics_utility_extra_settings=[
@@ -280,7 +286,7 @@ metrics_utility_extra_settings=[
 {"setting": "METRICS_UTILITY_REPORT_SKU", "value": "MCT3752MO"}]
 ```
 
-3.  Optional: Override the default data gathering schedule by adding the following variables with your `systemd timer` expressions:
+3. Optional: Override the default data gathering schedule by adding the following variables with your `systemd timer` expressions:
   
   Note:
       `systemd timer` expressions differ from `cron` expressions.
@@ -298,13 +304,15 @@ If you are running `metrics-utility` on a new installation, you do not need to t
 
 ### About this task
 
-If you are applying your `metrics-utility` configuration to an existing deployment, you must re-run the Ansible Automation Platform installer script. Re-running the script reads the updated inventory file, deploys the `automation-controller-metrics-utility` container, and creates the `systemd` user services and timers necessary to automate data collection and reporting. Use the following verification steps to ensure your `metrics-utility` configuration has been applied and is running correctly:
+If you are applying your `metrics-utility` configuration to an existing deployment, you must re-run the Ansible Automation Platform installer script.
+Re-running the script reads the updated inventory file, deploys the `automation-controller-metrics-utility` container, and creates the `systemd` user services and timers necessary to automate data collection and reporting.
+Use the following verification steps to ensure your `metrics-utility` configuration has been applied and is running correctly:
 
 ### Procedure
 
--  Verify your `systemctl` timer.
--  Verify data collection.
--  Locate generated reports.
+- Verify your `systemctl` timer.
+- Verify data collection.
+- Locate generated reports.
 
 ### Results
 
@@ -354,5 +362,6 @@ Aug 13 10:00:06 aap.example.org podman[1472927]: metrics-utility-gather
 Aug 13 10:00:06 aap.example.org podman[1472937]: metrics-utility-gather
 ```
 
-3. Locate the generated reports. Reports are saved in the directory you specified in the `METRICS_UTILITY_SHIP_PATH` setting.   - Path: Using the example provided in this document, the report path would be `/aap/controller/data/metrics/`.
+3. Locate the generated reports. Reports are saved in the directory you specified in the `METRICS_UTILITY_SHIP_PATH` setting.
+  - Path: Using the example provided in this document, the report path would be `/aap/controller/data/metrics/`.
   - Filename: The report name follows the format `CCSP-<YEAR>-<MONTH>.xlsx`. For example, a report generated for August, 2025 would be named `CCSP-2025-08.xlsx`.

@@ -5,9 +5,9 @@ To upgrade the Ansible plug-ins, you must update the `imageTagInfo` parameter in
 
 ### Procedure
 
-1.  Log in to your Red Hat OpenShift Container Platform instance.
-2.  In the OpenShift Developer UI, navigate to Helm> (and then)developer-hub> (and then)Actions> (and then)Upgrade> (and then)Yaml view.
-3.  Locate the `global` section.
+1. Log in to your Red Hat OpenShift Container Platform instance.
+2. In the OpenShift Developer UI, navigate to Helm> (and then)developer-hub> (and then)Actions> (and then)Upgrade> (and then)Yaml view.
+3. Locate the `global` section.
 
 
 ```yaml
@@ -25,7 +25,7 @@ dynamic:
 plugins: []
 ```
 
-4.  Click Upgrade.
+4. Click Upgrade.
 The Red Hat Developer Hub pods restart and pull the new plug-in versions.
 
 ### Results

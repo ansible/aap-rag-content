@@ -6,9 +6,9 @@ Create a new playbook and use the RHEL System Role collection to automate your R
 
 #### Procedure
 
-1.  In your Dev Spaces instance, click File> (and then)New File.
-2.  Enter `firewall.yml` for the filename and click **OK** to save it in the root directory.
-3.  Add the following lines to your `firewall.yml` file:
+1. In your Dev Spaces instance, click File> (and then)New File.
+2. Enter `firewall.yml` for the filename and click **OK** to save it in the root directory.
+3. Add the following lines to your `firewall.yml` file:
 
 
 ```

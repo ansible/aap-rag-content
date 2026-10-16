@@ -1,7 +1,7 @@
 +++
-title = "Configure subscriptions - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-proc_controller_configure_subscriptions"
+template = "docs/aem-title.html"
+title = "Configure subscriptions - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-assembly_gw_settings/", "Configure Ansible Automation Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/configure-proc_controller_configure_subscriptions/aem-page/configure-proc_controller_configure_subscriptions.html"
 last_crumb = "Configure subscriptions"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure subscriptions"
 oversized = "false"
@@ -41,9 +42,9 @@ For Red Hat Satellite, input your Satellite username and Satellite password in t
 
 ## Procedure
 
-1.  From the navigation panel, select Settings> (and then)Subscription. The **Subscription** page is displayed.
-2.  Click Edit subscription.
-3.  You can either enter your service account or Satellite credentials, or attach a current subscription manifest in the **Welcome** page.
-4.  Click Next and agree to the terms of the license agreement.
-5.  Click Next to review the subscription settings.
-6.  Click Finish to complete the configuration.
+1. From the navigation panel, select Settings> (and then)Subscription. The **Subscription** page is displayed.
+2. Click Edit subscription.
+3. You can either enter your service account or Satellite credentials, or attach a current subscription manifest in the **Welcome** page.
+4. Click Next and agree to the terms of the license agreement.
+5. Click Next to review the subscription settings.
+6. Click Finish to complete the configuration.

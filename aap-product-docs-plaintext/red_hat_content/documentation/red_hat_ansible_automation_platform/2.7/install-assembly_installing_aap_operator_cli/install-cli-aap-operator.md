@@ -16,14 +16,14 @@ You cannot deploy Ansible Automation Platform in the default namespace on your O
 
 ### Procedure
 
-1.  Create a project for the operator.
+1. Create a project for the operator.
 
 ```
 oc new-project ansible-automation-platform
 ```
 
-2.  Create a file called sub.yaml.
-3.  Add the following YAML code to the sub.yaml file.
+2. Create a file called sub.yaml.
+3. Add the following YAML code to the sub.yaml file.
 
 ```
 ---
@@ -52,14 +52,14 @@ sourceNamespace: openshift-marketplace
 
 This file creates a `Subscription` object called `ansible-automation-platform` that subscribes the `ansible-automation-platform` namespace to the `ansible-automation-platform-operator` operator.
 
-4.  Run the oc apply command to create the objects specified in the sub.yaml file:
+4. Run the oc apply command to create the objects specified in the sub.yaml file:
 
 
 ```
 oc apply -f sub.yaml
 ```
 
-5.  Verify the CSV PHASE reports "Succeeded" before proceeding using the oc get csv -n ansible-automation-platform command:
+5. Verify the CSV PHASE reports "Succeeded" before proceeding using the oc get csv -n ansible-automation-platform command:
 
 
 ```
@@ -69,7 +69,7 @@ NAME                               DISPLAY                       VERSION        
 aap-operator.v2.7.0-0.1728520175   Ansible Automation Platform   2.7.0+0.1728520175   aap-operator.v2.7.0-0.1727875185   Succeeded
 ```
 
-6.  Create an `AnsibleAutomationPlatform` object called `example` in the `ansible-automation-platform` namespace. To change the Ansible Automation Platform and its components from `example`, edit the *name* field in the `metadata:` section and replace example with the name you want to use:
+6. Create an `AnsibleAutomationPlatform` object called `example` in the `ansible-automation-platform` namespace. To change the Ansible Automation Platform and its components from `example`, edit the *name* field in the `metadata:` section and replace example with the name you want to use:
 
 ```
 oc apply -f - <<EOF

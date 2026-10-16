@@ -1,7 +1,9 @@
 # Access Ansible Automation Platform through the CLI
 ## Fetch the platform gateway web address
 
-A Red Hat OpenShift Container Platform route exposes a service at a host name, so that external clients can reach it by name. When you created the platform gateway instance, a route was created for it. The route inherits the name that you assigned to the platform gateway object in the YAML file.
+A Red Hat OpenShift Container Platform route exposes a service at a host name, so that external clients can reach it by name.
+When you created the platform gateway instance, a route was created for it.
+The route inherits the name that you assigned to the platform gateway object in the YAML file.
 
 ### About this task
 

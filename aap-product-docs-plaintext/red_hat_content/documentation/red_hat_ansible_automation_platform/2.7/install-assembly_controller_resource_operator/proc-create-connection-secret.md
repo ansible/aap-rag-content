@@ -7,7 +7,7 @@ To make your connection information available to the Resource Operator, create a
 
 ### Procedure
 
-1.  The following is an example of the YAML for the connection secret. Save the following example to a file, for example, `aap-connection-secret.yml`.
+1. The following is an example of the YAML for the connection secret. Save the following example to a file, for example, `aap-connection-secret.yml`.
 
 ```
 apiVersion: v1
@@ -20,8 +20,8 @@ token: <generated-token>
 host: https://aap-host.example.com/
 ```
 
-2.  Edit the file with your host and token value.
-3.  Apply it to your cluster by running the `kubectl create` command:
+2. Edit the file with your host and token value.
+3. Apply it to your cluster by running the `kubectl create` command:
 
 
 ```

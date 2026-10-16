@@ -10,15 +10,15 @@ Restore your external PostgreSQL database before running the restore playbook. T
 
 ### Procedure
 
-1.  Restore your PostgreSQL database using your external database provider's tools or a third-party restore solution.
-2.  Add the `postgresql_skip_data` variable to your inventory file:
+1. Restore your PostgreSQL database using your external database provider's tools or a third-party restore solution.
+2. Add the `postgresql_skip_data` variable to your inventory file:
 
 
 ```
 postgresql_skip_data=true
 ```
 
-3.  Run the `restore` playbook:
+3. Run the `restore` playbook:
 
 
 ```

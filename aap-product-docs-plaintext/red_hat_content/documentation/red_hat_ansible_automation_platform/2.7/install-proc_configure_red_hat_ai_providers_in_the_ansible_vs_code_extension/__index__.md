@@ -16,17 +16,17 @@ This integration enables you to use the "Bring Your Own LLM" (BYOLLM) capability
 
 ## Procedure
 
-1.  In Visual Studio Code, open the LLM provider settings:
-1.  In the Activity Bar, select the **Ansible** icon to open the Ansible Development Tools panel.
-2.  In the **GENERATIVE AI** section, select the settings icon (cog) to open the LLM provider configuration.
-2.  In the **API Endpoint URL** field, enter the full address of your RHEL AI or OpenShift AI instance.
-3.  In the **Model Name/ID** field, enter the specific identifier for the model you want to use (for example, `granite-13b-chat-v2`).
-4.  In the **API Key** field, enter the credentials required to authenticate with your infrastructure.
+1. In Visual Studio Code, open the LLM provider settings:
+1. In the Activity Bar, select the **Ansible** icon to open the Ansible Development Tools panel.
+2. In the **GENERATIVE AI** section, select the settings icon (cog) to open the LLM provider configuration.
+2. In the **API Endpoint URL** field, enter the full address of your RHEL AI or OpenShift AI instance.
+3. In the **Model Name/ID** field, enter the specific identifier for the model you want to use (for example, `granite-13b-chat-v2`).
+4. In the **API Key** field, enter the credentials required to authenticate with your infrastructure.
 
 Note:
 The extension connects directly to the provider endpoint. It does not require the `c.ai.ansible.redhat.com` middleware or Red Hat authentication to enable this feature.
 
-5.  Ensure that the Red Hat AI provider is selected as the active provider.
+5. Ensure that the Red Hat AI provider is selected as the active provider.
 
 Important:
 Only one provider can be active at a time. If you switch between providers, ensure you select the correct provider in the LLM provider configuration to enable the corresponding features.

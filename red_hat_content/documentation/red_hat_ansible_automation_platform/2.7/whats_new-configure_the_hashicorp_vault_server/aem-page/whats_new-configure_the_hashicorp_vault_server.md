@@ -1,7 +1,7 @@
 +++
-title = "Configure the HashiCorp Vault server - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-configure_the_hashicorp_vault_server"
+title = "Configure the HashiCorp Vault server - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-technology_preview/", "Technology Preview"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/whats_new-configure_the_hashicorp_vault_server/aem-page/whats_new-configure_the_hashicorp_vault_server.html"
 last_crumb = "Configure the HashiCorp Vault server"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure the HashiCorp Vault server"
 oversized = "false"
@@ -31,12 +32,12 @@ You must perform a one-time configuration of the Vault server to enable OIDC aut
 
 ## Procedure
 
-1.  Identify your OIDC discovery URL.
+1. Identify your OIDC discovery URL.
   This is the base URL of your Ansible Automation Platform instance followed by `/o`
   For example, `https://aap.example.com/o`
 
-2.  Enable the JWT authentication method on your Vault server: `vault auth enable jwt`
-3.  Configure the Vault JWT authentication backend to point to your Ansible Automation Platform discovery URL by running one of the following commands:
+2. Enable the JWT authentication method on your Vault server: `vault auth enable jwt`
+3. Configure the Vault JWT authentication backend to point to your Ansible Automation Platform discovery URL by running one of the following commands:
   - If your Ansible Automation Platform server uses a certificate signed by a CA that your Vault server trusts, run the following command:
   
 
@@ -53,7 +54,7 @@ vault write auth/jwt/config
 oidc_discovery_url=<https://aap.example.com/o> oidc_discovery_ca_pem=@aap-ca.pem
 ```
 
-4.  Create a JWT role in your HashiCorp Vault server that binds your Ansible Automation Platform issued JWTs to vault policies. The role name specified here will be referenced later when configuring a credential. `bound_audiences` must match the URL of the Vault server. `policies` must reference a valid HashiCorp Vault policy.
+4. Create a JWT role in your HashiCorp Vault server that binds your Ansible Automation Platform issued JWTs to vault policies. The role name specified here will be referenced later when configuring a credential. `bound_audiences` must match the URL of the Vault server. `policies` must reference a valid HashiCorp Vault policy.
   
 
 ```

@@ -25,11 +25,11 @@ activities executed during the collection import
 
 ### Procedure
 
-1.  Log in to your Ansible Automation Platform.
-2.  From the navigation panel, select Automation Content> (and then)Namespaces.
-3.  Select a namespace.
-4.  Click the More Actions icon **⋮** and select **Imports**.
-5.  Use the search field or locate an imported collection from the list.
-6.  Click the imported collection.
-7.  Review collection import details to determine the status of the collection in your namespace.
+1. Log in to your Ansible Automation Platform.
+2. From the navigation panel, select Automation Content> (and then)Namespaces.
+3. Select a namespace.
+4. Click the More Actions icon **⋮** and select **Imports**.
+5. Use the search field or locate an imported collection from the list.
+6. Click the imported collection.
+7. Review collection import details to determine the status of the collection in your namespace.
 

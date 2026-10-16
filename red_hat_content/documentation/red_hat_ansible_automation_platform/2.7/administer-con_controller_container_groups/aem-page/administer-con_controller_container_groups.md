@@ -1,7 +1,7 @@
 +++
-title = "Control where automation runs with container groups - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_controller_container_groups"
 template = "docs/aem-title.html"
+title = "Control where automation runs with container groups - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-define_where_automation_runs_with_host_and_node_groupings/", "Define where automation runs with host and node groupings"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-con_controller_container_groups/aem-page/administer-con_controller_container_groups.html"
 last_crumb = "Control where automation runs with container groups"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Control where automation runs with container groups"
 oversized = "false"
@@ -35,7 +36,7 @@ You can create instance groups to point to an OpenShift container. These are job
 
 In some cases, you might want to set container groups to be "always-on", which you can configure through the creation of an instance.
 
- Note:
+Note:
 
 Container groups upgraded from versions before automation controller 4.0 revert back to default and remove the old pod definition, clearing out all custom pod definitions in the migration.
 
@@ -59,11 +60,11 @@ A `ContainerGroup` is a type of `InstanceGroup` that has an associated credentia
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Instance Groups.
-2.  Click Create group and select **Create container group**.
-3.  Enter a name for your new container group and select the credential you created before to associate it to the container group.
-4.  Click Create container group.
-5.  Check the **Customize pod spec** box and edit the **Pod spec override** to include the namespace and service account name that you used in the previous steps.
+1. From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Instance Groups.
+2. Click Create group and select **Create container group**.
+3. Enter a name for your new container group and select the credential you created before to associate it to the container group.
+4. Click Create container group.
+5. Check the **Customize pod spec** box and edit the **Pod spec override** to include the namespace and service account name that you used in the previous steps.
 
 ## Create a service account in OpenShift Container Platform or Kubernetes
 
@@ -71,7 +72,7 @@ Use service accounts in an OpenShift cluster or Kubernetes to run jobs in a cont
 
 ### Procedure
 
-1.  To create a service account, download and use the following sample service account example, `containergroup sa` and change it as required to obtain the credentials:
+1. To create a service account, download and use the following sample service account example, `containergroup sa` and change it as required to obtain the credentials:
   
 
 ```
@@ -136,28 +137,28 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-2.  Apply the configuration from `containergroup-sa.yml`:
+2. Apply the configuration from `containergroup-sa.yml`:
   
 
 ```
 oc apply -f containergroup-sa.yml
 ```
 
-3.  Get an API token by generating a service account token:
+3. Get an API token by generating a service account token:
   
 
 ```
 oc create token containergroup-service-account --duration=$((365*24))h > containergroup-sa.token
 ```
 
-4.  Get the CA certificate:
+4. Get the CA certificate:
   
 
 ```
 oc get secret -n openshift-ingress wildcard-tls -o jsonpath='{.data.ca\.crt}' | base64 -d > containergroup-ca.crt
 ```
 
-5.  Use the contents of `containergroup-sa.token` and `containergroup-ca.crt` to provide the information for the [OpenShift or Kubernetes API Bearer Token](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_controller_container_groups#controller-create-service-account "Use service accounts in an OpenShift cluster or Kubernetes to run jobs in a container group through automation controller. After the service account is created, its credentials are provided to automation controller in the form of an OpenShift or Kubernetes API Bearer Token credential.") required for the container group.   1.  To create a container group, create a [OpenShift or Kubernetes API Bearer Token](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_controller_container_groups#controller-create-service-account "Use service accounts in an OpenShift cluster or Kubernetes to run jobs in a container group through automation controller. After the service account is created, its credentials are provided to automation controller in the form of an OpenShift or Kubernetes API Bearer Token credential.") credential to use with your container group.
+5. Use the contents of `containergroup-sa.token` and `containergroup-ca.crt` to provide the information for the [OpenShift or Kubernetes API Bearer Token](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_controller_container_groups#controller-create-service-account "Use service accounts in an OpenShift cluster or Kubernetes to run jobs in a container group through automation controller. After the service account is created, its credentials are provided to automation controller in the form of an OpenShift or Kubernetes API Bearer Token credential.") required for the container group.   1. To create a container group, create a [OpenShift or Kubernetes API Bearer Token](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_controller_container_groups#controller-create-service-account "Use service accounts in an OpenShift cluster or Kubernetes to run jobs in a container group through automation controller. After the service account is created, its credentials are provided to automation controller in the form of an OpenShift or Kubernetes API Bearer Token credential.") credential to use with your container group.
 
 ## Customize the pod specification
 
@@ -165,21 +166,29 @@ Ansible Automation Platform provides a simple default pod specification, however
 
 ### About this task
 
-This field uses any custom fields such as `ImagePullSecrets`, that can be "serialized" as valid pod JSON or YAML. A full list of options can be found in the [Pods and Services](https://docs.openshift.com/online/pro/architecture/core_concepts/pods_and_services.html) section of the OpenShift documentation.
+This field uses any custom fields such as `ImagePullSecrets`, that can be "serialized" as valid pod JSON or YAML.
+A full list of options can be found in the [Pods and Services](https://docs.openshift.com/online/pro/architecture/core_concepts/pods_and_services.html) section of the OpenShift documentation.
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Instance Groups.
-2.  Click Create group and select **Create container group**.
-3.  Check the option for **Customize pod spec**.
-4.  Enter a custom Kubernetes or OpenShift Pod specification in the **Pod spec override** field.  
+1. From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Instance Groups.
+2. Click Create group and select **Create container group**.
+3. Check the option for **Customize pod spec**.
+4. Enter a custom Kubernetes or OpenShift Pod specification in the **Pod spec override** field.
+
 ![Customize pod specification](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ag-instance-group-customize-cg-pod.png)  
-5.  Click Create container group.  Note:
-      The image when a job launches is determined by which execution environment is associated with the job. If you associate a container registry credential with the execution environment, then automation controller attempts to make an `ImagePullSecret` to pull the image. If you prefer not to give the service account permission to manage secrets, you must pre-create the `ImagePullSecret` and specify it on the pod specification, and omit any credential from the execution environment used.
+5. Click Create container group.
+  
+  Note:
+      The image when a job launches is determined by which execution environment is associated with the job.
+If you associate a container registry credential with the execution environment, then automation controller attempts to make an `ImagePullSecret` to pull the image.
+If you prefer not to give the service account permission to manage secrets, you must pre-create the `ImagePullSecret` and specify it on the pod specification, and omit any credential from the execution environment used.
 
     For more information, see the [Allowing Pods to Reference Images from Other Secured Registries](https://access.redhat.com/RegistryAuthentication#allowing-pods-to-reference-images-from-other-secured-registries-8) section of the *Red Hat Container Registry Authentication* article.
 
-6.  When you have created the container group successfully, the **Details** tab of the newly created container group remains, which enables you to review and edit your container group information. This is the same menu that is opened if you click the ![Edit](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png) icon from the **Instance Groups** list view. You can also edit **Instances** and review **Jobs** associated with this instance group.
+6. When you have created the container group successfully, the **Details** tab of the newly created container group remains, which enables you to review and edit your container group information.
+This is the same menu that is opened if you click the ![Edit](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png) icon from the **Instance Groups** list view.
+      You can also edit **Instances** and review **Jobs** associated with this instance group.
 
 ![Instance group successfully created](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ag-instance-group-successfully-created.png)  
     Container groups and instance groups are labeled accordingly.
@@ -190,16 +199,16 @@ Verify the deployment and termination of your container.
 
 ### Procedure
 
-1.  Create a mock inventory and associate the container group to it by populating the name of the container group in the **Instance groups** field. For more information, see [Add a new inventory](/documentation/en-us/red_hat_ansible_automation_platform/2.7/proc_controller_adding_new_inventory "To add a new inventory, you must configure permissions, groups, hosts, and sources, then view the completed jobs.").  
+1. Create a mock inventory and associate the container group to it by populating the name of the container group in the **Instance groups** field. For more information, see [Add a new inventory](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_adding_new_inventory#proc-controller-adding-new-inventory "To add a new inventory, you must configure permissions, groups, hosts, and sources, then view the completed jobs.").  
 ![Create test inventory](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ag-inventories-create-new-test-inventory.png)  
-2.  Create the `localhost` host in the inventory with the following variables:
+2. Create the `localhost` host in the inventory with the following variables:
   
 
 ```
 {'ansible_host': '127.0.0.1', 'ansible_connection': 'local'}
 ```
 
-3.  Launch an ad hoc job against the localhost using the *ping* or *setup* module. Even though the **Machine Credential** field is required, it does not matter which one is selected for this test:  
+3. Launch an ad hoc job against the localhost using the *ping* or *setup* module. Even though the **Machine Credential** field is required, it does not matter which one is selected for this test:  
 ![Launch ad hoc localhost](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ag-inventories-launch-adhoc-localhost.png)  
 
 ![Launch ad hoc localhost 2](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ag-inventories-launch-adhoc-localhost2.png)  
@@ -219,6 +228,6 @@ Capacity limits and quotas for containers are defined by objects in the Kubernet
 - To set limits on all pods within a given namespace, use the `LimitRange` object. For more information see the [Quotas and Limit Ranges](https://docs.openshift.com/online/pro/dev_guide/compute_resources.html#overview) section of the OpenShift documentation.
 - To set limits directly on the pod definition launched by automation controller, see [Customizing the pod specification](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_controller_container_groups#controller-customize-pod-spec "Ansible Automation Platform provides a simple default pod specification, however, you can provide a custom YAML or JSON document that overrides the default pod specification.") and the [Compute Resources](https://docs.openshift.com/online/pro/dev_guide/compute_resources.html#dev-compute-resources) section of the OpenShift documentation.
 
- Note:
+Note:
 
 Container groups do not use the capacity algorithm that normal nodes use. You need to set the number of forks at the job template level. If you configure forks in automation controller, that setting is passed along to the container.

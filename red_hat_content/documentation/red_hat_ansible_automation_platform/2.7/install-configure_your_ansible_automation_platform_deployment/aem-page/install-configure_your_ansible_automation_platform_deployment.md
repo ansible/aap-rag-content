@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-configure_your_ansible_automation_platform_deployment"
-template = "docs/aem-title.html"
 title = "Configure your Ansible Automation Platform deployment - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator/", "Install on OpenShift Container Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-configure_your_ansible_automation_platform_deployment/aem-page/install-configure_your_ansible_automation_platform_deployment.html"
 last_crumb = "Configure your Ansible Automation Platform deployment"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure your Ansible Automation Platform deployment"
 oversized = "false"
@@ -29,7 +30,7 @@ type = "aem-page"
 
 Configuring your Ansible Automation Platform deployment after installation customizes the platform to match your organizational requirements. Apply configuration settings to secure connections and manage storage resources.
 
- Configuring your deployment helps you to:
+Configuring your deployment helps you to:
 
 - **Secure authentication flows**: Enable HTTPS redirect for single sign-on to ensure secure authentication through platform gateway.
 - **Protect against security threads**: Configure CSRF protection settings to prevent cross-site request forgery attacks.
@@ -47,12 +48,12 @@ HTTPS redirect for SAML, allows you to log in once and access all of the platfor
 
 ### Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  Go to Operators> (and then)Installed Operators.
-3.  Select your Ansible Automation Platform Operator deployment.
-4.  Select **All Instances** and go to your **AnsibleAutomationPlatform** instance.
-5.  Click the ⋮ icon and then select Edit AnsibleAutomationPlatform.
-6.  In the **YAML view** paste the following YAML code under the `spec:` section:
+1. Log in to Red Hat OpenShift Container Platform.
+2. Go to Operators> (and then)Installed Operators.
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select **All Instances** and go to your **AnsibleAutomationPlatform** instance.
+5. Click the ⋮ icon and then select Edit AnsibleAutomationPlatform.
+6. In the **YAML view** paste the following YAML code under the `spec:` section:
   
 
 ```
@@ -62,7 +63,7 @@ spec:
       value: '"True"'
 ```
 
-7.  Click Save.
+7. Click Save.
 
 ### Results
 
@@ -82,15 +83,15 @@ When using external ingress, you must configure your CSRF on the ingress to allo
 
 ### Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  Navigate to Operators> (and then)Installed Operators.
-3.  Select your Ansible Automation Platform Operator deployment.
-4.  Select the **Ansible Automation Platform** tab.
-5.  For new instances, click Create AnsibleAutomationPlatform.   1.  For existing instances, you can edit the YAML view by clicking the ⋮ icon and then Edit AnsibleAutomationPlatform.
-6.  Click Advanced Configuration.
-7.  Under **Ingres annotations**, enter any annotations to add to the ingress.
-8.  Under **Ingress TLS secret**, click the drop-down list and select a secret from the list.
-9.  Under **YAML view** paste in the following code:
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to Operators> (and then)Installed Operators.
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select the **Ansible Automation Platform** tab.
+5. For new instances, click Create AnsibleAutomationPlatform.   1. For existing instances, you can edit the YAML view by clicking the ⋮ icon and then Edit AnsibleAutomationPlatform.
+6. Click Advanced Configuration.
+7. Under **Ingres annotations**, enter any annotations to add to the ingress.
+8. Under **Ingress TLS secret**, click the drop-down list and select a secret from the list.
+9. Under **YAML view** paste in the following code:
   
 
 ```
@@ -101,15 +102,15 @@ spec:
         - https://my-aap-domain.com
 ```
 
-10.  After you have configured your platform gateway, click Create at the bottom of the form view (Or Save in the case of editing existing instances).
+10. After you have configured your platform gateway, click Create at the bottom of the form view (Or Save in the case of editing existing instances).
 
 ### Results
 
 Red Hat OpenShift Container Platform creates the pods. This may take a few minutes. You can view the progress by navigating to Workloads> (and then)Pods and locating the newly created instance. Verify that the following operator pods provided by the Red Hat Ansible Automation Platform Operator installation from platform gateway are running:
 
-| Operator manager controllers pods                                                                                                                                                                        | Automation controller pods                                                                                                                                                                  | Automation hub pods                                                                                                                                                 | Event-Driven Ansible pods                                                                                                          | Platform gateway pods                                                                                                           |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| <br>The operator manager controllers for each of the four operators, include the following:<br>automation-controller-operator-controller-managerautomation-hub-operator-controller-managerresource-operator-controller-manageraap-gateway-operator-controller-manageransible-lightspeed-operator-controller-managereda-server-operator-controller-manager | <br>After deploying automation controller, you can see the addition of the following pods:<br>Automation controller webAutomation controller taskMesh ingressAutomation controller postgres | <br>After deploying automation hub, you can see the addition of the following pods:<br>Automation hub webAutomation hub taskAutomation hub APIAutomation hub worker | <br>After deploying EDA, you can see the addition of the following pods:<br>EDA APIEDA ActivationEDA workerEDA streamEDA Scheduler | <br>After deploying platform gateway, you can see the addition of the following pods:<br>platform gatewayplatform gateway redis |
+| Operator manager controllers pods                                                                                                                                                                        | Automation controller pods                                                                                                                                                              | Automation hub pods                                                                                                                                             | Event-Driven Ansible pods                                                                                                      | Platform gateway pods                                                                                                       |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| The operator manager controllers for each of the four operators, include the following:<br>automation-controller-operator-controller-managerautomation-hub-operator-controller-managerresource-operator-controller-manageraap-gateway-operator-controller-manageransible-lightspeed-operator-controller-managereda-server-operator-controller-manager | After deploying automation controller, you can see the addition of the following pods:<br>Automation controller webAutomation controller taskMesh ingressAutomation controller postgres | After deploying automation hub, you can see the addition of the following pods:<br>Automation hub webAutomation hub taskAutomation hub APIAutomation hub worker | After deploying EDA, you can see the addition of the following pods:<br>EDA APIEDA ActivationEDA workerEDA streamEDA Scheduler | After deploying platform gateway, you can see the addition of the following pods:<br>platform gatewayplatform gateway redis |
 
 Note:
 
@@ -125,15 +126,15 @@ This persistence is a key feature of static provisioning. If you redeploy an ins
 
 ### Procedure
 
-1.  List the existing PVCs in your deployment namespace:
+1. List the existing PVCs in your deployment namespace:
   
 
 ```
 oc get pvc -n <namespace>
 ```
 
-2.  Identify the PVC associated with your previous deployment by comparing the old deployment name and the PVC name.
-3.  Delete the old PVC:
+2. Identify the PVC associated with your previous deployment by comparing the old deployment name and the PVC name.
+3. Delete the old PVC:
   
 
 ```
@@ -150,7 +151,7 @@ To make feature flag information visible in the web UI to superusers and auditor
 
 ### Procedure
 
-1.  Edit the `AnsibleAutomationPlatform` custom resource:
+1. Edit the `AnsibleAutomationPlatform` custom resource:
   
 
 ```
@@ -168,7 +169,7 @@ spec:
       FEATURE_POLICY_AS_CODE_ENABLED:True
 ```
 
-2.  Save the custom resource. The operator applies the changes automatically.
+2. Save the custom resource. The operator applies the changes automatically.
 
 ### What to do next
 

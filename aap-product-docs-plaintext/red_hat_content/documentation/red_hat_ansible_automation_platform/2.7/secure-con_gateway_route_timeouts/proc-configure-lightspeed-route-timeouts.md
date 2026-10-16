@@ -19,7 +19,7 @@ These fields replace the `max_stream_duration` and `stream_idle_timeout` global 
 
 ### Procedure
 
-1.  Create or edit a playbook to configure the Ansible Lightspeed route timeouts:
+1. Create or edit a playbook to configure the Ansible Lightspeed route timeouts:
 
 
 ```
@@ -37,7 +37,7 @@ idle_timeout_seconds: 60
 - `request_timeout_seconds` - Maximum total duration in seconds for streaming requests. Replaces the former `max_stream_duration` setting.
 - `idle_timeout_seconds` - Idle timeout in seconds. The connection closes if no data is transmitted within this period. Replaces the former `stream_idle_timeout` setting.
 
-2.  Run the playbook:
+2. Run the playbook:
 
 
 ```

@@ -9,8 +9,8 @@ Inventories organize managed nodes in centralized files that provide Ansible wit
 
 ## Procedure
 
-1.  Create a file named `inventory.ini` in the `ansible_quickstart` directory that you created.
-2.  Add a new `[myhosts]` group to the inventory.ini file and specify the IP address or fully qualified domain name (FQDN) of each host system.
+1. Create a file named `inventory.ini` in the `ansible_quickstart` directory that you created.
+2. Add a new `[myhosts]` group to the inventory.ini file and specify the IP address or fully qualified domain name (FQDN) of each host system.
 
 ```
 [myhosts]
@@ -19,10 +19,10 @@ Inventories organize managed nodes in centralized files that provide Ansible wit
 192.0.2.52
 ```
 
-3.  Verify your inventory, using:
+3. Verify your inventory, using:
 `ansible-inventory -i inventory.ini --list`
 
-4.  Ping the `myhosts` group in your inventory, using:
+4. Ping the `myhosts` group in your inventory, using:
 'ansible myhosts -m ping -i inventory.ini`
 
 Pass the `-u` option with the Ansible command if the username is different on the control node and the managed node(s).

@@ -1,0 +1,183 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Ansible Automation Platform 2.7 patch release September 21, 2026 (2.7-9)",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Overview",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "aap-27-2_7_20260921___overview",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-2_7_20260921___overview"
+        },
+        {
+          "title": "Enhancements",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "aap-27-2_7_20260921___enhancements",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-2_7_20260921___enhancements"
+        },
+        {
+          "title": "Aap UI",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "aap-27-2_7_20260921___aap_ui",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-2_7_20260921___aap_ui"
+        },
+        {
+          "title": "Controller",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "aap-27-2_7_20260921___controller",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-2_7_20260921___controller"
+        },
+        {
+          "title": "Execution Environments",
+          "visible": true,
+          "weight": 5,
+          "urlFragment": "aap-27-2_7_20260921___execution_environments",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-2_7_20260921___execution_environments"
+        },
+        {
+          "title": "CVE",
+          "visible": true,
+          "weight": 6,
+          "urlFragment": "aap-27-2_7_20260921___cve",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-2_7_20260921___cve"
+        },
+        {
+          "title": "Automation controller",
+          "visible": true,
+          "weight": 7,
+          "urlFragment": "aap-27-2_7_20260921__section_2",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-2_7_20260921__section_2"
+        },
+        {
+          "title": "Automation hub",
+          "visible": true,
+          "weight": 8,
+          "urlFragment": "aap-27-2_7_20260921___automation_hub",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-2_7_20260921___automation_hub"
+        },
+        {
+          "title": "Event-Driven Ansible",
+          "visible": true,
+          "weight": 9,
+          "urlFragment": "aap-27-2_7_20260921__section_3",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-2_7_20260921__section_3"
+        },
+        {
+          "title": "Execution Environments",
+          "visible": true,
+          "weight": 10,
+          "urlFragment": "aap-27-2_7_20260921__section_4",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-2_7_20260921__section_4"
+        },
+        {
+          "title": "MCP Server",
+          "visible": true,
+          "weight": 11,
+          "urlFragment": "aap-27-2_7_20260921___mcp_server",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-2_7_20260921___mcp_server"
+        },
+        {
+          "title": "Platform Operator",
+          "visible": true,
+          "weight": 12,
+          "urlFragment": "aap-27-2_7_20260921__section_5",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-2_7_20260921__section_5"
+        },
+        {
+          "title": "Receptor",
+          "visible": true,
+          "weight": 13,
+          "urlFragment": "aap-27-2_7_20260921___receptor",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-2_7_20260921___receptor"
+        },
+        {
+          "title": "Other packages",
+          "visible": true,
+          "weight": 14,
+          "urlFragment": "aap-27-2_7_20260921___other_packages",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-2_7_20260921___other_packages"
+        },
+        {
+          "title": "Bug fixes",
+          "visible": true,
+          "weight": 15,
+          "urlFragment": "aap-27-2_7_20260921___automation_controller",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-2_7_20260921___automation_controller"
+        },
+        {
+          "title": "Aap Gateway",
+          "visible": true,
+          "weight": 16,
+          "urlFragment": "aap-27-2_7_20260921___aap_gateway",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-2_7_20260921___aap_gateway"
+        },
+        {
+          "title": "Aap UI",
+          "visible": true,
+          "weight": 17,
+          "urlFragment": "aap-27-2_7_20260921___aap_ui_2",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-2_7_20260921___aap_ui_2"
+        },
+        {
+          "title": "Controller",
+          "visible": true,
+          "weight": 18,
+          "urlFragment": "aap-27-2_7_20260921___controller_2",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-2_7_20260921___controller_2"
+        },
+        {
+          "title": "Django Ansible Base",
+          "visible": true,
+          "weight": 19,
+          "urlFragment": "aap-27-2_7_20260921___django_ansible_base",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-2_7_20260921___django_ansible_base"
+        },
+        {
+          "title": "Event Driven Ansible",
+          "visible": true,
+          "weight": 20,
+          "urlFragment": "aap-27-2_7_20260921___event_driven_ansible_2",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-2_7_20260921___event_driven_ansible_2"
+        },
+        {
+          "title": "Platform Operator",
+          "visible": true,
+          "weight": 21,
+          "urlFragment": "aap-27-2_7_20260921___platform_operator_2",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-2_7_20260921___platform_operator_2"
+        }
+      ]
+    }
+  ]
+}

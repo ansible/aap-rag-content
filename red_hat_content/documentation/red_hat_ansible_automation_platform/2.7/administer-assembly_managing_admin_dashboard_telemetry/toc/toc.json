@@ -1,0 +1,47 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "View and manage Admin dashboard telemetry",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Prerequisites",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "managing-admin-dashboard-telemetry___prerequisites",
+          "anchor": null,
+          "singlePageAnchor": "managing-admin-dashboard-telemetry___prerequisites"
+        },
+        {
+          "title": "What telemetry data is collected?",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "managing-admin-dashboard-telemetry___what_telemetry_data_is_collected",
+          "anchor": null,
+          "singlePageAnchor": "managing-admin-dashboard-telemetry___what_telemetry_data_is_collected"
+        },
+        {
+          "title": "View the Admin dashboard telemetry",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "view-admin-dashboard",
+          "anchor": null,
+          "singlePageAnchor": "view-admin-dashboard"
+        },
+        {
+          "title": "Disable the Admin dashboard telemetry",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "disable-admin-dashboard-telemetry",
+          "anchor": null,
+          "singlePageAnchor": "disable-admin-dashboard-telemetry"
+        }
+      ]
+    }
+  ]
+}

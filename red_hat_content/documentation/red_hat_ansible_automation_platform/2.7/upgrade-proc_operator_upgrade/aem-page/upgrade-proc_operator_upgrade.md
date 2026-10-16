@@ -1,7 +1,7 @@
 +++
-title = "Upgrade the Ansible Automation Platform Operator - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-proc_operator_upgrade"
 template = "docs/aem-title.html"
+title = "Upgrade the Ansible Automation Platform Operator - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-assembly_operator_upgrade/", "Upgrade your Operator-based deployment of Ansible Automation Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/upgrade-proc_operator_upgrade/aem-page/upgrade-proc_operator_upgrade.html"
 last_crumb = "Upgrade the Ansible Automation Platform Operator"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Upgrade the Ansible Automation Platform Operator"
 oversized = "false"
@@ -37,7 +38,7 @@ Upgrading from version 2.4 or 2.5 is not supported. Upgrade to Red Hat Ansible A
 
 See Upgrading Red Hat Ansible Automation Platform Operator in the version 2.6 documentation.
 
-- Read the [Release notes](/documentation/en-us/red_hat_ansible_automation_platform/2.7/platform_intro "Ansible Automation Platform unifies comprehensive automation capabilities, a robust ecosystem, and flexible deployment options into one strategic solution. It enables customers to automate and orchestrate workflows across domains for efficient, resilient, and consistent IT operations at scale.") for your target version.
+- Read the [Release notes](/documentation/en-us/red_hat_ansible_automation_platform/2.7/../whats-new/platform-intro.html "Ansible Automation Platform unifies comprehensive automation capabilities, a robust ecosystem, and flexible deployment options into one strategic solution. It enables customers to automate and orchestrate workflows across domains for efficient, resilient, and consistent IT operations at scale.") for your target version.
 
 1. For existing deployments only: You must deploy your automation controller and automation hub instances to the same, single namespace before upgrading. For more information see, [Migrating from one namespace to another](https://access.redhat.com/solutions/7092056).
 2. Review the [Backup and restore in an OpenShift environment](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_aap_backup_recovery "To safeguard against unexpected data loss and application errors, it is critical that you perform periodic backups of your Red Hat Ansible Automation Platform deployment. In addition to data loss prevention, backups allow you to fall back to a different deployment state.") section and backup your services:
@@ -51,14 +52,24 @@ Upgrading from Event-Driven Ansible 2.4 is not supported. If you are using Event
 
 ## Procedure
 
-1.  Log in to OpenShift Container Platform.
-2.  Navigate to Operators> (and then)Installed Operators.
-3.  Select the Ansible Automation Platform Operator installed on your project namespace.
-4.  Select the **Subscriptions** tab.
-5.  To upgrade to 2.7 change the channel to `stable-2.7`.
-6.  This creates an InstallPlan for the user. Click Preview InstallPlan.
-7.  Click Approve.
-8.  Create a Custom Resource (CR) using the Ansible Automation Platform UI.
+1. Log in to OpenShift Container Platform.
+2. Navigate to Operators> (and then)Installed Operators.
+3. Select the Ansible Automation Platform Operator installed on your project namespace.
+4. Select the **Subscriptions** tab.
+5. To upgrade to 2.7 change the channel to `stable-2.7`.
+6. Click Preview InstallPlan to review the InstallPlan.
+7. Click Approve.
+8. Verify that your existing AnsibleAutomationPlatform custom resource (CR) is present and that all components are healthy after the operator upgrade.
+  1. In the OpenShift Container Platform web console, navigate to Operators> (and then)Installed Operators and select **Ansible Automation Platform**.
+  2. Select the **Ansible Automation Platform** tab and confirm that your AnsibleAutomationPlatform CR instance is listed.
+  3. Verify that all pods are in a **Running** or **Completed** state:
+  
+
+```
+oc get pods -n <your-aap-namespace>
+```
+
+  4. Confirm the platform gateway is accessible by logging in to the Ansible Automation Platform UI.
   
   Note:
       The automation controller and automation hub UIs remain until all SSO configuration is supported in the platform gateway UI.
@@ -67,4 +78,4 @@ Upgrading from Event-Driven Ansible 2.4 is not supported. If you are using Event
 
 You can confirm you have upgraded successfully by navigating to Operators> (and then)Installed Operators, here under Ansible Automation Platform you can verify the version number matches your target version.
 
-Additionally, go to your Ansible Automation Platform Operator deployment and click All instances to verify if all instances upgraded correctly. All pods should display either a **Running** or **Completed status**, with no pods displaying an error status.
+Additionally, go to your Ansible Automation Platform Operator deployment and click All instances to verify if all instances upgraded correctly. All pods should display either a **Running** or **Completed** status, with no pods displaying an error status.

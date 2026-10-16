@@ -11,29 +11,29 @@ Upgrade the Helm chart and plug-in OCI tag when `pluginMode` is `oci`. This path
 
 Upgrade from the command line
 
-1.  Log in to your OpenShift Container Platform cluster and select the project that contains your Helm release:
+1. Log in to your OpenShift Container Platform cluster and select the project that contains your Helm release:
 
 
 ```
 $ oc project <namespace>
 ```
 
-2.  Update your local Helm repository index:
+2. Update your local Helm repository index:
 
 
 ```
 $ helm repo update openshift-helm-charts
 ```
 
-3.  List available chart versions and select the version listed on the lifecycle page for your target release:
+3. List available chart versions and select the version listed on the lifecycle page for your target release:
 
 
 ```
 $ helm search repo openshift-helm-charts/redhat-rhaap-portal
 ```
 
-4.  Confirm that `backup-values.yaml` includes `pluginMode: oci` and `imageTagInfo` set to the plug-in tag from the lifecycle page. Add them if they are not already set.
-5.  Upgrade the Helm release. Always pass `backup-values.yaml` so custom settings are preserved:
+4. Confirm that `backup-values.yaml` includes `pluginMode: oci` and `imageTagInfo` set to the plug-in tag from the lifecycle page. Add them if they are not already set.
+5. Upgrade the Helm release. Always pass `backup-values.yaml` so custom settings are preserved:
 
 
 ```
@@ -47,15 +47,15 @@ Replace `<release_name>`, `<chart_version>`, and `<namespace>` with your values.
 
 Upgrade from the OpenShift web console
 
-6.  Log in to the OpenShift Container Platform web console.
-7.  Switch to the Developer perspective.
-8.  Open the project that contains your Ansible automation portal Helm release.
-9.  From the navigation menu, select Helm.
-10.  Select your Helm release, then select Actions> (and then)Upgrade.
-11.  Select the target Chart Version.
-12.  In the YAML view, confirm that `redhat-developer-hub.global.pluginMode` is `oci` and `imageTagInfo` matches the lifecycle page and your edited `backup-values.yaml`.
-13.  Review the rest of the YAML to ensure custom values are preserved.
-14.  Click Upgrade.
+6. Log in to the OpenShift Container Platform web console.
+7. Switch to the Developer perspective.
+8. Open the project that contains your Ansible automation portal Helm release.
+9. From the navigation menu, select Helm.
+10. Select your Helm release, then select Actions> (and then)Upgrade.
+11. Select the target Chart Version.
+12. In the YAML view, confirm that `redhat-developer-hub.global.pluginMode` is `oci` and `imageTagInfo` matches the lifecycle page and your edited `backup-values.yaml`.
+13. Review the rest of the YAML to ensure custom values are preserved.
+14. Click Upgrade.
 
 ## Results
 

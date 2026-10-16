@@ -4,11 +4,11 @@ You can use the following procedure to customize the pod.
 
 ## Procedure
 
-1.  In the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Instance Groups.
-2.  Check Customize pod specification.
-3.  In the **Pod Spec Override** field, specify the namespace by using the toggle to enable and expand the **Pod Spec Override** field.
-4.  Click Save.
-5.  Optional: Click Expand to view the entire customization window if you want to provide additional customizations.
+1. In the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Instance Groups.
+2. Check Customize pod specification.
+3. In the **Pod Spec Override** field, specify the namespace by using the toggle to enable and expand the **Pod Spec Override** field.
+4. Click Save.
+5. Optional: Click Expand to view the entire customization window if you want to provide additional customizations.
 
 ## What to do next
 

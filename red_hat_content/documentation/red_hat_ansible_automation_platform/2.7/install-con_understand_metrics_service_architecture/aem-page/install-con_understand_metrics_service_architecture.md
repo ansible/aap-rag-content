@@ -1,7 +1,7 @@
 +++
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_understand_metrics_service_architecture"
 title = "Understand metrics service architecture - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_understand_metrics_service_architecture"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_understand_metrics_service_architecture/", "Understand metrics service architecture"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-con_understand_metrics_service_architecture/aem-page/install-con_understand_metrics_service_architecture.html"
 last_crumb = "Understand metrics service architecture"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Understand metrics service architecture"
 oversized = "false"
@@ -37,13 +38,14 @@ Metrics service is a Django-based application component of Ansible Automation Pl
 
 Metrics service is enabled by default in Ansible Automation Platform 2.7 for both operator-based (OpenShift) and containerized installations that include automation controller. It is deployed automatically as a required component when you install automation controller.
 
-- **Containerized installations:** [automationmetrics] inventory group is required when installing Ansible Automation Platform if automationcontroller is present in the inventory file
-- **Operator installations:** Enabled when `metrics.disabled: false` is set in the AnsibleAutomationPlatform custom resource
+- **Containerized installations:** `[automationmetrics]` inventory group is required when installing Ansible Automation Platform if automationcontroller is present in the inventory file, unless `automationmetrics_skip_install=true` is set in `[all:vars]`
+- **Operator installations:** Enabled when `metrics.disabled: false` is set in the AnsibleAutomationPlatform custom resource. Operator deployments do not support `automationmetrics_skip_install`; they use `metrics.disabled: true` in the CR instead.
 
 ## Key characteristics
 
 - **Django-based application:** Built on Django framework with database migrations managed through /app/scripts/init.sh
 - **Containerized deployment:** Runs as three containers (`automation-metrics-web`, `automation-metrics-tasks`, `automation-metrics-scheduler`) managed by systemd (containerized installer) or Kubernetes (operator)
+- **Optional deployment:** Set `automationmetrics_skip_install=true` to opt out of metrics service installation when automation controller is present (containerized installations only)
 - **Automatic anonymization:** Customer-defined object names are replaced with "Custom" before transmission. Only built-in object names and publicly available collection names are sent in their original form
 - **Auto-configured ingress:** Establishes secure connection to Red Hat Data Ingress without manual setup
 - **Read-only access:** Accesses automation controller database in read-only mode to prevent operational impact
@@ -52,24 +54,25 @@ Metrics service is enabled by default in Ansible Automation Platform 2.7 for bot
 - **HTTP proxy support:** Supports HTTP/HTTPS proxy configuration for environments without direct internet access
 - **Startup validation:** Validates required production environment variables at startup. Containers exit immediately with validation errors if required variables are missing or invalid
 - **Deployment flexibility:** Supports both RHEL-based containerized deployments and OpenShift operator-based deployments with different configuration approaches
+- **Date filtering**: Users can only use predefined date range options (Last 7 days, Last 30 days, Last 90 days, etc.)
+- **Currency**: All cost values display in USD. Multi-currency support not available.
+
+**Capabilities unavailable without metrics service**
+
+- Automation dashboard has no backend data source and is non-functional
+- No anonymized usage data is collected or transmitted
+- ROI calculations, automation savings, and executive reporting are unavailable
+- Dashboard collection tasks do not run
 
 ## Relationship to automation dashboard
 
-Metrics service serves as the unified backend for automation dashboard, a Technology Preview feature in Ansible Automation Platform 2.7. When dashboard collection is enabled (`FEATURE_DASHBOARD_COLLECTION_ENABLED: true`), metrics service collects additional dashboard-specific metrics, including:
+Metrics service serves as the unified backend for automation dashboard. Metrics service collects additional dashboard-specific metrics, including:
 
 - Cost and pricing data for ROI calculations
 - Automation savings metrics
 - Executive reporting data
 
-Dashboard collection is disabled by default and must be enabled separately. Dashboard collection runs on a 6-hourly schedule to minimize database impact.
-
-## Dashboard collection feature flag
-
-Automation dashboard data collection is controlled by the `FEATURE_DASHBOARD_COLLECTION_ENABLED` feature flag. This is an official Ansible Automation Platform feature flag that customers can configure during installation or post-installation.
-
-**Default:** `false` (dashboard collection disabled)
-
-**Purpose:** When enabled, metrics service collects additional dashboard-specific metrics (cost data, ROI calculations, pricing information) in addition to standard anonymized metrics.
+Dashboard collection is enabled by default when metrics service is installed. Dashboard collection runs on an hourly schedule..
 
 ## Architecture components
 
@@ -95,31 +98,30 @@ Automation dashboard data collection is controlled by the `FEATURE_DASHBOARD_COL
 | `metrics_service`             | `metrics_service` | ALL                                   | Metrics service own data storage, schema migrations, configuration |
 | **awx/automation controller** | `ms_awx_readonly` | SELECT ON ALL TABLES IN SCHEMA public | Read-only access to controller data for metrics collection         |
 
- Note:
+Note:
 
 The two-database model ensures metrics service cannot modify controller data. The `ms_awx_readonly` user has only SELECT privileges on the **awx/automation controller** database, preventing any writes to automation controller tables.
 
- Note:
+Note:
 
-When `FEATURE_DASHBOARD_COLLECTION_ENABLED: true`, the `metrics_service` database includes additional tables from apps/dashboard_reports/migrations/ for dashboard-specific data. These tables are created automatically during database migration if the feature flag is enabled.
+The `metrics_service` database includes additional tables from apps/dashboard_reports/migrations/ for dashboard-specific data. These tables are created automatically during database migration.
 
 ## Database schema architecture
 
-*Figure 2. Metrics service database scheme architecture*
+*Figure 2. Metrics service database schema architecture*
 ![Architectural diagram for metrics service database schema (simplified)](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/metrics-service-simplified-schema.png)
 
 **Collection phase**
 
 1. Metrics service queries automation controller/`awx` database (read-only connection using `ms_awx_readonly` user)
-2. Raw usage data extracted from the following tables: jobs, job host summaries, credentials, execution environments, controller versions, and feature flags
+2. Raw usage data extracted from the following tables: jobs, job host summaries, credentials, execution environments, controller versions, feature flags, and job events
 
 **What is NOT collected:**
 
-- Event data
 - Host inventory data
 - Customer-defined template names, playbook names, or workflow names
 
- Important:
+Important:
 
 Host and inventory data collection is handled separately by the metrics-utility CLI for CCSP reports only. Metrics service does not collect this data.
 
@@ -128,25 +130,26 @@ Host and inventory data collection is handled separately by the metrics-utility 
 *Figure 3. Task system module*
 ![Architectural diagram for metrics service and automation dashboard task system module](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/automation-dashboard-task-system-module.png)
 
-Metrics service uses three task groups controlled by feature flags:
+Metrics service uses three task groups:
 
 **METRICS_COLLECTION group**
 
 Gated by `METRICS_COLLECTION` feature flag (default: `true`). When disabled, all tasks in this group skip execution.
 
-| Task                                                 | Schedule            | Description                                                 |
-| ---------------------------------------------------- | ------------------- | ----------------------------------------------------------- |
-| `collect_hourly_metrics` (job\_host\_summary)        | Every hour at XX:05 | Collects job host summary metrics from controller database  |
-| `collect_hourly_metrics` (unified\_jobs)             | Every hour at XX:10 | Collects unified jobs metrics from controller database      |
-| `collect_hourly_metrics` (credentials)               | Every hour at XX:15 | Collects credentials usage metrics from controller database |
-| `collect_snapshot_metrics` (execution\_environments) | Daily at 1:00 AM    | Snapshot of execution environment configuration             |
-| `collect_snapshot_metrics` (config)                  | Daily at 1:30 AM    | Snapshot of system configuration                            |
-| `collect_snapshot_metrics` (controller\_version)     | Daily at 1:35 AM    | Snapshot of controller version information                  |
-| `collect_snapshot_metrics` (table\_metadata)         | Daily at 1:40 AM    | Snapshot of database table metadata                         |
-| `collect_snapshot_metrics` (feature\_flags)          | Daily at 1:45 AM    | Snapshot of feature flag states                             |
-| `collect_daily_metrics` (task\_executions)           | Daily at 1:50 AM    | Pipeline health metrics (task execution observability)      |
-| `daily_metrics_rollup`                               | Daily at 2:00 AM    | Aggregates hourly data into daily summaries                 |
-| `cleanup_metrics_data`                               | Daily at 4:00 AM    | Purges expired data based on retention policies             |
+| Task                                                 | Schedule            | Description                                                                        |
+| ---------------------------------------------------- | ------------------- | ---------------------------------------------------------------------------------- |
+| `collect_hourly_metrics` (job\_host\_summary)        | Every hour at XX:05 | Collects job host summary metrics from controller database                         |
+| `collect_hourly_metrics` (unified\_jobs)             | Every hour at XX:10 | Collects unified jobs metrics from controller database                             |
+| `collect_hourly_metrics` (credentials)               | Every hour at XX:15 | Collects credentials usage metrics from controller database                        |
+| `collect_hourly_metrics` (main\_jobevent\_service)   | Every hour at XX:20 | Collects collection, module, and role usage from job events in controller database |
+| `collect_snapshot_metrics` (execution\_environments) | Daily at 1:00 AM    | Snapshot of execution environment configuration                                    |
+| `collect_snapshot_metrics` (config)                  | Daily at 1:30 AM    | Snapshot of system configuration                                                   |
+| `collect_snapshot_metrics` (controller\_version)     | Daily at 1:35 AM    | Snapshot of controller version information                                         |
+| `collect_snapshot_metrics` (table\_metadata)         | Daily at 1:40 AM    | Snapshot of database table metadata                                                |
+| `collect_snapshot_metrics` (feature\_flags)          | Daily at 1:45 AM    | Snapshot of feature flag states                                                    |
+| `collect_daily_metrics` (task\_executions)           | Daily at 1:50 AM    | Pipeline health metrics (task execution observability)                             |
+| `daily_metrics_rollup`                               | Daily at 2:00 AM    | Aggregates hourly data into daily summaries                                        |
+| `cleanup_metrics_data`                               | Daily at 4:00 AM    | Purges expired data based on retention policies                                    |
 
 **ANONYMIZATION group**
 
@@ -169,17 +172,17 @@ Always enabled regardless of feature flag state. System maintenance tasks contin
 
 Tasks are scheduled in dependency order:
 
-1. **Hourly collection** (XX:05, XX:10, XX:15) - provides raw data
+1. **Hourly collection** (XX:05, XX:10, XX:15, XX:20) - provides raw data
 2. **Daily snapshots** (1:00 AM - 1:50 AM) - supplements hourly data
 3. **Daily rollup** (2:00 AM) - aggregates hourly data (depends on hourly collectors completing)
 4. **Anonymization** (3:00 AM) - anonymizes aggregated data (depends on rollup completing)
 5. **Cleanup** (4:00 AM, 5:00 AM) - purges old data (runs after rollup/anonymization to avoid race conditions)
 
- Important:
+Important:
 
 If hourly collectors fail, daily rollup will have incomplete data. Always verify hourly collection completed before troubleshooting rollup issues.
 
- Note:
+Note:
 
 To ensure the readonly user can access tables created in the future, we recommend setting the following default privileges: `ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO ms_awx_readonly;`
 
@@ -198,6 +201,7 @@ Metrics service transmits only aggregated statistics, counts, and built-in/publi
 - **Credential type statistics:** Built-in credential type names (e.g., "Machine", "Source Control", "Vault") and count of customer-defined credentials (e.g., "3 custom credentials"). Customer-defined credential names are NOT sent.
 - **Execution environment statistics:** Built-in EE names (e.g., "ee-minimal-rhel9", "ee-supported-rhel9") and count of customer-defined EEs (e.g., "5 custom EEs"). Customer-defined EE names are NOT sent.
 - **Collection statistics:** Public collection names from Galaxy or Red Hat Certified Collections (e.g., "ansible.builtin", "ansible.posix") and count of customer-defined collections. Customer-defined collection names are NOT sent.
+- **Collection, module, and role usage statistics**: Agregated counts of Ansible collection, module, and role usage extracted from job events. Data includes module execution counts, job success/failure rates, task retry and unreachable events, and collection-level host counts. Only publicly available (Certified, Community, and Validated) collection and module names are included. Custom-source entries and customer-defined role names are stripped during anonymization. Skipped tasks are excluded - only events from automation work that was actually performed are counted.
 - **Project SCM types:** Source control management types for projects (e.g., Git, SVN).
 - **Organization counts:** Total number of organizations configured.
 - **Version information:** Controller version, Ansible core version, installed collection versions.
@@ -210,13 +214,12 @@ Metrics service transmits only aggregated statistics, counts, and built-in/publi
 - **Customer-defined credential names** (only counts transmitted, e.g., "3 custom credentials")
 - **Customer-defined execution environment names** (only counts transmitted, e.g., "5 custom EEs")
 - **Customer-defined collection names** (only counts transmitted)
-- **Event data** (removed from metrics service in February 2026)
 - **Host inventory data** (not queried by metrics service; handled separately by metrics-utility CLI for CCSP reports only)
 - **Playbook names** (customer-defined content)
 - **Variable names and values** (customer-defined content)
 - **Workflow template names** (customer-defined content)
 
- Important:
+Important:
 
 Customer-defined object names are never transmitted. Metrics service sends only counts (e.g., "3 custom credentials") and statistics (e.g., "50 jobs executed"). There is no way to identify which specific custom objects belong to which customer, and no individual object names can be recovered from the transmitted data.
 
@@ -228,7 +231,7 @@ Customer-defined object names are never transmitted. Metrics service sends only 
 4. Transmission status logged in `metrics_service` database
 5. HTTP/HTTPS proxy supported for environments without direct internet access
 
- Note:
+Note:
 
 Segment is a third-party data pipeline service that securely routes anonymized metrics from your environment to Red Hat analytics infrastructure. The Segment write key is pre-configured during installation.
 
@@ -249,6 +252,8 @@ Characteristics:
 - Metrics service, controller, and databases on one node
 - Suitable for development, testing, or small production environments
 
+To skip metrics service installation, set `automationmetrics_skip_install=true` in `[all:vars] `and omit the `[automationmetrics]` inventory group.
+
 **Enterprise / Multi-Node topology**
 
 Metrics service runs on a dedicated node. You define which node hosts metrics service by using the `[automationmetrics]` inventory group. In the growth topology (all-in-one), metrics service shares the single host with all other components. In the enterprise topology, metrics service requires its own dedicated node. Unlike controller, hub, and EDA, metrics service does not support multi-node or high-availability deployment.
@@ -259,6 +264,8 @@ Characteristics:
 - Scaled independently from controller
 - Metrics processing isolated from automation execution
 - Suitable for large-scale production environments
+
+To skip metrics service installation, set `automationmetrics_skip_install=true` in `[all:vars]` and omit the `[automationmetrics]` inventory group.
 
 ## Deployment method comparison
 
@@ -275,7 +282,7 @@ Metrics service supports two deployment methods with different configuration com
 | **Upgrades**                 | Re-run installer with updated inventory                                      | Operator handles upgrades automatically via CR updates                                     |
 | **Backup/restore**           | Manual playbook execution                                                    | Operator-managed backup/restore via AutomationMetricsBackup CR (when available)            |
 
- Tip:
+Tip:
 
 For OpenShift deployments, use the operator method for simplified configuration and automatic lifecycle management. For RHEL-based containerized deployments, use the containerized installer method.
 
@@ -291,7 +298,7 @@ Metrics service is deployed through the `automationmetrics` Ansible role include
 
 **Configuration requirements:**
 
-- Hosts must be added to `[automationmetrics]` inventory group
+- Hosts must be added to `[automationmetrics]` inventory group (unless `automationmetrics_skip_install=true` is set)
 - Database connection variables must be configured (`automationmetrics_pg_host`, `automationmetrics_pg_password`, etc.)
 - Read-only controller database user must be provisioned manually or by installer
 - Segment write key must be provided for data transmission
@@ -323,11 +330,11 @@ Metrics service is deployed through the `automation-metrics-operator` running on
 - **Services:** Kubernetes Service resources for metrics API, tasks, and scheduler pods
 - **Routes/Ingress:** Traffic routing through platform gateway Envoy proxy (no direct external endpoints)
 
- Important:
+Important:
 
 In AAP 2.7, the operator removes ownerReferences from the MetricsService CR. This means the CR is not automatically deleted when you set `metrics.disabled: true`. You must manually delete the CR if you want to fully remove metrics service from your cluster.
 
- Note:
+Note:
 
 In standard operator deployments, database provisioning is fully automatic. The operator creates all required databases and users. This includes the metrics service database and the read-only user for the controller database.
 

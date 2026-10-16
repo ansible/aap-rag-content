@@ -1,7 +1,7 @@
 +++
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/discover-ansible_components"
 title = "Ansible components - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/discover-ansible_components"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/discover-ansible_components/", "Ansible components"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/discover-ansible_components/aem-page/discover-ansible_components.html"
 last_crumb = "Ansible components"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Ansible components"
 oversized = "false"
@@ -35,7 +36,7 @@ Ansible Automation Platform is structured around three main components:
 - Automation content: the central location for your Ansible content, which you can integrate into your automation environment.
 - Automation decisions: where you can manage Event-Driven Ansible, an automation engine that listens to your system's even stream and reacts to events that you have specified with targeted automation tasks.
 
- These components are united by the platform gateway, which includes an activity stream that captures changes to platform gateway resources, including the creation or modification of organizations, users, and service clusters, among others.
+These components are united by the platform gateway, which includes an activity stream that captures changes to platform gateway resources, including the creation or modification of organizations, users, and service clusters, among others.
 
 ## Automation execution
 
@@ -129,7 +130,7 @@ Choose the appropriate installation methods to match your infrastructure and org
 
 Depending on your organization’s needs, you can install Red Hat Ansible Automation Platform using one of the following methods, based on your environment:
 
--  [RPM installation](/documentation/en-us/red_hat_ansible_automation_platform/2.7/assembly_platform_install_overview "The Red Hat Ansible Automation Platform installation program offers you flexibility, allowing you to install Ansible Automation Platform by using several supported installation scenarios.")
+-  [RPM installation](/documentation/en-us/red_hat_ansible_automation_platform/2.7/../install/assembly-platform-install-overview.html "The Red Hat Ansible Automation Platform installation program offers you flexibility, allowing you to install Ansible Automation Platform by using several supported installation scenarios.")
 -  [Installing on OpenShift Container Platform](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator "As a system administrator, you can use Ansible Automation Platform Operator to deploy new Ansible Automation Platform instances in your OpenShift environment.")
 -  [Cloud environments](https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x)
 -  [Containerized installation](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_aap_containerized_installation_intro "Containerized Ansible Automation Platform uses Podman to run the platform in containers on Red Hat Enterprise Linux host machines. With this installation method, you manage both the product and infrastructure lifecycle while taking advantage of containerized architecture.")
@@ -139,13 +140,18 @@ Depending on your organization’s needs, you can install Red Hat Ansible Automa
 After you install Ansible Automation Platform on your system and log in for the first time, familiarize yourself with the platform dashboard.
 
 Quick starts
-Learn about Ansible automation functions with guided tutorials called quick starts. In the dashboard, you can access quick starts by selecting **Quick starts** from the navigation panel, and selecting a quick start tile. Click Start and complete the onscreen instructions. You can also filter quick starts by keyword and status.
+Learn about Ansible automation functions with guided tutorials called quick starts.
+In the dashboard, you can access quick starts by selecting **Quick starts** from the navigation panel, and selecting a quick start tile.
+Click Start and complete the onscreen instructions.
+You can also filter quick starts by keyword and status.
 
 Resource status
-Indicates the status of your hosts, projects, and inventories. The status indicator links to your configured hosts, projects and inventories where you can search, filter, add and change these resources.
+Indicates the status of your hosts, projects, and inventories.
+The status indicator links to your configured hosts, projects and inventories where you can search, filter, add and change these resources.
 
 Job Activity
-View a summary of your current job status. Filter the job status within a period of time or by job type, or click Go to jobs to view a complete list of jobs that are currently available.
+View a summary of your current job status.
+Filter the job status within a period of time or by job type, or click Go to jobs to view a complete list of jobs that are currently available.
 
 Jobs
 View recent jobs that have run, or click View all Jobs to view a complete list of jobs that are currently available, or create a new job.

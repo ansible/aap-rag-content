@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-assembly_firewall_policy_manage/aem-page/secure-assembly_firewall_policy_manage.html"
 last_crumb = "Manage firewall policies and rules with security automation"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Manage firewall policies and rules with security automation"
 oversized = "false"
@@ -43,11 +44,15 @@ Ansible security automation interacts with a wide variety of security technologi
 
 Ansible security automation enables you to automate various firewall policies that require a series of actions across various products.
 
-You can use an Ansible role, such as the `acl_manager` role to manage your *Access Control Lists* (ACLs) for many firewall devices such as blocking or unblocking an IP or URL. Roles let you automatically load related vars, files, tasks, handlers, and other Ansible artifacts based on a known file structure. After you group your content in roles, you can easily reuse them and share them with other users.
+You can use an Ansible role, such as the `acl_manager` role to manage your *Access Control Lists* (ACLs) for many firewall devices such as blocking or unblocking an IP or URL.
+Roles let you automatically load related vars, files, tasks, handlers, and other Ansible artifacts based on a known file structure.
+After you group your content in roles, you can easily reuse them and share them with other users.
 
-The following lab environment is a simplified example of a real-world enterprise security architecture, which can be more complex and include additional vendor-specific tools. This is a typical incident response scenario where you receive an intrusion alert and immediately execute a playbook with the acl_manger role that blocks the attacker’s IP address.
+The following lab environment is a simplified example of a real-world enterprise security architecture, which can be more complex and include additional vendor-specific tools.
+This is a typical incident response scenario where you receive an intrusion alert and immediately execute a playbook with the acl_manger role that blocks the attacker’s IP address.
 
-Your entire team can use Ansible security automation to address investigations, threat hunting, and incident response all on one platform. Red Hat Ansible Automation Platform provides you with certified content collections that are easy to consume and reuse within your security team.
+Your entire team can use Ansible security automation to address investigations, threat hunting, and incident response all on one platform.
+Red Hat Ansible Automation Platform provides you with certified content collections that are easy to consume and reuse within your security team.
 
 ![Simplified security lab environment](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/security-lab-environment.png)  
 
@@ -62,9 +67,9 @@ Use the `acl_manager` role to create a new firewall rule for blocking a source I
 
 ### Procedure
 
-1.  Install the acl_manager role using the ansible-galaxy command.  `$ ansible-galaxy install ansible_security.acl_manager`
+1. Install the acl_manager role using the ansible-galaxy command.  `$ ansible-galaxy install ansible_security.acl_manager`
 
-2.  Create a new playbook and set the following parameter. For example, source object, destination object, access rule between the two objects and the actual firewall you are managing, such as Check Point:
+2. Create a new playbook and set the following parameter. For example, source object, destination object, access rule between the two objects and the actual firewall you are managing, such as Check Point:
   
 
 ```
@@ -82,7 +87,7 @@ Use the `acl_manager` role to create a new firewall rule for blocking a source I
         ansible_network_os: checkpoint
 ```
 
-3.  Run the playbook:
+3. Run the playbook:
       `$ ansible-navigator run --ee false <playbook.yml>`.
 
 ![Playbook with new firewall rule](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/security-create-rule.png)  
@@ -102,10 +107,10 @@ Use the acl_manager role to delete a security rule.
 
 ### Procedure
 
-1.  Install the acl_manager role using the ansible-galaxy command:
+1. Install the acl_manager role using the ansible-galaxy command:
        `$ ansible-galaxy install ansible_security.acl_manager`
 
-2.  Using the CLI, create a new playbook with the acl_manger role and set the parameters, for example, source object, destination object, access rule between the two objects:
+2. Using the CLI, create a new playbook with the acl_manger role and set the parameters, for example, source object, destination object, access rule between the two objects:
   
 
 ```
@@ -122,9 +127,9 @@ Use the acl_manager role to delete a security rule.
         ansible_network_os: checkpoint
 ```
 
-3.  Run the playbook:
+3. Run the playbook:
       `$ ansible-navigator run --ee false <playbook.yml>`:
 
 ![Playbook with deleted firewall rule](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/security-delete-rule.png)  
 
-4.  You have deleted the firewall rule. Access the MGMT server and verify that the new security policy has been removed.
+4. You have deleted the firewall rule. Access the MGMT server and verify that the new security policy has been removed.

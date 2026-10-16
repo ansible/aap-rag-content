@@ -1,0 +1,23 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Get started automating with playbooks",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "How do Ansible Playbooks work",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "ref-how-do-playbooks-work",
+          "anchor": null,
+          "singlePageAnchor": "ref-how-do-playbooks-work"
+        }
+      ]
+    }
+  ]
+}

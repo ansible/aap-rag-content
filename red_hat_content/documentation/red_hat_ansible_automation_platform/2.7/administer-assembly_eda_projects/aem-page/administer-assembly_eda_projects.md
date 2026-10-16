@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_projects/aem-page/administer-assembly_eda_projects.html"
 last_crumb = "Organize rulebooks for event-driven automation"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Organize rulebooks for event-driven automation"
 oversized = "false"
@@ -45,10 +46,10 @@ Set up a project to connect Event-Driven Ansible controller to a Git repository,
 
 ### Procedure
 
-1.  Log in to the Ansible Automation Platform Dashboard.
-2.  Navigate to **Automation Decisions> (and then)Projects**.
-3.  Click Create project.
-4.  Insert the following:
+1. Log in to the Ansible Automation Platform Dashboard.
+2. Navigate to **Automation Decisions> (and then)Projects**.
+3. Click Create project.
+4. Insert the following:
   
 
 Name
@@ -90,7 +91,7 @@ Options
   - **Verify SSL** - The Verify SSL option is enabled by default. Enabling this option verifies the SSL with HTTPS when the project is imported. Note:
     You can disable this option if you have a local repository that uses self-signed certificates.
 
-5.  Select Create project.
+5. Select Create project.
 
 ### Results
 
@@ -104,7 +105,9 @@ The Projects list view provides a quick dashboard to verify rulebook sync status
 
 Note:
 
-If a rulebook changes in source control, you can re-sync a project by selecting the sync icon next to the project from the **Projects** list view. The **Git hash** updates represent the latest commit on that repository. An activation must be restarted or recreated if you want to use the updated project.
+If a rulebook changes in source control, you can re-sync a project by selecting the sync icon next to the project from the **Projects** list view.
+The **Git hash** updates represent the latest commit on that repository.
+An activation must be restarted or recreated if you want to use the updated project.
 
 ## Edit a project
 
@@ -112,15 +115,15 @@ Edit project details (like the source repository URL or credential) to manage wh
 
 ### Procedure
 
-1.  From the **Projects** list view, select the More Actions icon **⋮** next to the desired project. The Edit page is displayed.
-2.  Edit the desired fields. Important:
+1. From the **Projects** list view, select the More Actions icon **⋮** next to the desired project. The Edit page is displayed.
+2. Edit the desired fields. Important:
       When you update a project’s **Source control URL**, **Source control branch/tag/commit**, or **Source control refspec**, Event-Driven Ansible automatically triggers a project resync. This process updates the rulebooks available within Event-Driven Ansible controller and can significantly impact existing rulebook activations:
 
   - **Rulebook Content Updates**: Running activations continue to use old content when a rulebook’s content changes. To apply the newer content, you must restart the affected rulebook activation. If the rulebook content you update is attached to an activation that uses event streams, you must re-attach the event stream to that activation after the updates are applied and then, restart the activation.
   - **New Rulebooks**: Any new rulebook added to the repository becomes available in the database after the sync.
   - **Deleted Rulebooks**: A removed rulebook is deleted from the database upon sync. Its associated activations, however, continue to run and can be restarted. Review and update any activations detached from their source rulebook.
 
-3.  Select Save project.
+3. Select Save project.
 
 ## Delete a project
 
@@ -138,14 +141,14 @@ You cannot delete a project if it is still being used by a rulebook activation.
 
 ### Procedure
 
-1.  To delete a project, complete one of the following:
+1. To delete a project, complete one of the following:
 
   - From the **Projects** list view, select the checkbox next to the desired project, and click the More Actions icon **⋮** from the page menu.
   - From the **Projects** list view, click the More Actions icon **⋮** next to the desired project.
 
-2.  Select Delete project.
-3.  In the **Permanently delete projects** window, select Yes, I confirm that I want to delete this project.
-4.  Select Delete project.
+2. Select Delete project.
+3. In the **Permanently delete projects** window, select Yes, I confirm that I want to delete this project.
+4. Select Delete project.
 
 ## Update revision on launch for projects
 

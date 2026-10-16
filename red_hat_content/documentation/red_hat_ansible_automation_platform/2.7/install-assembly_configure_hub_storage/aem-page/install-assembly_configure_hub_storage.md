@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_configure_hub_storage"
 title = "Configure storage for automation hub - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_aap_containerized_installation_intro/", "Install containerized Ansible Automation Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_configure_hub_storage/aem-page/install-assembly_configure_hub_storage.html"
 last_crumb = "Configure storage for automation hub"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure storage for automation hub"
 oversized = "false"
@@ -35,8 +36,8 @@ Amazon S3 storage is a type of object storage that is supported in containerized
 
 ### Procedure
 
-1.  Ensure your AWS S3 bucket exists before proceeding with the installation.
-2.  Add the following variables to your inventory file under the `[all:vars]` group to configure S3 storage:
+1. Ensure your AWS S3 bucket exists before proceeding with the installation.
+2. Add the following variables to your inventory file under the `[all:vars]` group to configure S3 storage:
   
 
 ```
@@ -47,7 +48,7 @@ hub_s3_secret_key=<secret_key>
 hub_s3_bucket_name=<bucket_name>
 ```
 
-3.  Optional: You can pass extra parameters to the AWS S3 storage backend by using the `hub_s3_extra_settings` variable. For example:
+3. Optional: You can pass extra parameters to the AWS S3 storage backend by using the `hub_s3_extra_settings` variable. For example:
   
 
 ```
@@ -60,8 +61,8 @@ Azure Blob storage is a type of object storage that is supported in containerize
 
 ### Procedure
 
-1.  Ensure your Azure container exists before proceeding with the installation.
-2.  Add the following variables to your inventory file under the `[all:vars]` group to configure Azure Blob storage:
+1. Ensure your Azure container exists before proceeding with the installation.
+2. Add the following variables to your inventory file under the `[all:vars]` group to configure Azure Blob storage:
   
 
 ```
@@ -72,7 +73,7 @@ hub_azure_account_name=<account_name>
 hub_azure_container=<container_name>
 ```
 
-3.  Optional: You can pass extra parameters to the Azure Blob storage backend by using the `hub_azure_extra_settings` variable. For example:
+3. Optional: You can pass extra parameters to the Azure Blob storage backend by using the `hub_azure_extra_settings` variable. For example:
   
 
 ```
@@ -83,9 +84,24 @@ hub_azure_extra_settings={'AZURE_LOCATION': 'foo', 'AZURE_SSL': True, 'AZURE_URL
 
 NFS is a type of shared storage that is supported in containerized installations. Shared storage is required when installing more than one instance of automation hub with a `file` storage backend. When installing a single instance of the automation hub, shared storage is optional.
 
+### About this task
+
+Note:
+
+The containerized installer automatically handles NFS mounting when you configure the `hub_shared_data_path` and `hub_shared_data_mount_opts` variables in your inventory file. Manual NFS configuration on automation hub nodes is not required.
+
+Unlike Ansible Automation Platform RPM-based installations, you do not need to:
+
+- Create /var/lib/pulp directories on automation hub nodes
+- Add NFS mount entries to /etc/fstab
+- Manually mount the NFS share before running the installer
+- Configure SELinux contexts for pulp storage paths
+
+The installer manages all NFS mount operations automatically based on your inventory file settings.
+
 ### Procedure
 
-1.  To configure shared storage for automation hub, set the `hub_shared_data_path` variable in your inventory file:
+1. To configure shared storage for automation hub, set the `hub_shared_data_path` variable in your inventory file:
   
 
 ```yaml
@@ -94,4 +110,4 @@ hub_shared_data_path=<path_to_nfs_share>
 
     The value must match the format `host:dir`, for example `nfs-server.example.com:/exports/hub`.
 
-2.  (Optional) To change the mount options for your NFS share, use the `hub_shared_data_mount_opts` variable. The default value is `rw,sync,hard`.
+2. (Optional) To change the mount options for your NFS share, use the `hub_shared_data_mount_opts` variable. The default value is `rw,sync,hard`.

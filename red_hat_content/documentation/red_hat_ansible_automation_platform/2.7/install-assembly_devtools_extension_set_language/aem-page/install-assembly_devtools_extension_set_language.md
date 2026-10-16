@@ -4,13 +4,14 @@ template = "docs/aem-title.html"
 title = "Set the language for the VS Code extension - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_devtools_install/", "Install Ansible development tools"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_devtools_install/", "Set up your development environment"]]
 category = "Install"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_devtools_extension_set_language/aem-page/install-assembly_devtools_extension_set_language.html"
 last_crumb = "Set the language for the VS Code extension"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Set the language for the VS Code extension"
 oversized = "false"
@@ -39,9 +40,10 @@ The following procedure describes how to manually assign the Ansible language to
 
 ### Procedure
 
-1.  Open or create a YAML file in VS Code.
-2.  Hover the cursor over the language identified in the status bar at the bottom of the VS Code window to open the **Select Language Mode** list.
-3.  Select **Ansible** in the list. The language shown in the status bar at the bottom of the VS Code window for the file is changed to Ansible.
+1. Open or create a YAML file in VS Code.
+2. Hover the cursor over the language identified in the status bar at the bottom of the VS Code window to open the **Select Language Mode** list.
+3. Select **Ansible** in the list.
+      The language shown in the status bar at the bottom of the VS Code window for the file is changed to Ansible.
 
 ## Add the persistent file association for the Ansible language to `settings.json`
 
@@ -51,10 +53,11 @@ Instead of manually associating the Ansible language to YAML files, you can add 
 
 ### Procedure
 
-1.  Open the `settings.json` file:
-  1.  Click View> (and then)Command Palette to open the command palette.
-  2.  Enter `Workspace settings` in the search box and select **Open Workspace Settings (JSON)**.
-2.  Add the following code to `settings.json`.
+1. Open the `settings.json` file:
+  1. Click View> (and then)Command Palette to open the command palette.
+  2. Enter `Workspace settings` in the search box and select **Open Workspace Settings (JSON)**.
+2. Add the following code to `settings.json`.
+  
 
 ```
 {

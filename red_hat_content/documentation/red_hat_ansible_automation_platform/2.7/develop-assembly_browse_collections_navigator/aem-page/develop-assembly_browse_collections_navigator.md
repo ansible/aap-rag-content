@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_browse_collections_navigator/aem-page/develop-assembly_browse_collections_navigator.html"
 last_crumb = "Browse collections in a text-based format"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Browse collections in a text-based format"
 oversized = "false"
@@ -56,14 +57,14 @@ You can browse Ansible collections with the automation content navigator text-ba
 
 ### Procedure
 
-1.  Start automation content navigator
+1. Start automation content navigator
   
 
 ```
 $ ansible-navigator
 ```
 
-2.  Browse the collection. Alternately, you can type `ansible-navigator collections` to directly browse the collections.
+2. Browse the collection. Alternately, you can type `ansible-navigator collections` to directly browse the collections.
 
 ```
 $ :collections
@@ -71,7 +72,7 @@ $ :collections
 
 ![A list of Ansible collections shown in the automation content navigator](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-collection-list.png)  
 
-3.  Type the number of the collection you want to explore.
+3. Type the number of the collection you want to explore.
 
 ```
 :4
@@ -79,7 +80,7 @@ $ :collections
 
 ![A collection shown in the automation content navigator](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-plugin-list.png)  
 
-4.  Type the number corresponding to the module you want to delve into.
+4. Type the number corresponding to the module you want to delve into.
 
 ```
 ANSIBLE.UTILS.IP_ADDRESS: Test if something in an IP address
@@ -103,7 +104,7 @@ ANSIBLE.UTILS.IP_ADDRESS: Test if something in an IP address
 <... output truncated...>
 ```
 
-5.  Optional: jump to the documentation examples for this module.
+5. Optional: jump to the documentation examples for this module.
 
 ```
 :{{ examples }}
@@ -126,7 +127,7 @@ ANSIBLE.UTILS.IP_ADDRESS: Test if something in an IP address
 15│
 ```
 
-6.  Optional: open the example in your editor to copy it into a playbook.
+6. Optional: open the example in your editor to copy it into a playbook.
 
 ```
 :open
@@ -149,14 +150,14 @@ You can review Ansible documentation for collections and plugins with the automa
 
 ### Procedure
 
-1.  Start automation content navigator
+1. Start automation content navigator
   
 
 ```
 $ ansible-navigator
 ```
 
-2.  Review the module you are interested in. Alternately, you can type `ansible-navigator doc` to access the documentation.
+2. Review the module you are interested in. Alternately, you can type `ansible-navigator doc` to access the documentation.
 
 ```
 :doc ansible.utils.ip_address
@@ -184,7 +185,7 @@ ANSIBLE.UTILS.IP_ADDRESS: Test if something in an IP address
 <... output truncated...>
 ```
 
-3.  Jump to the documentation examples for this module.
+3. Jump to the documentation examples for this module.
 
 ```
 :{{ examples }}
@@ -207,7 +208,7 @@ ANSIBLE.UTILS.IP_ADDRESS: Test if something in an IP address
 15│
 ```
 
-4.  Optional: open the example in your editor to copy it into a playbook.
+4. Optional: open the example in your editor to copy it into a playbook.
 
 ```
 :open

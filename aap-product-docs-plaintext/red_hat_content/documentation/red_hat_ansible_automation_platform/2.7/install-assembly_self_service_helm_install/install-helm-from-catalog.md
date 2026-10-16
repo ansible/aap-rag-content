@@ -15,12 +15,12 @@ Deploy the Helm chart from the OpenShift catalog by configuring the base URL and
 
 ### Procedure
 
-1.  In the OpenShift Container Platform web console, select the Developer perspective.
-2.  Select your project and click the Helm option in the OpenShift sidebar.
-3.  Click Create and select Helm Release.
-4.  Search for `Portal` in the Helm Charts filter, and select the Automation Portal chart.
-5.  Click Create and select the YAML view.
-6.  Update the `clusterRouterBase` value with the base URL of your OpenShift instance.
+1. In the OpenShift Container Platform web console, select the Developer perspective.
+2. Select your project and click the Helm option in the OpenShift sidebar.
+3. Click Create and select Helm Release.
+4. Search for `Portal` in the Helm Charts filter, and select the Automation Portal chart.
+5. Click Create and select the YAML view.
+6. Update the `clusterRouterBase` value with the base URL of your OpenShift instance.
 
 Important:
 You must replace the default `apps.example.com` placeholder value. If the default value remains, Helm chart validation fails.
@@ -31,7 +31,7 @@ global:
 clusterRouterBase: apps.example.com
 ```
 
-7.  Configure the plug-in delivery mode and version by setting the `pluginMode` and `imageTagInfo` keys:
+7. Configure the plug-in delivery mode and version by setting the `pluginMode` and `imageTagInfo` keys:
 - For OCI delivery, set `pluginMode` to `oci`.
 Set `imageTagInfo` to the plug-in version from the Helm chart or the lifecycle page. To determine the correct version tag, see "Determine version tags before you install".
 
@@ -44,7 +44,9 @@ pluginMode: oci
 imageTagInfo: "<plugin-version>"
 ```
 
-8.  Set the Red Hat Ansible Automation Platform organization to synchronize. The default value is `Default`. Update the `orgs` key to match your organization name:
+8. Set the Red Hat Ansible Automation Platform organization to synchronize.
+The default value is `Default`. Update the `orgs` key to match your organization name:
+
 
 
 ```
@@ -59,7 +61,7 @@ rhaap:
 orgs: "<your-aap-organization-name>"
 ```
 
-9.  **Optional:** Update the `CUSTOMER_SUPPORT_URL` to point to your support portal:
+9. **Optional:** Update the `CUSTOMER_SUPPORT_URL` to point to your support portal:
 
 
 ```
@@ -71,5 +73,10 @@ extraEnvVars:
 value: https://access.redhat.com/support
 ```
 
-10.  Click Create.
+10. **Optional:** Configure collection discovery sources for the execution environment builder.
+If you plan to use the execution environment builder to automatically discover Ansible collections from Git repositories or Private Automation Hub, define the discovery providers under `catalog.providers.rhaap.production.sync` before deployment.
+
+For parameter syntax and complete examples, see [Configure collection discovery sources](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_collection_discovery "Configure Git content discovery and private automation hub collection discovery so that Ansible collections are available in execution environment builder and the collection catalog.").
+
+11. Click Create.
 

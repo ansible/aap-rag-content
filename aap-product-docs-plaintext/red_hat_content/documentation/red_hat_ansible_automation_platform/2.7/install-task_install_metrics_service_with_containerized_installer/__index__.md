@@ -20,13 +20,13 @@ This procedure configures metrics service during the initial containerized insta
 
 ## Procedure
 
-1.  Define metrics service inventory group
+1. Define metrics service inventory group
 Edit the inventory file and add the `[automationmetrics]` group:
 
 Note:
 Metrics service is NOT required to be co-located with automation controller. Place it on any node based on your deployment topology.
 
-2.  Run the containerized installer
+2. Run the containerized installer
 
 
 ```
@@ -47,7 +47,7 @@ The installer performs the following sequence:
 5. **Systemd integration:** Generates three user-scope systemd units: `automation-metrics-web.service`, `automation-metrics-tasks.service`, `automation-metrics-scheduler.service`
 6. **Firewall configuration:** Opens ports 8087/tcp (HTTP) and 8450/tcp (HTTPS)
 
-3.  Verify installation
+3. Verify installation
 
 
 ```
@@ -89,6 +89,6 @@ Metrics service is successfully installed when:
 After installation, metrics service automatically:
 
 - Begins collecting usage data from automation controller database
-- Anonymizes data. Any private object names are marked as Custom.
+- Anonymizes data. Any private object names are marked as *Custom*. When indirect node collection is enabled, indirect node counts grouped by Ansible collection and module are included in the anonymized payload. Host names are stripped entirely from the payload.
 - Transmits anonymized data to Red Hat Data Ingress via Gateway /api/metrics/ endpoint
 - Provides health monitoring at http://localhost:8087/health/ (via nginx)

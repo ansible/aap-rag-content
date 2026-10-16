@@ -7,49 +7,7 @@
       "weight": 1,
       "urlFragment": "index",
       "anchor": null,
-      "singlePageAnchor": null,
-      "sections": [
-        {
-          "title": "Understand the permission model",
-          "visible": true,
-          "weight": 1,
-          "urlFragment": "understand-portal-rbac-permissions",
-          "anchor": null,
-          "singlePageAnchor": "understand-portal-rbac-permissions"
-        },
-        {
-          "title": "Configure RBAC for synchronization",
-          "visible": true,
-          "weight": 2,
-          "urlFragment": "proc-portal-configure-rbac-sync",
-          "anchor": null,
-          "singlePageAnchor": "proc-portal-configure-rbac-sync"
-        },
-        {
-          "title": "Configure conditional access",
-          "visible": true,
-          "weight": 3,
-          "urlFragment": "portal-config-conditional-access",
-          "anchor": null,
-          "singlePageAnchor": "portal-config-conditional-access"
-        },
-        {
-          "title": "Permissions reference for Ansible Automation Platform job template access",
-          "visible": true,
-          "weight": 4,
-          "urlFragment": "portal-permission-ref-for-job-templates",
-          "anchor": null,
-          "singlePageAnchor": "portal-permission-ref-for-job-templates"
-        },
-        {
-          "title": "Adjust synchronization frequency between Ansible Automation Platform and Ansible automation portal",
-          "visible": true,
-          "weight": 5,
-          "urlFragment": "self-service-sync-frequency",
-          "anchor": null,
-          "singlePageAnchor": "self-service-sync-frequency"
-        }
-      ]
+      "singlePageAnchor": null
     }
   ]
 }

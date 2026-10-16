@@ -31,10 +31,6 @@ psql -h localhost -U ms_awx_readonly -d awx -c "SELECT COUNT(*) FROM main_job LI
 
 # Verify Podman secrets (should show 4 secrets)
 podman secret ls | grep automationmetrics
-
-# Verify dashboard collection feature flag status
-podman exec automation-metrics-web \
-env | grep METRICS_SERVICE_FEATURE_ENABLED__DASHBOARD_COLLECTION
 ```
 
 ## Common issues
@@ -255,3 +251,4 @@ Use pipeline health metrics to:
 - Detect performance degradation early (increasing task durations)
 - Identify which collectors are failing most frequently
 - Validate infrastructure changes (e.g., database upgrades) haven't impacted collection
+

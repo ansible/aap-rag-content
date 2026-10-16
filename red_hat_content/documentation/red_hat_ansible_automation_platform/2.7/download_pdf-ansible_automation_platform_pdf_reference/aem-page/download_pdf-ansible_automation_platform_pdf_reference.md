@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/download_pdf-ansible_automation_platform_pdf_reference"
 title = "Ansible Automation Platform 2.7 PDF Reference - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/download_pdf-ansible_automation_platform_pdf_reference"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/download_pdf-ansible_automation_platform_pdf_reference/", "Ansible Automation Platform 2.7 PDF Reference"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/download_pdf-ansible_automation_platform_pdf_reference/aem-page/download_pdf-ansible_automation_platform_pdf_reference.html"
 last_crumb = "Ansible Automation Platform 2.7 PDF Reference"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Ansible Automation Platform 2.7 PDF Reference"
 oversized = "false"

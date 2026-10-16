@@ -1,7 +1,8 @@
 # Advanced notification settings
 ## Notifications API
 
-The Notifications API enables you to trigger notifications for various events in Automation controller. The Notifications API provides endpoints to trigger notifications for job events, such as when a job starts, succeeds, or fails.
+The Notifications API enables you to trigger notifications for various events in Automation controller.
+The Notifications API provides endpoints to trigger notifications for job events, such as when a job starts, succeeds, or fails.
 
 Use the `started`, `success`, or `error` endpoints:
 

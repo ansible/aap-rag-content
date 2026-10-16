@@ -15,14 +15,14 @@ You can provide external database settings in the cloud-init user-data at first 
 
 ## Procedure
 
-1.  Edit the configuration file:
+1. Edit the configuration file:
 
 
 ```terminal
 $ sudo vi /etc/portal/configs/app-config/app-config.production.yaml
 ```
 
-2.  Update the `backend.database` section:
+2. Update the `backend.database` section:
 
 
 ```yaml
@@ -39,14 +39,14 @@ client: pg
 
 The database user requires the `CREATEDB` privilege.
 
-3.  Store the database password as a Podman secret:
+3. Store the database password as a Podman secret:
 
 
 ```terminal
 $ printf '%s' "*database-password*" | sudo podman secret create portal_postgresql_password -
 ```
 
-4.  Restart the Ansible automation portal service:
+4. Restart the Ansible automation portal service:
 
 
 ```terminal

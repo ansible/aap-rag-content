@@ -10,15 +10,15 @@ As part of the initial setup, two credentials are available for your use: Demo C
 
 ## Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Credentials.
-2.  On the **Credentials** page, click Create credential.
-3.  Enter the following information:
+1. From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Credentials.
+2. On the **Credentials** page, click Create credential.
+3. Enter the following information:
 
 - **Name**: the name for your new credential.
 - (Optional) **Description**: a description for the new credential.
 - Optional **Organization**: The name of the organization with which the credential is associated. The default is **Default**.
 - **Credential type**: enter or select the credential type you want to create.
 
-4.  Enter the appropriate details depending on the type of credential selected, as described in [Credential types](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_types "Ansible Automation Platform supports a number of credential types.").  ![Credential types drop down list](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/credential-types-drop-down-menu.png)
+4. Enter the appropriate details depending on the type of credential selected, as described in [Credential types](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_types "Ansible Automation Platform supports a number of credential types.").  ![Credential types drop down list](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/credential-types-drop-down-menu.png)
 
-5.  Click Create credential.
+5. Click Create credential.

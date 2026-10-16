@@ -10,7 +10,7 @@
       "singlePageAnchor": null,
       "sections": [
         {
-          "title": "Migrate to Managed Ansible Automation Platform",
+          "title": "Submit a migration request to Red Hat",
           "visible": true,
           "weight": 1,
           "urlFragment": "managed-target-migration",

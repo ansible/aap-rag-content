@@ -1,7 +1,7 @@
 +++
-title = "Configure mutual TLS certificate authentication for event streams database - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-configure_mutual_tls_certificate_authentication_for_event_streams_database"
+title = "Configure mutual TLS certificate authentication for event streams database - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_aap_containerized_installation_intro/", "Install containerized Ansible Automation Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-configure_mutual_tls_certificate_authentication_for_event_streams_database/aem-page/install-configure_mutual_tls_certificate_authentication_for_event_streams_database.html"
 last_crumb = "Configure mutual TLS certificate authentication for event streams database"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure mutual TLS certificate authentication for event streams database"
 oversized = "false"
@@ -37,7 +38,7 @@ Configure mutual TLS (mTLS) authentication to secure event streams database conn
 
 ## Procedure
 
-1.  Configure your PostgreSQL `pg_hba.conf` file to allow certificate authentication for the event streams user.
+1. Configure your PostgreSQL `pg_hba.conf` file to allow certificate authentication for the event streams user.
   
   For example:
 
@@ -50,7 +51,7 @@ hostssl     <database_name>    eda_event_stream     all          cert
 
     Replace `<database_name>` with your actual database name (for example, `eda`).
 
-2.  Reload the PostgreSQL configuration:
+2. Reload the PostgreSQL configuration:
   
 
 ```
@@ -59,7 +60,7 @@ hostssl     <database_name>    eda_event_stream     all          cert
 ----
 ```
 
-3.  Add the following variables to your inventory file under the `[all:vars]` group:
+3. Add the following variables to your inventory file under the `[all:vars]` group:
   
 
 ```
@@ -74,7 +75,7 @@ eda_event_stream_pg_tls_cert=/path/to/client-cert.pem eda_event_stream_pg_tls_ke
   - When using certificate authentication (`eda_event_stream_pg_cert_auth=true`), you do not need to provide the `eda_event_stream_pg_password`.
   - The `sslmode` value determines the level of verification. Valid options include `verify-full`, `verify-ca`, `require`, `prefer`, `allow`, and `disable`. For production environments, use `prefer`.
 
-4.  Ensure the certificate and key files are accessible to the installation program by completing one of the following options:
+4. Ensure the certificate and key files are accessible to the installation program by completing one of the following options:
 
   - If the files are on the Ansible control node (where you run the installer), set `eda_event_stream_pgclient_tls_files_remote=false` (default).
   - If the files are on the remote event streams server, set `eda_event_stream_pgclient_tls_files_remote=true`.

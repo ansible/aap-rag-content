@@ -5,7 +5,7 @@ The following procedure describes how to update the TLS certificates and keys by
 
 ### Procedure
 
-1.  To prepare the certificates and keys, choose one of the following methods:
+1. To prepare the certificates and keys, choose one of the following methods:
 
 - To provide custom certificates - For each service that requires updated TLS certificates, copy the new certificates and keys to a path relative to the Ansible Automation Platform installer. Then update the inventory file variables with the absolute paths to the new files.
 
@@ -47,17 +47,17 @@ receptor_tls_key=<path_to_tls_key>
 
 - To generate new certificates - If you want the installation program to generate a new certificate for a service, delete or move the existing certificates and keys. *Table 1. Certificate and key file paths per service*
 
-| Service                   | Certificate file path                 | Key file path                         |
-| ------------------------- | ------------------------------------- | ------------------------------------- |
-| <br>Automation controller | <br>`~/aap/controller/etc/tower.cert` | <br>`~/aap/controller/etc/tower.key`  |
-| <br>Event-Driven Ansible  | <br>`~/aap/eda/etc/eda.cert`          | <br>`~/aap/eda/etc/eda.key`           |
-| <br>Platform gateway      | <br>`~/aap/gateway/etc/gateway.cert`  | <br>`~/aap/gateway/etc/gateway.key`   |
-| <br>Automation hub        | <br>`~/aap/hub/etc/pulp.cert`         | <br>`~/aap/hub/etc/pulp.key`          |
-| <br>PostgreSQL            | <br>`~/aap/postgresql/server.crt`     | <br>`~/aap/postgresql/server.key`     |
-| <br>Receptor              | <br>`~/aap/receptor/etc/receptor.crt` | <br>`~/aap/receptor/etc/receptor.key` |
-| <br>Redis                 | <br>`~/aap/redis/server.crt`          | <br>`~/aap/redis/server.key`          |
+| Service               | Certificate file path             | Key file path                     |
+| --------------------- | --------------------------------- | --------------------------------- |
+| Automation controller | `~/aap/controller/etc/tower.cert` | `~/aap/controller/etc/tower.key`  |
+| Event-Driven Ansible  | `~/aap/eda/etc/eda.cert`          | `~/aap/eda/etc/eda.key`           |
+| Platform gateway      | `~/aap/gateway/etc/gateway.cert`  | `~/aap/gateway/etc/gateway.key`   |
+| Automation hub        | `~/aap/hub/etc/pulp.cert`         | `~/aap/hub/etc/pulp.key`          |
+| PostgreSQL            | `~/aap/postgresql/server.crt`     | `~/aap/postgresql/server.key`     |
+| Receptor              | `~/aap/receptor/etc/receptor.crt` | `~/aap/receptor/etc/receptor.key` |
+| Redis                 | `~/aap/redis/server.crt`          | `~/aap/redis/server.key`          |
 
-2.  After preparing your certificates, run the `install` playbook from your installation directory:
+2. After preparing your certificates, run the `install` playbook from your installation directory:
 `ansible-playbook -i <inventory_file_name>`
 
 `ansible.containerized_installer.install`

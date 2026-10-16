@@ -4,11 +4,11 @@
 
 Your system must meet the following minimum system requirements to install and run the Red Hat Ansible Lightspeed on-premise deployment.
 
-| Requirement    | Minimum requirement |
-| -------------- | ------------------- |
-| <br>RAM        | <br>5 GB            |
-| <br>CPU        | <br>1               |
-| <br>Local disk | <br>40 GB           |
+| Requirement | Minimum requirement |
+| ----------- | ------------------- |
+| RAM         | 5 GB                |
+| CPU         | 1                   |
+| Local disk  | 40 GB               |
 
 To see the rest of the Red Hat Ansible Automation Platform system requirements, see the System requirements section of *Planning your installation*.
 

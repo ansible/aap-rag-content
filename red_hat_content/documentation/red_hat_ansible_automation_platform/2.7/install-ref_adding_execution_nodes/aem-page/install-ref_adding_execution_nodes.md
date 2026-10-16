@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-ref_adding_execution_nodes/aem-page/install-ref_adding_execution_nodes.html"
 last_crumb = "Add execution nodes"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Add execution nodes"
 oversized = "false"
@@ -54,7 +55,7 @@ Note:
 
 The value of `receptor_peers` must be a comma-separated list of host names. Do not use inventory group names.
 
- **Example:**
+**Example:**
 
 ```
 [execution_nodes]

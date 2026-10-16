@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-ref_metrics_service_deployment_requirements/aem-page/install-ref_metrics_service_deployment_requirements.html"
 last_crumb = "Metrics service deployment requirements"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Metrics service deployment requirements"
 oversized = "false"
@@ -46,16 +47,48 @@ Metrics service does not support RHEL 8. All Ansible Automation Platform 2.7 dep
 
 **Data retention periods**
 
-| Data Category       | Description                                                                                   | Retention Period                                                               | Cleanup Schedule      |
-| ------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | --------------------- |
-| Hourly metrics      | Raw metrics collected hourly from controller                                                  | 7 days                                                                         | Daily at 4:00-5:30 AM |
-| Daily summaries     | Aggregated daily metrics                                                                      | 30 days                                                                        | Daily at 4:00-5:30 AM |
-| Anonymized payloads | Anonymized data sent to Red Hat Data Ingress                                                  | 7 days (after successful transmission) / 30 days (unsent/pending transmission) | Daily at 4:00-5:30 AM |
-| Dashboard data      | Job execution data for dashboard reporting (when`FEATURE_DASHBOARD_COLLECTION_ENABLED: true`) | 90 days                                                                        | Daily at 5:30 AM      |
+| Data Category            | Description                                                                                                                                              | Retention Period                                                               | Cleanup Schedule      |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | --------------------- |
+| Hourly metrics           | Raw metrics collected hourly from controller                                                                                                             | 7 days                                                                         | Daily at 4:00-5:30 AM |
+| Daily summaries          | Aggregated daily metrics                                                                                                                                 | 30 days                                                                        | Daily at 4:00-5:30 AM |
+| Anonymized payloads      | Anonymized data sent to Red Hat Data Ingress                                                                                                             | 7 days (after successful transmission) / 30 days (unsent/pending transmission) | Daily at 4:00-5:30 AM |
+| Indirect node audit data | Daily collection of indirect node audit records linked to jobs that finished in the previous day (when `FEATURE_INDIRECT_NODE_COLLECTION_ENABLED: true`) | 7 days                                                                         | Daily at 4:00-5:30 AM |
+| Dashboard data           | Job execution data for dashboard reporting                                                                                                               | 90 days                                                                        | Daily at 5:30 AM      |
 
 Note:
 
 Cleanup tasks run automatically daily at 4:00 AM to enforce retention policies.
+
+Note:
+
+Dashboard data retention follows the automation controller retention period by default. To use an independent retention period for dashboard data, add the following to your inventory file:
+
+```
+automationmetrics_extra_settings:
+  - setting: DASHBOARD_COLLECTION__USE_CONTROLLER_RETENTION
+    value: false
+  
+```
+
+When `DASHBOARD_COLLECTION__USE_CONTROLLER_RETENTION` is set to false, the dashboard uses its own `retention_period_days` value (default: 90 days) instead of the controller retention period.
+
+Warning:
+
+When dashboard retention syncs with the controller setting (`DASHBOARD_COLLECTION__USE_CONTROLLER_RETENTION: True`, the default), any data in the metrics service database older than the controller retention period will be deleted. Verify your controller retention period before enabling dashboard collection. If the controller retention period is shorter than the dashboard's previous retention period (default: 90 days), enabling this sync will permanently delete dashboard data older than the controller retention period.
+
+## Collection task schedule
+
+Metrics service runs automated collection tasks on the following schedule. All times are UTC:
+
+| Task Group                        | Task                                               | Schedule                            | Feature Flag                               | Description                                                |
+| --------------------------------- | -------------------------------------------------- | ----------------------------------- | ------------------------------------------ | ---------------------------------------------------------- |
+| METRICS\_COLLECTION\_GROUP        | `collect_metrics`                                  | Hourly (`5 * * * *`)                | `METRICS_COLLECTION`                       | Collects automation activity data from controller          |
+| METRICS\_COLLECTION\_GROUP        | `collect_hourly_metrics` (`main_jobevent_service`) | Hourly (`20 * * * *`)               | `METRICS_COLLECTION`                       | Collects collection/module usage from job events           |
+| METRICS\_COLLECTION\_GROUP        | `daily_anonymize_and_prepare`                      | Daily at 1:00 AM (`0 1 * * *`)      | `ANONYMIZED_DATA_COLLECTION`               | Anonymizes collected data and prepares payload for Red Hat |
+| METRICS\_COLLECTION\_GROUP        | `cleanup_metrics_data`                             | Daily at 4:00 AM (`0 4 * * *`)      | Always on                                  | Purges expired data per retention policies                 |
+| INDIRECT\_NODE\_COLLECTION\_GROUP | `daily_collect_indirect_nodes`                     | Daily at 1:55 AM UTC (`55 1 * * *`) | `FEATURE_INDIRECT_NODE_COLLECTION_ENABLED` | Collects indirect node audit data from controller          |
+
+All tasks run in the `automation-metrics-tasks` container (containerized) or `metrics-tasks` pod (operator).
 
 ## Hardware requirements
 
@@ -104,6 +137,49 @@ Metrics service can run on any node defined in the `[automationmetrics]` invento
 Note:
 
 The `ms_awx_readonly` user requires SELECT privileges on all tables in the public schema of the **awx/automation controller** database. This is configured automatically by the installer.
+
+## Feature flags
+
+Metrics service behavior is controlled by the following feature flags:
+
+| Flag                                       | Default            | Level                            | Restart Required | Purpose                                                              |
+| ------------------------------------------ | ------------------ | -------------------------------- | ---------------- | -------------------------------------------------------------------- |
+| `METRICS_COLLECTION`                       | `true` (enabled)   | Metrics service env var          | Yes              | Enables all metrics data collection from controller                  |
+| `ANONYMIZED_DATA_COLLECTION`               | `true` (enabled)   | Database dynamic setting         | No               | Enables anonymization and transmission of data to Red Hat            |
+| `FEATURE_INDIRECT_NODE_COLLECTION_ENABLED` | `false` (disabled) | Gateway AAPFlag (platform-level) | No               | Enables daily collection of indirect node audit data from controller |
+
+Feature flags resolve through the following priority chain (highest to lowest):
+
+1. DB Setting (`dynamic_settings` table)
+2. Dynaconf / environment variable
+3. Direct settings attribute
+4. DAB AAPFlag (Gateway-level flags, including `FEATURE_INDIRECT_NODE_COLLECTION_ENABLED`)
+5. Default value
+
+## Data sources
+
+Metrics service reads data from the following controller database tables using the `ms_awx_readonly` user:
+
+| Data Type           | Controller Table                             | What Is Collected                                             | Feature Flag                               |
+| ------------------- | -------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------ |
+| Automation activity | `main_unifiedjob`,`main_job`, related tables | Job execution data, host counts, template metadata            | `METRICS_COLLECTION`                       |
+| Indirect node audit | `main_indirectmanagednodeaudit`              | Indirect node counts grouped by Ansible collection and module | `FEATURE_INDIRECT_NODE_COLLECTION_ENABLED` |
+| Job event data      | `main_jobevent`                              | Collection, module, and role usage from job events            | `METRICS_COLLECTION`                       |
+
+**Supporting and related tables**
+
+| Collector                       | Primary table                   | Supporting tables                                                                           | Time filter                |
+| ------------------------------- | ------------------------------- | ------------------------------------------------------------------------------------------- | -------------------------- |
+| `main_jobevent_service`         | `main_jobevent`                 | `main_unifiedjob`                                                                           | `main_unifiedjob.finished` |
+| `main_indirectmanagednodeaudit` | `main_indirectmanagednodeaudit` | `main_job`,`main_unifiedjob`,`main_inventory`,`main_organization`,`main_unifiedjobtemplate` | `main_unifiedjob.finished` |
+
+The `main_indirectmanagednodeaudit` table is a controller table, not created by metrics service. The `ms_awx_readonly` user's existing SELECT privileges cover this table. No additional database permissions are required.
+
+**Indirect node data handling:**
+
+- Host names and organization names are stripped entirely from the payload before sending to Red Hat. Only the aggregate indirect node total and the `host_count` values grouped by Ansible collection and module are included.
+- Indirect node counts are tagged as `managed_node_type = INDIRECT` in the anonymized payload.
+- Metrics service does not collect full host inventory data. Full host inventory collection is handled separately by the metrics-utility CLI for CCSP reports.
 
 ## Performance impact and capacity planning
 

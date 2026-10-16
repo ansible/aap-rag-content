@@ -8,7 +8,7 @@ Automation dashboard displays a summary of the top and overview usage for your s
 - **Hosts automated**: Number of hosts that executed at least one automation job in the selected period. Indicates how much of your inventory is actively automated and can help with license or capacity planning.
 - **Hours of automation**: Sum of all job runtimes in the selected period. Reflects total automation workload and can inform capacity planning and resource allocation.
 - **Number of times jobs were run**: Total number of job executions in the selected period, regardless of success or failure. Use this to understand automation volume, trends, and adoption over time.
-- **Number of hosts jobs are running on**: Number of hosts that ran at least one job in the selected period. Complements run count by showing how broadly automation is applied across your inventory.
+- **Number of hosts jobs are running on**: Sum of all hosts that ran at least one job in the selected period. Complements run count by showing how broadly automation is applied across your inventory. For example, if you have 100 hosts and run 2 daily jobs against all of them for 30 days, that is 100 hosts × 2 jobs × 30 days = 6,000 host runs.
 - **Top 5 projects**: Projects ranked by total job count in the selected period. Helps identify which projects are driving the most automation activity.
 - **Top 5 users**: Users ranked by automation runs they triggered or that ran in their context in the selected period. Shows individual adoption and activity. Note:
 Scheduled jobs can affect these results, because they do not represent a real, logged-in user.

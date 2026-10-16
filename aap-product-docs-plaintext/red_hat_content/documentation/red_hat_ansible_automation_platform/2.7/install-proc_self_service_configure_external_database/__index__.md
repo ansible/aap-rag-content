@@ -16,7 +16,7 @@ Ansible automation portal creates multiple databases automatically at runtime. Y
 
 ## Procedure
 
-1.  Create a secret in OpenShift Container Platform with your database credentials.
+1. Create a secret in OpenShift Container Platform with your database credentials.
 
 
 ```terminal
@@ -45,7 +45,7 @@ Replace *database-user* with your PostgreSQL user name, *database-host* with you
 
 5. Click **Create**.
 
-2.  Update your Ansible automation portal Helm chart values to use the external database.
+2. Update your Ansible automation portal Helm chart values to use the external database.
 Add or modify the following configuration in your values.yaml file:
 
 ```yaml
@@ -151,7 +151,7 @@ $file: /opt/app-root/src/postgres-crt.pem
 
 Add the corresponding volumes and mounts for the client key and certificate alongside the `postgres-ca` entries.
 
-4.  Apply the configuration by upgrading your Ansible automation portal Helm release.
+4. Apply the configuration by upgrading your Ansible automation portal Helm release.
 
 
 ```terminal
@@ -170,7 +170,7 @@ Replace *release-name* with your Helm release name and *chart-name* with the Ans
 4. Switch to the **YAML view** and merge the external database configuration into the existing values.
 5. Click **Upgrade** to apply the changes.
 
-5.  Wait for Ansible automation portal pods to restart and initialize the database schema.
+5. Wait for Ansible automation portal pods to restart and initialize the database schema.
 
 
 ```terminal

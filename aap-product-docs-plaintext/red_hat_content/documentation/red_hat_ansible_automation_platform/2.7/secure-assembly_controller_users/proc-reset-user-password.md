@@ -9,11 +9,11 @@ As a platform administrator, you can reset local user passwords in platform gate
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Users.
-2.  Click the Edit icon next to the user you want to edit and select Edit user.
-3.  In the **Password** field, enter a new password.
-4.  Click Save user.
-5.  Securely notify the user of the new password.
+1. From the navigation panel, select Access Management> (and then)Users.
+2. Click the Edit icon next to the user you want to edit and select Edit user.
+3. In the **Password** field, enter a new password.
+4. Click Save user.
+5. Securely notify the user of the new password.
 
 ### Results
 

@@ -5,9 +5,9 @@ Automation controller integrates with VMware vSphere to manage virtual machines 
 
 VMware cloud credentials are exposed as the following environment variables during playbook execution (in the job template, choose the cloud credential needed for your setup):
 
--  `VMWARE_USER`
--  `VMWARE_PASSWORD`
--  `VMWARE_HOST`
+- `VMWARE_USER`
+- `VMWARE_PASSWORD`
+- `VMWARE_HOST`
 
 The following sample playbook demonstrates the usage of these credentials:
 

@@ -12,23 +12,23 @@ Each key and secret must belong to a unique application and cannot be shared or 
 
 ## Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Authentication Methods.
-2.  Click Create authentication.
-3.  Enter a **Name** for this authentication configuration.
-4.  Select **GitHub enterprise organization** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
-5.  When you register the application, GitHub displays the **Client ID** and **Client Secret**:
-1.  Copy and paste the GitHub Client ID into the GitHub OAuth2 Key field.
-2.  Copy and paste the GitHub Client Secret into the GitHub OAuth2 Secret field.
-6.  In the **Base URL** field, enter the hostname of the GitHub Enterprise instance, for example, `<https://github.example.com>`.
-7.  In the **Github OAuth2 Enterprise API URL** field, enter the API URL of the GitHub Enterprise instance, for example, `<https://github.example.com/api/v3>`.
-8.  Enter the name of your GitHub enterprise organization, as used in your organization’s URL, for example, `https://github.com/<yourorg>/` in the **GitHub OAuth2 Enterprise Org Name** field.
-9.  Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. Note:
+1. From the navigation panel, select Access Management> (and then)Authentication Methods.
+2. Click Create authentication.
+3. Enter a **Name** for this authentication configuration.
+4. Select **GitHub enterprise organization** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
+5. When you register the application, GitHub displays the **Client ID** and **Client Secret**:
+1. Copy and paste the GitHub Client ID into the GitHub OAuth2 Key field.
+2. Copy and paste the GitHub Client Secret into the GitHub OAuth2 Secret field.
+6. In the **Base URL** field, enter the hostname of the GitHub Enterprise instance, for example, `<https://github.example.com>`.
+7. In the **Github OAuth2 Enterprise API URL** field, enter the API URL of the GitHub Enterprise instance, for example, `<https://github.example.com/api/v3>`.
+8. Enter the name of your GitHub enterprise organization, as used in your organization’s URL, for example, `https://github.com/<yourorg>/` in the **GitHub OAuth2 Enterprise Org Name** field.
+9. Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. Note:
 Values defined in this field override the dedicated fields provided in the UI. Any values not defined here are not provided to the authenticator.
 
-10.  To automatically create organizations, users, and teams upon successful login, select **Create objects**.
-11.  To enable this authentication method upon creation, select **Enabled**.
-12.  To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users**.
-13.  Click Create Authentication Method. To verify that the authentication is configured correctly, log out of Ansible Automation Platform and check that the login screen displays the logo of your authentication chosen method to enable logging in with those credentials.
+10. To automatically create organizations, users, and teams upon successful login, select **Create objects**.
+11. To enable this authentication method upon creation, select **Enabled**.
+12. To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users**.
+13. Click Create Authentication Method. To verify that the authentication is configured correctly, log out of Ansible Automation Platform and check that the login screen displays the logo of your authentication chosen method to enable logging in with those credentials.
 
 ## What to do next
 

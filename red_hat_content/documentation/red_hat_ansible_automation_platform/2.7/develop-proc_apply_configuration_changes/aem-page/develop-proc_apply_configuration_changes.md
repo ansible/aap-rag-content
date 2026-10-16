@@ -1,6 +1,6 @@
 +++
-title = "Apply configuration changes - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Apply configuration changes - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_apply_configuration_changes"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_apply_configuration_changes/aem-page/develop-proc_apply_configuration_changes.html"
 last_crumb = "Apply configuration changes"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Apply configuration changes"
 oversized = "false"
@@ -35,7 +36,7 @@ You can apply changes at any point — you do not need to complete all configura
 
 ## Procedure
 
-1.  Apply the updated configuration.
+1. Apply the updated configuration.
       **OpenShift — CLI:**
 
 ```
@@ -59,7 +60,7 @@ $ sudo systemctl start portal.service
   Note:
       The `daemon-reload` and `stop/rm/start` sequence is required when Podman secrets have been added or changed. If you only changed `app-config.production.yaml` without modifying secrets, `sudo systemctl restart portal` is sufficient.
 
-2.  Verify that the service is running.
+2. Verify that the service is running.
       **OpenShift — CLI:**
 
 ```

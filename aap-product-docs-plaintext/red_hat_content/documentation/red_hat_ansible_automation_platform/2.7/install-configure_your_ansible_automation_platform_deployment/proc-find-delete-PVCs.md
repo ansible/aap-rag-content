@@ -9,15 +9,15 @@ This persistence is a key feature of static provisioning. If you redeploy an ins
 
 ### Procedure
 
-1.  List the existing PVCs in your deployment namespace:
+1. List the existing PVCs in your deployment namespace:
 
 
 ```
 oc get pvc -n <namespace>
 ```
 
-2.  Identify the PVC associated with your previous deployment by comparing the old deployment name and the PVC name.
-3.  Delete the old PVC:
+2. Identify the PVC associated with your previous deployment by comparing the old deployment name and the PVC name.
+3. Delete the old PVC:
 
 
 ```

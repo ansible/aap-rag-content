@@ -18,21 +18,21 @@ If you assign permissions to a particular team to launch a custom self-service t
 
 ### Procedure
 
-1.  In a browser, log in to your Ansible automation portal instance as an Ansible Automation Platform user with Ansible Automation Platform administrator privileges.
-2.  In the navigation panel, select Administration> (and then)RBAC.
-3.  In the **RBAC** view, click **Create**. The **Create Role** view appears.
+1. In a browser, log in to your Ansible automation portal instance as an Ansible Automation Platform user with Ansible Automation Platform administrator privileges.
+2. In the navigation panel, select Administration> (and then)RBAC.
+3. In the **RBAC** view, click **Create**. The **Create Role** view appears.
 
-1.  Enter a name for the role.
-2.  In the **Users and Groups** section, select the Ansible Automation Platform teams and users to assign to this role.
+1. Enter a name for the role.
+2. In the **Users and Groups** section, select the Ansible Automation Platform teams and users to assign to this role.
 
 ![Select users and groups table showing Members column](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/self-service-rbac-select-users-groups.png)
 Note:
 The **Members** column displays the total count of users in each team, including both regular team members and administrators.
 
-3.  In the **Add Permission policies** section, select the plug-ins that you want to enable for the role.
-4.  Select **Permission** in the list of plug-ins to configure the fine-grained permission policies for the role.
+3. In the **Add Permission policies** section, select the plug-ins that you want to enable for the role.
+4. Select **Permission** in the list of plug-ins to configure the fine-grained permission policies for the role.
 
-4.  Click **Next**.
-5.  Review the settings that you have selected for the role.
-6.  Click **Create** to create the role.
+4. Click **Next**.
+5. Review the settings that you have selected for the role.
+6. Click **Create** to create the role.
 

@@ -1,0 +1,39 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Get started with OAuth Applications",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Application functions",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "ref-gw-application-functions",
+          "anchor": null,
+          "singlePageAnchor": "ref-gw-application-functions"
+        },
+        {
+          "title": "Refresh an access token after expiration",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "gw-request-token-after-expiration",
+          "anchor": null,
+          "singlePageAnchor": "gw-request-token-after-expiration"
+        },
+        {
+          "title": "Configure the OAuth access token lifetime on OpenShift Container Platform",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "proc-gw-configure-oauth-token-lifetime-operator",
+          "anchor": null,
+          "singlePageAnchor": "proc-gw-configure-oauth-token-lifetime-operator"
+        }
+      ]
+    }
+  ]
+}

@@ -5,9 +5,9 @@ Enable debug logging for LDAP in the platform gateway settings to capture detail
 
 ### Procedure
 
-1.  Edit the gateway settings file:
-1.  On Ansible Automation Platform 2.6 Containerized, the file is `~/aap/gateway/etc/settings.py` (as the user running the platform gateway container).
-2.  On Ansible Automation Platform 2.6 RPM-based, the file is `/etc/ansible-automation-platform/gateway/settings.py`.
+1. Edit the gateway settings file:
+1. On Ansible Automation Platform 2.6 Containerized, the file is `~/aap/gateway/etc/settings.py` (as the user running the platform gateway container).
+2. On Ansible Automation Platform 2.6 RPM-based, the file is `/etc/ansible-automation-platform/gateway/settings.py`.
 
 ```
 (...)
@@ -20,14 +20,14 @@ LOGGING['loggers']['django_auth_ldap']['level'] = 'DEBUG'      ######      add t
 (...)
 ```
 
-2.  Restart the platform gateway service or container:
-1.  On Ansible Automation Platform 2.6 Containerized, restart the platform gateway service so that it restarts the platform gateway container:
+2. Restart the platform gateway service or container:
+1. On Ansible Automation Platform 2.6 Containerized, restart the platform gateway service so that it restarts the platform gateway container:
 
 Note:
 Ensure that you run `` systemctl with the `--user` `` flag as follows:
 
 + `$ systemctl --user restart automation-gateway`
 
-2.  On Ansible Automation Platform 2.6 RPM-based, use the `automation-gateway-service` command:
+2. On Ansible Automation Platform 2.6 RPM-based, use the `automation-gateway-service` command:
 `# automation-gateway-service restart`
 

@@ -2,7 +2,7 @@
   "version": "1.1",
   "sections": [
     {
-      "title": "Pre-upgrade migration checklist",
+      "title": "Pre-upgrade checklist",
       "visible": true,
       "weight": 1,
       "urlFragment": "index",
@@ -10,9 +10,57 @@
       "singlePageAnchor": null,
       "sections": [
         {
-          "title": "Pre-upgrade detection tooling",
+          "title": "Platform and version requirements",
           "visible": true,
           "weight": 1,
+          "urlFragment": "ref-pre-upgrade-assessment-checklist__platform-requirements",
+          "anchor": null,
+          "singlePageAnchor": "ref-pre-upgrade-assessment-checklist__platform-requirements"
+        },
+        {
+          "title": "Backup and data protection",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "ref-pre-upgrade-assessment-checklist__backup-data",
+          "anchor": null,
+          "singlePageAnchor": "ref-pre-upgrade-assessment-checklist__backup-data"
+        },
+        {
+          "title": "Gateway authentication assessment",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "ref-pre-upgrade-assessment-checklist__gateway-auth",
+          "anchor": null,
+          "singlePageAnchor": "ref-pre-upgrade-assessment-checklist__gateway-auth"
+        },
+        {
+          "title": "Run the pre-upgrade detection tool",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "ref-pre-upgrade-assessment-checklist__detection-tool",
+          "anchor": null,
+          "singlePageAnchor": "ref-pre-upgrade-assessment-checklist__detection-tool"
+        },
+        {
+          "title": "Infrastructure and environment checks",
+          "visible": true,
+          "weight": 5,
+          "urlFragment": "ref-pre-upgrade-assessment-checklist__infrastructure-env",
+          "anchor": null,
+          "singlePageAnchor": "ref-pre-upgrade-assessment-checklist__infrastructure-env"
+        },
+        {
+          "title": "Integration and automation readiness",
+          "visible": true,
+          "weight": 6,
+          "urlFragment": "ref-pre-upgrade-assessment-checklist__integrations-automation",
+          "anchor": null,
+          "singlePageAnchor": "ref-pre-upgrade-assessment-checklist__integrations-automation"
+        },
+        {
+          "title": "Pre-upgrade detection tooling",
+          "visible": true,
+          "weight": 7,
           "urlFragment": "ref-pre-upgrade-detection-tooling",
           "anchor": null,
           "singlePageAnchor": "ref-pre-upgrade-detection-tooling"

@@ -10,10 +10,10 @@ Set up a new decision environment to define the dedicated, containerized runtime
 
 ### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  Navigate to Automation Decisions> (and then)Decision Environments.
-3.  Click Create decision environment.
-4.  Insert the following:
+1. Log in to Ansible Automation Platform.
+2. Navigate to Automation Decisions> (and then)Decision Environments.
+3. Click Create decision environment.
+4. Insert the following:
 
 
 Name
@@ -38,7 +38,7 @@ This optional field defines when the Event-Driven Ansible controller attempts to
 Credential
 This field is optional. This is the credential needed to use the decision environment image.
 
-5.  Select Create decision environment.
+5. Select Create decision environment.
 
 ### Results
 

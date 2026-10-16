@@ -1,7 +1,7 @@
 +++
 title = "Customize your Red Hat Ansible Automation Platform Operator - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_customize_aap"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator/", "Install on OpenShift Container Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_operator_customize_aap/aem-page/install-assembly_operator_customize_aap.html"
 last_crumb = "Customize your Red Hat Ansible Automation Platform Operator"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Customize your Red Hat Ansible Automation Platform Operator"
 oversized = "false"
@@ -37,11 +38,13 @@ You can discover the configuration parameters for your Ansible Automation Platfo
 
 ### Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  Navigate to Operators> (and then)Installed Operators.
-3.  Select your Ansible Automation Platform Operator deployment.
-4.  Go to the Ansible Automation Platform tab and click the name of your CR.
-5.  Switch to the **YAML view** tab to view and edit the configuration. The available parameters are listed in the YAML schema. Note:
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to Operators> (and then)Installed Operators.
+3. Select your Ansible Automation Platform Operator deployment.
+4. Go to the Ansible Automation Platform tab and click the name of your CR.
+5. Switch to the **YAML view** tab to view and edit the configuration. The available parameters are listed in the YAML schema.
+  
+  Note:
       If you cannot see the **Schema** panel, you might have closed or minimized the side bar. Click view sidebar to reopen it.
 
 ## View configuration parameters by using the CLI
@@ -52,14 +55,14 @@ The Ansible Automation Platform Operator manages multiple custom resources (CRs)
 
 ### Procedure
 
-1.  To see all available configuration parameters for a top-level CR, run:
+1. To see all available configuration parameters for a top-level CR, run:
   
 
 ```
 oc explain ansibleautomationplatform.spec
 ```
 
-2.  To view component-specific configuration options nested under the Ansible Automation Platform CR, query them through the component section:
+2. To view component-specific configuration options nested under the Ansible Automation Platform CR, query them through the component section:
   
 
 ```
@@ -69,7 +72,7 @@ oc explain ansibleautomationplatform.spec.hub.storage_type
 oc explain ansibleautomationplatform.spec.eda.automation_server_url
 ```
 
-3.  To explore all nested fields for a specific component, use the `--recursive` flag:
+3. To explore all nested fields for a specific component, use the `--recursive` flag:
   
 
 ```
@@ -98,18 +101,18 @@ To define a parameter, such as the `resource_requirements` for automation contro
 
 Note:
 
-The `image` and `image_version`, as well as the `{component}_image` and `{component}_image_version` parameters are intended for development or hotfix purposes only.
+The `image` and `image_version`, as well as the `{component}_image` and `{component}_image_version` parameters are intended for development, hotfix, or internal registry deployments.
 
-**Do not use these in production environments.** These settings bypass standard version management and can lead to configuration drift, inconsistent deployments, and difficulty troubleshooting issues.
+**Do not use these in production environments** unless you are pointing components to a manually mirrored internal registry. If your team does not have cluster-admin permissions to configure a cluster-level `ImageDigestMirrorSet`, these parameters provide an alternative for specifying images from an internal registry. For an example, see [aap-custom-registry-image-overrides.yml](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_operator_crs#operator-crs___aap_custom_registry_image_overrides_yml).
 
 ### Procedure
 
-1.  Log in to OpenShift Container Platform.
-2.  Navigate to Operators> (and then)Installed Operators.
-3.  Select your Ansible Automation Platform Operator deployment.
-4.  Go to the Ansible Automation Platform tab and click the name of your CR.
-5.  In the **YAML view** tab, locate the **spec** section.
-6.  Add the `automationcontroller` parameter with the nested `resource_requirements` parameter and its value:
+1. Log in to OpenShift Container Platform.
+2. Navigate to Operators> (and then)Installed Operators.
+3. Select your Ansible Automation Platform Operator deployment.
+4. Go to the Ansible Automation Platform tab and click the name of your CR.
+5. In the **YAML view** tab, locate the **spec** section.
+6. Add the `automationcontroller` parameter with the nested `resource_requirements` parameter and its value:
   
 
 ```
@@ -124,7 +127,7 @@ spec:
         storage: 100Gi
 ```
 
-7.  Click Save to apply the changes. The operator automatically applies this configuration to the automation controller component.
+7. Click Save to apply the changes. The operator automatically applies this configuration to the automation controller component.
 
 ## Customize your resource requirements
 
@@ -137,7 +140,8 @@ The following section provides a complete code block with the default resource r
 - Resource Constrained Environments: Decrease resource requests to conserve cluster resources in development or test environments.
 - Environment Specifics: Align the resource allocation with the capacity of your OpenShift or Kubernetes cluster nodes.
 
-You can use this reference as a starting point. Copy the full code block for your Ansible Automation Platform instance and modify the values for the components you want to change. This method helps ensure all default settings are applied correctly, reducing the risk of deployment errors.
+You can use this reference as a starting point. Copy the full code block for your Ansible Automation Platform instance and modify the values for the components you want to change.
+This method helps ensure all default settings are applied correctly, reducing the risk of deployment errors.
 
 Note:
 

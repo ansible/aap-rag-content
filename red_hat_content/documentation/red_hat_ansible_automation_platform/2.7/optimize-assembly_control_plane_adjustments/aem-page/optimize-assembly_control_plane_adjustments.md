@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-assembly_control_plane_adjustments/aem-page/optimize-assembly_control_plane_adjustments.html"
 last_crumb = "Adjust the control plane to tune performance"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Adjust the control plane to tune performance"
 oversized = "false"
@@ -33,9 +34,11 @@ On the automation controller custom resource, the number of *replicas* determine
 
 ## Requests and limits for task containers
 
-You must set a value for the task container’s CPU and memory resource limits. For each job that is run in an execution node, processing must occur on the control plane to schedule, open, and receive callback events for that job.
+You must set a value for the task container’s CPU and memory resource limits.
+For each job that is run in an execution node, processing must occur on the control plane to schedule, open, and receive callback events for that job.
 
-For Operator deployments of automation controller, this control plane capacity usage is tracked on the **controlplane** instance group. The available capacity is determined based on the limits the user sets on the task container, using the **task_resource_requirements** field in the automation controller specification, or in the OpenShift UI, when creating automation controller.
+For Operator deployments of automation controller, this control plane capacity usage is tracked on the **controlplane** instance group.
+The available capacity is determined based on the limits the user sets on the task container, using the **task_resource_requirements** field in the automation controller specification, or in the OpenShift UI, when creating automation controller.
 
 You can also set memory and CPU resource limits that make sense for your cluster.
 
@@ -49,12 +52,12 @@ These requests and limits apply to the control pods for automation controller an
 
 See also [Jobs scheduled on the worker nodes](/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_specify_dedicated_nodes#ref-schedule-jobs-worker-nodes "Both automation controller and Kubernetes play a role in scheduling a job.").
 
-| Name                               | Description                                             | Default                                  |
-| ---------------------------------- | ------------------------------------------------------- | ---------------------------------------- |
-| <br> `web_resource_requirements`   | <br>Web container resource requirements                 | <br>requests: {CPU: 100m, memory: 128Mi} |
-| <br> `task_resource_requirements`  | <br>Task container resource requirements                | <br>requests: {CPU: 100m, memory: 128Mi} |
-| <br> `ee_resource_requirements`    | <br>EE control plane container resource requirements    | <br>requests: {CPU: 100m, memory: 128Mi} |
-| <br> `redis_resource_requirements` | <br>Redis control plane container resource requirements | <br>requests: {CPU:100m, memory: 128Mi}  |
+| Name                          | Description                                         | Default                              |
+| ----------------------------- | --------------------------------------------------- | ------------------------------------ |
+| `web_resource_requirements`   | Web container resource requirements                 | requests: {CPU: 100m, memory: 128Mi} |
+| `task_resource_requirements`  | Task container resource requirements                | requests: {CPU: 100m, memory: 128Mi} |
+| `ee_resource_requirements`    | EE control plane container resource requirements    | requests: {CPU: 100m, memory: 128Mi} |
+| `redis_resource_requirements` | Redis control plane container resource requirements | requests: {CPU:100m, memory: 128Mi}  |
 
 The use of `topology_spread_constraints` to maximally spread control nodes onto separate underlying Kubernetes worker nodes is recommended. A reasonable set of requests and limits would be limits whose sum is equal to the actual resources on the node. If only `limits` are set, then the request is automatically set to be equal to the limit. But because some variability of resource usage between the containers in the control pod is permitted, you can set `requests` to a lower amount, for example to 25% of the resources available on the node. An example of container customization for a cluster where the worker nodes have 4 CPUs and 16 GB of RAM could be:
 

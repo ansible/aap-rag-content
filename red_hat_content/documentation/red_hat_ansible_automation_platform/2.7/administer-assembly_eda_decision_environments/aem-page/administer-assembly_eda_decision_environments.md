@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_decision_environments/aem-page/administer-assembly_eda_decision_environments.html"
 last_crumb = "Create runtime environments for event-driven automation"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Create runtime environments for event-driven automation"
 oversized = "false"
@@ -45,28 +46,28 @@ The following table lists the supported plugins in the `de-minimal` image, inclu
 
 *Table 1. Supported event sources and filters*
 
-| <br>Plugin name                     | <br>Event filter | <br>Deprecated name                 |
-| ----------------------------------- | ---------------- | ----------------------------------- |
-| `eda.builtin.dashes_to_underscores` | <br>Event filter | `ansible.eda.dashes_to_underscores` |
-| `eda.builtin.event_splitter`        | <br>Event filter |                                     |
-| `eda.builtin.generic`               | <br>Event source | `ansible.eda.generic`               |
-| `eda.builtin.insert_hosts_to_meta`  | <br>Event filter | `ansible.eda.insert_hosts_to_meta`  |
-| `eda.builtin.insert_meta_info`      | <br>Event filter |                                     |
-| `eda.builtin.json_filter`           | <br>Event filter | `ansible.eda.json_filter`           |
-| `eda.builtin.normalize_keys`        | <br>Event filter | `ansible.eda.normalize_keys`        |
-| `eda.builtin.pg_listener`           | <br>Event source | `ansible.eda.pg_listener`           |
-| `eda.builtin.range`                 | <br>Event source | `ansible.eda.range`                 |
-| `eda.builtin.webhook`               | <br>Event source | `ansible.eda.webhook`               |
+| Plugin name                         | Event filter | Deprecated name                     |
+| ----------------------------------- | ------------ | ----------------------------------- |
+| `eda.builtin.dashes_to_underscores` | Event filter | `ansible.eda.dashes_to_underscores` |
+| `eda.builtin.event_splitter`        | Event filter |                                     |
+| `eda.builtin.generic`               | Event source | `ansible.eda.generic`               |
+| `eda.builtin.insert_hosts_to_meta`  | Event filter | `ansible.eda.insert_hosts_to_meta`  |
+| `eda.builtin.insert_meta_info`      | Event filter |                                     |
+| `eda.builtin.json_filter`           | Event filter | `ansible.eda.json_filter`           |
+| `eda.builtin.normalize_keys`        | Event filter | `ansible.eda.normalize_keys`        |
+| `eda.builtin.pg_listener`           | Event source | `ansible.eda.pg_listener`           |
+| `eda.builtin.range`                 | Event source | `ansible.eda.range`                 |
+| `eda.builtin.webhook`               | Event source | `ansible.eda.webhook`               |
 
 The following event sources have been made available in dedicated collections. The original `ansible.eda` names are currently supported as deprecated plugins in `de-minimal`, but you must transition to the new `de-supported` versions to ensure long-term compatibility and overall improvements:
 
 *Table 2. `de\-supported` event sources*
 
-| <br>Event source (in `de-supported`)   | <br>Deprecated name (in `de-minimal`) |
-| -------------------------------------- | ------------------------------------- |
-| `amazon.aws.aws_cloudtrail`            | `ansible.eda.aws_cloudtrail`          |
-| `amazon.aws.aws_sqs_queue`             | `ansible.eda.aws_sqs_queue`           |
-| `azure.azcollection.azure_service_bus` | `ansible.eda.azure_service_bus`       |
+| Event source (in `de-supported`)       | Deprecated name (in `de-minimal`) |
+| -------------------------------------- | --------------------------------- |
+| `amazon.aws.aws_cloudtrail`            | `ansible.eda.aws_cloudtrail`      |
+| `amazon.aws.aws_sqs_queue`             | `ansible.eda.aws_sqs_queue`       |
+| `azure.azcollection.azure_service_bus` | `ansible.eda.azure_service_bus`   |
 
 In addition, the `de-minimal` image currently provides event sources that are not supported, and will be removed in a future release:
 
@@ -92,7 +93,7 @@ Use the `de-minimal` decision environment image that matches your version of Ans
 
 ### Procedure
 
-1.  Use `de-minimal` as the base image with Ansible Builder to build your custom decision environments. This image is built from a base image provided by Red Hat at [Ansible Automation Platform minimal decision environment](https://catalog.redhat.com/en/search?q=de-minimal&searchType=Containers). Important:
+1. Use `de-minimal` as the base image with Ansible Builder to build your custom decision environments. This image is built from a base image provided by Red Hat at [Ansible Automation Platform minimal decision environment](https://catalog.redhat.com/en/search?q=de-minimal&searchType=Containers). Important:
   The `ansible.eda` collection is already installed in the `de-minimal `base image. To prevent Ansible Builder from attempting to reinstall it, add `ansible.eda` to the `exclude.all_from_collections` list as shown in the following examples.
 
 The following is an example of the Ansible Builder definition file that uses `de-minimal` as a base image to build a custom decision environment with the ansible.eda collection:
@@ -122,7 +123,7 @@ version: 3
   package_manager_path: /usr/bin/microdnf
 ```
 
-2.  Optional: If you need other Python packages or RPMs, add the following to a single definition file:
+2. Optional: If you need other Python packages or RPMs, add the following to a single definition file:
   
   Note:
       Replace `<platform-version>` with the namespace for your version of Ansible Automation Platform. Replace `<rhel-version>` with your Red Hat Enterprise Linux version
@@ -163,10 +164,10 @@ Set up a new decision environment to define the dedicated, containerized runtime
 
 ### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  Navigate to Automation Decisions> (and then)Decision Environments.
-3.  Click Create decision environment.
-4.  Insert the following:
+1. Log in to Ansible Automation Platform.
+2. Navigate to Automation Decisions> (and then)Decision Environments.
+3. Click Create decision environment.
+4. Insert the following:
   
 
 Name
@@ -191,7 +192,7 @@ This optional field defines when the Event-Driven Ansible controller attempts to
 Credential
 This field is optional. This is the credential needed to use the decision environment image.
 
-5.  Select Create decision environment.
+5. Select Create decision environment.
 
 ### Results
 

@@ -1,7 +1,7 @@
 +++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_get_started_credential_types"
 title = "Getting started with credential types - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_get_started_credential_types"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_credentials/", "Configure credentials to authenticate remote systems and services"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-proc_get_started_credential_types/aem-page/secure-proc_get_started_credential_types.html"
 last_crumb = "Getting started with credential types"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Getting started with credential types"
 oversized = "false"
@@ -31,7 +32,7 @@ Explore how automation controller organizes authentication details by using cust
 
 ## Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Credentials. If no custom credential types have been created, the **Credential Types** page prompts you to add one. If credential types have been created, this page displays a list of existing and available Credential Types.
+1. From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Credentials. If no custom credential types have been created, the **Credential Types** page prompts you to add one. If credential types have been created, this page displays a list of existing and available Credential Types.
 
-2.  Select the name of a credential or the Edit ![Edit](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png) icon to view more information about a credential type, .
-3.  On the **Details** tab, each credential type displays its own unique configurations in the **Input Configuration** field and the **Injector Configuration** field, if applicable. Both YAML and JSON formats are supported in the configuration fields.
+2. Select the name of a credential or the Edit ![Edit](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png) icon to view more information about a credential type, .
+3. On the **Details** tab, each credential type displays its own unique configurations in the **Input Configuration** field and the **Injector Configuration** field, if applicable. Both YAML and JSON formats are supported in the configuration fields.

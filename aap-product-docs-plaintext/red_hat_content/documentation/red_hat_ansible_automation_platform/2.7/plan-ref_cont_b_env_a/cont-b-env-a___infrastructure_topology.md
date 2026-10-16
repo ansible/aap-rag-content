@@ -10,39 +10,30 @@ Red Hat tests each VM with these requirements:
 
 *Table 1. Virtual machine requirements*
 
-| Requirement    | Minimum requirement                                                                                                                                                                                      |
-| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br>RAM        | <br>16 GB                                                                                                                                                                                                |
-| <br>CPUs       | <br>4                                                                                                                                                                                                    |
-| <br>Local disk | Total available disk space: 60 GBInstallation directory: 15 GB (if on a dedicated partition)`/var/tmp` for online installations: 1 GB`/var/tmp` for offline or bundled installations: 3 GBTemporary directory (defaults to `/tmp`) for offline or bundled installations: 10 GB |
-| <br>Disk IOPS  | <br>3000                                                                                                                                                                                                 |
+| Requirement | Minimum requirement                                                                                                                                                                                      |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| RAM         | 16 GB                                                                                                                                                                                                    |
+| CPUs        | 4                                                                                                                                                                                                        |
+| Local disk  | Total available disk space: 60 GBInstallation directory: 15 GB (if on a dedicated partition)`/var/tmp` for online installations: 1 GB`/var/tmp` for offline or bundled installations: 3 GBTemporary directory (defaults to `/tmp`) for offline or bundled installations: 10 GB |
+| Disk IOPS   | 3000                                                                                                                                                                                                     |
 
 Note:
 
 Hop nodes do not have a minimum RAM requirement. They route traffic through the automation mesh, and network latency is a more important factor than RAM or CPU.
 
-Note:
-
-Metrics service node requirements:
-
-- **RAM:** 16 GB (4 GB minimum, 8 GB recommended for high-volume environments)
-- **CPUs:** 4 (2 minimum)
-- **Local disk:** 40 GB (20 GB minimum)
-- **Disk IOPS:** 3000
-
 *Table 2. Infrastructure topology components*
 
-| VM count | Purpose                                                                     | Example VM group names      |
-| -------- | --------------------------------------------------------------------------- | --------------------------- |
-| <br>2    | <br>Platform gateway with colocated Redis                                   | <br> `automationgateway`    |
-| <br>2    | <br>Automation controller                                                   | <br> `automationcontroller` |
-| <br>1    | <br>Metrics service                                                         | <br>`automationmetrics`     |
-| <br>2    | <br>Private automation hub with colocated Redis                             | <br> `automationhub`        |
-| <br>2    | <br>Event-Driven Ansible with colocated Redis                               | <br> `automationeda`        |
-| <br>1    | <br>Automation mesh hop node                                                | <br> `execution_nodes`      |
-| <br>2    | <br>Automation mesh execution node                                          | <br> `execution_nodes`      |
-| <br>1    | <br>Externally managed database service                                     | <br>N/A                     |
-| <br>1    | <br>HAProxy load balancer in front of platform gateway (externally managed) | <br>N/A                     |
+| VM count | Purpose                                                                 | Example VM group names |
+| -------- | ----------------------------------------------------------------------- | ---------------------- |
+| 2        | Platform gateway with colocated Redis                                   | `automationgateway`    |
+| 2        | Automation controller                                                   | `automationcontroller` |
+| 1        | Metrics service                                                         | `automationmetrics`    |
+| 2        | Private automation hub with colocated Redis                             | `automationhub`        |
+| 2        | Event-Driven Ansible with colocated Redis                               | `automationeda`        |
+| 1        | Automation mesh hop node                                                | `execution_nodes`      |
+| 2        | Automation mesh execution node                                          | `execution_nodes`      |
+| 1        | Externally managed database service                                     | N/A                    |
+| 1        | HAProxy load balancer in front of platform gateway (externally managed) | N/A                    |
 
 Note:
 

@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-proc_controller_github_enterprise_team_settings/aem-page/secure-proc_controller_github_enterprise_team_settings.html"
 last_crumb = "Configure GitHub enterprise team authentication"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure GitHub enterprise team authentication"
 oversized = "false"
@@ -41,23 +42,23 @@ Each key and secret must belong to a unique application and cannot be shared or 
 
 ## Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Authentication Methods.
-2.  Click Create authentication.
-3.  Enter a **Name** for this authentication configuration.
-4.  Select **GitHub enterprise team** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
-5.  When the application is registered, GitHub displays the **Client ID** and **Client Secret**:
-  1.  Copy and paste the GitHub Client ID into the GitHub OAuth2 Key field.
-  2.  Copy and paste the GitHub Client Secret into the GitHub OAuth2 Secret field.
-6.  In the **Base URL** field, enter the hostname of the GitHub Enterprise instance, for example, `<https://github.orgexample.com>`.
-7.  In the **Github OAuth2 Enterprise API URL** field, enter the API URL of the GitHub Enterprise instance, for example, `<https://github.example.com/api/v3>`.
-8.  Enter the OAuth2 key (Client ID) from your GitHub developer application in the **GitHub OAuth2** team ID field.
-9.  Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. Note:
+1. From the navigation panel, select Access Management> (and then)Authentication Methods.
+2. Click Create authentication.
+3. Enter a **Name** for this authentication configuration.
+4. Select **GitHub enterprise team** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
+5. When the application is registered, GitHub displays the **Client ID** and **Client Secret**:
+  1. Copy and paste the GitHub Client ID into the GitHub OAuth2 Key field.
+  2. Copy and paste the GitHub Client Secret into the GitHub OAuth2 Secret field.
+6. In the **Base URL** field, enter the hostname of the GitHub Enterprise instance, for example, `<https://github.orgexample.com>`.
+7. In the **Github OAuth2 Enterprise API URL** field, enter the API URL of the GitHub Enterprise instance, for example, `<https://github.example.com/api/v3>`.
+8. Enter the OAuth2 key (Client ID) from your GitHub developer application in the **GitHub OAuth2** team ID field.
+9. Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. Note:
       Values defined in this field override the dedicated fields provided in the UI. Any values not defined here are not provided to the authenticator.
 
-10.  To automatically create organizations, users, and teams upon successful login, select **Create objects**.
-11.  To enable this authentication method upon creation, select **Enabled**.
-12.  To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users**.
-13.  Click Create Authentication Method.
+10. To automatically create organizations, users, and teams upon successful login, select **Create objects**.
+11. To enable this authentication method upon creation, select **Enabled**.
+12. To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users**.
+13. Click Create Authentication Method.
 
 ## Results
 

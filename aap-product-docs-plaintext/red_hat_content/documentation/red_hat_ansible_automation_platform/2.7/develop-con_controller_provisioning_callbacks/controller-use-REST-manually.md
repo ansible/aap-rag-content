@@ -5,11 +5,11 @@ You can use the REST API to trigger automation controller callbacks manually.
 
 ### Procedure
 
-1.  Examine the callback URL in the UI, in the form: https://<CONTROLLER_SERVER_NAME>/api/v2/job_templates/7/callback/
+1. Examine the callback URL in the UI, in the form: https://<CONTROLLER_SERVER_NAME>/api/v2/job_templates/7/callback/
 
 - The "7" in the sample URL is the job template ID in automation controller.
 
-2.  Ensure that the request from the host is a POST. The following is an example using `curl` (all on a single line):
+2. Ensure that the request from the host is a POST. The following is an example using `curl` (all on a single line):
 
 
 ```
@@ -17,7 +17,7 @@ curl -k -i -H 'Content-Type:application/json' -XPOST -d '{"host_config_key": "re
 https://<CONTROLLER_SERVER_NAME>/api/v2/job_templates/7/callback/
 ```
 
-3.  Ensure that the requesting host is defined in your inventory for the callback to succeed.
+3. Ensure that the requesting host is defined in your inventory for the callback to succeed.
 
 ### Results
 

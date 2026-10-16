@@ -1,0 +1,47 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "What the aap_snapshot migration artifact contains",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Artifact contents",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-af8e1a20-2388-404a-9aa7-feacd1038f28__artifact-contents",
+          "anchor": null,
+          "singlePageAnchor": "GUID-af8e1a20-2388-404a-9aa7-feacd1038f28__artifact-contents"
+        },
+        {
+          "title": "Artifact naming",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "GUID-af8e1a20-2388-404a-9aa7-feacd1038f28__artifact-naming",
+          "anchor": null,
+          "singlePageAnchor": "GUID-af8e1a20-2388-404a-9aa7-feacd1038f28__artifact-naming"
+        },
+        {
+          "title": "Security considerations",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "GUID-af8e1a20-2388-404a-9aa7-feacd1038f28__security",
+          "anchor": null,
+          "singlePageAnchor": "GUID-af8e1a20-2388-404a-9aa7-feacd1038f28__security"
+        },
+        {
+          "title": "What the artifact does not include",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "GUID-af8e1a20-2388-404a-9aa7-feacd1038f28__not-included",
+          "anchor": null,
+          "singlePageAnchor": "GUID-af8e1a20-2388-404a-9aa7-feacd1038f28__not-included"
+        }
+      ]
+    }
+  ]
+}

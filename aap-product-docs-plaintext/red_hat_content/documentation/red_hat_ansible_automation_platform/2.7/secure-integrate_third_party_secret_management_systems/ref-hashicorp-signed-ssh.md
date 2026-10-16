@@ -12,7 +12,8 @@ When you select **HashiCorp Vault Signed SSH** for **Credential Type**, give the
 - **AppRole secret_id**: specify the corresponding secret ID for AppRole authentication.
 - **Client Certificate**: specify a PEM-encoded client certificate when using the TLS authentication method, including any required intermediate certificates expected by Hashicorp Vault.
 - **Client Certificate Key**: specify a PEM-encoded certificate private key when using the TLS authentication method.
-- **TLS Authentication Role**: specify the role or certificate name in Hashicorp Vault that corresponds to your client certificate when using the TLS authentication method. If it is not provided, Hashicorp Vault attempts to match the certificate automatically.
+- **TLS Authentication Role**: specify the role or certificate name in Hashicorp Vault that corresponds to your client certificate when using the TLS authentication method.
+If it is not provided, Hashicorp Vault attempts to match the certificate automatically.
 - **Namespace name**: specify the Namespace name (Hashicorp Vault enterprise only).
 - **Kubernetes role**: specify the role name when using Kubernetes authentication.
 - **Username**: enter the username of the user to be used to authenticate this service.

@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/configure-configure_static_storage_for_ansible_automation_platform/aem-page/configure-configure_static_storage_for_ansible_automation_platform.html"
 last_crumb = "Configure static storage for Ansible Automation Platform"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure static storage for Ansible Automation Platform"
 oversized = "false"
@@ -48,18 +49,18 @@ Follow this process to manually prepare storage for an Ansible Automation Platfo
 
 ### Procedure
 
-1.  Identify the name you intend to use for your `AnsibleAutomationPlatform` deployment (for example, myaap).
-2.  Create a PVC manifest for the PostgreSQL database using the required naming convention: `postgres-15-<deployment_name>-0`,
-3.  Ensure the `accessModes` and `resources.requests.storage` match your manually provisioned PV.
-4.  Apply the PVC manifest:
+1. Identify the name you intend to use for your `AnsibleAutomationPlatform` deployment (for example, myaap).
+2. Create a PVC manifest for the PostgreSQL database using the required naming convention: `postgres-15-<deployment_name>-0`,
+3. Ensure the `accessModes` and `resources.requests.storage` match your manually provisioned PV.
+4. Apply the PVC manifest:
   
 
 ```
 oc apply -f postgres-pvc.yaml
 ```
 
-5.  Repeat these steps for other components, such as automation Hub, using the correct naming conventions.
-6.  Leave the `storage_class` fields empty or omit them from the specification. This forces the Operator to use the pre-created PVCs.
+5. Repeat these steps for other components, such as automation Hub, using the correct naming conventions.
+6. Leave the `storage_class` fields empty or omit them from the specification. This forces the Operator to use the pre-created PVCs.
   
   Note:
   Unlike core components, the `AnsibleAutomationPlatformBackup` and `Restore` custom resources provide a `backup_pvc` parameter. You must use this parameter to specify your custom PVC name instead of relying on naming conventions.
@@ -76,8 +77,8 @@ oc get pvc -n <namespace>
 
 The Operator must find PVCs with exact names to adopt them for static provisioning. Replace `<instance_name>` with the name of your `AnsibleAutomationPlatform` custom resource.
 
-| Component                            | Required PVC name                                                                         | Default access mode |
-| ------------------------------------ | ----------------------------------------------------------------------------------------- | ------------------- |
-| Ansible Automation Platform database | `postgres-15-<aap_cr_name>-postgres-15-0`                                                 | ReadWriteOnce       |
-| Automation hub storage               | <br>`<instance_name>-hub-file-storage`<br>(Required when `storage_type` is set to `file`) | ReadWriteMany       |
-| Automation Hub Redis persistence     | `<instance_name>-hub-redis-data`                                                          | ReadWriteOnce       |
+| Component                            | Required PVC name                                                                     | Default access mode |
+| ------------------------------------ | ------------------------------------------------------------------------------------- | ------------------- |
+| Ansible Automation Platform database | `postgres-15-<aap_cr_name>-postgres-15-0`                                             | ReadWriteOnce       |
+| Automation hub storage               | `<instance_name>-hub-file-storage`<br>(Required when `storage_type` is set to `file`) | ReadWriteMany       |
+| Automation Hub Redis persistence     | `<instance_name>-hub-redis-data`                                                      | ReadWriteOnce       |

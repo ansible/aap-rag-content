@@ -1,6 +1,6 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_provision_ocp_storage_with_readwritemany"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_provision_ocp_storage_with_readwritemany"
 title = "Provision OpenShift Container Platform storage with ReadWriteMany access mode - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_provision_ocp_storage_with_readwritemany/aem-page/install-proc_provision_ocp_storage_with_readwritemany.html"
 last_crumb = "Provision OpenShift Container Platform storage with ReadWriteMany access mode"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Provision OpenShift Container Platform storage with ReadWriteMany access mode"
 oversized = "false"
@@ -33,7 +34,8 @@ To ensure successful installation of Ansible Automation Platform Operator, you m
 
 ## Procedure
 
-1.  Go to Storage> (and then)PersistentVolume.
-2.  Click Create PersistentVolume.
-3.  In the first step, update the `accessModes` from the default `ReadWriteOnce` to `ReadWriteMany`.   1.  See [Provisioning](https://docs.redhat.com/en/documentation/openshift_container_platform/4.10/html-single/storage/index#persistent-storage-nfs-provisioning_persistent-storage-nfs) to update the access mode. for a detailed overview.
-4.  Complete the additional steps in this section to create the persistent volume claim (PVC).
+1. Go to Storage> (and then)PersistentVolume.
+2. Click Create PersistentVolume.
+3. In the first step, update the `accessModes` from the default `ReadWriteOnce` to `ReadWriteMany`.
+  1. See [Provisioning](https://docs.redhat.com/en/documentation/openshift_container_platform/4.10/html-single/storage/index#persistent-storage-nfs-provisioning_persistent-storage-nfs) to update the access mode. for a detailed overview.
+4. Complete the additional steps in this section to create the persistent volume claim (PVC).

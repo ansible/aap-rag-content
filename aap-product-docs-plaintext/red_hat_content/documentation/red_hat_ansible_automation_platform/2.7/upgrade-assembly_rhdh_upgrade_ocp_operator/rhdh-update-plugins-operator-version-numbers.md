@@ -5,10 +5,10 @@ To upgrade the Ansible plug-ins, you must edit the `rhaap-dynamic-plugins-config
 
 ### Procedure
 
-1.  Log in to your Red Hat OpenShift Container Platform instance.
-2.  Navigate to ConfigMaps and select the `rhaap-dynamic-plugins-config` map.
-3.  Select the YAML tab to edit the file.
-4.  In the `plugins` list, update the version tag at the end of the `package` URL for both the frontend and backend plugins.
+1. Log in to your Red Hat OpenShift Container Platform instance.
+2. Navigate to ConfigMaps and select the `rhaap-dynamic-plugins-config` map.
+3. Select the YAML tab to edit the file.
+4. In the `plugins` list, update the version tag at the end of the `package` URL for both the frontend and backend plugins.
 
 
 ```yaml
@@ -49,7 +49,7 @@ backend:
 ansible.plugin-scaffolder-backend-module-backstage-rhaap: null
 ```
 
-5.  Click Save.
+5. Click Save.
 The Red Hat Developer Hub detects the configuration change and reload the plug-ins automatically.
 
 ### Results

@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_using_job_explorer"
-title = "View data about automation jobs across your organization - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "View data about automation jobs across your organization - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_user_data_tracking/", "Get insights on automation across your environment with Automation Analytics"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-assembly_using_job_explorer/aem-page/optimize-assembly_using_job_explorer.html"
 last_crumb = "View data about automation jobs across your organization"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "View data about automation jobs across your organization"
 oversized = "false"
@@ -58,10 +59,11 @@ You can sort results by any of the parameters from each column by using the dire
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Analytics> (and then)Job Explorer.
-2.  In the filter toolbar, select **Job** from the **Filter by** list.
-3.  In that same toolbar, select a time range. Job Explorer will now display jobs within that time range.
-4.  To further refine results, return to the filter toolbar and select a different attribute to filter results by, including job status, cluster, or organization. The **Job Explorer** view updates and presents a list of jobs based on the attributes you selected.
+1. From the navigation panel, select Automation Analytics> (and then)Job Explorer.
+2. In the filter toolbar, select **Job** from the **Filter by** list.
+3. In that same toolbar, select a time range. Job Explorer will now display jobs within that time range.
+4. To further refine results, return to the filter toolbar and select a different attribute to filter results by, including job status, cluster, or organization.
+      The **Job Explorer** view updates and presents a list of jobs based on the attributes you selected.
 
 ## View more information about an individual job
 
@@ -69,8 +71,8 @@ You can view additional information about each individual job.
 
 ### Procedure
 
-1.  Navigate to the job **Id/Name** column.
-2.  Click the arrow icon.
+1. Navigate to the job **Id/Name** column.
+2. Click the arrow icon.
 
 ## Review job details on automation controller
 
@@ -78,4 +80,4 @@ You can review job details on automation controller.
 
 ### Procedure
 
- Click the job in the **Id/Name** column to view the job itself on the automation controller job details page.
+Click the job in the **Id/Name** column to view the job itself on the automation controller job details page.

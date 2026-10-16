@@ -9,7 +9,7 @@ To change the Ansible Automation Platform host URL or OAuth client ID after depl
 
 ### Procedure
 
-1.  To update the Ansible Automation Platform host URL or OAuth client ID, edit the configuration file:
+1. To update the Ansible Automation Platform host URL or OAuth client ID, edit the configuration file:
 
 
 ```terminal
@@ -18,7 +18,7 @@ $ sudo vi /etc/portal/configs/app-config/app-config.production.yaml
 
 Update `ansible.rhaap.baseUrl` and `auth.providers.rhaap.production.clientId` to the new values. Save the file.
 
-2.  To rotate the Ansible Automation Platform API token:
+2. To rotate the Ansible Automation Platform API token:
 
 
 ```terminal
@@ -28,7 +28,7 @@ $ sudo podman secret create --replace portal_aap_token "$temp_file"
 $ rm -f "$temp_file"
 ```
 
-3.  To rotate the OAuth client secret:
+3. To rotate the OAuth client secret:
 
 
 ```terminal
@@ -38,7 +38,7 @@ $ sudo podman secret create --replace portal_aap_oauth_client_secret "$temp_file
 $ rm -f "$temp_file"
 ```
 
-4.  Restart the Ansible automation portal service:
+4. Restart the Ansible automation portal service:
 
 
 ```terminal

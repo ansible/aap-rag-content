@@ -16,10 +16,10 @@ Importing templates requires AAP administrator access. Only users with the AAP A
 
 ### Procedure
 
-1.  Navigate to **Execution Environments > Create**.
-2.  Open the kebab menu and select **Import Template**.
-3.  Paste the template URL and click **Analyze**.
-4.  Click **Import**.
+1. Navigate to **Execution Environments > Create**.
+2. Open the kebab menu and select **Import Template**.
+3. Paste the template URL and click **Analyze**.
+4. Click **Import**.
 
 ### Results
 

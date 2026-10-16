@@ -13,12 +13,12 @@ Use this procedure if you want to configure a service account for analytics inst
 
 ### Procedure
 
-1.  From the navigation panel, select Settings> (and then)Automation Execution> (and then)System.
-2.  Click Edit.
+1. From the navigation panel, select Settings> (and then)Automation Execution> (and then)System.
+2. Click Edit.
 3. **Optional:** In the field labeled **Red Hat Client ID for Analytics**, enter the client ID you received when you created your service account to retrieve subscription and content information.
 4. **Optional:** In the field labeled **Red Hat Client Secret for Analytics**, enter the client secret you received when you created your service account to send data to Automation Analytics.
-5.  In the **Options** list select the checkbox to **Gather data for Automation Analytics**.
-6.  Click Save.
+5. In the **Options** list select the checkbox to **Gather data for Automation Analytics**.
+6. Click Save.
 
 ### Results
 

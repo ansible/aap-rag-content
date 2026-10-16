@@ -6,7 +6,7 @@ To make feature flag information visible in the web UI to superusers and auditor
 
 ### Procedure
 
-1.  Edit the `AnsibleAutomationPlatform` custom resource:
+1. Edit the `AnsibleAutomationPlatform` custom resource:
 
 
 ```
@@ -24,5 +24,5 @@ FEATURE_EDA_ANALYTICS_ENABLED:True
 FEATURE_POLICY_AS_CODE_ENABLED:True
 ```
 
-2.  Save the custom resource. The operator applies the changes automatically.
+2. Save the custom resource. The operator applies the changes automatically.
 

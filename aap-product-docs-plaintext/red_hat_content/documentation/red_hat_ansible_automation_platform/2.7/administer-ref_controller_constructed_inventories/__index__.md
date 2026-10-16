@@ -2,7 +2,8 @@
 
 You can create a new inventory (called a constructed inventory) from a list of input inventories.
 
-A constructed inventory has copies of hosts and groups in its input inventories, permitting jobs to target groups of servers across many inventories. Groups and hostvars can be added to the inventory content, and hosts can be filtered to limit the size of the constructed inventory.
+A constructed inventory has copies of hosts and groups in its input inventories, permitting jobs to target groups of servers across many inventories.
+Groups and hostvars can be added to the inventory content, and hosts can be filtered to limit the size of the constructed inventory.
 
 The key factors of a constructed inventory are:
 

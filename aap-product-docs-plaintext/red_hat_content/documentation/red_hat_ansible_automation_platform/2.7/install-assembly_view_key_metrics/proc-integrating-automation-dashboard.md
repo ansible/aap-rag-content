@@ -1,21 +1,19 @@
-# Install automation dashboard to calculate savings (RHEL only)
-## Install automation dashboard
-### Configure automation dashboard
+# Install the standalone automation dashboard utility to calculate savings (RHEL only)
+## Install the standalone automation dashboard utility
+### Configure the standalone automation dashboard utility
 
-Integrate your Ansible Automation Platform instances into the automation dashboard configuration to collect and visualise data and gain insights into your automation.
+Integrate your Ansible Automation Platform instances into the standalone automation dashboard utility configuration to collect and visualise data and gain insights into your automation.
 
 #### Before you begin
 
-- You have installed automation dashboard.
-- You have verified that automation dashboard is running on HTTPS port 8447 on your Red Hat Enterprise Linux host. Note:
-
-* This verification requires your Ansible Automation Platform login details.
-* Port 8447 is enabled by default, but this is configurable.
+- You have installed the standalone automation dashboard utility.
+- You have verified that the automation dashboard is running and reachable on your Red Hat Enterprise Linux host. Note:
+This verification requires your Ansible Automation Platform login details.
 
 #### Procedure
 
-1.  Configure a personal access token. For more information, see [Configuring access to external applications with token-based authentication](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_token_based_authentication#gw-token-based-authentication "Token-based authentication permits authentication of third-party tools and services with the platform through integrated OAuth 2 token support. Ansible Automation Platform utilizes both OAuth Tokens and Personal Access Tokens (PATs).").
-2.  Create or update the `clusters.yaml` file. You must include the `access_token`, `refresh_token`, `client_id`, and `client_secret` to enable persistent authentication and automatic token rotation.
+1. Configure a personal access token. For more information, see [Configuring access to external applications with token-based authentication](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_token_based_authentication#gw-token-based-authentication "Token-based authentication permits authentication of third-party tools and services with the platform through integrated OAuth 2 token support. Ansible Automation Platform utilizes both OAuth Tokens and Personal Access Tokens (PATs).").
+2. Create or update the `clusters.yaml` file. You must include the `access_token`, `refresh_token`, `client_id`, and `client_secret` to enable persistent authentication and automatic token rotation.
 
 ```yaml
 clusters:
@@ -44,7 +42,7 @@ When configuring the `verify_ssl` parameter, choose the setting that matches you
 - **Self-signed certificates:** Set `verify_ssl: false`.     * **Private or organizational Certificate Authority certificates:** Set `verify_ssl: true` and ensure `custom_ca_cert` is set in your inventory file. The installer configures the `REQUESTS_CA_BUNDLE` and `SSL_CERT_FILE` environment variables in the dashboard containers, enabling Python's requests library to trust certificates signed by your private Certificate Authority (CA). Note:
 Do not set `verify_ssl: false` or `aap_auth_provider_check_ssl=false` to work around TLS certificate errors when using a private CA. Disabling SSL verification removes authentication security and exposes OAuth credentials and sync data to interception. If TLS verification fails with a private CA, set `custom_ca_cert` in your inventory file to provide your CA certificate, then reinstall.
 
-3.  You can add one or more Ansible Automation Platform instances (of the same Ansible Automation Platform version) into the automation dashboard configuration for pulling and combining data by using the following:
+3. You can add one or more Ansible Automation Platform instances (of the same Ansible Automation Platform version) into the automation dashboard configuration for pulling and combining data by using the following:
 
 Note:
 If you only have one Ansible Automation Platform instance, then remove the second entry.
@@ -81,7 +79,7 @@ enabled: true
 Note:
 The `access_token`, `refresh_token`, and `client_secret` are stored in the automation dashboard database. These values are encrypted for security.
 
-4.  Load and activate your automation dashboard configuration. You must copy the configuration file to the container’s `/tmp/` directory. The system automatically removes the file from the container after successful processing.
+4. Load and activate your automation dashboard configuration. You must copy the configuration file to the container’s `/tmp/` directory. The system automatically removes the file from the container after successful processing.
 
 ```bash
 podman cp clusters.yaml automation-dashboard-web:/tmp

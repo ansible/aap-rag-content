@@ -9,6 +9,6 @@ As part of the initial setup, a **Demo Job Template** is created for you.
 
 ### Procedure
 
-1.  To review existing templates, select Automation Execution> (and then)Templates from the navigation panel.
-2.  Click Demo Job Template to view its details.
+1. To review existing templates, select Automation Execution> (and then)Templates from the navigation panel.
+2. Click Demo Job Template to view its details.
 

@@ -1,16 +1,17 @@
 +++
+template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_troubleshoot_lightspeed_configuration_errors"
 title = "Troubleshoot Red Hat Ansible Lightspeed configuration errors - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_lightspeed_intro/", "Build automation faster with Red Hat Ansible Lightspeed"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_lightspeed_intro/", "Build automation faster with Red Hat Ansible Lightspeed code assistant"]]
 category = "Develop"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_troubleshoot_lightspeed_configuration_errors/aem-page/develop-assembly_troubleshoot_lightspeed_configuration_errors.html"
 last_crumb = "Troubleshoot Red Hat Ansible Lightspeed configuration errors"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Troubleshoot Red Hat Ansible Lightspeed configuration errors"
 oversized = "false"
@@ -41,7 +42,7 @@ If you are the Red Hat organization administrator, before you access the Ansible
 
 When you enter the IBM watsonx Code Assistant API key, authentication fails and shows the following error message:
 
- `IBM Cloud API key is invalid`
+`IBM Cloud API key is invalid`
 
 Red Hat Ansible Lightspeed verifies the API key by generating an associated access token. To resolve the error, ensure that you have not accidentally included any extra spaces when obtaining the API key from IBM watsonx Code Assistant. If you still cannot upload the API key, contact IBM Support.
 
@@ -79,7 +80,7 @@ The following scenarios are possible:
 
 - The log-in attempt fails with the following error message:     `Enable lightspeed services from settings to use the feature.`
 
-     This error indicates that Ansible Lightspeed is not enabled in the Ansible VS Code extension. To resolve this error, perform the following tasks:
+    This error indicates that Ansible Lightspeed is not enabled in the Ansible VS Code extension. To resolve this error, perform the following tasks:
 
   1. Open the VS Code application.
   2. From the **Activity** bar, click the **Extensions** icon.
@@ -91,19 +92,19 @@ The following scenarios are possible:
 
 - Cannot request code recommendations     The following error message is displayed:
 
-     `An error occurred attempting to complete your request. Please try again later.`
+    `An error occurred attempting to complete your request. Please try again later.`
 
-     This error indicates that the Ansible Lightspeed service is not running or is running with issues. Please check the Lightspeed service logs (the pod with suffix `-api`) for more details and error codes.
+    This error indicates that the Ansible Lightspeed service is not running or is running with issues. Please check the Lightspeed service logs (the pod with suffix `-api`) for more details and error codes.
 
 - Cannot request code recommendations     The following error message is displayed:
 
-     `The IBM watsonx Code Assistant is unavailable. Please try again later.`
+    `The IBM watsonx Code Assistant is unavailable. Please try again later.`
 
-     or:
+    or:
 
-     `IBM watsonx Code Assistant Model ID is invalid. Please contact your administrator.`
+    `IBM watsonx Code Assistant Model ID is invalid. Please contact your administrator.`
 
-     This error indicates that the model secret contains incorrect values. To resolve this error, ensure that you have not accidentally added any whitespace characters (extra line, space, and so on) to the `username`, `model_url`, and `model_api_key` parameters in the model connection secret. For more information, see Creating connection secrets.
+    This error indicates that the model secret contains incorrect values. To resolve this error, ensure that you have not accidentally added any whitespace characters (extra line, space, and so on) to the `username`, `model_url`, and `model_api_key` parameters in the model connection secret. For more information, see Creating connection secrets.
 
 ### Cannot connect to the Ansible Lightspeed service due to SSL connection error
 
@@ -130,7 +131,7 @@ extra_settings:
       value: false
 ```
 
- Important:
+Important:
 
 **Reenabling the SSL protection** You must re-enable the SSL protection when deploying on a production environment. To re-enable the SSL protection, simply remove the extra setting from the YAML file.
 
@@ -173,7 +174,7 @@ The following scenarios are possible:
 
 - Your VS Code Workspace settings override user settings. If your Workspace settings are configured, they can override our user settings even if you have configured the Ansible VS Code extension correctly. The Workspace settings can disable your VS Code extension settings, and therefore you cannot access the Ansible Lightspeed service.
 
-     To resolve this error, ensure that there are no Workspace settings configured in VS Code.
+    To resolve this error, ensure that there are no Workspace settings configured in VS Code.
 
 - You entered a multitask prompt, but code recommendations were not generated. To resolve this error, log out of VS Code and log in again using your Red Hat account.
 
@@ -214,4 +215,4 @@ If you encounter network issues, use the **Network Proxy Test** extension to tes
 
 2. Use the **Network Proxy Test: Test Connection** action to target the server and the endpoint using the parameter `/check/status end-point`. For example:
 
-     `https://c.ai.ansible.redhat.com/check/status/` to test the connection to Red Hat Ansible Lightspeed cloud service.
+    `https://c.ai.ansible.redhat.com/check/status/` to test the connection to Red Hat Ansible Lightspeed cloud service.

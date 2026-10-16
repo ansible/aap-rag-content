@@ -24,4 +24,3 @@ For more information about sources and their templates, see [Supported inventory
 `source_vars` that contain `plugin: xxx.yyy.zzz` as a top-level key are replaced with the fully-qualified inventory plugin name at runtime based on the `InventorySource` source.
 
 For example, if you select `ec2` for the `InventorySource` then, at run time, the plugin is set to `amazon.aws.aws_ec2`.
-

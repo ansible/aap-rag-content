@@ -8,14 +8,14 @@ You can request explanations for a newly created role as well as an existing Ans
 - You meet **one** of the following requirements:
 * Your organization has a trial or paid subscription to both the Red Hat Ansible Automation Platform and IBM watsonx Code Assistant.
 * Your organization has a trial or paid subscription to the Red Hat Ansible Automation Platform, and you have a Red Hat Ansible Lightspeed trial account.
-- You have installed and configured the Ansible VS Code extension v25.3.0 or later. For the procedure, see [Installing and configuring the Ansible VS Code extension](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_install_ansible_vscode_extension#installing-ansible-vscode-extension "Red Hat Ansible Lightspeed with IBM watsonx Code Assistant integrates with the Ansible Visual Studio (VS) Code extension. When enabled, the extension automatically collects recommendations, usage telemetry, and Ansible YAML file state through automated events.").
+- You have installed and configured the Ansible VS Code extension v25.3.0 or later. For the procedure, see [Installing and configuring the Ansible VS Code extension](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_install_ansible_vscode_extension#installing-ansible-vscode-extension "Install and configure the Ansible VS Code extension to use the cloud-hosted coding assistant or a third-party LLM provider (IBM watsonx, Google Gemini). When enabled, the extension automatically collects recommendations, usage telemetry, and Ansible YAML file state through automated events.").
 - You have opened the role whose explanation you want to view in the VS Code editor.
 
 ### Procedure
 
-1.  Log in to VS Code with your Red Hat account.
-2.  Open an Ansible role YAML file within the roles directory in VS Code.
-3.  Use one of the following methods to view the playbook explanation:
+1. Log in to VS Code with your Red Hat account.
+2. Open an Ansible role YAML file within the roles directory in VS Code.
+3. Use one of the following methods to view the playbook explanation:
 
 - **From an active role YAML file**:
 1. Place your cursor anywhere within the playbook file.

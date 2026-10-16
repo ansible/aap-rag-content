@@ -1,5 +1,5 @@
 # Add and launch custom self-service templates
-## Add a template to Ansible automation portal
+## Add a custom software template to Ansible automation portal
 
 You can add a custom self-service template to the **Templates** view of your Ansible automation portal instance. Custom self-service templates are stored in git repositories. Ansible automation portal supports GitLab and GitHub Source Control Management (SCM).
 
@@ -23,13 +23,13 @@ Names for custom self-service templates must be unique. Custom self-service temp
 
 ### Procedure
 
-1.  In a browser, navigate to your Ansible automation portal instance and sign in with your Ansible Automation Platform credentials.
-2.  Navigate to the **Templates** Page.
-3.  Click Add template.
-4.  Enter a valid Git SCM URL for the template that you want to add.
-5.  Click Analyze to fetch the template.
-6.  After the template has been fetched, review the list of what will be imported and added to the catalog.
-7.  Click Import.
+1. In a browser, navigate to your Ansible automation portal instance and sign in with your Ansible Automation Platform credentials.
+2. Navigate to the **Templates** Page.
+3. Click Add template.
+4. Enter a valid Git SCM URL for the template that you want to add.
+5. Click Analyze to fetch the template.
+6. After the template has been fetched, review the list of what will be imported and added to the catalog.
+7. Click Import.
 
 ### Results
 

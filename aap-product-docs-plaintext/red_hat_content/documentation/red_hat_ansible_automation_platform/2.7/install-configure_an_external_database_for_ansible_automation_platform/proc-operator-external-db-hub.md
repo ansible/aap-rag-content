@@ -27,7 +27,7 @@ The following section outlines the steps to configure an external database for y
 
 ### Procedure
 
-1.  Create a `postgres_configuration_secret` YAML file, following the template below:
+1. Create a `postgres_configuration_secret` YAML file, following the template below:
 
 
 ```
@@ -47,19 +47,19 @@ type: "unmanaged"
 type: Opaque
 ```
 
-1.  Namespace to create the secret in. This should be the same namespace you want to deploy to.
-2.  The resolvable hostname for your database node.
-3.  External port defaults to `5432`.
-4.  Value for variable `password` should not contain single or double quotes (', ") or backslashes (\) to avoid any issues during deployment, backup or restoration.
-5.  The variable `sslmode` is valid for `external` databases only. The allowed values are: `prefer`, `disable`, `allow`, `require`, `verify-ca`, and `verify-full`.
+1. Namespace to create the secret in. This should be the same namespace you want to deploy to.
+2. The resolvable hostname for your database node.
+3. External port defaults to `5432`.
+4. Value for variable `password` should not contain single or double quotes (', ") or backslashes (\) to avoid any issues during deployment, backup or restoration.
+5. The variable `sslmode` is valid for `external` databases only. The allowed values are: `prefer`, `disable`, `allow`, `require`, `verify-ca`, and `verify-full`.
 
-2.  Apply `external-postgres-configuration-secret.yml` to your cluster using the `oc create` command.
+2. Apply `external-postgres-configuration-secret.yml` to your cluster using the `oc create` command.
 
 ```
 $ oc create -f external-postgres-configuration-secret.yml
 ```
 
-3.  When creating your `AnsibleAutomationPlatform` custom resource object, specify the secret under the `hub` section in your spec, following the example below:
+3. When creating your `AnsibleAutomationPlatform` custom resource object, specify the secret under the `hub` section in your spec, following the example below:
 
 
 ```

@@ -8,7 +8,11 @@ Create a new Ansible role within your collection by copying the default role dir
 
 #### Procedure
 
-1.  To create a new role, copy the default `run` role directory that was scaffolded when you created the collection.
-2.  Define the tasks that you want your role to perform in the `tasks/main.yml` file. If you are creating a role to reuse tasks in an existing playbook, copy the content in the tasks block of your playbook YAML file. Remove the whitespace to the left of the tasks. Use `ansible-lint` in VS Code to check your YAML code.
-3.  If your role depends on another role, add the dependency in the `meta/main.yml` file.
+1. To create a new role, copy the default `run` role directory that was scaffolded when you created the collection.
+2. Define the tasks that you want your role to perform in the `tasks/main.yml` file.
+If you are creating a role to reuse tasks in an existing playbook,
+copy the content in the tasks block of your playbook YAML file.
+Remove the whitespace to the left of the tasks.
+Use `ansible-lint` in VS Code to check your YAML code.
+3. If your role depends on another role, add the dependency in the `meta/main.yml` file.
 

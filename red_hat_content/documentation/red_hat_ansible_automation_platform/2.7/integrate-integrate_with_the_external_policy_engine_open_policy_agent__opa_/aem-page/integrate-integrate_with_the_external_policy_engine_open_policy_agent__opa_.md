@@ -1,6 +1,6 @@
 +++
-title = "Integrate with the external policy engine Open Policy Agent (OPA) - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Integrate with the external policy engine Open Policy Agent (OPA) - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-integrate_with_the_external_policy_engine_open_policy_agent__opa_"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/integrate-integrate_with_the_external_policy_engine_open_policy_agent__opa_/aem-page/integrate-integrate_with_the_external_policy_engine_open_policy_agent__opa_.html"
 last_crumb = "Integrate with the external policy engine Open Policy Agent (OPA)"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Integrate with the external policy engine Open Policy Agent (OPA)"
 oversized = "false"
@@ -29,7 +30,7 @@ type = "aem-page"
 
 Integrating Ansible Automation Platform with Open Policy Agent (OPA) enforces policies at automation runtime. Use encoded rules to define, manage, and enforce how users interact with the platform. Automate policy management to improve security, compliance, and operational efficiency.
 
- Integrating with OPA helps you to:
+Integrating with OPA helps you to:
 
 - **Enforce policies at runtime**: Stop automation actions that violate organizational policies and provide users with clear information about policy violations before jobs run.
 - **Centralize policy management**: Offload policy decisions to your OPA server and manage automation governance rules alongside organizational policies.

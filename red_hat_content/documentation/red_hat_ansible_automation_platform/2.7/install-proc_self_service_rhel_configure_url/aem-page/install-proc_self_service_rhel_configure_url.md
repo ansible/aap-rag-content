@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_self_service_rhel_configure_url/aem-page/install-proc_self_service_rhel_configure_url.html"
 last_crumb = "Set a custom user-accessible URL or port"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Set a custom user-accessible URL or port"
 oversized = "false"
@@ -36,14 +37,14 @@ The Ansible automation portal RHEL appliance auto-detects the user-accessible UR
 
 ## Procedure
 
-1.  Edit the configuration file:
+1. Edit the configuration file:
   
 
 ```terminal
 $ sudo vi /etc/portal/configs/app-config/app-config.production.yaml
 ```
 
-2.  Update the following three values.
+2. Update the following three values.
       This example uses port 8443. If you are using the standard port 443, you do not need to specify the port:
 
 ```yaml
@@ -55,15 +56,15 @@ backend:
     origin: "https://portal.example.com:8443"
 ```
 
-3.  Save the file and restart the Ansible automation portal service.
+3. Save the file and restart the Ansible automation portal service.
       Restarting the `portal` service also restarts `postgres` and `devtools` due to service dependencies:
 
 ```terminal
 $ sudo systemctl restart portal
 ```
 
-4.  If you set a custom port, open that port on any firewall and, for Red Hat OpenShift Virtualization deployments, update the OpenShift route.
-5.  Update the OAuth redirect URI in Ansible Automation Platform to match the new URL.
+4. If you set a custom port, open that port on any firewall and, for Red Hat OpenShift Virtualization deployments, update the OpenShift route.
+5. Update the OAuth redirect URI in Ansible Automation Platform to match the new URL.
 
   1. In Ansible Automation Platform, navigate to **Access Management** > **OAuth Applications**.
   2. Edit the OAuth application used by Ansible automation portal.

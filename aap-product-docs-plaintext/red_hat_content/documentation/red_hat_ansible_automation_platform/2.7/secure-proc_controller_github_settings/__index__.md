@@ -8,20 +8,20 @@ The OAuth2 key (Client ID) and secret (Client Secret) are used to supply the req
 
 ## Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Authentication Methods.
-2.  Click Create authentication.
-3.  Enter a **Name** for this authentication configuration.
-4.  Select **GitHub** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
-5.  When the application is registered, GitHub displays the **Client ID** and **Client Secret**:
-1.  Copy and paste the GitHub Client ID into the GitHub OAuth2 Key field.
-2.  Copy and paste the GitHub Client Secret into the GitHub OAuth2 Secret field.
-6.  Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. Note:
+1. From the navigation panel, select Access Management> (and then)Authentication Methods.
+2. Click Create authentication.
+3. Enter a **Name** for this authentication configuration.
+4. Select **GitHub** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
+5. When the application is registered, GitHub displays the **Client ID** and **Client Secret**:
+1. Copy and paste the GitHub Client ID into the GitHub OAuth2 Key field.
+2. Copy and paste the GitHub Client Secret into the GitHub OAuth2 Secret field.
+6. Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. Note:
 Values defined in this field override the dedicated fields provided in the UI. Any values not defined here are not provided to the authenticator.
 
-7.  To automatically create organizations, users, and teams upon successful login, select **Create objects**.
-8.  To enable this authentication method upon creation, select **Enabled**.
-9.  To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users**.
-10.  Click Create Authentication Method.
+7. To automatically create organizations, users, and teams upon successful login, select **Create objects**.
+8. To enable this authentication method upon creation, select **Enabled**.
+9. To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users**.
+10. Click Create Authentication Method.
 
 ## Results
 

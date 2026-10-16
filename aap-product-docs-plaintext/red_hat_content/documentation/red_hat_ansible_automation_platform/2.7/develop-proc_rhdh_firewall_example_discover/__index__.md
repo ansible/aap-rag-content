@@ -4,19 +4,24 @@ Red Hat recommends that you use trusted automation content that has been tested 
 
 ## About this task
 
-Automation hub is a central repository for discovering, downloading, and managing trusted content collections from Red Hat and its partners. Private automation hub provides an on-premise solution for managing content collections.
+Automation hub is a central repository for discovering, downloading, and managing trusted content collections from Red Hat and its partners.
+Private automation hub provides an on-premise solution for managing content collections.
 
 ## Procedure
 
-1.  Click on the Ansible `A` icon in the Red Hat Developer Hub navigation panel.
-2.  Click **Discover existing collections**.
-3.  Click **Go to Automation Hub**.   - If private automation hub has been configured in the Ansible plug-ins, you are redirected to your **PrivateHubName** instance.
-- If private automation hub has not been configured in the Ansible plug-ins installation configuration, you will be redirected to the Red Hat Hybrid Console (RHCC) automation hub.
+1. Click on the Ansible `A` icon in the Red Hat Developer Hub navigation panel.
+2. Click **Discover existing collections**.
+3. Click **Go to Automation Hub**.
 
+
+- If private automation hub has been configured in the Ansible plug-ins, you are redirected to your **PrivateHubName** instance.
+- If private automation hub has not been configured in the Ansible plug-ins installation configuration,
+you will be redirected to the Red Hat Hybrid Console (RHCC) automation hub.
 In this example, you are redirected to the RHCC automation hub.
 
-4.  If you are prompted to log in, provide your Red Hat Customer Portal credentials.
-5.  Filter the collections with the `rhel firewall` keywords. The search returns the `rhel_system_roles` collection.
+4. If you are prompted to log in, provide your Red Hat Customer Portal credentials.
+5. Filter the collections with the `rhel firewall` keywords.
+The search returns the `rhel_system_roles` collection.
 
 The RHEL System Roles collection contains certified Ansible content that you can reuse to configure your firewall.
 

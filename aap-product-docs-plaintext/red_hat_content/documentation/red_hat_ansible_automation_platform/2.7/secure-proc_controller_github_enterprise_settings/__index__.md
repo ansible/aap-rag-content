@@ -12,22 +12,22 @@ Each key and secret must belong to a unique application and cannot be shared or 
 
 ## Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Authentication Methods.
-2.  Click Create authentication.
-3.  Enter a **Name** for this authentication configuration.
-4.  Select **GitHub enterprise** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
-5.  When the application is registered, GitHub displays the **Client ID** and **Client Secret**:
-1.  Copy and paste the GitHub Client ID into the GitHub OAuth2 Key field.
-2.  Copy and paste the GitHub Client Secret into the GitHub OAuth2 Secret field.
-6.  In the **Base URL** field, enter the hostname of the GitHub Enterprise instance, for example, `<https://github.example.com>`.
-7.  In the **Github OAuth2 Enterprise API URL** field, enter the API URL of the GitHub Enterprise instance, for example, `<https://github.example.com/api/v3>`.
-8.  Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. Note:
+1. From the navigation panel, select Access Management> (and then)Authentication Methods.
+2. Click Create authentication.
+3. Enter a **Name** for this authentication configuration.
+4. Select **GitHub enterprise** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
+5. When the application is registered, GitHub displays the **Client ID** and **Client Secret**:
+1. Copy and paste the GitHub Client ID into the GitHub OAuth2 Key field.
+2. Copy and paste the GitHub Client Secret into the GitHub OAuth2 Secret field.
+6. In the **Base URL** field, enter the hostname of the GitHub Enterprise instance, for example, `<https://github.example.com>`.
+7. In the **Github OAuth2 Enterprise API URL** field, enter the API URL of the GitHub Enterprise instance, for example, `<https://github.example.com/api/v3>`.
+8. Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. Note:
 Values defined in this field override the dedicated fields provided in the UI. Any values not defined here are not provided to the authenticator.
 
-9.  To automatically create organizations, users, and teams upon successful login, select **Create objects**.
-10.  To enable this authentication method upon creation, select **Enabled**.
-11.  To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users**.
-12.  Click Create Authentication Method.
+9. To automatically create organizations, users, and teams upon successful login, select **Create objects**.
+10. To enable this authentication method upon creation, select **Enabled**.
+11. To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users**.
+12. Click Create Authentication Method.
 
 ## Results
 

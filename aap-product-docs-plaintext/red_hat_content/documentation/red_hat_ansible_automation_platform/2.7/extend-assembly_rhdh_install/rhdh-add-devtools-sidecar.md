@@ -19,7 +19,7 @@ Then add the `imagePullSecrets` field to the deployment patch as shown in the ex
 
 ### Procedure
 
-1.  Add the Ansible Developer Tools sidecar container to your deployment configuration.
+1. Add the Ansible Developer Tools sidecar container to your deployment configuration.
 **Operator installation**
 
 Modify the Backstage custom resource to add a `containers` block in the `spec.deployment.patch.spec.template.spec` block:
@@ -81,5 +81,5 @@ The image pull policy is `imagePullPolicy: IfNotPresent`. The image is pulled on
 
 The default resource requests and limits are shown in the Helm chart example. To customize these values, for example if your namespace enforces a `LimitRange`, see [Customize Ansible Developer Tools server resources](/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_ocp_configure_optional#customize-devtools-server-resources "Ansible Developer Tools sidecar container ships with default CPU and memory resource requests and limits. Customize these values if your namespace enforces a LimitRange with lower values or if you want to tune resources for your workload.").
 
-2.  Apply the changes. For Operator deployments, click **Save**. For Helm deployments, click **Upgrade**.
+2. Apply the changes. For Operator deployments, click **Save**. For Helm deployments, click **Upgrade**.
 

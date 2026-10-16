@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_controller_projects/aem-page/develop-assembly_controller_projects.html"
 last_crumb = "Logically group playbooks with projects"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Logically group playbooks with projects"
 oversized = "false"
@@ -38,7 +39,7 @@ These include Git, Subversion, Mercurial and Red Hat Lightspeed.
 
 For more information on creating a Red Hat Lightspeed project, see Setting up Red Hat Lightspeed Remediations.
 
- Note:
+Note:
 
 The Project Base Path is `/var/lib/awx/projects`. However, this can be modified by the system administrator. It is configured in `/etc/tower/conf.d/custom.py`.
 
@@ -69,6 +70,6 @@ In cases where you have a large project (around 10 GB), disk space on `/tmp` may
 - **OK** - The project is not configured for source control, and is correctly in place.
 - **Missing** - Projects are absent from the project base path of `/var/lib/awx/projects`. This is applicable for manual or source control managed projects.
 
- Note:
+Note:
 
 Projects of credential type `Manual` cannot update or schedule source control-based actions without being reconfigured as an SCM type credential.

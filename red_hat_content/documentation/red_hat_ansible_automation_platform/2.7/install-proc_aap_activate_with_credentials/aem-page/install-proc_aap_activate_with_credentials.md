@@ -1,16 +1,17 @@
 +++
-title = "Activate with credentials - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_aap_activate_with_credentials"
+title = "Activate with credentials - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_activate/", "Activate your subscription"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_activate_2/", "Activate your subscription"]]
 category = "Install"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_aap_activate_with_credentials/aem-page/install-proc_aap_activate_with_credentials.html"
 last_crumb = "Activate with credentials"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Activate with credentials"
 oversized = "false"
@@ -41,14 +42,14 @@ You are opted in for Automation Analytics by default when you activate the platf
 
 ## Procedure
 
-1.  Log in to Red Hat Ansible Automation Platform.
-2.  Select the **Service Account** tab in the subscription wizard.
-3.  Enter your **Client ID** and **Client secret**.
-4.  Select your subscription from the **Subscription** list. Note:
+1. Log in to Red Hat Ansible Automation Platform.
+2. Select the **Service Account** tab in the subscription wizard.
+3. Enter your **Client ID** and **Client secret**.
+4. Select your subscription from the **Subscription** list. Note:
       You can also enter your Satellite username and password in the **Satellite** tab if your cluster nodes are registered to Satellite through Subscription Manager.
 
-5.  Review the End User License Agreement and select **I agree to the End User License Agreement**.
-6.  Click Finish.
+5. Review the End User License Agreement and select **I agree to the End User License Agreement**.
+6. Click Finish.
 
 ## Results
 

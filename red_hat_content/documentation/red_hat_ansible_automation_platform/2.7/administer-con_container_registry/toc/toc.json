@@ -18,7 +18,7 @@
           "singlePageAnchor": "populate-container-registry"
         },
         {
-          "title": "Pull execution environments for use in automation hub",
+          "title": "Pull execution environments for use in Ansible Automation Platform",
           "visible": true,
           "weight": 2,
           "urlFragment": "obtain-images",

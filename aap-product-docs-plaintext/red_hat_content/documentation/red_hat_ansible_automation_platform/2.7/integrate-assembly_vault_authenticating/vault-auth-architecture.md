@@ -23,5 +23,6 @@ data:
 api_key: secret-api-key
 ```
 
-- **Token authentication:** Set the `VAULT_TOKEN` environment variable. Optionally, you can configure parameters for the token. If parameters are not provided, then the module uses environment variables.
+- **Token authentication:** Set the `VAULT_TOKEN` environment variable.
+Optionally, you can configure parameters for the token. If parameters are not provided, then the module uses environment variables.
 

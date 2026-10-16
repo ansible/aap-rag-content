@@ -23,26 +23,26 @@ Red Hat tests a Single Node OpenShift (SNO) cluster with these requirements:
 
 *Table 2. Infrastructure topology components*
 
-| Count | Component                                      |
-| ----- | ---------------------------------------------- |
-| <br>1 | <br>Automation controller web pod              |
-| <br>1 | <br>Automation controller task pod             |
-| <br>1 | <br>Automation hub web pod                     |
-| <br>1 | <br>Automation hub API pod                     |
-| <br>2 | <br>Automation hub content pod                 |
-| <br>2 | <br>Automation hub worker pod                  |
-| <br>1 | <br>Automation hub Redis pod                   |
-| <br>1 | <br>Metrics service web pod                    |
-| <br>1 | <br>Metrics service tasks pod                  |
-| <br>1 | <br>Metrics service scheduler pod              |
-| <br>1 | <br>Event-Driven Ansible API pod               |
-| <br>1 | <br>Event-Driven Ansible activation worker pod |
-| <br>1 | <br>Event-Driven Ansible default worker pod    |
-| <br>1 | <br>Event-Driven Ansible event stream pod      |
-| <br>1 | <br>Event-Driven Ansible scheduler pod         |
-| <br>1 | <br>Platform gateway pod                       |
-| <br>1 | <br>Database pod                               |
-| <br>1 | <br>Redis pod                                  |
+| Count | Component                                  |
+| ----- | ------------------------------------------ |
+| 1     | Automation controller web pod              |
+| 1     | Automation controller task pod             |
+| 1     | Automation hub web pod                     |
+| 1     | Automation hub API pod                     |
+| 2     | Automation hub content pod                 |
+| 2     | Automation hub worker pod                  |
+| 1     | Automation hub Redis pod                   |
+| 1     | Metrics service web pod                    |
+| 1     | Metrics service tasks pod                  |
+| 1     | Metrics service scheduler pod              |
+| 1     | Event-Driven Ansible API pod               |
+| 1     | Event-Driven Ansible activation worker pod |
+| 1     | Event-Driven Ansible default worker pod    |
+| 1     | Event-Driven Ansible event stream pod      |
+| 1     | Event-Driven Ansible scheduler pod         |
+| 1     | Platform gateway pod                       |
+| 1     | Database pod                               |
+| 1     | Redis pod                                  |
 
 Note:
 
@@ -50,7 +50,7 @@ Metrics service is deployed automatically when the AnsibleAutomationPlatform Cus
 
 - `<aap-name>`- **metrics-web** - REST API for metrics and dashboard data
 - `<aap-name>`- **metrics-tasks** - dispatcherd worker for background data collection
-- `<aap-name>`- **metrics-scheduler** - APScheduler for periodic collection tasks (6-hourly schedule)
+- `<aap-name>`- **metrics-scheduler** - APScheduler for periodic collection tasks (hourly and daily schedules)
 
 All database provisioning, secrets management, and routing configuration is handled automatically by the operators.
 

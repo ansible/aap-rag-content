@@ -1,7 +1,7 @@
 +++
+title = "Get organization-specific answers from the intelligent assistant - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-get_organization_specific_answers_from_the_intelligent_assistant"
-title = "Get organization-specific answers from the intelligent assistant - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-extend_the_intelligent_assistant_with_custom_knowledge/", "Extend the automation intelligent assistant with custom knowledge"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-get_organization_specific_answers_from_the_intelligent_assistant/aem-page/extend-get_organization_specific_answers_from_the_intelligent_assistant.html"
 last_crumb = "Get organization-specific answers from the intelligent assistant"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Get organization-specific answers from the intelligent assistant"
 oversized = "false"

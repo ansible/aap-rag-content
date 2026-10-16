@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-optimize_platform_performance/aem-page/optimize-optimize_platform_performance.html"
 last_crumb = "Optimize platform performance"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Optimize platform performance"
 oversized = "false"
@@ -29,7 +30,7 @@ type = "aem-page"
 
 Optimizing platform performance ensures your deployment responds efficiently to workload demands and maintains availability under load. Scale services appropriately and tune configurations to support your automation capacity requirements.
 
- Optimizing platform performance helps you to:
+Optimizing platform performance helps you to:
 
 - **Maintain system responsiveness**: Scale services and adjust capacity to handle workload demands and prevent request queueing or timeouts.
 - **Support growing automation workloads**: Plan deployment capacity based on your workload characteristics and add resources to accommodate increased managed hosts or concurrent jobs.

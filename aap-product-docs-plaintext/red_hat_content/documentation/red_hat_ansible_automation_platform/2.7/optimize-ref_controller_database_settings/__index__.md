@@ -10,7 +10,8 @@ The `VACUUM` and `ANALYZE` tasks are important maintenance activities that can i
 
 To improve the performance of the PostgreSQL server, configure the following *Grand Unified Configuration* (GUC) parameters that manage database memory. You can find these parameters inside the `$PDATA` directory in the `postgresql.conf` file, which manages the configurations of the database server.
 
-- `shared_buffers`: determines how much memory is dedicated to the server for caching data. The default value for this parameter is 128 MB. When you modify this value, you must set it between 15% and 25% of the machine’s total RAM. Note:
+- `shared_buffers`: determines how much memory is dedicated to the server for caching data. The default value for this parameter is 128 MB. When you modify this value, you must set it between 15% and 25% of the machine’s total RAM.
+Note:
 If you are compiling Postgres against OpenSSL 3.2, your system regresses to remove the parameter for User during startup. You can rectify this by using the BIO_get_app_data call instead of open_get_data. Only an administrator can make these changes, but it impacts all users connected to the PostgreSQL database. f you update your systems without the OpenSSL patch, you are not impacted, and you do not need to take action.
 
 Note:
@@ -21,7 +22,8 @@ If you are compiling Postgres against OpenSSL 3.2, your system regresses to remo
 
 If you update your systems without the OpenSSL patch, you are not impacted, and you do not need to take action.
 
-- `work_mem`: provides the amount of memory to be used by internal sort operations and hash tables before disk-swapping. Sort operations are used for order by, distinct, and merge join operations. Hash tables are used in hash joins and hash-based aggregation. The default value for this parameter is 4 MB. Setting the correct value of the `work_mem` parameter improves the speed of a search by reducing disk-swapping.   * Use the following formula to calculate the optimal value of the `work_mem` parameter for the database server:
+- `work_mem`: provides the amount of memory to be used by internal sort operations and hash tables before disk-swapping. Sort operations are used for order by, distinct, and merge join operations. Hash tables are used in hash joins and hash-based aggregation. The default value for this parameter is 4 MB. Setting the correct value of the `work_mem` parameter improves the speed of a search by reducing disk-swapping.
+* Use the following formula to calculate the optimal value of the `work_mem` parameter for the database server:
 
 ```
 Total RAM * 0.25 / max_connections

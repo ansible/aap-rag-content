@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-ref_initial_configuration/aem-page/secure-ref_initial_configuration.html"
 last_crumb = "Recommended security practices for access controls"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Recommended security practices for access controls"
 oversized = "false"
@@ -27,11 +28,18 @@ type = "aem-page"
 
 # Recommended security practices for access controls
 
-Granting access to certain parts of the system exposes security vulnerabilities. Apply the following practices to help secure access:
+Granting access to certain parts of the system exposes security vulnerabilities.
+Apply the following practices to help secure access:
 
-- Minimize access to system administrative accounts. There is a difference between the user interface (web interface) and access to the operating system that the automation controller is running on. A system administrator or super user can access, edit, and disrupt any system application. Anyone with root access to automation controller has the potential ability to decrypt those credentials, and so minimizing access to system administrative accounts is crucial for maintaining a secure system.
-- Minimize local system access. Automation controller should not require local user access except for administrative purposes. Non-administrator users should not have access to the automation controller system.
-- Enforce separation of duties. Different components of automation might need to access a system at different levels. Use different keys or credentials for each component so that the effect of any one key or credential vulnerability is minimized.
+- Minimize access to system administrative accounts.
+There is a difference between the user interface (web interface) and access to the operating system that the automation controller is running on.
+A system administrator or super user can access, edit, and disrupt any system application.
+Anyone with root access to automation controller has the potential ability to decrypt those credentials, and so minimizing access to system administrative accounts is crucial for maintaining a secure system.
+- Minimize local system access. Automation controller should not require local user access except for administrative purposes.
+Non-administrator users should not have access to the automation controller system.
+- Enforce separation of duties.
+Different components of automation might need to access a system at different levels.
+Use different keys or credentials for each component so that the effect of any one key or credential vulnerability is minimized.
 - Restrict automation controller to the minimum set of users possible for low-level automation controller configuration and disaster recovery only. In an automation controller context, any automation controller ‘system administrator’ or ‘superuser’ account can edit, change, and update any inventory or automation definition in automation controller.
 
 ## Use a configuration as code paradigm
@@ -42,11 +50,11 @@ The following Ansible content collections are available for managing Ansible Aut
 
 *Table 1. Ansible content collections*
 
-| Validated Collection           | Collection Purpose                                                                                                                                                                                       |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br> `infra.aap_utilities`     | <br>Ansible content for automating day 1 and day 2 operations of Ansible Automation Platform, including installation, backup and restore, certificate management, and more.                              |
-| <br> `infra.aap_configuration` | <br>A collection of roles to manage the creation of Ansible Automation Platform components, including users and groups (RBAC), projects, job templates and workflows, credentials, and more. This collection includes functionality from the older `infra.controller_configuration`, `infra.ah_configuration` and `infra.eda_configuration` and should be used in their place with Ansible Automation Platform 2.6. |
-| <br> `infra.ee_utilities`      | <br>A collection of roles for creating and managing execution environment images, or migrating from the older Tower virtualenvs to execution environments.                                               |
+| Validated Collection      | Collection Purpose                                                                                                                                                                                       |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `infra.aap_utilities`     | Ansible content for automating day 1 and day 2 operations of Ansible Automation Platform, including installation, backup and restore, certificate management, and more.                                  |
+| `infra.aap_configuration` | A collection of roles to manage the creation of Ansible Automation Platform components, including users and groups (RBAC), projects, job templates and workflows, credentials, and more. This collection includes functionality from the older `infra.controller_configuration`, `infra.ah_configuration` and `infra.eda_configuration` and should be used in their place with Ansible Automation Platform 2.6. |
+| `infra.ee_utilities`      | A collection of roles for creating and managing execution environment images, or migrating from the older Tower virtualenvs to execution environments.                                                   |
 
 Many organizations use CI/CD platforms to configure pipelines or other methods to manage this type of infrastructure. However, using Ansible Automation Platform natively, a webhook can be configured to link a Git-based repository natively. In this way, Ansible can respond to Git events to trigger Job Templates directly. This removes the need for external CI components from this overall process and thus reduces the attack surface.
 

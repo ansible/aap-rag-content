@@ -1,7 +1,7 @@
 +++
 template = "docs/aem-title.html"
-title = "Advanced configuration options - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_advanced_configuration_containerized"
+title = "Additional configuration options - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_aap_containerized_installation_intro/", "Install containerized Ansible Automation Platform"]]
@@ -9,10 +9,11 @@ category = "Install"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_advanced_configuration_containerized/aem-page/install-assembly_advanced_configuration_containerized.html"
-last_crumb = "Advanced configuration options"
-modified = "2026-07-30T17:12:56.473Z"
+last_crumb = "Additional configuration options"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
-name = "Advanced configuration options"
+name = "Additional configuration options"
 oversized = "false"
 page_slug = "install-assembly_advanced_configuration_containerized"
 portal_content_subtype = "title"
@@ -25,7 +26,7 @@ toc = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-asse
 type = "aem-page"
 +++
 
-# Advanced configuration options
+# Additional configuration options
 
 Configure external databases, custom TLS certificates, execution nodes, HAProxy load balancers, and hub storage for complex containerized Ansible Automation Platform deployments.
 

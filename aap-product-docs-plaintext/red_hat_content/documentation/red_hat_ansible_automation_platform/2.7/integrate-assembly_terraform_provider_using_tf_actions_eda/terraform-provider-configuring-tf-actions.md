@@ -5,7 +5,7 @@ To connect the event stream to Terraform actions, you configure the main TF file
 
 ### Procedure
 
-1.  Add a lifecycle block to call the Event-Driven Ansible event stream to your `*.tf` file. The `after_create` action will trigger the `action.aap_eda_eventstream_post.create`.  **Example**
+1. Add a lifecycle block to call the Event-Driven Ansible event stream to your `*.tf` file. The `after_create` action will trigger the `action.aap_eda_eventstream_post.create`.  **Example**
 
 The following example shows a `lifecycle` block added to the provisioning of an AWS EC2 server. After the new server is provisioned, the action runs.
 
@@ -116,7 +116,7 @@ url      = data.aap_eda_eventstream.eventstream.url
 }
 ```
 
-2.  (Required) Configure the following parameters:
+2. (Required) Configure the following parameters:
 
 - **`event_stream_config`:** (Attributes) Details for the Event-Driven Ansible event stream. You must include:
 * **`username`:** (String) Username to use when performing the POST to the event stream URL
@@ -126,9 +126,9 @@ url      = data.aap_eda_eventstream.eventstream.url
 - **`organization_name`:** (String) Organization name
 - **`template_type`:** (String) Template type: either `job` or `workflow_job`
 
-3.  (Optional) You can set `owners` to the Red Hat RHEL image ID so that the latest image is used each time the job runs.
-4.  (Optional) Set additional parameters as needed.
-5.  Configure an action integration with event payload specifications and target rulebook mapping.  **Example:**
+3. (Optional) You can set `owners` to the Red Hat RHEL image ID so that the latest image is used each time the job runs.
+4. (Optional) Set additional parameters as needed.
+5. Configure an action integration with event payload specifications and target rulebook mapping.  **Example:**
 
 ```
 - name: Dispatch TF Workflow Job Template Action

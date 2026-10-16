@@ -1,7 +1,7 @@
 +++
 title = "Assign notifiers and execution environments to organizations - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_organization_notifications"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_organization_notifications"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_managing_access/", "Manage access with role-based access control"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-proc_controller_organization_notifications/aem-page/secure-proc_controller_organization_notifications.html"
 last_crumb = "Assign notifiers and execution environments to organizations"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Assign notifiers and execution environments to organizations"
 oversized = "false"
@@ -31,11 +32,11 @@ When automation controller is enabled on the platform, you can review any notifi
 
 ## Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Organizations.
-2.  From the **Organizations** list view, select the organization whose notifications you want to manage.
-3.  Select the **Notification** tab.
-4.  Use the toggles to enable or disable the notifications to use with your particular organization.
-5.  If no notifiers have been set up, select Automation Execution> (and then)Administration> (and then)Notifiers from the navigation panel.
+1. From the navigation panel, select Access Management> (and then)Organizations.
+2. From the **Organizations** list view, select the organization whose notifications you want to manage.
+3. Select the **Notification** tab.
+4. Use the toggles to enable or disable the notifications to use with your particular organization.
+5. If no notifiers have been set up, select Automation Execution> (and then)Administration> (and then)Notifiers from the navigation panel.
 
 ## Work with execution environments
 
@@ -47,11 +48,11 @@ For more information about execution environments, see [Define, create, and buil
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Organizations.
-2.  From the Organizations list view, select the organization whose execution environments you want to manage.
-3.  Select the **Execution Environments** tab.
-4.  If no execution environments are available, click Create execution environment to create one. Alternatively, you can create an execution environment from the navigation panel by selecting Automation Execution> (and then)Infrastructure> (and then)Execution Environments.
-5.  Click Create execution environment. Note:
+1. From the navigation panel, select Access Management> (and then)Organizations.
+2. From the Organizations list view, select the organization whose execution environments you want to manage.
+3. Select the **Execution Environments** tab.
+4. If no execution environments are available, click Create execution environment to create one. Alternatively, you can create an execution environment from the navigation panel by selecting Automation Execution> (and then)Infrastructure> (and then)Execution Environments.
+5. Click Create execution environment. Note:
       After creating a new execution environments, return to Access Management> (and then)Organizations and select the organization in which you created the execution environment to update the list on that tab.
 
-6.  Select the execution environments to use with your particular organization.
+6. Select the execution environments to use with your particular organization.

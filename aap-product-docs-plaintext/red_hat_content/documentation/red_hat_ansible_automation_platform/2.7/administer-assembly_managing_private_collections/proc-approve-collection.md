@@ -13,10 +13,11 @@ All collections awaiting review are located in Automation Content> (and then)Col
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Content> (and then)Collection Approvals. Collections requiring approval have the status **Needs review**.
+1. From the navigation panel, select Automation Content> (and then)Collection Approvals.
+Collections requiring approval have the status **Needs review**.
 
-2.  Find the collection you want to review in the list. You can also filter collections by Namespace, Repository, and Status using the search bar.
-3.  Click the thumbs up icon to approve and sign the collection. Confirm your choice in the modal that appears.
+2. Find the collection you want to review in the list. You can also filter collections by Namespace, Repository, and Status using the search bar.
+3. Click the thumbs up icon to approve and sign the collection. Confirm your choice in the modal that appears.
 
 ### Results
 

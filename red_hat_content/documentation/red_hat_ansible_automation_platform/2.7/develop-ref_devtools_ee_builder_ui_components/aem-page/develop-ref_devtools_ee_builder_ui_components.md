@@ -1,16 +1,17 @@
 +++
+template = "docs/aem-title.html"
 title = "Execution environment builder custom UI components - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_devtools_ee_builder_ui_components"
-template = "docs/aem-title.html"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"]]
-category = ""
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-build_execution_environments_with_the_automation_portal/", "Build execution environments with automation portal"]]
+category = "Develop"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-ref_devtools_ee_builder_ui_components/aem-page/develop-ref_devtools_ee_builder_ui_components.html"
 last_crumb = "Execution environment builder custom UI components"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Execution environment builder custom UI components"
 oversized = "false"
@@ -25,9 +26,9 @@ toc = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-ref_
 type = "aem-page"
 +++
 
-# EE Builder custom UI components
+# Execution environment builder custom UI components
 
-Custom UI components are available for use in Backstage Software Templates to provide specialized form fields for creating and configuring execution environment definitions.
+Custom UI components are available for use in software templates to provide specialized form fields for creating and configuring execution environment definitions in Ansible automation portal.
 
 To use a component in your template, set the `ui:field` property on a parameter:
 
@@ -110,7 +111,7 @@ Provides an interface for adding discovery tags to an execution environment defi
 
 ## ScmSelector
 
-Provides a source control management (SCM) provider selector with built-in authentication. Users select a configured GitHub or GitLab instance, then authenticate through the SCM provider's OAuth flow. The component validates credentials and displays connection status.
+Provides a source control management (SCM) provider selector with built-in authentication. Users select a configured GitHub or GitLab instance, then authenticate through the SCM provider OAuth flow. The component validates credentials and displays connection status.
 
 | Property                                       | Description                                                                                               |
 | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------- |

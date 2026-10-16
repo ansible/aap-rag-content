@@ -5,8 +5,8 @@ Set the `fapolicyd` daemon to permissive mode before installing Ansible Automati
 
 ### Procedure
 
-1.  Edit the file `/etc/fapolicyd/fapolicyd.conf` and set "permissive = 1".
-2.  Restart the service with the command
+1. Edit the file `/etc/fapolicyd/fapolicyd.conf` and set "permissive = 1".
+2. Restart the service with the command
 `sudo systemctl restart fapolicyd.service`
 
 Note:

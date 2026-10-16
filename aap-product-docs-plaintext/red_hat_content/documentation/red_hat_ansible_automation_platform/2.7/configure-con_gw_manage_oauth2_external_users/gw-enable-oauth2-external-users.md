@@ -5,10 +5,10 @@ To enable external users to create OAuth2 tokens, change the appropriate setting
 
 ### Procedure
 
-1.  From the navigation panel, go to Settings> (and then)Platform gateway.
-2.  Click Edit platform gateway settings.
-3.  Change the **Allow external users to create OAuth2 tokens** setting to **Enabled**.
-4.  Click Save platform gateway settings.
+1. From the navigation panel, go to Settings> (and then)Platform gateway.
+2. Click Edit platform gateway settings.
+3. Change the **Allow external users to create OAuth2 tokens** setting to **Enabled**.
+4. Click Save platform gateway settings.
 
 ### What to do next
 

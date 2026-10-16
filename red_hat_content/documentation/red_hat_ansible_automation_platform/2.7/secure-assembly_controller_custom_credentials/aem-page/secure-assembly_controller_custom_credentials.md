@@ -1,7 +1,7 @@
 +++
 title = "Custom credential types - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_custom_credentials"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_custom_credentials"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_credentials/", "Configure credentials to authenticate remote systems and services"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_custom_credentials/aem-page/secure-assembly_controller_custom_credentials.html"
 last_crumb = "Custom credential types"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Custom credential types"
 oversized = "false"
@@ -27,7 +28,8 @@ type = "aem-page"
 
 # Custom credential types
 
-As a system administrator, you can define a custom credential type in a standard format by using a YAML or JSON-like definition. You can define a custom credential type that works in ways similar to existing credential types.
+As a system administrator, you can define a custom credential type in a standard format by using a YAML or JSON-like definition.
+You can define a custom credential type that works in ways similar to existing credential types.
 
 For example, a custom credential type can inject an API token for a third-party web service into an environment variable, for your playbook or custom inventory script to consume.
 
@@ -37,13 +39,17 @@ Custom credentials support the following ways of injecting their authentication 
 - Ansible extra variables
 - File-based templating, which means generating `.ini` or `.conf` files that contain credential values
 
-You can attach one SSH and multiple cloud credentials to a job template. Each cloud credential must be of a different type. Only one of each type of credential is permitted. Vault credentials and machine credentials are separate entities.
+You can attach one SSH and multiple cloud credentials to a job template.
+Each cloud credential must be of a different type.
+Only one of each type of credential is permitted.
+Vault credentials and machine credentials are separate entities.
 
- Note:
+Note:
 
 - When creating a new credential type, you must avoid collisions in the `extra_vars`, `env`, and file namespaces.
 - Environment variable or extra variable names must not start with `ANSIBLE_` because they are reserved.
-- You must have System administrator (superuser) permissions to be able to create and edit a credential type (`CredentialType`) and to be able to view the `CredentialType.injection` field.
+- You must have System administrator (superuser) permissions to be able to create and edit a credential type (`CredentialType`) and to be
+able to view the `CredentialType.injection` field.
 
 ## Content sourcing from collections
 
@@ -85,16 +91,16 @@ curl "https://controller.example.org/api/v2/credentials/?credential_type__namesp
 
 In the V2 Credential Type model, the relationships are defined as follows:
 
-| Machine      | SSH                                                                 |
-| ------------ | ------------------------------------------------------------------- |
-| <br>Vault    | <br>Vault                                                           |
-| <br>Network  | <br>Sets environment variables, for example `ANSIBLE_NET_AUTHORIZE` |
-| <br>SCM      | <br>Source Control                                                  |
-| <br>Cloud    | <br>EC2, AWS                                                        |
-| <br>Cloud    | <br>Many others                                                     |
-| <br>Insights | <br>Insights                                                        |
-| <br>Galaxy   | <br>galaxy.ansible.com, console.redhat.com                          |
-| <br>Galaxy   | <br>on-premise automation hub                                       |
+| Machine  | SSH                                                             |
+| -------- | --------------------------------------------------------------- |
+| Vault    | Vault                                                           |
+| Network  | Sets environment variables, for example `ANSIBLE_NET_AUTHORIZE` |
+| SCM      | Source Control                                                  |
+| Cloud    | EC2, AWS                                                        |
+| Cloud    | Many others                                                     |
+| Insights | Insights                                                        |
+| Galaxy   | galaxy.ansible.com, console.redhat.com                          |
+| Galaxy   | on-premise automation hub                                       |
 
 ### Content verification
 

@@ -9,8 +9,8 @@ When user accounts have been migrated to Ansible Automation Platform 2.6 during 
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Users.
-2.  In the **Search** bar, enter an appropriate keyword for the user you want to search for and click the arrow icon.
-3.  From the menu bar, you can sort the list of users by using the arrows for **Username**, **Email**, **First name**, **Last name** or **Last login** to toggle your sorting preference.
-4.  You can view user details by selecting a **Username** from the **Users** list view.
+1. From the navigation panel, select Access Management> (and then)Users.
+2. In the **Search** bar, enter an appropriate keyword for the user you want to search for and click the arrow icon.
+3. From the menu bar, you can sort the list of users by using the arrows for **Username**, **Email**, **First name**, **Last name** or **Last login** to toggle your sorting preference.
+4. You can view user details by selecting a **Username** from the **Users** list view.
 

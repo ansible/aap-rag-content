@@ -1,16 +1,17 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_accessing_deployment"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_accessing_deployment"
 title = "Update the deployment URL - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_about/", "Install Ansible automation portal (OpenShift Container Platform only)"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-install_automation_portal_on_openshift_container_platform/", "Install automation portal on OpenShift Container Platform"]]
 category = "Install"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_accessing_deployment/aem-page/install-assembly_self_service_accessing_deployment.html"
 last_crumb = "Update the deployment URL"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Update the deployment URL"
 oversized = "false"
@@ -31,7 +32,8 @@ Complete the necessary post-installation configuration, including updating the O
 
 ## Add the deployment URL to the OAuth Application
 
-When you set up your OAuth application in Ansible Automation Platform before deploying Ansible automation portal, you added placeholder text for the `Redirect URIs` value.
+When you set up your OAuth application in Ansible Automation Platform before deploying Ansible automation portal,
+you added placeholder text for the `Redirect URIs` value.
 
 ### About this task
 
@@ -39,18 +41,21 @@ You must update this value using the URL from the deployed application so that y
 
 ### Procedure
 
-1.  Determine the `Redirect URI` from your OpenShift deployment:
-  1.  Open the URL for the deployment from the OpenShift console to display the sign-in page for Ansible automation portal.  
-![Open URL from OpenShift web console](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/self-service-topology-get-url.png)  
-  2.  Copy the URL for the sign-in page for Ansible automation portal.
-  3.  To determine the `Redirect URI` value, append `/api/auth/rhaap/handler/frame` to the end of the deployment URL. For example, if the URL for the deployment is `https://my-automation-portal-project.mycluster.com`, then the `Redirect URI` value is `https://my-automation-portal-project.mycluster.com/api/auth/rhaap/handler/frame`.
+1. Determine the `Redirect URI` from your OpenShift deployment:
+  1. Open the URL for the deployment from the OpenShift console to display the sign-in page for Ansible automation portal.
 
-2.  Update the `Redirect URIs` field in the OAuth application in Ansible Automation Platform:
-  1.  In a browser, open your instance of Ansible Automation Platform.
-  2.  Navigate to Access Management> (and then)OAuth Applications.
-  3.  In the list view, click the OAuth application you created.
-  4.  Replace the placeholder text in the `Redirect URIs` field with the value you determined from your OpenShift deployment.
-  5.  Click `Save` to apply the changes.
+![Open URL from OpenShift web console](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/self-service-topology-get-url.png)  
+  2. Copy the URL for the sign-in page for Ansible automation portal.
+  3. To determine the `Redirect URI` value, append `/api/auth/rhaap/handler/frame` to the end of the deployment URL.
+            For example, if the URL for the deployment is `https://my-automation-portal-project.mycluster.com`,
+then the `Redirect URI` value is `https://my-automation-portal-project.mycluster.com/api/auth/rhaap/handler/frame`.
+
+2. Update the `Redirect URIs` field in the OAuth application in Ansible Automation Platform:
+  1. In a browser, open your instance of Ansible Automation Platform.
+  2. Navigate to Access Management> (and then)OAuth Applications.
+  3. In the list view, click the OAuth application you created.
+  4. Replace the placeholder text in the `Redirect URIs` field with the value you determined from your OpenShift deployment.
+  5. Click `Save` to apply the changes.
 
 ## Sign in to Ansible automation portal
 
@@ -63,13 +68,13 @@ Log in to the deployed Ansible automation portal using your existing Ansible Aut
 
 ### Procedure
 
-1.  In a browser, navigate to the URL for Ansible automation portal to open the sign-in page.  
+1. In a browser, navigate to the URL for Ansible automation portal to open the sign-in page.  
 ![Self-service sign-in page](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/self-service-sign-in-page.png)  
-2.  Click Sign In.
-3.  The sign-in page for Ansible Automation Platform appears:  
+2. Click Sign In.
+3. The sign-in page for Ansible Automation Platform appears:  
 ![Ansible Automation Platform sign-in page](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/rhaap-sign-in-page.png)  
-4.  Enter your Ansible Automation Platform credentials and click **Log in**.
-5.  The Ansible automation portal web console opens.
+4. Enter your Ansible Automation Platform credentials and click **Log in**.
+5. The Ansible automation portal web console opens.
 
 If you are using custom or self-signed SSL certificates and when attempting to log in to Ansible automation portal, it displays the error:
 
@@ -79,6 +84,6 @@ This error indicates that Ansible automation portal cannot verify the SSL certif
 
 To resolve this issue, configure Ansible automation portal to trust your custom CA certificate.
 
- Note:
+Note:
 
 While you can disable SSL validation by setting `checkSSL: false` in the Helm chart configuration, this approach is not recommended for production environments as it reduces security. Instead, configure Ansible automation portal to trust your custom CA certificate.

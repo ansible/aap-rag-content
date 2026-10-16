@@ -11,13 +11,13 @@ You must assign a unique metadata.name to each custom resource (CR) in your name
 
 ### Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  Navigate to Operators> (and then)Installed Operators.
-3.  Select your Ansible Automation Platform Operator deployment.
-4.  Select the **Ansible Automation Platform** tab.
-5.  Click the ⋮ icon next to your Ansible Automation Platform instance and select **Edit AnsibleAutomationPlatform** .
-6.  Click **YAML view** and locate the `spec.controller:` section..
-7.  Configure the route options under the `controller:` section:
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to Operators> (and then)Installed Operators.
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select the **Ansible Automation Platform** tab.
+5. Click the ⋮ icon next to your Ansible Automation Platform instance and select **Edit AnsibleAutomationPlatform** .
+6. Click **YAML view** and locate the `spec.controller:` section..
+7. Configure the route options under the `controller:` section:
 
 
 ```
@@ -30,7 +30,7 @@ route_tls_secret: controller-tls-secret  # Optional: TLS credential secret
 projects_persistence: false  # Enable/disable persistence for /var/lib/projects
 ```
 
-8.  Click **Save.**
+8. Click **Save.**
 
 Note:
 Edge termination is recommended for most instances. After configuring your route, you can customize additional route settings by adding them to the `controller:` section in the Ansible Automation Platform custom resource.

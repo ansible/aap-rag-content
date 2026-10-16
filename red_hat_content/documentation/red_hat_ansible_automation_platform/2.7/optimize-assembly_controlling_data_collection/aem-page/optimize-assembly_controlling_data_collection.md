@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_controlling_data_collection"
 title = "Manage analytics and data collection in Ansible Automation Platform - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_controlling_data_collection"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_controlling_data_collection/", "Manage analytics and data collection in Ansible Automation Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-assembly_controlling_data_collection/aem-page/optimize-assembly_controlling_data_collection.html"
 last_crumb = "Manage analytics and data collection in Ansible Automation Platform"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Manage analytics and data collection in Ansible Automation Platform"
 oversized = "false"
@@ -43,6 +44,6 @@ You can control how automation controller collects data from the Settings> (and 
 
 ### Procedure
 
-1.  Log in to your automation controller.
-2.  From the navigation panel, select Settings> (and then)Automation Execution> (and then)System.
-3.  Select **Gather data for Automation Analytics** to enable automation controller to gather data on automation and send it to Automation Analytics.
+1. Log in to your automation controller.
+2. From the navigation panel, select Settings> (and then)Automation Execution> (and then)System.
+3. Select **Gather data for Automation Analytics** to enable automation controller to gather data on automation and send it to Automation Analytics.

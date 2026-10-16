@@ -14,9 +14,11 @@ $ ansible-sign project gpg-verify .
 
 Note:
 
-By default, `ansible-sign` makes use of your default GPG keyring to look for a matching public key. You can specify a keyring file with the `--keyring` option, or a different GPG home with the `--gnugpg-home` option.
+By default, `ansible-sign` makes use of your default GPG keyring to look for a matching public key.
+You can specify a keyring file with the `--keyring` option, or a different GPG home with the `--gnugpg-home` option.
 
-If verification fails for any reason, information is displayed to help you debug the cause. More verbosity can be enabled by passing the global `--debug` flag, immediately after `ansible-sign` in your commands.
+If verification fails for any reason, information is displayed to help you debug the cause.
+More verbosity can be enabled by passing the global `--debug` flag, immediately after `ansible-sign` in your commands.
 
 Note:
 

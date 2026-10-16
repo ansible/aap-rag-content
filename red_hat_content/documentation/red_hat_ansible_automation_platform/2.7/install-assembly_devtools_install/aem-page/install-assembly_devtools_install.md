@@ -1,18 +1,19 @@
 +++
-title = "Install Ansible development tools - Red Hat Ansible Automation Platform 2.7"
+title = "Set up your development environment - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_devtools_install"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_devtools_install/", "Install Ansible development tools"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_devtools_install/", "Set up your development environment"]]
 category = "Install"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_devtools_install/aem-page/install-assembly_devtools_install.html"
-last_crumb = "Install Ansible development tools"
-modified = "2026-07-30T17:12:56.473Z"
+last_crumb = "Set up your development environment"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
-name = "Install Ansible development tools"
+name = "Set up your development environment"
 oversized = "false"
 page_slug = "install-assembly_devtools_install"
 portal_content_subtype = "title"
@@ -25,11 +26,11 @@ toc = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-asse
 type = "aem-page"
 +++
 
-# Install Ansible development tools
+# Set up your development environment
 
-You have two options for installing Ansible development tools, so that you can choose the installation method that best suits your preferred operating system and development environment.
+Set up your development environment with the tools and extensions you need to create Ansible automation content.
 
-Red Hat provides two options for installing Ansible development tools.
+To get started, install the Ansible VS Code extension and the Ansible development tools package. Red Hat provides two options for installing the development tools package:
 
 - Installation on a RHEL container running inside VS Code. You can install this option on MacOS, Windows, and Linux systems.
 - Installation on your local RHEL system using an RPM (Red Hat Package Manager) package.

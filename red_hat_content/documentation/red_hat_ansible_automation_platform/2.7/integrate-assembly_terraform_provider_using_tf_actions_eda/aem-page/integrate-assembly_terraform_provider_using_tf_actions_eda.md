@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_terraform_provider_using_tf_actions_eda"
-template = "docs/aem-title.html"
 title = "Use TF Actions with Event-Driven Ansible - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_terraform_introduction/", "Integrate with IBM HashiCorp Terraform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/integrate-assembly_terraform_provider_using_tf_actions_eda/aem-page/integrate-assembly_terraform_provider_using_tf_actions_eda.html"
 last_crumb = "Use TF Actions with Event-Driven Ansible"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Use TF Actions with Event-Driven Ansible"
 oversized = "false"
@@ -46,10 +47,10 @@ To use TF Actions with Event-Driven Ansible, you must first configure the event 
 
 ### Procedure
 
-1.  Log in to the Ansible Automation Platform user interface.
-2.  Navigate to **Automation Decisions> (and then)Event Streams**.
-3.  Click Create event stream.
-4.  On the **Create event stream** page, edit the fields:
+1. Log in to the Ansible Automation Platform user interface.
+2. Navigate to **Automation Decisions> (and then)Event Streams**.
+3. Click Create event stream.
+4. On the **Create event stream** page, edit the fields:
 
   - **Name:** A descriptive, unique name for your event stream (such as `Terraform provider_Events`).
   - **Organization:** Select the organization this event stream will belong to (usually `Default` or your specific organization).
@@ -58,13 +59,13 @@ To use TF Actions with Event-Driven Ansible, you must first configure the event 
   - **Headers:** (Optional) Enter comma-separated HTTP header keys that you want to include in the event payload that gets forwarded to the rulebook. Leave this empty to include all headers.
   - **Forward events to rulebook activation:** This option is typically enabled by default. Disabling it is useful for testing and diagnosing your connection and incoming data without inadvertently triggering any automation.
 
-5.  Click Create event stream. Then navigate to **Automation Decisions> (and then)Event Streams** to verify the event stream was created and see the number of events received so far. You can also click on the specific stream to see its detailed configuration, including the organization, event stream type, associated credential, and event forwarding settings.
+5. Click Create event stream. Then navigate to **Automation Decisions> (and then)Event Streams** to verify the event stream was created and see the number of events received so far. You can also click on the specific stream to see its detailed configuration, including the organization, event stream type, associated credential, and event forwarding settings.
 
-6.  Set up a rule book activation. Make sure to:
-  1.  Add the event stream to the rulebook.
-  2.  (Recommended) Select the **Rulebook activation enabled?** option to automatically start the activation after creation.
-  3.  Activate the rulebook.
-7.  Select **Automation Decisions> (and then)Rulebook Activations** to verify that the rulebook is active and check its status.
+6. Set up a rule book activation. Make sure to:
+  1. Add the event stream to the rulebook.
+  2. (Recommended) Select the **Rulebook activation enabled?** option to automatically start the activation after creation.
+  3. Activate the rulebook.
+7. Select **Automation Decisions> (and then)Rulebook Activations** to verify that the rulebook is active and check its status.
 
 ## Configure TF Actions
 
@@ -72,7 +73,7 @@ To connect the event stream to Terraform actions, you configure the main TF file
 
 ### Procedure
 
-1.  Add a lifecycle block to call the Event-Driven Ansible event stream to your `*.tf` file. The `after_create` action will trigger the `action.aap_eda_eventstream_post.create`.  **Example**
+1. Add a lifecycle block to call the Event-Driven Ansible event stream to your `*.tf` file. The `after_create` action will trigger the `action.aap_eda_eventstream_post.create`.  **Example**
 
     The following example shows a `lifecycle` block added to the provisioning of an AWS EC2 server. After the new server is provisioned, the action runs.
 
@@ -183,7 +184,7 @@ terraform {
 }
 ```
 
-2.  (Required) Configure the following parameters:
+2. (Required) Configure the following parameters:
 
   - **`event_stream_config`:** (Attributes) Details for the Event-Driven Ansible event stream. You must include:
     * **`username`:** (String) Username to use when performing the POST to the event stream URL
@@ -193,9 +194,9 @@ terraform {
   - **`organization_name`:** (String) Organization name
   - **`template_type`:** (String) Template type: either `job` or `workflow_job`
 
-3.  (Optional) You can set `owners` to the Red Hat RHEL image ID so that the latest image is used each time the job runs.
-4.  (Optional) Set additional parameters as needed.
-5.  Configure an action integration with event payload specifications and target rulebook mapping.  **Example:**
+3. (Optional) You can set `owners` to the Red Hat RHEL image ID so that the latest image is used each time the job runs.
+4. (Optional) Set additional parameters as needed.
+5. Configure an action integration with event payload specifications and target rulebook mapping.  **Example:**
 
 ```
 - name: Dispatch TF Workflow Job Template Action
@@ -222,15 +223,15 @@ After you configure your Terraform plan to include Event-Driven Ansible events, 
 
 ### Procedure
 
-1.  Run `terraform init` to initialize your working directory.
-2.  Use `terraform plan` to commit to create the plan. The following example also saves the plan to a file named `tfplan.out`, but you can specify any name for the plan. Saving the plan is a best practice for automation because the saved plan is strictly enforced.
+1. Run `terraform init` to initialize your working directory.
+2. Use `terraform plan` to commit to create the plan. The following example also saves the plan to a file named `tfplan.out`, but you can specify any name for the plan. Saving the plan is a best practice for automation because the saved plan is strictly enforced.
 
 ```
 terraform plan -out=tfplan.out
 ```
 
-3.  Review the plan output.
-4.  Apply the saved plan.
+3. Review the plan output.
+4. Apply the saved plan.
 
 ```
 terraform apply tfplan.out
