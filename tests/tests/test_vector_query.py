@@ -64,6 +64,14 @@ SOLUTION_GUIDE_QUERIES = {
         "query": "Red Hat AI Inference Server",
         "expected_url": SOLUTION_GUIDE_URL_PREFIX + "README-Intelligent-Assistant-RHAIIS",
     },
+    "splunk": {
+        "query": "Splunk IT Service Intelligence",
+        "expected_url": SOLUTION_GUIDE_URL_PREFIX + "README-AIOps-Splunk-ITSI",
+    },
+    "pqc": {
+        "query": "Post Quantum Cryptography",
+        "expected_url": SOLUTION_GUIDE_URL_PREFIX + "README-PQC-Discovery",
+    },
 }
 
 
@@ -280,6 +288,30 @@ class TestSolutionGuidesQuery:
             SOLUTION_GUIDE_QUERIES["rhaiis"]["query"],
         )
         expected = SOLUTION_GUIDE_QUERIES["rhaiis"]["expected_url"]
+        assert any(expected in url for url in urls), (
+            f"Expected a chunk from {expected} in top {self.TOP_K} results, " f"got URLs: {urls}"
+        )
+
+    def test_splunk_query_returns_splunk_guide(self, embedding_model, built_vector_db):
+        """Verify a Splunk ITSI query returns chunks from the Splunk ITSI solution guide."""
+        urls = self._query_top_urls(
+            embedding_model,
+            built_vector_db,
+            SOLUTION_GUIDE_QUERIES["splunk"]["query"],
+        )
+        expected = SOLUTION_GUIDE_QUERIES["splunk"]["expected_url"]
+        assert any(expected in url for url in urls), (
+            f"Expected a chunk from {expected} in top {self.TOP_K} results, " f"got URLs: {urls}"
+        )
+
+    def test_pqc_query_returns_pqc_guide(self, embedding_model, built_vector_db):
+        """Verify a Post Quantum Cryptography query returns chunks from the PQC Discovery guide."""
+        urls = self._query_top_urls(
+            embedding_model,
+            built_vector_db,
+            SOLUTION_GUIDE_QUERIES["pqc"]["query"],
+        )
+        expected = SOLUTION_GUIDE_QUERIES["pqc"]["expected_url"]
         assert any(expected in url for url in urls), (
             f"Expected a chunk from {expected} in top {self.TOP_K} results, " f"got URLs: {urls}"
         )
