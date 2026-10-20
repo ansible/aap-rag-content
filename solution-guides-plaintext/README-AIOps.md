@@ -1,84 +1,17 @@
-{% raw %}
-# AIOps automation with Ansible - Solution Guide <!-- omit in toc -->
-
-<style>
-  div#toc {
-    display: none;
-  }
-</style>
-
-
-
 ## Overview
 
 Traditional event-driven automation is **deterministic** -- for every event you want to handle, you write a specific rule and a corresponding action. Ten known failure scenarios means ten rules. A hundred means a hundred. This creates a **linear scaling problem**: as your IT environment grows in complexity, so does the number of rules you must author, test, and maintain.
 
 | Approach | Events | Rules Required | Actions |
 |----------|--------|---------------|---------|
-| Traditional EDA | 10 | 10 | 10 |
-| Traditional EDA | 100 | 100 | 100 |
-| Traditional EDA | 1,000 | 1,000 | 1,000 |
-| **AIOps with EDA** | **1,000** | **1** (+ AI inference) | **Dynamic** |
+| Traditional event-driven | 10 | 10 | 10 |
+| Traditional event-driven | 100 | 100 | 100 |
+| Traditional event-driven | 1,000 | 1,000 | 1,000 |
+| **AIOps with Event-Driven Ansible (EDA)** | **1,000** | **Few rulebooks** (+ AI inference) | **Curated or governed** |
 
-AIOps breaks this linear relationship by inserting **AI inference** between the event and the action. Instead of hand-coding a rule for every possible failure mode, a single intelligent workflow captures the event, uses AI to diagnose the root cause, and generates the remediation dynamically. This guide demonstrates how to build that workflow using Ansible Automation Platform.
+AIOps breaks this linear relationship by inserting **AI inference** between the event and **governed Ansible execution**. Most production paths **enrich** signals or **select from pre-approved job templates** rather than generating new playbooks at incident time. This guide maps operational patterns (Crawl/Walk/Run), partner integrations, and the **curated remediation** workflow most teams deploy. For the hands-on workshop pipeline, see [Self-healing infrastructure (use case 6)](README-AIOps-Use-Case-06-Self-Healing-Infrastructure.md).
 
-> **Where does AIOps fit?**
->
-> The industry is moving through three generations of IT automation: **task-based** automation (running known playbooks on a schedule or trigger), **event-driven** automation (reacting to known conditions with pre-written rules), and **agent-driven** automation (handling novel situations with real-time contextual judgment). Most organizations today rely heavily on task-based automation, with event-driven adoption growing and agent-driven still emerging. AIOps with Ansible bridges event-driven and agent-driven by using AI to handle situations you *didn't* explicitly write rules for, without requiring a fully autonomous agent.
-
-- [Overview](#overview)
-- [Background](#background)
-- [Solution](#solution)
-  - [Who Benefits](#who-benefits)
-- [Prerequisites](#prerequisites)
-  - [Ansible Automation Platform](#ansible-automation-platform)
-  - [Featured Ansible Content Collections](#featured-ansible-content-collections)
-  - [External Systems](#external-systems)
-- [AIOps Workflow](#aiops-workflow)
-  - [Operational Impact per Stage](#operational-impact-per-stage)
-  - [Example Workflow Diagram](#example-workflow-diagram)
-- [1. Event-Driven Ansible (EDA) Response](#1-event-driven-ansible-eda-response)
-  - [Example Walkthrough for EDA Response](#example-walkthrough-for-eda-response)
-  - [1. **IT infrastructure event**:](#1-it-infrastructure-event)
-    - [ Application-Level Events](#-application-level-events)
-    - [ Infrastructure & Platform Events](#-infrastructure--platform-events)
-    - [ Network & Security Events](#-network--security-events)
-    - [Observability-Driven Triggers](#observability-driven-triggers)
-  - [2. **Observability tool picks up event**:](#2-observability-tool-picks-up-event)
-    - [Filebeat](#filebeat)
-    - [IBM Instana](#ibm-instana)
-    - [Splunk](#splunk)
-  - [3. **EDA sees event in message queue**](#3-eda-sees-event-in-message-queue)
-    - [AWS SQS](#aws-sqs)
-    - [Azure Service Bus](#azure-service-bus)
-    - [Kafka](#kafka)
-- [2. Log Enrichment and Prompt Generation Workflow](#2-log-enrichment-and-prompt-generation-workflow)
-  - [1. Capture Additional Information](#1-capture-additional-information)
-  - [2. Red Hat AI: Analyze Incident](#2-red-hat-ai-analyze-incident)
-    - [Tools That Support the OpenAI-Compatible API](#tools-that-support-the-openai-compatible-api)
-  - [3. Notify Chat / ITSM](#3-notify-chat--itsm)
-    - [Mattermost](#mattermost)
-    - [ServiceNow](#servicenow)
-    - [Slack](#slack)
-  - [4. Build Ansible Lightspeed Job Template](#4-build-ansible-lightspeed-job-template)
-- [3. Remediation Workflow](#3-remediation-workflow)
-  - [1. Lightspeed Remediation Playbook Generator](#1-lightspeed-remediation-playbook-generator)
-  - [2. Commit Fix to Git](#2-commit-fix-to-git)
-  - [3. Sync Project](#3-sync-project)
-  - [4. Build Remediation Template](#4-build-remediation-template)
-- [4. Execute Remediation](#4-execute-remediation)
-  - [Policy Enforcement](#policy-enforcement)
-- [Validation](#validation)
-  - [Troubleshooting Across Workflow Boundaries](#troubleshooting-across-workflow-boundaries)
-- [AIOps Maturity Path](#aiops-maturity-path)
-  - [The Broader AIOps Journey](#the-broader-aiops-journey)
-  - [Self-Healing Infrastructure: Crawl, Walk, Run](#self-healing-infrastructure-crawl-walk-run)
-- [Related Guides](#related-guides)
-- [Summary](#summary)
-
-<h2 id="background"></h2>
-
-## Background
+<h2 id="background">Background</h2>
 
 **AIOps** stands for *artificial intelligence* for IT operations. It refers both to a modern approach to managing IT operations and to the software systems that implement it. AIOps uses data science, big data, and machine learning to augment--or even automate--many traditionally manual IT tasks. The goal is to improve issue detection, root cause analysis, and system resolution.
 
@@ -100,31 +33,23 @@ There are three major parts of AIOps:
 - **Automation**: Automatically detect, respond to, and resolve IT issues.
    -  <a target="_blank" href="https://www.redhat.com/en/blog/aiops-and-ansible-automation-platform-where-ai-intelligence-meets-trusted-execution">AIOps and Ansible Automation Platform: Where AI intelligence meets trusted execution</a>
 
-**Ansible Automation Platform** connects **observability** and **inference** to build **self-healing infrastructure.**
+**Ansible Automation Platform** connects **observability** and **inference** to build **self-healing infrastructure.** Adoption is incremental: start with the loop that matches your maturity stage, then add inference, orchestration, and deeper Red Hat AI capabilities when a use case benefits from them.
 
-> **AIOps adoption can be incremental.**
->
-> You don’t need full automation on Day One. *Start small, think big!*
+### Where AIOps sits in the automation stack
 
-<h2 id="solution"></h2>
+Organizations usually run more than one kind of automation initiative at the same time. These are the common types -- not a ladder you must climb:
 
-## Solution
+| Automation | What it does |
+|------------|--------------|
+| **Task-based** | Run known playbooks on a schedule or trigger |
+| **Event-driven** | React to known conditions with pre-written rules |
+| **Agent-driven** | Handle novel situations with real-time contextual judgment |
 
-What makes up the solution?
+Most teams still lean heavily on **task-based** work, with **event-driven** adoption growing and **agent-driven** still emerging. **AIOps with Ansible** bridges event-driven and agent-driven: AI inference enriches signals or helps **pick the right unit of automation your team already built and approved** -- a job template or workflow in AAP such as "restart httpd," "expand /var to 80 GB," or "patch CVE-2024-6387" -- then **AAP** executes with governance. That is Crawl/Walk in this guide -- not a fully autonomous agent on day one. Deeper Run autonomy still stays inside policy and the same approved automation.
 
--  **Red Hat AI** for understanding service issues <a target="_blank" href="https://www.redhat.com/en/products/ai">[Link]</a>
--  **Automation code assistant** to generate remediation playbooks <a target="_blank" href="https://www.redhat.com/en/technologies/management/ansible/ansible-lightspeed">[Link]</a>
--  **Red Hat Lightspeed** for CVE and Advisor remediation playbooks <a target="_blank" href="https://console.redhat.com">[Link]</a>
--  **Ansible Automation Platform (AAP)** workflows for orchestration <a target="_blank" href="https://www.redhat.com/en/blog/aiops-and-ansible-automation-platform-where-ai-intelligence-meets-trusted-execution">[Link]</a>
--  **Event-Driven Ansible (EDA)** to listen to real-time service events <a target="_blank" href="https://www.redhat.com/en/technologies/management/ansible/event-driven-ansible">[Link]</a>
+<h2 id="solution">Solution</h2>
 
-> **EDA is part of Ansible Automation Platform.**
->
-> It is referred to separately sometimes depending on the workflow. EDA uses rulebooks to monitor events, then executes specified job templates or workflows based on the event. Think of it simply as inputs and outputs. EDA is an automatic way for inputs into Ansible Automation Platform, where Ansible Automation Platform is the output (running a job template or workflow).
-
-> **Terminology update -- Lightspeed rebranding.**
->
-> Red Hat has consolidated its AI-powered services under the **Lightspeed** brand. **Ansible Lightspeed Code Assistant** is now **Automation code assistant** (supports Gemini, Red Hat AI, or IBM watsonx). **Ansible Lightspeed Intelligent Assistant** is now **Automation intelligent assistant**. **Red Hat Insights** (console.redhat.com) is now **Red Hat Lightspeed**. The functionality is the same -- only the branding has changed. This guide uses both old and new names where they appear in existing code and screenshots.
+Ansible Automation Platform is the **trusted execution and orchestration layer** for AIOps. Partner observability, ITSM, and cloud tools supply signals; AAP and **EDA** close the loop with auditability and RBAC.
 
 -  [YouTube video (~2 min)](https://youtu.be/a3fCHd2vTXU?si=L_5jGYZFtb3SzCJq)
 -  [Please consider subscribing to the Ansible Team!](https://youtube.com/ansibleautomation?sub_confirmation=1)
@@ -133,141 +58,131 @@ What makes up the solution?
 
 | Persona | Challenge | What They Gain |
 |---------|-----------|---------------|
-|  **IT Ops Engineer / SRE** | Manually triaging alerts, running the same diagnostic steps repeatedly, and writing one-off remediation scripts | Automated incident detection, AI-generated diagnosis, and dynamically generated playbooks -- less toil, faster recovery |
-|  **Automation Architect** | Designing event-driven workflows that scale beyond what deterministic rules can cover | A reference architecture for bridging EDA, AI inference, and playbook generation -- adaptable to any observability tool or ITSM |
-|  **IT Manager / Director** | Justifying AI investment and managing operational risk while reducing MTTR | Incremental adoption path (Crawl → Walk → Run), measurable reduction in manual intervention, and governance guardrails before full automation |
+|  **IT Ops Engineer / SRE** | Manually triaging alerts and repeatedly running the same diagnostics | Faster triage, AI-enriched context, and execution from **existing** approved job templates |
+|  **Automation Architect** | Event-driven workflows that outgrow deterministic rules | Reference patterns for EDA, inference, curated remediation, and optional orchestration -- any observability or ITSM partner |
+|  **IT Manager / Director** | Justifying AI investment while managing operational risk | Crawl/Walk/Run adoption, measurable MTTR gains, governance before autonomous Run |
 
-<h2 id="prerequisites"></h2>
+<h2 id="common-aiops-use-cases">Common AIOps use cases</h2>
 
-## Prerequisites
+Six operational patterns for customer conversations. **AI identifies opportunities; automation delivers outcomes.** Each row below maps to **Crawl**, **Walk**, or **Run** (see maturity chips).
+
+### How work starts
+
+
+
+Each pattern has its own **AIOps Use Case** page (adoption path, partner links, validation). Pick a row below or open the [Common AIOps Use Cases hub](aiops-use-cases.md).
+
+This foundational guide's [AIOps workflow](#aiops-workflow) is a **high-level walkthrough** of use case **4 -- Curated Automation Remediation**. That use-case page will grow more detailed and opinionated over time (examples, labs, Arcade). Open it from the strip when you want the dedicated pattern guide.
+
+<div class="cards-track-section cards-track-section--use-cases">
+<nav class="use-case-strip" aria-label="AIOps use cases">
+<a class="use-case-strip__item" href="README-AIOps-Use-Case-01-Incident-Ticket-Enrichment.html">
+  <span class="use-case-strip__num">1</span>
+  <span class="use-case-strip__body">
+    <span class="use-case-strip__title">Incident and Ticket Enrichment</span>
+    <span class="use-case-strip__question">How do we stop wasting time just figuring out what happened?</span>
+  </span>
+  <span class="use-case-maturity-chip use-case-maturity-chip--crawl">Crawl</span>
+</a>
+<a class="use-case-strip__item" href="README-AIOps-Use-Case-02-Cost-Resource-Optimization.html">
+  <span class="use-case-strip__num">2</span>
+  <span class="use-case-strip__body">
+    <span class="use-case-strip__title">Cost and Resource Optimization</span>
+    <span class="use-case-strip__question">How do we identify wasted capacity before it becomes an operational problem?</span>
+  </span>
+  <span class="use-case-maturity-chip use-case-maturity-chip--crawl">Crawl</span>
+</a>
+<a class="use-case-strip__item" href="README-AIOps-Use-Case-03-Intelligent-Capacity-Orchestration.html">
+  <span class="use-case-strip__num">3</span>
+  <span class="use-case-strip__body">
+    <span class="use-case-strip__title">Intelligent Capacity Orchestration</span>
+    <span class="use-case-strip__question">How do we anticipate capacity needs across hybrid environments?</span>
+  </span>
+  <span class="use-case-maturity-chip use-case-maturity-chip--walk">Walk</span>
+</a>
+<a class="use-case-strip__item" href="README-AIOps-Use-Case-04-Curated-Automation-Remediation.html">
+  <span class="use-case-strip__num">4</span>
+  <span class="use-case-strip__body">
+    <span class="use-case-strip__title">Curated Automation Remediation</span>
+    <span class="use-case-strip__question">How do we remediate faster using automation teams already trust?</span>
+  </span>
+  <span class="use-case-maturity-chip use-case-maturity-chip--walk">Walk</span>
+</a>
+<a class="use-case-strip__item" href="README-AIOps-Use-Case-05-System-Drift-Policy-Enforcement.html">
+  <span class="use-case-strip__num">5</span>
+  <span class="use-case-strip__body">
+    <span class="use-case-strip__title">System-Level Drift and Policy Enforcement</span>
+    <span class="use-case-strip__question">How do we prevent slow failure and risk accumulation in the first place?</span>
+  </span>
+  <span class="use-case-maturity-chip use-case-maturity-chip--run">Run</span>
+</a>
+<a class="use-case-strip__item" href="README-AIOps-Use-Case-06-Self-Healing-Infrastructure.html">
+  <span class="use-case-strip__num">6</span>
+  <span class="use-case-strip__body">
+    <span class="use-case-strip__title">Self-healing infrastructure</span>
+    <span class="use-case-strip__question">What do we do when something breaks, end to end?</span>
+  </span>
+  <span class="use-case-maturity-chip use-case-maturity-chip--run">Run</span>
+</a>
+</nav>
+</div>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+Requirements depend on which use case or partner guide you implement.
 
 ### Ansible Automation Platform
 
-- **Ansible Automation Platform 2.5+** -- Required for enterprise Event-Driven Ansible support.
+- **Ansible Automation Platform 2.5+** -- Required for enterprise **EDA** (baseline for this guide).
+- **Ansible Automation Platform 2.7+** -- Required when you adopt **Automation orchestrator** (approvals, task agents, and logic steps) or the **AAP <a target="_blank" href="https://www.redhat.com/en/topics/ai/what-is-model-context-protocol-mcp">Model Context Protocol (MCP)</a> server** (library search and governed launch from an AI client).
 
-### Featured Ansible Content Collections
+<h3 id="event-sources">Event sources</h3>
 
-| Collection | Type | Purpose |
-|-----------|------|---------|
-| <a target="_blank" href="https://console.redhat.com/ansible/automation-hub/repo/published/ansible/eda/">ansible.eda</a> | Certified | EDA event sources and filters (Kafka, webhooks, etc.) |
-| <a target="_blank" href="https://console.redhat.com/ansible/automation-hub/repo/published/ansible/controller/">ansible.controller</a> | Certified | AAP configuration as code (job templates, workflows, surveys) |
-| <a target="_blank" href="https://console.redhat.com/ansible/automation-hub/repo/published/ansible/scm/">ansible.scm</a> | Certified | Git operations (commit and push generated playbooks) |
-| <a target="_blank" href="https://console.redhat.com/ansible/automation-hub/repo/validated/infra/ai">infra.ai</a> | Validated | Provisions RHEL AI infrastructure (AWS, Azure, GCP, bare metal) |
-| <a target="_blank" href="https://console.redhat.com/ansible/automation-hub/repo/published/redhat/ai">redhat.ai</a> | Certified | Configures and serves AI models using InstructLab |
+You need at least one way for symptoms to reach automation -- a ticketing system, an observability platform, or both. Partner Solution Guides cover specific stacks; examples include:
 
-> **Need to deploy your own AI inference endpoint?**
+- **Observability** -- IBM Instana, Splunk, and similar alert or metric sources that can feed EDA (webhook, plugin, or message bus)
+- **ITSM / tickets** -- ServiceNow and similar systems where incidents or change requests start the loop
+- **Optional inference** -- Red Hat AI or another OpenAI-compatible endpoint when you enrich signals before enrichment or selection
+
+> **Tip:** Want event examples and vendor detail?
 >
-> The `infra.ai` and `redhat.ai` collections automate the full stack -- from provisioning a GPU instance to serving a model. See the companion guide [AI Infrastructure automation with Ansible](README-IA.md) for a complete walkthrough.
+> Skip to [1. Detect](#1-detect) in the AIOps workflow -- event tables, observability tools, and message buses are walked through there.
 
-### External Systems
+### Red Hat Lightspeed (optional)
 
-| System | Required | Examples |
-|--------|----------|----------|
-| Observability tool | Yes | Filebeat, IBM Instana, Splunk, Dynatrace, Prometheus |
-| Message queue | Optional (depends on observability tool) | Apache Kafka, AWS SQS, Azure Service Bus |
-| AI inference endpoint | Yes | Red Hat AI (RHEL AI + InstructLab) or any OpenAI-compatible API |
-| Automation code assistant | Yes | Automation code assistant (formerly Ansible Lightspeed) with Gemini, Red Hat AI, or IBM watsonx |
-| Red Hat Lightspeed | Recommended | CVE and Advisor remediation playbooks via console.redhat.com (formerly Red Hat Insights) |
-| Git repository | Yes | GitHub, GitLab, Gitea |
-| Chat or ITSM tool | Recommended | Mattermost, Slack, ServiceNow |
+For CVE and Advisor remediations, **Red Hat Lightspeed** publishes **curated** playbooks your teams promote into the approved library. That is not **Automation code assistant** (authoring-time drafts). See [Trusted sources for the approved library](#trusted-playbook-sources).
 
-<h2 id="aiops-workflow"></h2>
-
-## AIOps Workflow
-
-
-An AIOps workflow has four (4) parts:
-
-1. **Event-Driven Ansible (EDA) Response**
-
-   Respond to an event, such as a systemd application outage.  This falls under the **Observability** part of the AIOps workflow.  EDA allows us to plug-in **observability** to an **automation** workflow.
-
-2. **Log Enrichment and Prompt Generation Workflow**
-
-   AAP coordinates with Red Hat AI, notifies your chat application or ITSM (IT service management tool).  This falls under the **Inference** part of the AIOps workflow.  Again, Ansible Automation Platform ties this into an **automation** workflow.
-
-3. **Remediation Workflow**
-
-   Generates a playbook via Ansible Lightspeed, syncs it to Git, builds another Job Template.  This also falls under the **Inference** part of the AIOps workflow.  For this solution we are using one AI LLM endpoint (Red Hat AI) to figure out what the issue is and diagnose it, and one AI LLM endpoint to create an Ansible Playbook to remediate the issue.  This is considered a **multi-LLM workflow**, as we are using 2 or more LLM endpoints within our workflow.
-
-4. **Execute Remediation**
-
-   The final Job Template that fixes the issue on your IT infrastructure.  This is executing the Ansible Playbook that was generated in the previous workflow.  This falls under the **automation** part of AIOps and wraps up our self healing infrastructure use-case.
-
-### Operational Impact per Stage
-
-| Stage | Operational Impact | Why |
-|-------|-------------------|-----|
-| **1. EDA Response** | **None** | Read-only -- EDA listens to events and triggers a workflow. No changes to systems. |
-| **2. Enrichment Workflow** | **Low** | Collects logs, calls an AI API, posts to chat/ITSM. The only write is a notification message -- no infrastructure changes. |
-| **3. Remediation Workflow** | **Low** | Generates a playbook, commits to Git, creates a Job Template. Prepares the fix but does not touch production infrastructure. |
-| **4. Execute Remediation** | **High** | Modifies production infrastructure (restarting services, changing config files, etc.). Should go through a change window or approval gate. |
-
-Stages 1-3 are safe to experiment with in any environment. Stage 4 is where production risk lives -- which is why the guide recommends a manual approval gate at the **Walk** maturity level and policy-governed auto-approval at the **Run** level.
-
-> **Could this be one workflow?**
+> **Terminology update -- Lightspeed rebranding.**
 >
-> Yes -- but it’s broken up for review points and easier adoption.
+> Red Hat has consolidated its AI-powered services under the **Lightspeed** brand. **Ansible Lightspeed Code Assistant** is now **Automation code assistant** (supports Gemini, Red Hat AI, or IBM watsonx). **Ansible Lightspeed Intelligent Assistant** is now **Automation intelligent assistant**. **Red Hat Insights** (console.redhat.com) is now **Red Hat Lightspeed**. The functionality is the same -- only the branding has changed. This guide uses both old and new names where they appear in existing code and screenshots.
 
-<h3 id="example-workflow-diagram"></h3>
+<h2 id="aiops-workflow">AIOps workflow</h2>
 
-### Example Workflow Diagram
+The **default production pattern** is **curated automation remediation**: when an incident arrives, the AI assistant uses the **AAP MCP server** to **search** Ansible Automation Platform for units of automation -- job templates and workflows -- your team has **already built, tested, and approved**. It **selects** the best match -- the same way a senior engineer would say "run the disk-expand template on that host" -- and requests a **governed run**. Nothing new is invented at incident time, which keeps audit trails, RBAC, and change control intact.
 
-This is a workflow **example** from our hands-on workshop **Introduction to AI-Driven Ansible Automation**
+The sections below are a **high-level walkthrough** of that pattern -- the same loop as [Curated Automation Remediation (use case 4)](README-AIOps-Use-Case-04-Curated-Automation-Remediation.md). Use that page for the dedicated use-case narrative; expect it to gain deeper examples, demos, and Arcade content as it matures. This foundational guide stays the shared Detect → MCP search → Correlate and select → Execute path.
 
-
-
-
-> **This is a high level diagram.**
+> **Why select instead of generate?**
 >
-> It shows an opinionated approach for AIOps that is easily customizable for a variety of IT infrastructure use-cases.
+> Generating playbooks from an alert introduces **unreviewed change** every time the same symptom recurs. Teams already maintain trusted automation in AAP. MCP exposes that library to the AI client so inference **chooses** from approved options instead of authoring fixes from thin air.
 
-<h2 id="1-event-driven-ansible-eda-response"></h2>
+**EDA** is included in Ansible Automation Platform. The four sections below map to the curated path:
 
-## 1. Event-Driven Ansible (EDA) Response
-
-The first part of the AIOps workflow is the **Event-Driven Ansible (EDA) Response**.  Here is a breakdown of the four main components:
-
-<a target="_blank" href="https://github.com/rhpds/showroom-lb2961-ai-driven-ansible-automation/blob/main/solution_images/eda_response.png"></a>
-
-  1. IT infrastructure event
-  2. Observability tool picks up event
-  3. EDA sees event in message queue
-  4. Execute Enrichment workflow
-
-<h3 id="example-walkthrough-for-eda-response"></h3>
-
-### Example Walkthrough for EDA Response
-
-In our hands-on workshop we simulate an **httpd** application outage.  This is how the workflow works:
-
-  1. **IT infrastructure event**: The student will break httpd using a Job Template
-  2. **Observability tool picks up event**: Filebeat monitors Apache logs, Kafka acts as the event transport
-  3. **EDA sees event in message queue**: EDA listens to Kafka, launches automation workflows
-  4. **Execute Enrichment workflow** Ansible Automation Platform kicks off part 2, **Log Enrichment and Prompt Generation Workflow**
-
-> **Why Kafka?**
->
-> <a target="_blank" href="https://kafka.apache.org/">Apache Kafka</a> is a distributed streaming platform used for building real-time data pipelines and streaming applications, enabling applications to publish, consume, and process high volumes of data streams. It is all open source and self hosted and works great for workshops. This could be replaced by any event bus of your choosing. Event-Driven Ansible has numerous plugins including integrations with AWS SQS, AWS CloudTrail, Azure Service Bus, and Prometheus.
+1. **[Detect](#1-detect)** -- observability, ITSM, or an operator surfaces a symptom.
+2. **[MCP search](#2-mcp-search)** -- the AI client lists approved job templates and workflows in AAP.
+3. **[Correlate and select](#3-correlate-and-select)** -- inference picks from the library (or a short list for approval).
+4. **[Execute approved job](#4-execute-approved-job)** -- governed run with guardrails and validation.
 
 
-> **Why Filebeat?**
->
-> <a target="_blank" href="https://www.elastic.co/beats/filebeat">Filebeat</a> is a lightweight shipper for logs. It is also free and open source and works great for lab environments. Event-Driven Ansible has numerous plugins including integrations with BigPanda, Dynatrace, IBM Instana, Zabbix, and CyberArk.
 
-> **Do you need both a message bus and an observability tool?**
->
-> It depends on the particular integration. Generally combining a message bus and an observability tool will scale the most, but it really depends on your particular use-case, amount of events, etc. Many observability platforms can work directly with Event-Driven Ansible just fine.
+<h2 id="1-detect">1. Detect</h2>
+<a id="event-intake-reference"></a>
 
-Now that you understand our workflow example, lets dive into production-grade examples:
+Something must **detect** a symptom and reach EDA, an ITSM ticket, or an AI client before MCP search runs. The tables below are vendor-neutral patterns -- not a checklist to deploy all at once.
 
-<h3 id="1-it-infrastructure-event"></h3>
+### What can trigger automation?
 
-### 1. **IT infrastructure event**:
-
-What kind of events are relevant in an AIOps workflow?  EDA's value proposition is that it is extremely versatile and pluggable.  This means that Ansible Automation Platform can effectively handle any type of event.
-
-However here is a great list of ideas:
+EDA is versatile and pluggable -- Ansible Automation Platform can react to many event shapes. Partner Solution Guides show specific integrations; use these patterns when designing rulebooks:
 
 <h4 id="img-srchttpscdnjsdelivrnetghtwittertwemoji1402assets72x721f525png-width20-stylevertical-aligntext-bottom-application-level-events"></h4>
 
@@ -314,75 +229,69 @@ However here is a great list of ideas:
 | **New critical error introduced in logs post-deploy** | ELK, Honeycomb, etc. | Rollback deployment via Ansible |
 | **User reports spike via feedback or ticket** | ITSM tools | Use AI to correlate symptoms, gather diagnostics, and kick off a fix |
 
-<h3 id="2-observability-tool-picks-up-event"></h3>
-### 2. **Observability tool picks up event**:
+### Observability and event sources
 
-Now that you have a great understanding of types of events, what are great examples of observability tools that can plug-in to an AIOps workflow:
+Examples of tools that can feed EDA directly or via a bus (see [Common AIOps use cases](#common-aiops-use-cases) and partner guides):
 
-<h4 id="filebeat"></h4>
+<table class="guide-table-event-sources">
+<thead>
+<tr><th>Tool</th><th>Description</th><th>Hub</th><th>Solution guide</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><a id="filebeat"></a><span class="guide-tool-logo-set"></span><strong>Filebeat</strong></td>
+<td>Filebeat is a lightweight, open-source log shipper from Elastic that forwards logs from end-systems to a message aggregator. It is not an observability platform on its own -- it requires a message bus like Kafka to transport events to EDA. Workshops often use Filebeat because it is free, low-overhead, and easy to deploy in lab environments.</td>
+<td>--</td>
+<td>--</td>
+</tr>
+<tr>
+<td><a id="ibm-instana"></a><span class="guide-tool-logo-set"></span><strong>IBM Instana</strong></td>
+<td>IBM Instana provides real-time observability across hybrid and multicloud environments with automatic change detection, end-to-end tracing, and context-rich alerts. Its built-in anomaly detection and contextual correlation make it a natural event source for EDA rulebooks -- Instana can trigger automation workflows directly or through a message bus like Kafka.</td>
+<td><a target="_blank" href="https://console.redhat.com/ansible/automation-hub/repo/published/ibm/instana/">Instana</a></td>
+<td><a href="README-Instana-AIOps.html">Instana AIOps</a></td>
+</tr>
+<tr>
+<td><a id="splunk"></a><span class="guide-tool-logo-set"></span><strong>Cisco Splunk</strong></td>
+<td>Cisco Splunk (Splunk Enterprise / Splunk Cloud) ingests logs, metrics, traces, and events from virtually any source, providing a centralized view of system health across complex IT environments. Its machine learning and anomaly detection capabilities can proactively surface issues, making it an ideal trigger source for EDA-driven remediation workflows -- including network domains such as Cisco infrastructure.</td>
+<td><a target="_blank" href="https://console.redhat.com/ansible/automation-hub/namespaces/splunk/">Splunk</a></td>
+<td><a href="README-AIOps-Splunk-ITSI.html">Splunk and EDA</a></td>
+</tr>
+</tbody>
+</table>
 
-#### Filebeat
+> **Tip:** Skip Filebeat on Linux hosts?
+>
+> For RHEL and other Linux systems, **journald** or **syslog** can feed a message bus (or an EDA-compatible source) without Filebeat. Filebeat is a convenient lab shipper -- not a hard requirement when native OS logging already reaches your bus.
 
+### Message queues and EDA (optional)
 
+Message queues are optional depending on the observability tool. For example IBM Instana can work directly with EDA to trigger automation jobs, or it can work with a message queue like Apache Kafka. Here are some examples of other message queues that Ansible Automation Platform works with:
 
-Filebeat is a lightweight, open-source log shipper from Elastic that forwards logs from end-systems to a message aggregator. It is not an observability platform on its own -- it requires a message bus like Kafka to transport events to EDA. We use it in the AIOps workshop because it is free, low-overhead, and easy to deploy in lab environments.
-
-<h4 id="ibm-instana"></h4>
-
-#### IBM Instana
-
-
-
-<a target="_blank" href="https://console.redhat.com/ansible/automation-hub/repo/published/ibm/instana/">IBM Instana on Automation hub</a>
-
-IBM Instana provides real-time observability across hybrid and multicloud environments with automatic change detection, end-to-end tracing, and context-rich alerts. Its built-in anomaly detection and contextual correlation make it a natural event source for EDA rulebooks -- Instana can trigger automation workflows directly or through a message bus like Kafka.
-
-<h4 id="splunk"></h4>
-
-#### Splunk
-
-
-
-<a target="_blank" href="https://console.redhat.com/ansible/automation-hub/namespaces/splunk/">Splunk on Automation hub</a>
-
-Splunk ingests logs, metrics, traces, and events from virtually any source, providing a centralized view of system health across complex IT environments. Its machine learning and anomaly detection capabilities can proactively surface issues, making it an ideal trigger source for EDA-driven remediation workflows.
-
-
-<h3 id="3-eda-sees-event-in-message-queue"></h3>
-
-### 3. **EDA sees event in message queue**
-
-Message queues are optional depending on the observability tool.  For example IBM Instana can work directly with Event-Driven Ansible to trigger automation jobs, or it can work with a message queue like Apache Kafka.  Here are some examples of other message queues that Ansible Automation Platform works with:
-
-<h4 id="aws-sqs"></h4>
-
-#### AWS SQS
-
-
-
-<a target="_blank" href="https://console.redhat.com/ansible/automation-hub/repo/published/amazon/aws/">AWS on Automation hub</a>
-
-Amazon SQS (Simple Queue Service) is a managed message queuing service that decouples event producers from consumers. In an AIOps workflow, observability tools or AWS CloudWatch can publish events to an SQS queue, and EDA subscribes to that queue to trigger automation.
-
-<h4 id="azure-service-bus"></h4>
-
-#### Azure Service Bus
-
-
-
-<a target="_blank" href="https://console.redhat.com/ansible/automation-hub/repo/published/ansible/eda/content/eda%2Fplugins%2Fevent_source/azure_service_bus/">Azure Service Bus on Automation hub</a>
-
-Azure Service Bus is a fully managed enterprise messaging service with message queuing and publish-subscribe capabilities. EDA can subscribe to Service Bus topics or queues to detect events from Azure resources and third-party systems, making it a natural fit for cloud-centric AIOps workflows.
-
-<h4 id="kafka"></h4>
-
-#### Kafka
-
-
-
-<a target="_blank" href="https://console.redhat.com/ansible/automation-hub/repo/published/ansible/eda/content/eda%2Fplugins%2Fevent_source/kafka/">Kafka on Automation hub</a>
-
-Apache Kafka is a high-throughput, fault-tolerant event streaming platform that collects telemetry data, logs, alerts, and state changes from diverse sources. EDA listens to Kafka topics for specific patterns and triggers remediation workflows. Kafka's ability to decouple producers and consumers makes it ideal for scaling AIOps pipelines across large environments.
+<table class="guide-table-event-sources">
+<thead>
+<tr><th>Tool</th><th>Description</th><th>Hub</th><th>Solution guide</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><a id="aws-sqs"></a><span class="guide-tool-logo-set"></span><strong>AWS SQS</strong></td>
+<td>Amazon SQS (Simple Queue Service) is a managed message queuing service that decouples event producers from consumers. In an AIOps workflow, observability tools or AWS CloudWatch can publish events to an SQS queue, and EDA subscribes to that queue to trigger automation.</td>
+<td><a target="_blank" href="https://console.redhat.com/ansible/automation-hub/repo/published/amazon/aws/">AWS</a></td>
+<td><a href="README-SQS.html">AWS SQS and EDA</a></td>
+</tr>
+<tr>
+<td><a id="azure-service-bus"></a><span class="guide-tool-logo-set"></span><strong>Azure Service Bus</strong></td>
+<td>Azure Service Bus is a fully managed enterprise messaging service with message queuing and publish-subscribe capabilities. EDA can subscribe to Service Bus topics or queues to detect events from Azure resources and third-party systems, making it a natural fit for cloud-centric AIOps workflows.</td>
+<td><a target="_blank" href="https://console.redhat.com/ansible/automation-hub/repo/published/ansible/eda/content/eda%2Fplugins%2Fevent_source/azure_service_bus/">Azure</a></td>
+<td><a href="README-AIOps-Azure-Service-Bus.html">Azure Service Bus</a></td>
+</tr>
+<tr>
+<td><a id="kafka"></a><span class="guide-tool-logo-set"></span><strong>Kafka</strong></td>
+<td>Apache Kafka is a high-throughput, fault-tolerant event streaming platform that collects telemetry data, logs, alerts, and state changes from diverse sources. EDA listens to Kafka topics for specific patterns and triggers remediation workflows. Kafka's ability to decouple producers and consumers makes it ideal for scaling AIOps pipelines across large environments.</td>
+<td><a target="_blank" href="https://console.redhat.com/ansible/automation-hub/repo/published/ansible/eda/content/eda%2Fplugins%2Fevent_source/kafka/">Kafka</a></td>
+<td>--</td>
+</tr>
+</tbody>
+</table>
 
 Example rulebook for Kafka:
 
@@ -402,7 +311,7 @@ Example rulebook for Kafka:
       action:
         run_workflow_template:
           organization: "Default"
-          name: "{{ workflow_template_name | default('AI Insights and Lightspeed prompt generation') }}"
+          name: "{{ workflow_template_name | default('Curated enrichment workflow') }}"
 
     - name: show event messages
       condition: event.body.message is defined
@@ -412,471 +321,214 @@ Example rulebook for Kafka:
 
 ```
 
+<h2 id="2-mcp-search">2. MCP search</h2>
 
-<h2 id="2-log-enrichment-and-prompt-generation-workflow"></h2>
+After **Detect**, the AI assistant (or an enrichment workflow that hands off to a client) queries Ansible Automation Platform through the **AAP MCP server**. MCP returns **labeled job templates and workflows** from the approved library -- fix permissions, increase storage, patch a CVE, restart a service, and similar -- scoped to the operator's RBAC. Nothing launches yet; this stage only builds the menu for correlation.
 
-## 2. Log Enrichment and Prompt Generation Workflow
+| MCP read path | What you get |
+|---------------|--------------|
+| **Search job templates** | Names, descriptions, and organization scope for symptom-matching automation |
+| **Search workflows** | Multi-step governed sequences (surveys, approvals, child jobs) |
+| **RBAC boundary** | Empty or partial results if the token cannot see or run candidates |
 
-The second part of the AIOps workflow is the **Log Enrichment and Prompt Generation Workflow** (or for shorthand the Enrichment Workflow).  Here is a breakdown of the four main components:
+Work can also start from an operator pasting incident context into an AI client without EDA; MCP search works the same way once context is available.
 
-
-
-1. Capture Additional Information
-2. Red Hat AI: Analyze Incident
-3. Notify Chat / ITSM
-4. Build Ansible Lightspeed Job Template
-
-<h3 id="1-capture-additional-information"></h3>
-
-### 1. Capture Additional Information
-
-In our AIops workshop we have an Ansible Playbook that captures additional information from the host.  If server01 reports an outage with an application (e.g. httpd), we can have Ansible collect additional information to
-
-1. Confirm the systemd process is down
-2. Collect relevant logs
-3. Collect system information (operating system, memory, etc).
-
-This process is similar to agentic workflow, where we capture information, just as we need it.
-
-> **What is an agentic workflow?**
+> **Tip:** Connect MCP.
 >
-> An **agentic workflow** with AI refers to a system where an AI agent is empowered to make decisions, take actions, and pursue goals across multiple steps--often autonomously. Unlike a single API call or a static prompt, agentic workflows involve **planning, reasoning, tool use**, and possibly interacting with other agents or services. These agents maintain **state**, adjust behavior based on feedback, and operate in loops (like ReAct or AutoGPT). The goal is to replicate more human-like problem solving, where the AI isn't just responding, but actively **working through a task**. This is especially useful in AIOps, automation, and multi-step orchestration.
+> - [Ansible DevTools: connect to AAP MCP](README-Ansible-DevTools.md#connecting-to-ansible-automation-platform) -- gateway setup and toolsets
+> - [Curated Automation Remediation (use case 4)](README-AIOps-Use-Case-04-Curated-Automation-Remediation.md) -- full Walk pattern
 
-In this case we have a static workflow versus a fully agentic workflow, but unlike just a static LLM query, we are giving inputs from multiple sources, the event, the observability tool, system logs, and an Ansible Playbook running on the host to retrieve any additional info. In the future you will see increasingly more and more ability for the operations team to allow AI tools the ability to act more autonomously.
+<h2 id="3-correlate-and-select">3. Correlate and select</h2>
+<a id="4-curated-automation-remediation-walk"></a>
 
-<h3 id="2-red-hat-ai-analyze-incident"></h3>
+Curated automation provides a practical foundation for AIOps with Red Hat Ansible Automation Platform (AAP). Remediation can begin with an observability event through Event-Driven Ansible, an ITSM ticket, or an operator using an AI client such as Cursor, Claude Code, ChatGPT, or Copilot. AI capabilities from Red Hat AI or another platform help correlate signals and recommend actions, while AAP executes approved automation content to deliver controlled, repeatable remediation.
 
-### 2. Red Hat AI: Analyze Incident
+| Step | What happens |
+|------|----------------|
+| **1** | An **IT infrastructure issue** fires (EDA rulebook, Splunk or Instana alert, ServiceNow ticket, scheduled check, or human request). |
+| **2** | The **AI assistant** asks AAP, via **MCP**, what remediation automation is available for this class of problem. |
+| **3** | **AAP** returns the **approved automation library** -- labeled job templates and workflows (fix permissions, increase storage, correct configuration, patch CVE, and similar). |
+| **4** | The AI **correlates** incident context to one library entry (or a short ranked list for human approval). |
+| **5** | The AI **requests a run** of the selected template (for example, **Increase storage**) through MCP with the operator's RBAC. |
+| **6** | **AAP executes** the approved automation and reports success back to observability or ITSM. |
 
-To interface with Red Hat AI we can use the `redhat.ai` content collection, which wraps the OpenAI-compatible API into native Ansible modules.  Many AI tools, including Red Hat AI, are using the OpenAI API standard.
+Steps 1-2 align with [1. Detect](#1-detect) and [2. MCP search](#2-mcp-search). Steps 4-5 are the core of **Correlate and select**; step 6 is [4. Execute approved job](#4-execute-approved-job).
 
-> **Why is the OpenAI API the standard?**
+```mermaid
+graph LR
+  A([IT infrastructure issue]) --> B[EDA ticket or AI client]
+  subgraph AI
+    B --> C[Correlate symptoms]
+    C --> D[Select from menu]
+  end
+  subgraph AAP
+    E[AAP MCP search library]
+    F[Run approved job template]
+  end
+  C --> E
+  E --> D
+  D --> F
+  F --> G([Remediation validated])
+```
+
+
+
+<h3 id="trusted-playbook-sources">Trusted sources for the approved library</h3>
+
+Walk and Run assume automation already lives in AAP as reviewed job templates and workflows. Common sources:
+
+| Source | Description |
+|--------|-------------|
+| **CVE Remediation (Red Hat Lightspeed)** | <a target="_blank" href="https://console.redhat.com">Red Hat Lightspeed</a> (formerly Red Hat Insights) identifies vulnerabilities affecting your RHEL fleet and **publishes Red Hat-curated remediation playbooks** tied to errata and the Security Data API. This is expert-authored, Red Hat-approved content -- **not** LLM output from Automation code assistant. |
+| **Advisor Recommendations (Red Hat Lightspeed)** | Lightspeed flags misconfigurations and best-practice violations (e.g., SELinux policy issues, SSH configurations that won't survive a reboot) and **provides curated Advisor remediation playbooks** to fix them proactively. Think of CVEs as *reactive* -- patching known vulnerabilities. Advisor recommendations are *proactive* -- fixing misconfigurations before they become incidents. |
+| **Pre-approved AAP library** | Job templates and workflows your teams already test, review, and run -- the default source for Walk curated remediation and Run self-healing via MCP. |
+| **RHEL System Roles** | Officially supported, pre-built Ansible roles shipped with RHEL that provide a stable, version-independent interface for common configuration tasks (NTP, networking, storage, SELinux, firewall). |
+| **AI-assisted authoring (Automation code assistant)** | Developers use Automation code assistant in the IDE to accelerate playbook **authoring**. Humans review, test, and promote content into the approved library -- not incident-time generation. |
+
+> **Human-in-the-loop is what makes it production-ready.**
 >
-> The OpenAI API (`/v1/completions`, `/v1/chat/completions`) became a standard for interacting with LLMs because:
-> - It was the first widely adopted commercial LLM API
-> - It has a clean, JSON-based format that is easy to integrate
-> - Tons of apps, SDKs, frameworks (like LangChain, AutoGen, Semantic Kernel) built around it
+> Whether a playbook came from **Red Hat Lightspeed** (curated CVE or Advisor content), was **drafted with Automation code assistant** and reviewed by your team, or was hand-crafted, the same promotion process applies: Git as source of truth, project sync in AAP, Job Templates with guardrails (credentials, inventory limits, surveys), and optional approval gates. The IDE is where review happens for AI-assisted authoring; AAP is where gatekeeping happens.
 
-In an AIOps context, **inference** refers to the process where an AI model receives a question or input--such as a system error, log snippet, or performance metric--via an API, and returns a prediction or insight. This could include identifying root causes, classifying incidents, or suggesting remediation steps. The model has already been trained, so inference is the **real-time application** of that knowledge to live operational data. It's a key part of integrating AI into IT workflows, enabling automated, intelligent responses without human intervention.
-
-Here is an Ansible task for inference to Red Hat AI using the <a target="_blank" href="https://console.redhat.com/ansible/automation-hub/repo/published/redhat/ai">redhat.ai</a> collection:
-
-```yaml
-    - name: Analyze incident with Red Hat AI
-      redhat.ai.completion:
-        base_url: "http://{{ rhelai_server }}:{{ rhelai_port }}"
-        token: "{{ rhelai_token }}"
-        prompt: "{{ gpt_prompt | default('What is the capital of the USA?') }}"
-        model_path: "/root/.cache/instructlab/models/granite-8b-lab-v1"
-      delegate_to: localhost
-      register: gpt_response
-```
-
-- `base_url:` The URL of the Red Hat AI server (the module appends `/v1/completions` automatically).
-- `token:` Authentication token for the AI server.
-- `prompt:` The text input or question you want the AI to respond to.
-- `model_path:` The path to the specific AI model used to generate the response.
-
-The response is available as `gpt_response.choice_0_text` (the first answer) and `gpt_response.raw_response` (the full JSON payload).
-
-For advanced use cases that need full control over parameters like `temperature`, `max_tokens`, `top_p`, and `n`, use the `raw_input` parameter instead:
-
-```yaml
-    - name: Analyze incident with Red Hat AI (advanced)
-      redhat.ai.completion:
-        base_url: "http://{{ rhelai_server }}:{{ rhelai_port }}"
-        token: "{{ rhelai_token }}"
-        raw_input:
-          prompt: "{{ gpt_prompt }}"
-          model: "/root/.cache/instructlab/models/granite-8b-lab-v1"
-          max_tokens: 50
-          temperature: 0
-          top_p: 1
-          n: 1
-      delegate_to: localhost
-      register: gpt_response
-```
-
-- `temperature:` Controls randomness; lower values make outputs more deterministic, while higher values increase creativity.
-- `max_tokens:` The maximum number of tokens (words or sub-words) the AI can generate in its response.
-- `top_p:` Limits the AI to sampling from the top probability mass (e.g., top 90%) for more focused outputs.
-- `n:` Specifies how many different completions you want the AI to generate for the given prompt.
-
-Alternatively, you can call the OpenAI-compatible API directly with `ansible.builtin.uri`. This approach works with any model server -- not just Red Hat AI:
-
-```yaml
-    - name: Send POST request using uri module
-      ansible.builtin.uri:
-        url: "http://{{ rhelai_server }}:{{ rhelai_port }}/v1/completions"
-        method: POST
-        headers:
-          accept: "application/json"
-          Content-Type: "application/json"
-          Authorization: "Bearer {{ rhelai_token }}"
-        body:
-          prompt: "{{ gpt_prompt | default('What is the capital of the USA?') }}"
-          max_tokens: "{{ max_tokens | default('50') }}"
-          model: "/root/.cache/instructlab/models/granite-8b-lab-v1"
-          temperature: "{{ input_temperature | default(0) }}"
-          top_p: "{{ input_top_p | default(1) }}"
-          n: "{{ input_n | default(1) }}"
-        body_format: json
-        return_content: true
-        status_code: 200
-        timeout: 60
-      register: gpt_response
-```
-
-Both approaches produce the same result -- the `redhat.ai.completion` module handles the HTTP details (headers, URL path, body format) for you, while `ansible.builtin.uri` gives you full control over the raw request.
-
-> **Why set n: 1?**
+> **Tip:** Not ready to run automation yet?
 >
-> You’d want `n: 1` when you’re only interested in getting a single best response from the AI:
-> - Reduces overhead: Less processing time and memory usage, especially important when running local models like Red Hat AI.
-> - Simplifies parsing: You don’t have to iterate over multiple completions or choose the best one.
-> - Keeps things deterministic (especially with `temperature: 0`): When you’re aiming for predictable, repeatable automation, one clear response is ideal.
-> - `n: 1` is perfect for most automation tasks where you just need one solid, confident answer without extra noise.
-<h4 id="tools-that-support-the-openai-compatible-api"></h4>
+> Stop after correlate/select and **notify** only (chat or ITSM). See [Incident and Ticket Enrichment](README-AIOps-Use-Case-01-Incident-Ticket-Enrichment.md).
 
-#### Tools That Support the OpenAI-Compatible API
+<h2 id="4-execute-approved-job">4. Execute approved job</h2>
 
-| Tool                      | Description                                                                                  |
-|---------------------------|----------------------------------------------------------------------------------------------|
-| **vLLM**                  | Efficient LLM serving engine with OpenAI-compatible endpoints for both completion and chat APIs |
-| **llama.cpp**             | Lightweight C++ LLM inference with a `--server` mode that mimics OpenAI API                  |
-| **Ollama**                | CLI + local model manager that serves LLaMA and Mistral models via OpenAI-compatible endpoints |
-| **LM Studio**             | GUI for local LLMs that exposes an OpenAI-compatible endpoint                                 |
-| **Text Generation WebUI**| Hugely flexible GUI for multiple models (GGUF, HF, etc), includes OpenAI API adapter          |
-| **LocalAI**              | Drop-in OpenAI replacement server with multi-backend support (llama.cpp, GPT4All, etc)       |
-| **DeepInfra**            | Model hosting provider offering OpenAI-compatible APIs                                       |
-| **Replicate**            | Platform for hosting ML models with optional OpenAI-style API access                          |
-| **Anyscale**             | Provides OpenAI-compatible APIs for hosted open models with high performance                 |
+The AI client (or workflow) **launches** the selected job template or workflow through MCP with the operator's RBAC. AAP executes the approved automation, records audit history, and should feed results back to observability or ITSM. Add a **validation** job or observability check before closing the incident.
 
-<h3 id="3-notify-chat--itsm"></h3>
+### Production guardrails
 
-### 3. Notify Chat / ITSM
+Before high-impact runs, teams typically enforce:
 
+| Recommendation | What to do |
+|----------------|------------|
+| **Library-first** | Expose only approved job templates and workflows through MCP; grow the library before expanding autonomy |
+| **Approvals** | Require a human or Automation orchestrator gate before launch until policy clearly allows auto-run |
+| **Validation** | Confirm recovery with a post-run job or observability check before closing the incident |
+| **Policy** | Use surveys, inventory limits, and credential scope; add <a target="_blank" href="https://www.redhat.com/en/technologies/management/ansible/automated-policy-as-code">Automated Policy as Code</a> where required |
 
-This is where we synchronize the output from Red Hat AI to another outside system.  Here some great options:
+<h2 id="validation">Validation</h2>
 
-<h4 id="mattermost"></h4>
+Validate the **curated remediation** path end to end. Partner Solution Guides add tool-specific steps; this table is the pattern-level checklist.
 
-#### Mattermost
+| Stage | What to verify | Success indicator |
+|-------|----------------|-------------------|
+| **1. Detect** | Event, ticket, or operator request reaches automation | EDA rulebook activation **Running** with matching events, or MCP client receives incident context |
+| **2. MCP library search** | AI client queries AAP with operator RBAC | MCP returns labeled job templates or workflows relevant to the symptom class |
+| **3. Select and approve** | AI correlates to one library entry (or short list) | Selected template matches runbook intent; approval recorded if required |
+| **4. Execute and validate** | Governed job run completes | Job success in AAP; observability or validation playbook shows service recovered |
 
+### Troubleshooting (curated path)
 
+Most failures on the curated path show up as **library gaps**, **wrong selection**, or **RBAC** on execute.
 
-<a target="_blank" href="https://docs.ansible.com/ansible/latest/collections/community/general/mattermost_module.html">Mattermost Documentation</a>
+| Symptom | Likely cause | Fix |
+|---------|--------------|-----|
+| MCP returns empty library | No job templates tagged or scoped for the symptom | Publish approved templates; verify MCP token RBAC and organization |
+| AI selects wrong template | Weak incident context or overlapping library entries | Improve enrichment at Crawl; tighten template names or surveys; require human approval at Walk |
+| Job launch denied | RBAC or credential scope on MCP token | Use a token that may execute the selected template on target inventory |
+| Job succeeded but alert persists | Validation playbook missing or wrong host group | Add post-run validation job; confirm observability feedback loop in partner guide |
 
-**Mattermost** is an open-source, self-hostable chat platform with robust API and webhook integrations. We use it in the AIOps workshop as a free alternative to Slack or Microsoft Teams -- Ansible posts AI-generated diagnoses and remediation updates to a Mattermost channel in real time.
+<h2 id="aiops-maturity-path">AIOps Maturity Path</h2>
 
-<h4 id="servicenow"></h4>
-
-#### ServiceNow
-
-
-
-<a target="_blank" href="https://console.redhat.com/ansible/automation-hub/repo/published/servicenow/itsm/">ServiceNow on Automation hub</a>
-
-ServiceNow is an enterprise-grade **IT Service Management (ITSM)** platform and the system of record for incidents, changes, and problem management. In AIOps workflows, AI-driven insights enrich ServiceNow tickets automatically, and Ansible closes the loop by triggering remediation directly from ticket data.
-
-<h4 id="slack"></h4>
-
-#### Slack
-
-
-
-Slack is an enterprise messaging platform with a rich API and app ecosystem that integrates seamlessly with Ansible, ServiceNow, and monitoring tools. In AIOps workflows, Slack channels serve as a real-time hub where AI-driven alerts, diagnostics, and remediation updates are delivered directly to operations teams.
-
-<h3 id="4-build-ansible-lightspeed-job-template"></h3>
-
-### 4. Build Ansible Lightspeed Job Template
-
-The final piece of this workflow is creating (or updating) a Ansible Automation Platform job template with the insights we just gained from Red Hat AI.
-
-We have a problem, such as an application outage, and we now have a solution: for example: "there is a mis-configuration on this line" and now we can use this information we gleaned and now prompt Ansible Lightspeed in the next workflow, the **Remediation workflow**.  We are basically using one AI endpoint (Red Hat AI) to help create a prompt to a second AI endpoint (Ansible Lightspeed) to create an Ansible Playbook to help remediate the issue.
-
-
-
-A way to do this (an opinionated way, but not the only way) is to use an <a target="_blank" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/latest/html-single/using_automation_execution/index#controller-surveys-in-job-templates">Ansible Survey</a>.
-
-In the above screenshot, the left is the prompt we will use in the next workflow, while the right is the insights we gleaned from Red Hat AI based on all the information it had.  This is a natural breakpoint where the human can course correct the prompt.  We will still have time to review the solution before we move it into production, but it may make sense for your IT operations team to review this prompt before we move onto Lightspeed.
-
-> **Could we make this one workflow?**
->
-> YES! Absolutely. This is just showing how it is easy to adopt AIOps incrementally and add natural breakpoints to review what is happening as you adopt AI into your IT workflows.
-
-Here is an excerpt from the Ansible Playbook used in our AIOps workshop:
-
-```yaml
-    - name: Create Job Template
-      ansible.controller.job_template:
-        name: " Lightspeed Remediation Playbook Generator"
-        job_type: "run"
-        inventory: "{{ input_inventory | default('Demo Inventory') }}"
-        project: "{{ input_project | default('AI-EDA') }}"
-        playbook: "{{ input_playbook | default('playbooks/lightspeed_generate.yml') }}"
-        credentials:
-          - "{{ input_credential | default('AAP') }}"
-          - "{{ vault_credential | default('ansible-vault') }}"
-        validate_certs: true
-        execution_environment: "Default execution environment"
-
-    - name: Load remediation workflow template
-      ansible.controller.workflow_job_template:
-        name: Remediation Workflow
-        organization: Default
-        state: present
-        survey_enabled: true
-        survey_spec: "{{ lookup('template', playbook_dir + '/templates/survey.j2') }}"
-```
-
-We are able to dynamically update the survey inside the workflow by using the survey_spec.  The survey spec looks like the following:
-
-```json
-{
-  "name": "Prompt Lightspeed",
-  "description": "Survey for working with Ansible Lightspeed",
-  "spec": [
-    {
-      "type": "textarea",
-      "question_name": "Enter a prompt to create a remediation playbook?",
-      "question_description": "This prompt will be used with Ansible Lightspeed to automatically generate an Ansible Playbook",
-      "variable": "lightspeed_prompt",
-      "required": true,
-      "default": "For all hosts, use become true,  Remove line that contains InvalidDirectiveHere from /etc/httpd/conf/httpd.conf and restart httpd"
-    },
-    {
-      "type": "textarea",
-      "question_name": "This box shows the prompt generated from our Workflow job template",
-      "question_description": "This area shows you that AI was able to understand the error and create a prompt for Ansible Lightspeed.",
-      "variable": "ai_lightspeed_prompt",
-      "required": false,
-      "default": "{{ gpt_generated_prompt }}"
-    }
-  ]
-}
-```
-
-Now everytime the first workflow **Log Enrichment and Prompt Generation Workflow** runs, the second workflow **Remediation Workflow** automatically has its survey updates to be relevant to that workflow. This is doing **Config as Code** using the ansible.controller content collection.
-
-Please consider using the <a target="_blank" href="https://console.redhat.com/ansible/automation-hub/repo/validated/infra/aap_configuration/">AAP Configuration Collection on Automation hub.</a> This content collection simplifies interactions for Ansible Automation Platform.
-
-<h2 id="3-remediation-workflow"></h2>
-
-## 3. Remediation Workflow
-
-The third part of the AIOps workflow is the **Remediation Workflow**.  This workflow will take a prompt from the previous workflow, allow the human operator to customize this prompt, then build an Ansible Playbook to remediate the issue, sync this to git and build a job template that will run this playbook for the final step.
-
- Here is a breakdown of the four main components:
-
-
-
-1. Lightspeed Remediation Playbook Generator
-2. Commit Fix to Git
-3. Sync Project
-4. Build Remediation Template
-
-<h3 id="1-lightspeed-remediation-playbook-generator"></h3>
-
-### 1. Lightspeed Remediation Playbook Generator
-
-Ansible Lightspeed also has an API.  We can communicate to this API similarly as we do with Red Hat AI solutions.  Here is an example task:
-
-```yaml
-    - name: Send request to AI API
-      ansible.builtin.uri:
-        url: "{{ input_lightspeed_url | default('https://c.ai.ansible.redhat.com/api/v0/ai/generations/') }}"
-        method: POST
-        headers:
-          Content-Type: "application/json"
-          Authorization: "Bearer {{ lightspeed_wca_token }}"
-        body_format: json
-        body:
-          text: "{{ lightspeed_prompt }}"
-      register: response
-```
-
-The API will respond with the Ansible Playbook as part of the payload under the `playbook` keyword.  You can see the response in the Job Output window:
-
-
-
-<h3 id="2-commit-fix-to-git"></h3>
-
-### 2. Commit Fix to Git
-
-Once the Ansible Playbook is retrieved from Ansible Lightspeed, we need to store it in a Git repo.  We can use the <a target="_blank" href="https://console.redhat.com/ansible/automation-hub/repo/published/ansible/scm/">Ansible SCM</a> (source control management) content collection to easily publish the content to any specified repo.
-
-Here is an excerpt from our AIOps Workshop:
-
-```yaml
-    - name: Commit and push final version of playbook to Gitea
-      ansible.scm.git_publish:
-        path: "{{ repository['path'] }}"
-        token: "{{ gitea_token }}"
-```
-
-<h3 id="3-sync-project"></h3>
-
-### 3. Sync Project
-
-This is a special node type inside the Workflow Visualizer that will sync a Project.  Since we just pushed this Ansible Playbook to Git we need to sync the Project to update and retrieve this playbook to be used in an Ansible Job Template.  Here is a screen shot from the Workflow visualizer showing the **Project Sync**:
-
-
-
-<h3 id="4-build-remediation-template"></h3>
-
-### 4. Build Remediation Template
-
-The final job template inside this workflow is creating a new job template with the newly created Ansible Playbook.  We can use the `ansible.controller` content collection to dynamically build this.  Here is an example:
-
-```yaml
-    - name: Create Job Template
-      ansible.controller.job_template:
-        name: " Execute HTTPD Remediation"
-        job_type: "run"
-        inventory: "{{ input_inventory | default('lab-inventory') }}"
-        project: "{{ input_project | default('Lightspeed-Playbooks') }}"
-        playbook: "{{ input_playbook | default('lightspeed-response.yml') }}"
-        credential: "{{ input_credential | default('lab-credential') }}"
-        validate_certs: true
-        execution_environment: "Default execution environment"
-        become_enabled: true
-        ask_limit_on_launch: true
-```
-
-> **Could we just run the playbook now?**
->
-> YES, but you may want to run the playbook during a specific change window. This is another natural breakpoint where you can add more guard rails before you push an Ansible job into production. Now that you have the Job Template queued up, you can run it whenever you want.
-
-<h2 id="4-execute-remediation"></h2>
-
-## 4. Execute Remediation
-
-The final step is running the remediation Job Template that was dynamically created in the previous workflow. This is the Ansible Playbook that Lightspeed generated -- committed to Git, synced to a project, and loaded into a Job Template -- now ready to execute against the affected host.
-
-
-
-In the workflow diagram above, this is the **Execute HTTPD Remediation** node at the bottom -- the final step before the system returns to **steady state**. Notice this is marked as a **Manual Step**. This is intentional: the human operator reviews the AI-generated playbook and decides when to execute, giving organizations a natural approval gate before changes reach production.
-
-> **Why not fully automate this last step?**
->
-> You absolutely can. For organizations further along their AIOps maturity, this final step can be wired directly into the Remediation Workflow so the fix executes automatically. The manual breakpoint exists for teams that want to adopt AIOps incrementally -- gaining confidence in the AI-generated playbooks before removing the human gate.
-
-<h3 id="policy-enforcement"></h3>
-
-### Policy Enforcement
-
-Before executing AI-generated playbooks in production, organizations should consider adding policy guardrails. <a target="_blank" href="https://www.redhat.com/en/technologies/management/ansible/automated-policy-as-code">Ansible Automated Policy as Code</a> enables teams to define and enforce rules about what automation is allowed to do -- for example, restricting which hosts can be targeted, which modules are permitted, or requiring approval workflows before high-impact changes.
-
-In an AIOps context, policy enforcement is the safety net that lets you increase automation confidence over time:
-
-| Maturity | Policy Approach |
-|----------|----------------|
-| **Crawl** | Human reviews every AI-generated playbook before execution |
-| **Walk** | Policy engine validates playbook content automatically; human approves execution |
-| **Run** | Policy engine validates and auto-approves within defined boundaries; exceptions escalate to human |
-
-<h2 id="validation"></h2>
-
-## Validation
-
-Because this guide covers a reference architecture rather than a single tool integration, validation is done **per workflow stage** rather than with a single test command. Each stage has a clear success indicator that confirms the pipeline is working before moving to the next.
-
-| Stage | What to Verify | Success Indicator |
-|-------|---------------|-------------------|
-| **1. EDA Response** | Rulebook activation is running and receiving events | AAP shows the rulebook activation as **Running**; event log shows received events |
-| **2. Enrichment Workflow** | AI analyzed the incident and notifications were sent | Workflow Visualizer shows all nodes green; chat/ITSM received the AI-generated diagnosis |
-| **3. Remediation Workflow** | Lightspeed generated a playbook and it was committed to Git | New playbook file exists in the Git repository; Job Template was created with the correct playbook |
-| **4. Execute Remediation** | The AI-generated playbook resolved the issue | Job Template run completes successfully; the application or service returns to steady state |
-
-> **Want hands-on validation?**
->
-> The companion workshop [Hands-On AIOps: Building Self-Healing, Observability-Driven Automation with Ansible](https://rhpds.github.io/ai-driven-automation-showroom/modules/index.html) walks through this entire pipeline end-to-end with a live lab environment. Part 1 covers Apache service remediation, Part 2 extends the same pattern to network automation with Splunk and Cisco routers.
-
-### Troubleshooting Across Workflow Boundaries
-
-Most failures in an AIOps pipeline happen at the **integration boundaries** -- where one stage hands off to the next. Here are the most common issues:
-
-| Symptom | Boundary | Likely Cause | Fix |
-|---------|----------|-------------|-----|
-| EDA rulebook is active but workflow never launches | EDA → Enrichment Workflow | Event payload doesn't match rulebook condition | Compare the actual event JSON against the rulebook `condition` field |
-| Enrichment Workflow runs but AI response is empty or generic | Enrichment → Red Hat AI | Prompt is missing context (no logs, no system info) | Verify the "Capture Additional Information" job collected data and passed it to the AI prompt |
-| Lightspeed returns a playbook but it doesn't fix the issue | Remediation → Execute | Prompt to Lightspeed was too vague or AI diagnosis was incorrect | Review the prompt in the Remediation Workflow survey; refine the AI-generated prompt before Lightspeed generates the playbook |
-| Job Template was created but playbook is missing | Remediation → Git/Project Sync | Git commit failed or project sync didn't run | Check Gitea/GitHub for the commit; verify the Project Sync node succeeded in the Workflow Visualizer |
-
-<h2 id="aiops-maturity-path"></h2>
-
-## AIOps Maturity Path
-
-### The Broader AIOps Journey
-
-AIOps is not a single use case -- it is a maturity journey. Organizations typically progress through increasing levels of complexity, starting with read-only enrichment and advancing toward autonomous, self-healing systems. Each stage builds on the previous one.
+Progress from read-only enrichment toward governed closed-loop automation. The [AIOps workflow](#aiops-workflow) sections above map **Detect** through **Execute**; the hub table lists all six use-case patterns.
 
 | Maturity | Use Cases | What AI Does |
 |----------|-----------|-------------|
 |  **Crawl** | Incident & Ticket Enrichment, Cost & Resource Optimization | AI **interprets** operational signals and attaches context -- no changes to systems |
 |  **Walk** | Curated Automation Remediation, Intelligent Capacity Orchestration | AI **selects** from pre-approved automation -- proven playbooks, governed execution |
-|  **Run** | Self-Healing Infrastructure, System-Level Drift & Policy Enforcement | AI **generates or adapts** remediation automation on-the-fly -- constrained by policy guardrails |
+|  **Run** | [Self-healing infrastructure](README-AIOps-Use-Case-06-Self-Healing-Infrastructure.md), [System-Level Drift and Policy Enforcement](README-AIOps-Use-Case-05-System-Drift-Policy-Enforcement.md) | Closed-loop **approved library** execution with policy and validation |
 
 > **AIOps is the outcome. Agentic is a capability.**
 >
 > Agentic workflows -- where AI plans, uses tools, reflects on results, and iterates -- can enhance any stage of this journey. But AIOps does not require agentic capabilities to deliver value. A deterministic EDA rulebook that enriches a ServiceNow ticket is AIOps at the Crawl stage. A fully autonomous agent that reasons about OSPF failures is AIOps at the Run stage. Start where you are.
 
-### Self-Healing Infrastructure: Crawl, Walk, Run
-
-This guide covers the self-healing infrastructure use case, which has its own maturity progression. The key difference at each stage is **how much autonomy AI has over the remediation**:
-
-| Maturity | Approach | How It Works | AI Role |
-|----------|----------|-------------|---------|
-|  **Crawl** | Ticket Enrichment | EDA detects event → AI diagnoses root cause → enriched context is posted to chat/ITSM → **human remediates manually** | Read-only: AI interprets, humans act |
-|  **Walk** | Curated Remediation | EDA detects event → AI diagnoses root cause → AI **selects the right playbook** from a pre-approved library → human approves → playbook executes | AI selects from existing automation; no new code is created |
-|  **Run** | Self-Healing | EDA detects event → AI diagnoses root cause → Ansible Lightspeed **generates a new remediation playbook** → policy engine validates → playbook executes | AI generates new automation on-the-fly within policy boundaries |
-
-The workflow in this guide demonstrates the **Run** stage -- AI generates a remediation playbook that didn't exist before. But organizations can start at **Crawl** by using only the Enrichment Workflow (parts 1-2) and stopping before the Remediation Workflow. Each stage reuses the same underlying architecture; the difference is how far down the pipeline you automate.
-
-### Where Do Good Playbooks Come From?
-
-The AIOps pipeline in this guide uses Automation code assistant to generate remediation playbooks on-the-fly. But AI-generated code is not the only source of production-quality automation. Organizations should draw from multiple playbook sources depending on the use case:
-
-| Source | Description |
-|--------|-------------|
-| **CVE Remediation (Red Hat Lightspeed)** | <a target="_blank" href="https://console.redhat.com">Red Hat Lightspeed</a> (formerly Red Hat Insights) identifies vulnerabilities affecting your RHEL fleet and generates targeted playbooks to patch them. These are based on Red Hat's Security Data API and errata -- not AI-generated, but battle-tested remediation from Red Hat Support. |
-| **Advisor Recommendations (Red Hat Lightspeed)** | Lightspeed flags misconfigurations and best-practice violations (e.g., SELinux policy issues, SSH configurations that won't survive a reboot) and generates playbooks to fix them proactively. Think of CVEs as *reactive* -- patching known vulnerabilities. Advisor recommendations are *proactive* -- fixing misconfigurations before they become incidents. |
-| **RHEL System Roles** | Officially supported, pre-built Ansible roles shipped with RHEL that provide a stable, version-independent interface for common configuration tasks (NTP, networking, storage, SELinux, firewall). A playbook using  works the same on RHEL 8 and RHEL 9. |
-| **AI-assisted authoring (Automation code assistant)** | Developers use Automation code assistant in the IDE to accelerate playbook creation. The AI generates a first draft from natural language, then a human reviews, refines, and validates before committing. Supports Google Gemini, Red Hat AI, and IBM watsonx as backends. |
-
-> **Human-in-the-loop is what makes it production-ready.**
->
-> Whether a playbook was generated by Red Hat Lightspeed, written with AI assistance, or hand-crafted, the same review and approval process applies: Git as source of truth, project sync in AAP, Job Templates with guardrails (credentials, inventory limits, surveys), and optional approval gates. The IDE is where the review happens; AAP is where the gatekeeping happens.
-
-Each source has its place in the AIOps maturity journey. At the **Crawl** stage, Red Hat Lightspeed CVE and Advisor playbooks give you ready-made, trusted content. At **Walk**, curated RHEL System Roles and pre-approved playbook libraries provide governed automation. At **Run**, Automation code assistant generates new playbooks on-the-fly within policy boundaries.
-
-<h2 id="related-guides"></h2>
-
-## Related Guides
-
--  **Need to deploy the AI backend?** See [AI Infrastructure automation with Ansible](README-IA.md) for automating Red Hat AI provisioning with the `infra.ai` and `redhat.ai` collections.
--  **Want to try this hands-on?** The [Hands-On AIOps Workshop](https://rhpds.github.io/ai-driven-automation-showroom/modules/index.html) walks through the full self-healing pipeline with a live lab -- Part 1 covers Apache remediation, Part 2 extends to network automation with Splunk and Cisco routers.
--  **New to Event-Driven Ansible?** See [Get started with EDA (Ansible Rulebook)](https://access.redhat.com/articles/7136720) for the fundamentals of rulebooks, event sources, and actions.
--  **Looking for ticket enrichment?** See [ServiceNow ITSM Ticket Enrichment Automation](https://access.redhat.com/articles/7127603) -- a great starting point for the **Crawl** stage of AIOps.
-
----
-
 ## Summary
 
-With this workflow in place, your team moves from manually triaging every alert to AI-diagnosed, dynamically remediated incidents. Instead of writing hundreds of rules to match hundreds of failure modes, a single AIOps pipeline uses AI inference to diagnose issues and Automation code assistant to generate remediation playbooks on-the-fly. Combined with pre-built remediation from Red Hat Lightspeed (CVE and Advisor playbooks) and RHEL System Roles, organizations have multiple sources of trusted automation at every stage of the maturity journey. The result is faster mean time to resolution (MTTR), less operational toil, and an automation strategy that scales with your environment rather than against it.
+This foundational guide shows how Ansible Automation Platform turns AIOps signals into **governed remediation**: detect with EDA or ITSM, search the approved library through MCP, correlate and select with AI assistance, then execute with guardrails and validation. Partner observability and ticketing paths plug into that same loop. AAP stays the trusted execution layer -- with optional self-hosted **inference** for enrichment and **Red Hat Lightspeed** curated remediations feeding the library teams already trust.
 
----
+<h2 id="key-terms">Key Terms</h2>
+
+Short definitions for concepts used in this guide, plus Ansible collections. Partner Solution Guides add their own collections on each page.
+
+<div class="key-terms-group">
+
+<h3 id="key-terms-concepts">Concepts</h3>
+
+<dl class="key-terms-glossary">
+
+<dt>AIOps</dt>
+<dd>Artificial intelligence for IT operations -- using data, inference, and automation to improve detection, diagnosis, and resolution.
+<span class="key-terms-detail">See <a target="_blank" href="https://www.redhat.com/en/topics/ai/what-is-aiops">What is AIOps?</a> and the <a href="#background">Background</a> section of this guide.</span></dd>
+
+<dt>Event-Driven Ansible (EDA)</dt>
+<dd>The event intake capability in Ansible Automation Platform: rulebooks watch sources (webhooks, Kafka, partner plugins) and trigger jobs or workflows when conditions match.
+<span class="key-terms-detail">Baseline for Detect in this guide; see <a href="#1-detect">1. Detect</a>.</span></dd>
+
+<dt><a target="_blank" href="https://www.redhat.com/en/topics/ai/what-is-model-context-protocol-mcp">Model Context Protocol (MCP)</a></dt>
+<dd>An open protocol that lets AI clients call tools and data sources in a standard way. In this guide, the <strong>AAP MCP server</strong> exposes approved job templates and workflows so an AI assistant can search the library and request governed runs.
+<span class="key-terms-detail">See <a href="#2-mcp-search">2. MCP search</a> and <a target="_blank" href="https://www.redhat.com/en/topics/ai/what-is-model-context-protocol-mcp">What is MCP?</a>.</span></dd>
+
+<dt>Approved library / curated remediation</dt>
+<dd>Pre-reviewed job templates and workflows already in AAP. At incident time, AI <strong>selects</strong> from that menu and AAP executes -- it does not invent new playbooks from an alert.
+<span class="key-terms-detail">See <a href="#aiops-workflow">AIOps workflow</a> and <a href="#trusted-playbook-sources">Trusted sources for the approved library</a>.</span></dd>
+
+<dt>Automation orchestrator</dt>
+<dd>AAP capability for multi-step workflows with approvals, task agents, and logic steps (AAP 2.7+).
+<span class="key-terms-detail">Optional for gated launches and closed-loop validation; see <a href="#prerequisites">Prerequisites</a>.</span></dd>
+
+<dt>Red Hat Lightspeed</dt>
+<dd>console.redhat.com services (formerly Red Hat Insights) that publish <strong>Red Hat-curated</strong> CVE and Advisor remediation playbooks -- expert-authored content, not LLM output.
+<span class="key-terms-detail">Distinct from <strong>Automation code assistant</strong> (authoring-time drafts in the IDE). See <a href="#trusted-playbook-sources">Trusted sources</a>.</span></dd>
+
+<dt>Automation code assistant</dt>
+<dd>LLM-assisted playbook authoring in the IDE (formerly Ansible Lightspeed Code Assistant). Humans review and promote content into the approved library.
+<span class="key-terms-detail">Not used for incident-time codegen on the curated path in this guide.</span></dd>
+
+</dl>
+
+</div>
+
+<div class="key-terms-group">
+
+<h3 id="key-terms-collections">Ansible collections</h3>
+
+<dl class="key-terms-glossary">
+
+<dt><a target="_blank" href="https://console.redhat.com/ansible/automation-hub/repo/published/ansible/eda/">ansible.eda</a></dt>
+<dd>Certified collection for Event-Driven Ansible rulebooks, event sources, and filters (Kafka, webhooks, and partner plugins).
+<span class="key-terms-detail">Baseline for event-driven AIOps paths in this guide and in partner Solution Guides.</span></dd>
+
+<dt><a target="_blank" href="https://console.redhat.com/ansible/automation-hub/repo/published/ansible/controller/">ansible.controller</a></dt>
+<dd>Certified collection for automation controller resources as code: job templates, workflows, surveys, credentials, and RBAC (routes through the platform gateway on AAP 2.7+).
+<span class="key-terms-detail">Baseline for governed execution. <code>ansible.platform</code> covers gateway auth and platform-wide resources -- it does not replace controller job-template modules.</span></dd>
+
+<dt><a target="_blank" href="https://console.redhat.com/ansible/automation-hub/repo/published/ansible/scm/">ansible.scm</a></dt>
+<dd>Certified collection for Git operations against playbook projects.
+<span class="key-terms-detail">Used in the <a href="README-AIOps-Use-Case-06-Self-Healing-Infrastructure.html#workshop-run-pipeline">UC06 workshop pipeline</a> for Git promotion.</span></dd>
+
+<dt>Partner collections</dt>
+<dd>Collections named on each partner Solution Guide (for example <code>servicenow.itsm</code>, IBM Instana, Splunk or EDA integrations).
+<span class="key-terms-detail">Install only for the integration you are implementing; see <a href="#event-sources">Event sources</a> in Prerequisites.</span></dd>
+
+<dt><a target="_blank" href="https://console.redhat.com/ansible/automation-hub/repo/validated/infra/ai">infra.ai</a> and <a target="_blank" href="https://console.redhat.com/ansible/automation-hub/repo/published/redhat/ai">redhat.ai</a></dt>
+<dd>Optional validated and certified collections for <strong>self-hosted Red Hat AI</strong> on your infrastructure.
+<span class="key-terms-detail">Automate provisioning GPU capacity and serving models with RHEL AI and InstructLab. They do not replace generic OpenAI-compatible APIs or partner-hosted inference. See <a href="README-IA.html">AI Infrastructure automation with Ansible</a> for a full walkthrough.</span></dd>
+
+</dl>
+
+</div>
 
 ## Next Steps
 
 | | |
 |---|---|
-| <a target="_blank" href="https://www.redhat.com/en/technologies/management/ansible/trial"><strong>Try Ansible Automation Platform</strong></a> | Start a free 60-day trial and build your first automation workflows |
-| <a target="_blank" href="https://www.redhat.com/en/services/consulting"><strong>Red Hat Consulting</strong></a> | Work with Red Hat experts to design, implement, and scale AIOps automation tailored to your environment |
-| <a target="_blank" href="https://www.redhat.com/en/services/training-and-certification"><strong>Training and Certification</strong></a> | Build team skills with hands-on courses and industry-recognized certifications |
+|  <a target="_blank" href="https://www.redhat.com/en/technologies/management/ansible/trial"><strong>Try Ansible Automation Platform</strong></a> | Start a free 60-day trial and build your first automation workflows |
+|  <a target="_blank" href="https://www.redhat.com/en/services/consulting"><strong>Red Hat Consulting</strong></a> | Work with Red Hat experts to design, implement, and scale AIOps automation tailored to your environment |
+|  <a target="_blank" href="https://www.redhat.com/en/services/training-and-certification"><strong>Training and Certification</strong></a> | Build team skills with hands-on courses and industry-recognized certifications |
 
----
+<span class="guide-closing-logo-set">
 
 
-{% endraw %}
+</span>

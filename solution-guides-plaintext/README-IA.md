@@ -1,42 +1,3 @@
-
-# AI Infrastructure Automation with Ansible – Solution Guide
-
-
-<style>
-  div#toc {
-    display: none;
-  }
-</style>
-
-## Table of Contents
-
-- [AI Infrastructure Automation with Ansible – Solution Guide](#ai-infrastructure-automation-with-ansible--solution-guide)
-  - [Table of Contents](#table-of-contents)
-  - [Background](#background)
-  - [What this solution automates?](#what-this-solution-automates)
-  - [Solution Overview](#solution-overview)
-    - [Components](#components)
-  - [How to download these Collections](#how-to-download-these-collections)
-  - [AWS AMI Setup for RHEL AI](#aws-ami-setup-for-rhel-ai)
-    - [Option 1: Subscribe via AWS Marketplace](#option-1-subscribe-via-aws-marketplace)
-    - [Option 2: Create Your Own AMI](#option-2-create-your-own-ami)
-  - [Setting up the inventory](#setting-up-the-inventory)
-    - [Option 1: CLI-Based Inventory](#option-1-cli-based-inventory)
-    - [Option 2: Inventory sync in Ansible Automation Platform](#option-2-inventory-sync-in-ansible-automation-platform)
-  - [Visualizing the workflow in Ansible Automation Platform](#visualizing-the-workflow-in-ansible-automation-platform)
-  - [Included playbooks](#included-playbooks)
-    - [1. provision.yml (`infra.ai`)](#1-provisionyml-infraai)
-    - [2. ilab.yml (`redhat.ai`)](#2-ilabyml-redhatai)
-  - [Model selection and usage](#model-selection-and-usage)
-  - [Pulling sample vars and playbook files](#pulling-sample-vars-and-playbook-files)
-  - [Variable configuration](#variable-configuration)
-  - [Validating model deployment](#validating-model-deployment)
-    - [Option 1: Using curl](#option-1-using-curl)
-    - [Option 2: Using Ansible](#option-2-using-ansible)
-  - [Integration with Ansible Lightspeed](#integration-with-ansible-lightspeed)
-  - [Final Notes](#final-notes)
-  - [Sources](#sources)
-
 <h2 id="background"></h2>
 ## Background
 
@@ -61,7 +22,7 @@ This Ansible-based solution automates the key steps involved in setting up an AI
 - Serving an AI model: Deploys InstructLab, fetches a model, and launches an inference endpoint.
 - Validation: Verifies that the model server is accessible and working using test prompts.
 
-Together, these steps create a repeatable and auditable way to deploy AI infrastructure--from infrastructure provisioning to serving a model--using automation best practices. This automation can also be used to power the Ansible Lightspeed intelligent assistant by configuring Red Hat AI as a model provider and connecting Ansible Lightspeed to the hosted LLM.
+Together, these steps create a repeatable and auditable way to deploy AI infrastructure--from infrastructure provisioning to serving a model--using automation best practices. This automation can also back **Automation intelligent assistant** in AAP by configuring Red Hat AI as a model provider and pointing the chatbot at your hosted LLM endpoint.
 
 <h2 id="solution-overview"></h2>
 ## Solution Overview
@@ -290,16 +251,16 @@ You can also use the redhat.ai.completion module to send a prompt to the model d
 
 This method is useful when testing from within an automated workflow or integrating into a larger playbook.
 
-<h2 id="integration-with-ansible-lightspeed"></h2>
-## Integration with Ansible Lightspeed
+<h2 id="integration-with-automation-intelligent-assistant"></h2>
+## Integration with Automation intelligent assistant
 
-Once you have validated that the LLM is running and serving inference requests, this automated setup can act as the backend foundation for powering the Ansible Lightspeed Intelligent Assistant within Ansible Automation Platform (AAP).
+Once you have validated that the LLM is running and serving inference requests, this automated setup can act as the backend for **Automation intelligent assistant** within Ansible Automation Platform (AAP).
 
-This means you can use this deployment to support internal use cases where the Ansible Lightspeed intelligent assistant needs to leverage model hosted on your own infrastructure. This is particularly useful for air-gapped, privacy-sensitive, or regulated environments where using public models is not ideal.
+Use this deployment when **Automation intelligent assistant** must call a model on your own infrastructure -- air-gapped, privacy-sensitive, or regulated environments where public models are not ideal.
 
 After the model backend is ready:
-	•	Follow the [Ansible Lightspeed documentation](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/installing_on_openshift_container_platform/deploying-chatbot-operator) to configure and enable the Ansible Lightspeed intelligent assistant in AAP.
-	•	In the Lightspeed settings, supply your hosted LLM’s API endpoint and token as required.
+	•	Follow the [Automation intelligent assistant documentation](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/installing_on_openshift_container_platform/deploying-chatbot-operator) to configure and enable the in-product chatbot in AAP (legacy doc paths may still reference Ansible Lightspeed).
+	•	In the chatbot configuration secret, supply your hosted LLM API endpoint and token as required.
 
 This integration enables you to leverage generative AI for Ansible Automation Platform while retaining full control over your LLM infrastructure.
 
@@ -318,7 +279,7 @@ We recommend checking for updates to these collections regularly on [Automation 
 ## Sources
 
 - [Red Hat Ansible Automation Platform](https://www.redhat.com/en/technologies/management/ansible)
-- [Red Hat Ansible Lightspeed](https://www.redhat.com/en/technologies/management/ansible/ansible-lightspeed)
+- [Red Hat Lightspeed for Ansible Automation Platform](https://www.redhat.com/en/technologies/management/ansible/ansible-lightspeed)
 - [Red Hat Enterprise Linux AI](https://www.redhat.com/en/products/ai/enterprise-linux-ai)
 
 ---
@@ -333,3 +294,7 @@ We recommend checking for updates to these collections regularly on [Automation 
 
 ---
 
+<span class="guide-closing-logo-set">
+
+
+</span>
