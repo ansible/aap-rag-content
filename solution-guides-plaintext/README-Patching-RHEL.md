@@ -290,4 +290,3 @@ target_host : ok=3    changed=1    unreachable=0    failed=0    skipped=0
 - <a target="_blank" href="https://console.redhat.com">Red Hat Lightspeed (Insights)</a>
 - <a target="_blank" href="https://access.redhat.com/security/cve/CVE-2024-6174">CVE-2024-6174 Advisory</a>
 - <a target="_blank" href="https://docs.redhat.com/en/documentation/openshift_container_platform/latest/html/virtualization/">OpenShift Virtualization Documentation</a>
-{% endraw %}

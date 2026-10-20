@@ -522,4 +522,3 @@ Trigger a test P1 with multiple simultaneous alerts. Confirm the agent produces 
 - [AIOps automation with Ansible](README-AIOps.md) -- foundational guide with all six [Common AIOps use cases](README-AIOps.md#common-aiops-use-cases)
 - [Unlock AIOps with ServiceNow LEAP and Ansible MCP server](README-AIOps-ServiceNow.md) -- ServiceNow as the AIOps intelligence layer driving AAP via MCP
 - [AIOps with Splunk and Event-Driven Ansible](README-AIOps-Splunk-ITSI.md) -- Splunk ITSI integration for predictive and reactive automation
-{% endraw %}

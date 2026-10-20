@@ -1022,4 +1022,3 @@ This guide illustrated establishing a complete event pipeline from the OpenShift
 - **Another EDA pattern:** See [Event-Driven Network Source of Truth with NetBox and Ansible Automation Platform](README-NetBox-SoT-EDA-Config.md) for using EDA with webhooks instead of Kafka.
 - **New to Event-Driven Ansible?** See <a target="_blank" href="https://access.redhat.com/articles/7136720">Get started with EDA (Ansible Rulebook)</a> for the fundamentals.
 
-{% endraw %}

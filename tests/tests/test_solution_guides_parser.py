@@ -24,8 +24,9 @@ from unittest.mock import patch
 
 import pytest
 
-scripts_dir = Path(__file__).parent.parent.parent / "scripts"
-sys.path.insert(0, str(scripts_dir))
+repo_root = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(repo_root / "src"))
+sys.path.insert(0, str(repo_root / "scripts"))
 
 # The module file uses hyphens (solution-guides-parser.py), so we need importlib
 _mod = importlib.import_module("solution-guides-parser")
@@ -171,6 +172,14 @@ class TestExtractTitle:
         )
         assert title == "AIOps automation"
 
+    def test_extract_title_unescapes_markdown(self, tmp_path):
+        """Test that markdown backslash-escapes are decoded in the H1 fallback."""
+        parser = SolutionGuidesParser(str(tmp_path / "repo"), str(tmp_path / "out"))
+        title = parser._extract_title(
+            ["# LogicMonitor \\+ Ansible Automation Platform: AIOps Solution Guide\n"]
+        )
+        assert title == "LogicMonitor + Ansible Automation Platform: AIOps Solution Guide"
+
 
 class TestParseFile:
     """Test cases for _parse_file."""
@@ -304,7 +313,8 @@ class TestParseFile:
             "</div>\n"
             "\n"
             "## Overview\n"
-            "Body text.\n",
+            "Body text.\n"
+            "{% endraw %}\n",
             encoding="utf-8",
         )
 
@@ -313,6 +323,7 @@ class TestParseFile:
 
         result = (out_dir / "README-AIOps.md").read_text(encoding="utf-8")
         assert "{% raw %}" not in result
+        assert "{% endraw %}" not in result
         assert "<div" not in result
         assert "</div>" not in result
         assert "<h1>" not in result
@@ -449,6 +460,25 @@ class TestParseFile:
 
         result = (out_dir / "test.md").read_text(encoding="utf-8")
         assert result == "## Overview\n\nBody text.\n"
+
+    def test_parse_file_omits_trailing_endraw_tag(self, tmp_path):
+        """Test that a trailing '{% endraw %}' line is omitted from output."""
+        repo_dir = tmp_path / "repo"
+        out_dir = tmp_path / "out"
+        repo_dir.mkdir()
+        source = repo_dir / "test.md"
+        source.write_text(
+            "{% raw %}\n# Title\nBody text.\n{% endraw %}\n",
+            encoding="utf-8",
+        )
+
+        parser = SolutionGuidesParser(str(repo_dir), str(out_dir))
+        parser._parse_file("test.md")
+
+        result = (out_dir / "test.md").read_text(encoding="utf-8")
+        assert "{% raw %}" not in result
+        assert "{% endraw %}" not in result
+        assert result == "# Title\nBody text.\n"
 
     def test_run_calls_parse_for_all_source_files(self, tmp_path):
         """Test run() calls _parse_file once per entry in SOURCE_FILES."""

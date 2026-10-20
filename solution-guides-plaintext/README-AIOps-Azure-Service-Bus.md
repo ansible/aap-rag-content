@@ -379,4 +379,3 @@ With Azure Service Bus connected to Event-Driven Ansible, your Azure monitoring 
 
 
 </span>
-{% endraw %}

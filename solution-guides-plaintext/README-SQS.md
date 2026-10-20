@@ -598,4 +598,3 @@ With AWS SQS as the event transport, your AIOps pipeline gains the durability an
 
 
 </span>
-{% endraw %}

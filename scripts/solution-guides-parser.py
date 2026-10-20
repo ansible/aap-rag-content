@@ -1,4 +1,4 @@
-"""Download and parse solution guides for RAG DB ingestion."""  # pylint: disable=invalid-name
+"""Download and parse solution guides for RAG DB ingestion."""  # pylint: disable=invalid-name,import-error
 
 import argparse
 import json
@@ -11,6 +11,8 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
+from aap_rag_content.utils import resolve_output_path
+
 SOLUTION_GUIDES_REPO_URL = "https://github.com/ansible-tmm/solution-guides/"
 SOLUTION_GUIDES_WEB_PAGE = "https://ansible-tmm.github.io/solution-guides/"
 
@@ -22,6 +24,7 @@ SOURCE_FILES = [
     "README-AIOps.md",
     "README-AIOps-ServiceNow.md",
     "README-AIOps-Splunk-ITSI.md",
+    # Excluded: content moved to README-AIOps-Use-Case-01-Incident-Ticket-Enrichment.md
     # "README-AIOps-Ticket-Enrichment.md",
     "README-AIOps-Use-Case-01-Incident-Ticket-Enrichment.md",
     "README-AIOps-Use-Case-02-Cost-Resource-Optimization.md",
@@ -40,6 +43,7 @@ SOURCE_FILES = [
     "README-IA.md",
     "README-Instana-AIOps.md",
     "README-Intelligent-Assistant-RHAIIS.md",
+    # Excluded: repository table of contents, not a solution guide
     # "README.md",
     "README-NetBox-SoT-EDA-Config.md",
     "README-NetBox-WAN-EDA-Failover.md",
@@ -78,6 +82,16 @@ class SolutionGuidesParser:
         if lines and lines[0].strip() == "{% raw %}":
             return lines[1:]
         return lines
+
+    def _strip_trailing_endraw_tag(self, lines):
+        """Return lines without a trailing Jinja '{% endraw %}' line."""
+        if lines and lines[-1].strip() == "{% endraw %}":
+            return lines[:-1]
+        return lines
+
+    def _unescape_markdown(self, text):
+        """Return text with markdown backslash-escapes decoded."""
+        return re.sub(r"\\([!\"#$%&'()*+,\-./:;<=>?@\[\\\]^_`{|}~])", r"\1", text)
 
     def _is_markdown_heading(self, line):
         """Return True if line is an ATX markdown heading."""
@@ -169,6 +183,8 @@ class SolutionGuidesParser:
         for line in lines:
             if line.startswith("# "):
                 title = self._strip_html_comments(line.lstrip("# ").strip())
+                if title:
+                    title = self._unescape_markdown(title)
                 return title or None
         return None
 
@@ -198,6 +214,7 @@ class SolutionGuidesParser:
         stem = source_file.replace(".md", "")
         _, body_lines = self._strip_preamble_html(self._strip_leading_raw_tag(lines))
         body_lines = self._strip_leading_blank_lines(body_lines)
+        body_lines = self._strip_trailing_endraw_tag(body_lines)
 
         out_file = os.path.join(self.out_dir, source_file)
         with open(out_file, "w", encoding="utf-8") as f:
@@ -326,37 +343,6 @@ def main():
         parser.run()
     finally:
         print(f"Execution time: {(time.time() - start):.3f} secs")
-
-
-def resolve_output_path(path: str) -> str:
-    """Validate a CLI-supplied output path, rejecting relative ``..`` escapes.
-
-    An absolute path is honored as explicit operator intent and only
-    lexically normalized — it is NOT contained. A relative path is
-    anchored at the current working directory and must stay within it
-    *lexically*: ``../`` escapes are rejected, while symlinks inside the
-    tree are deliberately not resolved, so a symlinked output directory
-    (e.g. ``./output`` pointing at a scratch disk) keeps working. For
-    strict, symlink-resolving containment of input paths, use
-    :func:`resolve_within_cwd` instead.
-
-    Args:
-        path: A path provided via a CLI argument or config value.
-
-    Returns:
-        The absolute, lexically normalized path.
-
-    Raises:
-        ValueError: If a relative path lexically escapes the working
-            directory.
-    """
-    if os.path.isabs(path):
-        return os.path.normpath(path)
-    base = os.getcwd()
-    resolved = os.path.normpath(os.path.join(base, path))
-    if resolved != base and not resolved.startswith(base + os.sep):
-        raise ValueError(f"Path escapes the working directory: {path}")
-    return resolved
 
 
 if __name__ == "__main__":

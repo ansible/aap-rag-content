@@ -69,4 +69,3 @@ User- or schedule-initiated workflows: dependencies, capacity plan generation, a
 - [Common AIOps Use Cases](aiops-use-cases.md)
 - [AIOps automation with Ansible](README-AIOps.md)
 - [AI Infrastructure automation with Ansible](README-IA.md)
-{% endraw %}

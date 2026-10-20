@@ -151,9 +151,9 @@ dump-postgres: ## Dump database using pg_dump utility
 restore-postgres: ## Restore database using pg_restore utility
 	podman exec pgvector pg_restore -U $(POSTGRES_USER) -d $(POSTGRES_DATABASE) /pg_dump/$(PG_DUMP_FILE)
 
-update-solution-guides: ## Update solution guides
+update-solution-guides: ## Update solution guides (deletes both dirs first; git restore if download fails)
 	rm -rf ./solution-guides ./solution-guides-plaintext
-	uv run python3 ./scripts/solution-guides-parser.py
+	PYTHONPATH=src:$$PYTHONPATH uv run python3 ./scripts/solution-guides-parser.py
 
 help: ## Show this help screen
 	@echo 'Usage: make <OPTIONS> ... <TARGETS>'

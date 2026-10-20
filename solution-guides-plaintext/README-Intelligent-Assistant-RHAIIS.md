@@ -190,4 +190,3 @@ Save the CR. The operator will reconcile and deploy or update the in-product cha
 
 
 </span>
-{% endraw %}

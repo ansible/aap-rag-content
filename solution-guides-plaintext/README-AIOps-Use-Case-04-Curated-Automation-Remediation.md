@@ -75,4 +75,3 @@ Approval gates, switch nodes for confidence, and validation loops after remediat
 - [RHEL Patching with Red Hat Lightspeed and Ansible MCP Server](README-Patching-RHEL.md)
 - [Automated incident remediation with IBM Instana](README-Instana-AIOps.md)
 - [AIOps with Splunk and Event-Driven Ansible](README-AIOps-Splunk-ITSI.md)
-{% endraw %}

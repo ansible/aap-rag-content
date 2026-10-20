@@ -544,4 +544,3 @@ Validate **per workshop stage** before enabling policy-governed auto-run.
 - [Automated incident remediation with IBM Instana](README-Instana-AIOps.md)
 - [AIOps with Splunk and Event-Driven Ansible](README-AIOps-Splunk-ITSI.md)
 - [Hands-On AIOps Workshop](https://rhpds.github.io/ai-driven-automation-showroom/modules/index.html)
-{% endraw %}
