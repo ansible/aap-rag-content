@@ -3001,9 +3001,9 @@ tqdm==4.70.1 \
     #   openai
     #   sentence-transformers
     #   transformers
-transformers==5.19.0 \
-    --hash=sha256:87f38dd25e4521151b97e94520ac457f44a0ae8a8358a5b112daff6c64a822d6 \
-    --hash=sha256:afcd2dd5f603ed28c1e1fcb00a338ccbb4ef5f878ed289635df8b58187afb518
+transformers==5.20.1 \
+    --hash=sha256:25b30879e4c243f00630c1079171ede6d4f6bf76e68f978acd47628a640bc8a0 \
+    --hash=sha256:5f51ce444193e5d0a751e3fa489ddbc2224ff12f6675a5cfefd4044b09757c19
     # via sentence-transformers
 typer==0.27.3 \
     --hash=sha256:d0396f770a560ab1b0a8504e13b5f254b728cedb05c61cf0359e944e50ce8901 \
