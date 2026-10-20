@@ -7,8 +7,7 @@
   "packageRules": [
     {
       "description": "python Docker tag and GitHub Actions python-version are managed manually; pyproject.toml pins requires-python==3.12.* and must be updated deliberately (#455, #549)",
-      "matchPackageNames": ["python"],
-      "matchDepTypes": ["uses-with", "docker"],
+      "matchPackageNames": ["python", "actions/python-versions"],
       "enabled": false
     },
     {
@@ -22,9 +21,9 @@
       "allowedVersions": "<6"
     },
     {
-      "description": "pydantic and pydantic-core are transitive deps managed by lock-file maintenance; individual PRs produce mismatched versions/hashes and break the build (#546, #547)",
+      "description": "pydantic and pydantic-core must be updated together to avoid mismatched versions/hashes (#546, #547)",
       "matchPackageNames": ["pydantic", "pydantic-core"],
-      "enabled": false
+      "groupName": "pydantic"
     }
   ]
 }
