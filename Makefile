@@ -155,6 +155,9 @@ update-solution-guides: ## Update solution guides (deletes both dirs first; git 
 	rm -rf ./solution-guides ./solution-guides-plaintext
 	PYTHONPATH=src:$$PYTHONPATH uv run python3 ./scripts/solution-guides-parser.py
 
+update-url-reachable: ## Record URL reachability in aap-product-docs-plaintext metadata JSON files
+	PYTHONPATH=src:$$PYTHONPATH uv run python3 ./scripts/update_url_reachable.py
+
 help: ## Show this help screen
 	@echo 'Usage: make <OPTIONS> ... <TARGETS>'
 	@echo ''
