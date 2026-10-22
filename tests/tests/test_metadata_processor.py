@@ -19,6 +19,7 @@ import pytest
 import requests
 
 from aap_rag_content import metadata_processor
+from aap_rag_content.metadata_processor import check_url_reachable
 
 
 @pytest.fixture
@@ -48,9 +49,7 @@ class TestMetadataProcessor:
 
     def test_ping_url_200(self, md_processor, mocker, processor_data):
         """Test ping_url method returns True for successful HTTP 200 response."""
-        mock_get = mocker.patch(
-            "aap_rag_content.metadata_processor.requests.get"
-        )
+        mock_get = mocker.patch("aap_rag_content.metadata_processor.requests.get")
         mock_response = mocker.MagicMock()
         mock_response.status_code = 200
         mock_get.return_value = mock_response
@@ -63,9 +62,7 @@ class TestMetadataProcessor:
 
     def test_ping_url_404(self, md_processor, mocker, processor_data):
         """Test ping_url method returns False for HTTP 404 response."""
-        mock_get = mocker.patch(
-            "aap_rag_content.metadata_processor.requests.get"
-        )
+        mock_get = mocker.patch("aap_rag_content.metadata_processor.requests.get")
         mock_response = mocker.MagicMock()
         mock_response.status_code = 404
         mock_get.return_value = mock_response
@@ -80,9 +77,7 @@ class TestMetadataProcessor:
 
     def test_ping_url_exception(self, md_processor, mocker, processor_data):
         """Test ping_url method returns False when request raises exception."""
-        mock_get = mocker.patch(
-            "aap_rag_content.metadata_processor.requests.get"
-        )
+        mock_get = mocker.patch("aap_rag_content.metadata_processor.requests.get")
         mock_get.side_effect = requests.exceptions.RequestException()
 
         result = md_processor.ping_url(processor_data["url"])
@@ -92,6 +87,18 @@ class TestMetadataProcessor:
         for args, kwargs in mock_get.call_args_list:
             assert args == (processor_data["url"],)
             assert kwargs == {"timeout": 30}
+
+    def test_check_url_reachable_delegates_same_logic(self, mocker, processor_data):
+        """check_url_reachable is the shared implementation used by the updater."""
+        mock_get = mocker.patch("aap_rag_content.metadata_processor.requests.get")
+        mock_response = mocker.MagicMock()
+        mock_response.status_code = 200
+        mock_get.return_value = mock_response
+
+        result = check_url_reachable(processor_data["url"], retries=1)
+
+        assert result is True
+        mock_get.assert_called_once_with(processor_data["url"], timeout=30)
 
     def test_get_file_title(self, md_processor, mocker, processor_data):
         """Test get_file_title method extracts title from file header."""

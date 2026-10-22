@@ -23,6 +23,31 @@ import requests
 LOG = logging.getLogger(__name__)
 
 
+def check_url_reachable(url: str, retries: int = 3) -> bool:
+    """Return True if the URL responds with HTTP 200.
+
+    Retries the request when it fails or the status code is not 200.
+
+    Args:
+        url: URL to check.
+        retries: Maximum number of GET attempts.
+
+    Returns:
+        True when the URL returns HTTP 200, otherwise False.
+    """
+    for trynum in range(1, retries + 1):
+        try:
+            response = requests.get(url, timeout=30)
+            if trynum < retries and response.status_code != 200:
+                continue
+            return response.status_code == 200
+        except requests.exceptions.RequestException:
+            if trynum < retries:
+                continue
+            return False
+    return False
+
+
 class MetadataProcessor:
     """Metadata processing callback.
 
@@ -51,17 +76,23 @@ class MetadataProcessor:
 
     def ping_url(self, url: str, retries: int = 3) -> bool:
         """Check if the URL parameter is live."""
-        for trynum in range(1, retries + 1):
-            try:
-                response = requests.get(url, timeout=30)
-                if trynum < retries and response.status_code != 200:
-                    continue
-                return response.status_code == 200
-            except requests.exceptions.RequestException:
-                if trynum < retries:
-                    continue
-                return False
-        return False
+        return check_url_reachable(url, retries=retries)
+
+    def _resolve_url_reachable(self, url: str, file_path: str) -> bool:
+        """Return whether the document URL is reachable.
+
+        Args:
+            url: Document URL to check.
+            file_path: Path to the source document. Unused in the base
+                implementation; subclasses may use it to read stored metadata.
+
+        Returns:
+            True when the URL is treated as reachable.
+        """
+        _ = file_path
+        if self.suppress_ping_url:
+            return True
+        return self.ping_url(url)
 
     def populate(self, file_path: str) -> dict[str, typing.Any]:
         """Populate title and metadata with docs URL.
@@ -81,14 +112,13 @@ class MetadataProcessor:
             "url": doc_url,
         }
 
-        url_reachable = True
-        if not self.suppress_ping_url and not self.ping_url(doc_url):
+        url_reachable = self._resolve_url_reachable(doc_url, file_path)
+        if not url_reachable:
             LOG.warning(
                 'URL not reachable: %(url)s (Title: "%(title)s", '
                 "File path: %(file_path)s)",
                 document,
             )
-            url_reachable = False
 
         LOG.debug(
             'Metadata populated for: "%(title)s" (URL: %(url)s, File '

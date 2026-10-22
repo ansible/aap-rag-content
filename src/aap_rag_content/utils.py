@@ -151,7 +151,10 @@ def get_common_arg_parser() -> argparse.ArgumentParser:
         "--suppress-ping-url",
         action="store_true",
         default=False,
-        help="Skip URL reachability check and assume all URLs are reachable.",
+        help=(
+            "Skip live URL reachability checks. Use url_reachable from "
+            "metadata JSON when present; otherwise assume URLs are reachable."
+        ),
     )
     return parser
 

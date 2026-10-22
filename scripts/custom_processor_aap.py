@@ -41,6 +41,9 @@ class AAPMetadataProcessor(MetadataProcessor):
     """Metadata processor for AAP documentation.
 
     Extends MetadataProcessor to handle AAP-specific metadata stored in JSON files.
+    When a metadata JSON file already includes url_reachable, that stored
+    value is used instead of a live URL ping so offline builds can skip
+    network access.
     """
 
     def __init__(self, suppress_ping_url: bool = False):
@@ -74,9 +77,18 @@ class AAPMetadataProcessor(MetadataProcessor):
         if title:
             return title
         if not file_path.endswith(".txt"):
-            raise RuntimeError(f"Title metadata is not found for the markdown file {file_path}")
+            raise RuntimeError(
+                f"Title metadata is not found for the markdown file {file_path}"
+            )
         file_content = Path(file_path).read_text(encoding="utf8")
         return file_content.split("\n")[0].lstrip("# ")
+
+    def _resolve_url_reachable(self, url: str, file_path: str) -> bool:
+        """Return stored url_reachable from metadata JSON when present."""
+        stored = self._load_metadata(file_path).get("url_reachable")
+        if isinstance(stored, bool):
+            return stored
+        return super()._resolve_url_reachable(url, file_path)
 
 
 def main():
