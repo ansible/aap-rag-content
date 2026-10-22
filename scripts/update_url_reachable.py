@@ -72,8 +72,8 @@ def load_metadata(path: Path) -> dict[str, Any] | None:
     """Load a metadata JSON object, or None when the file cannot be used."""
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError) as exc:
-        LOG.error("Failed to read %s: %s", path, exc)
+    except (OSError, json.JSONDecodeError):
+        LOG.exception("Failed to read %s", path)
         return None
     if not isinstance(data, dict):
         LOG.error("Metadata file %s is not a JSON object", path)
