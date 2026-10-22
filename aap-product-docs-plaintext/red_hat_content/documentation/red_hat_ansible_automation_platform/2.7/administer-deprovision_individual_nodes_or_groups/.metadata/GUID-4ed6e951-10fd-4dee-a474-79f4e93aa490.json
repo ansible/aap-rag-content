@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/administer-deprovision_individual_nodes_or_groups#GUID-4ed6e951-10fd-4dee-a474-79f4e93aa490",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-deprovision_individual_nodes_or_groups",
-  "title": "Deprovision instance groups in a containerized deployment"
+  "title": "Deprovision instance groups in a containerized deployment",
+  "url_reachable": true
 }

@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/develop-assembly_configuring_lightspeed_onpremise#use-rest-api",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_configuring_lightspeed_onpremise",
-  "title": "Use the Ansible Lightspeed REST API"
+  "title": "Use the Ansible Lightspeed REST API",
+  "url_reachable": true
 }

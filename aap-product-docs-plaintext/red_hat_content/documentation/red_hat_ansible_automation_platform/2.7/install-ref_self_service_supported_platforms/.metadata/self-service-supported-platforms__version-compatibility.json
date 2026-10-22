@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/install-ref_self_service_supported_platforms#self-service-supported-platforms__version-compatibility",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_self_service_supported_platforms",
-  "title": "Ansible Automation Platform version compatibility"
+  "title": "Ansible Automation Platform version compatibility",
+  "url_reachable": true
 }

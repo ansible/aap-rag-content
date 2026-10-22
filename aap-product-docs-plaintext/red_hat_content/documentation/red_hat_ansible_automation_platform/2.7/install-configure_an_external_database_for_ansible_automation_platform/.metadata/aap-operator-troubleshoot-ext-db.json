@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/install-configure_an_external_database_for_ansible_automation_platform#aap-operator-troubleshoot-ext-db",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-configure_an_external_database_for_ansible_automation_platform",
-  "title": "Troubleshoot an external database"
+  "title": "Troubleshoot an external database",
+  "url_reachable": true
 }

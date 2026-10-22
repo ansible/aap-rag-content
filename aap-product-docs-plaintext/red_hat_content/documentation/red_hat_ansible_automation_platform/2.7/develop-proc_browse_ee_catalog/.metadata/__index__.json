@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/develop-proc_browse_ee_catalog",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_browse_ee_catalog",
-  "title": "Browse the execution environment catalog"
+  "title": "Browse the execution environment catalog",
+  "url_reachable": true
 }

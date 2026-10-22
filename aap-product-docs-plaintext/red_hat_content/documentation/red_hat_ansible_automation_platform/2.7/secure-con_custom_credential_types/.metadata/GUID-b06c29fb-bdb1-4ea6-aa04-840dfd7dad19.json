@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/secure-con_custom_credential_types#GUID-b06c29fb-bdb1-4ea6-aa04-840dfd7dad19",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_custom_credential_types",
-  "title": "Create a new credential type"
+  "title": "Create a new credential type",
+  "url_reachable": true
 }

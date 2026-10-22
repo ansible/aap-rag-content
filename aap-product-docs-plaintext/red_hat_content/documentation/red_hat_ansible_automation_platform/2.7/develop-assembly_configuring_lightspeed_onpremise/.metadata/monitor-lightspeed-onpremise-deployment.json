@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/develop-assembly_configuring_lightspeed_onpremise#monitor-lightspeed-onpremise-deployment",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_configuring_lightspeed_onpremise",
-  "title": "Monitor your Red Hat Ansible Lightspeed on-premise deployment"
+  "title": "Monitor your Red Hat Ansible Lightspeed on-premise deployment",
+  "url_reachable": true
 }

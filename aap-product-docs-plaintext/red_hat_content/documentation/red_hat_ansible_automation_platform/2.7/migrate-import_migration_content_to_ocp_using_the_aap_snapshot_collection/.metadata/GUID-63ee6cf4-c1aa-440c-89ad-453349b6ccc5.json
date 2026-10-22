@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/migrate-import_migration_content_to_ocp_using_the_aap_snapshot_collection#GUID-63ee6cf4-c1aa-440c-89ad-453349b6ccc5",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/migrate-import_migration_content_to_ocp_using_the_aap_snapshot_collection",
-  "title": "Set up the import inventory for OCP"
+  "title": "Set up the import inventory for OCP",
+  "url_reachable": true
 }

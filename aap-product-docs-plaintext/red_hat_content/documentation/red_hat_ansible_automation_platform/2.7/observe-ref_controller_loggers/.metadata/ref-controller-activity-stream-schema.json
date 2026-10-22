@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/observe-ref_controller_loggers#ref-controller-activity-stream-schema",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-ref_controller_loggers",
-  "title": "Activity stream schema"
+  "title": "Activity stream schema",
+  "url_reachable": true
 }

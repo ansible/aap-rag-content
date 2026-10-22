@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/administer-control_how_many_collection_versions_are_synced",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-control_how_many_collection_versions_are_synced",
-  "title": "Control how many collection versions are synced"
+  "title": "Control how many collection versions are synced",
+  "url_reachable": true
 }

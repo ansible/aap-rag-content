@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/troubleshoot-ref_troubleshoot_automation_dashboard_configuration_and_deployment#ref-troubleshoot-automation-dashboard-configuration-deployment__issue-top-5-users-total-mismatch",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-ref_troubleshoot_automation_dashboard_configuration_and_deployment",
-  "title": "Issue 2: Top 5 users total does not match the successful and failed job totals"
+  "title": "Issue 2: Top 5 users total does not match the successful and failed job totals",
+  "url_reachable": true
 }

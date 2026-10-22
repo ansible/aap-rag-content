@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/administer-proc_controller_adding_new_inventory#proc-controller-add-groups-to-groups",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_adding_new_inventory",
-  "title": "Add groups within groups"
+  "title": "Add groups within groups",
+  "url_reachable": true
 }

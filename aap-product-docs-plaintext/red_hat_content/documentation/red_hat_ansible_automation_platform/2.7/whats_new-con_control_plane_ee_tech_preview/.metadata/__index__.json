@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/whats_new-con_control_plane_ee_tech_preview",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-con_control_plane_ee_tech_preview",
-  "title": "Control-plane execution environment (Technology Preview)"
+  "title": "Control-plane execution environment (Technology Preview)",
+  "url_reachable": true
 }

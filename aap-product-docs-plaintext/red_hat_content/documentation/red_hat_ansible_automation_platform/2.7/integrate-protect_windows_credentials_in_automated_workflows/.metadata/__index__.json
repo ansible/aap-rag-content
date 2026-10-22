@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/integrate-protect_windows_credentials_in_automated_workflows",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-protect_windows_credentials_in_automated_workflows",
-  "title": "Protect Windows credentials in automated workflows"
+  "title": "Protect Windows credentials in automated workflows",
+  "url_reachable": true
 }

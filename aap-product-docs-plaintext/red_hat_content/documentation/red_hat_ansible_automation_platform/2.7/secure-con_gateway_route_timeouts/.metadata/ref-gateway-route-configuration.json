@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/secure-con_gateway_route_timeouts#ref-gateway-route-configuration",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gateway_route_timeouts",
-  "title": "When to configure gateway settings"
+  "title": "When to configure gateway settings",
+  "url_reachable": true
 }

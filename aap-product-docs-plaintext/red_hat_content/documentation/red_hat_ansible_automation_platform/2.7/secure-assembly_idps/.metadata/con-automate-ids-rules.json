@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/secure-assembly_idps#con-automate-ids-rules",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_idps",
-  "title": "Automate your IDPS rules with Ansible Automation Platform"
+  "title": "Automate your IDPS rules with Ansible Automation Platform",
+  "url_reachable": true
 }

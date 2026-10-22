@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/upgrade-ref_post_upgrade_requirements#proc-post-upgrade-validation",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-ref_post_upgrade_requirements",
-  "title": "Validating gateway authentication after the 2.7 upgrade"
+  "title": "Validating gateway authentication after the 2.7 upgrade",
+  "url_reachable": true
 }

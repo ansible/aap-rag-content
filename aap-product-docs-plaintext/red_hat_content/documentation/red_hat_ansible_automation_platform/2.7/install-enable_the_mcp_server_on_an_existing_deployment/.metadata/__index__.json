@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/install-enable_the_mcp_server_on_an_existing_deployment",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-enable_the_mcp_server_on_an_existing_deployment",
-  "title": "Enable the MCP server on an existing OCP deployment"
+  "title": "Enable the MCP server on an existing OCP deployment",
+  "url_reachable": true
 }

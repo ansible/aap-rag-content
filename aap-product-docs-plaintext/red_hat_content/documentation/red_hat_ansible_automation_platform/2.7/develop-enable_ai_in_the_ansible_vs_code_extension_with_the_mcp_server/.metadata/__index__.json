@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/develop-enable_ai_in_the_ansible_vs_code_extension_with_the_mcp_server",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-enable_ai_in_the_ansible_vs_code_extension_with_the_mcp_server",
-  "title": "Enable the MCP server through the VS Code command palette"
+  "title": "Enable the MCP server through the VS Code command palette",
+  "url_reachable": true
 }

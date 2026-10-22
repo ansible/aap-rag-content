@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/extend-ansible_base_jwt_validate_cert_default_change",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-ansible_base_jwt_validate_cert_default_change",
-  "title": "ANSIBLE_BASE_JWT_VALIDATE_CERT default change for Red Hat Ansible Lightspeed"
+  "title": "ANSIBLE_BASE_JWT_VALIDATE_CERT default change for Red Hat Ansible Lightspeed",
+  "url_reachable": true
 }

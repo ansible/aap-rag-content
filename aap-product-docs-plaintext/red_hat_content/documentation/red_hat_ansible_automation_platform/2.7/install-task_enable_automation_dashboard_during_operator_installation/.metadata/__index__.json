@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/install-task_enable_automation_dashboard_during_operator_installation",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_enable_automation_dashboard_during_operator_installation",
-  "title": "Configure automation dashboard during operator installation"
+  "title": "Configure automation dashboard during operator installation",
+  "url_reachable": true
 }

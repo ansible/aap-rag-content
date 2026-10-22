@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/get_started-assembly_gs_platform_admin#proc-controller-creating-a-user",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-assembly_gs_platform_admin",
-  "title": "Create a user"
+  "title": "Create a user",
+  "url_reachable": true
 }

@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_users#proc-controller-creating-a-user",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_users",
-  "title": "Create a user"
+  "title": "Create a user",
+  "url_reachable": true
 }

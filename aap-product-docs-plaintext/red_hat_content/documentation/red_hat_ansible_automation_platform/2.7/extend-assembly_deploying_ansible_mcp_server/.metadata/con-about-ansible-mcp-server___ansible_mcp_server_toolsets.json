@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/extend-assembly_deploying_ansible_mcp_server#con-about-ansible-mcp-server___ansible_mcp_server_toolsets",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_deploying_ansible_mcp_server",
-  "title": "MCP server toolsets"
+  "title": "MCP server toolsets",
+  "url_reachable": true
 }

@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_managing_authentication#gw-edit-authenticator",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_managing_authentication",
-  "title": "Edit an authenticator"
+  "title": "Edit an authenticator",
+  "url_reachable": true
 }

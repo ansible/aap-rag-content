@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/install-ref_portal_aap_sync_troubleshooting#portal-aap-sync-troubleshooting__no-users-teams",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_portal_aap_sync_troubleshooting",
-  "title": "No Users or Teams appearing in portal"
+  "title": "No Users or Teams appearing in portal",
+  "url_reachable": true
 }

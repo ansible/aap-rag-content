@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/secure-proc_controller_create_application#ref-controller-revoke-access-token",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_create_application",
-  "title": "Revoke an access token"
+  "title": "Revoke an access token",
+  "url_reachable": true
 }

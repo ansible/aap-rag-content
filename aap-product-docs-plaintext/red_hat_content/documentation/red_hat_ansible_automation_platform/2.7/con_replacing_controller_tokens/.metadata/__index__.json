@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/con_replacing_controller_tokens",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_replacing_controller_tokens",
-  "title": "Replace deprecated controller tokens"
+  "title": "Replace deprecated controller tokens",
+  "url_reachable": false
 }

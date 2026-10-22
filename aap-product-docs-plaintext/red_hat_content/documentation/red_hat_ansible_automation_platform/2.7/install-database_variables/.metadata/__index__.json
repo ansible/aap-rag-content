@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/install-database_variables",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-database_variables",
-  "title": "Database variables"
+  "title": "Database variables",
+  "url_reachable": false
 }

@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/migrate-migrate_from_existing_deployment_topologies",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/migrate-migrate_from_existing_deployment_topologies",
-  "title": "Migrate from existing deployment topologies"
+  "title": "Migrate from existing deployment topologies",
+  "url_reachable": true
 }

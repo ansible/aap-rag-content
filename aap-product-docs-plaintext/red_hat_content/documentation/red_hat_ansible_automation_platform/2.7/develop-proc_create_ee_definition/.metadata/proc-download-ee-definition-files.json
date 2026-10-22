@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/develop-proc_create_ee_definition#proc-download-ee-definition-files",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_create_ee_definition",
-  "title": "Download definition files without saving to a repository"
+  "title": "Download definition files without saving to a repository",
+  "url_reachable": true
 }

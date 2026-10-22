@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/get_started-con_gs_ansible_roles#creating-ansible-role",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-con_gs_ansible_roles",
-  "title": "Create a role"
+  "title": "Create a role",
+  "url_reachable": true
 }

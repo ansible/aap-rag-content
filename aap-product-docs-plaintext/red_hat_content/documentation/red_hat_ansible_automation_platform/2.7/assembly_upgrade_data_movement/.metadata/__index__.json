@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/assembly_upgrade_data_movement",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/assembly_upgrade_data_movement",
-  "title": "Identity and access management migration during upgrade"
+  "title": "Identity and access management migration during upgrade",
+  "url_reachable": false
 }

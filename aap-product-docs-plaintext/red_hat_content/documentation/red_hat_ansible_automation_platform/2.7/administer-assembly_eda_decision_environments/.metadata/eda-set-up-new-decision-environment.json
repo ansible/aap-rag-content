@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_decision_environments#eda-set-up-new-decision-environment",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_decision_environments",
-  "title": "Set up a new decision environment"
+  "title": "Set up a new decision environment",
+  "url_reachable": true
 }

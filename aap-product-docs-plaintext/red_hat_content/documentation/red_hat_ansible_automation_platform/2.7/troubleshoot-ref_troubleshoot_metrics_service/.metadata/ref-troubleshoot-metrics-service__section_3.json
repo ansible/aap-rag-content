@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/troubleshoot-ref_troubleshoot_metrics_service#ref-troubleshoot-metrics-service__section_3",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-ref_troubleshoot_metrics_service",
-  "title": "Cannot disable events collector individually"
+  "title": "Cannot disable events collector individually",
+  "url_reachable": true
 }

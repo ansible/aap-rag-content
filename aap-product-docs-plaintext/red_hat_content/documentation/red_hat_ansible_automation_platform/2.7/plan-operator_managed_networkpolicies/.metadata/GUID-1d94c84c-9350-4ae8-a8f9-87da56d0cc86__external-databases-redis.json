@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/plan-operator_managed_networkpolicies#GUID-1d94c84c-9350-4ae8-a8f9-87da56d0cc86__external-databases-redis",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-operator_managed_networkpolicies",
-  "title": "External databases and Redis"
+  "title": "External databases and Redis",
+  "url_reachable": true
 }

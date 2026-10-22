@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_users#proc-controller-user-roles",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_users",
-  "title": "Assign roles to a user"
+  "title": "Assign roles to a user",
+  "url_reachable": true
 }

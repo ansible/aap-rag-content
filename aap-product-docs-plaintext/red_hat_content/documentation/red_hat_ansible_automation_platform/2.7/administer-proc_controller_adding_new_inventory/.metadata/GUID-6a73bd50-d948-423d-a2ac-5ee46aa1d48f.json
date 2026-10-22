@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/administer-proc_controller_adding_new_inventory#GUID-6a73bd50-d948-423d-a2ac-5ee46aa1d48f",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_adding_new_inventory",
-  "title": "Add permissions to inventories"
+  "title": "Add permissions to inventories",
+  "url_reachable": true
 }

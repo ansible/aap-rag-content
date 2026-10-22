@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/install-ref_self_service_supported_platforms#self-service-supported-platforms__lifecycle-and-support",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_self_service_supported_platforms",
-  "title": "Lifecycle and support policies"
+  "title": "Lifecycle and support policies",
+  "url_reachable": true
 }

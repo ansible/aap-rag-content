@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/observe-assembly_self_service_telemetry_capture#enable-dashboard-containerized-post-install",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_self_service_telemetry_capture",
-  "title": "Procedure (containerized installation)"
+  "title": "Procedure (containerized installation)",
+  "url_reachable": true
 }

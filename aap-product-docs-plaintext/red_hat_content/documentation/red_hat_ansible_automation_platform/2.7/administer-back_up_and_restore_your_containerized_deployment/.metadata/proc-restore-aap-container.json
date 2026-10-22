@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/administer-back_up_and_restore_your_containerized_deployment#proc-restore-aap-container",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-back_up_and_restore_your_containerized_deployment",
-  "title": "Restore containerized Ansible Automation Platform"
+  "title": "Restore containerized Ansible Automation Platform",
+  "url_reachable": true
 }

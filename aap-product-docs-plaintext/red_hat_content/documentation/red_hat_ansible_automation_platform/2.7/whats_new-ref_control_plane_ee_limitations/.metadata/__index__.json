@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/whats_new-ref_control_plane_ee_limitations",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-ref_control_plane_ee_limitations",
-  "title": "Known limitations"
+  "title": "Known limitations",
+  "url_reachable": true
 }

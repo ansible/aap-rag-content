@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/integrate-configure_kerberos_for_domain_joined_environment",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-configure_kerberos_for_domain_joined_environment",
-  "title": "Configure Kerberos for domain-joined environment"
+  "title": "Configure Kerberos for domain-joined environment",
+  "url_reachable": true
 }

@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/secure-ref_controller_applications_getting_started#proc-gw-configure-oauth-token-lifetime-operator",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_applications_getting_started",
-  "title": "Configure the OAuth access token lifetime on OpenShift Container Platform"
+  "title": "Configure the OAuth access token lifetime on OpenShift Container Platform",
+  "url_reachable": true
 }

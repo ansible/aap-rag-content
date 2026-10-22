@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/migrate-import_migration_content_to_ocp_using_the_aap_snapshot_collection",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/migrate-import_migration_content_to_ocp_using_the_aap_snapshot_collection",
-  "title": "Import a deployment into OCP using the aap_snapshot collection"
+  "title": "Import a deployment into OCP using the aap_snapshot collection",
+  "url_reachable": true
 }

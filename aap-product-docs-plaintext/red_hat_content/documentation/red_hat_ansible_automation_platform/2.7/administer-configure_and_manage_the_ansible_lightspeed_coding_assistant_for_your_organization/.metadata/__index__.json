@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/administer-configure_and_manage_the_ansible_lightspeed_coding_assistant_for_your_organization",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-configure_and_manage_the_ansible_lightspeed_coding_assistant_for_your_organization",
-  "title": "Configure and manage the Ansible Lightspeed code assistant for your organization"
+  "title": "Configure and manage the Ansible Lightspeed code assistant for your organization",
+  "url_reachable": true
 }

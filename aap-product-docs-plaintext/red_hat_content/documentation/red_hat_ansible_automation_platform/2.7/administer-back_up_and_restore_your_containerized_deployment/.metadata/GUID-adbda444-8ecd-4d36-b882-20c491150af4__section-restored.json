@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/administer-back_up_and_restore_your_containerized_deployment#GUID-adbda444-8ecd-4d36-b882-20c491150af4__section-restored",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-back_up_and_restore_your_containerized_deployment",
-  "title": "Data restored from backup"
+  "title": "Data restored from backup",
+  "url_reachable": true
 }

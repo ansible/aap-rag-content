@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/extend-configure_ansible_base_jwt_validate_cert",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-configure_ansible_base_jwt_validate_cert",
-  "title": "Configure ANSIBLE_BASE_JWT_VALIDATE_CERT"
+  "title": "Configure ANSIBLE_BASE_JWT_VALIDATE_CERT",
+  "url_reachable": true
 }

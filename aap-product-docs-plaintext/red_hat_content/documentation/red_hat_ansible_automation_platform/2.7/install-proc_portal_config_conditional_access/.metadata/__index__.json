@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/install-proc_portal_config_conditional_access",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_portal_config_conditional_access",
-  "title": "Configure conditional access"
+  "title": "Configure conditional access",
+  "url_reachable": true
 }
