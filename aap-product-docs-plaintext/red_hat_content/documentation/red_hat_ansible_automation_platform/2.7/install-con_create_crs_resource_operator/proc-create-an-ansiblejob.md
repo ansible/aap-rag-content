@@ -7,7 +7,7 @@ An AnsibleJob custom resource launches a job in the Ansible Automation Platform 
 
 ### Procedure
 
-1.  Specify the connection secret and job template you want to launch.
+1. Specify the connection secret and job template you want to launch.
 
 ```
 apiVersion: tower.ansible.com/v1alpha1
@@ -19,7 +19,7 @@ connection_secret: aap-access
 job_template_name: Demo Job Template
 ```
 
-2.  Configure features such as, inventory, extra variables, and time to live for the job.
+2. Configure features such as, inventory, extra variables, and time to live for the job.
 
 ```
 spec:
@@ -38,7 +38,7 @@ skip_tags: "configuration,restart"           # Skip tasks with a given tag
 Note:
 You must enable prompt on launch for inventories and extra variables if you are configuring those. To enable **Prompt on launch**, within the automation controller UI: From the Resources> (and then)Templates page, select your template and select the **Prompt on launch** checkbox next to **Inventory** and **Variables** sections.
 
-3.  Launch a workflow job template with an AnsibleJob object by specifying the `workflow_template_name` instead of `job_template_name`:
+3. Launch a workflow job template with an AnsibleJob object by specifying the `workflow_template_name` instead of `job_template_name`:
 
 
 ```
@@ -48,6 +48,6 @@ metadata:
 generateName: demo-job-1 # generate a unique suffix per 'kubectl create'
 spec:
 connection_secret: aap-access
-workflow_template_name: Demo Workflow Template
+workflow_template_name: ExampleTowerWorkflow
 ```
 

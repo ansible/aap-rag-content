@@ -4,13 +4,14 @@ title = "Set up a project for Ansible automation portal in OpenShift - Red Hat A
 template = "docs/aem-title.html"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_about/", "Install Ansible automation portal (OpenShift Container Platform only)"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-install_automation_portal_on_openshift_container_platform/", "Install automation portal on OpenShift Container Platform"]]
 category = "Install"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_ocp_project/aem-page/install-assembly_self_service_ocp_project.html"
 last_crumb = "Set up a project for Ansible automation portal in OpenShift"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Set up a project for Ansible automation portal in OpenShift"
 oversized = "false"
@@ -35,20 +36,20 @@ You can use the OpenShift Container Platform web console to create a project in 
 
 ### Procedure
 
-1.  In a browser, log in to the OpenShift Container Platform web console.
-2.  Create a project based on your current perspective:
+1. In a browser, log in to the OpenShift Container Platform web console.
+2. Create a project based on your current perspective:
 
   - From the Developer perspective: select Project then Create Project.
   - From the Administrator perspective: select Home> (and then)Project> (and then)Create Project.
 
-3.  In the Create Project dialog box, enter a unique name in the Name field.
+3. In the Create Project dialog box, enter a unique name in the Name field.
 
   - Lowercase alphanumeric characters (`a-z`, `0-9`) and the hyphen character (`-`) are permitted for project names.
   - The underscore (`_`) character is not permitted.
   - The maximum length for project names is 63 characters.
 
 4. **Optional:** Add a display name and description for your project.
-5.  Click Create to create the project.
+5. Click Create to create the project.
 
 ## Set up an OpenShift project using the CLI
 
@@ -61,7 +62,7 @@ You can run commands from your terminal to create a project in your cluster for 
 
 ### Procedure
 
-1.  In a terminal, log in to OpenShift Container Platform using your credentials:
+1. In a terminal, log in to OpenShift Container Platform using your credentials:
   
 
 ```
@@ -85,7 +86,7 @@ Login successful.
     Using project "default".
 ```
 
-2.  Create a new project. Use a unique project name.
+2. Create a new project. Use a unique project name.
   
 
 ```
@@ -103,7 +104,7 @@ $ oc new-project my-project
     Now using project "my-project" on server "https://openshift.example.com:6443".
 ```
 
-3.  Open your new project:
+3. Open your new project:
   
 
 ```

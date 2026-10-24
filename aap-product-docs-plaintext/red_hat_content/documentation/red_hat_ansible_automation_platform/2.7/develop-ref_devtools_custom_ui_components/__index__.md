@@ -10,12 +10,12 @@ The `AAPTokenField` is a secure authentication field used in backstage scaffolde
 
 The following table details the field's properties for use in a template's properties section.
 
-| Property                        | Type        | Description                                                                                                                               |
-| ------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| <br> `title`                    | <br>string  | <br>The label displayed in the UI (for example, "AAP Token"). Defaults to "AAP Token".                                                    |
-| <br> `description`              | <br>string  | <br>A short help text displayed below the input field.                                                                                    |
-| <br> `ui:field`                 | <br>string  | <br>Must be set to `AAPTokenField`. This setting instructs Backstage to render a custom react component instead of a default input field. |
-| <br> `ui:backstage.review.show` | <br>boolean | <br>If `true`, this field appears in the **Review** step before scaffolding executes. The default value is `true`.                        |
+| Property                   | Type    | Description                                                                                                                           |
+| -------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `title`                    | string  | The label displayed in the UI (for example, "AAP Token"). Defaults to "AAP Token".                                                    |
+| `description`              | string  | A short help text displayed below the input field.                                                                                    |
+| `ui:field`                 | string  | Must be set to `AAPTokenField`. This setting instructs Backstage to render a custom react component instead of a default input field. |
+| `ui:backstage.review.show` | boolean | If `true`, this field appears in the **Review** step before scaffolding executes. The default value is `true`.                        |
 
 **Authentication flow and token management**
 
@@ -88,15 +88,15 @@ All `rhaap:*` actions include built-in validation and user-friendly error report
 
 The following table details the essential properties for configuring the resource picker in a template’s `properties` section.
 
-| Property           | Type       | Description                                                                                                                                            |
-| ------------------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| <br> `title`       | <br>string | <br>The label displayed in the UI (for example, "Inventory").                                                                                          |
-| <br> `description` | <br>string | <br>A short help text shown below the field.                                                                                                           |
-| <br> `ui:field`    | <br>string | <br>Must be set to `AAPResourcePicker`.                                                                                                                |
-| <br> `resource`    | <br>string | <br>The specific Ansible Automation Platform (AAP) resource type to fetch and display (for example, `inventories`, `credentials`, or `organizations`). |
-| <br> `idKey`       | <br>string | <br>The property name used to retrieve the resource ID (default: “id”).                                                                                |
-| <br> `nameKey`     | <br>string | <br>The property name used to display the resource name in the list (default: “name”).                                                                 |
-| <br> `type`        | <br>string | <br>Set to “array” for a multi-select field; omit this property for a single-select field.                                                             |
+| Property      | Type   | Description                                                                                                                                        |
+| ------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `title`       | string | The label displayed in the UI (for example, "Inventory").                                                                                          |
+| `description` | string | A short help text shown below the field.                                                                                                           |
+| `ui:field`    | string | Must be set to `AAPResourcePicker`.                                                                                                                |
+| `resource`    | string | The specific Ansible Automation Platform (AAP) resource type to fetch and display (for example, `inventories`, `credentials`, or `organizations`). |
+| `idKey`       | string | The property name used to retrieve the resource ID (default: “id”).                                                                                |
+| `nameKey`     | string | The property name used to display the resource name in the list (default: “name”).                                                                 |
+| `type`        | string | Set to “array” for a multi-select field; omit this property for a single-select field.                                                             |
 
 **Example**
 
@@ -124,7 +124,7 @@ default: DemoInventory
 
 The plugins provide custom filters to extract specific properties from resource objects, which is essential for passing data between backstage steps.
 
-| Filter                     | Purpose                                                                                       | Example Usage                                                        |
-| -------------------------- | --------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| <br> `resourceFilter`      | <br>Extracts a single, specific property from a resource object.                              | <br> `$!{{ parameters.organization | resourceFilter('name') }}`      |
-| <br> `multiResourceFilter` | <br>Extracts a specific property from multiple resource objects (when the input is an array). | <br> `$!{{ parameters.organization | multiResourceFilter('name') }}` |
+| Filter                | Purpose                                                                                   | Example Usage                                                   |
+| --------------------- | ----------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| `resourceFilter`      | Extracts a single, specific property from a resource object.                              | `$!{{ parameters.organization | resourceFilter('name') }}`      |
+| `multiResourceFilter` | Extracts a specific property from multiple resource objects (when the input is an array). | `$!{{ parameters.organization | multiResourceFilter('name') }}` |

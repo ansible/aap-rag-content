@@ -9,7 +9,7 @@ To ensure an execution environment pulled from the remote registry is properly s
 
 ### Procedure
 
-1.  Open your terminal and use the following command:
+1. Open your terminal and use the following command:
 
 
 ```
@@ -41,7 +41,7 @@ This file shows that neither `quay.io`, or `docker.io` will perform the verifica
 Note:
 The only `keyType` currently supported is GPG keys.
 
-2.  Under the `<server-address>` entry, modify the `keyPath` <1> to include the name of your key file.
+2. Under the `<server-address>` entry, modify the `keyPath` <1> to include the name of your key file.
 
 ```
 {
@@ -63,7 +63,7 @@ The only `keyType` currently supported is GPG keys.
 }
 ```
 
-3.  Save and close the file.
+3. Save and close the file.
 
 ### Results
 

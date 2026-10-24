@@ -22,13 +22,13 @@ The `ansible-devtools-server` runs as an `extraContainers` entry in the Helm cha
 
 ### Procedure
 
-1.  Log in to the OpenShift Container Platform web console.
-2.  Open the Helm chart configuration for your portal deployment.
+1. Log in to the OpenShift Container Platform web console.
+2. Open the Helm chart configuration for your portal deployment.
 
 - For a new deployment, select Ecosystem> (and then)Helm, click Create, and select **Helm Release**.
 - For an existing deployment, select Workloads> (and then)Deployments, click your portal deployment, and click the **YAML** tab.
 
-3.  Switch to the YAML view and find the `extraContainers` section. Set your desired resource values:
+3. Switch to the YAML view and find the `extraContainers` section. Set your desired resource values:
 
 
 ```yaml
@@ -55,7 +55,7 @@ memory: 1.25Gi
 
 Replace the `cpu` and `memory` values under `requests` and `limits` with values that match your namespace constraints.
 
-4.  Apply the changes.
+4. Apply the changes.
 
 - For a new deployment, click Create.
 - For an existing deployment, click Save. The pod restarts automatically with the updated resource values.

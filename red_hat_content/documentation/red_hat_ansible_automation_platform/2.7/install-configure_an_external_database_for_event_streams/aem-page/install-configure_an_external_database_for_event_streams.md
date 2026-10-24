@@ -1,6 +1,6 @@
 +++
-title = "Configure an external database for event streams - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-configure_an_external_database_for_event_streams"
+title = "Configure an external database for event streams - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-configure_an_external_database_for_event_streams/aem-page/install-configure_an_external_database_for_event_streams.html"
 last_crumb = "Configure an external database for event streams"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure an external database for event streams"
 oversized = "false"
@@ -27,7 +28,7 @@ type = "aem-page"
 
 # Configure an external database for event streams
 
-Event-Driven Ansible event streams require a dedicated PostgreSQL database user for security and access control. By default, the platform uses a separate user (`eda_event_stream`) to isolate event stream operations from other processes.
+Event-Driven Ansible event streams require a dedicated PostgreSQL database user (`eda_event_stream`) for security and access control. This user must exist on the Event-Driven Ansible database and requires only `CONNECT` privileges.
 
 If you use the Ansible Automation Platform provisioned database, the installer configures this user automatically. For external databases not managed by Ansible Automation Platform, use one of the following scenarios to set up the event streams database user:
 

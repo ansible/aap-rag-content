@@ -5,20 +5,20 @@ Sign an automation execution environment on a local system and push the signed e
 
 ### Procedure
 
-1.  From a terminal, log in to Podman, or any container client currently in use, and pull the execution environment you want to sign.
+1. From a terminal, log in to Podman, or any container client currently in use, and pull the execution environment you want to sign.
 
 ```
 podman pull <container-name>
 ```
 
-2.  After the execution environment is pulled, add tags (for example: `latest`, `rc`, `beta`, or version numbers, such as `1.0`, `2.3`, and so on):
+2. After the execution environment is pulled, add tags (for example: `latest`, `rc`, `beta`, or version numbers, such as `1.0`, `2.3`, and so on):
 
 
 ```
 podman tag <container-name> <server-address>/<container-name>:<tag name>
 ```
 
-3.  Sign the execution environment after changes have been made, and push it back up to the automation hub registry:
+3. Sign the execution environment after changes have been made, and push it back up to the automation hub registry:
 
 
 ```
@@ -31,9 +31,9 @@ If the execution environment is not signed, it can only be pushed with any curre
 podman push <server-address>/<container-name>:<tag name> --tls-verify=false
 ```
 
-4.  After the execution environment has been pushed, navigate to Automation Content> (and then)Execution Environments.
-5.  To display the new execution environment, click the **Refresh** icon.
-6.  Click the name of the image to view your pushed image.
+4. After the execution environment has been pushed, navigate to Automation Content> (and then)Execution Environments.
+5. To display the new execution environment, click the **Refresh** icon.
+6. Click the name of the image to view your pushed image.
 
 ### Results
 

@@ -10,10 +10,10 @@ Creates a project (a logical collection of Ansible playbooks) on the automation 
 | `repo`               | String | URL of the source control repository.                                                       | -              |
 | `branch`             | String | Branch of the source control repository to use.                                             | -              |
 | `name`               | String | Display name for the project in the automation controller.                                  | -              |
-| `scm_type`           | String | Source control type, for example `git`.                                                     | -              |
+| `scm_type`           | String | Source control type, for example`git`.                                                      | -              |
 | `organization`       | String | Organization the project belongs to.                                                        | -              |
 | `description`        | String | Description of the project.                                                                 | -              |
-| `runner_pull_policy` | String | Image pull policy for the runner pod. Options: `Always`, `Never`, `IfNotPresent`.           | `IfNotPresent` |
+| `runner_pull_policy` | String | Image pull policy for the runner pod. Options:`Always`,`Never`,`IfNotPresent`.              | `IfNotPresent` |
 
 **Example:**
 

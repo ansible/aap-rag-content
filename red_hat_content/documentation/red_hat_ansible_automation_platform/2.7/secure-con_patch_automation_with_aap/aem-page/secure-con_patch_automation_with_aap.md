@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_patch_automation_with_aap/aem-page/secure-con_patch_automation_with_aap.html"
 last_crumb = "Automate software patching"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Automate software patching"
 oversized = "false"
@@ -27,9 +28,11 @@ type = "aem-page"
 
 # Automate software patching
 
-Software patching is a fundamental activity of security and IT operations teams everywhere. Keeping patches up to date is critical to remediating software vulnerabilities and meeting compliance requirements, but patching systems manually at scale can be time-consuming and error-prone.
+Software patching is a fundamental activity of security and IT operations teams everywhere.
+Keeping patches up to date is critical to remediating software vulnerabilities and meeting compliance requirements, but patching systems manually at scale can be time-consuming and error-prone.
 
-Organizations should put thought into patch management strategies that meet their security, compliance, and business objectives, to prioritize the types of patches to apply (known exploits, critical or important vulnerabilities, optimizations, routine updates, new features, and so on) against the IT assets available across the enterprise. Once policies and priorities have been defined and a patching plan is established, the manual tasks involved in patch management can be automated using Red Hat Ansible Automation Platform to improve patch deployment speed and accuracy, reduce human error, and limit downtime.
+Organizations should put thought into patch management strategies that meet their security, compliance, and business objectives, to prioritize the types of patches to apply (known exploits, critical or important vulnerabilities, optimizations, routine updates, new features, and so on) against the IT assets available across the enterprise.
+Once policies and priorities have been defined and a patching plan is established, the manual tasks involved in patch management can be automated using Red Hat Ansible Automation Platform to improve patch deployment speed and accuracy, reduce human error, and limit downtime.
 
 ## Benefits of patch automation
 
@@ -44,7 +47,8 @@ Patch automation reduces manual effort, accelerates patch deployment across all 
 
 You can modify and thoroughly test the following playbooks that serve as patching examples, to fit the target environment before production use.
 
-These examples use the `ansible.builtin.dnf` module for managing packages on RHEL and other operating systems that use the `dnf` package manager. Modules for patching other Linux operating systems, Microsoft Windows, and many network devices are also available.
+These examples use the `ansible.builtin.dnf` module for managing packages on RHEL and other operating systems that use the `dnf` package manager.
+Modules for patching other Linux operating systems, Microsoft Windows, and many network devices are also available.
 
 ## Keep everything up to date
 
@@ -85,9 +89,10 @@ For production systems, a well-established configuration management practice is 
 
 This includes deploying only known versions of operating system software and patches to ensure that system updates do not introduce problems with production applications.
 
- Note:
+Note:
 
-The following example playbook installs a specific version of the `httpd` RPM and its dependencies when the target host uses the RHEL 9 operating system. This playbook does not take action if the specified versions are already in place or if a different version of RHEL is installed.
+The following example playbook installs a specific version of the `httpd` RPM and its dependencies when the target host uses the RHEL 9 operating system.
+This playbook does not take action if the specified versions are already in place or if a different version of RHEL is installed.
 
 ```
 - name: Install specific RPM versions
@@ -115,7 +120,7 @@ The following example playbook installs a specific version of the `httpd` RPM an
       - ansible_distribution_major_version == "9"
 ```
 
- Note:
+Note:
 
 By setting `allow_downgrade: true`, if a newer version of any defined package is installed on the system, it is downgraded to the specified version instead.
 

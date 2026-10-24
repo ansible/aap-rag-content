@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/develop-assembly_workspaces_intro#con-devspaces-image",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_workspaces_intro",
-  "title": "Ansible dev spaces container image"
+  "title": "Ansible dev spaces container image",
+  "url_reachable": true
 }

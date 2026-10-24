@@ -6,14 +6,14 @@ Use the `ansible-sign` utility to offer options for you to sign and verify wheth
 
 #### Procedure
 
-1.  Run the following command to install `ansible-sign`:
+1. Run the following command to install `ansible-sign`:
 
 
 ```
 $ dnf install ansible-sign
 ```
 
-2.  Verify that `ansible-sign` was successfully installed using the following command:
+2. Verify that `ansible-sign` was successfully installed using the following command:
 
 
 ```

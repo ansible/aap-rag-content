@@ -5,10 +5,10 @@ From the **Platform gateway settings** page, you can configure platform security
 
 ### Procedure
 
-1.  From the navigation panel, select Settings> (and then)Platform gateway.
-2.  The **Platform gateway settings** page is displayed.
-3.  To configure the options, click Edit.
-4.  You can configure the following **Security** settings:
+1. From the navigation panel, select Settings> (and then)Platform gateway.
+2. The **Platform gateway settings** page is displayed.
+3. To configure the options, click Edit.
+4. You can configure the following **Security** settings:
 
 - **Allow system administrators to set insecure user passwords**: Whether a superuser account can save an insecure password when editing any local user account.
 
@@ -37,5 +37,5 @@ If this name is changed, backends must be updated to compensate.
 
 - **Csrf trusted origins**: If the service is behind a reverse proxy or load balancer, use this setting to configure the `schema://addresses` from which the service should trust Origin header values.
 
-5.  Click Save changes to save the changes or proceed to configure the other platform options available.
+5. Click Save changes to save the changes or proceed to configure the other platform options available.
 

@@ -12,9 +12,9 @@ The following steps describe how to import a decision environment into the platf
 
 ### Procedure
 
-1.  Navigate to Automation Decisions> (and then)Decision Environments.
-2.  Click Create decision environment.
-3.  Enter the following:
+1. Navigate to Automation Decisions> (and then)Decision Environments.
+2. Click Create decision environment.
+3. Enter the following:
 
 
 Name
@@ -29,7 +29,7 @@ This is the full image location, including the container registry, image name, a
 Credential
 This field is optional. This is the token needed to use the decision environment image.
 
-4.  Select Create decision environment.
+4. Select Create decision environment.
 
 ### Results
 

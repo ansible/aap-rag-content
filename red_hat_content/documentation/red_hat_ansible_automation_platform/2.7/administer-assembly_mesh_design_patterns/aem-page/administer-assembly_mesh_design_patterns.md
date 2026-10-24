@@ -1,7 +1,7 @@
 +++
+title = "Design patterns for mesh - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_mesh_design_patterns"
-title = "Design patterns for mesh - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_install_mesh/", "Scale with automation mesh in a containerized or VM environment"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_mesh_design_patterns/aem-page/administer-assembly_mesh_design_patterns.html"
 last_crumb = "Design patterns for mesh"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Design patterns for mesh"
 oversized = "false"
@@ -29,7 +30,7 @@ type = "aem-page"
 
 The automation mesh topologies in this section provide examples you can use to design a mesh deployment in your environment. Examples range from a simple, hydrid node deployment to a complex pattern that deploys numerous automation controller instances, employing several execution and hop nodes.
 
- Important:
+Important:
 
 If you are creating a mesh similar to the following in a containerized environment:
 
@@ -43,7 +44,7 @@ The value of `receptor_peers` must be a comma-separated list of hostnames. Do no
 
 - You reviewed conceptual information on node types and relationships.
 
- Note:
+Note:
 
 The following examples include images that illustrate the mesh topology. The arrows in the images indicate the direction of peering. After peering is established, the connection between the nodes allows bidirectional communication.
 
@@ -62,7 +63,8 @@ The following image displays the topology of this mesh network.
 
 ![The topology map of the multiple hybrid node mesh configuration consists of an automation controller group. The automation controller group contains three hybrid nodes: aap_c_1, aap_c_2, and aap_c_3. The control nodes are peered to one another as follows: aap_c_3 is peered to aap_c_1 and aap_c_1 is peered to aap_c_2.](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/mesh-multiple-hybrid-nodes.png)  
 
-The default `node_type` for nodes in the control plane is `hybrid`. You can explicitly set the `node_type` of individual nodes to `hybrid` in the `[automationcontroller group]`:
+The default `node_type` for nodes in the control plane is `hybrid`.
+You can explicitly set the `node_type` of individual nodes to `hybrid` in the `[automationcontroller group]`:
 
 ```yaml
 [automationcontroller]
@@ -71,7 +73,8 @@ aap_c_2.example.com node_type=hybrid
 aap_c_3.example.com node_type=hybrid
 ```
 
-Alternatively, you can set the `node_type` of all nodes in the `[automationcontroller]` group. When you add new nodes to the control plane they are automatically set to hybrid nodes.
+Alternatively, you can set the `node_type` of all nodes in the `[automationcontroller]` group.
+When you add new nodes to the control plane they are automatically set to hybrid nodes.
 
 ```yaml
 [automationcontroller]
@@ -120,21 +123,24 @@ The following image displays the topology of this mesh network.
 
 ![The topology map shows an automation controller group and an execution node. The automation controller group contains a single control node: aap_c_1. The execution node is aap_e_1. The aap_c_1 node is peered to aap_e_1.](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/mesh-single-control-node.png)  
 
-The `[automationcontroller]` stanza defines the control nodes. If you add a new node to the automationcontroller group, it will automatically peer with the `aap_c_1.example.com` node.
+The `[automationcontroller]` stanza defines the control nodes.
+If you add a new node to the automationcontroller group, it will automatically peer with the `aap_c_1.example.com` node.
 
 The `[automationcontroller:vars]` stanza sets the node type to `control` for all nodes in the control plane and defines how the nodes peer to the execution nodes:
 
 - If you add a new node to the `execution_nodes` group, the control plane nodes automatically peer to it.
 - If you add a new node to the `automationcontroller` group, the node type is set to `control`.
 
-The `[execution_nodes]` stanza lists all the execution and hop nodes in the inventory. The default node type is `execution`. You can specify the node type for an individual node:
+The `[execution_nodes]` stanza lists all the execution and hop nodes in the inventory.
+The default node type is `execution`. You can specify the node type for an individual node:
 
 ```yaml
 [execution_nodes]
 aap_e_1.example.com node_type=execution
 ```
 
-Alternatively, you can set the node_type of all execution nodes in the `[execution_nodes]` group. When you add new nodes to the group, they are automatically set to execution nodes.
+Alternatively, you can set the node_type of all execution nodes in the `[execution_nodes]` group.
+When you add new nodes to the group, they are automatically set to execution nodes.
 
 ```yaml
 [execution_nodes]
@@ -192,7 +198,8 @@ The following image displays the topology of this mesh network.
 
 ## Segregated local and remote execution configuration
 
-This configuration adds a hop node and a remote execution node to the resilient configuration. The remote execution node is reachable from the hop node.
+This configuration adds a hop node and a remote execution node to the resilient configuration.
+The remote execution node is reachable from the hop node.
 
 You can use this setup if you are setting up execution nodes in a remote location, or if you need to run automation in a DMZ network.
 
@@ -241,7 +248,9 @@ If the name of a group of nodes begins with `instance_group_`, the installer rec
 
 ## Multi-hopped execution node
 
-In this configuration, resilient controller nodes are peered with resilient local execution nodes. Resilient local hop nodes are peered with the controller nodes. A remote execution node and a remote hop node are peered with the local hop nodes.
+In this configuration, resilient controller nodes are peered with resilient local execution nodes.
+Resilient local hop nodes are peered with the controller nodes.
+A remote execution node and a remote hop node are peered with the local hop nodes.
 
 You can use this setup if you need to run automation in a DMZ network from a remote network.
 
@@ -306,7 +315,9 @@ If the name of a group of nodes begins with `instance_group_`, the installer rec
 
 ## Outbound only connections to controller nodes
 
-This example inventory file deploys a control plane consisting of two control nodes, and several execution nodes. Only outbound connections are allowed to the controller nodes All nodes in the 'execution_nodes' group are peered with all nodes in the controller plane.
+This example inventory file deploys a control plane consisting of two control nodes, and several execution nodes.
+Only outbound connections are allowed to the controller nodes
+All nodes in the 'execution_nodes' group are peered with all nodes in the controller plane.
 
 ```yaml
 [automationcontroller]

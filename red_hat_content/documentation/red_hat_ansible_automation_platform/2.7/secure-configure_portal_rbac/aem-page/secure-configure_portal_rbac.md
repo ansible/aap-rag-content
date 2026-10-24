@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-configure_portal_rbac/aem-page/secure-configure_portal_rbac.html"
 last_crumb = "Configure role-based access control for Ansible automation portal"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure role-based access control for Ansible automation portal"
 oversized = "false"
@@ -80,7 +81,7 @@ Procedure:
 
 3. Click **Create Role** and provide a name (for example, `portal-user`).
 
-4. In the **Users and Groups** section, select the Ansible Automation Platform teams and users to assign to this role. Click **Next**. You can only select teams and users from the Ansible Automation Platform organization that you configured for synchronization with Ansible automation portal.
+4. In the **Users and Groups** section, select the Ansible Automation Platform teams and users to assign to this role. Click **Next**. You can select teams and users from the Ansible Automation Platform organizations that you configured for synchronization with Ansible automation portal.
 
 5. In the **Add permission policies** section, select the **Catalog** plugin from the dropdown menu and enable `catalog.entity.read`.
 

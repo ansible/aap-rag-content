@@ -22,26 +22,26 @@ For more information, see [Generating an installation access token for a GitHub 
 
 ### Procedure
 
-1.  Create a lookup credential that stores your secrets. For more information, see [Create new credentials](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_create_credential "Learn how to create new credentials in Automation controller.").
-2.  Select **GitHub App Installation Access Token Lookup** for **Credential type**, and enter the following attributes to properly configure your lookup:
+1. Create a lookup credential that stores your secrets. For more information, see [Create new credentials](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_create_credential "Learn how to create new credentials in Automation controller.").
+2. Select **GitHub App Installation Access Token Lookup** for **Credential type**, and enter the following attributes to properly configure your lookup:
 
 - **GitHub App ID**: Enter the App ID provided by your instance of GitHub, this is what is used to authenticate.
 - **GitHub App Installation ID**: Enter the ID of the application into your target organization where the access token is scoped. You must set it up to have access to your target repository.
 - **RSA Private Key**: Enter the generated private key that your GitHub instance generated. You can get it from the GitHub App maintainer within GitHub. For more information, see [Managing private keys for GitHub Apps](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/managing-private-keys-for-github-apps).
 
-3.  Click Create credential to confirm and save the credential. The following is an example of a configured **GitHub App Installation Access Token Lookup** credential:
+3. Click Create credential to confirm and save the credential. The following is an example of a configured **GitHub App Installation Access Token Lookup** credential:
 
 ![GitHub App token lookup credential](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/credentials-create-github-app-lookup-credential.png)
 
-4.  Create a target credential that searches for the lookup credential. To use your lookup in a private repository, select **Source Control** as your **Credential type**. Enter the following attributes to properly configure your target credential:
+4. Create a target credential that searches for the lookup credential. To use your lookup in a private repository, select **Source Control** as your **Credential type**. Enter the following attributes to properly configure your target credential:
 
 - **Username**: Enter the username `x-access-token`.
 
 - **Password**: Click the ![Link](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftkey.png) icon for managing external credentials in the input field. You are prompted to set the input source to use to retrieve your secret information. This is the lookup credential that you have already created. ![Target credential secret info](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/credentials-github-app-target-secret-info.png)
 
-5.  Enter an optional description for the metadata requested and click Finish.
-6.  Click Create credential to confirm and save the credential.
-7.  Verify both your lookup credential and your target credential are now available on the **Credentials** list view. To use the target credential in a project, create a project and enter the following information:
+5. Enter an optional description for the metadata requested and click Finish.
+6. Click Create credential to confirm and save the credential.
+7. Verify both your lookup credential and your target credential are now available on the **Credentials** list view. To use the target credential in a project, create a project and enter the following information:
 
 - **Name**: Enter the name for your project.
 
@@ -57,7 +57,7 @@ For more information, see [Generating an installation access token for a GitHub 
 
 ![GitHub App project](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/project-create-git-github-app.png)
 
-8.  Click Create project and the project sync automatically starts. The project **Details** tab displays the progress of the job:
+8. Click Create project and the project sync automatically starts. The project **Details** tab displays the progress of the job:
 ![Project sync GitHub App](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/project-sync-github-app.png)
 
 If your project sync fails, you might have to manually re-enter `<https://api.github.com>` in the **GitHub API endpoint URL** field from Step 2 and re-run your project sync.

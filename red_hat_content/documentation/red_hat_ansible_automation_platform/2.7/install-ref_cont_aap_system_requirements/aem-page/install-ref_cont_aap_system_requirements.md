@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_cont_aap_system_requirements"
-title = "System requirements - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "System requirements - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_cont_aap_system_requirements"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_aap_containerized_installation_intro/", "Install containerized Ansible Automation Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-ref_cont_aap_system_requirements/aem-page/install-ref_cont_aap_system_requirements.html"
 last_crumb = "System requirements"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "System requirements"
 oversized = "false"
@@ -43,32 +44,59 @@ Important:
 
 Podman does not support storing container images on an NFS share. To use an NFS share for the user home directory, set up the Podman storage backend path outside of the NFS share. For more information, see [Rootless Podman and NFS](https://www.redhat.com/en/blog/rootless-podman-nfs).
 
+Warning:
+
+**External security and monitoring tools can impact job stability**
+
+Enterprise endpoint detection software, monitoring agents, and operating system audit logging can interfere with Ansible Automation Platform job execution, resulting in unexpected job delays, stalls, or complete failures.
+
+This interference is not a defect in Ansible Automation Platform, but rather a side effect of how external tools interact with normal Ansible Automation Platform operational behavior (high I/O rates, rapid file access, network communication, and CPU resource usage).
+
+**Common interference sources**:
+
+- Antivirus or Endpoint Detection and Response (EDR) software, for example, Microsoft Defender for Endpoint, Trend Micro Deep Security, Trelix Endpoint Security (formerly McAfee).
+- System monitoring and telemetry agents.
+- Operating system audit logging (`auditd`, `syslog`) configured with granular rules.
+
+**Mitigation**
+
+Work with your security and infrastructure teams to implement the following exclusions on all Ansible Automation Platform execution nodes and control nodes:
+
+1. Add the following paths to antivirus/EDR scanning exclusions:
+  - `$HOME/aap/` (where `$HOME ` is the installation user's home directory)
+  - `$HOME/.local/share/containers/` (container storage and image cache)
+  - `/tmp `(and any other temporary directories configured for Ansible Automation Platform)
+2. Configure monitoring agents to exclude Ansible Automation Platform process monitoring or reduce sampling frequency on Ansible Automation Platform nodes
+3. Review `auditd` rules on Ansible Automation Platform nodes and disable overly granular system call auditing that may create disk I/O contention. Note that `auditd` is configured on RHEL by default. If it is configured on your systems, this step is applicable.
+
+For more information, see Red Hat Knowledge Solution 7144721
+
 ## Ansible Automation Platform system requirements
 
 Your system must meet the following minimum system requirements to install and run Red Hat Ansible Automation Platform.
 
 *Table 1. System configuration*
 
-| Type                 | Description                                                                                                                                                                                              | Notes                                                                                                                                                                                                    |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br>Subscription     | Valid Red Hat Ansible Automation Platform subscriptionValid Red Hat Enterprise Linux subscription (to consume the BaseOS and AppStream repositories)                                                     |                                                                                                                                                                                                          |
-| <br>Operating system | Red Hat Enterprise Linux 9.6 or later minor versions of Red Hat Enterprise Linux 9.Red Hat Enterprise Linux 10 or later minor versions of Red Hat Enterprise Linux 10.                                   |                                                                                                                                                                                                          |
-| <br>CPU architecture | <br>x86\_64, AArch64                                                                                                                                                                                     | <br>IBM Z (s390x) and IBM Power (ppc64le) are not supported in Ansible Automation Platform 2.7. For IBM architecture support, use Ansible Automation Platform 2.6.                                       |
-| <br> `ansible-core`  | RHEL 9: installation program uses `ansible-core` 2.14, Ansible Automation Platform operation uses `ansible-core` 2.16.RHEL 10: installation program uses `ansible-core` 2.16, Ansible Automation Platform operation uses `ansible-core` 2.16. | The installation program uses the `ansible-core` package from the RHEL AppStream repository.Ansible Automation Platform bundles `ansible-core` 2.16 for operation, so you do not need to install it manually. |
-| <br>Browser          | <br>A currently supported version of Mozilla Firefox or Google Chrome.                                                                                                                                   |                                                                                                                                                                                                          |
-| <br>Database         | For Ansible Automation Platform managed databases: PostgreSQL 15.For customer provided (external) databases: PostgreSQL 15, 16, or 17.                                                                   | External (customer supported) databases require International Components for Unicode (ICU) support.External databases using PostgreSQL 16 or 17 must rely on external backup and restore processes. Backup and restore functionality is dependent on utilities provided with PostgreSQL 15. |
-| <br>IP version       | <br>IPv4, IPv6 (single-stack and dual-stack)                                                                                                                                                             |                                                                                                                                                                                                          |
+| Type             | Description                                                                                                                                                                                              | Notes                                                                                                                                                                                                    |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Subscription     | Valid Red Hat Ansible Automation Platform subscriptionValid Red Hat Enterprise Linux subscription (to consume the BaseOS and AppStream repositories)                                                     |                                                                                                                                                                                                          |
+| Operating system | Red Hat Enterprise Linux 9.6 or later minor versions of Red Hat Enterprise Linux 9.Red Hat Enterprise Linux 10 or later minor versions of Red Hat Enterprise Linux 10.                                   |                                                                                                                                                                                                          |
+| CPU architecture | x86\_64, AArch64                                                                                                                                                                                         | IBM Z (s390x) and IBM Power (ppc64le) are not supported in Ansible Automation Platform 2.7. For IBM architecture support, use Ansible Automation Platform 2.6.                                           |
+| `ansible-core`   | RHEL 9: installation program uses `ansible-core` 2.14, Ansible Automation Platform operation uses `ansible-core` 2.16.RHEL 10: installation program uses `ansible-core` 2.16, Ansible Automation Platform operation uses `ansible-core` 2.16. | The installation program uses the `ansible-core` package from the RHEL AppStream repository.Ansible Automation Platform bundles `ansible-core` 2.16 for operation, so you do not need to install it manually. |
+| Browser          | A currently supported version of Mozilla Firefox or Google Chrome.                                                                                                                                       |                                                                                                                                                                                                          |
+| Database         | For Ansible Automation Platform managed databases: PostgreSQL 15.For customer provided (external) databases: PostgreSQL 15, 16, or 17.                                                                   | External (customer supported) databases require International Components for Unicode (ICU) support.External databases using PostgreSQL 16 or 17 must rely on external backup and restore processes. Backup and restore functionality is dependent on utilities provided with PostgreSQL 15. |
+| IP version       | IPv4, IPv6 (single-stack and dual-stack)                                                                                                                                                                 |                                                                                                                                                                                                          |
 
 Each virtual machine (VM) has the following system requirements:
 
 *Table 2. Virtual machine requirements*
 
-| Requirement    | Minimum requirement                                                                                                                                                                                      |
-| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br>RAM        | 16 GB32 GB required for growth topology bundled installations with `hub_seed_collections=true`. Seeding the collections can take 45 or more minutes.                                                     |
-| <br>CPUs       | <br>4                                                                                                                                                                                                    |
-| <br>Local disk | Total available disk space: 60 GBInstallation directory: 15 GB (if on a dedicated partition)`/var/tmp` for online installations: 1 GB`/var/tmp` for offline or bundled installations: 3 GBTemporary directory (defaults to `/tmp`) for offline or bundled installations: 10GB |
-| <br>Disk IOPS  | <br>3000                                                                                                                                                                                                 |
+| Requirement | Minimum requirement                                                                                                                                                                                      |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| RAM         | 16 GB32 GB required for growth topology bundled installations with `hub_seed_collections=true`. Seeding the collections can take 45 or more minutes.                                                     |
+| CPUs        | 4                                                                                                                                                                                                        |
+| Local disk  | Total available disk space: 60 GBInstallation directory: 15 GB (if on a dedicated partition)`/var/tmp` for online installations: 1 GB`/var/tmp` for offline or bundled installations: 3 GBTemporary directory (defaults to `/tmp`) for offline or bundled installations: 10GB |
+| Disk IOPS   | 3000                                                                                                                                                                                                     |
 
 ## Database requirements
 

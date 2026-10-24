@@ -12,3 +12,7 @@ postgresql_admin_password=<set your own>
 ```
 
 If these variables are already set, the installation program automatically creates the event streams database user using these admin credentials.
+
+Note:
+
+Event streams use the database connection for pub-sub messaging *only*. No read or write operations are performed on the database for event streams, so `CONNECT`-only permissions for the `eda_event_stream user` are sufficient.

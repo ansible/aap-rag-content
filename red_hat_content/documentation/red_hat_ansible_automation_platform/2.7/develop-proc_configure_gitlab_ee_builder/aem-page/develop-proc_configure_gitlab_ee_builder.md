@@ -1,6 +1,6 @@
 +++
-title = "Configure a GitLab OAuth App for saving definitions - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Configure a GitLab OAuth App for saving definitions - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_gitlab_ee_builder"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_configure_gitlab_ee_builder/aem-page/develop-proc_configure_gitlab_ee_builder.html"
 last_crumb = "Configure a GitLab OAuth App for saving definitions"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure a GitLab OAuth App for saving definitions"
 oversized = "false"
@@ -40,7 +41,7 @@ Automated image builds authenticate through the signed-in user's GitLab OAuth se
 
 ## Procedure
 
-1.  Create a GitLab OAuth application in your GitLab instance under **Admin Area > Applications** (or group-level settings). Enter the following details:
+1. Create a GitLab OAuth application in your GitLab instance under **Admin Area > Applications** (or group-level settings). Enter the following details:
 
   - **Name:** A descriptive name, for example `ansible-portal-ee-builder`.
   - **Redirect URI:** `https://<my_portal_domain>/api/auth/gitlab/handler/frame`
@@ -55,8 +56,8 @@ Automated image builds authenticate through the signed-in user's GitLab OAuth se
   Note:
       If you previously configured a GitLab OAuth application for content discovery or saving definition files, verify that the existing application includes the `api`, `read_api`, `read_user`, `read_repository`, and `write_repository` scopes. Open your OAuth application in **Admin Area > Applications**, select any missing scopes, and save. No other changes are required.
 
-2.  Note the **Application ID** and **Secret**. Save the secret value immediately — you cannot view it again.
-3.  Enable the GitLab auth provider in your configuration.
+2. Note the **Application ID** and **Secret**. Save the secret value immediately — you cannot view it again.
+3. Enable the GitLab auth provider in your configuration.
       **OpenShift:** Uncomment the `auth.providers.gitlab` block in your Helm chart configuration.
 
     **RHEL appliance:** Add the following `auth.providers` block to `/etc/portal/configs/app-config/app-config.production.yaml`. If an `auth:` section already exists, add the `providers:` section inside it:
@@ -70,7 +71,7 @@ auth:
           clientSecret: ${GITLAB_OAUTH_CLIENT_SECRET}
 ```
 
-4.  Add the OAuth client credentials to your `secrets-scm` secret.
+4. Add the OAuth client credentials to your `secrets-scm` secret.
       **OpenShift — CLI:**
 
 ```

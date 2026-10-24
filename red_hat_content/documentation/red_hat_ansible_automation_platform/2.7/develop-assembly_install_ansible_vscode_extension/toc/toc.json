@@ -21,17 +21,17 @@
           "title": "Install and configure the Ansible VS Code extension",
           "visible": true,
           "weight": 2,
-          "urlFragment": "unique_1725722105",
+          "urlFragment": "unique_0",
           "anchor": null,
-          "singlePageAnchor": "unique_1725722105",
+          "singlePageAnchor": "unique_0",
           "sections": [
             {
               "title": "Connectivity requirements",
               "visible": true,
               "weight": 1,
-              "urlFragment": "unique_1725722105",
-              "anchor": "unique_1725722105___connectivity_requirements",
-              "singlePageAnchor": "unique_1725722105___connectivity_requirements"
+              "urlFragment": "unique_0",
+              "anchor": "unique_0___connectivity_requirements",
+              "singlePageAnchor": "unique_0___connectivity_requirements"
             }
           ]
         },
@@ -44,7 +44,7 @@
           "singlePageAnchor": "install-vscode-extension"
         },
         {
-          "title": "Configure the Ansible VS Code extension",
+          "title": "Configure the Ansible VS Code extension for cloud or third-party providers",
           "visible": true,
           "weight": 4,
           "urlFragment": "configure-vscode-extension",
@@ -52,9 +52,27 @@
           "singlePageAnchor": "configure-vscode-extension"
         },
         {
-          "title": "Log in to Ansible Lightspeed through the Ansible VS Code extension",
+          "title": "Configure the Ansible VS Code extension for a containerized deployment",
           "visible": true,
           "weight": 5,
+          "urlFragment": "proc-configure-vs-code-containerized-install",
+          "anchor": null,
+          "singlePageAnchor": "proc-configure-vs-code-containerized-install",
+          "sections": [
+            {
+              "title": "Configure a wildcard OAuth redirect URI for OpenShift Dev Spaces",
+              "visible": true,
+              "weight": 1,
+              "urlFragment": "proc-configure-vs-code-containerized-install",
+              "anchor": "proc-configure-lightspeed-oauth-wildcard-devspaces",
+              "singlePageAnchor": "proc-configure-lightspeed-oauth-wildcard-devspaces"
+            }
+          ]
+        },
+        {
+          "title": "Log in to Ansible Lightspeed through the Ansible VS Code extension",
+          "visible": true,
+          "weight": 6,
           "urlFragment": "login-vscode-extension",
           "anchor": null,
           "singlePageAnchor": "login-vscode-extension"

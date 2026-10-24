@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_browse_collections"
-title = "Browse and view collections - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Browse and view collections - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-build_execution_environments_with_the_automation_portal/", "Build execution environments with automation portal"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_browse_collections/aem-page/develop-proc_browse_collections.html"
 last_crumb = "Browse and view collections"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Browse and view collections"
 oversized = "false"
@@ -35,10 +36,10 @@ Browse the collection catalog in Ansible automation portal to discover Ansible c
 
 ## Procedure
 
-1.  Navigate to **Collections** in the sidebar.
-2.  Browse or search for collections by name.
-3.  Filter by source (certified, community, Git-sourced).
-4.  Click a collection to view its details, including metadata, readme, dependencies, and a link to the source repository.
+1. Navigate to **Collections** in the sidebar.
+2. Browse or search for collections by name.
+3. Filter by source (certified, community, Git-sourced).
+4. Click a collection to view its details, including metadata, readme, dependencies, and a link to the source repository.
 
 ## What to do next
 

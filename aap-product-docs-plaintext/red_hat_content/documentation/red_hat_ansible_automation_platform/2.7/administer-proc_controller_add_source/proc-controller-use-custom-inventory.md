@@ -5,7 +5,7 @@ This describes how to use the `servicenow.itsm` collection inventory plugin to s
 
 ### Procedure
 
-1.  Create and sync a project using a Source Control Git repository that includes the following files:
+1. Create and sync a project using a Source Control Git repository that includes the following files:
 
 
 ```
@@ -27,6 +27,6 @@ prefix: os
 Note:
 Refer to the official [Ansible documentation](https://console.redhat.com/ansible/automation-hub/repo/published/servicenow/itsm/content/inventory/now/) for detailed guidance on using and configuring the `servicenow.itsm.now` plugin.
 
-2.  Create an inventory by setting the source to **Sourced from a Project**, selecting the new project, and choose `/(project root)` in the inventory file section.
-3.  Synchronize the source in the inventory.
+2. Create an inventory by setting the source to **Sourced from a Project**, selecting the new project, and choose `/(project root)` in the inventory file section.
+3. Synchronize the source in the inventory.
 

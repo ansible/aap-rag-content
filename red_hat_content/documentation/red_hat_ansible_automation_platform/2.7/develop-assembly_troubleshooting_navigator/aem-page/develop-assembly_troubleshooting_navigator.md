@@ -1,7 +1,7 @@
 +++
 title = "Troubleshoot collections, execution environments, and playbooks - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_troubleshooting_navigator"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_intro_navigator/", "Emulate a platform environment locally with automation content navigator"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_troubleshooting_navigator/aem-page/develop-assembly_troubleshooting_navigator.html"
 last_crumb = "Troubleshoot collections, execution environments, and playbooks"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Troubleshoot collections, execution environments, and playbooks"
 oversized = "false"
@@ -39,13 +40,13 @@ Automation content navigator saves playbook runs as JSON artifact files. You can
 
 ### Procedure
 
- Start automation content navigator with the artifact file.
+Start automation content navigator with the artifact file.
 
 ```
 $ ansible-navigator replay simple_playbook_artifact.json
 ```
 
-1.  Review the playbook results that match when the playbook ran.  
+1. Review the playbook results that match when the playbook ran.  
 ![Playbook results](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-artifact-replay.png)  
 
 ### Results

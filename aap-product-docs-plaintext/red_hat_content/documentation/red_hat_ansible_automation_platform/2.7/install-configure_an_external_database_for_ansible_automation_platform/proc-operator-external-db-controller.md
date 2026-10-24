@@ -27,7 +27,7 @@ The following section outlines the steps to configure an external database for y
 
 ### Procedure
 
-1.  Create a `postgres_configuration_secret` YAML file, following the template below:
+1. Create a `postgres_configuration_secret` YAML file, following the template below:
 
 
 ```
@@ -55,13 +55,13 @@ When configuring the secret:
 - `password`: Ensure the password does not contain single or double quotes (', ") or backslashes (\) to avoid any issues during deployment, backup or restoration.
 - `sslmode`: This variable is valid for external databases only. The allowed values are: `prefer`, `disable`, `allow`, `require`, `verify-ca`, and `verify-full`.
 
-2.  Apply `external-postgres-configuration-secret.yml` to your cluster using the `oc create` command.
+2. Apply `external-postgres-configuration-secret.yml` to your cluster using the `oc create` command.
 
 ```
 $ oc create -f external-postgres-configuration-secret.yml
 ```
 
-3.  When creating your `AnsibleAutomationPlatform` custom resource object, specify the secret under the `controller` section in your spec, following the example below:
+3. When creating your `AnsibleAutomationPlatform` custom resource object, specify the secret under the `controller` section in your spec, following the example below:
 
 
 ```

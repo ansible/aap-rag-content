@@ -1,7 +1,7 @@
 +++
-title = "Authenticate to hashicorp.vault - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_vault_authenticating"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_vault_authenticating"
+title = "Authenticate to hashicorp.vault - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_vault_introduction/", "Integrate with IBM HashiCorp Vault"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/integrate-assembly_vault_authenticating/aem-page/integrate-assembly_vault_authenticating.html"
 last_crumb = "Authenticate to hashicorp.vault"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Authenticate to hashicorp.vault"
 oversized = "false"
@@ -64,7 +65,8 @@ The following authentication types are supported:
       api_key: secret-api-key
 ```
 
-- **Token authentication:** Set the `VAULT_TOKEN` environment variable. Optionally, you can configure parameters for the token. If parameters are not provided, then the module uses environment variables.
+- **Token authentication:** Set the `VAULT_TOKEN` environment variable.
+    Optionally, you can configure parameters for the token. If parameters are not provided, then the module uses environment variables.
 
 ## Create a custom credential type for Vault
 
@@ -83,12 +85,12 @@ You can configure role-based (appRole) authentication or allow users to directly
 
 ### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select **Automation Execution> (and then)Infrastructure> (and then)Credential Types**.
-3.  Click Create a credential type. The **Create Credential Type** page opens.
-4.  Enter a name and a description in the corresponding fields.
-5.  If you want to configure token authentication for individual users:
-  1.  For **Input configuration**, enter:
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select **Automation Execution> (and then)Infrastructure> (and then)Credential Types**.
+3. Click Create a credential type. The **Create Credential Type** page opens.
+4. Enter a name and a description in the corresponding fields.
+5. If you want to configure token authentication for individual users:
+  1. For **Input configuration**, enter:
   
 
 ```
@@ -99,7 +101,7 @@ fields:
    secret: true
 ```
 
-  2.  For **Injector configuration**, enter:
+  2. For **Injector configuration**, enter:
   
 
 ```
@@ -107,8 +109,8 @@ env:
    VAULT_TOKEN: '{{ vault_token }}'
 ```
 
-6.  If you want to configure appRole authentication using `role_id` and `secret_id`:
-  1.  For **Input configuration**, enter:
+6. If you want to configure appRole authentication using `role_id` and `secret_id`:
+  1. For **Input configuration**, enter:
   
 
 ```
@@ -123,7 +125,7 @@ fields:
     secret: true
 ```
 
-  2.  For **Injector configuration**, enter:
+  2. For **Injector configuration**, enter:
   
 
 ```
@@ -132,7 +134,7 @@ env:
     VAULT_APPROLE_SECRET_ID: '{{ vault_approle_secret_id }}'
 ```
 
-7.  Click Create credential type.
+7. Click Create credential type.
 
 ### What to do next
 
@@ -148,12 +150,12 @@ Vault users must create a custom credential to use with job templates in Ansible
 
 ### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select **Automation Execution> (and then)Infrastructure> (and then)Credentials**, and then select Create credential.
-3.  Enter a name and a description in the corresponding fields.
-4.  (Optional) From the **Organization** list, select an organization.
-5.  From the **Credential type** list, select a Vault credential type. The fields that display depend on the credential type.
-6.  Do *one* of the following:
-  1.  For the token authentication, add your Vault token and edit any fields as needed.
-  2.  For the appRole authentication method, enter the IDs in the **appRole Role ID** and **appRole Secret ID** fields. Edit any other fields as needed.
-7.  Click Save credential. You are ready to use the credential in a job template.
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select **Automation Execution> (and then)Infrastructure> (and then)Credentials**, and then select Create credential.
+3. Enter a name and a description in the corresponding fields.
+4. (Optional) From the **Organization** list, select an organization.
+5. From the **Credential type** list, select a Vault credential type. The fields that display depend on the credential type.
+6. Do *one* of the following:
+  1. For the token authentication, add your Vault token and edit any fields as needed.
+  2. For the appRole authentication method, enter the IDs in the **appRole Role ID** and **appRole Secret ID** fields. Edit any other fields as needed.
+7. Click Save credential. You are ready to use the credential in a job template.

@@ -16,6 +16,22 @@
           "urlFragment": "troubleshoot-generic-oidc",
           "anchor": null,
           "singlePageAnchor": "troubleshoot-generic-oidc"
+        },
+        {
+          "title": "Troubleshoot Generic OIDC scope mismatches",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "troubleshoot-oidc-scope-mismatch",
+          "anchor": null,
+          "singlePageAnchor": "troubleshoot-oidc-scope-mismatch"
+        },
+        {
+          "title": "Configure JWT_Algorithms manually",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "config-jwt-algorithms",
+          "anchor": null,
+          "singlePageAnchor": "config-jwt-algorithms"
         }
       ]
     }

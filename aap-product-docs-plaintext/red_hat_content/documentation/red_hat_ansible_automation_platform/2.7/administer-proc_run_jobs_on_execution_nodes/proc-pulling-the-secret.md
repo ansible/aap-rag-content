@@ -13,7 +13,7 @@ Create a pull secret on the automation controller namespace and configure the `e
 
 ### Procedure
 
-1.  Create a secret using the following command:
+1. Create a secret using the following command:
 
 
 ```
@@ -23,7 +23,7 @@ oc create secret generic ee-pull-secret \
 --from-literal=url=registry.redhat.io
 ```
 
-2.  Add `ee_pull_credentials_secret` and `ee-pull-secret` to the specification by editing the deployment specification:
+2. Add `ee_pull_credentials_secret` and `ee-pull-secret` to the specification by editing the deployment specification:
 
 
 ```
@@ -37,5 +37,5 @@ spec
 ee_pull_credentials_secret=ee-pull-secret
 ```
 
-3.  To manage instances from the automation controller UI, you must have System Administrator or System Auditor permissions.
+3. To manage instances from the automation controller UI, you must have System Administrator or System Auditor permissions.
 

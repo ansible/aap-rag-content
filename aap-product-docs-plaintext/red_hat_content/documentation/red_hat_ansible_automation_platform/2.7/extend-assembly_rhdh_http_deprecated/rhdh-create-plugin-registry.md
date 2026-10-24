@@ -5,14 +5,14 @@ Set up a registry in your OpenShift cluster to host the Ansible plug-ins and mak
 
 ### Procedure
 
-1.  Log in to your OpenShift Container Platform instance with credentials to create a new application.
-2.  Open your Red Hat Developer Hub OpenShift project.
+1. Log in to your OpenShift Container Platform instance with credentials to create a new application.
+2. Open your Red Hat Developer Hub OpenShift project.
 
 ```
 $ oc project <YOUR_DEVELOPER_HUB_PROJECT>
 ```
 
-3.  Run the following commands to create a plug-in registry build in the OpenShift cluster.
+3. Run the following commands to create a plug-in registry build in the OpenShift cluster.
 
 ```
 $ oc new-build httpd --name=plugin-registry --binary

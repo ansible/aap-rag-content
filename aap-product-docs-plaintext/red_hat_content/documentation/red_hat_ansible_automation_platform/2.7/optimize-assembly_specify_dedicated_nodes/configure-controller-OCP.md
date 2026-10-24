@@ -18,7 +18,7 @@ Make the following configuration changes in automation controller to minimize do
 
 ### Procedure
 
-1.  Enable `RECEPTOR_KUBE_SUPPORT_RECONNECT` in AutomationController specification:
+1. Enable `RECEPTOR_KUBE_SUPPORT_RECONNECT` in AutomationController specification:
 
 
 ```
@@ -34,14 +34,14 @@ value: enabled
 ```
 ```
 
-2.  Enable the graceful termination feature in AutomationController specification:
+2. Enable the graceful termination feature in AutomationController specification:
 
 
 ```
 termination_grace_period_seconds: <time to wait for job to finish>
 ```
 
-3.  Configure `podAntiAffinity` for web and task the pod to spread out the deployment in AutomationController specification:
+3. Configure `podAntiAffinity` for web and task the pod to spread out the deployment in AutomationController specification:
 
 
 ```
@@ -71,7 +71,7 @@ topologyKey: topology.kubernetes.io/zone
 weight: 100
 ```
 
-4.  Configure `PodDisruptionBudget` in OpenShift Container Platform:
+4. Configure `PodDisruptionBudget` in OpenShift Container Platform:
 
 
 ```

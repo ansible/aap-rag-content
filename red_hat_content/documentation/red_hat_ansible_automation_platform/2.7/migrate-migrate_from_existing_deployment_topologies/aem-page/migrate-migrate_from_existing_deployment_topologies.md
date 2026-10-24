@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/migrate-migrate_from_existing_deployment_topologies"
 title = "Migrate from existing deployment topologies - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/migrate-migrate_from_existing_deployment_topologies"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/migrate-migrate_from_existing_deployment_topologies/", "Migrate from existing deployment topologies"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/migrate-migrate_from_existing_deployment_topologies/aem-page/migrate-migrate_from_existing_deployment_topologies.html"
 last_crumb = "Migrate from existing deployment topologies"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Migrate from existing deployment topologies"
 oversized = "false"
@@ -35,9 +36,9 @@ RPM-based deployments are not available in Ansible Automation Platform 2.7. For 
 
 The supported migration paths include:
 
-| Source environment                              | Target environment                      |
-| ----------------------------------------------- | --------------------------------------- |
-| <br>Container-based Ansible Automation Platform | <br>OpenShift Container Platform        |
-| <br>Container-based Ansible Automation Platform | <br>Managed Ansible Automation Platform |
+| Source environment                          | Target environment                  |
+| ------------------------------------------- | ----------------------------------- |
+| Container-based Ansible Automation Platform | OpenShift Container Platform        |
+| Container-based Ansible Automation Platform | Managed Ansible Automation Platform |
 
 Migrations outside of those listed are not supported at this time.

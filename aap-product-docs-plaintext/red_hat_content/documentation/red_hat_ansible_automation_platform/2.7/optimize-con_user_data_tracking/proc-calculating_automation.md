@@ -14,11 +14,11 @@ Automation savings calculations are not saved in Automation Analytics.
 
 #### Procedure
 
-1.  Under **Calculate your automation** enter cost information for:
-1.   **Manual process cost**
-2.   **Automated process cost**
-2.  Under **Top templates**:
-1.  Adjust time values for top templates to provide time to manually perform each task that the template automates.
+1. Under **Calculate your automation** enter cost information for:
+1.  **Manual process cost**
+2.  **Automated process cost**
+2. Under **Top templates**:
+1. Adjust time values for top templates to provide time to manually perform each task that the template automates.
 
 #### Results
 

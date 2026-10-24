@@ -1,0 +1,55 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Red Hat Ansible Lightspeed variables",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Red Hat Ansible Lightspeed variables",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "lightspeed-variables___red_hat_ansible_lightspeed_variables",
+          "anchor": null,
+          "singlePageAnchor": "lightspeed-variables___red_hat_ansible_lightspeed_variables"
+        },
+        {
+          "title": "Coding assistant variables",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "lightspeed-variables___ansible_lightspeed_coding_assistant_variables",
+          "anchor": null,
+          "singlePageAnchor": "lightspeed-variables___ansible_lightspeed_coding_assistant_variables"
+        },
+        {
+          "title": "Automation intelligent assistant variables",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables",
+          "anchor": null,
+          "singlePageAnchor": "lightspeed-variables___ansible_lightspeed_intelligent_assistant_variables"
+        },
+        {
+          "title": "Automation intelligent assistant integration with MCP server variables",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables",
+          "anchor": null,
+          "singlePageAnchor": "lightspeed-variables___ansible_lightspeed_intelligent_assistant_integration_with_mcp_server_variables"
+        },
+        {
+          "title": "Bring your own Knowledge for automation intelligent assistant variables",
+          "visible": true,
+          "weight": 5,
+          "urlFragment": "lightspeed-variables__section_1",
+          "anchor": null,
+          "singlePageAnchor": "lightspeed-variables__section_1"
+        }
+      ]
+    }
+  ]
+}

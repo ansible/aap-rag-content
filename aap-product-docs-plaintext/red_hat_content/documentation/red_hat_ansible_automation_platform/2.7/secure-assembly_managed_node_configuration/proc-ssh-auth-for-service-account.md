@@ -15,7 +15,7 @@ Use the following procedure to configure the SSH daemon:
 
 ### Procedure
 
-1.  Create the file `/etc/sshd/sshd_config.d/60-ansible.conf`, and include the following content:
+1. Create the file `/etc/sshd/sshd_config.d/60-ansible.conf`, and include the following content:
 
 
 ```
@@ -25,9 +25,9 @@ PasswordAuthentication no
 Match all
 ```
 
-2.  Verify that the file uses the proper syntax:
+2. Verify that the file uses the proper syntax:
 `sudo sshd -t`
 
-3.  Restart the SSH daemon
+3. Restart the SSH daemon
 `sudo systemctl restart sshd.service`
 

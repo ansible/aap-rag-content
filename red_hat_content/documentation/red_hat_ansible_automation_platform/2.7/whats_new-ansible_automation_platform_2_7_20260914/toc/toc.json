@@ -1,0 +1,231 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Ansible Automation Platform 2.7 patch release September 14, 2026 (2.7-8)",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Overview",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___overview",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___overview"
+        },
+        {
+          "title": "Features",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___features",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___features"
+        },
+        {
+          "title": "Highlights",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30__section_6",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30__section_6"
+        },
+        {
+          "title": "Enhancements",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___enhancements",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___enhancements"
+        },
+        {
+          "title": "Containerized installer",
+          "visible": true,
+          "weight": 5,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___aap_gateway",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___aap_gateway"
+        },
+        {
+          "title": "Execution environments",
+          "visible": true,
+          "weight": 6,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___execution_environments_partners",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___execution_environments_partners"
+        },
+        {
+          "title": "Platform operator",
+          "visible": true,
+          "weight": 7,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30__section_8",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30__section_8"
+        },
+        {
+          "title": "CVE",
+          "visible": true,
+          "weight": 8,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___cve",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___cve"
+        },
+        {
+          "title": "Automation Platform Gateway",
+          "visible": true,
+          "weight": 9,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___automation_gateway_container",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___automation_gateway_container"
+        },
+        {
+          "title": "Automation platform UI",
+          "visible": true,
+          "weight": 10,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___automation_platform_ui",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___automation_platform_ui"
+        },
+        {
+          "title": "Automation Controller",
+          "visible": true,
+          "weight": 11,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30__section_9",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30__section_9"
+        },
+        {
+          "title": "Event-Driven Ansible",
+          "visible": true,
+          "weight": 12,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30__section_10",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30__section_10"
+        },
+        {
+          "title": "Automation Execution Environments",
+          "visible": true,
+          "weight": 13,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30__section_11",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30__section_11"
+        },
+        {
+          "title": "Automation Hub",
+          "visible": true,
+          "weight": 14,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30__section_12",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30__section_12"
+        },
+        {
+          "title": "Ansible Lightspeed",
+          "visible": true,
+          "weight": 15,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30__section_13",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30__section_13"
+        },
+        {
+          "title": "Automation Metrics Service",
+          "visible": true,
+          "weight": 16,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30__section_14",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30__section_14"
+        },
+        {
+          "title": "MCP Server",
+          "visible": true,
+          "weight": 17,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30__section_15",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30__section_15"
+        },
+        {
+          "title": "Receptor",
+          "visible": true,
+          "weight": 18,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30__section_16",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30__section_16"
+        },
+        {
+          "title": "Bug fixes",
+          "visible": true,
+          "weight": 19,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___bug_fixes",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___bug_fixes"
+        },
+        {
+          "title": "Automation Platform Gateway",
+          "visible": true,
+          "weight": 20,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___aap_gateway_2",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___aap_gateway_2"
+        },
+        {
+          "title": "Automation Platform UI",
+          "visible": true,
+          "weight": 21,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___containerized_installer",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___containerized_installer"
+        },
+        {
+          "title": "Containerized installer",
+          "visible": true,
+          "weight": 22,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___controller_2",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___controller_2"
+        },
+        {
+          "title": "Automation Controller",
+          "visible": true,
+          "weight": 23,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___dispatcherd",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___dispatcherd"
+        },
+        {
+          "title": "Automation Platform",
+          "visible": true,
+          "weight": 24,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___event_driven_ansible",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___event_driven_ansible"
+        },
+        {
+          "title": "Automation Metrics Service",
+          "visible": true,
+          "weight": 25,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___general_2",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___general_2"
+        },
+        {
+          "title": "Platform operator",
+          "visible": true,
+          "weight": 26,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___hub",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30___hub"
+        },
+        {
+          "title": "Known issues",
+          "visible": true,
+          "weight": 27,
+          "urlFragment": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30__section_17",
+          "anchor": null,
+          "singlePageAnchor": "GUID-28f8b961-b458-43d7-b303-c2de6c341a30__section_17"
+        }
+      ]
+    }
+  ]
+}

@@ -8,9 +8,36 @@ $ govc import.vmdk disk.vmdk *<folder_name>*
 ```
 
 Note:
-The Ansible automation portal VMDK uses stream-optimized format and requires format conversion during upload. Do not upload VMDK disk images by using the vSphere web client or `govc datastore.upload` — these methods copy the file without converting it, producing an unusable 0 MB disk. The `govc import.vmdk` command converts the image automatically. This restriction applies to VMDK disk images only, not to ISO files.
+The Ansible automation portal VMDK uses stream-optimized format and requires format conversion during upload. Do not upload VMDK disk images by using the
+vSphere web client or `govc datastore.upload` — these methods copy the file without converting it, producing an unusable 0 MB disk. The `govc
+import.vmdk` command converts the image automatically. This restriction applies to VMDK disk images only, not to ISO files.
 
-2. Save your `cloud-init` user-data file as `cloud-init-user-data.yaml`. Use the template from Prerequisites for deploying Ansible automation portal on RHEL in the related links below.
+2. Create a cloud-init user-data file named cloud-init-user-data.yaml with your SSH key and Ansible Automation Platform credentials:
+
+```yaml
+#cloud-config
+users:
+- name: admin
+sudo: ALL=(ALL) NOPASSWD:ALL
+ssh_authorized_keys:
+- "<your-ssh-public-key>"
+
+aap:
+host_url: "https://<aap-host>"
+token: "<aap-api-token>"
+check_ssl: true
+oauth:
+client_id: "<oauth-client-id>"
+client_secret: "<oauth-client-secret>"
+
+database:
+type: builtin
+```
+
+Replace the placeholder values in angle brackets with your SSH public key, Ansible Automation Platform URL, API token, and OAuth credentials.
+
+Note:
+For optional configuration parameters such as external databases, custom ports, or SCM credentials, see Cloud-init reference in the related links below.
 
 3. Create a cloud-init ISO from your user-data file. VMware delivers cloud-init configuration to the VM as a small ISO disk image labeled `cidata`. Cloud-init expects two files on the ISO: `user-data` (your configuration) and `meta-data` (instance identity):
 

@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/troubleshoot-assembly_appendix_troubleshoot_containerized_aap#troubleshooting-containerized-ansible-automation-platform-configuration",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-assembly_appendix_troubleshoot_containerized_aap",
-  "title": "Troubleshoot your containerized configuration"
+  "title": "Troubleshoot your containerized configuration",
+  "url_reachable": true
 }

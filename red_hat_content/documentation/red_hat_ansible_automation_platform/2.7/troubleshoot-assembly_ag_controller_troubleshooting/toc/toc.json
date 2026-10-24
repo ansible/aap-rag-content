@@ -26,9 +26,35 @@
           "singlePageAnchor": "controller-unable-to-run-job"
         },
         {
-          "title": "Playbooks do not show up in the Job Template list",
+          "title": "External system interference and job failures",
           "visible": true,
           "weight": 3,
+          "urlFragment": "GUID-c17b7943-b4e7-4258-9235-d4bec43994df",
+          "anchor": null,
+          "singlePageAnchor": "GUID-c17b7943-b4e7-4258-9235-d4bec43994df",
+          "sections": [
+            {
+              "title": "Diagnostic checklist",
+              "visible": true,
+              "weight": 1,
+              "urlFragment": "GUID-c17b7943-b4e7-4258-9235-d4bec43994df",
+              "anchor": "GUID-c17b7943-b4e7-4258-9235-d4bec43994df__section_2",
+              "singlePageAnchor": "GUID-c17b7943-b4e7-4258-9235-d4bec43994df__section_2"
+            }
+          ]
+        },
+        {
+          "title": "External system interference and job failures: mitigation",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "GUID-dc1b8cfc-7a0e-4244-8f23-169cf6996036",
+          "anchor": null,
+          "singlePageAnchor": "GUID-dc1b8cfc-7a0e-4244-8f23-169cf6996036"
+        },
+        {
+          "title": "Playbooks do not show up in the Job Template list",
+          "visible": true,
+          "weight": 5,
           "urlFragment": "controller-playbooks-not-showing",
           "anchor": null,
           "singlePageAnchor": "controller-playbooks-not-showing"
@@ -36,7 +62,7 @@
         {
           "title": "Playbook stays in pending",
           "visible": true,
-          "weight": 4,
+          "weight": 6,
           "urlFragment": "controller-playbook-pending",
           "anchor": null,
           "singlePageAnchor": "controller-playbook-pending"
@@ -44,7 +70,7 @@
         {
           "title": "Prevent installation failures when reusing an external database",
           "visible": true,
-          "weight": 5,
+          "weight": 7,
           "urlFragment": "controller-reuse-external-database-fail",
           "anchor": null,
           "singlePageAnchor": "controller-reuse-external-database-fail"
@@ -52,7 +78,7 @@
         {
           "title": "View private EC2 VPC instances in the automation controller inventory",
           "visible": true,
-          "weight": 6,
+          "weight": 8,
           "urlFragment": "controller-ec2-vpc-instances",
           "anchor": null,
           "singlePageAnchor": "controller-ec2-vpc-instances"

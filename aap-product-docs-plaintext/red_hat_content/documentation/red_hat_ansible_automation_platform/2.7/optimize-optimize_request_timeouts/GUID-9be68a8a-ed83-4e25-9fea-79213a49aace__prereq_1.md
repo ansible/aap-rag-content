@@ -7,10 +7,10 @@
 
 ### Procedure
 
-1.  Log in to the OpenShift web console.
-2.  Navigate to **Installed Operators → Ansible Automation Platform → All Instances**.
-3.  Click your `AnsibleAutomationPlatform` instance.
-4.  Select the **YAML** tab. Under the spec: section, add the `route_annotations` to extend the timeout:
+1. Log in to the OpenShift web console.
+2. Navigate to **Installed Operators → Ansible Automation Platform → All Instances**.
+3. Click your `AnsibleAutomationPlatform` instance.
+4. Select the **YAML** tab. Under the spec: section, add the `route_annotations` to extend the timeout:
 
 
 ```
@@ -20,5 +20,5 @@ haproxy.router.openshift.io/timeout: 180s
 
 ```
 
-5.  Save the changes.
+5. Save the changes.
 

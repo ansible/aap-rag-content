@@ -11,13 +11,13 @@ The following steps describe the process for scaffolding a new playbook project 
 
 ### Procedure
 
-1.  Open VS Code.
-2.  Click the Ansible icon in the VS Code activity bar to open the Ansible extension.
-3.  Select **Get started** in the **Ansible content creator** section. The **Ansible content creator** tab opens.
+1. Open VS Code.
+2. Click the Ansible icon in the VS Code activity bar to open the Ansible extension.
+3. Select **Get started** in the **Ansible content creator** section. The **Ansible content creator** tab opens.
 
-4.  In the **Create** section, click **Ansible playbook project**. The **Create Ansible project** tab opens.
+4. In the **Create** section, click **Ansible playbook project**. The **Create Ansible project** tab opens.
 
-5.  In the form in the **Create Ansible project** tab, enter the following:
+5. In the form in the **Create Ansible project** tab, enter the following:
 
 - **Destination directory**: Enter the path to the directory where you want to scaffold your new playbook project. Note:
 If you enter an existing directory name, the scaffolding process overwrites the contents of that directory. The scaffold process only allows you to use an existing directory if you enable the `Force` option.
@@ -27,7 +27,7 @@ If you enter an existing directory name, the scaffolding process overwrites the 
 
 - **SCM organization and SCM project**: Enter a name for the directory and subdirectory where you can store roles that you create for your playbooks.
 
-6.  Enter a name for the directory where you want to scaffold your new playbook project.
+6. Enter a name for the directory where you want to scaffold your new playbook project.
 
 ### Results
 

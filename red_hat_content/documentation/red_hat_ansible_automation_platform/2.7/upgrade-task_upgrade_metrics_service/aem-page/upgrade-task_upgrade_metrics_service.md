@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/upgrade-task_upgrade_metrics_service/aem-page/upgrade-task_upgrade_metrics_service.html"
 last_crumb = "Upgrade metrics service"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Upgrade metrics service"
 oversized = "false"
@@ -37,7 +38,7 @@ Safely upgrade metrics service when upgrading Ansible Automation Platform to ben
 
 ## Procedure
 
-1.  Back up current configuration
+1. Back up current configuration
   
 
 ```
@@ -45,14 +46,14 @@ cp /path/to/installer/inventory /path/to/backup/inventory.backup.$(date +%Y%m%d)
 pg_dump -h localhost -U metrics_service metrics_service > metrics_service_backup_$(date +%Y%m%d).sql
 ```
 
-2.  Stop metrics service
+2. Stop metrics service
   
 
 ```
 systemctl --user stop automation-metrics-web.service automation-metrics-tasks.service automation-metrics-scheduler.service
 ```
 
-3.  Run upgrade installer
+3. Run upgrade installer
   
 
 ```
@@ -63,7 +64,7 @@ ansible-playbook -i inventory install.yml
   Note:
       There is no separate upgrade.yml playbook. The install.yml playbook handles upgrades. The role's tasks/update.yml automatically detects image changes, stops services, and recreates containers with the new image.
 
-4.  Verify database schema migration
+4. Verify database schema migration
       Database migrations are handled automatically during upgrade via the `automation-metrics-init` container, which executes Django migrations through /app/scripts/init.sh. The process retries up to 5 times if failures occur.
 
 ```
@@ -77,7 +78,7 @@ psql -h localhost -U metrics_service -d metrics_service -c "\dt"
   Note:
       The update.yml task in the automationmetrics role automatically handles container image updates and sets a recreate flag when newer images are detected.
 
-5.  Start metrics service
+5. Start metrics service
   
 
 ```

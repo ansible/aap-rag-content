@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-con_gs_rulebook_activations"
-title = "Configure rulebooks to take action in response to events or conditions - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Configure rulebooks to take action in response to events or conditions - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-assembly_gs_auto_dev/", "Get started as an automation developer"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/get_started-con_gs_rulebook_activations/aem-page/get_started-con_gs_rulebook_activations.html"
 last_crumb = "Configure rulebooks to take action in response to events or conditions"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure rulebooks to take action in response to events or conditions"
 oversized = "false"
@@ -40,9 +41,9 @@ Follow the steps in this procedure to set up a rulebook activation.
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Decisions> (and then)Rulebook Activations.
-2.  Click Create rulebook activation.
-3.  Enter the following information:
+1. From the navigation panel, select Automation Decisions> (and then)Rulebook Activations.
+2. Click Create rulebook activation.
+3. Enter the following information:
 
   - **Name**: Insert the name.
   - **Description**: This field is optional.
@@ -68,7 +69,7 @@ Follow the steps in this procedure to set up a rulebook activation.
   - **Variables**: The variables for the rulebook are in JSON or YAML format. The content would be equivalent to the file passed through the `--vars` flag of ansible-rulebook command.
   - **Options**: Check the **Skip audit events** option if you do not want to see your events in the Rule Audit.
 
-4.  Click Create rulebook activation.
+4. Click Create rulebook activation.
 
 ### Results
 
@@ -96,9 +97,9 @@ Toggle the state of an activation to start or stop event processing instantly, a
 
 ### Procedure
 
-1.  Select the switch on the row level to enable or disable your chosen rulebook.
-2.  In the window, select Yes, I confirm that I want to enable/disable these X rulebook activations.
-3.  Select Enable/Disable rulebook activation.
+1. Select the switch on the row level to enable or disable your chosen rulebook.
+2. In the window, select Yes, I confirm that I want to enable/disable these X rulebook activations.
+3. Select Enable/Disable rulebook activation.
 
 ## Restart rulebook activations
 
@@ -112,10 +113,10 @@ You can only restart a rulebook activation if it is currently enabled and the re
 
 ### Procedure
 
-1.  Select the More Actions icon **⋮** next to **Rulebook Activation enabled/disabled** toggle.
-2.  Select Restart rulebook activation.
-3.  In the window, select Yes, I confirm that I want to restart these X rulebook activations.
-4.  Select Restart rulebook activations.
+1. Select the More Actions icon **⋮** next to **Rulebook Activation enabled/disabled** toggle.
+2. Select Restart rulebook activation.
+3. In the window, select Yes, I confirm that I want to restart these X rulebook activations.
+4. Select Restart rulebook activations.
 
 ## Delete rulebook activations
 
@@ -123,10 +124,10 @@ End and permanently remove a rulebook activation and its configuration when its 
 
 ### Procedure
 
-1.  Select the More Actions icon **⋮** next to the **Rulebook Activation enabled/disabled** toggle.
-2.  Select Delete rulebook activation.
-3.  In the window, select Yes, I confirm that I want to delete these X rulebook activations.
-4.  Select Delete rulebook activations.
+1. Select the More Actions icon **⋮** next to the **Rulebook Activation enabled/disabled** toggle.
+2. Select Delete rulebook activation.
+3. In the window, select Yes, I confirm that I want to delete these X rulebook activations.
+4. Select Delete rulebook activations.
 
 ## Activate webhook-based automation in Openshift
 
@@ -162,7 +163,7 @@ The following is an example of rulebook with a given webhook:
 
 ### Procedure
 
-1.  Create a Route (on OpenShift Container Platform) to expose the service. The following is an example Route for an ansible-rulebook source that expects POST’s on port 5000 on the decision environment pod:
+1. Create a Route (on OpenShift Container Platform) to expose the service. The following is an example Route for an ansible-rulebook source that expects POST’s on port 5000 on the decision environment pod:
   
 
 ```
@@ -188,7 +189,7 @@ spec:
   wildcardPolicy: None
 ```
 
-2.  When you create the Route, test it with a **Post to the Route URL**:
+2. When you create the Route, test it with a **Post to the Route URL**:
   
   Note:
       You do not need the port as it is specified on the Route (targetPort).

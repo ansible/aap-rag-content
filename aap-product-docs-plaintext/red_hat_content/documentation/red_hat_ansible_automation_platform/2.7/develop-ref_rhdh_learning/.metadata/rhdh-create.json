@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/develop-ref_rhdh_learning#rhdh-create",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_rhdh_learning",
-  "title": "Create a project in the Red Hat Developer Hub UI"
+  "title": "Create a project in the Red Hat Developer Hub UI",
+  "url_reachable": true
 }

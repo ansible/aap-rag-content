@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_inventory_sync_jobs"
 title = "Sync inventory data with external sources - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_inventory_sync_jobs"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_jobs/", "Use jobs to run playbooks against an inventory of hosts"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-con_controller_inventory_sync_jobs/aem-page/develop-con_controller_inventory_sync_jobs.html"
 last_crumb = "Sync inventory data with external sources"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Sync inventory data with external sources"
 oversized = "false"
@@ -37,7 +38,7 @@ If used, the Ansible CLI displays the same information. This can be useful for d
 
 You can Relaunch job, Cancel job, download ![Download](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/download.png) the job output, or delete ![Delete](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/delete-button.png) the job.
 
- Note:
+Note:
 
 You can perform an inventory update while a related job is running. In cases where you have a large project (around 10 GB), disk space on `/tmp` can be an issue.
 
@@ -45,12 +46,14 @@ You can perform an inventory update while a related job is running. In cases whe
 
 Access the **Details** tab to view details about the job execution:
 
-![Show job details for inventory sync](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/sync.png)  
+![Show job details for inventory sync](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-show-job-details-for-inv-sync.png)  
 
 You can view the following details for an executed job:
 
 - **Status**: It can be any of the following:
-  * **Pending**: The inventory sync has been created, but not queued or started yet. Any job, not just inventory source syncs, stays in pending until it is ready to be run by the system. Reasons for inventory source syncs not being ready include:
+  * **Pending**: The inventory sync has been created, but not queued or started yet.
+Any job, not just inventory source syncs, stays in pending until it is ready to be run by the system.
+Reasons for inventory source syncs not being ready include:
     + Dependencies that are currently running (all dependencies must be completed before the next step can run).
     + Insufficient capacity to run in the locations it is configured for.
   * **Waiting**: The inventory sync is in the queue waiting to be executed.
@@ -72,7 +75,8 @@ When you synchronize an inventory source that is configured to use a source cont
 
 SCM inventory jobs function similarly to standard inventory source update jobs, but they specifically handle the interaction with the SCM system. These jobs ensure that the inventory data in automation controller remains up-to-date with the latest changes made in the SCM repository.
 
-When an inventory sourced from an SCM, for example git, is executed, the results are displayed in the **Output** tab. If used, the Ansible CLI displays the same information. This can be useful for debugging.
+When an inventory sourced from an SCM, for example git, is executed, the results are displayed in the **Output** tab.
+If used, the Ansible CLI displays the same information. This can be useful for debugging.
 
 Use the navigation menu to Relaunch job, Cancel job, download ![Download](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/download.png) the job output, or delete ![Delete](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/delete-button.png) the job.
 
@@ -83,7 +87,9 @@ To view details about the job execution and its associated project, select the *
 You can view the following details for an executed job:
 
 - **Status**: It can be any of the following:
-  * **Pending**: The SCM job has been created, but not queued or started yet. Any job, not just SCM jobs, stay in pending until it is ready to be run by the system. Reasons for SCM jobs not being ready include dependencies that are currently running (all dependencies must be completed before the next step can run), or there is not enough capacity to run in the locations it is configured to.
+  * **Pending**: The SCM job has been created, but not queued or started yet.
+Any job, not just SCM jobs, stay in pending until it is ready to be run by the system.
+Reasons for SCM jobs not being ready include dependencies that are currently running (all dependencies must be completed before the next step can run), or there is not enough capacity to run in the locations it is configured to.
   * **Waiting**: The SCM job is in the queue waiting to be executed.
   * **Running**: The SCM job is currently in progress.
   * **Successful**: The last SCM job succeeded.

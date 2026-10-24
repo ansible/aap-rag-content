@@ -23,24 +23,24 @@ Based on groups and attributes optionally provided by the SAML IdP, users can be
 
 ## Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Authentication Methods.
-2.  Click Create authentication.
-3.  Enter a **Name** for this SAML configuration.
-4.  Select **SAML** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
-5.  Enter the application-defined unique identifier used as the audience of the SAML service provider configuration in the **SAML Service Provider Entity ID** field. This is usually the base URL of your service provider, but the actual value depends on the Entity ID expected by your IdP.
-6.  Include the certificate content in the **SAML Service Provider Public Certificate** field. This information is contained in the cert.pem you created as a prerequisite and must include the `--BEGIN CERTIFICATE--` and `--END CERTIFICATE--`.
-7.  Include the private key content in the **SAML Service Provider Private Key** field. This information is contained in the key.pem you created as a prerequisite and must include the `--BEGIN PRIVATE KEY--` and `--END PRIVATE KEY--`.
-8.  Enter the URL to redirect the user to for login initiation in the **IdP Login URL** field. This is the login URL from your SAML IdP application.
-9.  Enter the public cert used for secrets coming from the **IdP in the IdP Public Cert** field. This is the SAML certificate available for download from IdP. Note:
+1. From the navigation panel, select Access Management> (and then)Authentication Methods.
+2. Click Create authentication.
+3. Enter a **Name** for this SAML configuration.
+4. Select **SAML** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
+5. Enter the application-defined unique identifier used as the audience of the SAML service provider configuration in the **SAML Service Provider Entity ID** field. This is usually the base URL of your service provider, but the actual value depends on the Entity ID expected by your IdP.
+6. Include the certificate content in the **SAML Service Provider Public Certificate** field. This information is contained in the cert.pem you created as a prerequisite and must include the `--BEGIN CERTIFICATE--` and `--END CERTIFICATE--`.
+7. Include the private key content in the **SAML Service Provider Private Key** field. This information is contained in the key.pem you created as a prerequisite and must include the `--BEGIN PRIVATE KEY--` and `--END PRIVATE KEY--`.
+8. Enter the URL to redirect the user to for login initiation in the **IdP Login URL** field. This is the login URL from your SAML IdP application.
+9. Enter the public cert used for secrets coming from the **IdP in the IdP Public Cert** field. This is the SAML certificate available for download from IdP. Note:
 The IdP in the IdP Public Cert field should contain the entire certificate, including the `--BEGIN--` and `--END CERTIFICATE--`. You must manually enter the prefix and suffix if the IdP does not include it.
 
-10.  Enter the entity ID returned in the assertion in the **Entity ID**. This is the identifier from your IdP SAML application. You can find this value in the SAML metadata provided by your IdP.
-11.  Enter user details in the **Groups**, **User Email**, **Username**, **User Last Name** and **User First Name**.
-12.  Enter a permanent ID for the user in the **User Permanent ID** field. This field is required. Note:
+10. Enter the entity ID returned in the assertion in the **Entity ID**. This is the identifier from your IdP SAML application. You can find this value in the SAML metadata provided by your IdP.
+11. Enter user details in the **Groups**, **User Email**, **Username**, **User Last Name** and **User First Name**.
+12. Enter a permanent ID for the user in the **User Permanent ID** field. This field is required. Note:
 Additional attributes might be available through your SAML IdP. Those values must be included in either the **Additional Authenticators Fields** or the **SAML IDP to extra_data attribute mapping** field. Refer to those steps for details.
 
-13.  The **SAML Assertion Consumer Service (ACS) URL** field registers the service as a service provider (SP) with each identity provider (IdP) you have configured. Leave this field blank. After you save this authentication method, it is auto generated. This field must match the **Reply URL** setting in your IdP.
-14.  Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. For example, to ensure all SAML IdP attributes other than Email, Username, Last Name, First Name are included for mapping, enter the following:
+13. The **SAML Assertion Consumer Service (ACS) URL** field registers the service as a service provider (SP) with each identity provider (IdP) you have configured. Leave this field blank. After you save this authentication method, it is auto generated. This field must match the **Reply URL** setting in your IdP.
+14. Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. For example, to ensure all SAML IdP attributes other than Email, Username, Last Name, First Name are included for mapping, enter the following:
 
 
 ```
@@ -52,7 +52,7 @@ Alternatively, you can include a list of SAML IdP attributes in the **SAML IDP t
 Note:
 Values defined in this field override the dedicated fields provided in the UI. Any values not defined here are not provided to the authenticator.
 
-15.  In the **SAML Service Provider Organization Info** field, provide the URL, display name, and the name of your app.
+15. In the **SAML Service Provider Organization Info** field, provide the URL, display name, and the name of your app.
 
 ```
 {
@@ -64,7 +64,7 @@ Values defined in this field override the dedicated fields provided in the UI. A
 }
 ```
 
-16.  In the **SAML Service Provider Technical Contact** field, give the name and email address of the technical contact for your service provider.
+16. In the **SAML Service Provider Technical Contact** field, give the name and email address of the technical contact for your service provider.
 
 ```
 {
@@ -73,7 +73,7 @@ Values defined in this field override the dedicated fields provided in the UI. A
 }
 ```
 
-17.  In the **SAML Service Provider Support Contact** field, give the name and email address of the support contact for your service provider.
+17. In the **SAML Service Provider Support Contact** field, give the name and email address of the support contact for your service provider.
 
 ```
 {
@@ -82,7 +82,7 @@ Values defined in this field override the dedicated fields provided in the UI. A
 }
 ```
 
-18.  Optional: Provide extra configuration data in the **SAML Service Provider extra configuration data** field. For example, you can choose to enable signing requests for added security:
+18. Optional: Provide extra configuration data in the **SAML Service Provider extra configuration data** field. For example, you can choose to enable signing requests for added security:
 
 
 ```
@@ -96,7 +96,7 @@ This field is the equivalent to the `SOCIAL_AUTH_SAML_SP_EXTRA` in the API. For 
 Note:
 References to the OneLogin SAML Python Toolkit are for formatting examples only. Some configuration entries in the OneLogin documentation might not apply to Ansible Automation Platform.
 
-19.  Optional: Provide security settings in the **SAML Security Config** field. This field is the equivalent to the `SOCIAL_AUTH_SAML_SECURITY_CONFIG` field in the API.
+19. Optional: Provide security settings in the **SAML Security Config** field. This field is the equivalent to the `SOCIAL_AUTH_SAML_SECURITY_CONFIG` field in the API.
 
 ```
 // Indicates whether the <samlp:AuthnRequest> messages sent by this SP // will be signed. [Metadata of the SP will offer this info]
@@ -117,7 +117,7 @@ References to the OneLogin SAML Python Toolkit are for formatting examples only.
 
 For more information and additional options, see [OneLogin’s SAML Python Toolkit](https://github.com/SAML-Toolkits/python-saml#settings).
 
-20.  Optional: In the **SAML IDP to extra_data attribute mapping** field, enter values to map IDP attributes to extra_data attributes. These values will include additional user information beyond standard attributes such as Email or Username to be mapped. For example:
+20. Optional: In the **SAML IDP to extra_data attribute mapping** field, enter values to map IDP attributes to extra_data attributes. These values will include additional user information beyond standard attributes such as Email or Username to be mapped. For example:
 
 
 ```
@@ -131,10 +131,10 @@ For more information on the values you can include, see [advanced SAML settings]
 Important:
 Ensure to include all relevant values so that everything gets mapped correctly for your configuration. Alternatively, you can include the `GET_ALL_EXTRA_DATA: true` in the **Additional Authenticator Fields** to allow mapping of all available SAML IdP attributes.
 
-21.  To automatically create organizations, users, and teams upon successful login, select **Create objects**.
-22.  To enable this authentication method upon creation, select **Enabled**.
-23.  To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users**.
-24.  Click Create Authentication Method. Important:
+21. To automatically create organizations, users, and teams upon successful login, select **Create objects**.
+22. To enable this authentication method upon creation, select **Enabled**.
+23. To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users**.
+24. Click Create Authentication Method. Important:
 You can configure an HTTPS redirect for SAML in operator-based deployments to simplify login for your users.
 
 ## What to do next

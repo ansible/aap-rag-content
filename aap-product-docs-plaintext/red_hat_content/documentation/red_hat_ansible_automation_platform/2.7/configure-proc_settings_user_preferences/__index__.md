@@ -10,12 +10,13 @@ User preferences are stored locally in your browser. This means that they are un
 
 ## Procedure
 
-1.  From the navigation panel, select Settings> (and then)User Preferences.
-2.  The **User Preferences page** is displayed.
-3.  Click Edit.
-4.  You can configure the following options:
+1. From the navigation panel, select Settings> (and then)User Preferences.
+2. The **User Preferences page** is displayed.
+3. Click Edit.
+4. You can configure the following options:
 
-- **Refresh interval**: Select the refresh interval for the page. This refreshes the data on the page at the selected interval.
+- **Refresh interval**: Select the refresh interval for the page.
+This refreshes the data on the page at the selected interval.
 
 The refresh happens in the background and does not reload the page.
 
@@ -38,4 +39,4 @@ The refresh happens in the background and does not reload the page.
 
 - **Preferred data format**: Sets the default format for when editing and displaying data.
 
-5.  Click Save user preferences.
+5. Click Save user preferences.

@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/install-assembly_aap_containerized_disconnected_installation#obtaining-and-configuring-rpm-dependencies",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_containerized_disconnected_installation",
-  "title": "Obtain and configure RPM source dependencies"
+  "title": "Obtain and configure RPM source dependencies",
+  "url_reachable": true
 }

@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-title = "Verify the vector database - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-verify_the_vector_database"
+title = "Verify the vector database - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-extend_the_intelligent_assistant_with_custom_knowledge/", "Extend the automation intelligent assistant with custom knowledge"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-verify_the_vector_database/aem-page/extend-verify_the_vector_database.html"
 last_crumb = "Verify the vector database"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Verify the vector database"
 oversized = "false"
@@ -31,7 +32,7 @@ Verify that you created a vector database of your documentation.
 
 ## Procedure
 
-1.  Run the following command:
+1. Run the following command:
   
 
 ```
@@ -53,7 +54,7 @@ In the example above:
   - `faiss_store.db`is the vector database file.
   - `llama-stack.yaml`is the Llama Stack configuration file.
 
-2.  Verify that you get the expected results by querying the generated vector database using the following command:
+2. Verify that you get the expected results by querying the generated vector database using the following command:
   
 
 ```

@@ -2,7 +2,7 @@
   "version": "1.1",
   "sections": [
     {
-      "title": "Migration process overview",
+      "title": "Migration approaches and workflow",
       "visible": true,
       "weight": 1,
       "urlFragment": "index",

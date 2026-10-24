@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-proc_update_aap_operator_yaml_chatbot/aem-page/extend-proc_update_aap_operator_yaml_chatbot.html"
 last_crumb = "Update the YAML file of the Ansible Automation Platform operator"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Update the YAML file of the Ansible Automation Platform operator"
 oversized = "false"
@@ -31,12 +32,12 @@ After you create the chatbot authorization secret, you must update the YAML file
 
 ## Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform as an administrator.
-2.  Navigate to Operators> (and then)Installed Operators.
-3.  From the list of installed operators, select the **Ansible Automation Platform** operator.
-4.  Locate and select the **Ansible Automation Platform** custom resource, and then click the required app.
-5.  Select the **YAML** tab.
-6.  Scroll the text to find the `spec:` section, and add the following details under the `spec:` section:
+1. Log in to Red Hat OpenShift Container Platform as an administrator.
+2. Navigate to Operators> (and then)Installed Operators.
+3. From the list of installed operators, select the **Ansible Automation Platform** operator.
+4. Locate and select the **Ansible Automation Platform** custom resource, and then click the required app.
+5. Select the **YAML** tab.
+6. Scroll the text to find the `spec:` section, and add the following details under the `spec:` section:
   
 
 ```
@@ -46,7 +47,7 @@ spec:
     chatbot_config_secret_name: <name of your chatbot configuration secret>
 ```
 
-7.  Click **Save**. The intelligent assistant service takes a few minutes to set up.  Note:
+7. Click **Save**. The intelligent assistant service takes a few minutes to set up. Note:
       Upgrading from Ansible Automation Platform 2.5 to 2.6.1 enables HTTPS and enables TLS by default for internal communication between the Ansible Lightspeed API and the intelligent assistant pod. Following the upgrade to Ansible Automation Platform 2.6.1, the intelligent assistant will be unavailable for approximately 60 seconds while its pod restarts.
 
 ## Results

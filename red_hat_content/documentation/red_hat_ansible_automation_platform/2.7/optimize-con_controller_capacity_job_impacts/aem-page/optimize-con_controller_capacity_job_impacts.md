@@ -1,6 +1,6 @@
 +++
-template = "docs/aem-title.html"
 title = "Job type impact on capacity - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_controller_capacity_job_impacts"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-con_controller_capacity_job_impacts/aem-page/optimize-con_controller_capacity_job_impacts.html"
 last_crumb = "Job type impact on capacity"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Job type impact on capacity"
 oversized = "false"
@@ -31,7 +32,8 @@ When configuring automation controller capacity, it is important to understand h
 
 automation controller uses Ansible to run jobs. Each job can have a different impact on system resources depending on the number of forks used for the job.
 
-The default forks value for Ansible is five. This means that, by default, each job can run tasks on up to five systems concurrently.
+The default forks value for Ansible is five.
+This means that, by default, each job can run tasks on up to five systems concurrently.
 
 However, if you set up automation controller to run against fewer systems than that, then the actual concurrency value is lower.
 
@@ -41,9 +43,12 @@ For example, if you run a playbook against five systems with forks value of 5, t
 
 ## Impact of job types in automation controller
 
-Jobs and ad hoc jobs follow the preceding model, forks +1. If you set a fork value on your job template, your job capacity value is the minimum of the forks value supplied and the number of hosts that you have, plus one. The +1 is to account for the parent Ansible process.
+Jobs and ad hoc jobs follow the preceding model, forks +1.
+If you set a fork value on your job template, your job capacity value is the minimum of the forks value supplied and the number of hosts that you have, plus one.
+The +1 is to account for the parent Ansible process.
 
-Instance capacity determines which jobs get assigned to any specific instance. Jobs and ad hoc commands use more capacity if they have a higher forks value.
+Instance capacity determines which jobs get assigned to any specific instance.
+Jobs and ad hoc commands use more capacity if they have a higher forks value.
 
 Job types including the following, have a fixed impact:
 
@@ -53,7 +58,11 @@ Job types including the following, have a fixed impact:
 
 Note:
 
-If you do not set a forks value on your job template, your job uses Ansible’s default forks value of five. However, it uses fewer if your job has fewer than five hosts. In general, setting a forks value higher than what the system is capable of can cause issues by running out of memory or over-committing CPU. The job template fork values that you use must fit on the system. If you have playbooks using 1000 forks but none of your systems individually has that much capacity, then your systems are undersized and at risk of performance or resource issues.
+If you do not set a forks value on your job template, your job uses Ansible’s default forks value of five.
+However, it uses fewer if your job has fewer than five hosts.
+In general, setting a forks value higher than what the system is capable of can cause issues by running out of memory or over-committing CPU.
+The job template fork values that you use must fit on the system.
+If you have playbooks using 1000 forks but none of your systems individually has that much capacity, then your systems are undersized and at risk of performance or resource issues.
 
 ## Select the correct capacity
 
@@ -73,7 +82,7 @@ The instance field `capacity_adjustment` enables you to select how much you want
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Instance Groups.
-2.  On the **Instance Groups** list view, select the required instance.
-3.  Select the **Instances** tab and adjust the **Capacity adjustment** slider. Note:
+1. From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Instance Groups.
+2. On the **Instance Groups** list view, select the required instance.
+3. Select the **Instances** tab and adjust the **Capacity adjustment** slider. Note:
       The slider adjusts whether the instance capacity algorithm yields less forks (towards the left) or yields more forks (towards the right).

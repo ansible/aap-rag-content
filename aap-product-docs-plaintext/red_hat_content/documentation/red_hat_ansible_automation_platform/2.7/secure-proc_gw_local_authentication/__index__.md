@@ -10,17 +10,17 @@ A local authenticator is automatically created by the Ansible Automation Platfor
 
 ## Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Authentication Methods.
-2.  Click Create authentication.
-3.  Enter a **Name** for this Local configuration. The configuration name is required, must be unique across all authenticators, and must not be longer than 512 characters.
-4.  Select **Local** from the **Authentication type** list.
-5.  Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. Note:
+1. From the navigation panel, select Access Management> (and then)Authentication Methods.
+2. Click Create authentication.
+3. Enter a **Name** for this Local configuration. The configuration name is required, must be unique across all authenticators, and must not be longer than 512 characters.
+4. Select **Local** from the **Authentication type** list.
+5. Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. Note:
 Values defined in this field override the dedicated fields provided in the UI. Any values not defined here are not provided to the authenticator.
 
-6.  To automatically create organizations, users, and teams upon successful login, select **Create objects**.
-7.  To enable this authentication method upon creation, select **Enabled**.
-8.  To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users**.
-9.  Click Next.
+6. To automatically create organizations, users, and teams upon successful login, select **Create objects**.
+7. To enable this authentication method upon creation, select **Enabled**.
+8. To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users**.
+9. Click Next.
 
 ## What to do next
 

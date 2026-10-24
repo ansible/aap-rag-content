@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/develop-connect_to_github",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-connect_to_github",
-  "title": "Connect to GitHub"
+  "title": "Connect to GitHub",
+  "url_reachable": true
 }

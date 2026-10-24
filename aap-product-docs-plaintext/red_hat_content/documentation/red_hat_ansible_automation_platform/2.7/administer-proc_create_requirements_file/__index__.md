@@ -27,4 +27,4 @@ Be sure to specify the collection version number, otherwise you will sync all co
 
 ## What to do next
 
-To sync the collections in your requirements file, follow the steps in [Synchronizing content collections](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_create_synclist "You can sync certified and validated collections in Ansible automation hub from console.redhat.com.").
+To sync the collections in your requirements file, follow the steps in [Synchronizing content collections](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_create_synclist "You can sync certified and validated collections in Ansible Automation Platform from console.redhat.com.").

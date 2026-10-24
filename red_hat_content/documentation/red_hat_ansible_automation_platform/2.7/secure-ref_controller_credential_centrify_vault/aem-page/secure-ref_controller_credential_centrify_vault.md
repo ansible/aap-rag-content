@@ -1,6 +1,6 @@
 +++
-title = "Centrify Vault Credential Provider Lookup credential type - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Centrify Vault Credential Provider Lookup credential type - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_centrify_vault"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_centrify_vault/aem-page/secure-ref_controller_credential_centrify_vault.html"
 last_crumb = "Centrify Vault Credential Provider Lookup credential type"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Centrify Vault Credential Provider Lookup credential type"
 oversized = "false"

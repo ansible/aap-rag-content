@@ -31,7 +31,17 @@
           "weight": 3,
           "urlFragment": "configure-hub-nfs-storage",
           "anchor": null,
-          "singlePageAnchor": "configure-hub-nfs-storage"
+          "singlePageAnchor": "configure-hub-nfs-storage",
+          "sections": [
+            {
+              "title": "About this task",
+              "visible": true,
+              "weight": 1,
+              "urlFragment": "configure-hub-nfs-storage",
+              "anchor": "configure-hub-nfs-storage__context_1",
+              "singlePageAnchor": "configure-hub-nfs-storage__context_1"
+            }
+          ]
         }
       ]
     }

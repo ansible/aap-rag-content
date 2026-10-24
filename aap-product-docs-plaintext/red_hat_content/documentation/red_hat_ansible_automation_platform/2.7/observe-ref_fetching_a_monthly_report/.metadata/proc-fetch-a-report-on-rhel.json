@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/observe-ref_fetching_a_monthly_report#proc-fetch-a-report-on-rhel",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-ref_fetching_a_monthly_report",
-  "title": "Fetch a monthly report on Red Hat Enterprise Linux"
+  "title": "Fetch a monthly report on Red Hat Enterprise Linux",
+  "url_reachable": true
 }

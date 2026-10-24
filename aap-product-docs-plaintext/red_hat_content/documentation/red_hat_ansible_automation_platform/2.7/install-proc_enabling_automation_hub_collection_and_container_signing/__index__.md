@@ -34,14 +34,14 @@ The algorithm and cipher used is the responsibility of the customer.
 
 ## Procedure
 
-1.  On a RHEL server run the following command to create a new key pair for collection signing:
+1. On a RHEL server run the following command to create a new key pair for collection signing:
 
 
 ```
 gpg --gen-key
 ```
 
-2.  Enter your information for "Real name" and "Email address":
+2. Enter your information for "Real name" and "Email address":
 Example output:
 
 ```
@@ -83,21 +83,21 @@ sub   rsa3072 2024-10-25 [E] [expires: 2026-10-25]
 
 - Note the expiry date that you can set based on company standards and needs.
 
-3.  You can view all of your GPG keys by running the following command:
+3. You can view all of your GPG keys by running the following command:
 
 
 ```
 gpg --list-secret-keys --keyid-format=long
 ```
 
-4.  To export the public key run the following command:
+4. To export the public key run the following command:
 
 
 ```
 gpg --export -a --output collection-signing-key.pub <email_address_used_to_generate_key>
 ```
 
-5.  To export the private key run the following command:
+5. To export the private key run the following command:
 
 
 ```
@@ -106,7 +106,7 @@ gpg -a --export-secret-keys <email_address_used_to_generate_key> > collection-si
 
 - Enter the passphrase if prompted.
 
-6.  To view the private key file contents, run the following command:
+6. To view the private key file contents, run the following command:
 
 
 ```
@@ -128,8 +128,8 @@ j920hRy/3wJGRDBMFa4mlQg=
 -----END PGP PRIVATE KEY BLOCK-----
 ```
 
-7.  Repeat steps 1 to 7 to create a key pair for container signing.
-8.  Add the following variables to the inventory file and run the installation to create the signing services:
+7. Repeat steps 1 to 7 to create a key pair for container signing.
+8. Add the following variables to the inventory file and run the installation to create the signing services:
 
 
 ```

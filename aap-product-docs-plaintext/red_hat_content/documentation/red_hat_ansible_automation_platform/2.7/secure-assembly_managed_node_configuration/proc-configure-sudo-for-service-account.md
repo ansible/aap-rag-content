@@ -11,7 +11,7 @@ To configure this, use the following procedure:
 
 ### Procedure
 
-1.  Create the file `/etc/sudoers.d/ansible`, and include the following content:
+1. Create the file `/etc/sudoers.d/ansible`, and include the following content:
 
 
 ```
@@ -19,9 +19,9 @@ To configure this, use the following procedure:
 ansible ALL=(ALL) NOPASSWD: ALL
 ```
 
-2.  Set restrictive permissions on the file:
+2. Set restrictive permissions on the file:
 `` sudo chmod 0440 /etc/sudoers.d/ansible` ``
 
-3.  Verify the file uses the proper syntax:
+3. Verify the file uses the proper syntax:
 `sudo visudo -cf /etc/sudoers.d/ansible`
 

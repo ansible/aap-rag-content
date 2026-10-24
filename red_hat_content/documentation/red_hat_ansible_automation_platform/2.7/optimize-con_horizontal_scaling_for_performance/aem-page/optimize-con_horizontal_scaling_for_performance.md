@@ -1,7 +1,7 @@
 +++
 title = "Horizontally scale tested deployment models to improve performance - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_horizontal_scaling_for_performance"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_horizontal_scaling_for_performance"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_horizontal_scaling_for_performance/", "Horizontally scale tested deployment models to improve performance"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-con_horizontal_scaling_for_performance/aem-page/optimize-con_horizontal_scaling_for_performance.html"
 last_crumb = "Horizontally scale tested deployment models to improve performance"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Horizontally scale tested deployment models to improve performance"
 oversized = "false"
@@ -27,7 +28,8 @@ type = "aem-page"
 
 # Horizontally scale tested deployment models to improve performance
 
-Horizontal scaling involves increasing the number of replicas (pods or virtual machines) for a given service. Similar to vertical scaling, this approach is useful for high resource utilization or workload scaling.
+Horizontal scaling involves increasing the number of replicas (pods or virtual machines) for a given service.
+Similar to vertical scaling, this approach is useful for high resource utilization or workload scaling.
 
 ## Benefits of horizontal scaling
 
@@ -38,5 +40,8 @@ Horizontal scaling involves increasing the number of replicas (pods or virtual m
 
 ## Drawbacks and other considerations for horizontal scaling
 
-- Database limitations: Scaling the application increases the maximum potential number of database connections from worker processes. This also increases the overall memory, I/O, and CPU utilization of the PostgreSQL instance. When you scale past the tested deployment models, deploy separate PostgreSQL instances per component (platform gateway, Event-Driven Ansible, automation controller, automation hub).
-- Health Check Overhead: In a mesh architecture, each Envoy proxy sends health checks to every other cluster member. Horizontal scaling increases this baseline traffic, adding to system usage.
+- Database limitations: Scaling the application increases the maximum potential number of database connections from worker processes.
+This also increases the overall memory, I/O, and CPU utilization of the PostgreSQL instance.
+When you scale past the tested deployment models, deploy separate PostgreSQL instances per component (platform gateway, Event-Driven Ansible, automation controller, automation hub).
+- Health Check Overhead: In a mesh architecture, each Envoy proxy sends health checks to every other cluster member.
+Horizontal scaling increases this baseline traffic, adding to system usage.

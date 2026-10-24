@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_automation_savings_planner"
-template = "docs/aem-title.html"
 title = "Plan, track, and analyze returns with automation savings planner - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_automation_savings_planner"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_user_data_tracking/", "Get insights on automation across your environment with Automation Analytics"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-assembly_automation_savings_planner/aem-page/optimize-assembly_automation_savings_planner.html"
 last_crumb = "Plan, track, and analyze returns with automation savings planner"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Plan, track, and analyze returns with automation savings planner"
 oversized = "false"
@@ -39,17 +40,17 @@ Create an automation savings plan by defining the tasks needed to complete an au
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Analytics> (and then)Savings Planner.
-2.  Click Add Plan.
-3.  Provide some information about your automation job:
-  1.  Enter descriptive information, such as a name, description, and type of automation.
-  2.  Enter technical information, such as the number of hosts, the duration to manually complete this job, and how often you complete this job.
-  3.  Click Next.
-4.  In the tasks section, list the tasks needed to complete this plan:
-  1.  Enter each task in the field, then click Add.
-  2.  Rearrange tasks by dragging the item up/down the tasks list.
-  3.  Click Next.
-5.  Select a template to link to this plan, then click Save. Note:
+1. From the navigation panel, select Automation Analytics> (and then)Savings Planner.
+2. Click Add Plan.
+3. Provide some information about your automation job:
+  1. Enter descriptive information, such as a name, description, and type of automation.
+  2. Enter technical information, such as the number of hosts, the duration to manually complete this job, and how often you complete this job.
+  3. Click Next.
+4. In the tasks section, list the tasks needed to complete this plan:
+  1. Enter each task in the field, then click Add.
+  2. Rearrange tasks by dragging the item up/down the tasks list.
+  3. Click Next.
+5. Select a template to link to this plan, then click Save. Note:
       The task list is for your planning purposes only, and does not currently factor into your automation savings calculation.
 
 ### Results
@@ -62,9 +63,9 @@ Edit any information about an existing savings plan by clicking on it from the s
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Analytics> (and then)Savings Planner.
-2.  On the automation savings plan, click Click the More Actions icon **⋮**, then click Edit.
-3.  Make any changes to the automation plan, then click Save.
+1. From the navigation panel, select Automation Analytics> (and then)Savings Planner.
+2. On the automation savings plan, click Click the More Actions icon **⋮**, then click Edit.
+3. Make any changes to the automation plan, then click Save.
 
 ## Link a savings plan to a job template
 
@@ -72,9 +73,9 @@ You can associate a job template to a savings plan to allow automation analytics
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Analytics> (and then)Savings Planner.
-2.  Click the More Actions icon **⋮** and select **Link Template**.
-3.  Click Save.
+1. From the navigation panel, select Automation Analytics> (and then)Savings Planner.
+2. Click the More Actions icon **⋮** and select **Link Template**.
+3. Click Save.
 
 ## Review savings calculations for your automation plans
 

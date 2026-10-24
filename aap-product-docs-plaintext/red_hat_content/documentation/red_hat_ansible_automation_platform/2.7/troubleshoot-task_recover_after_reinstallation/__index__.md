@@ -25,7 +25,7 @@ Choose one of the following options.
 
 ## Procedure
 
-1.  Option 1: Manually recreate the missing secret
+1. Option 1: Manually recreate the missing secret
 Use this option to restore normal operation without changing your metrics service configuration.
 
 1. Confirm the secret is missing. The secret name follows the pattern `<aap-name>-metrics-read-token`:
@@ -80,7 +80,7 @@ ansible.com/force-reconcile="$(date +%s)" \
 oc get pods -n <namespace> | grep metrics
 ```
 
-2.  Option 2: Configure metrics service to manage its own read-only credentials
+2. Option 2: Configure metrics service to manage its own read-only credentials
 Use this option if you cannot recreate the secret manually, or if you want to prevent the issue from recurring on future reinstallations. This directs the metrics service operator to create and manage the `ms_awx_readonly` database user independently.
 
 1. Patch the `MetricsService` CR to use operator-managed credentials:

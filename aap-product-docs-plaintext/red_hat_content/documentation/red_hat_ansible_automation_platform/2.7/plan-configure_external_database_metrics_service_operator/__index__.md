@@ -38,7 +38,7 @@ Metrics service requires two database connections: a `metrics_service` database 
 
 ## Procedure
 
-1.  Create a secret for the `metrics_service` database connection:
+1. Create a secret for the `metrics_service` database connection:
 
 
 ```
@@ -61,7 +61,7 @@ type: Opaque
 Important:
 `type: unmanaged` tells the operator this is an external database. Without this field, the operator attempts to initialize the database as a managed instance and fails.
 
-2.  Create a secret for read-only access to the `automationcontroller` database:
+2. Create a secret for read-only access to the `automationcontroller` database:
 
 
 ```
@@ -79,7 +79,7 @@ password: <readonly-user-password>
 type: Opaque
 ```
 
-3.  Apply both secrets to your OpenShift cluster:
+3. Apply both secrets to your OpenShift cluster:
 
 
 ```
@@ -87,7 +87,7 @@ $ oc apply -f aap-metrics-postgres-configuration.yaml -n aap
 $ oc apply -f aap-metrics-read-token.yaml -n aap
 ```
 
-4.  Verify the secrets were created:
+4. Verify the secrets were created:
 
 
 ```
@@ -101,7 +101,7 @@ aap-metrics-postgres-configuration
 aap-metrics-read-token
 ```
 
-5.  Reference the secrets in your AnsibleAutomationPlatform custom resource:
+5. Reference the secrets in your AnsibleAutomationPlatform custom resource:
 
 
 ```
@@ -124,8 +124,10 @@ Where:
 
 - `database.database_secret`: References the `metrics_service` database secret
 - `database.externally_managed: true`: Skips operator-managed PostgreSQL pod creation
-- `ms_awx_readonly_user_secret`: References the read-only user secret
+- `database.ms_awx_readonly_user_secret`: References the read-only user secret
 - `ms_awx_readonly_user.externally_managed: true`: Uses customer-provided read-only user instead of operator creating it
+Important:
+The `ms_awx_readonly_user_secret` field must be nested under `database`, while the `ms_awx_readonly_user.externally_managed` flag is a sibling of `database` at the `metrics` level. These two fields are intentionally at different nesting levels in the custom resource.
 
 ## Results
 

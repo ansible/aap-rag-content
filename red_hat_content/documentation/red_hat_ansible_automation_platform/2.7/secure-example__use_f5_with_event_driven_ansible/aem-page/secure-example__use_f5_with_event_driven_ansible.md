@@ -1,6 +1,6 @@
 +++
-template = "docs/aem-title.html"
 title = "Example: Use F5 with Event-Driven Ansible - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-example__use_f5_with_event_driven_ansible"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-example__use_f5_with_event_driven_ansible/aem-page/secure-example__use_f5_with_event_driven_ansible.html"
 last_crumb = "Example: Use F5 with Event-Driven Ansible"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Example: Use F5 with Event-Driven Ansible"
 oversized = "false"
@@ -33,15 +34,15 @@ Use F5 with Event-Driven Ansible to watch for events and trigger a rulebook base
 
 Example code using F5 and Event-Driven Ansible is available on GitHub. This code notes each instance of the watcher finding a match in its filter and then copies the source IP from that code into a CSV list. The list is then sent as a variable within the webhook along with the message to execute the code, as described in the high level workflow.
 
-![](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/f5-and-ansible.png)
+![F5 BIG-IP ASM and Advanced WAF integration workflow with Event-Driven Ansible](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/f5-and-ansible.png)
 
 ## Procedure
 
-1.  The F5 BIGIP pushes the monitoring logs to Elastic.
-2.  Elastic takes that data and stores it while using a watcher with its filters and criteria.
-3.  The Watcher detects an event that matches its criteria and sends the webhook with pauload to Event-Driven Ansible.
-4.  From the event, the Event-Driven Ansible rulebook triggers a job template within Ansible Automation Platform, which sends the payload provided by Elastic.
-5.  An Ansible Automation Platform template executes a playbook to secure the F5 BIG-IP using the payload provided by Event-Driven Ansible (originally provided by Elastic).
+1. The F5 BIGIP pushes the monitoring logs to Elastic.
+2. Elastic takes that data and stores it while using a watcher with its filters and criteria.
+3. The Watcher detects an event that matches its criteria and sends the webhook with pauload to Event-Driven Ansible.
+4. From the event, the Event-Driven Ansible rulebook triggers a job template within Ansible Automation Platform, which sends the payload provided by Elastic.
+5. An Ansible Automation Platform template executes a playbook to secure the F5 BIG-IP using the payload provided by Event-Driven Ansible (originally provided by Elastic).
 
 ## Drive responses from logging events
 

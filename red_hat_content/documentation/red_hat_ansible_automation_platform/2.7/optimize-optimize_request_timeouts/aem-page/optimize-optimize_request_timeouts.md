@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
 title = "Optimize request timeouts - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-optimize_request_timeouts"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-optimize_request_timeouts/", "Optimize request timeouts"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-optimize_request_timeouts/aem-page/optimize-optimize_request_timeouts.html"
 last_crumb = "Optimize request timeouts"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Optimize request timeouts"
 oversized = "false"
@@ -59,10 +60,10 @@ High-volume API operations can exceed the default 30-second OpenShift Route time
 
 ### Procedure
 
-1.  Log in to the OpenShift web console.
-2.  Navigate to **Installed Operators → Ansible Automation Platform → All Instances**.
-3.  Click your `AnsibleAutomationPlatform` instance.
-4.  Select the **YAML** tab. Under the spec: section, add the `route_annotations` to extend the timeout:
+1. Log in to the OpenShift web console.
+2. Navigate to **Installed Operators → Ansible Automation Platform → All Instances**.
+3. Click your `AnsibleAutomationPlatform` instance.
+4. Select the **YAML** tab. Under the spec: section, add the `route_annotations` to extend the timeout:
   
 
 ```
@@ -72,7 +73,7 @@ spec:
 
 ```
 
-5.  Save the changes.
+5. Save the changes.
 
 ### Results
 

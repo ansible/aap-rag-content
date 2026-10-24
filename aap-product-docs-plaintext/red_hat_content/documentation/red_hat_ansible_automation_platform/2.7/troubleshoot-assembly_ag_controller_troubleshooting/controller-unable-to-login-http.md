@@ -10,7 +10,8 @@ SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
 ```
 
-If you change these settings to `false` it enables automation controller to manage cookies and login sessions when using the HTTP protocol. You must do this on every node of a cluster installation.
+If you change these settings to `false` it enables automation controller to manage cookies and login sessions when using the HTTP protocol.
+You must do this on every node of a cluster installation.
 
 To apply the changes, run:
 

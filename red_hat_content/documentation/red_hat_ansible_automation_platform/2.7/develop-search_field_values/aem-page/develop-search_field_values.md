@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 title = "Search field values - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-search_field_values"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-search_and_filter_resources/", "Search and filter resources"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-search_field_values/aem-page/develop-search_field_values.html"
 last_crumb = "Search field values"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Search field values"
 oversized = "false"
@@ -31,12 +32,12 @@ You can determine the available search fields and related search fields for any 
 
 ## Procedure
 
-1.  Send a `GET` request to the resource endpoint to identify the available field names.
+1. Send a `GET` request to the resource endpoint to identify the available field names.
       Field names come from the keys returned in the `GET` response. The `url`, `related`, and `summary_fields` keys are excluded.
 
       To search for jobs by type, enter `type:run` on the Jobs page. To discover valid values for the `type` field, send an `OPTIONS` request to `/api/v2/jobs` and locate the `"type"` entry.
 
-2.  Send an `OPTIONS` request to the same endpoint to find related search fields.
+2. Send an `OPTIONS` request to the same endpoint to find related search fields.
       Related search fields are listed in the `related_search_fields` attribute of the `OPTIONS` response. Strip the `__search` suffix to get the related field name you can use in the search bar.
 
       The `/api/v2/jobs` endpoint returns:

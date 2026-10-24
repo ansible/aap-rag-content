@@ -10,7 +10,8 @@ metagroupname:
 children:
 ```
 
-The following inventory illustrates a basic structure for a data center. This example inventory has a network metagroup that includes all network devices and a data center metagroup that includes the network group and all webservers.
+The following inventory illustrates a basic structure for a data center.
+This example inventory has a network metagroup that includes all network devices and a data center metagroup that includes the network group and all webservers.
 
 ```
 leafs:

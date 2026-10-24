@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-configure_automated_image_builds__gitlab_ci_"
 title = "Configure automated image builds (GitLab CI) - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-configure_automated_image_builds__gitlab_ci_"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-build_execution_environments_with_the_automation_portal/", "Build execution environments with automation portal"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-configure_automated_image_builds__gitlab_ci_/aem-page/develop-configure_automated_image_builds__gitlab_ci_.html"
 last_crumb = "Configure automated image builds (GitLab CI)"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure automated image builds (GitLab CI)"
 oversized = "false"
@@ -41,14 +42,14 @@ When a user saves an EE definition to a GitLab repository and triggers **Build E
 
 ## Procedure
 
-1.  In GitLab, navigate to your group or subgroup and go to **Settings > CI/CD > Variables**.
-2.  Click **Add variable** and add each required CI/CD variable. For each variable:
+1. In GitLab, navigate to your group or subgroup and go to **Settings > CI/CD > Variables**.
+2. Click **Add variable** and add each required CI/CD variable. For each variable:
 
   - Set **Role** to **Developer** so that developers who push to this group can run pipelines with these variables.
   - **Unselect** the **Protected variable** checkbox. Protected variables are enabled by default. EE build pipelines run on non-protected branches (for example, feature branches created by the portal). If protected is selected, the pipeline cannot access the variable on those branches.
   - Select **Mask variable** for sensitive values (passwords, tokens) to prevent them from appearing in job logs.
 
-3.  Add the following registry and token variables:
+3. Add the following registry and token variables:
     | Variable                                                   | Purpose                                                                                                                                                           | When required                                                                                  |
     | ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
     | `REGISTRY_USERNAME`                                        | Username for the destination container registry where built EE images are pushed (for example, private automation hub).                                           | Not required if pushing to GitLab Container Registry.                                          |

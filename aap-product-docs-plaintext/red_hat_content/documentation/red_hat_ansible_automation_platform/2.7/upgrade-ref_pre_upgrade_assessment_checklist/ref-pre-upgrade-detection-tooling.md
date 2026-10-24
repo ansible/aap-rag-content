@@ -1,4 +1,4 @@
-# Pre-upgrade migration checklist
+# Pre-upgrade checklist
 ## Pre-upgrade detection tooling
 
 A CLI detection tool is available to identify direct API usage in Ansible Automation Platform 2.5 or 2.6 environments. The tool analyzes NGINX logs to detect requests that bypass platform gateway.

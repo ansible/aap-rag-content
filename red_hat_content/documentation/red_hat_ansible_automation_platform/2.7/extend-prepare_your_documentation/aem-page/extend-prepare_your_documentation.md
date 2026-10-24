@@ -1,6 +1,6 @@
 +++
-title = "Prepare your documentation - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Prepare your documentation - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-prepare_your_documentation"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-prepare_your_documentation/aem-page/extend-prepare_your_documentation.html"
 last_crumb = "Prepare your documentation"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Prepare your documentation"
 oversized = "false"
@@ -37,30 +38,30 @@ Before creating a BYOK RAG image, collect and prepare your organization's docume
 
 ## Procedure
 
-1.  Collect your knowledge sources:
-  1.  Identify all documents you want to include in the BYOK knowledge base.
-  2.  Create a staging directory for your knowledge sources:
+1. Collect your knowledge sources:
+  1. Identify all documents you want to include in the BYOK knowledge base.
+  2. Create a staging directory for your knowledge sources:
   
 
 ```
 mkdir -p knowledge-sources/staging
 ```
 
-  1.  Copy or download all source documents to the staging directory.
+  1. Copy or download all source documents to the staging directory.
 
-2.  If you have content that is not in Markdown (.md) and plain text (.txt) file format, convert them to Markdown or plain text format before uploading them to the BYOK RAG image:
-  1.  PDF conversion: use a tool like [docling](https://github.com/docling-project/docling).
-  2.  AsciiDoc conversion: Use [custom scripts](https://github.com/openshift/lightspeed-rag-content/blob/main/scripts/asciidoctor-text/convert-it-all.py) or the [Pandoc](https://pandoc.org/) tool.
-  3.  HTML conversion: Use the [Pandoc](https://pandoc.org/) tool.
-3.  Follow these guidelines when structuring your converted documents for optimal indexing. You can also find examples of each guideline in this [collections repository.](https://github.com/ansible/aap-rag-content/tree/main/byok/ansible-collection-docs)
-  1.  **Use clear file names**: Name files descriptively to improve searchability.
-  2.  **Organize by topic**: Group related documents in directories by subject area (for example, security-policies, deployment-procedures, compliance).
-  3.  **Use consistent formatting**: Apply uniform heading structures and Markdown conventions across all documents.
-  4.  **Include metadata**: Add document titles and source URLs when configuring the metadata processor.
-  5.  **Remove sensitive information**: Exclude credentials, API keys, or proprietary details before creating the RAG image.
-  6.  **Test document quality**: Verify that documents are readable and technically accurate.
-  7.  **Optimize storage volume:** Keep the BYOK data between 1 Mi and 999 Mi for best performance. While the system supports larger allocations up to 2 Gi, smaller volumes are recommended.
-4.  Copy the converted documents to a final directory for processing them with the `rag-content` tool.
+2. If you have content that is not in Markdown (.md) and plain text (.txt) file format, convert them to Markdown or plain text format before uploading them to the BYOK RAG image:
+  1. PDF conversion: use a tool like [docling](https://github.com/docling-project/docling).
+  2. AsciiDoc conversion: Use [custom scripts](https://github.com/openshift/lightspeed-rag-content/blob/main/scripts/asciidoctor-text/convert-it-all.py) or the [Pandoc](https://pandoc.org/) tool.
+  3. HTML conversion: Use the [Pandoc](https://pandoc.org/) tool.
+3. Follow these guidelines when structuring your converted documents for optimal indexing. You can also find examples of each guideline in this [collections repository.](https://github.com/ansible/aap-rag-content/tree/main/byok/ansible-collection-docs)
+  1. **Use clear file names**: Name files descriptively to improve searchability.
+  2. **Organize by topic**: Group related documents in directories by subject area (for example, security-policies, deployment-procedures, compliance).
+  3. **Use consistent formatting**: Apply uniform heading structures and Markdown conventions across all documents.
+  4. **Include metadata**: Add document titles and source URLs when configuring the metadata processor.
+  5. **Remove sensitive information**: Exclude credentials, API keys, or proprietary details before creating the RAG image.
+  6. **Test document quality**: Verify that documents are readable and technically accurate.
+  7. **Optimize storage volume:** Keep the BYOK data between 1 Mi and 999 Mi for best performance. While the system supports larger allocations up to 2 Gi, smaller volumes are recommended.
+4. Copy the converted documents to a final directory for processing them with the `rag-content` tool.
 
 ## What to do next
 

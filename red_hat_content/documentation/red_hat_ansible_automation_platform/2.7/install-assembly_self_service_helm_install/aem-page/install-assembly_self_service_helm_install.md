@@ -4,13 +4,14 @@ template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_helm_install"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_about/", "Install Ansible automation portal (OpenShift Container Platform only)"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-install_automation_portal_on_openshift_container_platform/", "Install automation portal on OpenShift Container Platform"]]
 category = "Install"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_helm_install/aem-page/install-assembly_self_service_helm_install.html"
 last_crumb = "Install the Ansible automation portal Helm chart"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Install the Ansible automation portal Helm chart"
 oversized = "false"
@@ -45,14 +46,14 @@ Deploy the Helm chart from the OpenShift catalog by configuring the base URL and
 
 ### Procedure
 
-1.  In the OpenShift Container Platform web console, select the Developer perspective.
-2.  Select your project and click the Helm option in the OpenShift sidebar.
-3.  Click Create and select Helm Release.
-4.  Search for `Portal` in the Helm Charts filter, and select the Automation Portal chart.
-5.  Click Create and select the YAML view.
-6.  Update the `clusterRouterBase` value with the base URL of your OpenShift instance.
+1. In the OpenShift Container Platform web console, select the Developer perspective.
+2. Select your project and click the Helm option in the OpenShift sidebar.
+3. Click Create and select Helm Release.
+4. Search for `Portal` in the Helm Charts filter, and select the Automation Portal chart.
+5. Click Create and select the YAML view.
+6. Update the `clusterRouterBase` value with the base URL of your OpenShift instance.
   
-   Important:
+  Important:
       You must replace the default `apps.example.com` placeholder value. If the default value remains, Helm chart validation fails.
 
 ```
@@ -61,7 +62,7 @@ redhat-developer-hub:
     clusterRouterBase: apps.example.com
 ```
 
-7.  Configure the plug-in delivery mode and version by setting the `pluginMode` and `imageTagInfo` keys:
+7. Configure the plug-in delivery mode and version by setting the `pluginMode` and `imageTagInfo` keys:
   - For OCI delivery, set `pluginMode` to `oci`.
       Set `imageTagInfo` to the plug-in version from the Helm chart or the lifecycle page. To determine the correct version tag, see "Determine version tags before you install".
 
@@ -74,22 +75,24 @@ redhat-developer-hub:
     imageTagInfo: "<plugin-version>"
 ```
 
-8.  Set the Red Hat Ansible Automation Platform organization to synchronize. The default value is `Default`. Update the `orgs` key to match your organization name:
+8. Set the Red Hat Ansible Automation Platform organization to synchronize.
+      The default value is `Default`. Update the `orgs` key to match your organization name:
+
   
 
 ```
 redhat-developer-hub:
-  upstream:
-    backstage:
-      appConfig:
-        catalog:
-          providers:
-            rhaap:
-              '{{- include "catalog.providers.env" . }}':
-                orgs: "<your-aap-organization-name>"
+    upstream:
+      backstage:
+        appConfig:
+          catalog:
+            providers:
+              rhaap:
+                '{{- include "catalog.providers.env" . }}':
+                  orgs: "<your-aap-organization-name>"
 ```
 
-9.  **Optional:** Update the `CUSTOMER_SUPPORT_URL` to point to your support portal:
+9. **Optional:** Update the `CUSTOMER_SUPPORT_URL` to point to your support portal:
   
 
 ```
@@ -101,7 +104,12 @@ redhat-developer-hub:
           value: https://access.redhat.com/support
 ```
 
-10.  Click Create.
+10. **Optional:** Configure collection discovery sources for the execution environment builder.
+      If you plan to use the execution environment builder to automatically discover Ansible collections from Git repositories or Private Automation Hub, define the discovery providers under `catalog.providers.rhaap.production.sync` before deployment.
+
+    For parameter syntax and complete examples, see [Configure collection discovery sources](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_collection_discovery "Configure Git content discovery and private automation hub collection discovery so that Ansible collections are available in execution environment builder and the collection catalog.").
+
+11. Click Create.
 
 ## Verify the installation
 
@@ -109,8 +117,8 @@ Verify the Helm chart installation from the OpenShift Container Platform web con
 
 ### Procedure
 
-1.  In a browser, log in to your OpenShift instance.
-2.  In the Developer perspective, navigate to the Topology view for the namespace where you deployed the Helm chart.
+1. In a browser, log in to your OpenShift instance.
+2. In the Developer perspective, navigate to the Topology view for the namespace where you deployed the Helm chart.
       The deployment appears with the label `D` on the icon. The name of the deployment is `<installation-name>-backstage`, for example `<my-self-service-automation-portal-backstage>`.
 
     While it is deploying, the icon is light blue. The color changes to dark blue when deployment is complete.

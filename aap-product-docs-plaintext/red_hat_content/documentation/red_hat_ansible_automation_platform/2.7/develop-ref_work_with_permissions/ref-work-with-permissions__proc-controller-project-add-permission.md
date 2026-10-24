@@ -11,6 +11,8 @@ Manage the permissions that users and teams have to access a project.
 4. Select a user or team to add and click Next.
 5. Select one or more users or teams from the list by clicking the checkbox next to the name to add them as members.
 6. Click Next.
-7. Select the roles you want the selected users or teams to have. Different resources have different options available.
-8. Click Finish to apply the roles to the selected users or teams and to add them as members. The updated roles assigned for each user and team are displayed.
+7. Select the roles you want the selected users or teams to have.
+Different resources have different options available.
+8. Click Finish to apply the roles to the selected users or teams and to add them as members.
+The updated roles assigned for each user and team are displayed.
 

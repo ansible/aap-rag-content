@@ -27,9 +27,9 @@ debug:
 msg: "The hostname is {{ ansible_net_hostname }} and the OS is {{ ansible_net_version }}"
 ```
 
-| Label               | Description                                                                                                                                                                                              |
-| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br> `gather_facts` | <br>Ansible’s native fact gathering (`ansible.builtin.setup`) is disabled here because the playbook relies on the facts provided by a platform-specific module (`vyos.vyos.vyos_facts`) in this networking collection. |
+| Label          | Description                                                                                                                                                                                              |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `gather_facts` | Ansible’s native fact gathering (`ansible.builtin.setup`) is disabled here because the playbook relies on the facts provided by a platform-specific module (`vyos.vyos.vyos_facts`) in this networking collection. |
 
 The playbook sets three of the seven values from the command line above:
 
@@ -37,7 +37,8 @@ The playbook sets three of the seven values from the command line above:
 - the connection method (`connection: ansible.netcommon.network_cli`) and
 - the module (in each task).
 
-With those values set in the playbook, you can omit them on the command line. The playbook also adds a second task to show the configuration output.
+With those values set in the playbook, you can omit them on the command line.
+The playbook also adds a second task to show the configuration output.
 
 When facts are gathered from a system, either through a collection-specific fact module such as `vyos.vyos.vyos_facts` or `ansible.builtin.setup`, the gathered data is held in memory for use by future tasks instead of being written to the console.
 
@@ -47,11 +48,13 @@ The following debug task lets you see the results in your shell.
 
 ### About this task
 
-The playbook can store many of the parameters you provided with flags at the command line, leaving less to type at the command line. You need two files for this, a playbook and an inventory file.
+The playbook can store many of the parameters you provided with flags at the command line, leaving less to type at the command line.
+You need two files for this, a playbook and an inventory file.
 
 ### Procedure
 
-1.  Run the playbook with the following command.  `ansible-playbook -i vyos.example.net, -u ansible -k -e ansible_network_os=vyos.vyos.vyos first_playbook.yml`
+1. Run the playbook with the following command.
+`ansible-playbook -i vyos.example.net, -u ansible -k -e ansible_network_os=vyos.vyos.vyos first_playbook.yml`
 
 The playbook contains one play with two tasks, and generates output similar to the following:
 
@@ -72,8 +75,8 @@ ok: [vyos.example.net] => {
 }
 ```
 
-2.  Now that you can retrieve the device configuration, you can try updating it with Ansible.
-3.  Download `first_playbook_ext.yml` from [here](https://docs.ansible.com/projects/ansible/latest/_downloads/47cc11a5d29fe635cb56cb6e1cd74e0f/first_playbook_ext.yml), which is an extended version of the first playbook:
+2. Now that you can retrieve the device configuration, you can try updating it with Ansible.
+3. Download `first_playbook_ext.yml` from [here](https://docs.ansible.com/projects/ansible/latest/_downloads/47cc11a5d29fe635cb56cb6e1cd74e0f/first_playbook_ext.yml), which is an extended version of the first playbook:
 The playbook looks like this:
 
 ```
@@ -108,14 +111,15 @@ debug:
 msg: "The new hostname is {{ ansible_net_hostname }} and the OS is {{ ansible_net_version }}"
 ```
 
-4.  The extended first playbook has five tasks in a single play.
-5.  Run the playbook with the following command.
+4. The extended first playbook has five tasks in a single play.
+5. Run the playbook with the following command.
+
 
 ```
 $ ansible-playbook -i vyos.example.net, -u ansible -k -e ansible_network_os=vyos.vyos.vyos first_playbook_ext.yml
 ```
 
-6.  The output shows you the change Ansible made to the configuration:
+6. The output shows you the change Ansible made to the configuration:
 
 
 ```

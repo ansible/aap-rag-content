@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_review_ee_navigator"
-title = "Run a playbook to display execution environment contents - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Run a playbook to display execution environment contents - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_intro_navigator/", "Emulate a platform environment locally with automation content navigator"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_review_ee_navigator/aem-page/develop-assembly_review_ee_navigator.html"
 last_crumb = "Run a playbook to display execution environment contents"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Run a playbook to display execution environment contents"
 oversized = "false"
@@ -39,7 +40,7 @@ Use the automation content navigator text-based interface to review your automat
 
 ### Procedure
 
-1.  Review the automation execution environments included in your automation content navigator configuration.
+1. Review the automation execution environments included in your automation content navigator configuration.
 
 ```
 $ ansible-navigator images
@@ -47,11 +48,11 @@ $ ansible-navigator images
 
 ![List of automation execution environments](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-images-list.png)  
 
-2.  Type the number of the automation execution environment you want to delve into for more details.  
+2. Type the number of the automation execution environment you want to delve into for more details.  
 ![Automation execution environment details](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-image-details.png)  
       You can review the packages and versions of each installed automation execution environment and the Ansible version any included collections.
 
-3.  Optional: pass in the automation execution environment that you want to use. This becomes the primary and is the automation execution environment that automation content navigator uses.
+3. Optional: pass in the automation execution environment that you want to use. This becomes the primary and is the automation execution environment that automation content navigator uses.
 
 ```
 $ ansible-navigator images --eei registry.example.com/example-enterprise-ee:latest

@@ -1,16 +1,17 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_configure_external_database"
-template = "docs/aem-title.html"
 title = "Configure an external PostgreSQL database for Ansible automation portal - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_configure_external_database"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_about/", "Install Ansible automation portal (OpenShift Container Platform only)"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-install_automation_portal_on_openshift_container_platform/", "Install automation portal on OpenShift Container Platform"]]
 category = "Install"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_self_service_configure_external_database/aem-page/install-proc_self_service_configure_external_database.html"
 last_crumb = "Configure an external PostgreSQL database for Ansible automation portal"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure an external PostgreSQL database for Ansible automation portal"
 oversized = "false"
@@ -43,7 +44,7 @@ Ansible automation portal creates multiple databases automatically at runtime. Y
 
 ## Procedure
 
-1.  Create a secret in OpenShift Container Platform with your database credentials.
+1. Create a secret in OpenShift Container Platform with your database credentials.
   
 
 ```terminal
@@ -72,7 +73,7 @@ $ oc create secret generic portal-postgresql-external \
 
   5. Click **Create**.
 
-2.  Update your Ansible automation portal Helm chart values to use the external database.
+2. Update your Ansible automation portal Helm chart values to use the external database.
       Add or modify the following configuration in your values.yaml file:
 
 ```yaml
@@ -178,7 +179,7 @@ ssl:
 
     Add the corresponding volumes and mounts for the client key and certificate alongside the `postgres-ca` entries.
 
-4.  Apply the configuration by upgrading your Ansible automation portal Helm release.
+4. Apply the configuration by upgrading your Ansible automation portal Helm release.
   
 
 ```terminal
@@ -197,7 +198,7 @@ $ helm upgrade *release-name* *chart-name* \
   4. Switch to the **YAML view** and merge the external database configuration into the existing values.
   5. Click **Upgrade** to apply the changes.
 
-5.  Wait for Ansible automation portal pods to restart and initialize the database schema.
+5. Wait for Ansible automation portal pods to restart and initialize the database schema.
   
 
 ```terminal
@@ -214,7 +215,7 @@ $ oc get pods -n *namespace* -w
 $ oc get pods -n *namespace*
 ```
 
-     All Ansible automation portal pods should show a status of `Running`.
+    All Ansible automation portal pods should show a status of `Running`.
 
 2. Check the Ansible automation portal logs to confirm the database connection:
 
@@ -222,7 +223,7 @@ $ oc get pods -n *namespace*
 $ oc logs -n *namespace* deploy/*release-name*-rhaap-portal | grep -i "database\|postgres"
 ```
 
-     You should see log entries indicating a successful database connection without errors.
+    You should see log entries indicating a successful database connection without errors.
 
 3. Connect to your external PostgreSQL database and verify that Ansible automation portal created the required databases. You should see multiple databases created by Ansible automation portal, one per plugin.
 

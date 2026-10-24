@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-ref_controller_job_template_variables/aem-page/develop-ref_controller_job_template_variables.html"
 last_crumb = "Set extra variables in job templates"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Set extra variables in job templates"
 oversized = "false"
@@ -29,7 +30,7 @@ type = "aem-page"
 
 Along with any extra variables set in the job template and survey, automation controller automatically adds the following variables to the job environment.
 
- Note:
+Note:
 
 - `awx_*` variables are defined by the system and cannot be overridden.
 - Variables about the job context, such as `awx_job_template_name` are not affected if they are set in `extra_vars`.
@@ -66,7 +67,8 @@ For compatibility, all variables are also given an "awx" prefix, for example, `a
 
 ## Create a survey
 
-You can create a survey for a job template to prompt users for input when they launch a job based on that template. Surveys can include many questions of various types, such as text input, multiple choice, and passwords.
+You can create a survey for a job template to prompt users for input when they launch a job based on that template.
+Surveys can include many questions of various types, such as text input, multiple choice, and passwords.
 
 ### About this task
 
@@ -74,33 +76,46 @@ The responses provided by users are stored in Ansible variables that can be used
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Templates.
-2.  Select the job template you want to create a survey for.
-3.  From the **Survey** tab, click Create survey question.
-4.  A survey can consist of any number of questions. For each question, enter the following information:
+1. From the navigation panel, select Automation Execution> (and then)Templates.
+2. Select the job template you want to create a survey for.
+3. From the **Survey** tab, click Create survey question.
+4. A survey can consist of any number of questions.
+For each question, enter the following information:
 
   - **Question**: The question to ask the user.
   - Optional: **Description**: A description of what is being asked of the user.
-  - **Answer variable name**: The Ansible variable name to store the user’s response in. This is the variable to be used by the playbook. Variable names cannot contain spaces.
+  - **Answer variable name**: The Ansible variable name to store the user’s response in.
+This is the variable to be used by the playbook.
+Variable names cannot contain spaces.
   - **Answer type**: Choose from the following question types:
-    * **Text**: A single line of text. You can set the minimum and maximum length (in characters) for this answer.
-    * **Textarea**: A multi-line text field. You can set the minimum and maximum length (in characters) for this answer.
-    * **Password**: Responses are treated as sensitive information, similar to the way an actual password is treated. You can set the minimum and maximum length (in characters) for this answer.
-    * **Multiple Choice (single select)**: A list of options, of which only one can be selected at a time. Enter the options, one per line, in the **Multiple Choice Options** field.
-    * **Multiple Choice (multiple select)**: A list of options, any number of which can be selected at a time. Enter the options, one per line, in the **Multiple Choice Options** field.
-    * **Integer**: An integer number. You can set the minimum and maximum length (in characters) for this answer.
-    * **Float**: A decimal number. You can set the minimum and maximum length (in characters) for this answer.
+    * **Text**: A single line of text.
+You can set the minimum and maximum length (in characters) for this answer.
+    * **Textarea**: A multi-line text field.
+You can set the minimum and maximum length (in characters) for this answer.
+    * **Password**: Responses are treated as sensitive information, similar to the way an actual password is treated.
+You can set the minimum and maximum length (in characters) for this answer.
+    * **Multiple Choice (single select)**: A list of options, of which only one can be selected at a time.
+Enter the options, one per line, in the **Multiple Choice Options** field.
+    * **Multiple Choice (multiple select)**: A list of options, any number of which can be selected at a time.
+Enter the options, one per line, in the **Multiple Choice Options** field.
+    * **Integer**: An integer number.
+You can set the minimum and maximum length (in characters) for this answer.
+    * **Float**: A decimal number.
+You can set the minimum and maximum length (in characters) for this answer.
   - **Required**: Whether or not an answer to this question is required from the user.
   - **Minimum length** and **Maximum length**: Specify if a certain length in the answer is required.
-  - **Default answer**: The default answer to the question. This value is pre-filled in the interface and is used if the answer is not provided by the user.
+  - **Default answer**: The default answer to the question.
+This value is pre-filled in the interface and is used if the answer is not provided by the user.
 
-5.  Once you have entered the question information, click Create question to add the question. The survey question displays in the **Survey** list. For any question, you can click ![Pencil](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png) to edit it.
+5. Once you have entered the question information, click Create question to add the question.
+      The survey question displays in the **Survey** list.
+For any question, you can click ![Pencil](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png) to edit it.
 
     Check the box next to each question and click Delete to delete the question, or use the toggle option in the menu bar to enable or disable the survey prompts.
 
     If you have more than one survey question, click Edit Order to rearrange the order of the questions by clicking and dragging on the grid icon.
 
-6.  To add more questions, click Add.
+6. To add more questions, click Add.
 
 ## Optional survey questions
 
@@ -120,7 +135,7 @@ When you pass survey variables, they are passed as extra variables (`extra_vars`
 
 By default, `extra_vars` are marked as `!unsafe` unless you specify them on the Job Template’s Extra Variables section. These are trusted, because they can only be added by users with enough privileges to add or edit a Job Template. For example, nested variables do not expand when entered as a prompt, as the Jinja brackets are treated as a string.
 
- Note:
+Note:
 
 `extra_vars` passed to the job launch API are only honored if one of the following is true:
 
@@ -162,24 +177,24 @@ The following table notes the behavior (hierarchy) of variable precedence in aut
 
  **Automation controller Variable Precedence Hierarchy (last listed wins)**
 
-| Ansible                         | automation controller                         |
-| ------------------------------- | --------------------------------------------- |
-| <br>role defaults               | <br>role defaults                             |
-| <br>dynamic inventory variables | <br>dynamic inventory variables               |
-| <br>inventory variables         | <br>automation controller inventory variables |
-| <br>inventory `group_vars`      | <br>automation controller group variables     |
-| <br>inventory `host_vars`       | <br>automation controller host variables      |
-| <br>playbook `group_vars`       | <br>playbook `group_vars`                     |
-| <br>playbook `host_vars`        | <br>playbook `host_vars`                      |
-| <br>host facts                  | <br>host facts                                |
-| <br>registered variables        | <br>registered variables                      |
-| <br>set facts                   | <br>set facts                                 |
-| <br>play variables              | <br>play variables                            |
-| <br>play `vars_prompt`          | <br>(not supported)                           |
-| <br>play `vars_files`           | <br>play `vars_files`                         |
-| <br>role and include variables  | <br>role and include variables                |
-| <br>block variables             | <br>block variables                           |
-| <br>task variables              | <br>task variables                            |
-| <br>extra variables             | <br>Job Template extra variables              |
-|                                 | <br>Job Template Survey (defaults)            |
-|                                 | <br>Job Launch extra variables                |
+| Ansible                     | automation controller                     |
+| --------------------------- | ----------------------------------------- |
+| role defaults               | role defaults                             |
+| dynamic inventory variables | dynamic inventory variables               |
+| inventory variables         | automation controller inventory variables |
+| inventory `group_vars`      | automation controller group variables     |
+| inventory `host_vars`       | automation controller host variables      |
+| playbook `group_vars`       | playbook `group_vars`                     |
+| playbook `host_vars`        | playbook `host_vars`                      |
+| host facts                  | host facts                                |
+| registered variables        | registered variables                      |
+| set facts                   | set facts                                 |
+| play variables              | play variables                            |
+| play `vars_prompt`          | (not supported)                           |
+| play `vars_files`           | play `vars_files`                         |
+| role and include variables  | role and include variables                |
+| block variables             | block variables                           |
+| task variables              | task variables                            |
+| extra variables             | Job Template extra variables              |
+|                             | Job Template Survey (defaults)            |
+|                             | Job Launch extra variables                |

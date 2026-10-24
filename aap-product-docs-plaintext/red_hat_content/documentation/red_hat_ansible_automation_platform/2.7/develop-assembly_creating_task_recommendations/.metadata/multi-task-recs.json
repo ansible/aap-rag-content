@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/develop-assembly_creating_task_recommendations#multi-task-recs",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_creating_task_recommendations",
-  "title": "Create multitask recommendations"
+  "title": "Create multitask recommendations",
+  "url_reachable": true
 }

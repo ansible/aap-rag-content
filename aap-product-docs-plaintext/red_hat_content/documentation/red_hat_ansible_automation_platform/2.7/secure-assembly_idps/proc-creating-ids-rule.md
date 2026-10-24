@@ -17,10 +17,10 @@ Currently, the `ids_rule` role only supports Snort IDPS.
 
 ### Procedure
 
-1.  Install the `ids_rule` role using the ansible-galaxy command:
+1. Install the `ids_rule` role using the ansible-galaxy command:
 `$ ansible-galaxy install ansible_security.ids_rule`
 
-2.  Create a new playbook file titled `add_snort_rule.yml`. Set the following parameters:
+2. Create a new playbook file titled `add_snort_rule.yml`. Set the following parameters:
 
 
 ```
@@ -28,7 +28,8 @@ Currently, the `ids_rule` role only supports Snort IDPS.
 hosts: snort
 ```
 
-3.  Add the `become` flag to ensure that Ansible handles privilege escalation.
+3. Add the `become` flag to ensure that Ansible handles privilege escalation.
+
 
 ```
 - name: Add Snort rule
@@ -36,7 +37,7 @@ hosts: snort
 become: true
 ```
 
-4.  Specify the name of your IDPS provider by adding the following variables:
+4. Specify the name of your IDPS provider by adding the following variables:
 
 
 ```
@@ -48,7 +49,7 @@ vars:
 ids_provider: snort
 ```
 
-5.  Add the following tasks and task-specific variables, for example, rules, Snort rules file, and the state of the rule - present or absent, to the playbook:
+5. Add the following tasks and task-specific variables, for example, rules, Snort rules file, and the state of the rule - present or absent, to the playbook:
 
 
 ```
@@ -73,7 +74,7 @@ Tasks are components that make changes on the target machine. Since you are usin
 
 The `ids_rules_file` variable specifies a defined location for the `local.rules` file, while the `ids_rule_state` variable indicates that the rule should be created if it does not already exist.
 
-6.  Run the playbook by executing the following command:
+6. Run the playbook by executing the following command:
 `$ ansible-navigator run add_snort_rule.ym --mode stdout`
 
 When the playbook runs, all of your tasks will be executed in addition to your newly created rules. Your playbook output confirms your PLAY, TASK, RUNNING HANDLER, and PLAY RECAP.

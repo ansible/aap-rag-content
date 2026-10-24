@@ -5,14 +5,14 @@ If your private registry uses a certificate signed by an internal or self-signed
 
 ### Procedure
 
-1.  Obtain the CA certificate chain that signed your mirror registry's TLS certificate.
+1. Obtain the CA certificate chain that signed your mirror registry's TLS certificate.
 If the registry uses a certificate chain, include the full chain:
 
 ```terminal
 $ cat registry.crt intermediate.crt root.crt > ca-bundle.crt
 ```
 
-2.  Create a ConfigMap from the CA certificate:
+2. Create a ConfigMap from the CA certificate:
 
 
 ```terminal
@@ -20,7 +20,7 @@ $ oc create configmap registry-ca-crt \
 --from-file=ca.crt=ca-bundle.crt -n *namespace*
 ```
 
-3.  Add the volume and mount to your values file.
+3. Add the volume and mount to your values file.
 Add the `registry-ca-crt` volume to `extraVolumes`, and add the CA certificate volume mount to the `install-dynamic-plugins` init container:
 
 ```yaml

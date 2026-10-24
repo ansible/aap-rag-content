@@ -5,9 +5,9 @@ The **Teams** page displays the existing teams for your installation. From here,
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Teams.
-2.  In the **Search** bar, enter an appropriate keyword for the team you want to search for and click the arrow icon.
-3.  From the menu bar, you can sort the list of teams by using the arrows for **Name** and **Organization** to toggle your sorting preference.
-4.  You can view team details by clicking a team **Name** on the **Teams** page.
-5.  You can view organization details by clicking the link in the **Organization** column.
+1. From the navigation panel, select Access Management> (and then)Teams.
+2. In the **Search** bar, enter an appropriate keyword for the team you want to search for and click the arrow icon.
+3. From the menu bar, you can sort the list of teams by using the arrows for **Name** and **Organization** to toggle your sorting preference.
+4. You can view team details by clicking a team **Name** on the **Teams** page.
+5. You can view organization details by clicking the link in the **Organization** column.
 

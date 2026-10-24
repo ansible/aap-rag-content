@@ -16,7 +16,7 @@ metadata:
 name: workflow
 spec:
 inventory: Demo Inventory
-workflow_template_name: Demo Job Template
+workflow_template_name: ExampleTowerWorkflow
 connection_secret: aap-access
 runner_pull_policy: IfNotPresent
 ```

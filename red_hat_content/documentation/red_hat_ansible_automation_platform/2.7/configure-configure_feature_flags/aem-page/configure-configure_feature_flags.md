@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-configure_feature_flags"
-title = "View feature flags in your user interface - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "View feature flags in your user interface - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-assembly_gw_settings/", "Configure Ansible Automation Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/configure-configure_feature_flags/aem-page/configure-configure_feature_flags.html"
 last_crumb = "View feature flags in your user interface"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "View feature flags in your user interface"
 oversized = "false"
@@ -35,9 +36,9 @@ The `RUNTIME_FEATURE_FLAGS` system setting must be enabled (set to `True`) for f
 
 ## Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation menu, go to Settings> (and then)Feature Flags.
-3.  The Feature Flags page displays all available feature flags.
+1. Log in to Ansible Automation Platform.
+2. From the navigation menu, go to Settings> (and then)Feature Flags.
+3. The Feature Flags page displays all available feature flags.
 
 ## Results
 

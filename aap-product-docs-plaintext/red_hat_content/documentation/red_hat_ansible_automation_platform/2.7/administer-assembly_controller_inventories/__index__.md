@@ -14,7 +14,7 @@ The **Inventory details** page includes:
 
 - **Name**: The inventory name.
 
--  **Status** The statuses are:
+-  **Status**     The statuses are:
 
 * **Success**: When the inventory source sync completed successfully
 * **Disabled**: No inventory source added to the inventory

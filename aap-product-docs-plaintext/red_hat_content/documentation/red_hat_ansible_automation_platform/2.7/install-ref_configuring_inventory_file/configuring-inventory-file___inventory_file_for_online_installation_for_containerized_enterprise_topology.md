@@ -114,4 +114,3 @@ Metrics service requires access to two databases:
 - **`metrics_service` database** (read/write): Stores collected metrics data
 - **`automationcontroller` database** (read-only): Correlates metrics with automation activity
 The `ms_awx_readonly` user must be created in the external database with SELECT privileges on the `automationcontroller` database.
-

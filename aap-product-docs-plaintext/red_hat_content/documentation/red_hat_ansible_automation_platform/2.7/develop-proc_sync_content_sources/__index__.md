@@ -15,15 +15,15 @@ After syncing, discovered collections and EE definitions become available for us
 
 ## Procedure
 
-1.  Navigate to the **Collections** page.
-2.  Click **Sync Now** in the top-right corner.
-3.  In the modal, select the content sources you want to sync.
+1. Navigate to the **Collections** page.
+2. Click **Sync Now** in the top-right corner.
+3. In the modal, select the content sources you want to sync.
 You can sync selectively by provider, host, or organization rather than syncing all sources at once.
 
 Note:
 Synchronization time depends on the number of collections and metadata in your configured repositories. Large repositories can take significantly longer. To reduce sync time, configure your private automation hub to sync only the collections your teams need.
 
-4.  Click **Sync Selected**.
+4. Click **Sync Selected**.
 
 Note:
 A toast notification confirms which sources are syncing. The **Sync Now** button is disabled during the operation and re-enabled when all selected sources finish.

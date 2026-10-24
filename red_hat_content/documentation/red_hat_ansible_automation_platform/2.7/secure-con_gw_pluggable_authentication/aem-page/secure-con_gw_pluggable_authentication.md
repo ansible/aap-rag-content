@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gw_pluggable_authentication"
 title = "Pluggable authentication - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_configure_authentication/", "Configure central authentication for Ansible Automation Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_gw_pluggable_authentication/aem-page/secure-con_gw_pluggable_authentication.html"
 last_crumb = "Pluggable authentication"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Pluggable authentication"
 oversized = "false"
@@ -82,17 +83,17 @@ If the local authenticator is disabled and an issue occurs with the configured e
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Authentication Methods.
-2.  Ensure that at least one other authenticator type is configured and enabled.
-3.  Select your **Local Authenticator**.
-4.  Toggle the **Enabled** switch to the off position to disable the local authenticator.
+1. From the navigation panel, select Access Management> (and then)Authentication Methods.
+2. Ensure that at least one other authenticator type is configured and enabled.
+3. Select your **Local Authenticator**.
+4. Toggle the **Enabled** switch to the off position to disable the local authenticator.
 
 If the local authenticator is disabled without another authentication method configured, or if an issue arises with your configured enterprise authentication provider, making the Ansible Automation Platform inaccessible, you can re-enable the local authenticator from the command line as follows:
 
 1. List the available authenticators and retrieve the ID of your local authenticator by running the following command:
 
 ```
-aap-gateway-api authenticators --list
+aap-gateway-manage authenticators --list
 ```
 
 2. Enable the local authenticator using its ID:
@@ -126,14 +127,14 @@ However, when the mapping order is changed to B, A; the first map allows `john` 
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Authentication Methods.
-2.  In the list view, select the authenticator name displayed in the **Name** column.
-3.  Select the **Mapping** tab from the **Details** page of your authenticator.
-4.  Click Manage mappings.
-5.  Adjust the mapping order by dragging and dropping the mappings up or down in the list using the icon. Note:
+1. From the navigation panel, select Access Management> (and then)Authentication Methods.
+2. In the list view, select the authenticator name displayed in the **Name** column.
+3. Select the **Mapping** tab from the **Details** page of your authenticator.
+4. Click Manage mappings.
+5. Adjust the mapping order by dragging and dropping the mappings up or down in the list using the icon. Note:
       The mapping precedence is determined by the order in which the mappings are listed.
 
-6.  After your authenticator maps are in the correct order, click Apply.
+6. After your authenticator maps are in the correct order, click Apply.
 
 ## Define authentication mapping rules and triggers
 
@@ -141,11 +142,11 @@ Authentication map types can be used with any type of authenticator. Each map ha
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Authentication Methods.
-2.  In the list view, select the authenticator name displayed in the **Name** column.
-3.  Select the **Mapping** tab from the **Details** page of your authenticator.
-4.  Click Create mapping.
-5.  Select a map type from the **Authentication mapping** list. See [Authenticator map types](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-authenticator-map-types "Ansible Automation Platform supports the following rule types:") for detailed descriptions of the different map types. Choices include:
+1. From the navigation panel, select Access Management> (and then)Authentication Methods.
+2. In the list view, select the authenticator name displayed in the **Name** column.
+3. Select the **Mapping** tab from the **Details** page of your authenticator.
+4. Click Create mapping.
+5. Select a map type from the **Authentication mapping** list. See [Authenticator map types](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-authenticator-map-types "Ansible Automation Platform supports the following rule types:") for detailed descriptions of the different map types. Choices include:
 
   -  [Allow](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-allow-mapping "With allow mapping, you can control which users have access to the system by defining the conditions that must be met.")
   -  [Organization](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#proc-controller-organization-mapping "You can control which users are placed into which Ansible Automation Platform organizations based on attributes such as their username and email address or based on groups provided from an authenticator.")
@@ -153,17 +154,17 @@ Authentication map types can be used with any type of authenticator. Each map ha
   -  [Role](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-role-mapping "Role mapping is the mapping of a user either to a global role, such as Platform Auditor, or team or organization role.")
   -  [Is Superuser](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-superuser-mapping "Superuser mapping is the mapping of a user to the superuser role, such as System Administrator.")
 
-6.  Enter a unique rule **Name** to identify the rule.
-7.  Select a **Trigger** from the list. See [Authenticator map triggers](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-authenticator-map-triggers "Each map has a trigger that defines when the map should be evaluated as true. Select a trigger from the When to apply the rule field.") for more details. Choices include:
+6. Enter a unique rule **Name** to identify the rule.
+7. Select a **Trigger** from the list. See [Authenticator map triggers](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-authenticator-map-triggers "Each map has a trigger that defines when the map should be evaluated as true. Select a trigger from the When to apply the rule field.") for more details. Choices include:
 
   -  **Always**
   -  **Never**
   -  **Group**
   -  **Attribute**
 
-8.  Click Create mapping.
-9.  Repeat this procedure to create additional mapping rules and triggers for the authenticator.
-10.  Proceed to [Adjust the Mapping order](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gw_pluggable_authentication#gw-adjust-mapping-order "Adjust the execution order of your authenticator maps to control authorization rule precedence. As later maps override earlier ones, setting the correct sequence helps ensure users receive the intended permissions and team memberships.") to optionally reorder the mappings for your authenticator. Note:
+8. Click Create mapping.
+9. Repeat this procedure to create additional mapping rules and triggers for the authenticator.
+10. Proceed to [Adjust the Mapping order](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gw_pluggable_authentication#gw-adjust-mapping-order "Adjust the execution order of your authenticator maps to control authorization rule precedence. As later maps override earlier ones, setting the correct sequence helps ensure users receive the intended permissions and team memberships.") to optionally reorder the mappings for your authenticator. Note:
       The mapping order setting is only available if there is more than one authenticator map defined.
 
 ## Select an authentication type
@@ -172,16 +173,16 @@ On the **Authentication Methods** page you can select the type of authenticator 
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Authentication Methods.
-2.  Click Create authentication.
-3.  Enter a unique **Name** for the authenticator. The name is required, must be unique across all authenticators, and must not be longer than 512 characters. This becomes the unique identifier generated for the authenticator. Note:
+1. From the navigation panel, select Access Management> (and then)Authentication Methods.
+2. Click Create authentication.
+3. Enter a unique **Name** for the authenticator. The name is required, must be unique across all authenticators, and must not be longer than 512 characters. This becomes the unique identifier generated for the authenticator. Note:
       Changing the name does not update the unique identifier of the authenticator. For example, if you create an authenticator with the name `My Authenticator` and later change it to `My LDAP Authenticator` you will not be able to create another authenticator with the name `My Authenticator` because the unique identifier is still in use.
 
-4.  Select the authenticator type from the **Authentication type** list. See [Configuring an authentication type](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_config_authentication_type#gw-config-authentication-type "Ansible Automation Platform provides multiple authenticator plugins that you can configure to simplify the login experience for your organization.") for the complete list of authentication plugins available.
-5.  The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type. See the relevant sections in Configuring an authentication type for the required details. For all authentication types you can enter a **Name**, **Additional Authenticator Fields** and **Create Objects**.
+4. Select the authenticator type from the **Authentication type** list. See [Configuring an authentication type](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_config_authentication_type#gw-config-authentication-type "Ansible Automation Platform provides multiple authenticator plugins that you can configure to simplify the login experience for your organization.") for the complete list of authentication plugins available.
+5. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type. See the relevant sections in Configuring an authentication type for the required details. For all authentication types you can enter a **Name**, **Additional Authenticator Fields** and **Create Objects**.
 
-6.  Enable or disable **Enabled** to specify if the authenticator should be enabled or disabled. If enabled, users are able to login from the authenticator. If disabled, users will not be allowed to login from the authenticator.
-7.  Enable or disable **Create Object** to specify whether the authenticator should create teams and organizations in the system when a user logs in.
+6. Enable or disable **Enabled** to specify if the authenticator should be enabled or disabled. If enabled, users are able to login from the authenticator. If disabled, users will not be allowed to login from the authenticator.
+7. Enable or disable **Create Object** to specify whether the authenticator should create teams and organizations in the system when a user logs in.
 
 Enabled
 Teams and organizations defined in the authenticator maps are created and the users added to them.
@@ -189,11 +190,11 @@ Teams and organizations defined in the authenticator maps are created and the us
 Disabled
 Organizations and teams defined in the authenticator maps will not be created automatically in the system. However, if they already exist, for example, created by a superuser, users who trigger the maps are granted access to them.
 
-8.  Enable or disable **Remove Users**. If enabled, any access previously granted to a user is removed when they authenticate from this source. If disabled, permissions are only added or removed from the user based on the results of this authenticator’s authenticator mappings. For example, assume a user has been granted the `is_superuser` permission in the system. And that user will log in to an authenticator whose maps will not formulate an opinion as to whether or not the user should be a superuser. If **Remove Users** is enabled, the `is_superuser` permission will be removed from the user, the authenticator maps will not have an opinion as to whether it should be there or not so, after login the user will not have the `is_superuser` permission.
+8. Enable or disable **Remove Users**. If enabled, any access previously granted to a user is removed when they authenticate from this source. If disabled, permissions are only added or removed from the user based on the results of this authenticator’s authenticator mappings. For example, assume a user has been granted the `is_superuser` permission in the system. And that user will log in to an authenticator whose maps will not formulate an opinion as to whether or not the user should be a superuser. If **Remove Users** is enabled, the `is_superuser` permission will be removed from the user, the authenticator maps will not have an opinion as to whether it should be there or not so, after login the user will not have the `is_superuser` permission.
 
     If **Remove Users** is disabled, the `is_superuser` permission *will not* be removed from the user. The authenticator maps will not have an opinion as to whether it should be there or not so after login the user *will* have the `is_superuser` permission.
 
-9.  Click Create Authentication Method and proceed to [Define authentication mapping rules and triggers](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gw_pluggable_authentication#gw-define-rules-triggers "Authentication map types can be used with any type of authenticator. Each map has a trigger that defines when the map should be evaluated as true.").
+9. Click Create Authentication Method and proceed to [Define authentication mapping rules and triggers](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gw_pluggable_authentication#gw-define-rules-triggers "Authentication map types can be used with any type of authenticator. Each map has a trigger that defines when the map should be evaluated as true.").
 
 ### What to do next
 

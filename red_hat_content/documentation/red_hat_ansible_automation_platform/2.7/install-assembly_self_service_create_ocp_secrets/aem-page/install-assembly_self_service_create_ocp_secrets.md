@@ -4,13 +4,14 @@ title = "Create secrets in OpenShift for Ansible automation portal - Red Hat Ans
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_create_ocp_secrets"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_about/", "Install Ansible automation portal (OpenShift Container Platform only)"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-install_automation_portal_on_openshift_container_platform/", "Install automation portal on OpenShift Container Platform"]]
 category = "Install"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_create_ocp_secrets/aem-page/install-assembly_self_service_create_ocp_secrets.html"
 last_crumb = "Create secrets in OpenShift for Ansible automation portal"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Create secrets in OpenShift for Ansible automation portal"
 oversized = "false"
@@ -48,7 +49,7 @@ The secret must use the exact name `secrets-rhaap-portal` with the exact key nam
 
 ### Procedure
 
- Run the following command to create the secret:
+Run the following command to create the secret:
 
 ```
 $ oc create secret generic secrets-rhaap-portal \
@@ -94,7 +95,7 @@ Create an OpenShift secret to hold Personal Access Tokens for your external Sour
 
 ### About this task
 
-This procedure establishes the required `secrets-scm` Key/Value secret within your OpenShift Container Platform project to securely store the GitHub and/or GitLab Personal Access Tokens (PATs).
+This procedure establishes the required `secrets-scm` Key/Value secret within your OpenShift Container Platform project to securely store GitHub, GitLab, or both Personal Access Tokens (PATs) for repository read access and template discovery.
 
 Create the `secrets-scm` secret using the `oc` CLI or the OpenShift web console. If you use only one SCM provider, include only that provider's token.
 
@@ -102,11 +103,13 @@ Note:
 
 The secret must use the exact name `secrets-scm` with the exact key names specified below.
 
-If you plan to use the execution environment builder to save definitions to a Git repository, this secret also holds OAuth App or GitHub App credentials. You add those credentials later when setting up the EE Builder. See [Configure a GitHub OAuth App for saving definitions](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_oauth_ee_builder "Configure a GitHub OAuth App so that users can save execution environment definition files to a GitHub repository and trigger automated image builds.") or [Configure a GitHub App for content discovery](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_app_ee_builder "Create and install a GitHub App so that execution environment builder can scan your organization's repositories for Ansible collections.").
+Important:
+
+Personal access tokens provide read-only access for discovering templates and collections. If you plan to use the execution environment builder to save and push definition files to a Git repository, this secret must hold GitHub OAuth App or GitHub App credentials instead of personal access tokens. For write access, see [Configure a GitHub OAuth App for saving definitions](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_oauth_ee_builder "Configure a GitHub OAuth App so that users can save execution environment definition files to a GitHub repository and trigger automated image builds.") or [Configure a GitHub App for content discovery](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_app_ee_builder "Create and install a GitHub App so that execution environment builder can scan your organization's repositories for Ansible collections.").
 
 ### Procedure
 
- Run the appropriate command to create the secret.
+Run the appropriate command to create the secret.
 
 To create the secret with both GitHub and GitLab tokens:
 

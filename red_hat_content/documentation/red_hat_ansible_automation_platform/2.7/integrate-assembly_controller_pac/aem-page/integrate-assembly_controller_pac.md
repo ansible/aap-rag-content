@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
 title = "Implement policy enforcement - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_controller_pac"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-integrate_with_the_external_policy_engine_open_policy_agent__opa_/", "Integrate with the external policy engine Open Policy Agent (OPA)"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/integrate-assembly_controller_pac/aem-page/integrate-assembly_controller_pac.html"
 last_crumb = "Implement policy enforcement"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Implement policy enforcement"
 oversized = "false"
@@ -59,9 +60,9 @@ If you do not configure the OPA server in your policy settings, policy evaluatio
 
 ### Procedure
 
-1.  From the navigation panel, select Settings> (and then)Automation Execution> (and then)Policy.
-2.  Click **Edit policy settings**.
-3.  On the Policy Settings page, fill out the following fields:
+1. From the navigation panel, select Settings> (and then)Automation Execution> (and then)Policy.
+2. Click **Edit policy settings**.
+3. On the Policy Settings page, fill out the following fields:
   
 
 OPA Server hostname
@@ -82,13 +83,13 @@ Enter the number of seconds until the connection times out.
 OPA request retry count
 Enter a figure for the number of times a request can attempt to connect to the OPA service before failing.
 
-4.  Depending on your authentication type, you might need to fill out the following fields.   1.  If you selected Token as your authentication type:
+4. Depending on your authentication type, you might need to fill out the following fields.   1. If you selected Token as your authentication type:
   
 
 OPA authentication token
 Enter the OPA authentication token.
 
-  2.  If you selected Certificate as your authentication type:
+  2. If you selected Certificate as your authentication type:
   
 
 OPA client certificate content
@@ -100,13 +101,13 @@ Enter the client key for mTLS authentication.
 OPA CA certificate content
 Enter the content of the CA certificate for mTLS authentication.
 
-5.  Beneath the heading labeled **Options**:
+5. Beneath the heading labeled **Options**:
   
 
 Use SSL for OPA connection
 Check this box to enable an SSL/TLS connection to the OPA service.
 
-6.  Click Save policy settings.
+6. Click Save policy settings.
 
 ## Understand OPA packages and rules
 

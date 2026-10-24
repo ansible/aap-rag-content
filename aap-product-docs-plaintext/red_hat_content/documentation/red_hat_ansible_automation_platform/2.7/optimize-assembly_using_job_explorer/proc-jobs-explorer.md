@@ -18,8 +18,9 @@ You can sort results by any of the parameters from each column by using the dire
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Analytics> (and then)Job Explorer.
-2.  In the filter toolbar, select **Job** from the **Filter by** list.
-3.  In that same toolbar, select a time range. Job Explorer will now display jobs within that time range.
-4.  To further refine results, return to the filter toolbar and select a different attribute to filter results by, including job status, cluster, or organization. The **Job Explorer** view updates and presents a list of jobs based on the attributes you selected.
+1. From the navigation panel, select Automation Analytics> (and then)Job Explorer.
+2. In the filter toolbar, select **Job** from the **Filter by** list.
+3. In that same toolbar, select a time range. Job Explorer will now display jobs within that time range.
+4. To further refine results, return to the filter toolbar and select a different attribute to filter results by, including job status, cluster, or organization.
+The **Job Explorer** view updates and presents a list of jobs based on the attributes you selected.
 

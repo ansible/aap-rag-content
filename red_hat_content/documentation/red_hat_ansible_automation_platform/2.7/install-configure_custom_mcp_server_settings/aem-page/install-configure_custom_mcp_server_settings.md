@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-configure_custom_mcp_server_settings/aem-page/install-configure_custom_mcp_server_settings.html"
 last_crumb = "Configure custom MCP server settings"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure custom MCP server settings"
 oversized = "false"
@@ -32,29 +33,30 @@ The `extra_settings` variable allows you to pass a list of custom setting and va
 ## Before you begin
 
 - You have installed the Ansible Automation Platform Operator.
-- You have deployed the MCP server for Red Hat Ansible Automation Platform on your operator-based installation.
+- You have deployed the MCP server for Red Hat Ansible Automation Platform on your operator-based installation. For more information, see [Enable the MCP server on an existing OCP deployment](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-enable_the_mcp_server_on_an_existing_deployment "You can enable the MCP server on an existing Ansible Automation Platform deployment by editing the AnsibleAutomationPlatform custom resource.").
 
 ## Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  Go to Operators> (and then)Installed Operators.
-3.  Select your Ansible Automation Platform Operator deployment.
-4.  Select All Instances and go to your Ansible Automation Platform instance.
-5.  Click the ⋮ icon and then select Edit Ansible Automation Platform.
-6.  In the YAML view, locate the `spec.mcp` section.
-7.  Add the `extra_settings`list under the existing `mcp`section. The following example configures the default page size for list-type API responses:
+1. Log in to Red Hat OpenShift Container Platform.
+2. Go to Operators> (and then)Installed Operators.
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select All Instances and go to your Ansible Automation Platform instance.
+5. Click the ⋮ icon and then select Edit Ansible Automation Platform.
+6. In the YAML view, locate the `spec.mcp` section.
+7. Add the `extra_settings`list under the existing `mcp`section. The following example configures the default page size for list-type API responses:
   
 
 ```
 spec:
   mcp:
-    disabled:false
-    allow_write_operations:false
+    disabled: false
+    allow_write_operations: false
     extra_settings:
-      - setting:DEFAULT_PAGE_SIZE value:"25"
+      - setting: DEFAULT_PAGE_SIZE
+        value: "25"
 ```
 
-8.  Click Save.
+8. Click Save.
 
 ## What to do next
 

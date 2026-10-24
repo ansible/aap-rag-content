@@ -5,12 +5,14 @@ A project is a logical collection of Ansible playbooks that you can manage in An
 
 ### About this task
 
-Platform administrators and automation developers have the permissions to create projects. As an automation operator you can view and sync projects. The following procedure desribes how to view available projects.
+Platform administrators and automation developers have the permissions to create projects.
+As an automation operator you can view and sync projects.
+The following procedure desribes how to view available projects.
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Projects. The **Projects** page displays a list of projects that are currently available.
-2.  Click a project to view its details.
+1. From the navigation panel, select Automation Execution> (and then)Projects. The **Projects** page displays a list of projects that are currently available.
+2. Click a project to view its details.
 
 ### What to do next
 

@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-ref_rhdh_learning/aem-page/develop-ref_rhdh_learning.html"
 last_crumb = "Access learning paths, labs, and collections"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Access learning paths, labs, and collections"
 oversized = "false"
@@ -27,9 +28,11 @@ type = "aem-page"
 
 # Access learning paths, labs, and collections
 
-To learn more about getting started with automation, click **Learn** from the **Overview** page of the plug-in dashboard. The **Learn** page provides the following options for learning:
+To learn more about getting started with automation, click **Learn** from the **Overview** page of the plug-in dashboard.
+The **Learn** page provides the following options for learning:
 
-- **Learning Paths** lists a curated selection of learning tools hosted on developers.redhat.com that guide you through the foundations of working with Ansible, the Ansible VS Code extension, and using YAML. You can select other Ansible learning paths from the **Useful links** section.
+- **Learning Paths** lists a curated selection of learning tools hosted on developers.redhat.com that guide you through the foundations of working with Ansible, the Ansible VS Code extension, and using YAML.
+    You can select other Ansible learning paths from the **Useful links** section.
 
 - **Labs** are self-led labs that are designed to give you hands-on experience in writing Ansible content and using Ansible development tools.
 
@@ -41,7 +44,8 @@ The links in this pane provide access to the source of reusable automation conte
 
 If you configured private automation hub when installing the plug-in, you can click **Go to Automation Hub** to view the collections and execution environments that your enterprise has curated.
 
-If you did not configure a private automation hub URL when installing the plug-in, the **Discover existing collection** pane provides a link to Red Hat automation hub on console.redhat.com. You can explore certified and validated Ansible content collections on this site.
+If you did not configure a private automation hub URL when installing the plug-in, the **Discover existing collection** pane provides a link to Red Hat automation hub on console.redhat.com.
+You can explore certified and validated Ansible content collections on this site.
 
 ## Create a project in the Red Hat Developer Hub UI
 
@@ -53,27 +57,27 @@ Create a new Ansible Playbook project in the Red Hat Developer Hub by logging in
 
 ### Procedure
 
-1.  Log in to your Red Hat Developer Hub UI.
-2.  Click the Ansible `A` icon in the Red Hat Developer Hub navigation panel.
-3.  Navigate to the **Overview** page.
-4.  Click **Create**.
-5.  Click **Create Ansible Git Project**. The **Available Templates** page opens.
-6.  Click **Create Ansible Playbook project**.
-7.  In the **Create Ansible Playbook Project** page, enter information for your new project in the form. You can see sample values for this form in the Example project.
+1. Log in to your Red Hat Developer Hub UI.
+2. Click the Ansible `A` icon in the Red Hat Developer Hub navigation panel.
+3. Navigate to the **Overview** page.
+4. Click **Create**.
+5. Click **Create Ansible Git Project**. The **Available Templates** page opens.
+6. Click **Create Ansible Playbook project**.
+7. In the **Create Ansible Playbook Project** page, enter information for your new project in the form. You can see sample values for this form in the Example project.
 
-    | Field                                                    | Description                                                                                                                |
-    | -------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-    | <br>Source code repository organization name or username | <br>The name of your source code repository username or organization name                                                  |
-    | <br>Playbook repository name                             | <br>The name of your new Git repository                                                                                    |
-    | <br>Playbook description (Optional)                      | <br>A description of the new playbook project                                                                              |
-    | <br>Playbook project’s collection namespace              | <br>The new playbook Git project creates an example collection folder for you. Enter a value for the collection namespace. |
-    | <br>Playbook project’s collection name                   | <br>The name of the collection                                                                                             |
-    | <br>Catalog Owner Name                                   | <br>The name of the Developer Hub catalog item owner. This is a Red Hat Developer Hub field.                               |
-    | <br>Source code repository organization name or username | <br>The name of your source code repository username or organization name                                                  |
-    | <br>Playbook repository name                             | <br>The name of your new Git repository                                                                                    |
-    | <br>Playbook description (Optional)                      | <br>A description of the new playbook project                                                                              |
-    | <br>System (Optional)                                    | <br>This is a Red Hat Developer Hub field                                                                                  |
+    | Field                                                | Description                                                                                                            |
+    | ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+    | Source code repository organization name or username | The name of your source code repository username or organization name                                                  |
+    | Playbook repository name                             | The name of your new Git repository                                                                                    |
+    | Playbook description (Optional)                      | A description of the new playbook project                                                                              |
+    | Playbook project’s collection namespace              | The new playbook Git project creates an example collection folder for you. Enter a value for the collection namespace. |
+    | Playbook project’s collection name                   | The name of the collection                                                                                             |
+    | Catalog Owner Name                                   | The name of the Developer Hub catalog item owner. This is a Red Hat Developer Hub field.                               |
+    | Source code repository organization name or username | The name of your source code repository username or organization name                                                  |
+    | Playbook repository name                             | The name of your new Git repository                                                                                    |
+    | Playbook description (Optional)                      | A description of the new playbook project                                                                              |
+    | System (Optional)                                    | This is a Red Hat Developer Hub field                                                                                  |
   Note:
       Collection namespaces must follow Python module naming conventions. Collections must have short, all lowercase names. You can use underscores in the collection name if it improves readability.
 
-8.  Click **Review**.
+8. Click **Review**.

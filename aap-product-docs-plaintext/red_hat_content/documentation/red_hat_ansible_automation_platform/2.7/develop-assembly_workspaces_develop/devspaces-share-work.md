@@ -7,6 +7,6 @@ Share your automation content and collaborate with colleagues by working togethe
 
 ### Procedure
 
-1.  To contribute to a colleague's project, request the URL for the Git repository that corresponds to your colleague's Ansible development workspace.
-2.  Launch a workspace using the repository URL that your colleague shared.
-3.  Work within a new git branch and contribute to your colleague's repository by creating a merge or pull request.
+1. To contribute to a colleague's project, request the URL for the Git repository that corresponds to your colleague's Ansible development workspace.
+2. Launch a workspace using the repository URL that your colleague shared.
+3. Work within a new git branch and contribute to your colleague's repository by creating a merge or pull request.

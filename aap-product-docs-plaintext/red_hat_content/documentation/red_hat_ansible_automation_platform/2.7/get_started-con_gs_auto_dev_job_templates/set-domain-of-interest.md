@@ -5,10 +5,10 @@ With Domain filtering lets you customize content in Automation Execution's **Job
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Jobs or Automation Execution> (and then)Templates.
-2.  Beneath the page heading, next to **Domains**, is a list of topic-related labels. Select a label to filter jobs and job templates so that only content related to the labels is shown. You can choose more than one label.
-3.  To clear your selection, click the **X**.
-4.  To customize your domain options, select the ![Wrench](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/wrench.png) icon. In the modal that appears, select **Add Domain** to add new domains to filter with.
+1. From the navigation panel, select Automation Execution> (and then)Jobs or Automation Execution> (and then)Templates.
+2. Beneath the page heading, next to **Domains**, is a list of topic-related labels. Select a label to filter jobs and job templates so that only content related to the labels is shown. You can choose more than one label.
+3. To clear your selection, click the **X**.
+4. To customize your domain options, select the ![Wrench](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/wrench.png) icon. In the modal that appears, select **Add Domain** to add new domains to filter with.
 
 ### What to do next
 

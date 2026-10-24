@@ -1,7 +1,7 @@
 +++
 title = "Understand how to configure workflows - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_workflows"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_workflow_job_templates/", "Orchestrate complex automation with workflow job templates"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_workflows/aem-page/develop-assembly_ug_controller_workflows.html"
 last_crumb = "Understand how to configure workflows"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Understand how to configure workflows"
 oversized = "false"
@@ -29,15 +30,21 @@ type = "aem-page"
 
 Workflows enable you to configure a sequence of disparate job templates (or workflow templates) that might or might not share inventory, playbooks, or permissions.
 
-Workflows have `admin` and `execute` permissions, similar to job templates. A workflow accomplishes the task of tracking the full set of jobs that were part of the release process as a single unit.
+Workflows have `admin` and `execute` permissions, similar to job templates.
+A workflow accomplishes the task of tracking the full set of jobs that were part of the release process as a single unit.
 
-Job or workflow templates are linked together using a graph-like structure called nodes. These nodes can be jobs, project syncs, or inventory syncs. A template can be part of different workflows or used multiple times in the same workflow. A copy of the graph structure is saved to a workflow job when you launch the workflow.
+Job or workflow templates are linked together using a graph-like structure called nodes.
+These nodes can be jobs, project syncs, or inventory syncs.
+A template can be part of different workflows or used multiple times in the same workflow.
+A copy of the graph structure is saved to a workflow job when you launch the workflow.
 
 The following example shows a workflow that has all three, and a workflow job template:
 
 ![Node in workflow](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-node-all-scenarios-wf.png)  
 
-As the workflow runs, jobs are spawned from the node’s linked template. Nodes linking to a job template which has prompt-driven fields (job_type, job_tags, skip_tags, limit) can contain those fields, and is not prompted on launch. Job templates that prompt for a credential or inventory, without defaults, are not available for inclusion in a workflow.
+As the workflow runs, jobs are spawned from the node’s linked template.
+Nodes linking to a job template which has prompt-driven fields (job_type, job_tags, skip_tags, limit) can contain those fields, and is not prompted on launch.
+Job templates that prompt for a credential or inventory, without defaults, are not available for inclusion in a workflow.
 
 ## Workflow scenarios and considerations
 
@@ -67,7 +74,7 @@ When building workflows, consider the following:
 
 - It is possible to launch several workflows simultaneously, and set a schedule for when to launch them. You can set notifications on workflows, such as when a job completes, similar to that of job templates.
 
- Note:
+Note:
 
 Job slicing is intended to scale job executions horizontally.
 
@@ -140,6 +147,6 @@ The `set_stats` module processes this workflow as follows:
 2. Through the `invoke_set_stats` playbook, `set_stats` is then invoked to artifact the URL of the uploaded `integration_results.txt` into the Ansible variable `integration_results_url`.
 3. The second playbook in the workflow consumes the Ansible extra variable `integration_results_url`. It calls out to the web by using the URI module to get the contents of the file uploaded by the previous job template job. Then, it prints out the contents of the obtained file.
 
- Note:
+Note:
 
 For artifacts to work, keep the default setting, `per_host = False` in the `set_stats` module.

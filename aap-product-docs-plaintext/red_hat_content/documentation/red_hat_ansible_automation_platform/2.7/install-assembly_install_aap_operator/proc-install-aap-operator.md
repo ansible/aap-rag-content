@@ -30,16 +30,16 @@ You cannot deploy Ansible Automation Platform in the default namespace on your O
 
 ### Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  Navigate to Operators> (and then)OperatorHub.
-3.  Search for Ansible Automation Platform and click Install.
-4.  Select an **Update Channel**:
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to Operators> (and then)OperatorHub.
+3. Search for Ansible Automation Platform and click Install.
+4. Select an **Update Channel**:
 
 - **stable-2.x**: installs a namespace-scoped operator, which limits deployments of automation hub and automation controller instances to the namespace the operator is installed in, this is suitable for most cases. The stable-2.x channel does not require administrator privileges and utilizes fewer resources because it only monitors a single namespace.
 - **stable-2.x-cluster-scoped**: installs the Ansible Automation Platform Operator in a single namespace that manages Ansible Automation Platform custom resources and deployments in all namespaces. The Ansible Automation Platform Operator requires administrator privileges for all namespaces in the cluster.
 
-5.  Select **Installation Mode**, **Installed Namespace**, and **Approval Strategy**.
-6.  Click Install.
+5. Select **Installation Mode**, **Installed Namespace**, and **Approval Strategy**.
+6. Click Install.
 
 ### Results
 

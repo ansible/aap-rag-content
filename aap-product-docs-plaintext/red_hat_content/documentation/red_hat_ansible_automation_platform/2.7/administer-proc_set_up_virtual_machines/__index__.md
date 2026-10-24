@@ -4,7 +4,7 @@ Prepare Red Hat Enterprise Linux virtual machines by setting up SSH access and e
 
 ## Procedure
 
-1.  SSH into each of the RHEL instances and perform the following steps. Depending on your network access and controls, SSH proxies or other access models might be required. Use the following command:
+1. SSH into each of the RHEL instances and perform the following steps. Depending on your network access and controls, SSH proxies or other access models might be required. Use the following command:
 
 ```
 ssh [username]@[host_ip_address]
@@ -16,8 +16,8 @@ For example, for an Ansible Automation Platform instance running on Amazon Web S
 ssh ec2-user@10.0.0.6
 ```
 
-2.  Create or copy an SSH key that can be used to connect from the hop node to the execution node in later steps. This can be a temporary key used just for the automation mesh configuration, or a long-lived key. The SSH user and key are used in later steps.
-3.  Enable your RHEL subscription with `baseos` and `appstream` repositories. Ansible Automation Platform RPM repositories are only available through subscription-manager, not the *Red Hat Update Infrastructure* (RHUI). If you attempt to use any other Linux footprint, including RHEL with RHUI, this causes errors.
+2. Create or copy an SSH key that can be used to connect from the hop node to the execution node in later steps. This can be a temporary key used just for the automation mesh configuration, or a long-lived key. The SSH user and key are used in later steps.
+3. Enable your RHEL subscription with `baseos` and `appstream` repositories. Ansible Automation Platform RPM repositories are only available through subscription-manager, not the *Red Hat Update Infrastructure* (RHUI). If you attempt to use any other Linux footprint, including RHEL with RHUI, this causes errors.
 
 ```
 sudo subscription-manager register --auto-attach
@@ -31,33 +31,33 @@ sudo subscription-manager register
 
 For more information about Simple Content Access, see [Getting started with simple content access](https://docs.redhat.com/en/documentation/subscription_central/1-latest/html/getting_started_with_simple_content_access/index).
 
-4.  Enable Ansible Automation Platform subscriptions and the proper Red Hat Ansible Automation Platform channel:
+4. Enable Ansible Automation Platform subscriptions and the proper Red Hat Ansible Automation Platform channel:
 For RHEL 8
 
 ```
-# subscription-manager repos --enable ansible-automation-platform-2.5-for-rhel-8-x86_64-rpms
+# subscription-manager repos --enable ansible-automation-platform-2.7-for-rhel-8-x86_64-rpms
 ```
 
 For RHEL 9
 
 ```
-# subscription-manager repos --enable ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms
+# subscription-manager repos --enable ansible-automation-platform-2.7-for-rhel-9-x86_64-rpms
 ```
 
 For ARM
 
 ```
-# subscription-manager repos --enable ansible-automation-platform-2.5-for-rhel-aarch64-rpms
+# subscription-manager repos --enable ansible-automation-platform-2.7-for-rhel-aarch64-rpms
 ```
 
-5.  Ensure the packages are up to date:
+5. Ensure the packages are up to date:
 
 
 ```
 sudo dnf upgrade -y
 ```
 
-6.  Install the ansible-core packages on the machine where the downloaded bundle is to run:
+6. Install the ansible-core packages on the machine where the downloaded bundle is to run:
 
 
 ```

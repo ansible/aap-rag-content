@@ -1,5 +1,5 @@
 # Deploy the MCP server on Ansible Automation Platform
-## Create an API token for the MCP server
+## Authenticate with the MCP server
 ### Troubleshoot MCP server errors
 
 This section contains information to help you diagnose and resolve issues with deploying the MCP server for Red Hat Ansible Automation Platform and connecting it to an external AI agent.

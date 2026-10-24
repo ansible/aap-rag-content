@@ -10,7 +10,7 @@
       "singlePageAnchor": null,
       "sections": [
         {
-          "title": "Add a template to Ansible automation portal",
+          "title": "Add a custom software template to Ansible automation portal",
           "visible": true,
           "weight": 1,
           "urlFragment": "self-service-add-template",
@@ -18,7 +18,7 @@
           "singlePageAnchor": "self-service-add-template"
         },
         {
-          "title": "Launch a template",
+          "title": "Launch a custom software template",
           "visible": true,
           "weight": 2,
           "urlFragment": "self-service-launch-template",

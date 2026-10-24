@@ -1,6 +1,6 @@
 +++
-title = "Back up your Ansible Automation Platform deployment - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_aap_backup"
+title = "Back up your Ansible Automation Platform deployment - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_aap_backup/aem-page/administer-assembly_aap_backup.html"
 last_crumb = "Back up your Ansible Automation Platform deployment"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Back up your Ansible Automation Platform deployment"
 oversized = "false"
@@ -29,7 +30,9 @@ type = "aem-page"
 
 Backing up your Red Hat Ansible Automation Platform deployment involves creating backup resources for your deployed instances.
 
-Use the following procedures to create backup resources for your Red Hat Ansible Automation Platform deployment. We recommend taking backups before upgrading the Ansible Automation Platform Operator. Take a backup regularly in case you want to restore the platform to a previous state.
+Use the following procedures to create backup resources for your Red Hat Ansible Automation Platform deployment.
+We recommend taking backups before upgrading the Ansible Automation Platform Operator.
+Take a backup regularly in case you want to restore the platform to a previous state.
 
 ## Back up your Ansible Automation Platform deployment
 
@@ -49,16 +52,16 @@ Ansible Automation Platform Operator creates a PersistentVolumeClaim (PVC) for y
 
 ### Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  Navigate to Operators> (and then)Installed Operators.
-3.  Select your Ansible Automation Platform Operator deployment.
-4.  Go to your **All Instances** tab, and click Create New.
-5.  Select **Ansible Automation Platform Backup** from the list. Note:
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to Operators> (and then)Installed Operators.
+3. Select your Ansible Automation Platform Operator deployment.
+4. Go to your **All Instances** tab, and click Create New.
+5. Select **Ansible Automation Platform Backup** from the list. Note:
       When creating the **Ansible Automation Platform Backup** resource it also creates backup resources for each of the nested components that are enabled.
 
-6.  In the **Name** field, enter a name for the backup.
-7.  In the **Deployment name** field, enter the name of the deployed Ansible Automation Platform instance being backed up. For example if your Ansible Automation Platform deployment must be backed up and the deployment name is aap, enter 'aap' in the **Deployment name** field.
-8.  Click Create. This results in an **AnsibleAutomationPlatformBackup** resource similar to the following:
+6. In the **Name** field, enter a name for the backup.
+7. In the **Deployment name** field, enter the name of the deployed Ansible Automation Platform instance being backed up. For example if your Ansible Automation Platform deployment must be backed up and the deployment name is aap, enter 'aap' in the **Deployment name** field.
+8. Click Create. This results in an **AnsibleAutomationPlatformBackup** resource similar to the following:
   
 
 ```
@@ -99,7 +102,7 @@ Define a custom Persistent Volume Claims (PVCs) to control backup storage alloca
 
 ### Procedure
 
-1.  Create a backup YAML file, for example `custom-pvc-backup.yaml`) , that defines `backup_pvc` and `create_backup_pvc` parameters for each component:
+1. Create a backup YAML file, for example `custom-pvc-backup.yaml`) , that defines `backup_pvc` and `create_backup_pvc` parameters for each component:
   
 
 ```none
@@ -141,7 +144,7 @@ spec:
   2. When set to `true`, the operator creates the PVC automatically if it does not already exist.
   3. Component-level settings override the global values for `backup_pvc`, `backup_storage_class`, and `backup_storage_requirements`. Each component can define its own `backup_pvc` to create a uniquely named PVC.
 
-2.  Apply the configuration:
+2. Apply the configuration:
   
 
 ```none
@@ -202,11 +205,11 @@ spec:
     no_log: false
 ```
 
-1.      The global `backup_storage_class` applies to the platform gateway. Components that do not specify their own `backup_storage_class` inherit this value.
+1. The global `backup_storage_class` applies to the platform gateway. Components that do not specify their own `backup_storage_class` inherit this value.
 
-2.      Each component can define its own `backup_pvc` to create a uniquely named PVC. Set `create_backup_pvc: true` to have the operator create the PVC automatically.
+2. Each component can define its own `backup_pvc` to create a uniquely named PVC. Set `create_backup_pvc: true` to have the operator create the PVC automatically.
 
-3.      Component-level values, such as `backup_storage_class: rook-block`, override the global setting for that component.
+3. Component-level values, such as `backup_storage_class: rook-block`, override the global setting for that component.
 
 ## Resolve naming conflicts when deploying an Automation Controller custom resource
 
@@ -218,7 +221,7 @@ The name specified for the new `AutomationController` custom resource must not m
 
 ### Procedure
 
-1.  Delete the existing `AutomationController` and the associated postgres PVC:
+1. Delete the existing `AutomationController` and the associated postgres PVC:
   
 
 ```
@@ -227,7 +230,7 @@ oc delete automationcontroller <YOUR_DEPLOYMENT_NAME> -n <YOUR_NAMESPACE>
     oc delete pvc postgres-15-<YOUR_DEPLOYMENT_NAME>-15-0 -n <YOUR_NAMESPACE>
 ```
 
-2.  Use `AutomationControllerRestore` with the same deployment_name in it:
+2. Use `AutomationControllerRestore` with the same deployment_name in it:
   
 
 ```

@@ -1,0 +1,23 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Install Ansible Development Tools with the AI assistant",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "What to do next",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-d4a25359-969e-413c-ba14-ee77f0de3125__postreq_1",
+          "anchor": null,
+          "singlePageAnchor": "GUID-d4a25359-969e-413c-ba14-ee77f0de3125__postreq_1"
+        }
+      ]
+    }
+  ]
+}

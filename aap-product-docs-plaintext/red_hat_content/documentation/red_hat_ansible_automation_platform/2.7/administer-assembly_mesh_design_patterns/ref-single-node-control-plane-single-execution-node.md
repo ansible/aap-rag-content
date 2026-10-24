@@ -19,21 +19,24 @@ The following image displays the topology of this mesh network.
 
 ![The topology map shows an automation controller group and an execution node. The automation controller group contains a single control node: aap_c_1. The execution node is aap_e_1. The aap_c_1 node is peered to aap_e_1.](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/mesh-single-control-node.png)
 
-The `[automationcontroller]` stanza defines the control nodes. If you add a new node to the automationcontroller group, it will automatically peer with the `aap_c_1.example.com` node.
+The `[automationcontroller]` stanza defines the control nodes.
+If you add a new node to the automationcontroller group, it will automatically peer with the `aap_c_1.example.com` node.
 
 The `[automationcontroller:vars]` stanza sets the node type to `control` for all nodes in the control plane and defines how the nodes peer to the execution nodes:
 
 - If you add a new node to the `execution_nodes` group, the control plane nodes automatically peer to it.
 - If you add a new node to the `automationcontroller` group, the node type is set to `control`.
 
-The `[execution_nodes]` stanza lists all the execution and hop nodes in the inventory. The default node type is `execution`. You can specify the node type for an individual node:
+The `[execution_nodes]` stanza lists all the execution and hop nodes in the inventory.
+The default node type is `execution`. You can specify the node type for an individual node:
 
 ```yaml
 [execution_nodes]
 aap_e_1.example.com node_type=execution
 ```
 
-Alternatively, you can set the node_type of all execution nodes in the `[execution_nodes]` group. When you add new nodes to the group, they are automatically set to execution nodes.
+Alternatively, you can set the node_type of all execution nodes in the `[execution_nodes]` group.
+When you add new nodes to the group, they are automatically set to execution nodes.
 
 ```yaml
 [execution_nodes]

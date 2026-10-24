@@ -18,9 +18,17 @@
           "singlePageAnchor": "con-controller-job-slice-considerations"
         },
         {
-          "title": "Job slice execution behavior",
+          "title": "Job slicing scaling behavior",
           "visible": true,
           "weight": 2,
+          "urlFragment": "con-controller-job-slice-scaling",
+          "anchor": null,
+          "singlePageAnchor": "con-controller-job-slice-scaling"
+        },
+        {
+          "title": "Job slice execution behavior",
+          "visible": true,
+          "weight": 3,
           "urlFragment": "controller-job-slice-execution-behavior",
           "anchor": null,
           "singlePageAnchor": "controller-job-slice-execution-behavior"
@@ -28,7 +36,7 @@
         {
           "title": "Search job slices",
           "visible": true,
-          "weight": 3,
+          "weight": 4,
           "urlFragment": "controller-search-job-slices",
           "anchor": null,
           "singlePageAnchor": "controller-search-job-slices"

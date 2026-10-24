@@ -23,12 +23,12 @@ By default, Red Hat Ansible Automation Platform Service on AWS includes two hop 
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Instances.
-2.  On the **Instances** list page, click Add instance. The **Add Instance** window opens.
+1. From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Instances.
+2. On the **Instances** list page, click Add instance. The **Add Instance** window opens.
 ![Create new Instance](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/instances_create_new.png)
 An instance requires the following attributes:
 
-- **Host name**: (required) Enter a fully qualified domain name (public DNS) or IP address for your instance. This field is equivalent to `hostname` for installer-based deployments.  Note:
+- **Host name**: (required) Enter a fully qualified domain name (public DNS) or IP address for your instance. This field is equivalent to `hostname` for installer-based deployments. Note:
 If the instance uses private DNS that cannot be resolved from the control cluster, DNS lookup routing fails, and the generated SSL/TLS certificates is invalid. Use the IP address instead.
 
 - Optional: **Description**: Enter a description for the instance.
@@ -49,11 +49,11 @@ If the instance uses private DNS that cannot be resolved from the control cluste
 - If the execution node needs to have requests pushed directly from automation controller, then check the **Peers from Control** box.
 - If the execution node is peered to a hop node, then make sure that **Peers from Control** is not checked.
 
-3.  Click Associate peers.
-4.  To view a graphical representation of your updated topology, see [Topology view](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_topology_viewer#assembly-controller-topology-viewer "Use the Topology View to view node type, node health, and specific details about each node if you already have a mesh topology deployed.").  Note:
+3. Click Associate peers.
+4. To view a graphical representation of your updated topology, see [Topology view](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_topology_viewer#assembly-controller-topology-viewer "Use the Topology View to view node type, node health, and specific details about each node if you already have a mesh topology deployed."). Note:
 Complete the following steps from any computer that has SSH access to the newly created instance.
 
-5.  Click the ![Download](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/download.png) icon next to **Download Bundle** to download the tar file that includes this new instance and the files necessary to install the created node into the automation mesh. The install bundle has TLS certificates and keys, a certificate authority, and a proper Receptor configuration file.
+5. Click the ![Download](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/download.png) icon next to **Download Bundle** to download the tar file that includes this new instance and the files necessary to install the created node into the automation mesh. The install bundle has TLS certificates and keys, a certificate authority, and a proper Receptor configuration file.
 
 ```
 receptor-ca.crt
@@ -65,8 +65,8 @@ group_vars/all.yml
 requirements.yml
 ```
 
-6.  Extract the downloaded `tar.gz` Install Bundle from the location where you downloaded it. To ensure that these files are in the correct location on the remote machine, the install bundle includes the `install_receptor.yml` playbook.
-7.  Before running the `ansible-playbook` command, edit the following fields in the `inventory.yml` file:
+6. Extract the downloaded `tar.gz` Install Bundle from the location where you downloaded it. To ensure that these files are in the correct location on the remote machine, the install bundle includes the `install_receptor.yml` playbook.
+7. Before running the `ansible-playbook` command, edit the following fields in the `inventory.yml` file:
 
 
 ```
@@ -83,7 +83,7 @@ ansible_ssh_private_key_file: ~/.ssh/<id_rsa>
 - Set `ansible_ssh_private_key_file` to contain the filename of the private key used to connect to the instance.
 - The content of the `inventory.yml` file serves as a template and has variables for roles that are applied during the installation and configuration of a receptor node in a mesh topology. You can change some of the other fields, or replace the file in its entirety for advanced scenarios. For more information, see [Role Variables](https://github.com/ansible/receptor-collection/blob/main/README.md).
 
-8.  For a node that uses a private DNS, add the following line to `inventory.yml`:
+8. For a node that uses a private DNS, add the following line to `inventory.yml`:
 
 
 ```
@@ -92,9 +92,9 @@ ansible_ssh_common_args: <your ssh ProxyCommand setting>
 
 This instructs the `install-receptor.yml` playbook to use the proxy command to connect through the local DNS node to the private node.
 
-9.  When the attributes are configured, click Save. The **Details** page of the created instance opens.
-10.  Save the file to continue.
-11.  The system that is going to run the install bundle to setup the remote node and run `ansible-playbook` requires the `ansible.receptor` collection to be installed:
+9. When the attributes are configured, click Save. The **Details** page of the created instance opens.
+10. Save the file to continue.
+11. The system that is going to run the install bundle to setup the remote node and run `ansible-playbook` requires the `ansible.receptor` collection to be installed:
 
 
 ```
@@ -110,14 +110,14 @@ ansible-galaxy install -r requirements.yml
 - Installing the receptor collection dependency from the `requirements.yml` file consistently retrieves the receptor version specified there. Additionally, it retrieves any other collection dependencies that might be needed in the future.
 - Install the receptor collection on all nodes where your playbook will run, otherwise an error occurs.
 
-12.  If `receptor_listener_port` is defined, the machine also requires an available open port on which to establish inbound TCP connections, for example, 27199. Run the following command to open port 27199 for receptor communication (Make sure you have port 27199 open in your firewall):
+12. If `receptor_listener_port` is defined, the machine also requires an available open port on which to establish inbound TCP connections, for example, 27199. Run the following command to open port 27199 for receptor communication (Make sure you have port 27199 open in your firewall):
 
 
 ```
 sudo firewall-cmd --permanent --zone=public --add-port=27199/tcp
 ```
 
-13.  Run the following playbook on the machine where you want to update your automation mesh:
+13. Run the following playbook on the machine where you want to update your automation mesh:
 
 
 ```

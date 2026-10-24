@@ -6,4 +6,3 @@
 3. Ansible automation portal converts Ansible Automation Platform entities into portal entities and displays them in the UI.
 4. Synchronization runs on a configurable schedule (for example, every 60 minutes).
 5. Users access and launch resources based on their existing Ansible Automation Platform permissions.
-

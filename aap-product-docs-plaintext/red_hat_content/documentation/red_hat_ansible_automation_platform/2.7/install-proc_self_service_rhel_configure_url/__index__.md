@@ -9,14 +9,14 @@ The Ansible automation portal RHEL appliance auto-detects the user-accessible UR
 
 ## Procedure
 
-1.  Edit the configuration file:
+1. Edit the configuration file:
 
 
 ```terminal
 $ sudo vi /etc/portal/configs/app-config/app-config.production.yaml
 ```
 
-2.  Update the following three values.
+2. Update the following three values.
 This example uses port 8443. If you are using the standard port 443, you do not need to specify the port:
 
 ```yaml
@@ -28,15 +28,15 @@ cors:
 origin: "https://portal.example.com:8443"
 ```
 
-3.  Save the file and restart the Ansible automation portal service.
+3. Save the file and restart the Ansible automation portal service.
 Restarting the `portal` service also restarts `postgres` and `devtools` due to service dependencies:
 
 ```terminal
 $ sudo systemctl restart portal
 ```
 
-4.  If you set a custom port, open that port on any firewall and, for Red Hat OpenShift Virtualization deployments, update the OpenShift route.
-5.  Update the OAuth redirect URI in Ansible Automation Platform to match the new URL.
+4. If you set a custom port, open that port on any firewall and, for Red Hat OpenShift Virtualization deployments, update the OpenShift route.
+5. Update the OAuth redirect URI in Ansible Automation Platform to match the new URL.
 
 1. In Ansible Automation Platform, navigate to **Access Management** > **OAuth Applications**.
 2. Edit the OAuth application used by Ansible automation portal.

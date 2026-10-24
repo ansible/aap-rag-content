@@ -20,7 +20,7 @@ metadata:
 name: workflow
 spec:
 connection_secret: aap-access
-workflow_template_name: Demo Job Template
+workflow_template_name: ExampleTowerWorkflow
 inventory: Demo Inventory
 ```
 

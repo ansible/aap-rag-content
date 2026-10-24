@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 title = "Create and integrate custom MCP Servers in execution environments - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-create_and_integrate_custom_mcp_servers_in_execution_environments"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-define__create__and_build_execution_environments/", "Define, create, and build execution environments"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-create_and_integrate_custom_mcp_servers_in_execution_environments/aem-page/administer-create_and_integrate_custom_mcp_servers_in_execution_environments.html"
 last_crumb = "Create and integrate custom MCP Servers in execution environments"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Create and integrate custom MCP Servers in execution environments"
 oversized = "false"
@@ -59,7 +60,7 @@ Before including an MCP server in your execution environment:
 
 - **Pin to specific versions**: Use explicit version numbers in your registry metadata rather than latest. `cfn_mcp_version: "1.0.19"`
 
-     This ensures reproducible builds and prevents unexpected behavior from upstream changes.
+    This ensures reproducible builds and prevents unexpected behavior from upstream changes.
 
 - **Use read-only mode where available**: Many MCP servers support a read-only flag that prevents mutating operations:
   
@@ -143,7 +144,7 @@ This procedure uses the AWS CloudFormation MCP Server (`awslabs.cfn-mcp-server`)
 
 ### Procedure
 
-1.  Create the collection directory structure and a new Ansible collection to hold your custom MCP role:
+1. Create the collection directory structure and a new Ansible collection to hold your custom MCP role:
   
 
 ```
@@ -175,7 +176,7 @@ collections/ansible_collections/myorg/mcp_cfn/
 
 ```
 
-2.  Define the collection metadata by creating `galaxy.yml` at the root of your collection:
+2. Define the collection metadata by creating `galaxy.yml` at the root of your collection:
   
 
 ```
@@ -200,7 +201,7 @@ dependencies:
 
     The dependencies field ensures that the `ansible.mcp_builder` collection is installed alongside your collection.
 
-3.  Define the role registry metadata by creating `roles/cfn_mcp/defaults/main.yml ` with the registry definition for your MCP server:
+3. Define the role registry metadata by creating `roles/cfn_mcp/defaults/main.yml ` with the registry definition for your MCP server:
   
 
 ```
@@ -239,7 +240,7 @@ myrole_build_path: "example/build"
 
 ```
 
-4.  Create the role tasks by creating `roles/cfn_mcp/tasks/main.yml`:
+4. Create the role tasks by creating `roles/cfn_mcp/tasks/main.yml`:
   
 
 ```
@@ -281,7 +282,7 @@ myrole_build_path: "example/build"
 
     The verification step is optional but recommended. It confirms the installed server is callable.
 
-5.  Create the role metadata by creating `roles/cfn_mcp/meta/main.yml`:
+5. Create the role metadata by creating `roles/cfn_mcp/meta/main.yml`:
   
 
 ```
@@ -306,7 +307,7 @@ galaxy_info:
   - ansible.mcp_builder
 ```
 
-6.  Create the installation playbook `playbooks/install_cfn_mcp.yml`:
+6. Create the installation playbook `playbooks/install_cfn_mcp.yml`:
   
 
 ```
@@ -341,7 +342,7 @@ galaxy_info:
   Note:
   The dev preview `ansible.mcp_builder.install_mcp` playbook only supports roles within the `ansible.mcp_builder` namespace. Custom roles in your own collection namespace require their own playbook, as shown above.
 
-7.  Build your collection into a distributable tar file:
+7. Build your collection into a distributable tar file:
   `cd collections/ansible_collections/myorg/mcp_cfn`
   `ansible-galaxy collection build --output-path /path/to/output/`
       This produces a file: `myorg-mcp_cfn-1.0.19.tar.gz. `
@@ -352,7 +353,7 @@ Use the ansible-builder tool to compile and build an execution environment conta
 
 ### Procedure
 
-1.  Create a working directory for the execution environment build and copy in the required collection tarballs:
+1. Create a working directory for the execution environment build and copy in the required collection tarballs:
   
 
 ```
@@ -362,7 +363,7 @@ cp ansible-mcp_builder-1.0.3.tar.gz ee-build/  # if using a local copy
 
 ```
 
-2.  Create `ee-build/requirements.yml ` listing your collections:
+2. Create `ee-build/requirements.yml ` listing your collections:
   
 
 ```
@@ -392,7 +393,7 @@ collections:
   - name: ansible.mcp
 ```
 
-3.  Create `ee-build/execution-environment.yml`:
+3. Create `ee-build/execution-environment.yml`:
   
   Note:
       Replace `<platform-version>` with the namespace for your version of Ansible Automation Platform. Replace `<rhel-version>` with your Red Hat Enterprise Linux version
@@ -431,7 +432,7 @@ version: 3
 
     `additional_build_steps.append_final`: Runs your installation playbook in the final build stage, after collections are installed.
 
-4.  Run ansible-builder to build your execution environment image:
+4. Run ansible-builder to build your execution environment image:
   
 
 ```
@@ -491,7 +492,7 @@ Available MCP servers:
 
 Inspect the generated manifest directly:
 
- `podman run --rm my-cfn-mcp-ee:latest cat /opt/mcp/mcpservers.json`
+`podman run --rm my-cfn-mcp-ee:latest cat /opt/mcp/mcpservers.json`
 
 Expected output:
 
@@ -511,7 +512,7 @@ Expected output:
 
 Run the MCP server with `--help` to confirm it is callable:
 
- `podman run --rm my-cfn-mcp-ee:latest mcp_manage run awslabs.cfn-mcp-server --help`
+`podman run --rm my-cfn-mcp-ee:latest mcp_manage run awslabs.cfn-mcp-server --help`
 
 For servers that require credentials (such as AWS), pass environment variables:
 
@@ -632,11 +633,11 @@ To execute automation tasks using your custom MCP server, add its execution envi
 
 #### Procedure
 
-1.  In the navigation panel, select **Automation execution > Administration > Execution Environments**.
-2.  Click **Add**.
-3.  Enter the image path (for example, `registry.example.com/ee/my-cfn-mcp-ee:latest`).
-4.  Configure registry credentials if required.
-5.  Save the execution environment.
+1. In the navigation panel, select **Automation execution > Administration > Execution Environments**.
+2. Click **Add**.
+3. Enter the image path (for example, `registry.example.com/ee/my-cfn-mcp-ee:latest`).
+4. Configure registry credentials if required.
+5. Save the execution environment.
 
 ### Assign to a Job Template
 
@@ -644,11 +645,11 @@ Configure your job template with an MCP-enabled execution environment and creden
 
 #### Procedure
 
-1.  In the navigation panel, select `Automation execution > Templates`.
-2.  Edit or create a **Job Template**.
-3.  In the **Execution Environment** field, select your MCP-enabled execution environment.
-4.  Configure any required credentials for the MCP server (such as AWS credentials).
-5.  Save and launch the template.
+1. In the navigation panel, select `Automation execution > Templates`.
+2. Edit or create a **Job Template**.
+3. In the **Execution Environment** field, select your MCP-enabled execution environment.
+4. Configure any required credentials for the MCP server (such as AWS credentials).
+5. Save and launch the template.
 
 ## Debug common issues
 
@@ -656,12 +657,12 @@ Diagnose and resolve initialization failures when your MCP server is unlisted or
 
 ### Procedure
 
-1.  Check the build log: Look for errors during the ansible-playbook step of the build output. Common issues include missing dependencies or network access failures during package download.
-2.  Inspect the installed files: Verify the binary or script is present:
+1. Check the build log: Look for errors during the ansible-playbook step of the build output. Common issues include missing dependencies or network access failures during package download.
+2. Inspect the installed files: Verify the binary or script is present:
   `podman run --rm my-cfn-mcp-ee:latest ls -la /opt/mcp/bin/`
 
-3.  Check the manifest separately from the binary: If `mcp_manage` list shows the server but `mcp_manage` run fails, the manifest was generated but the package installation may have failed silently.
-4.  Run the server directly: Bypass `mcp_manage` and call the server binary directly to see raw error output:
+3. Check the manifest separately from the binary: If `mcp_manage` list shows the server but `mcp_manage` run fails, the manifest was generated but the package installation may have failed silently.
+4. Run the server directly: Bypass `mcp_manage` and call the server binary directly to see raw error output:
    ` podman run --rm my-cfn-mcp-ee:latest /opt/mcp/bin/awslabs.cfn-mcp-server --help`
 
 **Troubleshoot build and runtime errors**
@@ -672,7 +673,7 @@ Diagnose and resolve common issues encountered when building, configuring, and i
 
 | Error                                    | Reason                                                                                                                                                                                                   |
 | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Unable to find collection artifact file. | This error occurs when the collection tarball path in requirements.yml does not match the path inside the container. Ensure:   The tarball is listed in `additional_build_files` with a dest value.The source path in `requirements.yml` uses `/build/configs/<filename>` (not the host filesystem path). |
+| Unable to find collection artifact file. | This error occurs when the collection tarball path in requirements.yml does not match the path inside the container. Ensure:  The tarball is listed in `additional_build_files` with a dest value.The source path in `requirements.yml` uses `/build/configs/<filename>` (not the host filesystem path). |
 | Package download fails during build      | The execution environment build environment requires network access to download packages from PyPI, npm, or Git repositories. If building behind a proxy, configure proxy settings in your container build environment. If building in an air-gapped environment, you must pre-download packages and include them using`additional_build_files`. |
 | Go build fails with "module not found"   | For Go-based MCP servers, ensure the`build_repo` URL and`build_repo_branch` are correct and accessible. The framework clones the repository and runs go mod download before building.                    |
 
@@ -680,9 +681,9 @@ Diagnose and resolve common issues encountered when building, configuring, and i
 
 | Error                                   | Reason                                                                                                                                                                                                   |
 | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `mcp_manage`: command not found         | <br>The `mcp_manage` script is installed at `/opt/mcp/mcp_manage` with a symlink at `/usr/local/bin/mcp_manage`. If it is missing, the common role's `generate_management` task may have been skipped.<br>Ensure your playbook includes `ansible.mcp_builder.common` with `public: true` as the first task |
-| MCP server fails with permission errors | <br>The execution environment runs as user 1000 (non-root). Ensure your playbook includes the ownership fix task:    ``` - name: Fix ownership of all MCP installations for runtime user   ansible.builtin.file:     path: "{{ common_mcp_base_path }}"     state: directory     recurse: true     owner: "{{ common_runtime_user }}"     group: "{{ common_runtime_user }}"   ``` |
-| Server listed but not executing         | <br>If `mcp_manage` list shows your server but `mcp_manage` run fails, check:   <br>The binary exists at the path shown in the manifest.Required runtime dependencies are present (for example, `Node.js` for npm-based servers).Environment variables required by the server are passed at container runtime. |
+| `mcp_manage`: command not found         | The `mcp_manage` script is installed at `/opt/mcp/mcp_manage` with a symlink at `/usr/local/bin/mcp_manage`. If it is missing, the common role's `generate_management` task may have been skipped.<br>Ensure your playbook includes `ansible.mcp_builder.common` with `public: true` as the first task |
+| MCP server fails with permission errors | The execution environment runs as user 1000 (non-root). Ensure your playbook includes the ownership fix task:    ``` - name: Fix ownership of all MCP installations for runtime user   ansible.builtin.file:     path: "{{ common_mcp_base_path }}"     state: directory     recurse: true     owner: "{{ common_runtime_user }}"     group: "{{ common_runtime_user }}"   ``` |
+| Server listed but not executing         | If `mcp_manage` list shows your server but `mcp_manage` run fails, check:   <br>The binary exists at the path shown in the manifest.Required runtime dependencies are present (for example, `Node.js` for npm-based servers).Environment variables required by the server are passed at container runtime. |
 
 **Variable validation errors**
 

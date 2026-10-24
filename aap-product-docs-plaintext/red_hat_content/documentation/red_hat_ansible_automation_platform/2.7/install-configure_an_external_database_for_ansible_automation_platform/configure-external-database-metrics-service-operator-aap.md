@@ -30,7 +30,7 @@ The following section outlines the steps to configure an external database for m
 
 ### Procedure
 
-1.  Create a `postgres_configuration_secret` YAML file for the `metrics_service` database, following the template below:
+1. Create a `postgres_configuration_secret` YAML file for the `metrics_service` database, following the template below:
 
 
 ```
@@ -59,7 +59,7 @@ When configuring the secret:
 - **password:** Ensure the password does not contain single or double quotes (`'`, `"`) or backslashes (`\`) to avoid any issues during deployment, backup or restoration.
 - **sslmode:** This variable is valid for external databases only. The allowed values are: `prefer`, `disable`, `allow`, `require`, `verify-ca`, and `verify-full`.
 
-2.  Create a second secret for read-only access to the automation controller database:
+2. Create a second secret for read-only access to the automation controller database:
 
 
 ```
@@ -83,7 +83,7 @@ type: Opaque
 Important:
 The `ms_awx_readonly` user must be created in your external database with SELECT privileges on the automation controller database before deployment. For instructions on creating this user, see Configure an external database for Ansible Automation Platform (containerized).
 
-3.  Apply both secrets to your cluster using the `oc create` command:
+3. Apply both secrets to your cluster using the `oc create` command:
 
 
 ```
@@ -91,7 +91,7 @@ $ oc create -f metrics-postgres-configuration.yml
 $ oc create -f metrics-controller-readonly-configuration.yml
 ```
 
-4.  When creating your AnsibleAutomationPlatform custom resource object, specify both secrets under the metrics section in your spec, following the example below:
+4. When creating your AnsibleAutomationPlatform custom resource object, specify both secrets under the metrics section in your spec, following the example below:
 
 
 ```
@@ -101,16 +101,17 @@ metadata:
 name: myaap
 spec:
 metrics:
-disabled: false
 database:
 database_secret: automation-platform-metrics-postgres-configuration
 externally_managed: true
+ms_awx_readonly_user_secret: metrics-controller-readonly-configuration
 ms_awx_readonly_user:
 externally_managed: true
-ms_awx_readonly_user_secret: metrics-controller-readonly-configuration
 ```
 
 
+Important:
+The `ms_awx_readonly_user_secret` field must be nested under `database`, while the `ms_awx_readonly_user.externally_managed` flag is a sibling of `database` at the `metrics` level. These two fields are intentionally at different nesting levels in the custom resource.
 Note:
 If you have an existing metrics service instance, specify its name under `metrics.name` to apply these settings to the existing instance. If you omit the name field, the operator will create a new instance with the default name pattern `<aap-instance-name>`-metrics.
 For more examples of Ansible Automation Platform custom resources, see Red Hat Ansible Automation Platform custom resources

@@ -9,10 +9,10 @@ The following example procedure treats the "ansible" service account as a truste
 
 ### Procedure
 
-1.  Create the file `/etc/fapolicy/rules.d/50-ansible.rules` with the following content:
+1. Create the file `/etc/fapolicy/rules.d/50-ansible.rules` with the following content:
 `allow perm=any uid=ansible trust=1 : dir=/home/ansible/.ansible/tmp/`
 
-2.  Restart the fapolicyd service:
+2. Restart the fapolicyd service:
 `sudo systemctl restart fapolicyd.service`
 
 This example rule might require modification to work with any other `fapolicyd` rules that exist on the managed RHEL nodes, and must be thoroughly tested and approved by your security auditor before being put into production.

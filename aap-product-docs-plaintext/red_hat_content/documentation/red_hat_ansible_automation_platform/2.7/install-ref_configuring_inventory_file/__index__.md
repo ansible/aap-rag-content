@@ -15,6 +15,10 @@ The following inventory file examples are for online installations. For disconne
 
 Important:
 
+For online installations, you must obtain registry credentials before configuring the inventory file. See [Create a registry service account](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_set_registry_username_password "Create a registry service account on the Red Hat Customer Portal to generate a token and username. Use these to set the registry_username and registry_password variables required for online non-bundled installations.") for steps to generate `registry_username` and `registry_password` values. Ensure your host has network access to Red Hat registries; see [Choose an installation type](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_choosing_installation_type "Containerized Ansible Automation Platform supports two installation types: online and disconnected. Review the requirements for each to decide which is appropriate for your environment.") for installation type prerequisites.
+
+Important:
+
 The `[automationmetrics]` inventory group is required in Ansible Automation Platform 2.7 when `[automationcontroller]` is present. The installer will fail preflight checks if this group is missing.
 
 **Metrics services deployment requirements:** Growth topology (all-in-one): Metrics service shares the same host with all other Ansible Automation Platform components. This is the only supported topology where metrics service shares the same host with other components.
@@ -30,7 +34,7 @@ Additionally, growth topology and enterprise topology inventory files are availa
 
 To use the example inventory files, replace the `< >` placeholders with your specific variables, and update the host names.
 
-Refer to the `README.md` file in the installation directory or [Inventory file variables](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_inventory_file_vars "The following tables contain information about the variables used in Ansible Automation Platform’s installation inventory files.") for more information about optional and required variables.
+Refer to the `README.md` file in the installation directory or [Inventory file variables](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_inventory_file_vars#appendix-inventory-files-vars "The following tables contain information about the variables used in Ansible Automation Platform’s installation inventory files.") for more information about optional and required variables.
 
 Important:
 

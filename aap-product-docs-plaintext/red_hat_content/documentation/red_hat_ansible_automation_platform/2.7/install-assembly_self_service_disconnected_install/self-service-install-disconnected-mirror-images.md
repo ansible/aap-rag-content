@@ -40,7 +40,7 @@ Replace version placeholders with the versions bundled with your Helm chart. See
 
 ### Procedure
 
-1.  Copy the Red Hat Developer Hub hub image to your disconnected registry:
+1. Copy the Red Hat Developer Hub hub image to your disconnected registry:
 
 
 ```terminal
@@ -51,7 +51,7 @@ docker://<disconnected_registry_url>/rhdh/rhdh-hub-rhel9:<rhdh_version>
 
 This image is used for both the main application container and the `install-dynamic-plugins` init container. Replace `<rhdh_version>` with the Red Hat Developer Hub version bundled with your Helm chart.
 
-2.  If you use the built-in PostgreSQL database, copy the PostgreSQL image.
+2. If you use the built-in PostgreSQL database, copy the PostgreSQL image.
 An external database is the supported production architecture and does not require this step.
 
 ```terminal
@@ -62,7 +62,7 @@ docker://<disconnected_registry_url>/rhel9/postgresql-<version>:<tag>
 
 Replace `<version>` with the PostgreSQL major version and `<tag>` with the image tag bundled with your Helm chart. See the [Ansible Automation Portal Lifecycle](https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-lifecycle) page for version mappings.
 
-3.  Copy the plug-in catalog index image:
+3. Copy the plug-in catalog index image:
 
 
 ```terminal
@@ -73,7 +73,7 @@ docker://<disconnected_registry_url>/rhdh/rhdh-plugin-catalog-index-rhel9:<rhdh_
 
 The Mirror dynamic plug-in artifacts procedure rebuilds this image with updated registry references. You must still mirror the original image because the script uses it as its source.
 
-4.  If you use OCI container delivery, copy the Ansible plug-ins OCI artifacts image:
+4. If you use OCI container delivery, copy the Ansible plug-ins OCI artifacts image:
 
 
 ```terminal
@@ -82,7 +82,7 @@ docker://registry.redhat.io/ansible-automation-platform/automation-portal:<plugi
 docker://<disconnected_registry_url>/ansible-automation-platform/automation-portal:<plugin-version>
 ```
 
-5.  Copy the Ansible Dev Tools sidecar image, using the path that matches your Ansible Automation Platform version.
+5. Copy the Ansible Dev Tools sidecar image, using the path that matches your Ansible Automation Platform version.
 **Ansible Automation Platform 2.5:**
 
 ```terminal

@@ -1,7 +1,7 @@
 +++
 title = "Collect configuration and diagnostic information - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-assembly_diagnosing_the_problem"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-assembly_diagnosing_the_problem"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-assembly_diagnosing_the_problem/", "Collect configuration and diagnostic information"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/troubleshoot-assembly_diagnosing_the_problem/aem-page/troubleshoot-assembly_diagnosing_the_problem.html"
 last_crumb = "Collect configuration and diagnostic information"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Collect configuration and diagnostic information"
 oversized = "false"
@@ -45,14 +46,14 @@ If your OpenShift environment does not have access to `registry.redhat.io` and y
 
 ### Procedure
 
-1.  Log in to your cluster:
+1. Log in to your cluster:
   
 
 ```
 oc login <openshift_url>
 ```
 
-2.  Run one of the following commands based on your level of access in the cluster:
+2. Run one of the following commands based on your level of access in the cluster:
 
   - Run `must-gather` across the entire cluster:
 
@@ -71,7 +72,7 @@ oc adm must-gather --image=registry.redhat.io/ansible-automation-platform-27/aap
 
     * `-- /usr/bin/ns-gather` limits the `must-gather` data collection to a specified namespace
 
-3.  To attach the `must-gather` archive to your support case, create a compressed file from the `must-gather` directory created before and attach it to your support case.   - For example, on a computer that uses a Linux operating system, run the following command, replacing `<must-gather-local.5421342344627712289/>` with the `must-gather` directory name:
+3. To attach the `must-gather` archive to your support case, create a compressed file from the `must-gather` directory created before and attach it to your support case.   - For example, on a computer that uses a Linux operating system, run the following command, replacing `<must-gather-local.5421342344627712289/>` with the `must-gather` directory name:
 
 ```
 $ tar cvaf must-gather.tar.gz <must-gather.local.5421342344627712289/>

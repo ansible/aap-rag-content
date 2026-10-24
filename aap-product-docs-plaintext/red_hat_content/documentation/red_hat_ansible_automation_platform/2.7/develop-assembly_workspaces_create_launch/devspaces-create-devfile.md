@@ -1,14 +1,16 @@
 # Create and launch an Ansible development workspace
 ## Create a devfile for an Ansible development workspace
 
-To ensure your Ansible development workspace launches with the correct Ansible dev spaces image, you must add a `devfile` to your git repository. A `devfile` is a YAML file that defines the development environment for a project in Red Hat OpenShift Dev Spaces.
+To ensure your Ansible development workspace launches with the correct Ansible dev spaces image,
+you must add a `devfile` to your git repository.
+A `devfile` is a YAML file that defines the development environment for a project in Red Hat OpenShift Dev Spaces.
 
 ### About this task
 
 ### Procedure
 
-1.  In your Git repository for your Ansible development workspace, create a new file named `devfile.yaml`.
-2.  Copy and paste the following sample code into the `devfile.yaml` file:
+1. In your Git repository for your Ansible development workspace, create a new file named `devfile.yaml`.
+2. Copy and paste the following sample code into the `devfile.yaml` file:
 
 
 ```
@@ -41,5 +43,5 @@ The environment variables configure the following:
 - `ADT_CONTAINER_ENGINE`: Enables podman for container-in-container operations, including execution environments.
 
 3. **Optional:** If you cannot pull images from the Red Hat Container Catalog (RHCC), modify the `image` value to point to your organization's internal registry.
-4.  Add the `devfile.yaml` file to your Git repository and push the changes.
+4. Add the `devfile.yaml` file to your Git repository and push the changes.
 

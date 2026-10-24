@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-assembly_appendix_troubleshoot_containerized_aap"
 title = "Troubleshoot your containerized deployment - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-assembly_appendix_troubleshoot_containerized_aap"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-assembly_appendix_troubleshoot_containerized_aap/", "Troubleshoot your containerized deployment"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/troubleshoot-assembly_appendix_troubleshoot_containerized_aap/aem-page/troubleshoot-assembly_appendix_troubleshoot_containerized_aap.html"
 last_crumb = "Troubleshoot your containerized deployment"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Troubleshoot your containerized deployment"
 oversized = "false"
@@ -39,14 +40,14 @@ You can collect an `sos` report for each host in your containerized Ansible Auto
 
 ### Procedure
 
-1.  Go to the Ansible Automation Platform installation directory.
-2.  Run the `log_gathering` playbook. This playbook connects to each host in the inventory file, installs the `sos` tool, and generates the `sos` report.
+1. Go to the Ansible Automation Platform installation directory.
+2. Run the `log_gathering` playbook. This playbook connects to each host in the inventory file, installs the `sos` tool, and generates the `sos` report.
 
 ```
 $ ansible-playbook -i <path_to_inventory_file> ansible.containerized_installer.log_gathering
 ```
 
-3.  To collect container-level logs, run the `sos` report directly on each host with the `aap_containerized` plugin enabled:
+3. To collect container-level logs, run the `sos` report directly on each host with the `aap_containerized` plugin enabled:
   
 
 ```
@@ -55,31 +56,31 @@ $ sudo sos report -e aap_containerized -k aap_containerized.username=*<username>
 
     where *<username>* is the service account or user running the containerized installation.
 
-4.  Optional: To define additional parameters, specify them with the `-e` option. For example:
+4. Optional: To define additional parameters, specify them with the `-e` option. For example:
   
 
 ```
 $ ansible-playbook -i <path_to_inventory_file> ansible.containerized_installer.log_gathering -e 'target_sos_directory=<path_to_files>' -e 'case_number=0000000' -e 'clean=true' -e 'upload=true' -s
 ```
 
-  1.  You can use the `-s` option to step through each task in the playbook and confirm its execution. This is optional but can be helpful for debugging.
-  2.  The following is a list of the parameters you can use with the `log_gathering` playbook:
+  1. You can use the `-s` option to step through each task in the playbook and confirm its execution. This is optional but can be helpful for debugging.
+  2. The following is a list of the parameters you can use with the `log_gathering` playbook:
     *Table 1. Parameter reference*
 
-      | Parameter name              | Description                                                              | Default                                     |
-      | --------------------------- | ------------------------------------------------------------------------ | ------------------------------------------- |
-      | <br> `target_sos_directory` | <br>Used to change the default location for the `sos` report files.      | <br>`/tmp` directory of the current server. |
-      | <br> `case_number`          | <br>Specifies the support case number if relevant to the log gathering.  |                                             |
-      | <br> `clean`                | <br>Obfuscates sensitive data that might be present on the `sos` report. | <br> `false`                                |
-      | <br> `upload`               | <br>Automatically uploads the `sos` report data to Red Hat.              | <br> `false`                                |
+      | Parameter name         | Description                                                          | Default                                 |
+      | ---------------------- | -------------------------------------------------------------------- | --------------------------------------- |
+      | `target_sos_directory` | Used to change the default location for the `sos` report files.      | `/tmp` directory of the current server. |
+      | `case_number`          | Specifies the support case number if relevant to the log gathering.  |                                         |
+      | `clean`                | Obfuscates sensitive data that might be present on the `sos` report. | `false`                                 |
+      | `upload`               | Automatically uploads the `sos` report data to Red Hat.              | `false`                                 |
 
-5.  Gather the `sos` report files described in the playbook output and share them with the support engineer or directly upload the `sos` report to Red Hat using the `upload=true` additional parameter.
+5. Gather the `sos` report files described in the playbook output and share them with the support engineer or directly upload the `sos` report to Red Hat using the `upload=true` additional parameter.
 
 ## Diagnose the problem
 
 For general container-based troubleshooting, you can inspect the container logs for any running service to help troubleshoot underlying issues.
 
- **Identifying the running containers**
+**Identifying the running containers**
 
 To get a list of the running container names run the following command:
 
@@ -89,29 +90,29 @@ $ podman ps --all --format "{{.Names}}"
 
 *Table 2. Container details*
 
-| Component group           | Container name                                   | Purpose                                                                                                                                                                  |
-| ------------------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| <br>Automation controller | <br> `automation-controller-rsyslog`             | <br>Handles centralized logging for automation controller.                                                                                                               |
-| <br>Automation controller | <br> `automation-controller-task`                | <br>Manages and runs tasks related to automation controller, such as running playbooks and interacting with inventories.                                                 |
-| <br>Automation controller | <br> `automation-controller-web`                 | <br>A web server that provides a REST API for automation controller. This is accessed and routed through platform gateway for user interaction.                          |
-| <br>Event-Driven Ansible  | <br> `automation-eda-api`                        | <br>Exposes the API for Event-Driven Ansible, allowing external systems to trigger and manage event-driven automations.                                                  |
-| <br>Event-Driven Ansible  | <br> `automation-eda-daphne`                     | <br>A web server for Event-Driven Ansible, handling WebSocket connections and serving static files.                                                                      |
-| <br>Event-Driven Ansible  | <br> `automation-eda-web`                        | <br>A web server that provides a REST API for Event-Driven Ansible. This is accessed and routed through platform gateway for user interaction.                           |
-| <br>Event-Driven Ansible  | <br> `automation-eda-worker-<number>`            | <br>These containers run the automation rules and playbooks based on incoming events.                                                                                    |
-| <br>Event-Driven Ansible  | <br> `automation-eda-activation-worker-<number>` | <br>These containers manage the activation of automation rules, ensuring they run when specific conditions are met.                                                      |
-| <br>Event-Driven Ansible  | <br> `automation-eda-scheduler`                  | <br>Responsible for scheduling and managing recurring tasks and rule activations.                                                                                        |
-| <br>Platform gateway      | <br> `automation-gateway-proxy`                  | <br>Acts as a reverse proxy, routing incoming requests to the appropriate Ansible Automation Platform services.                                                          |
-| <br>Platform gateway      | <br> `automation-gateway`                        | <br>Responsible for authentication, authorization, and overall request handling for the platform, all of which is exposed through a REST API and served by a web server. |
-| <br>Automation hub        | <br> `automation-hub-api`                        | <br>Provides the API for automation hub, enabling interaction with collection content, user management, and other automation hub functionality.                          |
-| <br>Automation hub        | <br> `automation-hub-content`                    | <br>Manages and serves Ansible Content Collections, roles, and modules stored in automation hub.                                                                         |
-| <br>Automation hub        | <br> `automation-hub-web`                        | <br>A web server that provides a REST API for automation hub. This is accessed and routed through platform gateway for user interaction.                                 |
-| <br>Automation hub        | <br> `automation-hub-worker-<number>`            | <br>These containers handle background tasks for automation hub, such as content synchronization, indexing, and validation.                                              |
-| <br>Performance Co-Pilot  | <br> `pcp`                                       | <br>If Performance Co-Pilot Monitoring is enabled, this container is used for system performance monitoring and data collection.                                         |
-| <br>PostgreSQL            | <br> `postgresql`                                | <br>Hosts the PostgreSQL database for Ansible Automation Platform.                                                                                                       |
-| <br>Receptor              | <br> `receptor`                                  | <br>Facilitates secure and reliable communication within Ansible Automation Platform.                                                                                    |
-| <br>Redis                 | <br> `redis-<suffix>`                            | <br>Responsible for caching, real-time analytics and fast data retrieval.                                                                                                |
+| Component group       | Container name                              | Purpose                                                                                                                                                              |
+| --------------------- | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Automation controller | `automation-controller-rsyslog`             | Handles centralized logging for automation controller.                                                                                                               |
+| Automation controller | `automation-controller-task`                | Manages and runs tasks related to automation controller, such as running playbooks and interacting with inventories.                                                 |
+| Automation controller | `automation-controller-web`                 | A web server that provides a REST API for automation controller. This is accessed and routed through platform gateway for user interaction.                          |
+| Event-Driven Ansible  | `automation-eda-api`                        | Exposes the API for Event-Driven Ansible, allowing external systems to trigger and manage event-driven automations.                                                  |
+| Event-Driven Ansible  | `automation-eda-daphne`                     | A web server for Event-Driven Ansible, handling WebSocket connections and serving static files.                                                                      |
+| Event-Driven Ansible  | `automation-eda-web`                        | A web server that provides a REST API for Event-Driven Ansible. This is accessed and routed through platform gateway for user interaction.                           |
+| Event-Driven Ansible  | `automation-eda-worker-<number>`            | These containers run the automation rules and playbooks based on incoming events.                                                                                    |
+| Event-Driven Ansible  | `automation-eda-activation-worker-<number>` | These containers manage the activation of automation rules, ensuring they run when specific conditions are met.                                                      |
+| Event-Driven Ansible  | `automation-eda-scheduler`                  | Responsible for scheduling and managing recurring tasks and rule activations.                                                                                        |
+| Platform gateway      | `automation-gateway-proxy`                  | Acts as a reverse proxy, routing incoming requests to the appropriate Ansible Automation Platform services.                                                          |
+| Platform gateway      | `automation-gateway`                        | Responsible for authentication, authorization, and overall request handling for the platform, all of which is exposed through a REST API and served by a web server. |
+| Automation hub        | `automation-hub-api`                        | Provides the API for automation hub, enabling interaction with collection content, user management, and other automation hub functionality.                          |
+| Automation hub        | `automation-hub-content`                    | Manages and serves Ansible Content Collections, roles, and modules stored in automation hub.                                                                         |
+| Automation hub        | `automation-hub-web`                        | A web server that provides a REST API for automation hub. This is accessed and routed through platform gateway for user interaction.                                 |
+| Automation hub        | `automation-hub-worker-<number>`            | These containers handle background tasks for automation hub, such as content synchronization, indexing, and validation.                                              |
+| Performance Co-Pilot  | `pcp`                                       | If Performance Co-Pilot Monitoring is enabled, this container is used for system performance monitoring and data collection.                                         |
+| PostgreSQL            | `postgresql`                                | Hosts the PostgreSQL database for Ansible Automation Platform.                                                                                                       |
+| Receptor              | `receptor`                                  | Facilitates secure and reliable communication within Ansible Automation Platform.                                                                                    |
+| Redis                 | `redis-<suffix>`                            | Responsible for caching, real-time analytics and fast data retrieval.                                                                                                |
 
- **Inspecting the logs**
+**Inspecting the logs**
 
 Containerized Ansible Automation Platform uses `journald` for Podman logging. To inspect any running container logs, run the `journalctl` command:
 
@@ -135,7 +136,7 @@ To view the logs of a running container in real-time, run the `podman logs -f` c
 $ podman logs -f <container_name>
 ```
 
- **Controlling container operations**
+**Controlling container operations**
 
 You can control operations for a container by running the `systemctl` command:
 
@@ -170,7 +171,7 @@ Oct 08 11:44:13 aap.example.org automation-gateway-proxy[1919]: [2024-10-08 10:4
 Oct 08 11:44:13 aap.example.org automation-gateway-proxy[1919]: [2024-10-08 10:44:13.856][2][info][upstream] [external/envoy/source/common/upstream/cds_ap
 ```
 
- **Getting container information about the execution plane**
+**Getting container information about the execution plane**
 
 To get container information about automation controller, Event-Driven Ansible, and `execution_nodes` nodes, prefix any Podman commands with either:
 
@@ -252,7 +253,7 @@ sudo subscription-manager register
 
 Use this information to troubleshoot your containerized Ansible Automation Platform configuration.
 
- **Sometimes the post install for seeding my Ansible Automation Platform content errors out**
+**Sometimes the post install for seeding my Ansible Automation Platform content errors out**
 
 This could manifest itself as output similar to this:
 
@@ -273,7 +274,7 @@ Re-run the installation program to ensure everything works as expected.
 
 Use this information to understand the architecture for your containerized Ansible Automation Platform deployment.
 
- **Can you give details of the architecture for the Ansible Automation Platform containerized design?**
+**Can you give details of the architecture for the Ansible Automation Platform containerized design?**
 
 We use as much of the underlying Red Hat Enterprise Linux technology as possible. Podman is used for the container runtime and management of services.
 
@@ -434,7 +435,7 @@ CONTAINERS_STORAGE_CONF=~/aap/containers/storage.conf podman <subcommand>
 CONTAINER_HOST=unix://run/user/<user uid>/podman/podman.sock podman <subcommand>
 ```
 
- **How can I see host resource utilization statistics?**
+**How can I see host resource utilization statistics?**
 
 Run the following command to display host resource utilization statistics:
 
@@ -454,7 +455,7 @@ c1458367ca9c  redis                          0.48%       10.52MB / 3.761GB  0.28
 ef712cc2dc89  postgresql                     0.09%       21.88MB / 3.761GB  0.58%       0B / 0B     0B / 0B     21          15.571059s  0.80%
 ```
 
- **How much storage is used and where?**
+**How much storage is used and where?**
 
 The container volume storage is under the local user at `$HOME/.local/share/containers/storage/volumes`.
 

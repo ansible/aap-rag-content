@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-task_configure_tls_ssl_metrics_service_databases/aem-page/install-task_configure_tls_ssl_metrics_service_databases.html"
 last_crumb = "Configure TLS/SSL for metrics service databases"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure TLS/SSL for metrics service databases"
 oversized = "false"
@@ -35,7 +36,7 @@ Use this procedure when securing database connections for compliance requirement
 
 ## Procedure
 
-1.  Configure PostgreSQL for TLS
+1. Configure PostgreSQL for TLS
       Edit postgresql.conf:
 
 ```
@@ -45,7 +46,7 @@ ssl_key_file = '/path/to/server.key'
 ssl_ca_file = '/path/to/ca.crt'
 ```
 
-2.  Configure metrics service for TLS
+2. Configure metrics service for TLS
       Edit your inventory file:
 
 ```

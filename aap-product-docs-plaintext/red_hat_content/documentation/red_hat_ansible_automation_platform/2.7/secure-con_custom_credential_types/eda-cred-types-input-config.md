@@ -12,12 +12,12 @@ Fields can have multiple properties, depending on the credential type you select
 
 *Table 1. Input Configuration Field Properties*
 
-| Fields         | Description                                                                    | Mandatory (Y/N)           |
-| -------------- | ------------------------------------------------------------------------------ | ------------------------- |
-| <br>id         | <br>Unique id of the field; must be a string type and stores the variable name | <br>Yes                   |
-| <br>type       | <br>Can be string or boolean type                                              | <br>No, default is string |
-| <br>label      | <br>Used by the UI when rendering the UI element                               | <br>Yes                   |
-| <br>secret     | <br>Will be encrypted                                                          | <br>No, default false     |
-| <br>multiline  | <br>If the field contains data from a file the multiline can be set to True    | <br>No, default false     |
-| <br>help\_text | <br>The help text associated with this field                                   | <br>No                    |
+| Fields     | Description                                                                | Mandatory (Y/N)       |
+| ---------- | -------------------------------------------------------------------------- | --------------------- |
+| id         | Unique id of the field; must be a string type and stores the variable name | Yes                   |
+| type       | Can be string or boolean type                                              | No, default is string |
+| label      | Used by the UI when rendering the UI element                               | Yes                   |
+| secret     | Will be encrypted                                                          | No, default false     |
+| multiline  | If the field contains data from a file the multiline can be set to True    | No, default false     |
+| help\_text | The help text associated with this field                                   | No                    |
 

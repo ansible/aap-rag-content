@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/observe-ref_supported_storage/aem-page/observe-ref_supported_storage.html"
 last_crumb = "Specify where to store consumption-based reports"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Specify where to store consumption-based reports"
 oversized = "false"
@@ -37,7 +38,7 @@ For an installation of Ansible Automation Platform on Red Hat Enterprise Linux, 
 
 ### Procedure
 
- Set the environment variables for your target directory and your local disk path.
+Set the environment variables for your target directory and your local disk path.
 
 ```
 # Set needed ENV VARs for gathering data and generating reports
@@ -52,7 +53,7 @@ To use object storage with S3 interface, for example, with AWS S3, Ceph Object s
 
 ### Procedure
 
- Set the environment variables for your S3 object storage path, name, endpoint, region, access key, and secret key.
+Set the environment variables for your S3 object storage path, name, endpoint, region, access key, and secret key.
 
 ```
 ################

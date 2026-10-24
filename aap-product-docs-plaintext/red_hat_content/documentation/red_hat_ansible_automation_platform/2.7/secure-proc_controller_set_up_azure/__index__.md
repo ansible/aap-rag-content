@@ -10,13 +10,13 @@ To set up enterprise authentication for Microsoft Entra ID, formerly known as Mi
 
 The attributes provided by Microsoft Entra ID are not set in the Ansible Automation Platform configuration for this authentication type. Instead, the [social_core azuread backend](https://github.com/python-social-auth/social-core/blob/master/social_core/backends/azuread.py#L85-L98) provides the translation of claims provided by Microsoft Entra ID. The user attributes that allow Ansible Automation Platform to correctly identify the user and assign the proper attributes such as given name, surname, email, and username include the following:
 
-| Ansible Automation Platform attribute | Microsoft Entra ID parameter    |
-| ------------------------------------- | ------------------------------- |
-| <br>authenticator\_uid                | <br>upn                         |
-| <br>Username                          | <br>name                        |
-| <br>First Name                        | <br>given\_name                 |
-| <br>Last Name                         | <br>family\_name                |
-| <br>Email                             | <br>email (falling back to upn) |
+| Ansible Automation Platform attribute | Microsoft Entra ID parameter |
+| ------------------------------------- | ---------------------------- |
+| authenticator\_uid                    | upn                          |
+| Username                              | name                         |
+| First Name                            | given\_name                  |
+| Last Name                             | family\_name                 |
+| Email                                 | email (falling back to upn)  |
 
 To set up enterprise authentication for Microsoft Azure Active Directory (AD), you need to obtain an OAuth2 key and secret by registering your organization-owned application from Azure at: [Quickstart: Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app).
 
@@ -24,26 +24,26 @@ Each key and secret must belong to a unique application and cannot be shared or 
 
 ## Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Authentication Methods.
-2.  Click Create authentication.
-3.  Enter a **Name** for this authentication configuration.
-4.  Select **Azuread** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
-5.  Click Edit, copy and paste Microsoft’s **Application (Client) ID** to the **OIDC Key** field.
-6.  If your Microsoft Entra ID is configured to provide user group information within a groups claim, ensure that the platform is configured with a **Groups Claim** name that matches your Microsoft Entra ID configuration. This allows the platform to correctly identify and associate groups for users logging in through Microsoft Entra ID. Note:
+1. From the navigation panel, select Access Management> (and then)Authentication Methods.
+2. Click Create authentication.
+3. Enter a **Name** for this authentication configuration.
+4. Select **Azuread** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
+5. Click Edit, copy and paste Microsoft’s **Application (Client) ID** to the **OIDC Key** field.
+6. If your Microsoft Entra ID is configured to provide user group information within a groups claim, ensure that the platform is configured with a **Groups Claim** name that matches your Microsoft Entra ID configuration. This allows the platform to correctly identify and associate groups for users logging in through Microsoft Entra ID. Note:
 Groups coming from Microsoft Entra ID can be identified using either unique IDs or group names. When creating group mappings for a Microsoft Entra ID authenticator, you can use either the unique ID or the group name.
 
 By default, Microsoft Entra ID uses groups as the default group claim name. So, be sure to either set the value to the default or to any custom override you have set in your IdP. The current default is set to preserve the existing behavior unless explicitly changed.
 
-7.  Following instructions for [registering your application with the Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app), supply the key (shown at one time only) to the client for authentication.
-8.  Copy and paste the secret key created for your Microsoft Entra ID/Microsoft Azure AD application to the **OIDC Secret** field.
-9.  Optional: By default, the name attribute from Microsoft Entra ID is used as the username field within Ansible Automation Platform. If you want to override that default value and use another attribute from Microsoft Entra ID, enter that attribute in the username field.
-10.  Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. Note:
+7. Following instructions for [registering your application with the Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app), supply the key (shown at one time only) to the client for authentication.
+8. Copy and paste the secret key created for your Microsoft Entra ID/Microsoft Azure AD application to the **OIDC Secret** field.
+9. Optional: By default, the name attribute from Microsoft Entra ID is used as the username field within Ansible Automation Platform. If you want to override that default value and use another attribute from Microsoft Entra ID, enter that attribute in the username field.
+10. Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. Note:
 Values defined in this field override the dedicated fields provided in the UI. Any values not defined here are not provided to the authenticator.
 
-11.  To automatically create organizations, users, and teams upon successful login, select **Create objects**.
-12.  To enable this authentication method upon creation, select **Enabled**.
-13.  To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users**.
-14.  Click Create Authentication Method.
+11. To automatically create organizations, users, and teams upon successful login, select **Create objects**.
+12. To enable this authentication method upon creation, select **Enabled**.
+13. To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users**.
+14. Click Create Authentication Method.
 
 ## Results
 

@@ -1,6 +1,6 @@
 +++
-title = "Deploy Ansible Automation Platform - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Deploy Ansible Automation Platform - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_install_aap_gateway"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_install_aap_gateway/aem-page/install-assembly_install_aap_gateway.html"
 last_crumb = "Deploy Ansible Automation Platform"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Deploy Ansible Automation Platform"
 oversized = "false"
@@ -35,6 +36,7 @@ The Ansible Automation Platform gateway uses the Ansible Automation Platform cus
 - Automation hub
 - Event-Driven Ansible
 - Red Hat Ansible Lightspeed (This feature is disabled by default, you must opt in to use it.)
+- The MCP server for Red Hat Ansible Automation Platform (This feature is disabled by default, you must opt in to use it.)
 
 Before you can deploy the platform gateway you must have Ansible Automation Platform Operator installed in a namespace. If you have not installed Ansible Automation Platform Operator see **Installing the Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform**.
 

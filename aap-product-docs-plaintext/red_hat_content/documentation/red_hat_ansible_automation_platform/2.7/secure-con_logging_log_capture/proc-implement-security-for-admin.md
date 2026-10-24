@@ -9,13 +9,13 @@ Use the following procedure to implement the security control as a System Admini
 
 ### Procedure
 
-1.  From the navigation panel, select Settings> (and then)Automation Execution> (and then)System. The System Settings page is displayed.
-2.  Click Edit.
-3.  Set the following:
+1. From the navigation panel, select Settings> (and then)Automation Execution> (and then)System. The System Settings page is displayed.
+2. Click Edit.
+3. Set the following:
 
 - **Enable Activity Stream** = On
 - **Enable Activity Stream for Inventory Sync** = On
 - **Organization Admins Can Manage Users and Teams** = On
 - **All Users Visible to Organization Admins** = On
 
-4.  Click Save.
+4. Click Save.

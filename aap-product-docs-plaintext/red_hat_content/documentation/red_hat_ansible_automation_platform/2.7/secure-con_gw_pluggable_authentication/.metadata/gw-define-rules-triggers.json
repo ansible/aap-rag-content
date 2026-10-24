@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/secure-con_gw_pluggable_authentication#gw-define-rules-triggers",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gw_pluggable_authentication",
-  "title": "Define authentication mapping rules and triggers"
+  "title": "Define authentication mapping rules and triggers",
+  "url_reachable": true
 }

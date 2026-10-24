@@ -1,4 +1,4 @@
-# Ansible Automation Platform patch release June 17, 2026
+# Ansible Automation Platform patch release June 17, 2026 (2.7-1)
 ## Lightspeed
 
 - Fixed an issue where the containerized installer Ansible Lightspeed chatbot did not show the image used for BYOK. (AAP-73534)

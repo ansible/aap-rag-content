@@ -8,6 +8,6 @@ Remove an execution environment definition from the catalog in Ansible automatio
 
 ## Procedure
 
-1.  Open the execution environment definition detail page.
-2.  Click the actions menu and select **Delete** (or **Unregister entity**).
-3.  Confirm the deletion.
+1. Open the execution environment definition detail page.
+2. Click the actions menu and select **Delete** (or **Unregister entity**).
+3. Confirm the deletion.

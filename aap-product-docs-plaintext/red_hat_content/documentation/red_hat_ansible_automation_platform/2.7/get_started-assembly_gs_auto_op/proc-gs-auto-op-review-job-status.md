@@ -6,9 +6,9 @@ The **Jobs** list view displays a list of jobs and their statuses, shown as comp
 
 #### Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Jobs. The default view is collapsed (Compact) with the job name, status, job type, start, and finish times. You can click the arrow icon to expand and see more information. You can sort this list by various criteria, and perform a search to filter the jobs of interest.
+1. From the navigation panel, select Automation Execution> (and then)Jobs. The default view is collapsed (Compact) with the job name, status, job type, start, and finish times. You can click the arrow icon to expand and see more information. You can sort this list by various criteria, and perform a search to filter the jobs of interest.
 
-2.  From this screen, you can complete the following tasks:
+2. From this screen, you can complete the following tasks:
 
 - View a job’s details and standard output.
 

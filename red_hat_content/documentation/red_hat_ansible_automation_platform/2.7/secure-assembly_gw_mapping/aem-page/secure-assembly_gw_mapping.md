@@ -1,7 +1,7 @@
 +++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping"
 title = "Map external authenticators to Ansible Automation Platform - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_configure_authentication/", "Configure central authentication for Ansible Automation Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping/aem-page/secure-assembly_gw_mapping.html"
 last_crumb = "Map external authenticators to Ansible Automation Platform"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Map external authenticators to Ansible Automation Platform"
 oversized = "false"
@@ -29,7 +30,10 @@ type = "aem-page"
 
 To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (such as username and email address) or what groups they belong to, you can configure authenticator maps.
 
-Use authenticator maps to add conditions that must be met before a user is given or denied access to a resource type. Authenticator maps are associated with an authenticator and are given an order. The maps are processed in order when the user logs in. These are similar to firewall rules or mail filters.
+Use authenticator maps to add conditions that must be met before a user is given or denied access to a resource type.
+Authenticator maps are associated with an authenticator and are given an order.
+The maps are processed in order when the user logs in.
+These are similar to firewall rules or mail filters.
 
 ## Understand authenticator mapping
 
@@ -170,6 +174,12 @@ When you select the **Based on groups** trigger, the authentication mapping expa
   Note:
       You must enter group identifiers in lowercase. For example, `cn=johnsmith,dc=example,dc=com` instead of `CN=JohnSmith,DC=Example,DC=COM`.
 
+If you previously used automation controller-side LDAP group settings, configure the equivalent behavior with authenticator maps:
+
+- `AUTH_LDAP_REQUIRE_GROUP`: Create an **Allow map** with a Based on groups trigger, and select Block non-matching users so that users who are not in the required group are denied access.
+- `AUTH_LDAP_DENY_GROUP`: Create an **Allow map** with a Never trigger for the group whose members you want to deny.
+- `AUTH_LDAP_USER_FLAGS_BY_GROUP`: Create a map for the corresponding flag, for example, an Is Superuser map, with a Based on groups trigger.
+
 Based on attributes
 The map is true or false based on a users attributes coming from the source system.
 
@@ -194,12 +204,12 @@ With allow mapping, you can control which users have access to the system by def
 
 ### Procedure
 
-1.  After configuring the authentication details for your authentication method, select the **Mapping** tab.
-2.  Select **Allow** from the **Add authentication mapping** list.
-3.  Enter a unique rule name in the **Rule name**field to identify the rule.
-4.  Select a trigger from the **When to apply the rule** list. See [Authenticator map triggers](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-authenticator-map-triggers "Each map has a trigger that defines when the map should be evaluated as true. Select a trigger from the When to apply the rule field.") for more information about map triggers.
-5.  Select **Block non-matching users** to deny user access to the system when the trigger conditions are not matched.
-6.  Click **Next**.
+1. After configuring the authentication details for your authentication method, select the **Mapping** tab.
+2. Select **Allow** from the **Add authentication mapping** list.
+3. Enter a unique rule name in the **Rule name**field to identify the rule.
+4. Select a trigger from the **When to apply the rule** list. See [Authenticator map triggers](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-authenticator-map-triggers "Each map has a trigger that defines when the map should be evaluated as true. Select a trigger from the When to apply the rule field.") for more information about map triggers.
+5. Select **Block non-matching users** to deny user access to the system when the trigger conditions are not matched.
+6. Click **Next**.
 
 ### What to do next
 
@@ -219,14 +229,14 @@ When organization mapping is positively evaluated, a specified organization is c
 
 ### Procedure
 
-1.  After configuring the authentication details for your authentication method, select the **Mapping** tab.
-2.  Select **Organization** from the **Add authentication mapping** list.
-3.  Enter a unique **Rule Name** to identify the rule.
-4.  Select a trigger from the **When to apply the rule** list. See [Authenticator map triggers](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-authenticator-map-triggers "Each map has a trigger that defines when the map should be evaluated as true. Select a trigger from the When to apply the rule field.") for more information about map triggers.
-5.  Select **Block non-matching users** to remove the user’s access to the selected organization role when the trigger conditions are not matched.
-6.  Select the **Organization** to which matching users are added or blocked.
-7.  Select a **Role** to be applied or removed for matching users (for example, **Organization Admin** or **Organization Member**).
-8.  Click **Next**.
+1. After configuring the authentication details for your authentication method, select the **Mapping** tab.
+2. Select **Organization** from the **Add authentication mapping** list.
+3. Enter a unique **Rule Name** to identify the rule.
+4. Select a trigger from the **When to apply the rule** list. See [Authenticator map triggers](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-authenticator-map-triggers "Each map has a trigger that defines when the map should be evaluated as true. Select a trigger from the When to apply the rule field.") for more information about map triggers.
+5. Select **Block non-matching users** to remove the user’s access to the selected organization role when the trigger conditions are not matched.
+6. Select the **Organization** to which matching users are added or blocked.
+7. Select a **Role** to be applied or removed for matching users (for example, **Organization Admin** or **Organization Member**).
+8. Click **Next**.
 
 ### What to do next
 
@@ -254,14 +264,14 @@ When configuring team mappings with a **Based on attributes** trigger, set the *
 
 ### Procedure
 
-1.  After configuring the authentication details for your authentication method, select the **Mapping** tab.
-2.  Select **Team** from the **Add authentication mapping** list.
-3.  Enter a unique rule name in the **Rule name** field to identify the rule.
-4.  Select a trigger from the **When to apply the rule** list. See [Authenticator map triggers](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-authenticator-map-triggers "Each map has a trigger that defines when the map should be evaluated as true. Select a trigger from the When to apply the rule field.") for more information about map triggers.
-5.  Select **Block non-matching users** to remove the user’s access to the selected organization role and deny user access to the system when the trigger conditions are not matched.
-6.  Select the **Team** and **Organization** to which matching users are added or blocked.
-7.  Select a **Role** to be applied or removed for matching users (for example, **Team Admin** or **Team Member**).
-8.  Click **Next**.
+1. After configuring the authentication details for your authentication method, select the **Mapping** tab.
+2. Select **Team** from the **Add authentication mapping** list.
+3. Enter a unique rule name in the **Rule name** field to identify the rule.
+4. Select a trigger from the **When to apply the rule** list. See [Authenticator map triggers](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-authenticator-map-triggers "Each map has a trigger that defines when the map should be evaluated as true. Select a trigger from the When to apply the rule field.") for more information about map triggers.
+5. Select **Block non-matching users** to remove the user’s access to the selected organization role and deny user access to the system when the trigger conditions are not matched.
+6. Select the **Team** and **Organization** to which matching users are added or blocked.
+7. Select a **Role** to be applied or removed for matching users (for example, **Team Admin** or **Team Member**).
+8. Click **Next**.
 
 ### What to do next
 
@@ -283,13 +293,13 @@ You can specify role mapping separately for each account authentication.
 
 ### Procedure
 
-1.  After configuring the authentication details for your authentication method, select the **Mapping** tab.
-2.  Select **Role** from the **Add authentication mapping** list.
-3.  Enter a unique rule name in the **Rule Name** field to identify the rule.
-4.  Select a trigger from the**When to apply the rule** list. See [Authenticator map triggers](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-authenticator-map-triggers "Each map has a trigger that defines when the map should be evaluated as true. Select a trigger from the When to apply the rule field.") for more information about map triggers.
-5.  Select **Block non-matching users** to remove the role for the user when none of the trigger conditions are matched.
-6.  Select a **Role** to be applied or removed for matching users.
-7.  Click **Next**.
+1. After configuring the authentication details for your authentication method, select the **Mapping** tab.
+2. Select **Role** from the **Add authentication mapping** list.
+3. Enter a unique rule name in the **Rule Name** field to identify the rule.
+4. Select a trigger from the**When to apply the rule** list. See [Authenticator map triggers](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-authenticator-map-triggers "Each map has a trigger that defines when the map should be evaluated as true. Select a trigger from the When to apply the rule field.") for more information about map triggers.
+5. Select **Block non-matching users** to remove the role for the user when none of the trigger conditions are matched.
+6. Select a **Role** to be applied or removed for matching users.
+7. Click **Next**.
 
 ### What to do next
 
@@ -305,12 +315,12 @@ Superuser mapping is the mapping of a user to the superuser role, such as System
 
 ### Procedure
 
-1.  After configuring the authentication details for your authentication method, select the **Mapping** tab.
-2.  Select **Superuser** from the **Add authentication mapping** list.
-3.  Enter a unique rule **Name** to identify the rule.
-4.  Select a **Trigger** from the list. See [Authenticator map triggers](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-authenticator-map-triggers "Each map has a trigger that defines when the map should be evaluated as true. Select a trigger from the When to apply the rule field.") for more information about map triggers.
-5.  Select **Revoke** to remove the superuser role from the user when none of the trigger conditions are matched.
-6.  Click Next.
+1. After configuring the authentication details for your authentication method, select the **Mapping** tab.
+2. Select **Superuser** from the **Add authentication mapping** list.
+3. Enter a unique rule **Name** to identify the rule.
+4. Select a **Trigger** from the list. See [Authenticator map triggers](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-authenticator-map-triggers "Each map has a trigger that defines when the map should be evaluated as true. Select a trigger from the When to apply the rule field.") for more information about map triggers.
+5. Select **Revoke** to remove the superuser role from the user when none of the trigger conditions are matched.
+6. Click Next.
 
 ### What to do next
 
@@ -359,17 +369,17 @@ You can also use this syntax more than once in a single attribute map. For examp
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Authentication Methods.
-2.  Select your authenticator from the list.
-3.  Select the **Mapping** tab and click Create mapping.
-4.  In **Authentication mapping**, choose the appropriate mapping type: **Organization**, **Team**, or **Role**.
-5.  In the **Trigger** field, select **Attributes**.
-6.  In the corresponding field, such as the **Organization** field for an Organization map, enter the Jinja-like syntax to dynamically generate the name.
+1. From the navigation panel, select Access Management> (and then)Authentication Methods.
+2. Select your authenticator from the list.
+3. Select the **Mapping** tab and click Create mapping.
+4. In **Authentication mapping**, choose the appropriate mapping type: **Organization**, **Team**, or **Role**.
+5. In the **Trigger** field, select **Attributes**.
+6. In the corresponding field, such as the **Organization** field for an Organization map, enter the Jinja-like syntax to dynamically generate the name.
       For example, to create an organization name based on an attribute called `users_orgs`, enter `Org {% for_attr_value(users_orgs) %}`.
 
-7.  In the **Attribute** field, specify the name of the attribute from your external provider that has values you want to loop through, such as `users_orgs`.
-8.  Complete any other required fields for the mapping.
-9.  Click Create mapping.
+7. In the **Attribute** field, specify the name of the attribute from your external provider that has values you want to loop through, such as `users_orgs`.
+8. Complete any other required fields for the mapping.
+9. Click Create mapping.
       Platform gateway uses this template to create and manage user assignments based on the values of the specified attribute.
 
 ### Results

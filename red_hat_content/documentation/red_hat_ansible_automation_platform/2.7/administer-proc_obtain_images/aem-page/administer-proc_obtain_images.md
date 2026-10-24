@@ -1,6 +1,6 @@
 +++
 template = "docs/aem-title.html"
-title = "Pull execution environments for use in automation hub - Red Hat Ansible Automation Platform 2.7"
+title = "Pull execution environments for use in Ansible Automation Platform - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_obtain_images"
 
 [extra]
@@ -9,10 +9,11 @@ category = "Administer"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-proc_obtain_images/aem-page/administer-proc_obtain_images.html"
-last_crumb = "Pull execution environments for use in automation hub"
-modified = "2026-07-30T17:12:56.473Z"
+last_crumb = "Pull execution environments for use in Ansible Automation Platform"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
-name = "Pull execution environments for use in automation hub"
+name = "Pull execution environments for use in Ansible Automation Platform"
 oversized = "false"
 page_slug = "administer-proc_obtain_images"
 portal_content_subtype = "title"
@@ -25,7 +26,7 @@ toc = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-p
 type = "aem-page"
 +++
 
-# Pull execution environments for use in automation hub
+# Pull execution environments for use in Ansible Automation Platform
 
 Before you can push execution environments to your private automation hub, you must first pull them from an existing registry and tag them for use.
 
@@ -39,14 +40,14 @@ The following example details how to pull an execution environment from the Red 
 
 ## Procedure
 
-1.  Log in to Podman with your `registry.redhat.io` credentials:
+1. Log in to Podman with your `registry.redhat.io` credentials:
   
 
 ```
 $ podman login registry.redhat.io
 ```
 
-2.  Pull an execution environment:
+2. Pull an execution environment:
   
 
 ```
@@ -76,7 +77,7 @@ After you pull execution environments from a registry, tag them for use in your 
 
 ### Procedure
 
- Tag a local execution environment with the automation hub container repository:
+Tag a local execution environment with the automation hub container repository:
 
 ```
 $ podman tag registry.redhat.io/<ee_name>:<tag> <automation_hub_hostname>/<ee_name>
@@ -92,9 +93,9 @@ $ podman images
 
 2. Verify that the execution environment you tagged with your automation hub information is contained in the list.
 
-## Push an execution environment to private automation hub
+## Push an execution environment to Ansible Automation Platform
 
-You can push tagged execution environments to private automation hub to create new containers and populate the remote registry.
+You can push tagged execution environments to Ansible Automation Platform to create new containers and populate the remote registry.
 
 ### Before you begin
 
@@ -103,21 +104,21 @@ You can push tagged execution environments to private automation hub to create n
 
 ### Procedure
 
-1.  Log in to Podman using your Ansible Automation Platform location and credentials:
+1. Log in to Podman using your Ansible Automation Platform location and credentials:
   
 
 ```
-$ podman login -u=<username> -p=<password> <aap_url>
+$ podman login -u=<username> -p=<password> <aap_gateway_url>
 ```
 
   Warning:
       Let Podman prompt you for your password when you log in. Entering your password at the same time as your username can expose your password to the shell history.
 
-2.  Push your execution environment to your automation hub remote registry:
+2. Push your execution environment to your Ansible Automation Platform gateway:
   
 
 ```
-$ podman push <automation_hub_url>/<ee_name>
+$ podman push <aap_gateway_url>/<ee_name>
 ```
 
 ### Results
@@ -143,10 +144,10 @@ Use the user interface to pull an execution environment from your private automa
 
 #### Procedure
 
-1.  From the navigation panel, select Automation Content> (and then)Execution Environments.
-2.  Select your execution environment.
-3.  In the **Pull this image** entry, click Copy to clipboard.
-4.  Paste and run the command in your terminal.
+1. From the navigation panel, select Automation Content> (and then)Execution Environments.
+2. Select your execution environment.
+3. In the **Pull this image** entry, click Copy to clipboard.
+4. Paste and run the command in your terminal.
 
 #### Results
 
@@ -162,17 +163,17 @@ You must have permission to view and pull from a private container repository.
 
 #### Procedure
 
-1.  From the navigation panel, select Automation Content> (and then)Execution Environments.
-2.  Add `<https://registry.redhat.io>` to the registry.
-3.  Add any required credentials to authenticate. Note:
+1. From the navigation panel, select Automation Content> (and then)Execution Environments.
+2. Add `<https://registry.redhat.io>` to the registry.
+3. Add any required credentials to authenticate. Note:
       Some remote registries are aggressive with rate limiting. Set a rate limit under **Advanced Options**.
 
-4.  From the navigation panel, select Automation Content> (and then)Execution Environments.
-5.  Click Create execution environment in the page header.
-6.  Select the registry you want to pull from. The **Name** field displays the name of the automation execution environments displayed on your local registry. Note:
+4. From the navigation panel, select Automation Content> (and then)Execution Environments.
+5. Click Create execution environment in the page header.
+6. Select the registry you want to pull from. The **Name** field displays the name of the automation execution environments displayed on your local registry. Note:
       The **Upstream name** field is the name of the image on the remote server. For example, if the upstream name is set to "alpine" and the **Name** field is "local/alpine", the alpine image is downloaded from the remote and renamed to "local/alpine".
 
-7.  Set a list of tags to include or exclude. Note that syncing automation execution environments with a large number of tags is time consuming and uses a lot of disk space.
+7. Set a list of tags to include or exclude. Note that syncing automation execution environments with a large number of tags is time consuming and uses a lot of disk space.
 
 ### Automation execution environments precedence
 
@@ -208,4 +209,4 @@ When the "Default Execution Environment" is not used for a job, double-check the
 # echo "select id, name, created from main_executionenvironment where organization_id is null and managed = False order by created desc;" | awx-manage dbshell
 ```
 
-     To ensure that the Default Execution Environment is used regardless of the `GLOBAL_JOB_EXECUTION_ENVIRONMENTS` setting and database order, set the Global default execution environment in Settings> (and then)Automation execution> (and then)System to Default Execution Environment.
+    To ensure that the Default Execution Environment is used regardless of the `GLOBAL_JOB_EXECUTION_ENVIRONMENTS` setting and database order, set the Global default execution environment in Settings> (and then)Automation execution> (and then)System to Default Execution Environment.

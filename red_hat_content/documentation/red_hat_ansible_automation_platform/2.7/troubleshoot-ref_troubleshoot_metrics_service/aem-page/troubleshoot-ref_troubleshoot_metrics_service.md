@@ -1,7 +1,7 @@
 +++
 title = "Troubleshoot metrics service - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-ref_troubleshoot_metrics_service"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-ref_troubleshoot_metrics_service"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-ref_troubleshoot_metrics_service/", "Troubleshoot metrics service"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/troubleshoot-ref_troubleshoot_metrics_service/aem-page/troubleshoot-ref_troubleshoot_metrics_service.html"
 last_crumb = "Troubleshoot metrics service"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Troubleshoot metrics service"
 oversized = "false"
@@ -58,10 +59,6 @@ psql -h localhost -U ms_awx_readonly -d awx -c "SELECT COUNT(*) FROM main_job LI
 
 # Verify Podman secrets (should show 4 secrets)
 podman secret ls | grep automationmetrics
-
-# Verify dashboard collection feature flag status
-podman exec automation-metrics-web \
-  env | grep METRICS_SERVICE_FEATURE_ENABLED__DASHBOARD_COLLECTION
 ```
 
 ## Common issues
@@ -135,7 +132,7 @@ podman exec automation-metrics-web \
    ORDER BY started DESC LIMIT 24;"
 ```
 
-     Expected output: All hourly tasks should show `status = 'success'` for the past 24 hours.
+    Expected output: All hourly tasks should show `status = 'success'` for the past 24 hours.
 
 2. Check scheduler logs for task execution order:
 
@@ -182,7 +179,7 @@ podman exec automation-metrics-web \
 podman exec automation-metrics-web env | grep RETENTION
 ```
 
-     Expected: Hourly data retained for 7 days (default), giving rollup sufficient time to process even if delayed.
+    Expected: Hourly data retained for 7 days (default), giving rollup sufficient time to process even if delayed.
 
 **Scenario 3: Stuck task auto-detection and reset (NEW GA feature)**
 
@@ -202,7 +199,7 @@ podman exec automation-metrics-web env | grep RETENTION
 podman logs automation-metrics-scheduler | grep -i "stuck\|timeout\|reset"
 ```
 
-     Expected output: Log messages indicating stuck task detection and automatic reset.
+    Expected output: Log messages indicating stuck task detection and automatic reset.
 
 2. Query task execution history to see reset tasks:
 
@@ -261,7 +258,7 @@ podman exec automation-metrics-web \
    ORDER BY success_rate ASC;"
 ```
 
-     Expected: Success rates >95% for all tasks. Rates <90% indicate infrastructure issues requiring investigation.
+    Expected: Success rates >95% for all tasks. Rates <90% indicate infrastructure issues requiring investigation.
 
 3. Monitor task duration trends:
 
@@ -282,3 +279,45 @@ Use pipeline health metrics to:
 - Detect performance degradation early (increasing task durations)
 - Identify which collectors are failing most frequently
 - Validate infrastructure changes (e.g., database upgrades) haven't impacted collection
+
+## Troubleshoot events collector
+
+**Events collector timeout or slow performance**
+
+**Symptom**: The `main_jobevent_service` task shows `failure` status or takes longer than expected in the `/api/v1/tasks/` output.
+
+**Cause**: Large deployments with high job volumes can exceed the 3600-second task timeout when processing job events. The stuck-task detector marks timed-out tasks as failed.
+
+**Resolution:**
+
+- Check the current limit settings:
+  * `JOBEVENT_ROW_LIMIT` (default: 200,000) - controls maximum rows processed per cycle
+  * `JOBEVENT_JOB_LIMIT` (default: 1,000) - controls maximum jobs processed per cycle
+- Reduce the limits to lower values to decrease processing time. The collector has a built-in time-budget check that stops processing early and marks the collection as partial (not failed) if it risks exceeding the timeout.
+- Verify the collector completes within the hourly window by querying the tasks API:
+
+```
+curl
+https://<gateway-route>/api/metrics/v1/tasks/?name=main_jobevent_services&limit=5 \
+    -H "Authorization: Bearer <token>"
+```
+
+Note:
+
+A collection cycle that completes within the hourly window but takes an extended time (for example, 50 minutes) still indicates a problem. Long-running SQL queries consume database resources that affect automation controller performance. If the `main_jobevent_service` task regularly takes more than a few minutes to complete, reduce `JOBEVENT_ROW_LIMIT` and `JOBEVENT_JOB_LIMIT` to lower values even if the task is not timing out.
+
+## Partial event data collection
+
+**Symptom**: Collection/module usage statistics appear incomplete or show fewer entries than expected.
+
+**Cause**: When `JOBEVENT_ROW_LIMIT`, `JOBEVENT_JOB_LIMIT`, or built-in time-budget cap is reached, the collector stops processing and marks the collection as partial. The `HourlyMetricsCollection` record is stored with whatever data was collected. Uncollected events from that cycle are skipped permanently - partial collections are NOT retried for the same time window. The next hourly run collects events only from jobs that finished during the new hourly window.
+
+**Resolution**: If more complete per-cycle collection is required, increase the limit values. Partial collections are included in the daily rollup with whatever data was collected, so no data gaps occur in the daily summary - but per-cycle granularity may be reduced.
+
+## Cannot disable events collector individually
+
+**Symptom**: You want to disable only the events collector without disabling other metrics collection.
+
+**Cause**: There is no dedicated feature flag for the events collector. It runs as part of the `METRICS_COLLECTION` task group.
+
+**Workaround**: Set both `JOBEVENT_ROW_LIMIT` and `JOBEVENT_JOB_LIMIT` to `1`. This effectively disables event collection by limiting processing to a negligible amount, while leaving all other metrics collection active.

@@ -14,7 +14,9 @@ To avoid this, you can configure a list of known proxies that are allowed.
 
 #### Procedure
 
-1.  From the navigation panel, select Settings> (and then)Automation Execution> (and then)System.
-2.  Enter a list of proxy IP addresses from which the service should trust custom remote header values in the **Proxy IP Allowed List** field. Note:
+1. From the navigation panel, select Settings> (and then)Automation Execution> (and then)System.
+2. Enter a list of proxy IP addresses from which the service should trust custom remote header values in the **Proxy IP Allowed List** field.
+
+Note:
 Load balancers and hosts that are not on the known proxies list result in a rejected request.
 

@@ -10,10 +10,10 @@ Create a credential to establish the authentication mechanism (like basic auth o
 
 #### Procedure
 
-1.  Log in to the Ansible Automation Platform Dashboard.
-2.  From the navigation panel, select Automation Decisions> (and then)Infrastructure> (and then)Credentials.
-3.  Click Create credential.
-4.  Insert the following:
+1. Log in to the Ansible Automation Platform Dashboard.
+2. From the navigation panel, select Automation Decisions> (and then)Infrastructure> (and then)Credentials.
+3. Click Create credential.
+4. Insert the following:
 
 
 Name
@@ -34,7 +34,7 @@ When you select the credential type, the **Type Details** section is displayed w
 Type Details
 Add the requested information for the credential type you selected. For example, if you selected the GitHub Event Stream credential type, you are required to add an HMAC Secret (symmetrical shared secret) between Event-Driven Ansible controller and the remote server.
 
-5.  Click Create credential.
+5. Click Create credential.
 
 #### Results
 

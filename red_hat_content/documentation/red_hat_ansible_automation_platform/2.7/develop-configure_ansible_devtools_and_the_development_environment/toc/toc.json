@@ -1,0 +1,31 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Configure Ansible DevTools and the development environment",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Before you begin",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-cd5a6d18-2c2a-446b-9d80-a2f8811c1dde__prereq_1",
+          "anchor": null,
+          "singlePageAnchor": "GUID-cd5a6d18-2c2a-446b-9d80-a2f8811c1dde__prereq_1"
+        },
+        {
+          "title": "What to do next",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "GUID-cd5a6d18-2c2a-446b-9d80-a2f8811c1dde__postreq_1",
+          "anchor": null,
+          "singlePageAnchor": "GUID-cd5a6d18-2c2a-446b-9d80-a2f8811c1dde__postreq_1"
+        }
+      ]
+    }
+  ]
+}

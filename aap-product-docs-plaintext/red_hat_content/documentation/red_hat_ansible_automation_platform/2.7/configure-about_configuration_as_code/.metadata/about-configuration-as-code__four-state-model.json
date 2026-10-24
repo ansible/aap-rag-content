@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/configure-about_configuration_as_code#about-configuration-as-code__four-state-model",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-about_configuration_as_code",
-  "title": "The four-state model"
+  "title": "The four-state model",
+  "url_reachable": true
 }

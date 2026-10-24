@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/configure-con_gw_open_api_specification/aem-page/configure-con_gw_open_api_specification.html"
 last_crumb = "Understanding the platform gateway OpenAPI specification"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Understanding the platform gateway OpenAPI specification"
 oversized = "false"
@@ -29,9 +30,10 @@ type = "aem-page"
 
 Platform gateway serves as the single entry point for Ansible Automation Platform, unifying the user interface and routing all API traffic to services such as automation controller, Event-Driven Ansible, and automation hub.
 
-The OpenAPI specification provides a standardized, machine-readable definition of the unified API endpoints available through platform gateway. It is essential for external developers and automation engineers building reliable custom integrations.
+The OpenAPI specification provides a standardized, machine-readable definition of the unified API endpoints available through platform gateway.
+It is essential for external developers and automation engineers building reliable custom integrations.
 
- **Key roles of the specification**
+**Key roles of the specification**
 
 The OpenAPI specification ensures successful integration by fulfilling the following roles:
 
@@ -55,7 +57,7 @@ Token authentication is the recommended method for programmatic API use.
 
 ### Procedure
 
- Retrieve the OpenAPI specification from the schema endpoint located at `<https://$AAP_INSTANCE/api/gateway/v1/docs/schema/>`, using one of the following methods:
+Retrieve the OpenAPI specification from the schema endpoint located at `<https://$AAP_INSTANCE/api/gateway/v1/docs/schema/>`, using one of the following methods:
 
 - Get the YAML specification (Default format): To download the specification as a YAML file, run the following command:
 

@@ -17,7 +17,7 @@ The `.dockercfg file`, or `$HOME/.docker/config.json` for newer Docker clients, 
 
 ### Procedure
 
-1.  If you already have a `.dockercfg` file for the secured registry, you can create a secret from that file by running the following command:
+1. If you already have a `.dockercfg` file for the secured registry, you can create a secret from that file by running the following command:
 
 
 ```
@@ -26,7 +26,7 @@ $ oc create secret generic <pull_secret_name> \
 --type=kubernetes.io/dockercfg
 ```
 
-2.  Or if you have a `$HOME/.docker/config.json` file:
+2. Or if you have a `$HOME/.docker/config.json` file:
 
 
 ```
@@ -35,7 +35,7 @@ $ oc create secret generic <pull_secret_name> \
 --type=kubernetes.io/dockerconfigjson
 ```
 
-3.  If you do not already have a Docker credentials file for the secured registry, you can create a secret by running the following command:
+3. If you do not already have a Docker credentials file for the secured registry, you can create a secret by running the following command:
 
 
 ```
@@ -46,21 +46,27 @@ $ oc create secret docker-registry <pull_secret_name> \
 --docker-email=<email>
 ```
 
-4.  To use a secret for pulling images for pods, you must add the secret to your service account. The name of the service account in this example must match the name of the service account the pod uses. The default is the default service account.
+4. To use a secret for pulling images for pods, you must add the secret to your service account.
+The name of the service account in this example must match the name of the service account the pod uses.
+The default is the default service account.
+
 
 ```
 $ oc secrets link default <pull_secret_name> --for=pull
 ```
 
-5.  Optional: To use a secret for pushing and pulling build images, the secret must be mountable inside a pod. You can do this by running:
+5. Optional: To use a secret for pushing and pulling build images, the secret must be mountable inside a pod.
+You can do this by running:
 
 
 ```
 $ oc secrets link builder <pull_secret_name>
 ```
 
-6.  Optional: For builds, you must also reference the secret as the pull secret from within your build configuration.
+6. Optional: For builds, you must also reference the secret as the pull secret from within your build configuration.
 
 ### Results
 
-When the container group is successfully created, the **Details** tab of the newly created container group remains. This allows you to review and edit your container group information. This is the same menu that is opened if you click the Edit icon **✎** from the **Instance Group** link. You can also edit instances and review jobs associated with this instance group.
+When the container group is successfully created, the **Details** tab of the newly created container group remains. This allows you to review and edit your container group information.
+This is the same menu that is opened if you click the Edit icon **✎** from the **Instance Group** link.
+You can also edit instances and review jobs associated with this instance group.

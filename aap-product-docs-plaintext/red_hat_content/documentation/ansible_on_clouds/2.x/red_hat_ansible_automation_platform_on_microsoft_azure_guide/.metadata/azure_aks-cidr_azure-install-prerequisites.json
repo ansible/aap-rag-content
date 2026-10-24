@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#azure_aks-cidr_azure-install-prerequisites",
   "path": "/documentation/en-us/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index",
-  "title": "AKS CIDR Blocks"
+  "title": "AKS CIDR Blocks",
+  "url_reachable": true
 }

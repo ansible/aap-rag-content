@@ -11,11 +11,11 @@ Your offline token expires after 30 days of inactivity.
 
 ### Procedure
 
-1.  Navigate to [Ansible Automation Platform on the Red Hat Hybrid Cloud Console](https://console.redhat.com/ansible/automation-hub/token/).
-2.  From the navigation panel, select Automation Hub> (and then)Connect to Hub.
-3.  Under **Offline token**, click Load Token.
-4.  Click the Copy to clipboard icon to copy the offline token.
-5.  Paste the token into a file and store in a secure location.
+1. Navigate to [Ansible Automation Platform on the Red Hat Hybrid Cloud Console](https://console.redhat.com/ansible/automation-hub/token/).
+2. From the navigation panel, select Automation Hub> (and then)Connect to Hub.
+3. Under **Offline token**, click Load Token.
+4. Click the Copy to clipboard icon to copy the offline token.
+5. Paste the token into a file and store in a secure location.
 
 ### What to do next
 

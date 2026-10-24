@@ -5,7 +5,7 @@ Private automation hub provides a centralized, on-premise repository for certifi
 
 ### Before you begin
 
-- You have a private automation hub instance. For more information, see [Manage your automation content in private automation hub](/documentation/en-us/red_hat_ansible_automation_platform/2.7/assembly_managing_collections_hub "As a content creator, you can use namespaces in automation hub to curate and manage collections.")
+- You have a private automation hub instance. For more information, see [Manage your automation content in private automation hub](/documentation/en-us/red_hat_ansible_automation_platform/2.7/../../2-6/administer/assembly-managing-collections-hub.html "As a content creator, you can use namespaces in automation hub to curate and manage collections.")
 
 ### About this task
 
@@ -17,8 +17,8 @@ The private automation hub configuration is optional but recommended. The Ansibl
 
 ### Procedure
 
-1.  Edit your custom Red Hat Developer Hub config map, for example `app-config-rhdh`.
-2.  Add the following code to your Red Hat Developer Hub `app-config-rhdh.yaml` file.
+1. Edit your custom Red Hat Developer Hub config map, for example `app-config-rhdh`.
+2. Add the following code to your Red Hat Developer Hub `app-config-rhdh.yaml` file.
 
 ```
 data:
@@ -30,8 +30,8 @@ baseUrl: '<https://MyOwnPAHUrl>'
 ...
 ```
 
-3.  Replace `<https://MyOwnPAHUrl/>` with your private automation hub URL.
-4.  In the OpenShift Developer UI, select the `Red Hat Developer Hub` pod.
-5.  Open **Actions**.
-6.  Click **Restart rollout**.
+3. Replace `<https://MyOwnPAHUrl/>` with your private automation hub URL.
+4. In the OpenShift Developer UI, select the `Red Hat Developer Hub` pod.
+5. Open **Actions**.
+6. Click **Restart rollout**.
 

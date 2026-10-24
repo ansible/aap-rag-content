@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-proc_self_service_download_tar"
-template = "docs/aem-title.html"
 title = "Download the plug-in TAR files (deprecated) - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-proc_self_service_download_tar"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-assembly_self_service_upgrading/", "Upgrade Ansible automation portal"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/upgrade-proc_self_service_download_tar/aem-page/upgrade-proc_self_service_download_tar.html"
 last_crumb = "Download the plug-in TAR files (deprecated)"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Download the plug-in TAR files (deprecated)"
 oversized = "false"
@@ -37,7 +38,7 @@ The HTTP plug-in registry method is deprecated and will be removed in a future r
 
 ## Procedure
 
-1.  Create a directory on your local machine and set an environment variable to represent the directory path:
+1. Create a directory on your local machine and set an environment variable to represent the directory path:
   
 
 ```
@@ -45,11 +46,11 @@ $ mkdir /path/to/<automation-portal-plugins>
 $ export DYNAMIC_PLUGIN_ROOT_DIR=/path/to/<automation-portal-plugins>
 ```
 
-2.  In a browser, open the Red Hat Ansible Automation Platform product software downloads page and select the Product Software tab.
-3.  Download the Ansible automation portal setup bundle that matches your target chart version on the lifecycle page or the Product Software tab.
+2. In a browser, open the Red Hat Ansible Automation Platform product software downloads page and select the Product Software tab.
+3. Download the Ansible automation portal setup bundle that matches your target chart version on the lifecycle page or the Product Software tab.
       The filename format is `ansible-backstage-rhaap-bundle-<plugin-version>.tar.gz`.
 
-4.  Extract the archive into `$DYNAMIC_PLUGIN_ROOT_DIR`:
+4. Extract the archive into `$DYNAMIC_PLUGIN_ROOT_DIR`:
   
 
 ```

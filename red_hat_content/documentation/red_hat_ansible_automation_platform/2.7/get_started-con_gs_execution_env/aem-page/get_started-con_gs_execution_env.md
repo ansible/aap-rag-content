@@ -1,6 +1,6 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-con_gs_execution_env"
 title = "Create automation runtimes with execution and decision environments - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-con_gs_execution_env"
 template = "docs/aem-title.html"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/get_started-con_gs_execution_env/aem-page/get_started-con_gs_execution_env.html"
 last_crumb = "Create automation runtimes with execution and decision environments"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Create automation runtimes with execution and decision environments"
 oversized = "false"
@@ -29,7 +30,8 @@ type = "aem-page"
 
 All automation in Red Hat Ansible Automation Platform runs on container images called automation execution environments.
 
-Automation execution environments are consistent and shareable container images that serve as Ansible control nodes. Automation execution environments reduce the challenge of sharing Ansible content that has external dependencies.
+Automation execution environments are consistent and shareable container images that serve as Ansible control nodes.
+Automation execution environments reduce the challenge of sharing Ansible content that has external dependencies.
 
 If automation content is similar to a script that a developer has written, an automation execution environment is like a replica of that developer’s environment, thereby enabling you to reproduce and scale that automation content. In this way, execution environments make it easier for you to implement automation in a range of environments.
 
@@ -56,20 +58,20 @@ Ansible Automation Platform provides access to some base automation execution en
 
 Ansible Automation Platform includes the following execution environments:
 
-- `Minimal` - Includes the latest Ansible-core 2.15 release along with Ansible Runner, but does not include collections or other content
+- `Minimal` - Includes the latest Ansible-core 2.16 release along with Ansible Runner, but does not include collections or other content
 - `EE Supported` - Minimal, plus all Red Hat-supported collections and dependencies
 
 Base images included with Ansible Automation Platform are hosted on the Red Hat Ecosystem Catalog (`registry.redhat.io`).
 
 ### Procedure
 
-1.  Log in to `registry.redhat.io`.
+1. Log in to `registry.redhat.io`.
 
 ```bash
 $ podman login registry.redhat.io
 ```
 
-2.  Pull the base images from the registry:
+2. Pull the base images from the registry:
   
 
 ```bash
@@ -92,23 +94,23 @@ Use the following procedure to add an execution environment to a job template.
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Execution Environments.
-2.  Click Create execution environment to create an execution environment.
-3.  Enter the appropriate details into the following fields:
-  1.  **Name** (required): Enter a name for the execution environment.
-  2.  **Image** (required): Enter the image name. The image name requires its full location (repository), the registry, image name, and version tag, as in the following example: `quay.io/ansible/awx-ee:latestrepo/project/image-name:tag`
-  3.  Optional: **Pull**: Choose the type of pull when running jobs:
+1. From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Execution Environments.
+2. Click Create execution environment to create an execution environment.
+3. Enter the appropriate details into the following fields:
+  1. **Name** (required): Enter a name for the execution environment.
+  2. **Image** (required): Enter the image name. The image name requires its full location (repository), the registry, image name, and version tag, as in the following example: `quay.io/ansible/awx-ee:latestrepo/project/image-name:tag`
+  3. Optional: **Pull**: Choose the type of pull when running jobs:
 
     1. **Always pull container before running**: Pulls the latest image file for the container.
     2. **Only pull the image if not present before running**: Only pulls the latest image if none are specified.
     3. **Never pull container before running**: Never pull the latest version of the container image. Note:
       If you do not set a type for pull, the value defaults to **Only pull the image if not present before running**.
 
-  4.  Optional: **Description**: Enter an optional description.
-  5.  Optional: **Organization**: Assign the organization to specifically use this execution environment. To make the execution environment available for use across multiple organizations, leave this field blank.
-  6.  **Registry credential**: If the image has a protected container registry, provide the credential to access it.
-4.  Click Create execution environment. Your newly added execution environment is ready to be used in a job template.
-5.  To add an execution environment to a job template, navigate to Automation Execution> (and then)Templates and select your template.   1.  Click Edit template and specify your execution environment in the field labeled **execution environment**.
+  4. Optional: **Description**: Enter an optional description.
+  5. Optional: **Organization**: Assign the organization to specifically use this execution environment. To make the execution environment available for use across multiple organizations, leave this field blank.
+  6. **Registry credential**: If the image has a protected container registry, provide the credential to access it.
+4. Click Create execution environment. Your newly added execution environment is ready to be used in a job template.
+5. To add an execution environment to a job template, navigate to Automation Execution> (and then)Templates and select your template.   1. Click Edit template and specify your execution environment in the field labeled **execution environment**.
 
 ### Results
 
@@ -122,16 +124,20 @@ For more information, see [Populating your private automation hub container regi
 
 ## Build and use a decision environment
 
-Event-Driven Ansible includes an ansible.eda collection, which contains sample sources, event filters and rulebooks. All the collections, ansible rulebooks and their dependencies use a decision environment, which is an image that can be run on either Podman or Kubernetes.
+Event-Driven Ansible includes an ansible.eda collection, which contains sample sources, event filters and rulebooks.
+All the collections, ansible rulebooks and their dependencies use a decision environment, which is an image that can be run on either Podman or Kubernetes.
 
-In decision environments, sources, which are typically Python code, are distributed through ansible-collections. They inject external events into a rulebook for processing. The rulebook consists of the following:
+In decision environments, sources, which are typically Python code, are distributed through ansible-collections.
+They inject external events into a rulebook for processing.
+The rulebook consists of the following:
 
 - The python interpreter
 - Java Runtime Environment for Drools rule engine
 - ansible-rulebook python package
 - ansible.eda collection
 
-You can use the base decision environment and build your own customized Decision Environments with additional collections and collection dependencies. You can build a decision environment using a Dockerfile or optionally you can deploy your CA certificate into the image.
+You can use the base decision environment and build your own customized Decision Environments with additional collections and collection dependencies.
+You can build a decision environment using a Dockerfile or optionally you can deploy your CA certificate into the image.
 
 ## Set up a new decision environment
 
@@ -146,9 +152,9 @@ The following steps describe how to import a decision environment into the platf
 
 ### Procedure
 
-1.  Navigate to Automation Decisions> (and then)Decision Environments.
-2.  Click Create decision environment.
-3.  Enter the following:
+1. Navigate to Automation Decisions> (and then)Decision Environments.
+2. Click Create decision environment.
+3. Enter the following:
   
 
 Name
@@ -163,7 +169,7 @@ This is the full image location, including the container registry, image name, a
 Credential
 This field is optional. This is the token needed to use the decision environment image.
 
-4.  Select Create decision environment.
+4. Select Create decision environment.
 
 ### Results
 

@@ -5,8 +5,8 @@ Add Ansible Automation Platform software templates to your Red Hat Developer Hub
 
 ### Procedure
 
-1.  Edit your custom Red Hat Developer Hub config map, for example `app-config-rhdh`.
-2.  Add the following code to your Red Hat Developer Hub `app-config-rhdh.yaml` file.
+1. Edit your custom Red Hat Developer Hub config map, for example `app-config-rhdh`.
+2. Add the following code to your Red Hat Developer Hub `app-config-rhdh.yaml` file.
 
 ```
 data:

@@ -10,19 +10,19 @@ Complete these post-installation steps after deploying the Ansible automation po
 
 Update the OAuth redirect URI
 
-1.  Log in to Ansible Automation Platform as an administrator.
-2.  Navigate to Access Management> (and then)OAuth Applications and select the OAuth application you created for Ansible automation portal.
-3.  Update Redirect URIs to `https://<portal-address>/api/auth/rhaap/handler/frame`.
+1. Log in to Ansible Automation Platform as an administrator.
+2. Navigate to Access Management> (and then)OAuth Applications and select the OAuth application you created for Ansible automation portal.
+3. Update Redirect URIs to `https://<portal-address>/api/auth/rhaap/handler/frame`.
 
 - For RHEL with KVM: use the VM IP address.
 - For Red Hat OpenShift Virtualization: use the route hostname.
 - For VMware `vSphere`: use the VM IP address or hostname.
 
-4.  Click Save.
+4. Click Save.
 
 Verify service health
 
-5.  SSH into the Ansible automation portal RHEL appliance and check the service status.
+5. SSH into the Ansible automation portal RHEL appliance and check the service status.
 
 
 ```terminal
@@ -50,12 +50,10 @@ $ sudo journalctl -u portal -n 100 --no-pager
 
 Sign in to Ansible automation portal
 
-6.  Open `https://<portal-address>` in a browser.
-7.  Click Sign in with RHAAP.
-8.  Authenticate with your Ansible Automation Platform credentials.
+6. Open `https://<portal-address>` in a browser.
+7. Click Sign in with RHAAP.
+8. Authenticate with your Ansible Automation Platform credentials.
 
 ## Results
 
 A successful login confirms that the OAuth integration with Ansible Automation Platform is working. The Ansible automation portal catalog displays synchronized job templates from Ansible Automation Platform. If no templates appear, verify that the API token has access to job templates in Ansible Automation Platform.
-
-To configure collection discovery sources for the execution environment builder, see [Configure collection discovery sources](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_collection_discovery "Configure Git content discovery and private automation hub collection discovery so that Ansible collections are available in execution environment builder and the collection catalog.").

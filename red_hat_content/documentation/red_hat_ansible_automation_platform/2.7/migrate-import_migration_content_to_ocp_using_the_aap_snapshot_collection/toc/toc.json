@@ -1,0 +1,49 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Import a deployment into OCP using the aap_snapshot collection",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Set up the import inventory for OCP",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-63ee6cf4-c1aa-440c-89ad-453349b6ccc5",
+          "anchor": null,
+          "singlePageAnchor": "GUID-63ee6cf4-c1aa-440c-89ad-453349b6ccc5"
+        },
+        {
+          "title": "Import Ansible Automation Platform data into an OCP deployment",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "GUID-8a276dbb-6872-4bed-8ce7-737a1630a0de",
+          "anchor": null,
+          "singlePageAnchor": "GUID-8a276dbb-6872-4bed-8ce7-737a1630a0de",
+          "sections": [
+            {
+              "title": "Procedure",
+              "visible": true,
+              "weight": 1,
+              "urlFragment": "GUID-8a276dbb-6872-4bed-8ce7-737a1630a0de",
+              "anchor": "GUID-8a276dbb-6872-4bed-8ce7-737a1630a0de__steps-unordered_1",
+              "singlePageAnchor": "GUID-8a276dbb-6872-4bed-8ce7-737a1630a0de__steps-unordered_1"
+            }
+          ]
+        },
+        {
+          "title": "Validate the restored deployment and complete post-import tasks",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "GUID-740c4114-4953-42c1-ba6f-432fc1303063",
+          "anchor": null,
+          "singlePageAnchor": "GUID-740c4114-4953-42c1-ba6f-432fc1303063"
+        }
+      ]
+    }
+  ]
+}

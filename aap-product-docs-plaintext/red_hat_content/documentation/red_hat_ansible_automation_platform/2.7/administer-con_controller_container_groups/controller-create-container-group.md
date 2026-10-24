@@ -17,9 +17,9 @@ A `ContainerGroup` is a type of `InstanceGroup` that has an associated credentia
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Instance Groups.
-2.  Click Create group and select **Create container group**.
-3.  Enter a name for your new container group and select the credential you created before to associate it to the container group.
-4.  Click Create container group.
-5.  Check the **Customize pod spec** box and edit the **Pod spec override** to include the namespace and service account name that you used in the previous steps.
+1. From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Instance Groups.
+2. Click Create group and select **Create container group**.
+3. Enter a name for your new container group and select the credential you created before to associate it to the container group.
+4. Click Create container group.
+5. Check the **Customize pod spec** box and edit the **Pod spec override** to include the namespace and service account name that you used in the previous steps.
 

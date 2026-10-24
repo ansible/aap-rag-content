@@ -1,16 +1,17 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_devtools_ms_dev_containers_ext"
-template = "docs/aem-title.html"
 title = "Install and configure the Dev Containers extension - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_devtools_ms_dev_containers_ext"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_devtools_install/", "Install Ansible development tools"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_devtools_install/", "Set up your development environment"]]
 category = "Install"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_devtools_ms_dev_containers_ext/aem-page/install-proc_devtools_ms_dev_containers_ext.html"
 last_crumb = "Install and configure the Dev Containers extension"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Install and configure the Dev Containers extension"
 oversized = "false"
@@ -33,14 +34,16 @@ If you are installing the containerized version of Ansible development tools, yo
 
 ## Procedure
 
-1.  Open VS Code.
-2.  Click the **Extensions** (![Extensions](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/vscode-extensions-icon.png)) icon in the Activity Bar, or click View> (and then)Extensions, to display the **Extensions** view.
-3.  In the search field in the **Extensions** view, type `Dev Containers`.
-4.  Select the Dev Containers extension from Microsoft and click Install. If you are using Podman or Podman Desktop as your containerization platform, you must modify the default settings in the `Dev Containers` extension.
+1. Open VS Code.
+2. Click the **Extensions** (![Extensions](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/vscode-extensions-icon.png)) icon in the Activity Bar, or click View> (and then)Extensions, to display the **Extensions** view.
+3. In the search field in the **Extensions** view, type `Dev Containers`.
+4. Select the Dev Containers extension from Microsoft and click Install.
+      If you are using Podman or Podman Desktop as your containerization platform, you must modify the default settings in the `Dev Containers` extension.
 
-5.  Replace docker with podman in the `Dev Containers` extension settings:
-  1.  In VS Code, open the settings editor.
-  2.  Search for `@ext:ms-vscode-remote.remote-containers`. Alternatively, click the **Extensions** icon in the activity bar and click the gear icon for the `Dev Containers` extension.
+5. Replace docker with podman in the `Dev Containers` extension settings:
+  1. In VS Code, open the settings editor.
+  2. Search for `@ext:ms-vscode-remote.remote-containers`.
+            Alternatively, click the **Extensions** icon in the activity bar and click the gear icon for the `Dev Containers` extension.
 
-6.  Set `Dev > Containers:Docker Path` to `podman`.
-7.  Set `Dev > Containers:Docker Compose Path` to `podman-compose`.
+6. Set `Dev > Containers:Docker Path` to `podman`.
+7. Set `Dev > Containers:Docker Compose Path` to `podman-compose`.

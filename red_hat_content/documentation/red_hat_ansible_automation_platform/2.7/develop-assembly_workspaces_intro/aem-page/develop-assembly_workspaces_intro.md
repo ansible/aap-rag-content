@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_workspaces_intro/aem-page/develop-assembly_workspaces_intro.html"
 last_crumb = "Access preconfigured development tools with Ansible development workspaces"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Access preconfigured development tools with Ansible development workspaces"
 oversized = "false"
@@ -41,7 +42,8 @@ To ensure that your automation content files persist when you quit Ansible devel
 
 ## Ansible development workspaces components
 
-Each Ansible development workspace is a project-agnostic full development environment. Dependencies are satisfied for all the tools in the environment.
+Each Ansible development workspace is a project-agnostic full development environment.
+Dependencies are satisfied for all the tools in the environment.
 
 The following applications are pre-installed.
 

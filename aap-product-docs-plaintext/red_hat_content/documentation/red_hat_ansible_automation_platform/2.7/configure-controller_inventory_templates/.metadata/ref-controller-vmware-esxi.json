@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/configure-controller_inventory_templates#ref-controller-vmware-esxi",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-controller_inventory_templates",
-  "title": "VMWare ESXi"
+  "title": "VMWare ESXi",
+  "url_reachable": true
 }

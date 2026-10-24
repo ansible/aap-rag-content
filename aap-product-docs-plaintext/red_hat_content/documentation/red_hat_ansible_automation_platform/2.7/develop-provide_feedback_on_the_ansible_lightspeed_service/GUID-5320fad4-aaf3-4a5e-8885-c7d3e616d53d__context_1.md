@@ -11,9 +11,9 @@ To submit a feature request, contact [Red Hat Support](https://access.redhat.com
 
 ## Procedure
 
-1.  Open VS Code.
-2.  Click the **Lightspeed** entry in your status bar to see options.
-3.  In the **Tell us why** field, enter your feedback. Here, provide feedback about what results you were expecting to receive, compared to what results were generated and the training match.
-4.  Select the issue type: **Bug report**, **Feature request**, or **Suggestion feedback**.
-5.  Select the **I understand that feedback is shared with Red Hat and IBM** checkbox.
-6.  Click **Send**.
+1. Open VS Code.
+2. Click the **Lightspeed** entry in your status bar to see options.
+3. In the **Tell us why** field, enter your feedback. Here, provide feedback about what results you were expecting to receive, compared to what results were generated and the training match.
+4. Select the issue type: **Bug report**, **Feature request**, or **Suggestion feedback**.
+5. Select the **I understand that feedback is shared with Red Hat and IBM** checkbox.
+6. Click **Send**.

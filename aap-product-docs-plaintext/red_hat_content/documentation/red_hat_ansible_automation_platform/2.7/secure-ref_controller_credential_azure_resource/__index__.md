@@ -32,7 +32,8 @@ AZURE_PASSWORD
 AZURE_SUBSCRIPTION_ID
 ```
 
-You can also pass credentials as parameters to a task within a playbook. The order of precedence is parameters, then environment variables, and finally a file found in your home directory.
+You can also pass credentials as parameters to a task within a playbook.
+The order of precedence is parameters, then environment variables, and finally a file found in your home directory.
 
 To pass credentials as parameters to a task, use the following parameters for service principal credentials:
 

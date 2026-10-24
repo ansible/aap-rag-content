@@ -8,9 +8,9 @@ RPM-based deployments are not available in Ansible Automation Platform 2.7. For 
 
 The supported migration paths include:
 
-| Source environment                              | Target environment                      |
-| ----------------------------------------------- | --------------------------------------- |
-| <br>Container-based Ansible Automation Platform | <br>OpenShift Container Platform        |
-| <br>Container-based Ansible Automation Platform | <br>Managed Ansible Automation Platform |
+| Source environment                          | Target environment                  |
+| ------------------------------------------- | ----------------------------------- |
+| Container-based Ansible Automation Platform | OpenShift Container Platform        |
+| Container-based Ansible Automation Platform | Managed Ansible Automation Platform |
 
 Migrations outside of those listed are not supported at this time.

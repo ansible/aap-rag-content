@@ -16,32 +16,6 @@
           "urlFragment": "assembly-controller-applications",
           "anchor": null,
           "singlePageAnchor": "assembly-controller-applications"
-        },
-        {
-          "title": "Get started with OAuth Applications",
-          "visible": true,
-          "weight": 2,
-          "urlFragment": "ref-controller-applications-getting-started",
-          "anchor": null,
-          "singlePageAnchor": "ref-controller-applications-getting-started",
-          "sections": [
-            {
-              "title": "Application functions",
-              "visible": true,
-              "weight": 1,
-              "urlFragment": "ref-controller-applications-getting-started",
-              "anchor": "ref-gw-application-functions",
-              "singlePageAnchor": "ref-gw-application-functions"
-            },
-            {
-              "title": "Refresh an access token after expiration",
-              "visible": true,
-              "weight": 2,
-              "urlFragment": "ref-controller-applications-getting-started",
-              "anchor": "gw-request-token-after-expiration",
-              "singlePageAnchor": "gw-request-token-after-expiration"
-            }
-          ]
         }
       ]
     }

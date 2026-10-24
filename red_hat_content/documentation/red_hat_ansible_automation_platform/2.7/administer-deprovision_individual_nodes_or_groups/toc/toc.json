@@ -1,0 +1,67 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Deprovision individual nodes or groups",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Deprovision nodes in a containerized deployment",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-af2ac60f-efb2-4710-8493-33d7f8f326a2",
+          "anchor": null,
+          "singlePageAnchor": "GUID-af2ac60f-efb2-4710-8493-33d7f8f326a2",
+          "sections": [
+            {
+              "title": "Before you begin",
+              "visible": true,
+              "weight": 1,
+              "urlFragment": "GUID-af2ac60f-efb2-4710-8493-33d7f8f326a2",
+              "anchor": "GUID-af2ac60f-efb2-4710-8493-33d7f8f326a2__prereq_1",
+              "singlePageAnchor": "GUID-af2ac60f-efb2-4710-8493-33d7f8f326a2__prereq_1"
+            }
+          ]
+        },
+        {
+          "title": "Deprovision instance groups in a containerized deployment",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "GUID-4ed6e951-10fd-4dee-a474-79f4e93aa490",
+          "anchor": null,
+          "singlePageAnchor": "GUID-4ed6e951-10fd-4dee-a474-79f4e93aa490",
+          "sections": [
+            {
+              "title": "Before you begin",
+              "visible": true,
+              "weight": 1,
+              "urlFragment": "GUID-4ed6e951-10fd-4dee-a474-79f4e93aa490",
+              "anchor": "GUID-4ed6e951-10fd-4dee-a474-79f4e93aa490__prereq_1",
+              "singlePageAnchor": "GUID-4ed6e951-10fd-4dee-a474-79f4e93aa490__prereq_1"
+            }
+          ]
+        },
+        {
+          "title": "Run deprovisioning commands",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "GUID-ed9e0f88-a8b7-4550-9a05-103ac366ecec",
+          "anchor": null,
+          "singlePageAnchor": "GUID-ed9e0f88-a8b7-4550-9a05-103ac366ecec"
+        },
+        {
+          "title": "Post removal checks",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "GUID-77d2f1ce-ffba-4124-92cf-c58f75b8a99c",
+          "anchor": null,
+          "singlePageAnchor": "GUID-77d2f1ce-ffba-4124-92cf-c58f75b8a99c"
+        }
+      ]
+    }
+  ]
+}

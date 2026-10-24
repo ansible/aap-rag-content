@@ -10,7 +10,8 @@ Provide the following details to set up a Mattermost notification:
 - Optional: **Username**: Enter a username for the notification.
 - Optional: **Channel**: Enter a channel for the notification.
 - **Icon URL**: Specifies the icon to display for this notification.
-- **Disable SSL verification**: Turns off verification of the authenticity of the target’s certificate. Select this option to disable verification for environments that use internal or private CA’s.
+- **Disable SSL verification**: Turns off verification of the authenticity of the target’s certificate.
+Select this option to disable verification for environments that use internal or private CA’s.
 
 ![Notification template Mattermost](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-notification-template-mattermost.png)
 

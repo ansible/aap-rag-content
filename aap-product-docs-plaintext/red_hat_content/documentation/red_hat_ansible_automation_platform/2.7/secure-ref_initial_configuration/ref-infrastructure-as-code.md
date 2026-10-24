@@ -7,11 +7,11 @@ The following Ansible content collections are available for managing Ansible Aut
 
 *Table 1. Ansible content collections*
 
-| Validated Collection           | Collection Purpose                                                                                                                                                                                       |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br> `infra.aap_utilities`     | <br>Ansible content for automating day 1 and day 2 operations of Ansible Automation Platform, including installation, backup and restore, certificate management, and more.                              |
-| <br> `infra.aap_configuration` | <br>A collection of roles to manage the creation of Ansible Automation Platform components, including users and groups (RBAC), projects, job templates and workflows, credentials, and more. This collection includes functionality from the older `infra.controller_configuration`, `infra.ah_configuration` and `infra.eda_configuration` and should be used in their place with Ansible Automation Platform 2.6. |
-| <br> `infra.ee_utilities`      | <br>A collection of roles for creating and managing execution environment images, or migrating from the older Tower virtualenvs to execution environments.                                               |
+| Validated Collection      | Collection Purpose                                                                                                                                                                                       |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `infra.aap_utilities`     | Ansible content for automating day 1 and day 2 operations of Ansible Automation Platform, including installation, backup and restore, certificate management, and more.                                  |
+| `infra.aap_configuration` | A collection of roles to manage the creation of Ansible Automation Platform components, including users and groups (RBAC), projects, job templates and workflows, credentials, and more. This collection includes functionality from the older `infra.controller_configuration`, `infra.ah_configuration` and `infra.eda_configuration` and should be used in their place with Ansible Automation Platform 2.6. |
+| `infra.ee_utilities`      | A collection of roles for creating and managing execution environment images, or migrating from the older Tower virtualenvs to execution environments.                                                   |
 
 Many organizations use CI/CD platforms to configure pipelines or other methods to manage this type of infrastructure. However, using Ansible Automation Platform natively, a webhook can be configured to link a Git-based repository natively. In this way, Ansible can respond to Git events to trigger Job Templates directly. This removes the need for external CI components from this overall process and thus reduces the attack surface.
 

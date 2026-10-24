@@ -1,0 +1,23 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Enable the MCP server through the VS Code command palette",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Before you begin",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-f00e524b-b295-4b67-9d46-a80ce419d584__prereq_1",
+          "anchor": null,
+          "singlePageAnchor": "GUID-f00e524b-b295-4b67-9d46-a80ce419d584__prereq_1"
+        }
+      ]
+    }
+  ]
+}

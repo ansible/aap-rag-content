@@ -1,7 +1,7 @@
 +++
-title = "Schedule recurring automation - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_schedules"
+template = "docs/aem-title.html"
+title = "Schedule recurring automation - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_schedules/", "Schedule recurring automation"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_schedules/aem-page/develop-assembly_ug_controller_schedules.html"
 last_crumb = "Schedule recurring automation"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Schedule recurring automation"
 oversized = "false"
@@ -27,7 +28,9 @@ type = "aem-page"
 
 # Schedule recurring automation
 
-From the navigation panel, click Automation Execution> (and then)Schedules to access your configured schedules. The schedules list can be sorted by any of the attributes from each column by using the directional arrows. You can also search by name, date, or the name of the month in which a schedule runs.
+From the navigation panel, click Automation Execution> (and then)Schedules to access your configured schedules.
+The schedules list can be sorted by any of the attributes from each column by using the directional arrows.
+You can also search by name, date, or the name of the month in which a schedule runs.
 
 Use the **On** or **Off** toggle to stop an active schedule or activate a stopped schedule.
 
@@ -35,7 +38,8 @@ Click the Edit ![Edit](/webassets/aem/red_hat_ansible_automation_platform/2.7/im
 
 ![Schedules sample list](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-schedules-sample-list.png)  
 
-If you are setting up a template, a project, or an inventory source, click the **Schedules** tab on the **Details** page for that resource, to configure schedules for these resources. When you create a schedule, it has the following parameters:
+If you are setting up a template, a project, or an inventory source, click the **Schedules** tab on the **Details** page for that resource, to configure schedules for these resources.
+When you create a schedule, it has the following parameters:
 
 Name
 Click the schedule name to open its details.
@@ -57,13 +61,11 @@ You can create a new schedule for a job template, workflow job template, invento
 
 You can create schedules from a template, project, or inventory source, and directly on the main **Schedules** page.
 
-To create a new schedule on the **Schedules** page:
-
 ### Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Schedules.
-2.  Click Create schedule. This opens the **Create schedule** window.
-3.  Select a **Resource type** onto which this schedule is applied. Select from:
+1. From the navigation panel, select Automation Execution> (and then)Schedules.
+2. Click Create schedule. This opens the **Create schedule** window.
+3. Select a **Resource type** onto which this schedule is applied. Select from:
 
   -  **Job template**
     * For **Job template** select a **Job template** from the menu.
@@ -76,7 +78,7 @@ To create a new schedule on the **Schedules** page:
   -  **Management job template**
     * For **Management job template** select a **Workflow job template** from the menu.
 
-4.  For **Job template** and **Project sync** enter the appropriate details into the following fields:
+4. For **Job template** and **Project sync** enter the appropriate details into the following fields:
 
   - **Schedule name**: Enter the name.
 
@@ -86,10 +88,10 @@ To create a new schedule on the **Schedules** page:
 
   - **Time zone**: Select the time zone. The **Start date/time** that you enter must be in this time zone. The **Schedule Details** display when you establish a schedule, enabling you to review the schedule settings and a list of the scheduled occurrences in the selected **Local Time Zone**.
 
-     Important:
+    Important:
             Jobs are scheduled in UTC. Repeating jobs that run at a specific time of day can move relative to a local time zone when Daylight Saving Time shifts occur. The system resolves the local time zone based time to UTC when the schedule is saved. To ensure your schedules are correctly created, set your schedules in UTC time.
 
-5.  Click Next. The **Define rules** page is displayed.
+5. Click Next. The **Define rules** page is displayed.
 
 ## Add a new schedule from a resource page
 
@@ -101,9 +103,11 @@ To create a new schedule from a resource page:
 
 ### Procedure
 
-1.  Click the **Schedules** tab of the resource that you are configuring. This can be a template, project, or inventory source.
-2.  Click Create schedule. This opens the **Create schedule** window.
-3.  Enter the appropriate details into the following fields:
+1. Click the **Schedules** tab of the resource that you are configuring.
+This can be a template, project, or inventory source.
+2. Click Create schedule.
+This opens the **Create schedule** window.
+3. Enter the appropriate details into the following fields:
 
   - **Schedule name**: Enter the name.
 
@@ -111,12 +115,17 @@ To create a new schedule from a resource page:
 
   - **Start date/time**: Enter the date and time to start the schedule.
 
-  - **Time zone**: Select the time zone. The **Start date/time** that you enter must be in this time zone. The **Schedule Details** display when you establish a schedule, enabling you to review the schedule settings and a list of the scheduled occurrences in the selected **Local Time Zone**.
+  - **Time zone**: Select the time zone. The **Start date/time** that you enter must be in this time zone.
+        The **Schedule Details** display when you establish a schedule, enabling you to review the schedule settings and a list of the scheduled occurrences in the selected **Local Time Zone**.
 
-     Important:
-            Jobs are scheduled in UTC. Repeating jobs that run at a specific time of day can move relative to a local time zone when Daylight Saving Time shifts occur. The system resolves the local time zone based time to UTC when the schedule is saved. To ensure your schedules are correctly created, set your schedules in UTC time.
+    Important:
+            Jobs are scheduled in UTC.
+Repeating jobs that run at a specific time of day can move relative to a local time zone when Daylight Saving Time shifts occur.
+The system resolves the local time zone based time to UTC when the schedule is saved.
+To ensure your schedules are correctly created, set your schedules in UTC time.
 
-4.  Click Next. The **Define rules** page is displayed.
+4. Click Next.
+The **Define rules** page is displayed.
 
 ## Define rules for the schedule
 
@@ -124,7 +133,7 @@ After you create a schedule, you can define rules for when the schedule runs.
 
 ### Procedure
 
-1.  Enter the following information:
+1. Enter the following information:
 
   - **Frequency**: Enter how often the schedule runs.
 
@@ -150,9 +159,9 @@ After you create a schedule, you can define rules for when the schedule runs.
 
   - **Schedule ending type**: Use this field to select when the schedule is set to end. For more information, see the [link](https://datatracker.ietf.org/doc/html/rfc5545) to the `iCalendar RFC for bysetpos` field in the iCalendar documentation when you have set the rules for the schedule.
 
-2.  Click Save rule. The **Schedule Rules** summary page is displayed.
-3.  Click Add rule to add additional rules.
-4.  Click Next. The **Schedule Exceptions** page is displayed.
+2. Click Save rule. The **Schedule Rules** summary page is displayed.
+3. Click Add rule to add additional rules.
+4. Click Next. The **Schedule Exceptions** page is displayed.
 
 ## Set exceptions to the schedule
 
@@ -160,6 +169,6 @@ Define specific dates or times when automated jobs should skip execution by usin
 
 ### Procedure
 
-1.  On the **Schedule Exceptions** page, click Create exception. Use the same format as for the schedule rules to create a schedule exception.
+1. On the **Schedule Exceptions** page, click Create exception. Use the same format as for the schedule rules to create a schedule exception.
 
-2.  Click Next to save and review both the schedule and the exception.
+2. Click Next to save and review both the schedule and the exception.

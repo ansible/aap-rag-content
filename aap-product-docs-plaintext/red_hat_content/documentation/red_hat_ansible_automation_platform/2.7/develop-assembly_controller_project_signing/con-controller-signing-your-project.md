@@ -28,7 +28,8 @@ Use `.` to indicate the current working directory.
 
 To sign content, create a `MANIFEST.in` file in the project root directory that tells `ansible-sign` which files to protect.
 
-Internally, `ansible-sign` uses the `distlib.manifest` module of Python’s distlib library, therefore `MANIFEST.in` must follow the syntax that this library specifies. For an explanation of the `MANIFEST.in` file directives, see the Python Packaging User Guide.
+Internally, `ansible-sign` uses the `distlib.manifest` module of Python’s distlib library, therefore `MANIFEST.in` must follow the syntax that this library specifies.
+For an explanation of the `MANIFEST.in` file directives, see the Python Packaging User Guide.
 
 In the sample project, two directives are included, resulting in the following `MANIFEST.in` file:
 
@@ -37,7 +38,8 @@ include inventory
 recursive-include playbooks *.yml
 ```
 
-With this file in place, generate your checksum manifest file and sign it. Both of these steps are achieved in a single `ansible-sign` command:
+With this file in place, generate your checksum manifest file and sign it.
+Both of these steps are achieved in a single `ansible-sign` command:
 
 ```
 $ ansible-sign project gpg-sign .
@@ -59,7 +61,8 @@ For signing project content, every command starts with `ansible-sign project`.
 
 Every `ansible-sign project` command takes the project root directory `.` as its final argument.
 
-`ansible-sign` makes use of your default keyring and looks for the first available secret key that it can find, to sign your project. You can specify a specific secret key to use with the `--fingerprint` option, or even a completely independent GPG home directory with the `--gnupg-home` option.
+`ansible-sign` makes use of your default keyring and looks for the first available secret key that it can find, to sign your project.
+You can specify a specific secret key to use with the `--fingerprint` option, or even a completely independent GPG home directory with the `--gnupg-home` option.
 
 Note:
 
@@ -67,7 +70,8 @@ If you are using a desktop environment, GnuPG automatically prompts you for your
 
 If this functionality does not work, or you are working without a desktop environment, for example, through SSH, you can use the `-p --prompt-passphrase` flag after `gpg-sign` , which causes `ansible-sign` to prompt for the password instead.
 
-Note that an `.ansible-sign` directory was created in the project directory. This directory contains the checksum manifest and a detached GPG signature for it.
+Note that an `.ansible-sign` directory was created in the project directory.
+This directory contains the checksum manifest and a detached GPG signature for it.
 
 ```
 $ tree -a .

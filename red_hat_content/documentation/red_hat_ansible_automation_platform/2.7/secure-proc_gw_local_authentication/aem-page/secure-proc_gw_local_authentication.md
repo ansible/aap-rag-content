@@ -1,7 +1,7 @@
 +++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_gw_local_authentication"
 title = "Configure local authentication - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_gw_local_authentication"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_configure_authentication/", "Configure central authentication for Ansible Automation Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-proc_gw_local_authentication/aem-page/secure-proc_gw_local_authentication.html"
 last_crumb = "Configure local authentication"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure local authentication"
 oversized = "false"
@@ -37,17 +38,17 @@ A local authenticator is automatically created by the Ansible Automation Platfor
 
 ## Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Authentication Methods.
-2.  Click Create authentication.
-3.  Enter a **Name** for this Local configuration. The configuration name is required, must be unique across all authenticators, and must not be longer than 512 characters.
-4.  Select **Local** from the **Authentication type** list.
-5.  Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. Note:
+1. From the navigation panel, select Access Management> (and then)Authentication Methods.
+2. Click Create authentication.
+3. Enter a **Name** for this Local configuration. The configuration name is required, must be unique across all authenticators, and must not be longer than 512 characters.
+4. Select **Local** from the **Authentication type** list.
+5. Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. Note:
       Values defined in this field override the dedicated fields provided in the UI. Any values not defined here are not provided to the authenticator.
 
-6.  To automatically create organizations, users, and teams upon successful login, select **Create objects**.
-7.  To enable this authentication method upon creation, select **Enabled**.
-8.  To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users**.
-9.  Click Next.
+6. To automatically create organizations, users, and teams upon successful login, select **Create objects**.
+7. To enable this authentication method upon creation, select **Enabled**.
+8. To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users**.
+9. Click Next.
 
 ## What to do next
 

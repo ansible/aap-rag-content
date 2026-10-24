@@ -10,9 +10,9 @@ Access the API to set a static UUID, a feature critical for maintaining webhook 
 
 #### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Overview.
-3.  In the URL, replaceOverview with the API endpoint, `api/eda/v1/` (for example, `https://<gateway-host>/api/eda/v1/`). The `Api V1 Root` page displays a list of Event-Driven Ansible resource URLs.
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Overview.
+3. In the URL, replaceOverview with the API endpoint, `api/eda/v1/` (for example, `https://<gateway-host>/api/eda/v1/`). The `Api V1 Root` page displays a list of Event-Driven Ansible resource URLs.
 
 ```
 {
@@ -42,8 +42,8 @@ Access the API to set a static UUID, a feature critical for maintaining webhook 
 "eventstream-list": "http://<gateway-host>/api/eda/v1/event-streams/"
 ```
 
-4.  At the end of the list, click the `eventstream-list` URL. This takes you to the Event Stream List page.
-5.  Locate and copy the `“id”` of the event stream UUID that you want to update. This can be found at the end of the event stream data.
+4. At the end of the list, click the `eventstream-list` URL. This takes you to the Event Stream List page.
+5. Locate and copy the `“id”` of the event stream UUID that you want to update. This can be found at the end of the event stream data.
 
 ```
 },
@@ -60,9 +60,9 @@ Access the API to set a static UUID, a feature critical for maintaining webhook 
 "last_event_received_at": null
 ```
 
-6.  Paste the id at the end of the URL (for example, `https://<platformURL>.com/api/eda/v1/<id#>`) and press **Enter**. The **Event Stream Instance** page is displayed, including the current `“uuid”` value.
-7.  In the form at the end of the **Event Stream Instance** page, update the value of the `“uuid”` field to a unique static string of your choice.
-8.  Click **Patch**.
+6. Paste the id at the end of the URL (for example, `https://<platformURL>.com/api/eda/v1/<id#>`) and press **Enter**. The **Event Stream Instance** page is displayed, including the current `“uuid”` value.
+7. In the form at the end of the **Event Stream Instance** page, update the value of the `“uuid”` field to a unique static string of your choice.
+8. Click **Patch**.
 
 #### Results
 

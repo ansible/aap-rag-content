@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_workspaces_management"
-template = "docs/aem-title.html"
 title = "Delete an Ansible development workspace - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_workspaces_management/", "Delete an Ansible development workspace"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_workspaces_management/aem-page/develop-assembly_workspaces_management.html"
 last_crumb = "Delete an Ansible development workspace"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Delete an Ansible development workspace"
 oversized = "false"
@@ -33,7 +34,8 @@ Deleting unused workspaces helps free up cluster resources and maintains a clean
 
 ## Delete an Ansible development workspace
 
-To delete the contents of an Ansible development workspace, you delete the workspace itself. This action removes all the pods, storage, and other resources associated with that specific workspace, effectively wiping its contents.
+To delete the contents of an Ansible development workspace, you delete the workspace itself.
+This action removes all the pods, storage, and other resources associated with that specific workspace, effectively wiping its contents.
 
 ### Before you begin
 
@@ -43,12 +45,12 @@ To delete the contents of an Ansible development workspace, you delete the works
 
 ### Procedure
 
-1.  Stop the Ansible development workspace that you want to delete.
+1. Stop the Ansible development workspace that you want to delete.
 
   - To stop the workspace in the Dev Spaces dashboard, select the workspace that you want to delete and select actions> (and then)Stop Workspace.
   - To stop the workspace using OpenShift `oc` commands, follow the steps in [Stopping workspaces](https://docs.redhat.com/en/documentation/red_hat_openshift_dev_spaces/latest/html-single/user_guide/index#managing-workspaces-with-apis-stopping-workspaces) in the Red Hat OpenShift Dev Spaces *User Guide*.
 
-2.  Delete the workspace:
+2. Delete the workspace:
 
   - To delete the workspace from the Dev Spaces dashboard, select the workspace that you want to delete and select actions> (and then)Delete Workspace.
   - To delete a workspace using OpenShift `oc` commands, follow the steps in [Removing workspaces](https://docs.redhat.com/en/documentation/red_hat_openshift_dev_spaces/latest/html-single/user_guide/index#managing-workspaces-with-apis-removing-workspaces) in the Red Hat OpenShift Dev Spaces *User Guide*.
@@ -61,7 +63,7 @@ Uninstall OpenShift Dev Spaces completely when it is no longer required. Remembe
 
 ### Procedure
 
- To uninstall OpenShift Dev Spaces, follow the steps in the [Uninstalling Dev Spaces](https://docs.redhat.com/en/documentation/red_hat_openshift_dev_spaces/latest/html/administration_guide/uninstalling-devspaces) chapter of the Red Hat OpenShift Dev Spaces *Administration Guide*.
+To uninstall OpenShift Dev Spaces, follow the steps in the [Uninstalling Dev Spaces](https://docs.redhat.com/en/documentation/red_hat_openshift_dev_spaces/latest/html/administration_guide/uninstalling-devspaces) chapter of the Red Hat OpenShift Dev Spaces *Administration Guide*.
 
 Note:
 

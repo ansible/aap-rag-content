@@ -10,9 +10,9 @@ Use the `acl_manager` role to create a new firewall rule for blocking a source I
 
 ### Procedure
 
-1.  Install the acl_manager role using the ansible-galaxy command.  `$ ansible-galaxy install ansible_security.acl_manager`
+1. Install the acl_manager role using the ansible-galaxy command.  `$ ansible-galaxy install ansible_security.acl_manager`
 
-2.  Create a new playbook and set the following parameter. For example, source object, destination object, access rule between the two objects and the actual firewall you are managing, such as Check Point:
+2. Create a new playbook and set the following parameter. For example, source object, destination object, access rule between the two objects and the actual firewall you are managing, such as Check Point:
 
 
 ```
@@ -30,7 +30,7 @@ destination_ip: 192.168.0.10
 ansible_network_os: checkpoint
 ```
 
-3.  Run the playbook:
+3. Run the playbook:
 `$ ansible-navigator run --ee false <playbook.yml>`.
 
 ![Playbook with new firewall rule](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/security-create-rule.png)

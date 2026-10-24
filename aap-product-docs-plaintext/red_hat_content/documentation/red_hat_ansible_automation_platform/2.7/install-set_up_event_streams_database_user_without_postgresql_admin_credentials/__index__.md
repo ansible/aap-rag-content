@@ -4,7 +4,7 @@ If you do not have PostgreSQL admin credentials, you must manually create the ed
 
 ## Procedure
 
-1.  Connect to your PostgreSQL database server with a user that has `SUPERUSER` privileges:
+1. Connect to your PostgreSQL database server with a user that has `SUPERUSER` privileges:
 
 
 ```
@@ -22,7 +22,7 @@ For example:
 ----
 ```
 
-2.  Create the `eda_event_stream` database user and grant access to your database:
+2. Create the `eda_event_stream` database user and grant access to your database:
 
 
 ```
@@ -33,7 +33,7 @@ GRANT CONNECT ON DATABASE <database_name> TO eda_event_stream;
 ----
 ```
 
-3.  Add the following variables to your inventory file under the `[all:vars]` group, replacing the password with the value used in the previous step:
+3. Add the following variables to your inventory file under the `[all:vars]` group, replacing the password with the value used in the previous step:
 
 
 ```
@@ -42,3 +42,6 @@ eda_event_stream_pg_username=eda_event_stream
 eda_event_stream_pg_password=<eda_event_stream_password>
 ----
 ```
+
+Note:
+Event streams use the database connection for pub-sub messaging *only*. No read or write operations are performed on the database for event streams, so `CONNECT`-only permissions for the `eda_event_stream user` are sufficient.

@@ -13,7 +13,7 @@ For **Ansible Automation Platform 2.7** (base metrics service without dashboard)
 
 ### Procedure
 
-1.  Backup procedure
+1. Backup procedure
 **Method 1: Use installer playbook (recommended)**
 
 ```
@@ -61,7 +61,7 @@ tar -czf /backup/automationmetrics_data_$(date +%Y%m%d_%H%M%S).tar.gz \
 {{ aap_volumes_dir }}/automationmetrics
 ```
 
-2.  Restore procedure
+2. Restore procedure
 
 Warning:
 Restoring from backup overwrites current metrics service data.

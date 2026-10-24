@@ -1,16 +1,17 @@
 +++
-template = "docs/aem-title.html"
 title = "How do Ansible Playbooks work - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_how_do_playbooks_work"
+template = "docs/aem-title.html"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-assembly_intro_to_playbooks_1/", "Get started automating with playbooks"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-assembly_intro_to_playbooks/", "Get started automating with playbooks"]]
 category = "Develop"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-ref_how_do_playbooks_work/aem-page/develop-ref_how_do_playbooks_work.html"
 last_crumb = "How do Ansible Playbooks work"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "How do Ansible Playbooks work"
 oversized = "false"
@@ -27,7 +28,8 @@ type = "aem-page"
 
 # How do Ansible Playbooks work
 
-Ansible Playbooks are lists of tasks that run automatically for your specified inventory or groups of hosts. One or more Ansible tasks can be combined to make a play, that is, an ordered grouping of tasks mapped to specific hosts.
+Ansible Playbooks are lists of tasks that run automatically for your specified inventory or groups of hosts.
+One or more Ansible tasks can be combined to make a play, that is, an ordered grouping of tasks mapped to specific hosts.
 
 Tasks are executed in the order in which they are written.
 
@@ -56,7 +58,10 @@ Roles are a way to make code in playbooks reusable by putting the functionality 
 Module
 A unit of code or binary that Ansible runs on managed nodes.
 
-Ansible modules are grouped in collections with a *Fully Qualified Collection Name* (FQCN) for each module. Tasks are executed by modules, each of which performs a specific task in a playbook. A module contains metadata that determines when and where a task is executed, and which user executes it. There are thousands of Ansible modules that perform all kinds of IT tasks, such as:
+Ansible modules are grouped in collections with a *Fully Qualified Collection Name* (FQCN) for each module.
+Tasks are executed by modules, each of which performs a specific task in a playbook.
+A module contains metadata that determines when and where a task is executed, and which user executes it.
+There are thousands of Ansible modules that perform all kinds of IT tasks, such as:
 
 - Cloud management
 - User management
@@ -65,7 +70,7 @@ Ansible modules are grouped in collections with a *Fully Qualified Collection Na
 - Configuration management
 - Communication
 
- ![Structure of a typical playbook](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/playbook.png)
+![Structure of a typical playbook](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/playbook.png)
 
 ## How do I use Ansible Playbooks
 
@@ -103,7 +108,7 @@ Get started with Ansible by creating an automation project, building an inventor
 
 ### Procedure
 
- Create a project folder on your filesystem.
+Create a project folder on your filesystem.
 
 ```
 mkdir ansible_quickstart

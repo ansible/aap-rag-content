@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatformbackup_and_ansibleautomationplatformrestore__aap_ansible_com_v1alpha1_"
-template = "docs/aem-title.html"
 title = "AnsibleAutomationPlatformBackup and AnsibleAutomationPlatformRestore [aap.ansible.com/v1alpha1] - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansible_automation_platform_custom_resources/", "Ansible Automation Platform custom resources"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatformbackup_and_ansibleautomationplatformrestore__aap_ansible_com_v1alpha1_/aem-page/reference-ansibleautomationplatformbackup_and_ansibleautomationplatformrestore__aap_ansible_com_v1alpha1_.html"
 last_crumb = "AnsibleAutomationPlatformBackup and AnsibleAutomationPlatformRestore [aap.ansible.com/v1alpha1]"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "AnsibleAutomationPlatformBackup and AnsibleAutomationPlatformRestore [aap.ansible.com/v1alpha1]"
 oversized = "false"
@@ -48,7 +49,7 @@ The `spec` fields for the `AnsibleAutomationPlatformBackup` custom resource.
 | `backup_pvc`                  | String  | Name of the persistent volume claim (PVC) to use for backup storage. This value applies globally to all components unless overridden.                                                                    | -       |
 | `backup_storage_class`        | String  | Kubernetes storage class for the backup PVC. Applies globally to the platform gateway. Components that do not specify their own`backup_storage_class` inherit this value.                                | -       |
 | `backup_storage_requirements` | String  | Storage size for the backup PVC, for example`15Gi`.                                                                                                                                                      | -       |
-| `hub`                         | Object  | <br>Override backup settings for the automation hub component. See [Component backup overrides](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatformbackup_and_ansibleautomationplatformrestore__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatformBackupRestore__backup-component-overrides). | -       |
+| `hub`                         | Object  | Override backup settings for the automation hub component. See [Component backup overrides](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatformbackup_and_ansibleautomationplatformrestore__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatformBackupRestore__backup-component-overrides). | -       |
 | `controller`                  | Object  | Override backup settings for the automation controller component. See [Component backup overrides](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatformbackup_and_ansibleautomationplatformrestore__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatformBackupRestore__backup-component-overrides). | -       |
 | `eda`                         | Object  | Override backup settings for the Event-Driven Ansible component. See [Component backup overrides](/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatformbackup_and_ansibleautomationplatformrestore__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatformBackupRestore__backup-component-overrides). | -       |
 
