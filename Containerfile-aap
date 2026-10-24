@@ -41,7 +41,7 @@ WORKDIR /rag-content/llama_stack_vector_db
 RUN gzip faiss_store.db; sha256sum faiss_store.db.gz > faiss_store.db.gz.sha256
 RUN sed -n 's/.*vector_store_id: //p' llama-stack.yaml | tr -d '\n' > provider_vector_db_id.ind
 
-FROM registry.access.redhat.com/ubi9/ubi-minimal@sha256:c4c285d42941ebb2bd4da878479008e1e4536bb599aad1dbe568f89de9053661
+FROM registry.access.redhat.com/ubi9/ubi-minimal@sha256:2d4c4551af6831dcd26bbf86108c4385de5183ec8fe6b5868f6f9640fe47f4ed
 
 # install diff and gzip
 RUN microdnf install -y diffutils gzip
