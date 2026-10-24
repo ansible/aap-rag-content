@@ -17,6 +17,10 @@ metadata:
   name: aap-rag-content-on-pull-request
   namespace: ansible-lightspeed-tenant
 spec:
+  timeouts:
+    pipeline: "4h30m"
+    tasks: "4h"
+    finally: "30m"
   params:
   - name: git-url
     value: '{{source_url}}'
