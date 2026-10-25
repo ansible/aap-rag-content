@@ -21,6 +21,16 @@ spec:
     pipeline: "4h30m"
     tasks: "4h"
     finally: "30m"
+  # Override buildah-oci-ta's ~4Gi default; embedding needs more RAM.
+  taskRunSpecs:
+    - pipelineTaskName: build-container
+      stepSpecs:
+        - name: build
+          computeResources:
+            requests:
+              memory: 8Gi
+            limits:
+              memory: 8Gi
   params:
   - name: git-url
     value: '{{source_url}}'
