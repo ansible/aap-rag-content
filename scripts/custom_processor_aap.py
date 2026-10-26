@@ -93,6 +93,7 @@ class AAPMetadataProcessor(MetadataProcessor):
 
 def main():
     """Main function to process AAP documentation and generate vector database."""
+    utils.setup_cli_logging("aap_rag_content")
     parser = utils.get_common_arg_parser()
     args = parser.parse_args()
 
