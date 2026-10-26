@@ -1,7 +1,9 @@
 # Design patterns for mesh
 ## Multi-hopped execution node
 
-In this configuration, resilient controller nodes are peered with resilient local execution nodes. Resilient local hop nodes are peered with the controller nodes. A remote execution node and a remote hop node are peered with the local hop nodes.
+In this configuration, resilient controller nodes are peered with resilient local execution nodes.
+Resilient local hop nodes are peered with the controller nodes.
+A remote execution node and a remote hop node are peered with the local hop nodes.
 
 You can use this setup if you need to run automation in a DMZ network from a remote network.
 

@@ -9,11 +9,11 @@ For more information about execution environments, see [Define, create, and buil
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Organizations.
-2.  From the Organizations list view, select the organization whose execution environments you want to manage.
-3.  Select the **Execution Environments** tab.
-4.  If no execution environments are available, click Create execution environment to create one. Alternatively, you can create an execution environment from the navigation panel by selecting Automation Execution> (and then)Infrastructure> (and then)Execution Environments.
-5.  Click Create execution environment. Note:
+1. From the navigation panel, select Access Management> (and then)Organizations.
+2. From the Organizations list view, select the organization whose execution environments you want to manage.
+3. Select the **Execution Environments** tab.
+4. If no execution environments are available, click Create execution environment to create one. Alternatively, you can create an execution environment from the navigation panel by selecting Automation Execution> (and then)Infrastructure> (and then)Execution Environments.
+5. Click Create execution environment. Note:
 After creating a new execution environments, return to Access Management> (and then)Organizations and select the organization in which you created the execution environment to update the list on that tab.
 
-6.  Select the execution environments to use with your particular organization.
+6. Select the execution environments to use with your particular organization.

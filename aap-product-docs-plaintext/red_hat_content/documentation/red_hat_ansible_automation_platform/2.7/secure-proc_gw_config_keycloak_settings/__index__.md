@@ -10,22 +10,22 @@ When using this authenticator some specific setup in your Keycloak instance is r
 
 ## Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Authentication Methods.
-2.  Click Create authentication.
-3.  Enter a **Name** for this authentication configuration.
-4.  Select **Keycloak** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
-5.  Enter the location where the user’s token can be retrieved in the **Keycloak Access Token URL** field.
-6.  Optional: Enter the redirect location the user is taken to during the login flow in the **Keycloak Provider URL** field.
-7.  Enter the Client ID from your Keycloak installation in the **Keycloak OIDC Key** field.
-8.  Enter the RS256 public key provided by your Keycloak realm in the **Keycloak Public Key** field.
-9.  Enter the OIDC secret (Client Secret) from your Keycloak installation in the **Keycloak OIDC Secret** field.
-10.  Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. Note:
+1. From the navigation panel, select Access Management> (and then)Authentication Methods.
+2. Click Create authentication.
+3. Enter a **Name** for this authentication configuration.
+4. Select **Keycloak** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
+5. Enter the location where the user’s token can be retrieved in the **Keycloak Access Token URL** field.
+6. Optional: Enter the redirect location the user is taken to during the login flow in the **Keycloak Provider URL** field.
+7. Enter the Client ID from your Keycloak installation in the **Keycloak OIDC Key** field.
+8. Enter the RS256 public key provided by your Keycloak realm in the **Keycloak Public Key** field.
+9. Enter the OIDC secret (Client Secret) from your Keycloak installation in the **Keycloak OIDC Secret** field.
+10. Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. Note:
 Values defined in this field override the dedicated fields provided in the UI. Any values not defined here are not provided to the authenticator.
 
-11.  To automatically create organizations, users, and teams upon successful login, select **Create objects**.
-12.  To enable this authentication method upon creation, select **Enabled**.
-13.  To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users**.
-14.  Click Create Authentication Method.
+11. To automatically create organizations, users, and teams upon successful login, select **Create objects**.
+12. To enable this authentication method upon creation, select **Enabled**.
+13. To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users**.
+14. Click Create Authentication Method.
 
 If you receive an `jwt.exceptions.InvalidAudienceError: Audience doesn’t match` error, you must re-enable the audience by doing the following:
 

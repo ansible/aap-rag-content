@@ -8,7 +8,7 @@ Use this procedure when securing database connections for compliance requirement
 
 ## Procedure
 
-1.  Configure PostgreSQL for TLS
+1. Configure PostgreSQL for TLS
 Edit postgresql.conf:
 
 ```
@@ -18,7 +18,7 @@ ssl_key_file = '/path/to/server.key'
 ssl_ca_file = '/path/to/ca.crt'
 ```
 
-2.  Configure metrics service for TLS
+2. Configure metrics service for TLS
 Edit your inventory file:
 
 ```

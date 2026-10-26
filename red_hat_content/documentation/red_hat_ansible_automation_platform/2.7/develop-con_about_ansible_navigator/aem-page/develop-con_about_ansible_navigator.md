@@ -1,7 +1,7 @@
 +++
+template = "docs/aem-title.html"
 title = "What is automation content navigator? - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_about_ansible_navigator"
-template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_intro_navigator/", "Emulate a platform environment locally with automation content navigator"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-con_about_ansible_navigator/aem-page/develop-con_about_ansible_navigator.html"
 last_crumb = "What is automation content navigator?"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "What is automation content navigator?"
 oversized = "false"
@@ -187,29 +188,29 @@ This document uses the text-based user interface mode for most procedures.
 
 The automation content navigator commands run familiar Ansible CLI commands in `-m stdout` mode. You can use all the subcommands and options from the related Ansible CLI command. Use `ansible-navigator --help` for details.
 
- **Automation content navigator commands**
+**Automation content navigator commands**
 
-| Command         | Description                                          | CLI example                                 |
-| --------------- | ---------------------------------------------------- | ------------------------------------------- |
-| <br>collections | <br>Explore available collections                    | <br> `ansible-navigator collections --help` |
-| <br>config      | <br>Explore the current Ansible configuration        | <br> `ansible-navigator config --help`      |
-| <br>doc         | <br>Review documentation for a module or plugin      | <br> `ansible-navigator doc --help`         |
-| <br>images      | <br>Explore execution environment images             | <br> `ansible-navigator images --help`      |
-| <br>inventory   | <br>Explore an inventory                             | <br> `ansible-navigator inventory --help`   |
-| <br>replay      | <br>Explore a previous run using a playbook artifact | <br> `ansible-navigator replay --help`      |
-| <br>run         | <br>Run a playbook                                   | <br> `ansible-navigator run --help`         |
-| <br>welcome     | <br>Start at the welcome page                        | <br> `ansible-navigator welcome --help`     |
+| Command     | Description                                      | CLI example                            |
+| ----------- | ------------------------------------------------ | -------------------------------------- |
+| collections | Explore available collections                    | `ansible-navigator collections --help` |
+| config      | Explore the current Ansible configuration        | `ansible-navigator config --help`      |
+| doc         | Review documentation for a module or plugin      | `ansible-navigator doc --help`         |
+| images      | Explore execution environment images             | `ansible-navigator images --help`      |
+| inventory   | Explore an inventory                             | `ansible-navigator inventory --help`   |
+| replay      | Explore a previous run using a playbook artifact | `ansible-navigator replay --help`      |
+| run         | Run a playbook                                   | `ansible-navigator run --help`         |
+| welcome     | Start at the welcome page                        | `ansible-navigator welcome --help`     |
 
 ### Relationship between Ansible and automation content navigator commands
 
 The automation content navigator commands run familiar Ansible CLI commands in `-m stdout` mode. You can use all the subcommands and options available in the related Ansible CLI command. Use `ansible-navigator --help` for details.
 
- **Comparison of automation content navigator and Ansible CLI commands**
+**Comparison of automation content navigator and Ansible CLI commands**
 
-| automation content navigator command | Ansible CLI command              |
-| ------------------------------------ | -------------------------------- |
-| <br> `ansible-navigator collections` | <br> `ansible-galaxy collection` |
-| <br> `ansible-navigator config`      | <br> `ansible-config`            |
-| <br> `ansible-navigator doc`         | <br> `ansible-doc`               |
-| <br> `ansible-navigator inventory`   | <br> `ansible-inventory`         |
-| <br> `ansible-navigator run`         | <br> `ansible-playbook`          |
+| automation content navigator command | Ansible CLI command         |
+| ------------------------------------ | --------------------------- |
+| `ansible-navigator collections`      | `ansible-galaxy collection` |
+| `ansible-navigator config`           | `ansible-config`            |
+| `ansible-navigator doc`              | `ansible-doc`               |
+| `ansible-navigator inventory`        | `ansible-inventory`         |
+| `ansible-navigator run`              | `ansible-playbook`          |

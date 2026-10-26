@@ -1,0 +1,295 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Ansible Automation Platform 2.7 patch release August 4, 2026 (2.7.4)",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Overview",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33___overview",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33___overview"
+        },
+        {
+          "title": "Highlights",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33___highlights",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33___highlights"
+        },
+        {
+          "title": "Features",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33___enhancements",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33___enhancements"
+        },
+        {
+          "title": "Ansible Lightspeed / MCP Server",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33___aap_gateway",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33___aap_gateway"
+        },
+        {
+          "title": "Metrics Service",
+          "visible": true,
+          "weight": 5,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_3",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_3"
+        },
+        {
+          "title": "Enhancements",
+          "visible": true,
+          "weight": 6,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_4",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_4"
+        },
+        {
+          "title": "Automation Platform Gateway",
+          "visible": true,
+          "weight": 7,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_5",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_5"
+        },
+        {
+          "title": "Metrics Service and Automation Dashboard",
+          "visible": true,
+          "weight": 8,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_6",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_6"
+        },
+        {
+          "title": "Automation Platform UI",
+          "visible": true,
+          "weight": 9,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_7",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_7"
+        },
+        {
+          "title": "Automation Platform Gateway / Platform Operator",
+          "visible": true,
+          "weight": 10,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_8",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_8"
+        },
+        {
+          "title": "Containerized installer",
+          "visible": true,
+          "weight": 11,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_9",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_9"
+        },
+        {
+          "title": "Automation Controller",
+          "visible": true,
+          "weight": 12,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_10",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_10"
+        },
+        {
+          "title": "Django-ansible-base",
+          "visible": true,
+          "weight": 13,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_11",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_11"
+        },
+        {
+          "title": "Event-Driven Ansible",
+          "visible": true,
+          "weight": 14,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_12",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_12"
+        },
+        {
+          "title": "Execution environments",
+          "visible": true,
+          "weight": 15,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33___execution_environments_partners",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33___execution_environments_partners"
+        },
+        {
+          "title": "Ansible Lightspeed / MCP Server",
+          "visible": true,
+          "weight": 16,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_14",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_14"
+        },
+        {
+          "title": "Ansible Lightspeed",
+          "visible": true,
+          "weight": 17,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_15",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_15"
+        },
+        {
+          "title": "MCP Server",
+          "visible": true,
+          "weight": 18,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_16",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_16"
+        },
+        {
+          "title": "Metrics Service and Automation Dashboard",
+          "visible": true,
+          "weight": 19,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_17",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_17"
+        },
+        {
+          "title": "Platform Operator",
+          "visible": true,
+          "weight": 20,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_18",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_18"
+        },
+        {
+          "title": "CVE",
+          "visible": true,
+          "weight": 21,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33___cve_common_vulnerabilities_and_exposures",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33___cve_common_vulnerabilities_and_exposures"
+        },
+        {
+          "title": "Bug fixes",
+          "visible": true,
+          "weight": 22,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33___bug_fixes",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33___bug_fixes"
+        },
+        {
+          "title": "Automation gateway",
+          "visible": true,
+          "weight": 23,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33___aap_gateway_platform_operator",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33___aap_gateway_platform_operator"
+        },
+        {
+          "title": "Automation Platform Gateway / Django-ansible-base",
+          "visible": true,
+          "weight": 24,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_19",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_19"
+        },
+        {
+          "title": "Automation Platform Gateway / Automation Dashboard",
+          "visible": true,
+          "weight": 25,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_20",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_20"
+        },
+        {
+          "title": "Metrics Service and Automation Dashboard",
+          "visible": true,
+          "weight": 26,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_21",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_21"
+        },
+        {
+          "title": "Automation Platform UI",
+          "visible": true,
+          "weight": 27,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_22",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_22"
+        },
+        {
+          "title": "Automation Platform UI / Automation Hub",
+          "visible": true,
+          "weight": 28,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_23",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_23"
+        },
+        {
+          "title": "Automation Controller",
+          "visible": true,
+          "weight": 29,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_24",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_24"
+        },
+        {
+          "title": "Automation Controller / Django-ansible-base",
+          "visible": true,
+          "weight": 30,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_25",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_25"
+        },
+        {
+          "title": "Django-ansible-base",
+          "visible": true,
+          "weight": 31,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_26",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_26"
+        },
+        {
+          "title": "Event-Driven Ansible",
+          "visible": true,
+          "weight": 32,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_27",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_27"
+        },
+        {
+          "title": "Ansible Lightspeed",
+          "visible": true,
+          "weight": 33,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_28",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_28"
+        },
+        {
+          "title": "Metrics Service and Automation Dashboard",
+          "visible": true,
+          "weight": 34,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_29",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_29"
+        },
+        {
+          "title": "Platform Operator",
+          "visible": true,
+          "weight": 35,
+          "urlFragment": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_30",
+          "anchor": null,
+          "singlePageAnchor": "GUID-399e3fd3-91cc-4bd5-91aa-53cbbbb66b33__section_30"
+        }
+      ]
+    }
+  ]
+}

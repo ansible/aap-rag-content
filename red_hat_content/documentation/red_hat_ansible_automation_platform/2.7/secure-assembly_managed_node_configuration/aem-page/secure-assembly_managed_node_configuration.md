@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-assembly_managed_node_configuration/aem-page/secure-assembly_managed_node_configuration.html"
 last_crumb = "Improve the security of nodes managed by Ansible Automation Platform"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Improve the security of nodes managed by Ansible Automation Platform"
 oversized = "false"
@@ -39,7 +40,8 @@ Any recommendations on managed node configuration presented here must be thoroug
 
 The following section provides guidance for *Red Hat Enterprise Linux* (RHEL) managed nodes, but the concepts may be applicable to other Linux distributions as well.
 
-Examples are provided for manual configuration of RHEL managed nodes. These steps can also be automated with Ansible Automation Platform, or they can be added to a *Standard Operating Environment* (SOE) or "golden image" created with a tool such as the Red Hat Lightspeed image builder.
+Examples are provided for manual configuration of RHEL managed nodes.
+These steps can also be automated with Ansible Automation Platform, or they can be added to a *Standard Operating Environment* (SOE) or "golden image" created with a tool such as the Red Hat Lightspeed image builder.
 
 ## Create a dedicated service account with access limits
 
@@ -76,7 +78,7 @@ To configure this, use the following procedure:
 
 ### Procedure
 
-1.  Create the file `/etc/sudoers.d/ansible`, and include the following content:
+1. Create the file `/etc/sudoers.d/ansible`, and include the following content:
   
 
 ```
@@ -84,10 +86,10 @@ To configure this, use the following procedure:
 ansible ALL=(ALL) NOPASSWD: ALL
 ```
 
-2.  Set restrictive permissions on the file:
+2. Set restrictive permissions on the file:
        `` sudo chmod 0440 /etc/sudoers.d/ansible` ``
 
-3.  Verify the file uses the proper syntax:
+3. Verify the file uses the proper syntax:
        `sudo visudo -cf /etc/sudoers.d/ansible`
 
 ## Require SSH key authentication for service account
@@ -106,7 +108,7 @@ Use the following procedure to configure the SSH daemon:
 
 ### Procedure
 
-1.  Create the file `/etc/sshd/sshd_config.d/60-ansible.conf`, and include the following content:
+1. Create the file `/etc/sshd/sshd_config.d/60-ansible.conf`, and include the following content:
   
 
 ```
@@ -116,10 +118,10 @@ Match User ansible
 Match all
 ```
 
-2.  Verify that the file uses the proper syntax:
+2. Verify that the file uses the proper syntax:
        `sudo sshd -t`
 
-3.  Restart the SSH daemon
+3. Restart the SSH daemon
        `sudo systemctl restart sshd.service`
 
 ## Enable and configure pam_access controls for service accounts
@@ -128,7 +130,7 @@ To restrict remote login access to connections originating from the Ansible Auto
 
 ### Procedure
 
-1.  Use the FQDNs of your automation controller and execution nodes to add the following content to the `/etc/security/access.conf` file, using the FQDNs of your controller nodes and execution nodes:
+1. Use the FQDNs of your automation controller and execution nodes to add the following content to the `/etc/security/access.conf` file, using the FQDNs of your controller nodes and execution nodes:
   
 
 ```
@@ -138,4 +140,4 @@ To restrict remote login access to connections originating from the Ansible Auto
 -:ansible:ALL
 ```
 
-2.  Enable the `with-pamaccess` feature in the current authselect profile. All authselect profiles included by default with RHEL have this feature.  `sudo authselect enable-feature with-pamaccess`
+2. Enable the `with-pamaccess` feature in the current authselect profile. All authselect profiles included by default with RHEL have this feature.  `sudo authselect enable-feature with-pamaccess`

@@ -1,7 +1,7 @@
 +++
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_event_filter_plugins"
 title = "Filter events before triggering automation - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_event_filter_plugins"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_event_filter_plugins/", "Filter events before triggering automation"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_event_filter_plugins/aem-page/administer-assembly_eda_event_filter_plugins.html"
 last_crumb = "Filter events before triggering automation"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Filter events before triggering automation"
 oversized = "false"
@@ -31,12 +32,12 @@ Events sometimes have extra data that is unnecessary and might overwhelm the rul
 
 Events are defined as python code and distributed as collections. The default EDA collection has the following filters:
 
-| Name                                    | Description                                                                                                      |
-| --------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| <br>json\_filter                        | <br>This filter includes and excludes keys from the event object                                                 |
-| <br>dashes\_to\_underscores             | <br>This filter changes the dashes in all keys in the payload to be underscore                                   |
-| <br>ansible.eda.insert\_hosts\_to\_meta | <br>This filter is used to add host information into the event so that ansible-rulebook can locate it and use it |
-| <br>ansible.eda.normalize\_keys         | <br>This filter is used if you want to change non alpha numeric keys to underscore                               |
+| Name                                | Description                                                                                                  |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| json\_filter                        | This filter includes and excludes keys from the event object                                                 |
+| dashes\_to\_underscores             | This filter changes the dashes in all keys in the payload to be underscore                                   |
+| ansible.eda.insert\_hosts\_to\_meta | This filter is used to add host information into the event so that ansible-rulebook can locate it and use it |
+| ansible.eda.normalize\_keys         | This filter is used if you want to change non alpha numeric keys to underscore                               |
 
 You can chain event filters one after the other, and the updated data is sent from one filter to the next. Event filters are defined in the rulebook after a source is defined. When the rulebook starts the source plugin it associates the correct filters and transforms the data before putting it into the queue.
 

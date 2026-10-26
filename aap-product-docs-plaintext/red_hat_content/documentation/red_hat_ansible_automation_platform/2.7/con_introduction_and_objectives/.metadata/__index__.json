@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/con_introduction_and_objectives",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_introduction_and_objectives",
-  "title": "Migrate from existing deployment topologies"
+  "title": "Migrate from existing deployment topologies",
+  "url_reachable": false
 }

@@ -4,8 +4,8 @@ You can view a list of all the tasks that have been run from Ansible automation 
 
 ## Procedure
 
-1.  In a browser, sign in to Ansible automation portal.
-2.  In the navigation pane, select History.
+1. In a browser, sign in to Ansible automation portal.
+2. In the navigation pane, select History.
 The Task list page displays the tasks that have been run.
 
 ## Results

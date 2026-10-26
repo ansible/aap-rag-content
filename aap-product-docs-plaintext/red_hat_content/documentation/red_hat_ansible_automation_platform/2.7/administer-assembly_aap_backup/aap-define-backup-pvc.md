@@ -10,7 +10,7 @@ Define a custom Persistent Volume Claims (PVCs) to control backup storage alloca
 
 ### Procedure
 
-1.  Create a backup YAML file, for example `custom-pvc-backup.yaml`) , that defines `backup_pvc` and `create_backup_pvc` parameters for each component:
+1. Create a backup YAML file, for example `custom-pvc-backup.yaml`) , that defines `backup_pvc` and `create_backup_pvc` parameters for each component:
 
 
 ```none
@@ -52,7 +52,7 @@ create_backup_pvc: true
 2. When set to `true`, the operator creates the PVC automatically if it does not already exist.
 3. Component-level settings override the global values for `backup_pvc`, `backup_storage_class`, and `backup_storage_requirements`. Each component can define its own `backup_pvc` to create a uniquely named PVC.
 
-2.  Apply the configuration:
+2. Apply the configuration:
 
 
 ```none

@@ -24,14 +24,6 @@
           "urlFragment": "configuring-inventory-file___inventory_file_for_online_installation_for_containerized_enterprise_topology",
           "anchor": null,
           "singlePageAnchor": "configuring-inventory-file___inventory_file_for_online_installation_for_containerized_enterprise_topology"
-        },
-        {
-          "title": "Tips for building inventories",
-          "visible": true,
-          "weight": 3,
-          "urlFragment": "ref-tips-build-inventory",
-          "anchor": null,
-          "singlePageAnchor": "ref-tips-build-inventory"
         }
       ]
     }

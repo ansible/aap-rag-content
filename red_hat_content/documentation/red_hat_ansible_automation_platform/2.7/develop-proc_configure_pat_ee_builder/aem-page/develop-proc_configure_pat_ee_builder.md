@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_pat_ee_builder"
 title = "Configure a Personal Access Token for GitHub content discovery - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_pat_ee_builder"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-build_execution_environments_with_the_automation_portal/", "Build execution environments with automation portal"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_configure_pat_ee_builder/aem-page/develop-proc_configure_pat_ee_builder.html"
 last_crumb = "Configure a Personal Access Token for GitHub content discovery"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure a Personal Access Token for GitHub content discovery"
 oversized = "false"
@@ -39,13 +40,13 @@ PATs provide a simpler setup with user-scoped access. If you are already using P
 
 ## Procedure
 
-1.  Create a GitHub PAT with the following scopes:
+1. Create a GitHub PAT with the following scopes:
 
   - `repo`
   - `read:org`
   - `workflow` (required for the CI activity tab to display workflow run status)
 
-2.  Store the PAT.
+2. Store the PAT.
       **OpenShift — CLI:**
 
 ```

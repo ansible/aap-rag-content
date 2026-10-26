@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
 title = "Create a credential using a Vault OIDC credential type - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-create_a_credential_using_a_vault_oidc_credential_type"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-technology_preview/", "Technology Preview"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/whats_new-create_a_credential_using_a_vault_oidc_credential_type/aem-page/whats_new-create_a_credential_using_a_vault_oidc_credential_type.html"
 last_crumb = "Create a credential using a Vault OIDC credential type"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Create a credential using a Vault OIDC credential type"
 oversized = "false"
@@ -37,10 +38,10 @@ Configure an OIDC credential to enable Ansible Automation Platform to authentica
 
 ## Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Credentials, and then select .
-3.  Click Create credential.
-4.  Edit the following fields:
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Credentials, and then select .
+3. Click Create credential.
+4. Edit the following fields:
   
 
 Name
@@ -74,8 +75,8 @@ Name of the Vault Enterprise namespace where your secrets and authentication met
 API version
 - The version of the Vault KV secrets engine used for secret lookups. Valid values are `v1` (for KV version 1) or `v2` (for KV version 2).
 
-5.  Click Test to verify connection to the secret management system.
-6.  In the **Test external credential** dialog, edit the fields:
+5. Click Test to verify connection to the secret management system.
+6. In the **Test external credential** dialog, edit the fields:
   - For HashiCorp Vault Secret Lookup (OIDC)
 
 Name of secret backend
@@ -110,8 +111,8 @@ The specific role name configured within the Vault SSH secrets engine that dicta
 Valid principals
 A comma-separated list of valid usernames or hosts allowed to use the signed certificate.
 
-7.  Click Run.
+7. Click Run.
   A success or error message displays, showing the claims associated with the job template you selected.   - For errors, click Retry to correct your input in the Test external credential dialog, or click Cancel to return to the Details screen of your target credential. Review the displayed claims and Vault logs to troubleshoot any errors.
   - For successful tests, click Close. You are returned to the Details screen of your target credential.
 
-8.  Click Create credential.
+8. Click Create credential.

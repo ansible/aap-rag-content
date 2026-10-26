@@ -6,8 +6,8 @@ A reverse proxy manages external requests, providing load balancing and security
 
 #### Procedure
 
-1.  From the navigation panel, select Settings> (and then)Automation Execution> (and then)System.
-2.  In the **Remote Host Headers** field, enter the following values:
+1. From the navigation panel, select Settings> (and then)Automation Execution> (and then)System.
+2. In the **Remote Host Headers** field, enter the following values:
 
 
 ```
@@ -18,7 +18,7 @@ A reverse proxy manages external requests, providing load balancing and security
 ]
 ```
 
-3.  Add the lines below to `/etc/tower/conf.d/custom.py` to ensure the application uses the correct headers:
+3. Add the lines below to `/etc/tower/conf.d/custom.py` to ensure the application uses the correct headers:
 
 
 ```
@@ -26,5 +26,5 @@ USE_X_FORWARDED_PORT = True
 USE_X_FORWARDED_HOST = True
 ```
 
-4.  Click Save to save the settings.
+4. Click Save to save the settings.
 

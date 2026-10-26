@@ -1,7 +1,7 @@
 +++
 title = "Configure custom PostgreSQL settings - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_configure_pg_extra_settings"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_configure_pg_extra_settings"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator/", "Install on OpenShift Container Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_configure_pg_extra_settings/aem-page/install-proc_configure_pg_extra_settings.html"
 last_crumb = "Configure custom PostgreSQL settings"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure custom PostgreSQL settings"
 oversized = "false"
@@ -37,13 +38,13 @@ The `postgres_extra_settings` variable allows you to pass a list of custom *name
 
 ## Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  Go to **Operators → Installed Operators**.
-3.  Select your Ansible Automation Platform Operator deployment.
-4.  Select **All Instances** and go to your **Ansible Automation Platform** instance.
-5.  Click the ⋮ icon and then select **Edit Ansible Automation Platform**.
-6.  In the **YAML** view, locate the `spec:` section
-7.  Add the `database` section and the required settings under `spec:`. The following example configures SSL ciphers and the maximum connections:
+1. Log in to Red Hat OpenShift Container Platform.
+2. Go to **Operators → Installed Operators**.
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select **All Instances** and go to your **Ansible Automation Platform** instance.
+5. Click the ⋮ icon and then select **Edit Ansible Automation Platform**.
+6. In the **YAML** view, locate the `spec:` section
+7. Add the `database` section and the required settings under `spec:`. The following example configures SSL ciphers and the maximum connections:
   
 
 ```bash
@@ -54,7 +55,7 @@ spec:
         value: '1000'
 ```
 
-8.  Click Save.
+8. Click Save.
 
 ## Results
 

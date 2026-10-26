@@ -10,21 +10,21 @@ You can run Ansible playbooks with the automation content navigator text-based u
 
 ### Procedure
 
-1.  Start automation content navigator
+1. Start automation content navigator
 
 
 ```
 $ ansible-navigator
 ```
 
-2.  Run the playbook.
+2. Run the playbook.
 
 ```
 $ :run
 ```
 
-3.  Optional: type `ansible-navigator run simple-playbook.yml -i inventory.yml` to run the playbook.
-4.  Verify or add the inventory and any other command line parameters.
+3. Optional: type `ansible-navigator run simple-playbook.yml -i inventory.yml` to run the playbook.
+4. Verify or add the inventory and any other command line parameters.
 
 ```
 INVENTORY OR PLAYBOOK NOT FOUND, PLEASE CONFIRM THE FOLLOWING
@@ -36,15 +36,15 @@ Additional command line parameters: Please provide a value (optional)
 Submit Cancel
 ```
 
-5.  Tab to `Submit` and hit Enter. You should see the tasks executing.
+5. Tab to `Submit` and hit Enter. You should see the tasks executing.
 ![Executing playbook tasks](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-play-list.png)
-6.  Type the number next to a play to step into the play results, or type `:<number>` for numbers above 9.
+6. Type the number next to a play to step into the play results, or type `:<number>` for numbers above 9.
 ![Task list](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-task-list.png)
 Notice failed tasks show up in red if you have colors enabled for automation content navigator.
 
-7.  Type the number next to a task to review the task results, or type `:<number>` for numbers above 9.
+7. Type the number next to a task to review the task results, or type `:<number>` for numbers above 9.
 ![Failed task results](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-task-output-failed.png)
-8.  Optional: type `:doc` bring up the documentation for the module or plugin used in the task to aid in troubleshooting.
+8. Optional: type `:doc` bring up the documentation for the module or plugin used in the task to aid in troubleshooting.
 
 ```
 ANSIBLE.BUILTIN.PACKAGE_FACTS (MODULE)

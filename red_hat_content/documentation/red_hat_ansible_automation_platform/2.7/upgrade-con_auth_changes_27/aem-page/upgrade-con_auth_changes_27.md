@@ -1,18 +1,19 @@
 +++
-title = "Authentication changes in Ansible Automation Platform 2.7 - Red Hat Ansible Automation Platform 2.7"
+title = "Authentication and access management changes when upgrading to 2.7 - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-con_auth_changes_27"
 template = "docs/aem-title.html"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-con_auth_changes_27/", "Authentication changes in Ansible Automation Platform 2.7"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-con_auth_changes_27/", "Authentication and access management changes when upgrading to 2.7"]]
 category = "Upgrade"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/upgrade-con_auth_changes_27/aem-page/upgrade-con_auth_changes_27.html"
-last_crumb = "Authentication changes in Ansible Automation Platform 2.7"
-modified = "2026-07-30T17:12:56.473Z"
+last_crumb = "Authentication and access management changes when upgrading to 2.7"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
-name = "Authentication changes in Ansible Automation Platform 2.7"
+name = "Authentication and access management changes when upgrading to 2.7"
 oversized = "false"
 page_slug = "upgrade-con_auth_changes_27"
 portal_content_subtype = "title"
@@ -25,7 +26,7 @@ toc = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/upgrade-con_
 type = "aem-page"
 +++
 
-# Authentication changes in Ansible Automation Platform 2.7
+# Authentication and access management changes when upgrading to 2.7
 
 In Ansible Automation Platform 2.7, all authentication has been consolidated through platform gateway. Direct API access to individual platform components has been removed.
 
@@ -67,8 +68,8 @@ You must configure platform gateway accounts for all users before upgrading. Use
 
 ### Procedure
 
-1.  Identify users who authenticate through the automation controller password fallback.
-2.  Create platform gateway accounts for these users or instruct users to set platform gateway passwords.
+1. Identify users who authenticate through the automation controller password fallback.
+2. Create platform gateway accounts for these users or instruct users to set platform gateway passwords.
   
   Note:
       If you miss this step before upgrading, automation controller accounts are automatically created in platform gateway during the upgrade, but passwords are not set. Users with automatically-created accounts must reset their passwords before they can log in.
@@ -76,15 +77,3 @@ You must configure platform gateway accounts for all users before upgrading. Use
 ### Results
 
 Confirm that all active users can log in to their platform gateway accounts.
-
-## Post-upgrade requirements
-
-After upgrading to Ansible Automation Platform 2.7, update tokens, scripts, and integrations to use platform gateway for all external authentication and API access.
-
-After upgrading to Ansible Automation Platform 2.7, perform the following actions:
-
-- **Regenerate tokens:** Regenerate all Personal Access Tokens through platform gateway.
-- **Update CaC:** Update Configuration as Code files to use platform gateway URLs.
-- **Update scripts:** Update scripts and integrations to point to platform gateway.
-- **Update container registry:** Re-authenticate to the container registry.
-- **Update collection connection parameters:** Update playbooks that use `ansible.controller`, `ansible.hub`, or `ansible.eda` collections to point to the platform gateway hostname instead of direct component hostnames. For example, change `controller_host` from `controller.example.com` to `gateway.example.com`. Token parameters such as `controller_oauthtoken` must use tokens created through platform gateway.

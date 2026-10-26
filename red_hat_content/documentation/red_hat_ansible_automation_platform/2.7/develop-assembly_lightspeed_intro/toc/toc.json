@@ -2,7 +2,7 @@
   "version": "1.1",
   "sections": [
     {
-      "title": "Build automation faster with Red Hat Ansible Lightspeed",
+      "title": "Build automation faster with Red Hat Ansible Lightspeed code assistant",
       "visible": true,
       "weight": 1,
       "urlFragment": "index",
@@ -10,7 +10,7 @@
       "singlePageAnchor": null,
       "sections": [
         {
-          "title": "Key features of Red Hat Ansible Lightspeed",
+          "title": "Key features of Red Hat Ansible Lightspeed code assistant",
           "visible": true,
           "weight": 1,
           "urlFragment": "lightspeed-intro__lightspeed-key-features_lightspeed-intro",

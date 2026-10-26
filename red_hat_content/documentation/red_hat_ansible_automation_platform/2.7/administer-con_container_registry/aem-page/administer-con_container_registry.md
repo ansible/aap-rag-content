@@ -1,7 +1,7 @@
 +++
 title = "Manage containers in your private automation hub - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_container_registry"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_container_registry"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_container_registry/", "Manage containers in your private automation hub"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-con_container_registry/aem-page/administer-con_container_registry.html"
 last_crumb = "Manage containers in your private automation hub"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Manage containers in your private automation hub"
 oversized = "false"
@@ -44,13 +45,13 @@ When you have built or sourced an execution environment, you can push that execu
 
 The workflow is as follows:
 
-1.      Pull an execution environment from an external registry (like registry.redhat.io) to your local machine.
+1. Pull an execution environment from an external registry (like registry.redhat.io) to your local machine.
 
-2.      Tag the image locally for your private automation hub registry.
+2. Tag the image locally for your private automation hub registry.
 
-3.      Push the image to your private automation hub.
+3. Push the image to your private automation hub.
 
-4.      Configure access permissions and documentation (such as READMEs) within private automation hub so your teams can use the image.
+4. Configure access permissions and documentation (such as READMEs) within private automation hub so your teams can use the image.
 
 Important:
 
@@ -76,7 +77,7 @@ Use the hostnames instead of IP addresses when configuring firewall rules.
 
 After making this change, you can continue to pull images from `registry.redhat.io` or `registry.access.redhat.com`. You do not require a `quay.io` login, or need to interact with the `quay.io` registry directly in any way to continue pulling Red Hat container images.
 
-## Pull execution environments for use in automation hub
+## Pull execution environments for use in Ansible Automation Platform
 
 Before you can push execution environments to your private automation hub, you must first pull them from an existing registry and tag them for use.
 
@@ -90,14 +91,14 @@ The following example details how to pull an execution environment from the Red 
 
 ### Procedure
 
-1.  Log in to Podman with your `registry.redhat.io` credentials:
+1. Log in to Podman with your `registry.redhat.io` credentials:
   
 
 ```
 $ podman login registry.redhat.io
 ```
 
-2.  Pull an execution environment:
+2. Pull an execution environment:
   
 
 ```
@@ -126,12 +127,12 @@ Tag automation execution environments to add an additional name to automation ex
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Content> (and then)Execution Environments.
-2.  Select your automation execution environments.
-3.  Click the **Images** tab.
-4.  Click the More Actions icon **⋮**, and click Manage tags.
-5.  Add a new tag in the text field and click Add.
-6.  Optional: Remove **current tags** by clicking x on any of the tags for that image.
+1. From the navigation panel, select Automation Content> (and then)Execution Environments.
+2. Select your automation execution environments.
+3. Click the **Images** tab.
+4. Click the More Actions icon **⋮**, and click Manage tags.
+5. Add a new tag in the text field and click Add.
+6. Optional: Remove **current tags** by clicking x on any of the tags for that image.
 
 ### Results
 
@@ -152,10 +153,10 @@ Use the user interface to pull an execution environment from your private automa
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Content> (and then)Execution Environments.
-2.  Select your execution environment.
-3.  In the **Pull this image** entry, click Copy to clipboard.
-4.  Paste and run the command in your terminal.
+1. From the navigation panel, select Automation Content> (and then)Execution Environments.
+2. Select your execution environment.
+3. In the **Pull this image** entry, click Copy to clipboard.
+4. Paste and run the command in your terminal.
 
 ### Results
 
@@ -171,17 +172,17 @@ You must have permission to view and pull from a private container repository.
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Content> (and then)Execution Environments.
-2.  Add `<https://registry.redhat.io>` to the registry.
-3.  Add any required credentials to authenticate. Note:
+1. From the navigation panel, select Automation Content> (and then)Execution Environments.
+2. Add `<https://registry.redhat.io>` to the registry.
+3. Add any required credentials to authenticate. Note:
       Some remote registries are aggressive with rate limiting. Set a rate limit under **Advanced Options**.
 
-4.  From the navigation panel, select Automation Content> (and then)Execution Environments.
-5.  Click Create execution environment in the page header.
-6.  Select the registry you want to pull from. The **Name** field displays the name of the automation execution environments displayed on your local registry. Note:
+4. From the navigation panel, select Automation Content> (and then)Execution Environments.
+5. Click Create execution environment in the page header.
+6. Select the registry you want to pull from. The **Name** field displays the name of the automation execution environments displayed on your local registry. Note:
       The **Upstream name** field is the name of the image on the remote server. For example, if the upstream name is set to "alpine" and the **Name** field is "local/alpine", the alpine image is downloaded from the remote and renamed to "local/alpine".
 
-7.  Set a list of tags to include or exclude. Note that syncing automation execution environments with a large number of tags is time consuming and uses a lot of disk space.
+7. Set a list of tags to include or exclude. Note that syncing automation execution environments with a large number of tags is time consuming and uses a lot of disk space.
 
 ## Create a credential
 
@@ -189,19 +190,21 @@ To pull automation execution environments images from a password or token-protec
 
 ### About this task
 
-In earlier versions of Ansible Automation Platform, you were required to deploy a registry to store execution environment images. On Ansible Automation Platform 2.0 and later, the system operates as if you already have a remote registry up and running. To store execution environment images, add the credentials of only your selected remote registries.
+In earlier versions of Ansible Automation Platform, you were required to deploy a registry to store execution environment images.
+On Ansible Automation Platform 2.0 and later, the system operates as if you already have a remote registry up and running.
+To store execution environment images, add the credentials of only your selected remote registries.
 
 ### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Credentials.
-3.  Click Create credential to create a new credential.
-4.  Enter an authorization **Name**, **Description**, and **Organization**.
-5.  In the **Credential Type** drop-down, select **Container Registry**.
-6.  Enter the **Authentication URL**. This is the remote registry address.
-7.  Enter the **Username** and **Password or Token** required to log in to the remote registry.
-8.  Optional: To enable SSL verification, select **Verify SSL**.
-9.  Click Create credential.
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Credentials.
+3. Click Create credential to create a new credential.
+4. Enter an authorization **Name**, **Description**, and **Organization**.
+5. In the **Credential Type** drop-down, select **Container Registry**.
+6. Enter the **Authentication URL**. This is the remote registry address.
+7. Enter the **Username** and **Password or Token** required to log in to the remote registry.
+8. Optional: To enable SSL verification, select **Verify SSL**.
+9. Click Create credential.
 
 ## Remote registry team permissions
 
@@ -213,13 +216,13 @@ The following table lists permissions you can grant to teams to ensure they have
 
 *Table 1. Team permissions for managing containers in private automation hub*
 
-| Permission name                            | Description                                                          |
-| ------------------------------------------ | -------------------------------------------------------------------- |
-| <br>Create new containers                  | <br>Users can create new containers                                  |
-| <br>Change container namespace permissions | <br>Users can change permissions on the container repository         |
-| <br>Change container                       | <br>Users can change information on a container                      |
-| <br>Change execution environment tags      | <br>Users can modify execution environment tags                      |
-| <br>Push to existing container             | <br>Users can push an execution environment to an existing container |
+| Permission name                        | Description                                                      |
+| -------------------------------------- | ---------------------------------------------------------------- |
+| Create new containers                  | Users can create new containers                                  |
+| Change container namespace permissions | Users can change permissions on the container repository         |
+| Change container                       | Users can change information on a container                      |
+| Change execution environment tags      | Users can modify execution environment tags                      |
+| Push to existing container             | Users can push an execution environment to an existing container |
 
 ## Add a README to your container repository
 
@@ -231,12 +234,12 @@ Add a README to your container repository to provide instructions to your users 
 
 ### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Automation Content> (and then)Execution Environments.
-3.  Select your execution environment.
-4.  On the **Detail** tab, click Add.
-5.  In the **Raw Markdown** text field, enter your README text in Markdown.
-6.  Click Save when you are finished.
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Automation Content> (and then)Execution Environments.
+3. Select your execution environment.
+4. On the **Detail** tab, click Add.
+5. In the **Raw Markdown** text field, enter your README text in Markdown.
+6. Click Save when you are finished.
 
 ### What to do next
 

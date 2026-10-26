@@ -15,12 +15,12 @@ You cannot delete a project if it is still being used by a rulebook activation.
 
 ### Procedure
 
-1.  To delete a project, complete one of the following:
+1. To delete a project, complete one of the following:
 
 - From the **Projects** list view, select the checkbox next to the desired project, and click the More Actions icon **⋮** from the page menu.
 - From the **Projects** list view, click the More Actions icon **⋮** next to the desired project.
 
-2.  Select Delete project.
-3.  In the **Permanently delete projects** window, select Yes, I confirm that I want to delete this project.
-4.  Select Delete project.
+2. Select Delete project.
+3. In the **Permanently delete projects** window, select Yes, I confirm that I want to delete this project.
+4. Select Delete project.
 

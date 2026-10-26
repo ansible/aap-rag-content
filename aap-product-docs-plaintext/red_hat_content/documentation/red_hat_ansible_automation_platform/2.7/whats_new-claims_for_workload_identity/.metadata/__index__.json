@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/whats_new-claims_for_workload_identity",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-claims_for_workload_identity",
-  "title": "Claims for workload identity"
+  "title": "Claims for workload identity",
+  "url_reachable": true
 }

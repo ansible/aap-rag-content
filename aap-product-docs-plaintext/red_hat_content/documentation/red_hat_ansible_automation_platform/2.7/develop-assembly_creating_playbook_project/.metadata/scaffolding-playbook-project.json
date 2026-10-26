@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/develop-assembly_creating_playbook_project#scaffolding-playbook-project",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_creating_playbook_project",
-  "title": "Scaffold a playbook project"
+  "title": "Scaffold a playbook project",
+  "url_reachable": true
 }

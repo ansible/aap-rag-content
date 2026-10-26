@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/extend-proc_rhdh_remove_ansible_sidebar",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-proc_rhdh_remove_ansible_sidebar",
-  "title": "Remove the Ansible sidebar navigation item"
+  "title": "Remove the Ansible sidebar navigation item",
+  "url_reachable": true
 }

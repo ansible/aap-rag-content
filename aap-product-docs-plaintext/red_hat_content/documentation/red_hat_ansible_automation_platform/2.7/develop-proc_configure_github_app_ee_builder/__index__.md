@@ -12,11 +12,11 @@ GitHub Apps provide organization-scoped permissions that do not depend on indivi
 
 ## Procedure
 
-1.  In a browser, log in to GitHub.
-2.  Navigate to your organization settings.
-3.  Select **Developer settings > GitHub Apps**.
-4.  Click **New GitHub App**.
-5.  Enter the following details:
+1. In a browser, log in to GitHub.
+2. Navigate to your organization settings.
+3. Select **Developer settings > GitHub Apps**.
+4. Click **New GitHub App**.
+5. Enter the following details:
 
 - **GitHub App name:** A descriptive name, for example `ansible-portal-content-discovery`.
 - **Homepage URL:** The URL of your automation portal deployment.
@@ -25,21 +25,21 @@ GitHub Apps provide organization-scoped permissions that do not depend on indivi
 Note:
 GitHub limits the Authorization callback URL to 100 characters. If your OpenShift route URL exceeds this limit, configure a shorter route hostname for the portal before creating the OAuth App.
 
-6.  In the **Permissions** section, set the following repository permissions:
+6. In the **Permissions** section, set the following repository permissions:
 
 - **Contents:** Read-only
 - **Actions:** Read-only
 
-7.  In the **Where can this GitHub App be installed?** section, select **Any account**.
-8.  Click **Create GitHub App**.
-9.  Note the **App ID** from the GitHub App settings page.
-10.  In the **Private keys** section, click **Generate a private key**. Store the downloaded `.pem` file securely.
-11.  In the **Client secrets** section, click **Generate a new client secret**. Save the client secret value immediately — you cannot view it again.
-12.  Install the GitHub App in your organization:
-1.  On the GitHub App settings page, click **Install App**.
-2.  Select your organization.
-3.  Select **All repositories** or specific repositories that automation portal requires access to.
-4.  Click **Install**.
+7. In the **Where can this GitHub App be installed?** section, select **Any account**.
+8. Click **Create GitHub App**.
+9. Note the **App ID** from the GitHub App settings page.
+10. In the **Private keys** section, click **Generate a private key**. Store the downloaded `.pem` file securely.
+11. In the **Client secrets** section, click **Generate a new client secret**. Save the client secret value immediately — you cannot view it again.
+12. Install the GitHub App in your organization:
+1. On the GitHub App settings page, click **Install App**.
+2. Select your organization.
+3. Select **All repositories** or specific repositories that automation portal requires access to.
+4. Click **Install**.
 
 ## Results
 

@@ -1,11 +1,13 @@
 # Scale up to an enterprise topology
 ## Motivations for customizing enterprise topologies
 
-Enterprise topologies provide a pattern for scalability and resilience. Organizations typically evolve the tested deployment models into custom deployments, tailoring service configurations and scaling to their specific workflows and performance needs within Red Hat Ansible Automation Platform.
+Enterprise topologies provide a pattern for scalability and resilience.
+Organizations typically evolve the tested deployment models into custom deployments, tailoring service configurations and scaling to their specific workflows and performance needs within Red Hat Ansible Automation Platform.
 
 An organization’s unique use of Ansible Automation Platform determines which components require scaling, moving from a generic enterprise topology to a workload-tuned deployment.
 
-Workloads such as infrequent automation hub use or API-heavy integrations necessitate different scaling priorities. This includes components such as the API service or execution plane.
+Workloads such as infrequent automation hub use or API-heavy integrations necessitate different scaling priorities.
+This includes components such as the API service or execution plane.
 
 Motivations for customizing the documented enterprise deployment models include the following:
 
@@ -22,5 +24,6 @@ Before customizing and scaling, you must identify specific bottlenecks within yo
 - Database performance
 - Event-Driven Ansible event handling.
 
-Use platform monitoring tools and analytics to identify bottlenecks. After bottlenecks are identified, you can approach scaling each component vertically or horizontally.
+Use platform monitoring tools and analytics to identify bottlenecks.
+After bottlenecks are identified, you can approach scaling each component vertically or horizontally.
 

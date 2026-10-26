@@ -29,5 +29,9 @@ Workflow templates have the workflow visualizer ![Workflow visualizer](/webasset
 
 Note:
 
-You can use job templates to build a workflow template. Templates that show the **Workflow Visualizer**![Visualizer](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/visualizer.png) icon next to them are workflow templates. Clicking the icon allows you to build a workflow graphically. Many parameters in a job template enable you to select **Prompt on Launch** that you can change at the workflow level, and do not affect the values assigned at the job template level. For instructions, see the [Workflow Visualizer](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_workflow_visualizer#controller-workflow-visualizer "The Workflow Visualizer provides a graphical way of linking together job templates, workflow templates, project syncs, and inventory syncs to build a workflow template.") section.
+You can use job templates to build a workflow template.
+Templates that show the **Workflow Visualizer**![Visualizer](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/visualizer.png) icon next to them are workflow templates.
+Clicking the icon allows you to build a workflow graphically.
+Many parameters in a job template enable you to select **Prompt on Launch** that you can change at the workflow level, and do not affect the values assigned at the job template level.
+For instructions, see the [Workflow Visualizer](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_workflow_visualizer#controller-workflow-visualizer "The Workflow Visualizer provides a graphical way of linking together job templates, workflow templates, project syncs, and inventory syncs to build a workflow template.") section.
 

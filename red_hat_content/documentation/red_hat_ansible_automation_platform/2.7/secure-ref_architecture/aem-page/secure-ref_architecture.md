@@ -1,6 +1,6 @@
 +++
-title = "Plan your topology and networking configuration - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Plan your topology and networking configuration - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_architecture"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-ref_architecture/aem-page/secure-ref_architecture.html"
 last_crumb = "Plan your topology and networking configuration"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Plan your topology and networking configuration"
 oversized = "false"

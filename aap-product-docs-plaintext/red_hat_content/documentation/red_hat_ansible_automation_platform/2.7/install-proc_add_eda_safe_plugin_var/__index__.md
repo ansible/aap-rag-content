@@ -4,15 +4,15 @@ When using the `redhat.insights_eda` plugin for rulebook activations, add a safe
 
 ## Procedure
 
-1.  Create a directory for the safe plugin variable:
+1. Create a directory for the safe plugin variable:
 
 
 ```
 mkdir -p ./group_vars/automationeda
 ```
 
-2.  Create a file within that directory for your new setting (for example, `touch ./group_vars/automationeda/custom.yml`)
-3.  Add the variable `eda_safe_plugins` with a list of plugins to enable. For example:
+2. Create a file within that directory for your new setting (for example, `touch ./group_vars/automationeda/custom.yml`)
+3. Add the variable `eda_safe_plugins` with a list of plugins to enable. For example:
 
 
 ```

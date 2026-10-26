@@ -1,7 +1,7 @@
 +++
-title = "Deploy your custom image to an operator-based installation - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-deploy_your_custom_image_to_an_operator_based_installation"
 template = "docs/aem-title.html"
+title = "Deploy your custom image to an operator-based installation - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-extend_the_intelligent_assistant_with_custom_knowledge/", "Extend the automation intelligent assistant with custom knowledge"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-deploy_your_custom_image_to_an_operator_based_installation/aem-page/extend-deploy_your_custom_image_to_an_operator_based_installation.html"
 last_crumb = "Deploy your custom image to an operator-based installation"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Deploy your custom image to an operator-based installation"
 oversized = "false"
@@ -37,11 +38,11 @@ Deploy the BYOK RAG image to the intelligent assistant for operator-based Ansibl
 
 ## Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform as an administrator.
-2.  Navigate to the namespace where you want to deploy the BYOK RAG image.
-3.  Select Operators> (and then)Installed Operators
-4.  From the list of installed operators, select Ansible Automation Platform.
-5.  In the **AnsibleAutomationPlatform** custom resource, select the YAML view, and set the following values in the `chatbot_extra_settings `parameters under the `spec: `section:
+1. Log in to Red Hat OpenShift Container Platform as an administrator.
+2. Navigate to the namespace where you want to deploy the BYOK RAG image.
+3. Select Operators> (and then)Installed Operators
+4. From the list of installed operators, select Ansible Automation Platform.
+5. In the **AnsibleAutomationPlatform** custom resource, select the YAML view, and set the following values in the `chatbot_extra_settings `parameters under the `spec: `section:
   
 
 ```
@@ -60,9 +61,9 @@ Deploy the BYOK RAG image to the intelligent assistant for operator-based Ansibl
     | ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
     | `chatbot_byok_image`         | The full registry path to your RAG image.                                                                                                                                                                | n/a           |
     | `chatbot_byok_image_version` | The specific version tag (for example,`1.0`) of the image to pull.                                                                                                                                       | `latest`      |
-    | `chatbot_byok_storage_size`  | <br>The amount of persistent storage allocated for the BYOK volume.<br>Keep the BYOK data between 1 Mi and 999 Mi for best performance. While the system supports larger allocations up to 2 Gi, smaller volumes are recommended. | `2 Gi`        |
+    | `chatbot_byok_storage_size`  | The amount of persistent storage allocated for the BYOK volume.<br>Keep the BYOK data between 1 Mi and 999 Mi for best performance. While the system supports larger allocations up to 2 Gi, smaller volumes are recommended. | `2 Gi`        |
 
-6.  If the BYOK image is in a private registry, you must create an image pull secret, and set the following values in the `chatbot_extra_settings` parameters under the `spec: `section:
+6. If the BYOK image is in a private registry, you must create an image pull secret, and set the following values in the `chatbot_extra_settings` parameters under the `spec: `section:
   
 
 ```
@@ -73,7 +74,7 @@ image_pull_secrets:
  - my-image-pull-secret
 ```
 
-7.  Click **Save**. The operator deployes the BYOK RAG image.
+7. Click **Save**. The operator deployes the BYOK RAG image.
 
 ## What to do next
 

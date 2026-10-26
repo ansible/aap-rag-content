@@ -172,6 +172,8 @@ registered_resources:
       password: ${{env.POSTGRES_PASSWORD}}"""
 
     CFG_FILENAME = "llama-stack.yaml"
+    EMBEDDING_BATCH_SIZE = 32
+    FILE_UPLOAD_CONCURRENCY = 16
 
     def __init__(self, config: _Config):
         """Initialize the llama-stack Vector IO database.
@@ -216,8 +218,10 @@ registered_resources:
         else:
             self.model_name_or_dir = config.model_name
 
-        model = SentenceTransformer(self.model_name_or_dir)
-        self.config.embedding_dimension = model.get_sentence_embedding_dimension()
+        self._embedding_model = SentenceTransformer(self.model_name_or_dir)
+        self.config.embedding_dimension = (
+            self._embedding_model.get_sentence_embedding_dimension()
+        )
 
         # faiss_store.db or sqlitevec_store.db
         self.db_filename = config.vector_store_type[11:] + "_store.db"
@@ -392,31 +396,28 @@ registered_resources:
                 for doc in docs
             )
 
-    async def _insert_prechunked_documents(  # pylint: disable=R0914
-        self, client: Any, index: str
-    ) -> str:
-        """Manual chunking: Insert pre-chunked documents into the vector store.
+    def _encode_chunk_texts(self, texts: list[str]) -> list[list[float]]:
+        """Embed texts in batches with the local sentence-transformer model.
 
-        This method uses two new llama-stack APIs (OpenAI compatible):
-        1. vector_stores API: Creates a new vector store
-        2. files API: Creates empty placeholder files for citation metadata
-           (provides document ID, URL, and title for citations)
-        And the vector_io API: Inserts chunks with embeddings
-
-        The empty files serve as citation anchors, linking chunks back to their
-        source documents without storing duplicate content (we don't use files downstream).
-
-        Returns:
-            The vector store ID
+        One llama-stack embeddings.create call per chunk is far too slow for
+        a full AAP corpus (tens of thousands of round trips). Batching through
+        SentenceTransformer.encode() keeps the same vectors and finishes in
+        minutes instead of hours.
         """
-        vector_store = await client.vector_stores.create(
-            name=index,
-            extra_body={
-                "provider_id": index,
-                "embedding_model": f"sentence-transformers/{self.model_name_or_dir}",
-                "embedding_dimension": self.config.embedding_dimension,
-            },
+        if not texts:
+            return []
+        encoded = self._embedding_model.encode(
+            texts,
+            batch_size=self.EMBEDDING_BATCH_SIZE,
+            show_progress_bar=True,
+            convert_to_numpy=True,
         )
+        if hasattr(encoded, "tolist"):
+            return encoded.tolist()
+        return [list(vector) for vector in encoded]
+
+    async def _upload_citation_files(self, client: Any) -> None:
+        """Upload empty citation files and stamp file IDs onto related chunks."""
 
         async def upload_file(chunk_indices: list[int]) -> str:
             """Upload a placeholder file and update all related chunks.
@@ -458,33 +459,74 @@ registered_resources:
                 doc_groups[doc_id] = []
             doc_groups[doc_id].append(idx)
 
-        upload_tasks = [
-            upload_file(chunk_indices) for chunk_indices in doc_groups.values()
-        ]
-        results = await asyncio.gather(*upload_tasks, return_exceptions=True)
+        total = len(doc_groups)
+        completed = 0
+        semaphore = asyncio.Semaphore(self.FILE_UPLOAD_CONCURRENCY)
+        LOG.info("Uploading %d citation files...", total)
+
+        async def upload_with_limit(chunk_indices: list[int]) -> str:
+            nonlocal completed
+            async with semaphore:
+                file_id = await upload_file(chunk_indices)
+                completed += 1
+                if completed % 100 == 0 or completed == total:
+                    LOG.info("Uploaded citation files: %d/%d", completed, total)
+                return file_id
+
+        results = await asyncio.gather(
+            *(upload_with_limit(indices) for indices in doc_groups.values()),
+            return_exceptions=True,
+        )
         for result in results:
             if isinstance(result, Exception):
                 LOG.error("Failed to upload file: %s", result)
 
-        # Compute embeddings
-        LOG.info("Computing embeddings for %d chunks...", len(self.documents))
-        chunks_to_insert = []
+    async def _insert_prechunked_documents(self, client: Any, index: str) -> str:
+        """Manual chunking: Insert pre-chunked documents into the vector store.
+
+        This method uses two new llama-stack APIs (OpenAI compatible):
+        1. vector_stores API: Creates a new vector store
+        2. files API: Creates empty placeholder files for citation metadata
+           (provides document ID, URL, and title for citations)
+        And the vector_io API: Inserts chunks with embeddings
+
+        The empty files serve as citation anchors, linking chunks back to their
+        source documents without storing duplicate content (we don't use files downstream).
+
+        Returns:
+            The vector store ID
+        """
+        LOG.info("Creating vector store %s", index)
+        vector_store = await client.vector_stores.create(
+            name=index,
+            extra_body={
+                "provider_id": index,
+                "embedding_model": f"sentence-transformers/{self.model_name_or_dir}",
+                "embedding_dimension": self.config.embedding_dimension,
+            },
+        )
+
+        await self._upload_citation_files(client)
+
+        texts = [doc["content"] for doc in self.documents if isinstance(doc, dict)]
+        LOG.info("Computing embeddings for %d chunks...", len(texts))
+        embeddings = self._encode_chunk_texts(texts)
+        if len(embeddings) != len(texts):
+            raise RuntimeError(
+                f"Expected {len(texts)} embeddings, got {len(embeddings)}"
+            )
+        embedding_iter = iter(embeddings)
+
         embedding_model = f"sentence-transformers/{self.model_name_or_dir}"
-
-        for idx, doc in enumerate(self.documents):
+        chunks_to_insert = []
+        for doc in self.documents:
             if isinstance(doc, dict):
-                embedding_response = await client.embeddings.create(
-                    input=doc["content"],
-                    model=embedding_model,
-                )
-                embedding = embedding_response.data[0].embedding
-
                 chunk = {
                     "content": doc["content"],
                     "chunk_id": doc["chunk_id"],
                     "metadata": doc.get("metadata", {}),
                     "chunk_metadata": doc["chunk_metadata"],
-                    "embedding": embedding,
+                    "embedding": next(embedding_iter),
                     "embedding_model": embedding_model,
                     "embedding_dimension": self.config.embedding_dimension,
                 }

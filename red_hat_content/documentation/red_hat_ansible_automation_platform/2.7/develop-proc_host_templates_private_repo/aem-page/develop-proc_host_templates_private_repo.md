@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_host_templates_private_repo/aem-page/develop-proc_host_templates_private_repo.html"
 last_crumb = "Host execution environment wizard templates in a private Git repository"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Host execution environment wizard templates in a private Git repository"
 oversized = "false"
@@ -43,14 +44,14 @@ After updating the catalog locations, import the templates into automation porta
 
 ## Procedure
 
-1.  From a connected system, download the template YAML files:
+1. From a connected system, download the template YAML files:
 
   - [ee-start-from-scratch.yaml](https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.1/templates/ee-start-from-scratch.yaml)
   - [ee-cloud-automation.yaml](https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.1/templates/ee-cloud-automation.yaml)
   - [ee-network-automation.yaml](https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.1/templates/ee-network-automation.yaml)
 
-2.  Push the template files to a private Git repository accessible from your deployment environment.
-3.  In your Helm chart configuration, replace the public GitHub URLs with your private repository URLs:
+2. Push the template files to a private Git repository accessible from your deployment environment.
+3. In your Helm chart configuration, replace the public GitHub URLs with your private repository URLs:
   
 
 ```
@@ -70,13 +71,13 @@ catalog:
         - allow: [Template]
 ```
 
-4.  For Networking Automation and Cloud Automation templates: ensure the domain-specific collections they reference are available from a configured content source (private automation hub or internal Git repository).
-5.  Apply the configuration. See [Apply configuration changes](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_apply_configuration_changes "Apply configuration changes after modifying your Helm chart values or RHEL appliance configuration file for execution environment builder.").
-6.  Import the templates into automation portal:
-  1.  Navigate to **Execution Environments > Create**.
-  2.  Open the kebab menu and select **Import Template**.
-  3.  Paste the URL to the template file in your private Git repository.
-  4.  Click **Analyze**, then **Import**.
+4. For Networking Automation and Cloud Automation templates: ensure the domain-specific collections they reference are available from a configured content source (private automation hub or internal Git repository).
+5. Apply the configuration. See [Apply configuration changes](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_apply_configuration_changes "Apply configuration changes after modifying your Helm chart values or RHEL appliance configuration file for execution environment builder.").
+6. Import the templates into automation portal:
+  1. Navigate to **Execution Environments > Create**.
+  2. Open the kebab menu and select **Import Template**.
+  3. Paste the URL to the template file in your private Git repository.
+  4. Click **Analyze**, then **Import**.
       Alternatively, templates added to `catalog.locations` in the Helm chart load automatically without manual import.
 
 ## Results
@@ -100,7 +101,7 @@ catalog:
   * `checkSSL: false` — applies to `ansibleGitContents` content discovery providers (see [Configure collection discovery sources](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_collection_discovery "Configure Git content discovery and private automation hub collection discovery so that Ansible collections are available in execution environment builder and the collection catalog.")). Controls TLS verification when crawling Git repositories for `galaxy.yml` files.
   * `skipTlsVerifyForHosts` — applies to the CI activities page and other catalog interactions with Git hosts. Controls TLS verification when fetching workflow run data and repository metadata.
 
-     These settings serve different purposes. You may need to configure both if your internal hosts use self-signed certificates:
+    These settings serve different purposes. You may need to configure both if your internal hosts use self-signed certificates:
 
 ```
 catalog:

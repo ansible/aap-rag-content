@@ -5,7 +5,7 @@ To scale up (add more nodes) or scale down (remove nodes), you must update the c
 
 ### Procedure
 
-1.  Update the inventory to add two more worker nodes:
+1. Update the inventory to add two more worker nodes:
 - For RPM-based installations:
 
 ```
@@ -36,5 +36,5 @@ To scale up (add more nodes) or scale down (remove nodes), you must update the c
 3.88.116.114 routable_hostname=automationeda-api.example.com eda_type=worker
 ```
 
-2.  Re-run the installer.
+2. Re-run the installer.
 

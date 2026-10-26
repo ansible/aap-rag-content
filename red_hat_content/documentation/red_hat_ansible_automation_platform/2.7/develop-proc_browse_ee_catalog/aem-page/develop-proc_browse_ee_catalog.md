@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_browse_ee_catalog/aem-page/develop-proc_browse_ee_catalog.html"
 last_crumb = "Browse the execution environment catalog"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Browse the execution environment catalog"
 oversized = "false"
@@ -31,7 +32,7 @@ Browse the execution environment catalog in Ansible automation portal to find an
 
 ## Procedure
 
-1.  Select **Execution Environments** from the sidebar.
-2.  Browse or search for execution environment definitions by name.
-3.  Use the **Owner** and **Tag** filters to narrow results.
-4.  Star an execution environment definition to add it to your **Starred** filter for quick access.
+1. Select **Execution Environments** from the sidebar.
+2. Browse or search for execution environment definitions by name.
+3. Use the **Owner** and **Tag** filters to narrow results.
+4. Star an execution environment definition to add it to your **Starred** filter for quick access.

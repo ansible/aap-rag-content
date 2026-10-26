@@ -1,7 +1,7 @@
 +++
-title = "Configure a Personal Access Token for GitLab content discovery - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-configure_a_pat_for_gitlab_content_discovery"
 template = "docs/aem-title.html"
+title = "Configure a Personal Access Token for GitLab content discovery - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-build_execution_environments_with_the_automation_portal/", "Build execution environments with automation portal"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-configure_a_pat_for_gitlab_content_discovery/aem-page/develop-configure_a_pat_for_gitlab_content_discovery.html"
 last_crumb = "Configure a Personal Access Token for GitLab content discovery"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure a Personal Access Token for GitLab content discovery"
 oversized = "false"
@@ -41,12 +42,12 @@ GitLab uses a Personal Access Token for content discovery.
 
 ## Procedure
 
-1.  Create a GitLab PAT with the following scopes:
+1. Create a GitLab PAT with the following scopes:
 
   - `read_repository`
   - `api`
 
-2.  Store the PAT.
+2. Store the PAT.
       **OpenShift — CLI:**
 
 ```
@@ -75,7 +76,7 @@ $ echo -n '<your_gitlab_pat>' | sudo podman secret create portal_gitlab_token -
   Note:
       If you configured a GitLab personal access token during RHEL appliance installation (via cloud-init), the `portal_gitlab_token` secret already exists and is active for content discovery. Running the command above updates the existing secret with a new value.
 
-3.  If you use a self-hosted GitLab instance (not `gitlab.com`), add its URL to the CORS allowed origins.
+3. If you use a self-hosted GitLab instance (not `gitlab.com`), add its URL to the CORS allowed origins.
       **OpenShift:**
 
 ```

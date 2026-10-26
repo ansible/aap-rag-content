@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/upgrade-con_upgrade_api_changes_27/aem-page/upgrade-con_upgrade_api_changes_27.html"
 last_crumb = "API changes in Ansible Automation Platform 2.7"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "API changes in Ansible Automation Platform 2.7"
 oversized = "false"
@@ -93,7 +94,7 @@ You must complete two actions to ensure your automation content works with Ansib
 
 ### Procedure
 
-1.  Update collection version pins in your `requirements.yml `file to require the latest versions:
+1. Update collection version pins in your `requirements.yml `file to require the latest versions:
   
 
 ```
@@ -104,16 +105,16 @@ collections:
   - name: ansible.platform version: ">=2.7.0"
 ```
 
-2.  Rebuild your execution environments to include the updated collections.
-3.  Refresh project and collection dependencies in automation controller.
-4.  Verify the installed collection versions:
+2. Rebuild your execution environments to include the updated collections.
+3. Refresh project and collection dependencies in automation controller.
+4. Verify the installed collection versions:
   
 
 ```
 ansible-galaxy collection list | grep -E "ansible\.(controller|hub|eda|platform)"
 ```
 
-5.  Run a test playbook against your upgraded Ansible Automation Platform 2.7 environment to confirm that API calls route through platform gateway.
+5. Run a test playbook against your upgraded Ansible Automation Platform 2.7 environment to confirm that API calls route through platform gateway.
 
 ## Migrate playbook connection values to platform gateway
 
@@ -127,21 +128,21 @@ After upgrading to Ansible Automation Platform 2.7, all host, username, password
 
 ### Procedure
 
-1.  Create credentials, OAuth2 applications, and API tokens in platform gateway. In the Ansible Automation Platform UI, navigate to Access> (and then)Applicationsto register OAuth2 applications, and Access> (and then)Tokensto generate tokens.
-2.  Identify all playbooks, inventory variables, and Configuration as Code definitions that reference component-specific hosts, usernames, passwords, or tokens.
-3.  Replace component-specific connection values with platform gateway values.
+1. Create credentials, OAuth2 applications, and API tokens in platform gateway. In the Ansible Automation Platform UI, navigate to Access> (and then)Applicationsto register OAuth2 applications, and Access> (and then)Tokensto generate tokens.
+2. Identify all playbooks, inventory variables, and Configuration as Code definitions that reference component-specific hosts, usernames, passwords, or tokens.
+3. Replace component-specific connection values with platform gateway values.
   The following table shows common variables and their required changes:
     | Variable                | Before (2.6 and earlier)         | After (2.7)                   |
     | ----------------------- | -------------------------------- | ----------------------------- |
     | `controller_host`       | `https://controller.example.com` | `https://gateway.example.com` |
-    | `ah_host` / `hub_host`  | `https://hub.example.com`        | `https://gateway.example.com` |
+    | `ah_host` /`hub_host`   | `https://hub.example.com`        | `https://gateway.example.com` |
     | `eda_host`              | `https://eda.example.com`        | `https://gateway.example.com` |
     | `controller_username`   | Component-scoped user            | Platform gateway user         |
     | `controller_password`   | Component-scoped password        | Platform gateway password     |
     | `controller_oauthtoken` | Controller-issued PAT            | Platform gateway-issued token |
 
-4.  Update your inventory files or environment variables to reflect the new values.
-5.  Test your updated playbooks against the upgraded environment.
+4. Update your inventory files or environment variables to reflect the new values.
+5. Test your updated playbooks against the upgraded environment.
 
 ### Example: Migrate a job launch playbook
 

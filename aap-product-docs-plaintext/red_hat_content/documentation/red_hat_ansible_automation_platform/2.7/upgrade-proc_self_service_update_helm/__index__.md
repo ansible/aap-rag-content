@@ -23,23 +23,23 @@ For detailed instructions on this process, see [Installing the Ansible automatio
 
 ## Procedure
 
--  **Upgrade from the command line:**
-1.  Log in to OpenShift Container Platform and select your project.
-2.  Update the Helm repository:
+- **Upgrade from the command line:**
+1. Log in to OpenShift Container Platform and select your project.
+2. Update the Helm repository:
 
 
 ```
 $ helm repo update openshift-helm-charts
 ```
 
-3.  Find the target chart version:
+3. Find the target chart version:
 
 
 ```
 $ helm search repo openshift-helm-charts/redhat-rhaap-portal
 ```
 
-4.  Upgrade with your values file:
+4. Upgrade with your values file:
 
 
 ```
@@ -51,14 +51,14 @@ $ helm upgrade <release_name> openshift-helm-charts/redhat-rhaap-portal \
 
 Replace `<release_name>` with the name of your Helm release and `<chart_version>` with the target Helm chart version.
 
--  **Upgrade from the OpenShift web console:**
-1.  Log in to the OpenShift web console and switch to the **Developer** perspective.
-2.  Open the project for your Helm release.
-3.  Select **Helm**, then select your release.
-4.  Select Actions> (and then)Upgrade.
-5.  Select the target chart version.
-6.  In the **YAML** view, confirm `pluginMode`, `imageTagInfo`, and other custom values match `backup-values.yaml`.
-7.  Click Upgrade.
+- **Upgrade from the OpenShift web console:**
+1. Log in to the OpenShift web console and switch to the **Developer** perspective.
+2. Open the project for your Helm release.
+3. Select **Helm**, then select your release.
+4. Select Actions> (and then)Upgrade.
+5. Select the target chart version.
+6. In the **YAML** view, confirm `pluginMode`, `imageTagInfo`, and other custom values match `backup-values.yaml`.
+7. Click Upgrade.
 
 ## Results
 

@@ -22,12 +22,12 @@ However, when the mapping order is changed to B, A; the first map allows `john` 
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Authentication Methods.
-2.  In the list view, select the authenticator name displayed in the **Name** column.
-3.  Select the **Mapping** tab from the **Details** page of your authenticator.
-4.  Click Manage mappings.
-5.  Adjust the mapping order by dragging and dropping the mappings up or down in the list using the icon. Note:
+1. From the navigation panel, select Access Management> (and then)Authentication Methods.
+2. In the list view, select the authenticator name displayed in the **Name** column.
+3. Select the **Mapping** tab from the **Details** page of your authenticator.
+4. Click Manage mappings.
+5. Adjust the mapping order by dragging and dropping the mappings up or down in the list using the icon. Note:
 The mapping precedence is determined by the order in which the mappings are listed.
 
-6.  After your authenticator maps are in the correct order, click Apply.
+6. After your authenticator maps are in the correct order, click Apply.
 

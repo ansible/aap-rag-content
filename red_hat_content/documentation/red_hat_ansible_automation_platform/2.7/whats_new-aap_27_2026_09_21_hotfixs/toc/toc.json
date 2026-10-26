@@ -1,0 +1,39 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Ansible Automation Platform 2.7 hotfix patch release September 25, 2026",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Overview",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "aap-27-2_7_20260921_hotfix___overview",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-2_7_20260921_hotfix___overview"
+        },
+        {
+          "title": "Bug fixes",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "aap-27-2_7_20260921_hotfix___bug_fixes",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-2_7_20260921_hotfix___bug_fixes"
+        },
+        {
+          "title": "Platform Operator",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "aap-27-2_7_20260921_hotfix___platform_operator",
+          "anchor": null,
+          "singlePageAnchor": "aap-27-2_7_20260921_hotfix___platform_operator"
+        }
+      ]
+    }
+  ]
+}

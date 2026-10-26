@@ -11,8 +11,8 @@ You can configure platform gateway route timeouts during installation or redeplo
 
 ### Procedure
 
-1.  Create or edit your platform gateway deployment playbook.
-2.  Add the route timeout configuration for your deployment type.
+1. Create or edit your platform gateway deployment playbook.
+2. Add the route timeout configuration for your deployment type.
 For OpenShift Container Platform deployments:
 
 ```
@@ -35,7 +35,7 @@ request_timeout_seconds: 600
 idle_timeout_seconds: 600
 ```
 
-3.  Run the playbook to apply the configuration:
+3. Run the playbook to apply the configuration:
 
 
 ```

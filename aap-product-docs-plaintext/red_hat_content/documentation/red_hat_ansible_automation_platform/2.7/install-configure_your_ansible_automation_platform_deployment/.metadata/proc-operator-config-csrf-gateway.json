@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/install-configure_your_ansible_automation_platform_deployment#proc-operator-config-csrf-gateway",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-configure_your_ansible_automation_platform_deployment",
-  "title": "Configure your CSRF settings"
+  "title": "Configure your CSRF settings",
+  "url_reachable": true
 }

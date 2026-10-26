@@ -14,12 +14,12 @@ GitLab uses a Personal Access Token for content discovery.
 
 ## Procedure
 
-1.  Create a GitLab PAT with the following scopes:
+1. Create a GitLab PAT with the following scopes:
 
 - `read_repository`
 - `api`
 
-2.  Store the PAT.
+2. Store the PAT.
 **OpenShift — CLI:**
 
 ```
@@ -48,7 +48,7 @@ $ echo -n '<your_gitlab_pat>' | sudo podman secret create portal_gitlab_token -
 Note:
 If you configured a GitLab personal access token during RHEL appliance installation (via cloud-init), the `portal_gitlab_token` secret already exists and is active for content discovery. Running the command above updates the existing secret with a new value.
 
-3.  If you use a self-hosted GitLab instance (not `gitlab.com`), add its URL to the CORS allowed origins.
+3. If you use a self-hosted GitLab instance (not `gitlab.com`), add its URL to the CORS allowed origins.
 **OpenShift:**
 
 ```

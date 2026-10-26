@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_eda_set_up_credential"
 title = "Set up credentials - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_eda_set_up_credential"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_eda_credentials/", "Configure credentials for Event-Driven Ansible"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-proc_eda_set_up_credential/aem-page/secure-proc_eda_set_up_credential.html"
 last_crumb = "Set up credentials"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Set up credentials"
 oversized = "false"
@@ -31,10 +32,10 @@ Create a credential to securely store sensitive data (like tokens and passwords)
 
 ## Procedure
 
-1.  Log in to the Ansible Automation Platform Dashboard.
-2.  From the navigation panel, select Automation Decisions> (and then)Infrastructure> (and then)Credentials.
-3.  Click Create credential.
-4.  Insert the following:
+1. Log in to the Ansible Automation Platform Dashboard.
+2. From the navigation panel, select Automation Decisions> (and then)Infrastructure> (and then)Credentials.
+3. Click Create credential.
+4. Insert the following:
   
 
 Name
@@ -52,8 +53,8 @@ Click the list to select your Credential type.
   Note:
       When you select the credential type, the **Type Details** section is displayed with fields that are applicable for the credential type you chose.
 
-5.  Complete the fields that are applicable to the credential type you selected.
-6.  Click Create credential.
+5. Complete the fields that are applicable to the credential type you selected.
+6. Click Create credential.
 
 ## What to do next
 
@@ -80,12 +81,12 @@ Edit credentials to update expired tokens, rotate secrets, or adjust permissions
 
 ### Procedure
 
-1.  Edit the credential by using one of these methods:
+1. Edit the credential by using one of these methods:
 
   - From the **Credentials** list view, click the Edit credential icon next to the desired credential.
   - From the **Credentials** list view, select the name of the credential, click Edit credential.
 
-2.  Edit the appropriate details and click Save credential.
+2. Edit the appropriate details and click Save credential.
 
 ## Duplicate a credential
 
@@ -93,16 +94,16 @@ Use the **Duplicate credential** feature to rapidly generate a new credential ba
 
 ### Procedure
 
-1.  On the Credentials list page, click the name of the credential that you want to duplicate. This takes you to the **Details** tab of the credential.
-2.  Click Duplicate credential in the top right of the Details tab. Note:
+1. On the Credentials list page, click the name of the credential that you want to duplicate. This takes you to the **Details** tab of the credential.
+2. Click Duplicate credential in the top right of the Details tab. Note:
       You can also click the Duplicate credential icon next to the desired credential on the Credentials list page.
 
     A message is displayed confirming that your selected credential has been duplicated: "<Name of credential> duplicated."
 
-3.  Click the Back to credentials tab to view the credential you just duplicated. The duplicated credential is displayed with the same name as the original credential followed by a time stamp in 24-hour format (for example, **<Name of credential> @ 17:26:30**).
+3. Click the Back to credentials tab to view the credential you just duplicated. The duplicated credential is displayed with the same name as the original credential followed by a time stamp in 24-hour format (for example, **<Name of credential> @ 17:26:30**).
 
-4.  Edit the details you prefer for your duplicated credential.
-5.  Click Save credential.
+4. Edit the details you prefer for your duplicated credential.
+5. Click Save credential.
 
 ## Delete a credential
 
@@ -114,15 +115,15 @@ You can permanently delete unused credentials. You must first ensure they are de
 
 ### Procedure
 
-1.  Delete the credential by using one of these methods:
+1. Delete the credential by using one of these methods:
 
   - From the **Credentials** list view, click the More Actions icon **⋮** next to the desired credential and click Delete credential.
   - From the **Credentials** list view, select the name of the credential, click the More Actions icon **⋮** next to Edit credential, and click Delete credential.
 
-2.  In the pop-up window, select **Yes, I confirm that I want to delete this credential**. Note:
+2. In the pop-up window, select **Yes, I confirm that I want to delete this credential**. Note:
       If your credential is still in use by other resources in your organization, a warning message is displayed letting you know that the credential cannot be deleted. Also, if your credential is being used in an event stream, you cannot delete it until the event stream is deleted or attached to a different credential. In general, avoid deleting a credential that is in use because it can lead to broken activations.
 
-3.  Click Delete credential.
+3. Click Delete credential.
 
 ### Results
 

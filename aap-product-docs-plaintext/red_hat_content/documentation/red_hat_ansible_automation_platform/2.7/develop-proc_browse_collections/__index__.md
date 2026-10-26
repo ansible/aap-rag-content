@@ -8,10 +8,10 @@ Browse the collection catalog in Ansible automation portal to discover Ansible c
 
 ## Procedure
 
-1.  Navigate to **Collections** in the sidebar.
-2.  Browse or search for collections by name.
-3.  Filter by source (certified, community, Git-sourced).
-4.  Click a collection to view its details, including metadata, readme, dependencies, and a link to the source repository.
+1. Navigate to **Collections** in the sidebar.
+2. Browse or search for collections by name.
+3. Filter by source (certified, community, Git-sourced).
+4. Click a collection to view its details, including metadata, readme, dependencies, and a link to the source repository.
 
 ## What to do next
 

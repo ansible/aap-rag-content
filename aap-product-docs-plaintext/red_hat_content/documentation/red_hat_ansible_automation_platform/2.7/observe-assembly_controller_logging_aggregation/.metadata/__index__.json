@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/observe-assembly_controller_logging_aggregation",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_controller_logging_aggregation",
-  "title": "Send log files to third-party aggregation services"
+  "title": "Send log files to third-party aggregation services",
+  "url_reachable": true
 }

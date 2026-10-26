@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_setup_postgresql_ext_database/aem-page/install-assembly_setup_postgresql_ext_database.html"
 last_crumb = "Configure an external (customer provided) PostgreSQL database"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure an external (customer provided) PostgreSQL database"
 oversized = "false"
@@ -48,7 +49,7 @@ If you have PostgreSQL admin credentials, you can supply them in the inventory f
 
 ### Procedure
 
- To configure the PostgreSQL admin credentials, add the following variables to the inventory file under the `[all:vars]` group:
+To configure the PostgreSQL admin credentials, add the following variables to the inventory file under the `[all:vars]` group:
 
 ```yaml
 postgresql_admin_username=<set your own>
@@ -61,7 +62,7 @@ If you do not have PostgreSQL admin credentials, then PostgreSQL users and datab
 
 ### Procedure
 
-1.  Connect to a PostgreSQL compliant database server with a user that has `SUPERUSER` privileges.
+1. Connect to a PostgreSQL compliant database server with a user that has `SUPERUSER` privileges.
 
 ```bash
 # psql -h <hostname> -U <username> -p <port_number>
@@ -73,19 +74,19 @@ If you do not have PostgreSQL admin credentials, then PostgreSQL users and datab
 # psql -h db.example.com -U superuser -p 5432
 ```
 
-2.  Create the user with a password and ensure the `CREATEDB` role is assigned to the user. For more information, see [Database Roles](https://www.postgresql.org/docs/15/user-manag.html).
+2. Create the user with a password and ensure the `CREATEDB` role is assigned to the user. For more information, see [Database Roles](https://www.postgresql.org/docs/15/user-manag.html).
 
 ```sql
 CREATE USER <username> WITH PASSWORD <password> CREATEDB;
 ```
 
-3.  Create the database and add the user you created as the owner.
+3. Create the database and add the user you created as the owner.
 
 ```sql
 CREATE DATABASE <database_name> OWNER <username>;
 ```
 
-4.  When you have created the PostgreSQL users and databases for each component, you can supply them in the inventory file under the `[all:vars]` group.
+4. When you have created the PostgreSQL users and databases for each component, you can supply them in the inventory file under the `[all:vars]` group.
 
 ```yaml
 # Platform gateway
@@ -140,14 +141,14 @@ This dual-database architecture ensures metrics service can collect data while m
 
 ### Procedure
 
-1.  Connect to your PostgreSQL database server with a user that has SUPERUSER privileges.
+1. Connect to your PostgreSQL database server with a user that has SUPERUSER privileges.
   
 
 ```
 $ psql -h <hostname> -U <username> -p <port_number>
 ```
 
-2.  Create the metrics service database and user.
+2. Create the metrics service database and user.
   
 
 ```
@@ -155,14 +156,14 @@ CREATE USER metrics_service WITH PASSWORD '<secure_password>' CREATEDB;
 CREATE DATABASE metrics_service OWNER metrics_service;
 ```
 
-3.  Create a read-only user for accessing the automation controller database.
+3. Create a read-only user for accessing the automation controller database.
   
 
 ```
 CREATE USER ms_awx_readonly WITH PASSWORD '<secure_password>';
 ```
 
-4.  Grant the read-only user access to the automation controller database.
+4. Grant the read-only user access to the automation controller database.
   
 
 ```
@@ -182,7 +183,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO ms_awx_readonly;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO ms_awx_readonly;
 ```
 
-5.  Add the metrics service database configuration to your inventory file under the `[all:vars]` group.
+5. Add the metrics service database configuration to your inventory file under the `[all:vars]` group.
   
 
 ```
@@ -217,13 +218,15 @@ If the `hstore` extension is not enabled before installation, a failure raises d
 
 ### Procedure
 
-1.  Check if the extension is available on the PostgreSQL server (automation hub database).
+1. Check if the extension is available on the PostgreSQL server (automation hub database).
+  
 
 ```
 $ psql -d <automation hub database> -c "SELECT * FROM pg_available_extensions WHERE name='hstore'"
 ```
 
-2.  Where the default value for `<automation hub database>` is `automationhub`. **Example output with `hstore` available**:
+2. Where the default value for `<automation hub database>` is `automationhub`.
+      **Example output with `hstore` available**:
 
 ```
 name  | default_version | installed_version |comment
@@ -240,13 +243,14 @@ name  | default_version | installed_version |comment
 (0 rows)
 ```
 
-3.  On a RHEL based server, the `hstore` extension is included in the `postgresql-contrib` RPM package, which is not installed automatically when installing the PostgreSQL server RPM package. To install the RPM package, use the following command:
+3. On a RHEL based server, the `hstore` extension is included in the `postgresql-contrib` RPM package, which is not installed automatically when installing the PostgreSQL server RPM package.
+      To install the RPM package, use the following command:
 
 ```
 dnf install postgresql-contrib
 ```
 
-4.  Load the `hstore` PostgreSQL extension into the automation hub database with the following command:
+4. Load the `hstore` PostgreSQL extension into the automation hub database with the following command:
   
 
 ```
@@ -268,7 +272,7 @@ mTLS authentication is disabled by default. To configure each component’s data
 
 ### Procedure
 
- Add the following variables to your inventory file under the `[all:vars]` group:
+Add the following variables to your inventory file under the `[all:vars]` group:
 
 ```yaml
 # Platform gateway

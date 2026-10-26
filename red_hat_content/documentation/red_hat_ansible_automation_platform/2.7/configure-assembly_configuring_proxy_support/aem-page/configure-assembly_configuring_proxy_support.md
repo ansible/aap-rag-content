@@ -1,7 +1,7 @@
 +++
 template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-assembly_configuring_proxy_support"
 title = "Configure proxy support to manage network configuration - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-assembly_configuring_proxy_support"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-configure_a_proxy_to_communicate_with_external_systems/", "Configure a proxy to communicate with external systems"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/configure-assembly_configuring_proxy_support/aem-page/configure-assembly_configuring_proxy_support.html"
 last_crumb = "Configure proxy support to manage network configuration"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure proxy support to manage network configuration"
 oversized = "false"
@@ -27,9 +28,11 @@ type = "aem-page"
 
 # Configure proxy support to manage network configuration
 
-You can configure Red Hat Ansible Automation Platform to communicate with traffic by using a proxy. Proxy servers act as an intermediary for requests from clients seeking resources from other servers.
+You can configure Red Hat Ansible Automation Platform to communicate with traffic by using a proxy.
+Proxy servers act as an intermediary for requests from clients seeking resources from other servers.
 
-A client connects to the proxy server, requesting some service or available resource from a different server, and the proxy server evaluates the request as a way to simplify and control its complexity. The following sections describe the supported proxy configurations and how to set them up.
+A client connects to the proxy server, requesting some service or available resource from a different server, and the proxy server evaluates the request as a way to simplify and control its complexity.
+The following sections describe the supported proxy configurations and how to set them up.
 
 ## Enable proxy support through a load balancer
 
@@ -37,15 +40,16 @@ A proxy server acts as an intermediary for requests from clients seeking resourc
 
 ### About this task
 
-A forward proxy deals with client traffic, regulating and securing it. To provide proxy server support, automation controller handles proxied requests (such as ALB, NLB , HAProxy, Squid, Nginx and tinyproxy in front of automation controller) using the **REMOTE_HOST_HEADERS** list variable in the automation controller settings. By default, **REMOTE_HOST_HEADERS** is set to `["REMOTE_ADDR", "REMOTE_HOST"]`.
+A forward proxy deals with client traffic, regulating and securing it.
+To provide proxy server support, automation controller handles proxied requests (such as ALB, NLB , HAProxy, Squid, Nginx and tinyproxy in front of automation controller) using the **REMOTE_HOST_HEADERS** list variable in the automation controller settings. By default, **REMOTE_HOST_HEADERS** is set to `["REMOTE_ADDR", "REMOTE_HOST"]`.
 
 To enable proxy server support, edit the **REMOTE_HOST_HEADERS** field in the settings page for your automation controller:
 
 ### Procedure
 
-1.  From the navigation panel, select Settings> (and then)Automation Execution> (and then)System.
-2.  Click Edit
-3.  In the **Remote Host Headers** field, enter the following values:
+1. From the navigation panel, select Settings> (and then)Automation Execution> (and then)System.
+2. Click Edit
+3. In the **Remote Host Headers** field, enter the following values:
   
 
 ```
@@ -56,7 +60,7 @@ To enable proxy server support, edit the **REMOTE_HOST_HEADERS** field in the se
 ]
 ```
 
-4.  Click Save to save your settings.
+4. Click Save to save your settings.
 
 ### Results
 
@@ -76,8 +80,10 @@ To avoid this, you can configure a list of known proxies that are allowed.
 
 #### Procedure
 
-1.  From the navigation panel, select Settings> (and then)Automation Execution> (and then)System.
-2.  Enter a list of proxy IP addresses from which the service should trust custom remote header values in the **Proxy IP Allowed List** field. Note:
+1. From the navigation panel, select Settings> (and then)Automation Execution> (and then)System.
+2. Enter a list of proxy IP addresses from which the service should trust custom remote header values in the **Proxy IP Allowed List** field.
+  
+  Note:
       Load balancers and hosts that are not on the known proxies list result in a rejected request.
 
 ### Configure known proxies
@@ -86,8 +92,8 @@ Learn how to configure a list of known proxies for your automation controller, a
 
 #### Procedure
 
-1.  From the navigation panel, select Settings> (and then)Automation Execution> (and then)System.
-2.  In the **Proxy IP Allowed List** field, enter IP addresses that are permitted to connect to your automation controller, using the syntax in the following example:
+1. From the navigation panel, select Settings> (and then)Automation Execution> (and then)System.
+2. In the **Proxy IP Allowed List** field, enter IP addresses that are permitted to connect to your automation controller, using the syntax in the following example:
        **Example Proxy IP Allowed List**
 
 ```
@@ -105,7 +111,7 @@ Learn how to configure a list of known proxies for your automation controller, a
     * The proxy provides sanitization or validation of the `X-Forwarded-For` header to prevent client spoofing;
     * `/etc/tower/conf.d/remote_host_headers.py` defines `PROXY_IP_ALLOWED_LIST` that contains only the originating IP addresses of trusted proxies or load balancers.
 
-3.  Click Save to save the settings.
+3. Click Save to save the settings.
 
 ### Configure a reverse proxy through a load balancer
 
@@ -113,8 +119,8 @@ A reverse proxy manages external requests, providing load balancing and security
 
 #### Procedure
 
-1.  From the navigation panel, select Settings> (and then)Automation Execution> (and then)System.
-2.  In the **Remote Host Headers** field, enter the following values:
+1. From the navigation panel, select Settings> (and then)Automation Execution> (and then)System.
+2. In the **Remote Host Headers** field, enter the following values:
   
 
 ```
@@ -125,7 +131,7 @@ A reverse proxy manages external requests, providing load balancing and security
 ]
 ```
 
-3.  Add the lines below to `/etc/tower/conf.d/custom.py` to ensure the application uses the correct headers:
+3. Add the lines below to `/etc/tower/conf.d/custom.py` to ensure the application uses the correct headers:
   
 
 ```
@@ -133,10 +139,12 @@ USE_X_FORWARDED_PORT = True
 USE_X_FORWARDED_HOST = True
 ```
 
-4.  Click Save to save the settings.
+4. Click Save to save the settings.
 
 ### Enable sticky sessions for automation hub
 
 By default, an application load balancer routes each request independently to a registered target based on the chosen load balancing algorithm.
 
-To avoid authentication errors when running multiple instances of automation hub behind a load balancer, you must enable sticky sessions. Enabling sticky sessions sets a custom application cookie that matches the cookie configured on the load balancer to enable stickiness. This custom cookie can include any of the cookie attributes required by the application.
+To avoid authentication errors when running multiple instances of automation hub behind a load balancer, you must enable sticky sessions.
+Enabling sticky sessions sets a custom application cookie that matches the cookie configured on the load balancer to enable stickiness.
+This custom cookie can include any of the cookie attributes required by the application.

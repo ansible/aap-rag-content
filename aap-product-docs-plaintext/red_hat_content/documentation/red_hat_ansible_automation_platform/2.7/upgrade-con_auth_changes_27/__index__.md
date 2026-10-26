@@ -1,4 +1,4 @@
-# Authentication changes in Ansible Automation Platform 2.7
+# Authentication and access management changes when upgrading to 2.7
 
 In Ansible Automation Platform 2.7, all authentication has been consolidated through platform gateway. Direct API access to individual platform components has been removed.
 

@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-proc_controller_managing_live_events"
-template = "docs/aem-title.html"
 title = "Manage live event streams to the UI - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-proc_controller_managing_live_events"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_controller_improving_performance/", "Tune automation controller to improve performance"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-proc_controller_managing_live_events/aem-page/optimize-proc_controller_managing_live_events.html"
 last_crumb = "Manage live event streams to the UI"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Manage live event streams to the UI"
 oversized = "false"
@@ -35,7 +36,7 @@ Events are sent to any node where there is a UI client subscribed to a job. This
 
 ## Procedure
 
- To reduce the overhead of displaying live events in the UI, administrators can choose to either:
+To reduce the overhead of displaying live events in the UI, administrators can choose to either:
 
 - Disable live streaming events.
 - Reduce the number of events shown per second or before truncating or hiding events in the UI.
@@ -50,10 +51,10 @@ You can disable live streaming events in automation controller to reduce system 
 
 ### Procedure
 
- Disable live streaming events by using one of the following methods:
+Disable live streaming events by using one of the following methods:
 
-1.  In the API, set `UI_LIVE_UPDATES_ENABLED` to **False**.
-2.  In the navigation panel, select Settings> (and then)Automation Execution> (and then)System.   1. Click Edit.
+1. In the API, set `UI_LIVE_UPDATES_ENABLED` to **False**.
+2. In the navigation panel, select Settings> (and then)Automation Execution> (and then)System.   1. Click Edit.
   2. Set the **Enable Activity Stream** option to **Off**.
 
 ## Settings to modify rate and size of events

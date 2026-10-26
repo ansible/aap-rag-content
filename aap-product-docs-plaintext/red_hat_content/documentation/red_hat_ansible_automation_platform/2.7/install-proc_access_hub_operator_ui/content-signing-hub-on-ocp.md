@@ -16,7 +16,7 @@ To successfully sign and publish Ansible Certified Content Collections, you must
 
 ### Procedure
 
-1.  Create a ConfigMap for signing scripts. The ConfigMap you create contains the scripts used by the signing service for collections and container images. Note:
+1. Create a ConfigMap for signing scripts. The ConfigMap you create contains the scripts used by the signing service for collections and container images. Note:
 This script is used as part of the signing service and must generate an ascii-armored detached `gpg` signature for that file using the key specified through the `PULP_SIGNING_KEY_FINGERPRINT` environment variable.
 
 The script prints out a JSON structure with the following format.
@@ -84,7 +84,7 @@ exit $STATUS
 fi
 ```
 
-2.  Create a secret for your GnuPG private key. This secret securely stores the GnuPG private key you use for signing.
+2. Create a secret for your GnuPG private key. This secret securely stores the GnuPG private key you use for signing.
 
 ```shell
 gpg --export --armor <your-gpg-key-id> > signing_service.gpg
@@ -94,7 +94,7 @@ oc create secret generic signing-galaxy --from-file=signing_service.gpg
 
 The secret must have a key named `signing_service.gpg`.
 
-3.  Configure the AnsibleAutomationPlatform CR.
+3. Configure the AnsibleAutomationPlatform CR.
 
 ```shell
 apiVersion: aap.ansible.com/v1alpha1
@@ -109,4 +109,4 @@ signing_scripts_configmap: "signing-scripts"
 
 ### What to do next
 
-[Using content signing services in private automation hub](/documentation/en-us/red_hat_ansible_automation_platform/2.7/proc_using_content_signing_services_in_pah "After you have configured content signing on your private automation hub, you can manually sign a new collection or replace an existing signature with a new one.")
+[Using content signing services in private automation hub](/documentation/en-us/red_hat_ansible_automation_platform/2.7/../administer/proc-using-content-signing-services-in-pah.html "After you have configured content signing on your private automation hub, you can manually sign a new collection or replace an existing signature with a new one.")

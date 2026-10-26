@@ -1,6 +1,6 @@
 +++
-title = "Red Hat Satellite 6 credential type - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Red Hat Satellite 6 credential type - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_satellite"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_satellite/aem-page/secure-ref_controller_credential_satellite.html"
 last_crumb = "Red Hat Satellite 6 credential type"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Red Hat Satellite 6 credential type"
 oversized = "false"
@@ -29,9 +30,10 @@ type = "aem-page"
 
 Select this credential type to enable synchronization of cloud inventory with Red Hat Satellite 6.
 
-Automation controller writes a Satellite configuration file based on fields prompted in the user interface. The absolute path to the file is set in the following environment variable:
+Automation controller writes a Satellite configuration file based on fields prompted in the user interface.
+The absolute path to the file is set in the following environment variable:
 
- `FOREMAN_INI_PATH`
+`FOREMAN_INI_PATH`
 
 Satellite credentials have the following required inputs:
 

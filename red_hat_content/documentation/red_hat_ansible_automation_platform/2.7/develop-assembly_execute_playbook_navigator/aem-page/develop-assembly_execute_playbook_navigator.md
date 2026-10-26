@@ -1,7 +1,7 @@
 +++
+title = "Run playbooks locally with automation content navigator - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_execute_playbook_navigator"
-title = "Run playbooks locally with automation content navigator - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_intro_navigator/", "Emulate a platform environment locally with automation content navigator"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-assembly_execute_playbook_navigator/aem-page/develop-assembly_execute_playbook_navigator.html"
 last_crumb = "Run playbooks locally with automation content navigator"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Run playbooks locally with automation content navigator"
 oversized = "false"
@@ -40,21 +41,21 @@ You can run Ansible playbooks with the automation content navigator text-based u
 
 ### Procedure
 
-1.  Start automation content navigator
+1. Start automation content navigator
   
 
 ```
 $ ansible-navigator
 ```
 
-2.  Run the playbook.
+2. Run the playbook.
 
 ```
 $ :run
 ```
 
-3.  Optional: type `ansible-navigator run simple-playbook.yml -i inventory.yml` to run the playbook.
-4.  Verify or add the inventory and any other command line parameters.
+3. Optional: type `ansible-navigator run simple-playbook.yml -i inventory.yml` to run the playbook.
+4. Verify or add the inventory and any other command line parameters.
 
 ```
 INVENTORY OR PLAYBOOK NOT FOUND, PLEASE CONFIRM THE FOLLOWING
@@ -66,15 +67,15 @@ INVENTORY OR PLAYBOOK NOT FOUND, PLEASE CONFIRM THE FOLLOWING
                                                            Submit Cancel
 ```
 
-5.  Tab to `Submit` and hit Enter. You should see the tasks executing.  
+5. Tab to `Submit` and hit Enter. You should see the tasks executing.  
 ![Executing playbook tasks](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-play-list.png)  
-6.  Type the number next to a play to step into the play results, or type `:<number>` for numbers above 9.  
+6. Type the number next to a play to step into the play results, or type `:<number>` for numbers above 9.  
 ![Task list](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-task-list.png)  
       Notice failed tasks show up in red if you have colors enabled for automation content navigator.
 
-7.  Type the number next to a task to review the task results, or type `:<number>` for numbers above 9.  
+7. Type the number next to a task to review the task results, or type `:<number>` for numbers above 9.  
 ![Failed task results](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-task-output-failed.png)  
-8.  Optional: type `:doc` bring up the documentation for the module or plugin used in the task to aid in troubleshooting.
+8. Optional: type `:doc` bring up the documentation for the module or plugin used in the task to aid in troubleshooting.
 
 ```
 ANSIBLE.BUILTIN.PACKAGE_FACTS (MODULE)
@@ -114,13 +115,13 @@ Automation content navigator saves playbook runs as JSON artifact files. You can
 
 ### Procedure
 
- Start automation content navigator with the artifact file.
+Start automation content navigator with the artifact file.
 
 ```
 $ ansible-navigator replay simple_playbook_artifact.json
 ```
 
-1.  Review the playbook results that match when the playbook ran.  
+1. Review the playbook results that match when the playbook ran.  
 ![Playbook results](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-artifact-replay.png)  
 
 ### Results
@@ -141,7 +142,7 @@ Use the automation content navigator interactive interface to review Ansible set
 
 #### Procedure
 
-1.  Start automation content navigator
+1. Start automation content navigator
   
 
 ```
@@ -150,7 +151,7 @@ $ ansible-navigator
 
     Optional: type `ansible-navigator config` from the command line to access the Ansible configuration settings.
 
-2.  Review the Ansible configuration.
+2. Review the Ansible configuration.
 
 ```
 :config
@@ -159,7 +160,7 @@ $ ansible-navigator
 ![Ansible configuration](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-ansible-config.png)  
     Some values reflect settings from within the automation execution environments needed for the automation execution environments to function. These display as non-default settings you cannot set in your Ansible configuration file.
 
-3.  Type the number corresponding to the setting you want to delve into, or type `:<number>` for numbers greater than 9.
+3. Type the number corresponding to the setting you want to delve into, or type `:<number>` for numbers greater than 9.
 
 ```
 ANSIBLE COW ACCEPTLIST (current: ['bud-frogs', 'bunny', 'cheese']) (default:

@@ -34,10 +34,10 @@ You can run an Ansible playbook through `ansible-navigator` by right-clicking th
 
 ### Procedure
 
-1.  To run a playbook, right-click the playbook name in the Explorer pane, then select Run Ansible Playbook via> (and then)Run playbook via ansible-navigator run.
-2.  View the output in the **Terminal** tab of the VS Code terminal. The **Successful** status indicates that the playbook ran successfully.  ![Output for ansible-navigator execution](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/devtools-extension-navigator-output.png)
+1. To run a playbook, right-click the playbook name in the Explorer pane, then select Run Ansible Playbook via> (and then)Run playbook via ansible-navigator run.
+2. View the output in the **Terminal** tab of the VS Code terminal. The **Successful** status indicates that the playbook ran successfully.  ![Output for ansible-navigator execution](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/devtools-extension-navigator-output.png)
 
-3.  Enter the number next to a play to step into the play results. The example playbook only contains one play. Enter `0` to view the status of the tasks executed in the play.  ![Tasks in ansible-navigator output](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/devtools-extension-navigator-tasks.png)
+3. Enter the number next to a play to step into the play results. The example playbook only contains one play. Enter `0` to view the status of the tasks executed in the play.  ![Tasks in ansible-navigator output](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/devtools-extension-navigator-tasks.png)
 
 Type the number next to a task to review the task results.
 
@@ -51,8 +51,8 @@ Save your playbook project as a repository in your source control management sys
 
 #### Procedure
 
-1.  Initialize your project directory as a git repository.
-2.  Push your project up to a source control system such as GitHub.
+1. Initialize your project directory as a git repository.
+2. Push your project up to a source control system such as GitHub.
 
 ### Run your playbook in Ansible Automation Platform
 
@@ -60,8 +60,8 @@ To run your playbook in Ansible Automation Platform, you must create a project i
 
 #### Procedure
 
-1.  In a browser, log in to automation controller.
-2.  Configure a Source Control credential type for your source control system if necessary. See the [Creating new credentials](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_create_credential "Learn how to create new credentials in Automation controller.") section of *Using automation execution* for more details.
-3.  In automation controller, create a project for the GitHub repository where you stored your playbook project. Refer to the [Projects](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_controller_projects "A project is a logical collection of Ansible playbooks, represented in automation controller.") chapter of *Using automation execution*.
-4.  Create a job template that uses a playbook from the project that you created. Refer to the [Job Templates](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_job_templates "You can create both Job templates and Workflow job templates from Automation Execution > Templates .") chapter of *Using automation execution*.
-5.  Run your playbook from automation controller by launching the job template. Refer to the [Launching a job template](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_controller_launch_job_template#controller-launch-job-template "You can configure a job template to store all the parameters that you would normally pass to the Ansible Playbook on the command line. In addition to the playbooks, the template passes the inventory, credentials, extra variables, and all options and settings that you can specify on the command line.") section of *Using automation execution*.
+1. In a browser, log in to automation controller.
+2. Configure a Source Control credential type for your source control system if necessary. See the [Creating new credentials](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_create_credential "Learn how to create new credentials in Automation controller.") section of *Using automation execution* for more details.
+3. In automation controller, create a project for the GitHub repository where you stored your playbook project. Refer to the [Projects](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_controller_projects "A project is a logical collection of Ansible playbooks, represented in automation controller.") chapter of *Using automation execution*.
+4. Create a job template that uses a playbook from the project that you created. Refer to the [Job Templates](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_job_templates "You can create both Job templates and Workflow job templates from Automation Execution > Templates .") chapter of *Using automation execution*.
+5. Run your playbook from automation controller by launching the job template. Refer to the [Launching a job template](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_controller_launch_job_template#controller-launch-job-template "You can configure a job template to store all the parameters that you would normally pass to the Ansible Playbook on the command line. In addition to the playbooks, the template passes the inventory, credentials, extra variables, and all options and settings that you can specify on the command line.") section of *Using automation execution*.

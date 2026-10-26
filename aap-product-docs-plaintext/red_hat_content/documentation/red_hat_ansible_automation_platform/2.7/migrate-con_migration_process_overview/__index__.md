@@ -1,4 +1,4 @@
-# Migration process overview
+# Migration approaches and workflow
 
 Understand the complete migration workflow including preparation, export, artifact creation, import, reconciliation, and validation steps for moving between Ansible Automation Platform installation types.
 

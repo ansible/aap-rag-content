@@ -11,9 +11,9 @@ You can find inventories in the UI by navigating to Automation Execution> (and t
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Inventories. The **Inventories** view displays a list of the inventories currently available.
-2.  Click Create inventory, and from the list menu select the type of inventory you want to create.
-3.  Enter the appropriate details into the following fields:
+1. From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Inventories. The **Inventories** view displays a list of the inventories currently available.
+2. Click Create inventory, and from the list menu select the type of inventory you want to create.
+3. Enter the appropriate details into the following fields:
 
 - **Name**: Enter a name for the inventory.
 - Optional: **Description**: Enter a description.
@@ -33,7 +33,7 @@ Set the `prevent_instance_group_fallback` option for smart inventories through t
 * **Variables**: Variable definitions and values to apply to all hosts in this inventory. Enter variables using either JSON or YAML syntax. Use the radio button to toggle between the two.
 * **Source variables** for constructed inventories are used to configure the constructed inventory plugin. Source variables create groups under the `groups` data key. The variable accepts Jinja2 template syntax, renders it for every host, makes a `true` or `false` evaluation, and includes the host in the group (from the key of the entry) if the result is `true`.
 
-4.  Click Create inventory.
+4. Click Create inventory.
 
 ### What to do next
 

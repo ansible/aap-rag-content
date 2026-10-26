@@ -4,13 +4,14 @@ path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-pro
 title = "Activate with a manifest file - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_activate/", "Activate your subscription"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_activate_2/", "Activate your subscription"]]
 category = "Install"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_aap_activate_with_manifest/aem-page/install-proc_aap_activate_with_manifest.html"
 last_crumb = "Activate with a manifest file"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Activate with a manifest file"
 oversized = "false"
@@ -31,7 +32,7 @@ If you have a subscriptions manifest, you can upload the manifest file by using 
 
 ## Before you begin
 
-You must have a Red Hat subscription manifest file exported from the Red Hat Customer Portal. For more information, see [Obtaining a manifest file](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_activate_1#assembly-aap-obtain-manifest-files "You can obtain a subscription manifest in the Subscription Allocations section of Red Hat Subscription Management.").
+You must have a Red Hat subscription manifest file exported from the Red Hat Customer Portal. For more information, see [Obtaining a manifest file](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_manifest_files#assembly-aap-obtain-manifest-files "You can obtain a subscription manifest in the Subscription Allocations section of Red Hat Subscription Management.").
 
 ## About this task
 
@@ -45,11 +46,11 @@ You are opted in for Automation Analytics by default when you activate the platf
 
 ## Procedure
 
-1.  Log in to Red Hat Ansible Automation Platform.   1.  If you are not immediately taken to the subscription wizard, go to Settings> (and then)Subscription.
-2.  Select the **Subscription manifest** tab.
-3.  Click Browse and select your manifest file.
-4.  Review the End User License Agreement and select **I agree to the End User License Agreement**.
-5.  Click Finish. Note:
+1. Log in to Red Hat Ansible Automation Platform.   1. If you are not immediately taken to the subscription wizard, go to Settings> (and then)Subscription.
+2. Select the **Subscription manifest** tab.
+3. Click Browse and select your manifest file.
+4. Review the End User License Agreement and select **I agree to the End User License Agreement**.
+5. Click Finish. Note:
       If the BROWSE button is disabled on the subscription wizard page, clear the **USERNAME** and **PASSWORD** fields.
 
 ## Results

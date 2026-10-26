@@ -1,6 +1,6 @@
 +++
-template = "docs/aem-title.html"
 title = "Configure object storage on Azure Blob - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_provision_ocp_storage_azure_blob"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_provision_ocp_storage_azure_blob/aem-page/install-proc_provision_ocp_storage_azure_blob.html"
 last_crumb = "Configure object storage on Azure Blob"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure object storage on Azure Blob"
 oversized = "false"
@@ -38,7 +39,7 @@ Red Hat supports Azure Blob Storage for automation hub. You can configure it whe
 
 ## Procedure
 
-1.  Create a Kubernetes secret containing the credentials and connection details for your Azure account, and the name of your Azure Storage blob container. The following example creates a secret called `test-azure`:
+1. Create a Kubernetes secret containing the credentials and connection details for your Azure account, and the name of your Azure Storage blob container. The following example creates a secret called `test-azure`:
   
 
 ```yaml
@@ -56,7 +57,7 @@ stringData:
 EOF
 ```
 
-2.  Add the secret to the Ansible Automation Platform custom resource (CR) under the `hub` section in the `spec`:
+2. Add the secret to the Ansible Automation Platform custom resource (CR) under the `hub` section in the `spec`:
   
 
 ```yaml
@@ -76,7 +77,7 @@ spec:
 
     For more examples of Ansible Automation Platform custom resources, see [Red Hat Ansible Automation Platform custom resources](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_operator_crs#appendix-operator-crs_appendix-operator-crs "This appendix provides a reference for the Ansible Automation Platform custom resources for various deployment scenarios.")
 
-3.  If you are applying this secret to an existing instance, restart the API pods for the change to take effect. `<hub-name>` is the name of your hub instance.
+3. If you are applying this secret to an existing instance, restart the API pods for the change to take effect. `<hub-name>` is the name of your hub instance.
 
 ```bash
 $ oc -n $HUB_NAMESPACE delete pod -l app.kubernetes.io/name=<hub-name>-api

@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/optimize-assembly_primary_workloads#controller-project-synchronization",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_primary_workloads",
-  "title": "Automation controller project synchronization"
+  "title": "Automation controller project synchronization",
+  "url_reachable": true
 }

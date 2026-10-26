@@ -104,6 +104,9 @@ def llama_stack_processor(mocker):
     """Fixture for _LlamaStackDB tests."""
     st = mocker.patch.object(document_processor, "SentenceTransformer")
     st.return_value.get_sentence_embedding_dimension.return_value = 768
+    st.return_value.encode.side_effect = lambda texts, **_kwargs: [
+        [0.1] * 768 for _ in texts
+    ]
     # Mock os.path.exists to return False only for the embeddings_model_dir check
     original_exists = os.path.exists
 
@@ -150,6 +153,23 @@ class TestDocumentProcessorLlamaStack:
         temp_dir.assert_called_once_with(prefix="ls-rag-")
         assert doc.tmp_dir is temp_dir.return_value
         assert os.environ["LLAMA_STACK_CONFIG_DIR"] == temp_dir.return_value.name
+
+    def test_encode_chunk_texts_empty(self, llama_stack_processor):
+        """Empty input skips the embedding model."""
+        doc = document_processor._LlamaStackDB(llama_stack_processor["config"])
+        assert doc._encode_chunk_texts([]) == []
+        document_processor.SentenceTransformer.return_value.encode.assert_not_called()
+
+    def test_encode_chunk_texts_uses_tolist(self, llama_stack_processor):
+        """Prefer ndarray.tolist() when encode() returns a numpy-like result."""
+        doc = document_processor._LlamaStackDB(llama_stack_processor["config"])
+        encoded = mock.Mock()
+        encoded.tolist.return_value = [[0.2] * 768]
+        encode = document_processor.SentenceTransformer.return_value.encode
+        encode.side_effect = None
+        encode.return_value = encoded
+        assert doc._encode_chunk_texts(["hello"]) == [[0.2] * 768]
+        encoded.tolist.assert_called_once()
 
     def test_init_model_path(self, mocker, llama_stack_processor):
         """Test initialization when embeddings_model_dir exists as a local path."""
@@ -644,6 +664,17 @@ registered_resources:
         assert call_kwargs["vector_store_id"] == "vs_123"
         assert "chunks" in call_kwargs
         assert len(call_kwargs["chunks"]) == 2
+        assert call_kwargs["chunks"][0]["embedding"] == [0.1] * 768
+        assert call_kwargs["chunks"][1]["embedding"] == [0.1] * 768
+        # Embeddings must be batched through SentenceTransformer, not one
+        # llama-stack round trip per chunk (that path times out in CI).
+        client.embeddings.create.assert_not_called()
+        encode = document_processor.SentenceTransformer.return_value.encode
+        encode.assert_called_once()
+        assert encode.call_args.args[0] == ["test content 1", "test content 2"]
+        assert encode.call_args.kwargs["batch_size"] == (
+            document_processor._LlamaStackDB.EMBEDDING_BATCH_SIZE
+        )
 
     def test_save_auto_chunking(self, mocker, llama_stack_processor):
         """Test saving documents with automatic chunking workflow."""

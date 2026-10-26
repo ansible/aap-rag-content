@@ -6,13 +6,13 @@
 
 You can use the following optional collectors for the `gather` command:
 
--  `main_jobhostsummary`
+- `main_jobhostsummary`
 * If present by default, this collects the `main_jobhostsummary` table from the automation controller database, and has information about jobs runs and managed nodes automated.
--  `main_host`
+- `main_host`
 * This collects daily snapshots of the `main_host` table from the automation controller database and has managed nodes/hosts present across automation controller inventories,
--  `main_jobevent`
+- `main_jobevent`
 * This collects the `main_jobevent` table from the automation controller database and has information about which modules, roles, and ansible collections are being used.
--  `main_indirectmanagednodeaudit`
+- `main_indirectmanagednodeaudit`
 * This collects the `main_indirectmanagednodeaudit` table from the automation controller database and has information about indirectly managed nodes,
 
 ```
@@ -24,7 +24,7 @@ export METRICS_UTILITY_OPTIONAL_COLLECTORS="main_host,main_jobevent,main_indirec
 
 You can use the following optional sheets for the `build_report` command:
 
--  `ccsp_summary`
+- `ccsp_summary`
 * This is a landing page specifically for partners under the CCSP program. It shows managed node usage by each automation controller organization.
 * This report takes additional parameters to customize the summary page. For more information, see the following example:
 
@@ -40,17 +40,17 @@ export METRICS_UTILITY_REPORT_COMPANY_BUSINESS_LEADER="BUSINESS LEADER"
 export METRICS_UTILITY_REPORT_COMPANY_PROCUREMENT_LEADER="PROCUREMENT LEADER"
 ```
 
--  `managed_nodes`
+- `managed_nodes`
 * This is a deduplicated list of managed nodes automated by automation controller.
--  `indirectly_managed_nodes`
+- `indirectly_managed_nodes`
 * This is a deduplicated list of indirect managed nodes automated by automation controller.
--  `inventory_scope`
+- `inventory_scope`
 * This is a deduplicated list of managed nodes present across all inventories of automation controller.
--  `usage_by_collections`
+- `usage_by_collections`
 * This is a list of Ansible collections used in automation controller job runs.
--  `usage_by_roles`
+- `usage_by_roles`
 * This is a list of roles used in automation controller job runs.
--  `usage_by_modules`
+- `usage_by_modules`
 * This is a list of modules used in automation controller job runs.
 
 ```

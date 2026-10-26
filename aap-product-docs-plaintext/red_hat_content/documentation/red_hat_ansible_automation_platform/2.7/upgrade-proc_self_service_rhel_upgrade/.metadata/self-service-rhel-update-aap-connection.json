@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/upgrade-proc_self_service_rhel_upgrade#self-service-rhel-update-aap-connection",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-proc_self_service_rhel_upgrade",
-  "title": "Update the Ansible Automation Platform connection"
+  "title": "Update the Ansible Automation Platform connection",
+  "url_reachable": true
 }

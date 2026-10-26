@@ -9,12 +9,12 @@ Add a README to your container repository to provide instructions to your users 
 
 ### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Automation Content> (and then)Execution Environments.
-3.  Select your execution environment.
-4.  On the **Detail** tab, click Add.
-5.  In the **Raw Markdown** text field, enter your README text in Markdown.
-6.  Click Save when you are finished.
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Automation Content> (and then)Execution Environments.
+3. Select your execution environment.
+4. On the **Detail** tab, click Add.
+5. In the **Raw Markdown** text field, enter your README text in Markdown.
+6. Click Save when you are finished.
 
 ### What to do next
 

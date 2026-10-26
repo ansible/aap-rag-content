@@ -17,7 +17,7 @@ The instance field `capacity_adjustment` enables you to select how much you want
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Instance Groups.
-2.  On the **Instance Groups** list view, select the required instance.
-3.  Select the **Instances** tab and adjust the **Capacity adjustment** slider. Note:
+1. From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Instance Groups.
+2. On the **Instance Groups** list view, select the required instance.
+3. Select the **Instances** tab and adjust the **Capacity adjustment** slider. Note:
 The slider adjusts whether the instance capacity algorithm yields less forks (towards the left) or yields more forks (towards the right).

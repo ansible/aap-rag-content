@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-con_about_lightspeed_containerized_install/aem-page/extend-con_about_lightspeed_containerized_install.html"
 last_crumb = "Overview"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Overview"
 oversized = "false"
@@ -40,8 +41,8 @@ Red Hat does not collect any telemetry data from your interactions with Red Hat 
 
 ## Process to deploy Red Hat Ansible Lightspeed on a container-based installation
 
-| Task                                                                                                       | Description                                                                                                                                                                                              |
-| ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <br>Deploy Red Hat Ansible Lightspeed during a container-based installation of Ansible Automation Platform | <br>An Ansible Automation Platform administrator who wants to deploy Red Hat Ansible Lightspeed for all Ansible users in the organization.<br>Perform the following tasks:<br>Configure the Red Hat Ansible Lightspeed variables in the inventory file.Install or upgrade to containerized Ansible Automation Platform 2.6 or later.If you want to install the coding assistant, configure the Ansible VS Code extension.Optional: Change your LLM model if you want to use a different LLM provider after deploying Red Hat Ansible Lightspeed. |
-| <br>Access and use the automation intelligent assistant                                                    | <br>All Ansible users within the organization who want to use the intelligent assistant to get answers to their questions about the Ansible Automation Platform.                                         |
-| <br>Access and use the coding assistant                                                                    | <br>All Ansible users within the organization who want to use the coding assistant to develop Ansible content:<br> Single task or multitask recomendations Create playbooks and view playbook explanationsCreate roles and view role explanations |
+| Task                                                                                                   | Description                                                                                                                                                                                              |
+| ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Deploy Red Hat Ansible Lightspeed during a container-based installation of Ansible Automation Platform | An Ansible Automation Platform administrator who wants to deploy Red Hat Ansible Lightspeed for all Ansible users in the organization.<br>Perform the following tasks:<br>Configure the Red Hat Ansible Lightspeed variables in the inventory file.Install or upgrade to containerized Ansible Automation Platform 2.6 or later.If you want to install the coding assistant, configure the Ansible VS Code extension.Optional: Change your LLM model if you want to use a different LLM provider after deploying Red Hat Ansible Lightspeed. |
+| Access and use the automation intelligent assistant                                                    | All Ansible users within the organization who want to use the intelligent assistant to get answers to their questions about the Ansible Automation Platform.                                             |
+| Access and use the coding assistant                                                                    | All Ansible users within the organization who want to use the coding assistant to develop Ansible content:<br> Single task or multitask recomendations Create playbooks and view playbook explanationsCreate roles and view role explanations |

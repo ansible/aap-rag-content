@@ -5,14 +5,14 @@ Use the `oc adm must-gather` command to collect comprehensive diagnostic data ab
 
 ### Procedure
 
-1.  To start the `must-gather` tool, run:
+1. To start the `must-gather` tool, run:
 
 
 ```
 oc adm must-gather --image=registry.redhat.io/<platform-version>/aap-must-gather-rhel<rhel-version>
 ```
 
-2.  View the collected data, use the `omc` tool to query the `must-gather` tarball as if it were a live cluster.
+2. View the collected data, use the `omc` tool to query the `must-gather` tarball as if it were a live cluster.
 
 ```
 omc use <path-to-must-gather>

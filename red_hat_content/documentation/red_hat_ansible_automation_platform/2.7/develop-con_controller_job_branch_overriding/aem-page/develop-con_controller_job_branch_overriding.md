@@ -1,7 +1,7 @@
 +++
 title = "Advanced configuration for jobs tied to source control management systems - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_job_branch_overriding"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_jobs/", "Use jobs to run playbooks against an inventory of hosts"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-con_controller_job_branch_overriding/aem-page/develop-con_controller_job_branch_overriding.html"
 last_crumb = "Advanced configuration for jobs tied to source control management systems"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Advanced configuration for jobs tied to source control management systems"
 oversized = "false"
@@ -29,19 +30,25 @@ type = "aem-page"
 
 In automation controller, you can configure projects to allow job templates to override the branch, tag, or reference used for source control.
 
-Projects specify the branch, tag, or reference to use from source control in the `scm_branch` field. These are represented by the values specified in the **Type Details** fields:
+Projects specify the branch, tag, or reference to use from source control in the `scm_branch` field.
+These are represented by the values specified in the **Type Details** fields:
 
 ![Project branching emphasized](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-scm-project-branching-emphasized.png)  
 
-When creating or editing a job you have the option to **Allow branch override**. When this option is checked, project administrators can delegate branch selection to the job templates that use that project, requiring only project `use_role`.
+When creating or editing a job you have the option to **Allow branch override**.
+When this option is checked, project administrators can delegate branch selection to the job templates that use that project, requiring only project `use_role`.
 
 ## Source tree copy behavior
 
 When automation controller runs a job, it creates a private copy of the project’s source tree for that job run.
 
-Every job run has its own private data directory. This directory contains a copy of the project source tree for the given `scm_branch` that the job is running. Jobs are free to make changes to the project folder and make use of those changes while it is still running. This folder is temporary and is removed at the end of the job run.
+Every job run has its own private data directory.
+This directory contains a copy of the project source tree for the given `scm_branch` that the job is running.
+Jobs are free to make changes to the project folder and make use of those changes while it is still running.
+This folder is temporary and is removed at the end of the job run.
 
-If you check the **Clean** option, modified files are removed in automation controller’s local copy of the repository. This is done through use of the force parameter in its corresponding Ansible modules pertaining to git or sub-version.
+If you check the **Clean** option, modified files are removed in automation controller’s local copy of the repository.
+This is done through use of the force parameter in its corresponding Ansible modules pertaining to git or sub-version.
 
 ## Project revision behavior
 

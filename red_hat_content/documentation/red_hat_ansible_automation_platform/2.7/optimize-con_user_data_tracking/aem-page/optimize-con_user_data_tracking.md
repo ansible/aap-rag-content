@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-con_user_data_tracking/aem-page/optimize-con_user_data_tracking.html"
 last_crumb = "Get insights on automation across your environment with Automation Analytics"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Get insights on automation across your environment with Automation Analytics"
 oversized = "false"
@@ -35,7 +36,7 @@ Only users installing a trial of automation controller or a fresh installation o
 
 When you imported your license for the first time, you were automatically opted in for the collection of data that powers Automation Analytics, a cloud service that is part of the Ansible Automation Platform subscription.
 
- Important:
+Important:
 
 For opt-in of Automation Analytics to have any effect, your instance of automation controller must be running on Red Hat Enterprise Linux.
 
@@ -66,7 +67,7 @@ On the clouds navigation panel, select Organization Statistics to view informati
 - Job runs by organization
 - Organization status
 
- Note:
+Note:
 
 The organization statistics page will be deprecated in a future release.
 
@@ -84,12 +85,12 @@ Use this procedure if you want to configure a service account for analytics inst
 
 ### Procedure
 
-1.  From the navigation panel, select Settings> (and then)Automation Execution> (and then)System.
-2.  Click Edit.
+1. From the navigation panel, select Settings> (and then)Automation Execution> (and then)System.
+2. Click Edit.
 3. **Optional:** In the field labeled **Red Hat Client ID for Analytics**, enter the client ID you received when you created your service account to retrieve subscription and content information.
 4. **Optional:** In the field labeled **Red Hat Client Secret for Analytics**, enter the client secret you received when you created your service account to send data to Automation Analytics.
-5.  In the **Options** list select the checkbox to **Gather data for Automation Analytics**.
-6.  Click Save.
+5. In the **Options** list select the checkbox to **Gather data for Automation Analytics**.
+6. Click Save.
 
 ### Results
 
@@ -110,17 +111,17 @@ The **Automation Calculator** produces its default total savings figure based on
 
 You can tune this calculation by providing more specific organizational cost information and adjusting the time values for each of the top templates.
 
- Note:
+Note:
 
 Automation savings calculations are not saved in Automation Analytics.
 
 #### Procedure
 
-1.  Under **Calculate your automation** enter cost information for:
-  1.   **Manual process cost**
-  2.   **Automated process cost**
-2.  Under **Top templates**:
-  1.  Adjust time values for top templates to provide time to manually perform each task that the template automates.
+1. Under **Calculate your automation** enter cost information for:
+  1.  **Manual process cost**
+  2.  **Automated process cost**
+2. Under **Top templates**:
+  1. Adjust time values for top templates to provide time to manually perform each task that the template automates.
 
 #### Results
 
@@ -138,7 +139,7 @@ You can use the toggle switch for each template to show or hide it in the bar gr
 
 #### Procedure
 
- Click the toggle switch for each template to display or hide it.
+Click the toggle switch for each template to display or hide it.
 
 #### Results
 
@@ -150,7 +151,7 @@ View detailed information for each template in **Top templates** to learn more a
 
 #### Procedure
 
- Click the **Info** icon for a job template to view template details.
+Click the **Info** icon for a job template to view template details.
 
 Top template information includes the following:
 

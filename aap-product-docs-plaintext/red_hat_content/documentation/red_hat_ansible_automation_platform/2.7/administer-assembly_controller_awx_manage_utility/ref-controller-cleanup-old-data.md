@@ -5,7 +5,7 @@
 
 Automation controller administrators can use the automation controller **Management Jobs** interface for access or use the command line.
 
--  `awx-manage cleanup_jobs [--help]`     This permanently deletes the job details and job output for jobs older than a specified number of days.
+- `awx-manage cleanup_jobs [--help]`     This permanently deletes the job details and job output for jobs older than a specified number of days.
 
--  `awx-manage cleanup_activitystream [--help]`     This permanently deletes any activity stream data older than a specific number of days.
+- `awx-manage cleanup_activitystream [--help]`     This permanently deletes any activity stream data older than a specific number of days.
 

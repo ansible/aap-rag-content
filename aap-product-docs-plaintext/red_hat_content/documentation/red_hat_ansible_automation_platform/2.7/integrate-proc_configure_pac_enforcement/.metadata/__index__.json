@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/integrate-proc_configure_pac_enforcement",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-proc_configure_pac_enforcement",
-  "title": "Configure enforcement points"
+  "title": "Configure enforcement points",
+  "url_reachable": true
 }

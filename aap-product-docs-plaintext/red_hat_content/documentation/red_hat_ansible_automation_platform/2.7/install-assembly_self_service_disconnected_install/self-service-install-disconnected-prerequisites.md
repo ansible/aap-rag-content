@@ -20,5 +20,5 @@ Fulfilling these prerequisites helps ensure a successful deployment.
 
 Important:
 
-The image versions and compatibility requirements vary between Helm chart releases. Before you begin, consult the [Ansible Automation Portal Lifecycle](https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-lifecycle) page for version mappings between the Helm chart, Red Hat Developer Hub, and PostgreSQL.
+The image versions and compatibility requirements vary between Helm chart releases. Before you begin, consult the Ansible Automation Platform Self-Service Automation Portal Lifecycle page (see the following Related information) for version mappings between the Helm chart, Red Hat Developer Hub, and PostgreSQL.
 

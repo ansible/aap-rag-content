@@ -4,5 +4,6 @@ This appendix provides a reference for the Ansible Automation Platform custom re
 
 Tip:
 
-You can link in existing components by specifying the component name under the `name` variable. You can also use `name` to create a custom name for a new component.
+You can link in existing components by specifying the component name under the `name` variable.
+You can also use `name` to create a custom name for a new component.
 

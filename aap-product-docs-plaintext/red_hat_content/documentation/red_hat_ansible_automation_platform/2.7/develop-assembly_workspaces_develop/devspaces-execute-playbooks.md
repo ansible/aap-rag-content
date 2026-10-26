@@ -9,8 +9,8 @@ With the introduction of full container-in-container support, you can seamlessly
 
 ### Procedure
 
-1.  To execute a playbook using the Ansible extension, right-click on a playbook name in the file explorer and select Run ansible playbook via> (and then)Run ansible playbook via ansible playbook.
-2.  Alternatively, to execute a playbook using `ansible-navigator` with an execution environment, open a terminal in VS Code and run:
+1. To execute a playbook using the Ansible extension, right-click on a playbook name in the file explorer and select Run ansible playbook via> (and then)Run ansible playbook via ansible playbook.
+2. Alternatively, to execute a playbook using `ansible-navigator` with an execution environment, open a terminal in VS Code and run:
 
 
 ```

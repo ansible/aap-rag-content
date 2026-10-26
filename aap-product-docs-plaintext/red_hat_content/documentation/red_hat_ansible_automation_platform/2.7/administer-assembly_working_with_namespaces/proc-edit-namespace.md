@@ -13,11 +13,11 @@ Customize your namespace by adding a logo and a description, and link users to y
 
 ### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Automation Content> (and then)Namespaces.
-3.  Select the namespace you want to edit.
-4.  Click the Edit namespace.
-5.  Enter the relevant information in the fields.
-6.  Optional: enter markdown information in the **Resources** field.
-7.  Click Save namespace.
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Automation Content> (and then)Namespaces.
+3. Select the namespace you want to edit.
+4. Click the Edit namespace.
+5. Enter the relevant information in the fields.
+6. Optional: enter markdown information in the **Resources** field.
+7. Click Save namespace.
 

@@ -9,12 +9,12 @@ These requests and limits apply to the control pods for automation controller an
 
 See also [Jobs scheduled on the worker nodes](/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_specify_dedicated_nodes#ref-schedule-jobs-worker-nodes "Both automation controller and Kubernetes play a role in scheduling a job.").
 
-| Name                               | Description                                             | Default                                  |
-| ---------------------------------- | ------------------------------------------------------- | ---------------------------------------- |
-| <br> `web_resource_requirements`   | <br>Web container resource requirements                 | <br>requests: {CPU: 100m, memory: 128Mi} |
-| <br> `task_resource_requirements`  | <br>Task container resource requirements                | <br>requests: {CPU: 100m, memory: 128Mi} |
-| <br> `ee_resource_requirements`    | <br>EE control plane container resource requirements    | <br>requests: {CPU: 100m, memory: 128Mi} |
-| <br> `redis_resource_requirements` | <br>Redis control plane container resource requirements | <br>requests: {CPU:100m, memory: 128Mi}  |
+| Name                          | Description                                         | Default                              |
+| ----------------------------- | --------------------------------------------------- | ------------------------------------ |
+| `web_resource_requirements`   | Web container resource requirements                 | requests: {CPU: 100m, memory: 128Mi} |
+| `task_resource_requirements`  | Task container resource requirements                | requests: {CPU: 100m, memory: 128Mi} |
+| `ee_resource_requirements`    | EE control plane container resource requirements    | requests: {CPU: 100m, memory: 128Mi} |
+| `redis_resource_requirements` | Redis control plane container resource requirements | requests: {CPU:100m, memory: 128Mi}  |
 
 The use of `topology_spread_constraints` to maximally spread control nodes onto separate underlying Kubernetes worker nodes is recommended. A reasonable set of requests and limits would be limits whose sum is equal to the actual resources on the node. If only `limits` are set, then the request is automatically set to be equal to the limit. But because some variability of resource usage between the containers in the control pod is permitted, you can set `requests` to a lower amount, for example to 25% of the resources available on the node. An example of container customization for a cluster where the worker nodes have 4 CPUs and 16 GB of RAM could be:
 

@@ -9,8 +9,8 @@ Reverting is a safe operation and does not delete content from the system, but r
 
 ### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Automation Content> (and then)Repositories.
-3.  Click into your repository in the list and then select the **Versions** tab.
-4.  Locate the version you want to revert to and click the More Actions icon **⋮**, and select **Revert to this version**.
-5.  Check the box confirming your selection, and then click Revert to repository version.
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Automation Content> (and then)Repositories.
+3. Click into your repository in the list and then select the **Versions** tab.
+4. Locate the version you want to revert to and click the More Actions icon **⋮**, and select **Revert to this version**.
+5. Check the box confirming your selection, and then click Revert to repository version.

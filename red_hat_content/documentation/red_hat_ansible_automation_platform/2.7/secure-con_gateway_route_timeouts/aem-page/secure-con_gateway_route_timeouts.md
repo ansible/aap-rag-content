@@ -1,7 +1,7 @@
 +++
-title = "Configure platform gateway route timeouts - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gateway_route_timeouts"
+title = "Configure platform gateway route timeouts - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_configure_authentication/", "Configure central authentication for Ansible Automation Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_gateway_route_timeouts/aem-page/secure-con_gateway_route_timeouts.html"
 last_crumb = "Configure platform gateway route timeouts"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure platform gateway route timeouts"
 oversized = "false"
@@ -86,8 +87,8 @@ You can configure platform gateway route timeouts during installation or redeplo
 
 ### Procedure
 
-1.  Create or edit your platform gateway deployment playbook.
-2.  Add the route timeout configuration for your deployment type.
+1. Create or edit your platform gateway deployment playbook.
+2. Add the route timeout configuration for your deployment type.
       For OpenShift Container Platform deployments:
 
 ```
@@ -110,7 +111,7 @@ You can configure platform gateway route timeouts during installation or redeplo
     idle_timeout_seconds: 600
 ```
 
-3.  Run the playbook to apply the configuration:
+3. Run the playbook to apply the configuration:
   
 
 ```
@@ -139,7 +140,7 @@ You can adjust route timeouts on existing deployments to support large file uplo
 
 ### Procedure
 
-1.  Obtain an administrative OAuth2 token:
+1. Obtain an administrative OAuth2 token:
   
 
 ```
@@ -149,7 +150,7 @@ $ curl -k -X POST \
   https://<gateway-host>/api/gateway/v1/tokens/
 ```
 
-2.  Update the route timeout settings.
+2. Update the route timeout settings.
       For OpenShift Container Platform deployments:
 
 ```
@@ -211,7 +212,7 @@ These fields replace the `max_stream_duration` and `stream_idle_timeout` global 
 
 ### Procedure
 
-1.  Create or edit a playbook to configure the Ansible Lightspeed route timeouts:
+1. Create or edit a playbook to configure the Ansible Lightspeed route timeouts:
   
 
 ```
@@ -229,7 +230,7 @@ These fields replace the `max_stream_duration` and `stream_idle_timeout` global 
   - `request_timeout_seconds` - Maximum total duration in seconds for streaming requests. Replaces the former `max_stream_duration` setting.
   - `idle_timeout_seconds` - Idle timeout in seconds. The connection closes if no data is transmitted within this period. Replaces the former `stream_idle_timeout` setting.
 
-2.  Run the playbook:
+2. Run the playbook:
   
 
 ```

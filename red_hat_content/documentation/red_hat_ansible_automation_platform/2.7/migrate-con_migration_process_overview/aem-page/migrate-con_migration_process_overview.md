@@ -1,18 +1,19 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/migrate-con_migration_process_overview"
-title = "Migration process overview - Red Hat Ansible Automation Platform 2.7"
+title = "Migration approaches and workflow - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/migrate-con_migration_process_overview/", "Migration process overview"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/migrate-con_migration_process_overview/", "Migration approaches and workflow"]]
 category = "Migrate"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/migrate-con_migration_process_overview/aem-page/migrate-con_migration_process_overview.html"
-last_crumb = "Migration process overview"
-modified = "2026-07-30T17:12:56.473Z"
+last_crumb = "Migration approaches and workflow"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
-name = "Migration process overview"
+name = "Migration approaches and workflow"
 oversized = "false"
 page_slug = "migrate-con_migration_process_overview"
 portal_content_subtype = "title"
@@ -25,7 +26,7 @@ toc = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/migrate-con_
 type = "aem-page"
 +++
 
-# Migration process overview
+# Migration approaches and workflow
 
 Understand the complete migration workflow including preparation, export, artifact creation, import, reconciliation, and validation steps for moving between Ansible Automation Platform installation types.
 

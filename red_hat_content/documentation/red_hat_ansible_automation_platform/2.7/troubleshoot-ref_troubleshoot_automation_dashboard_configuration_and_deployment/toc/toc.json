@@ -1,0 +1,47 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Troubleshoot automation dashboard",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Issue 1: Job counts differ between the automation dashboard and the Controller",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "ref-troubleshoot-automation-dashboard-configuration-deployment__issue-job-counts-differ",
+          "anchor": null,
+          "singlePageAnchor": "ref-troubleshoot-automation-dashboard-configuration-deployment__issue-job-counts-differ"
+        },
+        {
+          "title": "Issue 2: Top 5 users total does not match the successful and failed job totals",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "ref-troubleshoot-automation-dashboard-configuration-deployment__issue-top-5-users-total-mismatch",
+          "anchor": null,
+          "singlePageAnchor": "ref-troubleshoot-automation-dashboard-configuration-deployment__issue-top-5-users-total-mismatch"
+        },
+        {
+          "title": "Issue 3: Default manual execution time does not reflect actual job running time",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "ref-troubleshoot-automation-dashboard-configuration-deployment__issue-manual-execution-time-stale",
+          "anchor": null,
+          "singlePageAnchor": "ref-troubleshoot-automation-dashboard-configuration-deployment__issue-manual-execution-time-stale"
+        },
+        {
+          "title": "Getting help",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "ref-troubleshoot-automation-dashboard-configuration-deployment__getting-help",
+          "anchor": null,
+          "singlePageAnchor": "ref-troubleshoot-automation-dashboard-configuration-deployment__getting-help"
+        }
+      ]
+    }
+  ]
+}

@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_ocp_configure_optional/aem-page/extend-assembly_rhdh_ocp_configure_optional.html"
 last_crumb = "Optional configuration"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Optional configuration"
 oversized = "false"
@@ -41,16 +42,19 @@ When OpenShift Dev Spaces is configured for the Ansible plug-ins, users can clic
 
 Note:
 
-OpenShift Dev Spaces is a separate product and it is optional. The plug-ins will function without it.
+OpenShift Dev Spaces is a separate product and it is optional.
+The plug-ins will function without it.
 
 It is a separate Red Hat product and is not included in the Ansible Automation Platform or Red Hat Developer Hub subscription.
 
-If the OpenShift Dev Spaces link is not configured in the Ansible plug-ins, the **Go to OpenShift Dev Spaces dashboard** link in the **DEVELOP** section of the Ansible plug-ins landing page redirects users to the [Ansible development tools home page](https://www.redhat.com/en/technologies/management/ansible/development-tools).
+If the OpenShift Dev Spaces link is not configured in the Ansible plug-ins,
+the **Go to OpenShift Dev Spaces dashboard** link in the **DEVELOP** section of the Ansible plug-ins landing page redirects users to the [Ansible development tools home page](https://www.redhat.com/en/technologies/management/ansible/development-tools).
 
 ### Procedure
 
-1.  Edit your custom Red Hat Developer Hub config map, for example `app-config-rhdh`.
-2.  Add the following code to your Red Hat Developer Hub `app-config-rhdh.yaml` file.
+1. Edit your custom Red Hat Developer Hub config map, for example `app-config-rhdh`.
+2. Add the following code to your Red Hat Developer Hub `app-config-rhdh.yaml` file.
+  
 
 ```
 data:
@@ -61,10 +65,10 @@ data:
           https://<Your OpenShift Dev Spaces URL>
 ```
 
-3.  Replace `<Your OpenShft Dev Spaces URL>` with your OpenShift Dev Spaces URL.
-4.  In the OpenShift Developer UI, select the `Red Hat Developer Hub` pod.
-5.  Open **Actions**.
-6.  Click **Restart rollout**.
+3. Replace `<Your OpenShft Dev Spaces URL>` with your OpenShift Dev Spaces URL.
+4. In the OpenShift Developer UI, select the `Red Hat Developer Hub` pod.
+5. Open **Actions**.
+6. Click **Restart rollout**.
 
 ## Configure the private automation hub URL
 
@@ -72,7 +76,7 @@ Private automation hub provides a centralized, on-premise repository for certifi
 
 ### Before you begin
 
-- You have a private automation hub instance. For more information, see [Manage your automation content in private automation hub](/documentation/en-us/red_hat_ansible_automation_platform/2.7/assembly_managing_collections_hub "As a content creator, you can use namespaces in automation hub to curate and manage collections.")
+- You have a private automation hub instance. For more information, see [Manage your automation content in private automation hub](/documentation/en-us/red_hat_ansible_automation_platform/2.7/../../2-6/administer/assembly-managing-collections-hub.html "As a content creator, you can use namespaces in automation hub to curate and manage collections.")
 
 ### About this task
 
@@ -84,8 +88,8 @@ The private automation hub configuration is optional but recommended. The Ansibl
 
 ### Procedure
 
-1.  Edit your custom Red Hat Developer Hub config map, for example `app-config-rhdh`.
-2.  Add the following code to your Red Hat Developer Hub `app-config-rhdh.yaml` file.
+1. Edit your custom Red Hat Developer Hub config map, for example `app-config-rhdh`.
+2. Add the following code to your Red Hat Developer Hub `app-config-rhdh.yaml` file.
 
 ```
 data:
@@ -97,10 +101,10 @@ data:
     ...
 ```
 
-3.  Replace `<https://MyOwnPAHUrl/>` with your private automation hub URL.
-4.  In the OpenShift Developer UI, select the `Red Hat Developer Hub` pod.
-5.  Open **Actions**.
-6.  Click **Restart rollout**.
+3. Replace `<https://MyOwnPAHUrl/>` with your private automation hub URL.
+4. In the OpenShift Developer UI, select the `Red Hat Developer Hub` pod.
+5. Open **Actions**.
+6. Click **Restart rollout**.
 
 ## Customize Ansible Developer Tools server resources
 
@@ -125,13 +129,13 @@ The `ansible-devtools-server` runs as an `extraContainers` entry in the Helm cha
 
 ### Procedure
 
-1.  Log in to the OpenShift Container Platform web console.
-2.  Open the Helm chart configuration for your portal deployment.
+1. Log in to the OpenShift Container Platform web console.
+2. Open the Helm chart configuration for your portal deployment.
 
   - For a new deployment, select Ecosystem> (and then)Helm, click Create, and select **Helm Release**.
   - For an existing deployment, select Workloads> (and then)Deployments, click your portal deployment, and click the **YAML** tab.
 
-3.  Switch to the YAML view and find the `extraContainers` section. Set your desired resource values:
+3. Switch to the YAML view and find the `extraContainers` section. Set your desired resource values:
   
 
 ```yaml
@@ -158,7 +162,7 @@ upstream:
 
     Replace the `cpu` and `memory` values under `requests` and `limits` with values that match your namespace constraints.
 
-4.  Apply the changes.
+4. Apply the changes.
 
   - For a new deployment, click Create.
   - For an existing deployment, click Save. The pod restarts automatically with the updated resource values.

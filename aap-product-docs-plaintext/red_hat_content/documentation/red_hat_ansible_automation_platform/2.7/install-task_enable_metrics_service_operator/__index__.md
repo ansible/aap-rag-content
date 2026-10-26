@@ -22,7 +22,7 @@ The operator handles all configuration automatically, including database access,
 
 ## Procedure
 
-1.  Edit the AnsibleAutomationPlatform custom resource
+1. Edit the AnsibleAutomationPlatform custom resource
 Add or modify the `metrics` section in the CR specification:
 
 ```
@@ -47,7 +47,7 @@ disabled: false
 oc edit ansibleautomationplatform myaap -n ansible-automation-platform
 ```
 
-2.  Apply the custom resource
+2. Apply the custom resource
 If you edited the CR in a file:
 
 ```
@@ -56,7 +56,7 @@ oc apply -f aap.yml
 
 **Result:** The AAP gateway operator reconciles the change and creates the metrics service components.
 
-3.  Verify that the MetricsService custom resource was created
+3. Verify that the MetricsService custom resource was created
 The gateway operator automatically creates a MetricsService CR named `<aap-name>-automationmetricsservice` in the same namespace:
 
 ```
@@ -70,7 +70,7 @@ NAME                                   AGE
 myaap-automationmetricsservice         2m
 ```
 
-4.  Verify that metrics service pods are running
+4. Verify that metrics service pods are running
 
 
 ```
@@ -86,7 +86,7 @@ myaap-metrics-tasks-7d4c8b6f5d-j2k5h        1/1     Running   0          2m
 myaap-metrics-scheduler-5c9d7f8b6d-m3n7k    1/1     Running   0          2m
 ```
 
-5.  Verify the health endpoint
+5. Verify the health endpoint
 Port-forward to the metrics service and check the health endpoint:
 
 ```

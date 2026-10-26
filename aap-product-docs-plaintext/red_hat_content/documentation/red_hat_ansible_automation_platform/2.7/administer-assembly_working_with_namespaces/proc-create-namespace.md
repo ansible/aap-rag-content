@@ -17,16 +17,16 @@ By default, namespaces used on Ansible Galaxy are also used on automation hub by
 
 ### Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Automation Content> (and then)Namespaces.
-3.  Click Create namespace and enter a **Name** for your namespace.
-4.  Optional: enter a description, company, logo URL, resources, or useful links in the appropriate fields.
-5.  Click Create namespace.
-6.  Select the **Team Access** tab and click Add roles to assign roles to your namespace.
-7.  Select the team to which you want to grant a role, then click Next.
-8.  Select the roles you want to apply to the selected team, and then click Next.
-9.  Review your selections and click Finish.
-10.  Click Close to complete the process.
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Automation Content> (and then)Namespaces.
+3. Click Create namespace and enter a **Name** for your namespace.
+4. Optional: enter a description, company, logo URL, resources, or useful links in the appropriate fields.
+5. Click Create namespace.
+6. Select the **Team Access** tab and click Add roles to assign roles to your namespace.
+7. Select the team to which you want to grant a role, then click Next.
+8. Select the roles you want to apply to the selected team, and then click Next.
+9. Review your selections and click Finish.
+10. Click Close to complete the process.
 
 ### What to do next
 

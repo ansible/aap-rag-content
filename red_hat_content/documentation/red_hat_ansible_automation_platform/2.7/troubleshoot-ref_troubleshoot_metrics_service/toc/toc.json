@@ -7,7 +7,33 @@
       "weight": 1,
       "urlFragment": "index",
       "anchor": null,
-      "singlePageAnchor": null
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Troubleshoot events collector",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "ref-troubleshoot-metrics-service__section_1",
+          "anchor": null,
+          "singlePageAnchor": "ref-troubleshoot-metrics-service__section_1"
+        },
+        {
+          "title": "Partial event data collection",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "ref-troubleshoot-metrics-service__section_2",
+          "anchor": null,
+          "singlePageAnchor": "ref-troubleshoot-metrics-service__section_2"
+        },
+        {
+          "title": "Cannot disable events collector individually",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "ref-troubleshoot-metrics-service__section_3",
+          "anchor": null,
+          "singlePageAnchor": "ref-troubleshoot-metrics-service__section_3"
+        }
+      ]
     }
   ]
 }

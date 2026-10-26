@@ -1,7 +1,7 @@
 +++
 template = "docs/aem-title.html"
-title = "Configure the private automation hub community remote - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_set_community_remote"
+title = "Configure the private automation hub community remote - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-manage_your_organization_s_automation_content/", "Manage your organization's automation content"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-proc_set_community_remote/aem-page/administer-proc_set_community_remote.html"
 last_crumb = "Configure the private automation hub community remote"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure the private automation hub community remote"
 oversized = "false"
@@ -47,11 +48,11 @@ You can edit the **community** remote repository to synchronize chosen collectio
 
 ## Procedure
 
-1.  Log in to Ansible Automation Platform.
-2.  From the navigation panel, select Automation Content> (and then)Remotes.
-3.  In the **Details** tab in the **Community** remote, click Edit remote.
-4.  In the **YAML requirements** field, paste the contents of your `requirements.yml` file.
-5.  Click Save remote.
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select Automation Content> (and then)Remotes.
+3. In the **Details** tab in the **Community** remote, click Edit remote.
+4. In the **YAML requirements** field, paste the contents of your `requirements.yml` file.
+5. Click Save remote.
 
 ## Results
 
@@ -59,4 +60,4 @@ You can now synchronize collections identified in your `requirements.yml` file f
 
 ## What to do next
 
-See [Synchronizing content collections](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_create_synclist "You can sync certified and validated collections in Ansible automation hub from console.redhat.com.")for syncing steps.
+See [Synchronizing content collections](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_create_synclist "You can sync certified and validated collections in Ansible Automation Platform from console.redhat.com.")for syncing steps.

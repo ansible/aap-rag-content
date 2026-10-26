@@ -1,0 +1,23 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Disable the MCP server",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Procedure",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-481341a9-7766-45e7-8cf4-61ef2431d3b6__steps-unordered_1",
+          "anchor": null,
+          "singlePageAnchor": "GUID-481341a9-7766-45e7-8cf4-61ef2431d3b6__steps-unordered_1"
+        }
+      ]
+    }
+  ]
+}

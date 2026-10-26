@@ -13,7 +13,7 @@ Automated image builds authenticate through the signed-in user's GitLab OAuth se
 
 ## Procedure
 
-1.  Create a GitLab OAuth application in your GitLab instance under **Admin Area > Applications** (or group-level settings). Enter the following details:
+1. Create a GitLab OAuth application in your GitLab instance under **Admin Area > Applications** (or group-level settings). Enter the following details:
 
 - **Name:** A descriptive name, for example `ansible-portal-ee-builder`.
 - **Redirect URI:** `https://<my_portal_domain>/api/auth/gitlab/handler/frame`
@@ -28,8 +28,8 @@ Automated image builds authenticate through the signed-in user's GitLab OAuth se
 Note:
 If you previously configured a GitLab OAuth application for content discovery or saving definition files, verify that the existing application includes the `api`, `read_api`, `read_user`, `read_repository`, and `write_repository` scopes. Open your OAuth application in **Admin Area > Applications**, select any missing scopes, and save. No other changes are required.
 
-2.  Note the **Application ID** and **Secret**. Save the secret value immediately — you cannot view it again.
-3.  Enable the GitLab auth provider in your configuration.
+2. Note the **Application ID** and **Secret**. Save the secret value immediately — you cannot view it again.
+3. Enable the GitLab auth provider in your configuration.
 **OpenShift:** Uncomment the `auth.providers.gitlab` block in your Helm chart configuration.
 
 **RHEL appliance:** Add the following `auth.providers` block to `/etc/portal/configs/app-config/app-config.production.yaml`. If an `auth:` section already exists, add the `providers:` section inside it:
@@ -43,7 +43,7 @@ clientId: ${GITLAB_OAUTH_CLIENT_ID}
 clientSecret: ${GITLAB_OAUTH_CLIENT_SECRET}
 ```
 
-4.  Add the OAuth client credentials to your `secrets-scm` secret.
+4. Add the OAuth client credentials to your `secrets-scm` secret.
 **OpenShift — CLI:**
 
 ```

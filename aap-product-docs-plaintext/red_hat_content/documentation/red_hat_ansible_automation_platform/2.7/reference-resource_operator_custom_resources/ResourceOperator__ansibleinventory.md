@@ -10,7 +10,7 @@ Creates an inventory on the automation controller.
 | `name`              | String | Display name for the inventory.                                                                         | -         |
 | `description`       | String | Description of the inventory.                                                                           | -         |
 | `organization`      | String | Organization the inventory belongs to.                                                                  | -         |
-| `state`             | String | Desired state of the inventory. Options: `present`, `absent`.                                           | `present` |
+| `state`             | String | Desired state of the inventory. Options:`present`,`absent`.                                             | `present` |
 | `instance_groups`   | Array  | List of instance groups to associate with the inventory.                                                | -         |
 | `variables`         | Object | Inventory variables as key-value pairs. Supports strings, booleans, numbers, lists, and nested objects. | -         |
 

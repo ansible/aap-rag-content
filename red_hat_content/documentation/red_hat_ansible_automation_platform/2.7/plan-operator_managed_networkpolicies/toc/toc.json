@@ -1,0 +1,97 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Operator-managed NetworkPolicies",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Unrestricted egress for user-configured destinations",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-1d94c84c-9350-4ae8-a8f9-87da56d0cc86__unrestricted-egress",
+          "anchor": null,
+          "singlePageAnchor": "GUID-1d94c84c-9350-4ae8-a8f9-87da56d0cc86__unrestricted-egress"
+        },
+        {
+          "title": "External databases and Redis",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "GUID-1d94c84c-9350-4ae8-a8f9-87da56d0cc86__external-databases-redis",
+          "anchor": null,
+          "singlePageAnchor": "GUID-1d94c84c-9350-4ae8-a8f9-87da56d0cc86__external-databases-redis"
+        },
+        {
+          "title": "Restricted network environments",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "GUID-1d94c84c-9350-4ae8-a8f9-87da56d0cc86__restricted-network-environments",
+          "anchor": null,
+          "singlePageAnchor": "GUID-1d94c84c-9350-4ae8-a8f9-87da56d0cc86__restricted-network-environments"
+        },
+        {
+          "title": "NetworkPolicy specifications for operator deployments",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "GUID-8efa823a-face-4a5b-8d09-5214fb563d84",
+          "anchor": null,
+          "singlePageAnchor": "GUID-8efa823a-face-4a5b-8d09-5214fb563d84",
+          "sections": [
+            {
+              "title": "Platform gateway operator",
+              "visible": true,
+              "weight": 1,
+              "urlFragment": "GUID-8efa823a-face-4a5b-8d09-5214fb563d84",
+              "anchor": "GUID-8efa823a-face-4a5b-8d09-5214fb563d84__platform-gateway-operator",
+              "singlePageAnchor": "GUID-8efa823a-face-4a5b-8d09-5214fb563d84__platform-gateway-operator"
+            },
+            {
+              "title": "Automation controller operator",
+              "visible": true,
+              "weight": 2,
+              "urlFragment": "GUID-8efa823a-face-4a5b-8d09-5214fb563d84",
+              "anchor": "GUID-8efa823a-face-4a5b-8d09-5214fb563d84__automation-controller-operator",
+              "singlePageAnchor": "GUID-8efa823a-face-4a5b-8d09-5214fb563d84__automation-controller-operator"
+            },
+            {
+              "title": "Automation hub operator",
+              "visible": true,
+              "weight": 3,
+              "urlFragment": "GUID-8efa823a-face-4a5b-8d09-5214fb563d84",
+              "anchor": "GUID-8efa823a-face-4a5b-8d09-5214fb563d84__automation-hub-operator",
+              "singlePageAnchor": "GUID-8efa823a-face-4a5b-8d09-5214fb563d84__automation-hub-operator"
+            },
+            {
+              "title": "Event-Driven Ansible operator",
+              "visible": true,
+              "weight": 4,
+              "urlFragment": "GUID-8efa823a-face-4a5b-8d09-5214fb563d84",
+              "anchor": "GUID-8efa823a-face-4a5b-8d09-5214fb563d84__event-driven-ansible-operator",
+              "singlePageAnchor": "GUID-8efa823a-face-4a5b-8d09-5214fb563d84__event-driven-ansible-operator"
+            },
+            {
+              "title": "Automation metrics operator",
+              "visible": true,
+              "weight": 5,
+              "urlFragment": "GUID-8efa823a-face-4a5b-8d09-5214fb563d84",
+              "anchor": "GUID-8efa823a-face-4a5b-8d09-5214fb563d84__automation-metrics-operator",
+              "singlePageAnchor": "GUID-8efa823a-face-4a5b-8d09-5214fb563d84__automation-metrics-operator"
+            },
+            {
+              "title": "Automation orchestrator operator",
+              "visible": true,
+              "weight": 6,
+              "urlFragment": "GUID-8efa823a-face-4a5b-8d09-5214fb563d84",
+              "anchor": "GUID-8efa823a-face-4a5b-8d09-5214fb563d84__automation-orchestrator-operator",
+              "singlePageAnchor": "GUID-8efa823a-face-4a5b-8d09-5214fb563d84__automation-orchestrator-operator"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

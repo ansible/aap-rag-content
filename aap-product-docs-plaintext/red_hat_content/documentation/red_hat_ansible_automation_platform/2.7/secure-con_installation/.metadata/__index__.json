@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/secure-con_installation",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_installation",
-  "title": "Installation settings to secure your platform"
+  "title": "Installation settings to secure your platform",
+  "url_reachable": true
 }

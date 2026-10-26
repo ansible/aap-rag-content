@@ -5,14 +5,14 @@ Re-running the setup playbook won't deprovision instances, as clusters can't dis
 
 ### Procedure
 
-1.  Shut down the instance or stop the service with the following command:
+1. Shut down the instance or stop the service with the following command:
 
 
 ```
 automation-controller-service stop
 ```
 
-2.  Run the following deprovision command from another instance to remove it from the controller cluster registry:
+2. Run the following deprovision command from another instance to remove it from the controller cluster registry:
 
 
 ```

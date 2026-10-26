@@ -1,6 +1,6 @@
 +++
+title = "Inventory file variables for the standalone automation dashboard utility - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-inventory_file_variables_for_automation_dashboard"
-title = "Inventory file variables for automation dashboard - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 
 [extra]
@@ -9,10 +9,11 @@ category = "Optimize"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-inventory_file_variables_for_automation_dashboard/aem-page/optimize-inventory_file_variables_for_automation_dashboard.html"
-last_crumb = "Inventory file variables for automation dashboard"
-modified = "2026-07-30T17:12:56.473Z"
+last_crumb = "Inventory file variables for the standalone automation dashboard utility"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
-name = "Inventory file variables for automation dashboard"
+name = "Inventory file variables for the standalone automation dashboard utility"
 oversized = "false"
 page_slug = "optimize-inventory_file_variables_for_automation_dashboard"
 portal_content_subtype = "title"
@@ -25,9 +26,9 @@ toc = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/optimize-inv
 type = "aem-page"
 +++
 
-# Inventory file variables for automation dashboard
+# Inventory file variables for the standalone automation dashboard utility
 
-The inventory variables required by the automation dashboard installation program are described in the following table:
+The inventory variables required by the standalone automation dashboard utility installation program are described in the following table:
 
 | Inventory variable                             | Description                                                                                                                                                                                              |
 | ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -54,8 +55,11 @@ The inventory variables required by the automation dashboard installation progra
 | `dashboard_admin_password`                     | The password for the automation dashboard administrator user. The username is always`admin`.                                                                                                             |
 | `dashboard_pg_host`                            | The hostname or IP address of the PostgreSQL database. This host must be accessible from the installation program node on port 5432. If a public IP address blocks this port, you must use the internal IP address. |
 | `dashboard_pg_username`                        | The database user for automation dashboard.                                                                                                                                                              |
-| `dashboard_pg_password`                        | The password for the`dashboard_pg_username`.                                                                                                                                                             |
+| `dashboard_pg_password`                        | The password for the `dashboard_pg_username`.                                                                                                                                                            |
 | `dashboard_pg_database`                        | The database schema name for automation dashboard.                                                                                                                                                       |
+| `dashboard_pg_port`                            | Configures the port used by the client to connect to PostgreSQL. Default: 5432.                                                                                                                          |
+| `postgresql_port`                              | Configures the PostgreSQL listening port. Default: 5432.                                                                                                                                                 |
+| `postgresql_extra_settings`                    | Allows customization of PostgreSQL settings. For example, use this variable to change `ssl_ciphers` to `HIGH:MEDIUM:!3DES:!aNULL`.                                                                       |
 | `bundle_install`                               | Indicates the required container images are already included in the installation bundle (tar file).                                                                                                      |
 | `bundle_dir`                                   | The directory where the installation bundle unpacks`+ /bundle` (for example:/home/<username>/ansible-automation-dashboard-containerized-setup/bundle). The default value is relative to the current directory (PWD) and should work without modification. |
 | `redis_mode`                                   | Configures the Redis deployment mode. The required value is`standalone`.                                                                                                                                 |

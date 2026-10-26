@@ -1,0 +1,47 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Import to a containerized deployment using the aap_snapshot collection",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Set up the import inventory for a containerized deployment",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-c4fd78b8-8e1f-4248-8447-2f3b5176c24f",
+          "anchor": null,
+          "singlePageAnchor": "GUID-c4fd78b8-8e1f-4248-8447-2f3b5176c24f"
+        },
+        {
+          "title": "Import Ansible Automation Platform data into a containerized deployment",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "GUID-f0b01eae-4804-4898-afbc-1bf31bef6369",
+          "anchor": null,
+          "singlePageAnchor": "GUID-f0b01eae-4804-4898-afbc-1bf31bef6369"
+        },
+        {
+          "title": "Rerun the containerized installation program to complete the migration",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "GUID-eff36919-eb1c-45f4-b611-b2f55c1f9106",
+          "anchor": null,
+          "singlePageAnchor": "GUID-eff36919-eb1c-45f4-b611-b2f55c1f9106"
+        },
+        {
+          "title": "Validate the restored containerized deployment",
+          "visible": true,
+          "weight": 4,
+          "urlFragment": "GUID-f82688d7-7281-46c7-808e-88bd1d8e5303",
+          "anchor": null,
+          "singlePageAnchor": "GUID-f82688d7-7281-46c7-808e-88bd1d8e5303"
+        }
+      ]
+    }
+  ]
+}

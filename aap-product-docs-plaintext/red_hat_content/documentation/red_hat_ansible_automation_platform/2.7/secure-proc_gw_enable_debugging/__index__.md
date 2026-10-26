@@ -4,8 +4,8 @@ To further diagnose authentication issues, enable debug logging in platform gate
 
 ## Procedure
 
-1.  Change the logging configuration in the platform gateway’s `settings.py` file.
-2.  Set the logging level for the `ansible_base` logger to `DEBUG`:
+1. Change the logging configuration in the platform gateway’s `settings.py` file.
+2. Set the logging level for the `ansible_base` logger to `DEBUG`:
 
 
 ```

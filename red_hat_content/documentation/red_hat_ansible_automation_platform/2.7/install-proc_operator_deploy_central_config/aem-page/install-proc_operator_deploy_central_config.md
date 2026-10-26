@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_operator_deploy_central_config"
-title = "Add components to an existing deployment - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Add components to an existing deployment - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_operator_deploy_central_config"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator/", "Install on OpenShift Container Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_operator_deploy_central_config/aem-page/install-proc_operator_deploy_central_config.html"
 last_crumb = "Add components to an existing deployment"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Add components to an existing deployment"
 oversized = "false"
@@ -35,14 +36,14 @@ The following procedure simulates a scenario where you have automation controlle
 
 ## Procedure
 
-1.  Log in to Red Hat OpenShift Container Platform.
-2.  Navigate to Operators> (and then)Installed Operators.
-3.  Select your Ansible Automation Platform Operator deployment.
-4.  Click Subscriptions and edit your **Update channel** to `stable-2.7`.
-5.  Click Details and on the **Ansible Automation Platform** tile click Create instance.
-6.  From the **Create Ansible Automation Platform** page enter a name for your instance in the **Name** field.   - When deploying an Ansible Automation Platform instance, ensure that `auto_update` is set to the default value of `false` on your existing automation controller instance in order for the integration to work.
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to Operators> (and then)Installed Operators.
+3. Select your Ansible Automation Platform Operator deployment.
+4. Click Subscriptions and edit your **Update channel** to `stable-2.7`.
+5. Click Details and on the **Ansible Automation Platform** tile click Create instance.
+6. From the **Create Ansible Automation Platform** page enter a name for your instance in the **Name** field.   - When deploying an Ansible Automation Platform instance, ensure that `auto_update` is set to the default value of `false` on your existing automation controller instance in order for the integration to work.
 
-7.  Click YAML view and copy in the following:
+7. Click YAML view and copy in the following:
   
 
 ```
@@ -76,6 +77,8 @@ spec:
     storage_type: file
     file_storage_storage_class: <your-read-write-many-storage-class>
     file_storage_size: 10Gi
+  mcp:
+    disabled: false
 
     ## uncomment if using S3 storage for Content pod
     # storage_type: S3
@@ -84,8 +87,8 @@ spec:
     ## uncomment if using Azure storage
 ```
 
-  1.  For new components, if you do not specify a name, a default name is generated.
+  1. For new components, if you do not specify a name, a default name is generated.
 
-8.  Click Create.
-9.  To access your new instance, see [Accessing the platform gateway](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_operator_access_aap "Use the Ansible Automation Platform instance as your default. This instance links the automation controller, automation hub, and Event-Driven Ansible deployments to a single interface."). Note:
+8. Click Create.
+9. To access your new instance, see [Accessing the platform gateway](/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_operator_access_aap "Use the Ansible Automation Platform instance as your default. This instance links the automation controller, automation hub, and Event-Driven Ansible deployments to a single interface."). Note:
       If you have an existing controller with a managed Postgres pod, after creating the **Ansible Automation Platform** resource your automation controller instance will continue to use that original Postgres pod. If you were to do a fresh install you would have a single Postgres managed pod for all instances.

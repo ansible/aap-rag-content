@@ -15,17 +15,19 @@ The following example demonstrates how to configure webhooks in a remote system 
 
 #### Procedure
 
-1.  Log in to your GitHub repository.
-2.  Click **Your profile name → Your repositories**.  Note:
+1. Log in to your GitHub repository.
+2. Click **Your profile name → Your repositories**.
+
+Note:
 If you do not have a repository, click **New** to create a new one, select an owner, add a **Repository name**, and click **Create repository**.
 
-3.  Navigate to **Settings** (tool bar).
-4.  In the **General** navigation pane, select **Webhooks**.
-5.  Click **Add webhook**.
-6.  In the **Payload URL** field, paste the URL you saved when you created your event stream.
-7.  Select **application/json** in the **Content type** list.
-8.  Enter your **Secret**.
-9.  Click **Add webhook**.
+3. Navigate to **Settings** (tool bar).
+4. In the **General** navigation pane, select **Webhooks**.
+5. Click **Add webhook**.
+6. In the **Payload URL** field, paste the URL you saved when you created your event stream.
+7. Select **application/json** in the **Content type** list.
+8. Enter your **Secret**.
+9. Click **Add webhook**.
 
 #### Results
 

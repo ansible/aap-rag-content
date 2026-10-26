@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_change_ssl_tls_operator_based_install"
 template = "docs/aem-title.html"
 title = "Operator-based installations - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_change_ssl_tls_operator_based_install"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_changing_ssl_certs_keys/", "Renew and change SSL/TLS certificates"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_change_ssl_tls_operator_based_install/aem-page/secure-con_change_ssl_tls_operator_based_install.html"
 last_crumb = "Operator-based installations"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Operator-based installations"
 oversized = "false"
@@ -35,22 +36,22 @@ The following procedure describes how to change the SSL/TLS certificate and key 
 
 ### Procedure
 
-1.  Copy the signed SSL/TLS certificate and key to a secure location.
-2.  Create a TLS secret within OpenShift:
+1. Copy the signed SSL/TLS certificate and key to a secure location.
+2. Create a TLS secret within OpenShift:
   
 
 ```
 oc create secret tls controller-certs-$(date +%F) --cert=/path/to/ssl.crt --key=/path/to/ssl.key -n <namespace>
 ```
 
-3.  Edit the Ansible Automation Platform custom resource to add `route_tls_secret` under the `controller` section:
+3. Edit the Ansible Automation Platform custom resource to add `route_tls_secret` under the `controller` section:
   
 
 ```
 oc edit ansibleautomationplatform <aap-instance-name> -n <namespace>
 ```
 
-4.  Add or update the `route_tls_secret` parameter under `spec.controller`:
+4. Add or update the `route_tls_secret` parameter under `spec.controller`:
   
 
 ```
@@ -70,8 +71,8 @@ spec:
 
     The operator automatically applies this configuration to the automation controllerinstance managed by this Ansible Automation Platform deployment.
 
-5.  Wait a few minutes for the changes to be applied.
-6.  Verify that new SSL/TLS certificate and key have been installed:
+5. Wait a few minutes for the changes to be applied.
+6. Verify that new SSL/TLS certificate and key have been installed:
   
 
 ```
@@ -84,22 +85,22 @@ The following procedure describes how to change the SSL/TLS certificate and key 
 
 ### Procedure
 
-1.  Copy the signed SSL/TLS certificate and key to a secure location.
-2.  Create a TLS secret within OpenShift:
+1. Copy the signed SSL/TLS certificate and key to a secure location.
+2. Create a TLS secret within OpenShift:
   
 
 ```
 oc create secret tls hub-certs-$(date +%F) --cert=/path/to/ssl.crt --key=/path/to/ssl.key -n <namespace>
 ```
 
-3.  Edit the Ansible Automation Platform custom resource to add `route_tls_secret` under the `hub` section:
+3. Edit the Ansible Automation Platform custom resource to add `route_tls_secret` under the `hub` section:
   
 
 ```
 oc edit ansibleautomationplatform <aap-instance-name> -n <namespace>
 ```
 
-4.  Add or update the `route_tls_secret` parameter under `spec.hub`:
+4. Add or update the `route_tls_secret` parameter under `spec.hub`:
   
 
 ```
@@ -118,8 +119,8 @@ spec:
 
     The operator automatically applies this configuration to the automation hub instance managed by this Ansible Automation Platform deployment.
 
-5.  Wait a few minutes for the changes to be applied.
-6.  Verify that new SSL/TLS certificate and key have been installed:
+5. Wait a few minutes for the changes to be applied.
+6. Verify that new SSL/TLS certificate and key have been installed:
   
 
 ```

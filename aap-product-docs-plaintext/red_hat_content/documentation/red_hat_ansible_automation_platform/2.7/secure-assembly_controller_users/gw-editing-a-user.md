@@ -13,8 +13,8 @@ After upgrading to 2.6, users previously designated as automation controller adm
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Users.
-2.  Click the **Pencil**![Edit page](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png) icon next to the user you want to edit and select **Edit user**.
-3.  The **Edit** user page is displayed where you can change user details such as **Password**, **Email**, **User type**, and **Organization**.
-4.  After your changes are complete, click **Save user**.
+1. From the navigation panel, select Access Management> (and then)Users.
+2. Click the **Pencil**![Edit page](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png) icon next to the user you want to edit and select **Edit user**.
+3. The **Edit** user page is displayed where you can change user details such as **Password**, **Email**, **User type**, and **Organization**.
+4. After your changes are complete, click **Save user**.
 

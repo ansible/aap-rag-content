@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/observe-con_controller_configure_hostname_notifications#controller-attributes-custom-notifications",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-con_controller_configure_hostname_notifications",
-  "title": "Custom notification attributes"
+  "title": "Custom notification attributes",
+  "url_reachable": true
 }

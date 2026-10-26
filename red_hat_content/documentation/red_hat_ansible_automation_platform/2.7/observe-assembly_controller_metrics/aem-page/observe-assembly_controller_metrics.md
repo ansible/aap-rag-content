@@ -1,7 +1,7 @@
 +++
-title = "Send metrics to system monitoring software - Red Hat Ansible Automation Platform 2.7"
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_controller_metrics"
+template = "docs/aem-title.html"
+title = "Send metrics to system monitoring software - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_controller_metrics/", "Send metrics to system monitoring software"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/observe-assembly_controller_metrics/aem-page/observe-assembly_controller_metrics.html"
 last_crumb = "Send metrics to system monitoring software"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Send metrics to system monitoring software"
 oversized = "false"
@@ -29,7 +30,8 @@ type = "aem-page"
 
 Automation controller provides metrics that can be used to monitor the health and performance of the system.
 
-A metrics endpoint, `/api/controller/v2/metrics/` is available in the API that produces instantaneous metrics about automation controller, which can be consumed by system monitoring software such as the open source project Prometheus.
+A metrics endpoint, `/api/controller/v2/metrics/` is available in the API that produces instantaneous metrics about automation controller, which can be
+consumed by system monitoring software such as the open source project Prometheus.
 
 The types of data shown at the `metrics/` endpoint are `Content-type: text/plain` and `application/json`.
 
@@ -51,8 +53,11 @@ For more information, see the [First steps with Prometheus](https://prometheus.i
 
 ### Procedure
 
-1.  In the Prometheus configuration file (typically `prometheus.yml`), specify a `<token_value>`, a valid username and password for an automation controller user that you have created, and a `<controller_host>`.  Note:
-      Alternatively, you can provide an OAuth2 token (which can be generated at `/api/v2/users/N/personal_tokens/`). By default, the configuration assumes a user with username=`admin` and password=`password`.
+1. In the Prometheus configuration file (typically `prometheus.yml`), specify a `<token_value>`, a valid username and password for an automation controller user that you have created, and a `<controller_host>`.
+  
+  Note:
+      Alternatively, you can provide an OAuth2 token (which can be generated at `/api/v2/users/N/personal_tokens/`).
+By default, the configuration assumes a user with username=`admin` and password=`password`.
 
     Using an OAuth2 Token, created at the `/api/v2/tokens` endpoint to authenticate Prometheus with automation controller, the following example provides a valid scrape configuration if the URL for your automation controller’s metrics endpoint is `/https://controller_host:443/metrics`.
 
@@ -78,7 +83,9 @@ scrape_configs
 
     If Prometheus is already running, you must restart it to apply the configuration changes by making a **POST** to the reload endpoint, or by killing the Prometheus process or service.
 
-2.  Use a browser to navigate to your graph in the Prometheus UI at `/http://<your_prometheus>:9090/graph` and test out some queries. For example, you can query the current number of active automation controller user sessions by executing: `awx_sessions_total{type="user"}`.  ![Prometheus queries](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/metrics-prometheus-ui-query-example.png)
+2. Use a browser to navigate to your graph in the Prometheus UI at `/http://<your_prometheus>:9090/graph` and test out some queries.
+For example, you can query the current number of active automation controller user sessions by executing: `awx_sessions_total{type="user"}`.
+      ![Prometheus queries](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/metrics-prometheus-ui-query-example.png)
 
 ### What to do next
 

@@ -8,7 +8,7 @@ You can apply changes at any point — you do not need to complete all configura
 
 ## Procedure
 
-1.  Apply the updated configuration.
+1. Apply the updated configuration.
 **OpenShift — CLI:**
 
 ```
@@ -32,7 +32,7 @@ $ sudo systemctl start portal.service
 Note:
 The `daemon-reload` and `stop/rm/start` sequence is required when Podman secrets have been added or changed. If you only changed `app-config.production.yaml` without modifying secrets, `sudo systemctl restart portal` is sufficient.
 
-2.  Verify that the service is running.
+2. Verify that the service is running.
 **OpenShift — CLI:**
 
 ```

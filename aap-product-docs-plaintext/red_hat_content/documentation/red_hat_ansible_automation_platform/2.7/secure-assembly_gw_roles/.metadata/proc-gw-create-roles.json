@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_roles#proc-gw-create-roles",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_roles",
-  "title": "Create a role"
+  "title": "Create a role",
+  "url_reachable": true
 }

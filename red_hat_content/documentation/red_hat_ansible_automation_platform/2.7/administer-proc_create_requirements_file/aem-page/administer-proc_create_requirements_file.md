@@ -1,7 +1,7 @@
 +++
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_create_requirements_file"
-title = "Create a requirements file - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
+title = "Create a requirements file - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-manage_your_organization_s_automation_content/", "Manage your organization's automation content"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-proc_create_requirements_file/aem-page/administer-proc_create_requirements_file.html"
 last_crumb = "Create a requirements file"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Create a requirements file"
 oversized = "false"
@@ -38,7 +39,7 @@ Requirements files are in YAML format and list the collections that you want to 
 
 ## Procedure
 
- Create your requirements file.
+Create your requirements file.
 
 In YAML format, collection information in your requirements file should contain the following information:
 
@@ -54,4 +55,4 @@ Be sure to specify the collection version number, otherwise you will sync all co
 
 ## What to do next
 
-To sync the collections in your requirements file, follow the steps in [Synchronizing content collections](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_create_synclist "You can sync certified and validated collections in Ansible automation hub from console.redhat.com.").
+To sync the collections in your requirements file, follow the steps in [Synchronizing content collections](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_create_synclist "You can sync certified and validated collections in Ansible Automation Platform from console.redhat.com.").

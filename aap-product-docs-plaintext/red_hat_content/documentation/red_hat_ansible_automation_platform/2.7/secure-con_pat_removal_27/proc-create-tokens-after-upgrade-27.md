@@ -5,7 +5,7 @@ Component-level tokens from automation controller, automation hub, or Event-Driv
 
 ### Procedure
 
-1.  Log in to the platform gateway UI.
-2.  Navigate to Access Management> (and then)Users> (and then)[your user]> (and then)Tokens.
-3.  Create new tokens as needed.
-4.  Update any scripts or integrations to use the new platform gateway tokens.
+1. Log in to the platform gateway UI.
+2. Navigate to Access Management> (and then)Users> (and then)[your user]> (and then)Tokens.
+3. Create new tokens as needed.
+4. Update any scripts or integrations to use the new platform gateway tokens.

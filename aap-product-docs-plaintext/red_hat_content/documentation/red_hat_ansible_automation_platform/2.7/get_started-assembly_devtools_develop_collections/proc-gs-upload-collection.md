@@ -19,12 +19,12 @@ You can upload your collection by using either the automation hub user interface
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Content> (and then)Namespaces.
-2.  Within the My namespaces tab, locate and click into the namespace to which you want to upload a collection.
-3.  Select the **Collections** tab, and then click Upload collection.
-4.  In the New collection modal, click **Select file**. Locate the file on your system.
-5.  Click Upload.
-6.  Optional: you can also upload from the command line. Using the `ansible-galaxy` client, enter the following command:
+1. From the navigation panel, select Automation Content> (and then)Namespaces.
+2. Within the My namespaces tab, locate and click into the namespace to which you want to upload a collection.
+3. Select the **Collections** tab, and then click Upload collection.
+4. In the New collection modal, click **Select file**. Locate the file on your system.
+5. Click Upload.
+6. Optional: you can also upload from the command line. Using the `ansible-galaxy` client, enter the following command:
 
 
 ```bash

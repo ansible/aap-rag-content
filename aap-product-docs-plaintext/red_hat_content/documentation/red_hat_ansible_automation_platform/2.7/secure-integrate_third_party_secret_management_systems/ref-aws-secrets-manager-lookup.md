@@ -1,7 +1,8 @@
 # Integrate third-party secret management systems
 ## AWS Secrets Manager lookup
 
-This plugin enables Amazon Web Services to be used as a credential input source to pull secrets from the Amazon Web Services Secrets Manager. The AWS Secrets Manager provides similar service to Microsoft Azure Key Vault, and the AWS collection provides a lookup plugin for it.
+This plugin enables Amazon Web Services to be used as a credential input source to pull secrets from the Amazon Web Services Secrets Manager.
+The AWS Secrets Manager provides similar service to Microsoft Azure Key Vault, and the AWS collection provides a lookup plugin for it.
 
 When AWS Secrets Manager lookup is selected for **Credential type**, give the following metadata to configure your lookup:
 

@@ -18,4 +18,3 @@ With OAuth 2 you can use tokens to share data with an application without disclo
 You can create an application that is representative of the external application you are integrating with, then use it to create tokens for the application to use on behalf of its users.
 
 Associate these tokens with an application resource to manage all tokens issued for a particular application. By separating the issue of tokens under **OAuth Applications**, you can revoke all tokens based on the application without having to revoke all tokens in the system.
-

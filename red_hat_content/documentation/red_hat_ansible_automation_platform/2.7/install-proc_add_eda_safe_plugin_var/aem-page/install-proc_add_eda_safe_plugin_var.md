@@ -1,6 +1,6 @@
 +++
-template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_add_eda_safe_plugin_var"
+template = "docs/aem-title.html"
 title = "Add a safe plugin variable to Event-Driven Ansible controller - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_add_eda_safe_plugin_var/aem-page/install-proc_add_eda_safe_plugin_var.html"
 last_crumb = "Add a safe plugin variable to Event-Driven Ansible controller"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Add a safe plugin variable to Event-Driven Ansible controller"
 oversized = "false"
@@ -31,15 +32,15 @@ When using the `redhat.insights_eda` plugin for rulebook activations, add a safe
 
 ## Procedure
 
-1.  Create a directory for the safe plugin variable:
+1. Create a directory for the safe plugin variable:
   
 
 ```
 mkdir -p ./group_vars/automationeda
 ```
 
-2.  Create a file within that directory for your new setting (for example, `touch ./group_vars/automationeda/custom.yml`)
-3.  Add the variable `eda_safe_plugins` with a list of plugins to enable. For example:
+2. Create a file within that directory for your new setting (for example, `touch ./group_vars/automationeda/custom.yml`)
+3. Add the variable `eda_safe_plugins` with a list of plugins to enable. For example:
   
 
 ```

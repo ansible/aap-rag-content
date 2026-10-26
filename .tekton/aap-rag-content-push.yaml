@@ -16,6 +16,21 @@ metadata:
   name: aap-rag-content-on-push
   namespace: ansible-lightspeed-tenant
 spec:
+  timeouts:
+    pipeline: "4h30m"
+    tasks: "4h"
+    finally: "30m"
+  # Override buildah-oci-ta's ~4Gi default; embedding needs more RAM.
+  taskRunSpecs:
+    - pipelineTaskName: build-container
+      stepSpecs:
+        - name: build
+          computeResources:
+            requests:
+              cpu: "4"
+              memory: 8Gi
+            limits:
+              memory: 8Gi
   params:
   - name: git-url
     value: '{{source_url}}'

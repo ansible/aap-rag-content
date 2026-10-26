@@ -1,7 +1,7 @@
 +++
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_manage_active_rulebook_activations"
-template = "docs/aem-title.html"
 title = "Manage active event-driven automation integrations - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_manage_active_rulebook_activations"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_user_guide_overview/", "Trigger automation from events with Event-Driven Ansible"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_manage_active_rulebook_activations/aem-page/administer-assembly_eda_manage_active_rulebook_activations.html"
 last_crumb = "Manage active event-driven automation integrations"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Manage active event-driven automation integrations"
 oversized = "false"
@@ -35,9 +36,9 @@ Toggle the state of an activation to start or stop event processing instantly, a
 
 ### Procedure
 
-1.  Select the switch on the row level to enable or disable your chosen rulebook.
-2.  In the window, select Yes, I confirm that I want to enable/disable these X rulebook activations.
-3.  Select Enable/Disable rulebook activation.
+1. Select the switch on the row level to enable or disable your chosen rulebook.
+2. In the window, select Yes, I confirm that I want to enable/disable these X rulebook activations.
+3. Select Enable/Disable rulebook activation.
 
 ## Restart rulebook activations
 
@@ -51,10 +52,10 @@ You can only restart a rulebook activation if it is currently enabled and the re
 
 ### Procedure
 
-1.  Select the More Actions icon **⋮** next to **Rulebook Activation enabled/disabled** toggle.
-2.  Select Restart rulebook activation.
-3.  In the window, select Yes, I confirm that I want to restart these X rulebook activations.
-4.  Select Restart rulebook activations.
+1. Select the More Actions icon **⋮** next to **Rulebook Activation enabled/disabled** toggle.
+2. Select Restart rulebook activation.
+3. In the window, select Yes, I confirm that I want to restart these X rulebook activations.
+4. Select Restart rulebook activations.
 
 ## Edit a rulebook activation
 
@@ -62,16 +63,16 @@ Update a rulebook activation’s settings after deployment to adjust parameters,
 
 ### Procedure
 
-1.  On the Rulebook Activations page, next to the activation you want to edit, toggle the Rulebook Activation enabled button to the off position first to disable the activation. The **Disable rulebook activations** message is displayed asking you to confirm that you want to disable the activation.
+1. On the Rulebook Activations page, next to the activation you want to edit, toggle the Rulebook Activation enabled button to the off position first to disable the activation. The **Disable rulebook activations** message is displayed asking you to confirm that you want to disable the activation.
 
-2.  Select the **Yes, I confirm that I want to disable these <1> rulebook activations** checkbox and click Disable rulebook activations.
-3.  Next to the rulebook activation, click the **Edit** icon. This takes you to the Edit form. Note:
+2. Select the **Yes, I confirm that I want to disable these <1> rulebook activations** checkbox and click Disable rulebook activations.
+3. Next to the rulebook activation, click the **Edit** icon. This takes you to the Edit form. Note:
       You can also access the **Edit** feature by clicking the rulebook activation on the Rulebook Activations page, toggling the Rulebook activation enabled button to the off position, confirming that you want to disable the activation, and clicking the Edit rulebook activation button on the top right of the page to access the Edit form.
 
-4.  Edit the desired fields. Note:
+4. Edit the desired fields. Note:
       If you prefer to run your activation immediately, you can toggle the Rulebook activation enabled button to the on position, and then save your changes.
 
-5.  Click Save rulebook activation.
+5. Click Save rulebook activation.
 
 ### Results
 
@@ -83,7 +84,7 @@ End and permanently remove a rulebook activation and its configuration when its 
 
 ### Procedure
 
-1.  Select the More Actions icon **⋮** next to the **Rulebook Activation enabled/disabled** toggle.
-2.  Select Delete rulebook activation.
-3.  In the window, select Yes, I confirm that I want to delete these X rulebook activations.
-4.  Select Delete rulebook activations.
+1. Select the More Actions icon **⋮** next to the **Rulebook Activation enabled/disabled** toggle.
+2. Select Delete rulebook activation.
+3. In the window, select Yes, I confirm that I want to delete these X rulebook activations.
+4. Select Delete rulebook activations.

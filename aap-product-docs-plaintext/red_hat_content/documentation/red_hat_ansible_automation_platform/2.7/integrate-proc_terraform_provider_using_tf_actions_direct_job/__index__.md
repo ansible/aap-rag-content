@@ -20,8 +20,8 @@ This method can be useful when you want to execute Ansible automation against ne
 
 ## Procedure
 
-1.  Define the `aap_job_launch` action in your `*.tf` file.
-2.  Add a lifecycle job block to define which action will be invoked during the proper lifecycle event trigger.  **Example**
+1. Define the `aap_job_launch` action in your `*.tf` file.
+2. Add a lifecycle job block to define which action will be invoked during the proper lifecycle event trigger.  **Example**
 
 ```
 terraform {
@@ -130,8 +130,8 @@ wait_for_completion = true
 }
 ```
 
-3.  (Required) Change the job template name and the inventory name in this example to your corresponding variables.
-4.  (Optional) You can set `owners` to the Red Hat RHEL image ID so that the latest image is used each time the job runs.
-5.  (Optional) Set additional parameters as needed. For example, you can set `wait_for_completion` to `true`, then Terraform will wait until this job is created and reaches any final state before continuing. You can also set `wait_for_completion_timeout_seconds` to control the timeout limit.
-6.  Update and commit the Terraform code.
-7.  Execute the Terraform plan and apply it.
+3. (Required) Change the job template name and the inventory name in this example to your corresponding variables.
+4. (Optional) You can set `owners` to the Red Hat RHEL image ID so that the latest image is used each time the job runs.
+5. (Optional) Set additional parameters as needed. For example, you can set `wait_for_completion` to `true`, then Terraform will wait until this job is created and reaches any final state before continuing. You can also set `wait_for_completion_timeout_seconds` to control the timeout limit.
+6. Update and commit the Terraform code.
+7. Execute the Terraform plan and apply it.

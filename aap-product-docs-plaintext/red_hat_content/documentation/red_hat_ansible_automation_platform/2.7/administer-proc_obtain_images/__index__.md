@@ -1,4 +1,4 @@
-# Pull execution environments for use in automation hub
+# Pull execution environments for use in Ansible Automation Platform
 
 Before you can push execution environments to your private automation hub, you must first pull them from an existing registry and tag them for use.
 
@@ -12,14 +12,14 @@ The following example details how to pull an execution environment from the Red 
 
 ## Procedure
 
-1.  Log in to Podman with your `registry.redhat.io` credentials:
+1. Log in to Podman with your `registry.redhat.io` credentials:
 
 
 ```
 $ podman login registry.redhat.io
 ```
 
-2.  Pull an execution environment:
+2. Pull an execution environment:
 
 
 ```

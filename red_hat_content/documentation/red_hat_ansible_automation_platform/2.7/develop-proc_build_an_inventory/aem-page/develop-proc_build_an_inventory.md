@@ -4,13 +4,14 @@ path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-pro
 title = "Define which hosts to manage in an inventory file - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-assembly_intro_to_playbooks_1/", "Get started automating with playbooks"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-assembly_intro_to_playbooks/", "Get started automating with playbooks"]]
 category = "Develop"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_build_an_inventory/aem-page/develop-proc_build_an_inventory.html"
 last_crumb = "Define which hosts to manage in an inventory file"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Define which hosts to manage in an inventory file"
 oversized = "false"
@@ -36,8 +37,8 @@ Inventories organize managed nodes in centralized files that provide Ansible wit
 
 ## Procedure
 
-1.  Create a file named `inventory.ini` in the `ansible_quickstart` directory that you created.
-2.  Add a new `[myhosts]` group to the inventory.ini file and specify the IP address or fully qualified domain name (FQDN) of each host system.
+1. Create a file named `inventory.ini` in the `ansible_quickstart` directory that you created.
+2. Add a new `[myhosts]` group to the inventory.ini file and specify the IP address or fully qualified domain name (FQDN) of each host system.
 
 ```
 [myhosts]
@@ -46,10 +47,10 @@ Inventories organize managed nodes in centralized files that provide Ansible wit
 192.0.2.52
 ```
 
-3.  Verify your inventory, using:
+3. Verify your inventory, using:
        `ansible-inventory -i inventory.ini --list`
 
-4.  Ping the `myhosts` group in your inventory, using:
+4. Ping the `myhosts` group in your inventory, using:
       'ansible myhosts -m ping -i inventory.ini`
 
     Pass the `-u` option with the Ansible command if the username is different on the control node and the managed node(s).
@@ -82,7 +83,9 @@ Inventories organize managed nodes in centralized files that provide Ansible wit
 
 ## Inventories in INI or YAML format
 
-You can create inventories by using either INI files or in YAML. In most cases, such as the preceding example, INI files are straightforward and easy to read for a small number of managed nodes. Creating an inventory in YAML format becomes a sensible option as the number of managed nodes increases.
+You can create inventories by using either INI files or in YAML.
+In most cases, such as the preceding example, INI files are straightforward and easy to read for a small number of managed nodes.
+Creating an inventory in YAML format becomes a sensible option as the number of managed nodes increases.
 
 The following is the same as `inventory.ini` that declares unique names for managed nodes and uses the `ansible_host` field:
 
@@ -126,7 +129,8 @@ metagroupname:
   children:
 ```
 
-The following inventory illustrates a basic structure for a data center. This example inventory has a network metagroup that includes all network devices and a data center metagroup that includes the network group and all webservers.
+The following inventory illustrates a basic structure for a data center.
+This example inventory has a network metagroup that includes all network devices and a data center metagroup that includes the network group and all webservers.
 
 ```
 leafs:

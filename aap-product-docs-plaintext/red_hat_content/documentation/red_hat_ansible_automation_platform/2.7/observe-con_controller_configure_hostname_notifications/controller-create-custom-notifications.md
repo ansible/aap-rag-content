@@ -7,37 +7,45 @@ You can [customize the text content](/documentation/en-us/red_hat_ansible_automa
 
 ### Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Administration> (and then)Notifiers.
-2.  Click Create notifier.
-3.  Choose a notification type from the **Type** list.
-4.  Enable **Customize messages** by using the toggle.
+1. From the navigation panel, select Automation Execution> (and then)Administration> (and then)Notifiers.
+2. Click Create notifier.
+3. Choose a notification type from the **Type** list.
+4. Enable **Customize messages** by using the toggle.
+
 ![Customize notification](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-notification-template-customize.png)
-5.  You can provide a custom message for various job events, such as the following:
+5. You can provide a custom message for various job events, such as the following:
 
--  **Start message body**
+- **Start message body**
 
--  **success message body**
+- **success message body**
 
--  **Error message body**
+- **Error message body**
 
--  **Workflow approved body**
+- **Workflow approved body**
 
--  **Workflow denied message body**
+- **Workflow denied message body**
 
--  **Workflow pending message body**
+- **Workflow pending message body**
 
--  **Workflow timed out message body** The message forms vary depending on the type of notification that you are configuring. For example, messages for Email and PagerDuty notifications appear to be a typical email, with a body and a subject, in which case, automation controller displays the fields as **Message** and **Message Body**. Other notification types only expect a **Message** for each type of event.
+- **Workflow timed out message body**         The message forms vary depending on the type of notification that you are configuring.
+For example, messages for Email and PagerDuty notifications appear to be a typical email, with a body and a subject, in which case, automation controller displays the fields as **Message** and **Message Body**.
+Other notification types only expect a **Message** for each type of event.
 
-The **Message** fields are pre-populated with a template containing a top-level variable, `job` coupled with an attribute, such as `id` or `name`. Templates are enclosed in curly brackets and can draw from a fixed set of fields provided by automation controller, shown in the pre-populated message fields:
+The **Message** fields are pre-populated with a template containing a top-level variable, `job` coupled with an attribute, such as `id` or `name`.
+Templates are enclosed in curly brackets and can draw from a fixed set of fields provided by automation controller, shown in the pre-populated message fields:
 
-This pre-populated field suggests commonly displayed messages to a recipient who is notified of an event. You can customize these messages with different criteria by adding your own attributes for the job as needed. Custom notification messages are rendered using Jinja; the same templating engine used by Ansible playbooks.
+This pre-populated field suggests commonly displayed messages to a recipient who is notified of an event.
+You can customize these messages with different criteria by adding your own attributes for the job as needed.
+Custom notification messages are rendered using Jinja; the same templating engine used by Ansible playbooks.
 
 Messages and message bodies have different types of content, as the following points outline:
 
-- Messages are always just strings, one-liners only. New lines are not supported.
+- Messages are always just strings, one-liners only.
+New lines are not supported.
 
 - Message bodies are either a dictionary or a block of text:
-* The message body for Webhooks and PagerDuty uses dictionary definitions. The default message body for these is `{{ job_metadata }}`, you can either leave that as it is or provide your own dictionary.
+* The message body for Webhooks and PagerDuty uses dictionary definitions.
+The default message body for these is `{{ job_metadata }}`, you can either leave that as it is or provide your own dictionary.
 
 * The message body for email uses a block of text or a multi-line string. The default message body is:
 
@@ -45,7 +53,9 @@ Messages and message bodies have different types of content, as the following po
 {{ job_friendly_name }} #{{ job.id }} had status {{ job.status }}, view details at {{ url }} {{ job_metadata }}
 ```
 
-You can edit this text leaving `{{ job_metadata }}` in, or drop `{{ job_metadata }}`. Since the body is a block of text, it can be any string you want. `{{ job_metadata }}` is rendered as a dictionary containing fields that describe the job being executed. In all cases, `{{ job_metadata }}` includes the following fields:
+You can edit this text leaving `{{ job_metadata }}` in, or drop `{{ job_metadata }}`.
+Since the body is a block of text, it can be any string you want. `{{ job_metadata }}` is rendered as a dictionary containing fields that describe the job being executed.
+In all cases, `{{ job_metadata }}` includes the following fields:
 
 + `id`
 
@@ -61,7 +71,8 @@ You can edit this text leaving `{{ job_metadata }}` in, or drop `{{ job_metadata
 
 + `status`
 
-+ `traceback`                 You cannot query individual fields within `{{ job_metadata }}`. When you use `{{ job_metadata }}` in a notification template, all data is returned.
++ `traceback`                 You cannot query individual fields within `{{ job_metadata }}`.
+When you use `{{ job_metadata }}` in a notification template, all data is returned.
 
 The resulting dictionary looks like the following:
 
@@ -114,7 +125,8 @@ If `{{ job_metadata }}` is rendered in a job, it includes the following addition
 
 If `{{ job_metadata }}` is rendered in a workflow job, it includes the following additional field:
 
-+ `body` (This enumerates the nodes in the workflow job and includes a description of the job associated with each node)                 The resulting dictionary is similar to the following:
++ `body` (This enumerates the nodes in the workflow job and includes a description of the job associated with each node)
+The resulting dictionary is similar to the following:
 
 ```
 {"id": 14,
@@ -133,7 +145,8 @@ node #3 spawns job #17, \"Deploy Fleet\", which finished with status successful.
 }
 ```
 
-If you create a notification template that uses invalid syntax or references unusable fields, an error message displays indicating the nature of the error. If you delete a notification’s custom message, the default message is shown in its place.
+If you create a notification template that uses invalid syntax or references unusable fields, an error message displays indicating the nature of the error.
+If you delete a notification’s custom message, the default message is shown in its place.
 
 Important:
 If you save the notifications template without editing the custom message (or edit and revert back to the default values), the **Details** screen assumes the defaults and does not display the custom message tables. If you edit and save any of the values, the entire table displays in the **Details** screen.

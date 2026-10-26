@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/administer-assembly_planning_mesh#defining-node-types___peer_connections",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_planning_mesh",
-  "title": "Peer connections"
+  "title": "Peer connections",
+  "url_reachable": true
 }

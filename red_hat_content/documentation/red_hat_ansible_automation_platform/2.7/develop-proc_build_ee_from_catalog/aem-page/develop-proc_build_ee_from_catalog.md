@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_build_ee_from_catalog/aem-page/develop-proc_build_ee_from_catalog.html"
 last_crumb = "Build an execution environment image from the catalog"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Build an execution environment image from the catalog"
 oversized = "false"
@@ -37,8 +38,8 @@ Trigger a container image build on an existing execution environment definition 
 
 ## Procedure
 
-1.  From the execution environment catalog or definition detail page, click **Build**.
-2.  In the build dialog, configure the following settings:
+1. From the execution environment catalog or definition detail page, click **Build**.
+2. In the build dialog, configure the following settings:
 
   - **Registry** -- private automation hub or a custom registry URL.
 
@@ -48,5 +49,5 @@ Trigger a container image build on an existing execution environment definition 
 
   - **Verify TLS certificates**. Clear this checkbox if the target registry's TLS certificates are not trusted by the CI runner executing the build.
 
-3.  Click **Build**.
-4.  Monitor the build from the **Actions** tab (GitHub) or the CI/CD Pipelines page (GitLab) on the repository where the definition was saved.
+3. Click **Build**.
+4. Monitor the build from the **Actions** tab (GitHub) or the CI/CD Pipelines page (GitLab) on the repository where the definition was saved.

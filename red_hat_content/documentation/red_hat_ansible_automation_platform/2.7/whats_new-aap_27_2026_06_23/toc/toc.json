@@ -1,0 +1,23 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Ansible Automation Platform 2.7 Release Notes - June 23, 2026 (2.7-2)",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "CVE",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-623a27d0-0ac9-435a-a44e-5bacb9dd2f86___cve",
+          "anchor": null,
+          "singlePageAnchor": "GUID-623a27d0-0ac9-435a-a44e-5bacb9dd2f86___cve"
+        }
+      ]
+    }
+  ]
+}

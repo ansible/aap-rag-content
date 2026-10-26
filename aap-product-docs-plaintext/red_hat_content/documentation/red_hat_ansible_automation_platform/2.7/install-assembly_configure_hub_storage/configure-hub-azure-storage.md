@@ -5,8 +5,8 @@ Azure Blob storage is a type of object storage that is supported in containerize
 
 ### Procedure
 
-1.  Ensure your Azure container exists before proceeding with the installation.
-2.  Add the following variables to your inventory file under the `[all:vars]` group to configure Azure Blob storage:
+1. Ensure your Azure container exists before proceeding with the installation.
+2. Add the following variables to your inventory file under the `[all:vars]` group to configure Azure Blob storage:
 
 
 ```
@@ -17,7 +17,7 @@ hub_azure_account_name=<account_name>
 hub_azure_container=<container_name>
 ```
 
-3.  Optional: You can pass extra parameters to the Azure Blob storage backend by using the `hub_azure_extra_settings` variable. For example:
+3. Optional: You can pass extra parameters to the Azure Blob storage backend by using the `hub_azure_extra_settings` variable. For example:
 
 
 ```

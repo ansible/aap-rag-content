@@ -1,7 +1,7 @@
 +++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_controller_api_oauth2_token"
 template = "docs/aem-title.html"
 title = "OAuth 2 token authentication - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_controller_api_oauth2_token"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_api_auth_methods/", "Authenticate through the API"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_controller_api_oauth2_token/aem-page/secure-con_controller_api_oauth2_token.html"
 last_crumb = "OAuth 2 token authentication"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "OAuth 2 token authentication"
 oversized = "false"
@@ -42,7 +43,7 @@ You can create an OAuth 2 token in the API or in the Access Management> (and the
 
 For the purpose of this example, use the PAT method for creating a token in the API. After you create it, you can set the scope.
 
- Note:
+Note:
 
 You can configure the expiration time of the token system-wide..
 
@@ -85,6 +86,6 @@ By default, external users such as those created by single sign-on are not able 
 
 ### Procedure
 
-1.  From the navigation panel, select Settings> (and then)Platform gateway.
-2.  Select Edit platform gateway settings.
-3.  Enable the option to **Allow external users to create OAuth2 tokens**.
+1. From the navigation panel, select Settings> (and then)Platform gateway.
+2. Select Edit platform gateway settings.
+3. Enable the option to **Allow external users to create OAuth2 tokens**.

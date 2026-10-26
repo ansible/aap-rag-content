@@ -9,7 +9,7 @@ For each plug-in, you need the HTTP URL to the `.tgz` file in the registry and t
 
 ### Procedure
 
-1.  Add the plug-ins to your dynamic plug-ins configuration. Replace `<x.y.z>` with the correct plug-in version. Use the SHA-512 hash from the corresponding `.integrity` file for each `integrity` value.
+1. Add the plug-ins to your dynamic plug-ins configuration. Replace `<x.y.z>` with the correct plug-in version. Use the SHA-512 hash from the corresponding `.integrity` file for each `integrity` value.
 **Operator installation**
 
 Add the plug-ins to your dynamic plug-ins ConfigMap (for example, `rhaap-dynamic-plugins-config`).
@@ -53,7 +53,8 @@ Reference this ConfigMap in your `Backstage` CR under `spec.application.dynamicP
 
 **Helm chart installation**
 
-In the OpenShift Container Platform Developer UI, navigate to **Helm** > **developer-hub** > **Actions** > **Upgrade** > **Yaml view**. Add the plug-ins under the `global.dynamic.plugins` section.
+In the OpenShift Container Platform Developer UI, navigate to **Helm** > **developer-hub** > **Actions** > **Upgrade** > **Yaml view**.
+Add the plug-ins under the `global.dynamic.plugins` section.
 
 ```yaml
 global:
@@ -85,7 +86,7 @@ backend:
 ansible.plugin-scaffolder-backend-module-backstage-rhaap: null
 ```
 
-2.  Apply the changes. For Helm deployments, click **Upgrade**. The Developer Hub pods restart and the plug-ins are installed.
+2. Apply the changes. For Helm deployments, click **Upgrade**. The Developer Hub pods restart and the plug-ins are installed.
 
 ### Results
 

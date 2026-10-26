@@ -1,16 +1,17 @@
 +++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_configure_red_hat_ai_providers_in_the_ansible_vs_code_extension"
 template = "docs/aem-title.html"
 title = "Configure Red Hat AI providers in the Ansible VS Code extension - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_configure_red_hat_ai_providers_in_the_ansible_vs_code_extension"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_devtools_install/", "Install Ansible development tools"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_devtools_install/", "Set up your development environment"]]
 category = "Install"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-proc_configure_red_hat_ai_providers_in_the_ansible_vs_code_extension/aem-page/install-proc_configure_red_hat_ai_providers_in_the_ansible_vs_code_extension.html"
 last_crumb = "Configure Red Hat AI providers in the Ansible VS Code extension"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure Red Hat AI providers in the Ansible VS Code extension"
 oversized = "false"
@@ -43,17 +44,17 @@ This integration enables you to use the "Bring Your Own LLM" (BYOLLM) capability
 
 ## Procedure
 
-1.  In Visual Studio Code, open the LLM provider settings:
-  1.  In the Activity Bar, select the **Ansible** icon to open the Ansible Development Tools panel.
-  2.  In the **GENERATIVE AI** section, select the settings icon (cog) to open the LLM provider configuration.
-2.  In the **API Endpoint URL** field, enter the full address of your RHEL AI or OpenShift AI instance.
-3.  In the **Model Name/ID** field, enter the specific identifier for the model you want to use (for example, `granite-13b-chat-v2`).
-4.  In the **API Key** field, enter the credentials required to authenticate with your infrastructure.
+1. In Visual Studio Code, open the LLM provider settings:
+  1. In the Activity Bar, select the **Ansible** icon to open the Ansible Development Tools panel.
+  2. In the **GENERATIVE AI** section, select the settings icon (cog) to open the LLM provider configuration.
+2. In the **API Endpoint URL** field, enter the full address of your RHEL AI or OpenShift AI instance.
+3. In the **Model Name/ID** field, enter the specific identifier for the model you want to use (for example, `granite-13b-chat-v2`).
+4. In the **API Key** field, enter the credentials required to authenticate with your infrastructure.
   
   Note:
       The extension connects directly to the provider endpoint. It does not require the `c.ai.ansible.redhat.com` middleware or Red Hat authentication to enable this feature.
 
-5.  Ensure that the Red Hat AI provider is selected as the active provider.
+5. Ensure that the Red Hat AI provider is selected as the active provider.
   
   Important:
       Only one provider can be active at a time. If you switch between providers, ensure you select the correct provider in the LLM provider configuration to enable the corresponding features.

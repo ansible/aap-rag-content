@@ -1,11 +1,15 @@
 # How job capacity is determined and impacts job runs
 ## CPU relative capacity
 
-automation controller uses the `cpu_capacity` algorithm to determine the relative CPU capacity of managed nodes. This information is used to optimize the distribution of tasks across the available nodes.
+automation controller uses the `cpu_capacity` algorithm to determine the relative CPU capacity of managed nodes.
+This information is used to optimize the distribution of tasks across the available nodes.
 
-Ansible workloads are often processor-bound. In such cases, you can reduce the simultaneous workload to enable more tasks to run faster and reduce the average time-to-completion of those jobs.
+Ansible workloads are often processor-bound.
+In such cases, you can reduce the simultaneous workload to enable more tasks to run faster and reduce the average time-to-completion of those jobs.
 
-Just as the `mem_capacity` algorithm adjusts the amount of memory required per fork, the `cpu_capacity` algorithm adjusts the amount of processing resources required per fork. The baseline value for this is four forks per core. The algorithm formula for this is:
+Just as the `mem_capacity` algorithm adjusts the amount of memory required per fork, the `cpu_capacity` algorithm adjusts the amount of processing resources required per fork.
+The baseline value for this is four forks per core.
+The algorithm formula for this is:
 
 ```
 cpus * fork_per_cpu

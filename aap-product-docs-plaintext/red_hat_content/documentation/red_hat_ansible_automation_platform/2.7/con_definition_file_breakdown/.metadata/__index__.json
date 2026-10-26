@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/con_definition_file_breakdown",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_definition_file_breakdown",
-  "title": "Definition file reference"
+  "title": "Definition file reference",
+  "url_reachable": false
 }

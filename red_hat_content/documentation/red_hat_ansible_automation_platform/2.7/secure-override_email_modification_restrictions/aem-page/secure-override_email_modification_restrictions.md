@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-override_email_modification_restrictions/aem-page/secure-override_email_modification_restrictions.html"
 last_crumb = "Override email modification restrictions"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Override email modification restrictions"
 oversized = "false"
@@ -41,7 +42,7 @@ Each component manages its own settings independently. Apply the setting to each
 
 ## Procedure
 
- Configure the setting for your deployment type:
+Configure the setting for your deployment type:
 
 - **RPM deployments**: Create or edit the override file for the relevant component, then restart its service:
   * automation controller: /etc/tower/conf.d/custom.py
@@ -55,7 +56,7 @@ Each component manages its own settings independently. Apply the setting to each
   * `eda_extra_settings` — Event-Driven Ansible
   * `hub_extra_settings` — automation hub
 
-     Use the following format:
+    Use the following format:
 
 ```
 controller_extra_settings:
@@ -72,4 +73,4 @@ spec:
       value: "true"
 ```
 
-     The operator writes these settings into a ConfigMap and mounts it as a settings file inside the pod. The platform applies changes automatically after you update the custom resource.
+    The operator writes these settings into a ConfigMap and mounts it as a settings file inside the pod. The platform applies changes automatically after you update the custom resource.

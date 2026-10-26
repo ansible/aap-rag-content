@@ -1,6 +1,7 @@
 # How do Ansible Playbooks work
 
-Ansible Playbooks are lists of tasks that run automatically for your specified inventory or groups of hosts. One or more Ansible tasks can be combined to make a play, that is, an ordered grouping of tasks mapped to specific hosts.
+Ansible Playbooks are lists of tasks that run automatically for your specified inventory or groups of hosts.
+One or more Ansible tasks can be combined to make a play, that is, an ordered grouping of tasks mapped to specific hosts.
 
 Tasks are executed in the order in which they are written.
 
@@ -29,7 +30,10 @@ Roles are a way to make code in playbooks reusable by putting the functionality 
 Module
 A unit of code or binary that Ansible runs on managed nodes.
 
-Ansible modules are grouped in collections with a *Fully Qualified Collection Name* (FQCN) for each module. Tasks are executed by modules, each of which performs a specific task in a playbook. A module contains metadata that determines when and where a task is executed, and which user executes it. There are thousands of Ansible modules that perform all kinds of IT tasks, such as:
+Ansible modules are grouped in collections with a *Fully Qualified Collection Name* (FQCN) for each module.
+Tasks are executed by modules, each of which performs a specific task in a playbook.
+A module contains metadata that determines when and where a task is executed, and which user executes it.
+There are thousands of Ansible modules that perform all kinds of IT tasks, such as:
 
 - Cloud management
 - User management

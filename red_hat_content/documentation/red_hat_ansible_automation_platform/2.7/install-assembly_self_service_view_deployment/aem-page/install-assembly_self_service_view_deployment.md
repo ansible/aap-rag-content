@@ -1,16 +1,17 @@
 +++
-template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_view_deployment"
 title = "Verify the configuration - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_view_deployment"
+template = "docs/aem-title.html"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_about/", "Install Ansible automation portal (OpenShift Container Platform only)"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-install_automation_portal_on_openshift_container_platform/", "Install automation portal on OpenShift Container Platform"]]
 category = "Install"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_view_deployment/aem-page/install-assembly_self_service_view_deployment.html"
 last_crumb = "Verify the configuration"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Verify the configuration"
 oversized = "false"
@@ -35,12 +36,12 @@ Inspect the `install-dynamic-plugins` init container logs to confirm that plug-i
 
 ### Procedure
 
-1.  In a browser, log in to your OpenShift instance.
-2.  In the **Developer** perspective, open the **Topology** view for the namespace where you deployed the chart.
-3.  Select the deployment named `<release-name>-rhaap-portal`.
-4.  Open the deployment pod logs.
-5.  In the pod details page, select the **Logs** tab.
-6.  From **Init containers**, select `install-dynamic-plugins`.
+1. In a browser, log in to your OpenShift instance.
+2. In the **Developer** perspective, open the **Topology** view for the namespace where you deployed the chart.
+3. Select the deployment named `<release-name>-rhaap-portal`.
+4. Open the deployment pod logs.
+5. In the pod details page, select the **Logs** tab.
+6. From **Init containers**, select `install-dynamic-plugins`.
       **Expected log output for OCI delivery (recommended)**
 
     When `pluginMode` is `oci`, successful installation resembles the following output:
@@ -65,4 +66,4 @@ Inspect the `install-dynamic-plugins` init container logs to confirm that plug-i
 
     The tarball file name includes the plug-in version from your bundle.
 
-7.  On the **Environment** tab, verify that environment variables from your Helm chart appear as expected.
+7. On the **Environment** tab, verify that environment variables from your Helm chart appear as expected.

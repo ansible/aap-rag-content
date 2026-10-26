@@ -1,7 +1,7 @@
 +++
 title = "Configure options for the Certified Cloud and Service Provider report (CCSPv2) - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-ref_report_types"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-ref_report_types"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_metrics_utility/", "Generate consumption-based billing reports with the metrics-utility"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/observe-ref_report_types/aem-page/observe-ref_report_types.html"
 last_crumb = "Configure options for the Certified Cloud and Service Provider report (CCSPv2)"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure options for the Certified Cloud and Service Provider report (CCSPv2)"
 oversized = "false"
@@ -45,13 +46,13 @@ Set the report type by using `METRICS_UTILITY_REPORT_TYPE=CCSPv2`.
 
 You can use the following optional collectors for the `gather` command:
 
--  `main_jobhostsummary`
+- `main_jobhostsummary`
   * If present by default, this incrementally collects data from the `main_jobhostsummary` table in the automation controller database, containing information about jobs runs and managed nodes automated.
--  `main_host`
+- `main_host`
   * This collects daily snapshots of the `main_host` table in the automation controller database and has managed nodes and hosts present across automation controller inventories.
--  `main_jobevent`
+- `main_jobevent`
   * This incrementally collects data from the `main_jobevent` table in the automation controller database and contains information about which modules, roles, and Ansible collections are being used.
--  `main_indirectmanagednodeaudit`
+- `main_indirectmanagednodeaudit`
   * This incrementally collects data from the `main_indirectmanagednodeaudit` table in the automation controller database and contains information about indirectly managed nodes.
 
 ```
@@ -124,13 +125,13 @@ When generating reports by using the metrics utility, you can filter the data by
 
 To filter your report so that only certain organizations are present, use this environment variable with a semicolon separated list of organization names.
 
- `export METRICS_UTILITY_ORGANIZATION_FILTER="Organization 1;Organization 2"`
+`export METRICS_UTILITY_ORGANIZATION_FILTER="Organization 1;Organization 2"`
 
 This renders only the data from these organizations in the built report. This filter currently does not have any effect on the following optional sheets:
 
--  `usage_by_collections`
--  `usage_by_roles`
--  `usage_by_modules`
+- `usage_by_collections`
+- `usage_by_roles`
+- `usage_by_modules`
 
 ### Select a date range for your CCSPv2 report
 

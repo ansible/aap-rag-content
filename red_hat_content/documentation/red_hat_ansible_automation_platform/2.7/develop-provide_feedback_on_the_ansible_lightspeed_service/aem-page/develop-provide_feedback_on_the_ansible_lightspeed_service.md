@@ -4,13 +4,14 @@ title = "Provide feedback on the Ansible Lightspeed service - Red Hat Ansible Au
 template = "docs/aem-title.html"
 
 [extra]
-breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_lightspeed_intro/", "Build automation faster with Red Hat Ansible Lightspeed"]]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_lightspeed_intro/", "Build automation faster with Red Hat Ansible Lightspeed code assistant"]]
 category = "Develop"
 category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-provide_feedback_on_the_ansible_lightspeed_service/aem-page/develop-provide_feedback_on_the_ansible_lightspeed_service.html"
 last_crumb = "Provide feedback on the Ansible Lightspeed service"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Provide feedback on the Ansible Lightspeed service"
 oversized = "false"
@@ -48,9 +49,9 @@ You can submit feedback through the following channels:
 
 ## Procedure
 
-1.  Open VS Code.
-2.  Click the **Lightspeed** entry in your status bar to see options.
-3.  In the **Tell us why** field, enter your feedback. Here, provide feedback about what results you were expecting to receive, compared to what results were generated and the training match.
-4.  Select the issue type: **Bug report**, **Feature request**, or **Suggestion feedback**.
-5.  Select the **I understand that feedback is shared with Red Hat and IBM** checkbox.
-6.  Click **Send**.
+1. Open VS Code.
+2. Click the **Lightspeed** entry in your status bar to see options.
+3. In the **Tell us why** field, enter your feedback. Here, provide feedback about what results you were expecting to receive, compared to what results were generated and the training match.
+4. Select the issue type: **Bug report**, **Feature request**, or **Suggestion feedback**.
+5. Select the **I understand that feedback is shared with Red Hat and IBM** checkbox.
+6. Click **Send**.

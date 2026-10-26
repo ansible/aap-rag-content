@@ -1,7 +1,7 @@
 +++
-template = "docs/aem-title.html"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_ug_controller_instance_groups"
 title = "Determine where automation runs with instance groups - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_ug_controller_instance_groups"
+template = "docs/aem-title.html"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-define_where_automation_runs_with_host_and_node_groupings/", "Define where automation runs with host and node groupings"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/administer-assembly_ug_controller_instance_groups/aem-page/administer-assembly_ug_controller_instance_groups.html"
 last_crumb = "Determine where automation runs with instance groups"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Determine where automation runs with instance groups"
 oversized = "false"
@@ -61,24 +62,22 @@ You can create instance groups with Automation controller to organize and manage
 
 ### About this task
 
-Use the following procedure to create a new instance group.
-
 ### Procedure
 
-1.  From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Instance Groups.
-2.  Click Create group and select **Create instance group** from the list.
-3.  Enter the appropriate details into the following fields:
+1. From the navigation panel, select Automation Execution> (and then)Infrastructure> (and then)Instance Groups.
+2. Click Create group and select **Create instance group** from the list.
+3. Enter the appropriate details into the following fields:
 
   - **Name**: Names must be unique and must not be named "controller".
   - **Policy instance minimum**: Enter the minimum number of instances to automatically assign to this group when new instances come online.
-  - **Policy instance percentage**: Use the slider to select a minimum percentage of instances to automatically assign to this group when new instances come online.  Note:
+  - **Policy instance percentage**: Use the slider to select a minimum percentage of instances to automatically assign to this group when new instances come online. Note:
             Policy instance fields are not required to create a new instance group. If you do not specify values, then the **Policy instance minimum** and **Policy instance percentage** default to 0.
 
   - **Max concurrent jobs**: Specify the maximum number of forks that can be run for any given job.
-  - **Max forks**: Specify the maximum number of concurrent jobs that can be run for any given job.  Note:
+  - **Max forks**: Specify the maximum number of concurrent jobs that can be run for any given job. Note:
             The default value of 0 for **Max concurrent jobs** and **Max forks** denotes no limit. For more information, see [Instance group capacity limits](/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_controller_configure_instance_groups#controller-instance-group-capacity "There is external business logic that can drive the need to limit the concurrency of jobs sent to an instance group, or the maximum number of forks to be consumed.").
 
-4.  Click Create instance group, or, if you have edited an existing Instance Group click Save instance group
+4. Click Create instance group, or, if you have edited an existing Instance Group click Save instance group
 
 ### What to do next
 
@@ -94,9 +93,9 @@ Learn how to associate instances to an instance group in automation controller.
 
 ### Procedure
 
-1.  Select the **Instances** tab on the **Details** page of an Instance Group.
-2.  Click Associate instance.
-3.  Click the checkbox next to one or more available instances from the list to select the instances you want to associate with the instance group and click Confirm
+1. Select the **Instances** tab on the **Details** page of an Instance Group.
+2. Click Associate instance.
+3. Click the checkbox next to one or more available instances from the list to select the instances you want to associate with the instance group and click Confirm
 
 ## View jobs associated with an instance group
 
@@ -104,8 +103,8 @@ You can view jobs associated with an instance group to monitor their status and 
 
 ### Procedure
 
-1.  Select the **Jobs** tab of the **Instance Group** window.
-2.  Click the arrow ![Arrow](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/arrow.png) icon next to a job to expand the view and show details about each job. Each job displays the following details:
+1. Select the **Jobs** tab of the **Instance Group** window.
+2. Click the arrow ![Arrow](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/arrow.png) icon next to a job to expand the view and show details about each job. Each job displays the following details:
 
   - The job status
   - The ID and name
@@ -140,7 +139,7 @@ This presents the following possibilities:
 
 2. An administrator can assign instance groups to organizations. This enables the administrator to segment out the entire infrastructure and guarantee that each organization has capacity to run jobs without interfering with any other organization’s ability to run jobs.
 
-     An administrator can assign multiple groups to each organization, similar to the following scenario:
+    An administrator can assign multiple groups to each organization, similar to the following scenario:
 
   - There are three instance groups: *A*, *B*, and *C*. There are two organizations: *Org1* and *Org2*.
   - The administrator assigns group *A* to *Org1*, group *B* to *Org2* and then assigns group *C* to both *Org1* and *Org2* as an overflow for any extra capacity that might be needed.

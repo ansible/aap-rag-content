@@ -7,14 +7,14 @@ The Ansible Automation Platform Operator manages multiple custom resources (CRs)
 
 ### Procedure
 
-1.  To see all available configuration parameters for a top-level CR, run:
+1. To see all available configuration parameters for a top-level CR, run:
 
 
 ```
 oc explain ansibleautomationplatform.spec
 ```
 
-2.  To view component-specific configuration options nested under the Ansible Automation Platform CR, query them through the component section:
+2. To view component-specific configuration options nested under the Ansible Automation Platform CR, query them through the component section:
 
 
 ```
@@ -24,7 +24,7 @@ oc explain ansibleautomationplatform.spec.hub.storage_type
 oc explain ansibleautomationplatform.spec.eda.automation_server_url
 ```
 
-3.  To explore all nested fields for a specific component, use the `--recursive` flag:
+3. To explore all nested fields for a specific component, use the `--recursive` flag:
 
 
 ```

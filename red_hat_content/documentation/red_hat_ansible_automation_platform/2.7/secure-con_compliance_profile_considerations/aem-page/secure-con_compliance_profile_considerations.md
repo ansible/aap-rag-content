@@ -1,7 +1,7 @@
 +++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_compliance_profile_considerations"
 template = "docs/aem-title.html"
 title = "Ensure compliance with host-level security controls - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_compliance_profile_considerations"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_hardening_aap/", "Harden the platform security posture"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_compliance_profile_considerations/aem-page/secure-con_compliance_profile_considerations.html"
 last_crumb = "Ensure compliance with host-level security controls"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Ensure compliance with host-level security controls"
 oversized = "false"
@@ -31,14 +32,18 @@ You can use Ansible Automation Platform to manage systems where security control
 
 In environments where these controls are required, discuss waiving the controls with your security auditor.
 
+Warning:
+
+For a containerized installation of Ansible Automation Platform 2.7 on Red Hat Enterprise Linux 9, set the host `umask` to `022` or `002` for the installation. With `umask 077`, the installation program can report success even though the `automation-controller-task` container fails to start with a `Permission denied` error. If the installation already completed with `umask 077`, set the host `umask` to `022` or `002` and run the installation program again. If your security policy requires `umask 077`, consult your security auditor before changing it.
+
 ## Fapolicyd
 
 Set the `fapolicyd` daemon to permissive mode before installing Ansible Automation Platform. This prevents the pre-flight checks from stopping your installation and avoids subsequent operational failures caused by enforcing policies.
 
 ### Procedure
 
-1.  Edit the file `/etc/fapolicyd/fapolicyd.conf` and set "permissive = 1".
-2.  Restart the service with the command
+1. Edit the file `/etc/fapolicyd/fapolicyd.conf` and set "permissive = 1".
+2. Restart the service with the command
        `sudo systemctl restart fapolicyd.service`
 
   Note:
@@ -54,12 +59,12 @@ To install Ansible Automation Platform, you must re-mount these file systems wit
 
 ### Procedure
 
-1.  Reapply the `noexec` option to the `/tmp` and `/var/tmp` file systems.
-2.  Change the automation controller job execution path from `/tmp` to an alternate directory that does not have the `noexec` option enabled.
-3.  To make this change, log in to the automation controller UI as an administrator, navigate to Settings and select **Jobs settings**.
-4.  Change the "Job execution path" setting to the alternate directory. During normal operations, the file system which contains the `/var/lib/awx` subdirectory (typically `/var`) must not be mounted with the `noexec` option, or the automation controller cannot run automation jobs in execution environments.
+1. Reapply the `noexec` option to the `/tmp` and `/var/tmp` file systems.
+2. Change the automation controller job execution path from `/tmp` to an alternate directory that does not have the `noexec` option enabled.
+3. To make this change, log in to the automation controller UI as an administrator, navigate to Settings and select **Jobs settings**.
+4. Change the "Job execution path" setting to the alternate directory. During normal operations, the file system which contains the `/var/lib/awx` subdirectory (typically `/var`) must not be mounted with the `noexec` option, or the automation controller cannot run automation jobs in execution environments.
 
-5.  In environments where STIG controls are routinely audited, discuss waiving the STIG controls related to file system `noexec` with your security auditor.
+5. In environments where STIG controls are routinely audited, discuss waiving the STIG controls related to file system `noexec` with your security auditor.
 
 ## User namespaces
 
@@ -71,11 +76,11 @@ To check the `user.max_user_namespaces` kernel setting, complete the following s
 
 ### Procedure
 
-1.  Log in to your automation controller at the command line.
-2.  Run the command `sudo sysctl user.max_user_namespaces`.
-3.  If the output indicates that the value is zero, look at the contents of the file `/etc/sysctl.conf` and all files under `/etc/sysctl.d/`, edit the file containing the `user.max_user_namespaces` setting, and set the value to "65535".
-4.  To apply this new value, run the command `sudo sysctl -p <file>`, where `<file>` is the file just modified.
-5.  Re-run the command `sudo sysctl user.max_user_namespaces` and verify that the value is now set to "65535".
+1. Log in to your automation controller at the command line.
+2. Run the command `sudo sysctl user.max_user_namespaces`.
+3. If the output indicates that the value is zero, look at the contents of the file `/etc/sysctl.conf` and all files under `/etc/sysctl.d/`, edit the file containing the `user.max_user_namespaces` setting, and set the value to "65535".
+4. To apply this new value, run the command `sudo sysctl -p <file>`, where `<file>` is the file just modified.
+5. Re-run the command `sudo sysctl user.max_user_namespaces` and verify that the value is now set to "65535".
 
 ## Interactive session timeout
 

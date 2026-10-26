@@ -8,33 +8,33 @@ Create an Ansible Automation Platform project that links to a source control rep
 
 **Input parameters**
 
-| Parameter            | Type        | Required | Description                                                                                   |
-| -------------------- | ----------- | -------- | --------------------------------------------------------------------------------------------- |
-| <br> `token`         | <br>string  | <br>Yes  | <br>OAuth2 token for Ansible Automation Platform authentication.                              |
-| <br> `deleteIfExist` | <br>boolean | <br>No   | <br>If `true`, the action deletes the project if it already exists before creating a new one. |
-| <br> `values`        | <br>object  | <br>Yes  | <br>The project configuration object. See the "values" Object Structure table.                |
+| Parameter       | Type    | Required | Description                                                                               |
+| --------------- | ------- | -------- | ----------------------------------------------------------------------------------------- |
+| `token`         | string  | Yes      | OAuth2 token for Ansible Automation Platform authentication.                              |
+| `deleteIfExist` | boolean | No       | If `true`, the action deletes the project if it already exists before creating a new one. |
+| `values`        | object  | Yes      | The project configuration object. See the "values" Object Structure table.                |
 
 **“values” Object Structure**
 
-| Field                     | Type        | Required | Description                                                                                                   |
-| ------------------------- | ----------- | -------- | ------------------------------------------------------------------------------------------------------------- |
-| <br> `projectName`        | <br>string  | <br>Yes  | <br>Name of the project.                                                                                      |
-| <br> `projectDescription` | <br>string  | <br>No   | <br>Description of the project.                                                                               |
-| <br> `organization`       | <br>object  | <br>Yes  | <br>Organization object with `id` (number, required) and `name` (string, optional).                           |
-| <br> `credentials`        | <br>object  | <br>No   | <br>Credential object with `id` (number, required), `name` (string, optional), and `kind` (string, optional). |
-| <br> `scmUrl`             | <br>string  | <br>Yes  | <br>Source control URL (for example, GitHub/GitLab repository URL).                                           |
-| <br> `scmBranch`          | <br>string  | <br>No   | <br>Source control branch, tag, or commit.                                                                    |
-| <br> `scmUpdateOnLaunch`  | <br>boolean | <br>No   | <br>If `true`, updates the project revision before each job run.                                              |
+| Field                | Type    | Required | Description                                                                                               |
+| -------------------- | ------- | -------- | --------------------------------------------------------------------------------------------------------- |
+| `projectName`        | string  | Yes      | Name of the project.                                                                                      |
+| `projectDescription` | string  | No       | Description of the project.                                                                               |
+| `organization`       | object  | Yes      | Organization object with `id` (number, required) and `name` (string, optional).                           |
+| `credentials`        | object  | No       | Credential object with `id` (number, required), `name` (string, optional), and `kind` (string, optional). |
+| `scmUrl`             | string  | Yes      | Source control URL (for example, GitHub/GitLab repository URL).                                           |
+| `scmBranch`          | string  | No       | Source control branch, tag, or commit.                                                                    |
+| `scmUpdateOnLaunch`  | boolean | No       | If `true`, updates the project revision before each job run.                                              |
 
 **Output parameters**
 
-| Parameter                  | Type       | Description                                          |
-| -------------------------- | ---------- | ---------------------------------------------------- |
-| <br> `project`             | <br>object | <br>Created project details.                         |
-| <br> `project.id`          | <br>number | <br>Project ID in Ansible Automation Platform (AAP). |
-| <br> `project.name`        | <br>string | <br>Project name.                                    |
-| <br> `project.description` | <br>string | <br>Project description.                             |
-| <br> `project.url`         | <br>string | <br>Ansible Automation Platform URL for the project. |
+| Parameter             | Type   | Description                                      |
+| --------------------- | ------ | ------------------------------------------------ |
+| `project`             | object | Created project details.                         |
+| `project.id`          | number | Project ID in Ansible Automation Platform (AAP). |
+| `project.name`        | string | Project name.                                    |
+| `project.description` | string | Project description.                             |
+| `project.url`         | string | Ansible Automation Platform URL for the project. |
 
 **Example**
 
@@ -61,31 +61,31 @@ Create an execution environment in Ansible Automation Platform that defines the 
 
 **Input parameters**
 
-| Parameter            | Type        | Required | Description                                                                       |
-| -------------------- | ----------- | -------- | --------------------------------------------------------------------------------- |
-| <br> `token`         | <br>string  | <br>Yes  | <br>OAuth2 token for Ansible Automation Platform authentication.                  |
-| <br> `deleteIfExist` | <br>boolean | <br>No   | <br>If `true`, the action deletes the execution environment if it already exists. |
-| <br> `values`        | <br>object  | <br>Yes  | <br>The execution environment configuration object.                               |
+| Parameter       | Type    | Required | Description                                                                   |
+| --------------- | ------- | -------- | ----------------------------------------------------------------------------- |
+| `token`         | string  | Yes      | OAuth2 token for Ansible Automation Platform authentication.                  |
+| `deleteIfExist` | boolean | No       | If `true`, the action deletes the execution environment if it already exists. |
+| `values`        | object  | Yes      | The execution environment configuration object.                               |
 
 **“values” Object Structure**
 
-| Field                         | Type       | Required | Description                                                                                                          |
-| ----------------------------- | ---------- | -------- | -------------------------------------------------------------------------------------------------------------------- |
-| <br> `environmentName`        | <br>string | <br>Yes  | <br>Name of the execution environment.                                                                               |
-| <br> `environmentDescription` | <br>string | <br>No   | <br>Description of the execution environment.                                                                        |
-| <br> `organization`           | <br>object | <br>Yes  | <br>Organization object with required `id` (number) and optional `name` (string).                                    |
-| <br> `image`                  | <br>string | <br>Yes  | <br>Full image location, including registry, image name, and tag (for example, `quay.io/ansible/creator-ee:latest`). |
-| <br> `pull`                   | <br>string | <br>No   | <br>Image pull policy: `always`, `missing`, or `never`. Default is `missing`.                                        |
+| Field                    | Type   | Required | Description                                                                                                      |
+| ------------------------ | ------ | -------- | ---------------------------------------------------------------------------------------------------------------- |
+| `environmentName`        | string | Yes      | Name of the execution environment.                                                                               |
+| `environmentDescription` | string | No       | Description of the execution environment.                                                                        |
+| `organization`           | object | Yes      | Organization object with required `id` (number) and optional `name` (string).                                    |
+| `image`                  | string | Yes      | Full image location, including registry, image name, and tag (for example, `quay.io/ansible/creator-ee:latest`). |
+| `pull`                   | string | No       | Image pull policy: `always`, `missing`, or `never`. Default is `missing`.                                        |
 
 **Output parameters**
 
-| Parameter                               | Type       | Description                                                              |
-| --------------------------------------- | ---------- | ------------------------------------------------------------------------ |
-| <br> `executionEnvironment`             | <br>object | <br>Created execution environment details.                               |
-| <br> `executionEnvironment.id`          | <br>number | <br>Execution environment ID.                                            |
-| <br> `executionEnvironment.name`        | <br>string | <br>Execution environment name.                                          |
-| <br> `executionEnvironment.description` | <br>string | <br>Execution environment description.                                   |
-| <br> `executionEnvironment.url`         | <br>string | <br>Ansible Automation Platform (AAP) URL for the execution environment. |
+| Parameter                          | Type   | Description                                                          |
+| ---------------------------------- | ------ | -------------------------------------------------------------------- |
+| `executionEnvironment`             | object | Created execution environment details.                               |
+| `executionEnvironment.id`          | number | Execution environment ID.                                            |
+| `executionEnvironment.name`        | string | Execution environment name.                                          |
+| `executionEnvironment.description` | string | Execution environment description.                                   |
+| `executionEnvironment.url`         | string | Ansible Automation Platform (AAP) URL for the execution environment. |
 
 **Example**
 
@@ -111,36 +111,36 @@ Create a job template in Ansible Automation Platform that defines a reusable con
 
 **Input parameters**
 
-| Parameter            | Type        | Required | Description                                                              |
-| -------------------- | ----------- | -------- | ------------------------------------------------------------------------ |
-| <br> `token`         | <br>string  | <br>Yes  | <br>OAuth2 token for Ansible Automation Platform authentication.         |
-| <br> `deleteIfExist` | <br>boolean | <br>No   | <br>If `true`, the action deletes the job template if it already exists. |
-| <br> `values`        | <br>object  | <br>Yes  | <br>The job template configuration object.                               |
+| Parameter       | Type    | Required | Description                                                          |
+| --------------- | ------- | -------- | -------------------------------------------------------------------- |
+| `token`         | string  | Yes      | OAuth2 token for Ansible Automation Platform authentication.         |
+| `deleteIfExist` | boolean | No       | If `true`, the action deletes the job template if it already exists. |
+| `values`        | object  | Yes      | The job template configuration object.                               |
 
 **“values” Object Structure**
 
-| Field                       | Type       | Required | Description                                                                                |
-| --------------------------- | ---------- | -------- | ------------------------------------------------------------------------------------------ |
-| <br> `templateName`         | <br>string | <br>Yes  | <br>Name of the job template.                                                              |
-| <br> `templateDescription`  | <br>string | <br>No   | <br>Description of the job template.                                                       |
-| <br> `project`              | <br>object | <br>Yes  | <br>Project object with required `id` (number) and optional `name` (string).               |
-| <br> `organization`         | <br>object | <br>No   | <br>Organization object with `id` (number, required) and `name` (string, optional).        |
-| <br> `jobInventory`         | <br>object | <br>Yes  | <br>Inventory object with required `id` (number) and optional `name` (string).             |
-| <br> `playbook`             | <br>string | <br>Yes  | <br>Path to the playbook file to execute.                                                  |
-| <br> `templateDescription`  | <br>string | <br>No   | <br>Description of the job template.                                                       |
-| <br> `scmType`              | <br>string | <br>No   | <br>Source control type (for example, `Github` or `Gitlab`).                               |
-| <br> `executionEnvironment` | <br>object | <br>No   | <br>Execution environment object with required `id` (number) and optional `name` (string). |
-| <br> `extraVariables`       | <br>object | <br>No   | <br>Extra variables to pass to the playbook (key-value pairs).                             |
+| Field                  | Type   | Required | Description                                                                            |
+| ---------------------- | ------ | -------- | -------------------------------------------------------------------------------------- |
+| `templateName`         | string | Yes      | Name of the job template.                                                              |
+| `templateDescription`  | string | No       | Description of the job template.                                                       |
+| `project`              | object | Yes      | Project object with required `id` (number) and optional `name` (string).               |
+| `organization`         | object | No       | Organization object with `id` (number, required) and `name` (string, optional).        |
+| `jobInventory`         | object | Yes      | Inventory object with required `id` (number) and optional `name` (string).             |
+| `playbook`             | string | Yes      | Path to the playbook file to execute.                                                  |
+| `templateDescription`  | string | No       | Description of the job template.                                                       |
+| `scmType`              | string | No       | Source control type (for example, `Github` or `Gitlab`).                               |
+| `executionEnvironment` | object | No       | Execution environment object with required `id` (number) and optional `name` (string). |
+| `extraVariables`       | object | No       | Extra variables to pass to the playbook (key-value pairs).                             |
 
 **Output parameters**
 
-| Parameter                   | Type       | Description                                                     |
-| --------------------------- | ---------- | --------------------------------------------------------------- |
-| <br> `template`             | <br>object | <br>Created job template details.                               |
-| <br> `template.id`          | <br>number | <br>Job template ID.                                            |
-| <br> `template.name`        | <br>string | <br>Job template name.                                          |
-| <br> `template.description` | <br>string | <br>Job template description.                                   |
-| <br> `template.url`         | <br>string | <br>Ansible Automation Platform (AAP) URL for the job template. |
+| Parameter              | Type   | Description                                                 |
+| ---------------------- | ------ | ----------------------------------------------------------- |
+| `template`             | object | Created job template details.                               |
+| `template.id`          | number | Job template ID.                                            |
+| `template.name`        | string | Job template name.                                          |
+| `template.description` | string | Job template description.                                   |
+| `template.url`         | string | Ansible Automation Platform (AAP) URL for the job template. |
 
 **Example**
 
@@ -171,38 +171,38 @@ Launch an existing job template in Ansible Automation Platform.
 
 **Input parameters**
 
-| Parameter     | Type       | Required | Description                                                      |
-| ------------- | ---------- | -------- | ---------------------------------------------------------------- |
-| <br> `token`  | <br>string | <br>Yes  | <br>OAuth2 token for Ansible Automation Platform authentication. |
-| <br> `values` | <br>object | <br>Yes  | <br>The job launch configuration object.                         |
+| Parameter | Type   | Required | Description                                                  |
+| --------- | ------ | -------- | ------------------------------------------------------------ |
+| `token`   | string | Yes      | OAuth2 token for Ansible Automation Platform authentication. |
+| `values`  | object | Yes      | The job launch configuration object.                         |
 
 **“values” Object Structure**
 
-| Field                       | Type        | Required | Description                                                                |
-| --------------------------- | ----------- | -------- | -------------------------------------------------------------------------- |
-| <br> `template`             | <br>string  | <br>Yes  | <br>Job template name to launch.                                           |
-| <br> `inventory`            | <br>object  | <br>No   | <br>Override inventory with `id` (number) and `name` (string).             |
-| <br> `credentials`          | <br>array   | <br>No   | <br>Array of credential objects to use.                                    |
-| <br> `extraVariables`       | <br>object  | <br>No   | <br>Extra variables to pass to the job (key-value pairs).                  |
-| <br> `limit`                | <br>string  | <br>No   | <br>Host pattern to constrain which hosts the job runs against.            |
-| <br> `jobType`              | <br>string  | <br>No   | <br>Job type: `run` or `check`.                                            |
-| <br> `executionEnvironment` | <br>object  | <br>No   | <br>Override execution environment with `id` (number) and `name` (string). |
-| <br> `verbosity`            | <br>object  | <br>No   | <br>Verbosity level object with `id` and `name`.                           |
-| <br> `forks`                | <br>number  | <br>No   | <br>Number of parallel processes (default: `5`).                           |
-| <br> `jobSliceCount`        | <br>number  | <br>No   | <br>Divide the job into N slices.                                          |
-| <br> `timeout`              | <br>number  | <br>No   | <br>Job timeout in seconds (`0` = no timeout).                             |
-| <br> `diffMode`             | <br>boolean | <br>No   | <br>Enable diff mode to show changes.                                      |
-| <br> `jobTags`              | <br>string  | <br>No   | <br>Comma-separated tags to run only specific tasks.                       |
-| <br> `skipTags`             | <br>string  | <br>No   | <br>Comma-separated tags to skip specific tasks.                           |
+| Field                  | Type    | Required | Description                                                            |
+| ---------------------- | ------- | -------- | ---------------------------------------------------------------------- |
+| `template`             | string  | Yes      | Job template name to launch.                                           |
+| `inventory`            | object  | No       | Override inventory with `id` (number) and `name` (string).             |
+| `credentials`          | array   | No       | Array of credential objects to use.                                    |
+| `extraVariables`       | object  | No       | Extra variables to pass to the job (key-value pairs).                  |
+| `limit`                | string  | No       | Host pattern to constrain which hosts the job runs against.            |
+| `jobType`              | string  | No       | Job type: `run` or `check`.                                            |
+| `executionEnvironment` | object  | No       | Override execution environment with `id` (number) and `name` (string). |
+| `verbosity`            | object  | No       | Verbosity level object with `id` and `name`.                           |
+| `forks`                | number  | No       | Number of parallel processes (default: `5`).                           |
+| `jobSliceCount`        | number  | No       | Divide the job into N slices.                                          |
+| `timeout`              | number  | No       | Job timeout in seconds (`0` = no timeout).                             |
+| `diffMode`             | boolean | No       | Enable diff mode to show changes.                                      |
+| `jobTags`              | string  | No       | Comma-separated tags to run only specific tasks.                       |
+| `skipTags`             | string  | No       | Comma-separated tags to skip specific tasks.                           |
 
 **Output parameters**
 
-| Parameter          | Type       | Description                                            |
-| ------------------ | ---------- | ------------------------------------------------------ |
-| <br> `data`        | <br>object | <br>Job execution details.                             |
-| <br> `data.id`     | <br>number | <br>Job ID.                                            |
-| <br> `data.status` | <br>string | <br>Job status.                                        |
-| <br> `data.url`    | <br>string | <br>Ansible Automation Platform (AAP) URL for the job. |
+| Parameter     | Type   | Description                                        |
+| ------------- | ------ | -------------------------------------------------- |
+| `data`        | object | Job execution details.                             |
+| `data.id`     | number | Job ID.                                            |
+| `data.status` | string | Job status.                                        |
+| `data.url`    | string | Ansible Automation Platform (AAP) URL for the job. |
 
 **Example**
 

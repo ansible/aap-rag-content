@@ -5,7 +5,7 @@ After creating the registry authentication secret, add the Ansible plug-ins to y
 
 ### Procedure
 
-1.  Edit your dynamic plug-ins configuration and add the Ansible plug-ins using OCI references.
+1. Edit your dynamic plug-ins configuration and add the Ansible plug-ins using OCI references.
 **Operator installation**
 
 In the `data.dynamic-plugins.yaml.plugins` block, add the Ansible plug-ins:
@@ -108,6 +108,6 @@ backend:
 ansible.plugin-scaffolder-backend-module-backstage-rhaap:
 ```
 
-2.  Replace `<tag>` with the Ansible plug-ins image tag for your release (for example, `2.2`).
-3.  Apply the changes. For Operator deployments, click **Save**. For Helm deployments, click **Upgrade**.
+2. Replace `<tag>` with the Ansible plug-ins image tag for your release (for example, `2.2`).
+3. Apply the changes. For Operator deployments, click **Save**. For Helm deployments, click **Upgrade**.
 

@@ -5,18 +5,20 @@ Create an Ansible role by using the `ansible-galaxy` CLI tool to build reusable 
 
 ### About this task
 
-The Ansible Automation Platform bundle includes the Ansible Galaxy CLI tool. Access role-specific commands from the `role` subcommand:
+The Ansible Automation Platform bundle includes the Ansible Galaxy CLI tool.
+Access role-specific commands from the `role` subcommand:
 
 ```bash
 ansible-galaxy role init <role_name>
 ```
 
-Standalone roles outside of Collections are supported. Create new roles inside a Collection to take advantage of the features Ansible Automation Platform has to offer.
+Standalone roles outside of Collections are supported.
+Create new roles inside a Collection to take advantage of the features Ansible Automation Platform has to offer.
 
 ### Procedure
 
-1.  In a terminal, navigate to the `roles` directory inside a collection.
-2.  Create a role called `my_role` inside the collection:
+1. In a terminal, navigate to the `roles` directory inside a collection.
+2. Create a role called `my_role` inside the collection:
 
 
 ```
@@ -49,10 +51,13 @@ The collection now includes a role named `my_role` inside the `roles` directory,
 └── main.yml
 ```
 
-3.  A custom role skeleton directory can be supplied by using the `--role-skeleton` argument. This allows organizations to create standardized templates for new roles to suit their needs.
+3. A custom role skeleton directory can be supplied by using the `--role-skeleton` argument.
+This allows organizations to create standardized templates for new roles to suit their needs.
+
 
 ```
 $ ansible-galaxy role init my_role --role-skeleton ~/role_skeleton
 ```
 
-This creates a role named `my_role` by copying the contents of `~/role_skeleton` into `my_role`. The contents of `role_skeleton` can be any files or folders that are valid inside a role directory.
+This creates a role named `my_role` by copying the contents of `~/role_skeleton` into `my_role`.
+The contents of `role_skeleton` can be any files or folders that are valid inside a role directory.

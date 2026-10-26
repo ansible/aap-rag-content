@@ -1,0 +1,65 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Add a new inventory",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Add permissions to inventories",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-6a73bd50-d948-423d-a2ac-5ee46aa1d48f",
+          "anchor": null,
+          "singlePageAnchor": "GUID-6a73bd50-d948-423d-a2ac-5ee46aa1d48f"
+        },
+        {
+          "title": "Remove a permission",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "proc-controller-removing-inv-permissions",
+          "anchor": null,
+          "singlePageAnchor": "proc-controller-removing-inv-permissions"
+        },
+        {
+          "title": "Add groups to inventories",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "proc-controller-add-groups",
+          "anchor": null,
+          "singlePageAnchor": "proc-controller-add-groups",
+          "sections": [
+            {
+              "title": "View or edit inventory groups",
+              "visible": true,
+              "weight": 1,
+              "urlFragment": "proc-controller-add-groups",
+              "anchor": "ref-controller-view-edit-inv-groups",
+              "singlePageAnchor": "ref-controller-view-edit-inv-groups"
+            },
+            {
+              "title": "Add groups within groups",
+              "visible": true,
+              "weight": 2,
+              "urlFragment": "proc-controller-add-groups",
+              "anchor": "proc-controller-add-groups-to-groups",
+              "singlePageAnchor": "proc-controller-add-groups-to-groups"
+            },
+            {
+              "title": "Add hosts to inventory groups",
+              "visible": true,
+              "weight": 3,
+              "urlFragment": "proc-controller-add-groups",
+              "anchor": "proc-controller-add-hosts",
+              "singlePageAnchor": "proc-controller-add-hosts"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

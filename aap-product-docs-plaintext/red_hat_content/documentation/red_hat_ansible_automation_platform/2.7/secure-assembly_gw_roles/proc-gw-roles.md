@@ -17,7 +17,7 @@ A similar role entity for Automation Content is a "system" role, which gives acc
 
 ### Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Roles.
-2.  From the table header, you can sort the list of roles by using the arrows for **Name**, **Description**, **Component**, **Resource Type**, and **Role Creation**, or by making sort selections in the **Sort** list.
-3.  You can filter the list of roles by selecting **Name**, **Editable**, or **Component** from the filter list and clicking the arrow.
+1. From the navigation panel, select Access Management> (and then)Roles.
+2. From the table header, you can sort the list of roles by using the arrows for **Name**, **Description**, **Component**, **Resource Type**, and **Role Creation**, or by making sort selections in the **Sort** list.
+3. You can filter the list of roles by selecting **Name**, **Editable**, or **Component** from the filter list and clicking the arrow.
 

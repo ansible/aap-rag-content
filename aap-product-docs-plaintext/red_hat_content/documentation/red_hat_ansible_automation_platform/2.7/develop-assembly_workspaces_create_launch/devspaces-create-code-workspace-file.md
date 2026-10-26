@@ -1,14 +1,15 @@
 # Create and launch an Ansible development workspace
 ## Create a code-workspace file for an Ansible development workspace
 
-To configure VS Code extensions that are included in your Ansible development workspace, you must add a `.code-workspace` JSON file to your git repository.
+To configure VS Code extensions that are included in your Ansible development workspace,
+you must add a `.code-workspace` JSON file to your git repository.
 
 ### About this task
 
 ### Procedure
 
-1.  In your Git repository for your Ansible development workspace, create a new file named `.code-workspace`.
-2.  Copy and paste the following sample code into the `.code-workspace` file:
+1. In your Git repository for your Ansible development workspace, create a new file named `.code-workspace`.
+2. Copy and paste the following sample code into the `.code-workspace` file:
 
 
 ```
@@ -44,6 +45,6 @@ To configure VS Code extensions that are included in your Ansible development wo
 }
 ```
 
-3.  If you want to add extra extensions to your Ansible development workspace, add them in the `extensions.recommendations` section of the file.
-4.  Add the `.code-workspace` file to your Git repository and push the changes.
+3. If you want to add extra extensions to your Ansible development workspace, add them in the `extensions.recommendations` section of the file.
+4. Add the `.code-workspace` file to your Git repository and push the changes.
 

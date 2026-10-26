@@ -1,7 +1,7 @@
 +++
-title = "Search syntax - Red Hat Ansible Automation Platform 2.7"
 template = "docs/aem-title.html"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-search_syntax"
+title = "Search syntax - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-search_and_filter_resources/", "Search and filter resources"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-search_syntax/aem-page/develop-search_syntax.html"
 last_crumb = "Search syntax"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Search syntax"
 oversized = "false"
@@ -45,5 +46,5 @@ Job template searches accept alphanumeric characters only.
 | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `name:localhost`            | Searches for`localhost` in the`name` field. If the field name does not match a known field or related field, the query is treated as a string search.                                                    |
 | `organization.name:Default` | Related field search. The period separates the related model from the field. You can chain multiple periods for deeper lookups.                                                                          |
-| `foobar`                    | Simple string search. Runs`?search=foobar`, which performs an`icontains` lookup against name and description. Note that API field names might differ from the UI labels, for example,`Management job` in the UI is`system_job` in the API. |
+| `xyxyxy`                    | Simple string search. Runs`?search=xyxyxy`, which performs an`icontains` lookup against name and description. Note that API field names might differ from the UI labels, for example,`Management job` in the UI is`system_job` in the API. |
 | `organization:Default`      | Related field search without specifying a sub-field. Runs an`icontains` search against both the name and description of the related organization.                                                        |

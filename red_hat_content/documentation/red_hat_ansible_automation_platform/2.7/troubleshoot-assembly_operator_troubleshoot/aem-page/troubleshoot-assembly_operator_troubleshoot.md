@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/troubleshoot-assembly_operator_troubleshoot/aem-page/troubleshoot-assembly_operator_troubleshoot.html"
 last_crumb = "Troubleshoot your Operator-based deployment of Ansible Automation Platform"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Troubleshoot your Operator-based deployment of Ansible Automation Platform"
 oversized = "false"
@@ -35,7 +36,8 @@ If an **AutomationController** instance fails to deploy, check the `automation-c
 
 ## View events in the OpenShift Container Platform
 
-You can view events in the OpenShift Container Platform web console to monitor for errors and troubleshoot issues. This helps you quickly diagnose problems by examining the status of custom resources and their related events.
+You can view events in the OpenShift Container Platform web console to monitor for errors and troubleshoot issues.
+This helps you quickly diagnose problems by examining the status of custom resources and their related events.
 
 ### About this task
 
@@ -43,11 +45,11 @@ You can debug by first reviewing the status conditions of the Ansible Automation
 
 ### Procedure
 
-1.  Log in to the OpenShift Container Platform web console.
-2.  In the navigation menu, select Home> (and then)Events.
-3.  Select your project from the project list.
-4.  To view events for a specific resource, navigate to that resource’s page. Many resource pages, such as pods and deployments, have their own **Events** tab.
-5.  Select a resource to bring you to the **Pod Details** page.
+1. Log in to the OpenShift Container Platform web console.
+2. In the navigation menu, select Home> (and then)Events.
+3. Select your project from the project list.
+4. To view events for a specific resource, navigate to that resource’s page. Many resource pages, such as pods and deployments, have their own **Events** tab.
+5. Select a resource to bring you to the **Pod Details** page.
 
 ### Results
 
@@ -59,21 +61,21 @@ The following procedure is an example of how to view the logs for an `automation
 
 ### Procedure
 
-1.  To find the pod name, run:
+1. To find the pod name, run:
   
 
 ```
 oc get pods | grep operator
 ```
 
-2.  To view the logs for the pod, run:
+2. To view the logs for the pod, run:
   
 
 ```
 oc logs <operator-pod-name> -f
 ```
 
-  1.  Alternatively, to view the logs without first getting the pod name, run:
+  1. Alternatively, to view the logs without first getting the pod name, run:
   
 
 ```
@@ -90,7 +92,7 @@ The logs then show output for any failed tasks that originally had `no_log` set 
 
 ### Procedure
 
-1.  Edit the Ansible Automation Platform CR and set the `no_log` field to `false` for the component you want to debug. For automation controller:
+1. Edit the Ansible Automation Platform CR and set the `no_log` field to `false` for the component you want to debug. For automation controller:
 
 ```
 apiVersion: aap.ansible.com/v1alpha1
@@ -130,7 +132,7 @@ spec:
   Note:
       This might expose sensitive data in the logs. On production clusters, this value must generally be set to `true` unless you are actively debugging an issue.
 
-2.  To increase the Ansible Playbook verbosity from the operator, set the verbosity level using an annotation on the Ansible Automation Platform CR:
+2. To increase the Ansible Playbook verbosity from the operator, set the verbosity level using an annotation on the Ansible Automation Platform CR:
   
 
 ```
@@ -150,14 +152,14 @@ To inspect a OpenShift Container Platform resource, you must use the `oc` comman
 
 ### Procedure
 
-1.  To view a human-readable summary of a resource, run:
+1. To view a human-readable summary of a resource, run:
   
 
 ```
 oc describe -n <namespace> <resource> <resource-name>
 ```
 
-2.  To view the complete YAML definition of a resource, use the `-o yaml` flag:
+2. To view the complete YAML definition of a resource, use the `-o yaml` flag:
   
 
 ```
@@ -174,36 +176,36 @@ oc get -n aap automationcontroller aap -o yaml
 
 The following table lists and describes the core custom resources (CRs) that the Ansible Automation Platform Operator manages. Understanding these resources will help you with advanced troubleshooting and configuration.
 
-| **Resource name**                       | **Description**                                                                     |
-| --------------------------------------- | ----------------------------------------------------------------------------------- |
-| <br> `ansibleautomationplatform`        | <br>CR for deploying the entire Ansible Automation Platform.                        |
-| <br> `ansibleautomationplatformbackup`  | <br>CR for creating backups of the entire Ansible Automation Platform instance.     |
-| <br> `ansibleautomationplatformrestore` | <br>CR for restoring the entire Ansible Automation Platform instance from a backup. |
-| <br> `automationcontroller`             | <br>CR defining the desired state of an automation controller instance.             |
-| <br> `automationcontrollerbackup`       | <br>CR for creating backups of automation controller data and configuration.        |
-| <br> `automationcontrollerrestore`      | <br>CR for restoring the automation controller from a backup.                       |
-| <br> `automationhub`                    | <br>CR for deploying an automation hub (Galaxy) instance.                           |
-| <br> `automationhubbackup`              | <br>CR for creating backups of automation hub data and configuration.               |
-| <br> `automationhubrestore`             | <br>CR for restoring automation hub from a backup.                                  |
-| <br> `eda`                              | <br>CR for deploying an Event-Driven Ansible (EDA) instance.                        |
-| <br> `edabackup`                        | <br>CR for creating backups of EDA data and configuration.                          |
-| <br> `edarestore`                       | <br>CR for restoring EDA from a backup.                                             |
-| <br> `ansiblelightspeed`                | <br>CR for deploying an Red Hat Ansible Lightspeed instance.                        |
+| **Resource name**                  | **Description**                                                                 |
+| ---------------------------------- | ------------------------------------------------------------------------------- |
+| `ansibleautomationplatform`        | CR for deploying the entire Ansible Automation Platform.                        |
+| `ansibleautomationplatformbackup`  | CR for creating backups of the entire Ansible Automation Platform instance.     |
+| `ansibleautomationplatformrestore` | CR for restoring the entire Ansible Automation Platform instance from a backup. |
+| `automationcontroller`             | CR defining the desired state of an automation controller instance.             |
+| `automationcontrollerbackup`       | CR for creating backups of automation controller data and configuration.        |
+| `automationcontrollerrestore`      | CR for restoring the automation controller from a backup.                       |
+| `automationhub`                    | CR for deploying an automation hub (Galaxy) instance.                           |
+| `automationhubbackup`              | CR for creating backups of automation hub data and configuration.               |
+| `automationhubrestore`             | CR for restoring automation hub from a backup.                                  |
+| `eda`                              | CR for deploying an Event-Driven Ansible (EDA) instance.                        |
+| `edabackup`                        | CR for creating backups of EDA data and configuration.                          |
+| `edarestore`                       | CR for restoring EDA from a backup.                                             |
+| `ansiblelightspeed`                | CR for deploying an Red Hat Ansible Lightspeed instance.                        |
 
 ## Standard Kubernetes resources
 
 Standard Kubernetes resources are a core part of the OpenShift Container Platform. The following table describes the standard resources you can inspect to troubleshoot the state and configuration of an application.
 
-| **Resource name**     | **Description**                                                                                          |
-| --------------------- | -------------------------------------------------------------------------------------------------------- |
-| <br> `pod`            | <br>Smallest deployable unit containing one or more containers running the application workloads.        |
-| <br> `deployment`     | <br>Manages pod configuration and scaling.                                                               |
-| <br> `pvc`            | <br>A PersistentVolumeClaim (PVC) is a request for storage resources, used for persistent data storage.  |
-| <br> `service`        | <br>Exposes pods as network services with stable IP addresses and DNS names within the cluster.          |
-| <br> `ingress`        | <br>Manages external HTTP and HTTPS access to services within the cluster.                               |
-| <br> `route`          | <br>An OpenShift-specific resource for exposing services externally (similar to an ingress).             |
-| <br> `secrets`        | <br>Stores sensitive data like passwords, tokens, and certificates.                                      |
-| <br> `serviceaccount` | <br>Provides identity for processes running in pods to access permissions to other Kubernetes resources. |
+| **Resource name** | **Description**                                                                                      |
+| ----------------- | ---------------------------------------------------------------------------------------------------- |
+| `pod`             | Smallest deployable unit containing one or more containers running the application workloads.        |
+| `deployment`      | Manages pod configuration and scaling.                                                               |
+| `pvc`             | A PersistentVolumeClaim (PVC) is a request for storage resources, used for persistent data storage.  |
+| `service`         | Exposes pods as network services with stable IP addresses and DNS names within the cluster.          |
+| `ingress`         | Manages external HTTP and HTTPS access to services within the cluster.                               |
+| `route`           | An OpenShift-specific resource for exposing services externally (similar to an ingress).             |
+| `secrets`         | Stores sensitive data like passwords, tokens, and certificates.                                      |
+| `serviceaccount`  | Provides identity for processes running in pods to access permissions to other Kubernetes resources. |
 
 ## Collect diagnostic data
 
@@ -211,14 +213,14 @@ Use the `oc adm must-gather` command to collect comprehensive diagnostic data ab
 
 ### Procedure
 
-1.  To start the `must-gather` tool, run:
+1. To start the `must-gather` tool, run:
   
 
 ```
 oc adm must-gather --image=registry.redhat.io/<platform-version>/aap-must-gather-rhel<rhel-version>
 ```
 
-2.  View the collected data, use the `omc` tool to query the `must-gather` tarball as if it were a live cluster.
+2. View the collected data, use the `omc` tool to query the `must-gather` tarball as if it were a live cluster.
 
 ```
 omc use <path-to-must-gather>

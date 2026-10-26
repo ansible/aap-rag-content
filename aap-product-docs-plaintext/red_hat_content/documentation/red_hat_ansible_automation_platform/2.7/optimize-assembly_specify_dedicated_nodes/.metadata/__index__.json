@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/optimize-assembly_specify_dedicated_nodes",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_specify_dedicated_nodes",
-  "title": "Specify dedicated nodes for pods and job execution"
+  "title": "Specify dedicated nodes for pods and job execution",
+  "url_reachable": true
 }

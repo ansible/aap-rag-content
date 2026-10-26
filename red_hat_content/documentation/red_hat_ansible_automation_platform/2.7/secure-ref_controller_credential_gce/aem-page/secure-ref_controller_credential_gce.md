@@ -1,7 +1,7 @@
 +++
 title = "Google Compute Engine credential type - Red Hat Ansible Automation Platform 2.7"
-path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_gce"
 template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_gce"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_credentials/", "Configure credentials to authenticate remote systems and services"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_gce/aem-page/secure-ref_controller_credential_gce.html"
 last_crumb = "Google Compute Engine credential type"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Google Compute Engine credential type"
 oversized = "false"
@@ -43,5 +44,7 @@ GCE credentials require the following information:
 
 - **Service Account Email Address**: The email address assigned to the Google Compute Engine **service account**.
 - Optional: **Project**: Provide the GCE assigned identification or the unique project ID that you provided at project creation time.
-- Optional: **Service Account JSON File**: Upload a GCE service account file. Click Browse to browse for the file that has the special account information that can be used by services and applications running on your GCE instance to interact with other Google Cloud APIs. This grants permissions to the service account and virtual machine instances.
+- Optional: **Service Account JSON File**: Upload a GCE service account file.
+Click Browse to browse for the file that has the special account information that can be used by services and applications running on your GCE instance to interact with other Google Cloud APIs.
+This grants permissions to the service account and virtual machine instances.
 - **RSA Private Key**: The PEM file associated with the service account email.

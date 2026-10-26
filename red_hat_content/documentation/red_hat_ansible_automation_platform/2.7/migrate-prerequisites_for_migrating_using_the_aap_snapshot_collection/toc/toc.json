@@ -1,0 +1,57 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Prerequisites for migrating using the aap_snapshot collection",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Prerequisites for containerized deployment export",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-32fd208d-506a-487c-b6ab-f8b9a569b51a",
+          "anchor": null,
+          "singlePageAnchor": "GUID-32fd208d-506a-487c-b6ab-f8b9a569b51a"
+        },
+        {
+          "title": "Prerequisites for the OCP deployment import",
+          "visible": true,
+          "weight": 2,
+          "urlFragment": "GUID-8b7afdde-ad3d-4fb0-89c3-cf965ce1338f",
+          "anchor": null,
+          "singlePageAnchor": "GUID-8b7afdde-ad3d-4fb0-89c3-cf965ce1338f",
+          "sections": [
+            {
+              "title": "Control node requirements",
+              "visible": true,
+              "weight": 1,
+              "urlFragment": "GUID-8b7afdde-ad3d-4fb0-89c3-cf965ce1338f",
+              "anchor": "GUID-8b7afdde-ad3d-4fb0-89c3-cf965ce1338f__prereqs-control-node",
+              "singlePageAnchor": "GUID-8b7afdde-ad3d-4fb0-89c3-cf965ce1338f__prereqs-control-node"
+            },
+            {
+              "title": "OCP environment requirements",
+              "visible": true,
+              "weight": 2,
+              "urlFragment": "GUID-8b7afdde-ad3d-4fb0-89c3-cf965ce1338f",
+              "anchor": "GUID-8b7afdde-ad3d-4fb0-89c3-cf965ce1338f__prereqs-ocp-environment",
+              "singlePageAnchor": "GUID-8b7afdde-ad3d-4fb0-89c3-cf965ce1338f__prereqs-ocp-environment"
+            }
+          ]
+        },
+        {
+          "title": "Prerequisites for containerized deployment import",
+          "visible": true,
+          "weight": 3,
+          "urlFragment": "GUID-e10d9efb-25cd-4bef-84dd-1ffb4a4f36c5",
+          "anchor": null,
+          "singlePageAnchor": "GUID-e10d9efb-25cd-4bef-84dd-1ffb4a4f36c5"
+        }
+      ]
+    }
+  ]
+}

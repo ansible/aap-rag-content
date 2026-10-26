@@ -4,12 +4,12 @@ You can determine the available search fields and related search fields for any 
 
 ## Procedure
 
-1.  Send a `GET` request to the resource endpoint to identify the available field names.
+1. Send a `GET` request to the resource endpoint to identify the available field names.
 Field names come from the keys returned in the `GET` response. The `url`, `related`, and `summary_fields` keys are excluded.
 
 To search for jobs by type, enter `type:run` on the Jobs page. To discover valid values for the `type` field, send an `OPTIONS` request to `/api/v2/jobs` and locate the `"type"` entry.
 
-2.  Send an `OPTIONS` request to the same endpoint to find related search fields.
+2. Send an `OPTIONS` request to the same endpoint to find related search fields.
 Related search fields are listed in the `related_search_fields` attribute of the `OPTIONS` response. Strip the `__search` suffix to get the related field name you can use in the search bar.
 
 The `/api/v2/jobs` endpoint returns:

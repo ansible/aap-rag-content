@@ -1,7 +1,7 @@
 +++
-title = "Configure third-party services - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-ref_controller_log_aggregators"
 template = "docs/aem-title.html"
+title = "Configure third-party services - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_controller_logging_aggregation/", "Send log files to third-party aggregation services"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/observe-ref_controller_log_aggregators/aem-page/observe-ref_controller_log_aggregators.html"
 last_crumb = "Configure third-party services"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure third-party services"
 oversized = "false"
@@ -40,12 +41,12 @@ To set up logging to any of the aggregator types for centralized logging follow 
 
 ### Procedure
 
--  From the navigation panel, select Settings> (and then)Automation Execution> (and then)Logging.
--  On the **Logging settings** page, click Edit.
--  You can configure the following options:
+- From the navigation panel, select Settings> (and then)Automation Execution> (and then)Logging.
+- On the **Logging settings** page, click Edit.
+- You can configure the following options:
 
   * **Logging Aggregator**: Enter the hostname or IP address that you want to send logs to.
-  * **Logging Aggregator Port**: Specify the port for the aggregator if it requires one.  Note:
+  * **Logging Aggregator Port**: Specify the port for the aggregator if it requires one. Note:
             When the connection type is HTTPS, you can enter the hostname as a URL with a port number, after which, you are not required to enter the port again. However, TCP and UDP connections are determined by the hostname and port number combination, rather than URL. Therefore, in the case of a TCP or UDP connection, supply the port in the specified field. If a URL is entered in the **Logging Aggregator** field instead, its hostname portion is extracted as the hostname.
 
   * **Logging Aggregator Type**: Click to select the aggregator service from the list:
@@ -61,15 +62,15 @@ To set up logging to any of the aggregator types for centralized logging follow 
   * **File system location for rsyslogd disk persistence**: Location to persist logs that should be retried after an outage of the external log aggregator (defaults to `/var/lib/awx`). Equivalent to the `rsyslogd queue.spoolDirectory` setting.: Configure a specific error message. When the API encounters an issue with a request, it typically returns an HTTP error code in the 400 range along with an error. When this happens, an error message is generated in the log that follows the following pattern:
   * **Log Format For API 4XX Errors:** When the API encounters an issue with a request, it typically returns an HTTP error code in the 400 range along with an error. When this happens, an error message is generated in the log that follows the following pattern: `' status {status_code} received by user {user_name} attempting to access {url_path} from {remote_addr} '`
 
--  You can set the following options:
+- You can set the following options:
 
   * **Log System Tracking Facts Individually**: Click the tooltip ![Help](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/question-circle.png) icon for additional information, such as whether or not you want to turn it on, or leave it off by default.
 
--  Review your entries for your chosen logging aggregation.   * **Enable External Logging**: Select this checkbox if you want to send logs to an external log aggregator.
+- Review your entries for your chosen logging aggregation.   * **Enable External Logging**: Select this checkbox if you want to send logs to an external log aggregator.
   * **Enable/disable HTTPS certificate verification**: Certificate verification is enabled by default for the HTTPS log protocol. Select this checkbox if you want the log handler to verify the HTTPS certificate sent by the external log aggregator before establishing a connection.
   * **Enable rsyslogd debugging**: Select this checkbox to enable high verbosity debugging for `rsyslogd`. Useful for debugging connection issues for external log aggregation.
 
--  Click Save or Cancel to abandon the changes.
+- Click Save or Cancel to abandon the changes.
 
 ## Troubleshoot logging
 

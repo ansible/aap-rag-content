@@ -1,7 +1,7 @@
 +++
+title = "Configure GitHub team authentication - Red Hat Ansible Automation Platform 2.7"
 path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_github_team_settings"
 template = "docs/aem-title.html"
-title = "Configure GitHub team authentication - Red Hat Ansible Automation Platform 2.7"
 
 [extra]
 breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_configure_authentication/", "Configure central authentication for Ansible Automation Platform"]]
@@ -10,7 +10,8 @@ category_description = ""
 document_kind = "documentation"
 html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-proc_controller_github_team_settings/aem-page/secure-proc_controller_github_team_settings.html"
 last_crumb = "Configure GitHub team authentication"
-modified = "2026-07-30T17:12:56.473Z"
+latest = "true"
+modified = "2026-10-06T15:21:13.207Z"
 multi_page_path = ""
 name = "Configure GitHub team authentication"
 oversized = "false"
@@ -37,22 +38,22 @@ Each key and secret must belong to a unique application and cannot be shared or 
 
 ## Procedure
 
-1.  From the navigation panel, select Access Management> (and then)Authentication Methods.
-2.  Click Create authentication.
-3.  Enter a **Name** for this authentication configuration.
-4.  Select **GitHub team** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
-5.  When the application is registered, GitHub displays the **Client ID** and **Client Secret**:
-  1.  Copy and paste the GitHub Client ID into the GitHub OAuth2 Key field.
-  2.  Copy and paste the GitHub Client Secret into the GitHub OAuth2 Secret field.
-6.  Copy and paste GitHub’s team ID in the **GitHub OAuth2 Team ID** field.
-7.  Enter the authorization scope for users in the GitHub OAuth2 Scope field. The default is `read:org`.
-8.  Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. Note:
+1. From the navigation panel, select Access Management> (and then)Authentication Methods.
+2. Click Create authentication.
+3. Enter a **Name** for this authentication configuration.
+4. Select **GitHub team** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
+5. When the application is registered, GitHub displays the **Client ID** and **Client Secret**:
+  1. Copy and paste the GitHub Client ID into the GitHub OAuth2 Key field.
+  2. Copy and paste the GitHub Client Secret into the GitHub OAuth2 Secret field.
+6. Copy and paste GitHub’s team ID in the **GitHub OAuth2 Team ID** field.
+7. Enter the authorization scope for users in the GitHub OAuth2 Scope field. The default is `read:org`.
+8. Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. Note:
       Values defined in this field override the dedicated fields provided in the UI. Any values not defined here are not provided to the authenticator.
 
-9.  To automatically create organizations, users, and teams upon successful login, select **Create objects**.
-10.  To enable this authentication method upon creation, select **Enabled**.
-11.  To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users**.
-12.  Click Create Authentication Method. To verify that the authentication is configured correctly, log out of Ansible Automation Platform and check that the login screen displays the logo of your authentication chosen method to enable logging in with those credentials.
+9. To automatically create organizations, users, and teams upon successful login, select **Create objects**.
+10. To enable this authentication method upon creation, select **Enabled**.
+11. To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users**.
+12. Click Create Authentication Method. To verify that the authentication is configured correctly, log out of Ansible Automation Platform and check that the login screen displays the logo of your authentication chosen method to enable logging in with those credentials.
 
 ## What to do next
 

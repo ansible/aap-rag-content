@@ -27,8 +27,8 @@ To use the new Ansible vault with the installation program, use the following pr
 
 ### Procedure
 
-1.  Ensure your vault file, for example, `vault.yml`, contains all required sensitive variables.
-2.  Run the container installer using the following command:
+1. Ensure your vault file, for example, `vault.yml`, contains all required sensitive variables.
+2. Run the container installer using the following command:
 `ansible-playbook ansible.containerized_installer.install -e @vault.yml -ask-become-pass`.
 
 Ensure that the vault file is located in the working directory, or provide the full path. Do not duplicate the encrypted variables in the `plaintext` inventory file.

@@ -1,0 +1,23 @@
+{
+  "version": "1.1",
+  "sections": [
+    {
+      "title": "Understand host metrics",
+      "visible": true,
+      "weight": 1,
+      "urlFragment": "index",
+      "anchor": null,
+      "singlePageAnchor": null,
+      "sections": [
+        {
+          "title": "Soft deletion",
+          "visible": true,
+          "weight": 1,
+          "urlFragment": "GUID-0f688cf2-29ea-484d-a0a4-626b48686b1c__section_1",
+          "anchor": null,
+          "singlePageAnchor": "GUID-0f688cf2-29ea-484d-a0a4-626b48686b1c__section_1"
+        }
+      ]
+    }
+  ]
+}

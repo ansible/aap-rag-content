@@ -49,24 +49,24 @@ The following table notes the behavior (hierarchy) of variable precedence in aut
 
 **Automation controller Variable Precedence Hierarchy (last listed wins)**
 
-| Ansible                         | automation controller                         |
-| ------------------------------- | --------------------------------------------- |
-| <br>role defaults               | <br>role defaults                             |
-| <br>dynamic inventory variables | <br>dynamic inventory variables               |
-| <br>inventory variables         | <br>automation controller inventory variables |
-| <br>inventory `group_vars`      | <br>automation controller group variables     |
-| <br>inventory `host_vars`       | <br>automation controller host variables      |
-| <br>playbook `group_vars`       | <br>playbook `group_vars`                     |
-| <br>playbook `host_vars`        | <br>playbook `host_vars`                      |
-| <br>host facts                  | <br>host facts                                |
-| <br>registered variables        | <br>registered variables                      |
-| <br>set facts                   | <br>set facts                                 |
-| <br>play variables              | <br>play variables                            |
-| <br>play `vars_prompt`          | <br>(not supported)                           |
-| <br>play `vars_files`           | <br>play `vars_files`                         |
-| <br>role and include variables  | <br>role and include variables                |
-| <br>block variables             | <br>block variables                           |
-| <br>task variables              | <br>task variables                            |
-| <br>extra variables             | <br>Job Template extra variables              |
-|                                 | <br>Job Template Survey (defaults)            |
-|                                 | <br>Job Launch extra variables                |
+| Ansible                     | automation controller                     |
+| --------------------------- | ----------------------------------------- |
+| role defaults               | role defaults                             |
+| dynamic inventory variables | dynamic inventory variables               |
+| inventory variables         | automation controller inventory variables |
+| inventory `group_vars`      | automation controller group variables     |
+| inventory `host_vars`       | automation controller host variables      |
+| playbook `group_vars`       | playbook `group_vars`                     |
+| playbook `host_vars`        | playbook `host_vars`                      |
+| host facts                  | host facts                                |
+| registered variables        | registered variables                      |
+| set facts                   | set facts                                 |
+| play variables              | play variables                            |
+| play `vars_prompt`          | (not supported)                           |
+| play `vars_files`           | play `vars_files`                         |
+| role and include variables  | role and include variables                |
+| block variables             | block variables                           |
+| task variables              | task variables                            |
+| extra variables             | Job Template extra variables              |
+|                             | Job Template Survey (defaults)            |
+|                             | Job Launch extra variables                |

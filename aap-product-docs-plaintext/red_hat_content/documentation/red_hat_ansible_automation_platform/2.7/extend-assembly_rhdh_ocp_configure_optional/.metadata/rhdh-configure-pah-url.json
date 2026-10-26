@@ -1,5 +1,6 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_ocp_configure_optional#rhdh-configure-pah-url",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_rhdh_ocp_configure_optional",
-  "title": "Configure the private automation hub URL"
+  "title": "Configure the private automation hub URL",
+  "url_reachable": true
 }
