@@ -30,8 +30,7 @@ RUN python custom_processor_aap.py  \
   -i aap-product-docs-$(echo $AAP_VERSION | sed 's/\./_/g') \
   --vector-store-type=llamastack-faiss \
   -c 200 \
-  -l 10 \
-  -w 10
+  -l 10
 
 COPY tests ./tests
 COPY pyproject.toml ./pyproject.toml
