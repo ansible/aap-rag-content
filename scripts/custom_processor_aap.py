@@ -119,6 +119,7 @@ def main():
             folder,
             metadata=metadata_processor,
             required_exts=[".md"],
+            unreachable_action="drop",
         )
     for document_folder in ADDITIONAL_DOCS:
         folder = Path(Path(args.folder) / document_folder)
@@ -126,6 +127,7 @@ def main():
             folder,
             metadata=metadata_processor,
             required_exts=[".txt"],
+            unreachable_action="drop",
         )
     for document_folder in TECHNICAL_MARKETING_CONTENTS:
         folder = Path(Path(args.folder) / document_folder)
@@ -133,6 +135,7 @@ def main():
             folder,
             metadata=metadata_processor,
             required_exts=[".md"],
+            unreachable_action="drop",
         )
 
     # Save the new vector database to the output directory

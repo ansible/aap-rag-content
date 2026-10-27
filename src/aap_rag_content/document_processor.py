@@ -172,7 +172,7 @@ registered_resources:
       password: ${{env.POSTGRES_PASSWORD}}"""
 
     CFG_FILENAME = "llama-stack.yaml"
-    EMBEDDING_BATCH_SIZE = 128
+    EMBEDDING_BATCH_SIZE = 32
     FILE_UPLOAD_CONCURRENCY = 16
 
     def __init__(self, config: _Config):
