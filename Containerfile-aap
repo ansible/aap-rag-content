@@ -22,7 +22,7 @@ RUN cd embeddings_model; if [ ! -f model.safetensors ]; then  \
     fi
 
 ENV PYTHONPATH=/rag-content
-RUN python custom_processor_aap.py  \
+RUN OMP_NUM_THREADS=1 python custom_processor_aap.py  \
   -o ./llama_stack_vector_db \
   -f /rag-content \
   -md embeddings_model/ \
