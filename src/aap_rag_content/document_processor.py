@@ -173,6 +173,7 @@ registered_resources:
 
     CFG_FILENAME = "llama-stack.yaml"
     EMBEDDING_BATCH_SIZE = 32
+    EMBEDDING_ENCODE_SLICE_SIZE = 1024
     FILE_UPLOAD_CONCURRENCY = 16
 
     def __init__(self, config: _Config):
@@ -403,18 +404,41 @@ registered_resources:
         a full AAP corpus (tens of thousands of round trips). Batching through
         SentenceTransformer.encode() keeps the same vectors and finishes in
         minutes instead of hours.
+
+        Encodes in slices of EMBEDDING_ENCODE_SLICE_SIZE texts - each slice
+        still internally batched by encode() at EMBEDDING_BATCH_SIZE - and
+        logs progress ourselves once per slice instead of using
+        show_progress_bar: tqdm's carriage-return-only updates render as one
+        unterminated line for the entire multi-hour encode, which overflows
+        downstream log scanners (observed as buildah/Tekton log collection
+        dying with "bufio.Scanner: token too long" on a full-corpus build).
+        Slicing this way keeps most of encode()'s within-call benefit of
+        sorting inputs by length to minimize padding, while converting each
+        slice's numpy output to a list immediately - rather than calling
+        .tolist() once on the full-corpus array - bounds how much of the
+        float32 matrix is held in memory at once to one slice instead of the
+        whole corpus. This is a partial memory improvement: the full
+        Python-list of embeddings for the corpus is still accumulated and
+        held until the final vector_io insert.
         """
         if not texts:
             return []
-        encoded = self._embedding_model.encode(
-            texts,
-            batch_size=self.EMBEDDING_BATCH_SIZE,
-            show_progress_bar=True,
-            convert_to_numpy=True,
-        )
-        if hasattr(encoded, "tolist"):
-            return encoded.tolist()
-        return [list(vector) for vector in encoded]
+        slice_size = self.EMBEDDING_ENCODE_SLICE_SIZE
+        total_slices = (len(texts) + slice_size - 1) // slice_size
+        vectors: list[list[float]] = []
+        for slice_num, start in enumerate(range(0, len(texts), slice_size), start=1):
+            encoded = self._embedding_model.encode(
+                texts[start : start + slice_size],
+                batch_size=self.EMBEDDING_BATCH_SIZE,
+                show_progress_bar=False,
+                convert_to_numpy=True,
+            )
+            vectors.extend(
+                vector.tolist() if hasattr(vector, "tolist") else list(vector)
+                for vector in encoded
+            )
+            LOG.info("Encoded %d/%d embedding slices", slice_num, total_slices)
+        return vectors
 
     async def _upload_citation_files(self, client: Any) -> None:
         """Upload empty citation files and stamp file IDs onto related chunks."""
