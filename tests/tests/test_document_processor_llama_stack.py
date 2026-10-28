@@ -675,6 +675,51 @@ registered_resources:
 
         log_mock.exception.assert_called_once_with("Failed to insert document")
 
+    def test_insert_prechunked_documents_batches_inserts(
+        self, mocker, llama_stack_processor
+    ):
+        """Chunks are embedded and inserted in INSERT_BATCH_SIZE slices, not all at once."""
+        import asyncio
+
+        doc = document_processor._LlamaStackDB(llama_stack_processor["config"])
+        mocker.patch.object(doc, "INSERT_BATCH_SIZE", 2)
+        mocker.patch.object(doc, "_upload_citation_files", new=AsyncMock())
+        doc.documents = [
+            {
+                "content": f"content {i}",
+                "metadata": {"document_id": f"doc{i}"},
+                "chunk_metadata": {
+                    "document_id": f"doc{i}",
+                    "chunk_id": i,
+                    "source": f"doc{i}",
+                },
+                "chunk_id": i,
+            }
+            for i in range(5)
+        ]
+
+        client = mocker.Mock()
+        client.vector_stores.create = AsyncMock(return_value=mocker.Mock(id="vs_1"))
+        client.vector_io.insert = AsyncMock()
+
+        result = asyncio.run(doc._insert_prechunked_documents(client, "test-index"))
+
+        assert result == "vs_1"
+        # 5 documents in batches of 2 -> 3 insert calls (sizes 2, 2, 1)
+        assert client.vector_io.insert.await_count == 3
+        batch_sizes = [
+            len(call.kwargs["chunks"])
+            for call in client.vector_io.insert.await_args_list
+        ]
+        assert batch_sizes == [2, 2, 1]
+        for call in client.vector_io.insert.await_args_list:
+            assert call.kwargs["vector_store_id"] == "vs_1"
+        # No batch ever held more than INSERT_BATCH_SIZE chunks' embeddings at once.
+        encode = document_processor.SentenceTransformer.return_value.encode
+        assert encode.call_count == 3
+        for call in encode.call_args_list:
+            assert len(call.args[0]) <= 2
+
     def test_save_manual_chunking(self, mocker, llama_stack_processor):
         """Test saving documents with manual chunking workflow."""
         client = self._test_save(mocker, llama_stack_processor["config"])
