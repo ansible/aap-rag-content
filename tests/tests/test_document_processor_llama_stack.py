@@ -171,6 +171,27 @@ class TestDocumentProcessorLlamaStack:
         assert doc._encode_chunk_texts(["hello"]) == [[0.2] * 768]
         vector.tolist.assert_called_once()
 
+    def test_encode_chunk_texts_slices_large_input(self, llama_stack_processor):
+        """Large inputs are encoded in EMBEDDING_ENCODE_SLICE_SIZE slices."""
+        doc = document_processor._LlamaStackDB(llama_stack_processor["config"])
+        slice_size = document_processor._LlamaStackDB.EMBEDDING_ENCODE_SLICE_SIZE
+        texts = [f"text {i}" for i in range(slice_size + 1)]
+        encode = document_processor.SentenceTransformer.return_value.encode
+
+        result = doc._encode_chunk_texts(texts)
+
+        assert len(result) == len(texts)
+        assert encode.call_count == 2
+        first_call, second_call = encode.call_args_list
+        assert len(first_call.args[0]) == slice_size
+        assert len(second_call.args[0]) == 1
+        for call in (first_call, second_call):
+            assert call.kwargs["show_progress_bar"] is False
+            assert (
+                call.kwargs["batch_size"]
+                == document_processor._LlamaStackDB.EMBEDDING_BATCH_SIZE
+            )
+
     def test_init_model_path(self, mocker, llama_stack_processor):
         """Test initialization when embeddings_model_dir exists as a local path."""
         temp_dir = mocker.patch.object(
@@ -672,11 +693,15 @@ registered_resources:
         encode = document_processor.SentenceTransformer.return_value.encode
         encode.assert_called_once()
         assert encode.call_args.args[0] == ["test content 1", "test content 2"]
-        # Progress is logged by _encode_chunk_texts itself in fixed-size batches,
-        # not delegated to encode()'s own show_progress_bar/batch_size handling -
+        # show_progress_bar is explicitly disabled (and progress logged by
+        # _encode_chunk_texts itself) because sentence-transformers defaults
+        # show_progress_bar to on whenever the root logger is at INFO/DEBUG -
         # see _encode_chunk_texts docstring for why.
-        assert "show_progress_bar" not in encode.call_args.kwargs
-        assert "batch_size" not in encode.call_args.kwargs
+        assert encode.call_args.kwargs["show_progress_bar"] is False
+        assert (
+            encode.call_args.kwargs["batch_size"]
+            == document_processor._LlamaStackDB.EMBEDDING_BATCH_SIZE
+        )
 
     def test_save_auto_chunking(self, mocker, llama_stack_processor):
         """Test saving documents with automatic chunking workflow."""
