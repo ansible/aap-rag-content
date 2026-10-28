@@ -12,12 +12,10 @@
 #    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #    License for the specific language governing permissions and limitations
 #    under the License.
-
 import logging
 
 import pytest
 import requests
-
 from aap_rag_content import metadata_processor
 from aap_rag_content.metadata_processor import check_url_reachable
 
@@ -119,9 +117,7 @@ class TestMetadataProcessor:
         result = md_processor.get_file_title(processor_data["file_path"])
 
         assert result == ""
-        mock_file.assert_called_once_with(
-            processor_data["file_path"], "r", encoding="utf-8"
-        )
+        mock_file.assert_called_once_with(processor_data["file_path"], encoding="utf-8")
 
     def test_populate(self, md_processor, mocker, processor_data):
         """Test populate method returns complete metadata when URL is reachable."""
@@ -145,9 +141,7 @@ class TestMetadataProcessor:
         mock_get_title.assert_called_once_with(processor_data["file_path"])
         mock_ping_url.assert_called_once_with(processor_data["url"])
 
-    def test_populate_url_unreachable(
-        self, md_processor, mocker, caplog, processor_data
-    ):
+    def test_populate_url_unreachable(self, md_processor, mocker, caplog, processor_data):
         """Test populate method handles unreachable URLs and logs warning."""
         mock_url_func = mocker.patch.object(md_processor, "url_function")
         mock_get_title = mocker.patch.object(md_processor, "get_file_title")
@@ -183,9 +177,7 @@ class TestMetadataProcessor:
         processor = metadata_processor.MetadataProcessor(suppress_ping_url=True)
         assert processor.suppress_ping_url is True
 
-    def test_populate_suppress_ping_url(
-        self, md_processor_skip_ping, mocker, processor_data
-    ):
+    def test_populate_suppress_ping_url(self, md_processor_skip_ping, mocker, processor_data):
         """Test populate method skips ping_url when suppress_ping_url=True."""
         mock_url_func = mocker.patch.object(md_processor_skip_ping, "url_function")
         mock_get_title = mocker.patch.object(md_processor_skip_ping, "get_file_title")

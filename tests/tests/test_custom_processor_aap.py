@@ -13,9 +13,9 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 """Tests for custom_processor_aap module."""
-
 # pylint: disable=C0415,import-error,protected-access
 import json
+import logging
 import sys
 from pathlib import Path
 from unittest.mock import MagicMock
@@ -234,6 +234,41 @@ class TestAAPMetadataProcessor:
         mock_ping_url.assert_not_called()
         assert result["url_reachable"] is False
 
+    def test_populate_stored_false_with_suppress_ping_url_no_warning(
+        self, tmp_path, mocker, caplog
+    ):
+        """No warning is logged when suppress_ping_url=True, even though the
+        stored url_reachable metadata resolves to False.
+        """
+        from custom_processor_aap import AAPMetadataProcessor
+
+        doc_dir = tmp_path / "docs"
+        meta_dir = doc_dir / ".metadata"
+        meta_dir.mkdir(parents=True)
+        (doc_dir / "test.md").write_text("# Test Title\n", encoding="utf-8")
+        (meta_dir / "test.json").write_text(
+            json.dumps(
+                {
+                    "title": "Test Title",
+                    "url": "https://example.com/offline",
+                    "url_reachable": False,
+                    "path": "test.md",
+                }
+            ),
+            encoding="utf-8",
+        )
+
+        processor = AAPMetadataProcessor(suppress_ping_url=True)
+        mock_ping_url = mocker.patch.object(processor, "ping_url")
+
+        with caplog.at_level(logging.WARNING, logger="aap_rag_content.metadata_processor"):
+            result = processor.populate(str(doc_dir / "test.md"))
+
+        mock_ping_url.assert_not_called()
+        assert result["url_reachable"] is False
+        # Verify no warning was logged, since suppress_ping_url=True
+        assert "URL not reachable" not in caplog.text
+
 
 class TestTechnicalMarketingContents:
     """Test cases for TECHNICAL_MARKETING_CONTENTS integration."""
@@ -269,8 +304,7 @@ class TestTechnicalMarketingContents:
         solution_guide_calls = [
             c
             for c in process_calls
-            if "solution-guides-plaintext" in str(c)
-            and c.kwargs.get("required_exts") == [".md"]
+            if "solution-guides-plaintext" in str(c) and c.kwargs.get("required_exts") == [".md"]
         ]
         assert len(solution_guide_calls) == 1
 
@@ -288,17 +322,12 @@ class TestTechnicalMarketingContents:
             "url": "https://ansible-tmm.github.io/solution-guides/README-AIOps",
             "path": "README-AIOps.md",
         }
-        (meta_dir / "README-AIOps.json").write_text(
-            json.dumps(metadata), encoding="utf-8"
-        )
+        (meta_dir / "README-AIOps.json").write_text(json.dumps(metadata), encoding="utf-8")
 
         processor = AAPMetadataProcessor(suppress_ping_url=True)
         result = processor._load_metadata(str(doc_dir / "README-AIOps.md"))
         assert result["title"] == "AIOps Guide"
-        assert (
-            result["url"]
-            == "https://ansible-tmm.github.io/solution-guides/README-AIOps"
-        )
+        assert result["url"] == "https://ansible-tmm.github.io/solution-guides/README-AIOps"
 
     def test_metadata_processor_url_function_solution_guide(self, tmp_path):
         """Test url_function returns URL from solution guide metadata."""
@@ -311,9 +340,7 @@ class TestTechnicalMarketingContents:
 
         expected_url = "https://ansible-tmm.github.io/solution-guides/README-EDB"
         metadata = {"title": "EDB Guide", "url": expected_url, "path": "README-EDB.md"}
-        (meta_dir / "README-EDB.json").write_text(
-            json.dumps(metadata), encoding="utf-8"
-        )
+        (meta_dir / "README-EDB.json").write_text(json.dumps(metadata), encoding="utf-8")
 
         processor = AAPMetadataProcessor(suppress_ping_url=True)
         url = processor.url_function(str(doc_dir / "README-EDB.md"))
@@ -333,9 +360,7 @@ class TestTechnicalMarketingContents:
             "url": "https://example.com",
             "path": "README-EDB.md",
         }
-        (meta_dir / "README-EDB.json").write_text(
-            json.dumps(metadata), encoding="utf-8"
-        )
+        (meta_dir / "README-EDB.json").write_text(json.dumps(metadata), encoding="utf-8")
 
         processor = AAPMetadataProcessor(suppress_ping_url=True)
         title = processor.get_file_title(str(doc_dir / "README-EDB.md"))
