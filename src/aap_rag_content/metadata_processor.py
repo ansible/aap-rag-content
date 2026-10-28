@@ -13,7 +13,6 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 """Metadata handling for document nodes in vector database."""
-
 import abc
 import logging
 import typing
@@ -60,7 +59,8 @@ class MetadataProcessor:
         """Initialize MetadataProcessor.
 
         Args:
-            suppress_ping_url: If True, skip URL reachability check and assume all URLs are reachable.
+            suppress_ping_url: If True, skip URL reachability check and
+                assume all URLs are reachable.
         """
         self.suppress_ping_url = suppress_ping_url
 
@@ -68,7 +68,7 @@ class MetadataProcessor:
         """Extract title from the plaintext doc file."""
         title = ""
         try:
-            with open(file_path, "r", encoding="utf-8") as file:
+            with open(file_path, encoding="utf-8") as file:
                 title = file.readline().rstrip("\n").lstrip("# ")
         except Exception:  # noqa: S110 pylint: disable=broad-exception-caught
             pass
@@ -113,16 +113,14 @@ class MetadataProcessor:
         }
 
         url_reachable = self._resolve_url_reachable(doc_url, file_path)
-        if not url_reachable:
+        if not url_reachable and not self.suppress_ping_url:
             LOG.warning(
-                'URL not reachable: %(url)s (Title: "%(title)s", '
-                "File path: %(file_path)s)",
+                'URL not reachable: %(url)s (Title: "%(title)s", File path: %(file_path)s)',
                 document,
             )
 
         LOG.debug(
-            'Metadata populated for: "%(title)s" (URL: %(url)s, File '
-            "path: %(file_path)s)",
+            'Metadata populated for: "%(title)s" (URL: %(url)s, File path: %(file_path)s)',
             document,
         )
 
