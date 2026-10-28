@@ -161,15 +161,15 @@ class TestDocumentProcessorLlamaStack:
         document_processor.SentenceTransformer.return_value.encode.assert_not_called()
 
     def test_encode_chunk_texts_uses_tolist(self, llama_stack_processor):
-        """Prefer ndarray.tolist() when encode() returns a numpy-like result."""
+        """Prefer ndarray.tolist() per vector when encode() returns numpy-like rows."""
         doc = document_processor._LlamaStackDB(llama_stack_processor["config"])
-        encoded = mock.Mock()
-        encoded.tolist.return_value = [[0.2] * 768]
+        vector = mock.Mock()
+        vector.tolist.return_value = [0.2] * 768
         encode = document_processor.SentenceTransformer.return_value.encode
         encode.side_effect = None
-        encode.return_value = encoded
+        encode.return_value = [vector]
         assert doc._encode_chunk_texts(["hello"]) == [[0.2] * 768]
-        encoded.tolist.assert_called_once()
+        vector.tolist.assert_called_once()
 
     def test_init_model_path(self, mocker, llama_stack_processor):
         """Test initialization when embeddings_model_dir exists as a local path."""
@@ -672,9 +672,11 @@ registered_resources:
         encode = document_processor.SentenceTransformer.return_value.encode
         encode.assert_called_once()
         assert encode.call_args.args[0] == ["test content 1", "test content 2"]
-        assert encode.call_args.kwargs["batch_size"] == (
-            document_processor._LlamaStackDB.EMBEDDING_BATCH_SIZE
-        )
+        # Progress is logged by _encode_chunk_texts itself in fixed-size batches,
+        # not delegated to encode()'s own show_progress_bar/batch_size handling -
+        # see _encode_chunk_texts docstring for why.
+        assert "show_progress_bar" not in encode.call_args.kwargs
+        assert "batch_size" not in encode.call_args.kwargs
 
     def test_save_auto_chunking(self, mocker, llama_stack_processor):
         """Test saving documents with automatic chunking workflow."""

@@ -403,18 +403,35 @@ registered_resources:
         a full AAP corpus (tens of thousands of round trips). Batching through
         SentenceTransformer.encode() keeps the same vectors and finishes in
         minutes instead of hours.
+
+        Encodes one batch at a time (rather than handing the whole corpus to a
+        single encode() call) and logs progress ourselves instead of using
+        show_progress_bar: tqdm's carriage-return-only updates render as one
+        unterminated line for the entire multi-hour encode, which overflows
+        downstream log scanners (observed as buildah/Tekton log collection
+        dying with "bufio.Scanner: token too long" on a full-corpus build).
+        Converting each batch's numpy output to a list immediately, instead of
+        calling .tolist() once on the full-corpus array, also avoids briefly
+        holding both the complete float32 matrix and its Python-list copy in
+        memory at once - a multi-GB spike at current corpus sizes.
         """
         if not texts:
             return []
-        encoded = self._embedding_model.encode(
-            texts,
-            batch_size=self.EMBEDDING_BATCH_SIZE,
-            show_progress_bar=True,
-            convert_to_numpy=True,
-        )
-        if hasattr(encoded, "tolist"):
-            return encoded.tolist()
-        return [list(vector) for vector in encoded]
+        batch_size = self.EMBEDDING_BATCH_SIZE
+        total_batches = (len(texts) + batch_size - 1) // batch_size
+        vectors: list[list[float]] = []
+        for batch_num, start in enumerate(range(0, len(texts), batch_size), start=1):
+            encoded = self._embedding_model.encode(
+                texts[start : start + batch_size],
+                convert_to_numpy=True,
+            )
+            vectors.extend(
+                vector.tolist() if hasattr(vector, "tolist") else list(vector)
+                for vector in encoded
+            )
+            if batch_num % 50 == 0 or batch_num == total_batches:
+                LOG.info("Encoded %d/%d embedding batches", batch_num, total_batches)
+        return vectors
 
     async def _upload_citation_files(self, client: Any) -> None:
         """Upload empty citation files and stamp file IDs onto related chunks."""
