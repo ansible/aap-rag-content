@@ -175,6 +175,7 @@ registered_resources:
     EMBEDDING_BATCH_SIZE = 32
     EMBEDDING_ENCODE_SLICE_SIZE = 1024
     FILE_UPLOAD_CONCURRENCY = 16
+    INSERT_BATCH_SIZE = 1000
 
     def __init__(self, config: _Config):
         """Initialize the llama-stack Vector IO database.
@@ -505,6 +506,35 @@ registered_resources:
             if isinstance(result, Exception):
                 LOG.error("Failed to upload file: %s", result)
 
+    def _build_chunks_to_insert(
+        self, docs: list[Any], embedding_model: str
+    ) -> list[Any]:
+        """Pair a slice of self.documents with their embeddings for insertion."""
+        texts = [doc["content"] for doc in docs if isinstance(doc, dict)]
+        embeddings = self._encode_chunk_texts(texts)
+        if len(embeddings) != len(texts):
+            raise RuntimeError(
+                f"Expected {len(texts)} embeddings, got {len(embeddings)}"
+            )
+        embedding_iter = iter(embeddings)
+
+        chunks_to_insert = []
+        for doc in docs:
+            if isinstance(doc, dict):
+                chunk = {
+                    "content": doc["content"],
+                    "chunk_id": doc["chunk_id"],
+                    "metadata": doc.get("metadata", {}),
+                    "chunk_metadata": doc["chunk_metadata"],
+                    "embedding": next(embedding_iter),
+                    "embedding_model": embedding_model,
+                    "embedding_dimension": self.config.embedding_dimension,
+                }
+                chunks_to_insert.append(chunk)
+            else:
+                chunks_to_insert.append(doc)
+        return chunks_to_insert
+
     async def _insert_prechunked_documents(self, client: Any, index: str) -> str:
         """Manual chunking: Insert pre-chunked documents into the vector store.
 
@@ -516,6 +546,14 @@ registered_resources:
 
         The empty files serve as citation anchors, linking chunks back to their
         source documents without storing duplicate content (we don't use files downstream).
+
+        Embedding and inserting happen one INSERT_BATCH_SIZE slice of
+        self.documents at a time, rather than embedding the whole corpus and
+        building one chunks-with-embeddings payload for it, so peak memory is
+        bounded to one batch instead of three full-corpus-sized copies (texts,
+        embeddings, chunk payloads) alive at once - at full AAP-corpus size
+        that's the difference between fitting in the build step's memory
+        limit and getting OOM-killed partway through.
 
         Returns:
             The vector store ID
@@ -532,36 +570,25 @@ registered_resources:
 
         await self._upload_citation_files(client)
 
-        texts = [doc["content"] for doc in self.documents if isinstance(doc, dict)]
-        LOG.info("Computing embeddings for %d chunks...", len(texts))
-        embeddings = self._encode_chunk_texts(texts)
-        if len(embeddings) != len(texts):
-            raise RuntimeError(
-                f"Expected {len(texts)} embeddings, got {len(embeddings)}"
-            )
-        embedding_iter = iter(embeddings)
-
         embedding_model = f"sentence-transformers/{self.model_name_or_dir}"
-        chunks_to_insert = []
-        for doc in self.documents:
-            if isinstance(doc, dict):
-                chunk = {
-                    "content": doc["content"],
-                    "chunk_id": doc["chunk_id"],
-                    "metadata": doc.get("metadata", {}),
-                    "chunk_metadata": doc["chunk_metadata"],
-                    "embedding": next(embedding_iter),
-                    "embedding_model": embedding_model,
-                    "embedding_dimension": self.config.embedding_dimension,
-                }
-                chunks_to_insert.append(chunk)
-            else:
-                chunks_to_insert.append(doc)
-
-        LOG.info("Inserting %d chunks into vector store...", len(chunks_to_insert))
-        await client.vector_io.insert(
-            vector_store_id=vector_store.id, chunks=chunks_to_insert
+        total = len(self.documents)
+        LOG.info(
+            "Embedding and inserting %d chunks in batches of %d...",
+            total,
+            self.INSERT_BATCH_SIZE,
         )
+        for start in range(0, total, self.INSERT_BATCH_SIZE):
+            batch = self.documents[start : start + self.INSERT_BATCH_SIZE]
+            chunks_to_insert = self._build_chunks_to_insert(batch, embedding_model)
+            await client.vector_io.insert(
+                vector_store_id=vector_store.id, chunks=chunks_to_insert
+            )
+            LOG.info(
+                "Inserted chunks %d-%d of %d",
+                start + 1,
+                min(start + self.INSERT_BATCH_SIZE, total),
+                total,
+            )
         return str(vector_store.id)
 
     async def _wait_for_file_processing(
