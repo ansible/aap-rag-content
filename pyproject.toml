@@ -76,7 +76,7 @@ dependencies = [
     "pyjwt>=2.13.0",  # Transient dep pinned for CVE-2026-48526
     "python-dotenv>=1.2.2", # CVE-2026-28684
     "pyasn1==0.6.5",  # CVE-2026-59886
-    "python-multipart==0.0.32", # CVE-2026-42561
+    "python-multipart==0.0.33", # CVE-2026-42561
     "requests==2.34.2",
     "sentence-transformers==5.7.0",
     # Stay on 2.1.5: 2.1.6 is not yet on the RHAI index, and installing it
