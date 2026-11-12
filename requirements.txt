@@ -720,9 +720,9 @@ fastapi==0.162.2 \
     # via
     #   llama-stack
     #   llama-stack-api
-filelock==3.32.7 \
-    --hash=sha256:37b8a3d9811b0f9aef7e5ec5c71bb320de52df51e6ca9bcd6f5ad81187660da7 \
-    --hash=sha256:65ff0d0190ea42038b32bda4b77834fb05be2cad4c5b9b01aa4dfb3614536e52
+filelock==4.2.7 \
+    --hash=sha256:31f6f7e3a8b6f0bd89114d30c5d5218ea1cfb63e5c4aa695b7559314a209bc7f \
+    --hash=sha256:d08972bbca2b8767ee552aff877b091dd111ffb1d22de7de885766ea7d719d5e
     # via
     #   aap-rag-content (pyproject.toml)
     #   huggingface-hub
