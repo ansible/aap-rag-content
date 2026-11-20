@@ -228,25 +228,25 @@ registered_resources:
         # faiss_store.db or sqlitevec_store.db
         self.db_filename = config.vector_store_type[11:] + "_store.db"
 
-        # We need to set env var before importing llama_stack
-        # Create temp directory for the llama-stack configuration file and the DB
+        # We need to set env var before importing ogx
+        # Create temp directory for the ogx configuration file and the DB
         self.tmp_dir = tempfile.TemporaryDirectory(  # pylint: disable=R1732
             prefix="ls-rag-"
         )
-        # Force a default directory to prevent llama-stack from using hosts's
+        # Force a default directory to prevent ogx from using the host's
         # ~/.llama content
-        os.environ["LLAMA_STACK_CONFIG_DIR"] = self.tmp_dir.name
+        os.environ["OGX_CONFIG_DIR"] = self.tmp_dir.name
 
         # TODO: This part may need to be changed to support multiple usages
         # Not using importlib to help with typechecking
-        import llama_stack_api  # pylint: disable=C0415
-        from llama_stack.core.library_client import (  # pylint: disable=C0415
-            AsyncLlamaStackAsLibraryClient,
+        import ogx_api  # pylint: disable=C0415
+        from ogx.core.library_client import (  # pylint: disable=C0415
+            AsyncOGXAsLibraryClient,
         )
 
-        self.document_class = llama_stack_api.rag_tool.RAGDocument
-        self.client_class = AsyncLlamaStackAsLibraryClient
-        self.documents: list[dict[str, Any] | llama_stack_api.rag_tool.RAGDocument] = []
+        self.document_class = ogx_api.rag_tool.RAGDocument
+        self.client_class = AsyncOGXAsLibraryClient
+        self.documents: list[dict[str, Any] | ogx_api.rag_tool.RAGDocument] = []
 
     @property
     def provider_type(self) -> str:
