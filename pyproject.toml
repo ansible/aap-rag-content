@@ -58,7 +58,6 @@ version = "0.1.0"
 description = "RAG content for AAP chatbot"
 authors = []
 dependencies = [
-    "aiohttp==3.14.5",  # Transient dep pinned to handle CVE (CVE-2026-34993)
     "chardet==5.2.0",
     "cryptography>=50.0.0,<51", # Transient dep pinned to handle CVE
     "faiss-cpu==1.12",
@@ -69,10 +68,8 @@ dependencies = [
     "ogx-api>=1.2.5,<2",
     "openai>=2,<3",
     "mcp>=1.28.1,<2",
-    "pillow==13.0.0", # Transient dep pinned to handle CVE (CVE-2026-40192, CVE-2026-59197, CVE-2026-54058, CVE-2026-54060, CVE-2026-55380, CVE-2026-55379)
     "pyjwt>=2.13.0",  # Transient dep pinned for CVE-2026-48526
     "python-dotenv>=1.2.2", # CVE-2026-28684
-    "pyasn1==0.6.5",  # CVE-2026-59886
     "python-multipart==0.0.33", # CVE-2026-42561
     "requests==2.34.2",
     "sentence-transformers==5.7.0",
@@ -82,7 +79,6 @@ dependencies = [
     "sqlalchemy[asyncio]==2.1.8",
     "starlette>=1.3.1,<2",  # Bumped for CVE-2026-54283
     "torch",
-    "tornado>=6.5.9", # CVE-2026-103262
     "types-requests",
     "urllib3==2.8.0",
 ]
