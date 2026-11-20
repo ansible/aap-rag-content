@@ -148,11 +148,11 @@ class TestDocumentProcessorLlamaStack:
         assert doc.config.embedding_dimension == 768
         assert doc.db_filename == "faiss_store.db"
         assert doc.document_class.__name__ == "RAGDocument"
-        assert doc.client_class.__name__ == "AsyncLlamaStackAsLibraryClient"
+        assert doc.client_class.__name__ == "AsyncOGXAsLibraryClient"
         assert doc.documents == []
         temp_dir.assert_called_once_with(prefix="ls-rag-")
         assert doc.tmp_dir is temp_dir.return_value
-        assert os.environ["LLAMA_STACK_CONFIG_DIR"] == temp_dir.return_value.name
+        assert os.environ["OGX_CONFIG_DIR"] == temp_dir.return_value.name
 
     def test_encode_chunk_texts_empty(self, llama_stack_processor):
         """Empty input skips the embedding model."""
@@ -212,11 +212,11 @@ class TestDocumentProcessorLlamaStack:
         assert doc.config.embedding_dimension == 768
         assert doc.db_filename == "faiss_store.db"
         assert doc.document_class.__name__ == "RAGDocument"
-        assert doc.client_class.__name__ == "AsyncLlamaStackAsLibraryClient"
+        assert doc.client_class.__name__ == "AsyncOGXAsLibraryClient"
         assert doc.documents == []
         temp_dir.assert_called_once_with(prefix="ls-rag-")
         assert doc.tmp_dir is temp_dir.return_value
-        assert os.environ["LLAMA_STACK_CONFIG_DIR"] == temp_dir.return_value.name
+        assert os.environ["OGX_CONFIG_DIR"] == temp_dir.return_value.name
 
     def test_write_yaml_config_faiss(self, mocker, llama_stack_processor):
         """Test YAML configuration generation for FAISS vector store backend."""
@@ -362,7 +362,7 @@ registered_resources:
         insert_mock.assert_awaited_once()
 
         temp_dir.assert_called_once_with(prefix="ls-rag-")
-        assert os.environ["LLAMA_STACK_CONFIG_DIR"] == temp_dir.return_value.name
+        assert os.environ["OGX_CONFIG_DIR"] == temp_dir.return_value.name
 
     def test_add_docs_manual_chunking(self, mocker, llama_stack_processor):
         """Test adding documents with manual chunking enabled."""
