@@ -107,7 +107,7 @@ providers:
   tool_runtime:
   - config: {{}}
     provider_id: rag-runtime
-    provider_type: inline::rag-runtime
+    provider_type: inline::file-search
   vector_io:
   - config:
       {vector_io_cfg}
