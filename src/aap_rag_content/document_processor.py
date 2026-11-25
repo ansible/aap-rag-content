@@ -154,7 +154,7 @@ registered_resources:
     # Template for vector_stores section, added after vector store is created
     VECTOR_STORES_TEMPLATE = """vector_stores:
   - embedding_dimension: {dimension}
-    embedding_model: sentence-transformers/{model_name_or_dir}
+    embedding_model: {model_name}
     provider_id: {vector_io_provider_id}
     vector_store_id: {vector_store_id}"""
 
@@ -563,14 +563,14 @@ registered_resources:
             name=index,
             extra_body={
                 "provider_id": index,
-                "embedding_model": f"sentence-transformers/{self.model_name_or_dir}",
+                "embedding_model": self.config.model_name,
                 "embedding_dimension": self.config.embedding_dimension,
             },
         )
 
         await self._upload_citation_files(client)
 
-        embedding_model = f"sentence-transformers/{self.model_name_or_dir}"
+        embedding_model = self.config.model_name
         total = len(self.documents)
         LOG.info(
             "Embedding and inserting %d chunks in batches of %d...",
@@ -696,7 +696,7 @@ registered_resources:
             name=index,
             extra_body={
                 "provider_id": index,
-                "embedding_model": f"sentence-transformers/{self.model_name_or_dir}",
+                "embedding_model": self.config.model_name,
                 "embedding_dimension": self.config.embedding_dimension,
             },
         )
@@ -751,7 +751,7 @@ registered_resources:
         """Update the config file with the created vector_store_id."""
         vector_stores_section = self.VECTOR_STORES_TEMPLATE.format(
             dimension=self.config.embedding_dimension,
-            model_name_or_dir=self.model_name_or_dir,
+            model_name=self.config.model_name,
             vector_io_provider_id=index,
             vector_store_id=vector_store_id,
         )
