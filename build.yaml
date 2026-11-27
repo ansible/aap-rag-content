@@ -7,7 +7,7 @@ distribution_spec:
     vector_io:
     - inline::faiss
     tool_runtime:
-    - inline::rag-runtime
+    - inline::file-search
 image_type: venv
 additional_pip_packages:
 - aiosqlite

@@ -101,7 +101,7 @@ def _load_built_vector_db(db_path):
     conn = sqlite3.connect(str(db_path))
     try:
         cursor = conn.cursor()
-        cursor.execute("SELECT value FROM kvstore WHERE key LIKE 'faiss_index:%'")
+        cursor.execute("SELECT value FROM kvstore WHERE key LIKE '%faiss_index:%'")
         row = cursor.fetchone()
         if row is None:
             return None, None
