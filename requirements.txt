@@ -1149,9 +1149,9 @@ numpy==2.5.4 \
     #   scipy
     #   sentence-transformers
     #   transformers
-ogx==1.4.2 \
-    --hash=sha256:2a2f7768cb86c517070a77102feaf9ac3e80d2326fa19ec57a84e5945961aa83 \
-    --hash=sha256:c7cf36e42e29061d8e00011cd218f51206a985308209245b622989fc3fb5b119
+ogx==1.5.0 \
+    --hash=sha256:8812a6f2ed353cb0fc6474956e5b0050cc221633ee2f0b184942c132edb46a78 \
+    --hash=sha256:fd218259c926857e6fd91025b53cc724faa78fcba5dcfc2aa1a1e420d1ded2e3
     # via aap-rag-content (pyproject.toml)
 ogx-api==1.4.2 \
     --hash=sha256:226781c521b343ca92a055c10010650a29571a74b1374d1e1e3f5fe34f641d46 \
