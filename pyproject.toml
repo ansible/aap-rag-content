@@ -61,7 +61,7 @@ dependencies = [
     "chardet==5.2.0",
     "pypdf>=6.13.3",  # ogx faiss provider imports pypdf unconditionally; only declared as optional dep
     "cryptography>=50.0.0,<51", # Transient dep pinned to handle CVE
-    "faiss-cpu==1.12",
+    "faiss-cpu==1.16.0",
     "filelock>=4.2.1", # Transient dep bumped for CVE-2026-112940
     "fsspec>=2026.6.0", # CVE-2026-104851
     "ogx-client>=1.2.5,<2",
