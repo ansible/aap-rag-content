@@ -1153,9 +1153,9 @@ ogx==1.4.2 \
     --hash=sha256:2a2f7768cb86c517070a77102feaf9ac3e80d2326fa19ec57a84e5945961aa83 \
     --hash=sha256:c7cf36e42e29061d8e00011cd218f51206a985308209245b622989fc3fb5b119
     # via aap-rag-content (pyproject.toml)
-ogx-api==1.4.2 \
-    --hash=sha256:226781c521b343ca92a055c10010650a29571a74b1374d1e1e3f5fe34f641d46 \
-    --hash=sha256:2e69a0b01ca9ca1ac20080b1d974bbe492f57a48fc3c722c1cc6b7dd5cdf0ba0
+ogx-api==1.5.0 \
+    --hash=sha256:66acd94927ff7caf92fac622134c746a5d2746c60103fbbcb18f10619633ab53 \
+    --hash=sha256:73daedaa6e4aba24ce7235a648ac5b6b3aa1d0f4e3345c085c6edad219ee6499
     # via
     #   aap-rag-content (pyproject.toml)
     #   ogx
